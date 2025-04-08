@@ -17,14 +17,24 @@ import imageIconFaq from './assets/icon-faq.svg'
 import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
-import imageAaronKatz from './assets/speaker-aaron-katz.png'
-import imageAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
-import imageMarkNeedham from './assets/speaker-mark-needham.png'
-import imageRobertSchulze from './assets/speaker-robert-schulze.png'
-import imageRopaTangirala from './assets/speaker-roopa-tangirala.png'
-import imageTanyaBragin from './assets/speaker-tanya-bragin.png'
-import imageYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
-import imageZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
+import speakerAaronKatz from './assets/speaker-aaron-katz.png'
+import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
+import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
+import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
+import speakerKevinWeil from './assets/speaker-kevin-weil.png'
+import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
+import speakerLukasBiewald from './assets/speaker-lukas-biewald.png'
+import speakerMarkNeedham from './assets/speaker-mark-needham.png'
+import speakerMartinCasado from './assets/speaker-martin-casado.png'
+import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
+import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
+import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
+import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
+import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
+import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
+import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
+import speakerZachNaimon from './assets/speaker-zach-naimon.png'
+import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -283,43 +293,93 @@ export default function Page({ seo, footerData }: CommonProps) {
                   [
                     {
                       name: 'Aaron Katz',
-                      title: 'Founder, CEO',
-                      image: imageAaronKatz
+                      title: 'Founder, CEO, ClickHouse',
+                      image: speakerAaronKatz
                     },
                     {
                       name: 'Tanya Bragin',
-                      title: 'VP Product & Marketing',
-                      image: imageTanyaBragin
+                      title: 'VP Product & Marketing, ClickHouse',
+                      image: speakerTanyaBragin
                     },
                     {
                       name: 'Alexey Milovidov',
-                      title: 'Founder, CTO',
-                      image: imageAlexyMilovidov
+                      title: 'Founder, CTO, ClickHouse',
+                      image: speakerAlexyMilovidov
                     },
                     {
-                      name: 'Roopa Tangirala',
-                      title: 'VP, Engineering',
-                      image: imageRopaTangirala
+                      name: 'Kevin Weil',
+                      title: 'CPO, OpenAI',
+                      image: speakerKevinWeil
                     },
                     {
-                      name: 'Mark Needham',
-                      title: 'Principal PME',
-                      image: imageMarkNeedham
+                      name: 'Martin Casado',
+                      title: 'Partner, Andreessen Horowitz',
+                      image: speakerMartinCasado
                     },
                     {
-                      name: 'Robert Schulze',
-                      title: 'Core Engineering Lead',
-                      image: imageRobertSchulze
+                      name: 'Lukas Biewald',
+                      title: 'Founder, CEO, Weights & Biases',
+                      image: speakerLukasBiewald
                     },
                     {
-                      name: 'Zoe Steinkamp',
-                      title: 'Senior Developer Advocate',
-                      image: imageZoeSteinkamp
+                      name: 'Krithika Balagurunathan',
+                      title: 'Sr Director, PM, ClickHouse',
+                      image: speakerKrithikaBalagurunathan
                     },
                     {
                       name: 'Yury Izrailevsky',
-                      title: 'Founder, President',
-                      image: imageYuryIzrailevsky
+                      title: 'Founder, President, ClickHouse',
+                      image: speakerYuryIzrailevsky
+                    },
+                    {
+                      name: 'Mark Needham',
+                      title: 'Principal PME, ClickHouse',
+                      image: speakerMarkNeedham
+                    },
+                    {
+                      name: 'Robert Schulze',
+                      title: 'Core Engineering Lead, ClickHouse',
+                      image: speakerRobertSchulze
+                    },
+                    {
+                      name: 'Melvyn Peignon',
+                      title: 'Principal PM, ClickHouse',
+                      image: speakerMelvynPeignon
+                    },
+                    {
+                      name: 'Zoe Steinkamp',
+                      title: 'Senior Developer Advocate, ClickHouse',
+                      image: speakerZoeSteinkamp
+                    },
+                    {
+                      name: 'Chloe Carasso dit Carson',
+                      title: 'Senior Product Manager, ClickHouse',
+                      image: speakerChloeCarassoDitCarson
+                    },
+                    {
+                      name: 'Nikita Mikhailov',
+                      title: 'Director of Engineering, ClickHouse',
+                      image: speakerNikitaMikhailov
+                    },
+                    {
+                      name: 'Zach Naimon',
+                      title: 'Principal Product Manager, ClickHouse',
+                      image: speakerZachNaimon
+                    },
+                    {
+                      name: 'Kaushik Iska',
+                      title: 'Engineering Manager, ClickHouse',
+                      image: speakerKaushikIska
+                    },
+                    {
+                      name: 'Mihir Gokhale',
+                      title: 'Product Manager, ClickHouse',
+                      image: speakerMihirGokhale
+                    },
+                    {
+                      name: 'Ryadh Dahimene',
+                      title: 'Director, PM, ClickHouse',
+                      image: speakerRyadhDahimene
                     }
                   ] satisfies Array<{
                     name: string
@@ -329,16 +389,13 @@ export default function Page({ seo, footerData }: CommonProps) {
                 ).map((profile, profileIndex) => {
                   return (
                     <div key={profileIndex}>
-                      <div className='relative -mx-3 mb-4'>
-                        <div
-                          className={`absolute top-5 left-3 right-3 bottom-0 bg-[#EFEFEF] ${styles.gridBackgroundSmall}`}
-                        />
+                      <div className='group/speaker relative mb-4 bg-[#EFEFEF]'>
                         <Image
                           src={profile.image}
                           alt={profile.name}
                           width={353}
                           height={505}
-                          className='w-full h-auto max-w-none relative z-10'
+                          className='w-full h-auto max-w-none relative z-10 transition grayscale group-hover/speaker:grayscale-0'
                         />
                       </div>
                       <h3 className='text-2xl'>{profile.name}</h3>
