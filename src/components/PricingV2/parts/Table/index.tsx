@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { Fragment, memo, useCallback, useMemo } from 'react'
 import { PricingV2ComponentPlan } from '@/lib/api/strapi/types'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -207,7 +208,12 @@ export default function Table({
       <div className='my-8 space-y-4 text-center text-slate-300'>
         {minPublicInternetEgress && minInterRegionEgress && (
           <SuiText size='sm'>
-            Data transfer for public internet egress starting at{' '}
+            <Link
+              href='/docs/cloud/manage/network-data-transfer'
+              className='text-primary-300 underline'>
+              Data transfer
+            </Link>{' '}
+            for public internet egress starting at{' '}
             <strong className='text-white'>
               <PriceUsd price={minPublicInternetEgress} decimalPlaces='auto' />{' '}
               / GB
