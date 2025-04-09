@@ -126,7 +126,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Chloe Carasso dit Carson',
-    title: 'Senior Product Manager, ClickHouse',
+    title: 'Senior PM, ClickHouse',
     image: speakerChloeCarassoDitCarson
   },
   {
@@ -136,7 +136,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Zach Naimon',
-    title: 'Principal Product Manager, ClickHouse',
+    title: 'Principal PM, ClickHouse',
     image: speakerZachNaimon
   },
   {
@@ -146,7 +146,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Mihir Gokhale',
-    title: 'Product Manager, ClickHouse',
+    title: 'PM, ClickHouse',
     image: speakerMihirGokhale
   },
   {
