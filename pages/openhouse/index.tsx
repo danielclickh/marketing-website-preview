@@ -411,7 +411,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                 We have an exciting line-up of speakers, and more announcements
                 on the way
               </p>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2 -my-4'>
+              <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2 -my-4'>
                 {initialSpeakers.map((profile, profileIndex) => {
                   return <SpeakerProfile {...profile} key={profileIndex} />
                 })}
@@ -435,7 +435,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                           bounce: 0,
                           duration: 0.5
                         }}
-                        className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2'>
+                        className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2'>
                         {overflowSpeakers.map((profile, profileIndex) => {
                           return (
                             <SpeakerProfile {...profile} key={profileIndex} />
@@ -446,7 +446,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   </AnimatePresence>
                   <div
                     ref={speakersToggleRef}
-                    className='text-center -mx-6 px-6 py-2 bg-white/60 backdrop-blur sticky bottom-0 z-40 sm:relative'>
+                    className='text-center -mx-6 px-6 py-2 bg-white/60 backdrop-blur sticky bottom-0 z-40 sm:relative sm:bg-none'>
                     <OpenHouseButton
                       href='#'
                       onClick={(event) => {
@@ -637,8 +637,8 @@ function SpeakerProfile({
             className='w-full h-full max-w-none absolute inset-0 z-10 transition grayscale group-hover/speaker:grayscale-0'
           />
         </div>
-        <h3 className='text-2xl'>{name}</h3>
-        <p className='text-lg'>{title}</p>
+        <h3 className='text-lg md:text-xl lg:text-2xl'>{name}</h3>
+        <p className='text-sm md:text-base lg:text-lg'>{title}</p>
       </div>
     </div>
   )
