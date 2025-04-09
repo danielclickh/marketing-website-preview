@@ -30,6 +30,7 @@ import speakerMarkNeedham from './assets/speaker-mark-needham.png'
 import speakerMartinCasado from './assets/speaker-martin-casado.png'
 import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
 import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
+import speakerMikeShi from './assets/speaker-mike-shi.png'
 import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
 import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
 import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
@@ -147,6 +148,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Mihir Gokhale',
     title: 'Product Manager, ClickHouse',
     image: speakerMihirGokhale
+  },
+  {
+    name: 'Mike Shi',
+    title: 'Principal PM, ClickHouse',
+    image: speakerMikeShi
   },
   {
     name: 'Ryadh Dahimene',
@@ -420,30 +426,43 @@ export default function Page({ seo, footerData }: CommonProps) {
               {overflowSpeakers.length > 0 && (
                 <div
                   className={`relative transition-all duration-300 ${displayAllSpeakers ? 'mt-4' : 'mt-14'}`}>
-                  <AnimatePresence onExitComplete={scrollToSpeakersToggle}>
-                    {displayAllSpeakers && (
-                      <motion.div
-                        variants={{
-                          closed: { opacity: 0, height: 0 },
-                          open: { opacity: 1, height: 'auto' }
-                        }}
-                        initial='closed'
-                        animate='open'
-                        exit='closed'
-                        transition={{
-                          type: 'spring',
-                          bounce: 0,
-                          duration: 0.5
-                        }}
-                        className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2'>
-                        {overflowSpeakers.map((profile, profileIndex) => {
+                  <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2'>
+                    <AnimatePresence onExitComplete={scrollToSpeakersToggle}>
+                      {displayAllSpeakers &&
+                        overflowSpeakers.map((profile, profileIndex) => {
                           return (
-                            <SpeakerProfile {...profile} key={profileIndex} />
+                            <motion.div
+                              key={profileIndex}
+                              variants={{
+                                closed: {
+                                  opacity: 0,
+                                  height: 0,
+                                  transition: {
+                                    delay: 0
+                                  }
+                                },
+                                open: {
+                                  opacity: 1,
+                                  height: 'auto',
+                                  transition: {
+                                    delay: (profileIndex + 1) / 10
+                                  }
+                                }
+                              }}
+                              initial='closed'
+                              animate='open'
+                              exit='closed'
+                              transition={{
+                                type: 'spring',
+                                bounce: 0,
+                                duration: 0.5
+                              }}>
+                              <SpeakerProfile {...profile} />
+                            </motion.div>
                           )
                         })}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    </AnimatePresence>
+                  </div>
                   <div
                     ref={speakersToggleRef}
                     className='text-center -mx-6 px-6 py-2 bg-white/60 backdrop-blur sticky bottom-0 z-40 sm:relative sm:backdrop-blur-0 sm:bg-transparent'>
