@@ -159,8 +159,8 @@ export default function Page({ seo, footerData }: CommonProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
-  const initialSpeakers = ALL_SPEAKERS.toSpliced(8)
-  const overflowSpeakers = ALL_SPEAKERS.toSpliced(0, 8)
+  const initialSpeakers = ALL_SPEAKERS.slice(0, 8)
+  const overflowSpeakers = ALL_SPEAKERS.slice(8)
 
   const scrollToSpeakersToggle = useCallback(() => {
     const speakersToggle = speakersToggleRef.current
@@ -446,7 +446,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   </AnimatePresence>
                   <div
                     ref={speakersToggleRef}
-                    className='text-center -mx-6 px-6 py-2 bg-white/60 backdrop-blur sticky bottom-0 z-40 sm:relative sm:bg-none'>
+                    className='text-center -mx-6 px-6 py-2 bg-white/60 backdrop-blur sticky bottom-0 z-40 sm:relative sm:backdrop-blur-0 sm:bg-transparent'>
                     <OpenHouseButton
                       href='#'
                       onClick={(event) => {
