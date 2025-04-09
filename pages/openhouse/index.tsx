@@ -1,6 +1,8 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
+import { useCallback, useRef, useState } from 'react'
 import 'swiper/css'
 import FontSohne from '../../components/FontSohne'
 import FontSohneBreit from '../../components/FontSohneBreit'
@@ -17,14 +19,25 @@ import imageIconFaq from './assets/icon-faq.svg'
 import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
-import imageAaronKatz from './assets/speaker-aaron-katz.png'
-import imageAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
-import imageMarkNeedham from './assets/speaker-mark-needham.png'
-import imageRobertSchulze from './assets/speaker-robert-schulze.png'
-import imageRopaTangirala from './assets/speaker-roopa-tangirala.png'
-import imageTanyaBragin from './assets/speaker-tanya-bragin.png'
-import imageYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
-import imageZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
+import speakerAaronKatz from './assets/speaker-aaron-katz.png'
+import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
+import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
+import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
+import speakerKevinWeil from './assets/speaker-kevin-weil.png'
+import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
+import speakerLukasBiewald from './assets/speaker-lukas-biewald.png'
+import speakerMarkNeedham from './assets/speaker-mark-needham.png'
+import speakerMartinCasado from './assets/speaker-martin-casado.png'
+import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
+import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
+import speakerMikeShi from './assets/speaker-mike-shi.png'
+import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
+import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
+import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
+import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
+import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
+import speakerZachNaimon from './assets/speaker-zach-naimon.png'
+import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -44,7 +57,141 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
+const INITIAL_NUMBER_OF_SPEAKERS = 8
+
+const ALL_SPEAKERS: Array<{
+  name: string
+  title: string
+  image: ImageProps['src']
+}> = [
+  {
+    name: 'Aaron Katz',
+    title: 'Founder, CEO, ClickHouse',
+    image: speakerAaronKatz
+  },
+  {
+    name: 'Tanya Bragin',
+    title: 'VP Product & Marketing, ClickHouse',
+    image: speakerTanyaBragin
+  },
+  {
+    name: 'Alexey Milovidov',
+    title: 'Founder, CTO, ClickHouse',
+    image: speakerAlexyMilovidov
+  },
+  {
+    name: 'Kevin Weil',
+    title: 'CPO, OpenAI',
+    image: speakerKevinWeil
+  },
+  {
+    name: 'Martin Casado',
+    title: 'Partner, Andreessen Horowitz',
+    image: speakerMartinCasado
+  },
+  {
+    name: 'Lukas Biewald',
+    title: 'Founder, CEO, Weights & Biases',
+    image: speakerLukasBiewald
+  },
+  {
+    name: 'Krithika Balagurunathan',
+    title: 'Sr Director, PM, ClickHouse',
+    image: speakerKrithikaBalagurunathan
+  },
+  {
+    name: 'Yury Izrailevsky',
+    title: 'Founder, President, ClickHouse',
+    image: speakerYuryIzrailevsky
+  },
+  {
+    name: 'Mark Needham',
+    title: 'Principal PME, ClickHouse',
+    image: speakerMarkNeedham
+  },
+  {
+    name: 'Robert Schulze',
+    title: 'Core Engineering Lead, ClickHouse',
+    image: speakerRobertSchulze
+  },
+  {
+    name: 'Melvyn Peignon',
+    title: 'Principal PM, ClickHouse',
+    image: speakerMelvynPeignon
+  },
+  {
+    name: 'Zoe Steinkamp',
+    title: 'Senior Developer Advocate, ClickHouse',
+    image: speakerZoeSteinkamp
+  },
+  {
+    name: 'Chloe Carasso dit Carson',
+    title: 'Senior PM, ClickHouse',
+    image: speakerChloeCarassoDitCarson
+  },
+  {
+    name: 'Nikita Mikhailov',
+    title: 'Director of Engineering, ClickHouse',
+    image: speakerNikitaMikhailov
+  },
+  {
+    name: 'Zach Naimon',
+    title: 'Principal PM, ClickHouse',
+    image: speakerZachNaimon
+  },
+  {
+    name: 'Kaushik Iska',
+    title: 'Engineering Manager, ClickHouse',
+    image: speakerKaushikIska
+  },
+  {
+    name: 'Mihir Gokhale',
+    title: 'PM, ClickHouse',
+    image: speakerMihirGokhale
+  },
+  {
+    name: 'Mike Shi',
+    title: 'Principal PM, ClickHouse',
+    image: speakerMikeShi
+  },
+  {
+    name: 'Ryadh Dahimene',
+    title: 'Director, PM, ClickHouse',
+    image: speakerRyadhDahimene
+  }
+]
+
 export default function Page({ seo, footerData }: CommonProps) {
+  const speakersToggleRef = useRef<HTMLDivElement | null>(null)
+  const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
+
+  const initialSpeakers = ALL_SPEAKERS.slice(0, 8)
+  const overflowSpeakers = ALL_SPEAKERS.slice(8)
+
+  const scrollToSpeakersToggle = useCallback(() => {
+    const speakersToggle = speakersToggleRef.current
+    if (speakersToggle) {
+      const timer = window.setTimeout(() => {
+        const boundingRect = speakersToggle.getBoundingClientRect()
+        const isInView =
+          boundingRect.top >= 0 &&
+          boundingRect.left >= 0 &&
+          boundingRect.bottom <= window.innerHeight &&
+          boundingRect.right <= window.innerWidth
+
+        // Only scroll into view if it's not already in view
+        if (!isInView) {
+          speakersToggle.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        }
+      }, 100)
+
+      return () => window.clearTimeout(timer)
+    }
+  }, [speakersToggleRef])
+
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -52,14 +199,6 @@ export default function Page({ seo, footerData }: CommonProps) {
         <div className='readable-content'>
           {/* Header */}
           <OpenHouseHeader>
-            <OpenHouseButton
-              href='https://sessionize.com/clickhouse-user-conference-2025/'
-              target='_blank'
-              variant='light'
-              size='sm'
-              className='hidden sm:inline-block'>
-              Apply to speak
-            </OpenHouseButton>
             <OpenHouseButton
               href='/openhouse/register'
               variant='primary'
@@ -278,86 +417,70 @@ export default function Page({ seo, footerData }: CommonProps) {
                 We have an exciting line-up of speakers, and more announcements
                 on the way
               </p>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8'>
-                {(
-                  [
-                    {
-                      name: 'Aaron Katz',
-                      title: 'Founder, CEO',
-                      image: imageAaronKatz
-                    },
-                    {
-                      name: 'Tanya Bragin',
-                      title: 'VP Product & Marketing',
-                      image: imageTanyaBragin
-                    },
-                    {
-                      name: 'Alexey Milovidov',
-                      title: 'Founder, CTO',
-                      image: imageAlexyMilovidov
-                    },
-                    {
-                      name: 'Roopa Tangirala',
-                      title: 'VP, Engineering',
-                      image: imageRopaTangirala
-                    },
-                    {
-                      name: 'Mark Needham',
-                      title: 'Principal PME',
-                      image: imageMarkNeedham
-                    },
-                    {
-                      name: 'Robert Schulze',
-                      title: 'Core Engineering Lead',
-                      image: imageRobertSchulze
-                    },
-                    {
-                      name: 'Zoe Steinkamp',
-                      title: 'Senior Developer Advocate',
-                      image: imageZoeSteinkamp
-                    },
-                    {
-                      name: 'Yury Izrailevsky',
-                      title: 'Founder, President',
-                      image: imageYuryIzrailevsky
-                    }
-                  ] satisfies Array<{
-                    name: string
-                    title: string
-                    image: ImageProps['src']
-                  }>
-                ).map((profile, profileIndex) => {
-                  return (
-                    <div key={profileIndex}>
-                      <div className='relative -mx-3 mb-4'>
-                        <div
-                          className={`absolute top-5 left-3 right-3 bottom-0 bg-[#EFEFEF] ${styles.gridBackgroundSmall}`}
-                        />
-                        <Image
-                          src={profile.image}
-                          alt={profile.name}
-                          width={353}
-                          height={505}
-                          className='w-full h-auto max-w-none relative z-10'
-                        />
-                      </div>
-                      <h3 className='text-2xl'>{profile.name}</h3>
-                      <p className='text-lg'>{profile.title}</p>
-                    </div>
-                  )
+              <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2 -my-4'>
+                {initialSpeakers.map((profile, profileIndex) => {
+                  return <SpeakerProfile {...profile} key={profileIndex} />
                 })}
               </div>
 
-              <div className='mt-14 text-center'>
-                <OpenHouseButton
-                  href='https://sessionize.com/clickhouse-user-conference-2025/'
-                  target='_blank'
-                  variant='dark'
-                  size='lg'
-                  className='min-w-48'>
-                  Apply to speak
-                </OpenHouseButton>
-              </div>
+              {overflowSpeakers.length > 0 && (
+                <div
+                  className={`relative transition-all duration-300 ${displayAllSpeakers ? 'mt-4' : 'mt-14'}`}>
+                  <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2'>
+                    <AnimatePresence onExitComplete={scrollToSpeakersToggle}>
+                      {displayAllSpeakers &&
+                        overflowSpeakers.map((profile, profileIndex) => {
+                          return (
+                            <motion.div
+                              key={profileIndex}
+                              variants={{
+                                closed: {
+                                  opacity: 0,
+                                  height: 0,
+                                  transition: {
+                                    delay: 0
+                                  }
+                                },
+                                open: {
+                                  opacity: 1,
+                                  height: 'auto',
+                                  transition: {
+                                    delay: (profileIndex + 1) / 10
+                                  }
+                                }
+                              }}
+                              initial='closed'
+                              animate='open'
+                              exit='closed'
+                              transition={{
+                                type: 'spring',
+                                bounce: 0,
+                                duration: 0.5
+                              }}>
+                              <SpeakerProfile {...profile} />
+                            </motion.div>
+                          )
+                        })}
+                    </AnimatePresence>
+                  </div>
+                  <div
+                    ref={speakersToggleRef}
+                    className='text-center -mx-6 px-6 py-2 bg-white/60 backdrop-blur sticky bottom-0 z-40 sm:relative sm:backdrop-blur-0 sm:bg-transparent'>
+                    <OpenHouseButton
+                      href='#'
+                      onClick={(event) => {
+                        event.preventDefault()
+                        setDisplayAllSpeakers((old) => !old)
+                      }}
+                      variant='dark'
+                      size='lg'
+                      className='w-full min-w-48 sm:w-auto'>
+                      {!displayAllSpeakers && 'View all speakers'}
+                      {displayAllSpeakers && 'Collapse all speakers'}
+                    </OpenHouseButton>
+                  </div>
+                </div>
+              )}
             </div>
           </section>
 
@@ -493,20 +616,12 @@ export default function Page({ seo, footerData }: CommonProps) {
                     </Link>
                   </p>
                 </div>
-                <div className='flex flex-col sm:flex-row gap-4 items-center flex-1 w-full lg:w-auto'>
-                  <OpenHouseButton
-                    href='https://sessionize.com/clickhouse-user-conference-2025/'
-                    target='_blank'
-                    variant='light'
-                    size='lg'
-                    className='flex-1 w-full sm:w-auto'>
-                    Apply to speak
-                  </OpenHouseButton>
+                <div className='flex-1 w-full lg:w-auto text-center'>
                   <OpenHouseButton
                     href='/openhouse/register'
                     variant='primary'
                     size='lg'
-                    className='flex-1 w-full sm:w-auto'>
+                    className='flex-1 w-full sm:mx-auto sm:w-auto sm:min-w-48'>
                     Register
                   </OpenHouseButton>
                 </div>
@@ -517,5 +632,33 @@ export default function Page({ seo, footerData }: CommonProps) {
       </FontSohne>
       <Footer {...footerData} />
     </>
+  )
+}
+
+function SpeakerProfile({
+  name,
+  title,
+  image
+}: {
+  name: string
+  title: string
+  image: ImageProps['src']
+}) {
+  return (
+    <div className='group/speaker'>
+      <div className='px-2 py-4'>
+        <div className='relative aspect-square mb-4 bg-[#EFEFEF]'>
+          <Image
+            src={image}
+            alt={name}
+            width={353}
+            height={505}
+            className='w-full h-full max-w-none absolute inset-0 z-10 transition grayscale group-hover/speaker:grayscale-0'
+          />
+        </div>
+        <h3 className='text-lg md:text-xl lg:text-2xl'>{name}</h3>
+        <p className='text-sm md:text-base lg:text-lg'>{title}</p>
+      </div>
+    </div>
   )
 }

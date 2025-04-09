@@ -85,14 +85,6 @@ export default function Page({
           {/* Header */}
           <OpenHouseHeader>
             <OpenHouseButton
-              href='https://sessionize.com/clickhouse-user-conference-2025/'
-              target='_blank'
-              variant='light'
-              size='sm'
-              className='hidden sm:inline-block'>
-              Apply to speak
-            </OpenHouseButton>
-            <OpenHouseButton
               href='/openhouse/register'
               variant='primary'
               size='sm'>
