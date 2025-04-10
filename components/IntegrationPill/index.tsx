@@ -5,7 +5,7 @@ export default function IntegrationSupportPill({ label }: { label: string }) {
     experimental: 'bg-amber-600 text-white',
     alpha: 'bg-amber-600 text-white',
     beta: 'bg-amber-800 text-white',
-    new: 'bg-primary-500 text-white'
+    new: 'bg-primary-300 text-primary-900'
   }
 
   const colorTheme = themes[label] || 'bg-neutral-700 text-white'

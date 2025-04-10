@@ -54,8 +54,8 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
           </li>
           <li>
             <LogoItem
-              src='/images/cloud/integrations/postgres.svg'
-              alt='Postgres CDC'
+              src='/images/cloud/integrations/mysql.svg'
+              alt='MySQL CDC'
               active={true}
               badge='New'
             />
@@ -77,9 +77,10 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
           </li>
           <li>
             <LogoItem
-              src='/images/cloud/integrations/google-cloud-storage.svg'
-              alt='Google Cloud Storage'
+              src='/images/cloud/integrations/postgres.svg'
+              alt='Postgres CDC'
               active={true}
+              badge='Beta'
             />
           </li>
           {/* Row 3 */}
@@ -99,10 +100,9 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
           </li>
           <li>
             <LogoItem
-              src='/logos/iceberg.svg'
-              alt='Iceberg'
-              active={false}
-              badge='Soon'
+              src='/images/cloud/integrations/google-cloud-storage.svg'
+              alt='Google Cloud Storage'
+              active={true}
             />
           </li>
           {/* Row 4 */}
@@ -122,10 +122,9 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
           </li>
           <li>
             <LogoItem
-              src='/logos/deltaLake.svg'
-              alt='Delta Lake'
-              active={false}
-              badge='Soon'
+              src='/images/cloud/integrations/digitalocean.svg'
+              alt='DigitalOcean'
+              active={true}
             />
           </li>
         </ul>

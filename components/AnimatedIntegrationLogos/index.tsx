@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion'
 import Image, { ImageProps } from 'next/image'
-import Link from 'next/link'
-import { SuiText } from '../sui'
 
 const getRandomDelay = (min: number, max: number) =>
   Math.random() * (max - min) + min
@@ -10,7 +8,7 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
   return (
     <div className='flex flex-wrap justify-center gap-6'>
       {/* Row 1 */}
-      <ExpandingTile
+      {/*<ExpandingTile
         logo={{
           src: '/images/cloud/integrations/postgres.svg',
           alt: 'Postgres'
@@ -35,7 +33,14 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
             </Link>
           </SuiText>
         </div>
-      </ExpandingTile>
+      </ExpandingTile>*/}
+      <Tile
+        logo={{
+          src: '/images/cloud/integrations/postgres.svg',
+          alt: 'Postgres'
+        }}
+        fade={false}
+      />
       <Tile
         logo={{
           src: '/images/cloud/integrations/vector.svg',
@@ -110,8 +115,8 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
       />
       <Tile
         logo={{
-          src: '/images/cloud/integrations/mysql.svg',
-          alt: 'MySQL'
+          src: '/images/cloud/integrations/go.svg',
+          alt: 'Go Lang'
         }}
         fade={play}
       />
@@ -161,12 +166,13 @@ export default function AnimatedIntegrationLogos({ play }: { play: boolean }) {
       />
 
       {/* Row 4 */}
+
       <Tile
         logo={{
-          src: '/images/cloud/integrations/go.svg',
-          alt: 'Go Lang'
+          src: '/images/cloud/integrations/mysql.svg',
+          alt: 'MySQL'
         }}
-        fade={play}
+        fade={false}
       />
       <Tile
         logo={{

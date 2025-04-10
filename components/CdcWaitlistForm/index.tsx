@@ -1,7 +1,11 @@
 import { useRef, useState } from 'react'
 import MarketoForm from '../MarketoForm'
 
-export default function PostgresCdcWaitlistForm() {
+export interface CdcWaitlistFormProps {
+  formId: string
+}
+
+export default function CdcWaitlistForm({ formId }: CdcWaitlistFormProps) {
   const [formLoaded, setFormLoaded] = useState(false)
   const [formSuccess, setFormSuccess] = useState(false)
   const formSuccessRef = useRef<HTMLDivElement>(null)
@@ -12,7 +16,7 @@ export default function PostgresCdcWaitlistForm() {
           formSuccess ? 'pointer-events-none opacity-10 blur-sm' : ''
         }`}>
         <MarketoForm
-          formId='1293'
+          formId={formId}
           onLoad={() => setFormLoaded(true)}
           onSuccess={() => {
             setFormSuccess(true)

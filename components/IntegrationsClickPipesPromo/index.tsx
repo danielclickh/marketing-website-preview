@@ -19,7 +19,7 @@ export default function IntegrationsClickPipesPromo() {
 
   return (
     <div className='px-8 2xl:px-0'>
-      <div className='rounded-lg border border-neutral-700/80 bg-neutral-700/50 p-6 lg:p-10'>
+      <div className='rounded-lg border border-primary-300 bg-neutral-900/60 p-6 lg:p-10'>
         <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
           <div className='lg:max-w-[640px]'>
             <h3 className='text-balance font-basier text-3xl font-semibold'>
@@ -37,36 +37,51 @@ export default function IntegrationsClickPipesPromo() {
               Learn more about ClickPipes
             </CUIButton>
           </div>
-          <div className='grid grid-cols-5 gap-6 xl:grid-cols-5'>
-            <Amazonsimple className='w-full' />
-            <KinesisAmazon className='w-full' />
-            <Managedkafka className='w-full' />
-            <ConfluentCloud className='w-full' />
-            <Googlestorage className='w-full' />
+          <div className='grid grid-cols-6 gap-3 sm:gap-6 lg:gap-3 xl:gap-6'>
+            <Amazonsimple className='w-full h-auto max-w-12' />
+            <KinesisAmazon className='w-full h-auto max-w-12' />
+            <Managedkafka className='w-full h-auto max-w-12' />
+            <ConfluentCloud className='w-full h-auto max-w-12' />
+            <Googlestorage className='w-full h-auto max-w-12' />
+            <Image
+              src='/images/cloud/integrations/mysql.svg'
+              alt='MySQL'
+              width={64}
+              height={64}
+              className='w-full h-auto max-w-12'
+            />
             <Image
               src='/images/cloud/integrations/postgres.svg'
               alt='Postgres'
               width={64}
               height={64}
+              className='w-full h-auto max-w-12'
             />
-            <Kafka className='w-full' />
-            <Azureeventhub className='w-full' />
-            <Redpanda className='w-full' />
-            <Warpstream className='w-full' />
+            <Kafka className='w-full h-auto max-w-12' />
+            <Azureeventhub className='w-full h-auto max-w-12' />
+            <Redpanda className='w-full h-auto max-w-12' />
+            <Warpstream className='w-full h-auto max-w-12' />
+            <Image
+              src='/images/cloud/integrations/digitalocean.svg'
+              alt='DigitalOcean'
+              width={64}
+              height={64}
+              className='w-full h-auto max-w-12'
+            />
           </div>
         </div>
         <LogoAnnouncementLink
           mode='dark'
-          className='mt-8'
-          href='/cloud/clickpipes/postgres-cdc-connector?loc=integrations-promo'
+          className='mt-8 !bg-neutral-700/60'
+          href='/cloud/clickpipes/mysql-cdc-connector?loc=integrations-promo'
           logo={{
-            src: '/images/cloud/integrations/postgres.svg',
-            alt: 'Postgres',
+            src: '/images/cloud/integrations/mysql.svg',
+            alt: 'MySQL',
             width: 48,
             height: 49
           }}>
-          Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
-          connector — now in Public Beta.{' '}
+          Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe connector
+          — now in Private Preview.{' '}
           <span className='text-primary-300 group-hover:underline'>
             Learn&nbsp;more
           </span>

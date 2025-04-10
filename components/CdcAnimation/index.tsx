@@ -1,8 +1,11 @@
-import Image from 'next/image'
 import ScaleToContainer from '../ScaleToContainer'
 import styles from './styles.module.scss'
 
-export default function PostgresCdcAnimation() {
+export interface CdcAnimationProps {
+  logo: React.ReactNode
+}
+
+export default function CdcAnimation({ logo }: CdcAnimationProps) {
   return (
     <ScaleToContainer scaleUp={false}>
       <div className='pointer-events-none grid w-[507px] select-none grid-cols-1 grid-rows-1'>
@@ -18,13 +21,8 @@ export default function PostgresCdcAnimation() {
 
         <div className='relative z-0 col-start-1 row-start-1 flex items-center'>
           {/* Postgres logo */}
-          <div className='flex-shrink-0 flex-grow-0 pr-4'>
-            <Image
-              src='/images/cloud/integrations/postgres.svg'
-              width={64}
-              height={64}
-              alt='Postgres'
-            />
+          <div className='flex-shrink-0 flex-grow-0 pr-4 w-20 flex items-center justify-center'>
+            {logo}
           </div>
 
           {/* Animated line */}

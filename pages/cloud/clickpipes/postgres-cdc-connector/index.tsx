@@ -2,10 +2,10 @@ import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { CSSProperties } from 'react'
+import CdcAnimation from '../../../../components/CdcAnimation'
 import { CUIButton } from '../../../../components/ClickUI'
 import Layout from '../../../../components/Layout'
 import LinedIconCard from '../../../../components/LinedIconCard'
-import PostgresCdcAnimation from '../../../../components/PostgresCdcAnimation'
 import QuoteCard from '../../../../components/QuoteCard'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import {
@@ -142,7 +142,16 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         <div className='section-container relative z-10'>
           <div className='w-full mx-auto space-y-6 lg:max-w-4xl text-center'>
             <div className='flex justify-center mb-10'>
-              <PostgresCdcAnimation />
+              <CdcAnimation
+                logo={
+                  <Image
+                    src='/images/cloud/integrations/postgres.svg'
+                    width={64}
+                    height={64}
+                    alt='Postgres'
+                  />
+                }
+              />
             </div>
             <SuiTitle type='h1'>
               <span className='tilted tilted-yellow'>
