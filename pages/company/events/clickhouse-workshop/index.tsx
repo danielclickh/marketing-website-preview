@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import EventPost from '../../../../components/EventPostList/EventPost'
 import EventsContainerMarketo from '../../../../components/EventsContainer-Marketo'
@@ -8,11 +8,10 @@ import { StrapiImage } from '../../../../components/StrapiElements'
 import { SuiText, SuiTitle } from '../../../../components/sui'
 import { findAll } from '../../../../lib/api/strapi'
 import { getCommonProps } from '../../../../lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '../../../../lib/utils/revalidationConfig'
 import { EventProps, EventType } from '../../../../types/events'
 
-export const getStaticProps: GetStaticProps<EventProps> =
-  async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps<EventProps> =
+  async function getServerSideProps() {
     const { data } = await findAll('events', {
       filters: {
         slug: {
@@ -65,8 +64,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
 
     if (!page) {
       return {
-        notFound: true,
-        revalidate: REVALIDATE_SECONDS
+        notFound: true
       }
     }
 
@@ -92,8 +90,7 @@ export const getStaticProps: GetStaticProps<EventProps> =
         },
         recentEvents,
         ...commonProps
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 
