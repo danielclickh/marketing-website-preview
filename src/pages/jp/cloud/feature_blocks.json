@@ -1,0 +1,158 @@
+[
+  {
+    "id": 1,
+    "image": "/images/cloud/onboarding.svg",
+    "image_width": 580,
+    "image_height": 298,
+    "title": "すぐに開始",
+    "description": "ClickHouseならではのパワーとスピードをクラウドでご体験ください。",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "価格は$300から"
+      },
+      {
+        "id": 2,
+        "text": "事前のサイジング不要"
+      },
+      {
+        "id": 3,
+        "text": "レプリケーションを自動化"
+      },
+      {
+        "id": 4,
+        "text": "手動データシャーディング不要"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "image": "/images/cloud/price_performance.svg",
+    "image_width": 535,
+    "image_height": 282,
+    "title": "ベストなコストパフォーマンス ",
+    "description": "クラウドネイティブなアーキテクチャにより、データの階層管理やスケーリングで効率化。市場でトップのコストパフォーマンスを実現しました。",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "コンピュートとストレージの分離"
+      },
+      {
+        "id": 2,
+        "text": "基盤がオブジェクトストア"
+      },
+      {
+        "id": 3,
+        "text": "マルチレベルキャッシュ"
+      },
+      {
+        "id": 4,
+        "text": "コストとスケールのコントール"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "image": "/images/cloud/reliability.svg",
+    "image_width": 691,
+    "image_height": 369,
+    "title": "妥協のない信頼性",
+    "description": "デフォルトで高い信頼性を持ち、各サービスは複数のアベイラビリティゾーンに自動的にレプリケーションされます。",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "高可用性"
+      },
+      {
+        "id": 2,
+        "text": "シームレスにアップグレード"
+      },
+      {
+        "id": 3,
+        "text": "自動バックアップ"
+      },
+      {
+        "id": 4,
+        "text": "ディザスタリカバリ"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "image": "/images/cloud/security.svg",
+    "image_width": 416,
+    "image_height": 305,
+    "title": "ワールドクラスのセキュリティ",
+    "description": "セキュリティ、プライバシー、コンプライアンスの管理もClickHouseのエキスパートにおまかせください。常に業界標準の設定が適用され、ポリシーはカスタマイズ可能です。",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "強力なユーザおよびネットワークアクセス制御"
+      },
+      {
+        "id": 2,
+        "text": "転送中および保存中の暗号化"
+      },
+      {
+        "id": 3,
+        "text": "アクティビティログ"
+      },
+      {
+        "id": 4,
+        "text": "SOC 2 Type II 準拠"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "image": "/images/cloud/sql-console.svg",
+    "image_width": 792,
+    "image_height": 522,
+    "title": "対話型SQLコンソール",
+    "description": "ClickHouse Cloudデータベースに接続し、探索し、可視化する最も最速かつ簡単な方法です。シームレスにデータを読み込み、数クリックでクエリを開始できます。",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "使いやすいテーブルエクスプローラー"
+      },
+      {
+        "id": 2,
+        "text": "高機能なクエリインターフェース"
+      },
+      {
+        "id": 3,
+        "text": "データインジェストとインポートのウィザード"
+      },
+      {
+        "id": 4,
+        "text": "可視化とコラボレーション機能"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "image": "/images/cloud/automate-clickhouse-terraform.svg",
+    "image_width": 560,
+    "image_height": 407,
+    "title": "簡単に自動化",
+    "description": "ClickHouseのTerraformプロバイダーとインフラAPIを使用し、設定や構成を手間なく自動化できます。",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "構成の一貫性を維持"
+      },
+      {
+        "id": 2,
+        "text": "カスタム設定をすべてのデプロイに再利用"
+      },
+      {
+        "id": 3,
+        "text": "インフラチーム全体の作業効率を大幅に向上"
+      },
+      {
+        "id": 4,
+        "text": "シームレスな自動化でデリバリーを加速"
+      }
+    ]
+  }
+]

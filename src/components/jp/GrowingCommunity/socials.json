@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Github",
+    "href": "https://github.com/ClickHouse/ClickHouse",
+    "imgSrc": "/socials/github.svg"
+  },
+  {
+    "name": "Slack",
+    "href": "/slack",
+    "imgSrc": "/socials/slack.svg"
+  },
+  {
+    "name": "Linkedin",
+    "href": "https://www.linkedin.com/company/ClickHouseInc/",
+    "imgSrc": "/socials/linkedin.svg"
+  },
+  {
+    "name": "Twitter",
+    "href": "https://twitter.com/ClickhouseDB",
+    "imgSrc": "/socials/twitter.svg"
+  },
+  {
+    "name": "YouTube",
+    "href": "https://www.youtube.com/c/ClickHouseDB",
+    "imgSrc": "/socials/youtube.svg"
+  },
+  {
+    "name": "StackOverflow",
+    "href": "https://stackoverflow.com/questions/tagged/clickhouse",
+    "imgSrc": "/socials/stackoverflow.svg"
+  },
+  {
+    "name": "Telegram",
+    "href": "https://telegram.me/clickhouse_en",
+    "imgSrc": "/socials/telegram.svg"
+  },
+  {
+    "name": "Meetup",
+    "href": "https://www.meetup.com/pro/clickhouse",
+    "imgSrc": "/socials/meetup.svg"
+  }
+]

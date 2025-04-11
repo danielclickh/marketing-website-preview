@@ -1,0 +1,20 @@
+[
+  {
+    "id": 10,
+    "stat": "10x+",
+    "content": "コスト削減",
+    "readmore": "[詳しく見る](/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse)"
+  },
+  {
+    "id": 30,
+    "stat": "5x",
+    "content": "クエリ速度",
+    "readmore": "[詳しく見る](/comparison/redshift)"
+  },
+  {
+    "id": 40,
+    "stat": "20x",
+    "content": "同時実行数",
+    "readmore": "[詳しく見る](/comparison/redshift)"
+  }
+]

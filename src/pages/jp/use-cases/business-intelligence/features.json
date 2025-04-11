@@ -1,0 +1,22 @@
+[
+  {
+    "title": "あらゆるフォーマットのデータを分析可能",
+    "content": "Parquet、JSON、CSV、TSVなど、70を超える[ファイルフォーマット](https://clickhouse.com/docs/en/sql-reference/formats)をサポート。ローカルファイルについては、[clickhouse-local](/blog/extracting-converting-querying-local-files-with-sql-clickhouse-local)を使用することで、ローカルマシン上でデータをクエリ、コンバート、変換することができます。",
+    "icon": "/images/analyze-icon.svg"
+  },
+  {
+    "title": "使い慣れたツールと統合",
+    "content": "MySQL互換ツール、Tableauなどの主要な可視化製品、言語クライアント、dbtなど、[多様なツールやフレームワーク](https://clickhouse.com/docs/en/integrations)をClickHouseでそのまま使用できるように、インテグレーションのエコシステムを急拡大させています。",
+    "icon": "/images/tools-icon.svg"
+  },
+  {
+    "title": "費用を抑えて効率を最大化",
+    "content": "費用はクエリの量に応じて高くなり、同時実行回数には制限がある。また、高度な機能で価格帯が上がる。それが従来のデータウェアハウスでしたが、ClickHouseなら追加料金なしで高速化が可能です。しかも、お支払いはコンピューティングリソースと圧縮ストレージを実際に使用した分だけ。",
+    "icon": "/images/reduce-costs-icon.svg"
+  },
+  {
+    "title": "SQLをシンプルに",
+    "content": "数十億を超えるレコードでも、どれほど複雑なクエリでも、シンプルなSQLステートメントにシームレスに変換できるドメイン固有の関数を豊富に集めたライブラリをご用意しています。高度なデータ探索もClickHouseなら簡単です。",
+    "icon": "/images/sql-icon.svg"
+  }
+]

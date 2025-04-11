@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10,
+    "title": "Data ingestion",
+    "content": "ClickHouse is trusted at scale to ingest and process billions of new events per day from a wide range of sources and formats. For continuous streams of data, ClickPipes seamlessly manages your ingestion pipelines so that you don't have to.<br /><br />Features like User Defined Functions, described in more depth below, can be used to invoke models at insert time. This gives you the ability to pass incoming data to a model, receive the output, and store these results along with your ingested data. All without having to spin up other processes or jobs.<br /><br />Native table functions make it easy to query data wherever it lives, whether locally or in object stores such as GCS and S3, or applying transformations via services like HuggingFace."
+  },
+  {
+    "id": 20,
+    "title": "Data transformation",
+    "content": "ClickHouse User Defined Functions give you the flexibility to run Python scripts - or whichever executable language you prefer - directly in ClickHouse. These scripts can be triggered at insert or query time, making it easy to invoke pre-built models from providers like OpenAI and HuggingFace, or your own.<br /><br />Our extensive suite of statistical and aggregation functions scale seamlessly over petabytes of data, providing powerful model training and evaluation resources. With support for the most granular precision data types and codecs, you don't need to worry about reducing granularity.<br /><br />With ClickHouse, executing vector searches using linear or approximate techniques is effortless, with out-of-the-box support and blazing speed."
+  },
+  {
+    "id": 30,
+    "title": "Tooling, visualizations, and more",
+    "content": "ClickHouse is trusted all over the world to power customer-facing applications, where real-time responsiveness is critical.<br /><br />With ClickHouse, you have everything you need to enrich your customer experiences through machine learning workloads run on your data, all in one place.<br /><br />Our vibrant and growing ecosystem of integrations makes it easy to leverage your notebooks, visualization tools, and more, directly with ClickHouse."
+  }
+]

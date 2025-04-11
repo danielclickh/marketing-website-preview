@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10,
+    "title": "2x",
+    "description": "faster queries"
+  },
+  {
+    "id": 20,
+    "title": "38%",
+    "description": "better compression"
+  },
+  {
+    "id": 30,
+    "title": "3-5x",
+    "description": "reduction in costs"
+  }
+]
