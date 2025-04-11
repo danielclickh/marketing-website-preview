@@ -1,13 +1,10 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
-import React from 'react'
 import IntegrationPill from '@/components/IntegrationPill'
 import IntegrationTile from '@/components/IntegrationTile'
-import GetStartedFree from '@/components/jp/GetStartedFree'
-import Layout from '@/components/jp/Layout'
 import Markdown from '@/components/Markdown'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import { StrapiImage } from '@/components/StrapiElements'
+import GetStartedFree from '@/components/jp/GetStartedFree'
+import Layout from '@/components/jp/Layout'
 import { SuiTitle } from '@/components/sui'
 import { findAll, getPathsValues } from '@/lib/api/strapi'
 import { SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
@@ -19,6 +16,9 @@ import {
 } from '@/lib/utils/revalidationConfig'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { Integration } from '@/types/integrations'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
+import React from 'react'
 
 interface IntegrationPageProps extends CommonProps {
   seo?: SeoMetadata

@@ -1,6 +1,6 @@
+import MarketoForm, { SpoofedMarketoObject } from '../../MarketoForm'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
-import MarketoForm, { SpoofedMarketoObject } from '../../MarketoForm'
 
 function ContactForm() {
   const router = useRouter()

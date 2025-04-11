@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { BlogApiResponse } from '@/types/blogs'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const baseQuery: Record<string, any> = {
   sort: ['date:DESC', 'publishedAt:DESC'],

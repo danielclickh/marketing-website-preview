@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import LinkWithArrow from '../../../LinkWithArrow'
 import { NavigationLink } from '../parts'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import Image from 'next/image'
 
 export default function NavigationSubNavProducts() {
   return (

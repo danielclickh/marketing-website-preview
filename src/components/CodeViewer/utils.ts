@@ -1,5 +1,7 @@
 import { filesize } from 'filesize'
-import numeral from 'numeral' // @ts-ignore
+import numeral from 'numeral'
+
+// @ts-ignore
 
 export function roundToDynamicPrecision(num: number) {
   const validNum = Number(num)

@@ -1,9 +1,9 @@
+import LazyLoad from '../LazyLoad'
+import Markdown from '../Markdown'
 import { resolveHref } from 'next/dist/client/resolve-href'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useEffect, useId, useRef, useState } from 'react'
-import LazyLoad from '../LazyLoad'
-import Markdown from '../Markdown'
 
 type SpoofedMarketoValuesObject = Record<string, any>
 

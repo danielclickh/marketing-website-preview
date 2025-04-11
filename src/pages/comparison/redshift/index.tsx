@@ -1,9 +1,3 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import Tilt from 'react-parallax-tilt'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
@@ -19,6 +13,12 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import { ComparisonProps } from '@/types/comparisons'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import Tilt from 'react-parallax-tilt'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
   async function getStaticProps() {
@@ -100,7 +100,7 @@ export default function ComparisonPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative pt-16 lg:pb-24 '>
+        <div className='relative pt-16 lg:pb-24'>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
             <div className='w-full items-start gap-10 lg:grid lg:grid-cols-8 lg:gap-20'>
               <div className='lg:col-span-5'>
@@ -201,7 +201,7 @@ export default function ComparisonPage({
         <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
           <div className='relative z-40 mx-auto mt-4 max-w-4xl pb-0 pt-20 lg:mt-6'>
             <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
-              <div className='container mx-auto max-w-4xl border-none px-6  2xl:px-0'>
+              <div className='container mx-auto max-w-4xl border-none px-6 2xl:px-0'>
                 <div className='overflow-hidden rounded-xl'>
                   <ResponsiveEmbed html='<iframe src="https://www.youtube-nocookie.com/embed/8FUfyvoqDTg?rel=0&autoplay=0" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>' />
                 </div>
@@ -264,7 +264,7 @@ export default function ComparisonPage({
                             <h3 className='mb-4 flex-grow text-center font-basier text-3xl font-semibold leading-tight text-neutral-100 lg:text-left'>
                               {painpoint.Title}
                             </h3>
-                            <div className='rich_content  text-neutral-0'>
+                            <div className='rich_content text-neutral-0'>
                               <Markdown>{painpoint.Description}</Markdown>
                             </div>
                           </div>
@@ -272,7 +272,7 @@ export default function ComparisonPage({
                             <div className='h-full w-full lg:w-1/3'>
                               <CUICard className='p-6'>
                                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                                  <div className='rich_content  text-neutral-0'>
+                                  <div className='rich_content text-neutral-0'>
                                     <Image
                                       src='/images/Quote.svg'
                                       width={37}
@@ -329,10 +329,10 @@ export default function ComparisonPage({
                         {testimonial.logo && (
                           <StrapiImage
                             {...testimonial.logo}
-                            className='color-swap-no-hover mb-4 h-16  fill-none'
+                            className='color-swap-no-hover mb-4 h-16 fill-none'
                           />
                         )}
-                        <div className='rich-content-comparisons  text-neutral-0'>
+                        <div className='rich-content-comparisons text-neutral-0'>
                           <ReactMarkdown>
                             {testimonial.Description}
                           </ReactMarkdown>
@@ -372,7 +372,7 @@ export default function ComparisonPage({
                           href={custom.href}
                           target='_blank'
                           className={
-                            ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+                            'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
                           }>
                           <CUICard className='h-full'>
                             <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -390,7 +390,7 @@ export default function ComparisonPage({
                                 <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
                                   {custom.Category}
                                 </div>
-                                <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                                <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
                                   {custom.Title}
                                 </div>
                               </div>
@@ -420,7 +420,7 @@ export default function ComparisonPage({
       </div>
       <HRSeparator className='my-16 lg:my-24' />
       <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
-        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto  flex  flex-col items-center'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
           <Image
             src='/images/migration.svg'
             height={72}

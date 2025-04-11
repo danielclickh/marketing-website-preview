@@ -1,10 +1,3 @@
-import { MinusIcon } from '@heroicons/react/outline'
-import { CheckIcon } from '@heroicons/react/solid'
-import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useState } from 'react'
-import { slugify } from '@/lib/utils/strings'
-import { CloudProviderType } from '@/types/cloud'
-import { PricingPlanData, RegionPricing } from '@/types/pricing'
 import { CUIButton } from '../ClickUI'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
@@ -15,6 +8,13 @@ import styles from './PricingOptions.module.scss'
 import PricingSelector from './PricingSelector'
 import ShowPricing from './ShowPricing'
 import { RegionPricingWithIcon } from './types'
+import { slugify } from '@/lib/utils/strings'
+import { CloudProviderType } from '@/types/cloud'
+import { PricingPlanData, RegionPricing } from '@/types/pricing'
+import { MinusIcon } from '@heroicons/react/outline'
+import { CheckIcon } from '@heroicons/react/solid'
+import { useRouter } from 'next/router'
+import React, { useEffect, useMemo, useState } from 'react'
 
 function PricingOptions({
   pricingByRegion,
@@ -137,10 +137,10 @@ function PricingOptions({
   }
 
   return (
-    <div className='w-full '>
+    <div className='w-full'>
       <PricingContextProvider value={getDefaultRegion()}>
         {!selectorOnly && (
-          <div className='flex justify-center space-x-6 pb-6 pt-8 '>
+          <div className='flex justify-center space-x-6 pb-6 pt-8'>
             <div className='flex flex-col'>
               <div className='mx-auto flex flex-row items-start gap-4'>
                 {cloudProviders.map((cloudProvider, parentIndex: number) => (
@@ -408,7 +408,7 @@ function PricingOptions({
                                     <CheckIcon className='h-4 w-4' />
                                   )}
                                   <div className='item_text'>
-                                    <Markdown className=' max-w-xs !text-neutral-0'>
+                                    <Markdown className='max-w-xs !text-neutral-0'>
                                       {item.description}
                                     </Markdown>
                                   </div>

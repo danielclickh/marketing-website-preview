@@ -1,6 +1,6 @@
-import { SeoMetadata, StrapiButton } from '@/lib/api/strapi/types'
 import { EventType } from './events'
 import { CommonProps } from './homepage'
+import { SeoMetadata, StrapiButton } from '@/lib/api/strapi/types'
 
 export interface NewsItem {
   headline: string

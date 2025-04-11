@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { TwitterCardProps } from './types'
+import Image from 'next/image'
 
 function TwitterCard({
   src,

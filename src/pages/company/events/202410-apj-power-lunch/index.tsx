@@ -1,7 +1,3 @@
-import { GetServerSideProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
 import EventPost from '@/components/EventPostList/EventPost'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
@@ -10,6 +6,10 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { findAll } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
+import { GetServerSideProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<EventProps> =
   async function getServerSideProps() {
@@ -128,9 +128,7 @@ function EventPage({
                   </Link>{' '}
                   / {category}
                 </h4>
-                <h1
-                  className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5xl md:leading-normal
-            '>
+                <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5xl md:leading-normal'>
                   {title}
                 </h1>
                 {richDescription && (

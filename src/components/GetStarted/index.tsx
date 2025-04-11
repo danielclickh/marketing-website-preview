@@ -1,10 +1,11 @@
-import Link from 'next/link'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { CUILink } from '../ClickUI'
 import Markdown from '../Markdown'
 import { SuiCodeblock, SuiTitle } from '../sui'
 import styles from './GetStarted.module.scss'
 import { GettingStartedData } from './types'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import Link from 'next/link'
+
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
     <div

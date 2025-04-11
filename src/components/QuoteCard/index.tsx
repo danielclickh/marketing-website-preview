@@ -1,9 +1,9 @@
+import Markdown from '../Markdown'
+import { SuiText } from '../sui'
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
 import React from 'react'
 import Tilt from 'react-parallax-tilt'
-import Markdown from '../Markdown'
-import { SuiText } from '../sui'
 
 interface QuoteProps {
   content: React.ReactNode | string

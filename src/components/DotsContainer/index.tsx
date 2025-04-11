@@ -1,6 +1,6 @@
+import dots from './dots.png'
 import Image from 'next/image'
 import React from 'react'
-import dots from './dots.png'
 
 export type DotsAndFormProps = React.HTMLProps<HTMLDivElement>
 

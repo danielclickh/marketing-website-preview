@@ -1,5 +1,5 @@
-import { HTMLAttributes } from 'react'
 import { colorCalculator, sizeCalculator } from './calculator'
+import { HTMLAttributes } from 'react'
 
 export interface TextProps extends HTMLAttributes<HTMLDivElement> {
   size?: 'lg' | 'base' | 'sm' | 'xs'
@@ -12,11 +12,7 @@ export const SuiText = ({ ...TextProps }: TextProps) => {
 
   return (
     <div
-      className={`
-        ${className ?? ''}
-        ${colorCalculator(color, 'text-inherit')}
-        ${sizeCalculator(size ? size : 'base', weight ? weight : 'normal')}
-      `}>
+      className={` ${className ?? ''} ${colorCalculator(color, 'text-inherit')} ${sizeCalculator(size ? size : 'base', weight ? weight : 'normal')} `}>
       {children}
     </div>
   )

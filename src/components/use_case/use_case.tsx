@@ -1,9 +1,9 @@
+import { CUIButton } from '../ClickUI'
+import { SuiPanel, SuiText } from '../sui'
+import { BaseStrapiImage } from '@/lib/api/strapi/types'
 import { CheckIcon } from '@heroicons/react/outline'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
-import { CUIButton } from '../ClickUI'
-import { BaseStrapiImage } from '@/lib/api/strapi/types'
-import { SuiPanel, SuiText } from '../sui'
 
 type TestimonialProps = {
   id: string

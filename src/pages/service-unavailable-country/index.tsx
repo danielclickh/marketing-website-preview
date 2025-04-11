@@ -1,6 +1,3 @@
-import { GetStaticProps } from 'next'
-import { useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 import GetStarted from '@/components/GetStarted'
 import Layout from '@/components/Layout'
 import MarketoForm from '@/components/MarketoForm'
@@ -8,6 +5,9 @@ import { SuiPanel, SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ServiceProps } from '@/types/serviceUnavailablePage'
+import { GetStaticProps } from 'next'
+import { useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ServiceProps> =
   async function getStaticProps() {

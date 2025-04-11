@@ -1,14 +1,14 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
-import { FullyQualifiedEvent } from '@/lib/galaxy/client'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { CUIButton, CUICard } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import developerOptions from './developerOptions.json'
+import { FullyQualifiedEvent } from '@/lib/galaxy/client'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
 
 function DevelopersSection() {
   return (
-    <div className='section-container md:px-8 2xl:px-0 '>
+    <div className='section-container md:px-8 2xl:px-0'>
       <SuiTitle type='h2' className='mb-8 w-full text-left'>
         What do developers say?
       </SuiTitle>

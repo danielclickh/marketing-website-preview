@@ -1,5 +1,5 @@
-import { StrapiImageType } from '@/lib/api/strapi/types'
 import { CommonProps } from './homepage'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface PageProps {
   params: { slug: string }

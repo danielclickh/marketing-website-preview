@@ -4,6 +4,6 @@
   width: 100%;
   width: fill-available;
   & > div {
-    @apply rounded-xl relative z-10 p-4 w-full h-full bg-c4/10;
+    @apply relative z-10 h-full w-full rounded-xl bg-c4/10 p-4;
   }
 }

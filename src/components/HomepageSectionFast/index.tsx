@@ -1,11 +1,11 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
-import React from 'react'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
 import ColumnOrientedIllustration from '../ColumnOrientedIllustration'
 import RowOrientedIllustration from '../RowOrientedIllustration'
 import { SuiText, SuiTitle } from '../sui'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
+import React from 'react'
 
 export default function HomepageSectionFast({
   className = '',

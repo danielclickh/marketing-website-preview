@@ -1,6 +1,6 @@
-import { ReactNode } from 'react'
 import { StrapiImage } from '@/lib/types/images'
 import { EventForm } from '@/types/events'
+import { ReactNode } from 'react'
 
 export interface EventsContainerProps {
   children: ReactNode

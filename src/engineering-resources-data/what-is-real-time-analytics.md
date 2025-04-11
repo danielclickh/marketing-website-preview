@@ -42,11 +42,11 @@ We can now derive insights from events almost as soon as they’re generated. Bu
 
 ## Benefits of real-time analytics
 
-In today's fast-paced world, organizations rely on real-time analytics to stay agile and responsive to ever-changing conditions. A real-time analytics system can benefit a business in many ways. 
+In today's fast-paced world, organizations rely on real-time analytics to stay agile and responsive to ever-changing conditions. A real-time analytics system can benefit a business in many ways.
 
-### Better decision-making 
+### Better decision-making
 
-Decision-making can be improved by having access to actionable insights via real-time analytics. When business operators can see events as they’re happening, it makes it much easier to make timely interventions. 
+Decision-making can be improved by having access to actionable insights via real-time analytics. When business operators can see events as they’re happening, it makes it much easier to make timely interventions.
 
 For example, if we make changes to an application and want to know whether it’s having a detrimental effect on the user experience, we want to know this as quickly as possible so that we can revert the changes if necessary. With a less real-time approach, we might have to wait until the next day to do this analysis, by which type we’ll have a lot of unhappy users.
 
@@ -54,7 +54,7 @@ For example, if we make changes to an application and want to know whether it’
 
 Real-time analytics can help businesses generate new revenue streams. Organizations can develop new data-centered products and services that give users access to analytical querying capabilities. These products are often compelling enough for users to pay for access.
 
-In addition, existing applications can be made stickier, increasing user engagement and retention. This will result in more application use, creating more revenue for the organization. 
+In addition, existing applications can be made stickier, increasing user engagement and retention. This will result in more application use, creating more revenue for the organization.
 
 ### Improved customer experience
 
@@ -98,7 +98,7 @@ Coinhall provides its users with real-time insights into price movements over ti
 
 Many organizations run online services, and if something goes wrong, they need to be able to solve the problem as quickly as possible. Real-time analytics enables them to debug issues as they happen, using logs, events, and traces. This use case has high insert workloads and the need for low-latency analytical queries.
 
-LangChain is a popular software framework that helps users build applications that use large language models. They have built a commercial product called LangSmith, a unified developer platform for LLM application observability and evaluation that uses ClickHouse under the hood.  
+LangChain is a popular software framework that helps users build applications that use large language models. They have built a commercial product called LangSmith, a unified developer platform for LLM application observability and evaluation that uses ClickHouse under the hood.
 
 LangSmith lets users understand what’s going on in their LLM applications and allows them to debug agentic workflows. It also helps developers detect excessive token use, a costly problem they want to detect as soon as possible.
 
@@ -110,11 +110,11 @@ When working with LLM applications, there are invariably many moving pieces with
 
 There are also many other use cases, including:
 
-* Real-time ad analytics: Give buyers and sellers the ability to slice and dice ad performance data.  
-* Content recommendation: Show users fresh and interesting content each time they log in, considering the content they typically consume and interact with.  
-* Anomaly detection: In real-time, identify unusual patterns in data that might indicate a problem that needs addressing.  
-* [Usage-based pricing](https://clickhouse.com/blog/openmeter-real-time-usage-based-billing-powered-by-clickhouse-cloud): Precise metering through real-time analytics prevents overages and ensures fair charging in dynamic cloud environments.  
-* [Short-term forecasting](https://clickhouse.com/videos/lyft-user-story): Computing predicted demand using the latest usage data, sliced and diced across multiple dimensions.
+- Real-time ad analytics: Give buyers and sellers the ability to slice and dice ad performance data.
+- Content recommendation: Show users fresh and interesting content each time they log in, considering the content they typically consume and interact with.
+- Anomaly detection: In real-time, identify unusual patterns in data that might indicate a problem that needs addressing.
+- [Usage-based pricing](https://clickhouse.com/blog/openmeter-real-time-usage-based-billing-powered-by-clickhouse-cloud): Precise metering through real-time analytics prevents overages and ensures fair charging in dynamic cloud environments.
+- [Short-term forecasting](https://clickhouse.com/videos/lyft-user-story): Computing predicted demand using the latest usage data, sliced and diced across multiple dimensions.
 
 ## Characteristics of a real-time analytics system
 
@@ -122,7 +122,7 @@ The system we build must have specific characteristics to achieve the benefits a
 
 ### Ingestion speed
 
-We’re predominantly working with streaming data, the value of which decreases over time. Therefore, we need a fast data ingestion process to make the data available for querying. We should see a change in the real-time analytics system as soon as it happens. 
+We’re predominantly working with streaming data, the value of which decreases over time. Therefore, we need a fast data ingestion process to make the data available for querying. We should see a change in the real-time analytics system as soon as it happens.
 
 There will always be some lag between when the data is generated and when it’s available for querying. We need that lag to be as small as possible.
 
@@ -156,7 +156,7 @@ Real-time databases must ingest hundreds of thousands or millions of records per
 
 ## Why ClickHouse Cloud for real-time analytics?
 
-[ClickHouse Cloud](https://clickhouse.com/cloud) is a real-time data analytics platform. It offers a fully managed, cloud-based version of ClickHouse and also comes with ClickPipes, an integration engine that simplifies continuous data ingestion from various sources, including Amazon S3 and Apache Kafka. 
+[ClickHouse Cloud](https://clickhouse.com/cloud) is a real-time data analytics platform. It offers a fully managed, cloud-based version of ClickHouse and also comes with ClickPipes, an integration engine that simplifies continuous data ingestion from various sources, including Amazon S3 and Apache Kafka.
 
 You can see the architecture of ClickHouse Cloud in the following diagram:
 
@@ -170,19 +170,19 @@ It can comfortably ingest hundreds of thousands and even millions of records per
 
 ### Query latency
 
-[Query performance is a top priority](https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast) during the development of ClickHouse. ClickHouse Cloud customers typically see [second](https://clickhouse.com/blog/data-hive-the-story-of-beehiivs-journey-from-postgres-to-clickhouse) or [sub-second](https://clickhouse.com/blog/lago-using-clickhouse-to-scale-an-events-engine) latency for their queries, even with high data volumes. This is achieved through the way data is stored, how it’s compressed, and the use of data structures to ensure only relevant data is processed. 
+[Query performance is a top priority](https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast) during the development of ClickHouse. ClickHouse Cloud customers typically see [second](https://clickhouse.com/blog/data-hive-the-story-of-beehiivs-journey-from-postgres-to-clickhouse) or [sub-second](https://clickhouse.com/blog/lago-using-clickhouse-to-scale-an-events-engine) latency for their queries, even with high data volumes. This is achieved through the way data is stored, how it’s compressed, and the use of data structures to ensure only relevant data is processed.
 
 ClickHouse also uses vectorized query execution and parallelizes query execution across cores and servers. Users can also use materialized views to reduce the number of rows that need to be scanned when query latency is at a premium.
 
-### Concurrency  
+### Concurrency
 
-ClickHouse is designed to handle high concurrency workloads. It is frequently used in applications where organizations want to [provide real-time analytics functionality to their users](https://clickhouse.com/blog/behind-the-scenes-how-clickhouse-helps-vimeo-power-video-analytics-at-scale).  It's also used in [real-time dashboards](https://clickhouse.com/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked), where there are fewer users, but each dashboard refresh spawns multiple queries.   
+ClickHouse is designed to handle high concurrency workloads. It is frequently used in applications where organizations want to [provide real-time analytics functionality to their users](https://clickhouse.com/blog/behind-the-scenes-how-clickhouse-helps-vimeo-power-video-analytics-at-scale). It's also used in [real-time dashboards](https://clickhouse.com/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked), where there are fewer users, but each dashboard refresh spawns multiple queries.
 
 ## Getting started with ClickHouse Cloud for real-time analytics
 
 Hopefully, you’re excited to [add real-time analytics functionality to your application](https://clickhouse.com/blog/adding-analytics-to-an-application-with-clickhouse-query-endpoints). Let’s have a look at how to do that.
 
-The first step is to navigate to [clickhouse.cloud](https://console.clickhouse.cloud/) and create an account for your 30-day free trial. Once you’ve done that, create a service in the cloud and region of your choice. Initializing the service will take a few minutes, but then we’re ready to import some data. 
+The first step is to navigate to [clickhouse.cloud](https://console.clickhouse.cloud/) and create an account for your 30-day free trial. Once you’ve done that, create a service in the cloud and region of your choice. Initializing the service will take a few minutes, but then we’re ready to import some data.
 
 You can also watch the following video to see the steps described above:
 
@@ -192,8 +192,8 @@ You can also watch the following video to see the steps described above:
 Once your service is up and running, we need to follow these steps:
 <p></p>
 
-1. Ingest data with ClickPipes.  
-2. Write queries using the ClickHouse Cloud SQL console.  
+1. Ingest data with ClickPipes.
+2. Write queries using the ClickHouse Cloud SQL console.
 3. Create query endpoints based on those queries.
 
 Let’s go through each of these steps in a bit more detail.
@@ -210,11 +210,10 @@ You’ll likely want to use it to ingest data from Confluent Cloud or one of the
 
 Once the data is ingested, you can explore it using the [SQL console](https://clickhouse.com/docs/en/get-started/sql-console). Clicking on a table will show its contents, which you can view and filter.
 
-You can also write queries manually, and the SQL console provides a rich UI for editing queries and even has AI assistance if your SQL is a bit rusty. You can also create visualizations to understand query results better. 
+You can also write queries manually, and the SQL console provides a rich UI for editing queries and even has AI assistance if your SQL is a bit rusty. You can also create visualizations to understand query results better.
 
 ### Create query endpoints
 
 Once you’re happy with your query, you can save it and share it with other users in your organization. You can also [create an API endpoint](https://clickhouse.com/docs/en/get-started/query-endpoints) for the query. Query API endpoints create an API endpoint directly from any saved SQL query in the ClickHouse Cloud console. You can then access API endpoints via HTTP to execute your saved queries without connecting to your ClickHouse Cloud service via a native driver.
 
-You can read more about query endpoints in the blog post [Adding Analytics to an Application in under 10 minutes with ClickHouse Cloud Query Endpoints](https://clickhouse.com/blog/adding-analytics-to-an-application-with-clickhouse-query-endpoints)  
-
+You can read more about query endpoints in the blog post [Adding Analytics to an Application in under 10 minutes with ClickHouse Cloud Query Endpoints](https://clickhouse.com/blog/adding-analytics-to-an-application-with-clickhouse-query-endpoints)

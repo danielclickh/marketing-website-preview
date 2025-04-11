@@ -1,5 +1,5 @@
-import { HTMLAttributes } from 'react'
 import styles from './Text.module.scss'
+import { HTMLAttributes } from 'react'
 
 interface TextFieldProps extends HTMLAttributes<HTMLTextAreaElement> {
   htmlFor: string

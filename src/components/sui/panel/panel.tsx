@@ -36,7 +36,7 @@ export function SuiPanel(props: PanelProps) {
       <div
         className={`${bgColour} ${shadow} ${border} w-full ${paddingCalculator(
           props.padding
-        )}  duration-300 ease-in-out ${
+        )} duration-300 ease-in-out ${
           props.isRounded ? 'rounded-lg' : 'rounded-none'
         } ${className}`}>
         {props.children}

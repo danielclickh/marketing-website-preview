@@ -1,10 +1,10 @@
-import { ExternalLinkIcon } from '@heroicons/react/solid'
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
 import Layout from '@/components/Layout'
 import { SuiButton, SuiCard, SuiText, SuiTitle } from '@/components/sui'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { ExternalLinkIcon } from '@heroicons/react/solid'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
 
 const highlights = [
   {
@@ -57,7 +57,7 @@ function PartnersPage({ seo, headerData, footerData }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='pt-20 md:pt-30'>
-        <div className='mx-10 min-h-screen pb-10 md:pb-20 '>
+        <div className='mx-10 min-h-screen pb-10 md:pb-20'>
           <div className='mx-auto mb-20 flex w-full flex-col items-center justify-center gap-20 md:mb-36 md:flex-row-reverse'>
             <Image
               src='/images/aws-partner.svg'

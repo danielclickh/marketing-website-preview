@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from 'querystring'
+import { CommonProps } from './homepage'
 import {
   PricingV2EntryCompute,
   PricingV2EntryPlan,
@@ -6,7 +6,7 @@ import {
   SeoMetadata,
   StrapiImageType
 } from '@/lib/api/strapi/types'
-import { CommonProps } from './homepage'
+import { ParsedUrlQuery } from 'querystring'
 
 interface PricingDimension {
   priceUSD: string

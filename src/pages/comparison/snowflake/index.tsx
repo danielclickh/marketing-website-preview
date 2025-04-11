@@ -1,8 +1,3 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStarted from '@/components/GetStarted'
@@ -16,6 +11,11 @@ import { findAll, findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BigNumber, ComparisonProps } from '@/types/comparisons'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 interface SnowflakePageProps extends ComparisonProps {
   customerStories: any
@@ -112,7 +112,7 @@ export default function SnowflakePage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage'>
-        <div className='relative pt-16 lg:pb-20 '>
+        <div className='relative pt-16 lg:pb-20'>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
             <div className='items-start justify-between lg:flex lg:grid-cols-2'>
               <div>
@@ -121,7 +121,7 @@ export default function SnowflakePage({
                     <h4 className='mb-2 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
                       Comparisons
                     </h4>
-                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl xl:text-5.5xl '>
+                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl xl:text-5.5xl'>
                       {comparisonTitle}
                     </h1>
                     <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
@@ -151,7 +151,7 @@ export default function SnowflakePage({
 
         <div className='relative pt-12 lg:pt-0'>
           <div className='mx-auto flex flex-col text-center'>
-            <div className='mx-auto w-fit max-w-[850px] px-4 pb-4 pt-2 text-center font-basier text-2xl font-semibold  text-white md:px-0 lg:mb-8 lg:text-4xl'>
+            <div className='mx-auto w-fit max-w-[850px] px-4 pb-4 pt-2 text-center font-basier text-2xl font-semibold text-white md:px-0 lg:mb-8 lg:text-4xl'>
               ClickHouse performance compared to Snowflake for{' '}
               <span className='tilted tilted-yellow leading-relaxed'>
                 <span className='tilted-content'>real-time</span>
@@ -211,7 +211,7 @@ export default function SnowflakePage({
                   />
                 </div>
                 <div className='w-full rounded-md border border-white/40 bg-[#363531] p-10 shadow-lg'>
-                  <div className='lg:min-h-[320px] '>
+                  <div className='lg:min-h-[320px]'>
                     <Image
                       src='/images/Quote.svg'
                       width={37}
@@ -243,7 +243,7 @@ export default function SnowflakePage({
             </div>
 
             <div className='relative z-10 mx-auto -mt-10 max-w-7xl'>
-              <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+              <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0'>
                 <div className='flip-selection mx-auto flex flex-col pt-30 text-center'>
                   <h2 className='mb-8 font-basier text-4xl font-semibold text-primary-800'>
                     Executive summary
@@ -286,7 +286,7 @@ export default function SnowflakePage({
                       storage. Finally, this expense analysis is projected and
                       compared for a production environment and workload.
                     </p>
-                    <div className='absolute bottom-0 left-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px] '></div>
+                    <div className='absolute bottom-0 left-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px]'></div>
                   </div>
                   <div className='relative z-40 -mt-30 lg:-mt-20'>
                     <div className='mx-auto max-w-xl rounded-lg bg-neutral-900 p-5 text-white lg:p-10'>
@@ -397,7 +397,7 @@ export default function SnowflakePage({
                               href={custom.href}
                               target='_blank'
                               className={
-                                'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+                                'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
                               }>
                               <CUICard className='h-full'>
                                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -406,7 +406,7 @@ export default function SnowflakePage({
                                       {...custom.Image}
                                       sizes='medium'
                                       alt={custom.Image.alternativeText}
-                                      className='w-full rounded-t-lg xl:h-52 '
+                                      className='w-full rounded-t-lg xl:h-52'
                                       width={100}
                                       height={100}
                                     />
@@ -415,7 +415,7 @@ export default function SnowflakePage({
                                     <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
                                       {custom.Category}
                                     </div>
-                                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
                                       {custom.Title}
                                     </div>
                                   </div>

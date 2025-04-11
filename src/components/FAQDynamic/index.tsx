@@ -1,13 +1,13 @@
+import { CUILink } from '../ClickUI'
+import { SuiTitle } from '../sui'
+import styles from './styles.module.scss'
+import { FullyQualifiedEvent } from '@/lib/galaxy/client'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { Disclosure, Transition } from '@headlessui/react'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import { CSSProperties } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { FullyQualifiedEvent } from '@/lib/galaxy/client'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import { CUILink } from '../ClickUI'
-import { SuiTitle } from '../sui'
-import styles from './styles.module.scss'
 
 const style = {
   '--top-side': '224px'

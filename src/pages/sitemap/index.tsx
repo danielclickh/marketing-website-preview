@@ -1,5 +1,4 @@
-import { GetStaticProps } from 'next'
-import Link from 'next/link'
+import { fetchCategories } from '../api/blog'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import { fetchAll, findOne, getStagingOnlyFilters } from '@/lib/api/strapi'
@@ -10,7 +9,8 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getVideos } from '@/lib/videos'
 import { Video } from '@/lib/videos/types'
 import { CommonProps } from '@/types/homepage'
-import { fetchCategories } from '../api/blog'
+import { GetStaticProps } from 'next'
+import Link from 'next/link'
 
 interface SitemapProps extends CommonProps {
   blogCategories: Record<string, string>
@@ -147,7 +147,7 @@ function Sitemap({
               <p className='pb-2'>
                 <Link
                   href={'/clickhouse'}
-                  className=' text-primary-300 hover:underline'>
+                  className='text-primary-300 hover:underline'>
                   ClickHouse
                 </Link>
               </p>
@@ -196,7 +196,7 @@ function Sitemap({
               <p className='pb-2'>
                 <Link
                   href={'/blog'}
-                  className=' text-primary-300 hover:underline'>
+                  className='text-primary-300 hover:underline'>
                   Blog
                 </Link>
               </p>

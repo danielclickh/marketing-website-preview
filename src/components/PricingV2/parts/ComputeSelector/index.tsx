@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
+import { useMemo, useState } from 'react'
 
 // Array of replicate size options from 1-25
 const REPLICAS: Options = Array.from({ length: 25 }, (_, i) => ({

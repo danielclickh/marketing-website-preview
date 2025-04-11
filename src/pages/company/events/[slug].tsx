@@ -1,5 +1,3 @@
-import { GetServerSideProps } from 'next'
-import Link from 'next/link'
 import EventPost from '@/components/EventPostList/EventPost'
 import EventsContainer from '@/components/EventsContainer'
 import Layout from '@/components/Layout'
@@ -11,6 +9,8 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
 import { ParamsType } from '@/types/homepage'
+import { GetServerSideProps } from 'next'
+import Link from 'next/link'
 
 export const getServerSideProps: GetServerSideProps<EventProps> =
   async function getServerSideProps({ params }) {
@@ -146,9 +146,7 @@ function EventPage({
               </Link>{' '}
               / {category}
             </h4>
-            <h1
-              className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl
-            '>
+            <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
               {title}
             </h1>
 

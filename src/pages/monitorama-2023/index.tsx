@@ -1,8 +1,3 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import Tilt from 'react-parallax-tilt'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import ContactForm from '@/components/ContactForm'
 import HRSeparator from '@/components/HRSeparator'
@@ -11,6 +6,11 @@ import LogoCarousel from '@/components/LogoCarousel'
 import { findOne } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import Tilt from 'react-parallax-tilt'
 
 interface MonitoramaProps extends CommonProps {
   customerStories: any
@@ -72,7 +72,7 @@ export default function MonitoramaPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative pt-16 lg:pb-24 '>
+        <div className='relative pt-16 lg:pb-24'>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
             <div className='items-start justify-between gap-10 lg:flex lg:grid-cols-2 lg:gap-20'>
               <div className='lg:w-2/3'>
@@ -98,7 +98,7 @@ export default function MonitoramaPage({
                   ClickHouse can help you with your observability use cases and
                   real-time data analytics.
                 </div>
-                <div className='g mb-12 flex items-center gap-6 lg:max-w-md '>
+                <div className='g mb-12 flex items-center gap-6 lg:max-w-md'>
                   <div className='w-1/3 rounded-md border border-primary-600 p-2'>
                     <Image
                       src='/images/monitorama/hand-coins-light.svg'
@@ -168,7 +168,7 @@ export default function MonitoramaPage({
           </div>
           <div className='relative z-10 mx-auto -mt-10 bg-primary-300'>
             <div className='relative z-10 mx-auto -mt-10 max-w-7xl'>
-              <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+              <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0'>
                 <div className='flip-selection mx-auto flex flex-col text-center'>
                   <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
                     Trusted by developers that work with data at{' '}
@@ -254,7 +254,7 @@ export default function MonitoramaPage({
                         alt='Speed Layer'
                       />
                     </div>
-                    <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                    <div className='font-basier text-xl font-medium leading-tight text-neutral-100'>
                       Vendors building observability solutions
                     </div>
                     <div className='text-neutral-20 whitespace-pre-wrap pb-20 text-sm'>
@@ -279,7 +279,7 @@ export default function MonitoramaPage({
                           width={110}
                           height={32}
                           alt='Sentry'
-                          className='h-full w-full object-contain px-4 py-2 '
+                          className='h-full w-full object-contain px-4 py-2'
                         />
                       </div>
                       <div className='h-20'>
@@ -288,7 +288,7 @@ export default function MonitoramaPage({
                           width={153}
                           height={28}
                           alt='highlight.io'
-                          className='h-full w-full border-l border-l-neutral-700/80 object-contain px-4 py-2 '
+                          className='h-full w-full border-l border-l-neutral-700/80 object-contain px-4 py-2'
                         />
                       </div>
                       <div className='h-20'>
@@ -297,7 +297,7 @@ export default function MonitoramaPage({
                           width={110}
                           height={32}
                           alt='SigNoz'
-                          className='h-full w-full border-l border-l-neutral-700/80 object-contain px-4 py-2 '
+                          className='h-full w-full border-l border-l-neutral-700/80 object-contain px-4 py-2'
                         />
                       </div>
                     </div>
@@ -317,7 +317,7 @@ export default function MonitoramaPage({
                         alt='Speed Layer'
                       />
                     </div>
-                    <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                    <div className='font-basier text-xl font-medium leading-tight text-neutral-100'>
                       Teams building bespoke observability platforms
                     </div>
                     <div className='text-neutral-20 whitespace-pre-wrap pb-20 text-sm'>
@@ -488,7 +488,7 @@ export default function MonitoramaPage({
               href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
               target='_blank'
               className={
-                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+                'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
               }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -503,7 +503,7 @@ export default function MonitoramaPage({
                     <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
                       Engineering
                     </div>
-                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
                       Building an Observability Solution with ClickHouse - Part
                       1 - Logs
                     </div>
@@ -518,7 +518,7 @@ export default function MonitoramaPage({
               href='/blog/storing-traces-and-spans-open-telemetry-in-clickhouse'
               target='_blank'
               className={
-                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+                'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
               }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -533,7 +533,7 @@ export default function MonitoramaPage({
                     <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
                       Engineering
                     </div>
-                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
                       Building an Observability Solution with ClickHouse - Part
                       2 - Traces
                     </div>
@@ -548,7 +548,7 @@ export default function MonitoramaPage({
               href='/blog/overview-of-highlightio'
               target='_blank'
               className={
-                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+                'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
               }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -563,7 +563,7 @@ export default function MonitoramaPage({
                     <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
                       Customer stories
                     </div>
-                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
                       A ClickHouse-powered Observability Solution: Overview of
                       Highlight.io
                     </div>
@@ -578,7 +578,7 @@ export default function MonitoramaPage({
               href='https://tech.ebayinc.com/engineering/ou-online-analytical-processing/'
               target='_blank'
               className={
-                ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+                'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
               }>
               <CUICard className='h-full'>
                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -593,7 +593,7 @@ export default function MonitoramaPage({
                     <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
                       Customer stories
                     </div>
-                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
                       Our Online Analytical Processing Journey with ClickHouse
                       on Kubernetes
                     </div>
@@ -609,7 +609,7 @@ export default function MonitoramaPage({
       </div>
       <HRSeparator className='my-16 lg:my-24' />
       <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
-        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto  flex  flex-col items-center'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
           <Image
             src='/images/migration.svg'
             height={72}

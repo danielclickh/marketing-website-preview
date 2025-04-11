@@ -5,7 +5,6 @@ excerpt: "In this guide, we'll explore how teams monitor and debug their LLM app
 index: 16
 ---
 
-
 If you're building applications with Large Language Models (LLMs), you must know what's happening inside them. Are they giving accurate responses? Are they using the correct context? How much are they costing you? LLM observability helps answer these questions by adapting traditional monitoring approaches to handle the unique challenges of language models.
 
 This guide explores how teams monitor their LLM applications, from the basic principles to practical implementation details. We'll look at the key differences from traditional application monitoring, examine the specific challenges of tracking AI agents, and explore the tools that make this possible.
@@ -16,13 +15,13 @@ Understanding observability is crucial for building reliable AI applications, wh
 
 Observability for LLM applications builds upon traditional observability principles while adapting them to meet the unique challenges of language model applications. While core observability concepts like metrics, logs, and traces remain fundamental, teams must extend these approaches to handle LLMs' non-deterministic nature and complex interaction patterns.
 
-At its core, LLM observability provides teams with powerful insights to keep LLMs on track, ensuring they perform accurately, stay aligned with business goals, and serve users effectively. This visibility is crucial across development and production environments, helping teams understand how their LLM applications behave in real-world scenarios. 
+At its core, LLM observability provides teams with powerful insights to keep LLMs on track, ensuring they perform accurately, stay aligned with business goals, and serve users effectively. This visibility is crucial across development and production environments, helping teams understand how their LLM applications behave in real-world scenarios.
 
 With the right observability tools, teams can monitor LLM behavior in real-time, A/B test different LLMs in production, easily detect performance shifts, and preemptively address issues before they impact the business or user experience.
 
 ## How does LLM observability differ from observability?
 
-While [traditional observability](https://clickhouse.com/engineering-resources/observability) focuses on [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data) like metrics, logs, and traces, LLM observability must adapt to the unique characteristics of language model applications. The fundamental difference lies in LLMs' non-deterministic nature—where traditional applications produce consistent outputs for given inputs, LLMs may generate varying responses even with identical prompts.   
+While [traditional observability](https://clickhouse.com/engineering-resources/observability) focuses on [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data) like metrics, logs, and traces, LLM observability must adapt to the unique characteristics of language model applications. The fundamental difference lies in LLMs' non-deterministic nature—where traditional applications produce consistent outputs for given inputs, LLMs may generate varying responses even with identical prompts.  
 This unpredictability requires a different approach to monitoring and debugging.
 
 Success criteria also differ significantly. Traditional applications typically have binary success/failure states based on exceptions or error codes, but LLM applications often deal with subjective quality measures. A technically successful API call might still produce an inappropriate or low-quality response, necessitating more sophisticated evaluation methods that can assess semantic correctness and contextual appropriateness.
@@ -57,7 +56,7 @@ Implementing effective LLM observability presents several unique challenges. The
 
 Complex execution flows present another significant challenge. LLM applications typically involve multiple chained API calls, parallel operations, and sometimes sophisticated decision trees. This complexity creates technical challenges in capturing and presenting the full context of each execution while maintaining system performance.
 
-LangChain's experience with LangSmith documents the technical challenges of implementing LLM observability at scale. Initially using Postgres, they "quickly realized that people wanted to log a large percentage of their production data to perform specific actions such as tracing and creating datasets, running evaluation jobs, A/B testing, and monitoring performance." 
+LangChain's experience with LangSmith documents the technical challenges of implementing LLM observability at scale. Initially using Postgres, they "quickly realized that people wanted to log a large percentage of their production data to perform specific actions such as tracing and creating datasets, running evaluation jobs, A/B testing, and monitoring performance."
 
 Their transition from Postgres to ClickHouse highlights how traditional databases struggle with the volume and velocity of observability data, requiring specialized infrastructure decisions to handle high-throughput data ingestion and fast analytical queries.
 
@@ -65,7 +64,7 @@ The need for real-time insights adds another layer of complexity. Traditional ap
 
 ## ClickHouse for LLM observability
 
-Choosing the right database becomes crucial as organizations scale their LLM applications and their observability needs grow. The unique characteristics of LLM observability data - from high-volume trace ingestion to complex analytical queries - create specific requirements for the underlying storage system. 
+Choosing the right database becomes crucial as organizations scale their LLM applications and their observability needs grow. The unique characteristics of LLM observability data - from high-volume trace ingestion to complex analytical queries - create specific requirements for the underlying storage system.
 
 ClickHouse has emerged as a particularly well-suited solution for LLM observability data, offering a powerful combination of performance, scalability, and ease of use. Here are several key reasons why ClickHouse stands out as a practical choice for LLM observability:
 
@@ -101,19 +100,19 @@ The emergence of these platforms, all choosing ClickHouse as a core component of
 
 At its core, LLM observability can be implemented using [OpenTelemetry (OTel)](https://clickhouse.com/engineering-resources/opentelemetry-otel), the open standard for observability data. For LLM applications, this typically involves creating spans with flattened attributes that capture key GenAI-specific data such as:
 
-* Prompt content and tokens  
-* Model information and parameters  
-* Completion content and tokens  
-* Cost and latency metrics  
-* Context or retrieved documents for RAG applications  
-* Function calls and tool usage for agents
+- Prompt content and tokens
+- Model information and parameters
+- Completion content and tokens
+- Cost and latency metrics
+- Context or retrieved documents for RAG applications
+- Function calls and tool usage for agents
 
 This basic approach allows teams to start capturing LLM interactions while leveraging their existing observability infrastructure and expertise.
 
 Several open-source tools have emerged to simplify implementation, all building on OpenTelemetry's foundations:
 
-1. [OpenInference](https://github.com/Arize-ai/openinference) provides conventions and plugins specifically designed for AI applications. It works with any OpenTelemetry-compatible backend and offers standardized ways to trace AI-specific operations.  
-2. [OpenLLMetry](https://www.traceloop.com/docs/openllmetry/introduction) focuses on non-intrusive tracing for LLM applications, making it easy to monitor and debug LLM app execution. Teams can export these traces to specialized LLM observability platforms or their existing observability stack.  
+1. [OpenInference](https://github.com/Arize-ai/openinference) provides conventions and plugins specifically designed for AI applications. It works with any OpenTelemetry-compatible backend and offers standardized ways to trace AI-specific operations.
+2. [OpenLLMetry](https://www.traceloop.com/docs/openllmetry/introduction) focuses on non-intrusive tracing for LLM applications, making it easy to monitor and debug LLM app execution. Teams can export these traces to specialized LLM observability platforms or their existing observability stack.
 3. [OpenLIT](https://docs.openlit.io/latest/quickstart-observability) takes a comprehensive approach by providing automatic OpenTelemetry instrumentation across various LLM providers, frameworks, and vector databases. This broader coverage helps teams monitor LLM interactions and the surrounding infrastructure and dependencies.
 
 When implementing LLM observability, teams need to make several key decisions. First, they must choose between a manual OpenTelemetry implementation or leveraging automated tools like OpenInference, OpenLLMetry, or OpenLIT. This choice often depends on their specific needs for customization and control. Teams must also decide whether to use their existing observability stack or adopt specialized LLM platforms. This decision should be guided by their current tooling, team expertise, and specific monitoring requirements.

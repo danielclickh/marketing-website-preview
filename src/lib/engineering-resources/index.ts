@@ -1,7 +1,7 @@
+import { EngineeringResource } from './types'
 import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
-import { EngineeringResource } from './types'
 
 const engResourcesDirectory = path.join(
   process.cwd(),

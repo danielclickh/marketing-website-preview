@@ -1,3 +1,14 @@
+import releases from './releases.json'
+import { CUIButton } from '@/components/ClickUI'
+import EventPost from '@/components/EventPostList/EventPost'
+import GetStartedFree from '@/components/GetStartedFree'
+import HRSeparator from '@/components/HRSeparator'
+import Layout from '@/components/Layout'
+import { SuiText } from '@/components/sui'
+import { findAll, findOne } from '@/lib/api/strapi'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { EventProps, EventType } from '@/types/events'
 import {
   ArrowCircleRightIcon,
   BookOpenIcon,
@@ -10,17 +21,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import Tilt from 'react-parallax-tilt'
-import { CUIButton } from '@/components/ClickUI'
-import EventPost from '@/components/EventPostList/EventPost'
-import GetStartedFree from '@/components/GetStartedFree'
-import HRSeparator from '@/components/HRSeparator'
-import Layout from '@/components/Layout'
-import { SuiText } from '@/components/sui'
-import { findAll, findOne } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventProps, EventType } from '@/types/events'
-import releases from './releases.json'
 
 export const getStaticProps: GetStaticProps = async () => {
   const params = {
@@ -246,7 +246,7 @@ export default function LaunchWeekPage({
 
         <HRSeparator className='my-24' />
 
-        <div className='section-container md:px-8 2xl:px-0 '>
+        <div className='section-container md:px-8 2xl:px-0'>
           <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
         </div>
 

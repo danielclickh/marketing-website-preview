@@ -1,23 +1,23 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect } from 'react'
-import ReactMarkdown from 'react-markdown'
+import callouts from './callouts.json'
+import checkpoints from './checkpoints.json'
+import features from './features.json'
 import { CUIButton } from '@/components/ClickUI'
-import GetStartedFree from '@/components/jp/GetStartedFree'
-import Layout from '@/components/jp/Layout'
-import AccordionComponent from '@/components/jp/MLDiagram/Accordion'
 import LogoCarousel from '@/components/LogoCarousel'
 import Markdown from '@/components/Markdown'
 import QuoteCard from '@/components/QuoteCard'
+import GetStartedFree from '@/components/jp/GetStartedFree'
+import Layout from '@/components/jp/Layout'
+import AccordionComponent from '@/components/jp/MLDiagram/Accordion'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import callouts from './callouts.json'
-import checkpoints from './checkpoints.json'
-import features from './features.json'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 interface MLProps extends CommonProps {
   customerStories: any
@@ -147,7 +147,7 @@ export default function MLUseCasePage({
                     alt='ClickHouse'
                     width={326}
                     height={316}
-                    className='h-auto w-full '
+                    className='h-auto w-full'
                     priority
                   />
                 </div>
@@ -244,7 +244,7 @@ export default function MLUseCasePage({
 
         <div className='relative z-10 mx-auto -mt-10 bg-primary-300'>
           <div className='relative z-10 mx-auto -mt-10 max-w-7xl'>
-            <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+            <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0'>
               <div className='flip-selection mx-auto flex flex-col text-center'>
                 <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
                   大規模なデータを扱う開発者から信頼をいただいています。
@@ -292,8 +292,8 @@ export default function MLUseCasePage({
           </div>
         </div>
 
-        <div className='bg-shadow-element-right yellow-shadow '>
-          <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0 '>
+        <div className='bg-shadow-element-right yellow-shadow'>
+          <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0'>
             <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
               <div className='flex flex-col text-center'>
                 <SuiTitle type='h2' color='white'>
@@ -306,7 +306,7 @@ export default function MLUseCasePage({
                   ClickHouseによる以下のブログに、機械学習のためにClickhouseを導入する方法について詳しく説明されています。
                 </div>
                 <div className='bg-neutral-725 p-8'>
-                  <ol className='list-decimal space-y-2 text-left	text-primary-300'>
+                  <ol className='list-decimal space-y-2 text-left text-primary-300'>
                     <li>
                       <Link
                         href='/blog/vector-search-clickhouse-p1'

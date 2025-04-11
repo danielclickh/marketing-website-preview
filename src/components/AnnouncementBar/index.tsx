@@ -1,6 +1,6 @@
+import LinkWithArrow from '../LinkWithArrow'
 import { IconButton } from '@clickhouse/click-ui'
 import { MouseEvent, useEffect, useState } from 'react'
-import LinkWithArrow from '../LinkWithArrow'
 
 export interface AnnouncementBarProps {
   text: string

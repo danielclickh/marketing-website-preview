@@ -1,8 +1,7 @@
-import { GetStaticProps } from 'next'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
-import { SuiTitle } from '@/components/sui'
 import SupportProgram from '@/components/SupportProgram'
+import { SuiTitle } from '@/components/sui'
 import { findAll, getPathsValues } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -11,6 +10,7 @@ import {
   REVALIDATE_SECONDS
 } from '@/lib/utils/revalidationConfig'
 import { CatAllParamsType, RichContentPageProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
 
 export const getStaticProps: GetStaticProps<RichContentPageProps> =
   async function getStaticProps({ params }) {

@@ -1,7 +1,7 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { NewsItemProps } from '@/types/newsEvents'
 import { CUIButton } from '../ClickUI'
 import { SuiText } from '../sui'
+import { NewsItemProps } from '@/types/newsEvents'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 export default function NewsItem({
   source,

@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next'
 import ContactForm from '@/components/ContactForm'
 import GrowingCommunity from '@/components/GrowingCommunity'
 import HRSeparator from '@/components/HRSeparator'
@@ -8,6 +7,7 @@ import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ContactProps } from '@/types/contact'
+import { GetStaticProps } from 'next'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {

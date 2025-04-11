@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { findAll } from '@/lib/api/strapi'
 import { slugify } from '@/lib/utils/strings'
 import { VideosApiResponse } from '@/types/videos'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const baseQuery: Record<string, any> = {
   sort: ['VideoDate:DESC', 'publishedAt:DESC'],

@@ -1,5 +1,3 @@
-import { GetStaticProps } from 'next'
-import { useRef, useState } from 'react'
 import GrowingCommunity from '@/components/GrowingCommunity'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
@@ -8,6 +6,8 @@ import { SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {

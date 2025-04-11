@@ -76,7 +76,7 @@ export default function JpOverlay() {
                     <div className='absolute right-0 top-0 hidden pr-4 pt-4 sm:block'>
                       <button
                         type='button'
-                        className='rounded-md  text-neutral-0 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                        className='rounded-md text-neutral-0 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                         onClick={handleDismiss}>
                         <span className='sr-only'>Close</span>
                         <XIcon className='h-6 w-6' aria-hidden='true' />
@@ -103,7 +103,7 @@ export default function JpOverlay() {
                       onClick={handleDismiss}
                       target='_blank'
                       href='https://www.meetup.com/clickhouse-tokyo-user-group/events/300798053/'
-                      className='flex h-12 w-full items-center justify-center  gap-1 rounded border border-primary-300 bg-primary-300 px-4 text-center text-base font-semibold text-neutral-900 hover:bg-primary-400'>
+                      className='flex h-12 w-full items-center justify-center gap-1 rounded border border-primary-300 bg-primary-300 px-4 text-center text-base font-semibold text-neutral-900 hover:bg-primary-400'>
                       登録する
                     </a>
                   </div>

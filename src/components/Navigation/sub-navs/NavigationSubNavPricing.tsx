@@ -1,5 +1,5 @@
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { NavigationLink } from '../parts'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 
 export default function NavigationSubNavPricing() {
   return (

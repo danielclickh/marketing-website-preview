@@ -7,7 +7,7 @@ index: 13
 
 Most applications today aren't just programs running on one machine - they're distributed across multiple services, cloud providers, and regions worldwide. When something goes wrong (and it will), figuring out what happened can feel like searching for a needle in a haystack.
 
-This is where telemetry data becomes essential. Think of it like a patient's vital signs in a hospital - heart rate, blood pressure, temperature, and oxygen levels tell doctors about their health. Without these measurements, doctors would have to guess what's wrong. The same applies to software systems - without good telemetry data, you just guess what's happening inside.       
+This is where telemetry data becomes essential. Think of it like a patient's vital signs in a hospital - heart rate, blood pressure, temperature, and oxygen levels tell doctors about their health. Without these measurements, doctors would have to guess what's wrong. The same applies to software systems - without good telemetry data, you just guess what's happening inside.
 
 Whether running a small web app or managing a sprawling microservices architecture, you must know what's happening inside your systems. This guide will walk you through telemetry data, why you need it, what types exist, and how to collect it. We'll also examine how it fits into the bigger picture of keeping your systems healthy and observable.
 
@@ -15,7 +15,7 @@ Whether running a small web app or managing a sprawling microservices architectu
 
 Telemetry data refers to the information generated and collected about how systems operate. This data is essential for optimizing performance, troubleshooting issues, and maintaining system health. Much like how a car's dashboard provides vital information about speed, fuel levels, and engine health, telemetry data gives organizations visibility into their software systems' behavior and performance.
 
-Modern applications, especially those built using microservices or cloud infrastructure, generate vast amounts of telemetry data across their various components. This data comes from multiple sources: application code, infrastructure components, network devices, and third-party services. 
+Modern applications, especially those built using microservices or cloud infrastructure, generate vast amounts of telemetry data across their various components. This data comes from multiple sources: application code, infrastructure components, network devices, and third-party services.
 
 By collecting and analyzing this information, organizations can gain deep insights into their systems' behavior, performance patterns, and potential issues.
 
@@ -53,11 +53,11 @@ Beyond technical operations, telemetry data can provide valuable insights into b
 
 ## Types of telemetry data
 
-Organizations need to collect and analyze different types of telemetry data to achieve these benefits, each serving distinct but complementary purposes. There are three main types of telemetry data: metrics, traces, and logs. 
+Organizations need to collect and analyze different types of telemetry data to achieve these benefits, each serving distinct but complementary purposes. There are three main types of telemetry data: metrics, traces, and logs.
 
 ### Metrics
 
-Metrics are numerical measurements that provide ongoing insights into system performance and health. They are typically collected at regular intervals and are designed to be aggregated over time. Unlike logs or traces, metrics focus on quantitative values that can be tracked and compared. 
+Metrics are numerical measurements that provide ongoing insights into system performance and health. They are typically collected at regular intervals and are designed to be aggregated over time. Unlike logs or traces, metrics focus on quantitative values that can be tracked and compared.
 
 Common metrics you might collect include resource utilization (CPU, memory, disk usage), request rates and throughput, error rates and counts, response times and latency, queue lengths and processing times, and business metrics like active users or transaction values.
 
@@ -65,16 +65,16 @@ Let’s have a look at an example:
 
 ```json
 {
-    "timestamp": "2024-01-31T14:20:00Z",
-    "metric_name": "api_response_time",
-    "value": 247.5,
-    "unit": "milliseconds",
-    "service": "payment_api",
-    "endpoint": "/process-payment",
-    "tags": {
-        "environment": "production",
-        "region": "us-west-2"
-    }
+  "timestamp": "2024-01-31T14:20:00Z",
+  "metric_name": "api_response_time",
+  "value": 247.5,
+  "unit": "milliseconds",
+  "service": "payment_api",
+  "endpoint": "/process-payment",
+  "tags": {
+    "environment": "production",
+    "region": "us-west-2"
+  }
 }
 ```
 
@@ -90,34 +90,34 @@ It’s time for an example:
 
 ```json
 {
-    "trace_id": "abc123xyz789",
-    "name": "checkout_process",
-    "start_time": "2024-01-31T14:20:00.000Z",
-    "duration": 1250,
-    "spans": [
-        {
-            "span_id": "span1",
-            "name": "validate_cart",
-            "start_time": "2024-01-31T14:20:00.000Z",
-            "duration": 50,
-            "service": "cart_service"
-        },
-        {
-            "span_id": "span2",
-            "name": "process_payment",
-            "start_time": "2024-01-31T14:20:00.050Z",
-            "duration": 1000,
-            "service": "payment_service"
-        },
-        {
-            "span_id": "span3",
-            "name": "send_confirmation",
-            "start_time": "2024-01-31T14:20:01.050Z",
-            "duration": 200,
-            "service": "notification_service"
-        }
-    ]
-}	
+  "trace_id": "abc123xyz789",
+  "name": "checkout_process",
+  "start_time": "2024-01-31T14:20:00.000Z",
+  "duration": 1250,
+  "spans": [
+    {
+      "span_id": "span1",
+      "name": "validate_cart",
+      "start_time": "2024-01-31T14:20:00.000Z",
+      "duration": 50,
+      "service": "cart_service"
+    },
+    {
+      "span_id": "span2",
+      "name": "process_payment",
+      "start_time": "2024-01-31T14:20:00.050Z",
+      "duration": 1000,
+      "service": "payment_service"
+    },
+    {
+      "span_id": "span3",
+      "name": "send_confirmation",
+      "start_time": "2024-01-31T14:20:01.050Z",
+      "duration": 200,
+      "service": "notification_service"
+    }
+  ]
+}
 ```
 
 This trace shows how a single checkout process moves through multiple services. The hierarchical nature of traces, with spans representing individual operations, makes them ideal for understanding service dependencies and identifying bottlenecks in distributed systems. The `trace_id` allows you to follow a single request across your entire system, something neither metrics nor logs can easily provide.
@@ -132,29 +132,29 @@ An example of a structured log message is shown below:
 
 ```json
 {
-    "timestamp": "2024-01-31T14:20:00.123Z",
-    "level": "ERROR",
-    "service": "payment_service",
-    "transaction_id": "tx_789456",
-    "message": "Payment authorization failed",
-    "error_code": "AUTH_FAILED_001",
-    "details": {
-        "user_id": "user_123",
-        "payment_method": "credit_card",
-        "amount": 99.99,
-        "currency": "USD"
-    },
-    "stack_trace": "Error: Payment authorization failed\n    at PaymentProcessor.authorize (/src/payment.js:123)"
+  "timestamp": "2024-01-31T14:20:00.123Z",
+  "level": "ERROR",
+  "service": "payment_service",
+  "transaction_id": "tx_789456",
+  "message": "Payment authorization failed",
+  "error_code": "AUTH_FAILED_001",
+  "details": {
+    "user_id": "user_123",
+    "payment_method": "credit_card",
+    "amount": 99.99,
+    "currency": "USD"
+  },
+  "stack_trace": "Error: Payment authorization failed\n    at PaymentProcessor.authorize (/src/payment.js:123)"
 }
 ```
 
-This log entry captures detailed information about a payment failure. What makes logs distinct is their ability to include rich, structured data about specific events. While traces might show that a payment failed and metrics might count the number of failures, logs provide detailed context about why the failure occurred. Including stack traces and detailed error information makes logs invaluable for debugging and audit purposes. 
+This log entry captures detailed information about a payment failure. What makes logs distinct is their ability to include rich, structured data about specific events. While traces might show that a payment failed and metrics might count the number of failures, logs provide detailed context about why the failure occurred. Including stack traces and detailed error information makes logs invaluable for debugging and audit purposes.
 
 Together, these three types of telemetry data provide complementary views of system behavior:
 
-* Metrics tell you about system performance and trends over time  
-* Traces show you how requests flow through your system  
-* Logs give you detailed information about specific events
+- Metrics tell you about system performance and trends over time
+- Traces show you how requests flow through your system
+- Logs give you detailed information about specific events
 
 Combined, they provide a comprehensive understanding of system behavior, enabling effective monitoring, troubleshooting, and optimization.
 
@@ -192,10 +192,10 @@ Organizations should consider their application architecture, available developm
 
 Telemetry data forms the foundation of observability in modern systems. While telemetry focuses on collecting data about system behavior, observability is the broader practice of understanding system state and behavior from this external data. You can think of telemetry as the sensor network that feeds into the larger observability system. Without comprehensive telemetry data collection, achieving meaningful observability would be impossible. The metrics, traces, and logs that comprise telemetry data provide the raw material that observability platforms and practices use to:
 
-* Build comprehensive system views  
-* Create meaningful dashboards  
-* Enable sophisticated querying and analysis  
-* Support incident response and debugging  
-* Drive system improvements
+- Build comprehensive system views
+- Create meaningful dashboards
+- Enable sophisticated querying and analysis
+- Support incident response and debugging
+- Drive system improvements
 
 However, collecting telemetry data is just the beginning. The real value comes from how this data is aggregated, analyzed, and acted upon within your observability strategy. Modern observability platforms combine telemetry data from multiple sources, apply advanced analytics, and provide tools for investigation and troubleshooting. This relationship between telemetry and observability highlights why careful consideration of telemetry collection is crucial - the quality and completeness of your telemetry data directly impact your ability to achieve effective observability of your systems.

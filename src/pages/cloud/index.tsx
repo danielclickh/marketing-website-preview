@@ -1,12 +1,8 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { useInView } from 'framer-motion'
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import featureBlocks from './feature_blocks.json'
+import features from './features.json'
 import AnimatedIntegrationLogos from '@/components/AnimatedIntegrationLogos'
-import BulletPoint from '@/components/BulletPoint'
 import { BYOCSection } from '@/components/BYOCSection'
+import BulletPoint from '@/components/BulletPoint'
 import Lines from '@/components/ClickPipesAnimation/Lines'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import CloudProviders from '@/components/CloudProviders'
@@ -19,8 +15,12 @@ import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CloudData } from '@/types/cloud'
-import featureBlocks from './feature_blocks.json'
-import features from './features.json'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { useInView } from 'framer-motion'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {
@@ -174,7 +174,7 @@ export default function CloudPage({
           </div>
         </div>
         <div className='border-t-2 border-primary-300 bg-neutral-725 text-neutral-0'>
-          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <div className='feature-container'>
               {features.map((feature, index: number) => (
                 <div className='col' key={index}>
@@ -209,7 +209,7 @@ export default function CloudPage({
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   } justify-center`}>
                   <div className='mb-12 flex flex-col md:mb-0 md:w-1/2 md:text-left'>
-                    <div className='border-yellow-200 md:border-l-4 md:pl-8 '>
+                    <div className='border-yellow-200 md:border-l-4 md:pl-8'>
                       <SuiTitle
                         type='h3'
                         className='mb-4 !text-4xl'
@@ -328,7 +328,7 @@ export default function CloudPage({
 
         <BYOCSection loc='cloud-page-component' />
 
-        <div className='relative flex flex-col gap-y-28 '>
+        <div className='relative flex flex-col gap-y-28'>
           <div className='section-container bg-shadow-element-right red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
@@ -451,7 +451,7 @@ export default function CloudPage({
                       </div>
                     </div>
                   </CUICard.Body>
-                  <CUICard.Footer className='flex w-full items-center '>
+                  <CUICard.Footer className='flex w-full items-center'>
                     <CUIButton
                       type='secondary'
                       href='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'
@@ -482,7 +482,7 @@ export default function CloudPage({
                       </div>
                     </div>
                   </CUICard.Body>
-                  <CUICard.Footer className='flex w-full items-center '>
+                  <CUICard.Footer className='flex w-full items-center'>
                     <CUIButton
                       type='secondary'
                       href='https://console.cloud.google.com/marketplace/product/clickhouse-public/clickhouse-cloud'
@@ -513,7 +513,7 @@ export default function CloudPage({
                       </div>
                     </div>
                   </CUICard.Body>
-                  <CUICard.Footer className='flex w-full items-center '>
+                  <CUICard.Footer className='flex w-full items-center'>
                     <CUIButton
                       type='secondary'
                       href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/clickhouse.clickhouse_cloud?tab=Overview'
@@ -534,7 +534,7 @@ export default function CloudPage({
           </div>
         </div>
 
-        <div className='section-container pb-16 md:px-8 2xl:px-0 '>
+        <div className='section-container pb-16 md:px-8 2xl:px-0'>
           <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=cloud-page-get-started-footer' />
         </div>
       </Layout>

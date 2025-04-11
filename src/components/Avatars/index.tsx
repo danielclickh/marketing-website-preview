@@ -1,5 +1,5 @@
-import { StrapiImageType } from '@/lib/api/strapi/types'
 import { StrapiImage } from '../StrapiElements'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface AvatarsProps {
   avatars: Array<StrapiImageType>
@@ -24,7 +24,7 @@ export default function Avatars({ avatars }: AvatarsProps) {
                   {...avatar}
                   width={44}
                   height={44}
-                  className='aspect-square !w-14 !h-auto rounded-full border-4 border-neutral-900'
+                  className='aspect-square !h-auto !w-14 rounded-full border-4 border-neutral-900'
                 />
               </span>
             )

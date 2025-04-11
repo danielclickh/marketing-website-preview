@@ -1,17 +1,17 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import Link from 'next/link'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
-import { SuiButton, SuiTitle } from '@/components/sui'
 import VideoCard from '@/components/VideoCard'
+import { SuiButton, SuiTitle } from '@/components/sui'
 import { findAll } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { slugify } from '@/lib/utils/strings'
 import { ParamsType } from '@/types/homepage'
 import { Video } from '@/types/videos'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import Link from 'next/link'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { slug } = context.params as ParamsType

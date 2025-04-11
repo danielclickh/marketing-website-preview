@@ -1,20 +1,20 @@
+import jpIndustries from './industries.json'
+import useCasesJP from './use-cases.json'
+import AccordionComponent from '@/components/AccordionComponent'
+import { CUIButton, CUICard } from '@/components/ClickUI'
+import { StrapiImage } from '@/components/StrapiElements'
+import GetStartedFree from '@/components/jp/GetStartedFree'
+import Layout from '@/components/jp/Layout'
+import UseCasesComparisons from '@/components/jp/UseCasesComparisons'
+import { findAll, findOne } from '@/lib/api/strapi'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { Quote, useCasesPageDataProps } from '@/types/useCasesPage'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import 'glider-js/glider.min.css'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import AccordionComponent from '@/components/AccordionComponent'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import GetStartedFree from '@/components/jp/GetStartedFree'
-import Layout from '@/components/jp/Layout'
-import UseCasesComparisons from '@/components/jp/UseCasesComparisons'
-import { StrapiImage } from '@/components/StrapiElements'
-import { findAll, findOne } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { Quote, useCasesPageDataProps } from '@/types/useCasesPage'
-import jpIndustries from './industries.json'
-import useCasesJP from './use-cases.json'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -132,9 +132,9 @@ function UseCasesPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative gap-24 px-8 pb-16 pt-16 md:px-0 '>
+        <div className='relative gap-24 px-8 pb-16 pt-16 md:px-0'>
           <div className='mx-auto max-w-3xl'>
-            <div className='mx-auto text-center md:mr-0 '>
+            <div className='mx-auto text-center md:mr-0'>
               <h1 className='mb-6 font-basier text-4xl font-semibold text-neutral-200 md:text-5.5xl md:leading-tight'>
                 ユースケース
               </h1>
@@ -198,7 +198,7 @@ function UseCasesPage({
                                 />
                               )}
                             </div>
-                            <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                            <div className='font-basier text-xl font-medium leading-tight text-neutral-100'>
                               {useCase?.title}
                             </div>
                             <div className='text-neutral-20 whitespace-pre-wrap text-sm'>
@@ -227,7 +227,7 @@ function UseCasesPage({
                                       ? logo.link
                                       : 'https://clickhouse.com/jp/'
                                   }
-                                  className='flex items-center justify-center align-middle brightness-0  invert hover:brightness-100 hover:invert-0'>
+                                  className='flex items-center justify-center align-middle brightness-0 invert hover:brightness-100 hover:invert-0'>
                                   <Image
                                     src={logo.logo}
                                     alt={logo.name}

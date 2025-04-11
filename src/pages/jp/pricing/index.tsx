@@ -1,18 +1,14 @@
-import { GetServerSideProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useClickOutside } from '../../../hooks'
+import philosophy from './philosophy.json'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
-import ByocPricingCard from '@/components/jp/ByocPricingCard'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import Modal from '@/components/Modal'
 import PocContactForm from '@/components/PocContactForm'
+import ByocPricingCard from '@/components/jp/ByocPricingCard'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { useClickOutside } from '../../../hooks'
 import {
   findAll,
   findOne,
@@ -30,20 +26,18 @@ import {
   PricingPlanData,
   RegionPricing
 } from '@/types/pricing'
-import philosophy from './philosophy.json'
-
+import { GetServerSideProps } from 'next'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 
 // Lazy load prizing components
-const PricingV1 = dynamic(
-  () => import('@/components/PricingCalculator'),
-  {
-    loading: () => (
-      <p className='my-10 text-center'>価格を読み込んでいます...</p>
-    ),
-    ssr: true
-  }
-)
+const PricingV1 = dynamic(() => import('@/components/PricingCalculator'), {
+  loading: () => <p className='my-10 text-center'>価格を読み込んでいます...</p>,
+  ssr: true
+})
 
 const PricingV2 = dynamic(() => import('@/components/PricingV2'), {
   loading: () => <p className='my-10 text-center'>価格を読み込んでいます...</p>,

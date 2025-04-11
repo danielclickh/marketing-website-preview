@@ -1,6 +1,6 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
 import { CUIButton } from '../../ClickUI'
 import { SuiText, SuiTitle } from '../../sui'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 type Props = {
   href: string
@@ -21,7 +21,7 @@ export default function GetStartedFree({
     <div className='flip-selection w-full rounded-lg bg-primary-300 px-4 py-16 text-neutral-0'>
       <div className='container mx-auto flex flex-col 2xl:px-0'>
         <div className='mx-auto flex flex-col text-center'>
-          <SuiTitle type='h2' color='text-default' className='mb-6 '>
+          <SuiTitle type='h2' color='text-default' className='mb-6'>
             {textBefore}
             {textSlanted && (
               <>

@@ -5,7 +5,6 @@ excerpt: "In this guide, we'll learn all about the Apache Avro and Apache Parque
 index: 8
 ---
 
-
 The emergence of Apache Hadoop in the mid-2000s marked the beginning of the big data era, fundamentally changing how organizations store and process massive datasets. This transformation created a need for specialized file formats designed to handle data analysis and cross-system data transfer at scale efficiently.
 
 Two notable file formats emerged from this evolution: [Apache Avro](https://en.wikipedia.org/wiki/Apache_Avro) (2009) and [Apache Parquet](https://en.wikipedia.org/wiki/Apache_Parquet) (2013). While both formats serve essential roles in the big data ecosystem, each brings distinct advantages to different use cases.
@@ -18,21 +17,21 @@ Apache Avro is a row-oriented data serialization framework that emerged from the
 
 ### Avro’s key features
 
-* Schema-based serialization system  
-* Rich schema definition and evolution capabilities  
-* Compact binary data format  
-* Integration with schema registries  
-* Built-in support for data compression
+- Schema-based serialization system
+- Rich schema definition and evolution capabilities
+- Compact binary data format
+- Integration with schema registries
+- Built-in support for data compression
 
 One of Avro's standout features is its sophisticated schema management. While the schema must be present during data writing and reading, organizations can leverage schema registries to optimize this process. Instead of transmitting the complete schema with each data exchange, systems can simply reference a schema ID, significantly reducing overhead and improving performance.
 
 ### Avro's architecture and use cases
 
-* Primarily used in streaming data scenarios  
-* Strong integration with Apache Kafka for message publishing  
-* Optimized for wire transfer of data  
-* Typically handles smaller data units, often one record per file  
-* Ideal for real-time data processing and messaging systems
+- Primarily used in streaming data scenarios
+- Strong integration with Apache Kafka for message publishing
+- Optimized for wire transfer of data
+- Typically handles smaller data units, often one record per file
+- Ideal for real-time data processing and messaging systems
 
 The format gained prominence in the streaming data community due to its efficient serialization capabilities and schema evolution features. Its design makes it particularly well-suited for systems where data structures may need to evolve without breaking existing consumers.
 
@@ -42,25 +41,25 @@ Apache Avro excels in data transfer scenarios, particularly with streaming data 
 
 It has the following advantages compared to JSON for data transfer:
 
-1. Schema enforcement  
-   1. Strict schema definition ensures data consistency  
-   2. Clear contract between producers and consumers  
-   3. Reduces data quality issues and runtime errors  
-2. Schema evolution  
-   1. Supports forward and backward compatibility  
-   2. Allows systems to evolve without breaking existing applications  
-   3. Clean handling of schema changes over time  
-3. Performance benefits  
-   1. More compact binary format than JSON  
-   2. Reduced network bandwidth usage  
-   3. Faster serialization and deserialization  
+1. Schema enforcement
+   1. Strict schema definition ensures data consistency
+   2. Clear contract between producers and consumers
+   3. Reduces data quality issues and runtime errors
+2. Schema evolution
+   1. Supports forward and backward compatibility
+   2. Allows systems to evolve without breaking existing applications
+   3. Clean handling of schema changes over time
+3. Performance benefits
+   1. More compact binary format than JSON
+   2. Reduced network bandwidth usage
+   3. Faster serialization and deserialization
    4. Lower storage requirements
 
 By choosing Avro over text-based formats like JSON, organizations can ensure better data governance, improved performance, and more reliable data integration across their systems. Combining schema validation and efficient binary serialization makes Avro particularly valuable in enterprise-scale data operations, where data consistency and performance are crucial.
 
 ### Working with Avro in Python
 
-Let’s look at how to work with Avro in Python. [fastavro](https://fastavro.readthedocs.io/en/latest/) is a popular library for doing this. 
+Let’s look at how to work with Avro in Python. [fastavro](https://fastavro.readthedocs.io/en/latest/) is a popular library for doing this.
 We're going to use the faker library to create a 1 million row Avro file:
 
 <pre><code type='click-ui' language='bash'>
@@ -124,21 +123,21 @@ Apache Parquet is a columnar storage format that has emerged as the industry sta
 
 ### Parquet’s key features
 
-* Column-oriented storage format  
-* Optimized for large-scale data processing  
-* Commonly deployed on cloud object stores (Amazon S3, Google Cloud Storage)  
-* Foundation for modern data lake implementations  
-* Underlying format for Apache Iceberg and other table formats
+- Column-oriented storage format
+- Optimized for large-scale data processing
+- Commonly deployed on cloud object stores (Amazon S3, Google Cloud Storage)
+- Foundation for modern data lake implementations
+- Underlying format for Apache Iceberg and other table formats
 
 One of Parquet's standout features is its intelligent data organization. The format uses row groups, column chunks, and metadata filtering to enable efficient querying of large datasets. With its sophisticated compression algorithms tailored to specific data types, Parquet significantly reduces storage costs while maintaining high query performance.
 
 ### Parquet's architecture and use cases
 
-* The primary choice for data lake storage, especially on cloud platforms (S3, GCS)  
-* Fundamental storage layer for modern table formats like Apache Iceberg  
-* Optimized for analytical queries and big data processing  
-* Ideal for data warehousing and business intelligence applications  
-* Commonly used with query engines like Apache Spark, Presto, and Athena
+- The primary choice for data lake storage, especially on cloud platforms (S3, GCS)
+- Fundamental storage layer for modern table formats like Apache Iceberg
+- Optimized for analytical queries and big data processing
+- Ideal for data warehousing and business intelligence applications
+- Commonly used with query engines like Apache Spark, Presto, and Athena
 
 The format gained prominence during the data lake movement due to its ability to handle large-scale analytical workloads efficiently. Its design makes it particularly well-suited for systems where query performance and storage optimization are critical requirements.
 
@@ -148,16 +147,16 @@ Apache Parquet is the ideal choice when working with large-scale analytical data
 
 #### Data Storage and Analytics
 
-* Large-scale data warehousing and data lakes  
-* Long-term data storage ("data at rest")
-* Business intelligence and analytical processing  
-* Complex queries requiring column-specific access
+- Large-scale data warehousing and data lakes
+- Long-term data storage ("data at rest")
+- Business intelligence and analytical processing
+- Complex queries requiring column-specific access
 
 #### ETL and Batch Processing
 
-* Batch processing of records in ETL workflows  
-* Aggregation of multiple records into single Parquet files  
-* Kafka Connect used for time-based or record-count-based aggregation of streaming data
+- Batch processing of records in ETL workflows
+- Aggregation of multiple records into single Parquet files
+- Kafka Connect used for time-based or record-count-based aggregation of streaming data
 
 The format's columnar structure and compression capabilities make it particularly efficient for organizations that need to store and analyze large datasets cost-effectively.
 
@@ -234,7 +233,6 @@ SELECT
 FROM numbers(100_000_000);
 </code></pre>
 
-
 ```
 Ok.
 
@@ -265,7 +263,6 @@ INTO OUTFILE 'users.parquet' TRUNCATE
 FORMAT Parquet;
 </code></pre>
 
-
 ```
 100000000 rows in set. Elapsed: 3.161 sec. Processed 94.68 million rows, 4.88 GB (29.95 million rows/s., 1.54 GB/s.)
 Peak memory usage: 1.07 GiB.
@@ -283,7 +280,6 @@ SELECT
     arrayMap(x -> round(x, 2), quantiles(0.5, 0.9, 0.99)(value3)) AS quantV3
 FROM file('users.avro');
 </code></pre>
-
 
 ```
    ┌───count()─┬─quantV1────┬─quantV2───────┬─quantV3────────────┐

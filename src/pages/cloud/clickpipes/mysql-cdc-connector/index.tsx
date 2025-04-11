@@ -1,7 +1,7 @@
-import { GetStaticProps } from 'next'
-import Image, { ImageProps } from 'next/image'
-import Link from 'next/link'
-import React, { CSSProperties } from 'react'
+import imageAddMysqlSource from './assets/add-mysql-source.png'
+import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
+import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
+import imageMonitorPipe from './assets/monitor-pipe.png'
 import CdcAnimation from '@/components/CdcAnimation'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -9,16 +9,13 @@ import DotsContainer from '@/components/DotsContainer'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import { SuiText, SuiTitle } from '@/components/sui'
-import {
-  useGalaxyOnClick,
-  useGalaxyOnPage
-} from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import imageAddMysqlSource from './assets/add-mysql-source.png'
-import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
-import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
-import imageMonitorPipe from './assets/monitor-pipe.png'
+import { GetStaticProps } from 'next'
+import Image, { ImageProps } from 'next/image'
+import Link from 'next/link'
+import React, { CSSProperties } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -62,7 +59,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               </SuiText>
               <CdcAnimation
                 logo={
-                  <div className='aspect-square flex items-center justify-center border border-neutral-700 rounded-lg p-3 -mr-4'>
+                  <div className='-mr-4 flex aspect-square items-center justify-center rounded-lg border border-neutral-700 p-3'>
                     <Image
                       src='/images/cloud/integrations/mysql.svg'
                       width={64}
@@ -87,7 +84,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       {/* Cards  */}
       <div className='relative z-10 bg-neutral-700 py-20'>
         <div className='section-container'>
-          <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:max-w-4xl lg:mx-auto'>
+          <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='guage'
@@ -211,7 +208,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       <DotsContainer className='my-20'>
         <div className='mx-auto w-full lg:max-w-xl'>
           <CUICard className='bg-neutral-900/80'>
-            <div className='my-4 space-y-4 text-center lg:mt-6 lg:mb-4'>
+            <div className='my-4 space-y-4 text-center lg:mb-4 lg:mt-6'>
               <SuiTitle type='h2'>Get early access</SuiTitle>
               <SuiText className='opacity-70'>
                 Join the waitlist to get access to the MySQL CDC connector

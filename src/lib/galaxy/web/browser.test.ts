@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
-
 import Galaxy from './browser'
+
 describe('browser', () => {
   let events: Record<string, unknown> = {}
 

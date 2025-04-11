@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import type { Swiper as SwiperClass } from 'swiper/types'
+import { StrapiImage } from '../../StrapiElements'
+import { SuiText } from '../../sui'
+import styles from './styles.module.scss'
 import {
   HomepageCustomerStories,
   HomepageCustomerStoryLogo
 } from '@/types/homepage'
-import { StrapiImage } from '../../StrapiElements'
-import { SuiText } from '../../sui'
-import styles from './styles.module.scss'
-
+import React, { useEffect, useState } from 'react'
 import 'swiper/css'
 import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperClass } from 'swiper/types'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories

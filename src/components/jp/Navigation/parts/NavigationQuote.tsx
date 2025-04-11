@@ -1,8 +1,8 @@
+import LinkWithArrow from '../../../LinkWithArrow'
+import Markdown from '../../../Markdown'
 import Image, { ImageProps } from 'next/image'
 import { LinkProps } from 'next/link'
 import React from 'react'
-import LinkWithArrow from '../../../LinkWithArrow'
-import Markdown from '../../../Markdown'
 
 interface NavigationQuoteLinkProps extends LinkProps {
   text: string

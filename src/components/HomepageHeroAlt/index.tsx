@@ -1,10 +1,10 @@
-import Image from 'next/image'
-import React from 'react'
 import { CUIButton } from '../ClickUI'
 import CycleText from '../CycleText'
 import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import { SuiText, SuiTitle } from '../sui'
 import styles from './styles.module.scss'
+import Image from 'next/image'
+import React from 'react'
 
 export default function HomepageHeroAlt({
   className = '',

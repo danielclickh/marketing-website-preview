@@ -1,9 +1,6 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import React, { forwardRef, useEffect, useRef, useState } from 'react'
 import { CUIButton } from '@/components/ClickUI'
-import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
 import HRSeparator from '@/components/HRSeparator'
+import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import RealTimeDataWarehouseAnimation from '@/components/RealTimeDataWarehouseAnimation'
@@ -11,6 +8,9 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { HomePageProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import React, { forwardRef, useEffect, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps = async function getStaticProps() {
   const commonProps = await getCommonProps()

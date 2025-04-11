@@ -1,7 +1,7 @@
 ---
 title: 'An intro to OpenTelemetry (OTel)'
 slug: 'opentelemetry-otel'
-excerpt: "In this guide, we’ll explore OpenTelemetry (OTel), a framework for collecting and standardizing telemetry data—metrics, logs, and traces—enhancing observability and performance monitoring in modern software systems."
+excerpt: 'In this guide, we’ll explore OpenTelemetry (OTel), a framework for collecting and standardizing telemetry data—metrics, logs, and traces—enhancing observability and performance monitoring in modern software systems.'
 index: 12
 ---
 
@@ -27,7 +27,7 @@ There are three main types of telemetry data: metrics, traces, and logs. Each ty
 
 ### Metrics
 
-Metrics are numerical measurements that capture the ongoing performance and health of systems. Examples include request counts per second, millisecond response times, memory usage, and CPU utilization. Metrics can also track business-critical data, such as active users or transaction volumes. 
+Metrics are numerical measurements that capture the ongoing performance and health of systems. Examples include request counts per second, millisecond response times, memory usage, and CPU utilization. Metrics can also track business-critical data, such as active users or transaction volumes.
 
 For example, an online retail website might track the number of transactions per minute to monitor for peaks in activity that could strain server resources. This metric helps in scaling operations dynamically, ensuring smooth user experiences during sales or promotional events.
 
@@ -35,7 +35,7 @@ OpenTelemetry facilitates the collection of these metrics, allowing teams to set
 
 ### Traces
 
-Traces document the path of a request across various services within a system, from start to finish. This includes interactions across microservices, database queries, and external API calls. 
+Traces document the path of a request across various services within a system, from start to finish. This includes interactions across microservices, database queries, and external API calls.
 
 For example, in a healthcare app, tracing a patient's record request from the web frontend, through the authentication service, down to the database and back, can help identify latency issues or data bottlenecks that impact user experience.
 
@@ -43,7 +43,7 @@ OpenTelemetry's tracing tools provide insights into how requests are processed a
 
 ### Logs
 
-[Logs](https://clickhouse.com/engineering-resources/log-monitoring) are detailed records of events that occur within systems, such as application errors, user authentication attempts, and security breaches. They provide a timestamped account of activities, offering an in-depth view of system operations. 
+[Logs](https://clickhouse.com/engineering-resources/log-monitoring) are detailed records of events that occur within systems, such as application errors, user authentication attempts, and security breaches. They provide a timestamped account of activities, offering an in-depth view of system operations.
 
 For example, a cloud storage service might log every file access request to monitor for unauthorized access attempts. These logs are crucial for security audits and ensure that compliance standards regarding data access are met.
 
@@ -79,15 +79,15 @@ These components work together to ensure that OpenTelemetry's benefits can be re
 
 The [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) is a vendor-agnostic hub that centralizes telemetry data collection, processing, and exporting across your systems. This setup enhances scalability and supports various open-source observability data formats like Jaeger, Prometheus, and Fluent Bit. It can also export data to [column stores](https://clickhouse.com/engineering-resources/what-is-columnar-database) like ClickHouse. It simplifies the observability infrastructure by replacing the need for multiple agents or collectors, allowing for seamless transmission to both open-source and commercial backends.
 
-The collector is designed to be highly usable with a reasonable default configuration, performant under various loads, and exemplifies best practices in observability. It's also customizable and can be deployed as an agent or a more centralized collector that manages traces, metrics, and logs. 
+The collector is designed to be highly usable with a reasonable default configuration, performant under various loads, and exemplifies best practices in observability. It's also customizable and can be deployed as an agent or a more centralized collector that manages traces, metrics, and logs.
 
 In development or small-scale environments, sending data directly to a backend can work well, but using a collector is recommended for larger setups. It quickly offloads data from services, handling complex tasks like retries, batching, and encryption, and simplifies system architecture. By default, OTLP exporters in each language assume a local collector endpoint, making setup straightforward - launching a collector automatically integrates it into your telemetry pipeline.
 
-###  Code instrumentation
+### Code instrumentation
 
-* **APIs and SDKs** - OpenTelemetry offers stable support for traces, metrics, and logs in [several key programming languages](https://opentelemetry.io/docs/languages/), such as C++, C#, Java, and PHP. This enables developers to instrument their applications and effectively collect telemetry data. These tools are designed to integrate seamlessly with existing code, ensuring minimal disruption while enhancing observability.  
-* **Instrumentation libraries** - OpenTelemetry supports various instrumentation libraries and automatically generates relevant telemetry data from popular libraries and frameworks. For example, libraries handling HTTP requests are instrumented to provide detailed insights into traffic patterns, helping developers understand and optimize communication flows.  
-* **Zero-code instrumentation** - To reduce developers' burden and avoid the need for manual code modifications, OpenTelemetry promotes zero-code instrumentation. This approach typically involves using an agent or similar setup that automatically instruments an application at runtime. Techniques such as bytecode manipulation or monkey patching may inject observability capabilities directly. This means developers don’t have to instrument everyday library interactions manually; instead, they benefit from out-of-the-box observability for standard operations like web requests, database queries, and message queuing.
+- **APIs and SDKs** - OpenTelemetry offers stable support for traces, metrics, and logs in [several key programming languages](https://opentelemetry.io/docs/languages/), such as C++, C#, Java, and PHP. This enables developers to instrument their applications and effectively collect telemetry data. These tools are designed to integrate seamlessly with existing code, ensuring minimal disruption while enhancing observability.
+- **Instrumentation libraries** - OpenTelemetry supports various instrumentation libraries and automatically generates relevant telemetry data from popular libraries and frameworks. For example, libraries handling HTTP requests are instrumented to provide detailed insights into traffic patterns, helping developers understand and optimize communication flows.
+- **Zero-code instrumentation** - To reduce developers' burden and avoid the need for manual code modifications, OpenTelemetry promotes zero-code instrumentation. This approach typically involves using an agent or similar setup that automatically instruments an application at runtime. Techniques such as bytecode manipulation or monkey patching may inject observability capabilities directly. This means developers don’t have to instrument everyday library interactions manually; instead, they benefit from out-of-the-box observability for standard operations like web requests, database queries, and message queuing.
 
 Apart from the main components of the OpenTelemetry Collector and instrumentation libraries, OTel also includes a detailed specification outlining APIs, SDKs, and the OpenTelemetry Protocol for consistent data handling across languages. Additionally, it features a Kubernetes Operator for managing OpenTelemetry resources within Kubernetes environments and supports Function-as-a-Service monitoring with ready-to-use tools for platforms like AWS Lambda.
 
@@ -100,7 +100,7 @@ A key component enhancing this integration is the [OTel Exporter for ClickHouse]
 This integration showcases the practical application of OpenTelemetry with ClickHouse, providing advanced observability solutions that effectively support complex and voluminous data needs.
 
 ![Otel image 1](/images/engineering-resources/1_otel.png)
-  
+
 ➡️ Read [ClickHouse and OpenTelemetry](https://clickhouse.com/blog/clickhouse-and-open-telemtry)
 
 ➡️ Read [How we Built a 19 PiB Logging Platform with ClickHouse and Saved Millions](https://clickhouse.com/blog/building-a-logging-platform-with-clickhouse-and-saving-millions-over-datadog#choosing-opentelemetry-otel)

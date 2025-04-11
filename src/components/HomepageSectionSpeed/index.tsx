@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import React from 'react'
 import SpeedAnimationSvg from '../SpeedAnimation'
 import SpeedAnimationMobileSvg from '../SpeedAnimation/Mobile'
 import { SuiTitle } from '../sui'
+import Image from 'next/image'
+import React from 'react'
 
 export default function HomepageSectionSpeed({
   className = '',

@@ -1,5 +1,5 @@
-import { SuiButton } from '../sui/client'
 import { ButtonProps } from '../sui/SuiButton'
+import { SuiButton } from '../sui/client'
 
 interface Props {
   type: string

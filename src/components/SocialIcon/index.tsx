@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { CUILink } from '../ClickUI'
 import { LinkProps } from '../ClickUI/Link/types'
+import Image from 'next/image'
 
 interface Props extends Omit<LinkProps, 'children'> {
   name: string

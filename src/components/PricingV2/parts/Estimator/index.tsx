@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import HRSeparator from '../../../HRSeparator'
 import ComputeSelector from '../ComputeSelector'
 import DisplayPrice from '../DisplayPrice'
@@ -9,6 +8,7 @@ import PriceList from '../PriceList'
 import ProviderSelector from '../ProviderSelector'
 import RegionSelector from '../RegionSelector'
 import StorageSelector from '../StorageSelector'
+import Link from 'next/link'
 
 export default function Estimator() {
   return (

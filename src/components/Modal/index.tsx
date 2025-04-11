@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect } from 'react'
+
 export interface ModalProps {
   children: React.ReactNode
   isOpen: boolean

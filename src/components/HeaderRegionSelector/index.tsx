@@ -1,6 +1,6 @@
+import { useClickOutside } from '../../hooks'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
-import { useClickOutside } from '../../hooks'
 
 export interface HeaderRegionSelectorProps {
   className?: React.HTMLProps<HTMLDivElement>['className']

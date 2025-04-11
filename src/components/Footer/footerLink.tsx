@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import React from 'react'
 import { FullyQualifiedEvent } from '@/lib/galaxy/client'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import Link from 'next/link'
+import React from 'react'
 
 interface FooterLinkProps {
   href: string

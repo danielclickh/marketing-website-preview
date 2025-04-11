@@ -1,6 +1,3 @@
-import { GetStaticProps } from 'next'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
 import { CUICard } from '@/components/ClickUI'
 import DotsContainer from '@/components/DotsContainer'
 import Layout from '@/components/Layout'
@@ -9,6 +6,9 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -41,7 +41,7 @@ export default function ContactPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <DotsContainer>
         <div className='mx-auto w-full lg:max-w-xl'>
-          <div className='text-center mb-16'>
+          <div className='mb-16 text-center'>
             <SuiTitle type='h1' className='text-[28px] md:text-4xl'>
               ClickHouse as the query engine for your data lakehouse
             </SuiTitle>
@@ -118,7 +118,7 @@ export default function ContactPage({
                       d='M36.7 20.7 23.3 34l-8-8'
                     />
                   </svg>
-                  <h3 className='text-center text-2xl font-bold mt-8 mb-4'>
+                  <h3 className='mb-4 mt-8 text-center text-2xl font-bold'>
                     You’ve been added to the waitlist!
                   </h3>
                   <p className='mt-2 text-center text-neutral-200'>

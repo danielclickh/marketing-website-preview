@@ -1,10 +1,10 @@
 .textCommon {
-  @apply transition-[border] bg-left-bottom duration-300 ease-in bg-neutral-725 text-neutral-0 placeholder-neutral-400 relative w-full rounded-md shadow-input px-3 py-2 text-left sm:text-sm resize-none cursor-text;
+  @apply relative w-full cursor-text resize-none rounded-md bg-neutral-725 bg-left-bottom px-3 py-2 text-left text-neutral-0 placeholder-neutral-400 shadow-input transition-[border] duration-300 ease-in sm:text-sm;
   @apply border border-neutral-700;
   &:focus {
-    @apply border-primary-300 outline-none bg-slate-900;
+    @apply border-primary-300 bg-slate-900 outline-none;
   }
-  &[type="password"] {
+  &[type='password'] {
     @apply pr-10;
   }
 }

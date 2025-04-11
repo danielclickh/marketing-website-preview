@@ -1,6 +1,6 @@
+import { SuiText, SuiTitle } from '../sui'
 import Link from 'next/link'
 import React from 'react'
-import { SuiText, SuiTitle } from '../sui'
 
 export default function HomepageSectionDeployAlt({
   className = '',

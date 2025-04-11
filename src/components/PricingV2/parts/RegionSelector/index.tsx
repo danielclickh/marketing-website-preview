@@ -1,9 +1,9 @@
-import { memo, useMemo } from 'react'
-import { StrapiImageType } from '@/lib/api/strapi/types'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { StrapiImageUrl } from '../../../StrapiElements'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
+import { StrapiImageType } from '@/lib/api/strapi/types'
+import { memo, useMemo } from 'react'
 
 export interface RegionSelectorProps {
   displayLabel?: boolean

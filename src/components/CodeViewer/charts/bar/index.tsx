@@ -1,10 +1,11 @@
 'use client'
+
+import { ChartConfig, Column } from '../../types'
+import { nonNullType, roundToDynamicPrecision } from '../../utils'
 import ReactECharts, { EChartsOption } from 'echarts-for-react'
 import type { XAXisOption, YAXisOption } from 'echarts/types/dist/shared'
 import isEqual from 'lodash/isEqual'
 import { useEffect, useMemo, useState } from 'react'
-import { ChartConfig, Column } from '../../types'
-import { nonNullType, roundToDynamicPrecision } from '../../utils'
 
 const MAX_SERIES = 9
 
@@ -20,9 +21,9 @@ function getSupportedColumns(columns: Column[]): {
           nonNullType(col.type).startsWith('Date') ||
           nonNullType(col.type).includes('String') ||
           nonNullType(col.type).startsWith('UInt') ||
-          nonNullType(col.type).startsWith('Int')  ||
-          nonNullType(col.type).startsWith("Enum") || 
-          nonNullType(col.type).startsWith("LowCardinality")
+          nonNullType(col.type).startsWith('Int') ||
+          nonNullType(col.type).startsWith('Enum') ||
+          nonNullType(col.type).startsWith('LowCardinality')
       )
       .map((col) => col.name),
     yaxis: columns
@@ -35,11 +36,12 @@ function getSupportedColumns(columns: Column[]): {
       )
       .map((col) => col.name),
     series: columns
-      .filter((col) => 
-        nonNullType(col.type).includes("String") ||
-        nonNullType(col.type).startsWith("Enum") || 
-        nonNullType(col.type).startsWith("LowCardinality")
-    )
+      .filter(
+        (col) =>
+          nonNullType(col.type).includes('String') ||
+          nonNullType(col.type).startsWith('Enum') ||
+          nonNullType(col.type).startsWith('LowCardinality')
+      )
       .map((col) => col.name)
   }
 }
@@ -138,7 +140,7 @@ export default function Bar(props: {
     []
   )
 
-  const series:any = useMemo(() => {
+  const series: any = useMemo(() => {
     const mappedColors: { [key: string]: string } = {}
     return Object.values(values).map((series, i) => {
       let color = colors[i % colors.length]
@@ -196,7 +198,8 @@ export default function Bar(props: {
     ? Math.max(48, longestLabelLength * 7) // Estimate width based on character count
     : 24
 
-  const bottomPadding = windowWidth >= 1536 && series.length > 1 ? '48px' : '12px'
+  const bottomPadding =
+    windowWidth >= 1536 && series.length > 1 ? '48px' : '12px'
   const options: EChartsOption = {
     title: {
       text: props.config.title,
@@ -256,7 +259,7 @@ export default function Bar(props: {
   }
 
   return (
-    <div className='h-full w-full justify-between flex flex-col'>
+    <div className='flex h-full w-full flex-col justify-between'>
       <ReactECharts
         option={options}
         lazyUpdate

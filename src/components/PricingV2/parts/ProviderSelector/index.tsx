@@ -1,8 +1,8 @@
-import { memo } from 'react'
-import { PricingV2EntryProvider } from '@/lib/api/strapi/types'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { StrapiImage } from '../../../StrapiElements'
 import Label from '../../ui/Label'
+import { PricingV2EntryProvider } from '@/lib/api/strapi/types'
+import { memo } from 'react'
 
 export interface ProviderSelectorProps {
   displayLabel?: boolean

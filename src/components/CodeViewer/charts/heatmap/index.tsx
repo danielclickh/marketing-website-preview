@@ -1,13 +1,14 @@
 'use client'
+
+import { ChartConfig, Column } from '../../types'
+import { nonNullType } from '../../utils'
+import styles from './styles.module.css'
 import {
   default as EChartsReact,
   default as ReactECharts
 } from 'echarts-for-react'
 import isEqual from 'lodash/isEqual'
 import { useMemo, useRef } from 'react'
-import { ChartConfig, Column } from '../../types'
-import { nonNullType } from '../../utils'
-import styles from './styles.module.css'
 
 const MAX_SERIES = 9
 
@@ -25,8 +26,8 @@ function getSupportedColumns(columns: Column[]): {
       .filter(
         (col) =>
           nonNullType(col.type).includes('String') ||
-          nonNullType(col.type).startsWith("Enum") || 
-          nonNullType(col.type).startsWith("LowCardinality") ||
+          nonNullType(col.type).startsWith('Enum') ||
+          nonNullType(col.type).startsWith('LowCardinality') ||
           nonNullType(col.type).includes('Date')
       )
       .map((col) => col.name),
@@ -34,8 +35,8 @@ function getSupportedColumns(columns: Column[]): {
       .filter(
         (col) =>
           nonNullType(col.type).includes('String') ||
-          nonNullType(col.type).startsWith("Enum") || 
-          nonNullType(col.type).startsWith("LowCardinality") ||
+          nonNullType(col.type).startsWith('Enum') ||
+          nonNullType(col.type).startsWith('LowCardinality') ||
           nonNullType(col.type).includes('Date')
       )
       .map((col) => col.name),
@@ -116,7 +117,7 @@ export default function HeatMap(props: {
   )
   const leftPadding = longestYLabelLength * 8
 
-  const options:any = {
+  const options: any = {
     title: {
       text: props.config.title,
       textStyle: {
@@ -245,7 +246,7 @@ export default function HeatMap(props: {
   }
 
   return (
-    <div className='h-full w-full justify-between flex flex-col'>
+    <div className='flex h-full w-full flex-col justify-between'>
       <ReactECharts
         ref={chartRef}
         option={options}

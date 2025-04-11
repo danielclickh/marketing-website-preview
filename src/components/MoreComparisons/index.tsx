@@ -1,8 +1,8 @@
-import Image, { ImageProps } from 'next/image'
-import Link, { LinkProps } from 'next/link'
 import { CUICard } from '../ClickUI'
 import { SuiTitle } from '../sui'
 import logoClickhouse from './logo-clickhouse.svg'
+import Image, { ImageProps } from 'next/image'
+import Link, { LinkProps } from 'next/link'
 
 type Comparison = {
   name: string

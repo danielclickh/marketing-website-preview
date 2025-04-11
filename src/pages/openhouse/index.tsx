@@ -1,18 +1,3 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { GetStaticProps } from 'next'
-import Image, { ImageProps } from 'next/image'
-import Link from 'next/link'
-import { useCallback, useRef, useState } from 'react'
-import 'swiper/css'
-import FontSohne from '@/components/FontSohne'
-import FontSohneBreit from '@/components/FontSohneBreit'
-import Footer from '@/components/Footer'
-import OpenHouseAccordionItem from '@/components/OpenHouseAccordionItem'
-import OpenHouseButton from '@/components/OpenHouseButton'
-import OpenHouseHeader from '@/components/OpenHouseHeader'
-import SeoContainer from '@/components/SeoContainer'
-import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { CommonProps } from '@/types/homepage'
 import imageGallery from './assets/gallery.png'
 import imageIconBinary from './assets/icon-binary.svg'
 import imageIconFaq from './assets/icon-faq.svg'
@@ -39,6 +24,21 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import FontSohne from '@/components/FontSohne'
+import FontSohneBreit from '@/components/FontSohneBreit'
+import Footer from '@/components/Footer'
+import OpenHouseAccordionItem from '@/components/OpenHouseAccordionItem'
+import OpenHouseButton from '@/components/OpenHouseButton'
+import OpenHouseHeader from '@/components/OpenHouseHeader'
+import SeoContainer from '@/components/SeoContainer'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { CommonProps } from '@/types/homepage'
+import { AnimatePresence, motion } from 'framer-motion'
+import { GetStaticProps } from 'next'
+import Image, { ImageProps } from 'next/image'
+import Link from 'next/link'
+import { useCallback, useRef, useState } from 'react'
+import 'swiper/css'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -208,15 +208,15 @@ export default function Page({ seo, footerData }: CommonProps) {
           </OpenHouseHeader>
 
           {/* Hero */}
-          <section className='bg-black overflow-hidden relative'>
-            <div className='relative max-w-6xl mx-auto px-6 lg:px-12 pt-16'>
+          <section className='relative overflow-hidden bg-black'>
+            <div className='relative mx-auto max-w-6xl px-6 pt-16 lg:px-12'>
               <div
-                className={`absolute left-1/2 gradient-mask-to-b-[rgba(0,0,0,1)_0%,rgba(0,0,0,0.2)_70%] md:gradient-mask-to-r-[rgba(0,0,0,1)_0%,rgba(0,0,0,0.2)_70%] -translate-x-1/2 top-0 bottom-0 ${styles.gridBackground} bg-blend-luminosity mix-blend-luminosity opacity-50 w-dvw`}
+                className={`absolute bottom-0 left-1/2 top-0 -translate-x-1/2 gradient-mask-to-b-[rgba(0,0,0,1)_0%,rgba(0,0,0,0.2)_70%] md:gradient-mask-to-r-[rgba(0,0,0,1)_0%,rgba(0,0,0,0.2)_70%] ${styles.gridBackground} w-dvw opacity-50 bg-blend-luminosity mix-blend-luminosity`}
               />
 
-              <div className='md:min-h-[680px] py-24 md:py-0 relative z-10 flex flex-col md:flex-row gap-16 md:justify-between'>
-                <div className='relative md:w-max md:self-stretch flex items-center flex-shrink-1 flex-grow-0 px-8 md:px-0'>
-                  <div className='absolute scale-150 md:scale-100 -z-10 -top-20 -bottom-20 rounded-full aspect-square mix-blend-multiply left-1/2 -translate-x-1/2 bg-ch-teal/60 blur-[100px]' />
+              <div className='relative z-10 flex flex-col gap-16 py-24 md:min-h-[680px] md:flex-row md:justify-between md:py-0'>
+                <div className='flex-shrink-1 relative flex flex-grow-0 items-center px-8 md:w-max md:self-stretch md:px-0'>
+                  <div className='absolute -bottom-20 -top-20 left-1/2 -z-10 aspect-square -translate-x-1/2 scale-150 rounded-full bg-ch-teal/60 mix-blend-multiply blur-[100px] md:scale-100' />
                   <Image
                     src={imageOpenhouseLogo}
                     alt='Open House By ClickHouse'
@@ -226,11 +226,11 @@ export default function Page({ seo, footerData }: CommonProps) {
                     priority
                   />
                 </div>
-                <div className='md:self-center flex-shrink-0 flex-grow-0 text-center md:text-left'>
+                <div className='flex-shrink-0 flex-grow-0 text-center md:self-center md:text-left'>
                   <h2 className='text-2xl font-bold leading-loose'>
                     May 28-29, 2025
                   </h2>
-                  <p className='text-xl leading-loose mb-4'>
+                  <p className='mb-4 text-xl leading-loose'>
                     Free conference in San Francisco, CA.
                   </p>
                   <OpenHouseButton
@@ -246,7 +246,7 @@ export default function Page({ seo, footerData }: CommonProps) {
           </section>
 
           {/* Gallery */}
-          <div className='bg-white hidden md:flex relative px-2 md:py-10 lg:py-18 xl:py-24 justify-center'>
+          <div className='lg:py-18 relative hidden justify-center bg-white px-2 md:flex md:py-10 xl:py-24'>
             <Image
               src={imageGallery}
               width={3602 / 2}
@@ -257,9 +257,9 @@ export default function Page({ seo, footerData }: CommonProps) {
           </div>
 
           {/* Table */}
-          <section className={`py-20 bg-neutral-950 ${styles.dotBackground}`}>
-            <div className='max-w-6xl mx-auto px-6 lg:px-12'>
-              <h2 className='text-4xl mb-14 lg:mb-20 text-center'>
+          <section className={`bg-neutral-950 py-20 ${styles.dotBackground}`}>
+            <div className='mx-auto max-w-6xl px-6 lg:px-12'>
+              <h2 className='mb-14 text-center text-4xl lg:mb-20'>
                 What’s happening at Open House?
               </h2>
               <div className='divide-y-2 divide-ch-yellow'>
@@ -298,8 +298,8 @@ export default function Page({ seo, footerData }: CommonProps) {
                   return (
                     <div
                       key={rowIndex}
-                      className='space-y-6 lg:space-y-0 py-6 lg:py-0 lg:grid grid-cols-[repeat(15,_minmax(0,_1fr))] lg:divide-x-2 divide-white'>
-                      <div className='col-span-2 sm:float-start sm:mr-4 lg:mr-0 lg:float-none lg:flex items-center justify-center lg:py-8 lg:pr-2'>
+                      className='grid-cols-[repeat(15,_minmax(0,_1fr))] space-y-6 divide-white py-6 lg:grid lg:space-y-0 lg:divide-x-2 lg:py-0'>
+                      <div className='col-span-2 items-center justify-center sm:float-start sm:mr-4 lg:float-none lg:mr-0 lg:flex lg:py-8 lg:pr-2'>
                         <Image
                           src={row.icon}
                           width={75}
@@ -307,10 +307,10 @@ export default function Page({ seo, footerData }: CommonProps) {
                           alt={row.title}
                         />
                       </div>
-                      <div className='col-span-5 lg:px-2 lg:text-center lg:flex items-center justify-center uppercase font-bold text-2xl lg:py-8'>
+                      <div className='col-span-5 items-center justify-center text-2xl font-bold uppercase lg:flex lg:px-2 lg:py-8 lg:text-center'>
                         {row.title}
                       </div>
-                      <div className='col-span-8 lg:flex items-center text-left lg:py-8 text-lg lg:pl-8'>
+                      <div className='col-span-8 items-center text-left text-lg lg:flex lg:py-8 lg:pl-8'>
                         {row.description}
                       </div>
                     </div>
@@ -321,17 +321,17 @@ export default function Page({ seo, footerData }: CommonProps) {
           </section>
 
           {/* Agenda */}
-          <section className='relative py-20 bg-ch-yellow text-black'>
+          <section className='relative bg-ch-yellow py-20 text-black'>
             <div
-              className={`bg-ch-yellow h-8 absolute -top-8 left-0 right-0 ${styles.textureMaskTop}`}
+              className={`absolute -top-8 left-0 right-0 h-8 bg-ch-yellow ${styles.textureMaskTop}`}
             />
-            <div className='max-w-6xl mx-auto px-6 lg:px-12' id='agenda'>
-              <h2 className='text-4xl mb-10 text-center'>Agenda at a glance</h2>
-              <div className='space-y-6 lg:space-y-0 lg:grid grid-cols-2 gap-6'>
-                <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-6 lg:text-lg'>
+            <div className='mx-auto max-w-6xl px-6 lg:px-12' id='agenda'>
+              <h2 className='mb-10 text-center text-4xl'>Agenda at a glance</h2>
+              <div className='grid-cols-2 gap-6 space-y-6 lg:grid lg:space-y-0'>
+                <div className='space-y-6 bg-white px-6 py-8 lg:px-12 lg:py-10 lg:text-lg'>
                   <FontSohneBreit>
                     <h3 className='text-4xl'>
-                      <small className='uppercase font-bold text-2xl'>
+                      <small className='text-2xl font-bold uppercase'>
                         MAY 28
                       </small>
                       <br />
@@ -345,7 +345,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   <p>
                     <strong>We'll cover:</strong>
                   </p>
-                  <ul className='!mt-0 pl-8 list-disc'>
+                  <ul className='!mt-0 list-disc pl-8'>
                     <li>Module 1: Getting Started with ClickHouse</li>
                     <li>Module 2: ClickHouse Architecture</li>
                     <li>Module 3: Modeling Data</li>
@@ -358,10 +358,10 @@ export default function Page({ seo, footerData }: CommonProps) {
                     Open to conference registrants only.
                   </p>
                 </div>
-                <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 lg:text-lg space-y-3'>
+                <div className='space-y-3 bg-white px-6 py-8 lg:px-12 lg:py-10 lg:text-lg'>
                   <FontSohneBreit>
-                    <h3 className='text-4xl mb-6'>
-                      <small className='uppercase font-bold text-2xl'>
+                    <h3 className='mb-6 text-4xl'>
+                      <small className='text-2xl font-bold uppercase'>
                         MAY 29
                       </small>
                       <br />
@@ -371,7 +371,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   <p>
                     <strong>Sessions:</strong>
                   </p>
-                  <ul className='!mt-0 pl-8 list-disc'>
+                  <ul className='!mt-0 list-disc pl-8'>
                     <li>Opening keynote with ClickHouse founders</li>
                     <li>Roadmap session with product leaders</li>
                     <li>In-depth customer talks from our largest users</li>
@@ -380,7 +380,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   <p>
                     <strong>Breakouts:</strong>
                   </p>
-                  <ul className='!mt-0 pl-8 list-disc'>
+                  <ul className='!mt-0 list-disc pl-8'>
                     <li>Use Case & Integration Demos</li>
                     <li>“Built on ClickHouse” showcase</li>
                     <li>AMA Booth</li>
@@ -388,7 +388,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   <p>
                     <strong>Networking:</strong>
                   </p>
-                  <ul className='!mt-0 pl-8 list-disc'>
+                  <ul className='!mt-0 list-disc pl-8'>
                     <li>Catered breakfast & lunch</li>
                     <li>Evening networking reception</li>
                   </ul>
@@ -407,17 +407,17 @@ export default function Page({ seo, footerData }: CommonProps) {
           </section>
 
           {/* Speakers */}
-          <section className='relative py-20 bg-white text-black'>
+          <section className='relative bg-white py-20 text-black'>
             <div
-              className={`bg-white h-8 absolute -bottom-8 left-0 right-0 z-20 ${styles.textureMaskBottom}`}
+              className={`absolute -bottom-8 left-0 right-0 z-20 h-8 bg-white ${styles.textureMaskBottom}`}
             />
-            <div className='max-w-[1413px] mx-auto px-6'>
-              <h2 className='text-4xl text-center mb-4'>Speakers</h2>
-              <p className='text-2xl text-center mb-10'>
+            <div className='mx-auto max-w-[1413px] px-6'>
+              <h2 className='mb-4 text-center text-4xl'>Speakers</h2>
+              <p className='mb-10 text-center text-2xl'>
                 We have an exciting line-up of speakers, and more announcements
                 on the way
               </p>
-              <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2 -my-4'>
+              <div className='-mx-2 -my-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                 {initialSpeakers.map((profile, profileIndex) => {
                   return <SpeakerProfile {...profile} key={profileIndex} />
                 })}
@@ -426,7 +426,7 @@ export default function Page({ seo, footerData }: CommonProps) {
               {overflowSpeakers.length > 0 && (
                 <div
                   className={`relative transition-all duration-300 ${displayAllSpeakers ? 'mt-4' : 'mt-14'}`}>
-                  <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mx-2'>
+                  <div className='-mx-2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                     <AnimatePresence onExitComplete={scrollToSpeakersToggle}>
                       {displayAllSpeakers &&
                         overflowSpeakers.map((profile, profileIndex) => {
@@ -465,7 +465,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   </div>
                   <div
                     ref={speakersToggleRef}
-                    className='text-center -mx-6 px-6 py-2 bg-white/60 backdrop-blur sticky bottom-0 z-40 sm:relative sm:backdrop-blur-0 sm:bg-transparent'>
+                    className='sticky bottom-0 z-40 -mx-6 bg-white/60 px-6 py-2 text-center backdrop-blur sm:relative sm:bg-transparent sm:backdrop-blur-0'>
                     <OpenHouseButton
                       href='#'
                       onClick={(event) => {
@@ -486,10 +486,10 @@ export default function Page({ seo, footerData }: CommonProps) {
 
           {/* CTAs */}
           <section
-            className={`relative pt-24 pb-20 lg:min-h-[700px] flex bg-[#2F3032] text-black bg-blend-screen ${styles.patternBackground}`}>
-            <div className='max-w-xl mx-auto my-auto w-full px-6 lg:px-12'>
-              <div className='space-y-6 md:space-y-0 md:grid grid-cols-1 gap-6'>
-                <div className='bg-white py-8 px-6 lg:py-10 lg:px-12 space-y-8 text-lg text-center'>
+            className={`relative flex bg-[#2F3032] pb-20 pt-24 text-black bg-blend-screen lg:min-h-[700px] ${styles.patternBackground}`}>
+            <div className='mx-auto my-auto w-full max-w-xl px-6 lg:px-12'>
+              <div className='grid-cols-1 gap-6 space-y-6 md:grid md:space-y-0'>
+                <div className='space-y-8 bg-white px-6 py-8 text-center text-lg lg:px-12 lg:py-10'>
                   <FontSohneBreit>
                     <h3 className='text-4xl'>Open House</h3>
                   </FontSohneBreit>
@@ -515,9 +515,9 @@ export default function Page({ seo, footerData }: CommonProps) {
           </section>
 
           {/* FAQs */}
-          <section className='relative py-20 bg-white text-black'>
-            <div className='max-w-6xl mx-auto px-6 lg:px-12'>
-              <h2 className='text-4xl text-center mb-4'>FAQs</h2>
+          <section className='relative bg-white py-20 text-black'>
+            <div className='mx-auto max-w-6xl px-6 lg:px-12'>
+              <h2 className='mb-4 text-center text-4xl'>FAQs</h2>
               <OpenHouseAccordionItem handle='What is Open House 2025 by ClickHouse?'>
                 <p className='max-w-3xl'>
                   Open House 2025 is the first ever ClickHouse User Conference!
@@ -535,7 +535,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                   and we’ll be announcing more details as the event shapes up.
                   It will include:
                 </p>
-                <ul className='pl-8 list-disc mt-4'>
+                <ul className='mt-4 list-disc pl-8'>
                   <li>Insights from company founders</li>
                   <li>
                     In-depth technical sessions from builders and practitioners
@@ -599,11 +599,11 @@ export default function Page({ seo, footerData }: CommonProps) {
           </section>
 
           {/* Get in touch */}
-          <section className='relative pb-20 bg-white text-black'>
-            <div className='max-w-6xl mx-auto px-6 lg:px-12'>
-              <div className='bg-neutral-900 rounded p-8 lg:py-16 lg:px-14 text-white flex flex-col lg:flex-row items-center gap-y-10 gap-x-20'>
+          <section className='relative bg-white pb-20 text-black'>
+            <div className='mx-auto max-w-6xl px-6 lg:px-12'>
+              <div className='flex flex-col items-center gap-x-20 gap-y-10 rounded bg-neutral-900 p-8 text-white lg:flex-row lg:px-14 lg:py-16'>
                 <div className='w-full lg:w-auto'>
-                  <h2 className='text-4xl mb-4'>Get in touch</h2>
+                  <h2 className='mb-4 text-4xl'>Get in touch</h2>
                   <p className='text-lg'>
                     For questions about the event or general inquiries,
                     <br />
@@ -616,12 +616,12 @@ export default function Page({ seo, footerData }: CommonProps) {
                     </Link>
                   </p>
                 </div>
-                <div className='flex-1 w-full lg:w-auto text-center'>
+                <div className='w-full flex-1 text-center lg:w-auto'>
                   <OpenHouseButton
                     href='/openhouse/register'
                     variant='primary'
                     size='lg'
-                    className='flex-1 w-full sm:mx-auto sm:w-auto sm:min-w-48'>
+                    className='w-full flex-1 sm:mx-auto sm:w-auto sm:min-w-48'>
                     Register
                   </OpenHouseButton>
                 </div>
@@ -647,13 +647,13 @@ function SpeakerProfile({
   return (
     <div className='group/speaker'>
       <div className='px-2 py-4'>
-        <div className='relative aspect-square mb-4 bg-[#EFEFEF]'>
+        <div className='relative mb-4 aspect-square bg-[#EFEFEF]'>
           <Image
             src={image}
             alt={name}
             width={353}
             height={505}
-            className='w-full h-full max-w-none absolute inset-0 z-10 transition grayscale group-hover/speaker:grayscale-0'
+            className='absolute inset-0 z-10 h-full w-full max-w-none grayscale transition group-hover/speaker:grayscale-0'
           />
         </div>
         <h3 className='text-lg md:text-xl lg:text-2xl'>{name}</h3>

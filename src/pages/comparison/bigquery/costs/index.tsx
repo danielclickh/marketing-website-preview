@@ -1,29 +1,5 @@
-import { useFeatureValue, useGrowthBook } from '@growthbook/growthbook-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useCallback, useRef, useState } from 'react'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import Footer from '@/components/Footer'
-import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
-import MarketoForm from '@/components/MarketoForm'
-import Nbsp from '@/components/Nbsp'
-import QuotesCarousel from '@/components/QuotesCarousel'
-import SeoContainer from '@/components/SeoContainer'
-import StatsHero from '@/components/StatsHero'
-import StatsHeroWithForm from '@/components/StatsHeroWithForm'
-import { SuiText, SuiTitle } from '@/components/sui'
-import { updateLinks } from '@/components/UTMPersist'
-import { useClickOutside } from '../../../../hooks'
-import { findAll, findOne } from '@/lib/api/strapi'
-import {
-  useGalaxyOnClick,
-  useGalaxyOnPage
-} from '@/lib/galaxy/galaxy'
-import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import logoFull from '../../../../../public/logo-full.svg'
-import { ComparisonPage, ComparisonProps } from '@/types/comparisons'
-import { HomepageCustomerStories } from '@/types/homepage'
+import { useClickOutside } from '../../../../hooks'
 import chartCostsLoading from './chart-costs-loading.svg'
 import chartCostsQueryingSpeed from './chart-costs-querying-speed.svg'
 import chartCostsQuering from './chart-costs-querying.svg'
@@ -37,6 +13,27 @@ import logoAzure from './logo-azure.svg'
 import logoCoinhall from './logo-coinhall.svg'
 import logoGcs from './logo-gcs.svg'
 import logoPerfect from './logo-perfect.svg'
+import { CUIButton, CUICard } from '@/components/ClickUI'
+import Footer from '@/components/Footer'
+import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
+import MarketoForm from '@/components/MarketoForm'
+import Nbsp from '@/components/Nbsp'
+import QuotesCarousel from '@/components/QuotesCarousel'
+import SeoContainer from '@/components/SeoContainer'
+import StatsHero from '@/components/StatsHero'
+import StatsHeroWithForm from '@/components/StatsHeroWithForm'
+import { updateLinks } from '@/components/UTMPersist'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { findAll, findOne } from '@/lib/api/strapi'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
+import { ComparisonPage, ComparisonProps } from '@/types/comparisons'
+import { HomepageCustomerStories } from '@/types/homepage'
+import { useFeatureValue, useGrowthBook } from '@growthbook/growthbook-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useCallback, useRef, useState } from 'react'
 
 const locTracking = 'bigquery-comparison-page'
 
@@ -521,7 +518,7 @@ export default function BigQueryCostsPage({
                 our community of thousands more!
               </SuiText>
             </div>
-            <div className='order-first flex gap-6 lg:order-last  '>
+            <div className='order-first flex gap-6 lg:order-last'>
               <CUICard className='w-full max-w-40 p-5'>
                 <Image
                   src={logoGcs}

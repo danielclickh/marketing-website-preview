@@ -1,8 +1,8 @@
+import styles from './Carousel.module.scss'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import 'glider-js/glider.min.css'
 import { ReactNode, useState } from 'react'
 import Glider from 'react-glider'
-import styles from './Carousel.module.scss'
 
 const Carousel = ({ children }: { children: ReactNode }) => {
   const [showDiv, setShowDiv] = useState(false)

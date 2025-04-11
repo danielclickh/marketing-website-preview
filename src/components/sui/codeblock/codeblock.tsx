@@ -1,3 +1,6 @@
+import styles from './styles.module.scss'
+import { FullyQualifiedEvent } from '@/lib/galaxy/client'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { DuplicateIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import {
@@ -7,9 +10,6 @@ import {
   useRef,
   useState
 } from 'react'
-import { FullyQualifiedEvent } from '@/lib/galaxy/client'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import styles from './styles.module.scss'
 
 export interface CodeblockProps extends HTMLAttributes<HTMLPreElement> {
   bgColor?: string | undefined
@@ -48,7 +48,7 @@ export const SuiCodeblock: FunctionComponent<CodeblockProps> = ({
   return (
     <>
       <pre
-        className={`${styles.codePre}  ${className}`}
+        className={`${styles.codePre} ${className}`}
         ref={ref}
         {...CodeblockProps}>
         {showCopy && (

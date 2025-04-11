@@ -1,10 +1,10 @@
+import { CUIButton, CUICard } from '../ClickUI'
+import { SuiTitle } from '../sui'
+import { FullyQualifiedEvent } from '@/lib/galaxy/client'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React, { CSSProperties } from 'react'
-import { FullyQualifiedEvent } from '@/lib/galaxy/client'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import { CUIButton, CUICard } from '../ClickUI'
-import { SuiTitle } from '../sui'
 
 const yellowPositionStyle = {
   '--left-side': 'auto',
@@ -100,7 +100,7 @@ export default function HomepageSectionDeploy({
                   </div>
                 </div>
               </CUICard.Body>
-              <CUICard.Footer className='flex w-full items-center '>
+              <CUICard.Footer className='flex w-full items-center'>
                 <CUIButton
                   type={deploy.btnType}
                   href={deploy.href}

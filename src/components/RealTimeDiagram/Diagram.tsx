@@ -1,4 +1,5 @@
 import RealTimeDiagram from '@/pages/use-cases/real-time-analytics/RealTimeDiagram'
+
 interface DiagramProps {
   className?: string
   sectionId?: number

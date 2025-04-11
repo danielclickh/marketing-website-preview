@@ -1,6 +1,8 @@
-import { useMemo } from 'react'
 import { NumericSelectProps } from '../../CalculatorTypesOptions'
-import { Select } from '../Select/Select' // Assuming SelectProps is imported correctly
+import { Select } from '../Select/Select'
+import { useMemo } from 'react'
+
+// Assuming SelectProps is imported correctly
 
 export const NumericSelect: React.FC<NumericSelectProps> = ({
   options,

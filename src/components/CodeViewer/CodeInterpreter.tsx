@@ -1,8 +1,3 @@
-import { Button, Icon, RadioGroup, Tooltip } from '@clickhouse/click-ui'
-import { createClient as createWebClient } from '@clickhouse/client-web'
-import { parse } from 'json5'
-import { useEffect, useState } from 'react'
-import short from 'short-uuid'
 import CodeResults, { DefaultView } from './CodeResults'
 import {
   ChartConfig,
@@ -11,10 +6,18 @@ import {
   QueryResponse,
   QueryResults
 } from './types'
-import { formatBytes, formatReadableRows, roundToDynamicPrecision } from './utils'
-import { useRouter } from 'next/router'
+import {
+  formatBytes,
+  formatReadableRows,
+  roundToDynamicPrecision
+} from './utils'
 import { getGoogleAnalyticsUserIdFromBrowserCookie } from '@/lib/utils/google'
-
+import { Button, Icon, RadioGroup, Tooltip } from '@clickhouse/click-ui'
+import { createClient as createWebClient } from '@clickhouse/client-web'
+import { parse } from 'json5'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import short from 'short-uuid'
 
 interface Props {
   queryString: string
@@ -95,7 +98,7 @@ function CodeInterpreter({
       // Inject metadata as log comment
       const currentPath = router.asPath
       let jsonLogComment: Record<string, any> = {}
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         let gaId = getGoogleAnalyticsUserIdFromBrowserCookie('_ga')
         if (gaId) {
           jsonLogComment['ga_id'] = gaId
@@ -111,7 +114,7 @@ function CodeInterpreter({
         query_id: query_id,
         query_params: query_params,
         clickhouse_settings: {
-          log_comment: JSON.stringify(jsonLogComment),
+          log_comment: JSON.stringify(jsonLogComment)
         }
       })
       const json = (await res.json()) as QueryResults
@@ -139,7 +142,6 @@ function CodeInterpreter({
   }, [run])
 
   const handleRunQuery = async (runManually: boolean) => {
-
     const query_run_id = generateId()
     setResults({})
     setQueryRunning(true)
@@ -181,7 +183,7 @@ function CodeInterpreter({
         <Tooltip>
           <Tooltip.Trigger>
             <Button
-              className='h-full m-auto'
+              className='m-auto h-full'
               iconLeft='chevron-down'
               onClick={closeResultPanel}
               type='empty'></Button>
@@ -192,7 +194,7 @@ function CodeInterpreter({
         <Tooltip>
           <Tooltip.Trigger>
             <Button
-              className='h-full m-auto'
+              className='m-auto h-full'
               iconLeft='chevron-up'
               onClick={openTableResultPanel}
               type='empty'></Button>
@@ -206,27 +208,24 @@ function CodeInterpreter({
           {show_results}
           {chart && (
             <div className='my-auto w-[80px] sm:w-[140px]'>
-            <RadioGroup
-              orientation='vertical'
-              value={currentView}>
-              <RadioGroup.Item
-              label='Table'
-              onClick={(): void => {
-                  setCurrentView(DefaultView.Table)
-                }}
-                value={DefaultView.Table}
-              />
-              <RadioGroup.Item
-                label='Chart'
-                onClick={(): void => {
-                  setCurrentView(DefaultView.Chart)
-                }}
-                value={DefaultView.Chart}
-              />
-            </RadioGroup>
+              <RadioGroup orientation='vertical' value={currentView}>
+                <RadioGroup.Item
+                  label='Table'
+                  onClick={(): void => {
+                    setCurrentView(DefaultView.Table)
+                  }}
+                  value={DefaultView.Table}
+                />
+                <RadioGroup.Item
+                  label='Chart'
+                  onClick={(): void => {
+                    setCurrentView(DefaultView.Chart)
+                  }}
+                  value={DefaultView.Chart}
+                />
+              </RadioGroup>
             </div>
           )}
-          
         </div>
       )
     }
@@ -237,23 +236,26 @@ function CodeInterpreter({
       return (
         <div className='flex justify-between'>
           <div className='flex items-center'>
-          <div className='flex items-center'>{hideTableResultButton()}</div>
-          <div className='flex items-center'>
-          {show_statistics && results?.response?.statistics && (
-            <div className={`whitespace-pre-wrap text-xs mx-auto italic ${chart ? 'ml-[8px]' : ''}`}>
-              {`${runBy()} Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} in ${roundToDynamicPrecision(results.response.statistics.elapsed)} seconds`}
+            <div className='flex items-center'>{hideTableResultButton()}</div>
+            <div className='flex items-center'>
+              {show_statistics && results?.response?.statistics && (
+                <div
+                  className={`mx-auto whitespace-pre-wrap text-xs italic ${chart ? 'ml-[8px]' : ''}`}>
+                  {`${runBy()} Read ${formatReadableRows(results.response.statistics.rows_read)} rows and ${formatBytes(results.response.statistics.bytes_read)} in ${roundToDynamicPrecision(results.response.statistics.elapsed)} seconds`}
+                </div>
+              )}
             </div>
-          )}
           </div>
-          </div>
-          
+
           <div className='flex items-center'>
             <div className='m-1'>
               <Tooltip>
                 <Tooltip.Trigger>
                   <Button
                     iconLeft='play'
-                    onClick={() => {handleRunQuery(true)}}
+                    onClick={() => {
+                      handleRunQuery(true)
+                    }}
                     type='primary'
                     loading={queryRunning}></Button>
                 </Tooltip.Trigger>
@@ -286,7 +288,7 @@ function CodeInterpreter({
   return (
     <>
       {runButton()}
-      <div className='flex flex-col-reverse divide-y-4 divide-y-reverse divide-gray-200 border-t-1'>
+      <div className='border-t-1 flex flex-col-reverse divide-y-4 divide-y-reverse divide-gray-200'>
         {showResultsPanel && (
           <CodeResults
             results={results}

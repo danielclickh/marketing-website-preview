@@ -21,7 +21,7 @@ APM forms a key part of an organization's broader [observability](https://clickh
 
 APM systems track a wide range of metrics that indicate how well an application serves its users. While different APM solutions might focus on various aspects of performance, they all share the goal of providing visibility into application behavior and user experience.
 
-[Instabug's APM implementation](https://clickhouse.com/blog/10x-improved-response-times-cheaper-to-operate-and-30-storage-reduction-why-instabug-chose-clickhouse-for-apm) - which processes 3 billion events daily - gives us a comprehensive view of what modern APM systems typically measure.   
+[Instabug's APM implementation](https://clickhouse.com/blog/10x-improved-response-times-cheaper-to-operate-and-30-storage-reduction-why-instabug-chose-clickhouse-for-apm) - which processes 3 billion events daily - gives us a comprehensive view of what modern APM systems typically measure.
 
 ![](/images/engineering-resources/0_apm.png)
 
@@ -111,7 +111,7 @@ The alert management component ensures teams stay informed about performance iss
 
 These components work together as an integrated system, each crucially transforming raw performance data into actionable insights that help teams maintain and improve application performance.
 
-## What are the challenges of APM?  
+## What are the challenges of APM?
 
 Modern APM solutions face significant challenges, as demonstrated by [real-world implementations like SolarWinds' observability platform](https://clickhouse.com/videos/solarwinds-observability-3-milion-records-per-second). Let's look at the key challenges that make APM both essential and complex:
 
@@ -137,21 +137,21 @@ As described in the previous section, storing and querying APM data presents uni
 
 ### High-volume time series data
 
-APM systems generate massive amounts of time-series data, often billions of events per day at rates of millions of messages per second. 
+APM systems generate massive amounts of time-series data, often billions of events per day at rates of millions of messages per second.
 ClickHouse's [columnar storage](https://clickhouse.com/engineering-resources/what-is-columnar-database) and compression capabilities make it particularly efficient for this type of data, typically achieving 30% or better storage reduction than traditional solutions, even as data volumes grow.
 
 ### Real-Time query performance
 
-APM requires both real-time data ingestion and quick query responses for effective monitoring. ClickHouse's MergeTree engine family provides excellent write throughput for high-velocity data ingestion, while its analytics-oriented design delivers fast query responses. 
+APM requires both real-time data ingestion and quick query responses for effective monitoring. ClickHouse's MergeTree engine family provides excellent write throughput for high-velocity data ingestion, while its analytics-oriented design delivers fast query responses.
 Organizations implementing ClickHouse for APM commonly see query response times improve by an order of magnitude.
 
 ### Time-window query optimization
 
-APM systems frequently need to analyze recent time windows - often the last 60 minutes of data - while maintaining access to historical data. ClickHouse's partitioning capabilities and materialized views allow efficient time-based data organization and query optimization. 
+APM systems frequently need to analyze recent time windows - often the last 60 minutes of data - while maintaining access to historical data. ClickHouse's partitioning capabilities and materialized views allow efficient time-based data organization and query optimization.
 This is particularly important for APM's common use case of real-time monitoring combined with historical analysis.
 
 ### Cost-effective scaling
 
 Combining efficient storage, good compression, and high performance means fewer resources are needed to handle APM's demanding workloads. Organizations typically see significant cost savings when implementing ClickHouse for APM data storage, even as their data volumes grow, due to more efficient resource utilization and reduced infrastructure requirements.
 
-These capabilities make ClickHouse particularly well-suited for the specific challenges of APM data storage and analysis, where high-volume data ingestion must be balanced with fast query response times and efficient storage utilization.  
+These capabilities make ClickHouse particularly well-suited for the specific challenges of APM data storage and analysis, where high-volume data ingestion must be balanced with fast query response times and efficient storage utilization.

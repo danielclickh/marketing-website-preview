@@ -1,24 +1,24 @@
 .cloudProvidersButton {
-  @apply w-[72px] h-12 relative;
+  @apply relative h-12 w-[72px];
   &:not(:disabled) {
-    @apply bg-neutral-750 border-neutral-700;
+    @apply border-neutral-700 bg-neutral-750;
     &:hover {
       @apply bg-neutral-725;
     }
   }
-  &[data-selected="true"] {
+  &[data-selected='true'] {
     @apply border-primary-300;
     &:hover {
       @apply border-primary-300;
     }
   }
   &:disabled {
-    @apply bg-neutral-725 border-neutral-725 cursor-not-allowed #{!important};
+    @apply cursor-not-allowed border-neutral-725 bg-neutral-725 #{!important};
   }
 }
 
 .richTextLink {
-  @apply text-neutral-200 text-center text-sm;
+  @apply text-center text-sm text-neutral-200;
 
   :global a {
     @apply text-primary-300 #{!important};

@@ -1,6 +1,7 @@
+import Nbsp from '../Nbsp'
 import Link, { LinkProps } from 'next/link'
 import React from 'react'
-import Nbsp from '../Nbsp'
+
 interface Props extends LinkProps {
   children: React.ReactNode
   className?: string

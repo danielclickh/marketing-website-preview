@@ -1,30 +1,26 @@
-import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { GetServerSideProps } from 'next'
-import Link from 'next/link'
-import React from 'react'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
-import Layout from '@/components/jp/Layout'
 import Markdown from '@/components/Markdown'
 import NewsLetter from '@/components/NewsLetter'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
-import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
 import TableOfContents from '@/components/TableOfContents'
-import {
-  findAll,
-  findOne,
-  getStagingOnlyFilters
-} from '@/lib/api/strapi'
+import Layout from '@/components/jp/Layout'
+import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
+import { findAll, findOne, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
+import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { GetServerSideProps } from 'next'
+import Link from 'next/link'
+import React from 'react'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps({ params }) {
@@ -146,10 +142,10 @@ export default function BlogPage({
             </Link>
           </div>
           <div className='flex flex-col pt-10 text-left lg:pr-[180px] xl:pl-4'>
-            <h4 className='text-base font-semibold text-primary-300 '>
+            <h4 className='text-base font-semibold text-primary-300'>
               <Link href='/jp/blog'>ブログ</Link>
             </h4>
-            <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100 '>
+            <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
               <span className='leading-snug'>{title}</span>
             </h1>
             <div className='flex flex-row items-center space-x-4 pt-2'>
@@ -248,7 +244,7 @@ export default function BlogPage({
               path='/blog'
               type='empty'
               color='primary'
-              className='font-base border border-primary-300/50	'>
+              className='font-base border border-primary-300/50'>
               View all Blogs
             </SuiButton>
           </div>

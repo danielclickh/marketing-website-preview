@@ -1,6 +1,6 @@
+import { StrapiImageType } from '@/lib/api/strapi/types'
 import { ImageProps } from 'next/image'
 import { HTMLAttributes } from 'react'
-import { StrapiImageType } from '@/lib/api/strapi/types'
 
 export type SizeType = 'small' | 'medium' | 'large' | 'thumbnail'
 

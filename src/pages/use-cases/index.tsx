@@ -1,8 +1,3 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import 'glider-js/glider.min.css'
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
 import AccordionComponent from '@/components/AccordionComponent'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
@@ -13,6 +8,11 @@ import { findAll, findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { Quote, useCasesPageDataProps } from '@/types/useCasesPage'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import 'glider-js/glider.min.css'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -131,9 +131,9 @@ function UseCasesPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
-        <div className='relative gap-24 px-8 pb-16 pt-16 md:px-0 '>
+        <div className='relative gap-24 px-8 pb-16 pt-16 md:px-0'>
           <div className='mx-auto max-w-3xl'>
-            <div className='mx-auto text-center md:mr-0 '>
+            <div className='mx-auto text-center md:mr-0'>
               <h1 className='mb-6 font-basier text-4xl font-semibold text-neutral-200 md:text-5.5xl md:leading-tight'>
                 {useCasesPageData.Title}
               </h1>
@@ -192,7 +192,7 @@ function UseCasesPage({
                                 <StrapiImage {...useCase.icon} />
                               )}
                             </div>
-                            <div className='font-basier text-xl font-medium leading-tight  text-neutral-100'>
+                            <div className='font-basier text-xl font-medium leading-tight text-neutral-100'>
                               {useCase?.title}
                             </div>
                             <div className='text-neutral-20 whitespace-pre-wrap text-sm'>
@@ -319,9 +319,7 @@ function UseCasesPage({
                                                       'RunReveal'
                                                     ? 'max-w-[140px] lg:max-w-[150px]'
                                                     : 'max-h-[64px] max-w-[120px] lg:max-w-[120px]'
-                                    }
-                                        m-auto object-scale-down
-                                          `}
+                                    } m-auto object-scale-down`}
                                   />
                                 </Link>
                               </div>

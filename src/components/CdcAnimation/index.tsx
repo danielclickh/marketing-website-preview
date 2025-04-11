@@ -21,7 +21,7 @@ export default function CdcAnimation({ logo }: CdcAnimationProps) {
 
         <div className='relative z-0 col-start-1 row-start-1 flex items-center'>
           {/* Postgres logo */}
-          <div className='flex-shrink-0 flex-grow-0 pr-4 w-20 flex items-center justify-center'>
+          <div className='flex w-20 flex-shrink-0 flex-grow-0 items-center justify-center pr-4'>
             {logo}
           </div>
 

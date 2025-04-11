@@ -1,7 +1,7 @@
-import { StrapiImageProps } from '@/components/StrapiElements/types'
 import { findAll } from '../api/strapi'
 import { slugify } from '../utils/strings'
 import { Video, VideoCategoryRecord } from './types'
+import { StrapiImageProps } from '@/components/StrapiElements/types'
 
 type StrapiItem = {
   id: number

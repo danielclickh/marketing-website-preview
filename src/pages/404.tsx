@@ -1,10 +1,10 @@
-import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 import { SuiButton, SuiLink } from '@/components/sui'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {

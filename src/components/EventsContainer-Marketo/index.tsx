@@ -1,11 +1,11 @@
-import { CheckCircleIcon } from '@heroicons/react/outline'
-import Image from 'next/image'
-import { useRef, useState } from 'react'
 import CopyUrlButton from '../CopyUrlButton'
 import MarketoForm from '../MarketoForm'
 import SocialButton from '../SocialButton'
 import { SuiPanel } from '../sui'
 import { EventsContainerProps } from './types'
+import { CheckCircleIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
+import { useRef, useState } from 'react'
 
 interface MarketoEventsContainerProps
   extends Pick<EventsContainerProps, 'children' | 'featuredImage'> {

@@ -5,7 +5,7 @@ interface Props {
 const AzureLogo = (props: Props) => {
   return (
     <svg
-      className='h-8 w-auto fill-current '
+      className='h-8 w-auto fill-current'
       fill='none'
       viewBox='0 0 27 27'
       xmlns='http://www.w3.org/2000/svg'>

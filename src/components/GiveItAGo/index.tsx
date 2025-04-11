@@ -1,6 +1,6 @@
+import { CUIButton, CUICard } from '../ClickUI'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
-import { CUIButton, CUICard } from '../ClickUI'
 
 type DeployData = {
   title: string
@@ -65,7 +65,7 @@ export default function GiveItAGo() {
               </div>
             </div>
           </CUICard.Body>
-          <CUICard.Footer className='flex w-full items-center '>
+          <CUICard.Footer className='flex w-full items-center'>
             <CUIButton
               type={deploy.btnType}
               href={deploy.href}

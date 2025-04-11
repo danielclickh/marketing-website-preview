@@ -1,7 +1,4 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
+import features from './features.json'
 import CdcAnimation from '@/components/CdcAnimation'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import ClickPipesAnimationV2 from '@/components/ClickPipesAnimation/ClickPipesAnimationV2'
@@ -13,7 +10,10 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ClickPipesData } from '@/types/clickpipes'
-import features from './features.json'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -119,7 +119,7 @@ export default function ClickHouseServerPage({
               your external data sources to ClickHouse Cloud.
             </h2>
           </div>
-          <div className='container mx-auto flex max-w-4xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
+          <div className='container mx-auto flex max-w-4xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <div className='grid grid-cols-1 gap-x-8 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
@@ -260,10 +260,10 @@ export default function ClickHouseServerPage({
         <div className='section-container my-20'>
           <div className='mx-auto w-full lg:max-w-xl'>
             <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
-              <div className='flex justify-center mb-10'>
+              <div className='mb-10 flex justify-center'>
                 <CdcAnimation
                   logo={
-                    <div className='aspect-square flex items-center justify-center border border-neutral-700 rounded-lg p-3 -mr-4'>
+                    <div className='-mr-4 flex aspect-square items-center justify-center rounded-lg border border-neutral-700 p-3'>
                       <Image
                         src='/images/cloud/integrations/mysql.svg'
                         width={64}
@@ -289,7 +289,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='section-container my-28 md:px-8 2xl:px-0 '>
+        <div className='section-container my-28 md:px-8 2xl:px-0'>
           <GetStartedFree
             href='https://console.clickhouse.cloud/signUp?loc=clickpipes-getstarted-footer'
             textBefore='Try ClickPipes in ClickHouse'

@@ -1,6 +1,6 @@
-import { ReactNode } from 'react'
-import { StrapiImageType } from '@/lib/api/strapi/types'
 import { CommonProps } from './homepage'
+import { StrapiImageType } from '@/lib/api/strapi/types'
+import { ReactNode } from 'react'
 
 export interface BlogPost {
   id: number
@@ -17,7 +17,7 @@ export interface BlogPost {
   publishedAt: string
   slug?: string
   date?: string
-  keywords?: string,
+  keywords?: string
   ListOnBlogs?: boolean
 }
 

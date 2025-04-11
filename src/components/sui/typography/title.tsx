@@ -1,6 +1,6 @@
-import { createElement, HTMLAttributes } from 'react'
-import { colorCalculator } from './calculator'
 import styles from './Typography.module.scss'
+import { colorCalculator } from './calculator'
+import { createElement, HTMLAttributes } from 'react'
 
 export interface TitleProps extends HTMLAttributes<HTMLDivElement> {
   type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'

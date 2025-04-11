@@ -1,5 +1,5 @@
-import { StrapiButton, StrapiImageType } from '@/lib/api/strapi/types'
 import { CommonProps, Feature, ScreenshotAndBullets } from './homepage'
+import { StrapiButton, StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface CloudProvider {
   title: string

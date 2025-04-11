@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router'
 import { ToggleButtonsProps } from '../../CalculatorTypesOptions'
 import AwsLogo from './AwsLogo'
 import AzureLogo from './AzureLogo'
 import GCPLogo from './GCPLogo'
 import styles from './ToggleButtons.module.scss'
+import { useRouter } from 'next/router'
 
 export function ToggleButtonsProviders<T extends string = string>({
   options,

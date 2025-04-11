@@ -1,5 +1,4 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
+import features from './features.json'
 import BulletPoint from '@/components/BulletPoint'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStarted from '@/components/GetStarted'
@@ -11,7 +10,8 @@ import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ClickhouseData } from '@/types/clickhouse'
-import features from './features.json'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps<ClickhouseData> =
   async function getStaticProps() {
@@ -134,7 +134,7 @@ export default function ClickHouseServerPage({
         </div>
 
         <div className='bg-neutral-725 text-neutral-0'>
-          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
+          <div className='container mx-auto flex max-w-7xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <div className='feature-container'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
@@ -160,7 +160,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
+        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0'>
           <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
@@ -246,7 +246,7 @@ export default function ClickHouseServerPage({
         <HRSeparator className='my-12 md:my-24' />
 
         <div className='relative mx-auto flex flex-col gap-y-28 md:mt-24'>
-          <div className='section-container bg-shadow-element-left red-shadow mx-auto flex flex-col items-center justify-between self-center px-4 md:px-8 2xl:px-0 '>
+          <div className='section-container bg-shadow-element-left red-shadow mx-auto flex flex-col items-center justify-between self-center px-4 md:px-8 2xl:px-0'>
             <CUICard className='p-8'>
               <div className='flex w-full justify-between'>
                 <h3 className='mb-6 w-full text-center font-basier text-2xl font-semibold leading-tight md:text-left md:text-2xl'>

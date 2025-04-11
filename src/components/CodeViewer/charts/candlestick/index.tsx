@@ -1,9 +1,11 @@
 'use client'
+
+import { Column, XAxisConfig, YAxisConfig } from '../../types'
+import { nonNullType, roundByScale, roundToDynamicPrecision } from '../../utils'
 import EChartsReact from 'echarts-for-react'
 import isEqual from 'lodash/isEqual'
 import { useMemo, useRef } from 'react'
-import { Column, XAxisConfig, YAxisConfig } from '../../types'
-import { nonNullType, roundByScale, roundToDynamicPrecision } from '../../utils'
+
 /*
 
 example query to generate data:
@@ -143,7 +145,7 @@ const CandleStickChart = (props: {
     return initialValues
   }, [props.data, props.config])
 
-  const options:any = {
+  const options: any = {
     title: {
       text: props.config.title,
       textStyle: {
@@ -213,7 +215,7 @@ const CandleStickChart = (props: {
   }
 
   return (
-    <div className='h-full w-full justify-between flex flex-col'>
+    <div className='flex h-full w-full flex-col justify-between'>
       <EChartsReact
         ref={chartRef}
         option={options}

@@ -1,8 +1,8 @@
+import SuiButton from '../../SuiButton'
+import { SuiPanel } from '../../panel'
+import { SuiText } from '../../typography'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import { ReactNode } from 'react'
-import { SuiPanel } from '../../panel'
-import SuiButton from '../../SuiButton'
-import { SuiText } from '../../typography'
 
 type CardProps = {
   title: string

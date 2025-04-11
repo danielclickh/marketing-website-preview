@@ -1,3 +1,10 @@
+import pricingFile from '../../../public/pricingV2File.json'
+import config, { PlanConfig } from '../PricingV2/config'
+import {
+  PricingV2EntryCompute,
+  PricingV2EntryPlan,
+  PricingV2EntryProvider
+} from '@/lib/api/strapi/types'
 import {
   createContext,
   Dispatch,
@@ -8,13 +15,6 @@ import {
   useMemo,
   useState
 } from 'react'
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from '@/lib/api/strapi/types'
-import pricingFile from '../../../public/pricingV2File.json'
-import config, { PlanConfig } from '../PricingV2/config'
 
 const AVG_DAYS_PER_MONTH = 30.5
 

@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
 import MarketoForm from '../MarketoForm'
+import { useRef, useState } from 'react'
 
 export default function PocContactForm() {
   const [formLoaded, setFormLoaded] = useState(false)
@@ -29,7 +29,7 @@ export default function PocContactForm() {
       </div>
       {!formLoaded && <div className='text-center'>Loading form...</div>}
       {formSuccess && (
-        <div className='absolute inset-0 flex ' ref={formSuccessRef}>
+        <div className='absolute inset-0 flex' ref={formSuccessRef}>
           <div className='my-auto w-full text-center'>
             <h3 className='text-2xl font-bold'>
               Thank you for your submission!

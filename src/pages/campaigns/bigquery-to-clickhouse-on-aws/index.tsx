@@ -1,28 +1,4 @@
-import Image from 'next/image'
-import Link, { LinkProps } from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import BlogPost from '@/components/BlogPostList/BlogPost'
-import FeatureCard from '@/components/Cards/FeatureCard'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
-import Layout from '@/components/Layout'
-import MarketoForm from '@/components/MarketoForm'
-import MoreComparisons from '@/components/MoreComparisons'
-import { StrapiImage } from '@/components/StrapiElements'
-import { StrapiImageProps } from '@/components/StrapiElements/types'
-import { SuiText, SuiTitle } from '@/components/sui'
 import { useClickOutside } from '../../../hooks'
-import { findAll, findOne } from '@/lib/api/strapi'
-import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
-import {
-  ComparisonPage,
-  ComparisonProps,
-  RepeatableContent
-} from '@/types/comparisons'
-import { HomepageCustomerStories } from '@/types/homepage'
 import logos from './bigquery-to-aws.svg'
 import chartCosts from './chart-costs.svg'
 import chartLatency from './chart-latency.svg'
@@ -40,6 +16,31 @@ import logoPostgress from './logo-postgress.svg'
 import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
 import logoAdevinta from './logoAdevinta.svg'
+import BlogPost from '@/components/BlogPostList/BlogPost'
+import FeatureCard from '@/components/Cards/FeatureCard'
+import { CUIButton, CUICard } from '@/components/ClickUI'
+import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
+import Layout from '@/components/Layout'
+import MarketoForm from '@/components/MarketoForm'
+import MoreComparisons from '@/components/MoreComparisons'
+import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageProps } from '@/components/StrapiElements/types'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { findAll, findOne } from '@/lib/api/strapi'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
+import {
+  ComparisonPage,
+  ComparisonProps,
+  RepeatableContent
+} from '@/types/comparisons'
+import { HomepageCustomerStories } from '@/types/homepage'
+import Image from 'next/image'
+import Link, { LinkProps } from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+
 const locTracking = 'bigquery-to-clickhouse-on-aws-page'
 
 export interface BigQueryPageProps extends ComparisonProps {
@@ -152,7 +153,7 @@ export default function BigQueryPage({
       {/* Hero */}
       <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center px-8 2xl:px-0'>
         <div className='mx-auto max-w-[800px] space-y-6 text-center'>
-          <div className='w-full max-w-max mx-auto relative'>
+          <div className='relative mx-auto w-full max-w-max'>
             <div className='absolute bottom-0 left-[53.59%] right-[0.24%] top-0 z-0 animate-pulse rounded-2xl shadow-stackIntegrationGraphicSmall lg:shadow-stackIntegrationGraphic' />
             <Image
               src={logos}
@@ -177,7 +178,7 @@ export default function BigQueryPage({
           </SuiText>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 mb-8 max-w-[1030px]'>
+        <div className='mb-8 mt-10 grid max-w-[1030px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
           <FeatureCard
             className='!w-full'
             icon={
@@ -231,25 +232,25 @@ export default function BigQueryPage({
         <div className='mx-auto max-w-[800px]'>
           <SuiText
             weight='medium'
-            className='sm:text-center sm:text-lg text-neutral-200'>
+            className='text-neutral-200 sm:text-center sm:text-lg'>
             If you are considering a migration from BigQuery to ClickHouse on
             AWS we are providing a limited offer whereby you can benefit from:
           </SuiText>
         </div>
 
-        <div className='w-full sm:px-4 my-12'>
+        <div className='my-12 w-full sm:px-4'>
           <div className='-m-3 flex flex-wrap items-start justify-center'>
-            <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
+            <div className='flex w-full items-center gap-3 text-balance p-3 md:max-w-[314px] md:basis-1/2 lg:basis-1/3'>
               <Image src={iconCheck} alt='Check' width={24} height={24} />
               <SuiText className='sm:text-lg'>Free migration services</SuiText>
             </div>
-            <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
+            <div className='flex w-full items-center gap-3 text-balance p-3 md:max-w-[314px] md:basis-1/2 lg:basis-1/3'>
               <Image src={iconCheck} alt='Check' width={24} height={24} />
               <SuiText className='sm:text-lg'>
                 Discount on your ClickHouse Cloud subscriptions
               </SuiText>
             </div>
-            <div className='p-3 flex gap-3 items-center w-full md:max-w-[314px] md:basis-1/2 lg:basis-1/3 text-balance'>
+            <div className='flex w-full items-center gap-3 text-balance p-3 md:max-w-[314px] md:basis-1/2 lg:basis-1/3'>
               <Image src={iconCheck} alt='Check' width={24} height={24} />
               <SuiText className='sm:text-lg'>
                 Promotional Credits on AWS
@@ -257,7 +258,7 @@ export default function BigQueryPage({
             </div>
           </div>
         </div>
-        <div className='flex flex-col w-full px-4 sm:px-0 mx-auto sm:flex-row justify-center'>
+        <div className='mx-auto flex w-full flex-col justify-center px-4 sm:flex-row sm:px-0'>
           <CUIButton
             type='primary'
             size='lg'
@@ -483,7 +484,7 @@ export default function BigQueryPage({
       </div>
 
       <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
-        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto  flex  flex-col items-center'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
           <Image
             src='/images/migration.svg'
             height={72}
@@ -669,7 +670,7 @@ function CustomContentCard({
       href={href}
       target='_blank'
       className={
-        ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+        'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
       }>
       <CUICard className='h-full'>
         <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -687,7 +688,7 @@ function CustomContentCard({
             <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
               {category}
             </div>
-            <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+            <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
               {title}
             </div>
           </div>

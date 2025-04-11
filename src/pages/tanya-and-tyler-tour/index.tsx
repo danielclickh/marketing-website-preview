@@ -1,6 +1,3 @@
-import { GetStaticProps } from 'next'
-import Link, { LinkProps } from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
 import { CUICard } from '@/components/ClickUI'
 import EventPost from '@/components/EventPostList/EventPost'
 import GetStartedFree from '@/components/GetStartedFree'
@@ -11,6 +8,9 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventType } from '@/types/events'
 import { CommonProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
+import Link, { LinkProps } from 'next/link'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface PageProps extends CommonProps {
   recentEvents: Array<EventType>

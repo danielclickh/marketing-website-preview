@@ -1,3 +1,4 @@
+import { RegionPricingWithIcon } from './types'
 import {
   createContext,
   Dispatch,
@@ -7,7 +8,6 @@ import {
   useEffect,
   useState
 } from 'react'
-import { RegionPricingWithIcon } from './types'
 
 type ContextProps = {
   selectedRegion?: RegionPricingWithIcon

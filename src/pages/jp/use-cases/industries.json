@@ -1,38 +1,38 @@
 [
   {
     "name": "金融サービス",
-		"description": "トレーディングと市場分析、不正検知、リスク監視、ブロックチェーンなど。",
-		"href": "",
-		"iconNative": "https://clickhouse.com/uploads/financial_eabf48e8c4.svg"
+    "description": "トレーディングと市場分析、不正検知、リスク監視、ブロックチェーンなど。",
+    "href": "",
+    "iconNative": "https://clickhouse.com/uploads/financial_eabf48e8c4.svg"
   },
-	{
+  {
     "name": "マーケティングとセールス",
-		"description": "広告テクノロジー、ウェブ分析、SEOなどのためのデータストア。",
-		"href": "",
-		"iconNative": "https://clickhouse.com/uploads/marketing_564c57118c.svg"
+    "description": "広告テクノロジー、ウェブ分析、SEOなどのためのデータストア。",
+    "href": "",
+    "iconNative": "https://clickhouse.com/uploads/marketing_564c57118c.svg"
   },
-	{
+  {
     "name": "Eコマースと小売業",
-		"description": "オンラインビジネス向けのリアルタイム在庫監視と全体的なトラッキング。",
-		"href": "",
-		"iconNative": "https://clickhouse.com/uploads/ecommerce_007f909f93.svg"
+    "description": "オンラインビジネス向けのリアルタイム在庫監視と全体的なトラッキング。",
+    "href": "",
+    "iconNative": "https://clickhouse.com/uploads/ecommerce_007f909f93.svg"
   },
-	{
+  {
     "name": "テクノロジ",
-		"description": "IoT、エネルギー、バイオテクノロジー、製造業などを含む。",
-		"href": "",
-		"iconNative": "https://clickhouse.com/uploads/technology_f01c171efc.svg"
+    "description": "IoT、エネルギー、バイオテクノロジー、製造業などを含む。",
+    "href": "",
+    "iconNative": "https://clickhouse.com/uploads/technology_f01c171efc.svg"
   },
-	{
+  {
     "name": "メディアとエンターテイメント",
-		"description": "動画、アセット、その他のメディアのパフォーマンスをリアルタイムで評価する。",
-		"href": "",
-		"iconNative": "https://clickhouse.com/uploads/media_7dd1b2c68e.svg"
+    "description": "動画、アセット、その他のメディアのパフォーマンスをリアルタイムで評価する。",
+    "href": "",
+    "iconNative": "https://clickhouse.com/uploads/media_7dd1b2c68e.svg"
   },
-	{
+  {
     "name": "ゲーム",
-		"description": "プレイヤーの行動、ゲーム内の動向、ゲーム体験の向上に役立つ重要なインサイトを理解する。",
-		"href": "",
-		"iconNative": "https://clickhouse.com/uploads/gaming_71acbd7e42.svg"
-	}
+    "description": "プレイヤーの行動、ゲーム内の動向、ゲーム体験の向上に役立つ重要なインサイトを理解する。",
+    "href": "",
+    "iconNative": "https://clickhouse.com/uploads/gaming_71acbd7e42.svg"
+  }
 ]

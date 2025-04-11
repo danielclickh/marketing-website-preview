@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
+import { useEffect, useRef, useState } from 'react'
 
 export interface ResizeEvent {
   width: number

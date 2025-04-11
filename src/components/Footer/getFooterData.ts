@@ -1,5 +1,5 @@
-import { findOne } from '@/lib/api/strapi'
 import { FooterData } from './types'
+import { findOne } from '@/lib/api/strapi'
 
 let footerData: FooterData | null = null
 

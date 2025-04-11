@@ -1,6 +1,6 @@
-import { Fragment, useCallback, useEffect, useRef } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
+import { Fragment, useCallback, useEffect, useRef } from 'react'
 
 export default function DisplayPrice() {
   const { totalPriceRange } = usePricingV2Context()

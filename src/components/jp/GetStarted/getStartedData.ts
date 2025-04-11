@@ -1,5 +1,5 @@
-import { findOne } from '@/lib/api/strapi'
 import { GettingStartedData } from './types'
+import { findOne } from '@/lib/api/strapi'
 
 let getStarted: GettingStartedData | null = null
 

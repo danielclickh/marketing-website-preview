@@ -1,13 +1,13 @@
-import Image from 'next/image'
-import { FullyQualifiedEvent } from '@/lib/galaxy/client'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import logoFull from '../../../public/logo-full.svg'
 import { CUIButton } from '../ClickUI'
-import GitHub from '../icons/GitHub'
 import NewsLetterForm from '../NewsLetter/NewsLetterForm'
+import GitHub from '../icons/GitHub'
 import topLevelFooterMenu from './footer.json'
 import FooterLink from './footerLink'
 import { FooterData } from './types'
+import { FullyQualifiedEvent } from '@/lib/galaxy/client'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import Image from 'next/image'
 
 export default function Footer({
   newsletterForm,
@@ -43,7 +43,7 @@ export default function Footer({
                     ))}
                     {topMenu.title === 'Comparisons' && (
                       <>
-                        <h3 className='mt-8 mb-4 font-inter text-sm font-bold text-neutral-100'>
+                        <h3 className='mb-4 mt-8 font-inter text-sm font-bold text-neutral-100'>
                           Partners
                         </h3>
                         {topLevelFooterMenu
@@ -73,7 +73,7 @@ export default function Footer({
             width='135'
             height='40'
             alt='ClickHouse logo'
-            className=' mb-4 mr-3'
+            className='mb-4 mr-3'
           />
           <div className='mb-4 text-sm text-neutral-400'>
             {newsletterForm?.description}
@@ -86,7 +86,7 @@ export default function Footer({
             target='_blank'
             iconLeft={<GitHub />}
             linkClass='flex justify-end w-full'
-            className='bg-neutral-0 text-neutral-900 mt-6 w-full md:w-fit'>
+            className='mt-6 w-full bg-neutral-0 text-neutral-900 md:w-fit'>
             Star us on Github
           </CUIButton>
         </div>

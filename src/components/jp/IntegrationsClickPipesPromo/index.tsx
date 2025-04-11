@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { CUIButton } from '../../ClickUI'
 import Amazonsimple from './logos/Amazonsimple'
 import Azureeventhub from './logos/Azureeventhub'
@@ -10,6 +8,8 @@ import KinesisAmazon from './logos/KinesisAmazon'
 import Managedkafka from './logos/Managedkafka'
 import Redpanda from './logos/Redpanda'
 import Warpstream from './logos/Warpstream'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import Image from 'next/image'
 
 export default function IntegrationsClickPipesPromo() {
   const handleGalaxyClick = useGalaxyOnClick(

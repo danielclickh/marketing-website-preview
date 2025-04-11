@@ -1,7 +1,3 @@
-import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { GetServerSideProps } from 'next'
-import Link from 'next/link'
-import React from 'react'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import DemoCard from '@/components/DemoCard'
 import FollowUs from '@/components/FollowUs'
@@ -12,14 +8,18 @@ import NewsLetter from '@/components/NewsLetter'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
-import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
 import TableOfContents from '@/components/TableOfContents'
+import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
 import { findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { DemoProps } from '@/types/demo'
 import { Demo } from '@/types/demos'
 import { ParamsType } from '@/types/homepage'
+import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { GetServerSideProps } from 'next'
+import Link from 'next/link'
+import React from 'react'
 
 export const getServerSideProps: GetServerSideProps<DemoProps> =
   async function getServerSideProps({ params }) {
@@ -174,15 +174,14 @@ export default function DemoPage({
               path='/demos'
               type='empty'
               color='primary'
-              className='font-base border border-primary-300/50	'>
+              className='font-base border border-primary-300/50'>
               View all Demos
             </SuiButton>
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 lg:grid-cols-3'>
-            {otherDemos
-              .map((demo) => (
-                <DemoCard key={demo.id} {...demo} />
-              ))}
+            {otherDemos.map((demo) => (
+              <DemoCard key={demo.id} {...demo} />
+            ))}
           </div>
         </div>
       </div>

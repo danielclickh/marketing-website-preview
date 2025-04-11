@@ -1,12 +1,12 @@
 ---
 title: 'Columnar databases explained'
 slug: 'what-is-columnar-database'
-excerpt: "In this guide, we’ll explore columnar databases. How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?"
+excerpt: 'In this guide, we’ll explore columnar databases. How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?'
 index: 2
 ---
 
-In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym” 
-How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?
+In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym”
+How do they differ from row-based databases? What are they good at? What are the advantages of using a column store?
 
 We’ll answer these questions and more, but first, a brief history lesson.
 
@@ -24,13 +24,13 @@ In the years since then, further innovations, such as [vectorized processing](ht
 
 ## Row-based vs. column-based
 
-As column stores evolved from theoretical concepts to practical implementations, their fundamental difference from traditional row-based databases became increasingly apparent. 
+As column stores evolved from theoretical concepts to practical implementations, their fundamental difference from traditional row-based databases became increasingly apparent.
 
 This distinction in data organization is at the core of why column stores excel at specific queries while row-based systems remain preferable for others. Comparing their data layout with traditional row-based databases is essential to understanding the strengths and weaknesses of column stores.
 
 In a row-oriented database, consecutive table rows are stored sequentially, one after the other. This layout allows for quick retrieval of rows, as the column values of each row are stored together.
 
-In a column-oriented database, tables are stored as a collection of columns, i.e., the values of each column are stored sequentially, one after the other. This layout makes it harder to restore single rows (as there are now gaps between the row values), but column operations such as filters or aggregation become much faster than in a row-oriented database.  
+In a column-oriented database, tables are stored as a collection of columns, i.e., the values of each column are stored sequentially, one after the other. This layout makes it harder to restore single rows (as there are now gaps between the row values), but column operations such as filters or aggregation become much faster than in a row-oriented database.
 
 > In a column store, column operations such as filters or aggregation are faster than in a row-oriented database.
 
@@ -44,7 +44,7 @@ The row-based approach works better for single-row lookups. The column-based app
 
 ## When should I use a column store?
 
-Use a column store when you want to run queries that aggregate and filter data across a few columns but lots of rows. 
+Use a column store when you want to run queries that aggregate and filter data across a few columns but lots of rows.
 These datasets will typically contain a lot of columns, but we’ll only be touching a subset of those columns in each query.
 
 For example, take the [real-world anonymized web analytics dataset](https://clickhouse.com/docs/en/getting-started/example-datasets/metrica) that contains 100 million rows and has the following columns:
@@ -78,12 +78,12 @@ LIMIT 8;
 
 This query demonstrates several characteristics that make it ideal for a column store:
 
-1. Selective column access: Despite the table having over 100 columns, the query only needs to read data from `MobilePhoneModel`, `RegionID`, `EventDate`, and `MobilePhone`.  
-2. Filtering: The `WHERE` clause allows the database to eliminate irrelevant rows quickly.  
-3. Aggregation: The `COUNT()` function aggregates data across millions of rows.  
+1. Selective column access: Despite the table having over 100 columns, the query only needs to read data from `MobilePhoneModel`, `RegionID`, `EventDate`, and `MobilePhone`.
+2. Filtering: The `WHERE` clause allows the database to eliminate irrelevant rows quickly.
+3. Aggregation: The `COUNT()` function aggregates data across millions of rows.
 4. Large-scale processing: The query operates on a dataset of 100 million records, which is the lower bound of where column stores start showing their value for analytical queries.
 
-You can [try this query on the ClickHouse SQL Playground](https://sql.clickhouse.com/?query=U0VMRUNUIE1vYmlsZVBob25lTW9kZWwsIENPVU5UKCkgQVMgYyAKRlJPTSBtZXRyaWNhLmhpdHMgCldIRVJFIAogICAgICBSZWdpb25JRCA9IDIyOSAKICBBTkQgRXZlbnREYXRlID49ICcyMDEzLTA3LTAxJyAKICBBTkQgRXZlbnREYXRlIDw9ICcyMDEzLTA3LTMxJyAKICBBTkQgTW9iaWxlUGhvbmUgIT0gMCAKICBBTkQgTW9iaWxlUGhvbmVNb2RlbCBub3QgaW4gWycnLCAnaVBhZCddIApHUk9VUCBCWSBNb2JpbGVQaG9uZU1vZGVsCk9SREVSIEJZIGMgREVTQyAKTElNSVQgODs&chart=eyJ0eXBlIjoicGllIiwiY29uZmlnIjp7InhheGlzIjoiTW9iaWxlUGhvbmVNb2RlbCIsInlheGlzIjoiYyJ9fQ&run_query=true), hosted at [sql.clickhouse.com](http://sql.clickhouse.com). 
+You can [try this query on the ClickHouse SQL Playground](https://sql.clickhouse.com/?query=U0VMRUNUIE1vYmlsZVBob25lTW9kZWwsIENPVU5UKCkgQVMgYyAKRlJPTSBtZXRyaWNhLmhpdHMgCldIRVJFIAogICAgICBSZWdpb25JRCA9IDIyOSAKICBBTkQgRXZlbnREYXRlID49ICcyMDEzLTA3LTAxJyAKICBBTkQgRXZlbnREYXRlIDw9ICcyMDEzLTA3LTMxJyAKICBBTkQgTW9iaWxlUGhvbmUgIT0gMCAKICBBTkQgTW9iaWxlUGhvbmVNb2RlbCBub3QgaW4gWycnLCAnaVBhZCddIApHUk9VUCBCWSBNb2JpbGVQaG9uZU1vZGVsCk9SREVSIEJZIGMgREVTQyAKTElNSVQgODs&chart=eyJ0eXBlIjoicGllIiwiY29uZmlnIjp7InhheGlzIjoiTW9iaWxlUGhvbmVNb2RlbCIsInlheGlzIjoiYyJ9fQ&run_query=true), hosted at [sql.clickhouse.com](http://sql.clickhouse.com).
 The query processes 100 million rows in under 100 milliseconds, and you can explore the results as a table:
 
 ![](/images/engineering-resources/1_columnstore.png)
@@ -92,10 +92,9 @@ Or as a chart:
 
 ![](/images/engineering-resources/2_columnstore.png)
 
-
 ## When should I not use a column store?
 
-While column stores excel in certain scenarios, particularly in analytical workloads involving large datasets, they are not a one-size-fits-all solution. Understanding their limitations is crucial for making informed decisions about database architecture. 
+While column stores excel in certain scenarios, particularly in analytical workloads involving large datasets, they are not a one-size-fits-all solution. Understanding their limitations is crucial for making informed decisions about database architecture.
 
 Let's explore situations where there might be better choices than column stores.
 
@@ -106,20 +105,20 @@ Column stores are designed for analytics queries that typically aggregate or sca
 Consider our web analytics dataset example. If most of your queries resemble this:
 
 ```sql
-SELECT * 
-FROM metrica.hits 
+SELECT *
+FROM metrica.hits
 WHERE WatchID = 8120543446287442873;
 ```
 
 A column store would need to:
 
-1. Read the `WatchID` column to find the matching row  
-2. Fetch data from every other column for the matching row  
+1. Read the `WatchID` column to find the matching row
+2. Fetch data from every other column for the matching row
 3. Reconstruct the full row(s)
 
 This process can be inefficient, especially if you're fetching many columns. In contrast, a row-based store would have all the data for a single row stored contiguously, making such lookups much faster.
 
-Real-world example:  E-commerce platforms often need to retrieve all details of a specific order quickly. This operation is much more efficient in a row-based store.
+Real-world example: E-commerce platforms often need to retrieve all details of a specific order quickly. This operation is much more efficient in a row-based store.
 
 ### Small Datasets
 
@@ -135,21 +134,21 @@ For instance, a banking system processing account transfers must ensure that deb
 
 ## Advantages of using a column store
 
-Using column stores has two main advantages: query performance on large datasets and efficient data storage. 
+Using column stores has two main advantages: query performance on large datasets and efficient data storage.
 These benefits are particularly valuable in data warehousing, business intelligence, and large-scale analytics scenarios.
 Let’s learn about the techniques used to achieve this.
 
 ### Efficient storage
 
-At the start of this article, we learned that column stores store data from the same column next to each other. This means that identical values are often adjacent, which is [perfect for data compression](https://clickhouse.com/docs/en/data-compression/compression-in-clickhouse). 
+At the start of this article, we learned that column stores store data from the same column next to each other. This means that identical values are often adjacent, which is [perfect for data compression](https://clickhouse.com/docs/en/data-compression/compression-in-clickhouse).
 
 > Column stores are perfect for data compression.
 
 Column stores leverage various encoding and compression techniques:
 
-1. Dictionary encoding: Replaces repeated string values with integer IDs, dramatically reducing storage for columns with low cardinality.  
-2. Run length encoding (RLE): Compresses sequences of repeated values by storing the value and its count. For example, "AAAABBBCC" becomes "(A,4)(B,3)(C,2)".  
-3. Bit packing uses the minimum number of bits required to represent integers in a given range, which is particularly effective for columns with a limited range of values.  
+1. Dictionary encoding: Replaces repeated string values with integer IDs, dramatically reducing storage for columns with low cardinality.
+2. Run length encoding (RLE): Compresses sequences of repeated values by storing the value and its count. For example, "AAAABBBCC" becomes "(A,4)(B,3)(C,2)".
+3. Bit packing uses the minimum number of bits required to represent integers in a given range, which is particularly effective for columns with a limited range of values.
 4. General-purpose compression: For further compression, algorithms like ZSTD, LZ4, and GZIP are applied to these specialized encodings.
 
 For instance, consider a column storing country codes. Instead of repeatedly storing "USA" or "CAN," dictionary encoding might replace these with 1 and 2, respectively. If there are many consecutive "USA" entries, RLE could further compress this to (1, 1000), representing "USA" repeated 1000 times.
@@ -160,7 +159,7 @@ The benefits extend beyond mere storage savings. Less data on disk translates to
 
 Column stores truly shine in analytics queries, particularly those involving large datasets. Their performance advantage stems from a couple of factors:
 
-1. Efficient I/O utilization: Column stores can skip vast amounts of irrelevant data by reading only the columns relevant to a query. For instance, in a query like `SELECT AVG(salary) FROM employees WHERE department = 'Sales` , a column store only needs to read the `salary` and `department` columns, potentially ignoring dozens or hundreds of other columns.  
+1. Efficient I/O utilization: Column stores can skip vast amounts of irrelevant data by reading only the columns relevant to a query. For instance, in a query like `SELECT AVG(salary) FROM employees WHERE department = 'Sales` , a column store only needs to read the `salary` and `department` columns, potentially ignoring dozens or hundreds of other columns.
 2. Vectorized query execution: The columnar data layout aligns perfectly with modern CPU architectures, enabling efficient vectorized processing. Instead of processing data row-by-row, column stores can simultaneously operate on large chunks (vectors) of a single column. This approach maximizes CPU cache usage and allows for SIMD (Single Instruction, Multiple Data) operations, dramatically speeding up calculations.
 
 ### Query performance
@@ -191,8 +190,8 @@ Historically, column stores were optimized for read-heavy workloads and often la
 
 Denormalization involves combining data from multiple tables into a single, wide table. While this approach can significantly boost query performance, it comes with trade-offs:
 
-1. Data redundancy: Denormalized data often contains duplicated information, increasing storage requirements.  
-2. Update complexity: Changes to denormalized data may require updates across multiple rows or columns.  
+1. Data redundancy: Denormalized data often contains duplicated information, increasing storage requirements.
+2. Update complexity: Changes to denormalized data may require updates across multiple rows or columns.
 3. Data consistency: Maintaining consistency across denormalized data can be challenging, especially in systems with frequent updates.
 
 Modern column stores have improved their join performance, making extreme denormalization unnecessary. However, for maximum query performance, some level of denormalization is often still beneficial. The challenge lies in finding the right balance between normalization (for data integrity and ease of updates) and denormalization (for query performance).
@@ -203,7 +202,7 @@ In column stores, the physical organization of data can dramatically impact quer
 
 Key considerations include:
 
-1. Sort keys: Choosing the right columns to sort by can significantly speed up range queries and joins.  
+1. Sort keys: Choosing the right columns to sort by can significantly speed up range queries and joins.
 2. Partitioning: Effective data partitioning can enable query engines to skip large chunks of irrelevant data.
 
 For example, sorting data primarily by date could yield substantial performance benefits if most queries filter on date ranges. However, if this isn't considered during initial data loading, achieving optimal performance may require a costly data reorganization process.
@@ -224,7 +223,7 @@ In addition, row-based stores like Postgres have columnar add-ons via Citus or T
 
 Yes, [ClickHouse is a column database](https://clickhouse.com/docs/en/intro). It is available as [open-source software](https://github.com/ClickHouse/ClickHouse) and a [cloud offering](https://clickhouse.com/cloud) and is the [fastest](https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast) and most resource-efficient real-time data warehouse and open-source database.
 
-ClickHouse Cloud is used by Sony, Lyft, Cisco, GitLab, and many others. 
+ClickHouse Cloud is used by Sony, Lyft, Cisco, GitLab, and many others.
 
 You can learn more about the problems that ClickHouse solves in the [user stories](https://clickhouse.com/user-stories) section.
 
@@ -234,15 +233,15 @@ Yes, and this is quite common. A hybrid architecture that used both types of sto
 
 ### Row-based store for OLTP (Online Transaction Processing)
 
-* Handles day-to-day transactional operations  
-* Manages real-time data updates and insertions  
-* Ensures ACID (Atomicity, Consistency, Isolation, Durability) compliance
+- Handles day-to-day transactional operations
+- Manages real-time data updates and insertions
+- Ensures ACID (Atomicity, Consistency, Isolation, Durability) compliance
 
 ### Column-based store for OLAP (Online Analytical Processing)
 
-* Manages large-scale data analytics  
-* Handles analytical queries on historical and real-time data  
-* Optimizes for read-heavy workloads and aggregations
+- Manages large-scale data analytics
+- Handles analytical queries on historical and real-time data
+- Optimizes for read-heavy workloads and aggregations
 
 Many organizations employ change data capture (CDC) techniques to keep these systems in sync. CDC is a set of software design patterns used to determine and track data changes so that action can be taken using the changed data.
 

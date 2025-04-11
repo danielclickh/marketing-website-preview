@@ -1,6 +1,6 @@
-import { BaseStrapiImage } from '@/lib/api/strapi/types'
 import { StrapiImage } from '../StrapiElements'
 import { SuiText, SuiTitle } from '../sui'
+import { BaseStrapiImage } from '@/lib/api/strapi/types'
 
 type FeatureItemProps = {
   icon: BaseStrapiImage

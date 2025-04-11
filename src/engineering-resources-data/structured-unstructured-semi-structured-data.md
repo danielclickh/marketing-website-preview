@@ -1,27 +1,27 @@
 ---
 title: 'Structured, unstructured, and semi-structured data'
 slug: 'structured-unstructured-semi-structured-data'
-excerpt: "In this guide, we explore the three main forms of data: structured data with rigid schemas like database tables, unstructured data like text and images with no predefined format, and semi-structured data like JSON that combines elements of both while maintaining flexibility."
+excerpt: 'In this guide, we explore the three main forms of data: structured data with rigid schemas like database tables, unstructured data like text and images with no predefined format, and semi-structured data like JSON that combines elements of both while maintaining flexibility.'
 index: 9
 ---
 
-Data comes in different forms, each requiring different approaches for storage and analysis. This guide explores the three main types of data: structured, unstructured, and semi-structured. 
+Data comes in different forms, each requiring different approaches for storage and analysis. This guide explores the three main types of data: structured, unstructured, and semi-structured.
 
 We'll examine their characteristics, see practical examples of each type, and see how modern data systems like ClickHouse handle them.
 
 ## Structured data
 
-Structured data represents information organized in its most rigid and predictable form. It follows a pre-defined schema where every record conforms to the same format, with a fixed set of columns and clear data types for each field. While individual records may contain null values, the overall structure remains consistent across all entries, making it highly organized and easily queryable. This data type typically resides in relational databases, where table schemas must be defined before data can be inserted. 
+Structured data represents information organized in its most rigid and predictable form. It follows a pre-defined schema where every record conforms to the same format, with a fixed set of columns and clear data types for each field. While individual records may contain null values, the overall structure remains consistent across all entries, making it highly organized and easily queryable. This data type typically resides in relational databases, where table schemas must be defined before data can be inserted.
 
-The choice of database system often depends on the intended workload. Online Transaction Processing (OLTP) systems, which handle day-to-day transactions and require rapid processing of many small operations, frequently use databases like PostgreSQL. 
+The choice of database system often depends on the intended workload. Online Transaction Processing (OLTP) systems, which handle day-to-day transactions and require rapid processing of many small operations, frequently use databases like PostgreSQL.
 
-In contrast, Online Analytical Processing (OLAP) systems, designed for complex queries and analysis of large datasets, employ [column databases](https://clickhouse.com/engineering-resources/what-is-columnar-database) like ClickHouse. 
+In contrast, Online Analytical Processing (OLAP) systems, designed for complex queries and analysis of large datasets, employ [column databases](https://clickhouse.com/engineering-resources/what-is-columnar-database) like ClickHouse.
 
 ➡️ For more on OLAP and OLTP, see the [OLTP vs OLAP guide](https://clickhouse.com/engineering-resources/oltp-vs-olap).
 
 We can use [Change Data Capture](https://en.wikipedia.org/wiki/Change_data_capture) (CDC) to synchronize data between these systems, ensuring analytical databases remain current while not impacting operational performance.
 
-Beyond traditional databases, structured data has evolved to embrace modern storage needs. Open data formats like [Apache Parquet](https://clickhouse.com/engineering-resources/avro-vs-parquet#what-is-parquet) have become efficient solutions for storing structured data, particularly in big data environments. These formats optimize for analytical workloads by organizing data in columns rather than rows, enabling faster query performance and better compression. 
+Beyond traditional databases, structured data has evolved to embrace modern storage needs. Open data formats like [Apache Parquet](https://clickhouse.com/engineering-resources/avro-vs-parquet#what-is-parquet) have become efficient solutions for storing structured data, particularly in big data environments. These formats optimize for analytical workloads by organizing data in columns rather than rows, enabling faster query performance and better compression.
 
 Open table formats Apache Iceberg, Delta Lake, or Apache Hudi are becoming increasingly popular. These table formats manage collections of Parquet files and provide additional functionality, like ACID transactions, time travel (accessing historical versions), and the ability to efficiently handle updates and deletes across large datasets.
 
@@ -29,27 +29,27 @@ Open table formats Apache Iceberg, Delta Lake, or Apache Hudi are becoming incre
 
 Structured data appears in many everyday business operations and systems. Financial transactions form a perfect example, where each record must contain specific fields like transaction date, amount, account numbers, and transaction type. Customer records in a CRM system represent another typical case, with fixed fields for contact information and customer status. Product inventory systems track SKUs, names, prices, and stock levels, while employee records maintain consistent fields for IDs, names, departments, and salaries. Sales data, website user registrations, sensor readings, and point-of-sale transactions represent classic examples of structured data where every record follows the same precise format.
 
-Let's look at a sample sales data table to illustrate how structured data maintains consistent columns across all records. 
+Let's look at a sample sales data table to illustrate how structured data maintains consistent columns across all records.
 
-| sale_date  | product_id | product_name      | quantity | unit_price | total_amount |
-|------------|------------|-------------------|----------|------------|--------------|
-| 2024-01-15 | P001       | Gaming Monitor    | 2        | 299.99     | 599.98       |
-| 2024-01-15 | P002       | Wireless Mouse    | 5        | 49.99      | 249.95       |
-| 2024-01-16 | P001       | Gaming Monitor    | 1        | 299.99     | 299.99       |
-| 2024-01-16 | P003       | Mechanical Keyboard| 3        | 129.99     | 389.97       |
-| 2024-01-17 | P002       | Wireless Mouse    | 4        | 49.99      | 199.96       |
+| sale_date  | product_id | product_name        | quantity | unit_price | total_amount |
+| ---------- | ---------- | ------------------- | -------- | ---------- | ------------ |
+| 2024-01-15 | P001       | Gaming Monitor      | 2        | 299.99     | 599.98       |
+| 2024-01-15 | P002       | Wireless Mouse      | 5        | 49.99      | 249.95       |
+| 2024-01-16 | P001       | Gaming Monitor      | 1        | 299.99     | 299.99       |
+| 2024-01-16 | P003       | Mechanical Keyboard | 3        | 129.99     | 389.97       |
+| 2024-01-17 | P002       | Wireless Mouse      | 4        | 49.99      | 199.96       |
 
 In this example, every record follows the same structure with identical columns, making it easy to calculate total sales for each product, find the most popular items by quantity, analyze sales trends by date, and compare unit prices across products. The predictable nature of structured data makes it ideal for business operations that demand precise record-keeping and fast analysis.
 
 ## Unstructured data
 
-Unstructured data is information that doesn't follow a predefined data model or schema. It comes in various formats and cannot be easily organized in traditional databases.  Unlike structured data, which fits neatly into rows and columns, unstructured data comes in various formats and cannot be easily organized in traditional databases.  
+Unstructured data is information that doesn't follow a predefined data model or schema. It comes in various formats and cannot be easily organized in traditional databases. Unlike structured data, which fits neatly into rows and columns, unstructured data comes in various formats and cannot be easily organized in traditional databases.
 
 It's estimated that [approximately 90% of all data generated today falls into this category](https://blog.box.com/90-your-data-unstructured-and-its-full-untapped-value), making it a crucial consideration for modern data management.
 
 ### Examples of unstructured data
 
-Unstructured data sources are diverse and growing rapidly in our increasingly digital world. 
+Unstructured data sources are diverse and growing rapidly in our increasingly digital world.
 
 Human-generated unstructured data includes everyday communications like emails, text documents, and social media posts. These contain natural language text, often with informal writing styles, emoticons, and context-dependent meanings. Other forms include phone recordings, which capture voice conversations, text messages with their unique shorthand, and documents ranging from formal reports to casual notes.
 
@@ -63,7 +63,7 @@ Text processing represents one of the most common and well-developed areas of un
 
 The emergence of generative AI and large language models has further transformed how we work with unstructured text data. These models can understand and analyze text and generate human-like responses, summarize lengthy documents, translate between languages, and even assist in content creation. This capability has opened new possibilities for automated customer service, content moderation, and document analysis while also providing powerful tools for extracting structured information from unstructured text through techniques like zero-shot and few-shot learning. Organizations can now automatically generate metadata, create taxonomies, and classify content with unprecedented accuracy and scale.
 
-Visual and audio data present their unique processing challenges and opportunities. For images, modern AI approaches like [OpenAI's CLIP algorithm](https://openai.com/index/clip/) create embeddings that enable both image-to-image and text-to-image searching, effectively bridging the gap between visual and textual content. Image processing can also extract text through Optical Character Recognition (OCR), turning screenshots, scanned documents, and photos containing text into searchable content. 
+Visual and audio data present their unique processing challenges and opportunities. For images, modern AI approaches like [OpenAI's CLIP algorithm](https://openai.com/index/clip/) create embeddings that enable both image-to-image and text-to-image searching, effectively bridging the gap between visual and textual content. Image processing can also extract text through Optical Character Recognition (OCR), turning screenshots, scanned documents, and photos containing text into searchable content.
 
 Audio processing has similarly evolved, with models like [OpenAI's Whisper](https://openai.com/index/whisper/) converting speech to text with remarkable accuracy. This transcription can be enhanced with speaker diarization to identify who's speaking when in conversations. Voice analysis can detect emotional states and sentiment, particularly valuable for applications like call center analytics. Once converted to text, this audio content becomes amenable to all the text processing techniques described above, creating a rich set of structured data from initially unstructured sources.
 
@@ -97,7 +97,7 @@ Notice how each product has some common fields (id, name, category, price) but a
 
 ## Working with structured, unstructured, and semi-structured data in ClickHouse
 
-ClickHouse can handle each data type described in this guide, though it's best known for its exceptional performance with structured data. 
+ClickHouse can handle each data type described in this guide, though it's best known for its exceptional performance with structured data.
 
 ### ClickHouse and structured data
 
@@ -111,7 +111,7 @@ CREATE TABLE reddit
    subreddit LowCardinality(String),
    subreddit_id LowCardinality(String),
    subreddit_type Enum(
-    'public' = 1, 'restricted' = 2, 'user' = 3, 
+    'public' = 1, 'restricted' = 2, 'user' = 3,
     'archived' = 4, 'gold_restricted' = 5, 'private' = 6
    ),
    author LowCardinality(String),
@@ -128,7 +128,7 @@ CREATE TABLE reddit
    gilded UInt8,
    collapsed_because_crowd_control UInt8,
    collapsed_reason Enum(
-     '' = 0, 'comment score below threshold' = 1, 'may be sensitive content' = 2, 
+     '' = 0, 'comment score below threshold' = 1, 'may be sensitive content' = 2,
      'potentially toxic' = 3, 'potentially toxic content' = 4
   ),
    distinguished Enum('' = 0, 'moderator' = 1, 'admin' = 2, 'special' = 3),

@@ -1,11 +1,11 @@
-import * as Tooltip from '@radix-ui/react-tooltip'
-import Link from 'next/link'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import { Demo } from '@/types/demos'
 import { CUICard } from '../ClickUI'
 import Markdown from '../Markdown'
 import { StrapiImage } from '../StrapiElements'
 import { SuiTitle } from '../sui'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { Demo } from '@/types/demos'
+import * as Tooltip from '@radix-ui/react-tooltip'
+import Link from 'next/link'
 
 export default function DemoCard(demo: Demo) {
   const isValidGithubUrl = (url: string) => {

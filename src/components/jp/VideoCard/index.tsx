@@ -1,9 +1,9 @@
+import { CUICard } from '../../ClickUI'
+import fallbackTumbnail from './fallback.png'
+import { Video } from '@/types/videos'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { Video } from '@/types/videos'
-import { CUICard } from '../../ClickUI'
-import fallbackTumbnail from './fallback.png'
 
 export default function VideoCard({
   Slug,
@@ -52,7 +52,7 @@ export default function VideoCard({
             </div>
           </div>
 
-          <div className='p-6 font-basier text-xl font-medium leading-tight  text-neutral-100'>
+          <div className='p-6 font-basier text-xl font-medium leading-tight text-neutral-100'>
             {categories && (
               <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
                 {categories.map((cat) => cat.CategoryName).join(', ')}

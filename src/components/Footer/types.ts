@@ -1,8 +1,4 @@
-import {
-  LinkTarget,
-  StrapiImageType,
-  StrapiLink
-} from '@/lib/api/strapi/types'
+import { LinkTarget, StrapiImageType, StrapiLink } from '@/lib/api/strapi/types'
 
 export interface SubLevelFooterMenu {
   id: number

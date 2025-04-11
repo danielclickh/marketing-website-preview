@@ -1,11 +1,7 @@
-import type { InferGetStaticPropsType } from 'next'
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useState } from 'react'
 import CategorySelector from '@/components/CategorySelector'
 import GetStartedFree from '@/components/GetStartedFree'
-import IntegrationsClickPipesPromo from '@/components/IntegrationsClickPipesPromo'
 import IntegrationTile from '@/components/IntegrationTile'
+import IntegrationsClickPipesPromo from '@/components/IntegrationsClickPipesPromo'
 import Layout from '@/components/Layout'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import { fetchAll } from '@/lib/api/strapi'
@@ -18,6 +14,10 @@ import {
   IntegrationGroup,
   IntegrationsPageProps
 } from '@/types/integrations'
+import type { InferGetStaticPropsType } from 'next'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 export const categoryContentMap: Array<
   Pick<IntegrationGroup, 'key' | 'label' | 'description' | 'slug'>

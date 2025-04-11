@@ -1,6 +1,3 @@
-import { GetStaticProps } from 'next'
-import Head from 'next/head'
-import { useRef, useState } from 'react'
 import GrowingCommunity from '@/components/GrowingCommunity'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
@@ -8,6 +5,9 @@ import MarketoForm from '@/components/MarketoForm'
 import { findOne } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ContactProps } from '@/types/contact'
+import { GetStaticProps } from 'next'
+import Head from 'next/head'
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -63,7 +63,7 @@ export default function ContactPage({
               <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
                 Deal Registration
               </h1>
-              <div className=' text-neutral-200'>
+              <div className='text-neutral-200'>
                 Complete the form below to register your deal.
               </div>
             </div>

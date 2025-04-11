@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import Terminal from './index'
+import { useState } from 'react'
 
 function ClickhouseSyntax() {
   const [animationCompleted, setAnimationCompleted] = useState(false)

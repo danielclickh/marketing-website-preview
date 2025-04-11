@@ -1,15 +1,15 @@
 .terminalData {
-  @apply block whitespace-pre-wrap text-sm font-bold font-inconsolata w-full relative pl-4;
+  @apply relative block w-full whitespace-pre-wrap pl-4 font-inconsolata text-sm font-bold;
   p {
     @apply inline;
   }
 
   :global .line::before {
-    @apply absolute text-left text-slate-500 left-0;
-    content: "$";
+    @apply absolute left-0 text-left text-slate-500;
+    content: '$';
     width: 0.875rem;
   }
-  &[data-type="decimal"] {
+  &[data-type='decimal'] {
     @apply pl-[38px];
     counter-reset: line-numbering;
     :global .line::before {
@@ -21,17 +21,17 @@
 }
 
 .terminalHeader {
-  @apply py-3 px-4 text-primary-50 flex items-center gap-4 text-base font-bold rounded h-11;
-  &[data-terminal="false"] {
+  @apply flex h-11 items-center gap-4 rounded px-4 py-3 text-base font-bold text-primary-50;
+  &[data-terminal='false'] {
     @apply relative px-6;
     background: #171804;
     &::before {
-      content: "";
-      background-image: url("/noise.png");
-      @apply bg-cover absolute inset-0 opacity-5;
+      content: '';
+      background-image: url('/noise.png');
+      @apply absolute inset-0 bg-cover opacity-5;
     }
   }
-  &[data-controls="false"] {
+  &[data-controls='false'] {
     @apply px-4;
   }
 }

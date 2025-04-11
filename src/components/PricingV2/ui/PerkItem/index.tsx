@@ -1,9 +1,9 @@
+import { MarkdownMemoized } from '../../../Markdown'
+import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
+import { PricingV2ComponentPerk } from '@/lib/api/strapi/types'
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'
 import React from 'react'
-import { PricingV2ComponentPerk } from '@/lib/api/strapi/types'
-import { MarkdownMemoized } from '../../../Markdown'
-import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 
 const perkIcons: Record<
   PricingV2ComponentPerk['icon'],

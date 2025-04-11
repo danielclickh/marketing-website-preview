@@ -1,5 +1,3 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
 import CareersFilter from '@/components/CareersFilter'
 import CompanyImages from '@/components/CompanyImages'
 import FollowUs from '@/components/FollowUs'
@@ -9,6 +7,8 @@ import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CareersData } from '@/types/careers'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
 
 const careerImgs = [
   { id: 2, url: '/images/careers/Meeting.png', alt: 'Meeting' },

@@ -1,12 +1,12 @@
+import Markdown from '../Markdown'
+import { SuiTitle } from '../sui'
+import Diagram from './Diagram'
+import accordionItems from './accordion-items.json'
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 import * as Accordion from '@radix-ui/react-accordion'
 import classNames from 'classnames'
 import Image from 'next/image'
 import { forwardRef, useRef, useState } from 'react'
-import Markdown from '../Markdown'
-import { SuiTitle } from '../sui'
-import accordionItems from './accordion-items.json'
-import Diagram from './Diagram'
 
 const AccordionComponent = () => {
   const [activeItem, setActiveItem] = useState('item-0')
@@ -95,7 +95,7 @@ const AccordionTrigger = forwardRef<
   <Accordion.Header className='flex'>
     <Accordion.Trigger
       className={classNames(
-        'group z-20 my-2 flex flex-1 items-center justify-between rounded-sm border border-jet bg-[rgb(26,26,26)]/80 p-4 text-base font-[500] leading-none outline-none hover:cursor-pointer hover:bg-neutral-750 hover:bg-opacity-40 data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:bg-neutral-750  data-[state=open]:pb-2 xl:pr-6',
+        'group z-20 my-2 flex flex-1 items-center justify-between rounded-sm border border-jet bg-[rgb(26,26,26)]/80 p-4 text-base font-[500] leading-none outline-none hover:cursor-pointer hover:bg-neutral-750 hover:bg-opacity-40 data-[state=open]:rounded-b-none data-[state=open]:border-b-0 data-[state=open]:bg-neutral-750 data-[state=open]:pb-2 xl:pr-6',
         className
       )}
       {...props}

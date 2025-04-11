@@ -1,7 +1,7 @@
+import { Galaxy } from '@/lib/galaxy/web/browser'
 import { Experiment, Result } from '@growthbook/growthbook'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { Galaxy } from '@/lib/galaxy/web/browser'
 
 type UTMs = {
   [key: string]: string

@@ -2,11 +2,10 @@
   @apply flex gap-5;
 
   button {
-    @apply transition-all  text-sm font-medium rounded-[4px] border border-neutral-700  hover:bg-neutral-725 hover:bg-opacity-80 hover:border-primary-500 hover:shadow-xl bg-neutral-750 px-4 py-2 ;
+    @apply rounded-[4px] border border-neutral-700 bg-neutral-750 px-4 py-2 text-sm font-medium transition-all hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl;
 
     &.selected {
-     @apply border-primary-300 border;
+      @apply border border-primary-300;
     }
   }
 }
-

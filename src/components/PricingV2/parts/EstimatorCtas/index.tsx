@@ -1,8 +1,8 @@
+import { CUIButton } from '../../../ClickUI'
+import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { ShareIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
-import { CUIButton } from '../../../ClickUI'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 
 export default function EstimatorCtas() {
   const router = useRouter()

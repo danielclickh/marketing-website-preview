@@ -1,6 +1,6 @@
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import LinkWithArrow from '../../LinkWithArrow'
 import { NavigationLink } from '../parts'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 
 export default function NavigationSubNavUseCases() {
   return (

@@ -1,12 +1,12 @@
-import { CheckCircleIcon } from '@heroicons/react/outline'
-import Image from 'next/image'
-import { useState } from 'react'
-import { submitWorkatoForm } from '@/lib/api/workato'
-import { validateEmail } from '@/lib/form'
 import CopyUrlButton from '../CopyUrlButton'
 import SocialButton from '../SocialButton'
 import { SuiButton, SuiPanel, SuiTextField, useSnackbar } from '../sui/client'
 import { EventsFormProps } from './types'
+import { submitWorkatoForm } from '@/lib/api/workato'
+import { validateEmail } from '@/lib/form'
+import { CheckCircleIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
+import { useState } from 'react'
 
 function EventsForm({
   submitted,

@@ -1,5 +1,5 @@
-import { StrapiButton, StrapiImageType } from '@/lib/api/strapi/types'
 import { CommonProps } from './homepage'
+import { StrapiButton, StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface ServiceProps extends CommonProps {
   title: string

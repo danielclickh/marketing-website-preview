@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { NavigationLink } from '../parts'
 import NavigationChevron from '../parts/NavigationChevron'
 import NavigationSubNav from '../parts/NavigationSubNav'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { useState } from 'react'
 
 const SUBNAV_CLOSE_DELAY = 250
 

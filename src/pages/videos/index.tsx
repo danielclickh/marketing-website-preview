@@ -1,17 +1,17 @@
-import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useDebounce } from '../../hooks'
+import { fetchVideos } from '../api/videos'
 import CategorySelector from '@/components/CategorySelector'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import Pagination from '@/components/Pagination'
-import { SuiSearchField, SuiTitle } from '@/components/sui'
 import VideoCard from '@/components/VideoCard'
-import { useDebounce } from '../../hooks'
+import { SuiSearchField, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { VideosApiResponse, VideosPageProps } from '@/types/videos'
-import { fetchVideos } from '../api/videos'
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<VideosPageProps> =
   async function getServerSideProps(context) {

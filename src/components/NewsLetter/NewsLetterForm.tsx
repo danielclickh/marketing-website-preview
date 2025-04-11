@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
 import MarketoForm from '../MarketoForm'
+import { useRef, useState } from 'react'
 
 function NewsLetterForm() {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)

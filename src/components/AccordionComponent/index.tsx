@@ -1,10 +1,10 @@
+import { SuiTitle } from '../sui'
+import styles from './styles.module.scss'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 import { Disclosure, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { CSSProperties } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { StrapiImageType } from '@/lib/api/strapi/types'
-import { SuiTitle } from '../sui'
-import styles from './styles.module.scss'
 
 const style = {
   '--top-side': '224px'

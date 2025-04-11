@@ -1,6 +1,6 @@
+import { slugify } from '@/lib/utils/strings'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { slugify } from '@/lib/utils/strings'
 
 export const config = {
   matcher: [

@@ -1,7 +1,7 @@
+import logoFull from '../../../public/logo-full.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef } from 'react'
-import logoFull from '../../../public/logo-full.svg'
 
 export interface OpenHouseHeaderProps {
   children?: React.ReactNode
@@ -66,10 +66,10 @@ export default function OpenHouseHeader({ children }: OpenHouseHeaderProps) {
     <header className='fixed top-0 z-50 w-full'>
       <div
         ref={headerBackgroundRef}
-        className='absolute inset-0 z-0 border-b border-transparent duration-300 transition bg-black bg-opacity-25'
+        className='absolute inset-0 z-0 border-b border-transparent bg-black bg-opacity-25 transition duration-300'
       />
-      <div className='max-w-6xl mx-auto px-6 lg:px-12 py-4 relative z-10'>
-        <div className='h-10 flex items-center justify-between'>
+      <div className='relative z-10 mx-auto max-w-6xl px-6 py-4 lg:px-12'>
+        <div className='flex h-10 items-center justify-between'>
           <Link href='/public' prefetch={false}>
             <Image
               src={logoFull}

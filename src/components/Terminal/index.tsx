@@ -1,5 +1,5 @@
-import { HTMLAttributes } from 'react'
 import styles from './styles.module.scss'
+import { HTMLAttributes } from 'react'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   type: 'decimal' | 'terminal'

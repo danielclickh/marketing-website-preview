@@ -1,6 +1,6 @@
+import { LinkProps } from '../Link/types'
 import { ReactNode } from 'react'
 import { ReactElement } from 'react-markdown/lib/react-markdown'
-import { LinkProps } from '../Link/types'
 
 export interface ButtonProps extends Partial<LinkProps> {
   size?: 'lg' | 'sm'

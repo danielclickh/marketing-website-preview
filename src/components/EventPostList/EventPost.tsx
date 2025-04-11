@@ -1,9 +1,9 @@
-import { CalendarIcon } from '@heroicons/react/outline'
-import Link from 'next/link'
-import { convertDateToString } from '@/lib/utils/dateUtils'
-import { EventType } from '@/types/events'
 import { CUICard } from '../ClickUI'
 import { StrapiImage } from '../StrapiElements'
+import { convertDateToString } from '@/lib/utils/dateUtils'
+import { EventType } from '@/types/events'
+import { CalendarIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
 
 export default function EventPost({
   thumbnailPng,
@@ -47,7 +47,7 @@ export default function EventPost({
               {category !== 'On-Demand Webinar' && (
                 <>
                   <CalendarIcon className='h-6 w-6 stroke-1 text-neutral-200' />
-                  <div className=' text-neutral-200'>
+                  <div className='text-neutral-200'>
                     {localDatetime && (
                       <div className='text-sm text-neutral-300'>
                         {convertDateToString(localDatetime)}
@@ -76,7 +76,7 @@ export default function EventPost({
                   d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
                 />
               </svg>
-              <div className=' text-neutral-200'>
+              <div className='text-neutral-200'>
                 {location && (
                   <div className='text-sm text-neutral-300'>
                     <span>

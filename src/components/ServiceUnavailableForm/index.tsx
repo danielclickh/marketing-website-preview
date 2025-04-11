@@ -1,7 +1,7 @@
-import { ChangeEvent, ReactNode, useState } from 'react'
+import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'
 import { submitWorkatoForm } from '@/lib/api/workato'
 import { validateEmail } from '@/lib/form'
-import { SuiButton, SuiTextField, useSnackbar } from '../sui/client'
+import { ChangeEvent, ReactNode, useState } from 'react'
 
 type StatusType = {
   loading: boolean

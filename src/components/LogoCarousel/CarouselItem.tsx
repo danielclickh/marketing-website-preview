@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { StrapiImage } from '../StrapiElements'
+import Link from 'next/link'
 
 interface LogoCarouselItemProps {
   index: number

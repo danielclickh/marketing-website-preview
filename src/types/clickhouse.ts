@@ -1,9 +1,9 @@
+import { CommonProps, Feature } from './homepage'
 import {
   StrapiButton,
   StrapiIconButton,
   StrapiImageType
 } from '@/lib/api/strapi/types'
-import { CommonProps, Feature } from './homepage'
 
 export interface ClickhouseHero {
   title: string

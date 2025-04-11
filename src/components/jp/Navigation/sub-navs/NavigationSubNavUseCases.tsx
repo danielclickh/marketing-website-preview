@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import LinkWithArrow from '../../../LinkWithArrow'
 import { NavigationLink, NavigationQuote, NavigationQuoteProps } from '../parts'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { useState } from 'react'
 
 export default function NavigationSubNavUseCases() {
   type UseCaseQuote = Omit<NavigationQuoteProps, 'link'>

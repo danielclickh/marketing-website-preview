@@ -1,6 +1,3 @@
-import Image, { ImageProps } from 'next/image'
-import Link, { LinkProps } from 'next/link'
-import React from 'react'
 import { CUICard } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
 import book from './assets/book.svg'
@@ -13,6 +10,9 @@ import maximize from './assets/maximize.svg'
 import peerdb from './assets/peerdb.svg'
 import sparkles from './assets/sparkles.svg'
 import tada from './assets/tada.svg'
+import Image, { ImageProps } from 'next/image'
+import Link, { LinkProps } from 'next/link'
+import React from 'react'
 
 const icons = {
   guage,

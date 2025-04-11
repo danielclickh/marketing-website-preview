@@ -1,7 +1,7 @@
-import { Listbox } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
 import { usePricing } from './PricingContext'
 import { RegionPricingWithIcon } from './types'
+import { Listbox } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
 
 type OnChangeCallback = (value: RegionPricingWithIcon) => void
 
@@ -25,7 +25,7 @@ function PricingSelector({
   return (
     <Listbox value={selectedRegion} onChange={listValueChange}>
       <div className='relative'>
-        <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-750 py-2 pl-3 pr-10 text-left shadow-input hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl  focus:outline-none data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
+        <Listbox.Button className='relative w-full cursor-default rounded-[4px] border border-neutral-700 bg-neutral-750 py-2 pl-3 pr-10 text-left shadow-input hover:cursor-pointer hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl focus:outline-none data-[headlessui-state=open]:rounded-b-none data-[headlessui-state=open]:border-primary-300 sm:text-sm'>
           <span className='flex gap-3 truncate'>
             <>
               {selectedRegion?.regionFlagPNG}

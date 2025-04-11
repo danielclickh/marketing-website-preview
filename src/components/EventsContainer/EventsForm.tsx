@@ -1,15 +1,15 @@
-import { CheckCircleIcon } from '@heroicons/react/outline'
-import Image from 'next/image'
-import { useRef, useState } from 'react'
 import { CUICard } from '../ClickUI'
 import CopyUrlButton from '../CopyUrlButton'
 import Markdown from '../Markdown'
 import MarketoForm from '../MarketoForm'
 import SocialButton from '../SocialButton'
 import StripeBuyButton from '../StripeBuyButton'
-import { SuiPanel } from '../sui/client'
 import VideoPlayerCustom from '../VideoPlayerCustom'
+import { SuiPanel } from '../sui/client'
 import { EventsFormProps } from './types'
+import { CheckCircleIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
+import { useRef, useState } from 'react'
 
 function EventsForm({
   featuredImage,
@@ -92,7 +92,7 @@ function EventsForm({
                 </p>
               )}
               {form?.stripeBuyButtonId && (
-                <div className={!form?.SuccessMessage ? 'mt-4 mb-10' : 'my-10'}>
+                <div className={!form?.SuccessMessage ? 'mb-10 mt-4' : 'my-10'}>
                   <CUICard>
                     <CUICard.Body className='p-4'>
                       <StripeBuyButton id={form.stripeBuyButtonId} />

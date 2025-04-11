@@ -1,10 +1,10 @@
-import _fetch from 'cross-fetch'
-import { stringify } from 'qs'
 import {
   PricingV2EntryCompute,
   PricingV2EntryPlan,
   PricingV2EntryProvider
 } from './types'
+import _fetch from 'cross-fetch'
+import { stringify } from 'qs'
 
 export function fetch(uri: string, init: any = {}) {
   if (process?.env?.STRAPI_API_KEY) {
@@ -233,7 +233,7 @@ export async function getPricingV2Computes() {
   })) as Array<PricingV2EntryCompute>
 }
 
-export async function findImageDetails(imageUrl: string, ) {
+export async function findImageDetails(imageUrl: string) {
   const pathName = 'upload/files'
   const newParamString = stringify(
     {
@@ -246,7 +246,7 @@ export async function findImageDetails(imageUrl: string, ) {
   const response = await fetch(
     `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
   )
-  const data  = await response.json()
+  const data = await response.json()
   const imageDetails = data.length > 0 ? data[0] : null
   return imageDetails
 }

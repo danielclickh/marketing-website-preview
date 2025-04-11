@@ -1,7 +1,7 @@
+import { StrapiImage } from '../StrapiElements'
+import { CloudProviderType } from '@/types/pricing'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { CloudProviderType } from '@/types/pricing'
-import { StrapiImage } from '../StrapiElements'
 
 function CloudProviders({
   cloudProviders
@@ -24,11 +24,11 @@ function CloudProviders({
                   (index === 0 && path !== '/cloud')
                     ? 'hover:bg-neutral-800'
                     : ''
-                }  ${
+                } ${
                   path === '/cloud'
                     ? ''
-                    : 'grid h-16 place-items-center rounded border border-neutral-700/80  bg-neutral-900 '
-                }  `}>
+                    : 'grid h-16 place-items-center rounded border border-neutral-700/80 bg-neutral-900'
+                } `}>
                 {darkIconPng.name === 'logo_aws_dark.svg' ? (
                   <Link href='/pricing?provider=aws'>
                     <StrapiImage
@@ -52,7 +52,7 @@ function CloudProviders({
                     <StrapiImage
                       key={`${cloudProvider.title}-${index}`}
                       {...darkIconPng}
-                      className={'h-10 w-auto '}
+                      className={'h-10 w-auto'}
                     />
                   </Link>
                 )}

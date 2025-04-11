@@ -1,16 +1,7 @@
-import { CirclePlay } from 'lucide-react'
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/router'
-import { PrimeReactProvider } from 'primereact/api'
-import { MultiSelect } from 'primereact/multiselect'
-import { useEffect, useRef, useState } from 'react'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
-import { SuiSearchField, SuiTitle } from '@/components/sui'
 import ClearFilterButton from '@/components/UserStories/ClearFilterButton'
+import { SuiSearchField, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -21,6 +12,15 @@ import {
   UseCaseVertical,
   UserStoriesPage
 } from '@/types/userStories'
+import { CirclePlay } from 'lucide-react'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { PrimeReactProvider } from 'primereact/api'
+import { MultiSelect } from 'primereact/multiselect'
+import { useEffect, useRef, useState } from 'react'
 
 interface MousePosition {
   x: number

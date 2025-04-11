@@ -40,7 +40,7 @@ export default function ReadingProgress({
 
   return (
     <ProgressBar
-      className='top-100 z-[1] fixed h-1'
+      className='top-100 fixed z-[1] h-1'
       type='small'
       dir='start'
       progress={readingProgress}

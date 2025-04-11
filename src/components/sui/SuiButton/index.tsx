@@ -105,16 +105,15 @@ export default function SuiButton({
       <>
         <button
           disabled={disabled}
-          className={`${hoverEffects}
-          ${sizeCalculator(props.size)}
-          ${
+          className={`${hoverEffects} ${sizeCalculator(props.size)} ${
             weight ? `font-${weight}` : 'font-semibold'
-          } whitespace-nowrap rounded-lg text-center duration-300
-           ${colorCalculator({
-             color: type,
-             disabled: disabled ?? false,
-             textColor: props.color
-           })} ${props.className ?? ''}`}
+          } whitespace-nowrap rounded-lg text-center duration-300 ${colorCalculator(
+            {
+              color: type,
+              disabled: disabled ?? false,
+              textColor: props.color
+            }
+          )} ${props.className ?? ''}`}
           onClick={() => {
             props.onClick && props.onClick()
           }}>

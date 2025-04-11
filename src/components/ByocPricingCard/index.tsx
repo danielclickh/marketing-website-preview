@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import { CUIButton, CUICard } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
 import illustration from './illustration.svg'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function ByocPricingCard() {
   return (

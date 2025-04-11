@@ -1,15 +1,15 @@
-import { throttle } from 'lodash'
-import { useRouter } from 'next/router'
-import { ParsedUrlQuery } from 'querystring'
-import { useCallback } from 'react'
+import PricingV2ContextProvider, { Values } from '../PricingV2ContextProvider'
+import Estimator from './parts/Estimator'
+import Table from './parts/Table'
 import {
   PricingV2EntryCompute,
   PricingV2EntryPlan,
   PricingV2EntryProvider
 } from '@/lib/api/strapi/types'
-import PricingV2ContextProvider, { Values } from '../PricingV2ContextProvider'
-import Estimator from './parts/Estimator'
-import Table from './parts/Table'
+import { throttle } from 'lodash'
+import { useRouter } from 'next/router'
+import { ParsedUrlQuery } from 'querystring'
+import { useCallback } from 'react'
 
 export interface PricingV2Props {
   plans: Array<PricingV2EntryPlan>

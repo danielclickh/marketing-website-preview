@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
-import useClickOutside from '@/hooks/useClickOutside'
 import NavigationChevron from './NavigationChevron'
 import NavigationLink, { NavigationLinkProps } from './NavigationLink'
+import useClickOutside from '@/hooks/useClickOutside'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface NavigationItemBaseProps
   extends Omit<

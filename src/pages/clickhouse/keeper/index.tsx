@@ -1,14 +1,14 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
+import features from './features.json'
+import replacements from './replacements.json'
 import GetStarted from '@/components/GetStarted'
 import Layout from '@/components/Layout'
 import { SuiText } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { KeeperData } from '@/types/keeper'
-import features from './features.json'
-import replacements from './replacements.json'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<KeeperData> =
   async function getStaticProps() {
@@ -94,7 +94,7 @@ export default function KeeperPage({
                     loading='eager'
                     width={672}
                     height={486}
-                    className=' h-auto w-full'
+                    className='h-auto w-full'
                     priority={true}
                   />
                 </div>
@@ -103,8 +103,8 @@ export default function KeeperPage({
           </div>
         </div>
 
-        <div className='bg-neutral-700 px-4 pb-24 pt-16 text-neutral-0 sm:px-8 md:px-8  2xl:px-0'>
-          <div className='container mx-auto flex max-w-5xl flex-col '>
+        <div className='bg-neutral-700 px-4 pb-24 pt-16 text-neutral-0 sm:px-8 md:px-8 2xl:px-0'>
+          <div className='container mx-auto flex max-w-5xl flex-col'>
             <Image
               src='/images/coordination-icon.svg'
               width={72}
@@ -136,8 +136,8 @@ export default function KeeperPage({
           </div>
         </div>
 
-        <div className='bg-neutral-750 px-4 pb-24 pt-16 text-neutral-0 sm:px-8 md:px-8  2xl:px-0'>
-          <div className='container mx-auto flex max-w-5xl flex-col '>
+        <div className='bg-neutral-750 px-4 pb-24 pt-16 text-neutral-0 sm:px-8 md:px-8 2xl:px-0'>
+          <div className='container mx-auto flex max-w-5xl flex-col'>
             <Image
               src='/images/question-icon.svg'
               width={72}
@@ -181,7 +181,7 @@ export default function KeeperPage({
                   <h2 className='mb-6 text-center font-basier text-2xl font-semibold'>
                     When to use ClickHouse Keeper?
                   </h2>
-                  <ul className='ml-10 flex list-disc flex-col gap-y-3 '>
+                  <ul className='ml-10 flex list-disc flex-col gap-y-3'>
                     <li>Most of your request are writes</li>
                     <li>Efficient memory utilization matters</li>
                     <li>Your project isn’t part of the Java ecosystem</li>
@@ -199,7 +199,7 @@ export default function KeeperPage({
                   <h2 className='mb-6 text-center font-basier text-2xl font-semibold'>
                     When NOT to use ClickHouse Keeper?
                   </h2>
-                  <ul className='ml-10 flex list-disc flex-col gap-y-3 '>
+                  <ul className='ml-10 flex list-disc flex-col gap-y-3'>
                     <li>Most of your request are reads</li>
                     <li>You require scalability with a read-heavy workload</li>
                     <li>Java-based components are important to you</li>
@@ -210,8 +210,8 @@ export default function KeeperPage({
           </div>
         </div>
         <div className='bg-neutral-750'>
-          <div className=' clip-inverted-triangle'>
-            <div className='section-container mx-auto max-w-5xl lg:mt-0 '>
+          <div className='clip-inverted-triangle'>
+            <div className='section-container mx-auto max-w-5xl lg:mt-0'>
               <div className='relative flex flex-col rounded-lg border-t-4 border-neutral-700/80 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
                 <div className='p-16'>
                   <Image

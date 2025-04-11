@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next'
 import DemoCard from '@/components/DemoCard'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
@@ -9,6 +8,7 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { Demo } from '@/types/demos'
 import { CommonProps } from '@/types/homepage'
+import { GetServerSideProps } from 'next'
 
 interface DemosPageProps extends CommonProps {
   title: null | string

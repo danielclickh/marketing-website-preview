@@ -1,7 +1,7 @@
-import { Tab } from '@headlessui/react'
-import { ReactElement } from 'react'
 import { SuiText } from '../typography'
 import { colorCalculator } from '../typography/calculator'
+import { Tab } from '@headlessui/react'
+import { ReactElement } from 'react'
 
 type TabProps = {
   color?: string | undefined

@@ -1,3 +1,6 @@
+import Chart from './charts'
+import copyGridElements from './copy/copyGridElements'
+import { ChartConfig, ChartType, QueryResults } from './types'
 import {
   CellProps,
   createToast,
@@ -9,9 +12,6 @@ import {
 } from '@clickhouse/click-ui'
 import Image from 'next/image'
 import { useCallback, useRef, useMemo, useState } from 'react'
-import Chart from './charts'
-import copyGridElements from './copy/copyGridElements'
-import { ChartConfig, ChartType, QueryResults } from './types'
 
 export enum DefaultView {
   Chart = 'chart',
@@ -41,7 +41,7 @@ const Loading: React.FC<LoadingProps> = ({
   className = ''
 }) => {
   return (
-    <div className={`flex justify-center h-full ${className}`}>
+    <div className={`flex h-full justify-center ${className}`}>
       <div className={`flex gap-4 items-${position}`}>
         <Image src='/loading.svg' width={36} height={36} alt='loading-icon' />
         <span>Loading</span>
@@ -77,40 +77,47 @@ export function getValueOfCell(
 }
 
 interface SelectedCell {
-  row: number,
+  row: number
   column: number
 }
 
 function CodeResults(props: ResultsProps) {
-  const [selectedCell, setSelectedCell] = useState<SelectedCell>({ row: 1, column: 0 });
+  const [selectedCell, setSelectedCell] = useState<SelectedCell>({
+    row: 1,
+    column: 0
+  })
   const response = props.results?.response
   const error = props.results?.error
   const gridRef = useRef<HTMLDivElement | null>(null)
 
   const isNumeric = (columnType: string) => {
-    return columnType.startsWith('UInt') || columnType.startsWith('Int') || columnType.startsWith('Float') || columnType.startsWith('Decimal');
+    return (
+      columnType.startsWith('UInt') ||
+      columnType.startsWith('Int') ||
+      columnType.startsWith('Float') ||
+      columnType.startsWith('Decimal')
+    )
   }
 
   const isHyperlink = (value: string | null) => {
-    return value && value.startsWith('http');
+    return value && value.startsWith('http')
   }
 
   const extreme = useMemo(() => {
-    if (!response) return {};
-    let res: Record<string, { max: number; min: number }> = {};
+    if (!response) return {}
+    let res: Record<string, { max: number; min: number }> = {}
     for (let i = 0; i < response.meta.length; i++) {
-      const columnType = response.meta[i].type;
-      const columnName = response.meta[i].name;
+      const columnType = response.meta[i].type
+      const columnName = response.meta[i].name
       if (isNumeric(columnType)) {
-        const values = response.data.map(item => item[columnName]);
-        const max = Math.max(...values);
-        const min = Math.min(...values);
-        res[columnName] = { max, min };
+        const values = response.data.map((item) => item[columnName])
+        const max = Math.max(...values)
+        const min = Math.min(...values)
+        res[columnName] = { max, min }
       }
     }
-    return res;
-  }, [response]);
-
+    return res
+  }, [response])
 
   const cellValue = useCallback(
     (rowIndex: number, columnIndex: number): string | null => {
@@ -140,7 +147,7 @@ function CodeResults(props: ResultsProps) {
           Number(cell.dataset.gridRow),
           Number(cell.dataset.gridColumn)
         )
-        isHyperlink(value) && window.open(value || '', '_blank') 
+        isHyperlink(value) && window.open(value || '', '_blank')
         // props.handleCellClick(value)
       }
     }
@@ -160,7 +167,7 @@ function CodeResults(props: ResultsProps) {
       return (
         <Tooltip>
           <Tooltip.Trigger data-scrolling={isScrolling} {...props}>
-            <span className='max-w-full overflow-hidden whitespace-nowrap text-ellipsis'>
+            <span className='max-w-full overflow-hidden text-ellipsis whitespace-nowrap'>
               {response?.meta?.at(columnIndex)?.name}
             </span>
           </Tooltip.Trigger>
@@ -172,38 +179,51 @@ function CodeResults(props: ResultsProps) {
       )
     }
 
-    const textAlign = columnType && isNumeric(columnType) ? "right" : "left";
-    const value = cellValue(rowIndex, columnIndex);
+    const textAlign = columnType && isNumeric(columnType) ? 'right' : 'left'
+    const value = cellValue(rowIndex, columnIndex)
 
     if (isNumeric(columnType) && response && response.data.length > 1) {
-      const ratio = value ? 100 * Number(value) / Number(extreme[columnName].max) : 100;
-      const bgColor = rowIndex === selectedCell.row? "lch(15.8 0 0)" : "#1f201b";
+      const ratio = value
+        ? (100 * Number(value)) / Number(extreme[columnName].max)
+        : 100
+      const bgColor =
+        rowIndex === selectedCell.row ? 'lch(15.8 0 0)' : '#1f201b'
       const background = `linear-gradient(to right, #35372f 0%, #35372f ${ratio}%, ${bgColor} ${ratio}%, ${bgColor} 100%)`
-      return (<span
-        style={{
-          textAlign: textAlign,
-          display: "inline-block",
-          width: "100%",
-          background: background,
-          backgroundSize: "100% 50%",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-
-        }}
-        data-scrolling={isScrolling}
-        {...props}
-      >
-        {getValueOfCell(cellValue(rowIndex, columnIndex), false, width)}
-      </span>)
+      return (
+        <span
+          style={{
+            textAlign: textAlign,
+            display: 'inline-block',
+            width: '100%',
+            background: background,
+            backgroundSize: '100% 50%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+          data-scrolling={isScrolling}
+          {...props}>
+          {getValueOfCell(cellValue(rowIndex, columnIndex), false, width)}
+        </span>
+      )
     } else if (isHyperlink(value)) {
       return (
-        <span style={{ textAlign: textAlign, textDecoration: "underline", cursor: "pointer"}} data-scrolling={isScrolling} {...props}>
+        <span
+          style={{
+            textAlign: textAlign,
+            textDecoration: 'underline',
+            cursor: 'pointer'
+          }}
+          data-scrolling={isScrolling}
+          {...props}>
           {getValueOfCell(cellValue(rowIndex, columnIndex), false, width)}
         </span>
       )
     } else {
       return (
-        <span style={{ textAlign: textAlign }} data-scrolling={isScrolling} {...props}>
+        <span
+          style={{ textAlign: textAlign }}
+          data-scrolling={isScrolling}
+          {...props}>
           {getValueOfCell(cellValue(rowIndex, columnIndex), false, width)}
         </span>
       )
@@ -286,7 +306,7 @@ function CodeResults(props: ResultsProps) {
 
   if (props.queryRunning) {
     return (
-      <div className='h-[300px] w-full m-1'>
+      <div className='m-1 h-[300px] w-full'>
         <Loading position={Position.Center} />
       </div>
     )
@@ -323,13 +343,13 @@ function CodeResults(props: ResultsProps) {
       {error ? (
         <div className='flex'>
           <Icon
-            className='w-[30px] h-[30px] my-auto mx-1'
+            className='mx-1 my-auto h-[30px] w-[30px]'
             width='30px'
             height='30px'
             name='warning'
             size='md'
             state='danger'></Icon>
-          <p className='mx-1 text-sm text-red-400 text-wrap'>
+          <p className='mx-1 text-wrap text-sm text-red-400'>
             An error occurred while processing your request. Please check the
             browser console for more details.
           </p>

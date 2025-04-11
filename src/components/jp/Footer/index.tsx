@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import logoFull from '../../../../public/logo-full.svg'
 import NewsLetterForm from '../../NewsLetter/NewsLetterForm'
 import topLevelFooterMenu from './footer.json'
 import { FooterData } from './types'
-
 import { FullyQualifiedEvent } from '@/lib/galaxy/client'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import Image from 'next/image'
 
 export default function Footer({
   newsletterForm,
@@ -58,7 +57,7 @@ export default function Footer({
             width='135'
             height='40'
             alt='ClickHouse logo'
-            className=' mb-4 mr-3'
+            className='mb-4 mr-3'
           />
           <div className='mb-4 text-sm text-neutral-400'>
             {newsletterForm?.description}

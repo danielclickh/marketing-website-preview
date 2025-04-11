@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { CUIButton } from '../ClickUI'
 import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import Amazonsimple from './logos/Amazonsimple'
@@ -11,6 +9,8 @@ import KinesisAmazon from './logos/KinesisAmazon'
 import Managedkafka from './logos/Managedkafka'
 import Redpanda from './logos/Redpanda'
 import Warpstream from './logos/Warpstream'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import Image from 'next/image'
 
 export default function IntegrationsClickPipesPromo() {
   const handleGalaxyClick = useGalaxyOnClick(
@@ -38,35 +38,35 @@ export default function IntegrationsClickPipesPromo() {
             </CUIButton>
           </div>
           <div className='grid grid-cols-6 gap-3 sm:gap-6 lg:gap-3 xl:gap-6'>
-            <Amazonsimple className='w-full h-auto max-w-12' />
-            <KinesisAmazon className='w-full h-auto max-w-12' />
-            <Managedkafka className='w-full h-auto max-w-12' />
-            <ConfluentCloud className='w-full h-auto max-w-12' />
-            <Googlestorage className='w-full h-auto max-w-12' />
+            <Amazonsimple className='h-auto w-full max-w-12' />
+            <KinesisAmazon className='h-auto w-full max-w-12' />
+            <Managedkafka className='h-auto w-full max-w-12' />
+            <ConfluentCloud className='h-auto w-full max-w-12' />
+            <Googlestorage className='h-auto w-full max-w-12' />
             <Image
               src='/images/cloud/integrations/mysql.svg'
               alt='MySQL'
               width={64}
               height={64}
-              className='w-full h-auto max-w-12'
+              className='h-auto w-full max-w-12'
             />
             <Image
               src='/images/cloud/integrations/postgres.svg'
               alt='Postgres'
               width={64}
               height={64}
-              className='w-full h-auto max-w-12'
+              className='h-auto w-full max-w-12'
             />
-            <Kafka className='w-full h-auto max-w-12' />
-            <Azureeventhub className='w-full h-auto max-w-12' />
-            <Redpanda className='w-full h-auto max-w-12' />
-            <Warpstream className='w-full h-auto max-w-12' />
+            <Kafka className='h-auto w-full max-w-12' />
+            <Azureeventhub className='h-auto w-full max-w-12' />
+            <Redpanda className='h-auto w-full max-w-12' />
+            <Warpstream className='h-auto w-full max-w-12' />
             <Image
               src='/images/cloud/integrations/digitalocean.svg'
               alt='DigitalOcean'
               width={64}
               height={64}
-              className='w-full h-auto max-w-12'
+              className='h-auto w-full max-w-12'
             />
           </div>
         </div>

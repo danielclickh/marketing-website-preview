@@ -1,9 +1,9 @@
-import { CheckIcon } from '@heroicons/react/solid'
-import React, { useCallback, useMemo } from 'react'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Radios from '../../ui/Radios'
 import Select, { Option } from '../../ui/Select'
+import { CheckIcon } from '@heroicons/react/solid'
+import React, { useCallback, useMemo } from 'react'
 
 export default function StorageSelector() {
   const {

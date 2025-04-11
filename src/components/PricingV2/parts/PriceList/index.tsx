@@ -1,8 +1,8 @@
-import { CheckIcon, XIcon } from '@heroicons/react/solid'
 import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
 import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
+import { CheckIcon, XIcon } from '@heroicons/react/solid'
 
 export default function PriceList() {
   const {

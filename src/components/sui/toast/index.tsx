@@ -1,3 +1,4 @@
+import { SuiText } from '../typography'
 import { CheckIcon, ExclamationIcon } from '@heroicons/react/outline'
 import {
   createContext,
@@ -7,7 +8,6 @@ import {
   useRef,
   useState
 } from 'react'
-import { SuiText } from '../typography'
 
 export const SnackbarContext = createContext({
   openSnackBar: (message: string, type?: 'success' | 'error') => {}

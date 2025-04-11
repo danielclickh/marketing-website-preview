@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { CUIButton } from '../ClickUI'
 import Markdown from '../Markdown'
 import ResponsiveEmbed from '../ResponsiveEmbed'
 import { SuiText, SuiTitle } from '../sui'
 import { EntryCategory, EntryStat, getCategories, getContent } from './content'
+import React, { useEffect, useRef, useState } from 'react'
 
 function StatBox(props: EntryStat) {
   return (

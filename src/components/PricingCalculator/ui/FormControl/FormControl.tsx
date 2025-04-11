@@ -1,7 +1,7 @@
-import React from 'react'
 import { FormControlProps } from '../../CalculatorTypesOptions'
 import TooltipInfo from '../Tooltip/tooltip'
 import styles from './FormControl.module.scss'
+import React from 'react'
 
 export const FormControl: React.FC<FormControlProps> = ({
   label,
@@ -42,7 +42,7 @@ export const FormControl: React.FC<FormControlProps> = ({
           <p
             className={` ${
               id === 'storageSize' ? 'text-[#66FF73]' : 'text-white'
-            } ${styles.helpText} text-xs `}>
+            } ${styles.helpText} text-xs`}>
             {helpText}
           </p>
         </div>

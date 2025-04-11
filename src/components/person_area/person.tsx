@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { SuiText } from '../sui'
+import Image from 'next/image'
 
 type PersonProps = {
   avatar: string

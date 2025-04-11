@@ -1,8 +1,8 @@
-import { CodeBlock } from '@clickhouse/click-ui'
 import CodeInterpreter from './CodeInterpreter'
 import { DefaultView } from './CodeResults'
 import { ChartConfig, ChartType } from './types'
 import { base64Decode } from './utils'
+import { CodeBlock } from '@clickhouse/click-ui'
 
 function CodeViewer({
   node,
@@ -51,15 +51,14 @@ function CodeViewer({
     }
 
     return (
-      <div className='bg-[#282828] mb-9'>
+      <div className='mb-9 bg-[#282828]'>
         <CodeBlock
           style={{ wordBreak: 'break-word' }}
           language={language}
           onCopy={function Da() {}}
           onCopyError={function Da() {}}
           showLineNumbers={showLineNumbers}
-          wrapLines
-          >
+          wrapLines>
           {codeContent}
         </CodeBlock>
         <CodeInterpreter

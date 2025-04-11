@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import { CUIButton } from '../../ClickUI'
 import { calculateComputeMargin, PricingData } from '../CalculatorTypesOptions'
 import TooltipInfo from '../ui/Tooltip/tooltip'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 export default function CTAButtons({
   contactSales,

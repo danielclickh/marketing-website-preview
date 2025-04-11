@@ -1,6 +1,5 @@
-import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useDebounce } from '../../hooks'
+import { fetchBlogs } from '../api/blog'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import CategorySelector from '@/components/CategorySelector'
@@ -10,13 +9,14 @@ import Layout from '@/components/Layout'
 import Pagination from '@/components/Pagination'
 import { StrapiImage, StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
-import { useDebounce } from '../../hooks'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BlogApiResponse, BlogProps } from '@/types/blogs'
-import { fetchBlogs } from '../api/blog'
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps(context) {
@@ -179,7 +179,7 @@ export default function BlogsPage({
               <div className='font-inconsolata font-medium text-primary-300'>
                 {featuredBlog.category}
               </div>
-              <SuiTitle type='h2' className=' text-neutral-100'>
+              <SuiTitle type='h2' className='text-neutral-100'>
                 {featuredBlog.title}
               </SuiTitle>
               <div className='my-8 text-neutral-200'>

@@ -1,6 +1,6 @@
+import { RangeSliderProps } from '../../CalculatorTypesOptions'
 import * as Slider from '@radix-ui/react-slider'
 import { useRouter } from 'next/router'
-import { RangeSliderProps } from '../../CalculatorTypesOptions'
 
 export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
   // Set a default value (e.g., 12 hours)
@@ -27,10 +27,10 @@ export const RangeSlider: React.FC<RangeSliderProps> = ({ value }) => {
           )
         }}>
         <Slider.Track className='relative h-[3px] grow rounded-full bg-[#414141] hover:cursor-pointer'>
-          <Slider.Range className='absolute h-full rounded-full bg-primary-300 ' />
+          <Slider.Range className='absolute h-full rounded-full bg-primary-300' />
         </Slider.Track>
         <Slider.Thumb
-          className='block h-5 w-5 rounded-full border-4 border-neutral-800 bg-primary-300  focus:outline-none'
+          className='block h-5 w-5 rounded-full border-4 border-neutral-800 bg-primary-300 focus:outline-none'
           aria-label='Hours'
           id='sliderThumb'>
           <div className='absolute inset-0 -right-[70px] flex items-center justify-center'>

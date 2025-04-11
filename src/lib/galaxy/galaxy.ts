@@ -1,8 +1,8 @@
+import { FullyQualifiedEvent, GalaxyClient } from './client'
+import { Galaxy } from './web/browser'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { FullyQualifiedEvent, GalaxyClient } from './client'
-import { Galaxy } from './web/browser'
 
 type FetchOptions = Record<string, unknown>
 

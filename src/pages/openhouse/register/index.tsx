@@ -1,8 +1,5 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
-import 'swiper/css'
+import imageOpenhouseLogo from '../assets/logo.svg'
+import styles from '../styles.module.scss'
 import { CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import EventPost from '@/components/EventPostList/EventPost'
@@ -18,8 +15,11 @@ import { findAll } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventType } from '@/types/events'
 import { CommonProps } from '@/types/homepage'
-import imageOpenhouseLogo from '../assets/logo.svg'
-import styles from '../styles.module.scss'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
+import 'swiper/css'
 
 interface RegisterPageProps extends CommonProps {
   recentEvents: Array<EventType>
@@ -94,7 +94,7 @@ export default function Page({
 
           {/* Form */}
           <section>
-            <div className='max-w-6xl mx-auto px-6 lg:px-12'>
+            <div className='mx-auto max-w-6xl px-6 lg:px-12'>
               <Link href='/openhouse' className='inline-block'>
                 <Image
                   src={imageOpenhouseLogo}
@@ -110,7 +110,7 @@ export default function Page({
                 <CUICard.Body>
                   {!formSuccess && (
                     <>
-                      <h1 className='text-3xl mb-4'>Register</h1>
+                      <h1 className='mb-4 text-3xl'>Register</h1>
                       <MarketoForm
                         formId='1314'
                         clearbitTracking={true}
@@ -131,7 +131,7 @@ export default function Page({
                     </>
                   )}
                   {!formLoaded && (
-                    <div className='text-center mt-10 mb-12'>
+                    <div className='mb-12 mt-10 text-center'>
                       Loading form...
                     </div>
                   )}
@@ -139,7 +139,7 @@ export default function Page({
                   {formSuccess && (
                     <div
                       ref={formSuccessRef}
-                      className='text-center flex flex-col items-center py-6 lg:py-10'>
+                      className='flex flex-col items-center py-6 text-center lg:py-10'>
                       <svg
                         width='48'
                         height='48'
@@ -160,12 +160,12 @@ export default function Page({
                           strokeLinejoin='round'
                         />
                       </svg>
-                      <p className='mt-6 text-white font-bold text-xl'>
+                      <p className='mt-6 text-xl font-bold text-white'>
                         Thanks for your interest in OpenHouse.
                         <br />
                         Check your email for next steps.
                       </p>
-                      <p className='mt-12 mb-3 text-center font-bold text-neutral-400'>
+                      <p className='mb-3 mt-12 text-center font-bold text-neutral-400'>
                         Share this event
                       </p>
                       <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
@@ -197,7 +197,7 @@ export default function Page({
                   path='/company/news-event'
                   type='empty'
                   color='primary'
-                  className='font-base hidden border border-primary-300/50 md:inline-block !no-underline backdrop-blur-sm'>
+                  className='font-base hidden border border-primary-300/50 !no-underline backdrop-blur-sm md:inline-block'>
                   View all events
                 </SuiButton>
               </div>

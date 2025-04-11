@@ -11,12 +11,10 @@ Network monitoring has evolved from simple uptime checks to sophisticated system
 
 Network monitoring is systematically observing and analyzing network traffic and behavior. Its continuous diagnostic system provides visibility into how data moves through and between network components, helping organizations maintain optimal network operations and quickly address any issues.
 
-
 <p style="text-align: center;">
     <img src="/images/engineering-resources/0_network_monitoring.png" alt="image (8).png" class="h-auto w-auto max-w-full" node="[object Object]">
     <em>A Shopify network monitoring dashboard</em>
 </p>
-
 
 The interface above shows that modern network monitoring combines multiple data visualizations to provide comprehensive network visibility. Time-series graphs track key metrics like TCP volume, retransmits, and packet counts, while detailed tables show traffic patterns across different regions and deployments. This kind of monitoring interface allows operators to quickly identify issues and understand traffic patterns across their infrastructure.
 
@@ -88,7 +86,7 @@ Infrastructure diversity adds additional complexity. Modern networks span multip
 
 ## ClickHouse and network monitoring
 
-ClickHouse is a robust foundation for large-scale network monitoring systems due to its specialized capabilities in handling high-volume network data. Its architecture enables speedy lookups and efficient time-based queries,     essential for processing millions of network connections per second in modern cloud infrastructures.
+ClickHouse is a robust foundation for large-scale network monitoring systems due to its specialized capabilities in handling high-volume network data. Its architecture enables speedy lookups and efficient time-based queries, essential for processing millions of network connections per second in modern cloud infrastructures.
 
 Unlike traditional metrics-based solutions, ClickHouse allows for the storage of raw network flow data while avoiding cardinality problems that typically plague such systems. Combined with its fuzzy matching support through ASOF joins, this capability is well-suited for analyzing network traffic patterns across different timescales and dealing with incomplete or misaligned data.
 

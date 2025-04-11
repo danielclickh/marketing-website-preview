@@ -1,6 +1,6 @@
-import { NewsLetterData } from '@/types/homepage'
 import { SuiPanel, SuiText, SuiTitle } from '../sui'
 import NewsLetterForm from './NewsLetterForm'
+import { NewsLetterData } from '@/types/homepage'
 
 function NewsLetter({
   title,

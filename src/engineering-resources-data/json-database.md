@@ -55,7 +55,7 @@ Now that we’ve learned about JSON, let’s explore how to store data in this f
 
 Document databases like CouchDB and MongoDB emerged in the late 2000s/early 2010s. These databases store data in JSON-like documents, allowing for flexible, schema-less data modeling. Their main selling point was the ease with which users could store JSON and retrieve individual documents.
 
-This made them a perfect fit for storing application state in interactive Javascript-heavy web pages, which became popular with the emergence of [jQuery](https://en.wikipedia.org/wiki/JQuery) and later [AngularJS](https://en.wikipedia.org/wiki/AngularJS) and [React](https://en.wikipedia.org/wiki/React_\(JavaScript_library\)). Social media websites like Twitter gained popularity around the same time and offered JSON APIs to access their data, which users would then store in their document database of choice.
+This made them a perfect fit for storing application state in interactive Javascript-heavy web pages, which became popular with the emergence of [jQuery](https://en.wikipedia.org/wiki/JQuery) and later [AngularJS](https://en.wikipedia.org/wiki/AngularJS) and [React](<https://en.wikipedia.org/wiki/React_(JavaScript_library)>). Social media websites like Twitter gained popularity around the same time and offered JSON APIs to access their data, which users would then store in their document database of choice.
 
 Although MongoDB and CouchDB were the early contenders in this category, others include Couchbase, CosmosDB, and Firestore.
 
@@ -69,7 +69,7 @@ These databases are still predominantly used for storing data in rows and column
 
 ### Real-time analytics databases with JSON support
 
-In the late 2010s and early 2020s, real-time analytics databases like Apache Druid, Apache Pinot, Rockset, and ClickHouse emerged. These databases use column-based storage and focus on optimizing large-scale analytics queries across billions of rows or more. 
+In the late 2010s and early 2020s, real-time analytics databases like Apache Druid, Apache Pinot, Rockset, and ClickHouse emerged. These databases use column-based storage and focus on optimizing large-scale analytics queries across billions of rows or more.
 
 They all have functionality for extracting a schema from JSON documents, which works well if all the JSON documents have the same schema.
 
@@ -79,13 +79,13 @@ When storing the data, they need to ensure that it’s stored in a way that allo
 
 ## JSON in ClickHouse
 
-ClickHouse added a JSON data type in version 22.6 in June 2022, but this [implementation had some limitations](https://github.com/ClickHouse/ClickHouse/issues/54864) and was replaced by [a new JSON data type](https://clickhouse.com/docs/en/sql-reference/data-types/newjson) in [version 24.8](https://clickhouse.com/blog/clickhouse-release-24-08) in August 2024\. 
+ClickHouse added a JSON data type in version 22.6 in June 2022, but this [implementation had some limitations](https://github.com/ClickHouse/ClickHouse/issues/54864) and was replaced by [a new JSON data type](https://clickhouse.com/docs/en/sql-reference/data-types/newjson) in [version 24.8](https://clickhouse.com/blog/clickhouse-release-24-08) in August 2024\.
 
 The new data type [addresses the following challenges](https://clickhouse.com/blog/a-new-powerful-json-data-type-for-clickhouse):
 
-1. True column-oriented storage \- Implement a column-oriented storage system for JSON data to enable efficient compression and fast, vectorized operations.  
-2. Dynamically changing data without type unification \- Handle JSON paths with different data types without unifying them into a common type.  
-3. Prevention of an avalanche of column data files on disk \- Avoid creating excessive column files on disk for unique JSON paths.  
+1. True column-oriented storage \- Implement a column-oriented storage system for JSON data to enable efficient compression and fast, vectorized operations.
+2. Dynamically changing data without type unification \- Handle JSON paths with different data types without unifying them into a common type.
+3. Prevention of an avalanche of column data files on disk \- Avoid creating excessive column files on disk for unique JSON paths.
 4. Dense storage \- Store values of unique JSON paths in a dense, non-redundant way.
 
 It’s an experimental feature at the moment, so you’ll need to enable the following flag to use it:
@@ -118,7 +118,7 @@ SELECT
     ‘15946’ AS matchId,
     json
 FROM url(
-  'https://raw.githubusercontent.com/statsbomb/open-data/refs/heads/master/data/events/15946.json', 
+  'https://raw.githubusercontent.com/statsbomb/open-data/refs/heads/master/data/events/15946.json',
   JSONAsObject
 );
 ```
@@ -166,19 +166,19 @@ Yes, ClickHouse lets you query JSON data with SQL For example, imagine that we h
 
 ```json
 {
-    "duration": 0,
-    "id": "9f6e2ecf-6685-45df-a62e-c2db3090f6c1",
-    "index": "1",
-    "minute": "0",
-    "period": "1",
-    "play_pattern": {"id": "1", "name": "Regular Play"},
-    "possession": "1",
-    "possession_team": {"id": "217", "name": "Barcelona"},
-    "second": "0",
-    "tactics": {"formation": "442", "lineup": []},
-    "team": {"id": "217", "name": "Barcelona" },
-    "timestamp": "00:00:00.000",
-    "type": {"id": "35", "name": "Starting XI"}
+  "duration": 0,
+  "id": "9f6e2ecf-6685-45df-a62e-c2db3090f6c1",
+  "index": "1",
+  "minute": "0",
+  "period": "1",
+  "play_pattern": { "id": "1", "name": "Regular Play" },
+  "possession": "1",
+  "possession_team": { "id": "217", "name": "Barcelona" },
+  "second": "0",
+  "tactics": { "formation": "442", "lineup": [] },
+  "team": { "id": "217", "name": "Barcelona" },
+  "timestamp": "00:00:00.000",
+  "type": { "id": "35", "name": "Starting XI" }
 }
 ```
 
@@ -195,9 +195,9 @@ We could store this data in a table, `events`, with the following schema:
 We can then write the following query to find the most popular event types:
 
 ```sql
-SELECT json.type.name, count() AS count 
-FROM events 
-GROUP BY ALL 
-ORDER BY count DESC 
+SELECT json.type.name, count() AS count
+FROM events
+GROUP BY ALL
+ORDER BY count DESC
 LIMIT 10;
 ```

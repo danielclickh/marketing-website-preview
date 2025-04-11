@@ -1,5 +1,3 @@
-import { GetStaticProps } from 'next'
-import { useRef, useState } from 'react'
 import AirGappedIcon from '@/components/AirGapped/AirGappedIcon'
 import GrowingCommunity from '@/components/GrowingCommunity'
 import HRSeparator from '@/components/HRSeparator'
@@ -8,6 +6,8 @@ import MarketoForm from '@/components/MarketoForm'
 import { findOne } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ContactProps } from '@/types/contact'
+import { GetStaticProps } from 'next'
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -75,7 +75,7 @@ export default function Page({
           <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-12 sm:px-8 2xl:px-0'>
             <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
               <div className='mb-16 mr-0 flex-auto lg:mb-0 lg:mr-16 lg:max-w-2xl'>
-                <div className='section_metadata '>
+                <div className='section_metadata'>
                   <div className='mx-auto mb-6 max-w-2xl text-neutral-200'>
                     <div className='prose prose-neutral'>
                       <p>

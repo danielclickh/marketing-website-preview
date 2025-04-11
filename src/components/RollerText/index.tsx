@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
 import styles from './styles.module.scss'
+import { useEffect, useRef } from 'react'
 
 export default function RollerText({
   phrases,

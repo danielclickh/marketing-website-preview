@@ -1,7 +1,3 @@
-import type { InferGetStaticPropsType } from 'next'
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useState } from 'react'
 import CategorySelector from '@/components/CategorySelector'
 import IntegrationTile from '@/components/IntegrationTile'
 import GetStartedFree from '@/components/jp/GetStartedFree'
@@ -18,6 +14,10 @@ import {
   IntegrationGroup,
   IntegrationsPageProps
 } from '@/types/integrations'
+import type { InferGetStaticPropsType } from 'next'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 export const categoryContentMap: Array<
   Pick<IntegrationGroup, 'key' | 'label' | 'description' | 'slug'>

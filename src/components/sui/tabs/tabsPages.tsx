@@ -37,15 +37,11 @@ export function SuiTabsPages(props: TabProps) {
               <Link
                 key={tab.name}
                 href={tab.href}
-                className={`
-                ${
+                className={` ${
                   tab.id == props.activeTab
                     ? 'border-c6 text-neutral-0'
                     : 'border-transparent text-c4 hover:border-c4 hover:text-neutral-0'
-                }
-                tab-${index}    
-                  ) whitespace-nowrap border-b-2 px-1 py-4 text-sm
-                font-medium`}
+                } tab-${index} ) whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium`}
                 aria-current={tab.current ? 'page' : undefined}>
                 {tab.name}
               </Link>

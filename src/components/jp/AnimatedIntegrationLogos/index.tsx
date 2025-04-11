@@ -1,7 +1,7 @@
+import { SuiText } from '../../sui'
 import { motion } from 'framer-motion'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import { SuiText } from '../../sui'
 
 const getRandomDelay = (min: number, max: number) =>
   Math.random() * (max - min) + min

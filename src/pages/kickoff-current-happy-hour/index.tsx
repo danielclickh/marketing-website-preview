@@ -1,5 +1,3 @@
-import { GetStaticProps } from 'next'
-import { useRef, useState } from 'react'
 import GrowingCommunity from '@/components/GrowingCommunity'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
@@ -7,6 +5,8 @@ import MarketoForm from '@/components/MarketoForm'
 import { findOne } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ContactProps } from '@/types/contact'
+import { GetStaticProps } from 'next'
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {
@@ -60,7 +60,7 @@ export default function ContactPage({
               <h1 className='mb-6 text-center font-basier text-5.5xl font-semibold leading-tight text-neutral-200'>
                 Dedicated Services
               </h1>
-              <div className=' text-neutral-200'>
+              <div className='text-neutral-200'>
                 Thank you for your interest in our Dedicated Service; please
                 submit the below information to the best of your ability so we
                 can help.

@@ -1,20 +1,20 @@
-import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { fetchBlogs } from '../../api/jp/blog'
 import Avatars from '@/components/Avatars'
 import { CUILink } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
-import BlogPost from '@/components/jp/BlogPostList/BlogPost'
-import Layout from '@/components/jp/Layout'
 import Pagination from '@/components/Pagination'
 import { StrapiImage } from '@/components/StrapiElements'
+import BlogPost from '@/components/jp/BlogPostList/BlogPost'
+import Layout from '@/components/jp/Layout'
 import { SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BlogApiResponse, BlogProps } from '@/types/blogs'
-import { fetchBlogs } from '../../api/jp/blog'
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps(context) {
@@ -165,7 +165,7 @@ export default function BlogsPage({
               </div>
             )}
             <div className='flex w-full flex-col justify-start border-l-8 border-primary-300 pl-6 lg:w-1/2 lg:flex-1'>
-              <SuiTitle type='h2' className=' text-neutral-100'>
+              <SuiTitle type='h2' className='text-neutral-100'>
                 {featuredBlog.title}
               </SuiTitle>
               <div className='my-8 text-neutral-200'>

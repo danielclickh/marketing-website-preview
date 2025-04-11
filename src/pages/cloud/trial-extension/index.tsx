@@ -1,17 +1,15 @@
-import { GetStaticProps } from 'next'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useRef, useState } from 'react'
 import GrowingCommunity from '@/components/GrowingCommunity'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
-import MarketoForm, {
-  SpoofedMarketoObject
-} from '@/components/MarketoForm'
+import MarketoForm, { SpoofedMarketoObject } from '@/components/MarketoForm'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ContactProps } from '@/types/contact'
+import { GetStaticProps } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<ContactProps> =
   async function getStaticProps() {

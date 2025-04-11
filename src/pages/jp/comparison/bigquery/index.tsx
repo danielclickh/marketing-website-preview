@@ -1,32 +1,5 @@
-import Image from 'next/image'
-import Link, { LinkProps } from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import BlogPost from '@/components/BlogPostList/BlogPost'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import ComparisonTable from '@/components/ComparisonTable'
-import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
-import Layout from '@/components/jp/Layout'
-import MoreComparisons from '@/components/jp/MoreComparisons'
-import MarketoForm from '@/components/MarketoForm'
-import { StrapiImage } from '@/components/StrapiElements'
-import { StrapiImageProps } from '@/components/StrapiElements/types'
-import { SuiText, SuiTitle } from '@/components/sui'
-import { useClickOutside } from '../../../../hooks'
-import { findAll, findOne } from '@/lib/api/strapi'
-import {
-  useGalaxyOnClick,
-  useGalaxyOnPage
-} from '@/lib/galaxy/galaxy'
-import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import logoClickhouse from '../../../../../public/logo-full.svg'
-import {
-  ComparisonPage,
-  ComparisonProps,
-  RepeatableContent
-} from '@/types/comparisons'
-import { HomepageCustomerStories } from '@/types/homepage'
+import { useClickOutside } from '../../../../hooks'
 import chartCosts from './chart-costs.svg'
 import chartLatency from './chart-latency.svg'
 import iconDevelopers from './icon-developers.svg'
@@ -40,6 +13,30 @@ import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
 import logoAdevinta from './logoAdevinta.svg'
 import logos from './logos.png'
+import BlogPost from '@/components/BlogPostList/BlogPost'
+import { CUIButton, CUICard } from '@/components/ClickUI'
+import ComparisonTable from '@/components/ComparisonTable'
+import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
+import MarketoForm from '@/components/MarketoForm'
+import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageProps } from '@/components/StrapiElements/types'
+import Layout from '@/components/jp/Layout'
+import MoreComparisons from '@/components/jp/MoreComparisons'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { findAll, findOne } from '@/lib/api/strapi'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
+import {
+  ComparisonPage,
+  ComparisonProps,
+  RepeatableContent
+} from '@/types/comparisons'
+import { HomepageCustomerStories } from '@/types/homepage'
+import Image from 'next/image'
+import Link, { LinkProps } from 'next/link'
+import { useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 const locTracking = 'bigquery-comparison-page'
 
@@ -476,7 +473,7 @@ export default function BigQueryPage({
       </div>
 
       <div className='mx-auto mb-24 max-w-7xl px-4 md:px-8 2xl:px-0'>
-        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto  flex  flex-col items-center'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
           <Image
             src='/images/migration.svg'
             height={72}
@@ -699,7 +696,7 @@ function CustomContentCard({
       href={href}
       target='_blank'
       className={
-        ' hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1  hover:no-underline'
+        'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
       }>
       <CUICard className='h-full'>
         <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
@@ -717,7 +714,7 @@ function CustomContentCard({
             <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
               {category}
             </div>
-            <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+            <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
               {title}
             </div>
           </div>

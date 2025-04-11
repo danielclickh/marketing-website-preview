@@ -1,11 +1,11 @@
-import React from 'react'
-import 'swiper/css'
+import LogoCarouselV2, { LogoItem } from '../LogoCarouselV2'
+import { StrapiImage } from '../StrapiElements'
 import {
   HomepageCustomerStories,
   HomepageCustomerStoryLogo
 } from '@/types/homepage'
-import LogoCarouselV2, { LogoItem } from '../LogoCarouselV2'
-import { StrapiImage } from '../StrapiElements'
+import React from 'react'
+import 'swiper/css'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories

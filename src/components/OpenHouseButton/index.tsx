@@ -1,6 +1,6 @@
+import FontSohneBreit from '../FontSohneBreit'
 import Link, { LinkProps } from 'next/link'
 import React from 'react'
-import FontSohneBreit from '../FontSohneBreit'
 
 type OpenHouseButtonVariants = 'light' | 'dark' | 'primary'
 type OpenHouseButtonSizes = 'sm' | 'md' | 'lg'
@@ -38,9 +38,9 @@ export default function OpenHouseButton({
   return (
     <FontSohneBreit
       as='span'
-      className={`inline-block relative rounded text-center transition border duration-300 ${openHouseButtonSizeClasses[size]} ${openHouseButtonVariantClasses[variant]} ${className}`}>
+      className={`relative inline-block rounded border text-center transition duration-300 ${openHouseButtonSizeClasses[size]} ${openHouseButtonVariantClasses[variant]} ${className}`}>
       <Link {...link}>
-        <span className='block absolute inset-0' />
+        <span className='absolute inset-0 block' />
         {children}
       </Link>
     </FontSohneBreit>

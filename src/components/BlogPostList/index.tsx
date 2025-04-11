@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import CategorySelector from '../CategorySelector'
 import { SuiSearchField } from '../sui/client'
 import { BlogPostListProps } from './types'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 function BlogPostList({ categories, children }: BlogPostListProps) {
   const router = useRouter()

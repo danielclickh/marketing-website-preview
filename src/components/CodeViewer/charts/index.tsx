@@ -1,11 +1,11 @@
-import { Panel } from '@clickhouse/click-ui'
-import { useEffect, useState } from 'react'
 import { ChartConfig, ChartType, QueryResults } from '../types'
 import BarChart from './bar'
 import CandleStickChart from './candlestick'
 import HeatMap from './heatmap'
 import LineChart from './line'
 import PieChart from './pie'
+import { Panel } from '@clickhouse/click-ui'
+import { useEffect, useState } from 'react'
 
 const chartTypes = Object.values(ChartType)
 
@@ -103,16 +103,15 @@ const Chart = (props: {
   }
 
   return (
-    <div className='flex h-full border-0 flex-col-reverse lg:flex-row gap-2 lg:gap-4'>
+    <div className='flex h-full flex-col-reverse gap-2 border-0 lg:flex-row lg:gap-4'>
       <Panel
-        className={`w-full h-full`}
+        className={`h-full w-full`}
         alignItems='start'
         color='default'
         hasBorder
         orientation='vertical'
         padding='md'
-        radii='sm'
-        >
+        radii='sm'>
         {chart}
       </Panel>
     </div>

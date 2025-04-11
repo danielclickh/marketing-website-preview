@@ -1,19 +1,8 @@
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import {
-  calculateComputeCost,
-  calculateStorageCost
-} from '@/lib/m3ter/costs'
 import pricingPlansFromFile from '../../../public/pricingFile.json'
-import {
-  CloudProviderType,
-  PricingPlanData,
-  RegionPricing
-} from '@/types/pricing'
 import HRSeparator from '../HRSeparator'
 import PricingOptions from '../PricingOptions'
 import { SuiTitle } from '../sui'
+import CTAButtons from './CTAButtons'
 import {
   acceptableRegions,
   computeOptions,
@@ -23,7 +12,6 @@ import {
   storageUnitOptionsTiered
 } from './CalculatorTypesOptions'
 import styles from './CostCalculator.module.scss'
-import CTAButtons from './CTAButtons'
 import { FormControl } from './ui/FormControl'
 import { NumericSelect } from './ui/NumericSelect'
 import RadioGroupComponent from './ui/Radio/Radio'
@@ -32,6 +20,15 @@ import { Select } from './ui/Select'
 import { Text } from './ui/Text'
 import { ToggleButtons } from './ui/ToggleButtons'
 import { ToggleButtonsProviders } from './ui/ToggleButtonsProviders'
+import { calculateComputeCost, calculateStorageCost } from '@/lib/m3ter/costs'
+import {
+  CloudProviderType,
+  PricingPlanData,
+  RegionPricing
+} from '@/types/pricing'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 function convertStorageToGB(
   size: number,
@@ -634,7 +631,7 @@ const PricingCalculator: React.FC<{
           afterPricingTable={afterPricingTable}
         />
       )}
-      <HRSeparator className='mt-10 max-w-[384px] pb-10 ' />
+      <HRSeparator className='mt-10 max-w-[384px] pb-10' />
       <div id='pricing-calculator'>
         <SuiTitle type='h2' className='pb-16 text-center'>
           Estimate your monthly&nbsp;cost
@@ -671,7 +668,7 @@ const PricingCalculator: React.FC<{
               {/* need to convert to gbs */}
               <div className='relative'>
                 <div className='grid grid-cols-4 gap-6'>
-                  <div className='col-span-2  md:col-span-1'>
+                  <div className='col-span-2 md:col-span-1'>
                     <FormControl
                       id='storageSize'
                       label='Storage Volume'
@@ -710,7 +707,7 @@ const PricingCalculator: React.FC<{
                 <div
                   className={` ${
                     storageCompressed === 'no' ? 'text-[#66FF73]' : 'text-white'
-                  } ${styles.helpText} mb-10 mt-3 text-xs `}>
+                  } ${styles.helpText} mb-10 mt-3 text-xs`}>
                   {storageCompressed === 'no' ? (
                     <p>
                       {humanReadableStorage(
@@ -813,7 +810,7 @@ const PricingCalculator: React.FC<{
                     <div>
                       {tier === 'Development' ? (
                         <React.Fragment>
-                          <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px]  text-white'>
+                          <p className='mb-2 break-words font-basier text-[50px] font-bold leading-[84px] text-white'>
                             $
                             {Number(
                               (
@@ -883,7 +880,7 @@ const PricingCalculator: React.FC<{
                                           priceRangeTextSize <= 30
                                         ? 'text-[30px] leading-[54px] md:text-[28px] md:leading-[62px]'
                                         : 'text-[30px] leading-[54px] md:text-[50px] md:leading-[84px]'
-                            } mb-2 break-words font-basier font-bold  text-white`}
+                            } mb-2 break-words font-basier font-bold text-white`}
                             id='price-range'>
                             $
                             {Number(

@@ -1,6 +1,6 @@
-import { StrapiButton, StrapiImageType } from '@/lib/api/strapi/types'
 import { BlogPost } from './blogs'
 import { CommonProps } from './homepage'
+import { StrapiButton, StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface UseCasesTestimonial {
   avatar: StrapiImageType

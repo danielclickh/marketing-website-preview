@@ -1,10 +1,11 @@
 'use client'
-import EChartsReact from 'echarts-for-react'
-import isEqual from 'lodash/isEqual'
-import { useEffect, useMemo, useRef, useState } from 'react'
+
 import { ChartConfig, Column } from '../../types'
 import { nonNullType, roundByScale, roundToDynamicPrecision } from '../../utils'
 import styles from './styles.module.css'
+import EChartsReact from 'echarts-for-react'
+import isEqual from 'lodash/isEqual'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 const MAX_SERIES = 9
 
@@ -32,10 +33,11 @@ function getSupportedColumns(columns: Column[]): {
       )
       .map((col) => col.name),
     series: columns
-      .filter((col) => 
-        nonNullType(col.type).includes("String") ||
-        nonNullType(col.type).startsWith("Enum") || 
-        nonNullType(col.type).startsWith("LowCardinality")
+      .filter(
+        (col) =>
+          nonNullType(col.type).includes('String') ||
+          nonNullType(col.type).startsWith('Enum') ||
+          nonNullType(col.type).startsWith('LowCardinality')
       )
       .map((col) => col.name)
   }
@@ -220,7 +222,8 @@ const LineChart = (props: {
     }
   }
 
-  const bottomPadding = windowWidth >= 1536 && series.length > 1 ? '48px' : '12px'
+  const bottomPadding =
+    windowWidth >= 1536 && series.length > 1 ? '48px' : '12px'
 
   const options: any = {
     animation: false,
@@ -337,7 +340,7 @@ const LineChart = (props: {
 
   return (
     <div
-      className='h-full justify-between flex flex-col'
+      className='flex h-full flex-col justify-between'
       onMouseMove={onMouseOver}
       onMouseOut={onMouseOut}>
       <EChartsReact

@@ -1,8 +1,9 @@
 'use client'
-import ReactECharts from 'echarts-for-react'
-import { useEffect, useMemo, useState } from 'react'
+
 import { ChartConfig, Column } from '../../types'
 import { nonNullType, roundToDynamicPrecision } from '../../utils'
+import ReactECharts from 'echarts-for-react'
+import { useEffect, useMemo, useState } from 'react'
 
 const MAX_SERIES = 9
 
@@ -12,9 +13,12 @@ function getSupportedColumns(columns: Column[]): {
 } {
   return {
     xaxis: columns
-      .filter((col) => nonNullType(col.type).includes("String") ||
-      nonNullType(col.type).startsWith("Enum") || 
-      nonNullType(col.type).startsWith("LowCardinality"))
+      .filter(
+        (col) =>
+          nonNullType(col.type).includes('String') ||
+          nonNullType(col.type).startsWith('Enum') ||
+          nonNullType(col.type).startsWith('LowCardinality')
+      )
       .map((col) => col.name),
     yaxis: columns
       .filter(
@@ -84,7 +88,7 @@ export default function Pie(props: {
     return <></>
   }
 
-  const options:any = {
+  const options: any = {
     title: {
       text: props.config.title,
       textStyle: {
@@ -171,7 +175,7 @@ export default function Pie(props: {
   }
 
   return (
-    <div className='h-full w-full justify-between flex flex-col'>
+    <div className='flex h-full w-full flex-col justify-between'>
       <ReactECharts
         option={options}
         notMerge={true}

@@ -25,16 +25,16 @@ Modern observability, or Observability 2.0, takes a fundamentally different appr
 
 This rich data collection enables dynamic slicing and dicing of data without pre-defining metrics. Teams can derive metrics, traces, and other visualizations from this base data, allowing them to answer complex questions about system behavior that weren't anticipated when the instrumentation was first added.
 
-However, implementing modern observability capabilities presents its challenges. Organizations need reliable ways to collect, process, and export this rich telemetry data across diverse systems and technologies. While modern approaches have evolved beyond traditional boundaries, understanding the fundamental building blocks of observability remains crucial.       
+However, implementing modern observability capabilities presents its challenges. Organizations need reliable ways to collect, process, and export this rich telemetry data across diverse systems and technologies. While modern approaches have evolved beyond traditional boundaries, understanding the fundamental building blocks of observability remains crucial.
 
 ## The 3 pillars of observability
 
-To better understand how observability has evolved and works in practice, let's examine the three pillars of observability - logs, metrics, and traces. 
+To better understand how observability has evolved and works in practice, let's examine the three pillars of observability - logs, metrics, and traces.
 
 While modern observability has moved beyond treating these as separate concerns, they remain fundamental concepts for understanding different aspects of system behavior.
 
-1. **Logs** - Text-based records of discrete events that occur within a system. These provide detailed context about specific occurrences, errors, and state changes.  
-2. **Metrics** - Numerical measurements collected over time. These include counters, gauges, and histograms that help track system performance, resource usage, and business KPIs.  
+1. **Logs** - Text-based records of discrete events that occur within a system. These provide detailed context about specific occurrences, errors, and state changes.
+2. **Metrics** - Numerical measurements collected over time. These include counters, gauges, and histograms that help track system performance, resource usage, and business KPIs.
 3. **Traces** - Records that track the journey of requests as they flow through distributed systems. These help understand the relationships between services and identify performance bottlenecks.
 
 These pillars enable teams to monitor, troubleshoot, and optimize their systems. However, the real power comes from understanding how to effectively collect, analyze, and correlate data across all three pillars to gain meaningful insights into system behavior.
@@ -51,20 +51,20 @@ In their book "[Observability Engineering](https://learning.oreilly.com/library/
 
 The authors note that observability tools that help teams improve uptime and performance can lead to increased incremental revenue through improved code quality. This manifests in several ways:
 
-* Improved customer experience: Fast problem resolution and prevention of service degradation leads to higher customer satisfaction and retention  
-* Increased system reliability: Better uptime means more successful transactions and fewer lost business opportunities  
-* **Enhanced performance**: The ability to identify and optimize performance bottlenecks helps maintain responsive services that keep customers engaged  
-* Competitive advantage: Organizations that can maintain high service quality through comprehensive monitoring and quick issue resolution often gain an edge over competitors
+- Improved customer experience: Fast problem resolution and prevention of service degradation leads to higher customer satisfaction and retention
+- Increased system reliability: Better uptime means more successful transactions and fewer lost business opportunities
+- **Enhanced performance**: The ability to identify and optimize performance bottlenecks helps maintain responsive services that keep customers engaged
+- Competitive advantage: Organizations that can maintain high service quality through comprehensive monitoring and quick issue resolution often gain an edge over competitors
 
 ### Cost Savings from Faster Incident Response
 
 One of the most immediate benefits of observability is reduced labor costs through faster detection and resolution of issues. This comes from:
 
-* Reduced Mean Time to Detect (MTTD) and Mean Time to Resolve (MTTR)  
-* Improved query response times, enabling faster investigation  
-* Quicker identification of performance bottlenecks  
-* Reduced time spent on-call  
-* Fewer resources wasted on unnecessary rollbacks
+- Reduced Mean Time to Detect (MTTD) and Mean Time to Resolve (MTTR)
+- Improved query response times, enabling faster investigation
+- Quicker identification of performance bottlenecks
+- Reduced time spent on-call
+- Fewer resources wasted on unnecessary rollbacks
 
 We see this in practice - [trip.com built their observability system with ClickHouse](http://trip.com) and achieved query speeds 4-30x faster than their previous solution, with 90% of queries completing in under 300ms, enabling rapid issue investigation.
 
@@ -72,11 +72,11 @@ We see this in practice - [trip.com built their observability system with ClickH
 
 Observability doesn't just help resolve issues faster - it helps prevent them entirely. The authors emphasize how teams can prevent critical issues by:
 
-* Identifying potential problems before they become critical  
-* Analyzing patterns to prevent recurring issues  
-* Understanding system behavior under different conditions  
-* Proactively addressing performance bottlenecks  
-* Making data-driven decisions about system improvements
+- Identifying potential problems before they become critical
+- Analyzing patterns to prevent recurring issues
+- Understanding system behavior under different conditions
+- Proactively addressing performance bottlenecks
+- Making data-driven decisions about system improvements
 
 ClickHouse's [own observability platform, LogHouse](https://clickhouse.com/blog/building-a-logging-platform-with-clickhouse-and-saving-millions-over-datadog), demonstrates this. It enables our core engineers to search historical patterns across all clusters, helping prevent recurring issues.
 
@@ -84,13 +84,13 @@ ClickHouse's [own observability platform, LogHouse](https://clickhouse.com/blog/
 
 One of the most overlooked benefits is the impact on team satisfaction and retention. The authors highlight how observability leads to:
 
-* Improved job satisfaction through better tooling  
-* Decreased developer burnout from fewer unresolved issues  
-* Reduced alert fatigue through better signal-to-noise ratio  
-* Lower on-call stress due to better incident management  
-* Increased team confidence in system reliability
+- Improved job satisfaction through better tooling
+- Decreased developer burnout from fewer unresolved issues
+- Reduced alert fatigue through better signal-to-noise ratio
+- Lower on-call stress due to better incident management
+- Increased team confidence in system reliability
 
-We see this in practice - when [Fastly migrated to ClickHouse](https://clickhouse.com/videos/scaling-graphite-with-clickhouse), their engineers were amazed by the improvement in query performance, noting: 
+We see this in practice - when [Fastly migrated to ClickHouse](https://clickhouse.com/videos/scaling-graphite-with-clickhouse), their engineers were amazed by the improvement in query performance, noting:
 
 > "I couldn't believe it. I actually had to go back a couple of times just to make sure that I was querying it properly... this is coming back too fast. This doesn't make sense."
 
@@ -128,7 +128,7 @@ Ensuring standardization and avoiding vendor lock-in are vital for maintaining f
 
 ### Security and Compliance
 
-Security and compliance considerations remain crucial, especially when handling sensitive data within observability systems. Organizations must ensure that their observability solutions adhere to relevant regulations and effectively protect sensitive information. 
+Security and compliance considerations remain crucial, especially when handling sensitive data within observability systems. Organizations must ensure that their observability solutions adhere to relevant regulations and effectively protect sensitive information.
 
 These challenges underscore the importance of strategic planning and informed decision-making in implementing observability solutions that effectively meet organizational needs.
 
@@ -144,16 +144,16 @@ This challenge led Twitter to establish what has become the standard observabili
 
 ![](/images/engineering-resources/0_observability.png)
 
-1. **Collection**   
+1. **Collection**  
    The first step involves gathering [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data) from your systems. This includes [logs](https://clickhouse.com/engineering-resources/log-monitoring) from applications and services, system performance metrics, and traces tracking requests through your infrastructure. Over the past decade, collection methods have evolved significantly, with [OpenTelemetry](https://clickhouse.com/engineering-resources/opentelemetry-otel) (OTel) emerging as the industry standard. OTel provides vendor-neutral APIs, SDKs, and tools for instrumenting, generating, collecting, and exporting telemetry data. This standardization makes integrating with different storage layers and frontends easier while avoiding vendor lock-in.
 
-2. **Storage**   
-   The storage layer acts as the engine of the observability stack, and its requirements have grown increasingly demanding as systems become more complex. Modern storage solutions need to handle real-time ingestion of ever-growing data volumes while maintaining quick query response times. They must provide efficient compression to manage storage costs, especially as retention requirements grow. 
-   
+2. **Storage**  
+   The storage layer acts as the engine of the observability stack, and its requirements have grown increasingly demanding as systems become more complex. Modern storage solutions need to handle real-time ingestion of ever-growing data volumes while maintaining quick query response times. They must provide efficient compression to manage storage costs, especially as retention requirements grow.
+
    The storage layer must also scale horizontally to accommodate growing data volumes and support flexible data retention policies. As organizations collect more telemetry data, the efficiency and capabilities of the storage layer become increasingly critical to the success of their observability strategy.
 
-3. **Visualization and Alerting**   
-   The presentation layer is where teams interact with their observability data, turning raw telemetry into actionable insights. Modern visualization solutions provide dashboards for monitoring system health and interfaces for investigating issues. Alerting systems help teams proactively detect and respond to problems before they impact users. Tools for log exploration and analysis allow engineers to dive deep into system behavior when troubleshooting issues. 
+3. **Visualization and Alerting**  
+   The presentation layer is where teams interact with their observability data, turning raw telemetry into actionable insights. Modern visualization solutions provide dashboards for monitoring system health and interfaces for investigating issues. Alerting systems help teams proactively detect and respond to problems before they impact users. Tools for log exploration and analysis allow engineers to dive deep into system behavior when troubleshooting issues.
 
    The best visualization solutions integrate with various data sources and provide flexible ways to explore and understand system behavior, from high-level overviews to detailed debugging sessions. Many observability vendors offer end-to-end solutions that include all these components, from collection agents and data aggregators to storage and presentation GUIs. However, organizations increasingly choose to build custom pipelines using best-of-breed tools for each component, allowing them to tailor solutions to their specific needs while maintaining control over costs and capabilities.
 
@@ -161,32 +161,30 @@ This challenge led Twitter to establish what has become the standard observabili
 
 For small teams lacking expertise in observability, using an out-of-the-box solution can be highly beneficial. These solutions simplify the process by providing pre-configured tools that allow you to visualize and understand what's happening in your system without needing deep technical knowledge. This approach can be an excellent starting point, enabling you to focus on learning and gradually deciding whether to continue with the solution or explore more customized options as your understanding of observability grows.
 
-
 Out-of-the-box solutions from vendors like Datadog, New Relic, and honeycomb.io offer comprehensive platforms that support data collection, storage, visualization, and alerting. The service provider typically manages these platforms, reducing your team's infrastructure management burden. You may need to perform some basic instrumentation to collect telemetry data, but beyond that, much of the heavy lifting is handled for you.
 
-However, as your organization grows and your observability needs become more complex, you might find that these solutions have limitations regarding customization, scalability, and cost control. 
+However, as your organization grows and your observability needs become more complex, you might find that these solutions have limitations regarding customization, scalability, and cost control.
 
 In the past, building your own observability pipeline was often not feasible due to the lack of databases capable of handling the volume and speed at which telemetry data is generated. But now, with the advent of ClickHouse, this is changing.
 
-
 ## The SQL-based observability pipeline
 
-ClickHouse, as a real-time OLAP column store, provides the scalability, speed, and flexibility needed to handle large volumes of observability data efficiently. This makes it a viable option for organizations looking to build their own observability pipelines. 
+ClickHouse, as a real-time OLAP column store, provides the scalability, speed, and flexibility needed to handle large volumes of observability data efficiently. This makes it a viable option for organizations looking to build their own observability pipelines.
 
-The emergence of open standards and tooling like OpenTelemetry (OTel), Grafana, Fluentd, and Kubernetes further facilitates this transition. If you're already using OTel, integrating ClickHouse as your backend database becomes significantly more straightforward, allowing you to leverage its powerful SQL capabilities for querying and analyzing telemetry data. 
+The emergence of open standards and tooling like OpenTelemetry (OTel), Grafana, Fluentd, and Kubernetes further facilitates this transition. If you're already using OTel, integrating ClickHouse as your backend database becomes significantly more straightforward, allowing you to leverage its powerful SQL capabilities for querying and analyzing telemetry data.
 
 ![](/images/engineering-resources/1_observability.png)
 
 By adopting a [SQL-based observability pipeline](https://clickhouse.com/blog/the-state-of-sql-based-observability#the-sql-based-observability-pipeline) with ClickHouse, teams can benefit from:
 
-* Real-Time Analytics: ClickHouse's ability to process analytical queries at millisecond speeds and ingest millions of rows per second makes it ideal for real-time observability tasks.  
-* Cost-effectiveness: The combination of efficient data compression and the ability to separate storage and compute helps reduce the total cost of ownership, making it a cost-effective solution for managing large-scale observability data.  
-* Open standards and interoperability: With support for OpenTelemetry and a wide range of data formats and integrations, ClickHouse ensures that your observability stack remains open and adaptable, avoiding vendor lock-in.  
-* Customization and control: Building your own pipeline allows for customization to meet specific business needs, providing control over data retention, transformation workflows, and visualization tools.
+- Real-Time Analytics: ClickHouse's ability to process analytical queries at millisecond speeds and ingest millions of rows per second makes it ideal for real-time observability tasks.
+- Cost-effectiveness: The combination of efficient data compression and the ability to separate storage and compute helps reduce the total cost of ownership, making it a cost-effective solution for managing large-scale observability data.
+- Open standards and interoperability: With support for OpenTelemetry and a wide range of data formats and integrations, ClickHouse ensures that your observability stack remains open and adaptable, avoiding vendor lock-in.
+- Customization and control: Building your own pipeline allows for customization to meet specific business needs, providing control over data retention, transformation workflows, and visualization tools.
 
 As organizations seek more tailored and cost-effective observability solutions, the SQL-based approach with ClickHouse presents a robust option that aligns with the evolving landscape of data management and analytics.
 
-ClickHouse's "LogHouse" exemplifies this approach's power and efficiency. Deployed as a centralized logging platform within ClickHouse Cloud, it leverages OpenTelemetry for data collection, ClickHouse Cloud for storage, and Grafana for visualization. 
+ClickHouse's "LogHouse" exemplifies this approach's power and efficiency. Deployed as a centralized logging platform within ClickHouse Cloud, it leverages OpenTelemetry for data collection, ClickHouse Cloud for storage, and Grafana for visualization.
 
 This multi-region setup manages over 10 petabytes of telemetry data and compresses it to just 600 terabytes, achieving a 16x compression ratio. The deployment meets extensive logging requirements and demonstrates substantial cost savings. It is estimated to be 300 times more economical than leading commercial SaaS observability providers. This showcases the potential of SQL-based observability to deliver scalable, cost-effective solutions.
 

@@ -1,18 +1,18 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
+import founders from './founders.json'
+import investors from './investors.json'
+import styles from './styles.module.scss'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
-import { Person } from '@/components/person_area'
 import { StrapiImage } from '@/components/StrapiElements'
+import { Person } from '@/components/person_area'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { OurStoryData } from '@/types/ourStory'
-import founders from './founders.json'
-import investors from './investors.json'
-import styles from './styles.module.scss'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -61,7 +61,7 @@ export default function OurStoryPage({
           <div className='pt-10'>
             <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
               <div className='mx-auto flex flex-col text-center'>
-                <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight text-neutral-100  md:text-5.5xl'>
+                <h1 className='mb-4 font-basier text-4xl font-semibold leading-tight text-neutral-100 md:text-5.5xl'>
                   Who we are
                 </h1>
                 <p className='max-w-3xl text-neutral-200'>
@@ -81,7 +81,7 @@ export default function OurStoryPage({
 
           <div>
             <div className='relative pt-10'>
-              <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat  md:px-8 2xl:px-0'>
+              <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 2xl:px-0'>
                 <div className='flex'>
                   <Image
                     src='/images/team-who-we-are.png'
@@ -206,7 +206,7 @@ While we’re in different places, we all have the same goals, and we trust each
               ))}
             </div>
 
-            <div className='flex flex-wrap justify-evenly gap-x-20 gap-y-16 pt-12 '>
+            <div className='flex flex-wrap justify-evenly gap-x-20 gap-y-16 pt-12'>
               {team.darkInvestorLogosPng.map((image, index) => (
                 <StrapiImage
                   key={`investors-${index}`}
@@ -222,7 +222,7 @@ While we’re in different places, we all have the same goals, and we trust each
           <div className='flip-selection w-full rounded-lg bg-primary-300 py-16 text-neutral-0'>
             <div className='container mx-auto flex flex-col 2xl:px-0'>
               <div className='mx-auto flex flex-col text-center'>
-                <SuiTitle type='h2' color='text-default' className='mb-6 '>
+                <SuiTitle type='h2' color='text-default' className='mb-6'>
                   Interested in joining our team?
                 </SuiTitle>
                 <div className='max-w-3xl'>

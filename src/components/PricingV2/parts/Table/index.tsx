@@ -1,5 +1,3 @@
-import React, { Fragment, memo, useCallback } from 'react'
-import { PricingV2EntryPlan } from '@/lib/api/strapi/types'
 import { CUIButton, CUICard } from '../../../ClickUI'
 import HRSeparator from '../../../HRSeparator'
 import { MarkdownMemoized } from '../../../Markdown'
@@ -10,6 +8,8 @@ import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
 import ProviderSelector from '../ProviderSelector'
 import RegionSelector from '../RegionSelector'
+import { PricingV2EntryPlan } from '@/lib/api/strapi/types'
+import React, { Fragment, memo, useCallback } from 'react'
 
 const TableColumn = memo(function TableColumn({
   item,

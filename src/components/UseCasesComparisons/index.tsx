@@ -1,7 +1,7 @@
+import comparisons from './comparisons.json'
 import { ChevronRightIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import Link from 'next/link'
-import comparisons from './comparisons.json'
 
 export default function UseCasesComparisons() {
   return (

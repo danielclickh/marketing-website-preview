@@ -1,9 +1,9 @@
-import React from 'react'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { NavigationItem, NavigationItemProps } from './parts'
 import NavigationSubNavProducts from './sub-navs/NavigationSubNavProducts'
 import NavigationSubNavResources from './sub-navs/NavigationSubNavResources'
 import NavigationSubNavUseCases from './sub-navs/NavigationSubNavUseCases'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import React from 'react'
 
 export interface NavigationProps extends React.HTMLProps<HTMLElement> {
   onItemClick?: NavigationItemProps['onClick']

@@ -1,6 +1,3 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
-import React from 'react'
 import GetStartedFree from '@/components/GetStartedFree'
 import IntegrationPill from '@/components/IntegrationPill'
 import IntegrationTile from '@/components/IntegrationTile'
@@ -19,6 +16,9 @@ import {
 } from '@/lib/utils/revalidationConfig'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { Integration } from '@/types/integrations'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
+import React from 'react'
 
 interface IntegrationPageProps extends CommonProps {
   seo?: SeoMetadata

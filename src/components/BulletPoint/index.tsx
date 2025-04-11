@@ -1,6 +1,7 @@
+import { SuiText } from '../sui/client'
 import Image from 'next/image'
 import { ReactNode } from 'react'
-import { SuiText } from '../sui/client'
+
 interface BulletPointProps {
   text?: string
   className?: string

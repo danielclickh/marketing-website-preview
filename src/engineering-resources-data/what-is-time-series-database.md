@@ -1,11 +1,11 @@
 ---
 title: 'An intro to time-series databases'
 slug: 'what-is-time-series-database'
-excerpt: "In this guide, we’ll learn all about time-series data and its use cases, time-series databases, and how to query time-series data."
+excerpt: 'In this guide, we’ll learn all about time-series data and its use cases, time-series databases, and how to query time-series data.'
 index: 4
 ---
 
-Time-series data is everywhere in modern systems - from IoT sensors and financial markets to application monitoring and user analytics. As organizations collect more temporal data, they need efficient ways to store, process, and analyze it. 
+Time-series data is everywhere in modern systems - from IoT sensors and financial markets to application monitoring and user analytics. As organizations collect more temporal data, they need efficient ways to store, process, and analyze it.
 
 This article explores time-series databases, their use cases, and how different database solutions handle time-based data. Whether you're dealing with millions of sensor readings, tracking user behavior, or monitoring system performance, understanding your options for time-series data storage is crucial for building effective data systems.
 
@@ -17,8 +17,8 @@ For example, while a weather sensor might collect readings at fixed intervals (e
 
 Let’s look at the methods of data collection in a little more detail:
 
-* **Fixed interval sampling:** This method captures data at consistent time points, providing a predictable and continuous stream of information. Examples include weather sensors, heart rate monitors, and energy meters. Since the points are evenly distributed, this data is beneficial for seeing trends over specific periods.  
-* **Event-driven data:** Time-series data can also be captured irregularly, triggered by specific occurrences. For instance, a server logs data each time a particular error occurs, which could happen multiple times in one hour or not for several hours. Other examples include clickstream data from websites (where clicks happen unpredictably) or social media posts, which depend entirely on user activity.
+- **Fixed interval sampling:** This method captures data at consistent time points, providing a predictable and continuous stream of information. Examples include weather sensors, heart rate monitors, and energy meters. Since the points are evenly distributed, this data is beneficial for seeing trends over specific periods.
+- **Event-driven data:** Time-series data can also be captured irregularly, triggered by specific occurrences. For instance, a server logs data each time a particular error occurs, which could happen multiple times in one hour or not for several hours. Other examples include clickstream data from websites (where clicks happen unpredictably) or social media posts, which depend entirely on user activity.
 
 When analyzing time series data, we often **slice or** **group** it by different time periods to understand how it changes over time. This ability to analyze changes across **time** defines time series data—any data that changes in any way over time belongs to this category.
 
@@ -89,9 +89,9 @@ Now that we've defined time-series data and seen some examples, what does storin
 
 Such a database will need to have the following characteristics:
 
-1. **Data volume** \- Time-series data grows rapidly due to the high frequency of measurements, such as sensor readings every second. Traditional databases can struggle to maintain performance when millions of data points are generated in short periods. Instead, we need a database that is optimized for appending new data.  
-2. **Write and query performance** \- Time-series data involves frequent writes (inserting new data points continuously) and complex queries for analysis (e.g., aggregations over time). Our database needs efficient time-based indexing or the ability to sort data by timestamp during ingestion.  
-3. **Efficient storage and compression**—Since time series data often contains many repeated or very similar values, storing it efficiently is crucial. Column-based storage is an advantage here since values in the same column are stored next to each other. We’ll also want to use codecs that allow us to store deltas between values rather than the raw values each time. Delta encoding is one such codec that’s often used when storing timestamps.  
+1. **Data volume** \- Time-series data grows rapidly due to the high frequency of measurements, such as sensor readings every second. Traditional databases can struggle to maintain performance when millions of data points are generated in short periods. Instead, we need a database that is optimized for appending new data.
+2. **Write and query performance** \- Time-series data involves frequent writes (inserting new data points continuously) and complex queries for analysis (e.g., aggregations over time). Our database needs efficient time-based indexing or the ability to sort data by timestamp during ingestion.
+3. **Efficient storage and compression**—Since time series data often contains many repeated or very similar values, storing it efficiently is crucial. Column-based storage is an advantage here since values in the same column are stored next to each other. We’ll also want to use codecs that allow us to store deltas between values rather than the raw values each time. Delta encoding is one such codec that’s often used when storing timestamps.
 4. **Time-based aggregations**—Time-series analysis typically involves time-based queries, such as calculating daily averages or summing metrics over weeks. We need to be able to run these types of queries over large volumes of data while also being able to filter by time period.
 
 Many of these characteristics are the same as those required for [real-time analytics databases](/engineering-resources/what-is-real-time-analytics#characteristics-of-a-real-time-analytics-system).
@@ -104,9 +104,9 @@ Time-series databases can be categorized into three main types: purpose-built ti
 
 Specialized databases engineered from the ground up to efficiently handle time-stamped data, offering optimized temporal data storage and query mechanisms, including as of joins, specialized maths functions, downsampling, grouped gap filling, and more. Some examples are described below:
 
-* [InfluxDB](https://github.com/influxdata/influxdb) \- Specifically designed for time-series data, InfluxDB handles high write loads and provides features like downsampling and data retention policies, making it great for IoT, DevOps metrics, and real-time monitoring.  
-* [QuestDB](https://github.com/questdb/questdb) \- A high-performance open-source time-series database that excels at fast SQL queries and high-throughput ingestion.  
-* [Prometheus](https://github.com/prometheus/prometheus) \- An open-source monitoring system primarily designed for system and service monitoring. Prometheus excels at scraping metrics from various endpoints, storing them efficiently, and enabling alerting based on those metrics. It’s well-suited for use cases like server health monitoring and application performance metrics.
+- [InfluxDB](https://github.com/influxdata/influxdb) \- Specifically designed for time-series data, InfluxDB handles high write loads and provides features like downsampling and data retention policies, making it great for IoT, DevOps metrics, and real-time monitoring.
+- [QuestDB](https://github.com/questdb/questdb) \- A high-performance open-source time-series database that excels at fast SQL queries and high-throughput ingestion.
+- [Prometheus](https://github.com/prometheus/prometheus) \- An open-source monitoring system primarily designed for system and service monitoring. Prometheus excels at scraping metrics from various endpoints, storing them efficiently, and enabling alerting based on those metrics. It’s well-suited for use cases like server health monitoring and application performance metrics.
 
 ### Extensions of relational databases
 
@@ -118,8 +118,8 @@ Traditional relational databases can enhanced with time-series capabilities, com
 
 Systems optimized for rapid large-scale data analysis, using [columnar storage](/engineering-resources/what-is-columnar-database) to enable fast aggregations and real-time processing of time-series information. Some examples are described below:
 
-* [Apache Pinot](https://github.com/apache/pinot) \- Designed for real-time, low-latency analytics, Pinot is well-suited for applications like user-facing dashboards or clickstream analysis, offering sub-second query response times.  
-* [ClickHouse](https://github.com/ClickHouse/ClickHouse) \- That’d be us\! ClickHouse was initially designed to keep records of all clicks by people from all over the Internet but is now used for various time-centric datasets, with a particular focus on observability.
+- [Apache Pinot](https://github.com/apache/pinot) \- Designed for real-time, low-latency analytics, Pinot is well-suited for applications like user-facing dashboards or clickstream analysis, offering sub-second query response times.
+- [ClickHouse](https://github.com/ClickHouse/ClickHouse) \- That’d be us\! ClickHouse was initially designed to keep records of all clicks by people from all over the Internet but is now used for various time-centric datasets, with a particular focus on observability.
 
 ## Querying time-series data
 
@@ -127,11 +127,11 @@ Time-series databases offer specialized query capabilities designed to handle te
 
 Most time-series databases extend standard SQL with specialized functions for temporal analysis. These extensions typically include:
 
-* Time-based window functions for analyzing data over specific time intervals  
-* Gap filling to handle missing data points  
-* Interpolation functions to estimate values between known data points  
-* Time bucket operations for grouping data into regular time intervals  
-* Specialized mathematical functions for time-series analysis
+- Time-based window functions for analyzing data over specific time intervals
+- Gap filling to handle missing data points
+- Interpolation functions to estimate values between known data points
+- Time bucket operations for grouping data into regular time intervals
+- Specialized mathematical functions for time-series analysis
 
 Prometheus uses a domain-specific query language called [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/), specifically designed for time-series analysis and monitoring use cases. PromQL has built-in support for rate calculations and aggregations over time, native handling of labels and label matching, and vector and range vector selectors. It's particularly well-suited for monitoring scenarios where you must analyze metrics over time windows and create alerting rules.
 
@@ -139,22 +139,21 @@ InfluxDB initially used a query language called InfluxQL, which was SQL-like but
 
 ## Is ClickHouse a time-series database?
 
-While ClickHouse isn't specifically designed as a time-series database, it excels at handling time-series workloads as part of its broader analytical capabilities. 
+While ClickHouse isn't specifically designed as a time-series database, it excels at handling time-series workloads as part of its broader analytical capabilities.
 
 As a columnar OLAP database, ClickHouse provides the performance and features needed for efficient time-series analysis without the limitations of a specialized solution.
 
 ClickHouse's strengths in handling time-series data come from several key capabilities:
 
-* Real-time querying of large datasets, enabling analysis of historical and current data at scale  
-* Support for [high-precision timestamps](https://clickhouse.com/docs/en/sql-reference/data-types/datetime64) and date-time operations  
-* Rich set of temporal functions for [time-based aggregations](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions), [window operations](https://clickhouse.com/docs/en/sql-reference/window-functions), and more.
+- Real-time querying of large datasets, enabling analysis of historical and current data at scale
+- Support for [high-precision timestamps](https://clickhouse.com/docs/en/sql-reference/data-types/datetime64) and date-time operations
+- Rich set of temporal functions for [time-based aggregations](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions), [window operations](https://clickhouse.com/docs/en/sql-reference/window-functions), and more.
 
 Additionally, ClickHouse offers features that are particularly valuable for long-term time-series data management:
 
-* [Materialized views](https://clickhouse.com/docs/en/materialized-view) for maintaining pre-aggregated data efficiently  
-* Support for [aggregate states](https://clickhouse.com/blog/aggregate-functions-combinators-in-clickhouse-for-arrays-maps-and-states#working-with-aggregation-states) that enable flexible roll-up strategies  
-* [Time-to-live (TTL) functionality](https://clickhouse.com/docs/en/guides/developer/ttl) that can automatically manage data retention and aggregation levels
-
+- [Materialized views](https://clickhouse.com/docs/en/materialized-view) for maintaining pre-aggregated data efficiently
+- Support for [aggregate states](https://clickhouse.com/blog/aggregate-functions-combinators-in-clickhouse-for-arrays-maps-and-states#working-with-aggregation-states) that enable flexible roll-up strategies
+- [Time-to-live (TTL) functionality](https://clickhouse.com/docs/en/guides/developer/ttl) that can automatically manage data retention and aggregation levels
 
 These capabilities mean you can implement sophisticated time-series storage strategies, such as keeping recent data at full granularity while automatically rolling up older data to save space. This approach provides both detailed recent data for operational needs and efficient storage of historical data for long-term analysis.
 
@@ -162,4 +161,4 @@ ClickHouse also expands its time-series capabilities with experimental features 
 
 Rather than being limited to time-series-specific functionality, ClickHouse allows you to handle time-series workloads alongside other analytical queries, providing a more versatile solution for organizations with diverse data analysis needs.
 
-➡️ Read more in [Can I use ClickHouse as a Time-Series Database?](https://clickhouse.com/docs/en/faq/use-cases/time-series) and [Working with Time Series Data in ClickHouse](https://clickhouse.com/blog/working-with-time-series-data-and-functions-ClickHouse).  
+➡️ Read more in [Can I use ClickHouse as a Time-Series Database?](https://clickhouse.com/docs/en/faq/use-cases/time-series) and [Working with Time Series Data in ClickHouse](https://clickhouse.com/blog/working-with-time-series-data-and-functions-ClickHouse).

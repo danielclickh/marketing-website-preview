@@ -1,5 +1,5 @@
-import { EventType } from '@/types/events'
 import EventPost from '../EventPostList/EventPost'
+import { EventType } from '@/types/events'
 
 function RecentEvents({ events }: { events: Array<EventType> }) {
   return (

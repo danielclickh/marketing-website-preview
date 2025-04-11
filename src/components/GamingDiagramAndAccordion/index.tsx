@@ -1,7 +1,7 @@
+import GamingDiagram from '../GamingDiagram'
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import GamingDiagram from '../GamingDiagram'
 
 export default function GamingDiagramAndAccordion() {
   const [dataIngestion, setDataIngestion] = useState(false)
@@ -21,7 +21,7 @@ export default function GamingDiagramAndAccordion() {
       id='diagramTop'>
       <div className='lg:w-3/5 xl:mb-0'>
         <GamingDiagram
-          className='w-full h-auto'
+          className='h-auto w-full'
           applications={showAll || applications}
           objectStorage={showAll || objectStorage}
           mysqlInterface={showAll || applications}
@@ -29,7 +29,7 @@ export default function GamingDiagramAndAccordion() {
           clickhouse={showAll || dataTransformations}
         />
       </div>
-      <div className='w-full pt-4 lg:w-2/5 2xl:pt-2 space-y-4'>
+      <div className='w-full space-y-4 pt-4 lg:w-2/5 2xl:pt-2'>
         <AccordionItem
           handle='Data ingestion'
           open={dataIngestion}
@@ -41,7 +41,7 @@ export default function GamingDiagramAndAccordion() {
               setApplications(false)
             }
           }}>
-          <div className='space-y-4 text-white/80 text-sm'>
+          <div className='space-y-4 text-sm text-white/80'>
             <p>
               Access to live data is vital for real-time analytics. With{' '}
               <Link
@@ -108,7 +108,7 @@ export default function GamingDiagramAndAccordion() {
               setApplications(false)
             }
           }}>
-          <div className='space-y-4 text-white/80 text-sm'>
+          <div className='space-y-4 text-sm text-white/80'>
             <p>
               Data transformations are common pillars in many gaming analytics
               workflows. With ClickHouse,{' '}
@@ -159,7 +159,7 @@ export default function GamingDiagramAndAccordion() {
               setApplications(false)
             }
           }}>
-          <div className='space-y-4 text-white/80 text-sm'>
+          <div className='space-y-4 text-sm text-white/80'>
             <p>
               ClickHouse delivers the most efficient JSON storage for analytical
               workloads, significantly{' '}
@@ -207,7 +207,7 @@ export default function GamingDiagramAndAccordion() {
               setObjectStorage(false)
             }
           }}>
-          <div className='space-y-4 text-white/80 text-sm'>
+          <div className='space-y-4 text-sm text-white/80'>
             <p>
               ClickHouse is relied on by gaming companies all over the world to
               unlock value from data as soon as it arrives, powering user-facing
@@ -256,9 +256,9 @@ function AccordionItem({
           event.preventDefault()
           onChange(!open)
         }}
-        className={`py-3 w-full flex items-center justify-between rounded-sm border border-jet p-4 text-base font-medium leading-none outline-none cursor-pointer hover:bg-neutral-750/40 xl:pr-6 ${open ? 'rounded-b-none border-b-0 bg-neutral-750/40 pb-2' : 'bg-neutral-900/80'}`}>
+        className={`flex w-full cursor-pointer items-center justify-between rounded-sm border border-jet p-4 py-3 text-base font-medium leading-none outline-none hover:bg-neutral-750/40 xl:pr-6 ${open ? 'rounded-b-none border-b-0 bg-neutral-750/40 pb-2' : 'bg-neutral-900/80'}`}>
         <div>{handle}</div>
-        <div className='relative w-6 aspect-square'>
+        <div className='relative aspect-square w-6'>
           <PlusIcon
             className={`absolute inset-0 transition duration-300 ${open ? '-rotate-180 opacity-0' : ''}`}
           />
@@ -268,7 +268,7 @@ function AccordionItem({
         </div>
       </button>
       <div
-        className={`rounded-b-md border-t-0 border p-4 pt-2 border-jet overflow-y-auto bg-neutral-750 ${open ? '' : 'hidden'}`}>
+        className={`overflow-y-auto rounded-b-md border border-t-0 border-jet bg-neutral-750 p-4 pt-2 ${open ? '' : 'hidden'}`}>
         {children}
       </div>
     </div>

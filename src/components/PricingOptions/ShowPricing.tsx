@@ -1,9 +1,10 @@
+import { calculateComputeMargin } from '../PricingCalculator/CalculatorTypesOptions'
+import { usePricing } from './PricingContext'
+import { calculateStorageCost } from '@/lib/m3ter/costs'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { useRef, useState } from 'react'
-import { calculateStorageCost } from '@/lib/m3ter/costs'
-import { calculateComputeMargin } from '../PricingCalculator/CalculatorTypesOptions'
-import { usePricing } from './PricingContext'
+
 function InfoTooltip({ content }: { content: string }) {
   const triggerRef = useRef(null)
   return (

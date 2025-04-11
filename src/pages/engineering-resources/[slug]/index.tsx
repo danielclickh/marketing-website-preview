@@ -1,14 +1,10 @@
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { ParsedUrlQuery } from 'querystring'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
-import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import NewsLetterForm from '@/components/NewsLetter/NewsLetterForm'
+import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import SocialButton from '@/components/SocialButton'
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '@/components/sui'
 import {
@@ -19,6 +15,10 @@ import { EngineeringResource } from '@/lib/engineering-resources/types'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import { CommonProps, NewsLetterData } from '@/types/homepage'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ParsedUrlQuery } from 'querystring'
 
 type MoreLikeThisItem = {
   link: string
@@ -141,7 +141,7 @@ export default function Page({
             </div>
             <aside className='w-full flex-shrink-0 flex-grow-0 align-top lg:sticky lg:top-32 lg:max-w-sm'>
               {moreLikeThis.length > 0 && (
-                <div className='mb-8 '>
+                <div className='mb-8'>
                   <h3 className='mb-6 text-lg font-bold'>More like this</h3>
                   {(
                     moreLikeThis as EngineeringResourcesPageProps['moreLikeThis']

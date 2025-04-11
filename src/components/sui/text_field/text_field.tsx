@@ -1,6 +1,6 @@
+import styles from './Text.module.scss'
 import { EyeIcon } from '@heroicons/react/solid'
 import { HTMLAttributes } from 'react'
-import styles from './Text.module.scss'
 
 interface TextFieldProps extends HTMLAttributes<HTMLInputElement> {
   htmlFor: string

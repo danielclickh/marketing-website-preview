@@ -1,6 +1,6 @@
-import { v4 as uuid } from 'uuid'
 import { ErrorHandler, GalaxyClient, HttpClient } from '../client'
 import { enableGalaxyLogging } from '../logging'
+import { v4 as uuid } from 'uuid'
 
 declare global {
   interface Window {

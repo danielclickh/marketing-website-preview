@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { SuiText } from '../sui'
+import Image from 'next/image'
 
 export default function Feature({
   feature

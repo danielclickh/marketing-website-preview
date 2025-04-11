@@ -1,5 +1,5 @@
-import Image, { ImageProps } from 'next/image'
 import clickhouse from './logo.svg'
+import Image, { ImageProps } from 'next/image'
 
 export interface ClickHousePartnerLogoProps {
   logo: ImageProps['src']
@@ -47,7 +47,7 @@ function Tile({
 }) {
   return (
     <div
-      className={`relative w-16 lg:w-32 aspect-square flex items-center justify-center flex-shrink-0 flex-grow-0 ${className}`}>
+      className={`relative flex aspect-square w-16 flex-shrink-0 flex-grow-0 items-center justify-center lg:w-32 ${className}`}>
       <div className='absolute inset-3 lg:inset-4'>
         <Image
           src={src}
@@ -56,7 +56,7 @@ function Tile({
           height={100}
           loading='eager'
           priority
-          className='absolute w-full h-full object-scale-down object-center'
+          className='absolute h-full w-full object-scale-down object-center'
         />
       </div>
     </div>

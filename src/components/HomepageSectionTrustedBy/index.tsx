@@ -1,7 +1,7 @@
+import LogoCarousel from '../LogoCarousel'
+import { HomepageCustomerStories } from '@/types/homepage'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import { HomepageCustomerStories } from '@/types/homepage'
-import LogoCarousel from '../LogoCarousel'
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories

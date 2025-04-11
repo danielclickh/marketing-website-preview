@@ -1,19 +1,3 @@
-import { GetStaticProps } from 'next'
-import Image, { ImageProps } from 'next/image'
-import Link from 'next/link'
-import React, { CSSProperties } from 'react'
-import CdcAnimation from '@/components/CdcAnimation'
-import { CUIButton } from '@/components/ClickUI'
-import Layout from '@/components/Layout'
-import LinedIconCard from '@/components/LinedIconCard'
-import QuoteCard from '@/components/QuoteCard'
-import { SuiText, SuiTitle } from '@/components/sui'
-import {
-  useGalaxyOnClick,
-  useGalaxyOnPage
-} from '@/lib/galaxy/galaxy'
-import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { CommonProps } from '@/types/homepage'
 import imageAddPostgresSource from './assets/add-postgres-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageDataSource1 from './assets/data-source-logo-1.png'
@@ -39,6 +23,19 @@ import logoVapiPng from './assets/logo-vapi.png'
 import logoVuelingPng from './assets/logo-vueling.png'
 import logoVueling from './assets/logo-vueling.svg'
 import imageMonitorPipe from './assets/monitor-pipe.png'
+import CdcAnimation from '@/components/CdcAnimation'
+import { CUIButton } from '@/components/ClickUI'
+import Layout from '@/components/Layout'
+import LinedIconCard from '@/components/LinedIconCard'
+import QuoteCard from '@/components/QuoteCard'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { CommonProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
+import Image, { ImageProps } from 'next/image'
+import Link from 'next/link'
+import React, { CSSProperties } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -132,7 +129,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <div
-        className='relative bg-shadow-element yellow-shadow shadow-circle my-20 lg:my-24'
+        className='bg-shadow-element yellow-shadow shadow-circle relative my-20 lg:my-24'
         style={
           {
             '--top-side': '130%',
@@ -140,8 +137,8 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
           } as CSSProperties
         }>
         <div className='section-container relative z-10'>
-          <div className='w-full mx-auto space-y-6 lg:max-w-4xl text-center'>
-            <div className='flex justify-center mb-10'>
+          <div className='mx-auto w-full space-y-6 text-center lg:max-w-4xl'>
+            <div className='mb-10 flex justify-center'>
               <CdcAnimation
                 logo={
                   <Image
@@ -190,28 +187,28 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       <SuiText
         weight='bold'
         size='sm'
-        className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+        className='mb-8 text-center uppercase tracking-[0.0875rem] text-primary-300'>
         Our postgres CDC connector is already Trusted by
       </SuiText>
       <div className='mask-logos-carousel'>
         <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
-          <div className='flex items-center whitespace-nowrap animate-marqueeLeft'>
+          <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
             {logos.map((logo, logoIndex) => {
               return (
                 <div
                   key={logoIndex}
-                  className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                  className='w-max flex-shrink-0 flex-grow-0 px-6'>
                   <Image {...logo} className='opacity-75' />
                 </div>
               )
             })}
           </div>
-          <div className='flex items-center whitespace-nowrap animate-marqueeLeft'>
+          <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
             {logos.map((logo, logoIndex) => {
               return (
                 <div
                   key={logoIndex}
-                  className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                  className='w-max flex-shrink-0 flex-grow-0 px-6'>
                   <Image {...logo} className='opacity-75' />
                 </div>
               )
@@ -221,7 +218,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Cards */}
-      <div className='section-container mt-20 mb-16'>
+      <div className='section-container mb-16 mt-20'>
         <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
           <div className='p-4 lg:w-1/3'>
             <LinedIconCard
@@ -274,10 +271,10 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
           <SuiText
             weight='bold'
             size='sm'
-            className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+            className='mb-8 text-center uppercase tracking-[0.0875rem] text-primary-300'>
             supports a wide range of Postgres data sources
           </SuiText>
-          <div className='flex justify-center items-center gap-8 md:gap-10 lg:gap-16 flex-wrap'>
+          <div className='flex flex-wrap items-center justify-center gap-8 md:gap-10 lg:gap-16'>
             <Image
               src={imageDataSource1}
               alt='Data source 1'
@@ -459,7 +456,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Get started */}
-      <div className='section-container my-20 lg:my-28 md:px-8 2xl:px-0'>
+      <div className='section-container my-20 md:px-8 lg:my-28 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
             Get started with ClickHouse{' '}

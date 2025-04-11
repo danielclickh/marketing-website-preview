@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import { Integration } from '@/types/integrations'
 import { CUICard } from '../ClickUI'
-import { ExternalLink } from '../icons/ExternalLink'
 import IntegrationSupportPill from '../IntegrationPill'
 import { StrapiImage } from '../StrapiElements'
+import { ExternalLink } from '../icons/ExternalLink'
 import { SuiTitle } from '../sui'
+import { Integration } from '@/types/integrations'
+import Link from 'next/link'
 
 export default function IntegrationTile({
   name,
@@ -38,7 +38,7 @@ export default function IntegrationTile({
             </div>
           )}
           {openInNewWindow && (
-            <ExternalLink className='absolute right-3 top-3 text-primary-300 opacity-0 transition-opacity  group-hover:opacity-100 group-hover:delay-75 group-hover:ease-in-out' />
+            <ExternalLink className='absolute right-3 top-3 text-primary-300 opacity-0 transition-opacity group-hover:opacity-100 group-hover:delay-75 group-hover:ease-in-out' />
           )}
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
             {!!tileLogo && (

@@ -1,7 +1,3 @@
-import { CalendarIcon } from '@heroicons/react/outline'
-import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import CategorySelector from '@/components/CategorySelector'
 import { CUILink } from '@/components/ClickUI'
 import EventPost from '@/components/EventPostList/EventPost'
@@ -10,16 +6,16 @@ import NewsItem from '@/components/NewsItem'
 import RecentEvents from '@/components/RecentEvents'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiTitle } from '@/components/sui'
-import {
-  findAll,
-  findOne,
-  getStagingOnlyFilters
-} from '@/lib/api/strapi'
+import { findAll, findOne, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventType } from '@/types/events'
 import { NewsAndEventsData, NewsEventProps } from '@/types/newsEvents'
+import { CalendarIcon } from '@heroicons/react/outline'
+import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<NewsEventProps> =
   async function getServerSideProps() {
@@ -224,7 +220,7 @@ export default function News({
                         {featuredEvent.category !== 'On-Demand Webinar' ? (
                           <div className='mb-4 flex items-center space-x-3'>
                             <CalendarIcon className='h-6 w-6 stroke-1 text-neutral-200' />
-                            <div className=' text-neutral-200'>
+                            <div className='text-neutral-200'>
                               {featuredEvent.localDatetime && (
                                 <div className='text-sm text-neutral-300'>
                                   {convertDateToString(
@@ -256,7 +252,7 @@ export default function News({
                               d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
                             />
                           </svg>
-                          <div className=' text-neutral-200'>
+                          <div className='text-neutral-200'>
                             {featuredEvent.location && (
                               <div className='text-sm text-neutral-300'>
                                 <span>
@@ -345,7 +341,7 @@ export default function News({
         <h2 className='mb-6 font-basier text-4xl font-semibold text-neutral-100'>
           {latestNewsTitle}
         </h2>
-        <div className='grid gap-12 md:grid-cols-2 '>
+        <div className='grid gap-12 md:grid-cols-2'>
           {newsItems.map((newsItem) => (
             <NewsItem
               key={newsItem.headline}

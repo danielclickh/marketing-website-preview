@@ -1,5 +1,5 @@
-import React from 'react'
 import { usePricing } from './PricingContext'
+import React from 'react'
 
 interface PlanPricingProps {
   isFirst: boolean

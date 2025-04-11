@@ -1,4 +1,5 @@
 import RealTimeDiagram from './SvgSection1'
+
 interface DiagramProps {
   className?: string
   sectionId?: number

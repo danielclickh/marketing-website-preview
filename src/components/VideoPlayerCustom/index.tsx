@@ -1,6 +1,6 @@
+import VideoPlayButton from '../../../public/images/VideoPlayButton'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import VideoPlayButton from '../../../public/images/VideoPlayButton'
 
 interface Video {
   videoId: string
@@ -85,7 +85,7 @@ export default function VideoPlayerCustom({ videos, fullWidth }: VideosProps) {
           fullWidth
             ? 'mx-auto max-w-4xl'
             : 'grid grid-cols-1 md:grid-cols-2 md:flex-row lg:grid-cols-4'
-        }  gap-6 px-4 xl:gap-10 2xl:px-0`}>
+        } gap-6 px-4 xl:gap-10 2xl:px-0`}>
         {videos.map((video) => {
           return (
             <div
@@ -128,7 +128,7 @@ export default function VideoPlayerCustom({ videos, fullWidth }: VideosProps) {
           className='fixed left-0 top-0 z-[60] w-full overflow-hidden bg-neutral-725/90 backdrop-blur-[10px]'>
           <div
             id='videoPlayerContainer'
-            className={`relative z-[60] mx-auto min-h-screen  px-4 pt-20 md:pt-10  ${
+            className={`relative z-[60] mx-auto min-h-screen px-4 pt-20 md:pt-10 ${
               isShortScreen ? 'max-w-3xl' : 'max-w-3xl 2xl:max-w-7xl'
             }`}>
             <div

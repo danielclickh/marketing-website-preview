@@ -1,15 +1,15 @@
-import { MenuIcon, XIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import logoFull from '../../../../public/logo-full.svg'
 import { CUIButton, CUILink } from '../../ClickUI'
 import { HeaderProps } from '../../Header/types'
 import HeaderRegionSelector from '../../HeaderRegionSelector'
-import GitHub from '../../icons/GitHub'
 import LinkWithArrow from '../../LinkWithArrow'
+import GitHub from '../../icons/GitHub'
 import Navigation from '../Navigation'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { MenuIcon, XIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Header({
   github = { stars: 38000 },
@@ -215,7 +215,7 @@ export default function Header({
                 target='_blank'
                 weight='medium'
                 href='https://console.clickhouse.cloud/signUp?loc=nav-get-started'
-                className={`w-full md-mid:w-auto  ${eyebrow?.className || ''}`}
+                className={`w-full md-mid:w-auto ${eyebrow?.className || ''}`}
                 linkClass='w-full md-mid:w-auto'
                 onClick={useGalaxyOnClick('topNav.navItems.getStartedSelect')}>
                 <span id='nav-bar-cta-button'>開始する</span>

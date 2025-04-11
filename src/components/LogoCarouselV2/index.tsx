@@ -1,3 +1,5 @@
+import { SuiText } from '../sui'
+import styles from './styles.module.scss'
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -5,8 +7,6 @@ import 'swiper/css'
 import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
-import { SuiText } from '../sui'
-import styles from './styles.module.scss'
 
 export interface LogoItem extends ImageProps {
   link?: Omit<

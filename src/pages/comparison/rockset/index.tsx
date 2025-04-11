@@ -1,8 +1,4 @@
-import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
+import faqs from '../../use-cases/real-time-analytics/faqs.json'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import HRSeparator from '@/components/HRSeparator'
@@ -16,7 +12,11 @@ import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ContactProps } from '@/types/contact'
-import faqs from '../../use-cases/real-time-analytics/faqs.json'
+import { ArrowDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRef, useState } from 'react'
 
 interface PageProps {
   customerStories: any
@@ -222,7 +222,7 @@ export default function Page({
             </div>
           </div>
         </div>
-        <div className='bg-neutral-725 '>
+        <div className='bg-neutral-725'>
           <div className='bg-shadow-element-left red-shadow section-container max-w-7xl'>
             <div className='flex flex-col justify-between py-16 xl:flex-row xl:px-12'>
               <div className='mb-10 xl:mb-0 xl:min-w-[540px]'>
@@ -331,7 +331,7 @@ export default function Page({
 
         <div className='relative z-10 mx-auto bg-primary-300'>
           <div className='relative z-10 mx-auto max-w-7xl'>
-            <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0 '>
+            <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0'>
               <div className='flip-selection mx-auto flex flex-col text-center'>
                 <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
                   Trusted by developers that work with data at{' '}
@@ -353,7 +353,7 @@ export default function Page({
           </div>
         </div>
 
-        <div className='bg-shadow-element-right yellow-shadow '>
+        <div className='bg-shadow-element-right yellow-shadow'>
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
               href='https://console.clickhouse.cloud/signUp?loc=rockset-comparison-getstarted-footer'

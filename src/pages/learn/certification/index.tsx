@@ -1,21 +1,21 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
+import faqs from './faqs.json'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import FAQDynamic from '@/components/FAQDynamic'
+import Layout from '@/components/Layout'
+import LogoCarousel from '@/components/LogoCarousel'
 import Bullseye from '@/components/icons/Bullseye'
 import Clock from '@/components/icons/Clock'
 import Coins from '@/components/icons/Coins'
 import FileDashed from '@/components/icons/FileDashed'
 import Globe from '@/components/icons/Globe'
-import Layout from '@/components/Layout'
-import LogoCarousel from '@/components/LogoCarousel'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { LearnProps } from '@/types/learn'
-import faqs from './faqs.json'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -178,7 +178,7 @@ export default function CertificationPage({
               training.
             </p>
 
-            <div className='flex flex-col gap-2 '>
+            <div className='flex flex-col gap-2'>
               <Feature
                 icon={<Bullseye className='h-auto w-full' />}
                 value='Recommended for ClickHouse experts who handle app creation, data ingestion, modeling, query efficiency, and optimization.'

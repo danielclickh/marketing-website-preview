@@ -1,7 +1,7 @@
-import { SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
 import { BlogPost as BlogPostType } from './blogs'
 import { HomepageCustomerStories } from './homepage'
 import { CommonProps } from './homepage'
+import { SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
 
 interface Painpoint {
   Title: string

@@ -1,10 +1,10 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
-import Link from 'next/link'
 import { CUICard, CUILink } from '../ClickUI'
 import HRSeparator from '../HRSeparator'
 import { SuiText, SuiTitle } from '../sui'
 import ArrowsUp from './arrowsUp'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function SupportProgram(props: any) {
   return (
@@ -35,7 +35,7 @@ export default function SupportProgram(props: any) {
           </SuiText>
         </div>
 
-        <div className='mx-auto grid max-w-3xl gap-x-10 px-4 pb-12 text-center sm:px-8 md:grid-cols-2 2xl:px-0 '>
+        <div className='mx-auto grid max-w-3xl gap-x-10 px-4 pb-12 text-center sm:px-8 md:grid-cols-2 2xl:px-0'>
           <Link
             href='https://console.clickhouse.cloud/support'
             target='_blank'
@@ -102,7 +102,7 @@ export default function SupportProgram(props: any) {
           </svg>
           <div className='bg-primary-300 pb-16 pt-10 text-neutral-800 md:pt-0'>
             <div className='flip-selection mx-auto max-w-3xl px-8 text-center text-base'>
-              <p className='mb-4 '>
+              <p className='mb-4'>
                 Please note that only Subscription or Cloud Trial customers have
                 initial response time targets on support incidents. If you are
                 not currently a ClickHouse Cloud customer – while we will try to
@@ -131,12 +131,10 @@ export default function SupportProgram(props: any) {
           />
         </div>
         <div className='text-center'>
-          <h2
-            className='mb-2 text-4xl font-semibold
-          '>
+          <h2 className='mb-2 text-4xl font-semibold'>
             ClickHouse Cloud support details
           </h2>
-          <p className='pb-16 pt-2 text-base mx-auto text-neutral-200 max-w-3xl'>
+          <p className='mx-auto max-w-3xl pb-16 pt-2 text-base text-neutral-200'>
             ClickHouse includes support services for all users and customers of
             ClickHouse Cloud. Our ClickHouse Support Services Policy can be
             found{' '}
@@ -152,10 +150,10 @@ export default function SupportProgram(props: any) {
               <thead>
                 <tr>
                   <th></th>
-                  <th className='border border-neutral-700 bg-neutral-750 p-0 max-w-72'>
-                    <div className='p-3  text-neutral-100'>Trial</div>
+                  <th className='max-w-72 border border-neutral-700 bg-neutral-750 p-0'>
+                    <div className='p-3 text-neutral-100'>Trial</div>
                   </th>
-                  <th className='border border-neutral-700 bg-neutral-750 p-0 max-w-72'>
+                  <th className='max-w-72 border border-neutral-700 bg-neutral-750 p-0'>
                     <div className='p-3 text-neutral-100'>
                       ClickHouse Cloud monthly "pay as you go" or annual
                     </div>
@@ -167,7 +165,7 @@ export default function SupportProgram(props: any) {
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
                     <strong>Learning</strong>
                   </td>
-                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4 '>
+                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     <p>
                       <a href='https://console.clickhouse.cloud/learn'>
                         On-demand training included
@@ -177,7 +175,7 @@ export default function SupportProgram(props: any) {
                       <a href='https://clickhouse.com/docs/'>Docs</a>
                     </p>
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     <p>
                       <a href='https://console.clickhouse.cloud/learn'>
                         On-demand training included
@@ -198,7 +196,7 @@ export default function SupportProgram(props: any) {
                       <li>Business day support only</li>
                     </ul>
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     <ul>
                       <li>Unlimited support cases</li>
                       <li>24x7 support for Sev-1</li>
@@ -210,11 +208,11 @@ export default function SupportProgram(props: any) {
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
                     <strong>Expert sessions</strong>
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     1 live expert session included for <br />
                     virtual consultative support guidance
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     Unlimited live expert sessions for virtual <br />
                     consultative support guidance
                   </td>
@@ -223,10 +221,10 @@ export default function SupportProgram(props: any) {
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
                     <strong>TAM Architect</strong>
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     Not available
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4'>
+                  <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     Available as an additional purchase
                     <br /> for Support
                   </td>
@@ -235,14 +233,14 @@ export default function SupportProgram(props: any) {
                   <td className='w-64 border border-neutral-700 bg-neutral-750 px-3 text-left text-neutral-100'>
                     <strong>Professional services</strong>
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4 max-w-72'>
+                  <td className='max-w-72 border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     ClickHouse Cloud consultancy packages available for purchase{' '}
                     <br />
                     SOW available for purchase <br />
                     &nbsp;&nbsp;&nbsp;&nbsp; Virtual + additional T&amp;E for
                     onsite
                   </td>
-                  <td className='border-r border-r-neutral-700  bg-neutral-750 p-4 max-w-72'>
+                  <td className='max-w-72 border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     ClickHouse Cloud consultancy packages available for purchase{' '}
                     <br />
                     SOW available for purchase <br />
@@ -288,7 +286,7 @@ export default function SupportProgram(props: any) {
               Major business impact
             </span>
           </div>
-          <div className='col-span-3 border-b border-b-neutral-700 p-6  text-neutral-200'>
+          <div className='col-span-3 border-b border-b-neutral-700 p-6 text-neutral-200'>
             A Severity Level 2 issue is an error within the Software or
             ClickHouse Cloud where the Customer's system is functioning for
             production purposes but in a reduced capacity, such as a problem
@@ -306,7 +304,7 @@ export default function SupportProgram(props: any) {
               Minor business impact or general questions
             </span>
           </div>
-          <div className='col-span-3 p-6  text-neutral-200'>
+          <div className='col-span-3 p-6 text-neutral-200'>
             A Severity Level 3 issue is a medium-to-low impact error that
             involves partial and/or non-critical loss of functionality for
             production purposes or development purposes, such as a problem that
@@ -332,25 +330,25 @@ export default function SupportProgram(props: any) {
           Classification of severity levels for issues reported and response
           times.
         </p>
-        <div className='overflow-x-auto grid max-w-5xl grid-cols-1 mx-auto w-full horiz rounded-lg border border-neutral-700 bg-neutral-800 border-b-neutral-700 text-neutral-200'>
-          <table className='relative z-20 mx-auto text-neutral-200 w-full'>
+        <div className='horiz mx-auto grid w-full max-w-5xl grid-cols-1 overflow-x-auto rounded-lg border border-neutral-700 border-b-neutral-700 bg-neutral-800 text-neutral-200'>
+          <table className='relative z-20 mx-auto w-full text-neutral-200'>
             <thead>
               <tr>
                 <th className='border-r border-neutral-700 p-0'>
-                  <p className='p-3 text-neutral-100 border-b border-neutral-700'>
+                  <p className='border-b border-neutral-700 p-3 text-neutral-100'>
                     Severity level
                   </p>
                 </th>
-                <th className='border-r border-neutral-700 hover:bg-neutral-750 p-0 border-b'>
+                <th className='border-b border-r border-neutral-700 p-0 hover:bg-neutral-750'>
                   <p className='p-3 text-neutral-100'>Trial</p>
                 </th>
-                <th className='border-r border-neutral-700 hover:bg-neutral-750 p-0 border-b'>
+                <th className='border-b border-r border-neutral-700 p-0 hover:bg-neutral-750'>
                   <p className='p-3 text-neutral-100'>Basic</p>
                 </th>
-                <th className='border-r border-neutral-700 hover:bg-neutral-750 p-0 border-b'>
+                <th className='border-b border-r border-neutral-700 p-0 hover:bg-neutral-750'>
                   <p className='p-3 text-neutral-100'>Scale</p>
                 </th>
-                <th className='border-neutral-700 p-0 border-b'>
+                <th className='border-b border-neutral-700 p-0'>
                   <p className='p-3 text-neutral-100'>Enterprise</p>
                 </th>
               </tr>
@@ -358,61 +356,61 @@ export default function SupportProgram(props: any) {
             <tbody>
               <tr className='w-full text-center'>
                 <td className='border-r border-neutral-700 p-0'>
-                  <p className='p-3 text-neutral-100 font-semibold'>
+                  <p className='p-3 font-semibold text-neutral-100'>
                     Severity 1
                   </p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
                   <p className='p-3'>Not available</p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 0'>Not available</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='0 p-3'>Not available</p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>1 hour 24x7</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>1 hour 24x7</p>
                 </td>
-                <td className=' border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>30 minute 24x7</p>
+                <td className='border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>30 minute 24x7</p>
                 </td>
               </tr>
 
               <tr className='text-center'>
                 <td className='border-r border-neutral-700 p-0'>
-                  <p className='p-3 text-neutral-100 font-semibold'>
+                  <p className='p-3 font-semibold text-neutral-100'>
                     Severity 2
                   </p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>Not available</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>Not available</p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>Not available</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>Not available</p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>4 business hours</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>4 business hours</p>
                 </td>
-                <td className=' border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>2 business hours</p>
+                <td className='border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>2 business hours</p>
                 </td>
               </tr>
 
               <tr className='text-center'>
                 <td className='border-r border-neutral-700 p-0'>
-                  <p className='p-3 text-neutral-100 font-semibold'>
+                  <p className='p-3 font-semibold text-neutral-100'>
                     Severity 3
                   </p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>1 business day</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>1 business day</p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>1 business day</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>1 business day</p>
                 </td>
-                <td className='border-r border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>1 business day</p>
+                <td className='border-r border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>1 business day</p>
                 </td>
-                <td className='border-neutral-700 hover:bg-neutral-750 p-0'>
-                  <p className='p-3 '>1 business day</p>
+                <td className='border-neutral-700 p-0 hover:bg-neutral-750'>
+                  <p className='p-3'>1 business day</p>
                 </td>
               </tr>
             </tbody>
@@ -421,16 +419,14 @@ export default function SupportProgram(props: any) {
         <SuiText
           size='sm'
           color='muted'
-          className='mt-6 text-center flex justify-end'>
+          className='mt-6 flex justify-end text-center'>
           (*) Business hours are Monday 00:00 UTC to Saturday 00:00 UTC
         </SuiText>
       </div>
 
       <HRSeparator className='my-30' />
-      <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto mb-30 flex  flex-col items-center'>
-        <h2
-          className='mb-20 text-center text-4xl font-semibold
-          '>
+      <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto mb-30 flex flex-col items-center'>
+        <h2 className='mb-20 text-center text-4xl font-semibold'>
           Support and escalation levels
         </h2>
         <div className='grid w-full max-w-2xl grid-cols-1 gap-y-2'>
@@ -508,9 +504,7 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
         </div>
-        <p
-          className='max-w-3xl pt-32 text-center text-base leading-relaxed text-neutral-200
-        '>
+        <p className='max-w-3xl pt-32 text-center text-base leading-relaxed text-neutral-200'>
           Our ClickHouse Support Services team is focused not only on your quick
           questions or break-fix issues, but also on your hardest questions such
           as how to define your schema, how to model your data, or how to

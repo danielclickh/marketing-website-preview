@@ -1,7 +1,7 @@
-import { ChevronRightIcon } from '@heroicons/react/outline'
-import Image from 'next/image'
 import { CUIButton } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
+import { ChevronRightIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
 
 interface BYOCSectionProps {
   loc?: string
@@ -24,7 +24,7 @@ export function BYOCSection({ loc }: BYOCSectionProps) {
             <SuiTitle type='h2'>Bring Your Own Cloud</SuiTitle>
           </div>
           <div className='flip-selection'>
-            <SuiText className='mb-6 leading-relaxed '>
+            <SuiText className='mb-6 leading-relaxed'>
               Do you have strict data residency and compliance requirements that
               make typical SaaS offerings a nonstarter? Our Bring Your Own Cloud
               deployment model allows you to experience the advantages of

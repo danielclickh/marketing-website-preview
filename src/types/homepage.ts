@@ -1,5 +1,3 @@
-import { ParsedUrlQuery } from 'querystring'
-import { ReactNode } from 'react'
 import { FooterData } from '@/components/Footer/types'
 import { GettingStartedPlatform } from '@/components/GetStarted/types'
 import { HeaderProps } from '@/components/Header/types'
@@ -9,6 +7,8 @@ import {
   StrapiImageType,
   StrapiLink
 } from '@/lib/api/strapi/types'
+import { ParsedUrlQuery } from 'querystring'
+import { ReactNode } from 'react'
 
 export type Props = {
   children: ReactNode

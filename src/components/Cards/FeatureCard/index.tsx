@@ -1,6 +1,7 @@
+import { SuiText } from '../../sui'
 import Link from 'next/link'
 import React from 'react'
-import { SuiText } from '../../sui'
+
 interface FeatureCardProps {
   icon: React.ReactNode | undefined
   title: React.ReactNode | string
@@ -27,7 +28,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   const content = (
     <>
       {icon}
-      <h2 className='text-4xl font-bold py-0'>{title}</h2>
+      <h2 className='py-0 text-4xl font-bold'>{title}</h2>
       {description && (
         <div className={descriptionFullWidth ? 'w-full' : 'md:w-36'}>
           <SuiText color='inherit' size='sm'>

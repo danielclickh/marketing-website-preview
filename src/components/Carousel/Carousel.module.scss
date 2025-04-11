@@ -1,5 +1,5 @@
 .gliderContainer {
-  @apply max-w-full w-full px-6 transition-opacity;
+  @apply w-full max-w-full px-6 transition-opacity;
 
   :global .glider.draggable {
     overflow: hidden;

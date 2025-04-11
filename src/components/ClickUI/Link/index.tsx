@@ -1,6 +1,6 @@
+import { LinkProps } from './types'
 import NextLink from 'next/link'
 import { MouseEventHandler } from 'react'
-import { LinkProps } from './types'
 
 function Link({
   href,

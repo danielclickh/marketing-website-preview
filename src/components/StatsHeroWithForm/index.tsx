@@ -1,7 +1,7 @@
-import Image, { ImageProps } from 'next/image'
-import React from 'react'
 import { CUICard } from '../ClickUI'
 import styles from './styles.module.scss'
+import Image, { ImageProps } from 'next/image'
+import React from 'react'
 
 export interface StatsHeroProps {
   content: React.ReactNode

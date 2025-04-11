@@ -11,11 +11,14 @@
       //
       //
 
-      &, * {
+      &,
+      * {
         float: none !important;
       }
 
-      .mktoClear, .mktoOffset, .mktoGutter {
+      .mktoClear,
+      .mktoOffset,
+      .mktoGutter {
         @apply hidden;
       }
 
@@ -28,27 +31,30 @@
       // Basic layout
       //
       //
-      .mktoFormRow, .mktoButtonRow {
+      .mktoFormRow,
+      .mktoButtonRow {
         @apply flex flex-wrap;
         @apply md:gap-4;
 
         > * {
-          @apply flex-shrink-0 w-full max-w-full;
+          @apply w-full max-w-full flex-shrink-0;
         }
 
         .mktoFormCol {
-          @apply flex-grow flex-shrink basis-full max-w-full mb-8;
+          @apply mb-8 max-w-full flex-shrink flex-grow basis-full;
           @apply md:basis-0;
         }
 
         // Field groups
-        fieldset.mktoFormCol {}
+        fieldset.mktoFormCol {
+        }
       }
 
       // By default, on smaller screens we break columns onto new lines.
       // Adding this class to the will disable this behaviour.
       &.allow-columns {
-        .mktoFormRow, .mktoButtonRow {
+        .mktoFormRow,
+        .mktoButtonRow {
           @apply gap-4;
 
           .mktoFormCol {
@@ -61,20 +67,20 @@
       //
       //
       legend {
-        @apply mb-4 pb-2 border-b border-b-primary-300/30 w-full;
+        @apply mb-4 w-full border-b border-b-primary-300/30 pb-2;
       }
 
       // Fields
       //
       //
       .mktoFieldWrap {
-        @apply relative h-full flex flex-col justify-items-start;
+        @apply relative flex h-full flex-col justify-items-start;
 
         // Label
         //
         label.mktoLabel {
           gap: 0.5ch;
-          @apply flex flex-row justify-start w-auto text-xs font-medium pb-1 mb-1;
+          @apply mb-1 flex w-auto flex-row justify-start pb-1 text-xs font-medium;
 
           a {
             @apply underline;
@@ -82,11 +88,9 @@
 
           .mktoAsterix {
             float: none !important;
-            @apply text-c4 hidden align-super order-last;
+            @apply order-last hidden align-super text-c4;
           }
         }
-
-
 
         &.mktoRequiredField label.mktoLabel .mktoAsterix {
           @apply inline;
@@ -107,7 +111,7 @@
           }
 
           .mktoErrorMsg {
-            @apply block mt-1 text-xs min-h-[1rem];
+            @apply mt-1 block min-h-[1rem] text-xs;
           }
         }
 
@@ -128,11 +132,11 @@
 
         // General field styles
         //
-        input:not([type="checkbox"]):not([type="radio"]),
+        input:not([type='checkbox']):not([type='radio']),
         textarea,
         select {
           width: 100% !important;
-          @apply border shadow-input appearance-none cursor-text mt-1 px-3 py-2 relative resize-none rounded-md sm:text-sm text-left w-full transition-[border] duration-300 ease-in;
+          @apply relative mt-1 w-full cursor-text resize-none appearance-none rounded-md border px-3 py-2 text-left shadow-input transition-[border] duration-300 ease-in sm:text-sm;
         }
 
         // Dropdowns
@@ -145,13 +149,15 @@
             position: right 0.5rem center;
             repeat: no-repeat;
             size: 1.5em 1.5em;
-          };
+          }
         }
 
         // Dates
         //
-        input[type="date"] {
-          padding-right: calc(1.5em + .75rem) !important; // Add error padding by default on marketo date fields to prevent issue on Chrome.
+        input[type='date'] {
+          padding-right: calc(
+            1.5em + 0.75rem
+          ) !important; // Add error padding by default on marketo date fields to prevent issue on Chrome.
         }
 
         // Checkboxes
@@ -161,7 +167,7 @@
           @apply flex flex-row flex-wrap items-center justify-start;
 
           input {
-            @apply appearance-none border w-4 h-4 rounded mr-2;
+            @apply mr-2 h-4 w-4 appearance-none rounded border;
 
             &:checked {
               background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
@@ -169,10 +175,11 @@
 
             & + label {
               @apply block min-h-[1rem];
-              width: calc(100% - 1.5rem); // 100% minus the width and margin of the input
+              width: calc(
+                100% - 1.5rem
+              ); // 100% minus the width and margin of the input
             }
           }
-
         }
 
         // Radios
@@ -182,7 +189,7 @@
           @apply flex flex-row flex-wrap items-center justify-start;
 
           input {
-            @apply appearance-none border w-4 h-4 rounded-full mr-2;
+            @apply mr-2 h-4 w-4 appearance-none rounded-full border;
 
             &:checked {
               background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
@@ -190,7 +197,9 @@
 
             & + label {
               @apply block min-h-[1rem];
-              width: calc(100% - 1.5rem); // 100% minus the width and margin of the input
+              width: calc(
+                100% - 1.5rem
+              ); // 100% minus the width and margin of the input
             }
           }
         }
@@ -200,7 +209,6 @@
         .mktoHtmlText {
           width: 100% !important;
         }
-
       }
 
       // Buttons
@@ -211,7 +219,7 @@
       }
 
       .mktoButton {
-        @apply w-full py-2.5 px-6 text-sm font-semibold text-center rounded-lg duration-300 whitespace-nowrap transition-colors;
+        @apply w-full whitespace-nowrap rounded-lg px-6 py-2.5 text-center text-sm font-semibold transition-colors duration-300;
       }
 
       // ======
@@ -220,7 +228,6 @@
 
       &.theme-dark {
         .mktoFieldWrap {
-
           // Label
           //
           label.mktoLabel {
@@ -242,11 +249,11 @@
 
           // General field styles
           //
-          input:not([type="checkbox"]):not([type="radio"]),
+          input:not([type='checkbox']):not([type='radio']),
           textarea,
           select {
-            @apply bg-neutral-725 border-neutral-700 placeholder-neutral-400 text-neutral-0;
-            @apply focus:bg-slate-900 focus:border-primary-300 focus:outline-none;
+            @apply border-neutral-700 bg-neutral-725 text-neutral-0 placeholder-neutral-400;
+            @apply focus:border-primary-300 focus:bg-slate-900 focus:outline-none;
 
             // Error state
             &.mktoInvalid:not(:focus) {
@@ -264,7 +271,7 @@
           //
           .mktoCheckboxList {
             input {
-              @apply bg-neutral-725 border-neutral-700;
+              @apply border-neutral-700 bg-neutral-725;
               @apply checked:border-primary-300;
 
               &:checked {
@@ -282,7 +289,7 @@
           //
           .mktoRadioList {
             input {
-              @apply bg-neutral-725 border-neutral-700;
+              @apply border-neutral-700 bg-neutral-725;
               @apply checked:border-primary-300;
 
               &:checked {
@@ -295,7 +302,6 @@
               @apply border-danger-200;
             }
           }
-
         }
 
         // Buttons
@@ -313,7 +319,6 @@
 
       &.theme-light {
         .mktoFieldWrap {
-
           // Label
           //
           label.mktoLabel {
@@ -335,10 +340,10 @@
 
           // General field styles
           //
-          input:not([type="checkbox"]):not([type="radio"]),
+          input:not([type='checkbox']):not([type='radio']),
           textarea,
           select {
-            @apply bg-white border-neutral-200 placeholder-neutral-200 text-primary-900;
+            @apply border-neutral-200 bg-white text-primary-900 placeholder-neutral-200;
             @apply focus:border-primary-400 focus:outline-none;
 
             // Error state
@@ -357,7 +362,7 @@
           //
           .mktoCheckboxList {
             input {
-              @apply bg-white border-neutral-200;
+              @apply border-neutral-200 bg-white;
               @apply checked:border-primary-400;
 
               &:checked {
@@ -375,7 +380,7 @@
           //
           .mktoRadioList {
             input {
-              @apply bg-white border-neutral-200;
+              @apply border-neutral-200 bg-white;
               @apply checked:border-primary-400;
 
               &:checked {
@@ -388,7 +393,6 @@
               @apply border-danger-600;
             }
           }
-
         }
 
         // Buttons
@@ -399,7 +403,6 @@
           @apply hover:bg-primary-400;
         }
       }
-
 
       // Newsletter specific styles (Marketo ID 1122)
       //
@@ -413,7 +416,7 @@
         }
 
         .mktoFormRow:first-child {
-          @apply flex-grow w-full self-center;
+          @apply w-full flex-grow self-center;
 
           .mktoFormCol {
             @apply mb-0;
@@ -423,7 +426,7 @@
                 @apply hidden;
               }
 
-              input:not([type="checkbox"]):not([type="radio"]),
+              input:not([type='checkbox']):not([type='radio']),
               textarea,
               select {
                 @apply mt-0 pl-2;
@@ -441,7 +444,7 @@
           @apply flex-1;
 
           button.mktoButton {
-            @apply w-auto px-4 h-full whitespace-nowrap;
+            @apply h-full w-auto whitespace-nowrap px-4;
             @apply rounded font-medium;
           }
         }
@@ -454,7 +457,7 @@
       &.referer-houseparty-vegas-2024,
       &.referer-houseparty-vegas-2024-ticket {
         .mktoButtonRow button.mktoButton {
-          background-color: #EBFF00 !important;
+          background-color: #ebff00 !important;
         }
       }
 
@@ -475,7 +478,7 @@
         }
 
         ::placeholder {
-          @apply text-neutral-600 text-sm
+          @apply text-sm text-neutral-600;
         }
 
         .mktoFormRow:nth-child(9) {
@@ -506,11 +509,8 @@
               width: auto !important;
             }
           }
-
         }
-
       }
-
     }
   }
 }

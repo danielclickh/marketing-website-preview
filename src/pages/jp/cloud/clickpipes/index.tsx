@@ -1,7 +1,4 @@
-import { GetStaticProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
+import features from './features.json'
 import ClickPipesAnimationV2 from '@/components/ClickPipesAnimation/ClickPipesAnimationV2'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/jp/GetStartedFree'
@@ -10,7 +7,10 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ClickPipesData } from '@/types/clickpipes'
-import features from './features.json'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
@@ -96,7 +96,7 @@ export default function ClickHouseServerPage({
               外部データ ソースを ClickHouse Cloud にシームレスに接続します。
             </h2>
           </div>
-          <div className='container mx-auto flex max-w-4xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8  2xl:px-0'>
+          <div className='container mx-auto flex max-w-4xl flex-col px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <div className='grid grid-cols-1 gap-x-8 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0'>
               {features.map((feature) => (
                 <div className='col' key={feature.id}>
@@ -204,7 +204,7 @@ export default function ClickHouseServerPage({
         </div>
         <div className='bg-primary-300 py-12'></div>
 
-        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0 '>
+        <div className='relative mx-auto mt-12 flex flex-col gap-y-28 md:mt-24 md:px-0'>
           <div className='section-container bg-shadow-element-left red-shadow flex w-full flex-col items-center justify-between self-center'>
             <div className='flex w-full flex-col items-center'>
               <Image
@@ -231,7 +231,7 @@ export default function ClickHouseServerPage({
           </div>
         </div>
 
-        <div className='section-container my-12 pb-16 md:px-8 2xl:px-0 '>
+        <div className='section-container my-12 pb-16 md:px-8 2xl:px-0'>
           <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=clickpipes-getstarted-footer' />
         </div>
       </Layout>

@@ -51,7 +51,7 @@ export function SuiSelect(props: SelectProps) {
                       key={option.id}
                       className={({ active }) =>
                         classNames(
-                          active ? ' bg-c1' : 'bg-c2',
+                          active ? 'bg-c1' : 'bg-c2',
                           'relative cursor-pointer select-none py-2 pl-3 pr-9 text-neutral-0 placeholder-c4'
                         )
                       }

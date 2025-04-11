@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next'
 import HRSeparator from '@/components/HRSeparator'
 import FAQ from '@/components/jp/FAQ'
 import GetStarted from '@/components/jp/GetStarted'
@@ -15,6 +14,7 @@ import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { HomePageProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {

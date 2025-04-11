@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import StrapiSvg from './StrapiSvg'
 import { StrapiImageProps, StrapiPicProps } from './types'
+import Image from 'next/image'
 
 interface StrapiImageUrlProps extends Omit<StrapiImageProps, 'mime'> {
   priority?: boolean

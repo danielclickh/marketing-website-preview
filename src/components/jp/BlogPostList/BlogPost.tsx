@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import { convertDateToString } from '@/lib/utils/dateUtils'
-import { BlogPost as BlogPostType } from '@/types/blogs'
 import { CUICard } from '../../ClickUI'
 import { StrapiImage } from '../../StrapiElements'
+import { convertDateToString } from '@/lib/utils/dateUtils'
+import { BlogPost as BlogPostType } from '@/types/blogs'
+import Link from 'next/link'
 
 export default function BlogPost({
   thumbnailPng,
@@ -22,7 +22,7 @@ export default function BlogPost({
     <Link
       prefetch={false}
       href={`/jp/blog/${slug}`}
-      className={` hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 blog-post-card-${slug} hover:no-underline category-${category
+      className={`hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 blog-post-card-${slug} hover:no-underline category-${category
         .split(' ')
         .join('-')
         .toLowerCase()}`}>
@@ -39,7 +39,7 @@ export default function BlogPost({
             />
           )}
           <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
-            <div className='cursor-pointer font-basier text-xl font-medium leading-tight  text-neutral-100'>
+            <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
               {title}
             </div>
           </div>

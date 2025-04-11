@@ -1,7 +1,7 @@
-import { useCallback } from 'react'
 import LazyLoad from '../LazyLoad'
 import styles from './styles.module.scss'
 import { ResponsiveEmbedProps } from './types'
+import { useCallback } from 'react'
 
 export default function ResponsiveEmbed({
   ratio,
@@ -29,8 +29,8 @@ export default function ResponsiveEmbed({
   return (
     <div className={`relative ${styles.responsiveEmbed}`} style={style}>
       {lazyLoad && (
-        <div className='absolute inset-0 bg-black flex'>
-          <div className='w-10 aspect-square rounded-full border-4 border-primary-300/20 border-t-primary-300 m-auto animate-spin' />
+        <div className='absolute inset-0 flex bg-black'>
+          <div className='m-auto aspect-square w-10 animate-spin rounded-full border-4 border-primary-300/20 border-t-primary-300' />
         </div>
       )}
       {!lazyLoad && <Content />}

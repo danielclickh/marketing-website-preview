@@ -1,9 +1,15 @@
+import { fetchBlogs } from '../../api/blog'
+import azureLogo from './assets/azure-logo.svg'
+import iconCode from './assets/icon-code.svg'
+import logoAstronomer from './assets/logo-astronomer.svg'
+import logoBaxenergy from './assets/logo-baxenergy.svg'
+import logoMicrosoft from './assets/logo-microsoft.svg'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import ClickHousePartnerLogo from '@/components/ClickHousePartnerLogo'
 import { CUIButton, CUILink } from '@/components/ClickUI'
 import styles from '@/components/FAQ/styles.module.scss'
-import { replaceCustomerLogo } from '@/components/HomepageSectionTrustedByAlt'
 import HRSeparator from '@/components/HRSeparator'
+import { replaceCustomerLogo } from '@/components/HomepageSectionTrustedByAlt'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import Markdown from '@/components/Markdown'
@@ -22,12 +28,6 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
-import { fetchBlogs } from '../../api/blog'
-import azureLogo from './assets/azure-logo.svg'
-import iconCode from './assets/icon-code.svg'
-import logoAstronomer from './assets/logo-astronomer.svg'
-import logoBaxenergy from './assets/logo-baxenergy.svg'
-import logoMicrosoft from './assets/logo-microsoft.svg'
 
 interface PageProps extends CommonProps {
   customerStories: HomepageCustomerStories
@@ -99,18 +99,18 @@ export default function Page({
             className='mb-12'
           />
           <p className='mb-4'>
-            <span className='text-xs inline-block rounded-full px-3 py-1 bg-primary-700 border border-primary-500 text-primary-300'>
+            <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-3 py-1 text-xs text-primary-300'>
               Partners
             </span>
           </p>
-          <h1 className='text-[1.75rem] lg:text-[3.5rem] leading-[1.3] font-bold mb-6 max-w-5xl mx-auto'>
+          <h1 className='mx-auto mb-6 max-w-5xl text-[1.75rem] font-bold leading-[1.3] lg:text-[3.5rem]'>
             Transform your Data Analytics with the power of Azure + ClickHouse.
           </h1>
-          <p className='lg:text-xl font-medium mb-12 max-w-3xl mx-auto'>
+          <p className='mx-auto mb-12 max-w-3xl font-medium lg:text-xl'>
             Supercharge your data with ClickHouse on Azure, combining seamless
             scalability with blazing-fast analytics.
           </p>
-          <div className='flex flex-wrap gap-4 sm:gap-8 md:flex-nowrap md:gap-6 justify-center'>
+          <div className='flex flex-wrap justify-center gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
             <CUIButton
               type='primary'
               size='lg'
@@ -138,10 +138,10 @@ export default function Page({
       </div>
 
       {/* Why? */}
-      <div className='py-16 lg:py-20 bg-white/5'>
+      <div className='bg-white/5 py-16 lg:py-20'>
         <div className='section-container px-6'>
           {/* Intro */}
-          <div className='mb-10 lg:mb-16 space-y-6 text-center'>
+          <div className='mb-10 space-y-6 text-center lg:mb-16'>
             <Image
               src={iconCode}
               alt='Icon'
@@ -149,10 +149,10 @@ export default function Page({
               height={72}
               className='inline-block'
             />
-            <h2 className='text-[1.75rem] lg:text-4xl leading-[1.3] font-semibold'>
+            <h2 className='text-[1.75rem] font-semibold leading-[1.3] lg:text-4xl'>
               Why Choose Azure + ClickHouse?
             </h2>
-            <p className='text-white/70 max-w-xl mx-auto'>
+            <p className='mx-auto max-w-xl text-white/70'>
               ClickHouse is the fastest and most resource efficient real-time
               data warehouse and open-source database.
             </p>
@@ -199,13 +199,13 @@ export default function Page({
           </div>
 
           {/* Footnote */}
-          <p className='text-center font-medium mt-10 lg:mt-16'>
+          <p className='mt-10 text-center font-medium lg:mt-16'>
             Get started in a few minutes with a{' '}
             <Link
               target='_blank'
               href='https://console.clickhouse.cloud/signUp?loc=azurePartnersPageWhy'
               onClick={useGalaxyOnClick('azurePartnersPage.why.freeCloudTrial')}
-              className='text-primary-300 hover:underline whitespace-nowrap'>
+              className='whitespace-nowrap text-primary-300 hover:underline'>
               free cloud trial -&gt;
             </Link>
           </p>
@@ -217,12 +217,12 @@ export default function Page({
         <div className='section-container'>
           <SuiTitle
             type='h2'
-            className='mb-10 lg:mb-16 text-center !text-primary-900'>
+            className='mb-10 text-center !text-primary-900 lg:mb-16'>
             What our customers are saying
           </SuiTitle>
-          <div className='overflow-x-auto hide-scrollbar -mx-4 sm:-mx-8 lg:mx-0 px-6 sm:px-8 lg:px-0 lg:overflow-x-visible'>
-            <div className='-mx-2 lg:-mx-4 flex flex-row lg:flex-wrap lg:justify-center'>
-              <div className='p-2 lg:p-4 lg:w-1/3 min-w-64 w-[90vw] max-w-md lg:max-w-none lg:min-w-none flex-shrink-0 flex-grow-0 lg:flex-1'>
+          <div className='hide-scrollbar -mx-4 overflow-x-auto px-6 sm:-mx-8 sm:px-8 lg:mx-0 lg:overflow-x-visible lg:px-0'>
+            <div className='-mx-2 flex flex-row lg:-mx-4 lg:flex-wrap lg:justify-center'>
+              <div className='lg:min-w-none w-[90vw] min-w-64 max-w-md flex-shrink-0 flex-grow-0 p-2 lg:w-1/3 lg:max-w-none lg:flex-1 lg:p-4'>
                 <QuoteCard
                   className='!bg-neutral-900'
                   content={
@@ -236,7 +236,7 @@ export default function Page({
                   }}
                 />
               </div>
-              <div className='p-2 lg:p-4 lg:w-1/3 min-w-64 w-[90vw] max-w-md lg:max-w-none lg:min-w-none flex-shrink-0 flex-grow-0 lg:flex-1'>
+              <div className='lg:min-w-none w-[90vw] min-w-64 max-w-md flex-shrink-0 flex-grow-0 p-2 lg:w-1/3 lg:max-w-none lg:flex-1 lg:p-4'>
                 <QuoteCard
                   className='!bg-neutral-900'
                   content={
@@ -250,7 +250,7 @@ export default function Page({
                   }}
                 />
               </div>
-              <div className='p-2 lg:p-4 lg:w-1/3 min-w-64 w-[90vw] max-w-md lg:max-w-none lg:min-w-none flex-shrink-0 flex-grow-0 lg:flex-1'>
+              <div className='lg:min-w-none w-[90vw] min-w-64 max-w-md flex-shrink-0 flex-grow-0 p-2 lg:w-1/3 lg:max-w-none lg:flex-1 lg:p-4'>
                 <QuoteCard
                   className='!bg-neutral-900'
                   content={
@@ -270,7 +270,7 @@ export default function Page({
       </div>
 
       {/* Features */}
-      <div className='py-16 lg:py-20 bg-white/5'>
+      <div className='bg-white/5 py-16 lg:py-20'>
         <div className='section-container px-6'>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/3'>
@@ -315,28 +315,28 @@ export default function Page({
           <SuiText
             weight='bold'
             size='sm'
-            className='mb-8 text-primary-300 text-center uppercase tracking-[0.0875rem]'>
+            className='mb-8 text-center uppercase tracking-[0.0875rem] text-primary-300'>
             Trusted by
           </SuiText>
           <div className='mask-logos-carousel opacity-90 grayscale invert'>
             <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
-              <div className='flex items-center whitespace-nowrap animate-marqueeLeft5'>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
                 {customerLogos.map((logo, logoIndex) => {
                   return (
                     <div
                       key={logoIndex}
-                      className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
                       <StrapiImage {...logo.darkLogoPng} />
                     </div>
                   )
                 })}
               </div>
-              <div className='flex items-center whitespace-nowrap animate-marqueeLeft5'>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
                 {customerLogos.map((logo, logoIndex) => {
                   return (
                     <div
                       key={logoIndex}
-                      className='flex-shrink-0 flex-grow-0 w-max px-6'>
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
                       <StrapiImage {...logo.darkLogoPng} />
                     </div>
                   )
@@ -348,15 +348,15 @@ export default function Page({
       </div>
 
       {/* Checklist */}
-      <div className='my-20 lg:my-24 section-container'>
-        <div className='text-center space-y-4'>
+      <div className='section-container my-20 lg:my-24'>
+        <div className='space-y-4 text-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='72'
             height='73'
             fill='none'
             viewBox='0 0 72 73'
-            className='inline-block mb-6'>
+            className='mb-6 inline-block'>
             <rect
               width='70'
               height='70'
@@ -371,15 +371,15 @@ export default function Page({
               d='M37 19.61a16.73 16.73 0 1 0 0 33.47 16.73 16.73 0 0 0 0-33.47Zm5.98 21.33a7.53 7.53 0 0 0 0-9.19l5.13-5.12a14.73 14.73 0 0 1 0 19.43l-5.13-5.12Zm-11.56-4.6a5.58 5.58 0 1 1 11.16 0 5.58 5.58 0 0 1-11.16 0Zm15.3-11.1-5.13 5.12a7.53 7.53 0 0 0-9.18 0l-5.13-5.12a14.73 14.73 0 0 1 19.44 0Zm-20.83 1.39 5.13 5.12a7.53 7.53 0 0 0 0 9.19l-5.13 5.12a14.73 14.73 0 0 1 0-19.43Zm1.4 20.82 5.12-5.12a7.53 7.53 0 0 0 9.18 0l5.13 5.12a14.73 14.73 0 0 1-19.43 0Z'
             />
           </svg>
-          <h2 className='text-[1.75rem] lg:text-4xl leading-[1.3] font-semibold'>
+          <h2 className='text-[1.75rem] font-semibold leading-[1.3] lg:text-4xl'>
             Seamless Azure marketplace Integration
           </h2>
-          <p className='text-white/70 max-w-xl mx-auto'>
+          <p className='mx-auto max-w-xl text-white/70'>
             ClickHouse is fully integrated into the Azure Marketplace, enabling
             you to:
           </p>
         </div>
-        <div className='max-w-3xl mx-auto bg-neutral-700/50 border border-neutral-700 divide-y divide-neutral-700 md:divide-y-0 shadow-sm md:shadow-none md:border-none md:space-y-4 md:py-6 md:px-8 rounded mt-10'>
+        <div className='mx-auto mt-10 max-w-3xl divide-y divide-neutral-700 rounded border border-neutral-700 bg-neutral-700/50 shadow-sm md:space-y-4 md:divide-y-0 md:border-none md:px-8 md:py-6 md:shadow-none'>
           <TickItem
             title='Effortless Deployment'
             description='Set up ClickHouse on Azure in just one click.'
@@ -396,7 +396,7 @@ export default function Page({
             className='p-3 md:p-0'
           />
         </div>
-        <div className='flex justify-center mt-10'>
+        <div className='mt-10 flex justify-center'>
           <CUIButton
             type='secondary'
             size='lg'
@@ -407,14 +407,14 @@ export default function Page({
               'azurePartnersPage.checklist.goToAzureMarketPlace'
             )}>
             Go to Azure Marketplace
-            <ExternalLinkIcon className='h-4 w-4 ml-3 inline-block' />
+            <ExternalLinkIcon className='ml-3 inline-block h-4 w-4' />
           </CUIButton>
         </div>
       </div>
 
       {/* Form */}
       <div className='my-20 lg:my-24'>
-        <div className='section-container px-6 bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center px-6'>
           <Image
             src='/images/migration.svg'
             height={72}
@@ -422,7 +422,7 @@ export default function Page({
             alt='Migrations'
             className='mb-4 fill-none'
           />
-          <h2 className='text-[1.75rem] text-center lg:text-4xl leading-[1.3] font-semibold mb-10 lg:mb-16'>
+          <h2 className='mb-10 text-center text-[1.75rem] font-semibold leading-[1.3] lg:mb-16 lg:text-4xl'>
             Contact us for help with your migration
           </h2>
           <div className='mx-auto max-w-lg'>
@@ -464,7 +464,7 @@ export default function Page({
       </div>
 
       {/* Get started */}
-      <div className='section-container px-6 my-20 lg:my-28 md:px-8 2xl:px-0'>
+      <div className='section-container my-20 px-6 md:px-8 lg:my-28 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
             Get started with ClickHouse Cloud and Azure
@@ -635,7 +635,7 @@ export default function Page({
 
       {/* Latest blogs */}
       <div className='section-container my-20'>
-        <div className='flex justify-between mb-8'>
+        <div className='mb-8 flex justify-between'>
           <SuiTitle
             type='h2'
             className='!text-3xl text-neutral-100'
@@ -671,7 +671,7 @@ function TickItem({
 }) {
   return (
     <div className={`flex items-center gap-4 ${className}`}>
-      <div className='flex-shrink-0 flex-grow-0 hidden md:block'>
+      <div className='hidden flex-shrink-0 flex-grow-0 md:block'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='25'
@@ -687,7 +687,7 @@ function TickItem({
           />
         </svg>
       </div>
-      <div className='flex-1 flex flex-col md:flex-row md:gap-2'>
+      <div className='flex flex-1 flex-col md:flex-row md:gap-2'>
         <strong>
           {title}
           <span className='hidden md:inline'>:</span>

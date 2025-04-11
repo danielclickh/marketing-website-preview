@@ -1,6 +1,6 @@
+import { SuiText, SuiTitle } from '../sui'
 import Image from 'next/image'
 import React from 'react'
-import { SuiText, SuiTitle } from '../sui'
 
 export default function HomepageSectionStackIntegration({
   className = '',

@@ -1,5 +1,5 @@
-import React from 'react'
 import Paths from './Paths'
+import React from 'react'
 
 interface Props {
   className: string

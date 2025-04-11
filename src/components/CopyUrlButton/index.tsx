@@ -1,6 +1,6 @@
-import { DuplicateIcon } from '@heroicons/react/outline'
-import { SuiButton } from '../sui/client'
 import { ButtonProps } from '../sui/SuiButton'
+import { SuiButton } from '../sui/client'
+import { DuplicateIcon } from '@heroicons/react/outline'
 
 function CopyUrlButton({
   className = ''

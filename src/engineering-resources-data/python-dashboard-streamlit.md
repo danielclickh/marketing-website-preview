@@ -13,7 +13,7 @@ That's where Python dashboard frameworks come in. These days, you don't need fro
 
 In this guide, we're going to build a dashboard using Python that combines ClickHouse's processing power with Streamlit's user-friendly interface. While there are tons of [great visualization libraries](http://clickhouse.com/engineering-resources/real-time-data-visualization#python-visualization-libraries) out there - like Matplotlib, Seaborn, Bokeh, and Altair - we'll be using plot.ly for our charts because it plays really nicely with Streamlit and gives us interactive visualizations right out of the box. Whether you're just starting with Python dashboarding or looking for fresh ideas, we'll walk through everything step by step, creating something that looks professional but doesn't require a computer science degree to build.
 
-By the time we're done, you'll have your own custom dashboard.py that you can show off to your colleagues or use as a starting point for your next project. 
+By the time we're done, you'll have your own custom dashboard.py that you can show off to your colleagues or use as a starting point for your next project.
 
 To help whet your appetite, this is what we're going to build:
 
@@ -21,11 +21,11 @@ To help whet your appetite, this is what we're going to build:
 
 ## Meet the data: Exploring Bluesky's social network
 
-Now, every good dashboard needs interesting data to visualize. While you could import your own dataset, we're going to skip the data preparation headaches and jump straight into the fun part - building our dashboard. We'll be working with a fascinating real-world dataset from one of the newest players in social media: Bluesky.  
+Now, every good dashboard needs interesting data to visualize. While you could import your own dataset, we're going to skip the data preparation headaches and jump straight into the fun part - building our dashboard. We'll be working with a fascinating real-world dataset from one of the newest players in social media: Bluesky.
 
-If you haven't heard of it yet, Bluesky is like X (formerly Twitter), but with a twist - it's completely open-source and decentralized. What makes it particularly interesting for us data folks is that it provides free access to real-time events like posts and interactions. This means we can analyze actual social media data as it flows through the network.  
+If you haven't heard of it yet, Bluesky is like X (formerly Twitter), but with a twist - it's completely open-source and decentralized. What makes it particularly interesting for us data folks is that it provides free access to real-time events like posts and interactions. This means we can analyze actual social media data as it flows through the network.
 
-We've already done the heavy lifting for you by taking data from Bluesky's [Jetstream API](https://docs.bsky.app/blog/jetstream) and loading it into the [ClickHouse SQL playground](https://clickhouse.com/blog/announcing-the-new-sql-playground). If you're curious about how we processed and structured this data, you can check out our detailed walkthrough in ['Building a Medallion architecture for Bluesky data with ClickHouse'](https://clickhouse.com/blog/building-a-medallion-architecture-for-bluesky-json-data-with-clickhouse).  
+We've already done the heavy lifting for you by taking data from Bluesky's [Jetstream API](https://docs.bsky.app/blog/jetstream) and loading it into the [ClickHouse SQL playground](https://clickhouse.com/blog/announcing-the-new-sql-playground). If you're curious about how we processed and structured this data, you can check out our detailed walkthrough in ['Building a Medallion architecture for Bluesky data with ClickHouse'](https://clickhouse.com/blog/building-a-medallion-architecture-for-bluesky-json-data-with-clickhouse).
 
 Ready to dive in? First, let's get you set up with the data. You'll need to [download ClickHouse](https://clickhouse.com/docs/en/install) and connect to the playground:
 
@@ -115,7 +115,7 @@ name: _rmt_partition_id
 type: LowCardinality(String)
 ```
 
-This table stores the raw JSON from the BlueSky API. 
+This table stores the raw JSON from the BlueSky API.
 We can have a look at an individual record by running the following query:
 
 <pre><code type='click-ui' language='sql'>
@@ -197,9 +197,9 @@ GROUP BY ALL
 
 ## Creating your first Python dashboard with Streamlit
 
-Now that we understand our data source, it's time for the fun part - building our Python dashboard! We'll start simple and gradually add more features as we go. Our dashboard will eventually visualize Bluesky's social data, but first, let's get the basic structure in place.  
+Now that we understand our data source, it's time for the fun part - building our Python dashboard! We'll start simple and gradually add more features as we go. Our dashboard will eventually visualize Bluesky's social data, but first, let's get the basic structure in place.
 
-We're going to create two files: `dashboard.py` and `queries.py`. This separation helps keep our code organized - `dashboard.py` will handle the visualization and interface components, while `queries.py` will store our queries (we'll add those later).  
+We're going to create two files: `dashboard.py` and `queries.py`. This separation helps keep our code organized - `dashboard.py` will handle the visualization and interface components, while `queries.py` will store our queries (we'll add those later).
 
 Let's start with a minimal setup in `dashboard.py`:
 
@@ -235,11 +235,10 @@ Right now it's pretty bare bones, but don't worry - we're about to make it a lot
 
 We're going to query ClickHouse using [`clickhouse-connect`](https://clickhouse.com/docs/en/integrations/python), so we'll kill the Streamlit command that we ran before and add in `clickhouse-connect` as a dependency, as shown in the following command:
 
-Next, we need to set up our connection to ClickHouse. For this, we'll use [`clickhouse-connect`](https://clickhouse.com/docs/en/integrations/python), Python's official client library for ClickHouse. 
+Next, we need to set up our connection to ClickHouse. For this, we'll use [`clickhouse-connect`](https://clickhouse.com/docs/en/integrations/python), Python's official client library for ClickHouse.
 
 Let's update our development environment to include this package.
 First, stop the currently running Streamlit server (press Ctrl/Cmd+C in your terminal). Then, run the following command to restart Streamlit with both packages installed:
-
 
 <pre><code type='click-ui' language='bash'>
 uv run \
@@ -250,7 +249,7 @@ streamlit run dashboard.py --server.headless True
 
 A quick note about the command: the `--server.headless True` flag prevents Streamlit from opening a new browser tab (since we already have one open from before).
 
-Let's now make our dashboard more interesting by adding some real-time metrics about Bluesky activity. 
+Let's now make our dashboard more interesting by adding some real-time metrics about Bluesky activity.
 We'll create a simple but informative panel that shows how many events are being generated on the platform, both in total and over recent time periods.
 
 First, let's set up our queries in `queries.py`:
@@ -274,16 +273,15 @@ FROM bluesky.bluesky
 
 The first query is straightforward - it simply counts all events in our Bluesky dataset. But the second query is where things get interesting. Let's break it down:
 
-* `countIf(bluesky_ts > (now() - ((24 * 60) * 60)))` counts events from the last 24 hours  
-  * `now()` gives us the current timestamp  
-  * We subtract 24 hours worth of seconds (`24 * 60 * 60 = 86400 seconds`)  
-  * `countIf` only counts rows where the condition is true  
-* The second `countIf` looks at the previous 24-hour period:  
-  * It counts events between 24 and 48 hours ago  
-  * This gives us our comparison period for calculating the trend  
+- `countIf(bluesky_ts > (now() - ((24 * 60) * 60)))` counts events from the last 24 hours
+  - `now()` gives us the current timestamp
+  - We subtract 24 hours worth of seconds (`24 * 60 * 60 = 86400 seconds`)
+  - `countIf` only counts rows where the condition is true
+- The second `countIf` looks at the previous 24-hour period:
+  - It counts events between 24 and 48 hours ago
+  - This gives us our comparison period for calculating the trend
 
 By comparing these two periods, we can see if activity is increasing or decreasing. Streamlit will automatically handle the visual presentation of this comparison with an up or down arrow in our dashboard.
-
 
 And then let's come back to `dashboard.py` and add the following import at the top of the file:
 
@@ -328,8 +326,8 @@ with right:
 
 This code creates two metrics cards side by side:
 
-* On the left, we show the total number of events ever recorded
-* On the right, we display events from the last 24 hours, along with a delta showing the change from the previous 24-hour period
+- On the left, we show the total number of events ever recorded
+- On the right, we display events from the last 24 hours, along with a delta showing the change from the previous 24-hour period
 
 The delta indicator will automatically show green for increases and red for decreases, giving us an instant visual cue about platform growth trends.
 
@@ -339,8 +337,8 @@ When you refresh your browser, you'll see your dashboard has come to life with r
 
 Our dashboard now shows two key metrics:
 
-* Total Events: Over 1.1 billion events have been recorded on Bluesky! This gives us a sense of the platform's overall scale.
-* 24-Hour Activity: We can see about 54 million events in the last day, with the red arrow indicating a decrease of roughly 3.3 million events compared to the previous 24 hours.
+- Total Events: Over 1.1 billion events have been recorded on Bluesky! This gives us a sense of the platform's overall scale.
+- 24-Hour Activity: We can see about 54 million events in the last day, with the red arrow indicating a decrease of roughly 3.3 million events compared to the previous 24 hours.
 
 This is just our first visualization, but it's already telling us an interesting story about platform activity. The comparison between time periods helps us understand if engagement is growing or declining.
 
@@ -368,8 +366,9 @@ ORDER BY day ASC
 </code></pre>
 
 These queries will help us understand:
-* Hour-by-hour activity patterns for different types of engagement (posts, reposts, and likes)
-* Daily event totals to spot trends over time
+
+- Hour-by-hour activity patterns for different types of engagement (posts, reposts, and likes)
+- Daily event totals to spot trends over time
 
 Now let's update our dashboard to create some interactive visualizations using plot.ly.
 
@@ -408,37 +407,37 @@ with right:
     labels={"day": "Day", "count": "Event Count"},
   ))
 </code></pre>
-  
+
 Let's break down what we're creating:
 
 1. Hourly Activity Chart (left side):
-   * Shows when people are most active throughout the day  
-   * Breaks down activity by type (posts, reposts, and likes)  
-   * Uses different colors to distinguish between activity types  
-   * Horizontal legend at the top for better readability  
+   - Shows when people are most active throughout the day
+   - Breaks down activity by type (posts, reposts, and likes)
+   - Uses different colors to distinguish between activity types
+   - Horizontal legend at the top for better readability
 2. Daily Trends Chart (right side):
-   * Shows total activity per day  
-   * Helps identify overall growth trends  
-   * Reveals any weekly patterns or special events
-
+   - Shows total activity per day
+   - Helps identify overall growth trends
+   - Reveals any weekly patterns or special events
 
 ![Dashboard image 4](/images/engineering-resources/3_dashboard_full.png)
 
-Let's break down what these visualizations reveal:  
+Let's break down what these visualizations reveal:
 
 Hourly Activity Patterns (Left Chart):
-* Peak activity occurs during the evening hours (around hour 15-22)  
-* The early morning hours (2-5) show the lowest activity  
-* Likes (blue) make up the majority of interactions  
-* Posts (red) and reposts (green) follow similar patterns but at lower volumes  
-* There's a clear "wake-up" period where activity starts ramping up
+
+- Peak activity occurs during the evening hours (around hour 15-22)
+- The early morning hours (2-5) show the lowest activity
+- Likes (blue) make up the majority of interactions
+- Posts (red) and reposts (green) follow similar patterns but at lower volumes
+- There's a clear "wake-up" period where activity starts ramping up
 
 Daily Trends (Right Chart):
-* We can see activity levels over the past few weeks  
-* There's significant day-to-day variation  
-* The platform saw peak activity around January 5th  
-* Recent days show relatively stable engagement levels
 
+- We can see activity levels over the past few weeks
+- There's significant day-to-day variation
+- The platform saw peak activity around January 5th
+- Recent days show relatively stable engagement levels
 
 ## Additional examples and wrap-up
 
@@ -449,19 +448,19 @@ While we won't walk through these examples individually, you can explore them in
 
 Through this guide, you've learned how to:
 
-* Build an interactive Python dashboard from scratch using Streamlit  
-* Connect to and query real-time data from ClickHouse  
-* Create engaging visualizations using plot.ly  
-* Display both metrics and trends in an intuitive way  
-* Structure your code for maintainability (separating queries from visualization logic)
+- Build an interactive Python dashboard from scratch using Streamlit
+- Connect to and query real-time data from ClickHouse
+- Create engaging visualizations using plot.ly
+- Display both metrics and trends in an intuitive way
+- Structure your code for maintainability (separating queries from visualization logic)
 
 This `dashboard.py` example demonstrates just a fraction of what's possible when combining Python, ClickHouse, and Streamlit. You could extend this further by:
 
-* Adding user filters and interactive controls  
-* Creating more complex visualizations  
-* Implementing real-time updates  
-* Adding authentication  
-* Deploying your dashboard to a production environment
+- Adding user filters and interactive controls
+- Creating more complex visualizations
+- Implementing real-time updates
+- Adding authentication
+- Deploying your dashboard to a production environment
 
 Whether you're building a data visualizer for social media analytics, business metrics, or any other dataset, the pattern remains the same: connect to your data source, write clear queries, and create intuitive visualizations that tell your data's story.
 
