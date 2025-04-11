@@ -137,7 +137,7 @@ export default function Header({
         <div className='no-wrap section-container relative flex items-center py-4'>
           {/* Logo */}
           <Link
-            href='/public'
+            href='/'
             prefetch={false}
             onClick={useGalaxyOnClick('topNav.logo.select')}>
             <Image
