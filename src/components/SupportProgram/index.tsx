@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export default function SupportProgram(props: any) {
   return (
-    <div>
+    <>
       <div className='bg-grid'>
         <div className='relative mx-auto max-w-4xl px-4 pb-24 pt-28 text-center sm:px-8 md:px-16 2xl:px-0'>
           <SuiTitle type='h1' className='mb-6 md:!text-6xl'>
@@ -514,6 +514,6 @@ export default function SupportProgram(props: any) {
           please open a case to get started.
         </p>
       </div>
-    </div>
+    </>
   )
 }

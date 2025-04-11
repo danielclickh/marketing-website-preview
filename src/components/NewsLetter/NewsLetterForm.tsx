@@ -7,7 +7,7 @@ function NewsLetterForm() {
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <div>
+    <>
       {!formSuccess && (
         <MarketoForm
           formId={'1122'}
@@ -36,7 +36,7 @@ function NewsLetterForm() {
           <p>Thanks for registering to our newsletter!</p>
         </div>
       )}
-    </div>
+    </>
   )
 }
 
