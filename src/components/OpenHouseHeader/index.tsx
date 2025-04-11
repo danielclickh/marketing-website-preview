@@ -70,7 +70,7 @@ export default function OpenHouseHeader({ children }: OpenHouseHeaderProps) {
       />
       <div className='relative z-10 mx-auto max-w-6xl px-6 py-4 lg:px-12'>
         <div className='flex h-10 items-center justify-between'>
-          <Link href='/public' prefetch={false}>
+          <Link href='/' prefetch={false}>
             <Image
               src={logoFull}
               priority

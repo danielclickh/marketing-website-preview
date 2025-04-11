@@ -69,7 +69,7 @@ export default function HeaderRegionSelector({
         <ul className='relative min-w-44 rounded-lg bg-neutral-750 p-4 text-sm text-white shadow transition-all'>
           <li>
             <Link
-              href='/public?country=en'
+              href='/?country=en'
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               English
             </Link>
