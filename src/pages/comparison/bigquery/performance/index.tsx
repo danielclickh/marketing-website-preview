@@ -197,7 +197,7 @@ export default function BigQueryPerformancePage({
   )
 
   return (
-    <div>
+    <>
       {seo && <SeoContainer {...seo} />}
       <div className='readable-content relative'>
         {/* Logo */}
@@ -660,6 +660,6 @@ export default function BigQueryPerformancePage({
         </div>
       </div>
       <Footer {...footerData} />
-    </div>
+    </>
   )
 }

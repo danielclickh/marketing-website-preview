@@ -192,7 +192,7 @@ export default function BigQueryCostsPage({
   }, [galaxyOnClickHeroStart])
 
   return (
-    <div>
+    <>
       {seo && <SeoContainer {...seo} />}
       <div className='readable-content relative'>
         {/* Logo */}
@@ -640,6 +640,6 @@ export default function BigQueryCostsPage({
         </div>
       </div>
       <Footer {...footerData} />
-    </div>
+    </>
   )
 }

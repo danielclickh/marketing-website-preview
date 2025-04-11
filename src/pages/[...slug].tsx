@@ -168,7 +168,7 @@ export default function RichContentPage({
 
   if (lockContent) {
     return (
-      <div>
+      <>
         <div
           className='print:hidden'
           style={{ userSelect: 'none' }}
@@ -183,7 +183,7 @@ export default function RichContentPage({
         <div className='hidden text-black print:block'>
           Please request a copy from legal@clickhouse.com
         </div>
-      </div>
+      </>
     )
   }
 

@@ -14,12 +14,12 @@ interface Props {
 }
 function Layout({ children, footerData, headerData, seo }: Props) {
   return (
-    <div>
+    <>
       {seo && <SeoContainer {...seo} />}
       <Header {...headerData} />
       <div className='readable-content'>{children}</div>
       <Footer {...footerData} />
-    </div>
+    </>
   )
 }
 
