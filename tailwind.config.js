@@ -2,11 +2,11 @@ module.exports = {
   darkMode: 'class',
   plugins: [
     require('@tailwindcss/typography'),
-    require('./lib/tailwind/gradient-masks')
+    require('./src/lib/tailwind/gradient-masks')
   ],
   content: [
-    './components/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}',
+    './src/pages/**/*.{js,ts,jsx,tsx}',
     './node_modules/primereact/**/*.{js,ts,jsx,tsx}'
   ],
   safelist: ['py-[6px]', 'py-[1px]'],
