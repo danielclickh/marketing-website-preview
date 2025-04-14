@@ -11,6 +11,7 @@ import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { AppProps } from 'next/app'
 import { Inconsolata, Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
@@ -36,6 +37,28 @@ const inconsolata = Inconsolata({
   variable: '--font-inconsolata',
   adjustFontFallback: false,
   fallback: []
+})
+
+const basier = localFont({
+  variable: '--font-basier',
+  display: 'swap',
+  src: [
+    {
+      path: '../fonts/BasierSquare/basiersquare-medium-webfont.woff',
+      weight: '500',
+      style: 'normal'
+    },
+    {
+      path: '../fonts/BasierSquare/basiersquare-semibold-webfont.woff',
+      weight: '600',
+      style: 'normal'
+    },
+    {
+      path: '../fonts/BasierSquare/basiersquare-bold-webfont.woff',
+      weight: '700',
+      style: 'normal'
+    }
+  ]
 })
 
 // Create a client-side GrowthBook instance
@@ -94,7 +117,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GrowthBookProvider growthbook={gb}>
           <main
             id='main-site-container'
-            className={`${inter.variable} font-inter ${inconsolata.variable}`}>
+            className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
             <SnackbarContextProvider>
               <div className='flex min-h-screen flex-col'>
                 <Component {...pageProps} />
