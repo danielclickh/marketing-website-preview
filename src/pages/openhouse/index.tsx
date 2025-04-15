@@ -7,6 +7,7 @@ import imageOpenhouseLogo from './assets/logo.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
+import speakerDaleFrohman from './assets/speaker-dale-frohman.png'
 import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
 import speakerKevinWeil from './assets/speaker-kevin-weil.png'
 import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
@@ -98,6 +99,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Krithika Balagurunathan',
     title: 'Sr Director, PM, ClickHouse',
     image: speakerKrithikaBalagurunathan
+  },
+  {
+    name: 'Dale',
+    title: 'Lead Director Engineering, CVS',
+    image: speakerDaleFrohman
   },
   {
     name: 'Yury Izrailevsky',
