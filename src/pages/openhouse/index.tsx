@@ -367,19 +367,15 @@ export default function Page({ seo, footerData }: CommonProps) {
             <div className='mx-auto max-w-6xl px-6 lg:px-12' id='agenda'>
               <h2 className='mb-10 text-center text-4xl'>Agenda at a glance</h2>
               <div className='relative flex flex-col gap-2.5'>
-                <div className='bg-gradient-checkered absolute bottom-0 left-52 top-0 hidden w-0.5 from-neutral-950 bg-[length:1rem_1rem] lg:block' />
+                <div className='bg-gradient-checkered absolute bottom-0 left-52 top-0 z-10 hidden w-0.5 from-neutral-950 bg-[length:1rem_1rem] lg:block' />
                 {AGENDA.map((row, rowIndex) => {
                   return (
-                    <div
+                    <AgendaItem
                       key={rowIndex}
-                      className='items-center bg-white p-4 lg:flex lg:p-0'>
-                      <div className='flex-shrink-0 flex-grow-0 text-lg font-bold lg:w-52 lg:text-center lg:text-2xl'>
-                        {row.time}
-                      </div>
-                      <div className='text-lg lg:flex-1 lg:py-6 lg:pl-12 lg:text-2xl'>
-                        {row.title}
-                      </div>
-                    </div>
+                      title={row.title}
+                      time={row.time}>
+                      {row.description}
+                    </AgendaItem>
                   )
                 })}
               </div>
@@ -621,6 +617,90 @@ export default function Page({ seo, footerData }: CommonProps) {
       </FontSohne>
       <Footer {...footerData} />
     </>
+  )
+}
+
+function AgendaItem({
+  time,
+  title,
+  children
+}: {
+  time: string
+  title: string
+  children?: React.ReactNode
+}) {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <div className='relative overflow-hidden bg-white p-4 lg:p-0'>
+      <div className='flex'>
+        <div className='flex flex-1 flex-wrap lg:flex-nowrap'>
+          <div className='flex w-full flex-shrink-0 flex-grow-0 items-center text-lg font-bold lg:h-20 lg:w-52 lg:justify-center lg:text-center lg:text-2xl'>
+            {time}
+          </div>
+          <div className='text-lg lg:flex-1 lg:py-6 lg:pl-12 lg:text-2xl'>
+            {title}
+          </div>
+        </div>
+        {!!children && (
+          <button
+            type='button'
+            className='flex aspect-square w-12 items-center justify-center lg:w-20'
+            onClick={(event) => {
+              event.preventDefault()
+              setIsOpen((old) => !old)
+            }}>
+            <span className='absolute inset-0 block' />
+            <span className='sr-only'>
+              {isOpen ? 'Close agenda item' : 'Open agenda item'}
+            </span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='15'
+              height='18'
+              fill='none'
+              className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+              <path
+                stroke='#171618'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M7.03 1v14.99M13.02 10l-6 6.04L1 10'
+              />
+            </svg>
+          </button>
+        )}
+      </div>
+      <AnimatePresence>
+        {!!children && isOpen && (
+          <motion.div
+            variants={{
+              closed: {
+                opacity: 0,
+                height: 0,
+                transition: {
+                  delay: 0
+                }
+              },
+              open: {
+                opacity: 1,
+                height: 'auto'
+              }
+            }}
+            initial='closed'
+            animate='open'
+            exit='closed'
+            transition={{
+              type: 'spring',
+              bounce: 0,
+              duration: 0.5
+            }}>
+            <div className='pt-4 lg:pb-6 lg:pl-64 lg:pr-12 lg:pt-0'>
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 
