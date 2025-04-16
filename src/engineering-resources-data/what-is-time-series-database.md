@@ -9,6 +9,26 @@ Time-series data is everywhere in modern systems - from IoT sensors and financia
 
 This article explores time-series databases, their use cases, and how different database solutions handle time-based data. Whether you're dealing with millions of sensor readings, tracking user behavior, or monitoring system performance, understanding your options for time-series data storage is crucial for building effective data systems.
 
+To get a taste of time-series analysis in action, here’s a sample query that looks at average yearly precipitation across the UK, France, and the US using weather station data from NOAA. It's a simple example, but it shows how powerful time-based queries can be for uncovering trends over time.
+
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHllYXIsCiAgICAgICBhdmcoYHByZWNpcGl0YXRpb25gKSBBUyBgYXZnX3ByZWNpcGl0YXRpb25gLAogICAgICAgZGljdEdldChgY291bnRyeWAuYGNvdW50cnlfaXNvX2NvZGVzYCwgJ25hbWUnLCBjb2RlKSBhcyBjb3VudHJ5CkZST00gYG5vYWFgLmBub2FhX3YyYApXSEVSRSBkYXRlID4gJzE5OTAtMDEtMDEnIEFORCBjb2RlIElOICgnVUsnLCAnRlInLCAnVVMnKQpHUk9VUCBCWSB0b1N0YXJ0T2ZZZWFyKGBkYXRlYCkgQVMgYHllYXJgLAogICAgICAgICBzdWJzdHJpbmcoc3RhdGlvbl9pZCwgMSwgMikgYXMgY29kZQpIQVZJTkcgYXZnX3ByZWNpcGl0YXRpb24gPiAwICAgICAgICAgCk9SREVSIEJZIGNvdW50cnksIHllYXIgQVNDCkxJTUlUIDEwMDAwMA&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'   show_statistics='true' view='chart'
+  chart_config='eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'
+>
+SELECT year,
+       avg(`precipitation`) AS `avg_precipitation`,
+       dictGet(`country`.`country_iso_codes`, 'name', code) as country
+FROM `noaa`.`noaa_v2`
+WHERE date > '1990-01-01' AND code IN ('UK', 'FR', 'US')
+GROUP BY toStartOfYear(`date`) AS `year`,
+         substring(station_id, 1, 2) as code
+HAVING avg_precipitation > 0         
+ORDER BY country, year ASC
+LIMIT 100000;
+</code></pre>
+
+You can see more queries like this in the [Is ClickHouse a time-series database?](/engineering-resources/what-is-time-series-database#clickhouse-times-series) section.
+
 ## What is time-series data?
 
 Let’s start by defining time-series data. It describes datasets where observations are captured along a timeline, and a key feature is a **timestamp**. These data points are collected at **regular intervals**—like every second, minute, or day—or **irregular intervals** when events occur unpredictably.
@@ -137,17 +157,130 @@ Prometheus uses a domain-specific query language called [PromQL](https://prometh
 
 InfluxDB initially used a query language called InfluxQL, which was SQL-like but explicitly designed for time-series operations. With InfluxDB 2.0, they introduced Flux, a more powerful SQL-based language, before adding SQL support to make the platform more accessible to users familiar with traditional database querying.
 
-## Is ClickHouse a time-series database?
+## Is ClickHouse a time-series database? {#clickhouse-times-series}
 
 While ClickHouse isn't specifically designed as a time-series database, it excels at handling time-series workloads as part of its broader analytical capabilities.
 
 As a columnar OLAP database, ClickHouse provides the performance and features needed for efficient time-series analysis without the limitations of a specialized solution.
 
-ClickHouse's strengths in handling time-series data come from several key capabilities:
 
-- Real-time querying of large datasets, enabling analysis of historical and current data at scale
-- Support for [high-precision timestamps](https://clickhouse.com/docs/en/sql-reference/data-types/datetime64) and date-time operations
-- Rich set of temporal functions for [time-based aggregations](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions), [window operations](https://clickhouse.com/docs/en/sql-reference/window-functions), and more.
+ClickHouse's strengths in handling time-series data come from several key capabilities.
+
+### Real-time querying of large datasets
+
+ClickHouse enables the analysis of historical and current data at a large scale through its innovative dual-layer architecture. The system processes billions of rows per second on standard hardware through:
+
+* Isolated concurrent operations: Data is organized into "table parts" that allow inserts and selects to operate independently without blocking each other  
+* Vectorized query execution: Processes data in batches rather than row-by-row, utilizing CPU caches efficiently and applying SIMD instructions  
+* Parallel processing: Automatically distributes query execution across multiple CPU cores and can scale horizontally across nodes in a cluster  
+* Merge-time computation: Shifts computational work from query time to background merge processes, making queries significantly faster  
+* Specialized algorithms and data structures: As noted by CMU Professor Andy Pavlo, ClickHouse has "20 versions of a hash table" and other specialized components optimized for different query patterns
+
+> You can read more in the [Why is ClickHouse fast? Developer guide](https://clickhouse.com/docs/concepts/why-clickhouse-is-so-fast).
+
+These architectural advantages enable organizations to maintain years of historical time-series data while providing sub-second query responses for real-time dashboards and deep historical analysis.
+
+The following query analyzes New York City taxi data that contains over 3 billion records. For January 1, 2014, it groups rides by hour and cab type to show the number of rides, average trip distance, and average fare for each hourly period and taxi category.
+
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIAogICAgdG9TdGFydE9mSG91cihwaWNrdXBfZGF0ZXRpbWUpIEFTIGhvdXIsCiAgICBjYWJfdHlwZSwKICAgIGNvdW50KCopIEFTIHJpZGVzLAogICAgcm91bmQoYXZnKHRyaXBfZGlzdGFuY2UpLCAyKSBBUyBhdmdfZGlzdGFuY2UsCiAgICByb3VuZChhdmcodG90YWxfYW1vdW50KSwgMikgQVMgYXZnX2ZhcmUKRlJPTSBueWNfdGF4aS50cmlwcwpXSEVSRSBwaWNrdXBfZGF0ZSA9ICcyMDE0LTAxLTAxJwpHUk9VUCBCWSAxLCAyCk9SREVSIEJZIDEsIDI&chart=eyJ0eXBlIjoiYmFyIiwiY29uZmlnIjp7InRpdGxlIjoiTmV3IFlvcmsgdGF4aSByaWRlcyBvbiAxc3QgSmFudWFyeSAyMDE0IiwieGF4aXMiOiJob3VyIiwieWF4aXMiOiJyaWRlcyIsInNlcmllcyI6ImNhYl90eXBlIiwic3RhY2siOnRydWV9fQ'   show_statistics='true' view='chart'
+  chart_config='eyJ0eXBlIjoiYmFyIiwiY29uZmlnIjp7InRpdGxlIjoiTmV3IFlvcmsgdGF4aSByaWRlcyBvbiAxc3QgSmFudWFyeSAyMDE0IiwieGF4aXMiOiJob3VyIiwieWF4aXMiOiJyaWRlcyIsInNlcmllcyI6ImNhYl90eXBlIiwic3RhY2siOnRydWV9fQ'
+>
+SELECT 
+    toStartOfHour(pickup_datetime) AS hour,
+    cab_type,
+    count(*) AS rides,
+    round(avg(trip_distance), 2) AS avg_distance,
+    round(avg(total_amount), 2) AS avg_fare
+FROM nyc_taxi.trips
+WHERE pickup_date = '2014-01-01'
+GROUP BY 1, 2
+ORDER BY 1, 2
+</code></pre>
+
+### Comprehensive date/time type support
+
+ClickHouse provides [robust support for time-series data through specialized date and time data types](https://clickhouse.com/docs/use-cases/time-series/date-time-data-types) that balance storage efficiency with precision requirements:
+
+* **Versatile date types**:  
+  * `Date`: Compact 2-byte storage covering `[1970-01-01, 2149-06-06]`, sufficient for most use cases  
+  * `Date32`: Extended 4-byte storage covering a wider range `[1900-01-01, 2299-12-31]`  
+* **Flexible timestamp types**:  
+  * `DateTime`: 4-byte storage with second precision, range of `[1970-01-01 00:00:00, 2106-02-07 06:28:15]`  
+  * `DateTime64`: 8-byte storage with configurable sub-second precision (up to nanoseconds), range of `[1900-01-01 00:00:00, 2299-12-31 23:59:59.99999999]`  
+* **Time zone awareness:**  
+  * Built-in support for time zones in both `DateTime('TimeZone')` and `DateTime64('TimeZone')`  
+  * Automatic time zone conversion during queries  
+  * Support for different time zones within the same table  
+* **Type conversion functions**:  
+  * Seamless conversion between temporal types with functions like [`toDate`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todate), [`toDateTime`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todatetime), and [`toDateTime64`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todatetime64)  
+  * Precision control when converting between different temporal resolutions
+
+These comprehensive date/time capabilities provide the foundation for sophisticated time-series analysis, enabling precise temporal storage and manipulation across massive datasets while optimizing storage efficiency and query performance.
+
+The following query aggregates total daily hits from the Wiki dataset, using the `toDate` function to convert `DateTime` values to `Date`:
+
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com/?query_id=4RNIAAXZVWK2YLFFVGEC1O'   show_statistics='true'
+>
+SELECT
+    sum(hits) AS h,
+    toDate(time) AS d
+FROM wiki.wikistat_small
+GROUP BY d
+ORDER BY d
+LIMIT 5;</code></pre>
+
+### Rich set of temporal functions
+
+ClickHouse offers a comprehensive suite of temporal functions that can be used for time-series analysis:
+
+* Time-based aggregations: Functions like [`toStartOfHour`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofhour), [`toStartOfMonth`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofmonth), and [`toStartOfInterval`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofinterval) enable efficient grouping of time-series data into regular intervals  
+* Date and time arithmetic: Functions for adding or subtracting intervals from timestamps with [`addDays`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#adddays), [`addHours`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#addhours), and more.  
+* Date/time formatting: Flexible formatting options with [`formatDateTime`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#formatdatetime) and [`parseDateTime`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#parsedatetime) for input/output operations  
+* Time difference calculations: Functions like [`dateDiff`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#date_diff) for measuring intervals between timestamps.  
+* Time zone handling: Comprehensive support for time zone conversions with functions like [`toTimeZone`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#totimezone) and automatic time zone awareness  
+* Standard window functions: Full support for SQL window functions, including:  
+  * Row numbering with [`row_number`](https://clickhouse.com/docs/sql-reference/window-functions/row_number)  
+  * Ranking with [`rank`](https://clickhouse.com/docs/sql-reference/window-functions/rank), [`dense_rank`](https://clickhouse.com/docs/sql-reference/window-functions/dense_rank), and [`percent_rank`](https://clickhouse.com/docs/sql-reference/window-functions/percent_rank)  
+  * Value access with [`first_value`](https://clickhouse.com/docs/sql-reference/window-functions/first_value), [`last_value`](https://clickhouse.com/docs/sql-reference/window-functions/last_value), and [`nth_value`](https://clickhouse.com/docs/sql-reference/window-functions/nth_value)  
+  * Frame navigation with [`lagInFrame`](https://clickhouse.com/docs/sql-reference/window-functions/lagInFrame) and [`leadInFrame`](https://clickhouse.com/docs/sql-reference/window-functions/leadInFrame)
+
+These temporal functions allow analysts to perform sophisticated time-series analyses with concise, readable SQL queries. With ClickHouse's query performance, these functions enable complex time-based aggregations, pattern detection, and anomaly identification across massive datasets with minimal latency.
+
+Let’s have a look at a couple of examples.
+
+The following query computes the yearly average precipitation in the UK, France, and the US from 1990 onwards.
+
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHllYXIsCiAgICAgICBhdmcoYHByZWNpcGl0YXRpb25gKSBBUyBgYXZnX3ByZWNpcGl0YXRpb25gLAogICAgICAgZGljdEdldChgY291bnRyeWAuYGNvdW50cnlfaXNvX2NvZGVzYCwgJ25hbWUnLCBjb2RlKSBhcyBjb3VudHJ5CkZST00gYG5vYWFgLmBub2FhX3YyYApXSEVSRSBkYXRlID4gJzE5OTAtMDEtMDEnIEFORCBjb2RlIElOICgnVUsnLCAnRlInLCAnVVMnKQpHUk9VUCBCWSB0b1N0YXJ0T2ZZZWFyKGBkYXRlYCkgQVMgYHllYXJgLAogICAgICAgICBzdWJzdHJpbmcoc3RhdGlvbl9pZCwgMSwgMikgYXMgY29kZQpIQVZJTkcgYXZnX3ByZWNpcGl0YXRpb24gPiAwICAgICAgICAgCk9SREVSIEJZIGNvdW50cnksIHllYXIgQVNDCkxJTUlUIDEwMDAwMA&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'   show_statistics='true' view='chart'
+  chart_config='eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'
+>
+SELECT year,
+       avg(`precipitation`) AS `avg_precipitation`,
+       dictGet(`country`.`country_iso_codes`, 'name', code) as country
+FROM `noaa`.`noaa_v2`
+WHERE date > '1990-01-01' AND code IN ('UK', 'FR', 'US')
+GROUP BY toStartOfYear(`date`) AS `year`,
+         substring(station_id, 1, 2) as code
+HAVING avg_precipitation > 0         
+ORDER BY country, year ASC
+LIMIT 100000;
+</code></pre>
+
+The following query uses a window function to calculate the cumulative stars of the `deepseek-ai/DeepSeek-R1` repository:
+
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHRvRGF0ZShjcmVhdGVkX2F0KSBBUyBkYXksIAogICAgICAgY291bnQoKSBBUyBkYWlseUNvdW50LAogICAgICAgc3VtKGRhaWx5Q291bnQpIE9WRVIgKE9SREVSIEJZIGRheSBBU0MpIEFTIGN1bFN0YXJzCkZST00gZ2l0aHViLmV2ZW50cyAKV0hFUkUgZXZlbnRfdHlwZSA9ICdXYXRjaEV2ZW50JyBBTkQgcmVwb19uYW1lID0gJ2RlZXBzZWVrLWFpL0RlZXBTZWVrLVIxJwpHUk9VUCBCWSBBTEwKT1JERVIgQlkgZGF5OwoK&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6ImRheSIsInlheGlzIjoiY3VsU3RhcnMifX0'   show_statistics='true'
+>
+SELECT toDate(created_at) AS day, 
+       count() AS dailyCount,
+       sum(dailyCount) OVER (ORDER BY day ASC) AS culStars
+FROM github.events 
+WHERE event_type = 'WatchEvent' AND repo_name = 'deepseek-ai/DeepSeek-R1'
+GROUP BY ALL
+ORDER BY day;
+</code></pre>
 
 Additionally, ClickHouse offers features that are particularly valuable for long-term time-series data management:
 
