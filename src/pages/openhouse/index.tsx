@@ -21,6 +21,7 @@ import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
 import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
 import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
 import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
+import speakerVladSeliverstov from './assets/speaker-vlad-seliverstov.png'
 import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
@@ -159,6 +160,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Mike Shi',
     title: 'Principal PM, ClickHouse',
     image: speakerMikeShi
+  },
+  {
+    name: 'Vlad Seliverstov',
+    title: 'Principal PME, ClickHouse',
+    image: speakerVladSeliverstov
   },
   {
     name: 'Ryadh Dahimene',
