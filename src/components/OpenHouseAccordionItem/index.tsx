@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
 interface OpenHouseAccordionItemProps {
@@ -21,10 +22,10 @@ export default function OpenHouseAccordionItem({
   }, [open])
 
   return (
-    <div className={`border-b-2 border-black ${className}`}>
+    <div className={`overflow-hidden border-b-2 border-black ${className}`}>
       <button
         onClick={() => setIsOpen((old) => !old)}
-        className='flex w-full items-center gap-4 py-4 text-left text-lg'>
+        className={`flex w-full items-center gap-4 text-left text-lg transition-all duration-300 ${isOpen ? 'pt-4' : 'py-4'}`}>
         <span className='flex-1 text-xl'>{handle}</span>
         <span className='relative ml-auto block aspect-square w-10 flex-shrink-0 flex-grow-0 p-3 transition-colors lg:w-12 lg:p-4'>
           <span
@@ -36,9 +37,31 @@ export default function OpenHouseAccordionItem({
           </span>
         </span>
       </button>
-      <div className={`-mt-4 pb-6 ${isOpen ? 'block' : 'hidden'}`}>
-        {children}
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            variants={{
+              closed: {
+                opacity: 0,
+                height: 0
+              },
+              open: {
+                opacity: 1,
+                height: 'auto'
+              }
+            }}
+            initial='closed'
+            animate='open'
+            exit='closed'
+            transition={{
+              type: 'spring',
+              bounce: 0,
+              duration: 0.5
+            }}>
+            <div className='pb-6'>{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
