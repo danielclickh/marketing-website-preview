@@ -173,6 +173,33 @@ const ALL_SPEAKERS: Array<{
   }
 ]
 
+const AGENDA: Array<{
+  time: string
+  title: string
+  description?: string | React.ReactNode
+}> = [
+  { time: '8:00 a.m.', title: 'Registration and buffet' },
+  { time: '9:00 a.m.', title: 'Keynote: Product vision and roadmap' },
+  { time: '10:30 a.m.', title: 'Break: AMA booth and demo stations' },
+  {
+    time: '11:00 a.m.',
+    title: 'Real-time analytics: technical deep dives and user stories'
+  },
+  { time: '12:00 a.m.', title: 'Lunch' },
+  {
+    time: '1:00 p.m.',
+    title: 'Data warehousing: technical deep dives and user stories'
+  },
+  {
+    time: '2:00 p.m.',
+    title: 'Observability: technical deep dives and user stories'
+  },
+  { time: '3:00 p.m.', title: 'Break: AMA booth and demo stations' },
+  { time: '3:30 p.m.', title: 'AI/ML: technical deep dives and user stories' },
+  { time: '4:30 p.m.', title: 'Fireside chat' },
+  { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
+]
+
 export default function Page({ seo, footerData }: CommonProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
@@ -339,72 +366,22 @@ export default function Page({ seo, footerData }: CommonProps) {
             />
             <div className='mx-auto max-w-6xl px-6 lg:px-12' id='agenda'>
               <h2 className='mb-10 text-center text-4xl'>Agenda at a glance</h2>
-              <div className='grid-cols-2 gap-6 space-y-6 lg:grid lg:space-y-0'>
-                <div className='space-y-6 bg-white px-6 py-8 lg:px-12 lg:py-10 lg:text-lg'>
-                  <FontSohneBreit>
-                    <h3 className='text-4xl'>
-                      <small className='text-2xl font-bold uppercase'>
-                        MAY 28
-                      </small>
-                      <br />
-                      Training
-                    </h3>
-                  </FontSohneBreit>
-                  <p>
-                    Start your journey to becoming a ClickHouse Certified
-                    Developer with this free, hands-on training.
-                  </p>
-                  <p>
-                    <strong>We'll cover:</strong>
-                  </p>
-                  <ul className='!mt-0 list-disc pl-8'>
-                    <li>Module 1: Getting Started with ClickHouse</li>
-                    <li>Module 2: ClickHouse Architecture</li>
-                    <li>Module 3: Modeling Data</li>
-                    <li>Module 4: Inserting Data</li>
-                    <li>Module 5: Analyzing Data</li>
-                  </ul>
-                  <p>
-                    This will be a full-day event with limited seats.
-                    <br />
-                    Open to conference registrants only.
-                  </p>
-                </div>
-                <div className='space-y-3 bg-white px-6 py-8 lg:px-12 lg:py-10 lg:text-lg'>
-                  <FontSohneBreit>
-                    <h3 className='mb-6 text-4xl'>
-                      <small className='text-2xl font-bold uppercase'>
-                        MAY 29
-                      </small>
-                      <br />
-                      Conference
-                    </h3>
-                  </FontSohneBreit>
-                  <p>
-                    <strong>Sessions:</strong>
-                  </p>
-                  <ul className='!mt-0 list-disc pl-8'>
-                    <li>Opening keynote with ClickHouse founders</li>
-                    <li>Roadmap session with product leaders</li>
-                    <li>In-depth customer talks from our largest users</li>
-                    <li>Technical feature deep dives from our engineers</li>
-                  </ul>
-                  <p>
-                    <strong>Breakouts:</strong>
-                  </p>
-                  <ul className='!mt-0 list-disc pl-8'>
-                    <li>Use Case & Integration Demos</li>
-                    <li>“Built on ClickHouse” showcase</li>
-                    <li>AMA Booth</li>
-                  </ul>
-                  <p>
-                    <strong>Networking:</strong>
-                  </p>
-                  <ul className='!mt-0 list-disc pl-8'>
-                    <li>Catered breakfast & lunch</li>
-                    <li>Evening networking reception</li>
-                  </ul>
-                </div>
+              <div className='relative flex flex-col gap-2.5'>
+                <div className='bg-gradient-checkered absolute bottom-0 left-52 top-0 hidden w-0.5 from-neutral-950 bg-[length:1rem_1rem] lg:block' />
+                {AGENDA.map((row, rowIndex) => {
+                  return (
+                    <div
+                      key={rowIndex}
+                      className='items-center bg-white p-4 lg:flex lg:p-0'>
+                      <div className='flex-shrink-0 flex-grow-0 text-lg font-bold lg:w-52 lg:text-center lg:text-2xl'>
+                        {row.time}
+                      </div>
+                      <div className='text-lg lg:flex-1 lg:py-6 lg:pl-12 lg:text-2xl'>
+                        {row.title}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
               <div className='mt-10 text-center'>
                 <OpenHouseButton
