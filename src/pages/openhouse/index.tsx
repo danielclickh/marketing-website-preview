@@ -163,7 +163,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Vlad Seliverstov',
-    title: 'Principal PME, ClickHouse',
+    title: 'Engineering Manager',
     image: speakerVladSeliverstov
   },
   {
