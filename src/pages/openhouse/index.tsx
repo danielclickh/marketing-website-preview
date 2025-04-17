@@ -178,7 +178,7 @@ const AGENDA: Array<{
   title: string
   description?: string | React.ReactNode
 }> = [
-  { time: '8:00 a.m.', title: 'Registration and buffet' },
+  { time: '8:00 a.m.', title: 'Registration and light refreshments' },
   { time: '9:00 a.m.', title: 'Keynote: Product vision and roadmap' },
   { time: '10:30 a.m.', title: 'Break: AMA booth and demo stations' },
   {
