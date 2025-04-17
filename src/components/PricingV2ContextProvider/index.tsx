@@ -1,18 +1,3 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react'
-import { PricingV2ComponentUseCase } from '../../lib/api/strapi/types'
-import {
-  bytesTo,
-  bytesToHumanReadable,
-  humanReadableTo,
-  humanReadableToBytes
-} from '@/lib/utils/memory'
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
 import {
@@ -51,6 +36,21 @@ import {
   PricingFile,
   Values
 } from '../PricingV2/types'
+import { PricingV2ComponentUseCase } from '@/lib/api/strapi/types'
+import {
+  bytesTo,
+  bytesToHumanReadable,
+  humanReadableTo,
+  humanReadableToBytes
+} from '@/lib/utils/memory'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 
 function getPlanPricingData(planKey: string) {
   return (pricingFile as PricingFile)[planKey]

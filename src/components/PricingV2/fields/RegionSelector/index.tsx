@@ -1,7 +1,7 @@
-import { useMemo } from 'react'
-import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { useMemo } from 'react'
 
 export interface RegionSelectorProps {
   displayLabel?: boolean

@@ -163,18 +163,17 @@ While ClickHouse isn't specifically designed as a time-series database, it excel
 
 As a columnar OLAP database, ClickHouse provides the performance and features needed for efficient time-series analysis without the limitations of a specialized solution.
 
-
 ClickHouse's strengths in handling time-series data come from several key capabilities.
 
 ### Real-time querying of large datasets
 
 ClickHouse enables the analysis of historical and current data at a large scale through its innovative dual-layer architecture. The system processes billions of rows per second on standard hardware through:
 
-* Isolated concurrent operations: Data is organized into "table parts" that allow inserts and selects to operate independently without blocking each other  
-* Vectorized query execution: Processes data in batches rather than row-by-row, utilizing CPU caches efficiently and applying SIMD instructions  
-* Parallel processing: Automatically distributes query execution across multiple CPU cores and can scale horizontally across nodes in a cluster  
-* Merge-time computation: Shifts computational work from query time to background merge processes, making queries significantly faster  
-* Specialized algorithms and data structures: As noted by CMU Professor Andy Pavlo, ClickHouse has "20 versions of a hash table" and other specialized components optimized for different query patterns
+- Isolated concurrent operations: Data is organized into "table parts" that allow inserts and selects to operate independently without blocking each other
+- Vectorized query execution: Processes data in batches rather than row-by-row, utilizing CPU caches efficiently and applying SIMD instructions
+- Parallel processing: Automatically distributes query execution across multiple CPU cores and can scale horizontally across nodes in a cluster
+- Merge-time computation: Shifts computational work from query time to background merge processes, making queries significantly faster
+- Specialized algorithms and data structures: As noted by CMU Professor Andy Pavlo, ClickHouse has "20 versions of a hash table" and other specialized components optimized for different query patterns
 
 > You can read more in the [Why is ClickHouse fast? Developer guide](https://clickhouse.com/docs/concepts/why-clickhouse-is-so-fast).
 
@@ -202,19 +201,19 @@ ORDER BY 1, 2
 
 ClickHouse provides [robust support for time-series data through specialized date and time data types](https://clickhouse.com/docs/use-cases/time-series/date-time-data-types) that balance storage efficiency with precision requirements:
 
-* **Versatile date types**:  
-  * `Date`: Compact 2-byte storage covering `[1970-01-01, 2149-06-06]`, sufficient for most use cases  
-  * `Date32`: Extended 4-byte storage covering a wider range `[1900-01-01, 2299-12-31]`  
-* **Flexible timestamp types**:  
-  * `DateTime`: 4-byte storage with second precision, range of `[1970-01-01 00:00:00, 2106-02-07 06:28:15]`  
-  * `DateTime64`: 8-byte storage with configurable sub-second precision (up to nanoseconds), range of `[1900-01-01 00:00:00, 2299-12-31 23:59:59.99999999]`  
-* **Time zone awareness:**  
-  * Built-in support for time zones in both `DateTime('TimeZone')` and `DateTime64('TimeZone')`  
-  * Automatic time zone conversion during queries  
-  * Support for different time zones within the same table  
-* **Type conversion functions**:  
-  * Seamless conversion between temporal types with functions like [`toDate`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todate), [`toDateTime`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todatetime), and [`toDateTime64`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todatetime64)  
-  * Precision control when converting between different temporal resolutions
+- **Versatile date types**:
+  - `Date`: Compact 2-byte storage covering `[1970-01-01, 2149-06-06]`, sufficient for most use cases
+  - `Date32`: Extended 4-byte storage covering a wider range `[1900-01-01, 2299-12-31]`
+- **Flexible timestamp types**:
+  - `DateTime`: 4-byte storage with second precision, range of `[1970-01-01 00:00:00, 2106-02-07 06:28:15]`
+  - `DateTime64`: 8-byte storage with configurable sub-second precision (up to nanoseconds), range of `[1900-01-01 00:00:00, 2299-12-31 23:59:59.99999999]`
+- **Time zone awareness:**
+  - Built-in support for time zones in both `DateTime('TimeZone')` and `DateTime64('TimeZone')`
+  - Automatic time zone conversion during queries
+  - Support for different time zones within the same table
+- **Type conversion functions**:
+  - Seamless conversion between temporal types with functions like [`toDate`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todate), [`toDateTime`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todatetime), and [`toDateTime64`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#todatetime64)
+  - Precision control when converting between different temporal resolutions
 
 These comprehensive date/time capabilities provide the foundation for sophisticated time-series analysis, enabling precise temporal storage and manipulation across massive datasets while optimizing storage efficiency and query performance.
 
@@ -235,16 +234,16 @@ LIMIT 5;</code></pre>
 
 ClickHouse offers a comprehensive suite of temporal functions that can be used for time-series analysis:
 
-* Time-based aggregations: Functions like [`toStartOfHour`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofhour), [`toStartOfMonth`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofmonth), and [`toStartOfInterval`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofinterval) enable efficient grouping of time-series data into regular intervals  
-* Date and time arithmetic: Functions for adding or subtracting intervals from timestamps with [`addDays`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#adddays), [`addHours`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#addhours), and more.  
-* Date/time formatting: Flexible formatting options with [`formatDateTime`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#formatdatetime) and [`parseDateTime`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#parsedatetime) for input/output operations  
-* Time difference calculations: Functions like [`dateDiff`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#date_diff) for measuring intervals between timestamps.  
-* Time zone handling: Comprehensive support for time zone conversions with functions like [`toTimeZone`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#totimezone) and automatic time zone awareness  
-* Standard window functions: Full support for SQL window functions, including:  
-  * Row numbering with [`row_number`](https://clickhouse.com/docs/sql-reference/window-functions/row_number)  
-  * Ranking with [`rank`](https://clickhouse.com/docs/sql-reference/window-functions/rank), [`dense_rank`](https://clickhouse.com/docs/sql-reference/window-functions/dense_rank), and [`percent_rank`](https://clickhouse.com/docs/sql-reference/window-functions/percent_rank)  
-  * Value access with [`first_value`](https://clickhouse.com/docs/sql-reference/window-functions/first_value), [`last_value`](https://clickhouse.com/docs/sql-reference/window-functions/last_value), and [`nth_value`](https://clickhouse.com/docs/sql-reference/window-functions/nth_value)  
-  * Frame navigation with [`lagInFrame`](https://clickhouse.com/docs/sql-reference/window-functions/lagInFrame) and [`leadInFrame`](https://clickhouse.com/docs/sql-reference/window-functions/leadInFrame)
+- Time-based aggregations: Functions like [`toStartOfHour`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofhour), [`toStartOfMonth`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofmonth), and [`toStartOfInterval`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#tostartofinterval) enable efficient grouping of time-series data into regular intervals
+- Date and time arithmetic: Functions for adding or subtracting intervals from timestamps with [`addDays`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#adddays), [`addHours`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#addhours), and more.
+- Date/time formatting: Flexible formatting options with [`formatDateTime`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#formatdatetime) and [`parseDateTime`](https://clickhouse.com/docs/sql-reference/functions/type-conversion-functions#parsedatetime) for input/output operations
+- Time difference calculations: Functions like [`dateDiff`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#date_diff) for measuring intervals between timestamps.
+- Time zone handling: Comprehensive support for time zone conversions with functions like [`toTimeZone`](https://clickhouse.com/docs/sql-reference/functions/date-time-functions#totimezone) and automatic time zone awareness
+- Standard window functions: Full support for SQL window functions, including:
+  - Row numbering with [`row_number`](https://clickhouse.com/docs/sql-reference/window-functions/row_number)
+  - Ranking with [`rank`](https://clickhouse.com/docs/sql-reference/window-functions/rank), [`dense_rank`](https://clickhouse.com/docs/sql-reference/window-functions/dense_rank), and [`percent_rank`](https://clickhouse.com/docs/sql-reference/window-functions/percent_rank)
+  - Value access with [`first_value`](https://clickhouse.com/docs/sql-reference/window-functions/first_value), [`last_value`](https://clickhouse.com/docs/sql-reference/window-functions/last_value), and [`nth_value`](https://clickhouse.com/docs/sql-reference/window-functions/nth_value)
+  - Frame navigation with [`lagInFrame`](https://clickhouse.com/docs/sql-reference/window-functions/lagInFrame) and [`leadInFrame`](https://clickhouse.com/docs/sql-reference/window-functions/leadInFrame)
 
 These temporal functions allow analysts to perform sophisticated time-series analyses with concise, readable SQL queries. With ClickHouse's query performance, these functions enable complex time-based aggregations, pattern detection, and anomaly identification across massive datasets with minimal latency.
 

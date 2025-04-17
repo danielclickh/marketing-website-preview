@@ -1,12 +1,12 @@
-import { ExternalLinkIcon } from '@heroicons/react/outline'
-import Link from 'next/link'
-import { useCallback, useMemo } from 'react'
-import HRSeparator from '../../../HRSeparator'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { Transfer } from '../../types'
 import DataSize from '../../ui/DataSize'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
+import HRSeparator from '@/components/HRSeparator'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { ExternalLinkIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
+import { useCallback, useMemo } from 'react'
 
 export default function DataTransferSelector() {
   const { setValues, providerEntry, transfers } = usePricingV2Context()
@@ -90,7 +90,7 @@ export default function DataTransferSelector() {
     <>
       {/* Fix inter-region egress */}
       {!providerEntry?.useDestinationInterRegionEgress && (
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+        <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
           <div>
             <Label>Public internet egress / month</Label>
             <DataSize
@@ -130,8 +130,8 @@ export default function DataTransferSelector() {
               {transfers.map((item, transferIndex) => {
                 return (
                   <>
-                    <div key={transferIndex} className='flex gap-2 items-end'>
-                      <div className='flex-1 grid grid-cols-1 md:grid-cols-2 gap-6'>
+                    <div key={transferIndex} className='flex items-end gap-2'>
+                      <div className='grid flex-1 grid-cols-1 gap-6 md:grid-cols-2'>
                         <div>
                           {item.type === 'public-internet' && (
                             <Label>Public internet egress / month</Label>
@@ -173,13 +173,13 @@ export default function DataTransferSelector() {
                             </div>
                           )}
                       </div>
-                      <div className='h-10 flex items-center flex-grow-0 flex-shrink-0'>
+                      <div className='flex h-10 flex-shrink-0 flex-grow-0 items-center'>
                         <button
                           onClick={(event) => {
                             event.preventDefault()
                             removeTransfer(transferIndex)
                           }}
-                          className='flex items-center justify-center w-8 aspect-square rounded transition-colors hover:bg-white/10'>
+                          className='flex aspect-square w-8 items-center justify-center rounded transition-colors hover:bg-white/10'>
                           <span className='sr-only'>Remove</span>
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -206,7 +206,7 @@ export default function DataTransferSelector() {
           )}
 
           {(canAddPublicInternet || canAddInterRegion) && (
-            <div className='flex gap-3 flex-wrap'>
+            <div className='flex flex-wrap gap-3'>
               {canAddPublicInternet && (
                 <button
                   onClick={(event) => {
@@ -216,7 +216,7 @@ export default function DataTransferSelector() {
                       value: null
                     })
                   }}
-                  className='px-3 py-1 rounded border border-neutral-700 bg-neutral-725 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
+                  className='rounded border border-neutral-700 bg-neutral-725 px-3 py-1 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
                   <span className='leading-none'>+</span> Add public internet
                   egress
                 </button>
@@ -231,7 +231,7 @@ export default function DataTransferSelector() {
                       region: nextAvailableOption?.value || null
                     })
                   }}
-                  className='px-3 py-1 rounded border border-neutral-700 bg-neutral-725 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
+                  className='rounded border border-neutral-700 bg-neutral-725 px-3 py-1 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
                   <span className='leading-none'>+</span> Add inter-region
                   egress
                 </button>
@@ -249,7 +249,7 @@ export default function DataTransferSelector() {
           target='_blank'
           title='Opens in a new tab'
           className='text-primary-300 hover:underline'>
-          data transfer docs <ExternalLinkIcon className='h-4 w-4 inline' />
+          data transfer docs <ExternalLinkIcon className='inline h-4 w-4' />
         </Link>
       </p>
     </>

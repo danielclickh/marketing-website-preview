@@ -1,8 +1,4 @@
-import { GetServerSideProps } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import philosophy from './philosophy.json'
 import ByocPricingCard from '@/components/ByocPricingCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
@@ -24,9 +20,12 @@ import {
   PricingPlanData,
   RegionPricing
 } from '@/types/pricing'
-import philosophy from './philosophy.json'
-
+import { GetServerSideProps } from 'next'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 
 // Lazy load prizing components
 const PricingV1 = dynamic(() => import('@/components/PricingCalculator'), {

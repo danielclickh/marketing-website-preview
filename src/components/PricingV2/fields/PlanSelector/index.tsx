@@ -1,5 +1,5 @@
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 
 export default function PlanSelector() {
   const { setValues, sourceData, plan } = usePricingV2Context()

@@ -1,5 +1,5 @@
-import { CUIButton } from '../../../ClickUI'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { CUIButton } from '@/components/ClickUI'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { ShareIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -123,7 +123,7 @@ export default function EstimatorCtas() {
       <div className={promoteContact ? 'space-y-4' : 'hidden'}>
         <p className='-mt-4 mb-8 text-center text-base font-bold text-white'>
           You’re eligible for custom terms{' '}
-          <span className='text-xl inline-block ml-1 -mr-1'>🎉</span>
+          <span className='-mr-1 ml-1 inline-block text-xl'>🎉</span>
           <br />
           Contact us for more details
         </p>

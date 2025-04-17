@@ -1,11 +1,11 @@
-import { useCallback, useMemo } from 'react'
+import Select, { Options } from '../Select'
 import {
   BYTE_UNITS,
   bytesToHumanReadable,
   humanReadableParts,
   humanReadableToBytes
-} from '../../../../lib/utils/memory'
-import Select, { Options } from '../Select'
+} from '@/lib/utils/memory'
+import { useCallback, useMemo } from 'react'
 
 export type Value = {
   bytes: null | number

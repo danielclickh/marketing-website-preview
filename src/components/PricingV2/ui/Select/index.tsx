@@ -1,9 +1,9 @@
+import { StrapiImageUrl } from '../../../StrapiElements'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { isEqual } from 'lodash'
 import { memo, useMemo } from 'react'
-import { StrapiImageType } from '../../../../lib/api/strapi/types'
-import { StrapiImageUrl } from '../../../StrapiElements'
 
 export type Option = {
   value: any
@@ -42,7 +42,7 @@ const SelectOption = memo(function SelectOption({
       {icon && (
         <StrapiImageUrl
           {...icon}
-          className='!h-6 !w-8 object-scale-down object-center flex-shrink-0 flex-grow-0'
+          className='!h-6 !w-8 flex-shrink-0 flex-grow-0 object-scale-down object-center'
         />
       )}
       {label}
@@ -75,7 +75,7 @@ const Select = memo(function Select({
                 {selectedOption.icon && (
                   <StrapiImageUrl
                     {...selectedOption.icon}
-                    className='!h-6 !w-8 object-scale-down object-center flex-shrink-0 flex-grow-0'
+                    className='!h-6 !w-8 flex-shrink-0 flex-grow-0 object-scale-down object-center'
                   />
                 )}
                 {selectedOption.label}

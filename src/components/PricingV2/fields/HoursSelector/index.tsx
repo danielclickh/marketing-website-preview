@@ -1,6 +1,6 @@
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import Label from '../../ui/Label'
 import Range from '../../ui/Range'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { CheckIcon } from '@heroicons/react/solid'
 
 export default function HoursSelector() {

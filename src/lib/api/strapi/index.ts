@@ -1,6 +1,6 @@
+import { PricingV2 } from './types'
 import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
-import { PricingV2 } from './types'
 
 export function fetch(uri: string, init: any = {}) {
   if (process?.env?.STRAPI_API_KEY) {

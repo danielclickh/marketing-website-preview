@@ -1,9 +1,5 @@
 import { CommonProps } from './homepage'
-import {
-  PricingV2,
-  SeoMetadata,
-  StrapiImageType
-} from '@/lib/api/strapi/types'
+import { PricingV2, SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
 import { ParsedUrlQuery } from 'querystring'
 
 interface PricingDimension {

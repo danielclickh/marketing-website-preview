@@ -1,13 +1,13 @@
-import { useMemo } from 'react'
-import { PricingV2ComponentPackage } from '@/lib/api/strapi/types'
-import HRSeparator from '@/components/HRSeparator'
-import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
-import { SuiText } from '@/components/sui'
 import * as config from '../../config'
 import { findClosestCompute } from '../../config'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 import HoursSelector from '../HoursSelector'
+import HRSeparator from '@/components/HRSeparator'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { SuiText } from '@/components/sui'
+import { PricingV2ComponentPackage } from '@/lib/api/strapi/types'
+import { useMemo } from 'react'
 
 // Array of replicate size options from 1-25
 const REPLICAS: Options = Array.from({ length: 25 }, (_, i) => ({
@@ -130,7 +130,7 @@ export default function ComputeSelector() {
           {hasPackages && (
             <>
               <Label>Compute resources</Label>
-              <div className='grid flex-col gap-4 sm:grid-cols-2 lg:flex-row mb-8'>
+              <div className='mb-8 grid flex-col gap-4 sm:grid-cols-2 lg:flex-row'>
                 {packages.map((item, index) => {
                   const isActive = item === activePackage
                   return (
@@ -168,7 +168,7 @@ export default function ComputeSelector() {
           {/* Fixed user feedback */}
           {!isCusomizable && customizablePlans.length > 0 && (
             <>
-              <div className='text-xs -mt-5 mb-8'>
+              <div className='-mt-5 mb-8 text-xs'>
                 To increase or customize the size of your service with
                 additional RAM and CPU, or to add more replicas for redundancy,
                 switch to{' '}
@@ -218,7 +218,7 @@ export default function ComputeSelector() {
           {/* Use Case heading and reset button */}
           {canCustomize && useCaseEntry && (
             <>
-              <HRSeparator className='mt-6 mb-4' />
+              <HRSeparator className='mb-4 mt-6' />
               {(useCaseEntry.title || useCaseEntry.enableReset) && (
                 <div
                   className={`flex items-center gap-3 ${useCaseEntry.description ? 'mb-2' : 'mb-6'}`}>
@@ -241,7 +241,7 @@ export default function ComputeSelector() {
               )}
 
               {useCaseEntry.description && (
-                <SuiText size='sm' className='opacity-70 mb-6'>
+                <SuiText size='sm' className='mb-6 opacity-70'>
                   {useCaseEntry.description}
                 </SuiText>
               )}
@@ -251,7 +251,7 @@ export default function ComputeSelector() {
           {/* Customizer */}
           {canCustomize && (
             <>
-              <div className='grid sm:grid-cols-2 gap-4 mt-8'>
+              <div className='mt-8 grid gap-4 sm:grid-cols-2'>
                 <div>
                   {replicas === 1 && <Label>Compute per replica</Label>}
                   {replicas !== 1 && <Label>Minimum compute per replica</Label>}

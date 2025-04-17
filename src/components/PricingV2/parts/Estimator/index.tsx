@@ -1,5 +1,3 @@
-import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
-import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import BackupsSelector from '../../fields/BackupsSelector'
 import ComputeSelector from '../../fields/ComputeSelector'
 import DataSourcesSelector from '../../fields/DataSourcesSelector'
@@ -12,6 +10,8 @@ import FieldGroupAccordion from '../../ui/FieldGroupAccordion'
 import DisplayPrice from '../DisplayPrice'
 import EstimatorCtas from '../EstimatorCtas'
 import PriceList from '../PriceList'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 
 type Addons = 'backups' | 'dataSources' | 'dataTransfer'
 
@@ -128,7 +128,7 @@ export default function Estimator({ before }: EstimatorProps) {
         <RegionSelector displayLabel={false} className='w-full max-w-80' />
       </div>
 
-      <div className='flex flex-col gap-y-8 gap-x-12 lg:-mx-6 lg:flex-row lg:items-start lg:justify-center'>
+      <div className='flex flex-col gap-x-12 gap-y-8 lg:-mx-6 lg:flex-row lg:items-start lg:justify-center'>
         {/* Form */}
         <div className='w-full space-y-6 lg:w-1/2'>
           <PlanSelector />
@@ -213,7 +213,7 @@ export default function Estimator({ before }: EstimatorProps) {
             )
           })}
 
-          <div className='my-6 mx-4 gap-x-8 gap-y-6 flex flex-wrap items-center justify-start'>
+          <div className='mx-4 my-6 flex flex-wrap items-center justify-start gap-x-8 gap-y-6'>
             {planEntry?.allowBackups && !displayBackups && (
               <button
                 className='text-sm text-primary-300 hover:underline'
@@ -289,7 +289,7 @@ export default function Estimator({ before }: EstimatorProps) {
         </div>
 
         {/* Results */}
-        <div className='w-full lg:w-1/2 lg:max-w-md sticky top-32'>
+        <div className='sticky top-32 w-full lg:w-1/2 lg:max-w-md'>
           <div className='rounded-lg border border-primary-300 bg-slate-900 p-7'>
             <p className='text-center font-inconsolata text-lg text-primary-300'>
               Average price per month

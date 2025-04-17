@@ -1,10 +1,10 @@
-import { useCallback, useMemo } from 'react'
-import HRSeparator from '../../../HRSeparator'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { ClickPipe } from '../../types'
 import DataSize from '../../ui/DataSize'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
+import HRSeparator from '@/components/HRSeparator'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { useCallback, useMemo } from 'react'
 
 const INSTANCES = Array.from({ length: 10 }, (_, i) => ({
   value: i + 1,
@@ -75,8 +75,8 @@ export default function DataSourcesSelector() {
             const sourceEntry = findSourceBySlug(item.source)
             return (
               <>
-                <div key={clickpipeIndex} className='flex gap-2 items-end'>
-                  <div className='flex-1 grid grid-cols-1 md:grid-cols-6 gap-6'>
+                <div key={clickpipeIndex} className='flex items-end gap-2'>
+                  <div className='grid flex-1 grid-cols-1 gap-6 md:grid-cols-6'>
                     <div className='md:col-span-3'>
                       <Label>Data source</Label>
                       <Select
@@ -93,7 +93,7 @@ export default function DataSourcesSelector() {
                     </div>
                     {sourceEntry?.excludeFromCalculations && (
                       <div className='flex items-end md:col-span-3'>
-                        <div className='h-10 flex items-center'>
+                        <div className='flex h-10 items-center'>
                           <span className='text-success-500'>
                             {sourceEntry?.excludeFromCalculationsLabel}
                           </span>
@@ -136,13 +136,13 @@ export default function DataSourcesSelector() {
                       </>
                     )}
                   </div>
-                  <div className='h-10 flex items-center flex-grow-0 flex-shrink-0'>
+                  <div className='flex h-10 flex-shrink-0 flex-grow-0 items-center'>
                     <button
                       onClick={(event) => {
                         event.preventDefault()
                         removeClickpipe(clickpipeIndex)
                       }}
-                      className='flex items-center justify-center w-8 aspect-square rounded transition-colors hover:bg-white/10'>
+                      className='flex aspect-square w-8 items-center justify-center rounded transition-colors hover:bg-white/10'>
                       <span className='sr-only'>Remove</span>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -176,7 +176,7 @@ export default function DataSourcesSelector() {
               instances: 1
             })
           }}
-          className='px-3 py-1 rounded border border-neutral-700 bg-neutral-725 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
+          className='rounded border border-neutral-700 bg-neutral-725 px-3 py-1 transition-colors hover:border-neutral-600 active:bg-neutral-800'>
           <span className='leading-none'>+</span> Add data source
         </button>
       )}

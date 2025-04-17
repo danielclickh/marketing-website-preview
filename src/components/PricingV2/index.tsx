@@ -1,14 +1,14 @@
+import Estimator from './parts/Estimator'
+import Table from './parts/Table'
+import { Values } from './types'
+import HRSeparator from '@/components/HRSeparator'
+import PricingV2ContextProvider from '@/components/PricingV2ContextProvider'
+import type { PricingV2 } from '@/lib/api/strapi/types'
 import { throttle } from 'lodash'
 import { useRouter } from 'next/router'
 import { parse, ParsedQs, stringify } from 'qs'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback } from 'react'
-import type { PricingV2 } from '@/lib/api/strapi/types'
-import HRSeparator from '@/components/HRSeparator'
-import PricingV2ContextProvider from '../PricingV2ContextProvider'
-import Estimator from './parts/Estimator'
-import Table from './parts/Table'
-import { Values } from './types'
 
 export interface PricingV2Props {
   data: PricingV2

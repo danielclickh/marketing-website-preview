@@ -1,9 +1,3 @@
-import { useMemo } from 'react'
-import {
-  bytesToHumanReadable,
-  humanReadableToBytes
-} from '../../../../lib/utils/memory'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import { averageDaysPerMonth, backupIntervals } from '../../config'
 import { ContextBackupFrequency } from '../../types'
 import DataSize from '../../ui/DataSize'
@@ -11,6 +5,9 @@ import Label from '../../ui/Label'
 import Radios from '../../ui/Radios'
 import Select from '../../ui/Select'
 import StorageSelector from '../StorageSelector'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { bytesToHumanReadable, humanReadableToBytes } from '@/lib/utils/memory'
+import { useMemo } from 'react'
 
 const frequencyOptions: Array<{
   value: Exclude<ContextBackupFrequency, null>
@@ -103,7 +100,7 @@ export default function BackupsSelector() {
 
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+      <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
         <div>
           <Label>Backup frequency</Label>
           <Select
@@ -147,7 +144,7 @@ export default function BackupsSelector() {
             estimateBackup &&
             estimatedBackupsPerMonth &&
             estimatedBackupSizeFormatted && (
-              <p className='text-sm mt-4'>
+              <p className='mt-4 text-sm'>
                 You will have {estimatedBackupsPerMonth} backups with an
                 estimated total size of {estimatedBackupSizeFormatted}. This is
                 based on a storage volume of {storage} of{' '}

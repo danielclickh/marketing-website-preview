@@ -1,9 +1,9 @@
-import { CheckIcon, XIcon } from '@heroicons/react/solid'
-import { useCallback } from 'react'
-import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
-import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
+import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { CheckIcon, XIcon } from '@heroicons/react/solid'
+import { useCallback } from 'react'
 
 export default function PriceList() {
   const {
