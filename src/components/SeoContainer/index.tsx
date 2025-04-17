@@ -46,19 +46,21 @@ function SeoContainer({
 
   return (
     <Head>
-      {title.length > 0 && <title>{title}</title>}
+      {title && title.length > 0 && <title>{title}</title>}
       <link rel='canonical' href={canonicalUrl} key='canonical' />
       <link rel='alternate' hrefLang='en' href={canonicalUrl} />
       <link rel='alternate' hrefLang='ja' href={canonicalUrlJP} />
 
-      {description.length > 0 && (
+      {description && description.length > 0 && (
         <meta name='description' content={description} />
       )}
       <meta name='author' content='ClickHouse' />
 
       {/* Open Graph */}
-      {title.length > 0 && <meta property='og:title' content={title} />}
-      {description.length > 0 && (
+      {title && title.length > 0 && (
+        <meta property='og:title' content={title} />
+      )}
+      {description && description.length > 0 && (
         <meta property='og:description' content={description} />
       )}
       {type && <meta property='og:type' content={type} />}
@@ -67,8 +69,10 @@ function SeoContainer({
 
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
-      {title.length > 0 && <meta name='twitter:title' content={title} />}
-      {description.length > 0 && (
+      {title && title.length > 0 && (
+        <meta name='twitter:title' content={title} />
+      )}
+      {description && description.length > 0 && (
         <meta name='twitter:description' content={description} />
       )}
       <meta name='twitter:image' content={socialImageUrl} />
