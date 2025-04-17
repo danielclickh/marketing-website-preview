@@ -533,13 +533,15 @@ export default function Page({ seo, footerData }: CommonProps) {
                 <p className='max-w-3xl'>
                   Yes, in-person training will be offered on an optional basis
                   in San Francisco on May 28 2025, the day before the main
-                  event. We are offering free hands-on training on 28 May, the
-                  day before Open House, to equip attendees with practical
-                  skills for deploying and optimizing ClickHouse in production.
-                  Whether you’re just starting with ClickHouse or refining an
-                  advanced deployment, this training will empower you with the
-                  tools and techniques to unlock the full potential of your
-                  data.
+                  event, at the Hyatt Regency Embarcadero. We are offering free
+                  hands-on training on 28 May, the day before Open House, to
+                  equip attendees with practical skills for deploying and
+                  optimizing ClickHouse in production. Whether you're just
+                  starting with ClickHouse or refining an advanced deployment,
+                  this training will empower you with the tools and techniques
+                  to unlock the full potential of your data. We will be offering
+                  two training options, a full day course open to all, and a
+                  half day advanced course.
                 </p>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will there be a CFP process for speakers?'>
