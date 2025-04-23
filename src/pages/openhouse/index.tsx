@@ -8,6 +8,7 @@ import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
 import speakerDaleFrohman from './assets/speaker-dale-frohman.png'
+import speakerJeanaChoi from './assets/speaker-jeana-choi.png'
 import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
 import speakerKevinWeil from './assets/speaker-kevin-weil.png'
 import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
@@ -18,6 +19,7 @@ import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
 import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
 import speakerMikeShi from './assets/speaker-mike-shi.png'
 import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
+import speakerRiteshVaryani from './assets/speaker-ritesh-varyani.png'
 import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
 import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
 import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
@@ -107,6 +109,11 @@ const ALL_SPEAKERS: Array<{
     image: speakerDaleFrohman
   },
   {
+    name: 'Jeana Choi',
+    title: 'Sr Software Engineer, Lyft',
+    image: speakerJeanaChoi
+  },
+  {
     name: 'Yury Izrailevsky',
     title: 'Founder, President, ClickHouse',
     image: speakerYuryIzrailevsky
@@ -115,6 +122,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Mark Needham',
     title: 'Principal PME, ClickHouse',
     image: speakerMarkNeedham
+  },
+  {
+    name: 'Ritesh Varyani',
+    title: 'Software Engineer, Lyft',
+    image: speakerRiteshVaryani
   },
   {
     name: 'Robert Schulze',
