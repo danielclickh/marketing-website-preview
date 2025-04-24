@@ -282,7 +282,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                     May 28-29, 2025
                   </h2>
                   <p className='mb-4 text-xl leading-loose'>
-                    Free conference in San Francisco, CA.
+                    Free conference in San Francisco, CA
                   </p>
                   <OpenHouseButton
                     href='/openhouse/register'
