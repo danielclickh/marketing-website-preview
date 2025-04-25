@@ -198,16 +198,16 @@ const AGENDA: Array<{
     title: 'Real-time analytics: technical deep dives and user stories'
   },
   { time: '12:00 a.m.', title: 'Lunch' },
-  {
-    time: '1:00 p.m.',
-    title: 'Data warehousing: technical deep dives and user stories'
-  },
+  { time: '1:00 p.m.', title: 'AI/ML: technical deep dives and user stories' },
   {
     time: '2:00 p.m.',
-    title: 'Observability: technical deep dives and user stories'
+    title: 'Data warehousing: technical deep dives and user stories'
   },
   { time: '3:00 p.m.', title: 'Break: AMA booth and demo stations' },
-  { time: '3:30 p.m.', title: 'AI/ML: technical deep dives and user stories' },
+  {
+    time: '3:30 p.m.',
+    title: 'Observability: technical deep dives and user stories'
+  },
   { time: '4:30 p.m.', title: 'Fireside chat' },
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
