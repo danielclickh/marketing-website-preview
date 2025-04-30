@@ -67,7 +67,7 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>
-            <LogoAnnouncementLink
+            {/*<LogoAnnouncementLink
               className='mt-6'
               href='/cloud/clickpipes/mysql-cdc-connector?loc=homepage-hero'
               logo={{
@@ -82,7 +82,7 @@ export default function HomepageHeroAlt({
               <span className='underline group-hover:decoration-2'>
                 Learn&nbsp;more
               </span>
-            </LogoAnnouncementLink>
+            </LogoAnnouncementLink>*/}
           </div>
         </div>
 
