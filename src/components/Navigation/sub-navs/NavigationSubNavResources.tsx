@@ -37,55 +37,14 @@ export default function NavigationSubNavResources() {
           Events
         </NavigationLink>
       </li>
-      <li
-        onMouseEnter={() => {
-          setActiveSubNav('learning')
-        }}
-        onMouseLeave={() => {
-          setActiveSubNav(null)
-        }}>
+      <li>
         <NavigationLink
-          onClick={() => {
-            setActiveSubNav(isSubNavActive('learning') ? null : 'learning')
-          }}
-          className={`w-full items-center justify-between ${
-            isSubNavActive('learning') ? 'text-primary-300' : ''
-          }`}>
-          <span>Learning and certification</span>
-          <NavigationChevron
-            className={
-              isSubNavActive('learning')
-                ? 'rotate-90 text-primary-300 md-mid:rotate-0'
-                : 'text-neutral-500'
-            }
-          />
+          href='/learn'
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.learnAndCertificationSelect')}
+          className='block w-full'
+        >
+          Learning and certification
         </NavigationLink>
-        <NavigationSubNav isOpen={isSubNavActive('learning')}>
-          <li>
-            <NavigationLink
-              href='/learn'
-              onClick={useGalaxyOnClick('topNav.learnMenu.academySelect')}
-              className='block w-full'>
-              ClickHouse Academy
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='/company/news-events?category=Free+Training#upcoming-events'
-              onClick={useGalaxyOnClick('topNav.learnMenu.freeTrainingSelect')}
-              className='block w-full'>
-              Free live training
-            </NavigationLink>
-          </li>
-          <li>
-            <NavigationLink
-              href='/learn/certification'
-              onClick={useGalaxyOnClick('topNav.learnMenu.certificationSelect')}
-              className='block w-full'>
-              ClickHouse Certification
-            </NavigationLink>
-          </li>
-        </NavigationSubNav>
       </li>
       <li
         onMouseEnter={() => {
