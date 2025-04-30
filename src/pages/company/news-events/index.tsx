@@ -41,6 +41,9 @@ export const getServerSideProps: GetServerSideProps<NewsEventProps> =
           },
           {
             $or: getStagingOnlyFilters()
+          },
+          {
+            $or: [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
           }
         ]
       },

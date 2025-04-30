@@ -1,11 +1,12 @@
-import dotenv from 'dotenv'
-import fs from 'fs'
-import path from 'path'
 import { fetchAll, getStagingOnlyFilters } from '../src/lib/api/strapi'
 import { getEngineeringResources } from '../src/lib/engineering-resources'
 import { getVideos } from '../src/lib/videos'
 import { Video } from '../src/lib/videos/types'
 import { Integration } from '../src/types/integrations'
+import dotenv from 'dotenv'
+import fs from 'fs'
+import path from 'path'
+
 dotenv.config({
   path: [
     path.join(__dirname, '..', '.env.local'),
@@ -241,7 +242,10 @@ async function triggerSitemap() {
   log('Fetching events')
   const events = await fetchAll('events', {
     sort: ['localDatetime:DESC'],
-    populate: ['category']
+    populate: ['category'],
+    filters: {
+      $or: [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
+    }
   })
 
   log('Fetching comparisons')
