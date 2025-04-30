@@ -59,6 +59,9 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
             },
             {
               $or: getStagingOnlyFilters()
+            },
+            {
+              $or: [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
             }
           ]
         },
