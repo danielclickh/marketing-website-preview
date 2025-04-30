@@ -40,7 +40,7 @@ export default function NavigationSubNavResources() {
       <li>
         <NavigationLink
           href='/learn'
-          onClick={useGalaxyOnClick('topNav.learnMenu.academySelect')}
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.academySelect')}
           className='block w-full'
         >
           Learning and certification
