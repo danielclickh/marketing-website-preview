@@ -38,6 +38,8 @@ export interface EventForm {
   type: 'recordedGatedContent' | 'eventRegistration'
   SuccessMessage?: string
   stripeBuyButtonId?: `buy_btn_${string}`
+  disabled: null | boolean
+  marketoFormId: null | string
 }
 export type EventType = {
   id: number
