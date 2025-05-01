@@ -1,7 +1,12 @@
 import { fetchCategories } from '../api/blog'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
-import { fetchAll, findOne, getStagingOnlyFilters } from '@/lib/api/strapi'
+import {
+  fetchAll,
+  findOne,
+  getStagingOnlyFilters,
+  getUnlistedFilters
+} from '@/lib/api/strapi'
 import { getEngineeringResources } from '@/lib/engineering-resources'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
@@ -50,6 +55,13 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
 
     const blogPosts = await fetchAll('blog-posts', blogsParams)
     const events = await fetchAll('events', {
+      filters: {
+        $and: [
+          {
+            $or: getUnlistedFilters()
+          }
+        ]
+      },
       sort: ['localDatetime:DESC'],
       populate: ['category']
     })

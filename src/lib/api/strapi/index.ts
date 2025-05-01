@@ -31,6 +31,10 @@ export function getStagingOnlyFilters(): Array<Record<'StagingOnly', any>> {
   ]
 }
 
+export function getUnlistedFilters() {
+  return [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
+}
+
 export async function getPathsValues(
   pathName: string,
   obj: Record<string, any>,
