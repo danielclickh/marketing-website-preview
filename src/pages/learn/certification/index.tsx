@@ -271,7 +271,7 @@ export default function CertificationPage({
                       <CheckListItem value='Insert a file from cloud storage into a table' />
                     </li>
                     <li>
-                      <CheckListItem value='Insert a Parqet, CSV, or TSV file into a table' />
+                      <CheckListItem value='Insert a Parquet, CSV, or TSV file into a table' />
                     </li>
                     <li>
                       <CheckListItem value='Provide minor transformations to columns as they are being inserted' />
