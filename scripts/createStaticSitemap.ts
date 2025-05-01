@@ -1,4 +1,8 @@
-import { fetchAll, getStagingOnlyFilters } from '../src/lib/api/strapi'
+import {
+  fetchAll,
+  getStagingOnlyFilters,
+  getUnlistedFilters
+} from '../src/lib/api/strapi'
 import { getEngineeringResources } from '../src/lib/engineering-resources'
 import { getVideos } from '../src/lib/videos'
 import { Video } from '../src/lib/videos/types'
@@ -244,7 +248,7 @@ async function triggerSitemap() {
     sort: ['localDatetime:DESC'],
     populate: ['category'],
     filters: {
-      $or: [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
+      $or: getUnlistedFilters()
     }
   })
 

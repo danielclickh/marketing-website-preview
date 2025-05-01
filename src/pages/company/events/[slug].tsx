@@ -4,7 +4,11 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { StrapiImage } from '@/components/StrapiElements'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import {
+  findAll,
+  getStagingOnlyFilters,
+  getUnlistedFilters
+} from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -26,6 +30,9 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
           },
           {
             $or: getStagingOnlyFilters()
+          },
+          {
+            $or: getUnlistedFilters()
           }
         ]
       },
@@ -62,7 +69,7 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
               $or: getStagingOnlyFilters()
             },
             {
-              $or: [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
+              $or: getUnlistedFilters()
             }
           ]
         },

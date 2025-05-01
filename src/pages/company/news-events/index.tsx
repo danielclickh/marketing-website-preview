@@ -6,7 +6,12 @@ import NewsItem from '@/components/NewsItem'
 import RecentEvents from '@/components/RecentEvents'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiTitle } from '@/components/sui'
-import { findAll, findOne, getStagingOnlyFilters } from '@/lib/api/strapi'
+import {
+  findAll,
+  findOne,
+  getStagingOnlyFilters,
+  getUnlistedFilters
+} from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -43,7 +48,7 @@ export const getServerSideProps: GetServerSideProps<NewsEventProps> =
             $or: getStagingOnlyFilters()
           },
           {
-            $or: [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
+            $or: getUnlistedFilters()
           }
         ]
       },
@@ -92,6 +97,9 @@ export const getServerSideProps: GetServerSideProps<NewsEventProps> =
         },
         {
           $or: getStagingOnlyFilters()
+        },
+        {
+          $or: getUnlistedFilters()
         }
       ]
     }
