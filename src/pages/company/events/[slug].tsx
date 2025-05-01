@@ -5,6 +5,7 @@ import Markdown from '@/components/Markdown'
 import { StrapiImage } from '@/components/StrapiElements'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
@@ -99,17 +100,23 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
       }
     }
 
+    const seo: SeoMetadata = {
+      title: page.title,
+      description: page.shortDescription,
+      image: [data[0].thumbnailPng],
+      type: 'website',
+      siteName: 'ClickHouse',
+      path: `/company/events/${slug}`
+    }
+
+    if (page.unlisted) {
+      seo.robots = 'noindex'
+    }
+
     return {
       props: {
         ...page,
-        seo: {
-          title: page.title,
-          description: page.shortDescription,
-          image: [data[0].thumbnailPng],
-          type: 'website',
-          siteName: 'ClickHouse',
-          path: `/company/events/${slug}`
-        },
+        seo,
         recentEvents,
         ...commonProps
       }
