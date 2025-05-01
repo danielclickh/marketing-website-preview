@@ -1,11 +1,15 @@
 import { ProgressBar } from '@clickhouse/click-ui'
 import React, { useCallback, useEffect, useState } from 'react'
 
-export default function ReadingProgress({
-  target
-}: {
+export interface ReadingProgressProps {
   target: React.RefObject<HTMLElement>
-}) {
+  startAt?: number | 'article'
+}
+
+export default function ReadingProgress({
+  target,
+  startAt
+}: ReadingProgressProps) {
   const [readingProgress, setReadingProgress] = useState(0)
   const scrollListener = useCallback(() => {
     if (!target.current) {
@@ -16,8 +20,16 @@ export default function ReadingProgress({
     const windowHeight =
       window.innerHeight || document.documentElement.clientHeight
 
-    const articleTop = rect.top + window.scrollY
-    const articleHeight = target.current.offsetHeight
+    const rectTopAbs = rect.top + window.scrollY
+
+    const articleTop =
+      startAt === 'article'
+        ? rect.top + window.scrollY
+        : typeof startAt === 'number'
+          ? startAt
+          : 0
+    const articleHeight =
+      target.current.offsetHeight + (rectTopAbs - articleTop)
 
     const scrollY = window.scrollY
     const scrollStart = articleTop
@@ -27,7 +39,7 @@ export default function ReadingProgress({
     percent = Math.max(0, Math.min(99.9999, percent))
 
     setReadingProgress(percent)
-  }, [target, setReadingProgress])
+  }, [startAt, target, setReadingProgress])
 
   useEffect(() => {
     scrollListener() // Apply scroll percent on component mount
