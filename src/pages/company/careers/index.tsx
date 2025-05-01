@@ -44,13 +44,6 @@ const values = [
       'ClickHouse is proud to have employees in over 10 countries. We believe that diverse and distributed workplaces working inclusively are an essential advantage.'
   },
   {
-    id: 3,
-    icon: '/images/careers/icons/remote.svg',
-    title: 'Remote and flexible',
-    content:
-      'We’re a remote company, with a flexible work-from-anywhere policy. We work in small product oriented teams to focus & execute faster. We don’t track working hours, what matters is what you get done.'
-  },
-  {
     id: 4,
     icon: '/images/careers/icons/empathy.svg',
     title: 'Empathy at work',
