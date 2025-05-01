@@ -30,9 +30,6 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
           },
           {
             $or: getStagingOnlyFilters()
-          },
-          {
-            $or: getUnlistedFilters()
           }
         ]
       },
