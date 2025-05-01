@@ -10,7 +10,8 @@ function SeoContainer({
   description = '',
   type,
   siteName,
-  path
+  path,
+  robots
 }: SeoMetadata) {
   // Default social image
   let socialImageUrl = `${siteUrl}/images/social_share.png`
@@ -46,6 +47,7 @@ function SeoContainer({
 
   return (
     <Head>
+      {robots && robots.length > 0 && <meta name='robots' content={robots} />}
       {title && title.length > 0 && <title>{title}</title>}
       <link rel='canonical' href={canonicalUrl} key='canonical' />
       <link rel='alternate' hrefLang='en' href={canonicalUrl} />

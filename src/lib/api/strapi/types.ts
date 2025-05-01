@@ -55,6 +55,7 @@ export interface SeoMetadata {
   type?: string
   siteName?: string
   path: string
+  robots?: string
 }
 
 // ------
