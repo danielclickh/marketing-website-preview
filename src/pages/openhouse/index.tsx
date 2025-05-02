@@ -379,8 +379,8 @@ export default function Page({ seo, footerData }: CommonProps) {
             <div className='mx-auto max-w-6xl px-6 lg:px-12' id='agenda'>
               <h2 className='mb-10 text-center text-4xl'>Agenda at a glance</h2>
               {/* Agenda overview */}
-              <div className='mb-20 grid-cols-2 gap-6 space-y-20 lg:mb-24 lg:grid lg:space-y-0'>
-                <div className='relative space-y-6 bg-neutral-950 px-6 py-8 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+              <div className='mb-20 grid-cols-2 gap-6 space-y-16 lg:mb-24 lg:grid lg:space-y-0'>
+                <div className='relative space-y-6 bg-neutral-950 px-6 pb-4 pt-2 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
                   <div
                     className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
                   />
@@ -398,7 +398,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                     Hyatt Regency, Embarcadero, San Francisco
                   </p>
                 </div>
-                <div className='relative space-y-6 bg-neutral-950 px-6 py-8 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+                <div className='relative space-y-6 bg-neutral-950 px-6 pb-4 pt-2 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
                   <div
                     className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
                   />
@@ -420,7 +420,7 @@ export default function Page({ seo, footerData }: CommonProps) {
               </div>
 
               {/* Agenda deepdive */}
-              <div className='mb-2.5 bg-neutral-950 px-12 py-6 text-center text-2xl font-bold text-white lg:text-left'>
+              <div className='mb-2.5 bg-neutral-950 py-6 text-center text-2xl font-bold text-white lg:px-12 lg:text-left'>
                 Conference day agenda
               </div>
               <div className='relative flex flex-col gap-2.5'>
