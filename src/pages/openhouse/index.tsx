@@ -378,6 +378,51 @@ export default function Page({ seo, footerData }: CommonProps) {
             />
             <div className='mx-auto max-w-6xl px-6 lg:px-12' id='agenda'>
               <h2 className='mb-10 text-center text-4xl'>Agenda at a glance</h2>
+              {/* Agenda overview */}
+              <div className='mb-20 grid-cols-2 gap-6 space-y-20 lg:mb-24 lg:grid lg:space-y-0'>
+                <div className='relative space-y-6 bg-neutral-950 px-6 py-8 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+                  <div
+                    className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
+                  />
+                  <FontSohneBreit>
+                    <h3 className='text-4xl'>
+                      <small className='text-2xl font-bold uppercase'>
+                        MAY 28
+                      </small>
+                      <br />
+                      Workshops
+                    </h3>
+                  </FontSohneBreit>
+                  <p>
+                    Full day training workshops <br />
+                    Hyatt Regency, Embarcadero, San Francisco
+                  </p>
+                </div>
+                <div className='relative space-y-6 bg-neutral-950 px-6 py-8 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+                  <div
+                    className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
+                  />
+                  <FontSohneBreit>
+                    <h3 className='text-4xl'>
+                      <small className='text-2xl font-bold uppercase'>
+                        MAY 29
+                      </small>
+                      <br />
+                      Conference
+                    </h3>
+                  </FontSohneBreit>
+                  <p>
+                    Main conference day
+                    <br />
+                    The Pearl, San Francisco
+                  </p>
+                </div>
+              </div>
+
+              {/* Agenda deepdive */}
+              <div className='mb-2.5 bg-neutral-950 px-12 py-6 text-center text-2xl font-bold text-white lg:text-left'>
+                Conference day agenda
+              </div>
               <div className='relative flex flex-col gap-2.5'>
                 <div className='bg-gradient-checkered absolute bottom-0 left-52 top-0 z-10 hidden w-0.5 from-neutral-950 bg-[length:1rem_1rem] lg:block' />
                 {AGENDA.map((row, rowIndex) => {
