@@ -393,10 +393,12 @@ export default function Page({ seo, footerData }: CommonProps) {
                       Workshops
                     </h3>
                   </FontSohneBreit>
-                  <p>
-                    Full day training workshops <br />
-                    Hyatt Regency, Embarcadero, San Francisco
-                  </p>
+                  <p>Free training workshops</p>
+                  <ul className='!mt-0 list-disc pl-8'>
+                    <li>ClickHouse Developer Training</li>
+                    <li>ClickHouse Query Optimization </li>
+                  </ul>
+                  <p>Hyatt Regency, Embarcadero, San Francisco</p>
                 </div>
                 <div className='relative space-y-6 bg-neutral-950 px-6 pb-4 pt-2 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
                   <div
@@ -411,11 +413,12 @@ export default function Page({ seo, footerData }: CommonProps) {
                       Conference
                     </h3>
                   </FontSohneBreit>
-                  <p>
-                    Main conference day
-                    <br />
-                    The Pearl, San Francisco
-                  </p>
+                  <p>Main conference day</p>
+                  <ul className='!mt-0 list-disc pl-8'>
+                    <li>Full day of content, AMA booths, and more</li>
+                    <li>Rooftop after party</li>
+                  </ul>
+                  <p>The Pearl, San Francisco</p>
                 </div>
               </div>
 
@@ -587,18 +590,21 @@ export default function Page({ seo, footerData }: CommonProps) {
                 </ul>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will you be offering in-person training?'>
+                <p className='mb-4 max-w-3xl'>
+                  We are offering free in-person training workshops on May 28
+                  2025, the day before the main event. Workshops will be held at
+                  the Hyatt Regency Embarcadero.
+                </p>
+                <p className='mb-4 max-w-3xl'>
+                  We will be offering two training options, a full day course
+                  open to all, and a half day advanced course. Whether you're
+                  just starting with ClickHouse or refining an advanced
+                  deployment, these workshops will empower you with the tools
+                  and techniques to unlock the full potential of your data.
+                </p>
                 <p className='max-w-3xl'>
-                  Yes, in-person training will be offered on an optional basis
-                  in San Francisco on May 28 2025, the day before the main
-                  event, at the Hyatt Regency Embarcadero. We are offering free
-                  hands-on training on 28 May, the day before Open House, to
-                  equip attendees with practical skills for deploying and
-                  optimizing ClickHouse in production. Whether you're just
-                  starting with ClickHouse or refining an advanced deployment,
-                  this training will empower you with the tools and techniques
-                  to unlock the full potential of your data. We will be offering
-                  two training options, a full day course open to all, and a
-                  half day advanced course.
+                  Register for Open House and check the box for training on the
+                  registration form to receive more information.
                 </p>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will there be a CFP process for speakers?'>
