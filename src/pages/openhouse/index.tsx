@@ -105,7 +105,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Dale Frohman',
-    title: 'Lead Director Engineering, CVS',
+    title: 'Lead Director Engineering, CVS Health',
     image: speakerDaleFrohman
   },
   {
