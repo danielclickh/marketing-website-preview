@@ -591,14 +591,14 @@ export default function Page({ seo, footerData }: CommonProps) {
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will you be offering in-person training?'>
                 <p className='mb-4 max-w-3xl'>
-                  We are offering free in-person training workshops on May 28
-                  2025, the day before the main event. Workshops will be held at
-                  the Hyatt Regency Embarcadero.
+                  We are offering free in-person training workshops on May 28,
+                  the day before the main event. Workshops will be held at the
+                  Hyatt Regency Embarcadero.
                 </p>
                 <p className='mb-4 max-w-3xl'>
-                  We will be offering two training options, a full day course
-                  open to all, and a half day advanced course. Whether you're
-                  just starting with ClickHouse or refining an advanced
+                  Join us for one of two training options: a full day course
+                  open to all levels, and a half day advanced course. Whether
+                  you're just starting with ClickHouse or refining an advanced
                   deployment, these workshops will empower you with the tools
                   and techniques to unlock the full potential of your data.
                 </p>
