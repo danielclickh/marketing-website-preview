@@ -105,7 +105,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Dale Frohman',
-    title: 'Lead Director Engineering, CVS',
+    title: 'Lead Director Engineering, CVS Health',
     image: speakerDaleFrohman
   },
   {
@@ -378,6 +378,54 @@ export default function Page({ seo, footerData }: CommonProps) {
             />
             <div className='mx-auto max-w-6xl px-6 lg:px-12' id='agenda'>
               <h2 className='mb-10 text-center text-4xl'>Agenda at a glance</h2>
+              {/* Agenda overview */}
+              <div className='mb-20 grid-cols-2 gap-6 space-y-16 lg:mb-24 lg:grid lg:space-y-0'>
+                <div className='relative space-y-6 bg-neutral-950 px-6 pb-4 pt-2 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+                  <div
+                    className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
+                  />
+                  <FontSohneBreit>
+                    <h3 className='text-4xl'>
+                      <small className='text-2xl font-bold uppercase'>
+                        MAY 28
+                      </small>
+                      <br />
+                      Workshops
+                    </h3>
+                  </FontSohneBreit>
+                  <p>Free training workshops</p>
+                  <ul className='!mt-0 list-disc pl-8'>
+                    <li>ClickHouse Developer Training</li>
+                    <li>ClickHouse Query Optimization </li>
+                  </ul>
+                  <p>Hyatt Regency, Embarcadero, San Francisco</p>
+                </div>
+                <div className='relative space-y-6 bg-neutral-950 px-6 pb-4 pt-2 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+                  <div
+                    className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
+                  />
+                  <FontSohneBreit>
+                    <h3 className='text-4xl'>
+                      <small className='text-2xl font-bold uppercase'>
+                        MAY 29
+                      </small>
+                      <br />
+                      Conference
+                    </h3>
+                  </FontSohneBreit>
+                  <p>Main conference day</p>
+                  <ul className='!mt-0 list-disc pl-8'>
+                    <li>Full day of content, AMA booths, and more</li>
+                    <li>Rooftop after party</li>
+                  </ul>
+                  <p>The Pearl, San Francisco</p>
+                </div>
+              </div>
+
+              {/* Agenda deepdive */}
+              <div className='mb-2.5 bg-neutral-950 py-6 text-center text-2xl font-bold text-white lg:px-12 lg:text-left'>
+                Conference day agenda
+              </div>
               <div className='relative flex flex-col gap-2.5'>
                 <div className='bg-gradient-checkered absolute bottom-0 left-52 top-0 z-10 hidden w-0.5 from-neutral-950 bg-[length:1rem_1rem] lg:block' />
                 {AGENDA.map((row, rowIndex) => {
@@ -542,18 +590,21 @@ export default function Page({ seo, footerData }: CommonProps) {
                 </ul>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will you be offering in-person training?'>
+                <p className='mb-4 max-w-3xl'>
+                  We are offering free in-person training workshops on May 28
+                  2025, the day before the main event. Workshops will be held at
+                  the Hyatt Regency Embarcadero.
+                </p>
+                <p className='mb-4 max-w-3xl'>
+                  We will be offering two training options, a full day course
+                  open to all, and a half day advanced course. Whether you're
+                  just starting with ClickHouse or refining an advanced
+                  deployment, these workshops will empower you with the tools
+                  and techniques to unlock the full potential of your data.
+                </p>
                 <p className='max-w-3xl'>
-                  Yes, in-person training will be offered on an optional basis
-                  in San Francisco on May 28 2025, the day before the main
-                  event, at the Hyatt Regency Embarcadero. We are offering free
-                  hands-on training on 28 May, the day before Open House, to
-                  equip attendees with practical skills for deploying and
-                  optimizing ClickHouse in production. Whether you're just
-                  starting with ClickHouse or refining an advanced deployment,
-                  this training will empower you with the tools and techniques
-                  to unlock the full potential of your data. We will be offering
-                  two training options, a full day course open to all, and a
-                  half day advanced course.
+                  Register for Open House and check the box for training on the
+                  registration form to receive more information.
                 </p>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will there be a CFP process for speakers?'>
