@@ -1,17 +1,12 @@
-import { GetServerSideProps } from 'next'
-import { useSearchParams } from 'next/navigation'
-import { PrimeReactProvider } from 'primereact/api'
-import { MultiSelect } from 'primereact/multiselect'
-import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
-import CustomerStoryCard from '../../components/CustomerStoryCard'
-import FollowUs from '../../components/FollowUs'
-import Layout from '../../components/Layout'
-import { SuiSearchField, SuiTitle } from '../../components/sui'
-import ClearFilterButton from '../../components/UserStories/ClearFilterButton'
-import { fetchAll, findOne } from '../../lib/api/strapi'
-import { useGalaxyOnPage } from '../../lib/galaxy/galaxy'
-import { getCommonProps } from '../../lib/utils/getCommonProps'
-import { Tailwind } from '../../lib/utils/primereact'
+import CustomerStoryCard from '@/components/CustomerStoryCard'
+import FollowUs from '@/components/FollowUs'
+import Layout from '@/components/Layout'
+import ClearFilterButton from '@/components/UserStories/ClearFilterButton'
+import { SuiSearchField, SuiTitle } from '@/components/sui'
+import { fetchAll, findOne } from '@/lib/api/strapi'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { Tailwind } from '@/lib/utils/primereact'
 import {
   CloudProvider,
   Migration,
@@ -19,7 +14,12 @@ import {
   UserStoriesPage,
   UserStory,
   Vertical
-} from '../../types/userStories'
+} from '@/types/userStories'
+import { GetServerSideProps } from 'next'
+import { useSearchParams } from 'next/navigation'
+import { PrimeReactProvider } from 'primereact/api'
+import { MultiSelect } from 'primereact/multiselect'
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<UserStoriesPage> =
   async function getServerSideProps() {
