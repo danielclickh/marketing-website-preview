@@ -65,10 +65,12 @@ export const getStaticProps: GetStaticProps<UserStoriesPage> =
         }
       })
 
-      if (story.cloudProvider) {
-        if (!cloudProviders.hasOwnProperty(story.cloudProvider.slug)) {
-          cloudProviders[story.cloudProvider.slug] = story.cloudProvider.name
-        }
+      if (story.cloudProvider?.length) {
+        story.cloudProvider?.forEach((provider) => {
+          if (!cloudProviders.hasOwnProperty(provider.slug)) {
+            cloudProviders[provider.slug] = provider.name
+          }
+        })
       }
     })
 
@@ -336,8 +338,10 @@ export default function CustomerStoriesPage({
 
       const cloudProvidersMatch =
         !filterByCloudProviders.length ||
-        (story.cloudProvider?.slug &&
-          filterByCloudProviders.includes(story.cloudProvider.slug))
+        (story.cloudProvider?.length &&
+          story.cloudProvider.find((entry) =>
+            filterByCloudProviders.includes(entry.slug)
+          ))
 
       return (
         searchMatch &&

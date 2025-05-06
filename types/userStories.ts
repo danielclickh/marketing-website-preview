@@ -25,7 +25,7 @@ export interface UserStory {
   useCase: UseCase[]
   migrations: Migration[]
   vertical: Vertical[]
-  cloudProvider: null | CloudProvider
+  cloudProvider: null | Array<CloudProvider>
 }
 
 interface UserData {
@@ -61,6 +61,7 @@ export interface CloudProvider {
   id: number
   name: string
   slug: string
+  logo: null | StrapiImageType
   createdAt: string
   updatedAt: string
 }
