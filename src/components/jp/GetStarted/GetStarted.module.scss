@@ -1,0 +1,13 @@
+.description {
+  p:not(:last-child) {
+    @apply mb-2.5 #{!important};
+  }
+}
+
+.codeBlock {
+  @apply relative;
+  &::before {
+    @apply absolute right-full top-0;
+    content: '$ ';
+  }
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Aaron Katz",
+    "imgSrc": "/images/our-story/founders/aaron.png",
+    "role": "Co-Founder & CEO"
+  },
+  {
+    "name": "Alexey Milovidov",
+    "imgSrc": "/images/our-story/founders/alexey.png",
+    "role": "Co-Founder & CTO"
+  },
+  {
+    "name": "Yury Izrailevsky",
+    "imgSrc": "/images/our-story/founders/yury.png",
+    "role": "Co-Founder & President"
+  }
+]

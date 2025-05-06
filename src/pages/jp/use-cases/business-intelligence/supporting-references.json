@@ -1,0 +1,42 @@
+[
+  {
+    "text": "ClickHouse Cloud now Compatible with the MySQL Protocol",
+    "href": "/blog/clickhouse-cloud-compatible-with-mysql",
+    "target": "_self"
+  },
+  {
+    "text": "Change Data Capture (CDC) with PostgreSQL and ClickHouse - Part 1",
+    "href": "/blog/clickhouse-postgresql-change-data-capture-cdc-part-1",
+    "target": "_self"
+  },
+  {
+    "text": "Change Data Capture (CDC) with PostgreSQL and ClickHouse - Part 2",
+    "href": "/blog/clickhouse-postgresql-change-data-capture-cdc-part-2",
+    "target": "_self"
+  },
+  {
+    "text": "Asynchronous Data Inserts in ClickHouse",
+    "href": "/blog/asynchronous-data-inserts-in-clickhouse",
+    "target": "_self"
+  },
+  {
+    "text": "ClickHouse vs Snowflake for Real-Time Analytics - Comparing and Migrating",
+    "href": "/blog/clickhouse-vs-snowflake-for-real-time-analytics-comparison-migration-guide",
+    "target": "_self"
+  },
+  {
+    "text": "ClickHouse vs Snowflake for Real-Time Analytics - Benchmarks and Cost Analysis",
+    "href": "/blog/clickhouse-vs-snowflake-for-real-time-analytics-benchmarks-cost-analysis",
+    "target": "_self"
+  },
+  {
+    "text": "ClickHouse vs BigQuery: Using ClickHouse to Serve Real-Time Queries on Top of BigQuery Data",
+    "href": "/blog/clickhouse-bigquery-migrating-data-for-realtime-queries",
+    "target": "_self"
+  },
+  {
+    "text": "Optimizing Analytical Workloads: Comparing Redshift vs ClickHouse",
+    "href": "/blog/redshift-vs-clickhouse-comparison",
+    "target": "_self"
+  }
+]

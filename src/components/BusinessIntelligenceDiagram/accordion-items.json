@@ -1,0 +1,22 @@
+[
+  {
+    "id": 40,
+    "title": "Integrations",
+    "content": "Leveraging the tools and frameworks you love with ClickHouse is easy with our extensive ecosystem of integrations. Whether your go-to is Tableau, Looker, or another tool that supports the MySQL interface - ClickHouse has you covered.<br /><br />Unlike traditional databases, ClickHouse supports a REST interface, allowing web developers to build lightweight applications on ClickHouse without the need to integrate with complex binary protocols. Flexible RBAC and quota controls mean read-only tables can be exposed publicly for client-side fetching of data.<br /><br />ClickHouse is relied on by companies all over the world to unlock value from data as soon as it arrives, powering live dashboards and business intelligence workflows across a wide range of industries, from financial services to gaming, e-commerce, and many more."
+  },
+  {
+    "id": 20,
+    "title": "Data transformations",
+    "content": "Materialized Views in ClickHouse make data transformations - common pillars in business intelligence or analytics workflows - seamless. Automatically triggered when new data is inserted into source tables, these SQL-based views are used to easily extract, aggregate, and modify data as it arrives. Leveraging Materialized Views means there is no need to build and manage bespoke data transformation pipelines yourself.<br /><br />Our extensive suite of integrations makes it easy to use the tools and services you already rely on directly with Clickhouse. For example, with ClickHouse's DBT integration, you can effortlessly migrate your existing DBT jobs to run on ClickHouse."
+  },
+  {
+    "id": 30,
+    "title": "Querying",
+    "content": "With ClickHouse, you can query data directly from object stores like S3 and GCS, or from data lakes with formats such as Iceberg, Delta Lake, and Hudi.<br /><br />Queries on Materialized Views are exceptionally fast, as their summarized results are automatically stored in new tables. This ensures that applications that rely on these queries are even more responsive, no matter how many petabytes of data are being analyzed. While other database providers hide valuable accelerating features behind higher pricing tiers or additional charges, Clickhouse Cloud offers these out of the box.<br /><br />The ClickHouse Query Cache is available for further enhanced responsiveness and reduced resource consumption, and is best suited for frequently used and expensive queries. Additional tuning through indexes and projections provides additional optimizations to ensure ultimate performance, every time."
+  },
+  {
+    "id": 10,
+    "title": "Data ingestion",
+    "content": "For bulk data loads between ClickHouse and a traditional data warehouse, companies commonly leverage an object store such as S3 as the intermediary, ingesting data into ClickHouse via the S3 (or corresponding alternative) table engine. Generally, Parquet files are used, as ClickHouse's unparalleled Parquet reading performance allows data to be loaded at hundreds of millions of files per second."
+  }
+]

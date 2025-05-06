@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Compatible client protocol (all clients work out of the box)"
+  },
+  {
+    "id": 2,
+    "title": "The same state machine (data model)"
+  },
+  {
+    "id": 3,
+    "title": "Better guarantees (optionally allows linearizable reads)"
+  },
+  {
+    "id": 4,
+    "title": "Uses Raft algorithm (NuRaft implementation)"
+  },
+  {
+    "id": 6,
+    "title": "Optional TLS for clients and internal communication"
+  }
+]

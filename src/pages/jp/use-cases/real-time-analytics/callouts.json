@@ -1,0 +1,26 @@
+[
+  {
+    "id": 10,
+    "title": "リアルタイムのインサイトで最高のユーザー体験を",
+    "content": "ビジネスの成果を高めるためにライブデータを分析する場合や、インタラクティブなユーザ向けアプリケーションを構築する場合でも、ClickHouseは桁外れなパフォーマンスを提供します。",
+    "icon": "/images/use-cases/ml-and-ds/tools.svg"
+  },
+  {
+    "id": 20,
+    "title": "SQLをシンプルに",
+    "content": "どれほど複雑なクエリでもシンプルなSQLステートメントに変換できるドメイン固有の関数を豊富に集めたライブラリをご用意しています。高度なリアルタイムのデータ探索も、ClickHouseなら実に簡単です。",
+    "icon": "/images/use-cases/logging/ingest.svg"
+  },
+  {
+    "id": 30,
+    "title": "データ管理を効率的に",
+    "content": "最高のデータ圧縮技術と完全に並列化されたクエリパイプラインでCPU効率を最大化。膨大な量の圧縮データもすばやく処理できます。",
+    "icon": "/images/use-cases/logging/manage.svg"
+  },
+  {
+    "id": 40,
+    "title": "スケールも簡単",
+    "content": "ClickHouseは、読み取りや書き込みなどのあらゆるワークロードの要求に応えるために、垂直と水平の両方向にスケーリングします。数百のコアとペタバイトのストレージを持つシステムにも対応可能です。ClickHouseは、データ量やワークロードの増加に対処するためのスケーラビリティを提供します。",
+    "icon": "/images/use-cases/real-time-analytics/trend-up-light.svg"
+  }
+]

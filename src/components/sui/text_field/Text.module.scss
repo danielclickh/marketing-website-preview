@@ -1,0 +1,21 @@
+.textCommon {
+  @apply relative w-full cursor-text resize-none rounded-md bg-neutral-725 bg-left-bottom px-3 py-2 text-left text-neutral-0 placeholder-neutral-400 shadow-input transition-[border] duration-300 ease-in sm:text-sm;
+  @apply border border-neutral-700;
+  &:focus {
+    @apply border-primary-300 bg-slate-900 outline-none;
+  }
+  &[type='password'] {
+    @apply pr-10;
+  }
+}
+
+.search {
+  @apply pl-9;
+}
+
+.container {
+  @apply flex flex-col;
+  &:focus-within label {
+    @apply text-neutral-0;
+  }
+}

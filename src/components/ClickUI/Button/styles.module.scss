@@ -1,0 +1,58 @@
+.button {
+  @apply flex h-10 items-center justify-center gap-1 rounded border px-4 text-sm;
+  &[data-type='primary'] {
+    @apply border-primary-300 bg-primary-300 text-neutral-900;
+
+    &:hover,
+    &:active {
+      @apply border-primary-400 bg-primary-400;
+    }
+  }
+
+  &[data-type='primary-dark'] {
+    @apply border-primary bg-neutral-900 bg-opacity-90 text-neutral-0;
+
+    &:hover,
+    &:active {
+      @apply bg-neutral-900 bg-opacity-100;
+    }
+  }
+
+  &[data-type='secondary'] {
+    @apply border-primary-600 bg-transparent text-neutral-0;
+
+    &:hover,
+    &:active {
+      @apply border-primary-500 bg-neutral-725 bg-opacity-80 shadow-xl;
+    }
+  }
+
+  &[data-type='secondary-dark'] {
+    @apply border-primary bg-transparent text-neutral-0;
+
+    &:hover,
+    &:active {
+      @apply bg-neutral-800;
+    }
+  }
+
+  &:disabled {
+    @apply cursor-default border-neutral-700 bg-neutral-700 text-neutral-500;
+
+    &:hover,
+    &:active {
+      @apply bg-neutral-800;
+    }
+  }
+  &:not(:disabled) {
+    @apply transition-all;
+  }
+
+  &[data-size='lg'] {
+    @apply h-12 text-base;
+  }
+
+  &[data-size='sm'] {
+    @apply h-8 text-xs;
+  }
+}

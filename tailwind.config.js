@@ -4,15 +4,15 @@ module.exports = {
   darkMode: 'class',
   plugins: [
     require('@tailwindcss/typography'),
-    require('./lib/tailwind/gradient-masks'),
+    require('./src/lib/tailwind/gradient-masks'),
     plugin(function ({ addVariant }) {
       addVariant('has-hover', '@media (hover: hover)')
       addVariant('no-hover', '@media (hover: none)')
     })
   ],
   content: [
-    './components/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}',
+    './src/pages/**/*.{js,ts,jsx,tsx}',
     './node_modules/primereact/**/*.{js,ts,jsx,tsx}'
   ],
   safelist: ['py-[6px]', 'py-[1px]'],
@@ -81,7 +81,7 @@ module.exports = {
       fontFamily: {
         inter: 'var(--font-inter), sans-serif',
         inconsolata: 'var(--font-inconsolata)',
-        basier: 'Basier Square, Arial, Helvetica, sans-serif'
+        basier: 'var(--font-basier), Arial, Helvetica, sans-serif'
       },
       colors: {
         rangitoto: '#28281D',

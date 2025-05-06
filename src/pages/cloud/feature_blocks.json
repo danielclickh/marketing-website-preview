@@ -1,0 +1,158 @@
+[
+  {
+    "id": 1,
+    "image": "/images/cloud/onboarding.svg",
+    "image_width": 580,
+    "image_height": 298,
+    "title": "Instant onboarding",
+    "description": "All the speed and power that you expect from ClickHouse available in a cloud offering.",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "Start with $300 credits"
+      },
+      {
+        "id": 2,
+        "text": "No upfront sizing"
+      },
+      {
+        "id": 3,
+        "text": "Automatic replication"
+      },
+      {
+        "id": 4,
+        "text": "No manual data sharding"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "image": "/images/cloud/price_performance.svg",
+    "image_width": 535,
+    "image_height": 282,
+    "title": "Best price / performance",
+    "description": "Cloud-native architecture enables effective data tiering and scaling, resulting in the leading price / performance ratio on the market.",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "Decoupled compute & storage"
+      },
+      {
+        "id": 2,
+        "text": "Backed by object store"
+      },
+      {
+        "id": 3,
+        "text": "Multi-level caching"
+      },
+      {
+        "id": 4,
+        "text": "Cost and scaling controls"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "image": "/images/cloud/reliability.svg",
+    "image_width": 691,
+    "image_height": 369,
+    "title": "Uncompromising reliability",
+    "description": "Reliable by default, each service is automatically replicated across multiple availability zones.",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "Highly available"
+      },
+      {
+        "id": 2,
+        "text": "Seamless upgrades"
+      },
+      {
+        "id": 3,
+        "text": "Automated backups"
+      },
+      {
+        "id": 4,
+        "text": "Disaster recovery"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "image": "/images/cloud/security.svg",
+    "image_width": 416,
+    "image_height": 305,
+    "title": "World class security",
+    "description": "Let our experts sweat the security, privacy, and compliance details. Always-on industry standard defaults and customizable policies.",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "Strong user and network access controls"
+      },
+      {
+        "id": 2,
+        "text": "Encryption in transit and at rest"
+      },
+      {
+        "id": 3,
+        "text": "Activity logging"
+      },
+      {
+        "id": 4,
+        "text": "SOC 2 Type II compliant"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "image": "/images/cloud/sql-console.svg",
+    "image_width": 792,
+    "image_height": 522,
+    "title": "Interactive SQL console",
+    "description": "The fastest and easiest way to connect, explore, and visualize your ClickHouse Cloud databases. Seamlessly load your data and start querying in just a few clicks.",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "Easy-to-use table explorer"
+      },
+      {
+        "id": 2,
+        "text": "Supercharged query interface"
+      },
+      {
+        "id": 3,
+        "text": "Data ingestion and import wizard"
+      },
+      {
+        "id": 4,
+        "text": "Visualization and collaboration features"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "image": "/images/cloud/automate-clickhouse-terraform.svg",
+    "image_width": 560,
+    "image_height": 407,
+    "title": "Automate with ease",
+    "description": "Use our Terraform provider and infrastructure APIs to effortlessly automate your setup and configuration. ",
+    "bullets": [
+      {
+        "id": 1,
+        "text": "Ensure consistency of configurations"
+      },
+      {
+        "id": 2,
+        "text": "Reuse custom settings for all your deployments"
+      },
+      {
+        "id": 3,
+        "text": "Maximize efficiency across infrastructure teams"
+      },
+      {
+        "id": 4,
+        "text": "Accelerate delivery with seamless automation"
+      }
+    ]
+  }
+]
