@@ -508,6 +508,13 @@ export default function CustomerStoriesPage({
             {filteredAndSortedStories.length > 0 ? (
               <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                 {filteredAndSortedStories.map((story, index) => {
+                  const hasVerticals =
+                    !!story.vertical?.length && story.vertical.length > 0
+                  const hasMigrations =
+                    !!story.migrations?.length && story.migrations.length > 0
+                  const hasProviders =
+                    !!story.cloudProvider?.length &&
+                    story.cloudProvider?.length > 0
                   return (
                     <Fragment key={index}>
                       <CustomerStoryCard
@@ -518,6 +525,13 @@ export default function CustomerStoriesPage({
                         categories={story.useCase.map((useCase) => {
                           return useCase.Name
                         })}
+                        verticals={story.vertical?.map((entry) => entry.Name)}
+                        migrations={story.migrations?.map(
+                          (entry) => entry.Name
+                        )}
+                        cloudProviders={story.cloudProvider?.map(
+                          (entry) => entry.name
+                        )}
                         blogLink={story.ReadBlogLink}
                         externalLink={story.ExternalLink}
                         videoLink={story.WatchVideoLink}
