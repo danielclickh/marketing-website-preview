@@ -1,12 +1,12 @@
-import { StrapiImageType } from '../lib/api/strapi/types'
 import { CommonProps } from './homepage'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface UserStoriesPage extends CommonProps {
   stories: UserStory[]
   categories: Record<UseCase['id'], UseCase['Name']>
   migrations: Record<Migration['id'], Migration['Name']>
   verticals: Record<Vertical['id'], Vertical['Name']>
-  cloudProviders: Record<CloudProvider['slug'], CloudProvider['name']>
+  cloudProviders: Record<CloudProvider['slug'], CloudProvider>
 }
 
 export interface UserStory {
@@ -62,6 +62,7 @@ export interface CloudProvider {
   name: string
   slug: string
   logo: null | StrapiImageType
+  displayOrder: number | null
   createdAt: string
   updatedAt: string
 }

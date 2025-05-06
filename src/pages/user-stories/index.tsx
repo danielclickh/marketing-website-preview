@@ -68,7 +68,7 @@ export const getServerSideProps: GetServerSideProps<UserStoriesPage> =
       if (story.cloudProvider?.length) {
         story.cloudProvider?.forEach((provider) => {
           if (!cloudProviders.hasOwnProperty(provider.slug)) {
-            cloudProviders[provider.slug] = provider.name
+            cloudProviders[provider.slug] = provider
           }
         })
       }
@@ -163,14 +163,24 @@ export default function CustomerStoriesPage({
   // Build cloud providers multi-select options array
   const cloudProvidersOptions = useMemo(() => {
     return Object.entries(cloudProviders)
-      .map(([slug, name]) => {
+      .sort(([aSlug, a], [bSlug, b]) => {
+        const aHasValidOrder = typeof a.displayOrder === 'number'
+        const bHasValidOrder = typeof b.displayOrder === 'number'
+
+        if (aHasValidOrder && bHasValidOrder) {
+          return a.displayOrder! - b.displayOrder!
+        }
+
+        if (aHasValidOrder) return -1
+        if (bHasValidOrder) return 1
+
+        return a.name.localeCompare(b.name)
+      })
+      .map(([slug, provider]) => {
         return {
           value: slug,
-          label: name
+          label: provider.name
         }
-      })
-      .sort((a, b) => {
-        return a.label.localeCompare(b.label)
       })
   }, [cloudProviders])
 
