@@ -1,8 +1,14 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   darkMode: 'class',
   plugins: [
     require('@tailwindcss/typography'),
-    require('./src/lib/tailwind/gradient-masks')
+    require('./src/lib/tailwind/gradient-masks'),
+    plugin(function ({ addVariant }) {
+      addVariant('has-hover', '@media (hover: hover)')
+      addVariant('no-hover', '@media (hover: none)')
+    })
   ],
   content: [
     './src/components/**/*.{js,ts,jsx,tsx}',
