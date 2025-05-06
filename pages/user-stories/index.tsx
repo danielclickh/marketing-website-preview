@@ -525,13 +525,6 @@ export default function CustomerStoriesPage({
                         categories={story.useCase.map((useCase) => {
                           return useCase.Name
                         })}
-                        verticals={story.vertical?.map((entry) => entry.Name)}
-                        migrations={story.migrations?.map(
-                          (entry) => entry.Name
-                        )}
-                        cloudProviders={story.cloudProvider?.map(
-                          (entry) => entry.name
-                        )}
                         blogLink={story.ReadBlogLink}
                         externalLink={story.ExternalLink}
                         videoLink={story.WatchVideoLink}
