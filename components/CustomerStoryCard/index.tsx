@@ -66,7 +66,9 @@ export default function CustomerStoryCard({
                 disableHoverableContent={false}>
                 <Tooltip.Root>
                   <Tooltip.Trigger asChild>
-                    <button type='button' className='inline-flex h-4 w-4'>
+                    <button
+                      type='button'
+                      className='hidden has-hover:inline-flex h-4 w-4'>
                       <InformationCircleIcon className='w-full h-auto' />
                     </button>
                   </Tooltip.Trigger>
