@@ -4,7 +4,7 @@ import {
   acceptableRegions,
   config
 } from '../src/components/PricingCalculator/CalculatorTypesOptions'
-import pricingV2Config from '../src/components/PricingV2/config'
+import { meter as pricingV2Config } from '../src/components/PricingV2/config'
 import {
   getPricingsByPlan,
   getPricingsByPlanTemplate,

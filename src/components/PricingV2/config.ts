@@ -1,15 +1,25 @@
-export type PlanConfig = {
-  planTemplateId: string
-  aggregationIds: {
-    compute: Array<string>
-    storage: Array<string>
-  }
-}
-export type Config = {
-  plans: Record<string, PlanConfig>
+import { MeterConfig } from './types'
+
+export const averageDaysPerMonth = 30.5
+
+// Must be divisible by 4
+export const computes = [
+  8, 12, 16, 24, 28, 36, 48, 60, 80, 100, 128, 168, 216, 276, 356
+]
+
+// In hours
+// @link https://clickhouse.com/docs/cloud/manage/backups/configurable-backups
+export const backupIntervals = [6, 8, 12, 16, 20, 24, 36, 48]
+
+// @link https://clickhouse.com/docs/cloud/manage/jan-2025-faq/pricing-dimensions#what-are-the-clickpipes-public-prices
+export const clickpipePircingDimentions = {
+  computeUnit: 0.25,
+  computeUsdPerHour: 0.2,
+  replicaComputeUsdPerHour: 0.05,
+  ingestedUsdPerHour: 0.04
 }
 
-const config: Config = {
+export const meter: MeterConfig = {
   plans: {
     basic: {
       planTemplateId: 'c84c5422-f679-48b4-9910-4265b285795f',
@@ -39,4 +49,24 @@ const config: Config = {
   }
 }
 
-export default config
+// Finds the closet compute value
+// @example input: 220, output: 216
+// @example input: 700, output: 356
+export function findClosestCompute(input: number) {
+  // If the value exists, return it
+  if (computes.includes(input)) return input
+
+  let closest = computes[0]
+  let minDifference = Math.abs(input - computes[0])
+
+  for (let i = 1; i < computes.length; i++) {
+    const difference = Math.abs(input - computes[i])
+
+    if (difference < minDifference) {
+      closest = computes[i]
+      minDifference = difference
+    }
+  }
+
+  return closest
+}

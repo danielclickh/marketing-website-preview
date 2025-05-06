@@ -62,42 +62,6 @@ export interface SeoMetadata {
 // Pricing V2
 // ------
 
-export interface PricingV2EntryCompute {
-  name: string
-  size: number
-}
-
-export interface PricingV2EntryPlan {
-  name: string
-  slug: string
-  customizable: boolean
-  packages: Array<PricingV2EntryPackage>
-  order: null | number
-  perks: Array<PricingV2ComponentPerk>
-  description: null | string
-  featured: boolean
-  priceList: Array<PricingV2ComponentPerk>
-  maxStorageCapacity: null | number
-}
-
-export interface PricingV2EntryProvider {
-  name: string
-  slug: string
-  logo: StrapiImageType
-  order: null | number
-  regions: Array<PricingV2ComponentRegion>
-  internetEgress: null | number
-  interRegionEgress: null | number
-}
-
-export interface PricingV2EntryPackage {
-  name: string
-  minimumCompute: null | PricingV2EntryCompute
-  maximumCompute: null | PricingV2EntryCompute
-  replicas: number
-  description: null | string
-}
-
 export interface PricingV2ComponentPerk {
   text: string
   icon: 'None' | 'Tick' | 'Dash'
@@ -108,4 +72,66 @@ export interface PricingV2ComponentRegion {
   key: string
   label: null | string
   icon: null | StrapiImageType
+  internetEgress: number
+  interRegionEgress: number
+}
+
+export interface PricingV2ComponentPlan {
+  name: string
+  slug: string
+  description: null | string
+  perks: Array<PricingV2ComponentPerk>
+  featured: boolean
+  maxStorageCapacity: null | number
+  allowDataSources: boolean
+  allowDataTransfer: boolean
+  allowBackups: boolean
+  priceList: Array<PricingV2ComponentPerk>
+  packages: Array<PricingV2ComponentPackage>
+  customizable: boolean
+}
+
+export interface PricingV2ComponentProvider {
+  name: string
+  slug: string
+  logo: StrapiImageType
+  regions: Array<PricingV2ComponentRegion>
+  useDestinationInterRegionEgress: boolean
+}
+
+export interface PricingV2ComponentPackage {
+  name: string
+  slug: string
+  computeMinimum: number
+  computeMaximum: number
+  replicas: number
+  description: null | string
+  activeHours: number
+}
+
+export interface PricingV2ComponentUseCase {
+  name: string
+  slug: string
+  activeHours: number
+  ratio: number
+  replicas: number
+  description: null | string
+  title: null | string
+  enableReset: boolean
+}
+
+export interface PricingV2ComponentDataSource {
+  name: string
+  slug: string
+  icon: StrapiImageType | null
+  ingestsData: boolean
+  excludeFromCalculations: boolean
+  excludeFromCalculationsLabel: null | string
+}
+
+export interface PricingV2 {
+  plans: Array<PricingV2ComponentPlan>
+  providers: Array<PricingV2ComponentProvider>
+  useCases: Array<PricingV2ComponentUseCase>
+  dataSources: Array<PricingV2ComponentDataSource>
 }

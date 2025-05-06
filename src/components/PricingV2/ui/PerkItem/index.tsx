@@ -1,5 +1,5 @@
-import { MarkdownMemoized } from '../../../Markdown'
-import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
+import { MarkdownMemoized } from '@/components/Markdown'
+import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
 import { PricingV2ComponentPerk } from '@/lib/api/strapi/types'
 import { MinusIcon } from '@heroicons/react/outline'
 import { CheckIcon } from '@heroicons/react/solid'

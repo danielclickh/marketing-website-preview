@@ -1,7 +1,7 @@
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
-import { StrapiImage } from '../../../StrapiElements'
 import Label from '../../ui/Label'
-import { PricingV2EntryProvider } from '@/lib/api/strapi/types'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { StrapiImage } from '@/components/StrapiElements'
+import { PricingV2ComponentProvider } from '@/lib/api/strapi/types'
 import { memo } from 'react'
 
 export interface ProviderSelectorProps {
@@ -12,7 +12,7 @@ export interface ProviderSelectorProps {
 const ProviderLogo = memo(function ProviderLogo({
   logo
 }: {
-  logo: PricingV2EntryProvider['logo']
+  logo: PricingV2ComponentProvider['logo']
 }) {
   return <StrapiImage {...logo} />
 })
@@ -21,12 +21,12 @@ export default function ProviderSelector({
   displayLabel = true,
   className = ''
 }: ProviderSelectorProps) {
-  const { providers, provider, setProvider } = usePricingV2Context()
+  const { setValues, sourceData, provider } = usePricingV2Context()
   return (
     <div className={className}>
       {displayLabel && <Label>Cloud provider</Label>}
       <div className='flex justify-start gap-3'>
-        {providers.map((item, index) => {
+        {sourceData.providers.map((item, index) => {
           const isActive = provider === item.slug
           return (
             <button
@@ -38,7 +38,7 @@ export default function ProviderSelector({
               }`}
               onClick={(event) => {
                 event.preventDefault()
-                setProvider(item.slug)
+                setValues({ provider: item.slug })
               }}>
               <ProviderLogo logo={item.logo} />
             </button>

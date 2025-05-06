@@ -1,11 +1,5 @@
 import { CommonProps } from './homepage'
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider,
-  SeoMetadata,
-  StrapiImageType
-} from '@/lib/api/strapi/types'
+import { PricingV2, SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
 import { ParsedUrlQuery } from 'querystring'
 
 interface PricingDimension {
@@ -101,9 +95,7 @@ interface PricingPageBase extends CommonProps {
 
 export interface PricingPagePropsV1 extends PricingPageBase {
   displayOldPricing: true
-  plans: never
-  providers: never
-  computes: never
+  pricingData: never
   pricingByRegion: Array<RegionPricing>
   pricingPlans: Array<PricingPlanData>
   cloudProviders: Array<CloudProviderType>
@@ -111,9 +103,7 @@ export interface PricingPagePropsV1 extends PricingPageBase {
 
 export interface PricingPagePropsV2 extends PricingPageBase {
   displayOldPricing: false
-  plans: Array<PricingV2EntryPlan>
-  providers: Array<PricingV2EntryProvider>
-  computes: Array<PricingV2EntryCompute>
+  pricingData: PricingV2
   pricingByRegion: never
   pricingPlans: never
   cloudProviders: never

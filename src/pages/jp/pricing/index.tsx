@@ -1,7 +1,5 @@
-import { useClickOutside } from '../../../hooks'
 import philosophy from './philosophy.json'
 import { CUIButton, CUICard } from '@/components/ClickUI'
-import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
@@ -9,13 +7,8 @@ import Modal from '@/components/Modal'
 import PocContactForm from '@/components/PocContactForm'
 import ByocPricingCard from '@/components/jp/ByocPricingCard'
 import { SuiText, SuiTitle } from '@/components/sui'
-import {
-  findAll,
-  findOne,
-  getPricingV2Computes,
-  getPricingV2Plans,
-  getPricingV2Providers
-} from '@/lib/api/strapi'
+import { useClickOutside } from '@/hooks'
+import { findAll, findOne, getPricingV2 } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import {
@@ -129,23 +122,14 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
     }
 
     // New (V2) pricing
-    const plansPromise = getPricingV2Plans()
-    const providersPromise = getPricingV2Providers()
-    const computesPromise = getPricingV2Computes()
+    // New (V2) pricing
+    const pricingDataPromise = getPricingV2()
 
     const [
       { hero, contactSection, meteredPricing, seo },
       commonProps,
-      plans,
-      providers,
-      computes
-    ] = await Promise.all([
-      pagePromise,
-      commonPropsPromise,
-      plansPromise,
-      providersPromise,
-      computesPromise
-    ])
+      pricingData
+    ] = await Promise.all([pagePromise, commonPropsPromise, pricingDataPromise])
 
     seo.path = '/jp/pricing'
 
@@ -156,9 +140,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
         meteredPricing,
         seo,
         displayOldPricing: false,
-        plans,
-        providers,
-        computes,
+        pricingData,
         requestParams: query,
         ...commonProps
       } as PricingPagePropsV2
@@ -173,9 +155,7 @@ export default function PricingPage({
   pricingByRegion,
   pricingPlans,
   cloudProviders,
-  plans,
-  providers,
-  computes,
+  pricingData,
   requestParams,
   headerData,
   footerData
@@ -260,10 +240,8 @@ export default function PricingPage({
 
             {!displayOldPricing && (
               <PricingV2
+                data={pricingData}
                 requestParams={requestParams}
-                plans={plans}
-                providers={providers}
-                computes={computes}
                 afterTableFilters={<RegionRequest />}
                 inbetweenContent={
                   <>
@@ -326,11 +304,12 @@ export default function PricingPage({
                         </div>
                       </div>
                     </div>
-                    <HRSeparator className='my-16 lg:my-24' />
-                    <SuiTitle type='h2' className='my-12 text-center'>
-                      毎月のコストを見積もる
-                    </SuiTitle>
                   </>
+                }
+                beforeEstimator={
+                  <SuiTitle type='h2' className='my-12 text-center'>
+                    毎月のコストを見積もる
+                  </SuiTitle>
                 }
               />
             )}

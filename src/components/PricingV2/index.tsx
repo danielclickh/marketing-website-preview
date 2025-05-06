@@ -1,120 +1,128 @@
-import PricingV2ContextProvider, { Values } from '../PricingV2ContextProvider'
 import Estimator from './parts/Estimator'
 import Table from './parts/Table'
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from '@/lib/api/strapi/types'
+import { Values } from './types'
+import HRSeparator from '@/components/HRSeparator'
+import PricingV2ContextProvider from '@/components/PricingV2ContextProvider'
+import type { PricingV2 } from '@/lib/api/strapi/types'
 import { throttle } from 'lodash'
 import { useRouter } from 'next/router'
+import { parse, ParsedQs, stringify } from 'qs'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback } from 'react'
 
 export interface PricingV2Props {
-  plans: Array<PricingV2EntryPlan>
-  providers: Array<PricingV2EntryProvider>
-  computes: Array<PricingV2EntryCompute>
-
+  data: PricingV2
   requestParams?: ParsedUrlQuery
-
   beforeTableFilters?: React.ReactNode
   afterTableFilters?: React.ReactNode
   inbetweenContent?: React.ReactNode
+  beforeEstimator?: React.ReactNode
 }
 
 export default function PricingV2({
-  plans,
-  providers,
-  computes,
+  data,
   requestParams,
   beforeTableFilters,
   afterTableFilters,
-  inbetweenContent
+  inbetweenContent,
+  beforeEstimator
 }: PricingV2Props) {
   const router = useRouter()
 
-  const cleanUrlParam = (param: string | string[] | undefined) => {
-    if (Array.isArray(param)) param = param[0]
+  function cleanUrlParams(
+    param: string | string[] | ParsedQs | ParsedQs[] | undefined
+  ): any {
     if (!param) return null
+
+    if (Array.isArray(param)) {
+      return param.map((param) => cleanUrlParams(param))
+    }
+
+    if (typeof param === 'object') {
+      return Object.fromEntries(
+        Object.entries(param).map(([key, value]) => {
+          return [key, cleanUrlParams(value)]
+        })
+      )
+    }
+
     if (param.match(/^\d+$/)) return Number(param)
-    param = decodeURI(param).trim()
     if (param.toLowerCase() === 'true') return true
     if (param.toLowerCase() === 'false') return false
+
     return param
   }
 
-  const urlPlan = cleanUrlParam(requestParams?.plan)
-  const urlProvider = cleanUrlParam(requestParams?.provider)
-  const urlRegion = cleanUrlParam(requestParams?.region)
-  const urlHours = cleanUrlParam(requestParams?.hours)
-  const urlComputeMinSize = cleanUrlParam(requestParams?.computeMinSize)
-  const urlComputeMaxSize = cleanUrlParam(requestParams?.computeMaxSize)
-  const urlReplicas = cleanUrlParam(requestParams?.replicas)
-  const urlStorageUnit = cleanUrlParam(requestParams?.storageUnit)
-  const urlStorageSize = cleanUrlParam(requestParams?.storageSize)
-  const urlStorageCompressed = cleanUrlParam(requestParams?.storageCompressed)
+  const {
+    plan: urlPlan,
+    provider: urlProvider,
+    region: urlRegion,
+    useCase: urlUseCase,
+    hours: urlHours,
+    computeMinSize: urlComputeMinSize,
+    computeMaxSize: urlComputeMaxSize,
+    replicas: urlReplicas,
+    storage: urlStorage,
+    storageCompressed: urlStorageCompressed,
+    estimateBackup: urlEstimateBackup,
+    backupFrequency: urlBackupFrequency,
+    backupRetention: urlBackupRetention,
+    fullBackup: urlFullBackup,
+    incrementalBackup: urlIncrementalBackup,
+    clickpipes: urlClickpipes,
+    transfers: urlTransfers
+  } = cleanUrlParams(parse(stringify(requestParams)))
 
   // Combine URL and default values
-  const startingValues: Values = {
+  const startingValues: Partial<Values> = {
     plan: urlPlan?.toString() || null,
     provider: urlProvider?.toString() || null,
     region: urlRegion?.toString() || null,
+    useCase: urlUseCase?.toString() || null,
     hours: typeof urlHours === 'number' ? urlHours : null,
     computeMinSize:
       typeof urlComputeMinSize === 'number' ? urlComputeMinSize : null,
     computeMaxSize:
       typeof urlComputeMaxSize === 'number' ? urlComputeMaxSize : null,
     replicas: typeof urlReplicas === 'number' ? urlReplicas : null,
-    storageUnit:
-      urlStorageUnit === 'gb' ||
-      urlStorageUnit === 'tb' ||
-      urlStorageUnit === 'pb'
-        ? urlStorageUnit
-        : null,
-    storageSize: typeof urlStorageSize === 'number' ? urlStorageSize : null,
+    storage: urlStorage?.toString() || null,
     storageCompressed:
-      typeof urlStorageCompressed === 'boolean' ? urlStorageCompressed : null
+      typeof urlStorageCompressed === 'boolean' ? urlStorageCompressed : null,
+    estimateBackup:
+      typeof urlEstimateBackup === 'boolean' ? urlEstimateBackup : null,
+    backupFrequency:
+      typeof urlBackupFrequency === 'number' ? urlBackupFrequency : null,
+    backupRetention:
+      typeof urlBackupRetention === 'number' ? urlBackupRetention : null,
+    fullBackup: urlFullBackup?.toString() || null,
+    incrementalBackup: urlIncrementalBackup?.toString() || null,
+    clickpipes: Array.isArray(urlClickpipes) ? urlClickpipes : null,
+    transfers: Array.isArray(urlTransfers) ? urlTransfers : null
   }
 
   // Update URL when pricing values have changed
   const onChangeHandler = useCallback(
     throttle((values: Values) => {
-      let queryChanged = false
-      let modifiedQuery = { ...router.query }
+      const newUrl = new URL(window.location.toString())
 
-      Object.entries(values).forEach(([key, value]) => {
-        if (value !== null) {
-          if (value !== modifiedQuery[key]) {
-            queryChanged = true
-            modifiedQuery[key] = value.toString()
-          }
-        } else {
-          queryChanged = true
-          delete modifiedQuery[key]
+      newUrl.search = stringify(
+        { ...newUrl.searchParams, ...values },
+        {
+          skipNulls: true,
+          encodeValuesOnly: true
         }
-      })
+      )
 
-      // Store values in the URL
-      if (queryChanged) {
-        const newUrl = new URL(window.location.toString())
-        Object.entries(modifiedQuery)
-          .reverse()
-          .forEach(([key, value]) => {
-            newUrl.searchParams.set(key, value?.toString() || '')
-          })
-
-        // We use the native API because of a bug where the nextjs
-        // `router.replace(...)` causes all iframes on the page to reload
-        window.history.replaceState(null, '', newUrl.toString())
-      }
+      // We use the native API because of a bug where the nextjs
+      // `router.replace(...)` causes all iframes on the page to reload
+      window.history.replaceState(null, '', newUrl.toString())
     }, 200),
     [router.query]
   )
 
   return (
     <PricingV2ContextProvider
-      data={{ plans, providers, computes }}
+      sourceData={data}
       startingValues={startingValues}
       onChange={onChangeHandler}>
       <Table
@@ -122,7 +130,8 @@ export default function PricingV2({
         afterFilters={afterTableFilters}
       />
       {inbetweenContent}
-      <Estimator />
+      {inbetweenContent && <HRSeparator className='my-16 lg:my-24' />}
+      <Estimator before={beforeEstimator} />
     </PricingV2ContextProvider>
   )
 }

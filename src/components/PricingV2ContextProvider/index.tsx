@@ -1,14 +1,50 @@
 import pricingFile from '../../../public/pricingV2File.json'
-import config, { PlanConfig } from '../PricingV2/config'
+import * as config from '../PricingV2/config'
 import {
-  PricingV2EntryCompute,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from '@/lib/api/strapi/types'
+  Adhoc,
+  Context,
+  ContextBackupFrequency,
+  ContextBackupRetention,
+  ContextBackupsPrice,
+  ContextClickpipes,
+  ContextClickpipesPrice,
+  ContextComputeMaxPrice,
+  ContextComputeMaxSize,
+  ContextComputeMinPrice,
+  ContextComputeMinSize,
+  ContextComputeUnitPrice,
+  ContextEstimateBackup,
+  ContextFullBackup,
+  ContextHours,
+  ContextIncrementalBackup,
+  ContextPlan,
+  ContextProvider,
+  ContextRegion,
+  ContextReplicas,
+  ContextStorage,
+  ContextStorageCameFrom,
+  ContextStorageCompressed,
+  ContextStoragePrice,
+  ContextStorageUnitPrice,
+  ContextTotalMaxPrice,
+  ContextTotalMinPrice,
+  ContextTotalPriceRange,
+  ContextTransfers,
+  ContextTransfersPrice,
+  ContextUseCase,
+  Data,
+  PricingFile,
+  Values
+} from '../PricingV2/types'
+import { PricingV2ComponentUseCase } from '@/lib/api/strapi/types'
+import {
+  bytesTo,
+  bytesToHumanReadable,
+  humanReadableTo,
+  humanReadableToBytes
+} from '@/lib/utils/memory'
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useContext,
   useEffect,
@@ -16,163 +52,135 @@ import {
   useState
 } from 'react'
 
-const AVG_DAYS_PER_MONTH = 30.5
-
-export type PricingFileItem = Array<{
-  id: string
-  aggregationId: string
-  description: string
-  region: string
-  cloudProvider: string
-  pricingBands: Array<{
-    id: string
-    lowerLimit: number
-    fixedPrice: number
-    unitPrice: number
-  }>
-}>
-export type PricingFile = Record<string, PricingFileItem>
-
-export type ContextPlan = null | string
-export type ContextProvider = null | string
-export type ContextRegion = null | string
-export type ContextHours = null | number
-export type ContextComputeMinSize = null | number
-export type ContextComputeMaxSize = null | number
-export type ContextReplicas = null | number
-export type ContextStorageUnit = null | 'gb' | 'tb' | 'pb'
-export type ContextStorageSize = null | number
-export type ContextStorageCompressed = null | boolean
-
-export type ContextComputeUnitPrice = null | number
-export type ContextStorageUnitPrice = null | number
-export type ContextComputeMinPrice = null | number
-export type ContextComputeMaxPrice = null | number
-export type ContextStoragePrice = null | number
-export type ContextTotalMinPrice = null | number
-export type ContextTotalMaxPrice = null | number
-export type ContextTotalPriceRange = [number] | [number, number]
-
-export interface Context {
-  // Helper functions
-  getPlanPricingData: (value: string) => undefined | PricingFileItem
-  getPlanPricingConfig: (value: string) => undefined | PlanConfig
-
-  // Data sources
-  plans: Array<PricingV2EntryPlan>
-  setPlans: Dispatch<SetStateAction<Array<PricingV2EntryPlan>>>
-  providers: Array<PricingV2EntryProvider>
-  setProviders: Dispatch<SetStateAction<Array<PricingV2EntryProvider>>>
-  computes: Array<PricingV2EntryCompute>
-  setComputes: Dispatch<SetStateAction<Array<PricingV2EntryCompute>>>
-
-  // User values
-  plan: ContextPlan
-  setPlan: (value: ContextPlan) => void
-  provider: ContextProvider
-  setProvider: (value: ContextProvider) => void
-  region: ContextRegion
-  setRegion: (value: ContextRegion) => void
-  hours: ContextHours
-  setHours: (value: ContextHours) => void
-
-  setCompute: (
-    min: ContextComputeMinSize,
-    max: ContextComputeMaxSize,
-    replicas: ContextReplicas
-  ) => void
-  computeMinSize: ContextComputeMinSize
-  setComputeMinSize: (value: ContextComputeMinSize) => void
-  computeMaxSize: ContextComputeMaxSize
-  setComputeMaxSize: (value: ContextComputeMaxSize) => void
-  replicas: ContextReplicas
-  setReplicas: (value: ContextReplicas) => void
-
-  storageUnit: ContextStorageUnit
-  setStorageUnit: (value: ContextStorageUnit) => void
-  storageSize: ContextStorageSize
-  setStorageSize: (value: ContextStorageSize) => void
-  storageCompressed: ContextStorageCompressed
-  setStorageCompressed: (value: ContextStorageCompressed) => void
-
-  // Computed values
-  planEntry: undefined | PricingV2EntryPlan
-  providerEntry: undefined | PricingV2EntryProvider
-  computeUnitPrice: ContextComputeUnitPrice
-  storageUnitPrice: ContextStorageUnitPrice
-  computeMinPrice: ContextComputeMinPrice
-  computeMaxPrice: ContextComputeMaxPrice
-  storagePrice: ContextStoragePrice
-  totalMinPrice: ContextTotalMinPrice
-  totalMaxPrice: ContextTotalMaxPrice
-  totalPriceRange: ContextTotalPriceRange
+function getPlanPricingData(planKey: string) {
+  return (pricingFile as PricingFile)[planKey]
 }
 
-export type Data = Pick<Context, 'plans' | 'providers' | 'computes'>
+function getPlanPricingConfig(planKey: string) {
+  return config.meter.plans[planKey]
+}
 
-export type Values = Pick<
-  Context,
-  | 'plan'
-  | 'provider'
-  | 'region'
-  | 'hours'
-  | 'computeMinSize'
-  | 'computeMaxSize'
-  | 'replicas'
-  | 'storageUnit'
-  | 'storageSize'
-  | 'storageCompressed'
->
+function getUseCaseCompute(
+  storage: ContextStorage,
+  storageCompressed: boolean,
+  useCase: PricingV2ComponentUseCase
+) {
+  if (!storage || !useCase) return
+
+  let storageInGb = humanReadableTo(storage, 'GB')
+
+  // Sanity check
+  if (!storageInGb) return
+
+  // Apply 10x compression
+  if (!storageCompressed) storageInGb /= 10
+
+  // E.g. 100
+  const storageRatioGb = storageInGb / useCase.ratio
+
+  // Ensure computes are sorted low to high
+  const sortedComputes = [...config.computes].sort((a, b) => a - b)
+  const minCompute = sortedComputes[0]
+  const maxCompute = sortedComputes[sortedComputes.length - 1]
+
+  // Ideal compute sizes
+  const idealComputeMinSize = storageRatioGb - storageRatioGb * 0.2
+  const idealComputeMaxSize = storageRatioGb + storageRatioGb * 0.2
+
+  // Recommended replicas for this use case
+  let replicas = useCase.replicas
+
+  // Start by using the ideal compute values
+  let computeMinSize = idealComputeMinSize
+  let computeMaxSize = idealComputeMaxSize
+
+  // If the compute values are less than the minimum
+  // decrease the number of replicas and increase the compute size
+  while (
+    computeMinSize < minCompute &&
+    computeMaxSize <= minCompute &&
+    replicas > 2
+  ) {
+    computeMinSize = idealComputeMinSize * replicas
+    computeMaxSize = idealComputeMaxSize * replicas
+    replicas -= 1
+  }
+
+  // If the compute values are less than the maximum
+  // increase the number of replicas and decrease the compute size
+  while (
+    computeMinSize >= maxCompute &&
+    computeMaxSize > maxCompute &&
+    replicas < 25
+  ) {
+    computeMinSize = idealComputeMinSize / replicas
+    computeMaxSize = idealComputeMaxSize / replicas
+    replicas += 1
+  }
+
+  return {
+    computeMinSize,
+    computeMaxSize,
+    replicas,
+    hours: useCase.activeHours
+  }
+}
 
 const PricingV2Context = createContext<Context>({
   // Helper functions
-  getPlanPricingData: () => undefined,
-  getPlanPricingConfig: () => undefined,
+  setValues: () => null,
+  getPlanPricingData,
+  getPlanPricingConfig,
+  getUseCaseCompute,
 
-  // Data sources
-  plans: [],
-  setPlans: () => {},
-  providers: [],
-  setProviders: () => {},
-  computes: [],
-  setComputes: () => {},
+  // Initial source data
+  sourceData: {
+    plans: [],
+    providers: [],
+    useCases: [],
+    dataSources: []
+  },
+
+  // Ad-hoc
+  storageCameFrom: null,
 
   // User values
   plan: null,
-  setPlan: () => {},
   provider: null,
-  setProvider: () => {},
   region: null,
-  setRegion: () => {},
+  useCase: null,
   hours: null,
-  setHours: () => {},
-
-  setCompute: () => {},
   computeMinSize: null,
-  setComputeMinSize: () => {},
   computeMaxSize: null,
-  setComputeMaxSize: () => {},
   replicas: null,
-  setReplicas: () => {},
-
-  storageUnit: null,
-  setStorageUnit: () => {},
-  storageSize: null,
-  setStorageSize: () => {},
+  storage: null,
   storageCompressed: null,
-  setStorageCompressed: () => {},
+  backupFrequency: null,
+  backupRetention: null,
+  estimateBackup: null,
+  fullBackup: null,
+  incrementalBackup: null,
+  clickpipes: null,
+  transfers: null,
 
   // Computed values
   planEntry: undefined,
   providerEntry: undefined,
+  regionEntry: undefined,
+  useCaseEntry: undefined,
+
   computeUnitPrice: null,
   storageUnitPrice: null,
   computeMinPrice: null,
   computeMaxPrice: null,
   storagePrice: null,
+  backupsPrice: null,
+  clickpipesPrice: null,
+  transfersPrice: null,
+
   totalMinPrice: null,
   totalMaxPrice: null,
-  totalPriceRange: [0]
+  totalPriceRange: null
 })
 
 export function usePricingV2Context() {
@@ -184,25 +192,27 @@ export function usePricingV2Context() {
 }
 
 export interface PricingV2ContextProviderProps {
-  data: Data
+  sourceData: Data
   startingValues?: Partial<Values>
   onChange?: (values: Values) => void
   children: React.ReactNode
 }
 
 export default function PricingV2ContextProvider({
-  data,
+  sourceData,
   startingValues,
   onChange,
   children
 }: PricingV2ContextProviderProps) {
-  const [plans, setPlans] = useState<Array<PricingV2EntryPlan>>(data.plans)
-  const [providers, setProviders] = useState<Array<PricingV2EntryProvider>>(
-    data.providers
-  )
-  const [computes, setComputes] = useState<Array<PricingV2EntryCompute>>(
-    data.computes
-  )
+  // -----------------------------------
+  // Ad-hoc
+  // -----------------------------------
+  const [storageCameFrom, setStorageCameFrom] =
+    useState<ContextStorageCameFrom>(null)
+
+  // -----------------------------------
+  // User values
+  // -----------------------------------
 
   const [plan, setPlan] = useState<ContextPlan>(null)
   const [provider, setProvider] = useState<ContextProvider>(
@@ -210,6 +220,9 @@ export default function PricingV2ContextProvider({
   )
   const [region, setRegion] = useState<ContextRegion>(
     startingValues?.region ?? null
+  )
+  const [useCase, setUseCase] = useState<ContextUseCase>(
+    startingValues?.useCase ?? null
   )
   const [hours, setHours] = useState<ContextHours>(
     startingValues?.hours ?? null
@@ -223,46 +236,64 @@ export default function PricingV2ContextProvider({
   const [replicas, setReplicas] = useState<ContextReplicas>(
     startingValues?.replicas ?? null
   )
-  const [storageUnit, setStorageUnit] = useState<ContextStorageUnit>(
-    startingValues?.storageUnit ?? null
-  )
-  const [storageSize, setStorageSize] = useState<ContextStorageSize>(
-    startingValues?.storageSize ?? null
+  const [storage, setStorage] = useState<ContextStorage>(
+    startingValues?.storage ?? null
   )
   const [storageCompressed, setStorageCompressed] =
     useState<ContextStorageCompressed>(
       startingValues?.storageCompressed ?? null
     )
-
-  // -----------------------------------
-  // Helper functions
-  // -----------------------------------
-
-  const getPlanPricingData = (planKey: string) => {
-    return (pricingFile as PricingFile)[planKey]
-  }
-
-  const getPlanPricingConfig = (planKey: string) => {
-    return config.plans[planKey]
-  }
+  const [backupFrequency, setBackupFrequency] =
+    useState<ContextBackupFrequency>(startingValues?.backupFrequency ?? null)
+  const [backupRetention, setBackupRetention] =
+    useState<ContextBackupRetention>(startingValues?.backupRetention ?? null)
+  const [estimateBackup, setEstimateBackup] = useState<ContextEstimateBackup>(
+    startingValues?.estimateBackup ?? null
+  )
+  const [fullBackup, setFullBackup] = useState<ContextFullBackup>(
+    startingValues?.fullBackup ?? null
+  )
+  const [incrementalBackup, setIncrementalBackup] =
+    useState<ContextIncrementalBackup>(
+      startingValues?.incrementalBackup ?? null
+    )
+  const [clickpipes, setClickpipes] = useState<ContextClickpipes>(
+    startingValues?.clickpipes ?? null
+  )
+  const [transfers, setTransfers] = useState<ContextTransfers>(
+    startingValues?.transfers ?? null
+  )
 
   // -----------------------------------
   // Computed values
   // -----------------------------------
 
   // Get the provider strapi entry
+  //
   const providerEntry = useMemo(() => {
-    return providers
-      ? providers.find((item) => item.slug === provider)
-      : undefined
-  }, [providers, provider])
+    return sourceData.providers.find((item) => item.slug === provider)
+  }, [sourceData, provider])
+
+  // Get the region strapi entry
+  //
+  const regionEntry = useMemo(() => {
+    return providerEntry?.regions?.find((item) => item.key === region)
+  }, [providerEntry, region])
 
   // Get the plan strapi entry
+  //
   const planEntry = useMemo(() => {
-    return plan ? plans.find((item) => item.slug === plan) : undefined
-  }, [plans, plan])
+    return sourceData.plans.find((item) => item.slug === plan)
+  }, [sourceData, plan])
+
+  // Get the useCase strapi entry
+  //
+  const useCaseEntry = useMemo(() => {
+    return sourceData.useCases.find((item) => item.slug === useCase)
+  }, [sourceData, useCase])
 
   // Find the pricing data for the combined plan, privder and region values
+  //
   const pricingData = useMemo(() => {
     if (!plan || !provider || !region || !(plan in pricingFile)) return null
 
@@ -275,8 +306,9 @@ export default function PricingV2ContextProvider({
   }, [plan, provider, region])
 
   // Get the compute unit price from pricing file
+  //
   const computeUnitPrice: ContextComputeUnitPrice = useMemo(() => {
-    if (!pricingData || !plan || !(plan in config.plans)) return null
+    if (!pricingData || !plan || !(plan in config.meter.plans)) return null
 
     const aggregationIds = getPlanPricingConfig(plan).aggregationIds.compute
 
@@ -288,8 +320,9 @@ export default function PricingV2ContextProvider({
   }, [pricingData, plan])
 
   // Get the storage unit price from pricing file
+  //
   const storageUnitPrice: ContextStorageUnitPrice = useMemo(() => {
-    if (!pricingData || !plan || !(plan in config.plans)) return null
+    if (!pricingData || !plan || !(plan in config.meter.plans)) return null
 
     const aggregationIds = getPlanPricingConfig(plan).aggregationIds.storage
 
@@ -301,6 +334,7 @@ export default function PricingV2ContextProvider({
   }, [pricingData, plan])
 
   // Calculate the minimum compute price
+  //
   const computeMinPrice: ContextComputeMinPrice = useMemo(() => {
     if (!computeUnitPrice || hours === null || computeMinSize === null) {
       return null
@@ -308,11 +342,12 @@ export default function PricingV2ContextProvider({
 
     // Divide `computeMinSize` by 8 because 1 unit is equal to a compute size of 8
     const computeMinHoursPerMonth =
-      (computeMinSize / 8) * hours * AVG_DAYS_PER_MONTH
+      (computeMinSize / 8) * hours * config.averageDaysPerMonth
     return computeUnitPrice * computeMinHoursPerMonth * (replicas || 1)
   }, [hours, computeMinSize, computeUnitPrice, replicas])
 
   // Calculate the maximum compute price
+  //
   const computeMaxPrice: ContextComputeMaxPrice = useMemo(() => {
     if (!computeUnitPrice || hours === null || computeMaxSize === null) {
       return null
@@ -320,28 +355,23 @@ export default function PricingV2ContextProvider({
 
     // Divide `computeMaxSize` by 8 because 1 unit is equal to a compute size of 8
     const computeMaxHoursPerMonth =
-      (computeMaxSize / 8) * hours * AVG_DAYS_PER_MONTH
+      (computeMaxSize / 8) * hours * config.averageDaysPerMonth
     return computeUnitPrice * computeMaxHoursPerMonth * (replicas || 1)
   }, [hours, computeMaxSize, computeUnitPrice, replicas])
 
   // Calculate the storage price
+  //
   const storagePrice: ContextStoragePrice = useMemo(() => {
-    if (!storageUnitPrice || !storageSize || !storageUnit) {
+    // Prevent storage calculation if no computeMinPrice
+    if (!storage || !storageUnitPrice || !computeMinPrice) {
       return null
     }
 
     // Unit price is in terabytes so we need to convert usage accordingly
-    let usageInTb = storageSize
+    let usageInTb = humanReadableTo(storage, 'TB')
 
-    // Convert usage values into gigabytes
-    switch (storageUnit) {
-      case 'gb':
-        usageInTb = storageSize / 1000 // 1 TB = 1024 GB
-        break
-      case 'pb':
-        usageInTb = storageSize * 1000 // 1 PB = 1024 TB
-        break
-    }
+    // Bail if converting value failed
+    if (!usageInTb) return null
 
     // If the storage isn't already compressed, apply standard 10x compression
     if (!storageCompressed) {
@@ -349,33 +379,225 @@ export default function PricingV2ContextProvider({
     }
 
     return usageInTb * storageUnitPrice
-  }, [storageSize, storageUnit, storageCompressed, storageUnitPrice])
+  }, [storage, storageCompressed, storageUnitPrice, computeMinPrice])
+
+  // Calculate the price of backups
+  //
+  const backupsPrice: ContextBackupsPrice = useMemo(() => {
+    if (!planEntry || !storageUnitPrice || !backupFrequency || !backupRetention)
+      return null
+
+    // No pricing needed for plans that don't allow backups
+    if (!planEntry.allowBackups) return null
+
+    //
+    const hoursPerMonth = config.averageDaysPerMonth * 24
+    const visibleBackups = (24 / backupFrequency) * backupRetention + 1
+    const fullBackupsPerDay = visibleBackups / 7
+    const incrementalBackupsPerDay = visibleBackups - fullBackupsPerDay
+
+    let fullBackupsBytes = 0
+    let incrementalBackupsBytes = 0
+
+    // Add user defined values
+    if (!estimateBackup) {
+      fullBackupsBytes = fullBackup ? humanReadableToBytes(fullBackup) : 0
+      incrementalBackupsBytes = incrementalBackup
+        ? humanReadableToBytes(incrementalBackup)
+        : 0
+    }
+
+    // Esitmate backup
+    if (estimateBackup && storage) {
+      fullBackupsBytes = humanReadableToBytes(storage) || 0
+
+      // Apply 10x compression
+      if (!storageCompressed && fullBackupsBytes) {
+        fullBackupsBytes /= 10
+      }
+
+      // Assume incrementals are 1% of storage
+      incrementalBackupsBytes = fullBackupsBytes / 100
+    }
+
+    const fullBackupsInGb = bytesTo(fullBackupsBytes, 'GB') || 0
+    const incrementalBackupsInGb = bytesTo(incrementalBackupsBytes, 'GB') || 0
+
+    // The below calculations were provided by Aashish Kohli
+    const gbMinutesPerDay =
+      (fullBackupsPerDay * fullBackupsInGb +
+        incrementalBackupsPerDay * incrementalBackupsInGb) *
+      60 *
+      24
+    const gbMinutesPerHour = gbMinutesPerDay / 24
+    const gbMinutesPerMonth = gbMinutesPerHour * hoursPerMonth
+    const tbMinutesPerMonth = gbMinutesPerMonth / 1000
+    const tbMonthPerMonth = tbMinutesPerMonth / (hoursPerMonth * 60)
+
+    return tbMonthPerMonth * storageUnitPrice
+  }, [
+    planEntry,
+    storage,
+    storageCompressed,
+    storageUnitPrice,
+    backupFrequency,
+    backupRetention,
+    estimateBackup,
+    fullBackup,
+    incrementalBackup
+  ])
+
+  // Calculate the price of clickpipes
+  //
+  const clickpipesPrice: ContextClickpipesPrice = useMemo(() => {
+    if (!planEntry || !clickpipes?.length) return null
+
+    // No pricing needed for plans that don't allow data sources/clickpipes
+    if (!planEntry.allowDataSources) return null
+
+    const {
+      computeUnit,
+      computeUsdPerHour,
+      replicaComputeUsdPerHour,
+      ingestedUsdPerHour
+    } = config.clickpipePircingDimentions
+
+    let dailyCost = 0
+
+    clickpipes.forEach(({ source, dataIngested, instances }) => {
+      const sourceEntry = sourceData.dataSources.find(
+        (item) => item.slug === source
+      )
+
+      // Skip clickpipe if it's invalid or is excluded from calculations (e.g. free for public beta)
+      if (!sourceEntry || sourceEntry.excludeFromCalculations) {
+        return
+      }
+
+      const replicaCost = instances * replicaComputeUsdPerHour * 24
+      let ingestCost = 0
+      let computeCost = 0
+
+      // If the source entry allows data streaming/ingestion
+      if (sourceEntry.ingestsData) {
+        // Calculations are based on gigabytes so we need to conver the users value accordingly
+        const dataIngestedInGb = dataIngested
+          ? humanReadableTo(dataIngested, 'GB')
+          : null
+
+        if (dataIngestedInGb) {
+          ingestCost =
+            computeUnit * computeUsdPerHour * 24 +
+            ingestedUsdPerHour * dataIngestedInGb
+        }
+      }
+
+      // Else it must be object storage
+      else {
+        computeCost = computeUnit * computeUsdPerHour * 24
+      }
+
+      // Apply cost for replicas
+      if (ingestCost || computeCost) {
+        dailyCost += ingestCost + computeCost + replicaCost
+      }
+    })
+
+    return dailyCost * config.averageDaysPerMonth
+  }, [planEntry, clickpipes, sourceData])
+
+  // Calculate the price of data transfer
+  //
+  const transfersPrice: ContextTransfersPrice = useMemo(() => {
+    if (!planEntry || !providerEntry || !regionEntry) return null
+
+    // No pricing needed for plans that don't allow data transfer
+    if (!planEntry.allowDataTransfer) return null
+
+    let transferCost = 0
+
+    transfers?.forEach((transfer) => {
+      // Skip if user hasn't provided a value
+      if (!transfer.value) return
+
+      // Ensure transfer usage is in GB
+      const usageInGb = humanReadableTo(transfer.value, 'GB')
+
+      // Skip if users value is invalid
+      if (!usageInGb) return
+
+      switch (transfer.type) {
+        case 'inter-region':
+          // Use costs from destination region
+          if (providerEntry.useDestinationInterRegionEgress) {
+            // Get the region config from provider
+            const sourceRegion = providerEntry.regions.find(
+              (item) => item.key === transfer.region
+            )
+
+            // Skip transfer if it uses an invalid region OR if it's the same as the compute region (we assume no costs for same region transfers)
+            if (!sourceRegion || sourceRegion.key === regionEntry.key) {
+              return
+            }
+
+            // Add inter-region destination transfer cost
+            transferCost += usageInGb * sourceRegion.interRegionEgress
+          }
+
+          // Use the cost from the compute region
+          else {
+            // Add inter-region transfer cost
+            transferCost += usageInGb * regionEntry.interRegionEgress
+          }
+          break
+        case 'public-internet':
+          transferCost += usageInGb * regionEntry.internetEgress
+          break
+      }
+    })
+
+    return transferCost
+  }, [planEntry, providerEntry, regionEntry, transfers])
 
   // Calculate the minimum total price (min compute & min storage combined)
   const totalMinPrice: ContextTotalMinPrice = useMemo(() => {
-    return [computeMinPrice, storagePrice]
+    return [
+      computeMinPrice,
+      storagePrice,
+      backupsPrice,
+      clickpipesPrice,
+      transfersPrice
+    ]
       .filter((val) => val !== null)
       .reduce((total, current) => total + current, 0)
-  }, [computeMinPrice, storagePrice, replicas])
+  }, [
+    computeMinPrice,
+    storagePrice,
+    backupsPrice,
+    clickpipesPrice,
+    transfersPrice
+  ])
 
   // Calculate the maximum total price (max compute & max storage combined)
   const totalMaxPrice: ContextTotalMaxPrice = useMemo(() => {
-    return [computeMaxPrice, storagePrice]
+    return [
+      computeMaxPrice,
+      storagePrice,
+      backupsPrice,
+      clickpipesPrice,
+      transfersPrice
+    ]
       .filter((val) => val !== null)
       .reduce((total, current) => total + current, 0)
-  }, [computeMaxPrice, storagePrice, replicas])
+  }, [
+    computeMaxPrice,
+    storagePrice,
+    backupsPrice,
+    clickpipesPrice,
+    transfersPrice
+  ])
 
   const totalPriceRange: ContextTotalPriceRange = useMemo(() => {
-    const isValid = !!(
-      (totalMinPrice && totalMinPrice > 1) ||
-      (totalMaxPrice && totalMaxPrice > 1)
-    )
-
-    // Set default to zero
-    if (!isValid) {
-      return [0]
-    }
-
     // De-dupe and remove empties
     const cleaned = [...new Set([totalMinPrice, totalMaxPrice])].filter(
       (val) => val !== null
@@ -388,7 +610,7 @@ export default function PricingV2ContextProvider({
       case 1:
         return [cleaned[0]]
       default:
-        return [0]
+        return null
     }
   }, [totalMinPrice, totalMaxPrice])
 
@@ -403,76 +625,117 @@ export default function PricingV2ContextProvider({
         plan,
         provider,
         region,
+        useCase,
         hours,
         computeMinSize,
         computeMaxSize,
         replicas,
-        storageUnit,
-        storageSize,
-        storageCompressed
+        storage,
+        storageCompressed,
+        backupFrequency,
+        backupRetention,
+        estimateBackup,
+        fullBackup,
+        incrementalBackup,
+        clickpipes,
+        transfers
       })
     }
   }, [
     plan,
     provider,
     region,
+    useCase,
     hours,
     computeMinSize,
     computeMaxSize,
     replicas,
-    storageUnit,
-    storageSize,
-    storageCompressed
+    storage,
+    storageCompressed,
+    estimateBackup,
+    backupFrequency,
+    backupRetention,
+    fullBackup,
+    incrementalBackup,
+    clickpipes,
+    transfers
   ])
 
   // -----------------------------------
-  // Value validators
+  // Context setter
   // -----------------------------------
 
-  const validateAndSetValues = useCallback(
-    (newValues: Partial<Values>) => {
+  const setValues = useCallback(
+    (newValues: Partial<Values & Adhoc>) => {
       let newPlanEntry = planEntry
       let newProviderEntry = providerEntry
+      let newUseCaseEntry = useCaseEntry
 
       let {
+        storageCameFrom: newStorageCameFrom,
         plan: newPlan,
         provider: newProvider,
         region: newRegion,
+        useCase: newUseCase,
         hours: newHours,
         computeMinSize: newComputeMinSize,
         computeMaxSize: newComputeMaxSize,
         replicas: newReplicas,
-        storageUnit: newStorageUnit,
-        storageSize: newStorageSize,
-        storageCompressed: newStorageCompressed
+        storage: newStorage,
+        storageCompressed: newStorageCompressed,
+        backupFrequency: newBackupFrequency,
+        backupRetention: newBackupRetention,
+        estimateBackup: newEstimateBackup,
+        fullBackup: newFullBackup,
+        incrementalBackup: newIncrementalBackup,
+        clickpipes: newClickpipes,
+        transfers: newTransfers
       } = newValues
 
       // Validate plan
       if (newPlan !== undefined) {
-        newPlanEntry = plans.find((item) => item.slug === newPlan)
+        newPlanEntry = sourceData.plans.find((item) => item.slug === newPlan)
+
         if (!newPlan || !newPlanEntry) {
           newPlanEntry =
-            plans.find((item) => item.featured) || plans.at(0) || undefined
+            sourceData.plans.find((item) => item.featured) ||
+            sourceData.plans.at(0) ||
+            undefined
           newPlan = newPlanEntry?.slug || null
         }
+      }
 
-        // Force new compute values when the plan changes and customizablilty has changed
-        if (
-          plan &&
-          newPlan !== plan &&
-          planEntry?.customizable !== newPlanEntry?.customizable
-        ) {
+      // Reset some values when chaning plan
+      if (plan && newPlan !== plan) {
+        // Reset compute if customizability changes
+        if (planEntry?.customizable !== newPlanEntry?.customizable) {
           newComputeMinSize = null
           newComputeMaxSize = null
           newReplicas = null
+        }
+
+        // Reset use cases
+        if (newPlanEntry?.packages?.length) {
+          newUseCase = null
+          newUseCaseEntry = undefined
+        }
+
+        // Reset backups if plan does not allow it
+        if (!newPlanEntry?.allowBackups) {
+          newBackupFrequency = null
+          newBackupRetention = null
+          newFullBackup = null
+          newIncrementalBackup = null
         }
       }
 
       // Validate provider
       if (newProvider !== undefined) {
-        newProviderEntry = providers.find((item) => item.slug === newProvider)
+        newProviderEntry = sourceData.providers.find(
+          (item) => item.slug === newProvider
+        )
         if (!newProvider || !newProviderEntry) {
-          newProviderEntry = providers.at(0)
+          newProviderEntry = sourceData.providers.at(0)
           newProvider = newProviderEntry?.slug || null
         }
 
@@ -495,28 +758,82 @@ export default function PricingV2ContextProvider({
         }
       }
 
-      // Validate hours
-      if (newHours !== undefined) {
-        // Set hours default value
-        if (newHours === null) newHours = 8
+      // Validate use case
+      if (newUseCase !== undefined) {
+        // Esnure user value exists in source data
+        newUseCaseEntry = sourceData.useCases.find(
+          (item) => item.slug === newUseCase
+        )
 
-        // Constrain hours to 0-24
-        newHours = Math.min(24, Math.max(0, newHours))
+        // Failed to find in source data so reset both values
+        if (!newUseCaseEntry) {
+          newUseCaseEntry = undefined
+          newUseCase = null
+        }
+      }
+
+      // Validate storage
+      if (newStorage && newPlanEntry?.maxStorageCapacity) {
+        const storageInGb = humanReadableTo(newStorage, 'GB')
+        if (storageInGb > newPlanEntry.maxStorageCapacity) {
+          newStorage = `${newPlanEntry.maxStorageCapacity}GB`
+        }
+      }
+
+      // Validate storage compressed
+      if (newStorageCompressed !== undefined) {
+        newStorageCompressed = !!newStorageCompressed
+      }
+
+      // When use case or storage changes, apply use case recommended compute values
+      if (
+        newUseCaseEntry &&
+        (newUseCase || newStorage || newStorageCompressed !== undefined)
+      ) {
+        const useCaseCompute = getUseCaseCompute(
+          newStorage || storage || '10TB', // Default storage so we can display somewhat relevant values to the user
+          newStorageCompressed ?? storageCompressed ?? false,
+          newUseCaseEntry
+        )
+
+        if (useCaseCompute) {
+          newComputeMinSize = useCaseCompute.computeMinSize
+          newComputeMaxSize = useCaseCompute.computeMaxSize
+          newReplicas = useCaseCompute.replicas
+
+          // Apply recommended hours only when newly selected usecase
+          if (newUseCaseEntry && newUseCase) {
+            newHours = useCaseCompute.hours
+          }
+        } else {
+          newComputeMinSize = config.computes[0]
+          newComputeMaxSize = config.computes[config.computes.length - 1]
+          newReplicas = newUseCaseEntry.replicas
+        }
       }
 
       // Validate compute
       if (
+        newPlanEntry ||
         newComputeMinSize !== undefined ||
         newComputeMaxSize !== undefined ||
         newReplicas !== undefined
       ) {
-        const firstComputePackage = () => {
+        const applyFirstPackage = () => {
           if (newPlanEntry) {
             const first = newPlanEntry.packages.at(0)
-
-            newComputeMinSize = first?.minimumCompute?.size || null
-            newComputeMaxSize = first?.maximumCompute?.size || null
+            newComputeMinSize = first?.computeMinimum || null
+            newComputeMaxSize = first?.computeMaximum || null
             newReplicas = first?.replicas || null
+
+            // Only override hours if it's been set in the source data
+            if (typeof first?.activeHours === 'number') {
+              newHours = first?.activeHours
+            }
+          } else {
+            newComputeMinSize = config.computes[0]
+            newComputeMaxSize = config.computes[config.computes.length - 1]
+            newReplicas = 1
           }
         }
 
@@ -531,7 +848,18 @@ export default function PricingV2ContextProvider({
           newComputeMaxSize === null &&
           newReplicas === null
         ) {
-          firstComputePackage()
+          applyFirstPackage()
+        }
+
+        // Enforce limits if a single replica
+        if (newReplicas === 1) {
+          // Limit to a max 12 compute size
+          if (newComputeMinSize && newComputeMinSize > 12) {
+            newComputeMinSize = 12
+          }
+
+          // Max value should match min (no range allowed)
+          newComputeMaxSize = newComputeMinSize
         }
 
         // Min value is null, set it to match max
@@ -544,129 +872,240 @@ export default function PricingV2ContextProvider({
           newComputeMaxSize = newComputeMinSize
         }
 
-        // Min size is still null, default to first compute size
-        if (newComputeMinSize === null) {
-          newComputeMinSize = computes[0].size
-        }
-
-        // Max size is still null, default to last compute size
-        if (newComputeMaxSize === null) {
-          newComputeMaxSize = computes[computes.length - 1].size
-        }
-
-        // If min value has changed, ensure max value is always greater than or equal to
-        if (
-          newComputeMinSize !== computeMinSize &&
-          newComputeMinSize > newComputeMaxSize
-        ) {
-          newComputeMaxSize = newComputeMinSize
-        }
-
-        // If max value has changed, ensure min value is always less than or equal to
-        else if (
-          newComputeMaxSize !== computeMaxSize &&
-          newComputeMinSize > newComputeMaxSize
-        ) {
-          newComputeMinSize = newComputeMaxSize
-        }
-
-        // Sanity check if neither value has changed
-        else if (newComputeMinSize > newComputeMaxSize) {
-          newComputeMaxSize = newComputeMinSize
-        }
-
-        // Set replicas default value
-        if (newReplicas === null) newReplicas = 1
-
-        // Constrain replicas to 1-25
-        newReplicas = Math.min(25, Math.max(1, newReplicas))
-
         // Ensure values match a package for non-customizable plans
         if (newPlanEntry && !newPlanEntry.customizable) {
           const packageExists = newPlanEntry.packages.find((item) => {
             return (
-              item.minimumCompute?.size === newComputeMinSize &&
-              item.maximumCompute?.size === newComputeMaxSize &&
+              item.computeMinimum === newComputeMinSize &&
+              item.computeMaximum === newComputeMaxSize &&
               item.replicas === newReplicas
             )
           })
 
           // If not a valid package, set values to the first available package
           if (!packageExists) {
-            firstComputePackage()
+            applyFirstPackage()
+          }
+        }
+
+        // Ensure the compute value exists in the config array
+        newComputeMinSize =
+          typeof newComputeMinSize === 'number'
+            ? config.findClosestCompute(newComputeMinSize)
+            : null
+        newComputeMaxSize =
+          typeof newComputeMaxSize === 'number'
+            ? config.findClosestCompute(newComputeMaxSize)
+            : null
+
+        if (newComputeMinSize !== null && newComputeMaxSize !== null) {
+          // If min value has changed, ensure max value is always greater than or equal to
+          if (
+            newComputeMinSize !== computeMinSize &&
+            newComputeMinSize > newComputeMaxSize
+          ) {
+            newComputeMaxSize = newComputeMinSize
+          }
+
+          // If max value has changed, ensure min value is always less than or equal to
+          else if (
+            newComputeMaxSize !== computeMaxSize &&
+            newComputeMinSize > newComputeMaxSize
+          ) {
+            newComputeMinSize = newComputeMaxSize
+          }
+
+          // Sanity check if neither value has changed
+          else if (newComputeMinSize > newComputeMaxSize) {
+            newComputeMaxSize = newComputeMinSize
+          }
+        }
+
+        // We don't need replicas if there are no compute values
+        if (newComputeMinSize === null && newComputeMaxSize === null) {
+          newReplicas = null
+        } else {
+          // Set replicas default value
+          if (newReplicas === null) newReplicas = 1
+
+          // Constrain replicas to 1-25
+          newReplicas = Math.min(25, Math.max(1, newReplicas))
+        }
+      }
+
+      // Validate hours
+      if (newHours !== undefined) {
+        // Set hours default value
+        if (newHours === null) newHours = 8
+
+        // Constrain hours to 0-24
+        newHours = Math.min(24, Math.max(0, newHours))
+      }
+
+      // Validate backup frequency (in hours)
+      if (newBackupFrequency !== undefined) {
+        if (
+          newBackupFrequency !== null &&
+          !config.backupIntervals.includes(newBackupFrequency)
+        ) {
+          newBackupRetention = null
+        }
+      }
+
+      // Limit backup retention to 1-30 days
+      if (newBackupRetention !== undefined) {
+        if (newBackupRetention !== null) {
+          newBackupRetention = Math.max(1, Math.min(30, newBackupRetention))
+        } else {
+          newBackupRetention = null
+        }
+      }
+
+      // Set default backup values
+      if (newStorage) {
+        let storageBytes = humanReadableToBytes(newStorage)
+
+        // Sanity check, ensure storage value is valid
+        if (storageBytes) {
+          // Apply standard 10x compression
+          if (!(newStorageCompressed ?? storageCompressed)) {
+            storageBytes /= 10
+          }
+
+          // Set default incremental value
+          if (newFullBackup === undefined) {
+            newFullBackup = bytesToHumanReadable(storageBytes)
+          }
+
+          // Set default incremental value
+          if (newIncrementalBackup === undefined) {
+            newIncrementalBackup = bytesToHumanReadable(storageBytes / 100)
           }
         }
       }
 
-      // Validate storage
+      // Validate full backup
+      if (newFullBackup !== undefined) {
+        // Set default values
+        newFullBackup = newFullBackup ?? newStorage ?? storage ?? null
+
+        const fullBackupInPB = newFullBackup
+          ? humanReadableTo(newFullBackup, 'PB')
+          : null
+        if (!fullBackupInPB) {
+          newFullBackup = null
+        } else if (fullBackupInPB > 999) {
+          newFullBackup = '999PB'
+        } else if (fullBackupInPB < 0) {
+          newFullBackup = null
+        }
+      }
+
+      // Validate incremental backup
+      if (newIncrementalBackup !== undefined) {
+        const incrementalBackupInPB = newIncrementalBackup
+          ? humanReadableTo(newIncrementalBackup, 'PB')
+          : null
+        if (!incrementalBackupInPB) {
+          newIncrementalBackup = null
+        }
+        if (incrementalBackupInPB > 999) {
+          newIncrementalBackup = '999PB'
+        } else if (incrementalBackupInPB < 0) {
+          newIncrementalBackup = null
+        }
+      }
+
+      // Validate clickpipes
+      if (newClickpipes !== undefined) {
+        if (!Array.isArray(newClickpipes)) {
+          newClickpipes = null
+        } else {
+          newClickpipes
+            .map((item) => {
+              let isValid = true
+
+              // Check clickpipe source exists in source data
+              const source = sourceData.dataSources.find(
+                (source) => source.slug === item.source
+              )
+
+              if (!source) {
+                isValid = false
+              } else {
+                // Validate ingested data value
+                const dataIngestedInPB = item.dataIngested
+                  ? humanReadableTo(item.dataIngested, 'PB')
+                  : null
+                if (!dataIngestedInPB) {
+                  item.dataIngested = null
+                } else if (dataIngestedInPB > 999) {
+                  item.dataIngested = '999PB'
+                } else if (dataIngestedInPB < 0) {
+                  item.dataIngested = null
+                }
+              }
+
+              return isValid ? item : null
+            })
+            .filter((item) => !!item)
+        }
+      }
+
+      // Validate transfers
+      if (newTransfers !== undefined) {
+        if (!Array.isArray(newTransfers)) {
+          newTransfers = null
+        } else {
+          newTransfers
+            .map((item) => {
+              // Make sure the user didn't give us an invalid type
+              if (!['inter-region', 'public-internet'].includes(item.type))
+                return null
+
+              // Validate ingested data value
+              const valueInPB = item.value
+                ? humanReadableTo(item.value, 'PB')
+                : null
+              if (!valueInPB) {
+                item.value = null
+              } else if (valueInPB > 999) {
+                item.value = '999PB'
+              } else if (valueInPB < 0) {
+                item.value = null
+              }
+
+              return item
+            })
+            .filter((item) => !!item)
+        }
+      }
+
+      if (newStorageCameFrom !== undefined) {
+        setStorageCameFrom(newStorageCameFrom)
+      }
+
+      if (newPlanEntry !== undefined && newPlanEntry !== planEntry) {
+        setPlan(newPlanEntry.slug)
+      }
+
       if (
-        newStorageUnit !== undefined ||
-        newStorageSize !== undefined ||
-        newPlanEntry?.maxStorageCapacity
+        newProviderEntry !== undefined &&
+        newProviderEntry !== providerEntry
       ) {
-        // If a value is undefined, use the current value
-        if (newStorageUnit === undefined) newStorageUnit = storageUnit
-        if (newStorageSize === undefined) newStorageSize = storageSize
-
-        if (!newStorageUnit || !['gb', 'pb', 'tb'].includes(newStorageUnit)) {
-          newStorageUnit = 'gb'
-        }
-
-        // Set 500 as the default value
-        if (newStorageSize === null) newStorageSize = 500
-
-        // Constrain value to 0-9999
-        newStorageSize = Math.max(Math.min(newStorageSize, 9999), 0)
-
-        // Apply plan storage restriciton
-        if (newPlanEntry?.maxStorageCapacity) {
-          let newStorageSizeInGb = newStorageSize
-
-          // maxStorageCapacity is in gigabytes, convert user values to gb
-          switch (newStorageUnit) {
-            case 'tb':
-              newStorageSizeInGb = newStorageSizeInGb * 1024
-              break
-            case 'pb':
-              newStorageSizeInGb = newStorageSizeInGb * 2048
-              break
-          }
-
-          // If storage size is greater than max, use max value
-          newStorageSizeInGb = Math.min(
-            newStorageSizeInGb,
-            newPlanEntry.maxStorageCapacity
-          )
-
-          // Transform new value for the UI
-          if (newStorageSizeInGb < 9999) {
-            newStorageSize = newStorageSizeInGb
-            newStorageUnit = 'gb'
-          } else if (newStorageSizeInGb > 9999 * 1024) {
-            newStorageSize = newStorageSizeInGb * 2048
-            newStorageUnit = 'pb'
-          } else {
-            newStorageSize = newStorageSizeInGb * 1024
-            newStorageUnit = 'tb'
-          }
-        }
+        setProvider(newProviderEntry.slug)
       }
 
-      // Validate storage compressed
-      if (newStorageCompressed !== undefined) {
-        newStorageCompressed = !!newStorageCompressed
-      }
-
-      if (newPlan !== undefined && newPlan !== plan) {
-        setPlan(newPlan)
-      }
-
-      if (newProvider !== undefined && newProvider !== provider) {
-        setProvider(newProvider)
+      if (newUseCaseEntry !== undefined && newUseCaseEntry !== useCaseEntry) {
+        setUseCase(newUseCaseEntry.slug)
       }
 
       if (newRegion !== undefined && newRegion !== region) {
         setRegion(newRegion)
+      }
+
+      if (newUseCase !== undefined && newUseCase !== useCase) {
+        setUseCase(newUseCase)
       }
 
       if (newHours !== undefined && newHours !== hours) {
@@ -691,12 +1130,8 @@ export default function PricingV2ContextProvider({
         setReplicas(newReplicas)
       }
 
-      if (newStorageUnit !== undefined && newStorageUnit !== storageUnit) {
-        setStorageUnit(newStorageUnit)
-      }
-
-      if (newStorageSize !== undefined && newStorageSize !== storageSize) {
-        setStorageSize(newStorageSize)
+      if (newStorage !== undefined && newStorage !== storage) {
+        setStorage(newStorage)
       }
 
       if (
@@ -705,91 +1140,171 @@ export default function PricingV2ContextProvider({
       ) {
         setStorageCompressed(newStorageCompressed)
       }
+
+      if (
+        newBackupFrequency !== undefined &&
+        newBackupFrequency !== backupFrequency
+      ) {
+        setBackupFrequency(newBackupFrequency)
+      }
+
+      if (
+        newBackupRetention !== undefined &&
+        newBackupRetention !== backupRetention
+      ) {
+        setBackupRetention(newBackupRetention)
+      }
+
+      if (
+        newEstimateBackup !== undefined &&
+        newEstimateBackup !== estimateBackup
+      ) {
+        setEstimateBackup(newEstimateBackup)
+      }
+
+      if (newFullBackup !== undefined && newFullBackup !== fullBackup) {
+        setFullBackup(newFullBackup)
+      }
+
+      if (
+        newIncrementalBackup !== undefined &&
+        newIncrementalBackup !== incrementalBackup
+      ) {
+        setIncrementalBackup(newIncrementalBackup)
+      }
+
+      if (newTransfers !== undefined && newTransfers !== transfers) {
+        setTransfers(newTransfers)
+      }
+
+      if (newClickpipes !== undefined && newClickpipes !== clickpipes) {
+        setClickpipes(newClickpipes)
+      }
     },
     [
+      sourceData,
+
       planEntry,
       providerEntry,
 
-      plans,
-      providers,
+      storageCameFrom,
+
       plan,
       provider,
       region,
+      useCase,
       hours,
       computeMinSize,
       computeMaxSize,
       replicas,
-      storageUnit,
-      storageSize,
-      storageCompressed
+      storage,
+      storageCompressed,
+      backupFrequency,
+      backupRetention,
+      estimateBackup,
+      fullBackup,
+      incrementalBackup,
+      clickpipes,
+      transfers
     ]
   )
 
   // -----------------------------------
-  // On mount
+  // Initialize states on mount
   // -----------------------------------
 
   useEffect(() => {
-    if (startingValues) validateAndSetValues(startingValues)
+    if (startingValues) setValues(startingValues)
   }, [])
 
   return (
     <PricingV2Context.Provider
       value={{
+        // CMS data
+        sourceData,
+
         // Helper functions
+        setValues,
         getPlanPricingData,
         getPlanPricingConfig,
+        getUseCaseCompute,
 
-        // Data sources
-        plans,
-        setPlans,
-        providers,
-        setProviders,
-        computes,
-        setComputes,
+        // Ad-hoc
+        storageCameFrom,
 
         // User values
         plan,
-        setPlan: (plan) => validateAndSetValues({ plan }),
         provider,
-        setProvider: (provider) => validateAndSetValues({ provider }),
         region,
-        setRegion: (region) => validateAndSetValues({ region }),
+        useCase,
         hours,
-        setHours: (hours) => validateAndSetValues({ hours }),
-
-        setCompute: (computeMinSize, computeMaxSize, replicas) =>
-          validateAndSetValues({ computeMinSize, computeMaxSize, replicas }),
         computeMinSize,
-        setComputeMinSize: (computeMinSize) =>
-          validateAndSetValues({ computeMinSize }),
         computeMaxSize,
-        setComputeMaxSize: (computeMaxSize) =>
-          validateAndSetValues({ computeMaxSize }),
         replicas,
-        setReplicas: (replicas) => validateAndSetValues({ replicas }),
-
-        storageUnit,
-        setStorageUnit: (storageUnit) => validateAndSetValues({ storageUnit }),
-        storageSize,
-        setStorageSize: (storageSize) => validateAndSetValues({ storageSize }),
+        storage,
         storageCompressed,
-        setStorageCompressed: (storageCompressed) =>
-          validateAndSetValues({ storageCompressed }),
+        backupFrequency,
+        backupRetention,
+        estimateBackup,
+        fullBackup,
+        incrementalBackup,
+        clickpipes,
+        transfers,
 
         // Computed values
         planEntry,
         providerEntry,
+        regionEntry,
+        useCaseEntry,
         computeUnitPrice,
         storageUnitPrice,
         computeMinPrice,
         computeMaxPrice,
         storagePrice,
+        backupsPrice,
+        clickpipesPrice,
+        transfersPrice,
         totalMinPrice,
         totalMaxPrice,
         totalPriceRange
       }}>
       {children}
+      {/*<pre>
+        {JSON.stringify(
+          {
+            plan,
+            provider,
+            region,
+            useCase,
+            hours,
+            computeMinSize,
+            computeMaxSize,
+            replicas,
+            storage,
+            storageCompressed,
+            backupFrequency,
+            backupRetention,
+            estimateBackup,
+            fullBackup,
+            incrementalBackup,
+            clickpipes,
+            transfers,
+            prices: {
+              storageUnitPrice,
+              computeMaxPrice,
+              storagePrice,
+              backupsPrice,
+              clickpipesPrice,
+              transfersPrice,
+              totalMinPrice,
+              totalMaxPrice,
+              totalPriceRange
+            }
+          },
+          null,
+          2
+        )}
+      </pre>*/}
     </PricingV2Context.Provider>
   )
 }
