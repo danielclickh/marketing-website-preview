@@ -15,14 +15,14 @@ import {
   UserStory,
   Vertical
 } from '@/types/userStories'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { useSearchParams } from 'next/navigation'
 import { PrimeReactProvider } from 'primereact/api'
 import { MultiSelect } from 'primereact/multiselect'
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 
-export const getServerSideProps: GetServerSideProps<UserStoriesPage> =
-  async function getServerSideProps() {
+export const getStaticProps: GetStaticProps<UserStoriesPage> =
+  async function getStaticProps() {
     const pagePromise = findOne('use-case', {
       populate: ['useCaseItems', 'useCaseItems.darkLogoPng', 'seo', 'seo.image']
     })
