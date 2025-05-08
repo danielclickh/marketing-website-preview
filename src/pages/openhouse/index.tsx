@@ -864,7 +864,7 @@ function AgendaItem({
         {!!children && (
           <button
             type='button'
-            className='flex aspect-square w-12 items-center justify-center lg:w-20'
+            className='group/agenda-button flex aspect-square w-12 items-center justify-center lg:w-20'
             onClick={(event) => {
               event.preventDefault()
               setIsOpen((old) => !old)
@@ -873,20 +873,22 @@ function AgendaItem({
             <span className='sr-only'>
               {isOpen ? 'Close agenda item' : 'Open agenda item'}
             </span>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='15'
-              height='18'
-              fill='none'
-              className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-              <path
-                stroke='#171618'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M7.03 1v14.99M13.02 10l-6 6.04L1 10'
-              />
-            </svg>
+            <span className='flex aspect-square flex-1 items-center justify-center rounded-full transition-colors group-hover/agenda-button:bg-neutral-900/5 lg:m-3'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='15'
+                height='18'
+                fill='none'
+                className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                <path
+                  stroke='#171618'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M7.03 1v14.99M13.02 10l-6 6.04L1 10'
+                />
+              </svg>
+            </span>
           </button>
         )}
       </div>
