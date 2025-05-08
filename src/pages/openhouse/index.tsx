@@ -899,13 +899,15 @@ function AgendaItem({
               closed: {
                 opacity: 0,
                 height: 0,
+                y: '1rem',
                 transition: {
                   delay: 0
                 }
               },
               open: {
                 opacity: 1,
-                height: 'auto'
+                height: 'auto',
+                y: '0rem'
               }
             }}
             initial='closed'
