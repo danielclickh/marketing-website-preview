@@ -198,27 +198,44 @@ const AGENDA: Array<{
       <>
         <ul className='list-disc space-y-2 pl-4'>
           <li>
-            <strong>Alexey Milovidov</strong>, ClickHouse CTO and the creator of{' '}
-            the ClickHouse open source project, will share the origin story of{' '}
-            ClickHouse.
+            <strong>
+              <u>Alexey Milovidov</u>
+            </strong>
+            , ClickHouse CTO and the creator of the ClickHouse open source
+            project, will share the origin story of ClickHouse.
           </li>
           <li>
-            <strong>Aaron Katz</strong>, ClickHouse CEO, will talk about the{' '}
-            founding of ClickHouse, Inc. and the trajectory of the company.
+            <strong>
+              <u>Aaron Katz</u>
+            </strong>
+            , ClickHouse CEO, will talk about the founding of ClickHouse, Inc.
+            and the trajectory of the company.
           </li>
           <li>
-            <strong>Yury Izrailevsky</strong>, ClickHouse President of{' '}
-            Engineering, and Krithika Balagurunathan, Head of Product for{' '}
-            ClickHouse Cloud, will dive into the details of ClickHouse Cloud.
+            <strong>
+              <u>Yury Izrailevsky</u>
+            </strong>
+            , ClickHouse President of Engineering, and Krithika Balagurunathan,
+            Head of Product for ClickHouse Cloud, will dive into the details of
+            ClickHouse Cloud.
           </li>
           <li>
-            <strong>Tanya Bragin</strong>, VP Product & Marketing at ClickHouse,{' '}
-            will cover the latest product announcements and product roadmap.
+            <strong>
+              <u>Tanya Bragin</u>
+            </strong>
+            , VP Product & Marketing at ClickHouse, will cover the latest
+            product announcements and product roadmap.
           </li>
           <li>
-            Thought-leading customers, including <strong>Lukas Biewald</strong>,{' '}
-            Founder & CEO Weights & Biases, and <strong>Dale Frohman</strong>,{' '}
-            Lead Director Engineering, CVS Health, will walk through their use{' '}
+            Thought-leading customers, including{' '}
+            <strong>
+              <u>Lukas Biewald</u>
+            </strong>
+            , Founder & CEO Weights & Biases, and{' '}
+            <strong>
+              <u>Dale Frohman</u>
+            </strong>
+            , Lead Director Engineering, CVS Health, will walk through their use{' '}
             cases and how ClickHouse helped them in their journey.
           </li>
           <li>
@@ -236,20 +253,31 @@ const AGENDA: Array<{
       <>
         <ul className='list-disc space-y-2 pl-4'>
           <li>
-            <strong>Zach Naimon</strong>, Principal Product Manager at{' '}
-            ClickHouse, will lead you through ClickHouse for real-time{' '}
-            analytics.
+            <strong>
+              <u>Zach Naimon</u>
+            </strong>
+            , Principal Product Manager at ClickHouse, will lead you through
+            ClickHouse for real-time analytics.
           </li>
           <li>
-            <strong>Sai Shrirampur</strong> and <strong>Kaushik Iska</strong>,{' '}
-            founders of PeerDB, will cover the evolving better together story{' '}
-            for Postgres users and the future of change data capture (CDC) at{' '}
+            <strong>
+              <u>Sai Shrirampur</u>
+            </strong>{' '}
+            and{' '}
+            <strong>
+              <u>Kaushik Iska</u>
+            </strong>
+            , founders of PeerDB, will cover the evolving better together story
+            for Postgres users and the future of change data capture (CDC) at
             ClickHouse.
           </li>
           <li>
-            <strong>Nikita Mikhailov</strong>, Director Engineering at{' '}
-            ClickHouse and one of the original ClickHouse developers, will talk{' '}
-            about the latest core database innovations for real-time analytics.
+            <strong>
+              <u>Nikita Mikhailov</u>
+            </strong>
+            , Director Engineering at ClickHouse and one of the original
+            ClickHouse developers, will talk about the latest core database
+            innovations for real-time analytics.
           </li>
           <li>
             <em>
@@ -269,16 +297,25 @@ const AGENDA: Array<{
       <>
         <ul className='list-disc space-y-2 pl-4'>
           <li>
-            <strong>Mike Shi</strong>, founder of HyperDX, and{' '}
-            <strong>Dale McDiarmid</strong>, Principal PME at ClickHouse, will{' '}
-            share a perspective on how the observability market is evolving and{' '}
-            how the stack based on OpenTelemetry + ClickHouse + HyperDX enables{' '}
-            turnkey open source observability for all.
+            <strong>
+              <u>Mike Shi</u>
+            </strong>
+            , founder of HyperDX, and{' '}
+            <strong>
+              <u>Dale McDiarmid</u>
+            </strong>
+            , Principal PME at ClickHouse, will share a perspective on how the
+            observability market is evolving and how the stack based on
+            OpenTelemetry + ClickHouse + HyperDX enables turnkey open source
+            observability for all.
           </li>
           <li>
-            <strong>Vlad Seliverstov</strong>, Engineering Manager at{' '}
-            ClickHouse, will share the story of the ClickHouse observability{' '}
-            team moving off Datadog to ClickHouse + Grafana + HyperDX.
+            <strong>
+              <u>Vlad Seliverstov</u>
+            </strong>
+            , Engineering Manager at ClickHouse, will share the story of the
+            ClickHouse observability team moving off Datadog to ClickHouse +
+            Grafana + HyperDX.
           </li>
           <li>
             <em>
@@ -297,30 +334,41 @@ const AGENDA: Array<{
       <>
         <ul className='list-disc space-y-2 pl-4'>
           <li>
-            <strong>Chloe Carasso</strong>, Senior Product Manager at{' '}
-            ClickHouse, will cover how the data warehousing landscape has been{' '}
-            transformed by open standards and open source alternatives to{' '}
-            traditional data warehouses.
+            <strong>
+              <u>Chloe Carasso</u>
+            </strong>
+            , Senior Product Manager at ClickHouse, will cover how the data
+            warehousing landscape has been transformed by open standards and
+            open source alternatives to traditional data warehouses.
           </li>
           <li>
-            <strong>Robert Schulze</strong>, Engineering Manager at ClickHouse,{' '}
-            will share the latest core database product innovations for the data{' '}
-            warehousing use case.
+            <strong>
+              <u>Robert Schulze</u>
+            </strong>
+            , Engineering Manager at ClickHouse, will share the latest core
+            database product innovations for the data warehousing use case.
           </li>
           <li>
-            <strong>Melvyn Peignon</strong>, Principal Product Manager at{' '}
-            ClickHouse, will cover how ClickHouse is evolving to be the query{' '}
-            engine of choice on top of data lakes.
+            <strong>
+              <u>Melvyn Peignon</u>
+            </strong>
+            , Principal Product Manager at ClickHouse, will cover how ClickHouse
+            is evolving to be the query engine of choice on top of data lakes.
           </li>
           <li>
-            <strong>Jeana Choi</strong> and <strong>Ritesh Varyani</strong>,{' '}
-            Software Engineers at Lyft, will share why they adopted ClickHouse{' '}
-            for business analytics.
+            <strong>
+              <u>Jeana Choi</u>
+            </strong>{' '}
+            and <strong>Ritesh Varyani</strong>, Software Engineers at Lyft,
+            will share why they adopted ClickHouse for business analytics.
           </li>
           <li>
-            <strong>Mihir Gorkale</strong>, Product Manager at ClickHouse, will{' '}
-            share how ClickHouse is running our internal data warehouse on{' '}
-            ClickHouse and tools we use for dashboarding and Agentic BI.
+            <strong>
+              <u>Mihir Gorkale</u>
+            </strong>
+            , Product Manager at ClickHouse, will share how ClickHouse is
+            running our internal data warehouse on ClickHouse and tools we use
+            for dashboarding and Agentic BI.
           </li>
         </ul>
       </>
@@ -334,18 +382,35 @@ const AGENDA: Array<{
       <>
         <ul className='list-disc space-y-2 pl-4'>
           <li>
-            <strong>Alexey Milovidov</strong>, ClickHouse CTO and{' '}
-            <strong>Ryadh Dahimene</strong>, Director PM at ClickHouse, will{' '}
-            share a perspective on evolution of AI/ML use cases and how{' '}
-            ClickHouse fits into the data landscape as the market evolves.
+            <strong>
+              <u>Alexey Milovidov</u>
+            </strong>
+            , ClickHouse CTO and{' '}
+            <strong>
+              <u>Ryadh Dahimene</u>
+            </strong>
+            , Director PM at ClickHouse, will share a perspective on evolution
+            of AI/ML use cases and how ClickHouse fits into the data landscape
+            as the market evolves.
           </li>
           <li>
-            <strong>Ryadh Dahimene</strong>, Director PM at ClickHouse will lead{' '}
-            a discussion on MCP servers + AI Agents with{' '}
-            <strong>Alan Braithwaite</strong>, Co-Founder of RunReveal,{' '}
-            <strong>Johanan Ottensooser</strong>, AI Product Lead at{' '}
-            FiveOneFour, and <strong>Mihir Gorkale</strong>, Product Manager at{' '}
-            ClickHouse.
+            <strong>
+              <u>Ryadh Dahimene</u>
+            </strong>
+            , Director PM at ClickHouse will lead a discussion on MCP servers +
+            AI Agents with{' '}
+            <strong>
+              <u>Alan Braithwaite</u>
+            </strong>
+            , Co-Founder of RunReveal,{' '}
+            <strong>
+              <u>Johanan Ottensooser</u>
+            </strong>
+            , AI Product Lead at FiveOneFour, and{' '}
+            <strong>
+              <u>Mihir Gorkale</u>
+            </strong>
+            , Product Manager at ClickHouse.
           </li>
         </ul>
       </>
@@ -357,9 +422,19 @@ const AGENDA: Array<{
     description: (
       <p>
         As AI and ML workloads explode, data requirements are evolving quickly.{' '}
-        Hear from <strong>Kevin Weil</strong>, CPO at OpenAI,{' '}
-        <strong>Martin Casado</strong>, Partner at Andressen Horowitz, and{' '}
-        <strong>Aaron Katz</strong>, CEO at ClickHouse, on the future of data{' '}
+        Hear from{' '}
+        <strong>
+          <u>Kevin Weil</u>
+        </strong>
+        , CPO at <strong>OpenAI</strong>,{' '}
+        <strong>
+          <u>Martin Casado</u>
+        </strong>
+        , Partner at <strong>Andressen Horowitz</strong>, and{' '}
+        <strong>
+          <u>Aaron Katz</u>
+        </strong>
+        , CEO at <strong>ClickHouse</strong>, on the future of data{' '}
         infrastructure for AI at scale.
       </p>
     )
