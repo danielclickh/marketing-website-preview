@@ -264,7 +264,7 @@ const AGENDA: Array<{
   { time: '12:00 a.m.', title: 'Lunch' },
   {
     time: '1:00 p.m.',
-    title: 'AI/ML: technical deep dives and user stories',
+    title: 'Observability: technical deep dives and user stories',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -329,7 +329,7 @@ const AGENDA: Array<{
   { time: '3:00 p.m.', title: 'Break: AMA booth and demo stations' },
   {
     time: '3:30 p.m.',
-    title: 'Observability: technical deep dives and user stories',
+    title: 'AI/ML: technical deep dives and user stories',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
