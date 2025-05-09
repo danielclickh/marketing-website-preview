@@ -191,24 +191,254 @@ const AGENDA: Array<{
   description?: string | React.ReactNode
 }> = [
   { time: '8:00 a.m.', title: 'Registration and light refreshments' },
-  { time: '9:00 a.m.', title: 'Keynote: Product vision and roadmap' },
+  {
+    time: '9:00 a.m.',
+    title: 'Keynote: Product vision and roadmap',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Alexey Milovidov</u>
+            </strong>
+            , ClickHouse CTO and the creator of the ClickHouse open source
+            project, will share the origin story of ClickHouse.
+          </li>
+          <li>
+            <strong>
+              <u>Aaron Katz</u>
+            </strong>
+            , ClickHouse CEO, will talk about the founding of ClickHouse, Inc.
+            and the trajectory of the company.
+          </li>
+          <li>
+            <strong>
+              <u>Yury Izrailevsky</u>
+            </strong>
+            , ClickHouse President of Engineering, and Krithika Balagurunathan,
+            Head of Product for ClickHouse Cloud, will dive into the details of
+            ClickHouse Cloud.
+          </li>
+          <li>
+            <strong>
+              <u>Tanya Bragin</u>
+            </strong>
+            , VP Product & Marketing at ClickHouse, will cover the latest
+            product announcements and product roadmap.
+          </li>
+          <li>
+            Thought-leading customers, including{' '}
+            <strong>
+              <u>Lukas Biewald</u>
+            </strong>
+            , Founder & CEO Weights & Biases, and{' '}
+            <strong>
+              <u>Dale Frohman</u>
+            </strong>
+            , Lead Director Engineering, CVS Health, will walk through their use{' '}
+            cases and how ClickHouse helped them in their journey.
+          </li>
+          <li>
+            <em>Stay tuned for additional keynote speaker announcements!</em>
+          </li>
+        </ul>
+      </>
+    )
+  },
   { time: '10:30 a.m.', title: 'Break: AMA booth and demo stations' },
   {
     time: '11:00 a.m.',
-    title: 'Real-time analytics: technical deep dives and user stories'
+    title: 'Real-time analytics: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Zach Naimon</u>
+            </strong>
+            , Principal Product Manager at ClickHouse, will lead you through
+            ClickHouse for real-time analytics.
+          </li>
+          <li>
+            <strong>
+              <u>Sai Shrirampur</u>
+            </strong>{' '}
+            and{' '}
+            <strong>
+              <u>Kaushik Iska</u>
+            </strong>
+            , founders of PeerDB, will cover the evolving better together story
+            for Postgres users and the future of change data capture (CDC) at
+            ClickHouse.
+          </li>
+          <li>
+            <strong>
+              <u>Nikita Mikhailov</u>
+            </strong>
+            , Director Engineering at ClickHouse and one of the original
+            ClickHouse developers, will talk about the latest core database
+            innovations for real-time analytics.
+          </li>
+          <li>
+            <em>
+              Stay tuned for an exciting customer speaker lineup in this{' '}
+              session!
+            </em>
+          </li>
+        </ul>
+      </>
+    )
   },
   { time: '12:00 a.m.', title: 'Lunch' },
-  { time: '1:00 p.m.', title: 'AI/ML: technical deep dives and user stories' },
+  {
+    time: '1:00 p.m.',
+    title: 'Observability: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Mike Shi</u>
+            </strong>
+            , founder of HyperDX, and{' '}
+            <strong>
+              <u>Dale McDiarmid</u>
+            </strong>
+            , Principal PME at ClickHouse, will share a perspective on how the
+            observability market is evolving and how the stack based on
+            OpenTelemetry + ClickHouse + HyperDX enables turnkey open source
+            observability for all.
+          </li>
+          <li>
+            <strong>
+              <u>Vlad Seliverstov</u>
+            </strong>
+            , Engineering Manager at ClickHouse, will share the story of the
+            ClickHouse observability team moving off Datadog to ClickHouse +
+            Grafana + HyperDX.
+          </li>
+          <li>
+            <em>
+              Stay tuned for an exciting customer speaker lineup in this{' '}
+              session!
+            </em>
+          </li>
+        </ul>
+      </>
+    )
+  },
   {
     time: '2:00 p.m.',
-    title: 'Data warehousing: technical deep dives and user stories'
+    title: 'Data warehousing: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Chloe Carasso</u>
+            </strong>
+            , Senior Product Manager at ClickHouse, will cover how the data
+            warehousing landscape has been transformed by open standards and
+            open source alternatives to traditional data warehouses.
+          </li>
+          <li>
+            <strong>
+              <u>Robert Schulze</u>
+            </strong>
+            , Engineering Manager at ClickHouse, will share the latest core
+            database product innovations for the data warehousing use case.
+          </li>
+          <li>
+            <strong>
+              <u>Melvyn Peignon</u>
+            </strong>
+            , Principal Product Manager at ClickHouse, will cover how ClickHouse
+            is evolving to be the query engine of choice on top of data lakes.
+          </li>
+          <li>
+            <strong>
+              <u>Jeana Choi</u>
+            </strong>{' '}
+            and <strong>Ritesh Varyani</strong>, Software Engineers at Lyft,
+            will share why they adopted ClickHouse for business analytics.
+          </li>
+          <li>
+            <strong>
+              <u>Mihir Gorkale</u>
+            </strong>
+            , Product Manager at ClickHouse, will share how ClickHouse is
+            running our internal data warehouse on ClickHouse and tools we use
+            for dashboarding and Agentic BI.
+          </li>
+        </ul>
+      </>
+    )
   },
   { time: '3:00 p.m.', title: 'Break: AMA booth and demo stations' },
   {
     time: '3:30 p.m.',
-    title: 'Observability: technical deep dives and user stories'
+    title: 'AI/ML: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Alexey Milovidov</u>
+            </strong>
+            , ClickHouse CTO and{' '}
+            <strong>
+              <u>Ryadh Dahimene</u>
+            </strong>
+            , Director PM at ClickHouse, will share a perspective on evolution
+            of AI/ML use cases and how ClickHouse fits into the data landscape
+            as the market evolves.
+          </li>
+          <li>
+            <strong>
+              <u>Ryadh Dahimene</u>
+            </strong>
+            , Director PM at ClickHouse will lead a discussion on MCP servers +
+            AI Agents with{' '}
+            <strong>
+              <u>Alan Braithwaite</u>
+            </strong>
+            , Co-Founder of RunReveal,{' '}
+            <strong>
+              <u>Johanan Ottensooser</u>
+            </strong>
+            , AI Product Lead at FiveOneFour, and{' '}
+            <strong>
+              <u>Mihir Gorkale</u>
+            </strong>
+            , Product Manager at ClickHouse.
+          </li>
+        </ul>
+      </>
+    )
   },
-  { time: '4:30 p.m.', title: 'Fireside chat' },
+  {
+    time: '4:30 p.m.',
+    title: 'Fireside chat',
+    description: (
+      <p>
+        As AI and ML workloads explode, data requirements are evolving quickly.{' '}
+        Hear from{' '}
+        <strong>
+          <u>Kevin Weil</u>
+        </strong>
+        , CPO at <strong>OpenAI</strong>,{' '}
+        <strong>
+          <u>Martin Casado</u>
+        </strong>
+        , Partner at <strong>Andressen Horowitz</strong>, and{' '}
+        <strong>
+          <u>Aaron Katz</u>
+        </strong>
+        , CEO at <strong>ClickHouse</strong>, on the future of data{' '}
+        infrastructure for AI at scale.
+      </p>
+    )
+  },
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
@@ -216,8 +446,8 @@ export default function Page({ seo, footerData }: CommonProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
-  const initialSpeakers = ALL_SPEAKERS.slice(0, 8)
-  const overflowSpeakers = ALL_SPEAKERS.slice(8)
+  const initialSpeakers = ALL_SPEAKERS.slice(0, INITIAL_NUMBER_OF_SPEAKERS)
+  const overflowSpeakers = ALL_SPEAKERS.slice(INITIAL_NUMBER_OF_SPEAKERS)
 
   const scrollToSpeakersToggle = useCallback(() => {
     const speakersToggle = speakersToggleRef.current
@@ -709,7 +939,7 @@ function AgendaItem({
         {!!children && (
           <button
             type='button'
-            className='flex aspect-square w-12 items-center justify-center lg:w-20'
+            className='group/agenda-button flex aspect-square w-12 items-center justify-center lg:w-20'
             onClick={(event) => {
               event.preventDefault()
               setIsOpen((old) => !old)
@@ -718,20 +948,22 @@ function AgendaItem({
             <span className='sr-only'>
               {isOpen ? 'Close agenda item' : 'Open agenda item'}
             </span>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='15'
-              height='18'
-              fill='none'
-              className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-              <path
-                stroke='#171618'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M7.03 1v14.99M13.02 10l-6 6.04L1 10'
-              />
-            </svg>
+            <span className='flex aspect-square flex-1 items-center justify-center rounded-full transition-colors group-hover/agenda-button:bg-neutral-900/5 lg:m-3'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='15'
+                height='18'
+                fill='none'
+                className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                <path
+                  stroke='#171618'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M7.03 1v14.99M13.02 10l-6 6.04L1 10'
+                />
+              </svg>
+            </span>
           </button>
         )}
       </div>
@@ -742,13 +974,15 @@ function AgendaItem({
               closed: {
                 opacity: 0,
                 height: 0,
+                y: '1rem',
                 transition: {
                   delay: 0
                 }
               },
               open: {
                 opacity: 1,
-                height: 'auto'
+                height: 'auto',
+                y: '0rem'
               }
             }}
             initial='closed'
