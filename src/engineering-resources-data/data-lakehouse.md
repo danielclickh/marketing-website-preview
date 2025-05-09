@@ -1,7 +1,7 @@
 ---
 title: 'Data lakehouse'
 slug: 'data-lakehouse'
-excerpt: "In this guide, we'll explore data catalogs for open table formats like Iceberg, Delta Lake, and Hudi, explaining how these metadata systems make modern data lakes more powerful and accessible."
+excerpt: "The data lakehouse combines the best of data warehouses and data lakes into a unified architecture. We'll explore its key components, advantages, and how ClickHouse fits into this modern analytics platform."
 index: 21
 ---
 
