@@ -5,7 +5,6 @@ excerpt: "In this guide, we'll explore the Iceberg, Delta Lake, and Hudi open ta
 index: 19
 ---
 
-
 Data lakes are popular for storing [structured, semi-structured, or unstructured data](https://clickhouse.com/engineering-resources/structured-unstructured-semi-structured-data). Parquet files, which can handle large volumes efficiently, are often used to store this data. 
 
 Each Parquet file can have its own schema, which provides much flexibility, but it becomes problematic when you query multiple files. If the schema of one file doesn’t match another, your queries can fail, making it difficult to analyze or pull insights from data spread across the lake.
