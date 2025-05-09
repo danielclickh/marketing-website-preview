@@ -100,6 +100,7 @@ export async function getStaticProps() {
   const props: IntegrationsPageProps = {
     title: 'インテグレーション',
     seo: {
+      locale: 'ja_JP',
       title: 'インテグレーション',
       description:
         'ClickHouse は、言語クライアント、データ取り込み、SQL クライアント、データ視覚化などのカテゴリにわたって 100 を超える統合を提供します。データ ワークフローを簡単に強化できます。',

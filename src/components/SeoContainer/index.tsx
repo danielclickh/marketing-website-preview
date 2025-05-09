@@ -11,7 +11,8 @@ function SeoContainer({
   type,
   siteName,
   path,
-  robots
+  robots,
+  locale
 }: SeoMetadata) {
   // Default social image
   let socialImageUrl = `${siteUrl}/images/social_share.png`
@@ -45,38 +46,36 @@ function SeoContainer({
     return `${siteUrl}/jp${path}`
   })()
 
+  title = title && title.length > 0 ? title : ''
+  description = description && description.length > 0 ? description : ''
+  siteName = siteName && siteName.length > 0 ? siteName : 'ClickHouse'
+  type = type && type.length > 0 ? type : 'website'
+  locale = locale && locale.length > 0 ? locale : 'en_US'
+
   return (
     <Head>
       {robots && robots.length > 0 && <meta name='robots' content={robots} />}
-      {title && title.length > 0 && <title>{title}</title>}
+
+      <title>{title}</title>
+      <meta name='description' content={description} />
+      <meta name='author' content={siteName} />
+
       <link rel='canonical' href={canonicalUrl} key='canonical' />
       <link rel='alternate' hrefLang='en' href={canonicalUrl} />
       <link rel='alternate' hrefLang='ja' href={canonicalUrlJP} />
 
-      {description && description.length > 0 && (
-        <meta name='description' content={description} />
-      )}
-      <meta name='author' content='ClickHouse' />
-
       {/* Open Graph */}
-      {title && title.length > 0 && (
-        <meta property='og:title' content={title} />
-      )}
-      {description && description.length > 0 && (
-        <meta property='og:description' content={description} />
-      )}
-      {type && <meta property='og:type' content={type} />}
-      {siteName && <meta name='og:site_name' content={siteName} />}
+      <meta property='og:title' content={title} />
+      <meta property='og:description' content={description} />
+      <meta property='og:type' content={type} />
       <meta property='og:image' content={socialImageUrl} />
+      <meta property='og:site_name' content={siteName} />
+      <meta property='og:locale' content={locale} />
 
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
-      {title && title.length > 0 && (
-        <meta name='twitter:title' content={title} />
-      )}
-      {description && description.length > 0 && (
-        <meta name='twitter:description' content={description} />
-      )}
+      <meta name='twitter:title' content={title} />
+      <meta name='twitter:description' content={description} />
       <meta name='twitter:image' content={socialImageUrl} />
     </Head>
   )

@@ -103,6 +103,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
         cloudPromise
       ])
 
+      seo.locale = 'ja_JP'
       seo.path = '/jp/pricing'
 
       return {

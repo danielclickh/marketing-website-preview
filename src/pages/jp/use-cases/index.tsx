@@ -74,6 +74,7 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
         individualUseCases,
         quotes,
         seo: {
+          locale: 'ja_JP',
           title: 'すべてのユースケース | ClickHouse',
           description: useCasesPageData.Description,
           path: '/jp/use-cases'

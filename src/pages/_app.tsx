@@ -112,7 +112,31 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <base href='/' />
           <meta content='width=device-width, initial-scale=1' name='viewport' />
-          <link href='favicon.ico' rel='icon' type='image/x-icon' />
+          <meta
+            content='telephone=no, address=no, email=no'
+            name='format-detection'
+          />
+          <meta name='apple-mobile-web-app-title' content='ClickHouse' />
+          <link rel='manifest' href='/site.webmanifest' />
+          <link
+            href='/favicon.ico'
+            rel='icon'
+            sizes='48x48'
+            type='image/x-icon'
+          />
+          <link rel='shortcut icon' href='/favicon.ico' />
+          <link
+            rel='icon'
+            type='image/png'
+            href='/favicons/favicon-96x96.png'
+            sizes='96x96'
+          />
+          <link rel='icon' type='image/svg+xml' href='/favicons/favicon.svg' />
+          <link
+            rel='apple-touch-icon'
+            sizes='180x180'
+            href='/favicons/apple-touch-icon.png'
+          />
         </Head>
         <GrowthBookProvider growthbook={gb}>
           <main

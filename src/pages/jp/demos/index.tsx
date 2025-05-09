@@ -35,6 +35,7 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
     })
 
     if (!seo?.title) seo.title = title
+    seo.locale = 'ja_JP'
     seo.path = '/jp/demos'
     seo.title = 'ClickHouse デモ'
 

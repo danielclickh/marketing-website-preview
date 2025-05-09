@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
 
     const data = await findOne('homepage', params)
 
+    data.seo.locale = 'ja_JP'
     data.seo.path = '/jp/use-cases/business-intelligence'
     data.seo.title = 'ClickHouseによるビジネスインテリジェンス'
     data.seo.description =
