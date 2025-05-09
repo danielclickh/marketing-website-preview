@@ -25,11 +25,11 @@ This layer provides scalable, durable, cost-effective storage for all data files
 
 ### Table format layer
 
-Manages the logical organization of data files into tables, providing database-like features such as ACID transactions, schema enforcement and evolution, time travel capabilities, and performance optimizations like data skipping and clustering.
+The [table format layer](https://clickhouse.com/engineering-resources/open-table-formats) manages the logical organization of data files into tables, providing database-like features such as ACID transactions, schema enforcement and evolution, time travel capabilities, and performance optimizations like data skipping and clustering.
 
 ###  Metadata catalog
 
-It acts as a central repository for metadata, storing and managing table definitions and schemas, partitioning information, and access control policies. Enables data discovery, lineage tracking, and governance across the lakehouse.
+The [data catalog](https://clickhouse.com/engineering-resources/data-catalog) acts as a central repository for metadata, storing and managing table definitions and schemas, partitioning information, and access control policies. Enables data discovery, lineage tracking, and governance across the lakehouse.
 
 ### Query engine
 
