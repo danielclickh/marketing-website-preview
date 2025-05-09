@@ -1,6 +1,6 @@
 ---
-title: 'Data catalogs'
-slug: 'data-catalogs'
+title: 'Data catalog'
+slug: 'data-catalog'
 excerpt: "In this guide, we'll explore data catalogs for open table formats like Iceberg, Delta Lake, and Hudi, explaining how these metadata systems make modern data lakes more powerful and accessible."
 index: 20
 ---
