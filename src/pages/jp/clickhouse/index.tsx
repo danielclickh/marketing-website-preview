@@ -32,6 +32,7 @@ export const getStaticProps: GetStaticProps<ClickhouseData> =
       ]
     }
     const data = await findOne('click-house', params)
+    data.seo.locale = 'ja_JP'
     data.seo.path = '/jp/clickhouse'
     data.seo.title = 'ClickHouse が日本で登場'
     const commonProps = await getCommonProps()

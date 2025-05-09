@@ -16,6 +16,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
     })
 
     const commonProps = await getCommonProps()
+    data.seo.locale = 'ja_JP'
     data.seo.path = '/company/contact'
     data.seo.title = 'ClickHouse お問合せ'
     return {

@@ -24,6 +24,7 @@ import Layout from '@/components/jp/Layout'
 import MoreComparisons from '@/components/jp/MoreComparisons'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findAll, findOne } from '@/lib/api/strapi'
+import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
@@ -82,8 +83,9 @@ export async function getStaticProps() {
 
   const comparison = data[0]
 
-  const seo = comparison.seo
-  if (seo) seo.path = `/comparison/${comparison.slug}`
+  const seo: any = comparison.seo || {}
+  seo.locale = 'ja_JP'
+  seo.path = `/comparison/${comparison.slug}`
 
   const props: BigQueryPageProps = {
     comparison,

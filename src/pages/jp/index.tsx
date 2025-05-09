@@ -33,6 +33,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', params)
+    data.seo.locale = 'ja_JP'
     data.seo.path = ''
     data.seo.title = '高速オープンソース OLAP DBMS - ClickHouse'
     return {

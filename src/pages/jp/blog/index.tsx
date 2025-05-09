@@ -28,6 +28,7 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
     const { page = 1, category = null, search = null } = context.query || {}
     const initialData = await fetchBlogs({ page, category, search })
 
+    seo.locale = 'ja_JP'
     seo.path = '/jp/blog'
     seo.title = 'ClickHouse ブログ'
 

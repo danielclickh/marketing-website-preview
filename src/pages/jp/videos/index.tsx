@@ -25,6 +25,7 @@ export const getServerSideProps: GetServerSideProps<VideosPageProps> =
         title: 'ビデオ',
         initialData,
         seo: {
+          locale: 'ja_JP',
           title: 'ClickHouse ビデオ | ClickHouse ハウツー ビデオ',
           description:
             '豊富な顧客の声、有益なチュートリアル、魅力的なMeetupの録画をご覧ください。当社の多様なビデオライブラリでデータ分析のレベルを高めましょう。',

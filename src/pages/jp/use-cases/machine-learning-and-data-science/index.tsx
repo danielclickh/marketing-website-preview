@@ -38,6 +38,7 @@ export const getStaticProps: GetStaticProps<MLProps> =
 
     const data = await findOne('homepage', params)
 
+    data.seo.locale = 'ja_JP'
     data.seo.path = '/jp/use-cases/machine-learning-and-data-science'
     data.seo.title =
       'ClickHouse による機械学習と GenAI | ML とデータ サイエンスのための ClickHouse'
