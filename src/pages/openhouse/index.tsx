@@ -6,6 +6,7 @@ import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
+import speakerArupMalakar from './assets/speaker-arup-malakar.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
 import speakerDaleFrohman from './assets/speaker-dale-frohman.png'
 import speakerJeanaChoi from './assets/speaker-jeana-choi.png'
@@ -13,8 +14,8 @@ import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
 import speakerKevinWeil from './assets/speaker-kevin-weil.png'
 import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
 import speakerLukasBiewald from './assets/speaker-lukas-biewald.png'
-import speakerMarkNeedham from './assets/speaker-mark-needham.png'
 import speakerMartinCasado from './assets/speaker-martin-casado.png'
+import speakerMaruthGoyal from './assets/speaker-maruth-goyal.png'
 import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
 import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
 import speakerMikeShi from './assets/speaker-mike-shi.png'
@@ -89,6 +90,21 @@ const ALL_SPEAKERS: Array<{
     image: speakerKevinWeil
   },
   {
+    name: 'Jeana Choi',
+    title: 'Sr Software Engineer, Lyft',
+    image: speakerJeanaChoi
+  },
+  {
+    name: 'Dale Frohman',
+    title: 'Lead Director Engineering, CVS Health',
+    image: speakerDaleFrohman
+  },
+  {
+    name: 'Krithika Balagurunathan',
+    title: 'Sr Director, PM, ClickHouse',
+    image: speakerKrithikaBalagurunathan
+  },
+  {
     name: 'Martin Casado',
     title: 'Partner, Andreessen Horowitz',
     image: speakerMartinCasado
@@ -99,34 +115,24 @@ const ALL_SPEAKERS: Array<{
     image: speakerLukasBiewald
   },
   {
-    name: 'Krithika Balagurunathan',
-    title: 'Sr Director, PM, ClickHouse',
-    image: speakerKrithikaBalagurunathan
-  },
-  {
-    name: 'Dale Frohman',
-    title: 'Lead Director Engineering, CVS Health',
-    image: speakerDaleFrohman
-  },
-  {
-    name: 'Jeana Choi',
-    title: 'Sr Software Engineer, Lyft',
-    image: speakerJeanaChoi
-  },
-  {
     name: 'Yury Izrailevsky',
     title: 'Founder, President, ClickHouse',
     image: speakerYuryIzrailevsky
   },
   {
-    name: 'Mark Needham',
-    title: 'Principal PME, ClickHouse',
-    image: speakerMarkNeedham
-  },
-  {
     name: 'Ritesh Varyani',
     title: 'Software Engineer, Lyft',
     image: speakerRiteshVaryani
+  },
+  {
+    name: 'Arup Malakar',
+    title: 'Software Engineer, Sierra',
+    image: speakerArupMalakar
+  },
+  {
+    name: 'Maruth Goyal',
+    title: 'Member of Technical Staff, Anthropic\n',
+    image: speakerMaruthGoyal
   },
   {
     name: 'Robert Schulze',
