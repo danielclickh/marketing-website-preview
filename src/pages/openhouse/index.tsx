@@ -371,8 +371,12 @@ const AGENDA: Array<{
             <strong>
               <u>Jeana Choi</u>
             </strong>{' '}
-            and <strong>Ritesh Varyani</strong>, Software Engineers at Lyft,
-            will share why they adopted ClickHouse for business analytics.
+            and{' '}
+            <strong>
+              <u>Ritesh Varyani</u>
+            </strong>
+            , Software Engineers at Lyft, will share why they adopted ClickHouse
+            for business analytics.
           </li>
           <li>
             <strong>
