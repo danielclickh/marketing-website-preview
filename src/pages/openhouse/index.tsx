@@ -23,6 +23,7 @@ import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
 import speakerRiteshVaryani from './assets/speaker-ritesh-varyani.png'
 import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
 import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
+import speakerSaiSrirampur from './assets/speaker-sai-srirampur.png'
 import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
 import speakerVladSeliverstov from './assets/speaker-vlad-seliverstov.png'
 import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
@@ -188,6 +189,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Ryadh Dahimene',
     title: 'Director, PM, ClickHouse',
     image: speakerRyadhDahimene
+  },
+  {
+    name: 'Sai Srirampur',
+    title: 'Director, PM, ClickHouse',
+    image: speakerSaiSrirampur
   }
 ]
 
