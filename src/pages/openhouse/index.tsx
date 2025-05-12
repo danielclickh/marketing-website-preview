@@ -273,7 +273,7 @@ const AGENDA: Array<{
           </li>
           <li>
             <strong>
-              <u>Sai Shrirampur</u>
+              <u>Sai Srirampur</u>
             </strong>{' '}
             and{' '}
             <strong>
