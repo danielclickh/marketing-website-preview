@@ -151,7 +151,7 @@ const ALL_SPEAKERS: Array<{
     image: speakerZoeSteinkamp
   },
   {
-    name: 'Chloe Carasso dit Carson',
+    name: 'Chlo&eacute; Carasso dit Carson',
     title: 'Senior PM, ClickHouse',
     image: speakerChloeCarassoDitCarson
   },
@@ -347,7 +347,7 @@ const AGENDA: Array<{
         <ul className='list-disc space-y-2 pl-4'>
           <li>
             <strong>
-              <u>Chloe Carasso</u>
+              <u>Chlo&eacute; Carasso</u>
             </strong>
             , Senior Product Manager at ClickHouse, will cover how the data
             warehousing landscape has been transformed by open standards and
