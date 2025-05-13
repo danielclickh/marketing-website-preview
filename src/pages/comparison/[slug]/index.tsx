@@ -66,8 +66,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     })
     if (!data?.[0]) {
       return {
-        notFound: true,
-        revalidate: REVALIDATE_SECONDS
+        notFound: true
       }
     }
 
@@ -84,8 +83,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
         seo,
         newsLetterData,
         ...commonData
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 
@@ -487,6 +485,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: NOT_FOUND_FALLBACK
+    fallback: 'blocking'
   }
 }

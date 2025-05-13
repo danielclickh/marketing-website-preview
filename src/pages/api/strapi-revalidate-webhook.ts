@@ -33,6 +33,11 @@ const CONTENT_TYPE_HANDLERS: Record<
     if (body?.entry?.Link && !body?.entry?.External) {
       await revalidate(response, `/demo/${body.entry.Link}`)
     }
+  },
+  'api::comparison.comparison': async function (body, response) {
+    if (body?.entry?.slug) {
+      await revalidate(response, `/comparison/${body.entry.slug}`)
+    }
   }
 }
 
@@ -57,7 +62,7 @@ export default async function handler(
 
   // Handle revalidation based on strapi UID
   const body = req.body
-  //log(body)
+  log(body)
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
     await CONTENT_TYPE_HANDLERS[body.uid](body, res)
     return res.json({ revalidated: true })
