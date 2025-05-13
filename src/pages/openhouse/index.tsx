@@ -255,12 +255,16 @@ const AGENDA: Array<{
             <strong>
               <u>Lukas Biewald</u>
             </strong>
-            , Founder & CEO Weights & Biases, and{' '}
+            , Founder & CEO Weights & Biases,{' '}
             <strong>
               <u>Dale Frohman</u>
             </strong>
-            , Lead Director Engineering, CVS Health, will walk through their use{' '}
-            cases and how ClickHouse helped them in their journey.
+            , Lead Director Engineering, CVS Health, and{' '}
+            <strong>
+              <u>Akshay Nanavati</u>
+            </strong>
+            , Engineering Manager, Open AI, will walk through their use cases
+            and how ClickHouse helped them in their journey.
           </li>
           <li>
             <em>Stay tuned for additional keynote speaker announcements!</em>
@@ -304,6 +308,19 @@ const AGENDA: Array<{
             innovations for real-time analytics.
           </li>
           <li>
+            <strong>
+              <u>Arup Malakar</u>
+            </strong>
+            , Software Engineer at Sierra will share how{' '}
+            <Link
+              href='https://sierra.ai/'
+              target='_blank'
+              className='underline'>
+              Sierra.ai
+            </Link>{' '}
+            powers their customer service AI agents with ClickHouse.
+          </li>
+          <li>
             <em>
               Stay tuned for an exciting customer speaker lineup in this{' '}
               session!
@@ -340,6 +357,13 @@ const AGENDA: Array<{
             , Engineering Manager at ClickHouse, will share the story of the
             ClickHouse observability team moving off Datadog to ClickHouse +
             Grafana + HyperDX.
+          </li>
+          <li>
+            <strong>
+              <u>Maruth Goyal</u>
+            </strong>
+            , Member of Technical Staff at Anthropic will share how they
+            migrated their logging backend from Splunk to ClickHouse.
           </li>
           <li>
             <em>
