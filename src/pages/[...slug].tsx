@@ -5,10 +5,6 @@ import { SuiTitle } from '@/components/sui'
 import { findAll, getPathsValues } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '@/lib/utils/revalidationConfig'
 import { CatAllParamsType, RichContentPageProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 
