@@ -10,19 +10,19 @@ import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
 import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
-import { findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { fetchAll, findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { DemoProps } from '@/types/demo'
 import { Demo } from '@/types/demos'
 import { ParamsType } from '@/types/homepage'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 
-export const getServerSideProps: GetServerSideProps<DemoProps> =
-  async function getServerSideProps({ params }) {
+export const getStaticProps: GetStaticProps<DemoProps> =
+  async function getStaticProps({ params }) {
     const { link } = params as ParamsType
     const stagingOnlyFilters = getStagingOnlyFilters()
 
@@ -82,6 +82,31 @@ export const getServerSideProps: GetServerSideProps<DemoProps> =
       }
     }
   }
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
+export async function getStaticPaths() {
+  const data = await fetchAll('demos', {
+    filters: {
+      Link: { $notNull: true },
+      External: { $eq: false },
+      ListOnDemos: { $eq: true },
+      $or: getStagingOnlyFilters()
+    },
+    fields: ['Link']
+  })
+
+  // Get the paths we want to pre-render based on posts
+  const paths = data.map((post) => ({
+    params: { link: post.Link }
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: 'blocking' } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: 'blocking' }
+}
 
 export default function DemoPage({
   Title,

@@ -28,6 +28,11 @@ const CONTENT_TYPE_HANDLERS: Record<
     if (body?.entry?.url) {
       await revalidate(response, `${body.entry.url}`)
     }
+  },
+  'api::demo.demo': async function (body, response) {
+    if (body?.entry?.Link && !body?.entry?.External) {
+      await revalidate(response, `/demo/${body.entry.Link}`)
+    }
   }
 }
 
