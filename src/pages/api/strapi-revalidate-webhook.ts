@@ -23,6 +23,11 @@ const CONTENT_TYPE_HANDLERS: Record<
     if (body?.entry?.Slug) {
       await revalidate(response, `/videos/${body.entry.Slug}`)
     }
+  },
+  'api::rich-content-page.rich-content-page': async function (body, response) {
+    if (body?.entry?.url) {
+      await revalidate(response, `${body.entry.url}`)
+    }
   }
 }
 
