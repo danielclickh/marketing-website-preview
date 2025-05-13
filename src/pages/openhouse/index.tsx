@@ -458,7 +458,7 @@ const AGENDA: Array<{
         <strong>
           <u>Martin Casado</u>
         </strong>
-        , Partner at <strong>Andressen Horowitz</strong>, and{' '}
+        , Partner at <strong>Andreessen Horowitz</strong>, and{' '}
         <strong>
           <u>Aaron Katz</u>
         </strong>
