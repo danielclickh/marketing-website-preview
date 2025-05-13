@@ -128,14 +128,14 @@ const ALL_SPEAKERS: Array<{
     image: speakerRiteshVaryani
   },
   {
-    name: 'Arup Malakar',
-    title: 'Software Engineer, Sierra',
-    image: speakerArupMalakar
-  },
-  {
     name: 'Maruth Goyal',
     title: 'Member of Technical Staff, Anthropic',
     image: speakerMaruthGoyal
+  },
+  {
+    name: 'Arup Malakar',
+    title: 'Software Engineer, Sierra',
+    image: speakerArupMalakar
   },
   {
     name: 'Akshay Nanavati',
