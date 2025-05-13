@@ -5,10 +5,12 @@ import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
+import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
 import speakerArupMalakar from './assets/speaker-arup-malakar.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
 import speakerDaleFrohman from './assets/speaker-dale-frohman.png'
+import speakerDaleMcDiarmid from './assets/speaker-dale-mcdiarmid.png'
 import speakerJeanaChoi from './assets/speaker-jeana-choi.png'
 import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
 import speakerKevinWeil from './assets/speaker-kevin-weil.png'
@@ -132,8 +134,13 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Maruth Goyal',
-    title: 'Member of Technical Staff, Anthropic\n',
+    title: 'Member of Technical Staff, Anthropic',
     image: speakerMaruthGoyal
+  },
+  {
+    name: 'Akshay Nanavati',
+    title: 'Engineering Manager, OpenAI',
+    image: speakerAkshayNanavati
   },
   {
     name: 'Robert Schulze',
@@ -194,6 +201,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Sai Srirampur',
     title: 'Director, PM, ClickHouse',
     image: speakerSaiSrirampur
+  },
+  {
+    name: 'Dale McDiarmid',
+    title: 'Principal PME, ClickHouse',
+    image: speakerDaleMcDiarmid
   }
 ]
 
@@ -446,7 +458,7 @@ const AGENDA: Array<{
         <strong>
           <u>Martin Casado</u>
         </strong>
-        , Partner at <strong>Andressen Horowitz</strong>, and{' '}
+        , Partner at <strong>Andreessen Horowitz</strong>, and{' '}
         <strong>
           <u>Aaron Katz</u>
         </strong>
