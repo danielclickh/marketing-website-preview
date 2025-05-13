@@ -112,8 +112,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         },
         newsLetterData,
         ...commonData
-      },
-      revalidate: 30
+      }
     }
   }
 
