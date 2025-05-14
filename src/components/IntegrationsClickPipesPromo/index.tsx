@@ -11,6 +11,7 @@ import Redpanda from './logos/Redpanda'
 import Warpstream from './logos/Warpstream'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import Image from 'next/image'
+import React from 'react'
 
 export default function IntegrationsClickPipesPromo() {
   const handleGalaxyClick = useGalaxyOnClick(
@@ -73,18 +74,19 @@ export default function IntegrationsClickPipesPromo() {
         <LogoAnnouncementLink
           mode='dark'
           className='mt-8 !bg-neutral-700/60'
-          href='/cloud/clickpipes/mysql-cdc-connector?loc=integrations-promo'
+          href='/cloud/clickpipes/azure-blob-storage-connector?loc=integrations-promo'
           logo={{
-            src: '/images/cloud/integrations/mysql.svg',
-            alt: 'MySQL',
-            width: 48,
-            height: 49
+            src: '/images/cloud/integrations/azure-blob-storage.svg',
+            alt: 'Azure Blob Storage',
+            width: 46,
+            height: 37
           }}>
-          Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe connector
-          — now in Private Preview.{' '}
+          Azure Blob Storage ClickPipe is now in Private Preview - be among the
+          first to explore its power and{' '}
           <span className='text-primary-300 group-hover:underline'>
-            Learn&nbsp;more
+            request early access today
           </span>
+          !
         </LogoAnnouncementLink>
       </div>
     </div>
