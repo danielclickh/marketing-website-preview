@@ -72,7 +72,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <div className='w-full lg:max-w-lg'>
               <CUICard>
                 <CUICard.Body className='p-4 lg:p-6'>
-                  <CdcWaitlistForm formId='1365' />
+                  <CdcWaitlistForm formId='1390' />
                 </CUICard.Body>
               </CUICard>
             </div>
