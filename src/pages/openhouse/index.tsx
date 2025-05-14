@@ -22,6 +22,7 @@ import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
 import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
 import speakerMikeShi from './assets/speaker-mike-shi.png'
 import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
+import speakerPoomChiarawongse from './assets/speaker-poom-chiarawongse.png'
 import speakerRiteshVaryani from './assets/speaker-ritesh-varyani.png'
 import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
 import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
@@ -124,7 +125,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Ritesh Varyani',
-    title: 'Software Engineer, Lyft',
+    title: 'Staff Software Engineer, Lyft',
     image: speakerRiteshVaryani
   },
   {
@@ -141,6 +142,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Akshay Nanavati',
     title: 'Engineering Manager, OpenAI',
     image: speakerAkshayNanavati
+  },
+  {
+    name: 'Poom Chiarawongse',
+    title: 'Engineering Manager, OpenAI\n',
+    image: speakerPoomChiarawongse
   },
   {
     name: 'Robert Schulze',
