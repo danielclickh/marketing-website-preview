@@ -62,8 +62,8 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 logo={
                   <Image
                     src='/images/cloud/integrations/azure-blob-storage.svg'
-                    width={64}
-                    height={64}
+                    width={90}
+                    height={72}
                     alt='Azure Blob Storage'
                   />
                 }
