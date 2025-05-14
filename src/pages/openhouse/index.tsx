@@ -239,9 +239,12 @@ const AGENDA: Array<{
             <strong>
               <u>Yury Izrailevsky</u>
             </strong>
-            , ClickHouse President of Engineering, and Krithika Balagurunathan,
-            Head of Product for ClickHouse Cloud, will dive into the details of
-            ClickHouse Cloud.
+            , ClickHouse President of Engineering, and{' '}
+            <strong>
+              <u>Krithika Balagurunathan</u>
+            </strong>
+            , Head of Product for ClickHouse Cloud, will dive into the details
+            of ClickHouse Cloud.
           </li>
           <li>
             <strong>
@@ -255,12 +258,20 @@ const AGENDA: Array<{
             <strong>
               <u>Lukas Biewald</u>
             </strong>
-            , Founder & CEO Weights & Biases, and{' '}
+            , Founder & CEO Weights & Biases,{' '}
             <strong>
               <u>Dale Frohman</u>
             </strong>
-            , Lead Director Engineering, CVS Health, will walk through their use{' '}
-            cases and how ClickHouse helped them in their journey.
+            , Lead Director Engineering, CVS Health, and{' '}
+            <strong>
+              <u>Akshay Nanavati</u>
+            </strong>{' '}
+            and{' '}
+            <strong>
+              <u>Poom Chiarawongse</u>
+            </strong>
+            , Engineering Managers, Open AI, will walk through their use cases
+            and how ClickHouse helped them in their journey.
           </li>
           <li>
             <em>Stay tuned for additional keynote speaker announcements!</em>
@@ -304,6 +315,19 @@ const AGENDA: Array<{
             innovations for real-time analytics.
           </li>
           <li>
+            <strong>
+              <u>Arup Malakar</u>
+            </strong>
+            , Software Engineer at Sierra will share how{' '}
+            <Link
+              href='https://sierra.ai/'
+              target='_blank'
+              className='underline'>
+              Sierra.ai
+            </Link>{' '}
+            powers their customer service AI agents with ClickHouse.
+          </li>
+          <li>
             <em>
               Stay tuned for an exciting customer speaker lineup in this{' '}
               session!
@@ -340,6 +364,13 @@ const AGENDA: Array<{
             , Engineering Manager at ClickHouse, will share the story of the
             ClickHouse observability team moving off Datadog to ClickHouse +
             Grafana + HyperDX.
+          </li>
+          <li>
+            <strong>
+              <u>Maruth Goyal</u>
+            </strong>
+            , Member of Technical Staff at Anthropic will share how they
+            migrated their logging backend from Splunk to ClickHouse.
           </li>
           <li>
             <em>
@@ -454,16 +485,16 @@ const AGENDA: Array<{
         <strong>
           <u>Kevin Weil</u>
         </strong>
-        , CPO at <strong>OpenAI</strong>,{' '}
+        , CPO at OpenAI,{' '}
         <strong>
           <u>Martin Casado</u>
         </strong>
-        , Partner at <strong>Andreessen Horowitz</strong>, and{' '}
+        , Partner at Andreessen Horowitz, and{' '}
         <strong>
           <u>Aaron Katz</u>
         </strong>
-        , CEO at <strong>ClickHouse</strong>, on the future of data{' '}
-        infrastructure for AI at scale.
+        , CEO at ClickHouse, on the future of data infrastructure for AI at
+        scale.
       </p>
     )
   },
