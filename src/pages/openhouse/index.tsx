@@ -239,9 +239,12 @@ const AGENDA: Array<{
             <strong>
               <u>Yury Izrailevsky</u>
             </strong>
-            , ClickHouse President of Engineering, and Krithika Balagurunathan,
-            Head of Product for ClickHouse Cloud, will dive into the details of
-            ClickHouse Cloud.
+            , ClickHouse President of Engineering, and{' '}
+            <strong>
+              <u>Krithika Balagurunathan</u>
+            </strong>
+            , Head of Product for ClickHouse Cloud, will dive into the details
+            of ClickHouse Cloud.
           </li>
           <li>
             <strong>
@@ -262,8 +265,12 @@ const AGENDA: Array<{
             , Lead Director Engineering, CVS Health, and{' '}
             <strong>
               <u>Akshay Nanavati</u>
+            </strong>{' '}
+            and{' '}
+            <strong>
+              <u>Poom Chiarawongse</u>
             </strong>
-            , Engineering Manager, Open AI, will walk through their use cases
+            , Engineering Managers, Open AI, will walk through their use cases
             and how ClickHouse helped them in their journey.
           </li>
           <li>
@@ -478,16 +485,16 @@ const AGENDA: Array<{
         <strong>
           <u>Kevin Weil</u>
         </strong>
-        , CPO at <strong>OpenAI</strong>,{' '}
+        , CPO at OpenAI,{' '}
         <strong>
           <u>Martin Casado</u>
         </strong>
-        , Partner at <strong>Andreessen Horowitz</strong>, and{' '}
+        , Partner at Andreessen Horowitz, and{' '}
         <strong>
           <u>Aaron Katz</u>
         </strong>
-        , CEO at <strong>ClickHouse</strong>, on the future of data{' '}
-        infrastructure for AI at scale.
+        , CEO at ClickHouse, on the future of data infrastructure for AI at
+        scale.
       </p>
     )
   },
