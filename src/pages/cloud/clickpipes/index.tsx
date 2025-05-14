@@ -13,6 +13,7 @@ import { ClickPipesData } from '@/types/clickpipes'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
@@ -86,18 +87,19 @@ export default function ClickHouseServerPage({
                   </div>
                   <LogoAnnouncementLink
                     mode='dark'
-                    className='mt-8'
-                    href='/cloud/clickpipes/mysql-cdc-connector?loc=clickpipes-hero'
+                    className='mt-8 !bg-neutral-700/60'
+                    href='/cloud/clickpipes/azure-blob-storage-connector?loc=clickpipes-hero'
                     logo={{
-                      src: '/images/cloud/integrations/mysql.svg',
-                      alt: 'MySQL',
-                      width: 48,
-                      height: 49
+                      src: '/images/cloud/integrations/azure-blob-storage.svg',
+                      alt: 'Azure Blob Storage',
+                      width: 46 * 1.325,
+                      height: 37 * 1.325
                     }}>
-                    Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
-                    connector — now in Private Preview.{' '}
+                    Seamless data ingestion from Azure Blob Storage to
+                    ClickHouse with our new ClickPipe connector — now in Private
+                    Preview.{' '}
                     <span className='text-primary-300 group-hover:underline'>
-                      Learn&nbsp;more
+                      Learn more
                     </span>
                   </LogoAnnouncementLink>
                 </div>
@@ -191,7 +193,11 @@ export default function ClickHouseServerPage({
                     },
                     {
                       logo: '/images/cloud/integrations/mysql.svg',
-                      name: 'MySQL CDC',
+                      name: 'MySQL CDC'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/azure-blob-storage.svg',
+                      name: 'Azure Blob Storage',
                       badge: 'New'
                     },
                     {
@@ -256,7 +262,7 @@ export default function ClickHouseServerPage({
         </div>
         <div className='bg-primary-300 py-12'></div>
 
-        {/* Mysql CDC form */}
+        {/* Azure Blob Storage form */}
         <div className='section-container my-20'>
           <div className='mx-auto w-full lg:max-w-xl'>
             <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
@@ -274,11 +280,13 @@ export default function ClickHouseServerPage({
                   }
                 />
               </div>
-              <SuiTitle type='h2'>MySQL CDC is in Private Preview</SuiTitle>
+              <SuiTitle type='h2'>
+                Azure Blob Storage ClickPipes is in Private Preview
+              </SuiTitle>
               <SuiText className='opacity-70'>
-                Stream your MySQL data into ClickHouse Cloud to bridge the gap
-                between transactional and analytical workloads — blazing fast
-                with our new ClickPipes MySQL CDC connector!
+                Seamlessly load files from Azure Blob Storage into ClickHouse
+                Cloud. Get blazing fast analytics without the complexity or cost
+                of external ETL tools.
               </SuiText>
             </div>
             <CUICard className='bg-neutral-900/80'>

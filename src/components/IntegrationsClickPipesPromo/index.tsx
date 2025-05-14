@@ -81,12 +81,12 @@ export default function IntegrationsClickPipesPromo() {
             width: 46,
             height: 37
           }}>
-          Azure Blob Storage ClickPipe is now in Private Preview - be among the
-          first to explore its power and{' '}
+          Seamless data ingestion from Azure Blob Storage to ClickHouse with our
+          new ClickPipe connector — now in Private Preview.
+          <br />
           <span className='text-primary-300 group-hover:underline'>
-            request early access today
+            Learn more
           </span>
-          !
         </LogoAnnouncementLink>
       </div>
     </div>
