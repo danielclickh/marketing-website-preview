@@ -515,12 +515,13 @@ function ComparisonCard({
         <SuiTitle type='h3' className='leading-none'>
           <Link href={link}>
             <span className='absolute inset-0' />
-            ClickHouse vs {name}
+            ClickHouse vs <br className='hidden lg:block xl:hidden' />
+            {name}
           </Link>
         </SuiTitle>
       </CUICard.Body>
       <CUICard.Footer className='grid flex-1 grid-cols-2'>
-        <div className='flex flex-col items-center justify-center px-1 py-4 text-center'>
+        <div className='flex flex-col items-center justify-center px-2 py-4 text-center'>
           <FitText
             minFontSize={14}
             maxFontSize={36}
@@ -534,7 +535,7 @@ function ComparisonCard({
             Savings
           </FitText>
         </div>
-        <div className='flex flex-col items-center justify-center border-l border-neutral-700/80 px-1 py-4 text-center'>
+        <div className='flex flex-col items-center justify-center border-l border-neutral-700/80 px-2 py-4 text-center'>
           <FitText
             minFontSize={14}
             maxFontSize={36}
