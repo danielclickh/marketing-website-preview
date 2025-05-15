@@ -38,8 +38,16 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section className='bg-grid py-16 lg:py-24'>
-        <div className='section-container'>
+      <section
+        className='bg-shadow-element yellow-shadow overflow-hidden bg-grid py-16 lg:py-24'
+        style={
+          {
+            '--top-side': '60%',
+            '--right-side': '20%',
+            '--left-side': 'auto'
+          } as React.CSSProperties
+        }>
+        <div className='section-container relative z-10'>
           <div className='flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:gap-16'>
             {/* Content column */}
             <div className='flip-selection mx-auto w-full max-w-md space-y-6 lg:ml-0 lg:w-1/2'>
@@ -419,7 +427,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
 
       {/* Form */}
       <section id='waitlist' className='section-container my-16 lg:my-24'>
-        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
+        <div className='bg-shadow-element red-shadow align-shadow-left flex flex-col items-center'>
           <Image
             src='/images/migration.svg'
             height={72}
