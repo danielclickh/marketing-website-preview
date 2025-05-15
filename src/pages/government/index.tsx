@@ -2,6 +2,7 @@ import comparisonBigQuery from './assets/comparison-bigquery.png'
 import comparisonPostgres from './assets/comparison-postgres.png'
 import comparisonRedshift from './assets/comparison-redshift.png'
 import comparisonSnowflake from './assets/comparison-snowflake.png'
+import diagram from './assets/diagram.png'
 import heroGraphic from './assets/hero-graphic.png'
 import { CUICard } from '@/components/ClickUI'
 import FitText from '@/components/FitText'
@@ -34,10 +35,6 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function Page({ seo, headerData, footerData }: CommonProps) {
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
-
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -67,46 +64,14 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             </div>
 
             {/* Form column */}
-            <div className='w-full rounded-lg bg-neutral-900 p-8 lg:w-1/2 2xl:max-w-[578px]'>
-              {!formSuccess && (
-                <MarketoForm
-                  formId='1135'
-                  clearbitTracking={true}
-                  onLoad={() => {
-                    setFormLoaded(true)
-                  }}
-                  onSuccess={() => {
-                    setFormSuccess(true)
-
-                    // Delay needed to allow the ref to update before scrolling
-                    setTimeout(() => {
-                      formSuccessRef.current?.scrollIntoView({
-                        behavior: 'smooth'
-                      })
-                    }, 10)
-
-                    return false // Stops page from reloading
-                  }}
-                />
-              )}
-
-              {!formLoaded && (
-                <div className='text-center'>Loading form...</div>
-              )}
-
-              {formSuccess && (
-                <div ref={formSuccessRef} className='py-20 text-center'>
-                  <h3 className='text-2xl font-bold'>Thank you!</h3>
-                  <p className='mt-2 text-neutral-200'>
-                    We'll be in touch shortly.
-                  </p>
-                </div>
-              )}
+            <div className='w-full lg:w-1/2 2xl:max-w-[578px]'>
+              <Form />
             </div>
           </div>
         </div>
       </section>
 
+      {/* Why ClickHouse */}
       <section className='bg-neutral-700 py-16 lg:py-24'>
         <div className='section-container'>
           <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
@@ -321,7 +286,196 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
           </div>
         </div>
       </section>
+
+      {/* Architecture */}
+      <section className='bg-neutral-725 py-16 lg:py-24'>
+        <div className='section-container mx-auto'>
+          {/* Intro */}
+          <div className='mx-auto max-w-4xl space-y-6 text-center'>
+            <Image
+              width={72}
+              height={72}
+              src='/images/use-cases/logging/icon-how.svg'
+              alt='System overview'
+              className='mx-auto'
+            />
+            <SuiTitle type='h2'>Government use cases</SuiTitle>
+            <SuiText size='lg' className='text-neutral-200'>
+              ClickHouse powers real-time analytics for mission-critical
+              insights.
+            </SuiText>
+          </div>
+
+          {/* Cards */}
+          <div className='my-12 flex w-full flex-col gap-6 px-8 lg:my-20 lg:flex-row lg:px-6 xl:px-0'>
+            <div className='items-center space-y-6 rounded-md border border-neutral-0/30 bg-[#3e3e3e] p-6 text-left lg:w-1/3'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='22.9'
+                height='26'
+                viewBox='0 0 22.9 22.87'>
+                <path
+                  fill='#FCFF74'
+                  d='M17.65 0c2.9 0 5.25 2.35 5.25 5.25v12.37c0 2.9-2.35 5.25-5.25 5.25H5.25A5.25 5.25 0 0 1 0 17.62V5.25C0 2.35 2.35 0 5.25 0h12.4Zm0 1.5H5.25A3.75 3.75 0 0 0 1.5 5.25v12.37a3.75 3.75 0 0 0 3.75 3.75h12.4a3.75 3.75 0 0 0 3.75-3.75V5.25a3.75 3.75 0 0 0-3.75-3.75Zm-3.28 4.01 2.24 5.17h1.59c.38 0 .7.28.74.65l.01.1c0 .41-.34.75-.75.75h-2.08a.75.75 0 0 1-.69-.45l-1.72-3.97-3.8 9.58a.75.75 0 0 1-1.33.12l-.05-.1-2.24-5.18H4.7a.75.75 0 0 1-.74-.65l-.01-.1c0-.41.34-.75.75-.75h2.08c.3 0 .57.18.69.45l1.72 3.97 3.8-9.57a.75.75 0 0 1 1.38-.02Z'
+                />
+              </svg>
+              <SuiTitle type='h3'>IT monitoring</SuiTitle>
+              <SuiText className='text-neutral-200'>
+                Monitor your logs, events, and traces with confidence. Detect
+                anomalies, network or infrastructure issues, and more.
+              </SuiText>
+            </div>
+            <div className='items-center space-y-6 rounded-md border border-neutral-0/30 bg-[#3e3e3e] p-6 text-left lg:w-1/3'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='25'
+                height='26'
+                viewBox='0 0 25 21'>
+                <path
+                  fill='#FCFF74'
+                  d='M.5 0c.28 0 .5.22.5.5v14.8l7.15-7.15c.2-.2.5-.2.7 0l3.65 3.64L20.3 4h-3.8a.5.5 0 0 1-.5-.41V3.5c0-.28.22-.5.5-.5h5.01a.5.5 0 0 1 .06 0h-.07a.5.5 0 0 1 .35.15h.02a.5.5 0 0 1 .03.05l-.05-.05a.5.5 0 0 1 .15.35v5a.5.5 0 1 1-1 0V4.7l-8.15 8.15a.5.5 0 0 1-.7 0L8.5 9.21 1 16.7V20h23.5a.5.5 0 0 1 .5.41v.09a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5V.5C0 .22.22 0 .5 0Z'
+                />
+              </svg>
+              <SuiTitle type='h3'>Mission analytics</SuiTitle>
+              <SuiText className='text-neutral-200'>
+                Enable evidence-based decision-making to enhance public services
+                at speed and scale without breaking the bank.
+              </SuiText>
+            </div>
+            <div className='items-center space-y-6 rounded-md border border-neutral-0/30 bg-[#3e3e3e] p-6 text-left lg:w-1/3'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='23'
+                height='26'
+                viewBox='0 0 23 26'>
+                <path
+                  fill='#FCFF74'
+                  d='M11.5 0A5.5 5.5 0 0 1 17 5.5V9h4.5c.83 0 1.5.67 1.5 1.5v14c0 .83-.67 1.5-1.5 1.5h-20A1.5 1.5 0 0 1 0 24.5v-14C0 9.67.67 9 1.5 9H6V5.5A5.5 5.5 0 0 1 11.5 0ZM22 22H1v2.5c0 .28.22.5.5.5h20a.5.5 0 0 0 .5-.5V22Zm0-4H1v3h21v-3Zm0-4H1v3h21v-3Zm-.5-4h-20a.5.5 0 0 0-.5.5V13h21v-2.5a.5.5 0 0 0-.5-.5Zm-10-9A4.5 4.5 0 0 0 7 5.5V9h9V5.5A4.5 4.5 0 0 0 11.5 1Z'
+                />
+              </svg>
+              <SuiTitle type='h3'>Cybersecurity</SuiTitle>
+              <SuiText className='text-neutral-200'>
+                Optimize performance with threat detection, event correlation,
+                and tracking attack patterns.
+              </SuiText>
+            </div>
+          </div>
+
+          {/* Diagram */}
+          <div className='rounded-md border border-neutral-700/80 bg-neutral-900/50 p-6 lg:p-12'>
+            <SuiTitle type='h2' className='text-center'>
+              Architecture and components
+            </SuiTitle>
+            <Image
+              src={diagram}
+              alt='Architecture and components diagram'
+              width={1691 / 2}
+              height={1311 / 2}
+              className='mx-auto my-12'
+            />
+            <ul className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-2 lg:gap-y-8'>
+              <li>
+                <CheckItem>
+                  Installable via container images for Kubernetes deployments
+                </CheckItem>
+              </li>
+              <li>
+                <CheckItem>
+                  Automated backups ensure system resiliency and data protection
+                </CheckItem>
+              </li>
+              <li>
+                <CheckItem>
+                  Kubernetes management is streamlined with our proprietary
+                  ClickHouse Operator
+                </CheckItem>
+              </li>
+              <li>
+                <CheckItem>
+                  End-to-end encryption leveraging FIPS 140-3 compliant OpenSSL
+                </CheckItem>
+              </li>
+              <li>
+                <CheckItem>
+                  APIs facilitate automation for efficient resource management
+                </CheckItem>
+              </li>
+              <li>
+                <CheckItem>
+                  Automatic vertical scaling dynamically manages fluctuating
+                  workload demands
+                </CheckItem>
+              </li>
+              <li>
+                <CheckItem>
+                  Comprehensive NIST 800-53 documentation facilitates ATO from
+                  FedRAMP Moderate to IL-6.
+                </CheckItem>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Form */}
+      <section id='waitlist' className='section-container my-16 lg:my-24'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
+          <Image
+            src='/images/migration.svg'
+            height={72}
+            width={72}
+            alt='Migrations'
+            className='mb-4 lg:mb-6'
+          />
+          <SuiTitle type='h2' className='mb-12 text-center lg:mb-20'>
+            Join the ClickHouse Government waitlist
+          </SuiTitle>
+          <div className='mx-auto max-w-[578px]'>
+            <Form />
+          </div>
+        </div>
+      </section>
     </Layout>
+  )
+}
+
+function Form() {
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+  return (
+    <div className='rounded-lg bg-neutral-900 p-8'>
+      {!formSuccess && (
+        <MarketoForm
+          formId='1135'
+          clearbitTracking={true}
+          onLoad={() => {
+            setFormLoaded(true)
+          }}
+          onSuccess={() => {
+            setFormSuccess(true)
+
+            // Delay needed to allow the ref to update before scrolling
+            setTimeout(() => {
+              formSuccessRef.current?.scrollIntoView({
+                behavior: 'smooth'
+              })
+            }, 10)
+
+            return false // Stops page from reloading
+          }}
+        />
+      )}
+
+      {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+      {formSuccess && (
+        <div ref={formSuccessRef} className='py-20 text-center'>
+          <h3 className='text-2xl font-bold'>Thank you!</h3>
+          <p className='mt-2 text-neutral-200'>We'll be in touch shortly.</p>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -375,5 +529,14 @@ function ComparisonCard({
         </div>
       </CUICard.Footer>
     </CUICard>
+  )
+}
+
+function CheckItem({ children }: { children: React.ReactNode }) {
+  return (
+    <div className='item-center flex space-x-4 pb-2 last:pb-0'>
+      <Image src='/images/cloud/check.svg' width={32} height={32} alt='Icon' />
+      <SuiText>{children}</SuiText>
+    </div>
   )
 }
