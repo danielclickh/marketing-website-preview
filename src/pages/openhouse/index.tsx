@@ -493,9 +493,17 @@ const AGENDA: Array<{
             </strong>
             , Co-Founder of RunReveal,{' '}
             <strong>
+              <u>Chris Crane</u>
+            </strong>
+            , Co-Founder of FiveOneFour,{' '}
+            <strong>
               <u>Johanan Ottensooser</u>
             </strong>
-            , AI Product Lead at FiveOneFour, and{' '}
+            , AI Product Lead at FiveOneFour,{' '}
+            <strong>
+              <u>Mike Driscoll</u>
+            </strong>
+            , Co-Founder, CEO, Rill Data, and{' '}
             <strong>
               <u>Mihir Gorkale</u>
             </strong>
