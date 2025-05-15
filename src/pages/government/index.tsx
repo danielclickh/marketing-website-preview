@@ -27,7 +27,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
             'ClickHouse Government — Blazing fast queries and resource efficiency for mission critical analytics.',
           description:
             'Deploy the full power of ClickHouse Cloud on any government network, including FedRAMP Moderate, High, and IL levels 2-6. Benefit from included NIST 800-53 compliance documentation for simplified ATO. Initially available for AWS government users, this offering delivers all ClickHouse Cloud features with enhanced security, including FIPS 140-3 support.',
-          path: '/government'
+          path: '/government',
+          image: [{ url: '/images/social-government.jpg' }]
         },
         ...commonProps
       }
