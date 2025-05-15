@@ -6,12 +6,15 @@ import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
+import speakerAlanBraithwaite from './assets/speaker-alan-braithwaite.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
 import speakerArupMalakar from './assets/speaker-arup-malakar.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
+import speakerChrisCrane from './assets/speaker-chris-crane.png'
 import speakerDaleFrohman from './assets/speaker-dale-frohman.png'
 import speakerDaleMcDiarmid from './assets/speaker-dale-mcdiarmid.png'
 import speakerJeanaChoi from './assets/speaker-jeana-choi.png'
+import speakerJohananOttensooser from './assets/speaker-johanan-ottensooser.png'
 import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
 import speakerKevinWeil from './assets/speaker-kevin-weil.png'
 import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
@@ -20,6 +23,7 @@ import speakerMartinCasado from './assets/speaker-martin-casado.png'
 import speakerMaruthGoyal from './assets/speaker-maruth-goyal.png'
 import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
 import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
+import speakerMikeDriscoll from './assets/speaker-mike-driscoll.png'
 import speakerMikeShi from './assets/speaker-mike-shi.png'
 import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
 import speakerPoomChiarawongse from './assets/speaker-poom-chiarawongse.png'
@@ -145,8 +149,28 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Poom Chiarawongse',
-    title: 'Engineering Manager, OpenAI\n',
+    title: 'Engineering Manager, OpenAI',
     image: speakerPoomChiarawongse
+  },
+  {
+    name: 'Chris Crane',
+    title: 'Co-Founder & CPO, FiveOneFour',
+    image: speakerChrisCrane
+  },
+  {
+    name: 'Johanan Ottensooser',
+    title: 'AI Product Manager, FiveOneFour',
+    image: speakerJohananOttensooser
+  },
+  {
+    name: 'Alan Braithwaite',
+    title: 'Co-Founder & CTO, RunReveal',
+    image: speakerAlanBraithwaite
+  },
+  {
+    name: 'Mike Driscoll',
+    title: 'Co-Founder, CEO, Rill Data',
+    image: speakerMikeDriscoll
   },
   {
     name: 'Robert Schulze',
