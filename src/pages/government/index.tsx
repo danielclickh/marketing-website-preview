@@ -232,6 +232,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               name='SnowFlake'
               savings='3-5x'
               performance='2x'
+              link='/comparison/snowflake?loc=government'
             />
             <ComparisonCard
               logo={
@@ -245,6 +246,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               name='BigQuery'
               savings='10x'
               performance='10x'
+              link='/comparison/bigquery?loc=government'
             />
             <ComparisonCard
               logo={
@@ -258,6 +260,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               name='Postgres'
               savings='5x'
               performance='1000x'
+              link='/comparison/postgresql?loc=government'
             />
             <ComparisonCard
               logo={
@@ -271,6 +274,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               name='Redshift'
               savings='4x'
               performance='5x'
+              link='/comparison/redshift?loc=government'
             />
           </div>
 
@@ -491,19 +495,24 @@ function ComparisonCard({
   logo,
   name,
   savings,
-  performance
+  performance,
+  link
 }: {
   logo: React.ReactNode
   name: string
   savings: string | number
   performance: string | number
+  link: string
 }) {
   return (
-    <CUICard className='!bg-neutral-750'>
+    <CUICard className='relative !bg-neutral-750'>
       <CUICard.Body className='flex flex-col items-center justify-center space-y-2 border-b border-neutral-700/80 py-6 text-center'>
         <div className='mx-auto w-auto'>{logo}</div>
         <SuiTitle type='h3' className='leading-none'>
-          ClickHouse vs {name}
+          <Link href={link}>
+            <span className='absolute inset-0' />
+            ClickHouse vs {name}
+          </Link>
         </SuiTitle>
       </CUICard.Body>
       <CUICard.Footer className='grid flex-1 grid-cols-2'>
