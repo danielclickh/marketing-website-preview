@@ -67,6 +67,9 @@ function generateSiteMap(
         <loc>${siteURL}/chdb</loc>
     </url>
     <url>
+        <loc>${siteURL}/government</loc>
+    </url>
+    <url>
         <loc>${siteURL}/cloud/azure-waitlist</loc>
     </url>
     <url>
