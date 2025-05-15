@@ -180,8 +180,11 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                   Cost effective
                 </SuiTitle>
                 <SuiText>
-                  Best-in-class compression ratios that reduce storage and
-                  accelerate performance.
+                  Best-in-class compression ratios{' '}
+                  <br className='hidden lg:block' />
+                  that reduce storage and accelerate{' '}
+                  <br className='hidden lg:block' />
+                  performance.
                 </SuiText>
               </div>
             </div>
