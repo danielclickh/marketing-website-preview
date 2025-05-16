@@ -6,7 +6,6 @@ import { SuiTitle } from '@/components/sui'
 import { findAll, findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import { Demo } from '@/types/demos'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -45,8 +44,7 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
         demos,
         seo,
         ...commonProps
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 

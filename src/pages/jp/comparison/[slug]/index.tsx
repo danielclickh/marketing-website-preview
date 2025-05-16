@@ -10,10 +10,6 @@ import { StrapiImage } from '@/components/StrapiElements'
 import { findAll, getPathsValues } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '@/lib/utils/revalidationConfig'
 import { ComparisonProps } from '@/types/comparisons'
 import { ParamsType } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -66,8 +62,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     })
     if (!data?.[0]) {
       return {
-        notFound: true,
-        revalidate: REVALIDATE_SECONDS
+        notFound: true
       }
     }
 
@@ -84,8 +79,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
         seo,
         newsLetterData,
         ...commonData
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 
@@ -486,6 +480,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: NOT_FOUND_FALLBACK
+    fallback: 'blocking'
   }
 }

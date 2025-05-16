@@ -7,7 +7,6 @@ import { SuiSearchField, SuiTitle } from '@/components/sui'
 import { fetchAll } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import { slugify, upperCaseFirst } from '@/lib/utils/strings'
 import {
   Integration,
