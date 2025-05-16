@@ -58,7 +58,8 @@ export async function getStaticPaths() {
       },
       fields: ['slug'],
       publicationState: 'preview'
-    })
+    }),
+    fallback: 'blocking'
   }
 }
 
