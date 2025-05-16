@@ -48,6 +48,9 @@ const CONTENT_TYPE_HANDLERS: Record<
       )
       await Promise.all([main, inner, mainJp, innerJp])
     }
+  },
+  'api::user-story.user-story': async function (body, response) {
+    await revalidate(response, `/user-stories`)
   }
 }
 
