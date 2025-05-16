@@ -130,6 +130,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 export async function getStaticPaths() {
   const data = await fetchAll('blog-posts', {
     filters: {
+      category: { $ne: 'Japanese' },
       $or: getStagingOnlyFilters()
     },
     fields: ['slug']
