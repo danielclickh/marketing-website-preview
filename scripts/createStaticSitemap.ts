@@ -73,6 +73,15 @@ function generateSiteMap(
         <loc>${siteURL}/cloud/clickpipes</loc>
     </url>
     <url>
+        <loc>${siteURL}/cloud/clickpipes/azure-blob-storage-connector</loc>
+    </url>
+    <url>
+        <loc>${siteURL}/cloud/clickpipes/mysql-cdc-connector</loc>
+    </url>
+    <url>
+        <loc>${siteURL}/cloud/clickpipes/postgres-cdc-connector</loc>
+    </url>
+    <url>
         <loc>${siteURL}/cloud/bring-your-own-cloud</loc>
     </url>
     <url>
