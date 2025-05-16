@@ -18,7 +18,7 @@ const baseQuery: Record<string, any> = {
   ],
   filters: {
     $and: [
-      { category: { $eq: 'japanese' } }, // Only include japanese category
+      { category: { $eq: 'Japanese' } }, // Only include japanese category
       { $or: getStagingOnlyFilters() }
     ]
   }

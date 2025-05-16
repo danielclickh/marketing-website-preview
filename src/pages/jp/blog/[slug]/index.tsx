@@ -41,13 +41,21 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
       pagination: { limit: 1 }
     })
-    if (!data?.[0]) {
+
+    const blog = data?.[0]
+
+    if (!blog) {
       return {
         notFound: true
       }
+    } else if (blog?.category !== 'Japanese') {
+      return {
+        redirect: {
+          destination: `/blog/${slug}`,
+          permanent: true
+        }
+      }
     }
-
-    const blog = data[0]
 
     const cloudCtaContent = await findOne('blog', {
       populate: ['CloudCTAHeader', 'CloudCTAFooter']
@@ -72,6 +80,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         slug: {
           $ne: slug
         },
+        category: { $eq: 'Japanese' },
         $or: stagingOnlyFilters
       }
     }
@@ -268,7 +277,7 @@ export default function BlogPage({
             </SuiTitle>
 
             <SuiButton
-              path='/blog'
+              path='/jp/blog'
               type='empty'
               color='primary'
               className='font-base border border-primary-300/50'>

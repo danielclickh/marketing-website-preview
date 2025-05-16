@@ -50,13 +50,20 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       pagination: { limit: 1 }
     })
 
-    if (!data?.[0]) {
+    const blog = data?.[0]
+
+    if (!blog) {
       return {
         notFound: true
       }
+    } else if (blog?.category === 'Japanese') {
+      return {
+        redirect: {
+          destination: `/jp/blog/${slug}`,
+          permanent: true
+        }
+      }
     }
-
-    const blog = data[0]
 
     const cloudCtaContent = await findOne('blog', {
       populate: ['CloudCTAHeader', 'CloudCTAFooter']
@@ -81,6 +88,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         slug: {
           $ne: slug
         },
+        category: { $ne: 'Japanese' },
         $or: stagingOnlyFilters
       }
     }
