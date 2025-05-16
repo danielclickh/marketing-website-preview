@@ -149,7 +149,7 @@ const ALL_SPEAKERS: Array<{
   },
   {
     name: 'Poom Chiarawongse',
-    title: 'Engineering Manager, OpenAI',
+    title: 'Member of Technical Staff, OpenAI',
     image: speakerPoomChiarawongse
   },
   {
@@ -300,7 +300,7 @@ const AGENDA: Array<{
             <strong>
               <u>Poom Chiarawongse</u>
             </strong>
-            , Engineering Managers, Open AI, will walk through their use cases
+            , from OpenAI, will walk through their use cases
             and how ClickHouse helped them in their journey.
           </li>
           <li>
