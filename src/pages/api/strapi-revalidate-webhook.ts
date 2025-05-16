@@ -49,8 +49,8 @@ export default async function handler(
   const webhookToken = process.env.STRAPI_WEBHOOK_TOKEN
   if (
     !webhookToken ||
-    !req.headers?.authorization ||
-    req.headers.authorization !== webhookToken
+    !req.headers?.['isr-auth-token'] ||
+    req.headers['isr-auth-token'] !== webhookToken
   ) {
     return res.status(403).send('Unauthorized')
   }
