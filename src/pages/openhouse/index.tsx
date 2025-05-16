@@ -298,7 +298,7 @@ const AGENDA: Array<{
             </strong>{' '}
             and{' '}
             <strong>
-              <u>Poom Chiarawongse</u>
+              <u>Poom Chiarawongse</u>{' '}
             </strong>
             from OpenAI, will walk through their use cases
             and how ClickHouse helped them in their journey.
