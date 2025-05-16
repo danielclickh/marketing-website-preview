@@ -10,10 +10,6 @@ import { findAll, getPathsValues } from '@/lib/api/strapi'
 import { SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import {
-  NOT_FOUND_FALLBACK,
-  REVALIDATE_SECONDS
-} from '@/lib/utils/revalidationConfig'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { Integration } from '@/types/integrations'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
@@ -62,8 +58,7 @@ export async function getStaticPaths() {
       },
       fields: ['slug'],
       publicationState: 'preview'
-    }),
-    fallback: NOT_FOUND_FALLBACK
+    })
   }
 }
 
@@ -82,8 +77,7 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
 
     if (!data?.[0]) {
       return {
-        notFound: true,
-        revalidate: REVALIDATE_SECONDS
+        notFound: true
       }
     }
 
@@ -137,8 +131,7 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
         seo,
         newsLetterData,
         ...commonData
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 

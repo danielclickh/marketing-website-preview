@@ -41,7 +41,12 @@ const CONTENT_TYPE_HANDLERS: Record<
     if (body?.entry?.slug) {
       const main = revalidate(response, `/integrations`)
       const inner = revalidate(response, `/integrations/${body.entry.slug}`)
-      await Promise.all([main, inner])
+      const mainJp = revalidate(response, `/jp/integrations`)
+      const innerJp = revalidate(
+        response,
+        `/jp/integrations/${body.entry.slug}`
+      )
+      await Promise.all([main, inner, mainJp, innerJp])
     }
   }
 }
