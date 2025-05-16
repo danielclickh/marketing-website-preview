@@ -36,6 +36,13 @@ const CONTENT_TYPE_HANDLERS: Record<
     if (body?.entry?.slug) {
       await revalidate(response, `/comparison/${body.entry.slug}`)
     }
+  },
+  'api::integration.integration': async function (body, response) {
+    if (body?.entry?.slug) {
+      const main = revalidate(response, `/integrations`)
+      const inner = revalidate(response, `/integrations/${body.entry.slug}`)
+      await Promise.all([main, inner])
+    }
   }
 }
 
