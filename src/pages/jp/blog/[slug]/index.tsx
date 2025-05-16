@@ -11,19 +11,24 @@ import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
 import Layout from '@/components/jp/Layout'
 import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
-import { findAll, findOne, getStagingOnlyFilters } from '@/lib/api/strapi'
+import {
+  fetchAll,
+  findAll,
+  findOne,
+  getStagingOnlyFilters
+} from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 
-export const getServerSideProps: GetServerSideProps<BlogProps> =
-  async function getServerSideProps({ params }) {
+export const getStaticProps: GetStaticProps<BlogProps> =
+  async function getStaticProps({ params }) {
     const stagingOnlyFilters = getStagingOnlyFilters()
     const { slug } = params as ParamsType
     const { data } = await findAll('blog-posts', {
@@ -103,6 +108,28 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
       }
     }
   }
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
+export async function getStaticPaths() {
+  const data = await fetchAll('blog-posts', {
+    filters: {
+      $or: getStagingOnlyFilters()
+    },
+    fields: ['slug']
+  })
+
+  // Get the paths we want to pre-render based on posts
+  const paths = data.map((post) => ({
+    params: { slug: post.slug }
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: 'blocking' } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: 'blocking' }
+}
 
 export default function BlogPage({
   title,

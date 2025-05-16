@@ -25,7 +25,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 

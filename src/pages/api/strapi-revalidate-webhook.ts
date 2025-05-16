@@ -1,11 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const log = (...params: any[]) => {
-  console.log('Revalidation webhook:', ...params)
-}
-
 const revalidate = async (response: NextApiResponse, uri: string) => {
-  log(uri)
+  console.log('Revalidation webhook:', uri)
   await response.revalidate(uri)
 }
 
@@ -16,7 +12,9 @@ const CONTENT_TYPE_HANDLERS: Record<
 > = {
   'api::blog-post.blog-post': async function (body, response) {
     if (body?.entry?.slug) {
-      await revalidate(response, `/blog/${body.entry.slug}`)
+      const en = revalidate(response, `/blog/${body.entry.slug}`)
+      const jp = revalidate(response, `/jp/blog/${body.entry.slug}`)
+      await Promise.all([en, jp])
     }
   },
   'api::marketing-video.marketing-video': async function (body, response) {
@@ -62,7 +60,6 @@ export default async function handler(
 
   // Handle revalidation based on strapi UID
   const body = req.body
-  log(body)
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
     await CONTENT_TYPE_HANDLERS[body.uid](body, res)
     return res.json({ revalidated: true })
