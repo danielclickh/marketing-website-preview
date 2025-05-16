@@ -288,11 +288,11 @@ const AGENDA: Array<{
             <strong>
               <u>Lukas Biewald</u>
             </strong>
-            , Founder & CEO Weights & Biases,{' '}
+            , Founder & CEO Weights & Biases;{' '}
             <strong>
               <u>Dale Frohman</u>
             </strong>
-            , Lead Director Engineering, CVS Health, and{' '}
+            , Lead Director Engineering, CVS Health; and{' '}
             <strong>
               <u>Akshay Nanavati</u>
             </strong>{' '}
@@ -300,7 +300,7 @@ const AGENDA: Array<{
             <strong>
               <u>Poom Chiarawongse</u>
             </strong>
-            , from OpenAI, will walk through their use cases
+            from OpenAI, will walk through their use cases
             and how ClickHouse helped them in their journey.
           </li>
           <li>
