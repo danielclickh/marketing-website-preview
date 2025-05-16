@@ -57,7 +57,6 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
               src='/images/cloud/integrations/mysql.svg'
               alt='MySQL CDC'
               active={true}
-              badge='New'
             />
           </li>
           {/* Row 2 */}
@@ -115,9 +114,10 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
           </li>
           <li>
             <LogoItem
-              src='/images/cloud/integrations/warpstream.svg'
-              alt='Warpstream'
+              src='/images/cloud/integrations/azure-blob-storage.svg'
+              alt='Azure Blob Storage'
               active={true}
+              badge='New'
             />
           </li>
           <li>

@@ -13,6 +13,7 @@ import { ClickPipesData } from '@/types/clickpipes'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
@@ -86,18 +87,19 @@ export default function ClickHouseServerPage({
                   </div>
                   <LogoAnnouncementLink
                     mode='dark'
-                    className='mt-8'
-                    href='/cloud/clickpipes/mysql-cdc-connector?loc=clickpipes-hero'
+                    className='mt-8 !bg-neutral-700/60'
+                    href='/cloud/clickpipes/azure-blob-storage-connector?loc=clickpipes-hero'
                     logo={{
-                      src: '/images/cloud/integrations/mysql.svg',
-                      alt: 'MySQL',
-                      width: 48,
-                      height: 49
+                      src: '/images/cloud/integrations/azure-blob-storage.svg',
+                      alt: 'Azure Blob Storage',
+                      width: 46 * 1.325,
+                      height: 37 * 1.325
                     }}>
-                    Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
-                    connector — now in Private Preview.{' '}
+                    Seamless data ingestion from Azure Blob Storage to
+                    ClickHouse with our new ClickPipe connector — now in Private
+                    Preview.{' '}
                     <span className='text-primary-300 group-hover:underline'>
-                      Learn&nbsp;more
+                      Learn more
                     </span>
                   </LogoAnnouncementLink>
                 </div>
@@ -191,7 +193,11 @@ export default function ClickHouseServerPage({
                     },
                     {
                       logo: '/images/cloud/integrations/mysql.svg',
-                      name: 'MySQL CDC',
+                      name: 'MySQL CDC'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/azure-blob-storage.svg',
+                      name: 'Azure Blob Storage',
                       badge: 'New'
                     },
                     {
@@ -256,34 +262,72 @@ export default function ClickHouseServerPage({
         </div>
         <div className='bg-primary-300 py-12'></div>
 
-        {/* Mysql CDC form */}
+        {/* Azure Blob Storage form */}
         <div className='section-container my-20'>
           <div className='mx-auto w-full lg:max-w-xl'>
             <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
               <div className='mb-10 flex justify-center'>
-                <CdcAnimation
-                  logo={
-                    <div className='-mr-4 flex aspect-square items-center justify-center rounded-lg border border-neutral-700 p-3'>
-                      <Image
-                        src='/images/cloud/integrations/mysql.svg'
-                        width={64}
-                        height={64}
-                        alt='MySQL'
-                      />
-                    </div>
-                  }
-                />
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='208'
+                  height='80'
+                  fill='none'>
+                  <path
+                    fill='#FAFF69'
+                    d='m124 39-9.86-5.7v11.4L124 39Zm-44 0v.99h1.83V38H80v1Zm5.5 0v.99h3.67V38H85.5v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.34 0v.99h3.66V38h-3.66v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.33 0v.99h3.67V38h-3.67v1Zm9.17 0-9.86-5.7v11.4L124 39Zm-44 0v.99h1.83V38H80v1Zm5.5 0v.99h3.67V38H85.5v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.34 0v.99h3.66V38h-3.66v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.33 0v.99h3.67V38h-3.67v1Z'
+                  />
+                  <rect
+                    width='79.17'
+                    height='79.17'
+                    x='.42'
+                    y='.42'
+                    stroke='#414141'
+                    stroke-width='.83'
+                    rx='6.25'
+                  />
+                  <path
+                    fill='#32BEDD'
+                    d='M9.78 28.58h60.44v33.7a2.02 2.02 0 0 1-2.02 2.02H11.8a2.02 2.02 0 0 1-2.02-2.02v-33.7Z'
+                  />
+                  <path
+                    fill='#0078D4'
+                    d='M11.8 15.7h56.4a2.02 2.02 0 0 1 2.01 2.02v10.86H9.78V17.72a2.02 2.02 0 0 1 2.03-2.02Zm25.8 17.36H17.28a1 1 0 0 0-1 1v10.11a1 1 0 0 0 1 1.01H37.6a1 1 0 0 0 1.01-1V34.06a1 1 0 0 0-1-1Z'
+                  />
+                  <path
+                    fill='#fff'
+                    d='M62.52 33.06H42.2a1 1 0 0 0-1 1v10.11a1 1 0 0 0 1 1.01h20.32a1 1 0 0 0 1-1V34.06a1 1 0 0 0-1-1Z'
+                  />
+                  <path
+                    fill='#0078D4'
+                    d='M37.49 47.57H17.17a1 1 0 0 0-1 1v10.1a1 1 0 0 0 1 1.01h20.32a1 1 0 0 0 1-1v-10.1a1 1 0 0 0-1-1.01Zm24.91 0H42.1a1 1 0 0 0-1 1v10.1a1 1 0 0 0 1 1.01h20.3a1 1 0 0 0 1-1v-10.1a1 1 0 0 0-1-1.01Z'
+                  />
+                  <rect
+                    width='79.17'
+                    height='79.17'
+                    x='128.42'
+                    y='.42'
+                    stroke='#414141'
+                    stroke-width='.83'
+                    rx='6.25'
+                  />
+                  <path
+                    fill='#fff'
+                    d='M141.23 13.56c0-.32.27-.64.64-.64h4.72c.32 0 .65.27.65.64v52.4c0 .32-.27.64-.65.64h-4.72a.65.65 0 0 1-.64-.65V13.56Zm11.9 0c0-.32.27-.64.65-.64h4.72c.32 0 .64.27.64.64v52.4c0 .32-.27.64-.64.64h-4.72a.65.65 0 0 1-.65-.65V13.56Zm11.91 0c0-.32.27-.64.64-.64h4.72c.32 0 .64.27.64.64v52.4c0 .32-.26.64-.64.64h-4.72a.65.65 0 0 1-.64-.65V13.56Zm11.9 0c0-.32.27-.64.65-.64h4.72c.32 0 .64.27.64.64v52.4c0 .32-.27.64-.64.64h-4.72a.65.65 0 0 1-.65-.65V13.56Zm11.96 20.86c0-.32.27-.64.65-.64h4.71c.33 0 .65.27.65.64V45.1c0 .33-.27.65-.65.65h-4.71a.65.65 0 0 1-.65-.65V34.42Z'
+                  />
+                </svg>
               </div>
-              <SuiTitle type='h2'>MySQL CDC is in Private Preview</SuiTitle>
+              <SuiTitle type='h2'>
+                Azure Blob Storage ClickPipes is in Private Preview
+              </SuiTitle>
               <SuiText className='opacity-70'>
-                Stream your MySQL data into ClickHouse Cloud to bridge the gap
-                between transactional and analytical workloads — blazing fast
-                with our new ClickPipes MySQL CDC connector!
+                Seamlessly load files from Azure Blob Storage into ClickHouse
+                Cloud. Get blazing fast analytics without the complexity or cost
+                of external ETL tools.
               </SuiText>
             </div>
             <CUICard className='bg-neutral-900/80'>
               <CUICard.Body className='p-4 lg:p-6'>
-                <CdcWaitlistForm formId='1365' />
+                <CdcWaitlistForm formId='1390' />
               </CUICard.Body>
             </CUICard>
           </div>

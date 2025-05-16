@@ -8,6 +8,7 @@ import guage from './assets/guage.svg'
 import listSearch from './assets/list-search.svg'
 import maximize from './assets/maximize.svg'
 import peerdb from './assets/peerdb.svg'
+import shieldCheck from './assets/shield-check.svg'
 import sparkles from './assets/sparkles.svg'
 import tada from './assets/tada.svg'
 import Image, { ImageProps } from 'next/image'
@@ -24,7 +25,8 @@ const icons = {
   book,
   'list-search': listSearch,
   'file-py': filePy,
-  enterprise
+  enterprise,
+  'shield-check': shieldCheck
 }
 
 type Icons = keyof typeof icons
