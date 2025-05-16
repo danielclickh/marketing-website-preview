@@ -1,8 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const revalidate = async (response: NextApiResponse, uri: string) => {
-  console.log('Revalidation webhook:', uri)
-  await response.revalidate(uri)
+const revalidate = async (
+  response: NextApiResponse,
+  uris: Array<string> | string
+) => {
+  if (!Array.isArray(uris)) {
+    uris = [uris]
+  }
+
+  const promises: Array<Promise<void>> = []
+
+  uris.forEach((uri) => {
+    console.log('Revalidation webhook:', uri)
+    promises.push(response.revalidate(uri))
+  })
+
+  return await Promise.all(promises)
 }
 
 // strapi UID => revalidation callback
@@ -11,11 +24,14 @@ const CONTENT_TYPE_HANDLERS: Record<
   (body: any, response: NextApiResponse) => Promise<void>
 > = {
   'api::blog-post.blog-post': async function (body, response) {
+    const paths = []
+
     if (body?.entry?.slug) {
-      const en = revalidate(response, `/blog/${body.entry.slug}`)
-      const jp = revalidate(response, `/jp/blog/${body.entry.slug}`)
-      await Promise.all([en, jp])
+      paths.push(`/blog/${body.entry.slug}`)
+      paths.push(`/jp/blog/${body.entry.slug}`)
     }
+
+    await revalidate(response, paths)
   },
   'api::marketing-video.marketing-video': async function (body, response) {
     if (body?.entry?.Slug) {
@@ -28,9 +44,14 @@ const CONTENT_TYPE_HANDLERS: Record<
     }
   },
   'api::demo.demo': async function (body, response) {
-    if (body?.entry?.Link && !body?.entry?.External) {
-      await revalidate(response, `/demo/${body.entry.Link}`)
+    const paths = [`/demos`, `/jp/demos`]
+
+    if (body?.entry?.Link) {
+      paths.push(`/demos/${body.entry.Link}`)
+      paths.push(`/jp/demos/${body.entry.Link}`)
     }
+
+    await revalidate(response, paths)
   },
   'api::comparison.comparison': async function (body, response) {
     if (body?.entry?.slug) {
@@ -38,16 +59,14 @@ const CONTENT_TYPE_HANDLERS: Record<
     }
   },
   'api::integration.integration': async function (body, response) {
+    const paths = [`/integrations`, `/jp/integrations`]
+
     if (body?.entry?.slug) {
-      const main = revalidate(response, `/integrations`)
-      const inner = revalidate(response, `/integrations/${body.entry.slug}`)
-      const mainJp = revalidate(response, `/jp/integrations`)
-      const innerJp = revalidate(
-        response,
-        `/jp/integrations/${body.entry.slug}`
-      )
-      await Promise.all([main, inner, mainJp, innerJp])
+      paths.push(`/integrations/${body.entry.slug}`)
+      paths.push(`/jp/integrations/${body.entry.slug}`)
     }
+
+    await revalidate(response, paths)
   },
   'api::user-story.user-story': async function (body, response) {
     await revalidate(response, `/user-stories`)
