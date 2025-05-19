@@ -24,7 +24,7 @@ const CONTENT_TYPE_HANDLERS: Record<
   (body: any, response: NextApiResponse) => Promise<void>
 > = {
   'api::blog-post.blog-post': async function (body, response) {
-    const paths = []
+    const paths = ['/sitemap']
 
     if (body?.entry?.slug) {
       paths.push(`/blog/${body.entry.slug}`)
@@ -34,14 +34,22 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::marketing-video.marketing-video': async function (body, response) {
+    const paths = ['/sitemap']
+
     if (body?.entry?.Slug) {
-      await revalidate(response, `/videos/${body.entry.Slug}`)
+      paths.push(`/videos/${body.entry.Slug}`)
     }
+
+    await revalidate(response, paths)
   },
   'api::rich-content-page.rich-content-page': async function (body, response) {
+    const paths = ['/sitemap']
+
     if (body?.entry?.url) {
-      await revalidate(response, `${body.entry.url}`)
+      paths.push(`${body.entry.url}`)
     }
+
+    await revalidate(response, paths)
   },
   'api::demo.demo': async function (body, response) {
     const paths = [`/demos`, `/jp/demos`]
@@ -54,12 +62,16 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::comparison.comparison': async function (body, response) {
+    const paths = ['/sitemap']
+
     if (body?.entry?.slug) {
-      await revalidate(response, `/comparison/${body.entry.slug}`)
+      paths.push(`/comparison/${body.entry.slug}`)
     }
+
+    await revalidate(response, paths)
   },
   'api::integration.integration': async function (body, response) {
-    const paths = [`/integrations`, `/jp/integrations`]
+    const paths = [`/sitemap`, `/integrations`, `/jp/integrations`]
 
     if (body?.entry?.slug) {
       paths.push(`/integrations/${body.entry.slug}`)
