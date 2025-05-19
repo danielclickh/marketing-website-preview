@@ -1,9 +1,6 @@
 import LogoCarouselV2, { LogoItem } from '../LogoCarouselV2'
-import { StrapiImage, StrapiImageUrl } from '../StrapiElements'
-import {
-  HomepageCustomerStories,
-  HomepageCustomerStoryLogo
-} from '@/types/homepage'
+import { StrapiImageUrl } from '../StrapiElements'
+import { HomepageCustomerStories } from '@/types/homepage'
 import React from 'react'
 import 'swiper/css'
 
