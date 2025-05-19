@@ -102,7 +102,8 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
           type: 'article',
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
-          path: canonical
+          path: canonical,
+          keywords: blog?.keywords || ''
         },
         newsLetterData,
         ...commonData
