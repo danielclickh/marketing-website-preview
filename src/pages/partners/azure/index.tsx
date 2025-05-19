@@ -9,7 +9,6 @@ import ClickHousePartnerLogo from '@/components/ClickHousePartnerLogo'
 import { CUIButton, CUILink } from '@/components/ClickUI'
 import styles from '@/components/FAQ/styles.module.scss'
 import HRSeparator from '@/components/HRSeparator'
-import { replaceCustomerLogo } from '@/components/HomepageSectionTrustedByAlt'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import Markdown from '@/components/Markdown'
@@ -84,9 +83,7 @@ export default function Page({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
-  const customerLogos = structuredClone(customerStories.logos).map(
-    replaceCustomerLogo
-  )
+  const customerLogos = customerStories.logos
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>

@@ -13,15 +13,13 @@ import Layout from '@/components/Layout'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { HomePageProps } from '@/types/homepage'
+import { HomepageCustomerStoryLogo, HomePageProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 
 export const getStaticProps: GetStaticProps<HomePageProps> =
   async function getStaticProps() {
     const params = {
       populate: [
-        'hero',
-        'hero.ctaButton',
         'seo',
         'seo.image',
         'customerStories',
@@ -33,6 +31,22 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', params)
+
+    // Remove unwanted svg data from being serialized
+    data.customerStories.logos = data.customerStories.logos.map(
+      (story: HomepageCustomerStoryLogo) => {
+        if (story.darkLogoPng && story.darkLogoPng?.svgText) {
+          delete story.darkLogoPng.svgText
+        }
+
+        if (story.lightLogoPng && story.lightLogoPng?.svgText) {
+          delete story.lightLogoPng.svgText
+        }
+
+        return story
+      }
+    )
+
     data.seo.path = ''
     return {
       props: {
@@ -43,7 +57,6 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
   }
 
 export default function HomePage({
-  hero,
   seo,
   footerData,
   headerData,
