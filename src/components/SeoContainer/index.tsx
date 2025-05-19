@@ -12,7 +12,8 @@ function SeoContainer({
   siteName,
   path,
   robots,
-  locale
+  locale,
+  keywords
 }: SeoMetadata) {
   // Default social image
   let socialImageUrl = `${siteUrl}/images/social_share.png`
@@ -51,6 +52,7 @@ function SeoContainer({
   siteName = siteName && siteName.length > 0 ? siteName : 'ClickHouse'
   type = type && type.length > 0 ? type : 'website'
   locale = locale && locale.length > 0 ? locale : 'en_US'
+  keywords = keywords && keywords.length > 0 ? keywords : ''
 
   return (
     <Head>
@@ -59,6 +61,7 @@ function SeoContainer({
       <title>{title}</title>
       <meta name='description' content={description} />
       <meta name='author' content={siteName} />
+      <meta name='keywords' content={keywords} />
 
       <link rel='canonical' href={canonicalUrl} key='canonical' />
       <link rel='alternate' hrefLang='en' href={canonicalUrl} />
