@@ -1,5 +1,5 @@
 import LogoCarouselV2, { LogoItem } from '../LogoCarouselV2'
-import { StrapiImageUrl } from '../StrapiElements'
+import { StrapiImage } from '../StrapiElements'
 import { HomepageCustomerStories } from '@/types/homepage'
 import React from 'react'
 import 'swiper/css'
@@ -33,9 +33,7 @@ export default function HomepageSectionTrustedByAlt({
               href: story.href
             }
           : undefined,
-        component: (
-          <StrapiImageUrl {...story.darkLogoPng} className='max-w-full' />
-        )
+        component: <StrapiImage {...story.darkLogoPng} className='max-w-full' />
       }
     }
   )
