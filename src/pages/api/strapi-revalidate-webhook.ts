@@ -267,8 +267,13 @@ export default async function handler(
   // Handle revalidation based on strapi UID
   const body = req.body
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
-    await CONTENT_TYPE_HANDLERS[body.uid](body, res)
-    return res.json({ revalidated: true })
+    try {
+      await CONTENT_TYPE_HANDLERS[body.uid](body, res)
+      return res.json({ revalidated: true })
+    } catch (error) {
+      console.log('Revalidate error', error)
+      return res.status(500).send('Error revalidating')
+    }
   }
 
   return res.json({ revalidated: false })
