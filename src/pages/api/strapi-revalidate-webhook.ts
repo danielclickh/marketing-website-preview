@@ -10,8 +10,9 @@ const revalidate = async (
 
   const promises: Array<Promise<void>> = []
 
+  console.log('Revalidating:', uris)
+
   uris.forEach((uri) => {
-    console.log('Revalidation webhook:', uri)
     promises.push(response.revalidate(uri))
   })
 
