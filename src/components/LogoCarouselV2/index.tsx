@@ -183,6 +183,7 @@ function CarouselRow({
       loopPreventsSliding={true}
       allowTouchMove={true}
       touchEventsTarget={'container'}
+      lazyPreloadPrevNext={3}
       initialSlide={initialSlide}
       freeMode={{
         enabled: true,
