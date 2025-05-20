@@ -1,6 +1,5 @@
-import faqs from './faqs.json'
+import Accordion from '@/components-cleaned/Accordion'
 import { CUIButton, CUICard } from '@/components/ClickUI'
-import FAQDynamic from '@/components/FAQDynamic'
 import Layout from '@/components/Layout'
 import LogoCarousel from '@/components/LogoCarousel'
 import Bullseye from '@/components/icons/Bullseye'
@@ -271,7 +270,7 @@ export default function CertificationPage({
                       <CheckListItem value='Insert a file from cloud storage into a table' />
                     </li>
                     <li>
-                      <CheckListItem value='Insert a Parqet, CSV, or TSV file into a table' />
+                      <CheckListItem value='Insert a Parquet, CSV, or TSV file into a table' />
                     </li>
                     <li>
                       <CheckListItem value='Provide minor transformations to columns as they are being inserted' />
@@ -427,8 +426,417 @@ export default function CertificationPage({
           </div>
         </div>
       </div>
-      <div className='my-24' id='faqs'>
-        <FAQDynamic askUsAnything={false} faqs={faqs} />
+
+      <div
+        id='faqs'
+        className='bg-shadow-element relative mx-auto my-24 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+        style={
+          {
+            '--top-side': '224px'
+          } as React.CSSProperties
+        }>
+        <div className='pb-10 text-center lg:text-left'>
+          <div className='lg:sticky lg:top-32'>
+            <Image
+              src='/faq-icon.svg'
+              alt='FAQ Icon'
+              width={72}
+              height={72}
+              className='mx-auto lg:mx-0'
+            />
+            <SuiTitle type='h2' className='my-6 lg:text-left'>
+              FAQs
+            </SuiTitle>
+            <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
+              Wherever you need us, we’re there. We love to engage in thoughtful
+              conversation with the ClickHouse community and are always on-hand
+              to answer your questions.
+            </div>
+          </div>
+        </div>
+        <Accordion
+          className='mx-auto w-full max-w-2xl lg:mr-0'
+          items={[
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.whyCertified'
+              ),
+              handle: 'Why should I get certified?',
+              content: (
+                <>
+                  <p className='mb-4'>
+                    Being a ClickHouse Certified professional validates your
+                    ClickHouse expertise and tells both current and prospective
+                    employers that you have the necessary skill set that
+                    companies want and need for building and deploying
+                    successful ClickHouse applications.
+                  </p>
+                  <p>
+                    Our goal with the ClickHouse certification program is to
+                    provide a meaningful and recognizable credential in the
+                    software industry that companies can trust and be confident
+                    in knowing you have a competitive advantage and will be a
+                    more effective contributor on ClickHouse projects.
+                  </p>
+                </>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.whoShouldTakeExam'
+              ),
+              handle:
+                'Who should take the ClickHouse Certified Developer exam?',
+              content: (
+                <p>
+                  Software professionals responsible for creating and/or
+                  deploying ClickHouse applications, including modeling and
+                  storing the data efficiently, ingesting data, writing
+                  efficient queries, and optimizing the performance of queries.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.trainingRequirement'
+              ),
+              handle: 'Do I have to attend training to become certified?',
+              content: (
+                <p>
+                  No - anyone can purchase and take an exam attempt. However, it
+                  is highly recommended that you take our free ClickHouse
+                  Developer training course, which covers all of the exam
+                  objectives and is offered both virtually and on-demand.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examFormat'
+              ),
+              handle: 'What is the format of the exam?',
+              content: (
+                <p>
+                  The exam is a hands-on, performance-based test where you are
+                  given tasks to complete. You take the exam using your own
+                  computer. We use a third-party vendor named HackerRank which
+                  builds the exam environment, displays the exam tasks, and
+                  provides a user interface for you to complete the tasks.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick('certificationPage.faqSection.examCost'),
+              handle: 'How much does it cost to take the exam?',
+              content: (
+                <p>
+                  The ClickHouse Certified Developer exam is $200 USD per
+                  attempt. An exam attempt is valid for 365 days after purchase,
+                  at which time it will expire. Note that exam attempt purchases
+                  are not refundable.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.purchaseExamAttempt'
+              ),
+              handle: 'How do I purchase an exam attempt?',
+              content: (
+                <p>
+                  Individual exam attempts can be purchased on our website at{' '}
+                  <Link
+                    href='/learn/certification'
+                    className='text-primary-300 hover:underline'>
+                    https://clickhouse.com/learn/certification
+                  </Link>
+                  . If you wish to purchase multiple exam attempts at once,
+                  please email us at{' '}
+                  <Link
+                    href='mailto:certification@clickhouse.com'
+                    target='_blank'
+                    className='text-primary-300 hover:underline'>
+                    certification@clickhouse.com
+                  </Link>
+                  .
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examDuration'
+              ),
+              handle: 'How long is the exam?',
+              content: (
+                <p>
+                  You will be given 2 hours to successfully complete 10 to 12
+                  hands-on tasks.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examResults'
+              ),
+              handle: 'How will I receive my exam results?',
+              content: (
+                <p>
+                  You will receive an email within 5 business days of your exam
+                  completion.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick('certificationPage.faqSection.examSwag'),
+              handle: 'Do I get some swag if I get certified?',
+              content: (
+                <p>
+                  Yes - of course! You will get a t-shirt with the certification
+                  logo on it, as well as some stickers and maybe a surprise or
+                  two in the swag box. In addition, we hope to have special
+                  gatherings at ClickHouse conferences to celebrate those of you
+                  who are certified, as well as assist certified professionals
+                  who want to present at meetups and conferences.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.shareCertification'
+              ),
+              handle: "How do I let people know that I'm certified?",
+              content: (
+                <p>
+                  Once certified, you will receive a digital badge from a
+                  third-party vendor named Credly that specializes in
+                  credentialing software professionals. You can share your
+                  digital badge on LinkedIn, X, Facebook and all the other usual
+                  social media platforms. You can also download and print out a
+                  signed certificate of your credential.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.afterPurchasingExam'
+              ),
+              handle: 'What happens after I purchase an exam attempt?',
+              content: (
+                <p>
+                  You will receive an email with instructions on how to access
+                  the exam on hackerrank.com. You will need to create an account
+                  on HackerRank using the same email address used to purchase
+                  the exam.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examScheduling'
+              ),
+              handle: 'How do I schedule a time to take the exam?',
+              content: (
+                <p>
+                  You don't! You can take the exam right away after you purchase
+                  an attempt, or any time up to 365 days after the purchase
+                  date. You just take the exam whenever you are ready. Be aware
+                  that the entire exam attempt will take slightly more than 2
+                  hours, because it can take up to 5-10 minutes for the exam
+                  environment to get built and to work through the pre-exam
+                  process.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examProctoring'
+              ),
+              handle: 'Is the exam proctored?',
+              content: (
+                <p>
+                  Yes, using AI technology. No other person watches you take the
+                  exam, but your exam attempt is monitored using your web camera
+                  and an AI technology that verifies the same person is taking
+                  the exam throughout the duration. Therefore, your computer
+                  must have a functioning web camera and the room should have
+                  good lighting. The exam environment monitors any answers that
+                  seem to have been generated by an AI tool. The exam
+                  environment also records your screen for each task, and
+                  monitors when you leave the exam tab in your web browser,
+                  which you are allowed to do only for accessing the
+                  documentation or for translating English to another language.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examDocumentationAccess'
+              ),
+              handle: 'Can I have access to the documentation during the exam?',
+              content: (
+                <p>
+                  Yes, you can go to the ClickHouse docs in a separate tab in
+                  your browser.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.externalMonitorUse'
+              ),
+              handle: 'Can I use an external monitor?',
+              content: (
+                <p>
+                  No. The AI proctoring notifies us if an external monitor is
+                  attached.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.aiUsageInExam'
+              ),
+              handle: 'Can I use AI to answer the tasks?',
+              content: (
+                <p>
+                  No. The only external resource you are allowed to access is on
+                  clickhouse.com, which includes the documentation, blogs and
+                  any other articles posted there.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.minimumPassingScore'
+              ),
+              handle: 'What is the minimum passing score for the exam?',
+              content: (
+                <p>
+                  The passing score is 70%. Not all tasks are weighted equally,
+                  as some tasks are more difficult or take longer to complete.
+                  Most of the exam is graded by scripts, but note that we
+                  manually review the results of every exam attempt, so you will
+                  not get your exam results immediately. It can take up to 5
+                  business days to get your exam results.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examLanguage'
+              ),
+              handle: 'What language is the exam available in?',
+              content: (
+                <p>
+                  The exam is only available in English, but you may open a
+                  separate tab in your web browser to access a translation
+                  website of your choice.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.certificationValidity'
+              ),
+              handle: 'How long is my awarded certification valid?',
+              content: (
+                <p>
+                  Once certified, always certified! Your ClickHouse
+                  certification will show the date that you earned the
+                  credential, and the credential does not expire.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examAttemptsLimit'
+              ),
+              handle: 'Is there a limit to the number of exam attempts?',
+              content: (
+                <p>
+                  There is no limit to the number of exam attempts you can take.
+                  You do have to purchase each exam attempt at $200 USD, and you
+                  must wait 7 days from your previous attempt before attempting
+                  the exam again.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examBreaks'
+              ),
+              handle: 'Can I take a break during the exam?',
+              content: (
+                <p>
+                  Sure - you can get up and stretch your legs and leave the room
+                  if necessary. Keep in mind that taking a break does not stop
+                  the timer on the exam. Once you start the exam, it will end in
+                  two hours (or sooner if you complete all the tasks and submit
+                  the exam manually).
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examAccommodations'
+              ),
+              handle:
+                'Can exam accommodations be made as needed for individuals taking the exam?',
+              content: (
+                <p>
+                  Please don't hesitate to email us at{' '}
+                  <Link
+                    href='mailto:certification@clickhouse.com'
+                    target='_blank'
+                    className='text-primary-300 hover:underline'>
+                    certification@clickhouse.com
+                  </Link>{' '}
+                  to discuss any desired accommodations.
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.furtherQuestions'
+              ),
+              handle: 'Further Questions?',
+              content: (
+                <p>
+                  If your question wasn’t answered, please contact us at{' '}
+                  <Link
+                    href='mailto:certification@clickhouse.com'
+                    target='_blank'
+                    className='text-primary-300 hover:underline'>
+                    certification@clickhouse.com
+                  </Link>
+                  .
+                </p>
+              )
+            }
+          ]}
+        />
       </div>
     </Layout>
   )

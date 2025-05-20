@@ -16,6 +16,7 @@ export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
     const data = {
       seo: {
+        locale: 'ja_JP',
         path: '/jp/cloud/clickpipes',
         title: 'ClickPipes - Continuous Data Ingestion for ClickHouse Cloud',
         description:

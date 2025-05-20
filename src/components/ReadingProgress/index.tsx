@@ -1,39 +1,48 @@
 import { ProgressBar } from '@clickhouse/click-ui'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+
+export interface ReadingProgressProps {
+  target: React.RefObject<HTMLElement>
+  startAt?: number | 'article'
+}
 
 export default function ReadingProgress({
-  target
-}: {
-  target: React.RefObject<HTMLElement>
-}) {
+  target,
+  startAt
+}: ReadingProgressProps) {
   const [readingProgress, setReadingProgress] = useState(0)
-  const scrollListener = () => {
+  const scrollListener = useCallback(() => {
     if (!target.current) {
       return
     }
 
-    const element = target.current
-    const totalHeight =
-      element.clientHeight - element.offsetTop - window.innerHeight
-    const windowScrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0
+    const rect = target.current.getBoundingClientRect()
+    const windowHeight =
+      window.innerHeight || document.documentElement.clientHeight
 
-    if (windowScrollTop === 0) {
-      return setReadingProgress(0)
-    }
+    const rectTopAbs = rect.top + window.scrollY
 
-    if (windowScrollTop >= totalHeight) {
-      // value 100 set the bar to empty.
-      return setReadingProgress(99.9999)
-    }
+    const articleTop =
+      startAt === 'article'
+        ? rect.top + window.scrollY
+        : typeof startAt === 'number'
+          ? startAt
+          : 0
+    const articleHeight =
+      target.current.offsetHeight + (rectTopAbs - articleTop)
 
-    setReadingProgress((windowScrollTop / totalHeight) * 100)
-  }
+    const scrollY = window.scrollY
+    const scrollStart = articleTop
+    const scrollEnd = articleTop + articleHeight - windowHeight
+
+    let percent = ((scrollY - scrollStart) / (scrollEnd - scrollStart)) * 100
+    percent = Math.max(0, Math.min(99.9999, percent))
+
+    setReadingProgress(percent)
+  }, [startAt, target, setReadingProgress])
 
   useEffect(() => {
+    scrollListener() // Apply scroll percent on component mount
     window.addEventListener('scroll', scrollListener)
     return () => window.removeEventListener('scroll', scrollListener)
   })

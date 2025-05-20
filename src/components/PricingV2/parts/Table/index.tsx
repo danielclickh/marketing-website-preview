@@ -1,15 +1,17 @@
-import { CUIButton, CUICard } from '../../../ClickUI'
-import HRSeparator from '../../../HRSeparator'
-import { MarkdownMemoized } from '../../../Markdown'
-import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
-import { Context, usePricingV2Context } from '../../../PricingV2ContextProvider'
-import { SuiText, SuiTitle } from '../../../sui'
+import ProviderSelector from '../../fields/ProviderSelector'
+import RegionSelector from '../../fields/RegionSelector'
+import { Context } from '../../types'
 import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
-import ProviderSelector from '../ProviderSelector'
-import RegionSelector from '../RegionSelector'
-import { PricingV2EntryPlan } from '@/lib/api/strapi/types'
-import React, { Fragment, memo, useCallback } from 'react'
+import { CUIButton, CUICard } from '@/components/ClickUI'
+import HRSeparator from '@/components/HRSeparator'
+import { MarkdownMemoized } from '@/components/Markdown'
+import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { PricingV2ComponentPlan } from '@/lib/api/strapi/types'
+import Link from 'next/link'
+import React, { Fragment, memo, useCallback, useMemo } from 'react'
 
 const TableColumn = memo(function TableColumn({
   item,
@@ -17,7 +19,7 @@ const TableColumn = memo(function TableColumn({
   storageUnitPrice,
   onEstimateCostClick
 }: {
-  item: PricingV2EntryPlan
+  item: PricingV2ComponentPlan
   computeUnitPrice: Context['computeUnitPrice']
   storageUnitPrice: Context['storageUnitPrice']
   onEstimateCostClick: () => void
@@ -118,8 +120,8 @@ export default function Table({
   afterFilters?: React.ReactNode
 }) {
   const {
-    plans,
-    setPlan,
+    sourceData,
+    setValues,
     provider,
     providerEntry,
     region,
@@ -165,6 +167,18 @@ export default function Table({
     [getPlanPricingData, getPlanPricingConfig, provider, region]
   )
 
+  const minPublicInternetEgress = useMemo(() => {
+    if (!providerEntry) return null
+    return Math.min(...providerEntry.regions.map((item) => item.internetEgress))
+  }, [providerEntry])
+
+  const minInterRegionEgress = useMemo(() => {
+    if (!providerEntry) return null
+    return Math.min(
+      ...providerEntry.regions.map((item) => item.interRegionEgress)
+    )
+  }, [providerEntry])
+
   return (
     <div id='pricing-table'>
       <div className='mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-6'>
@@ -174,7 +188,7 @@ export default function Table({
         {afterFilters}
       </div>
       <div className='flex flex-col lg:flex-row'>
-        {plans.map((item, index) => {
+        {sourceData.plans.map((item, index) => {
           const planPricingData = getPricingData(item.slug)
           return (
             <Fragment key={index}>
@@ -183,7 +197,7 @@ export default function Table({
                 computeUnitPrice={planPricingData?.computeUnitPrice || null}
                 storageUnitPrice={planPricingData?.storageUnitPrice || null}
                 onEstimateCostClick={() => {
-                  setPlan(item.slug)
+                  setValues({ plan: item.slug })
                 }}
               />
             </Fragment>
@@ -192,23 +206,22 @@ export default function Table({
       </div>
 
       <div className='my-8 space-y-4 text-center text-slate-300'>
-        {providerEntry?.internetEgress && providerEntry?.interRegionEgress && (
+        {minPublicInternetEgress && minInterRegionEgress && (
           <SuiText size='sm'>
-            Data transfer for public internet egress starting at{' '}
+            <Link
+              href='/docs/cloud/manage/network-data-transfer'
+              className='text-primary-300 underline'>
+              Data transfer
+            </Link>{' '}
+            for public internet egress starting at{' '}
             <strong className='text-white'>
-              <PriceUsd
-                price={providerEntry.internetEgress}
-                decimalPlaces='auto'
-              />{' '}
+              <PriceUsd price={minPublicInternetEgress} decimalPlaces='auto' />{' '}
               / GB
             </strong>
             , inter region egress starting at{' '}
             <strong className='text-white'>
-              <PriceUsd
-                price={providerEntry.interRegionEgress}
-                decimalPlaces='auto'
-              />{' '}
-              / GB
+              <PriceUsd price={minInterRegionEgress} decimalPlaces='auto' /> /
+              GB
             </strong>
             .
           </SuiText>

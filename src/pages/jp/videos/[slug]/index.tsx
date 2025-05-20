@@ -121,6 +121,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const commonData = await getCommonProps()
 
   let seo: SeoMetadata = {
+    locale: 'ja_JP',
     path: `/jp/videos/${video.Slug}`,
     title: video.Title || video.VideoID
   }

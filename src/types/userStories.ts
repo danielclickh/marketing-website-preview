@@ -1,112 +1,68 @@
 import { CommonProps } from './homepage'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface UserStoriesPage extends CommonProps {
-  userStories: UserStory[]
-  UseCaseCategories: UseCaseCategory[]
-  UseCaseMigrations: UseCaseMigration[]
-  UseCaseVerticals: UseCaseVertical[]
-}
-
-export interface UseCaseCategory {
-  code: number
-  name: string
-}
-
-export interface UseCaseMigration {
-  code: number
-  name: string
-}
-
-export interface UseCaseVertical {
-  code: number
-  name: string
+  stories: UserStory[]
+  categories: Record<UseCase['id'], UseCase['Name']>
+  migrations: Record<Migration['id'], Migration['Name']>
+  verticals: Record<Vertical['id'], Vertical['Name']>
+  cloudProviders: Record<CloudProvider['slug'], CloudProvider>
 }
 
 export interface UserStory {
   id: number
-  attributes: {
-    Title: string
-    highlight: boolean
-    Description: string | null
-    ReadBlogLink: string | null
-    ExternalLink: string | null
-    WatchVideoLink: string | null
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-    SortOrder: number
-    User: {
-      data: UserData
-    }
-    useCase: {
-      data: UseCase[]
-    }
-    migrations: {
-      data: Migration[]
-    }
-    vertical: {
-      data: Vertical[]
-    }
-  }
+  Title: string
+  highlight: boolean
+  Description: string | null
+  ReadBlogLink: string | null
+  ExternalLink: string | null
+  WatchVideoLink: string | null
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  SortOrder: number
+  User: UserData
+  useCase: UseCase[]
+  migrations: Migration[]
+  vertical: Vertical[]
+  cloudProvider: null | Array<CloudProvider>
 }
 
 interface UserData {
   id: number
-  attributes: {
-    Name: string
-    createdAt: string
-    updatedAt: string
-    logo: {
-      data: LogoData
-    }
-  }
-}
-
-interface LogoData {
-  id: number
-  attributes: {
-    name: string
-    alternativeText: string | null
-    caption: string | null
-    width: number
-    height: number
-    formats: any
-    hash: string
-    ext: string
-    mime: string
-    size: number
-    url: string
-    previewUrl: string | null
-    provider: string
-    provider_metadata: any
-    createdAt: string
-    updatedAt: string
-  }
+  Name: string
+  createdAt: string
+  updatedAt: string
+  logo: StrapiImageType
 }
 
 export interface UseCase {
   id: number
-  attributes: {
-    Name: string
-    createdAt: string
-    updatedAt: string
-  }
+  Name: string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface Migration {
   id: number
-  attributes: {
-    Name: string
-    createdAt: string
-    updatedAt: string
-  }
+  Name: string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface Vertical {
   id: number
-  attributes: {
-    Name: string
-    createdAt: string
-    updatedAt: string
-  }
+  Name: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface CloudProvider {
+  id: number
+  name: string
+  slug: string
+  logo: null | StrapiImageType
+  displayOrder: number | null
+  createdAt: string
+  updatedAt: string
 }

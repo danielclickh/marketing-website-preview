@@ -1,5 +1,5 @@
-import { CUIButton } from '../../../ClickUI'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
+import { CUIButton } from '@/components/ClickUI'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { ShareIcon } from '@heroicons/react/outline'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -15,8 +15,7 @@ export default function EstimatorCtas() {
     computeMinSize,
     computeMaxSize,
     replicas,
-    storageUnit,
-    storageSize,
+    storage,
     storageCompressed,
     totalMinPrice
   } = usePricingV2Context()
@@ -35,8 +34,7 @@ export default function EstimatorCtas() {
           provider: provider,
           region: region,
           hours: hours,
-          storageVolume: storageSize,
-          storageUnit: storageUnit,
+          storage: storage,
           storageCompressed: storageCompressed,
           minimumCompute: computeMinSize,
           maximumCompute: computeMaxSize,
@@ -52,8 +50,7 @@ export default function EstimatorCtas() {
       computeMinSize,
       computeMaxSize,
       replicas,
-      storageUnit,
-      storageSize,
+      storage,
       storageCompressed
     ]
   )
@@ -73,8 +70,7 @@ export default function EstimatorCtas() {
         provider: provider,
         region: region,
         hours: hours,
-        storageVolume: storageSize,
-        storageUnit: storageUnit,
+        storage: storage,
         storageCompressed: storageCompressed,
         minimumCompute: computeMinSize,
         maximumCompute: computeMaxSize,
@@ -89,8 +85,7 @@ export default function EstimatorCtas() {
     computeMinSize,
     computeMaxSize,
     replicas,
-    storageUnit,
-    storageSize,
+    storage,
     storageCompressed
   ])
 
@@ -106,18 +101,7 @@ export default function EstimatorCtas() {
       )
       console.error('Error copying to clipboard:', err)
     })
-  }, [
-    plan,
-    provider,
-    region,
-    hours,
-    computeMinSize,
-    computeMaxSize,
-    replicas,
-    storageUnit,
-    storageSize,
-    storageCompressed
-  ])
+  }, [])
   return (
     <>
       {/* Promote free trial */}
@@ -137,10 +121,11 @@ export default function EstimatorCtas() {
 
       {/* Promote contact us */}
       <div className={promoteContact ? 'space-y-4' : 'hidden'}>
-        <p className='-mt-4 mb-8 text-center text-base text-[#B3B6BD]'>
-          You’re eligible for custom terms.
+        <p className='-mt-4 mb-8 text-center text-base font-bold text-white'>
+          You’re eligible for custom terms{' '}
+          <span className='-mr-1 ml-1 inline-block text-xl'>🎉</span>
           <br />
-          Contact us for more details.
+          Contact us for more details
         </p>
         <PricingButton type='primary' onClick={contactButtonHandler}>
           Get a custom quote

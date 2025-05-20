@@ -1,11 +1,11 @@
-import jpIndustries from './industries.json'
 import useCasesJP from './use-cases.json'
-import AccordionComponent from '@/components/AccordionComponent'
+import Accordion from '@/components-cleaned/Accordion'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import { StrapiImage } from '@/components/StrapiElements'
 import GetStartedFree from '@/components/jp/GetStartedFree'
 import Layout from '@/components/jp/Layout'
 import UseCasesComparisons from '@/components/jp/UseCasesComparisons'
+import { SuiTitle } from '@/components/sui'
 import { findAll, findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -15,6 +15,7 @@ import 'glider-js/glider.min.css'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CSSProperties } from 'react'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -74,6 +75,7 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
         individualUseCases,
         quotes,
         seo: {
+          locale: 'ja_JP',
           title: 'すべてのユースケース | ClickHouse',
           description: useCasesPageData.Description,
           path: '/jp/use-cases'
@@ -310,13 +312,119 @@ function UseCasesPage({
         className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'
         id='industries'>
         <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
-          <AccordionComponent
-            numbered={false}
-            items={jpIndustries}
-            title='業界'
-            icon='/images/industries-icon.svg'
-            description='必要な場所に、私たちはいます。ClickHouseコミュニティとの意見交換を大切にしており、いつでもご質問にお答えできるよう準備しています。'
-          />
+          <div
+            className='bg-shadow-element relative mx-auto mb-20 max-w-7xl items-center px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+            style={
+              {
+                '--top-side': '224px'
+              } as CSSProperties
+            }>
+            <div className='pb-10 text-center'>
+              <Image
+                src='/images/industries-icon.svg'
+                alt='Industries Icon'
+                width={72}
+                height={72}
+                className='mx-auto lg:mx-0'
+              />
+              <SuiTitle type='h2' className='my-6 lg:text-left'>
+                業界
+              </SuiTitle>
+              <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
+                必要な場所に、私たちはいます。ClickHouseコミュニティとの意見交換を大切にしており、いつでもご質問にお答えできるよう準備しています。
+              </div>
+            </div>
+            <Accordion
+              className='mx-auto w-full max-w-2xl lg:mr-0'
+              numbered={false}
+              items={[
+                {
+                  handle: '金融サービス',
+                  content:
+                    'トレーディングと市場分析、不正検知、リスク監視、ブロックチェーンなど。',
+                  prefix: (
+                    <Image
+                      src='/uploads/financial_eabf48e8c4.svg'
+                      alt='Financial Icon'
+                      width={32}
+                      height={32}
+                      className='-my-1'
+                    />
+                  )
+                },
+                {
+                  handle: 'マーケティングとセールス',
+                  content:
+                    '広告テクノロジー、ウェブ分析、SEOなどのためのデータストア。',
+                  prefix: (
+                    <Image
+                      src='/uploads/marketing_564c57118c.svg'
+                      alt='Marketing Icon'
+                      width={32}
+                      height={32}
+                      className='-my-1'
+                    />
+                  )
+                },
+                {
+                  handle: 'Eコマースと小売業',
+                  content:
+                    'オンラインビジネス向けのリアルタイム在庫監視と全体的なトラッキング。',
+                  prefix: (
+                    <Image
+                      src='/uploads/ecommerce_007f909f93.svg'
+                      alt='Ecommerce Icon'
+                      width={32}
+                      height={32}
+                      className='-my-1'
+                    />
+                  )
+                },
+                {
+                  handle: 'テクノロジ',
+                  content:
+                    'IoT、エネルギー、バイオテクノロジー、製造業などを含む。',
+                  prefix: (
+                    <Image
+                      src='/uploads/technology_f01c171efc.svg'
+                      alt='Technology Icon'
+                      width={32}
+                      height={32}
+                      className='-my-1'
+                    />
+                  )
+                },
+                {
+                  handle: 'メディアとエンターテイメント',
+                  content:
+                    '動画、アセット、その他のメディアのパフォーマンスをリアルタイムで評価する。',
+                  prefix: (
+                    <Image
+                      src='/uploads/media_7dd1b2c68e.svg'
+                      alt='Media Icon'
+                      width={32}
+                      height={32}
+                      className='-my-1'
+                    />
+                  )
+                },
+                {
+                  handle: 'ゲーム',
+                  content:
+                    'プレイヤーの行動、ゲーム内の動向、ゲーム体験の向上に役立つ重要なインサイトを理解する。',
+                  prefix: (
+                    <Image
+                      src='/uploads/gaming_71acbd7e42.svg'
+                      alt='Gaming Icon'
+                      width={32}
+                      height={32}
+                      className='-my-1'
+                    />
+                  )
+                }
+              ]}
+            />
+          </div>
 
           <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
         </div>

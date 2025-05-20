@@ -126,6 +126,7 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
       description: integration.shortDescription
     }
 
+    seo.locale = 'ja_JP'
     seo.path = `/integrations/${slug}`
 
     const commonData = await getCommonProps()

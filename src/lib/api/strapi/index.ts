@@ -1,8 +1,4 @@
-import {
-  PricingV2EntryCompute,
-  PricingV2EntryPlan,
-  PricingV2EntryProvider
-} from './types'
+import { PricingV2 } from './types'
 import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
 
@@ -29,6 +25,10 @@ export function getStagingOnlyFilters(): Array<Record<'StagingOnly', any>> {
     { StagingOnly: stagingOnlyFilter },
     { StagingOnly: { $eq: false } }
   ]
+}
+
+export function getUnlistedFilters() {
+  return [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
 }
 
 export async function getPathsValues(
@@ -196,41 +196,23 @@ export async function findHeader(requestString: string) {
   return headerData.seo
 }
 
-export async function getPricingV2Plans() {
-  return (await fetchAll('pricing-v2-plans', {
+export async function getPricingV2() {
+  const response = await findOne('pricing-v2', {
     populate: [
-      'packages',
-      'packages.minimumCompute',
-      'packages.maximumCompute',
-      'perks',
-      'priceList'
-    ],
-    fields: [
-      'name',
-      'slug',
-      'customizable',
-      'order',
-      'description',
-      'featured',
-      'maxStorageCapacity'
-    ],
-    sort: ['order:asc', 'name:asc']
-  })) as Array<PricingV2EntryPlan>
-}
-
-export async function getPricingV2Providers() {
-  return (await fetchAll('pricing-v2-providers', {
-    populate: ['logo', 'regions', 'regions.icon'],
-    fields: ['name', 'slug', 'order', 'internetEgress', 'interRegionEgress'],
-    sort: ['order:asc', 'name:asc']
-  })) as Array<PricingV2EntryProvider>
-}
-
-export async function getPricingV2Computes() {
-  return (await fetchAll('pricing-v2-computes', {
-    fields: ['name', 'size'],
-    sort: ['size:asc']
-  })) as Array<PricingV2EntryCompute>
+      'plans.*',
+      'plans.perks.*',
+      'plans.priceList.*',
+      'plans.packages.*',
+      'providers.*',
+      'providers.logo.*',
+      'providers.regions.*',
+      'providers.regions.icon.*',
+      'useCases.*',
+      'dataSources.*',
+      'dataSources.icon.*'
+    ]
+  })
+  return response as PricingV2
 }
 
 export async function findImageDetails(imageUrl: string) {

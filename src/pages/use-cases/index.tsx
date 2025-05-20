@@ -1,9 +1,10 @@
-import AccordionComponent from '@/components/AccordionComponent'
+import Accordion from '@/components-cleaned/Accordion'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImage, StrapiImageUrl } from '@/components/StrapiElements'
 import UseCasesComparisons from '@/components/UseCasesComparisons'
+import { SuiTitle } from '@/components/sui'
 import { findAll, findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -13,6 +14,7 @@ import 'glider-js/glider.min.css'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CSSProperties } from 'react'
 
 export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
   async function getStaticProps() {
@@ -396,13 +398,50 @@ function UseCasesPage({
         className='bg-shadow-element yellow-shadow align-shadow-right bg-neutral-900'
         id='industries'>
         <div className='mx-auto max-w-7xl px-4 py-20 md:px-8 2xl:px-0'>
-          <AccordionComponent
-            numbered={false}
-            items={useCasesPageData.Industries}
-            title='Industries'
-            icon='/images/industries-icon.svg'
-            description='Wherever you need us, we’re there. We love to engage in thoughtful conversation with the ClickHouse community and are always on-hand to answer your questions. '
-          />
+          <div
+            className='bg-shadow-element relative mx-auto mb-20 max-w-7xl items-center px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+            style={
+              {
+                '--top-side': '224px'
+              } as CSSProperties
+            }>
+            <div className='pb-10 text-center'>
+              <Image
+                src='/images/industries-icon.svg'
+                alt='Industries Icon'
+                width={72}
+                height={72}
+                className='mx-auto lg:mx-0'
+              />
+              <SuiTitle type='h2' className='my-6 lg:text-left'>
+                Industries
+              </SuiTitle>
+              <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
+                Wherever you need us, we’re there. We love to engage in
+                thoughtful conversation with the ClickHouse community and are
+                always on-hand to answer your questions.
+              </div>
+            </div>
+            <Accordion
+              className='mx-auto w-full max-w-2xl lg:mr-0'
+              numbered={false}
+              items={useCasesPageData.Industries.map((industry) => {
+                return {
+                  handle: industry.name,
+                  prefix: (
+                    <StrapiImageUrl
+                      {...industry.icon}
+                      alt={industry.name}
+                      width={32}
+                      height={32}
+                      className='-my-1'
+                    />
+                  ),
+                  content: industry.description
+                }
+              })}
+            />
+          </div>
 
           <GetStartedFree href='https://console.clickhouse.cloud/signUp?loc=use-cases-get-started-footer' />
         </div>

@@ -1,9 +1,9 @@
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import PriceUsd from '../../ui/PriceUsd'
-import { Fragment, useCallback, useEffect, useRef } from 'react'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { Fragment, useCallback, useEffect, useMemo, useRef } from 'react'
 
 export default function DisplayPrice() {
-  const { totalPriceRange } = usePricingV2Context()
+  const { totalMinPrice, totalPriceRange } = usePricingV2Context()
 
   const priceRef = useRef<null | HTMLParagraphElement>(null)
 
@@ -31,6 +31,9 @@ export default function DisplayPrice() {
     priceEl.style.fontSize = `${high}px`
   }, [priceRef])
 
+  // Promote contact if min price is over $5000
+  const promoteContact = !!(totalMinPrice && totalMinPrice > 5000)
+
   // Attach resize events on mount
   useEffect(() => {
     window.addEventListener('resize', resize)
@@ -47,20 +50,36 @@ export default function DisplayPrice() {
   useEffect(() => {
     const timer = window.setTimeout(resize, 100)
     return () => window.clearTimeout(timer)
+  }, [totalPriceRange, promoteContact])
+
+  const isValidPriceRange = useMemo(() => {
+    return (
+      totalPriceRange &&
+      totalPriceRange.filter((value) => Number(value.toFixed(2)) >= 0.01)
+        .length > 0
+    )
   }, [totalPriceRange])
 
   return (
     <span
       ref={priceRef}
       className='block w-full overflow-hidden whitespace-nowrap'>
-      {totalPriceRange.map((price, priceIndex, allPrices) => {
-        return (
-          <Fragment key={priceIndex}>
-            <PriceUsd price={price} decimalPlaces={0} />
-            {priceIndex < allPrices.length - 1 && ' - '}
-          </Fragment>
-        )
-      })}
+      {promoteContact && <>Contact sales</>}
+      {!promoteContact && !isValidPriceRange && '--'}
+      {!promoteContact &&
+        isValidPriceRange &&
+        totalPriceRange &&
+        totalPriceRange.map((price, priceIndex, allPrices) => {
+          return (
+            <Fragment key={priceIndex}>
+              <PriceUsd
+                price={price}
+                decimalPlaces={allPrices.length === 1 && price < 1 ? 2 : 0}
+              />
+              {priceIndex < allPrices.length - 1 && ' - '}
+            </Fragment>
+          )
+        })}
     </span>
   )
 }

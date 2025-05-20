@@ -5,7 +5,7 @@ import GetStartedFree from '@/components/GetStartedFree'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import { SuiText } from '@/components/sui'
-import { findAll, findOne } from '@/lib/api/strapi'
+import { findAll, findOne, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
@@ -42,9 +42,16 @@ export const getStaticProps: GetStaticProps = async () => {
     'events',
     {
       filters: {
-        localDatetime: {
-          $gte: new Date().toISOString()
-        }
+        $and: [
+          {
+            localDatetime: {
+              $gte: new Date().toISOString()
+            }
+          },
+          {
+            $or: getUnlistedFilters()
+          }
+        ]
       },
       sort: ['localDatetime:ASC'],
       populate: [

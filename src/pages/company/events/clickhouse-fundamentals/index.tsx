@@ -4,7 +4,7 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { StrapiImage } from '@/components/StrapiElements'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findAll } from '@/lib/api/strapi'
+import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
 import { GetServerSideProps } from 'next'
@@ -36,12 +36,21 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
       'events',
       {
         filters: {
-          localDatetime: {
-            $gte: new Date().toISOString()
-          },
-          slug: {
-            $notContains: 'clickhouse-fundamentals'
-          }
+          $and: [
+            {
+              localDatetime: {
+                $gte: new Date().toISOString()
+              }
+            },
+            {
+              slug: {
+                $notContains: 'clickhouse-fundamentals'
+              }
+            },
+            {
+              $or: getUnlistedFilters()
+            }
+          ]
         },
         sort: ['localDatetime:ASC'],
         populate: [

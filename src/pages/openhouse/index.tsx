@@ -5,21 +5,34 @@ import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
+import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
+import speakerAlanBraithwaite from './assets/speaker-alan-braithwaite.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
+import speakerArupMalakar from './assets/speaker-arup-malakar.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
+import speakerChrisCrane from './assets/speaker-chris-crane.png'
+import speakerDaleFrohman from './assets/speaker-dale-frohman.png'
+import speakerDaleMcDiarmid from './assets/speaker-dale-mcdiarmid.png'
+import speakerJeanaChoi from './assets/speaker-jeana-choi.png'
+import speakerJohananOttensooser from './assets/speaker-johanan-ottensooser.png'
 import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
-import speakerKevinWeil from './assets/speaker-kevin-weil.png'
 import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
 import speakerLukasBiewald from './assets/speaker-lukas-biewald.png'
-import speakerMarkNeedham from './assets/speaker-mark-needham.png'
 import speakerMartinCasado from './assets/speaker-martin-casado.png'
+import speakerMaruthGoyal from './assets/speaker-maruth-goyal.png'
 import speakerMelvynPeignon from './assets/speaker-melvyn-peignon.png'
 import speakerMihirGokhale from './assets/speaker-mihir-gokhale.png'
+import speakerMikeDriscoll from './assets/speaker-mike-driscoll.png'
 import speakerMikeShi from './assets/speaker-mike-shi.png'
 import speakerNikitaMikhailov from './assets/speaker-nikita-mikhailov.png'
+import speakerPoomChiarawongse from './assets/speaker-poom-chiarawongse.png'
+import speakerRiteshVaryani from './assets/speaker-ritesh-varyani.png'
 import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
 import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
+import speakerSaiSrirampur from './assets/speaker-sai-srirampur.png'
+import speakerSrinivasNarayanan from './assets/speaker-srinivas-narayanan.png'
 import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
+import speakerVladSeliverstov from './assets/speaker-vlad-seliverstov.png'
 import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
@@ -80,9 +93,24 @@ const ALL_SPEAKERS: Array<{
     image: speakerAlexyMilovidov
   },
   {
-    name: 'Kevin Weil',
-    title: 'CPO, OpenAI',
-    image: speakerKevinWeil
+    name: 'Srinivas Narayanan',
+    title: 'VP of Engineering, OpenAI',
+    image: speakerSrinivasNarayanan
+  },
+  {
+    name: 'Jeana Choi',
+    title: 'Sr Software Engineer, Lyft',
+    image: speakerJeanaChoi
+  },
+  {
+    name: 'Dale Frohman',
+    title: 'Lead Director Engineering, CVS Health',
+    image: speakerDaleFrohman
+  },
+  {
+    name: 'Krithika Balagurunathan',
+    title: 'Sr Director, PM, ClickHouse',
+    image: speakerKrithikaBalagurunathan
   },
   {
     name: 'Martin Casado',
@@ -95,19 +123,54 @@ const ALL_SPEAKERS: Array<{
     image: speakerLukasBiewald
   },
   {
-    name: 'Krithika Balagurunathan',
-    title: 'Sr Director, PM, ClickHouse',
-    image: speakerKrithikaBalagurunathan
-  },
-  {
     name: 'Yury Izrailevsky',
     title: 'Founder, President, ClickHouse',
     image: speakerYuryIzrailevsky
   },
   {
-    name: 'Mark Needham',
-    title: 'Principal PME, ClickHouse',
-    image: speakerMarkNeedham
+    name: 'Ritesh Varyani',
+    title: 'Staff Software Engineer, Lyft',
+    image: speakerRiteshVaryani
+  },
+  {
+    name: 'Maruth Goyal',
+    title: 'Member of Technical Staff, Anthropic',
+    image: speakerMaruthGoyal
+  },
+  {
+    name: 'Arup Malakar',
+    title: 'Software Engineer, Sierra',
+    image: speakerArupMalakar
+  },
+  {
+    name: 'Akshay Nanavati',
+    title: 'Engineering Manager, OpenAI',
+    image: speakerAkshayNanavati
+  },
+  {
+    name: 'Poom Chiarawongse',
+    title: 'Member of Technical Staff, OpenAI',
+    image: speakerPoomChiarawongse
+  },
+  {
+    name: 'Chris Crane',
+    title: 'Co-Founder & CPO, FiveOneFour',
+    image: speakerChrisCrane
+  },
+  {
+    name: 'Johanan Ottensooser',
+    title: 'AI Product Manager, FiveOneFour',
+    image: speakerJohananOttensooser
+  },
+  {
+    name: 'Alan Braithwaite',
+    title: 'Co-Founder & CTO, RunReveal',
+    image: speakerAlanBraithwaite
+  },
+  {
+    name: 'Mike Driscoll',
+    title: 'Co-Founder, CEO, Rill Data',
+    image: speakerMikeDriscoll
   },
   {
     name: 'Robert Schulze',
@@ -125,7 +188,7 @@ const ALL_SPEAKERS: Array<{
     image: speakerZoeSteinkamp
   },
   {
-    name: 'Chloe Carasso dit Carson',
+    name: 'Chloé Carasso dit Carson',
     title: 'Senior PM, ClickHouse',
     image: speakerChloeCarassoDitCarson
   },
@@ -155,18 +218,333 @@ const ALL_SPEAKERS: Array<{
     image: speakerMikeShi
   },
   {
+    name: 'Vlad Seliverstov',
+    title: 'Engineering Manager, ClickHouse',
+    image: speakerVladSeliverstov
+  },
+  {
     name: 'Ryadh Dahimene',
     title: 'Director, PM, ClickHouse',
     image: speakerRyadhDahimene
+  },
+  {
+    name: 'Sai Srirampur',
+    title: 'Director, PM, ClickHouse',
+    image: speakerSaiSrirampur
+  },
+  {
+    name: 'Dale McDiarmid',
+    title: 'Principal PME, ClickHouse',
+    image: speakerDaleMcDiarmid
   }
+]
+
+const AGENDA: Array<{
+  time: string
+  title: string
+  description?: string | React.ReactNode
+}> = [
+  { time: '8:00 a.m.', title: 'Registration and light refreshments' },
+  {
+    time: '9:00 a.m.',
+    title: 'Keynote: Product vision and roadmap',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Alexey Milovidov</u>
+            </strong>
+            , ClickHouse CTO and the creator of the ClickHouse open source
+            project, will share the origin story of ClickHouse.
+          </li>
+          <li>
+            <strong>
+              <u>Aaron Katz</u>
+            </strong>
+            , ClickHouse CEO, will talk about the founding of ClickHouse, Inc.
+            and the trajectory of the company.
+          </li>
+          <li>
+            <strong>
+              <u>Yury Izrailevsky</u>
+            </strong>
+            , ClickHouse President of Engineering, and{' '}
+            <strong>
+              <u>Krithika Balagurunathan</u>
+            </strong>
+            , Head of Product for ClickHouse Cloud, will dive into the details
+            of ClickHouse Cloud.
+          </li>
+          <li>
+            <strong>
+              <u>Tanya Bragin</u>
+            </strong>
+            , VP Product & Marketing at ClickHouse, will cover the latest
+            product announcements and product roadmap.
+          </li>
+          <li>
+            Thought-leading customers, including{' '}
+            <strong>
+              <u>Lukas Biewald</u>
+            </strong>
+            , Founder & CEO Weights & Biases;{' '}
+            <strong>
+              <u>Dale Frohman</u>
+            </strong>
+            , Lead Director Engineering, CVS Health; and{' '}
+            <strong>
+              <u>Akshay Nanavati</u>
+            </strong>{' '}
+            and{' '}
+            <strong>
+              <u>Poom Chiarawongse</u>{' '}
+            </strong>
+            from OpenAI, will walk through their use cases and how ClickHouse
+            helped them in their journey.
+          </li>
+          <li>
+            <em>Stay tuned for additional keynote speaker announcements!</em>
+          </li>
+        </ul>
+      </>
+    )
+  },
+  { time: '10:30 a.m.', title: 'Break: AMA booth and demo stations' },
+  {
+    time: '11:00 a.m.',
+    title: 'Real-time analytics: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Zach Naimon</u>
+            </strong>
+            , Principal Product Manager at ClickHouse, will lead you through
+            ClickHouse for real-time analytics.
+          </li>
+          <li>
+            <strong>
+              <u>Sai Srirampur</u>
+            </strong>{' '}
+            and{' '}
+            <strong>
+              <u>Kaushik Iska</u>
+            </strong>
+            , founders of PeerDB, will cover the evolving better together story
+            for Postgres users and the future of change data capture (CDC) at
+            ClickHouse.
+          </li>
+          <li>
+            <strong>
+              <u>Nikita Mikhailov</u>
+            </strong>
+            , Director Engineering at ClickHouse and one of the original
+            ClickHouse developers, will talk about the latest core database
+            innovations for real-time analytics.
+          </li>
+          <li>
+            <strong>
+              <u>Arup Malakar</u>
+            </strong>
+            , Software Engineer at Sierra will share how{' '}
+            <Link
+              href='https://sierra.ai/'
+              target='_blank'
+              className='underline'>
+              Sierra.ai
+            </Link>{' '}
+            powers their customer service AI agents with ClickHouse.
+          </li>
+          <li>
+            <em>
+              Stay tuned for an exciting customer speaker lineup in this{' '}
+              session!
+            </em>
+          </li>
+        </ul>
+      </>
+    )
+  },
+  { time: '12:00 a.m.', title: 'Lunch' },
+  {
+    time: '1:00 p.m.',
+    title: 'Observability: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Mike Shi</u>
+            </strong>
+            , founder of HyperDX, and{' '}
+            <strong>
+              <u>Dale McDiarmid</u>
+            </strong>
+            , Principal PME at ClickHouse, will share a perspective on how the
+            observability market is evolving and how the stack based on
+            OpenTelemetry + ClickHouse + HyperDX enables turnkey open source
+            observability for all.
+          </li>
+          <li>
+            <strong>
+              <u>Vlad Seliverstov</u>
+            </strong>
+            , Engineering Manager at ClickHouse, will share the story of the
+            ClickHouse observability team moving off Datadog to ClickHouse +
+            Grafana + HyperDX.
+          </li>
+          <li>
+            <strong>
+              <u>Maruth Goyal</u>
+            </strong>
+            , Member of Technical Staff at Anthropic will share how they
+            migrated their logging backend from Splunk to ClickHouse.
+          </li>
+          <li>
+            <em>
+              Stay tuned for an exciting customer speaker lineup in this{' '}
+              session!
+            </em>
+          </li>
+        </ul>
+      </>
+    )
+  },
+  {
+    time: '2:00 p.m.',
+    title: 'Data warehousing: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Chlo&eacute; Carasso dit Carson</u>
+            </strong>
+            , Senior Product Manager at ClickHouse, will cover how the data
+            warehousing landscape has been transformed by open standards and
+            open source alternatives to traditional data warehouses.
+          </li>
+          <li>
+            <strong>
+              <u>Robert Schulze</u>
+            </strong>
+            , Engineering Manager at ClickHouse, will share the latest core
+            database product innovations for the data warehousing use case.
+          </li>
+          <li>
+            <strong>
+              <u>Melvyn Peignon</u>
+            </strong>
+            , Principal Product Manager at ClickHouse, will cover how ClickHouse
+            is evolving to be the query engine of choice on top of data lakes.
+          </li>
+          <li>
+            <strong>
+              <u>Jeana Choi</u>
+            </strong>{' '}
+            and{' '}
+            <strong>
+              <u>Ritesh Varyani</u>
+            </strong>
+            , Software Engineers at Lyft, will share why they adopted ClickHouse
+            for business analytics.
+          </li>
+          <li>
+            <strong>
+              <u>Mihir Gorkale</u>
+            </strong>
+            , Product Manager at ClickHouse, will share how ClickHouse is
+            running our internal data warehouse on ClickHouse and tools we use
+            for dashboarding and Agentic BI.
+          </li>
+        </ul>
+      </>
+    )
+  },
+  { time: '3:00 p.m.', title: 'Break: AMA booth and demo stations' },
+  {
+    time: '3:30 p.m.',
+    title: 'AI/ML: technical deep dives and user stories',
+    description: (
+      <>
+        <ul className='list-disc space-y-2 pl-4'>
+          <li>
+            <strong>
+              <u>Alexey Milovidov</u>
+            </strong>
+            , ClickHouse CTO and{' '}
+            <strong>
+              <u>Ryadh Dahimene</u>
+            </strong>
+            , Director PM at ClickHouse, will share a perspective on evolution
+            of AI/ML use cases and how ClickHouse fits into the data landscape
+            as the market evolves.
+          </li>
+          <li>
+            <strong>
+              <u>Ryadh Dahimene</u>
+            </strong>
+            , Director PM at ClickHouse will lead a discussion on MCP servers +
+            AI Agents with{' '}
+            <strong>
+              <u>Alan Braithwaite</u>
+            </strong>
+            , Co-Founder of RunReveal,{' '}
+            <strong>
+              <u>Chris Crane</u>
+            </strong>
+            , Co-Founder of FiveOneFour,{' '}
+            <strong>
+              <u>Johanan Ottensooser</u>
+            </strong>
+            , AI Product Lead at FiveOneFour,{' '}
+            <strong>
+              <u>Mike Driscoll</u>
+            </strong>
+            , Co-Founder, CEO, Rill Data, and{' '}
+            <strong>
+              <u>Mihir Gorkale</u>
+            </strong>
+            , Product Manager at ClickHouse.
+          </li>
+        </ul>
+      </>
+    )
+  },
+  {
+    time: '4:30 p.m.',
+    title: 'Fireside chat',
+    description: (
+      <p>
+        As AI and ML workloads explode, data requirements are evolving quickly.
+        Hear from{' '}
+        <strong>
+          <u>Srinivas Narayanan</u>
+        </strong>
+        , VP of Engineering at OpenAI,{' '}
+        <strong>
+          <u>Martin Casado</u>
+        </strong>
+        , Partner at Andreessen Horowitz, and{' '}
+        <strong>
+          <u>Aaron Katz</u>
+        </strong>
+        , CEO at ClickHouse, on the future of data infrastructure for AI at
+        scale.
+      </p>
+    )
+  },
+  { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
 export default function Page({ seo, footerData }: CommonProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
-  const initialSpeakers = ALL_SPEAKERS.slice(0, 8)
-  const overflowSpeakers = ALL_SPEAKERS.slice(8)
+  const initialSpeakers = ALL_SPEAKERS.slice(0, INITIAL_NUMBER_OF_SPEAKERS)
+  const overflowSpeakers = ALL_SPEAKERS.slice(INITIAL_NUMBER_OF_SPEAKERS)
 
   const scrollToSpeakersToggle = useCallback(() => {
     const speakersToggle = speakersToggleRef.current
@@ -231,7 +609,7 @@ export default function Page({ seo, footerData }: CommonProps) {
                     May 28-29, 2025
                   </h2>
                   <p className='mb-4 text-xl leading-loose'>
-                    Free conference in San Francisco, CA.
+                    Free conference in San Francisco, CA
                   </p>
                   <OpenHouseButton
                     href='/openhouse/register'
@@ -327,40 +705,34 @@ export default function Page({ seo, footerData }: CommonProps) {
             />
             <div className='mx-auto max-w-6xl px-6 lg:px-12' id='agenda'>
               <h2 className='mb-10 text-center text-4xl'>Agenda at a glance</h2>
-              <div className='grid-cols-2 gap-6 space-y-6 lg:grid lg:space-y-0'>
-                <div className='space-y-6 bg-white px-6 py-8 lg:px-12 lg:py-10 lg:text-lg'>
+              {/* Agenda overview */}
+              <div className='mb-20 grid-cols-2 gap-6 space-y-16 lg:mb-24 lg:grid lg:space-y-0'>
+                <div className='relative space-y-6 bg-neutral-950 px-6 pb-4 pt-2 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+                  <div
+                    className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
+                  />
                   <FontSohneBreit>
                     <h3 className='text-4xl'>
                       <small className='text-2xl font-bold uppercase'>
                         MAY 28
                       </small>
                       <br />
-                      Training
+                      Workshops
                     </h3>
                   </FontSohneBreit>
-                  <p>
-                    Start your journey to becoming a ClickHouse Certified
-                    Developer with this free, hands-on training.
-                  </p>
-                  <p>
-                    <strong>We'll cover:</strong>
-                  </p>
+                  <p>Free training workshops</p>
                   <ul className='!mt-0 list-disc pl-8'>
-                    <li>Module 1: Getting Started with ClickHouse</li>
-                    <li>Module 2: ClickHouse Architecture</li>
-                    <li>Module 3: Modeling Data</li>
-                    <li>Module 4: Inserting Data</li>
-                    <li>Module 5: Analyzing Data</li>
+                    <li>ClickHouse Developer Training</li>
+                    <li>ClickHouse Query Optimization </li>
                   </ul>
-                  <p>
-                    This will be a full-day event with limited seats.
-                    <br />
-                    Open to conference registrants only.
-                  </p>
+                  <p>Hyatt Regency, Embarcadero, San Francisco</p>
                 </div>
-                <div className='space-y-3 bg-white px-6 py-8 lg:px-12 lg:py-10 lg:text-lg'>
+                <div className='relative space-y-6 bg-neutral-950 px-6 pb-4 pt-2 text-white lg:px-12 lg:pb-6 lg:pt-4 lg:text-lg'>
+                  <div
+                    className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-950 ${styles.textureMaskBottom}`}
+                  />
                   <FontSohneBreit>
-                    <h3 className='mb-6 text-4xl'>
+                    <h3 className='text-4xl'>
                       <small className='text-2xl font-bold uppercase'>
                         MAY 29
                       </small>
@@ -368,31 +740,31 @@ export default function Page({ seo, footerData }: CommonProps) {
                       Conference
                     </h3>
                   </FontSohneBreit>
-                  <p>
-                    <strong>Sessions:</strong>
-                  </p>
+                  <p>Main conference day</p>
                   <ul className='!mt-0 list-disc pl-8'>
-                    <li>Opening keynote with ClickHouse founders</li>
-                    <li>Roadmap session with product leaders</li>
-                    <li>In-depth customer talks from our largest users</li>
-                    <li>Technical feature deep dives from our engineers</li>
+                    <li>Full day of content, AMA booths, and more</li>
+                    <li>Rooftop after party</li>
                   </ul>
-                  <p>
-                    <strong>Breakouts:</strong>
-                  </p>
-                  <ul className='!mt-0 list-disc pl-8'>
-                    <li>Use Case & Integration Demos</li>
-                    <li>“Built on ClickHouse” showcase</li>
-                    <li>AMA Booth</li>
-                  </ul>
-                  <p>
-                    <strong>Networking:</strong>
-                  </p>
-                  <ul className='!mt-0 list-disc pl-8'>
-                    <li>Catered breakfast & lunch</li>
-                    <li>Evening networking reception</li>
-                  </ul>
+                  <p>The Pearl, San Francisco</p>
                 </div>
+              </div>
+
+              {/* Agenda deepdive */}
+              <div className='mb-2.5 bg-neutral-950 py-6 text-center text-2xl font-bold text-white lg:px-12 lg:text-left'>
+                Conference day agenda
+              </div>
+              <div className='relative flex flex-col gap-2.5'>
+                <div className='bg-gradient-checkered absolute bottom-0 left-52 top-0 z-10 hidden w-0.5 from-neutral-950 bg-[length:1rem_1rem] lg:block' />
+                {AGENDA.map((row, rowIndex) => {
+                  return (
+                    <AgendaItem
+                      key={rowIndex}
+                      title={row.title}
+                      time={row.time}>
+                      {row.description}
+                    </AgendaItem>
+                  )
+                })}
               </div>
               <div className='mt-10 text-center'>
                 <OpenHouseButton
@@ -545,16 +917,21 @@ export default function Page({ seo, footerData }: CommonProps) {
                 </ul>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will you be offering in-person training?'>
+                <p className='mb-4 max-w-3xl'>
+                  We are offering free in-person training workshops on May 28,
+                  the day before the main event. Workshops will be held at the
+                  Hyatt Regency Embarcadero.
+                </p>
+                <p className='mb-4 max-w-3xl'>
+                  Join us for one of two training options: a full day course
+                  open to all levels, and a half day advanced course. Whether
+                  you're just starting with ClickHouse or refining an advanced
+                  deployment, these workshops will empower you with the tools
+                  and techniques to unlock the full potential of your data.
+                </p>
                 <p className='max-w-3xl'>
-                  Yes, in-person training will be offered on an optional basis
-                  in San Francisco on May 28 2025, the day before the main
-                  event. We are offering free hands-on training on 28 May, the
-                  day before Open House, to equip attendees with practical
-                  skills for deploying and optimizing ClickHouse in production.
-                  Whether you’re just starting with ClickHouse or refining an
-                  advanced deployment, this training will empower you with the
-                  tools and techniques to unlock the full potential of your
-                  data.
+                  Register for Open House and check the box for training on the
+                  registration form to receive more information.
                 </p>
               </OpenHouseAccordionItem>
               <OpenHouseAccordionItem handle='Will there be a CFP process for speakers?'>
@@ -632,6 +1009,94 @@ export default function Page({ seo, footerData }: CommonProps) {
       </FontSohne>
       <Footer {...footerData} />
     </>
+  )
+}
+
+function AgendaItem({
+  time,
+  title,
+  children
+}: {
+  time: string
+  title: string
+  children?: React.ReactNode
+}) {
+  const [isOpen, setIsOpen] = useState(false)
+  return (
+    <div className='relative overflow-hidden bg-white p-4 lg:p-0'>
+      <div className='flex'>
+        <div className='flex flex-1 flex-wrap lg:flex-nowrap'>
+          <div className='flex w-full flex-shrink-0 flex-grow-0 items-center text-lg font-bold lg:h-20 lg:w-52 lg:justify-center lg:text-center lg:text-2xl'>
+            {time}
+          </div>
+          <div className='text-lg lg:flex-1 lg:py-6 lg:pl-12 lg:text-2xl'>
+            {title}
+          </div>
+        </div>
+        {!!children && (
+          <button
+            type='button'
+            className='group/agenda-button flex aspect-square w-12 items-center justify-center lg:w-20'
+            onClick={(event) => {
+              event.preventDefault()
+              setIsOpen((old) => !old)
+            }}>
+            <span className='absolute inset-0 block' />
+            <span className='sr-only'>
+              {isOpen ? 'Close agenda item' : 'Open agenda item'}
+            </span>
+            <span className='flex aspect-square flex-1 items-center justify-center rounded-full transition-colors group-hover/agenda-button:bg-neutral-900/5 lg:m-3'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='15'
+                height='18'
+                fill='none'
+                className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                <path
+                  stroke='#171618'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M7.03 1v14.99M13.02 10l-6 6.04L1 10'
+                />
+              </svg>
+            </span>
+          </button>
+        )}
+      </div>
+      <AnimatePresence>
+        {!!children && isOpen && (
+          <motion.div
+            variants={{
+              closed: {
+                opacity: 0,
+                height: 0,
+                y: '1rem',
+                transition: {
+                  delay: 0
+                }
+              },
+              open: {
+                opacity: 1,
+                height: 'auto',
+                y: '0rem'
+              }
+            }}
+            initial='closed'
+            animate='open'
+            exit='closed'
+            transition={{
+              type: 'spring',
+              bounce: 0,
+              duration: 0.5
+            }}>
+            <div className='pt-4 lg:pb-6 lg:pl-64 lg:pr-12 lg:pt-0'>
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 

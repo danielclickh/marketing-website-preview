@@ -69,19 +69,19 @@ export default function HomepageHeroAlt({
             </div>
             <LogoAnnouncementLink
               className='mt-6'
-              href='/cloud/clickpipes/mysql-cdc-connector?loc=homepage-hero'
+              href='/cloud/clickpipes/azure-blob-storage-connector?loc=homepage-hero'
               logo={{
-                src: '/images/cloud/integrations/mysql.svg',
-                alt: 'MySQL',
-                width: 48,
-                height: 49,
-                className: 'brightness-0'
+                src: '/images/cloud/integrations/azure-blob-storage.svg',
+                alt: 'Azure Blob Storage',
+                width: 46,
+                height: 37
               }}>
-              Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
-              connector — now in Private Preview.{' '}
+              Azure Blob Storage ClickPipe is now in Private Preview - be among
+              the first to explore its power and{' '}
               <span className='underline group-hover:decoration-2'>
-                Learn&nbsp;more
+                request early access today
               </span>
+              !
             </LogoAnnouncementLink>
           </div>
         </div>

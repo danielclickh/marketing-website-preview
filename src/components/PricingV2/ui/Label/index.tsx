@@ -1,4 +1,4 @@
-import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
+import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
 import React from 'react'
 
 export interface LabelProps {

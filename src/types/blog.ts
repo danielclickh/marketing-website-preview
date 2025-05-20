@@ -1,5 +1,6 @@
 import { BlogPost } from './blogs'
 import { CommonProps, NewsLetterData } from './homepage'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface BlogProps extends BlogPost, CommonProps {
   content: string
@@ -11,4 +12,9 @@ export interface BlogProps extends BlogPost, CommonProps {
   CloudCTAHeader: string
   reading_time: number
   table_contents_headers: string
+  promotion?: {
+    title: string
+    description: string
+    image: StrapiImageType
+  }
 }

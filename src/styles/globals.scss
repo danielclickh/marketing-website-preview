@@ -1,27 +1,4 @@
 @tailwind base;
-@layer base {
-  @font-face {
-    font-family: Basier Square;
-    font-weight: 600;
-    font-display: swap;
-    src: url(/fonts/BasierSquare/basiersquare-semibold-webfont.woff)
-      format('woff');
-  }
-  @font-face {
-    font-family: Basier Square;
-    font-weight: 700;
-    font-display: swap;
-    src: url(/fonts/BasierSquare/basiersquare-bold-webfont.woff) format('woff');
-  }
-  @font-face {
-    font-family: Basier Square;
-    font-weight: 500;
-    font-display: swap;
-    src: url(/fonts/BasierSquare/basiersquare-medium-webfont.woff)
-      format('woff');
-  }
-}
-
 @tailwind components;
 @layer components {
   .bg-noised {

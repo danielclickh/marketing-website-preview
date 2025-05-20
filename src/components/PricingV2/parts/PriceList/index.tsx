@@ -1,8 +1,9 @@
-import TooltipInfo from '../../../PricingCalculator/ui/Tooltip/tooltip'
-import { usePricingV2Context } from '../../../PricingV2ContextProvider'
 import PerkItem from '../../ui/PerkItem'
 import PriceUsd from '../../ui/PriceUsd'
+import TooltipInfo from '@/components/PricingCalculator/ui/Tooltip/tooltip'
+import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { CheckIcon, XIcon } from '@heroicons/react/solid'
+import { useCallback } from 'react'
 
 export default function PriceList() {
   const {
@@ -11,39 +12,49 @@ export default function PriceList() {
     computeMinSize,
     computeMaxSize,
     replicas,
-    storageUnit,
-    storageSize,
+    storage,
     storageCompressed,
     computeUnitPrice,
     storageUnitPrice,
     computeMinPrice,
     computeMaxPrice,
-    storagePrice
+    storagePrice,
+    backupsPrice,
+    clickpipesPrice,
+    transfersPrice
   } = usePricingV2Context()
 
+  const canDisplayPrice = useCallback((value: number) => {
+    return Math.round(value * 100) / 100 >= 0.01
+  }, [])
+
   return (
-    <ul className='mt-5 space-y-4 text-sm font-medium'>
+    <ul className='mt-5 space-y-4 text-sm font-medium empty:hidden'>
       {/* Storage price */}
-      <li className='flex items-center gap-x-2'>
-        <CheckIcon className='h-4 w-4 text-primary-300' />
-        <PriceUsd price={storagePrice || 0.0} /> for storage{' '}
-        <TooltipInfo
-          content={
-            <>
-              Storage cost for {storageSize} {storageUnit?.toUpperCase()}{' '}
-              {storageCompressed ? 'uncompressed data' : 'compressed data'}
-              <br />
-              <br />
-              {storageUnitPrice && (
-                <>
-                  1 TB compressed data = <PriceUsd price={storageUnitPrice} />{' '}
-                  per month
-                </>
-              )}
-            </>
-          }
-        />
-      </li>
+      {!!storagePrice && canDisplayPrice(storagePrice) && (
+        <li className='flex items-center gap-x-2'>
+          <CheckIcon className='h-4 w-4 text-primary-300' />
+          <PriceUsd price={storagePrice} /> for storage{' '}
+          <TooltipInfo
+            content={
+              <>
+                Storage cost for {storage}{' '}
+                {storageCompressed ? 'uncompressed data' : 'compressed data'}
+                {storageUnitPrice && (
+                  <>
+                    <br />
+                    <br />
+                    1 TB compressed data = <PriceUsd
+                      price={storageUnitPrice}
+                    />{' '}
+                    per month
+                  </>
+                )}
+              </>
+            }
+          />
+        </li>
+      )}
 
       {/* Min/max compute costs */}
       {!!computeMinPrice &&
@@ -130,7 +141,50 @@ export default function PriceList() {
           </>
         )}
 
-      {(!replicas || replicas < 2) && (
+      {/* Backups price */}
+      {!!backupsPrice && canDisplayPrice(backupsPrice) && (
+        <li className='flex items-center gap-x-2'>
+          <CheckIcon className='h-4 w-4 text-primary-300' />
+          <PriceUsd price={backupsPrice} /> for backups{' '}
+          {/*<TooltipInfo
+            content={
+              <>
+                Storage cost for {storage}{' '}
+                {storageCompressed ? 'uncompressed data' : 'compressed data'}
+                {storageUnitPrice && (
+                  <>
+                    <br />
+                    <br />
+                    1 TB compressed data = <PriceUsd
+                      price={storageUnitPrice}
+                    />{' '}
+                    per month
+                  </>
+                )}
+              </>
+            }
+          />*/}
+        </li>
+      )}
+
+      {/* Clickpipes/data sources price */}
+      {!!clickpipesPrice && canDisplayPrice(clickpipesPrice) && (
+        <li className='flex items-center gap-x-2'>
+          <CheckIcon className='h-4 w-4 text-primary-300' />
+          <PriceUsd price={clickpipesPrice} /> for ClickPipes
+        </li>
+      )}
+
+      {/* Data transfers price */}
+      {!!transfersPrice && canDisplayPrice(transfersPrice) && (
+        <li className='flex items-center gap-x-2'>
+          <CheckIcon className='h-4 w-4 text-primary-300' />
+          <PriceUsd price={transfersPrice} /> for data transfer
+        </li>
+      )}
+
+      {/* Not fault-tolerant */}
+      {replicas && replicas < 2 && (
         <li className='flex items-center gap-x-2'>
           <XIcon className='h-4 w-4 text-red-200' />
           Not fault tolerant
@@ -138,6 +192,7 @@ export default function PriceList() {
         </li>
       )}
 
+      {/* Fault-tolerant */}
       {replicas && replicas >= 2 && (
         <li className='flex items-center gap-x-2'>
           <CheckIcon className='h-4 w-4 text-primary-300' />
@@ -145,6 +200,7 @@ export default function PriceList() {
         </li>
       )}
 
+      {/* Additional price list items from CMS */}
       {planEntry?.priceList && planEntry.priceList.length > 0 && (
         <ul className='space-y-5'>
           {planEntry.priceList.map((perk, perkIndex) => {

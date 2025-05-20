@@ -1,5 +1,6 @@
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
+import { CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
@@ -9,6 +10,7 @@ import NewsLetter from '@/components/NewsLetter'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
+import { StrapiImage } from '@/components/StrapiElements'
 import TableOfContents from '@/components/TableOfContents'
 import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
 import { findAll, findOne, getStagingOnlyFilters } from '@/lib/api/strapi'
@@ -33,7 +35,13 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
         },
         $or: stagingOnlyFilters
       },
-      populate: ['author', 'author.avatarPng', 'thumbnailPng'],
+      populate: [
+        'author',
+        'author.avatarPng',
+        'thumbnailPng',
+        'promotion',
+        'promotion.image'
+      ],
       pagination: { limit: 1 }
     })
     if (!data?.[0]) {
@@ -94,7 +102,8 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
           type: 'article',
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
-          path: canonical
+          path: canonical,
+          keywords: blog?.keywords || ''
         },
         newsLetterData,
         ...commonData
@@ -119,7 +128,8 @@ export default function BlogPage({
   CloudCTAFooter,
   CloudCTAHeader,
   seo,
-  table_contents_headers
+  table_contents_headers,
+  promotion
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
   const contentRef = React.createRef<HTMLDivElement>()
@@ -205,6 +215,25 @@ export default function BlogPage({
               </div>
             )}
 
+            {promotion && (
+              <div className='mt-8'>
+                <CUICard className='border-primary-300'>
+                  <CUICard.Body className='p-6 text-sm'>
+                    <p className='mb-3'>
+                      <strong>{promotion.title}</strong>
+                    </p>
+                    <div className='flex flex-col gap-6 md:flex-row md:items-start'>
+                      <p>{promotion.description}</p>
+                      <StrapiImage
+                        {...promotion.image}
+                        className='mx-auto !h-auto !w-36 flex-shrink-0 flex-grow-0 md:mr-0'
+                      />
+                    </div>
+                  </CUICard.Body>
+                </CUICard>
+              </div>
+            )}
+
             {ShowCloudCTAFooter && (
               <>
                 <Markdown
@@ -214,6 +243,7 @@ export default function BlogPage({
                 </Markdown>
               </>
             )}
+
             <HRSeparator className='my-8' />
             <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
               <div className='flex'>

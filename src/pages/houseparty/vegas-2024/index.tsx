@@ -10,7 +10,7 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findAll } from '@/lib/api/strapi'
+import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventType } from '@/types/events'
@@ -30,9 +30,16 @@ export const getStaticProps: GetStaticProps<PageProps> =
     const { data: recentEvents }: { data: PageProps['recentEvents'] } =
       await findAll('events', {
         filters: {
-          localDatetime: {
-            $gte: new Date().toISOString()
-          }
+          $and: [
+            {
+              localDatetime: {
+                $gte: new Date().toISOString()
+              }
+            },
+            {
+              $or: getUnlistedFilters()
+            }
+          ]
         },
         sort: ['localDatetime:ASC'],
         populate: ['thumbnailPng', 'location'],

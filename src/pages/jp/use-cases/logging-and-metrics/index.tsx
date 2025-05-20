@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 
     const data = await findOne('homepage', params)
 
+    data.seo.locale = 'ja_JP'
     data.seo.path = '/jp/use-cases/logging-and-metrics'
     data.seo.title = 'ClickHouseによるログ、イベント、トレース'
     data.seo.description =
