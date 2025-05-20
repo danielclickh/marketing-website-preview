@@ -5,8 +5,12 @@ import AccordionItem, {
 } from '@/components-cleaned/AccordionItem'
 import { useState, Fragment } from 'react'
 
+interface AccordionsItem extends Omit<AccordionItemProps, 'children'> {
+  content: AccordionItemProps['children'] | string
+}
+
 export interface AccordionsProps {
-  items: Array<AccordionItemProps>
+  items: Array<AccordionsItem>
   numbered?: boolean
   perPage?: number
   className?: string
@@ -23,26 +27,22 @@ export default function Accordion({
   const hasMore = items.length > paged
   return (
     <div className={`space-y-6 ${className}`}>
-      {items.map(({ children: itemChildren, ...item }, index) => {
+      {items.map((item, index) => {
+        const paddedNumber = `${index + 1}`.padStart(
+          items.length.toString().length + 1,
+          '0'
+        )
         return (
-          <Fragment key={index}>
-            <div className={index >= paged ? 'hidden' : 'block'}>
-              <AccordionItem
-                handle={item.handle}
-                prefix={
-                  numbered ? (
-                    <NumberPrefix
-                      value={`${index + 1}`.padStart(
-                        items.length.toString().length + 1,
-                        '0'
-                      )}
-                    />
-                  ) : undefined
-                }>
-                {itemChildren}
-              </AccordionItem>
-            </div>
-          </Fragment>
+          <div key={index} className={index >= paged ? 'hidden' : 'block'}>
+            <AccordionItem
+              handle={item.handle}
+              prefix={
+                item?.prefix ||
+                (numbered ? <NumberPrefix value={paddedNumber} /> : undefined)
+              }>
+              {item.content}
+            </AccordionItem>
+          </div>
         )
       })}
       {hasMore && (

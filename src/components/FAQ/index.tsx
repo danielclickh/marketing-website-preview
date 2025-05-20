@@ -41,11 +41,12 @@ export default function FAQ() {
       </div>
       <Accordion
         className='mx-auto w-full max-w-2xl lg:mr-0'
+        numbered={false}
         items={[
           {
             onOpen: useGalaxyOnClick('homePage.faqSection.whyClickhouseExpand'),
             handle: 'Why should I use ClickHouse vs. X database?',
-            children: (
+            content: (
               <p>
                 ClickHouse is faster than most traditional data warehouses and
                 databases and is most often used when real-time queries on large
@@ -59,7 +60,7 @@ export default function FAQ() {
           {
             onOpen: useGalaxyOnClick('homePage.faqSection.olapOverviewExpand'),
             handle: 'What is OLAP?',
-            children: (
+            content: (
               <p>
                 OLAP stands for “online analytical processing” which contrasts
                 from OLTP, or “online transaction processing.” As the name
@@ -72,7 +73,7 @@ export default function FAQ() {
           {
             onOpen: useGalaxyOnClick('homePage.faqSection.largeDataExpand'),
             handle: 'How does ClickHouse handle large amounts of data?',
-            children: (
+            content: (
               <p>
                 In order to easily process large amounts of data, ClickHouse
                 uses highly optimized compression techniques and vectorized
@@ -84,7 +85,7 @@ export default function FAQ() {
             onOpen: useGalaxyOnClick('homePage.faqSection.'),
             handle:
               'How does ClickHouse support data visualization and analysis?',
-            children: (
+            content: (
               <p>
                 ClickHouse supports connectors to many clients and drivers,
                 including common BI and data analysis tools. Please see{' '}
@@ -102,7 +103,7 @@ export default function FAQ() {
               'homePage.faqSection.clickhouseCostExpand'
             ),
             handle: 'How much does ClickHouse cost?',
-            children: (
+            content: (
               <p>
                 Self-managed ClickHouse is dependent on the cost of your compute
                 and data storage resources, as well as headcount necessary to
