@@ -555,10 +555,21 @@ export default function CertificationPage({
                   content: (
                     <p>
                       Individual exam attempts can be purchased on our website
-                      at
-                      [clickhouse.com/learn/certification](https://clickhouse.com/learn/certification).
-                      If you wish to purchase multiple exam attempts at once,
-                      please email us at certification@clickhouse.com.
+                      at{' '}
+                      <Link
+                        href='/learn/certification'
+                        className='text-primary-300 hover:underline'>
+                        https://clickhouse.com/learn/certification
+                      </Link>
+                      . If you wish to purchase multiple exam attempts at once,
+                      please email us at{' '}
+                      <Link
+                        href='mailto:certification@clickhouse.com'
+                        target='_blank'
+                        className='text-primary-300 hover:underline'>
+                        certification@clickhouse.com
+                      </Link>
+                      .
                     </p>
                   )
                 },
@@ -806,9 +817,14 @@ export default function CertificationPage({
                     'Can exam accommodations be made as needed for individuals taking the exam?',
                   content: (
                     <p>
-                      Please don't hesitate to email us at
-                      certification@clickhouse.com to discuss any desired
-                      accommodations.
+                      Please don't hesitate to email us at{' '}
+                      <Link
+                        href='mailto:certification@clickhouse.com'
+                        target='_blank'
+                        className='text-primary-300 hover:underline'>
+                        certification@clickhouse.com
+                      </Link>{' '}
+                      to discuss any desired accommodations.
                     </p>
                   )
                 },
@@ -820,8 +836,14 @@ export default function CertificationPage({
                   handle: 'Further Questions?',
                   content: (
                     <p>
-                      If your question wasn’t answered, please contact us at
-                      certification@clickhouse.com.
+                      If your question wasn’t answered, please contact us at{' '}
+                      <Link
+                        href='mailto:certification@clickhouse.com'
+                        target='_blank'
+                        className='text-primary-300 hover:underline'>
+                        certification@clickhouse.com
+                      </Link>
+                      .
                     </p>
                   )
                 }
