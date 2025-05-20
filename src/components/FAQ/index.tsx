@@ -1,14 +1,10 @@
-import { CUILink } from '../ClickUI'
 import { SuiTitle } from '../sui'
-import faqList from './faqList.json'
-import styles from './styles.module.scss'
-import { FullyQualifiedEvent } from '@/lib/galaxy/client'
+import Accordion from '@/components-cleaned/Accordion'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import { Disclosure, Transition } from '@headlessui/react'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
+import Link from 'next/link'
 import { CSSProperties } from 'react'
-import ReactMarkdown from 'react-markdown'
 
 const style = {
   '--top-side': '224px'
@@ -19,7 +15,7 @@ export default function FAQ() {
     <div
       className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
       style={style}>
-      <div className='pb-10 text-center'>
+      <div className='mx-auto max-w-md pb-10 text-center lg:mx-0 lg:text-left'>
         <Image
           src='/faq-icon.svg'
           alt='FAQ Icon'
@@ -30,56 +26,99 @@ export default function FAQ() {
         <SuiTitle type='h2' className='my-6 lg:text-left'>
           FAQs
         </SuiTitle>
-        <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
+        <div className='text-neutral-200 lg:text-left'>
           Wherever you need us, we’re there. We love to engage in thoughtful
           conversation with the ClickHouse community and are always on-hand to
           answer your questions.{' '}
         </div>
-        <CUILink
+        <Link
           href='/support/program/'
           target='_self'
-          className='mt-6 flex items-center justify-center gap-4 text-primary lg:justify-start'
+          className='mt-6 inline-flex items-center justify-center gap-4 text-primary-300 hover:underline lg:justify-start'
           onClick={useGalaxyOnClick('homePage.faqSection.askAnythingSelect')}>
-          <span>Ask us anything</span> <ExternalLinkIcon className='h-4 w-4' />
-        </CUILink>
+          Ask us anything <ExternalLinkIcon className='h-4 w-4' />
+        </Link>
       </div>
-      <div className={styles.accordionContainer}>
-        {faqList.map((faq, index) => (
-          <Disclosure
-            as='div'
-            className={styles.accordion}
-            key={`faq-${index}`}>
-            {({ open }) => (
-              <>
-                <div
-                  // eslint-disable-next-line react-hooks/rules-of-hooks
-                  onClick={useGalaxyOnClick(faq.event as FullyQualifiedEvent)}>
-                  <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
-                    <span className='text-md'>{faq.title}</span>
-                    <span className={styles.plusMinus} data-active={open} />
-                  </Disclosure.Button>
-                </div>
-                <Transition
-                  show={open}
-                  className='h-full'
-                  enter='transition-[max-height] duration-300 ease-in-out'
-                  enterFrom='max-h-0 opacity-0'
-                  enterTo='max-h-fit opacity-100'
-                  leave='transition-[max-height] duration-300 ease-in-out'
-                  leaveFrom='max-h-fit opacity-100'
-                  leaveTo='max-h-0 opacity-0'>
-                  <Disclosure.Panel
-                    className={`home-faqs pb-4 pl-20 pr-4 text-sm text-neutral-200 transition-opacity duration-100 ${
-                      open ? 'opacity-100' : 'opacity-0'
-                    }`}>
-                    <ReactMarkdown>{faq.content}</ReactMarkdown>
-                  </Disclosure.Panel>
-                </Transition>
-              </>
-            )}
-          </Disclosure>
-        ))}
-      </div>
+      <Accordion
+        className='mx-auto w-full max-w-2xl lg:mr-0'
+        items={[
+          {
+            onOpen: useGalaxyOnClick('homePage.faqSection.whyClickhouseExpand'),
+            handle: 'Why should I use ClickHouse vs. X database?',
+            children: (
+              <p>
+                ClickHouse is faster than most traditional data warehouses and
+                databases and is most often used when real-time queries on large
+                datasets are necessary at an affordable cost. However,
+                developers also often use ClickHouse on top of their CDWH or
+                OLTP databases to act as a “speed layer” within their existing
+                infrastructure.
+              </p>
+            )
+          },
+          {
+            onOpen: useGalaxyOnClick('homePage.faqSection.olapOverviewExpand'),
+            handle: 'What is OLAP?',
+            children: (
+              <p>
+                OLAP stands for “online analytical processing” which contrasts
+                from OLTP, or “online transaction processing.” As the name
+                suggests, OLAP databases perform significantly better compared
+                to OLTP databases for analytical workloads common with large
+                datasets.
+              </p>
+            )
+          },
+          {
+            onOpen: useGalaxyOnClick('homePage.faqSection.largeDataExpand'),
+            handle: 'How does ClickHouse handle large amounts of data?',
+            children: (
+              <p>
+                In order to easily process large amounts of data, ClickHouse
+                uses highly optimized compression techniques and vectorized
+                query execution to maximize CPU efficiency.
+              </p>
+            )
+          },
+          {
+            onOpen: useGalaxyOnClick('homePage.faqSection.'),
+            handle:
+              'How does ClickHouse support data visualization and analysis?',
+            children: (
+              <p>
+                ClickHouse supports connectors to many clients and drivers,
+                including common BI and data analysis tools. Please see{' '}
+                <Link
+                  href='/docs/en/integrations'
+                  className='text-primary-300 hover:underline'>
+                  this page
+                </Link>{' '}
+                for a complete list of supported integrations.
+              </p>
+            )
+          },
+          {
+            onOpen: useGalaxyOnClick(
+              'homePage.faqSection.clickhouseCostExpand'
+            ),
+            handle: 'How much does ClickHouse cost?',
+            children: (
+              <p>
+                Self-managed ClickHouse is dependent on the cost of your compute
+                and data storage resources, as well as headcount necessary to
+                manage the ClickHouse deployment. For the most affordable way to
+                run ClickHouse, use{' '}
+                <Link
+                  href='https://console.clickhouse.cloud/signUp?loc=homepage-faq-accordion'
+                  className='text-primary-300 hover:underline'>
+                  ClickHouse Cloud
+                </Link>
+                , which starts at $50/month.
+              </p>
+            )
+          }
+        ]}
+      />
     </div>
   )
 }
