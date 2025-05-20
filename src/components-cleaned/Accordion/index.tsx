@@ -27,7 +27,7 @@ export default function Accordion({
   const hasMore = items.length > paged
   return (
     <div className={`space-y-6 ${className}`}>
-      {items.map((item, index) => {
+      {items.map(({ content, handle, prefix, ...item }, index) => {
         const paddedNumber = `${index + 1}`.padStart(
           items.length.toString().length + 1,
           '0'
@@ -35,12 +35,13 @@ export default function Accordion({
         return (
           <div key={index} className={index >= paged ? 'hidden' : 'block'}>
             <AccordionItem
-              handle={item.handle}
+              handle={handle}
               prefix={
-                item?.prefix ||
+                prefix ||
                 (numbered ? <NumberPrefix value={paddedNumber} /> : undefined)
-              }>
-              {item.content}
+              }
+              {...item}>
+              {content}
             </AccordionItem>
           </div>
         )
