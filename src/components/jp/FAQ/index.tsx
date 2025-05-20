@@ -33,7 +33,7 @@ export default function FAQ() {
         <CUILink
           href='/support/program/'
           target='_self'
-          className='mt-6 flex items-center justify-center gap-4 text-primary lg:justify-start'
+          className='mt-6 flex items-center justify-center gap-4 text-primary-300 hover:underline lg:justify-start'
           onClick={useGalaxyOnClick('homePage.faqSection.askAnythingSelect')}>
           <span>問い合わせる</span> <ExternalLinkIcon className='h-4 w-4' />
         </CUILink>
