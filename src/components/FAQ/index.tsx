@@ -41,7 +41,6 @@ export default function FAQ() {
       </div>
       <Accordion
         className='mx-auto w-full max-w-2xl lg:mr-0'
-        numbered={false}
         items={[
           {
             onOpen: useGalaxyOnClick('homePage.faqSection.whyClickhouseExpand'),
