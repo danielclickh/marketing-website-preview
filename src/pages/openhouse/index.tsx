@@ -16,7 +16,6 @@ import speakerDaleMcDiarmid from './assets/speaker-dale-mcdiarmid.png'
 import speakerJeanaChoi from './assets/speaker-jeana-choi.png'
 import speakerJohananOttensooser from './assets/speaker-johanan-ottensooser.png'
 import speakerKaushikIska from './assets/speaker-kaushik-iska.png'
-import speakerKevinWeil from './assets/speaker-kevin-weil.png'
 import speakerKrithikaBalagurunathan from './assets/speaker-krithika-balagurunathan.png'
 import speakerLukasBiewald from './assets/speaker-lukas-biewald.png'
 import speakerMartinCasado from './assets/speaker-martin-casado.png'
@@ -31,6 +30,7 @@ import speakerRiteshVaryani from './assets/speaker-ritesh-varyani.png'
 import speakerRobertSchulze from './assets/speaker-robert-schulze.png'
 import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
 import speakerSaiSrirampur from './assets/speaker-sai-srirampur.png'
+import speakerSrinivasNarayanan from './assets/speaker-srinivas-narayanan.png'
 import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
 import speakerVladSeliverstov from './assets/speaker-vlad-seliverstov.png'
 import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
@@ -93,9 +93,9 @@ const ALL_SPEAKERS: Array<{
     image: speakerAlexyMilovidov
   },
   {
-    name: 'Kevin Weil',
-    title: 'CPO, OpenAI',
-    image: speakerKevinWeil
+    name: 'Srinivas Narayanan',
+    title: 'VP of Engineering, OpenAI',
+    image: speakerSrinivasNarayanan
   },
   {
     name: 'Jeana Choi',
@@ -300,8 +300,8 @@ const AGENDA: Array<{
             <strong>
               <u>Poom Chiarawongse</u>{' '}
             </strong>
-            from OpenAI, will walk through their use cases
-            and how ClickHouse helped them in their journey.
+            from OpenAI, will walk through their use cases and how ClickHouse
+            helped them in their journey.
           </li>
           <li>
             <em>Stay tuned for additional keynote speaker announcements!</em>
@@ -518,12 +518,12 @@ const AGENDA: Array<{
     title: 'Fireside chat',
     description: (
       <p>
-        As AI and ML workloads explode, data requirements are evolving quickly.{' '}
+        As AI and ML workloads explode, data requirements are evolving quickly.
         Hear from{' '}
         <strong>
-          <u>Kevin Weil</u>
+          <u>Srinivas Narayanan</u>
         </strong>
-        , CPO at OpenAI,{' '}
+        , VP of Engineering at OpenAI,{' '}
         <strong>
           <u>Martin Casado</u>
         </strong>
