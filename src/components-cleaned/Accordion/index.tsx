@@ -25,11 +25,14 @@ export default function Accordion({
   perPage = perPage || items.length
   const [paged, setPaged] = useState<number>(perPage)
   const hasMore = items.length > paged
+  const numberedPrefixLength = items.length.toString().length
   return (
     <div className={`space-y-6 ${className}`}>
       {items.map(({ content, handle, prefix, ...item }, index) => {
         const paddedNumber = `${index + 1}`.padStart(
-          items.length.toString().length + 1,
+          numberedPrefixLength < 2
+            ? numberedPrefixLength + 1
+            : numberedPrefixLength,
           '0'
         )
         return (
