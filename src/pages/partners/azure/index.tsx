@@ -4,6 +4,7 @@ import iconCode from './assets/icon-code.svg'
 import logoAstronomer from './assets/logo-astronomer.svg'
 import logoBaxenergy from './assets/logo-baxenergy.svg'
 import logoMicrosoft from './assets/logo-microsoft.svg'
+import Accordion from '@/components-cleaned/Accordion'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import ClickHousePartnerLogo from '@/components/ClickHousePartnerLogo'
 import { CUIButton, CUILink } from '@/components/ClickUI'
@@ -485,7 +486,7 @@ export default function Page({
 
       {/* FAQs */}
       <div className='bg-shadow-element relative mx-auto mb-20 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'>
-        <div className='pb-10 text-center'>
+        <div className='pb-10 text-center lg:text-left'>
           <div className='lg:sticky lg:top-32'>
             <Image
               src='/faq-icon.svg'
@@ -494,138 +495,164 @@ export default function Page({
               height={72}
               className='mx-auto lg:mx-0'
             />
-            <SuiTitle type='h2' className='my-6 lg:text-left'>
+            <SuiTitle type='h2' className='my-6'>
               FAQ: Azure + ClickHouse
             </SuiTitle>
-            <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
+            <div className='mx-auto max-w-md text-neutral-200'>
               Discover everything you need to know about using ClickHouse on
               Azure. From deployment options and integration with Azure tools to
               performance, pricing, and support, this FAQ section answers your
               most pressing questions and helps you get started with confidence.
             </div>
-            <CUILink
+            <Link
               href='/support/program/'
               target='_self'
-              className='mt-6 flex items-center justify-center gap-4 text-primary lg:justify-start'
+              className='mt-6 inline-flex items-center gap-4 text-primary-300 hover:underline'
               onClick={useGalaxyOnClick(
                 'azurePartnersPage.faqSection.askAnythingSelect'
               )}>
               <span>Ask us anything</span>{' '}
               <ExternalLinkIcon className='h-4 w-4' />
-            </CUILink>
+            </Link>
           </div>
         </div>
-        <div className={`${styles.accordionContainer} !gap-3 lg:!gap-6`}>
-          <FaqItem title='What are the options to purchase ClickHouse on Azure?'>
-            <p>
-              You can sign up for ClickHouse Cloud directly, or you can sign up
-              through the{' '}
-              <Link
-                href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/clickhouse.clickhouse_cloud?tab=overview'
-                target='_blank'
-                className='text-primary-300 hover:underline'>
-                Azure Marketplace
-              </Link>
-              . Through the Marketplace, you’ll have unified billing along with
-              all your other Azure resources - your ClickHouse Cloud
-              organization and its resources are bound to your Azure
-              subscription. Our integration with the Azure Marketplace allows
-              you to either pay for your Azure consumption on a PAYG
-              (pay-as-you-go) basis, or sign a committed contract over a
-              specified period. If your organization has a pre-committed spend
-              agreement with Azure, you may be able to apply some of that
-              committed spend towards ClickHouse Cloud consumption on Azure.
-            </p>
-          </FaqItem>
-          <FaqItem title='What are the pricing options for ClickHouse on Azure?'>
-            <p>
-              Review our Azure pricing and estimate costs using our calculator{' '}
-              <Link
-                href='/pricing?provider=azure'
-                className='text-primary-300 hover:underline'>
-                here
-              </Link>
-              .
-            </p>
-          </FaqItem>
-
-          <FaqItem title='Which Azure regions are supported?'>
-            <p>
-              All supported Azure regions can be found{' '}
-              <Link
-                href='https://clickhouse.com/docs/cloud/reference/supported-regions#azure-regions'
-                className='text-primary-300 hover:underline'>
-                here
-              </Link>
-              .
-            </p>
-          </FaqItem>
-
-          <FaqItem title='How does the performance of ClickHouse on Azure compare to other CSPs ClickHouse supports?'>
-            <p>
-              Our Azure offering is on par with ClickHouse on AWS and GCP in
-              terms of performance. On a hot run we found Azure is faster
-              compared to GCP and AWS. On a cold run, Azure is faster than GCP
-              and slower than AWS. The public ClickBench performance results can
-              be found here{' '}
-              <Link
-                href='https://benchmark.clickhouse.com/'
-                className='text-primary-300 hover:underline'>
-                https://benchmark.clickhouse.com/
-              </Link>
-              .
-            </p>
-          </FaqItem>
-
-          <FaqItem
-            title='What types of security and compliance services does ClickHouse offer on Azure?
-'>
-            <p>
-              ClickHouse offers a 2024 SOC 2 Type II report and updated ISO
-              27001 certificate for its Azure services. HIPAA compliance is
-              currently only available on AWS and GCP for the Enterprise tier
-              but is on the roadmap for Azure.
-            </p>
-          </FaqItem>
-
-          <FaqItem title='What terms are supported for Azure Private offers?'>
-            <p>
-              Azure private offers can only be set up with 1 month and 1, 2, and
-              3 year terms.
-            </p>
-          </FaqItem>
-
-          <FaqItem title='What is the Microsoft Azure Consumption Commitment (MACC) program and is ClickHouse eligible?'>
-            <p>
-              Yes ClickHouse Cloud is eligible for the MACC program. This
-              program allows ClickHouse Cloud customers to leverage their
-              existing Microsoft Azure commit towards their usage of ClickHouse
-              Cloud. Only a select set of services and solutions on the Azure
-              marketplace qualify for this benefit, and our eligibility into the
-              MACC program strongly validates the value ClickHouse Cloud brings
-              to Azure customers. Learn more about ClickHouse and the MACC
-              program{' '}
-              <Link
-                href='/blog/clickhouse-cloud-microsoft-azure-consumption-commitment-eligble'
-                className='text-primary-300 hover:underline'>
-                here
-              </Link>
-              .
-            </p>
-          </FaqItem>
-
-          <FaqItem title='What integrations does ClickHouse Cloud offer with Azure?'>
-            <p>
-              ClickHouse Cloud integrates seamlessly into the Azure ecosystem.
-              Customers can directly query data in Azure Blob Storage using the
-              azureBlobStorage table function, or ingest data into ClickHouse
-              Cloud via ClickPipes using a supported source such as Azure Events
-              Hubs. We also recently launched a connector for Microsoft Power BI
-              which enables Azure customers to build visualizations and
-              business-level dashboards on top of data stored in ClickHouse.
-            </p>
-          </FaqItem>
-        </div>
+        <Accordion
+          className='mx-auto w-full max-w-2xl lg:mr-0'
+          items={[
+            {
+              handle: 'What are the options to purchase ClickHouse on Azure?',
+              content: (
+                <p>
+                  You can sign up for ClickHouse Cloud directly, or you can sign
+                  up through the{' '}
+                  <Link
+                    href='https://azuremarketplace.microsoft.com/en-us/marketplace/apps/clickhouse.clickhouse_cloud?tab=overview'
+                    target='_blank'
+                    className='text-primary-300 hover:underline'>
+                    Azure Marketplace
+                  </Link>
+                  . Through the Marketplace, you’ll have unified billing along
+                  with all your other Azure resources - your ClickHouse Cloud
+                  organization and its resources are bound to your Azure
+                  subscription. Our integration with the Azure Marketplace
+                  allows you to either pay for your Azure consumption on a PAYG
+                  (pay-as-you-go) basis, or sign a committed contract over a
+                  specified period. If your organization has a pre-committed
+                  spend agreement with Azure, you may be able to apply some of
+                  that committed spend towards ClickHouse Cloud consumption on
+                  Azure.
+                </p>
+              )
+            },
+            {
+              handle: 'What are the pricing options for ClickHouse on Azure?',
+              content: (
+                <p>
+                  Review our Azure pricing and estimate costs using our
+                  calculator{' '}
+                  <Link
+                    href='/pricing?provider=azure'
+                    className='text-primary-300 hover:underline'>
+                    here
+                  </Link>
+                  .
+                </p>
+              )
+            },
+            {
+              handle: 'Which Azure regions are supported?',
+              content: (
+                <p>
+                  All supported Azure regions can be found{' '}
+                  <Link
+                    href='https://clickhouse.com/docs/cloud/reference/supported-regions#azure-regions'
+                    className='text-primary-300 hover:underline'>
+                    here
+                  </Link>
+                  .
+                </p>
+              )
+            },
+            {
+              handle:
+                'How does the performance of ClickHouse on Azure compare to other CSPs ClickHouse supports?',
+              content: (
+                <p>
+                  Our Azure offering is on par with ClickHouse on AWS and GCP in
+                  terms of performance. On a hot run we found Azure is faster
+                  compared to GCP and AWS. On a cold run, Azure is faster than
+                  GCP and slower than AWS. The public ClickBench performance
+                  results can be found here{' '}
+                  <Link
+                    href='https://benchmark.clickhouse.com/'
+                    className='text-primary-300 hover:underline'>
+                    https://benchmark.clickhouse.com/
+                  </Link>
+                  .
+                </p>
+              )
+            },
+            {
+              handle:
+                'What types of security and compliance services does ClickHouse offer on Azure?',
+              content: (
+                <p>
+                  ClickHouse offers a 2024 SOC 2 Type II report and updated ISO
+                  27001 certificate for its Azure services. HIPAA compliance is
+                  currently only available on AWS and GCP for the Enterprise
+                  tier but is on the roadmap for Azure.
+                </p>
+              )
+            },
+            {
+              handle: 'What terms are supported for Azure Private offers?',
+              content: (
+                <p>
+                  Azure private offers can only be set up with 1 month and 1, 2,
+                  and 3 year terms.
+                </p>
+              )
+            },
+            {
+              handle:
+                'What is the Microsoft Azure Consumption Commitment (MACC) program and is ClickHouse eligible?',
+              content: (
+                <p>
+                  Yes ClickHouse Cloud is eligible for the MACC program. This
+                  program allows ClickHouse Cloud customers to leverage their
+                  existing Microsoft Azure commit towards their usage of
+                  ClickHouse Cloud. Only a select set of services and solutions
+                  on the Azure marketplace qualify for this benefit, and our
+                  eligibility into the MACC program strongly validates the value
+                  ClickHouse Cloud brings to Azure customers. Learn more about
+                  ClickHouse and the MACC program{' '}
+                  <Link
+                    href='/blog/clickhouse-cloud-microsoft-azure-consumption-commitment-eligble'
+                    className='text-primary-300 hover:underline'>
+                    here
+                  </Link>
+                  .
+                </p>
+              )
+            },
+            {
+              handle:
+                'What integrations does ClickHouse Cloud offer with Azure?',
+              content: (
+                <p>
+                  ClickHouse Cloud integrates seamlessly into the Azure
+                  ecosystem. Customers can directly query data in Azure Blob
+                  Storage using the azureBlobStorage table function, or ingest
+                  data into ClickHouse Cloud via ClickPipes using a supported
+                  source such as Azure Events Hubs. We also recently launched a
+                  connector for Microsoft Power BI which enables Azure customers
+                  to build visualizations and business-level dashboards on top
+                  of data stored in ClickHouse.
+                </p>
+              )
+            }
+          ]}
+        />
       </div>
 
       <HRSeparator className='!max-w-none' />
@@ -692,47 +719,5 @@ function TickItem({
         <span className='text-xs md:text-base'>{description}</span>
       </div>
     </div>
-  )
-}
-
-function FaqItem({
-  title,
-  content,
-  children
-}: {
-  title: string
-  content?: string
-  children?: React.ReactNode
-}) {
-  return (
-    <Disclosure as='div' className={styles.accordion}>
-      {({ open }) => (
-        <>
-          <div>
-            <Disclosure.Button className='relative z-10 grid w-full grid-cols-[1fr_1rem] items-center justify-between gap-x-6 rounded-lg p-4 pl-20 pr-6 text-left font-medium text-neutral-200 hover:text-neutral-0 focus:outline-none'>
-              <span className='text-md'>{title}</span>
-              <span className={styles.plusMinus} data-active={open} />
-            </Disclosure.Button>
-          </div>
-          <Transition
-            show={open}
-            className='h-full'
-            enter='transition-[max-height] duration-300 ease-in-out'
-            enterFrom='max-h-0 opacity-0'
-            enterTo='max-h-fit opacity-100'
-            leave='transition-[max-height] duration-300 ease-in-out'
-            leaveFrom='max-h-fit opacity-100'
-            leaveTo='max-h-0 opacity-0'>
-            <Disclosure.Panel
-              className={`home-faqs pb-4 pl-20 pr-4 text-sm text-neutral-200 transition-opacity duration-100 ${
-                open ? 'opacity-100' : 'opacity-0'
-              }`}>
-              {content && <Markdown>{content}</Markdown>}
-              {children}
-            </Disclosure.Panel>
-          </Transition>
-        </>
-      )}
-    </Disclosure>
   )
 }
