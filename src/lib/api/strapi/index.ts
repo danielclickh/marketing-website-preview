@@ -31,7 +31,7 @@ export function getUnlistedFilters() {
   return [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
 }
 
-export function getStrapiMediaUrl(path: string | null = '') {
+export function getAbsoluteMediaUrl(path: string | null = '') {
   if (!path) path = ''
 
   // In case of already absolute URL
@@ -39,15 +39,14 @@ export function getStrapiMediaUrl(path: string | null = '') {
     return path
   }
 
-  let url =
-    process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL || `${strapiApiUrl}/uploads/`
+  let url = strapiApiUrl
   url = url.replace(/\/$/, '')
   path = path.replace(/^\//, '')
   return `${url}/${path}`
 }
 
 export function getRelativeMediaUrl(path: string) {
-  path = getStrapiMediaUrl(path)
+  path = getAbsoluteMediaUrl(path)
 
   const base =
     process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL || `${strapiApiUrl}/uploads/`
