@@ -1,3 +1,4 @@
+import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const revalidate = async (
@@ -136,7 +137,35 @@ const CONTENT_TYPE_HANDLERS: Record<
    */
   'api::blog.blog': async function (body, response) {
     const paths = [`/blog`, `/jp/blog`]
-    // @todo revalidate all individual blogs that use `CloudCTAHeader` or `CloudCTAFooter`
+
+    const data = await fetchAll('blog-posts', {
+      filters: {
+        $or: [
+          {
+            CloudCTAHeader: {
+              $eq: true
+            }
+          },
+          {
+            CloudCTAFooter: {
+              $eq: true
+            }
+          }
+        ]
+      },
+      fields: ['slug', 'category']
+    })
+
+    if (data) {
+      data.forEach((post) => {
+        if (post.category === 'Japanese') {
+          paths.push(`/jp/blog/${post.slug}`)
+        } else {
+          paths.push(`/blog/${post.slug}`)
+        }
+      })
+    }
+
     await revalidate(response, paths)
   },
   'api::career.career': async function (body, response) {
