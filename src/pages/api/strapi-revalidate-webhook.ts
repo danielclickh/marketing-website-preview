@@ -30,7 +30,7 @@ const CONTENT_TYPE_HANDLERS: Record<
    * -----
    */
   'api::blog-post.blog-post': async function (body, response) {
-    const paths = [`/sitemap`]
+    const paths = [`/sitemap` /*`/blog`*/]
 
     if (body?.entry?.slug) {
       paths.push(`/blog/${body.entry.slug}`)
@@ -136,7 +136,9 @@ const CONTENT_TYPE_HANDLERS: Record<
    * -----
    */
   'api::blog.blog': async function (body, response) {
-    const paths = [`/blog`, `/jp/blog`]
+    const paths: Array<string> = [
+      /*`/blog`, `/jp/blog`*/
+    ]
 
     const data = await fetchAll('blog-posts', {
       filters: {
