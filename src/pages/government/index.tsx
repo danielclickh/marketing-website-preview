@@ -509,7 +509,9 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         innerRef={modalInnerRef}>
-        <Form wrapped={false} />
+        <div className='px-8 sm:min-w-80'>
+          <Form wrapped={false} />
+        </div>
       </Modal>
     </Layout>
   )
