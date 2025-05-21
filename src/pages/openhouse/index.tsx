@@ -399,8 +399,8 @@ const AGENDA: Array<{
             <strong>
               <u>Maruth Goyal</u>
             </strong>
-            , Member of Technical Staff at Anthropic will share how they
-            migrated their logging backend from Splunk to ClickHouse.
+            , Member of Technical Staff at Anthropic will share how Clickhouse
+            is used to improve Observability.
           </li>
           <li>
             <em>
