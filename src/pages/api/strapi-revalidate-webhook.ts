@@ -105,12 +105,12 @@ const CONTENT_TYPE_HANDLERS: Record<
     body,
     response
   ) {
-    const paths = [`/pricing`, `/jp/pricing`]
-    await revalidate(response, paths)
+    // const paths = [`/pricing`, `/jp/pricing`]
+    // await revalidate(response, paths)
   },
   'api::pricing-plan.pricing-plan': async function (body, response) {
-    const paths = [`/pricing`, `/jp/pricing`]
-    await revalidate(response, paths)
+    // const paths = [`/pricing`, `/jp/pricing`]
+    // await revalidate(response, paths)
   },
   'api::rich-content-page.rich-content-page': async function (body, response) {
     const paths = [`/sitemap`]
@@ -258,12 +258,12 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::pricing.pricing': async function (body, response) {
-    const paths = [`/pricing`, `/jp/pricing`]
-    await revalidate(response, paths)
+    // const paths = [`/pricing`, `/jp/pricing`]
+    // await revalidate(response, paths)
   },
   'api::pricing-v2.pricing-v2': async function (body, response) {
-    const paths = [`/pricing`, `/jp/pricing`]
-    await revalidate(response, paths)
+    // const paths = [`/pricing`, `/jp/pricing`]
+    // await revalidate(response, paths)
   },
   'api::service-unavailable-country.service-unavailable-country':
     async function (body, response) {
