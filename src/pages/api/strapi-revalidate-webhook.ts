@@ -142,12 +142,12 @@ const CONTENT_TYPE_HANDLERS: Record<
       filters: {
         $or: [
           {
-            CloudCTAHeader: {
+            ShowCloudCTAHeader: {
               $eq: true
             }
           },
           {
-            CloudCTAFooter: {
+            ShowCloudCTAFooter: {
               $eq: true
             }
           }
