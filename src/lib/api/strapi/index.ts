@@ -31,6 +31,35 @@ export function getUnlistedFilters() {
   return [{ unlisted: { $null: true } }, { unlisted: { $eq: false } }]
 }
 
+export function getAbsoluteMediaUrl(path: string | null = '') {
+  if (!path) path = ''
+
+  // In case of already absolute URL
+  if (path.startsWith('http') || path.startsWith('//')) {
+    return path
+  }
+
+  let url = strapiApiUrl
+  url = url.replace(/\/$/, '')
+  path = path.replace(/^\//, '')
+  return `${url}/${path}`
+}
+
+export function getRelativeMediaUrl(path: string) {
+  path = getAbsoluteMediaUrl(path)
+
+  const base =
+    process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL || `${strapiApiUrl}/uploads/`
+
+  if (base.trim().length && path.startsWith(base)) {
+    path = path.replace(base, '')
+    path = path.replace(/^\//, '')
+    path = `/uploads/${path}`
+  }
+
+  return path
+}
+
 export async function getPathsValues(
   pathName: string,
   obj: Record<string, any>,

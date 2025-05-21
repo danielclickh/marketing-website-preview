@@ -27,7 +27,6 @@ import { findAll, findOne } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import {
   ComparisonPage,
   ComparisonProps,
@@ -67,8 +66,7 @@ export async function getStaticProps() {
 
   if (!data?.[0]) {
     return {
-      notFound: true,
-      revalidate: REVALIDATE_SECONDS
+      notFound: true
     }
   }
 
@@ -95,8 +93,7 @@ export async function getStaticProps() {
   }
 
   return {
-    props,
-    revalidate: REVALIDATE_SECONDS
+    props
   }
 }
 

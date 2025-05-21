@@ -11,7 +11,6 @@ import { StrapiImage } from '@/components/StrapiElements'
 import { findAll } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import { ComparisonProps } from '@/types/comparisons'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -62,8 +61,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     })
     if (!data?.[0]) {
       return {
-        notFound: true,
-        revalidate: REVALIDATE_SECONDS
+        notFound: true
       }
     }
 
@@ -81,8 +79,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
         seo,
         newsLetterData,
         ...commonData
-      },
-      revalidate: REVALIDATE_SECONDS
+      }
     }
   }
 

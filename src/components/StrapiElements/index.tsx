@@ -36,7 +36,7 @@ export function StrapiImageUrl({
 }
 
 export function StrapiImage({ mime, ...props }: StrapiImageProps) {
-  if (!mime.includes('svg')) {
+  if (!mime.includes('svg') || !props.svgText) {
     return <StrapiImageUrl {...props} />
   }
 

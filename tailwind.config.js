@@ -11,8 +11,7 @@ module.exports = {
     })
   ],
   content: [
-    './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/pages/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/primereact/**/*.{js,ts,jsx,tsx}'
   ],
   safelist: ['py-[6px]', 'py-[1px]'],

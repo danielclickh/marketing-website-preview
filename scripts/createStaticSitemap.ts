@@ -30,6 +30,10 @@ interface Items {
   title?: string
 }
 
+interface BlogItems extends Items {
+  category: string
+}
+
 function log(message: string) {
   console.log(`[${new Date().toTimeString()}] ${message}`)
 }
@@ -39,7 +43,7 @@ function warn(message: string) {
 }
 
 function generateSiteMap(
-  blogPosts: Items[],
+  blogPosts: BlogItems[],
   events: Items[],
   comparisons: Items[],
   richTextPages: Items[],
@@ -74,6 +78,15 @@ function generateSiteMap(
     </url>
     <url>
         <loc>${siteURL}/cloud/clickpipes</loc>
+    </url>
+    <url>
+        <loc>${siteURL}/cloud/clickpipes/azure-blob-storage-connector</loc>
+    </url>
+    <url>
+        <loc>${siteURL}/cloud/clickpipes/mysql-cdc-connector</loc>
+    </url>
+    <url>
+        <loc>${siteURL}/cloud/clickpipes/postgres-cdc-connector</loc>
     </url>
     <url>
         <loc>${siteURL}/cloud/bring-your-own-cloud</loc>
@@ -157,9 +170,10 @@ function generateSiteMap(
     </url>
     ${blogPosts
       .map((post) => {
+        const prefix = post.category === 'Japanese' ? '/jp' : ''
         return `
     <url>
-        <loc>${siteURL}/blog/${post.slug}</loc>
+        <loc>${siteURL}${prefix}/blog/${post.slug}</loc>
         <lastmod>${post.updatedAt}</lastmod>
     </url>
     `
@@ -242,7 +256,14 @@ async function triggerSitemap() {
   log('Fetching blogs')
   const blogPosts = await fetchAll('blog-posts', {
     sort: ['date:DESC', 'publishedAt:DESC'],
-    fields: ['createdAt', 'updatedAt', 'publishedAt', 'slug', 'date'],
+    fields: [
+      'createdAt',
+      'updatedAt',
+      'publishedAt',
+      'slug',
+      'date',
+      'category'
+    ],
     filters: { $or: stagingOnlyFilters }
   })
 
