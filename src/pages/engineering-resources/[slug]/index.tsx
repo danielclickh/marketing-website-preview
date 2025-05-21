@@ -13,7 +13,6 @@ import {
 } from '@/lib/engineering-resources'
 import { EngineeringResource } from '@/lib/engineering-resources/types'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { REVALIDATE_SECONDS } from '@/lib/utils/revalidationConfig'
 import { CommonProps, NewsLetterData } from '@/types/homepage'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
@@ -76,14 +75,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
 
     return {
-      props,
-      revalidate: REVALIDATE_SECONDS
+      props
     }
   }
 
   return {
-    notFound: true,
-    revalidate: REVALIDATE_SECONDS
+    notFound: true
   }
 }
 
