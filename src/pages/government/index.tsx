@@ -9,7 +9,9 @@ import FitText from '@/components/FitText'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import MarketoForm from '@/components/MarketoForm'
+import Modal from '@/components/Modal'
 import { SuiText, SuiTitle } from '@/components/sui'
+import { useClickOutside } from '@/hooks'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -27,7 +29,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           title:
             'ClickHouse Government — Blazing fast queries and resource efficiency for mission critical analytics.',
           description:
-            'Deploy the full power of ClickHouse Cloud on any government network, including FedRAMP Moderate, High, and IL levels 2-6. Benefit from included NIST 800-53 compliance documentation for simplified ATO. Initially available for AWS government users, this offering delivers all ClickHouse Cloud features with enhanced security, including FIPS 140-3 support.',
+            'Deploy ClickHouse Government self-managed on AWS for government networks (FedRAMP, IL2-6). Get ATO documentation & FIPS 140-3 support.',
+          keywords:
+            'ClickHouse Government, self-managed ClickHouse, ClickHouse AWS, government data platform, FedRAMP Moderate, FedRAMP High, IL2, IL3, IL4, IL5, IL6, ATO documentation, Authority to Operate, NIST 800-53, FIPS 140-3, secure data analytics, real-time analytics government, on-premise cloud, private cloud government, customer-managed database, cloud database government',
           path: '/government',
           image: [{ url: '/images/social-government.jpg' }]
         },
@@ -37,6 +41,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function Page({ seo, headerData, footerData }: CommonProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const modalInnerRef = useRef<HTMLDivElement | null>(null)
+
+  useClickOutside(modalInnerRef, () => {
+    setIsModalOpen(false)
+  })
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -218,7 +229,10 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               ClickHouse Cloud features with enhanced security, including FIPS
               140-3 support.
             </SuiText>
-            <CUIButton type='primary' className='inline-block'>
+            <CUIButton
+              type='primary'
+              className='inline-block'
+              onClick={() => setIsModalOpen(true)}>
               Join the waitlist
             </CUIButton>
           </div>
@@ -489,16 +503,24 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
           </div>
         </div>
       </section>
+
+      {/* Form modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        innerRef={modalInnerRef}>
+        <Form wrapped={false} />
+      </Modal>
     </Layout>
   )
 }
 
-function Form() {
+function Form({ wrapped = true }: { wrapped?: boolean }) {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   return (
-    <div className='rounded-lg bg-neutral-900 p-8'>
+    <div className={wrapped ? 'rounded-lg bg-neutral-900 p-8' : ''}>
       {!formSuccess && (
         <MarketoForm
           formId='1391'
