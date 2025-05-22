@@ -235,9 +235,16 @@ function Sitemap({
               </p>
               <p className='pb-2'>
                 <Link
-                  href={'/company/news-events'}
+                  href={'/company/events'}
                   className='text-primary-300 hover:underline'>
-                  News and events
+                  Events
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
+                  href={'/company/news'}
+                  className='text-primary-300 hover:underline'>
+                  News
                 </Link>
               </p>
             </div>
@@ -440,16 +447,9 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='/company/news-events?category=Free+Training#upcoming-events'
+                    href='/company/events?category=Free+Training#upcoming-events'
                     className='font text-primary-300 hover:underline'>
                     Upcoming training
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/company/news-events'
-                    className='font text-primary-300 hover:underline'>
-                    News and events
                   </Link>
                 </li>
                 <li>
@@ -457,6 +457,13 @@ function Sitemap({
                     href='/videos?category=how-to'
                     className='font text-primary-300 hover:underline'>
                     How to videos
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/company/events'
+                    className='font text-primary-300 hover:underline'>
+                    Events
                   </Link>
                 </li>
               </ul>

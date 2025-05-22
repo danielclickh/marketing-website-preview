@@ -494,6 +494,11 @@ const nextConfig = {
         source: '/media',
         destination: 'https://brandfolder.com/clickhouse/media-kit',
         permanent: true
+      },
+      {
+        source: '/company/news-events',
+        destination: '/company/events',
+        permanent: true
       }
     ]
   }

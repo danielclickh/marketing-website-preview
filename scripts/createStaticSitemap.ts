@@ -95,7 +95,10 @@ function generateSiteMap(
         <loc>${siteURL}/company/contact</loc>
     </url>
     <url>
-        <loc>${siteURL}/company/news-events</loc>
+        <loc>${siteURL}/company/events</loc>
+    </url>
+    <url>
+        <loc>${siteURL}/company/news</loc>
     </url>
     <url>
         <loc>${siteURL}/company/our-story</loc>
