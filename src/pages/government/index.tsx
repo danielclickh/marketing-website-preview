@@ -578,7 +578,7 @@ function Form({
   const [formLoaded, setFormLoaded] = useState(false)
   return (
     <div
-      className={`flex min-h-[560px] flex-col ${wrapped ? 'rounded-lg bg-neutral-900 p-8 shadow-lg' : ''} ${className}`}>
+      className={`flex min-h-[688px] flex-col ${wrapped ? 'rounded-lg bg-neutral-900 p-8 shadow-lg' : ''} ${className}`}>
       {!formSuccess && (
         <>
           {beforeForm}
