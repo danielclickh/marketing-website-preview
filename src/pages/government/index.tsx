@@ -78,14 +78,14 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                   <CheckItem>
                     Deploy <strong>self-managed on AWS</strong> within any{' '}
                     <br />
-                    government network (FedRAMP, IL2-6).
+                    government network (FedRAMP, IL2,4,5,6).
                   </CheckItem>
                 </li>
                 <li>
                   <CheckItem>
                     Access{' '}
                     <strong>
-                      NIST 800-53 compliance <br />
+                      NIST 800-53 (Risk Management Framework) compliance 
                       documentation
                     </strong>{' '}
                     and robust <strong>FIPS 140-3 support</strong>.

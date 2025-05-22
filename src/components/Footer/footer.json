@@ -25,6 +25,13 @@
         "galaxyEvent": "footerNav.productMenu.byocSelect"
       },
       {
+        "id": 301,
+        "name": "ClickHouse Government",
+        "href": "/government",
+        "target": "_self",
+        "galaxyEvent": "footerNav.productMenu.governmentSelect"
+      },
+      {
         "id": 22,
         "name": "ClickHouse Keeper",
         "href": "/clickhouse/keeper",
