@@ -193,6 +193,13 @@ function Sitemap({
               </p>
               <p className='pb-2'>
                 <Link
+                  href={'/government?loc=sitemap'}
+                  className='text-primary-300 hover:underline'>
+                  ClickHouse Government
+                </Link>
+              </p>
+              <p className='pb-2'>
+                <Link
                   href={'/real-time-data-warehouse?loc=sitemap'}
                   className='text-primary-300 hover:underline'>
                   Real-time Data Warehouse

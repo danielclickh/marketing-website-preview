@@ -909,11 +909,14 @@ a.arrow-link {
 
 /**
  ================================
- Marketo: Bring Your Own Cloud (BYOC)
+ Marketo Forms:
+   - Bring Your Own Cloud (BYOC)
+   - Government Waitlist
  ================================
  */
 
-form.mktoForm#mktoForm_1135 {
+form.mktoForm#mktoForm_1135,
+form.mktoForm#mktoForm_1391 {
   label#LblmiscBlankField15 + .mktoGutter + .mktoRadioList {
     @apply flex flex-row flex-nowrap items-stretch gap-2 pt-1;
 
@@ -943,6 +946,10 @@ form.mktoForm#mktoForm_1135 {
 
     input[value='Azure'] {
       background-image: url('/marketo-inputs/1135-azure.svg');
+    }
+
+    input[value='Other'] {
+      background-image: url('/marketo-inputs/1135-other.svg');
     }
   }
 }
