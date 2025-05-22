@@ -60,8 +60,9 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             '--left-side': 'auto'
           } as React.CSSProperties
         }>
-        <div className='section-container relative z-10'>
-          <div className='flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:gap-16'>
+        <div className='relative z-10'>
+          <div className='absolute bottom-4 left-0 z-0 aspect-[1512/524] w-full bg-contain bg-center bg-no-repeat lg:bg-speed-lines' />
+          <div className='section-container relative z-10 flex flex-wrap justify-between gap-12 lg:flex-nowrap lg:gap-16'>
             {/* Content column */}
             <div className='mx-auto w-full max-w-lg space-y-6 text-center text-neutral-200 lg:ml-0 lg:w-1/2 lg:pr-9 lg:text-left'>
               <SuiTitle type='h1' className='text-white'>
