@@ -104,6 +104,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             {/* Form column */}
             <div className='w-full lg:w-1/2 2xl:max-w-[578px]'>
               <Form
+                className='min-h-[688px]'
                 beforeForm={
                   <SuiTitle type='h3' className='mb-6 text-center'>
                     Join the ClickHouse Government waitlist
@@ -578,7 +579,7 @@ function Form({
   const [formLoaded, setFormLoaded] = useState(false)
   return (
     <div
-      className={`flex min-h-[688px] flex-col ${wrapped ? 'rounded-lg bg-neutral-900 p-8 shadow-lg' : ''} ${className}`}>
+      className={`flex flex-col ${wrapped ? 'rounded-lg bg-neutral-900 p-8 shadow-lg' : ''} ${className}`}>
       {!formSuccess && (
         <>
           {beforeForm}
