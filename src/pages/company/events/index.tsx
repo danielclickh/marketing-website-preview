@@ -61,6 +61,7 @@ export const getStaticProps: GetStaticProps<EventsPageProps> =
       events
     ])
 
+    seo.title = 'Events - ClickHouse'
     seo.path = '/company/events'
 
     let featuredEvent: EventType | undefined
