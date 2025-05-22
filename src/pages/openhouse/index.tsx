@@ -411,8 +411,8 @@ const AGENDA: Array<{
             <strong>
               <u>Maruth Goyal</u>
             </strong>
-            , Member of Technical Staff at Anthropic will share how Clickhouse
-            is used to improve Observability.
+            , Member of Technical Staff at Anthropic will share how ClickHouse
+            is used to improve observability.
           </li>
           <li>
             <em>
