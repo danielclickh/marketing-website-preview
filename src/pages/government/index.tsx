@@ -545,9 +545,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
           <SuiTitle type='h2' className='mb-12 text-center lg:mb-20'>
             Join the ClickHouse Government waitlist
           </SuiTitle>
-          <div className='mx-auto max-w-[578px]'>
-            <Form />
-          </div>
+          <Form className='mx-auto w-full max-w-[578px]' />
         </div>
       </section>
 
@@ -566,10 +564,12 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
 
 function Form({
   wrapped = true,
+  className = '',
   beforeForm,
   afterForm
 }: {
   wrapped?: boolean
+  className?: string
   beforeForm?: React.ReactNode
   afterForm?: React.ReactNode
 }) {
@@ -577,7 +577,8 @@ function Form({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   return (
-    <div className={wrapped ? 'rounded-lg bg-neutral-900 p-8' : ''}>
+    <div
+      className={`flex min-h-[560px] flex-col ${wrapped ? 'rounded-lg bg-neutral-900 p-8 shadow-lg' : ''} ${className}`}>
       {!formSuccess && (
         <>
           {beforeForm}
@@ -604,10 +605,12 @@ function Form({
         </>
       )}
 
-      {!formLoaded && <div className='text-center'>Loading form...</div>}
+      {!formLoaded && (
+        <div className='my-auto text-center'>Loading form...</div>
+      )}
 
       {formSuccess && (
-        <div ref={formSuccessRef} className='py-20 text-center'>
+        <div ref={formSuccessRef} className='my-auto text-center'>
           <h3 className='text-2xl font-bold'>Thank you!</h3>
           <p className='mt-2 text-neutral-200'>We'll be in touch shortly.</p>
         </div>
