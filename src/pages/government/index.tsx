@@ -78,7 +78,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                   <CheckItem>
                     Deploy <strong>self-managed on AWS</strong> within any{' '}
                     <br />
-                    government network (FedRAMP, IL2,4,5,6).
+                    government network (FedRAMP, IL2, 4, 5, 6).
                   </CheckItem>
                 </li>
                 <li>
