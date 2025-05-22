@@ -8,6 +8,7 @@ import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
 import speakerAlanBraithwaite from './assets/speaker-alan-braithwaite.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
+import speakerArunmozhiRa from './assets/speaker-arunmozhi-ra.png'
 import speakerArupMalakar from './assets/speaker-arup-malakar.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
 import speakerChrisCrane from './assets/speaker-chris-crane.png'
@@ -32,6 +33,7 @@ import speakerRyadhDahimene from './assets/speaker-ryadh-dahimene.png'
 import speakerSaiSrirampur from './assets/speaker-sai-srirampur.png'
 import speakerSrinivasNarayanan from './assets/speaker-srinivas-narayanan.png'
 import speakerTanyaBragin from './assets/speaker-tanya-bragin.png'
+import speakerVinayakSaokar from './assets/speaker-vinayak-saokar.png'
 import speakerVladSeliverstov from './assets/speaker-vlad-seliverstov.png'
 import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
@@ -171,6 +173,16 @@ const ALL_SPEAKERS: Array<{
     name: 'Mike Driscoll',
     title: 'Co-Founder, CEO, Rill Data',
     image: speakerMikeDriscoll
+  },
+  {
+    name: 'Vinayak Saokar',
+    title: 'VP of Engineering, Exabeam',
+    image: speakerVinayakSaokar
+  },
+  {
+    name: 'Arunmozhi RA',
+    title: 'Senior Software Engineer, Exabeam',
+    image: speakerArunmozhiRa
   },
   {
     name: 'Robert Schulze',
@@ -399,8 +411,8 @@ const AGENDA: Array<{
             <strong>
               <u>Maruth Goyal</u>
             </strong>
-            , Member of Technical Staff at Anthropic will share how they
-            migrated their logging backend from Splunk to ClickHouse.
+            , Member of Technical Staff at Anthropic will share how ClickHouse
+            is used to improve observability.
           </li>
           <li>
             <em>
