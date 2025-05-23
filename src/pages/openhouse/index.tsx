@@ -155,16 +155,6 @@ const ALL_SPEAKERS: Array<{
     image: speakerPoomChiarawongse
   },
   {
-    name: 'Chris Crane',
-    title: 'Co-Founder & CPO, FiveOneFour',
-    image: speakerChrisCrane
-  },
-  {
-    name: 'Johanan Ottensooser',
-    title: 'AI Product Manager, FiveOneFour',
-    image: speakerJohananOttensooser
-  },
-  {
     name: 'Vinayak Saokar',
     title: 'VP of Engineering, Exabeam',
     image: speakerVinayakSaokar
@@ -173,6 +163,16 @@ const ALL_SPEAKERS: Array<{
     name: 'Arunmozhi RA',
     title: 'Senior Software Engineer, Exabeam',
     image: speakerArunmozhiRa
+  },
+  {
+    name: 'Chris Crane',
+    title: 'Co-Founder & CPO, FiveOneFour',
+    image: speakerChrisCrane
+  },
+  {
+    name: 'Johanan Ottensooser',
+    title: 'AI Product Manager, FiveOneFour',
+    image: speakerJohananOttensooser
   },
   {
     name: 'Alan Braithwaite',
@@ -315,9 +315,6 @@ const AGENDA: Array<{
             from OpenAI, will walk through their use cases and how ClickHouse
             helped them in their journey.
           </li>
-          <li>
-            <em>Stay tuned for additional keynote speaker announcements!</em>
-          </li>
         </ul>
       </>
     )
@@ -380,12 +377,6 @@ const AGENDA: Array<{
             , Sr Software Engineer at Exabeam will present how they scale
             ClickHouse for their security operations platform.
           </li>
-          <li>
-            <em>
-              Stay tuned for an exciting customer speaker lineup in this{' '}
-              session!
-            </em>
-          </li>
         </ul>
       </>
     )
@@ -424,12 +415,6 @@ const AGENDA: Array<{
             </strong>
             , Member of Technical Staff at Anthropic will share how ClickHouse
             is used to improve observability.
-          </li>
-          <li>
-            <em>
-              Stay tuned for an exciting customer speaker lineup in this{' '}
-              session!
-            </em>
           </li>
         </ul>
       </>
