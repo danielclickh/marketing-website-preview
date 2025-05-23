@@ -12,15 +12,131 @@ import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import DotsContainer from '@/components/DotsContainer'
 import Layout from '@/components/Layout'
-import LinedIconCard from '@/components/LinedIconCard'
+import LinedIconCard, { LinedIconCardProps } from '@/components/LinedIconCard'
 import Parallax from '@/components/Parallax'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { AnimatePresence, motion } from 'motion/react'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
-import React, { CSSProperties, useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { CSSProperties, useEffect, useState } from 'react'
+
+type Tabs = 'mcp' | 'assistant'
+type Feature = Pick<LinedIconCardProps, 'icon' | 'title' | 'text'> & {
+  tab: Tabs
+}
+const featues: Array<Feature> = [
+  {
+    tab: 'assistant',
+    icon: 'chat-teardrop-text',
+    title: 'Natural language queries',
+    text: (
+      <>
+        Talk to your data, no SQL required.
+        <br />
+        Use the AI Assistant to ask questions in plain English and get fast,
+        accurate responses from your ClickHouse data—perfect for analysts, PMs,
+        or anyone without a technical background.
+      </>
+    )
+  },
+  {
+    tab: 'assistant',
+    icon: 'gear',
+    title: 'Structured & guided workflows',
+    text: (
+      <>
+        Built for real AI applications.
+        <br />
+        The MCP interface enables large language models like GPT-4 to follow
+        multi-step, structured workflows for querying, summarizing, and
+        interpreting data with precision.
+      </>
+    )
+  },
+  {
+    tab: 'assistant',
+    icon: 'lightning',
+    title: 'Real-time & in-place',
+    text: (
+      <>
+        Instant insights, without moving data.
+        <br />
+        Get answers on live data with sub-second latency. Because it runs
+        directly on ClickHouse in Azure, your queries stay fast—and your data
+        stays put.
+      </>
+    )
+  },
+  {
+    tab: 'assistant',
+    icon: 'lock',
+    title: 'Secure & scalable by design',
+    text: (
+      <>
+        AI that plays by enterprise rules.
+        <br />
+        Fully integrated with ClickHouse Cloud security: supports SSO, IP
+        filtering, Private Link, and data never leaves the Azure environment.
+      </>
+    )
+  },
+  {
+    tab: 'mcp',
+    icon: 'guage',
+    title: 'Item 1',
+    text: (
+      <>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
+        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
+        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
+        voluptatibus?
+      </>
+    )
+  },
+  {
+    tab: 'mcp',
+    icon: 'guage',
+    title: 'Item 2',
+    text: (
+      <>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
+        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
+        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
+        voluptatibus?
+      </>
+    )
+  },
+  {
+    tab: 'mcp',
+    icon: 'guage',
+    title: 'Item 3',
+    text: (
+      <>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
+        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
+        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
+        voluptatibus?
+      </>
+    )
+  },
+  {
+    tab: 'mcp',
+    icon: 'guage',
+    title: 'Item 4',
+    text: (
+      <>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
+        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
+        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
+        voluptatibus?
+      </>
+    )
+  }
+]
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -32,7 +148,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
             'ClickHouse.ai — Natural language & MCP interface for your data',
           description:
             'Leverage the power of natural language for your ClickHouse data with our AI Assistant and the versatile MCP interface. Enable advanced AI applications, real-time insights, and secure, scalable analytics directly in Azure.',
-          path: '/cloud/ai'
+          path: '/ai'
         },
         ...commonProps
       }
@@ -40,7 +156,20 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function Page({ seo, headerData, footerData }: CommonProps) {
-  const [activeTab, setActiveTab] = useState<'mcp' | 'assistant'>('assistant')
+  const [activeTab, setActiveTab] = useState<Tabs>('assistant')
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (
+        router.query?.feature &&
+        (router.query.feature === 'mcp' || router.query.feature === 'assistant')
+      ) {
+        setActiveTab(router.query.feature)
+      }
+    }
+  }, [router])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -71,7 +200,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               ClickHouse.ai
             </SuiTitle>
             <CUIButton
-              href='/cloud/ai#waitlist'
+              href='/ai#waitlist'
               type='primary'
               className='inline-block'
               linkClass='inline-block'
@@ -147,75 +276,44 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
         </div>
       </section>
 
-      {/* Cards  */}
-      <section className='relative z-10 bg-neutral-700 py-20'>
+      {/* Cards */}
+      <section className='relative z-10 bg-neutral-700 py-16 lg:py-20'>
         <div className='section-container'>
+          <div className='mx-auto mb-10 flex w-max lg:mb-16'>
+            <button
+              type='button'
+              className={`rounded rounded-r-none border px-5 py-1.5 text-sm transition-colors ${activeTab === 'mcp' ? 'border-primary-300 bg-[#2D2D2D]' : 'border-[#585858] bg-neutral-750 text-neutral-300 hover:text-white'}`}
+              onClick={(event) => {
+                event.preventDefault()
+                setActiveTab('mcp')
+              }}>
+              Remote MCP Server
+            </button>
+            <button
+              type='button'
+              className={`rounded rounded-l-none border px-5 py-1.5 text-sm transition-colors ${activeTab === 'assistant' ? 'border-primary-300 bg-[#2D2D2D]' : 'border-[#585858] bg-neutral-750 text-neutral-300 hover:text-white'}`}
+              onClick={(event) => {
+                event.preventDefault()
+                setActiveTab('assistant')
+              }}>
+              Agentic Ask AI
+            </button>
+          </div>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='chat-teardrop-text'
-                title='Natural language queries'
-                text={
-                  <>
-                    Talk to your data, no SQL required.
-                    <br />
-                    Use the AI Assistant to ask questions in plain English and
-                    get fast, accurate responses from your ClickHouse
-                    data—perfect for analysts, PMs, or anyone without a
-                    technical background.
-                  </>
-                }
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='gear'
-                title='Structured & guided workflows'
-                text={
-                  <>
-                    Built for real AI applications.
-                    <br />
-                    The MCP interface enables large language models like GPT-4
-                    to follow multi-step, structured workflows for querying,
-                    summarizing, and interpreting data with precision.
-                  </>
-                }
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='lightning'
-                title='Real-time & in-place'
-                text={
-                  <>
-                    Instant insights, without moving data.
-                    <br />
-                    Get answers on live data with sub-second latency. Because it
-                    runs directly on ClickHouse in Azure, your queries stay
-                    fast—and your data stays put.
-                  </>
-                }
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='lock'
-                title='Secure & scalable by design'
-                text={
-                  <>
-                    AI that plays by enterprise rules.
-                    <br />
-                    Fully integrated with ClickHouse Cloud security: supports
-                    SSO, IP filtering, Private Link, and data never leaves the
-                    Azure environment.
-                  </>
-                }
-                className='bg-neutral-900/80'
-              />
-            </div>
+            {featues
+              .filter((item) => item.tab === activeTab)
+              .map((feature, tabIndex) => {
+                return (
+                  <div key={tabIndex} className='p-4 lg:w-1/2'>
+                    <LinedIconCard
+                      icon={feature.icon}
+                      title={feature.title}
+                      text={feature.text}
+                      className='bg-neutral-900/80'
+                    />
+                  </div>
+                )
+              })}
           </div>
         </div>
       </section>
@@ -363,7 +461,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             <div className='my-4 space-y-2 text-center lg:mb-4 lg:mt-6'>
               <SuiTitle type='h2'>Get early access</SuiTitle>
               <SuiText className='opacity-70'>
-                Join the waitlist to get access to ClickHouse AI
+                Join the waitlist to get access to ClickHouse.ai
               </SuiText>
             </div>
             <CUICard.Body className='p-4 lg:p-6'>
