@@ -13,9 +13,6 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
     const { slug } = params as CatAllParamsType
     const { data } = await findAll('rich-content-pages', {
       filters: {
-        url: {
-          $ne: '/ai'
-        },
         $or: [
           {
             url: {
@@ -78,7 +75,7 @@ export async function getStaticPaths() {
   // { fallback: 'blocking' } will server-render pages
   // on-demand if the path doesn't exist.
   return {
-    paths: paths.filter((item) => item.params.slug !== '/ai'),
+    paths: paths.filter((item) => item.params.slug.join('/') !== 'ai'),
     fallback: 'blocking'
   }
 }
