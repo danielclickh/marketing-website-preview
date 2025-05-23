@@ -3,9 +3,7 @@ import { MeterConfig } from './types'
 export const averageDaysPerMonth = 30.5
 
 // Must be divisible by 4
-export const computes = [
-  8, 12, 16, 24, 28, 36, 48, 60, 80, 100, 128, 168, 216, 276, 356
-]
+export const computes = [8, 12, 16, 32, 64, 120, 236, 356]
 
 // In hours
 // @link https://clickhouse.com/docs/cloud/manage/backups/configurable-backups
