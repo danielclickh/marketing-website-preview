@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         seo: {
           title:
-            'Postgres CDC connector in ClickPipes is now generally available',
+            'Postgres CDC connector in ClickPipes is now Generally Available',
           description:
             'Replicate your Postgres data to ClickHouse Cloud in just a few clicks for blazing fast analytics.',
           path: '/cloud/clickpipes/postgres-cdc-connector'
@@ -176,7 +176,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               <span className='tilted tilted-yellow'>
                 <span className='tilted-content'>Postgres CDC</span>
               </span>{' '}
-              connector is now generally available
+              connector is now Generally Available
             </SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               Replicate your Postgres data to ClickHouse Cloud in just a few
