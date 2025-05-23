@@ -18,7 +18,6 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { AnimatePresence, motion } from 'motion/react'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import { useRouter } from 'next/router'
@@ -31,7 +30,7 @@ type Feature = Pick<LinedIconCardProps, 'icon' | 'title' | 'text'> & {
 const featues: Array<Feature> = [
   {
     tab: 'assistant',
-    icon: 'chat-teardrop-text',
+    icon: 'users-three',
     title: 'Natural language interaction',
     text: (
       <>
@@ -45,7 +44,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'assistant',
-    icon: 'gear',
+    icon: 'database',
     title: 'Context-aware assistance',
     text: (
       <>
@@ -61,7 +60,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'assistant',
-    icon: 'lightning',
+    icon: 'magic-wand',
     title: 'Seamless integration',
     text: (
       <>
@@ -75,7 +74,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'assistant',
-    icon: 'lock',
+    icon: 'chart-line',
     title: 'Dashboard & reporting',
     text: (
       <>
@@ -89,7 +88,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'mcp',
-    icon: 'guage',
+    icon: 'sidebar',
     title: (
       <>
         Built into your ClickHouse Cloud <br className='hidden lg:block' />
@@ -99,7 +98,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'mcp',
-    icon: 'guage',
+    icon: 'squares-four',
     title: (
       <>
         Leverage your data with external <br className='hidden lg:block' />
@@ -109,7 +108,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'mcp',
-    icon: 'guage',
+    icon: 'lock',
     title: (
       <>
         Secured with OAuth for <br className='hidden lg:block' />
@@ -119,7 +118,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'mcp',
-    icon: 'guage',
+    icon: 'toggle-right',
     title: (
       <>
         Turn-key experience, no infra to <br className='hidden lg:block' />
