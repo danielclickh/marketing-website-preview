@@ -96,6 +96,8 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 height={1060 / 2}
                 alt='Hero center'
                 className='absolute left-[6.82%] top-[0.47%] hidden h-auto w-[86.74%] rounded-[0.32%/0.63%] md:block'
+                loading='eager'
+                priority={true}
               />
               <Parallax
                 speed={20}
@@ -107,6 +109,8 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                   height={1149 / 2}
                   alt='Hero right big'
                   className='h-full w-full'
+                  loading='eager'
+                  priority={true}
                 />
               </Parallax>
               <Parallax
@@ -119,6 +123,8 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                   height={844 / 2}
                   alt='Hero left'
                   className='h-full w-full'
+                  loading='eager'
+                  priority={true}
                 />
               </Parallax>
               <Parallax
@@ -131,6 +137,8 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                   height={253 / 2}
                   alt='Hero right small'
                   className='h-full w-full'
+                  loading='eager'
+                  priority={true}
                 />
               </Parallax>
             </div>
