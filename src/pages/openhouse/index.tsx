@@ -165,16 +165,6 @@ const ALL_SPEAKERS: Array<{
     image: speakerJohananOttensooser
   },
   {
-    name: 'Alan Braithwaite',
-    title: 'Co-Founder & CTO, RunReveal',
-    image: speakerAlanBraithwaite
-  },
-  {
-    name: 'Mike Driscoll',
-    title: 'Co-Founder, CEO, Rill Data',
-    image: speakerMikeDriscoll
-  },
-  {
     name: 'Vinayak Saokar',
     title: 'VP of Engineering, Exabeam',
     image: speakerVinayakSaokar
@@ -183,6 +173,16 @@ const ALL_SPEAKERS: Array<{
     name: 'Arunmozhi RA',
     title: 'Senior Software Engineer, Exabeam',
     image: speakerArunmozhiRa
+  },
+  {
+    name: 'Alan Braithwaite',
+    title: 'Co-Founder & CTO, RunReveal',
+    image: speakerAlanBraithwaite
+  },
+  {
+    name: 'Mike Driscoll',
+    title: 'Co-Founder, CEO, Rill Data',
+    image: speakerMikeDriscoll
   },
   {
     name: 'Robert Schulze',
@@ -368,6 +368,17 @@ const AGENDA: Array<{
               Sierra.ai
             </Link>{' '}
             powers their customer service AI agents with ClickHouse.
+          </li>
+          <li>
+            <strong>
+              <u>Vinayak Saokar</u>
+            </strong>
+            , VP Engineering, and{' '}
+            <strong>
+              <u>Arunmozhi RA</u>
+            </strong>
+            , Sr Software Engineer at Exabeam will present how they scale
+            ClickHouse for their security operations platform.
           </li>
           <li>
             <em>
