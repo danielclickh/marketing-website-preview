@@ -162,7 +162,7 @@ export default function SnowflakePage({
 
           <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
             <div className='relative z-40 mx-auto mt-4 max-w-4xl pb-0 pt-20 lg:mt-12'>
-              <div className='mx-auto mb-12 flex items-center gap-4 px-4 md:px-0'>
+              <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
                 {BigNumbers.map((stat: BigNumber, index: number) => (
                   <div
                     key={index}
@@ -178,10 +178,11 @@ export default function SnowflakePage({
               </div>
             </div>
           </div>
-          <div className='relative z-10 mx-auto -mt-16 bg-primary-300'>
-            <div className='mx-auto max-w-4xl px-4 pt-8 md:px-0'>
+
+          <div className='relative z-10 bg-primary-300 pt-4'>
+            <div className='section-container max-w-4xl'>
               <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
-                <div className='w-full rounded-md border border-white/40 bg-[#363531] p-10 shadow-lg'>
+                <div className='flex w-full flex-col rounded-md border border-white/40 bg-[#363531] p-6 shadow-lg'>
                   <Image
                     src='/images/Quote.svg'
                     width={37}
@@ -198,8 +199,10 @@ export default function SnowflakePage({
                     materialized views. The decision to switch was a no-brainer
                     for us.”
                   </h3>
-                  <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
-                    <Link href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'>
+                  <p className='mb-6'>
+                    <Link
+                      href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
+                      className='text-sm text-primary-300 hover:underline lg:text-base'>
                       Read more
                     </Link>
                   </p>
@@ -208,35 +211,67 @@ export default function SnowflakePage({
                     alt='Adgreetz'
                     width={224}
                     height={29}
+                    className='mt-auto'
                   />
                 </div>
-                <div className='w-full rounded-md border border-white/40 bg-[#363531] p-10 shadow-lg'>
-                  <div className='lg:min-h-[320px]'>
-                    <Image
-                      src='/images/Quote.svg'
-                      width={37}
-                      height={28}
-                      alt='Quote'
-                      className='mb-4 flex-none'
-                    />
-                    <h3 className='mb-4 text-base'>
-                      “Snowflake [was] too slow and costly for our needs. While
-                      it performs well for processing in-house data, it becomes
-                      quite expensive when handling real-time customer data
-                      within a product, which negatively impacts the product's
-                      unit economics.”
-                    </h3>
-                    <p className='min-h-[30px] pb-6 text-sm text-primary-300 lg:min-h-fit lg:text-base'>
-                      <Link href='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'>
-                        Read more
-                      </Link>
-                    </p>
-                  </div>
+                <div className='flex w-full flex-col rounded-md border border-white/40 bg-[#363531] p-6 shadow-lg'>
+                  <Image
+                    src='/images/Quote.svg'
+                    width={37}
+                    height={28}
+                    alt='Quote'
+                    className='mb-4 flex-none'
+                  />
+                  <h3 className='mb-4 text-base'>
+                    “Snowflake [was] too slow and costly for our needs. While it
+                    performs well for processing in-house data, it becomes quite
+                    expensive when handling real-time customer data within a
+                    product, which negatively impacts the product's unit
+                    economics.”
+                  </h3>
+                  <p className='mb-6'>
+                    <Link
+                      href='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'
+                      className='text-sm text-primary-300 hover:underline lg:text-base'>
+                      Read more
+                    </Link>
+                  </p>
                   <Image
                     src='/images/inigo-logo.svg'
                     alt='inigo'
                     width={135}
                     height={40}
+                    className='mt-auto'
+                  />
+                </div>
+                <div className='col-span-full flex w-full flex-col rounded-md border border-white/40 bg-[#363531] p-6 shadow-lg'>
+                  <Image
+                    src='/images/Quote.svg'
+                    width={37}
+                    height={28}
+                    alt='Quote'
+                    className='mb-4 flex-none'
+                  />
+                  <h3 className='mb-4 text-base'>
+                    “Over time, those queries had become painfully slow in
+                    Snowflake and Postgres. Some took over a minute. Others
+                    timed out entirely...The payoff [of migrating to ClickHouse]
+                    came right away. Queries that once failed now ran in six
+                    seconds, with no caching required.”
+                  </h3>
+                  <p className='mb-6'>
+                    <Link
+                      href='/blog/chartmetric-uses-clickhouse-to-turn-artist-data-into-music-intelligence'
+                      className='text-sm text-primary-300 hover:underline lg:text-base'>
+                      Read more
+                    </Link>
+                  </p>
+                  <Image
+                    src='/images/logo-chartmetric-gray.svg'
+                    alt='Chartmetric'
+                    width={221.85}
+                    height={40}
+                    className='mt-auto'
                   />
                 </div>
               </div>
