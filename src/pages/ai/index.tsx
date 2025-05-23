@@ -32,107 +32,98 @@ const featues: Array<Feature> = [
   {
     tab: 'assistant',
     icon: 'chat-teardrop-text',
-    title: 'Natural language queries',
+    title: 'Natural language interaction',
     text: (
       <>
-        Talk to your data, no SQL required.
+        &bull; Chat like a teammate
         <br />
-        Use the AI Assistant to ask questions in plain English and get fast,
-        accurate responses from your ClickHouse data—perfect for analysts, PMs,
-        or anyone without a technical background.
+        &bull; Ask data question in plane English
+        <br />
+        &bull; Generate SQL queries, visualisations or summaries
       </>
     )
   },
   {
     tab: 'assistant',
     icon: 'gear',
-    title: 'Structured & guided workflows',
+    title: 'Context-aware assistance',
     text: (
       <>
-        Built for real AI applications.
+        &bull; Understands your current tab, saved{' '}
+        <br className='hidden lg:block' />
+        queries schema, dashboard
         <br />
-        The MCP interface enables large language models like GPT-4 to follow
-        multi-step, structured workflows for querying, summarizing, and
-        interpreting data with precision.
+        &bull; Dynamically adapts answers based on{' '}
+        <br className='hidden lg:block' />
+        what is relevant
       </>
     )
   },
   {
     tab: 'assistant',
     icon: 'lightning',
-    title: 'Real-time & in-place',
+    title: 'Seamless integration',
     text: (
       <>
-        Instant insights, without moving data.
+        &bull; Pushes queries directly to the editor
         <br />
-        Get answers on live data with sub-second latency. Because it runs
-        directly on ClickHouse in Azure, your queries stay fast—and your data
-        stays put.
+        &bull; Creates saved queries, dashboards, API Endpoints
+        <br />
+        &bull; Acts like Colipot for ClickHouse Cloud
       </>
     )
   },
   {
     tab: 'assistant',
     icon: 'lock',
-    title: 'Secure & scalable by design',
+    title: 'Dashboard & reporting',
     text: (
       <>
-        AI that plays by enterprise rules.
+        &bull; Analyses dashboards, highlights anomalies or trends
         <br />
-        Fully integrated with ClickHouse Cloud security: supports SSO, IP
-        filtering, Private Link, and data never leaves the Azure environment.
+        &bull; Summarises what dashboards are telling you
+        <br />
+        &bull; Can generate reports with clear insights
       </>
     )
   },
   {
     tab: 'mcp',
     icon: 'guage',
-    title: 'Item 1',
-    text: (
+    title: (
       <>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
-        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
-        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
-        voluptatibus?
+        Built into your ClickHouse Cloud <br className='hidden lg:block' />
+        service as a new interface
       </>
     )
   },
   {
     tab: 'mcp',
     icon: 'guage',
-    title: 'Item 2',
-    text: (
+    title: (
       <>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
-        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
-        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
-        voluptatibus?
+        Leverage your data with external <br className='hidden lg:block' />
+        agents and MCP-compatible clients
       </>
     )
   },
   {
     tab: 'mcp',
     icon: 'guage',
-    title: 'Item 3',
-    text: (
+    title: (
       <>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
-        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
-        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
-        voluptatibus?
+        Secured with OAuth for <br className='hidden lg:block' />
+        authentication
       </>
     )
   },
   {
     tab: 'mcp',
     icon: 'guage',
-    title: 'Item 4',
-    text: (
+    title: (
       <>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci
-        animi assumenda esse explicabo hic illo modi, nam nemo, nobis odit
-        omnis, similique tempore! Ipsam ipsum laudantium repellat saepe
-        voluptatibus?
+        Turn-key experience, no infra to <br className='hidden lg:block' />
+        setup or manage
       </>
     )
   }
@@ -195,7 +186,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             </SuiText>
             <SuiTitle
               type='h1'
-              className='!my-4 font-semibold sm:!text-6.5xl md:!my-0 lg:text-[5rem]'
+              className='!my-4 font-semibold sm:!text-6.5xl lg:text-[5rem]'
               weight='bold'>
               ClickHouse.ai
             </SuiTitle>
