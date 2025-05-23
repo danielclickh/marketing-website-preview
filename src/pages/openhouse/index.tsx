@@ -105,9 +105,9 @@ const ALL_SPEAKERS: Array<{
     image: speakerJeanaChoi
   },
   {
-    name: 'Dale Frohman',
-    title: 'Lead Director Engineering, CVS Health',
-    image: speakerDaleFrohman
+    name: 'Maruth Goyal',
+    title: 'Member of Technical Staff, Anthropic',
+    image: speakerMaruthGoyal
   },
   {
     name: 'Krithika Balagurunathan',
@@ -133,11 +133,6 @@ const ALL_SPEAKERS: Array<{
     name: 'Ritesh Varyani',
     title: 'Staff Software Engineer, Lyft',
     image: speakerRiteshVaryani
-  },
-  {
-    name: 'Maruth Goyal',
-    title: 'Member of Technical Staff, Anthropic',
-    image: speakerMaruthGoyal
   },
   {
     name: 'Arup Malakar',
@@ -300,11 +295,7 @@ const AGENDA: Array<{
             <strong>
               <u>Lukas Biewald</u>
             </strong>
-            , Founder & CEO Weights & Biases;{' '}
-            <strong>
-              <u>Dale Frohman</u>
-            </strong>
-            , Lead Director Engineering, CVS Health; and{' '}
+            , Founder & CEO Weights & Biases; and{' '}
             <strong>
               <u>Akshay Nanavati</u>
             </strong>{' '}
