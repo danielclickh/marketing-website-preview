@@ -267,7 +267,7 @@ export default function SnowflakePage({
                     </Link>
                   </p>
                   <Image
-                    src='/images/logo-chartmetric-grey.svg'
+                    src='/images/logo-chartmetric-gray.svg'
                     alt='Chartmetric'
                     width={221.85}
                     height={40}
