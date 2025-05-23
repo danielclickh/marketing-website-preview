@@ -137,7 +137,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           title:
             'ClickHouse.ai — Natural language & MCP interface for your data',
           description:
-            'Leverage the power of natural language for your ClickHouse data with our AI Assistant and the versatile MCP interface. Enable advanced AI applications, real-time insights, and secure, scalable analytics directly in Azure.',
+            'Unlock Agent-Facing Analytics within the ClickHouse Cloud console or via the native remote MCP server',
           path: '/ai'
         },
         ...commonProps
@@ -175,20 +175,18 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
         }>
         <AnimatedFlare className='absolute -bottom-[40%] left-1/2 z-0 aspect-video h-[140vh] max-w-[3000px] -translate-x-1/3 blur-sm md:bottom-0 md:left-1/2 md:h-auto md:w-[200vw] md:-translate-x-1/2 lg:-bottom-[5%] xl:-bottom-[3%] 3xl:bottom-[3%] 3xl:w-[150vw]' />
         <div className='section-container'>
-          <div className='relative z-10 space-y-2 pb-8 pt-16 text-center md:py-24'>
-            <SuiText
-              size='lg'
-              className='text-balance text-primary-300'
-              weight='bold'>
-              Two powerful ways to bring natural language intelligence to your
-              ClickHouse data.
-            </SuiText>
+          <div className='relative z-10 pb-8 pt-16 text-center md:py-24'>
             <SuiTitle
               type='h1'
-              className='!my-4 font-semibold sm:!text-6.5xl lg:text-[5rem]'
+              className='font-semibold sm:!text-6.5xl lg:text-[5rem]'
               weight='bold'>
               ClickHouse.ai
             </SuiTitle>
+            <SuiText size='lg' className='!mb-8 !mt-4 text-balance'>
+              Unlock Agent-Facing Analytics within the ClickHouse Cloud console
+              or <br className='hidden md:block' />
+              via the native remote MCP server
+            </SuiText>
             <CUIButton
               href='/ai#waitlist'
               type='primary'
