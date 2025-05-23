@@ -13,6 +13,9 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
     const { slug } = params as CatAllParamsType
     const { data } = await findAll('rich-content-pages', {
       filters: {
+        url: {
+          $ne: '/ai'
+        },
         $or: [
           {
             url: {
