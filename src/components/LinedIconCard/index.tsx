@@ -1,11 +1,15 @@
 import { CUICard } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
 import book from './assets/book.svg'
+import chatTeardropText from './assets/chat-teardrop-text.svg'
 import cloudTick from './assets/cloud-tick.svg'
 import enterprise from './assets/enterprise.svg'
 import filePy from './assets/file-py.svg'
+import gear from './assets/gear.svg'
 import guage from './assets/guage.svg'
+import lightning from './assets/lightning.svg'
 import listSearch from './assets/list-search.svg'
+import lock from './assets/lock.svg'
 import maximize from './assets/maximize.svg'
 import peerdb from './assets/peerdb.svg'
 import shieldCheck from './assets/shield-check.svg'
@@ -26,7 +30,11 @@ const icons = {
   'list-search': listSearch,
   'file-py': filePy,
   enterprise,
-  'shield-check': shieldCheck
+  'shield-check': shieldCheck,
+  lightning,
+  lock,
+  gear,
+  'chat-teardrop-text': chatTeardropText
 }
 
 type Icons = keyof typeof icons
@@ -46,20 +54,20 @@ interface BaseLinedIconCard {
 
 interface LinedIconCardChildren extends BaseLinedIconCard {
   children: React.ReactNode
-  title?: string
-  text?: string
+  title?: string | React.ReactNode
+  text?: string | React.ReactNode
 }
 
 interface LinedIconCardTitle extends BaseLinedIconCard {
   children?: React.ReactNode
-  title: string
-  text?: string
+  title: string | React.ReactNode
+  text?: string | React.ReactNode
 }
 
 interface LinedIconCardText extends BaseLinedIconCard {
   children?: React.ReactNode
-  title?: string
-  text: string
+  title?: string | React.ReactNode
+  text: string | React.ReactNode
 }
 
 export type LinedIconCardProps =

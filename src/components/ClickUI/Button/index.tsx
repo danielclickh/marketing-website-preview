@@ -35,8 +35,8 @@ function Button({
         className={`${styles.button} ${className} ${'font-' + weight}`}
         data-type={type}
         data-size={size}
-        onClick={() => {
-          onClick && onClick()
+        onClick={(event) => {
+          onClick && onClick(event)
         }}>
         {iconLeft && <span className='pr-1'>{iconLeft}</span>}
         <span className='flex items-center whitespace-nowrap'>{children}</span>
