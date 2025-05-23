@@ -77,7 +77,10 @@ export async function getStaticPaths() {
   // We'll pre-render only these paths at build time.
   // { fallback: 'blocking' } will server-render pages
   // on-demand if the path doesn't exist.
-  return { paths: paths.filter((path) => path !== '/ai'), fallback: 'blocking' }
+  return {
+    paths: paths.filter((item) => item.params.slug !== '/ai'),
+    fallback: 'blocking'
+  }
 }
 
 export default function RichContentPage({
