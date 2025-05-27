@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 
 export interface AccordionItemProps {
   prefix?: string | number | React.ReactNode
-  handle: string
+  handle: React.ReactNode | string
   children: React.ReactNode
   open?: boolean
   className?: React.HTMLProps<HTMLDivElement>['className']
