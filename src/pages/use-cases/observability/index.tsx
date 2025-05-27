@@ -28,6 +28,7 @@ import logoLovable from './assets/logo-lovable.svg'
 import logoNetflix from './assets/logo-netflix.svg'
 import logoSony from './assets/logo-sony.svg'
 import AccordionItem from '@/components-cleaned/AccordionItem'
+import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
 import Layout from '@/components/Layout'
@@ -68,17 +69,19 @@ export default function ClickHouseServerPage({
   const [activeTab, setActiveTab] = useState<
     null | 'searches' | 'storage' | 'data-collection'
   >(null)
-  const [accordionSearchesOpen, setAccordionSearchesOpen] = useState(false)
-  const [accordionStorageOpen, setAccordionStorageOpen] = useState(false)
-  const [accordionCollectionOpen, setAccordionCollectionOpen] = useState(false)
+  const [hyperdxActive, setHyperdxActive] = useState(false)
+  const [clickhouseActive, setClickhouseActive] = useState(false)
+  const [opentelemetryActive, setOpentelemetryActive] = useState(false)
+  const allAreInactive =
+    !hyperdxActive && !clickhouseActive && !opentelemetryActive
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section className='overflow-hidden py-16 lg:py-20'>
+      <section className='overflow-hidden py-20 lg:py-24'>
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
           {/* Content */}
           <div className='relative z-10 w-full max-w-2xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
-            <SuiText className='flip-selection mb-16 text-[3.5rem]'>
+            <SuiText className='flip-selection !text-3xl lg:mb-16 lg:!text-[3.5rem]'>
               <TiltedText type='black-on-yellow' className='px-2 py-1'>
                 <strong>ClickStack</strong>
               </TiltedText>
@@ -135,7 +138,7 @@ export default function ClickHouseServerPage({
       </section>
 
       {/* Trusted by */}
-      <section className='section-container my-16 lg:my-20'>
+      <section className='section-container mb-20 lg:mb-24 lg:mt-10'>
         <EyebrowText className='mb-10 text-center text-primary-300'>
           Trusted by
         </EyebrowText>
@@ -157,11 +160,11 @@ export default function ClickHouseServerPage({
       </section>
 
       {/* Customer quotes */}
-      <section className='relative z-10 bg-neutral-950/60 py-16 lg:py-20'>
+      <section className='relative z-10 bg-neutral-950/60 pb-12 pt-20 lg:pb-16 lg:pt-24'>
         <div className='section-container'>
           <SuiTitle
             type='h2'
-            className='mx-auto mb-16 max-w-4xl text-center lg:mb-20 lg:px-7'>
+            className='mx-auto mb-12 max-w-4xl text-center lg:mb-24 lg:px-7'>
             Join the companies choosing ClickStack as their high-performance
             observability solution
           </SuiTitle>
@@ -206,7 +209,7 @@ export default function ClickHouseServerPage({
             />
           </div>
         </div>
-        <div className='lg:mt-18 mt-16 text-center'>
+        <div className='mt-12 text-center lg:mt-16'>
           <LinkWithArrow
             href='/use-cases?log=use-case-observability'
             className='text-slate-300 hover:underline'>
@@ -245,7 +248,7 @@ export default function ClickHouseServerPage({
               className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
               Sub-second queries
             </SuiTitle>
-            <SuiText size='lg'>
+            <SuiText size='lg' className='text-balance'>
               Even on petabytes of high <br className='hidden lg:block' />
               cardinality data
             </SuiText>
@@ -257,7 +260,7 @@ export default function ClickHouseServerPage({
               className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
               10-100x cost savings
             </SuiTitle>
-            <SuiText size='lg'>
+            <SuiText size='lg' className='text-balance'>
               Best in class ingestion and <br className='hidden lg:block' />
               compression rates (30x)
             </SuiText>
@@ -269,7 +272,7 @@ export default function ClickHouseServerPage({
               className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
               Full stack observability
             </SuiTitle>
-            <SuiText size='lg'>
+            <SuiText size='lg' className='text-balance'>
               Unify Session Replays, Logs, <br className='hidden lg:block' />
               Traces, Metrics and Errors
             </SuiText>
@@ -277,13 +280,31 @@ export default function ClickHouseServerPage({
         </div>
 
         {/* Diagram */}
-        <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row lg:gap-20'>
+        <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row lg:items-start lg:gap-20'>
           <div className='px-6'>
-            <Image
-              src={imageStack}
-              width={245}
-              height={273.5}
-              alt='ClickStack placeholder'
+            <ClickStack
+              hyperdx={hyperdxActive || allAreInactive}
+              clickhouse={clickhouseActive || allAreInactive}
+              opentelemetry={opentelemetryActive || allAreInactive}
+              onClick={(stack) => {
+                switch (stack) {
+                  case 'hyperdx':
+                    setHyperdxActive(true)
+                    setClickhouseActive(false)
+                    setOpentelemetryActive(false)
+                    break
+                  case 'clickhouse':
+                    setHyperdxActive(false)
+                    setClickhouseActive(true)
+                    setOpentelemetryActive(false)
+                    break
+                  case 'opentelemetry':
+                    setHyperdxActive(false)
+                    setClickhouseActive(false)
+                    setOpentelemetryActive(true)
+                    break
+                }
+              }}
             />
           </div>
           <div className='flex w-full flex-1 flex-col items-center gap-6 lg:items-start'>
@@ -292,13 +313,13 @@ export default function ClickHouseServerPage({
                 <SuiTitle type='h3'>Searches, dashboards, and alerts</SuiTitle>
               }
               onToggle={(isOpen) => {
-                setAccordionSearchesOpen(isOpen)
+                setHyperdxActive(isOpen)
                 if (isOpen) {
-                  setAccordionStorageOpen(false)
-                  setAccordionCollectionOpen(false)
+                  setClickhouseActive(false)
+                  setOpentelemetryActive(false)
                 }
               }}
-              open={accordionSearchesOpen}
+              open={hyperdxActive}
               className='w-full !bg-neutral-750'>
               <div className='space-y-4'>
                 <SuiText>
@@ -318,13 +339,13 @@ export default function ClickHouseServerPage({
             <AccordionItem
               handle={<SuiTitle type='h3'>ClickHouse powered storage</SuiTitle>}
               onToggle={(isOpen) => {
-                setAccordionStorageOpen(isOpen)
+                setClickhouseActive(isOpen)
                 if (isOpen) {
-                  setAccordionSearchesOpen(false)
-                  setAccordionCollectionOpen(false)
+                  setHyperdxActive(false)
+                  setOpentelemetryActive(false)
                 }
               }}
-              open={accordionStorageOpen}
+              open={clickhouseActive}
               className='w-full !bg-neutral-750'>
               <div className='space-y-4'>
                 <SuiText>
@@ -345,13 +366,13 @@ export default function ClickHouseServerPage({
             <AccordionItem
               handle={<SuiTitle type='h3'>Data collection</SuiTitle>}
               onToggle={(isOpen) => {
-                setAccordionCollectionOpen(isOpen)
+                setOpentelemetryActive(isOpen)
                 if (isOpen) {
-                  setAccordionSearchesOpen(false)
-                  setAccordionStorageOpen(false)
+                  setHyperdxActive(false)
+                  setClickhouseActive(false)
                 }
               }}
-              open={accordionCollectionOpen}
+              open={opentelemetryActive}
               className='w-full !bg-neutral-750'>
               <div className='space-y-4'>
                 <SuiText>
@@ -384,7 +405,7 @@ export default function ClickHouseServerPage({
       </section>
 
       {/* Custom stack */}
-      <section className='section-container my-16 lg:my-20'>
+      <section className='section-container my-20 lg:my-24'>
         <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
           <div className='absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent' />
 
@@ -408,7 +429,7 @@ export default function ClickHouseServerPage({
       </section>
 
       {/* Get started */}
-      <section className='section-container my-16 grid grid-cols-1 gap-8 lg:my-20 lg:grid-cols-2 lg:gap-16'>
+      <section className='section-container my-20 grid grid-cols-1 gap-8 lg:my-24 lg:grid-cols-2 lg:gap-16'>
         <SuiTitle type='h2' className='col-span-full text-center'>
           Get started with ClickStack
         </SuiTitle>
@@ -503,7 +524,7 @@ export default function ClickHouseServerPage({
       </section>
 
       {/* Integrations */}
-      <section className='section-container my-24 lg:my-32'>
+      <section className='section-container my-24 lg:my-36'>
         <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16'>
           <SuiTitle type='h2'>Instrument Your Applications</SuiTitle>
           <SuiText size='lg' className='text-neutral-200' weight='bold'>
@@ -554,7 +575,7 @@ export default function ClickHouseServerPage({
       </section>
 
       {/* Try ClickHouse */}
-      <div className='section-container pb-16 md:px-8 2xl:px-0'>
+      <div className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
             Try{' '}
