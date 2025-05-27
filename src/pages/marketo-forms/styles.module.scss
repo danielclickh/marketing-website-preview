@@ -512,5 +512,160 @@
         }
       }
     }
+
+
+
+    /**
+     ================================
+     Marketo Forms:
+       - Bring Your Own Cloud (BYOC)
+       - Government Waitlist
+     ================================
+     */
+
+    form.mktoForm#mktoForm_1135,
+    form.mktoForm#mktoForm_1391,
+    form.mktoForm#mktoForm_1407 {
+      label#LblmiscBlankField15 + .mktoGutter + .mktoRadioList {
+        @apply flex flex-row flex-nowrap items-stretch gap-2 pt-1;
+
+        input {
+          // Resets
+          @apply mr-0 h-auto w-auto bg-transparent checked:bg-none;
+          & + label {
+            @apply hidden;
+          }
+
+          // Spoof buttons
+          @apply h-[42px] flex-1 cursor-pointer rounded border border-neutral-700 bg-neutral-725 transition-colors;
+          @apply bg-contain bg-center bg-no-repeat;
+          @apply hover:border-neutral-600;
+          @apply checked:border-primary;
+          background-size: 30px;
+        }
+
+        input[value='Amazon Web Services'] {
+          background-image: url('/marketo-inputs/1135-aws.svg');
+          background-size: 40px;
+        }
+
+        input[value='Google Cloud Platform'] {
+          background-image: url('/marketo-inputs/1135-gcp.svg');
+        }
+
+        input[value='Azure'] {
+          background-image: url('/marketo-inputs/1135-azure.svg');
+        }
+
+        input[value='Other'] {
+          background-image: url('/marketo-inputs/1135-other.svg');
+        }
+      }
+    }
+
+    /**
+     ================================
+     Marketo: Data Lakehouse Private Preview
+     ================================
+     */
+
+    form.mktoForm#mktoForm_1315 {
+      // Inline radios
+      label#LblmiscBlankField18,
+      label#LblmiscBlankField21,
+      label#LblmiscBlankField22 {
+        & + .mktoGutter + .mktoRadioList {
+          @apply flex items-center;
+
+          input {
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            & + label {
+              @apply mr-4 w-auto;
+              flex-grow: 0;
+              flex-shrink: 1;
+            }
+          }
+        }
+      }
+
+      // Radio buttons
+      label#LblmiscBlankField19,
+      label#LblmiscBlankField20 {
+        & + .mktoGutter + .mktoRadioList {
+          @apply flex flex-row flex-wrap items-stretch gap-4 pt-1;
+
+          &.mktoInvalid {
+            input {
+              @apply border-danger-200;
+            }
+          }
+
+          input {
+            // Resets
+            @apply mr-0 h-auto w-auto bg-transparent checked:bg-none;
+            & + label {
+              @apply hidden;
+            }
+
+            // Spoof buttons
+            @apply h-[42px] cursor-pointer rounded border border-neutral-700 bg-neutral-725 transition-colors;
+            @apply bg-contain bg-no-repeat;
+            @apply hover:border-neutral-600;
+            @apply checked:border-primary;
+            background-position: center left 0.5rem;
+            flex-basis: 100%;
+            flex-grow: 0;
+            flex-shrink: 1;
+
+            @media (min-width: 420px) {
+              flex-basis: calc(50% - 0.5rem);
+            }
+
+            &[value='Other'] {
+              background-image: url('/marketo-inputs/1315-other.svg');
+              background-size: 67.3px;
+            }
+
+            &[value='Iceberg'] {
+              background-image: url('/marketo-inputs/1315-iceberg.svg');
+              background-size: 135.8px;
+            }
+
+            &[value='Delta Lake'] {
+              background-image: url('/marketo-inputs/1315-delta-lake.svg');
+              background-size: 102px;
+            }
+
+            &[value='Hudi'] {
+              background-image: url('/marketo-inputs/1315-hudi.svg');
+              background-size: 61.7px;
+            }
+
+            &[value='Unity'] {
+              background-image: url('/marketo-inputs/1315-unity.svg');
+              background-size: 118.9px;
+            }
+            &[value='Polaris'] {
+              background-image: url('/marketo-inputs/1315-polaris.svg');
+              background-size: 131.3px;
+            }
+            &[value='Glue'] {
+              background-image: url('/marketo-inputs/1315-glue.svg');
+              background-size: 97.3px;
+            }
+            &[value='HMS'] {
+              background-image: url('/marketo-inputs/1315-hms.svg');
+              background-size: 179.1px;
+            }
+            &[value='Nessie'] {
+              background-image: url('/marketo-inputs/1315-nessie.svg');
+              background-size: 72px;
+            }
+          }
+        }
+      }
+    }
   }
 }
