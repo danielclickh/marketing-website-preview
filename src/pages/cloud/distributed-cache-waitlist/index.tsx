@@ -61,7 +61,7 @@ export default function ContactPage({
                         questions below.
                       </span>{' '}
                       <Link
-                        href='#'
+                        href='/blog/building-a-distributed-cache-for-s3'
                         className='text-primary-300 hover:underline'>
                         Read more
                       </Link>
