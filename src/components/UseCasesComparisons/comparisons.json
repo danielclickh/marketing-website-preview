@@ -2,7 +2,7 @@
   {
     "href": "/comparison/snowflake",
     "title": "Snowflake",
-    "quote": "With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud.",
+    "quote": "Over time, those queries had become painfully slow in Snowflake and Postgres. Some took over a minute. Others timed out entirely...The payoff [of migrating to ClickHouse] came right away. Queries that once failed now ran in six seconds, with no caching required.",
     "stats": [
       {
         "icon": "/images/use-cases/logging/gauge-light.svg",
@@ -26,8 +26,8 @@
         "iconHeight": 32
       }
     ],
-    "customerLogo": "/images/adgreetz-logo-white.svg",
-    "customerLogoWidth": 166,
+    "customerLogo": "/images/logo-chartmetric-white.svg",
+    "customerLogoWidth": 166.39,
     "customerLogoHeight": 30
   },
   {

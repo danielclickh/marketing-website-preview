@@ -105,9 +105,9 @@ const ALL_SPEAKERS: Array<{
     image: speakerJeanaChoi
   },
   {
-    name: 'Dale Frohman',
-    title: 'Lead Director Engineering, CVS Health',
-    image: speakerDaleFrohman
+    name: 'Maruth Goyal',
+    title: 'Member of Technical Staff, Anthropic',
+    image: speakerMaruthGoyal
   },
   {
     name: 'Krithika Balagurunathan',
@@ -135,11 +135,6 @@ const ALL_SPEAKERS: Array<{
     image: speakerRiteshVaryani
   },
   {
-    name: 'Maruth Goyal',
-    title: 'Member of Technical Staff, Anthropic',
-    image: speakerMaruthGoyal
-  },
-  {
     name: 'Arup Malakar',
     title: 'Software Engineer, Sierra',
     image: speakerArupMalakar
@@ -153,6 +148,16 @@ const ALL_SPEAKERS: Array<{
     name: 'Poom Chiarawongse',
     title: 'Member of Technical Staff, OpenAI',
     image: speakerPoomChiarawongse
+  },
+  {
+    name: 'Vinayak Saokar',
+    title: 'VP of Engineering, Exabeam',
+    image: speakerVinayakSaokar
+  },
+  {
+    name: 'Arunmozhi RA',
+    title: 'Senior Software Engineer, Exabeam',
+    image: speakerArunmozhiRa
   },
   {
     name: 'Chris Crane',
@@ -173,16 +178,6 @@ const ALL_SPEAKERS: Array<{
     name: 'Mike Driscoll',
     title: 'Co-Founder, CEO, Rill Data',
     image: speakerMikeDriscoll
-  },
-  {
-    name: 'Vinayak Saokar',
-    title: 'VP of Engineering, Exabeam',
-    image: speakerVinayakSaokar
-  },
-  {
-    name: 'Arunmozhi RA',
-    title: 'Senior Software Engineer, Exabeam',
-    image: speakerArunmozhiRa
   },
   {
     name: 'Robert Schulze',
@@ -300,11 +295,7 @@ const AGENDA: Array<{
             <strong>
               <u>Lukas Biewald</u>
             </strong>
-            , Founder & CEO Weights & Biases;{' '}
-            <strong>
-              <u>Dale Frohman</u>
-            </strong>
-            , Lead Director Engineering, CVS Health; and{' '}
+            , Founder & CEO Weights & Biases; and{' '}
             <strong>
               <u>Akshay Nanavati</u>
             </strong>{' '}
@@ -314,9 +305,6 @@ const AGENDA: Array<{
             </strong>
             from OpenAI, will walk through their use cases and how ClickHouse
             helped them in their journey.
-          </li>
-          <li>
-            <em>Stay tuned for additional keynote speaker announcements!</em>
           </li>
         </ul>
       </>
@@ -370,10 +358,15 @@ const AGENDA: Array<{
             powers their customer service AI agents with ClickHouse.
           </li>
           <li>
-            <em>
-              Stay tuned for an exciting customer speaker lineup in this{' '}
-              session!
-            </em>
+            <strong>
+              <u>Vinayak Saokar</u>
+            </strong>
+            , VP Engineering, and{' '}
+            <strong>
+              <u>Arunmozhi RA</u>
+            </strong>
+            , Sr Software Engineer at Exabeam will present how they scale
+            ClickHouse for their security operations platform.
           </li>
         </ul>
       </>
@@ -411,14 +404,8 @@ const AGENDA: Array<{
             <strong>
               <u>Maruth Goyal</u>
             </strong>
-            , Member of Technical Staff at Anthropic will share how Clickhouse
-            is used to improve Observability.
-          </li>
-          <li>
-            <em>
-              Stay tuned for an exciting customer speaker lineup in this{' '}
-              session!
-            </em>
+            , Member of Technical Staff at Anthropic will share how ClickHouse
+            is used to improve observability.
           </li>
         </ul>
       </>

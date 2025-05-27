@@ -499,6 +499,11 @@ const nextConfig = {
         source: '/company/news-events',
         destination: '/company/events',
         permanent: true
+      },
+      {
+        source: '/air-gapped',
+        destination: '/government',
+        permanent: true
       }
     ]
   }
