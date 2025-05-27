@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 export interface AccordionItemProps {
   prefix?: string | number | React.ReactNode
@@ -18,7 +18,7 @@ export default function AccordionItem({
   prefix,
   handle,
   children,
-  open = false,
+  open,
   className = '',
   onOpen,
   onClose,
@@ -27,19 +27,29 @@ export default function AccordionItem({
   const elRef = useRef<HTMLDivElement | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  // Sync local state with prop
-  useEffect(() => {
-    setIsOpen(open)
-  }, [open])
-
-  // Send events
-  useEffect(() => {
-    if (isOpen && onOpen) onOpen()
-    if (!isOpen && onClose) onClose()
-    if (onToggle) onToggle(isOpen)
-  }, [isOpen])
-
   const hasPrefix = !!prefix
+
+  // Use parent state if provided, else default to local state
+  const areWeOpen = useMemo(() => {
+    return open !== undefined ? open : isOpen
+  }, [open, isOpen])
+
+  const onClickCallback = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault()
+
+      if (areWeOpen) {
+        setIsOpen(false)
+        if (onClose) onClose()
+      } else {
+        setIsOpen(true)
+        if (onOpen) onOpen()
+      }
+
+      if (onToggle) onToggle(!areWeOpen)
+    },
+    [areWeOpen, onOpen, onClose, onToggle]
+  )
 
   return (
     <div
@@ -50,23 +60,23 @@ export default function AccordionItem({
       )}
       {/* Handle */}
       <button
-        onClick={() => setIsOpen((old) => !old)}
-        className={`flex w-full items-center gap-4 text-left ${hasPrefix ? 'pl-4 pr-2' : 'px-2'} ${isOpen ? 'text-white' : 'text-neutral-200 hover:text-neutral-0'}`}>
+        onClick={onClickCallback}
+        className={`flex w-full items-center gap-4 text-left ${hasPrefix ? 'pl-4 pr-2' : 'px-2'} ${areWeOpen ? 'text-white' : 'text-neutral-200 hover:text-neutral-0'}`}>
         <span className='absolute inset-0 z-10' />
         <span className='flex-1'>{handle}</span>
         {/* Plus/minus icon */}
         <span className='relative ml-auto block aspect-square w-4 flex-shrink-0 flex-grow-0 transition-colors'>
           <span
-            className={`absolute left-1/2 top-1/2 block h-0.5 w-full -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ${isOpen ? '-rotate-90' : ''}`}>
+            className={`absolute left-1/2 top-1/2 block h-0.5 w-full -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ${areWeOpen ? '-rotate-90' : ''}`}>
             <span
-              className={`absolute inset-0 bg-white transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`}
+              className={`absolute inset-0 bg-white transition-opacity duration-300 ${areWeOpen ? 'opacity-0' : ''}`}
             />
             <span className='absolute inset-0 rotate-90 bg-white' />
           </span>
         </span>
       </button>
       <AnimatePresence>
-        {isOpen && (
+        {areWeOpen && (
           <motion.div
             variants={{
               closed: {
