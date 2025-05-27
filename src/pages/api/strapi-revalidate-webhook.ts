@@ -59,7 +59,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::event.event': async function (body, response) {
-    const paths = [`/sitemap`, `/company/news-events`]
+    const paths = [`/sitemap`, `/company/events`]
 
     if (body?.entry?.slug) {
       paths.push(`/company/events/${body.entry.slug}`)
@@ -247,7 +247,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::news-and-event.news-and-event': async function (body, response) {
-    const paths = [`/sitemap`, `/company/news-events`]
+    const paths = [`/sitemap`, `/company/events`, `/company/news`]
     await revalidate(response, paths)
   },
   'api::newsletter-form.newsletter-form': async function (body, response) {

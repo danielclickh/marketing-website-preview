@@ -178,10 +178,17 @@
       },
       {
         "id": 26,
-        "name": "News and events",
-        "href": "/company/news-events",
+        "name": "Events",
+        "href": "/company/events",
         "target": "_self",
-        "galaxyEvent": "footerNav.companyMenu.newsEventsSelect"
+        "galaxyEvent": "footerNav.companyMenu.eventsSelect"
+      },
+      {
+        "id": 262,
+        "name": "News",
+        "href": "/company/news",
+        "target": "_self",
+        "galaxyEvent": "footerNav.companyMenu.newsSelect"
       },
       {
         "id": 27,
