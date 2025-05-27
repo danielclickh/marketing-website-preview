@@ -2,7 +2,8 @@ import imageAiExperience from './assets/01-ai-experience.png'
 import imageContextAware from './assets/02-context-aware.png'
 import imageBuiltIn from './assets/03-built-in.png'
 import imageAiDocs from './assets/04-ai-docs.png'
-import imageMcpClient from './assets/05-mcp-client.png'
+import imageMcpServer from './assets/05-mcp-server.png'
+import imageMcpClient from './assets/06-mcp-client.png'
 import heroCenter from './assets/hero-center.png'
 import heroLeft from './assets/hero-left.png'
 import heroRightBig from './assets/hero-right-big.png'
@@ -20,6 +21,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { CSSProperties, useEffect, useState } from 'react'
 
@@ -108,7 +110,7 @@ const featues: Array<Feature> = [
   },
   {
     tab: 'mcp',
-    icon: 'lock',
+    icon: 'keyhole',
     title: (
       <>
         Secured with OAuth for <br className='hidden lg:block' />
@@ -218,7 +220,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 priority={true}
               />
               <Parallax
-                speed={20}
+                speed={15}
                 direction='up'
                 className='absolute bottom-0 right-0 h-auto w-[69.22%] md:w-[31.05%]'>
                 <Image
@@ -232,7 +234,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 />
               </Parallax>
               <Parallax
-                speed={20}
+                speed={10}
                 direction='up'
                 className='absolute left-0 top-0 h-auto w-[82.15%] md:top-[28.43%] md:w-[36.09%]'>
                 <Image
@@ -246,7 +248,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 />
               </Parallax>
               <Parallax
-                speed={10}
+                speed={5}
                 direction='up'
                 className='absolute bottom-[5.32%] right-[34.8%] h-auto w-[53.03%] md:bottom-[5.63%] md:right-[15.69%] md:w-[23.65%]'>
                 <Image
@@ -326,12 +328,23 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               height: 373 / 2,
               alt: 'A feature-complete AI experience'
             }}>
-            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
+            <SuiTitle
+              type='h3'
+              className='mb-8 max-w-md !text-4xl'
+              weight='semibold'>
               A feature-complete AI experience
             </SuiTitle>
-            <TickItem>AI Agent</TickItem>
-            <TickItem>AI Assistant</TickItem>
-            <TickItem>Docs AI</TickItem>
+            <TickItem className='max-w-md'>
+              <strong>Docs AI:</strong>Allows you to query the docs for help
+            </TickItem>
+            <TickItem className='max-w-md'>
+              <strong>AI Assistant:</strong> helps you craft SQL queries powered
+              by our ClickHouse fine-tuned text-to-sql model
+            </TickItem>
+            <TickItem className='max-w-md'>
+              <strong>AI Agent:</strong> Generate full fledged analysis and
+              reports on top of your datasets
+            </TickItem>
           </FeatureSection>
           <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
@@ -425,19 +438,62 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               } as CSSProperties
             }
             image={{
-              src: imageMcpClient,
+              src: imageMcpServer,
               width: 908 / 2,
               height: 859 / 2,
+              alt: 'A fully managed remote MCP Server'
+            }}>
+            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
+              A fully managed remote MCP Server
+            </SuiTitle>
+            <TickItem className='max-w-sm'>
+              Built into your ClickHouse Cloud service as a new interface
+            </TickItem>
+            <TickItem className='max-w-sm'>
+              Leverage your data with external agents and MCP-compatible clients
+            </TickItem>
+            <TickItem className='max-w-sm'>
+              Secured with OAuth for authentication
+            </TickItem>
+            <TickItem>
+              Turn-key experience, no infra to setup or manage
+            </TickItem>
+          </FeatureSection>
+          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
+          <FeatureSection
+            className='bg-shadow-element yellow-shadow'
+            style={
+              {
+                '--top-side': '50%',
+                '--right-side': 'auto',
+                '--left-side': '20%',
+                '--scale': '1',
+                '--opacity': '0.02'
+              } as CSSProperties
+            }
+            flip={true}
+            image={{
+              src: imageMcpClient,
+              width: 1092 / 2,
+              height: 982 / 2,
               alt: 'Bring your own MCP-compatible client'
             }}>
             <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
               Bring your own MCP-
-              <br />
+              <br className='hidden lg:block' />
               compatible client
             </SuiTitle>
-            <TickItem>Works with any MCP-compatible LLM</TickItem>
-            <TickItem>Structured prompts, your way</TickItem>
-            <TickItem>Developer-friendly setup</TickItem>
+            <TickItem>Claude (Desktop or Web via integrations)</TickItem>
+            <TickItem>Cursor</TickItem>
+            <TickItem>Windsurf</TickItem>
+            <TickItem>
+              <Link
+                href='https://github.com/punkpeye/awesome-mcp-clients'
+                target='_blank'
+                className='text-primary-300 underline hover:decoration-2'>
+                And many more
+              </Link>
+            </TickItem>
           </FeatureSection>
         </div>
       </section>
@@ -448,9 +504,6 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
           <CUICard className='bg-neutral-900/80'>
             <div className='my-4 space-y-2 text-center lg:mb-4 lg:mt-6'>
               <SuiTitle type='h2'>Get early access</SuiTitle>
-              <SuiText className='opacity-70'>
-                Join the waitlist to get access to ClickHouse.ai
-              </SuiText>
             </div>
             <CUICard.Body className='p-4 lg:p-6'>
               <CdcWaitlistForm formId='1401' />
