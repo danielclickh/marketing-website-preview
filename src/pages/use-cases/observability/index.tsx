@@ -66,10 +66,7 @@ export default function ClickHouseServerPage({
   footerData
 }: CommonProps) {
   useGalaxyOnPage('observabilityUseCasePage')
-  const [activeTab, setActiveTab] = useState<
-    null | 'searches' | 'storage' | 'data-collection'
-  >(null)
-  const [hyperdxActive, setHyperdxActive] = useState(false)
+  const [hyperdxActive, setHyperdxActive] = useState(true)
   const [clickhouseActive, setClickhouseActive] = useState(false)
   const [opentelemetryActive, setOpentelemetryActive] = useState(false)
   const allAreInactive =
@@ -191,7 +188,8 @@ export default function ClickHouseServerPage({
                 src: '/images/use-cases/logging/tripdotcom.svg',
                 width: 141,
                 height: 34.01,
-                alt: 'Trip.com'
+                alt: 'Trip.com',
+                className: '-mb-1'
               }}
             />
             <QuoteCard
@@ -199,12 +197,12 @@ export default function ClickHouseServerPage({
               content={
                 'ClickHouse’s analytics capabilities and open ecosystem make it a powerful technology for observability. HyperDX is very exciting, bringing together an enhanced query experience with a more intuitive UI for exploratory observability workflows.'
               }
-              link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
               logo={{
                 src: logoLovable,
                 width: 159,
                 height: 27,
-                alt: 'Lovable'
+                alt: 'Lovable',
+                className: 'mb-0.5'
               }}
             />
           </div>
@@ -245,10 +243,10 @@ export default function ClickHouseServerPage({
             <Image src={iconTimer} width={48} height={49} alt='Timer icon' />
             <SuiTitle
               type='h3'
-              className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
+              className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
               Sub-second queries
             </SuiTitle>
-            <SuiText size='lg' className='text-balance'>
+            <SuiText className='text-balance'>
               Even on petabytes of high <br className='hidden lg:block' />
               cardinality data
             </SuiText>
@@ -257,10 +255,10 @@ export default function ClickHouseServerPage({
             <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
             <SuiTitle
               type='h3'
-              className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
+              className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
               10-100x cost savings
             </SuiTitle>
-            <SuiText size='lg' className='text-balance'>
+            <SuiText className='text-balance'>
               Best in class ingestion and <br className='hidden lg:block' />
               compression rates (30x)
             </SuiText>
@@ -269,10 +267,10 @@ export default function ClickHouseServerPage({
             <Image src={iconStack} width={48} height={49} alt='Stack icon' />
             <SuiTitle
               type='h3'
-              className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
+              className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
               Full stack observability
             </SuiTitle>
-            <SuiText size='lg' className='text-balance'>
+            <SuiText className='text-balance'>
               Unify Session Replays, Logs, <br className='hidden lg:block' />
               Traces, Metrics and Errors
             </SuiText>
@@ -525,9 +523,9 @@ export default function ClickHouseServerPage({
 
       {/* Integrations */}
       <section className='section-container my-24 lg:my-36'>
-        <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16'>
-          <SuiTitle type='h2'>Instrument Your Applications</SuiTitle>
-          <SuiText size='lg' className='text-neutral-200' weight='bold'>
+        <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16 lg:px-12'>
+          <SuiTitle type='h2'>Instrument your applications</SuiTitle>
+          <SuiText size='lg' className='text-neutral-200'>
             Trace every log, API request, DB query, and more with just a few
             lines of code. Instrument and observe your stack in minutes with
             OpenTelemetry.
