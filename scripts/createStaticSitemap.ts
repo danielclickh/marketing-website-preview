@@ -98,6 +98,9 @@ function generateSiteMap(
         <loc>${siteURL}/company/contact</loc>
     </url>
     <url>
+        <loc>${siteURL}/company/request-demo</loc>
+    </url>
+    <url>
         <loc>${siteURL}/company/events</loc>
     </url>
     <url>
