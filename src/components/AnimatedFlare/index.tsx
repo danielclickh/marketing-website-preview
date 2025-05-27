@@ -64,6 +64,7 @@ export default function AnimatedFlare({
     const camera = new Camera()
     const renderer = new WebGLRenderer({ alpha: true })
 
+    renderer.domElement.className = 'blur-sm'
     renderer.domElement.style.position = 'absolute'
     renderer.domElement.style.inset = '0px'
     renderer.domElement.style.zIndex = '0'

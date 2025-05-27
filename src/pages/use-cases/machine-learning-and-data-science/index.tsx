@@ -1,6 +1,7 @@
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
+import AnimatedFlare from '@/components/AnimatedFlare'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
@@ -8,6 +9,7 @@ import LogoCarousel from '@/components/LogoCarousel'
 import AccordionComponent from '@/components/MLDiagram/Accordion'
 import Markdown from '@/components/Markdown'
 import QuoteCard from '@/components/QuoteCard'
+import TickItem from '@/components/TickItem'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -16,7 +18,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 interface MLProps extends CommonProps {
@@ -72,6 +74,7 @@ export default function MLUseCasePage({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
+        {/* Hero */}
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-grid pb-20 pt-10'>
             <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-64 lg:h-[524px] lg:bg-speed-lines-ml'></div>
@@ -97,30 +100,22 @@ export default function MLUseCasePage({
                       </p>
                     </SuiText>
                   </div>
-                  <div className='lg:max-w-2xl xl:max-w-full'>
+                  <div className='space-y-4 lg:max-w-2xl xl:max-w-full'>
                     {checkpoints.map((checkpoint) => {
                       return (
-                        <div
-                          className={'item-center flex space-x-4 pb-2'}
-                          key={checkpoint.id}>
-                          <Image
-                            src='/images/cloud/check.svg'
-                            width='0'
-                            height='0'
-                            alt='Machine learning feature icon'
-                            className='w-8'
-                          />
-                          <SuiText
-                            size='base'
-                            weight='normal'
-                            color='secondary'
-                            className='flex items-center'>
-                            <p>{checkpoint.content}</p>
-                          </SuiText>
-                        </div>
+                        <Fragment key={checkpoint.id}>
+                          <TickItem>
+                            <SuiText
+                              size='base'
+                              weight='normal'
+                              color='secondary'>
+                              <p>{checkpoint.content}</p>
+                            </SuiText>
+                          </TickItem>
+                        </Fragment>
                       )
                     })}
-                    <div className='relative z-40 mt-6 flex gap-6'>
+                    <div className='relative z-40 !mt-8 flex gap-6'>
                       <CUIButton
                         type='primary'
                         size='lg'
@@ -160,6 +155,55 @@ export default function MLUseCasePage({
           </div>
         </div>
 
+        {/* ClickHouse.ai */}
+        <section className='relative overflow-hidden bg-[#D1C302]/5 py-10'>
+          <AnimatedFlare className='absolute right-0 top-1/3 z-0 aspect-video w-[300vh] -translate-y-1/2 lg:left-1/2 lg:right-auto lg:w-[150vw] lg:-translate-x-1/2' />
+          <AnimatedFlare className='absolute left-0 top-1/3 z-0 aspect-video w-[300vh] -translate-y-1/2 opacity-70 lg:hidden' />
+          <div className='section-container relative z-10 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:justify-between'>
+            <div className='mx-auto -mt-1 max-w-lg space-y-4 text-center lg:mx-0 lg:pr-6 lg:text-left'>
+              <SuiTitle type='h2'>ClickHouse.ai</SuiTitle>
+              <SuiText size='lg' className='text-neutral-200'>
+                Unlock Agent-Facing Analytics within the ClickHouse Cloud
+                console or via the native remote MCP server
+              </SuiText>
+            </div>
+            <ul className='mx-auto flex max-w-md flex-wrap justify-center gap-x-11 gap-y-3.5 lg:mx-0 lg:grid lg:grid-cols-1 xl:grid-cols-2'>
+              <li>
+                <TickItem>
+                  <strong>AI Assistant</strong>
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>AI Agent</strong>
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Remote MCP Server</strong>
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Docs AI</strong>
+                </TickItem>
+              </li>
+            </ul>
+            <div className='text-center lg:text-left'>
+              <CUIButton
+                type='secondary'
+                size='lg'
+                weight='semibold'
+                href='/ai?loc=use-case-ml-and-ds'
+                linkClass='inline-block'
+                className='!bg-neutral-950/60 px-8'>
+                Find out more
+              </CUIButton>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
         <div className='bg-neutral-725 text-neutral-0'>
           <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
             <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>

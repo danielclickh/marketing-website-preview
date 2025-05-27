@@ -175,7 +175,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             '--left-side': 'auto'
           } as React.CSSProperties
         }>
-        <AnimatedFlare className='absolute -bottom-[40%] left-1/2 z-0 aspect-video h-[140vh] max-w-[3000px] -translate-x-1/3 blur-sm md:bottom-0 md:left-1/2 md:h-auto md:w-[200vw] md:-translate-x-1/2 lg:-bottom-[5%] xl:-bottom-[3%] 3xl:bottom-[3%] 3xl:w-[150vw]' />
+        <AnimatedFlare className='absolute -bottom-[40%] left-1/2 z-0 aspect-video h-[140vh] max-w-[3000px] -translate-x-1/3 md:bottom-0 md:left-1/2 md:h-auto md:w-[200vw] md:-translate-x-1/2 lg:-bottom-[5%] xl:-bottom-[3%] 3xl:bottom-[3%] 3xl:w-[150vw]' />
         <div className='section-container'>
           <div className='relative z-10 pb-8 pt-16 text-center md:py-24'>
             <SuiTitle
