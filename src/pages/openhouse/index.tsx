@@ -1328,49 +1328,8 @@ function ContentCarousel({
   }
 
   return (
-    <div className='relative'>
-      <Swiper
-        modules={[Navigation]}
-        slidesPerView={1}
-        spaceBetween={6}
-        speed={600}
-        watchSlidesProgress={true}
-        allowTouchMove={true}
-        breakpoints={{
-          480: {
-            slidesPerView: 1.25,
-            spaceBetween: 10
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 32
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 32
-          }
-        }}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current
-        }}
-        className='!overflow-visible'>
-        {Children.map(children, (child, index) => {
-          if (isValidElement(child)) {
-            return (
-              <SwiperSlide key={index} className='!h-auto'>
-                {({ isVisible }) => (
-                  <div
-                    className={`h-full transition-opacity ${isVisible ? '' : 'pointer-events-none opacity-50'}`}>
-                    {child}
-                  </div>
-                )}
-              </SwiperSlide>
-            )
-          }
-        })}
-      </Swiper>
-      <div className='pointer-events-none z-10 mt-4 flex items-center justify-center gap-4 lg:absolute lg:left-0 lg:right-0 lg:top-1/2 lg:mt-0 lg:-translate-y-1/2 lg:justify-between'>
+    <div className='relative flex flex-col'>
+      <div className='pointer-events-none z-10 order-last mt-4 flex w-full items-center justify-center gap-4 lg:absolute lg:left-0 lg:right-0 lg:top-1/2 lg:mt-0 lg:-translate-y-1/2 lg:justify-between'>
         <button
           ref={prevRef}
           type='button'
@@ -1398,6 +1357,47 @@ function ContentCarousel({
           />
         </button>
       </div>
+      <Swiper
+        modules={[Navigation]}
+        slidesPerView={1}
+        spaceBetween={6}
+        speed={600}
+        watchSlidesProgress={true}
+        allowTouchMove={true}
+        breakpoints={{
+          480: {
+            slidesPerView: 1.25,
+            spaceBetween: 10
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 32
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 32
+          }
+        }}
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current
+        }}
+        className='order-first w-full !overflow-visible'>
+        {Children.map(children, (child, index) => {
+          if (isValidElement(child)) {
+            return (
+              <SwiperSlide key={index} className='!h-auto'>
+                {({ isVisible }) => (
+                  <div
+                    className={`h-full transition-opacity ${isVisible ? '' : 'pointer-events-none opacity-50'}`}>
+                    {child}
+                  </div>
+                )}
+              </SwiperSlide>
+            )
+          }
+        })}
+      </Swiper>
     </div>
   )
 }
