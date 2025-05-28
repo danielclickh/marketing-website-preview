@@ -80,6 +80,24 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       alt: 'Vueling'
     },
     {
+      src: logoAshby,
+      width: 91.71,
+      height: 30,
+      alt: 'Ashby'
+    },
+    {
+      src: logoAutoNation,
+      width: 141.95,
+      height: 30,
+      alt: 'AutoNation'
+    },
+    {
+      src: logoSeemplicity,
+      width: 186,
+      height: 30,
+      alt: 'Seemplicity'
+    },
+    {
       src: logoBlacksmithPng,
       width: 417 / 2,
       height: 53 / 2,
@@ -126,24 +144,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       width: 204.68,
       height: 29.25,
       alt: 'Ottimate'
-    },
-    {
-      src: logoAshby,
-      width: 91.71,
-      height: 30,
-      alt: 'Ashby'
-    },
-    {
-      src: logoAutoNation,
-      width: 141.95,
-      height: 30,
-      alt: 'AutoNation'
-    },
-    {
-      src: logoSeemplicity,
-      width: 186,
-      height: 30,
-      alt: 'Seemplicity'
     }
   ]
 
