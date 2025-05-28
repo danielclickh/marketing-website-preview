@@ -1,9 +1,11 @@
+import clapperboard from './assets/clapperboard.png'
 import imageGallery from './assets/gallery.png'
 import imageIconBinary from './assets/icon-binary.svg'
 import imageIconFaq from './assets/icon-faq.svg'
 import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
+import navigationArrow from './assets/navigation-arrow.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
 import speakerAlanBraithwaite from './assets/speaker-alan-braithwaite.png'
@@ -12,7 +14,6 @@ import speakerArunmozhiRa from './assets/speaker-arunmozhi-ra.png'
 import speakerArupMalakar from './assets/speaker-arup-malakar.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
 import speakerChrisCrane from './assets/speaker-chris-crane.png'
-import speakerDaleFrohman from './assets/speaker-dale-frohman.png'
 import speakerDaleMcDiarmid from './assets/speaker-dale-mcdiarmid.png'
 import speakerJeanaChoi from './assets/speaker-jeana-choi.png'
 import speakerJohananOttensooser from './assets/speaker-johanan-ottensooser.png'
@@ -42,22 +43,90 @@ import styles from './styles.module.scss'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
+import MarketingVideoThumbnail from '@/components/MarketingVideoThumbnail'
 import OpenHouseAccordionItem from '@/components/OpenHouseAccordionItem'
 import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
 import SeoContainer from '@/components/SeoContainer'
+import { fetchAll, findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { limitStringByWord, stripHtmlTags } from '@/lib/utils/strings'
+import { BlogPost } from '@/types/blogs'
 import { CommonProps } from '@/types/homepage'
+import { Video } from '@/types/videos'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import { useCallback, useRef, useState } from 'react'
+import { isValidElement, Children } from 'react'
 import 'swiper/css'
+import { Navigation } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-export const getStaticProps: GetStaticProps<CommonProps> =
+interface OpenHousePageProps extends CommonProps {
+  blogs: Array<
+    Pick<
+      BlogPost,
+      | 'id'
+      | 'category'
+      | 'title'
+      | 'slug'
+      | 'date'
+      | 'shortDescription'
+      | 'content'
+      | 'thumbnailPng'
+      | 'publishedAt'
+    >
+  >
+  videos: Array<
+    Pick<
+      Video,
+      | 'id'
+      | 'Slug'
+      | 'VideoID'
+      | 'Title'
+      | 'IntroText'
+      | 'Description'
+      | 'categories'
+      | 'VideoDate'
+      | 'publishedAt'
+    >
+  >
+}
+
+export const getStaticProps: GetStaticProps<OpenHousePageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
+
+    const blogs: OpenHousePageProps['blogs'] = await fetchAll('blog-posts', {
+      filters: {
+        tags: {
+          slug: {
+            $eq: 'open-house'
+          }
+        },
+        $or: getStagingOnlyFilters()
+      },
+      populate: ['thumbnailPng'],
+      sort: ['date:DESC', 'publishedAt:DESC']
+    })
+
+    const videos: OpenHousePageProps['videos'] = await fetchAll(
+      'marketing-videos',
+      {
+        filters: {
+          tags: {
+            slug: {
+              $eq: 'open-house'
+            }
+          }
+        },
+        populate: ['categories'],
+        sort: ['VideoDate:DESC', 'publishedAt:DESC']
+      }
+    )
 
     return {
       props: {
@@ -67,6 +136,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           path: '/openhouse',
           image: [{ url: '/images/social-open-house.png' }]
         },
+        blogs,
+        videos,
         ...commonProps
       }
     }
@@ -538,7 +609,12 @@ const AGENDA: Array<{
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
-export default function Page({ seo, footerData }: CommonProps) {
+export default function Page({
+  seo,
+  footerData,
+  blogs,
+  videos
+}: OpenHousePageProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
@@ -577,10 +653,10 @@ export default function Page({ seo, footerData }: CommonProps) {
           {/* Header */}
           <OpenHouseHeader>
             <OpenHouseButton
-              href='/openhouse/register'
+              href='/company/contact'
               variant='primary'
               size='sm'>
-              Register
+              Get in touch
             </OpenHouseButton>
           </OpenHouseHeader>
 
@@ -610,20 +686,13 @@ export default function Page({ seo, footerData }: CommonProps) {
                   <p className='mb-4 text-xl leading-loose'>
                     Free conference in San Francisco, CA
                   </p>
-                  <OpenHouseButton
-                    href='/openhouse/register'
-                    variant='primary'
-                    size='lg'
-                    className='min-w-48'>
-                    Register
-                  </OpenHouseButton>
                 </div>
               </div>
             </div>
           </section>
 
           {/* Gallery */}
-          <div className='lg:py-18 relative hidden justify-center bg-white px-2 md:flex md:py-10 xl:py-24'>
+          <div className='relative hidden justify-center bg-white px-2 md:flex md:py-10 xl:py-24'>
             <Image
               src={imageGallery}
               width={3602 / 2}
@@ -632,6 +701,135 @@ export default function Page({ seo, footerData }: CommonProps) {
               className=''
             />
           </div>
+
+          {/* Blogs */}
+          {blogs.length > 0 && (
+            <>
+              <section className='overflow-hidden bg-[#EFEFEF] py-10 text-black md:py-20 xl:py-24'>
+                <div className='section-container'>
+                  <h2 className='mb-10 text-center text-4xl md:mb-14 lg:mb-20'>
+                    Whats been announced
+                  </h2>
+                  <ContentCarousel>
+                    {blogs.map((blog, blogIndex) => {
+                      return (
+                        <div
+                          key={blogIndex}
+                          className='group/blogItem relative flex h-full flex-col bg-white text-black'>
+                          <Image
+                            src={blog.thumbnailPng.url}
+                            alt={blog.title}
+                            width={310}
+                            height={160}
+                            loading='lazy'
+                            className='aspect-[31/16] h-auto w-full flex-shrink-0 flex-grow-0 object-cover'
+                          />
+                          <div className='flex flex-1 flex-col p-4 lg:p-6'>
+                            <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
+                              {blog.category} <span>·</span>
+                              {convertDateToString(
+                                blog.date || blog.publishedAt
+                              )}
+                            </p>
+                            <h3 className='mb-3 text-xl'>
+                              <Link href={`/blog/${blog.slug}`}>
+                                <span className='absolute inset-0' />
+                                {blog.title}
+                              </Link>
+                            </h3>
+                            <p className='mb-3 hidden lg:block'>
+                              {limitStringByWord(
+                                stripHtmlTags(
+                                  blog.shortDescription || blog.content
+                                ),
+                                140,
+                                '...'
+                              )}
+                            </p>
+                            <strong className='mt-auto group-hover/blogItem:underline'>
+                              Read more
+                            </strong>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </ContentCarousel>
+                </div>
+              </section>
+
+              {/* Videos */}
+              <section className='relative bg-neutral-900 py-10 text-white md:py-20 xl:py-24'>
+                <div
+                  className={`absolute -top-8 left-0 right-0 h-8 bg-neutral-900 ${styles.textureMaskTop}`}
+                />
+                <div
+                  className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-900 ${styles.textureMaskBottom}`}
+                />
+                <div className='overflow-hidden'>
+                  <div className='section-container'>
+                    {videos.length > 0 ? (
+                      <>
+                        <h2 className='mb-10 text-center text-4xl md:mb-14 lg:mb-20'>
+                          Open House videos
+                        </h2>
+                        <ContentCarousel mode='dark'>
+                          {videos.map((video, videoIndex) => {
+                            return (
+                              <div
+                                key={videoIndex}
+                                className='group/videoItem relative flex h-full flex-col bg-white text-black'>
+                                <MarketingVideoThumbnail
+                                  videoId={video.VideoID}
+                                />
+                                <div className='flex flex-1 flex-col p-4 lg:p-6'>
+                                  <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
+                                    {video.categories[0]?.CategoryName ||
+                                      'Video'}{' '}
+                                    <span>·</span>
+                                    {convertDateToString(
+                                      video.VideoDate || video.publishedAt
+                                    )}
+                                  </p>
+                                  <h3 className='mb-3 text-xl'>
+                                    <Link href={`/videos/${video.Slug}`}>
+                                      <span className='absolute inset-0' />
+                                      {video.Title}
+                                    </Link>
+                                  </h3>
+                                  <strong className='mt-auto group-hover/videoItem:underline'>
+                                    Watch now
+                                  </strong>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </ContentCarousel>
+                      </>
+                    ) : (
+                      <div className='py-4 text-center'>
+                        <Image
+                          src={clapperboard}
+                          width={322 / 2}
+                          height={298 / 2}
+                          alt='Clapperboard'
+                          className='mx-auto mb-10 h-auto w-28 md:mb-12 md:w-40'
+                        />
+                        <h2 className='mb-8 text-4xl'>
+                          Open House videos are on the way
+                        </h2>
+                        <p className='text-balance text-lg md:text-2xl'>
+                          We’re curating the best moments to share with you.{' '}
+                          <br />
+                          Check back soon to watch the highlights and relive the
+                          energy.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
 
           {/* Table */}
           <section className={`bg-neutral-950 py-20 ${styles.dotBackground}`}>
@@ -765,15 +963,6 @@ export default function Page({ seo, footerData }: CommonProps) {
                   )
                 })}
               </div>
-              <div className='mt-10 text-center'>
-                <OpenHouseButton
-                  href='/openhouse/register'
-                  variant='dark'
-                  size='lg'
-                  className='min-w-48'>
-                  Register
-                </OpenHouseButton>
-              </div>
             </div>
           </section>
 
@@ -870,15 +1059,6 @@ export default function Page({ seo, footerData }: CommonProps) {
                     San Francisco, California
                     <br />
                     FREE
-                  </p>
-                  <p>
-                    <OpenHouseButton
-                      href='/openhouse/register'
-                      variant='primary'
-                      size='lg'
-                      className='min-w-48 border !border-black hover:!text-black'>
-                      Register
-                    </OpenHouseButton>
                   </p>
                 </div>
               </div>
@@ -994,11 +1174,11 @@ export default function Page({ seo, footerData }: CommonProps) {
                 </div>
                 <div className='w-full flex-1 text-center lg:w-auto'>
                   <OpenHouseButton
-                    href='/openhouse/register'
+                    href='/company/contact'
                     variant='primary'
                     size='lg'
                     className='w-full flex-1 sm:mx-auto sm:w-auto sm:min-w-48'>
-                    Register
+                    Get in touch
                   </OpenHouseButton>
                 </div>
               </div>
@@ -1122,6 +1302,101 @@ function SpeakerProfile({
         </div>
         <h3 className='text-lg md:text-xl lg:text-2xl'>{name}</h3>
         <p className='text-sm md:text-base lg:text-lg'>{title}</p>
+      </div>
+    </div>
+  )
+}
+
+function ContentCarousel({
+  children,
+  mode = 'light'
+}: {
+  children: React.ReactNode
+  mode?: 'dark' | 'light'
+}) {
+  const prevRef = useRef<null | HTMLButtonElement>(null)
+  const nextRef = useRef<null | HTMLButtonElement>(null)
+
+  const modeButtonClasses: Record<'dark' | 'light', string> = {
+    dark: 'bg-ch-yellow ring-neutral-900 ring-offset-neutral-900',
+    light: 'bg-neutral-900 ring-neutral-900 ring-offset-ch-yellow'
+  }
+
+  const modeArrowClasses: Record<'dark' | 'light', string> = {
+    dark: 'saturate-0 brightness-0',
+    light: ''
+  }
+
+  return (
+    <div className='relative'>
+      <Swiper
+        modules={[Navigation]}
+        slidesPerView={1}
+        spaceBetween={6}
+        speed={600}
+        watchSlidesProgress={true}
+        allowTouchMove={true}
+        breakpoints={{
+          480: {
+            slidesPerView: 1.25,
+            spaceBetween: 10
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 32
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 32
+          }
+        }}
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current
+        }}
+        className='!overflow-visible'>
+        {Children.map(children, (child, index) => {
+          if (isValidElement(child)) {
+            return (
+              <SwiperSlide key={index} className='!h-auto'>
+                {({ isVisible }) => (
+                  <div
+                    className={`h-full transition-opacity ${isVisible ? '' : 'pointer-events-none opacity-50'}`}>
+                    {child}
+                  </div>
+                )}
+              </SwiperSlide>
+            )
+          }
+        })}
+      </Swiper>
+      <div className='pointer-events-none z-10 mt-4 flex items-center justify-center gap-4 lg:absolute lg:left-0 lg:right-0 lg:top-1/2 lg:mt-0 lg:-translate-y-1/2 lg:justify-between'>
+        <button
+          ref={prevRef}
+          type='button'
+          className={`pointer-events-auto flex aspect-square w-12 rounded-full ring-0 transition hover:ring hover:ring-offset-2 disabled:pointer-events-none disabled:opacity-20 lg:w-14 lg:-translate-x-2/3 lg:disabled:opacity-0 ${modeButtonClasses[mode]}`}>
+          <span className='sr-only'>Previous slide</span>
+          <Image
+            src={navigationArrow}
+            width={24}
+            height={16}
+            alt='Previous slide'
+            className={`m-auto w-5 rotate-180 lg:w-6 ${modeArrowClasses[mode]}`}
+          />
+        </button>
+        <button
+          ref={nextRef}
+          type='button'
+          className={`pointer-events-auto flex aspect-square w-12 rounded-full ring-0 transition hover:ring hover:ring-offset-2 disabled:pointer-events-none disabled:opacity-20 lg:w-14 lg:translate-x-2/3 lg:disabled:opacity-0 ${modeButtonClasses[mode]}`}>
+          <span className='sr-only'>Next slide</span>
+          <Image
+            src={navigationArrow}
+            width={24}
+            height={16}
+            alt='Next slide'
+            className={`m-auto w-5 lg:w-6 ${modeArrowClasses[mode]}`}
+          />
+        </button>
       </div>
     </div>
   )

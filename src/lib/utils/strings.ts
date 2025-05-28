@@ -1,11 +1,29 @@
-type SlugifyOptions = {
-  separator: string
-  maxLength: number
-  enforceLowercase: boolean
-  dictionary: { [key: string | number]: string }
+export function upperCaseFirst(string: string) {
+  return string.charAt(0).toLocaleUpperCase() + string.slice(1)
 }
 
-const slugifyDefaults: SlugifyOptions = {
+export function upperCaseWords(string: string) {
+  return string.split(' ').map(upperCaseFirst).join(' ')
+}
+
+export function pascal(string: string) {
+  string = slugify(string, { separator: ' ' })
+  return upperCaseWords(string).replaceAll(/\s+/g, '')
+}
+
+export function camel(string: string) {
+  string = pascal(string)
+  return string.charAt(0).toLocaleLowerCase() + string.slice(1)
+}
+
+type SlugifyOptions = {
+  separator?: string
+  maxLength?: number
+  enforceLowercase?: boolean
+  dictionary?: Record<string, string>
+}
+
+const slugifyDefaults = {
   separator: '-',
   maxLength: 0,
   enforceLowercase: true,
@@ -13,18 +31,16 @@ const slugifyDefaults: SlugifyOptions = {
     '&': 'and',
     '@': 'at'
   }
-}
+} satisfies SlugifyOptions
 
 /**
  * Slugify a string replacing any white space and spacial characters with `separator` param.
  */
 export function slugify(string: string, options?: SlugifyOptions): string {
-  const {
-    separator = slugifyDefaults.separator,
-    maxLength = slugifyDefaults.maxLength,
-    enforceLowercase = slugifyDefaults.enforceLowercase,
-    dictionary = slugifyDefaults.dictionary
-  } = options || slugifyDefaults
+  const { separator, maxLength, enforceLowercase, dictionary } = {
+    ...slugifyDefaults,
+    ...options
+  }
 
   const charPattern = new RegExp(`[^a-z0-9\s${separator}]`, 'gi')
 
@@ -33,7 +49,9 @@ export function slugify(string: string, options?: SlugifyOptions): string {
 
   // Replace dictionary key-pairs.
   for (const key in dictionary) {
-    slug = slug.replaceAll(key, dictionary[key])
+    if (dictionary.hasOwnProperty(key)) {
+      slug = slug.replaceAll(key, dictionary[key as keyof typeof dictionary])
+    }
   }
 
   // Normalise string and remove unwanted characters.
@@ -57,10 +75,50 @@ export function slugify(string: string, options?: SlugifyOptions): string {
   return slug
 }
 
-export function upperCaseFirst(string: string) {
-  return string.charAt(0).toLocaleUpperCase() + string.slice(1)
+export function stripHtmlTags(
+  string: string,
+  tags: '*' | Array<string> = '*',
+  preserveContent = false
+): string {
+  if (tags === '*') {
+    tags = ['[^>\\s]+']
+  }
+
+  if (!tags.length) return string
+
+  const matchingTagsPattern = new RegExp(
+    `<(${tags.join('|')})[^>]*?>(.*?)<\\/\\1>`,
+    'gi'
+  )
+  string = string.replaceAll(matchingTagsPattern, preserveContent ? '$2' : '')
+
+  const strayTagsPattern = new RegExp(
+    `<(${tags.join('|')})[^>]*?>|<\\/(${tags.join('|')})>`,
+    'gi'
+  )
+  string = string.replaceAll(strayTagsPattern, '')
+
+  return string
 }
 
-export function upperCaseWords(string: string) {
-  return string.split(' ').map(upperCaseFirst).join(' ')
+export function limitStringByWord(
+  string: string,
+  maxLength: number,
+  appends: string = ''
+) {
+  if (string.length <= maxLength) return string
+
+  let trimmedString = string.slice(0, maxLength)
+  const lastSpaceIndex = trimmedString.lastIndexOf(' ')
+
+  // If there's no space, just truncate normally, otherwise cut off at the last space
+  if (lastSpaceIndex > 0) {
+    trimmedString = trimmedString.slice(0, lastSpaceIndex)
+  }
+
+  return trimmedString + appends
+}
+
+export function escapeForRegex(input: string) {
+  return input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }

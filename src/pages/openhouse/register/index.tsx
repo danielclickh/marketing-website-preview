@@ -85,129 +85,36 @@ export default function Page({
           {/* Header */}
           <OpenHouseHeader>
             <OpenHouseButton
-              href='/openhouse/register'
+              href='/company/contact'
               variant='primary'
               size='sm'>
-              Register
+              Get in touch
             </OpenHouseButton>
           </OpenHouseHeader>
 
           {/* Form */}
           <section>
             <div className='mx-auto max-w-6xl px-6 lg:px-12'>
-              <Link href='/openhouse' className='inline-block'>
-                <Image
-                  src={imageOpenhouseLogo}
-                  alt='Open House By ClickHouse'
-                  width={326}
-                  height={160}
-                  loading='eager'
-                  priority
-                  className='my-20'
-                />
-              </Link>
-              <CUICard className='p-6 backdrop-blur-sm'>
+              <CUICard className='my-20 px-6 py-20 text-center backdrop-blur-sm'>
                 <CUICard.Body>
-                  {!formSuccess && (
-                    <>
-                      <h1 className='mb-4 text-3xl'>Register</h1>
-                      <MarketoForm
-                        formId='1314'
-                        clearbitTracking={true}
-                        onLoad={() => setFormLoaded(true)}
-                        onSuccess={() => {
-                          setFormSuccess(true)
-
-                          // Delay needed to allow the ref to update before scrolling
-                          setTimeout(() => {
-                            formSuccessRef.current?.scrollIntoView({
-                              behavior: 'smooth'
-                            })
-                          }, 10)
-
-                          return false // Stops page from reloading
-                        }}
-                      />
-                    </>
-                  )}
-                  {!formLoaded && (
-                    <div className='mb-12 mt-10 text-center'>
-                      Loading form...
-                    </div>
-                  )}
-
-                  {formSuccess && (
-                    <div
-                      ref={formSuccessRef}
-                      className='flex flex-col items-center py-6 text-center lg:py-10'>
-                      <svg
-                        width='48'
-                        height='48'
-                        viewBox='0 0 48 48'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'>
-                        <path
-                          fillRule='evenodd'
-                          clipRule='evenodd'
-                          d='M24 48.0091V48.0091C10.744 48.0091 0 37.2651 0 24.0091V24.0091C0 10.7531 10.744 0.00909424 24 0.00909424V0.00909424C37.256 0.00909424 48 10.7531 48 24.0091V24.0091C48 37.2651 37.256 48.0091 24 48.0091Z'
-                          fill='#EBFF00'
-                        />
-                        <path
-                          d='M34.6666 18.6758L21.3333 32.0091L13.3333 24.0091'
-                          stroke='black'
-                          strokeWidth='1.5'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                        />
-                      </svg>
-                      <p className='mt-6 text-xl font-bold text-white'>
-                        Thanks for your interest in OpenHouse.
-                        <br />
-                        Check your email for next steps.
-                      </p>
-                      <p className='mb-3 mt-12 text-center font-bold text-neutral-400'>
-                        Share this event
-                      </p>
-                      <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
-                        <CopyUrlButton />
-                        {[
-                          'y_combinator',
-                          'twitter',
-                          'facebook',
-                          'linkedin'
-                        ].map((social) => (
-                          <SocialButton
-                            key={social}
-                            type={social}
-                            title='Open House by ClickHouse'
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  <Link href='/openhouse' className='inline-block'>
+                    <Image
+                      src={imageOpenhouseLogo}
+                      alt='Open House By ClickHouse'
+                      width={326}
+                      height={160}
+                      loading='eager'
+                      priority
+                      className='mb-10'
+                    />
+                  </Link>
+                  <p className='text-xl font-bold text-white'>
+                    Registration closed.
+                  </p>
                 </CUICard.Body>
               </CUICard>
             </div>
           </section>
-          {formSuccess && (
-            <div className='mx-auto mt-36 max-w-7xl px-4 sm:px-8 2xl:px-0'>
-              <div className='flex justify-between'>
-                <h3 className='mb-10 font-basier text-4xl'>Upcoming events</h3>
-                <SuiButton
-                  path='/company/news-event'
-                  type='empty'
-                  color='primary'
-                  className='font-base hidden border border-primary-300/50 !no-underline backdrop-blur-sm md:inline-block'>
-                  View all events
-                </SuiButton>
-              </div>
-              <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-                {recentEvents.map((event) => (
-                  <EventPost key={event.id} {...event} />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </FontSohne>
       <Footer {...footerData} />
