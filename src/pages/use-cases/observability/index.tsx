@@ -26,6 +26,7 @@ import logoGitLab from './assets/logo-gitlab.svg'
 import logoLovable from './assets/logo-lovable.svg'
 import logoNetflix from './assets/logo-netflix.svg'
 import logoSony from './assets/logo-sony.svg'
+import shareImage from './assets/share-image.png'
 import AccordionItem from '@/components-cleaned/AccordionItem'
 import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
@@ -48,11 +49,12 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Observability with ClickHouse | ClickHouse for logging',
+          title:
+            'ClickStack: High-Performance Open-Source Observability | Logs, Metrics, Traces with ClickHouse',
           description:
-            'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.',
+            'ClickStack is a high-performance, open-source observability stack powered by ClickHouse. Unify logs, metrics, traces, and session replays with lightning-fast queries and 10-100x cost savings on even your highest-cardinality data.',
           path: '/use-cases/observability',
-          image: [{ url: '/images/use-cases/logging/og.png' }]
+          image: [{ url: shareImage.src }]
         },
         ...commonProps
       }
