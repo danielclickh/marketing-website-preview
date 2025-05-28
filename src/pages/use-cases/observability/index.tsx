@@ -5,7 +5,6 @@ import iconLightBulb from './assets/icon-light-bulb.svg'
 import iconSparkles from './assets/icon-sparkles.svg'
 import iconStack from './assets/icon-stack.svg'
 import iconTimer from './assets/icon-timer.svg'
-import imageStack from './assets/image-stack.png'
 import integrationAws from './assets/integration-aws.svg'
 import integrationCloudflare from './assets/integration-cloudflare.svg'
 import integrationFluentd from './assets/integration-fluentd.svg'
@@ -102,7 +101,7 @@ export default function ClickHouseServerPage({
                 type='primary'
                 size='lg'
                 weight='semibold'
-                href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
+                href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
                 target='_blank'
                 linkClass='w-full md:w-auto'
                 className='w-full px-10 md:w-auto'>
@@ -129,6 +128,8 @@ export default function ClickHouseServerPage({
               height={1038 / 2}
               alt='HyperDX Dashboard'
               className='bottom-0 left-0 top-0 h-auto w-full origin-left from-40% gradient-mask-to-b md:from-25% lg:absolute lg:h-full lg:w-auto lg:max-w-none lg:gradient-mask-to-none xl:scale-110 2xl:scale-125'
+              loading='eager'
+              priority={true}
             />
           </div>
         </div>
