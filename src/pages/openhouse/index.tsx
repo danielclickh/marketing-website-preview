@@ -646,6 +646,21 @@ export default function Page({
     }
   }, [speakersToggleRef])
 
+  const hasBlogs = blogs.length > 0
+
+  const blogsRef = useRef<HTMLDivElement | null>(null)
+  const scrollToBlogs = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>) => {
+      const blogsEl = blogsRef.current
+      if (!blogsEl) return
+      event.preventDefault()
+      blogsEl.scrollIntoView({
+        behavior: 'smooth'
+      })
+    },
+    [blogsRef]
+  )
+
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -687,6 +702,16 @@ export default function Page({
                   <p className='mb-4 text-xl leading-loose'>
                     Free conference in San Francisco, CA
                   </p>
+                  {hasBlogs && (
+                    <OpenHouseButton
+                      href='#whats-new'
+                      variant='primary'
+                      size='lg'
+                      className='min-w-48'
+                      onClick={scrollToBlogs}>
+                      See what's new
+                    </OpenHouseButton>
+                  )}
                 </div>
               </div>
             </div>
@@ -704,9 +729,12 @@ export default function Page({
           </div>
 
           {/* Blogs */}
-          {blogs.length > 0 && (
+          {hasBlogs && (
             <>
-              <section className='overflow-hidden bg-[#EFEFEF] py-10 text-black md:py-20 xl:py-24'>
+              <section
+                ref={blogsRef}
+                id='whats-new'
+                className='overflow-hidden bg-[#EFEFEF] py-10 text-black md:py-20 xl:py-24'>
                 <div className='section-container'>
                   <h2 className='mb-10 text-center text-4xl md:mb-14 lg:mb-20'>
                     Whats been announced
