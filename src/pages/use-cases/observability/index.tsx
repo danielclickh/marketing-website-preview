@@ -442,18 +442,15 @@ export default function ClickHouseServerPage({
             Reduce your observability costs
           </SuiTitle>
           <SuiText className='text-neutral-200'>
-            ClickHouse delivers exceptional cost efficiency through
-            hardware-optimized design that outperforms traditional JVM-based
-            systems.
+            ClickHouse delivers exceptional cost efficiency, avoiding the
+            overhead of JVM-based systems, with a hardware-optimized
+            column-oriented design that reduces storage by up to 90% without
+            sacrificing speed.
           </SuiText>
           <SuiText className='text-neutral-200'>
-            Its column-oriented architecture with custom compression reduces
-            storage requirements by up to 90% while maintaining query speed.
-          </SuiText>
-          <SuiText className='text-neutral-200'>
-            Scale seamlessly from a single machine to hundreds of cores, with
-            automatic tiering between fast local storage and cost-effective
-            object storage.
+            Scaling seamlessly from a single machine to hundreds of cores, with
+            automatic tiering between local disks and object storage for maximum
+            performance and efficiency.
           </SuiText>
         </div>
         <div className='space-y-6'>
@@ -531,7 +528,7 @@ export default function ClickHouseServerPage({
           <SuiText size='lg' className='text-neutral-200'>
             Trace every log, API request, DB query, and more with just a few
             lines of code. Instrument and observe your stack in minutes with
-            OpenTelemetry.
+            ClickStack.
           </SuiText>
         </div>
         <div className='flex flex-wrap items-center justify-center gap-10 xl:justify-between xl:gap-12'>
@@ -591,17 +588,30 @@ export default function ClickHouseServerPage({
             We’ll get you started on a 30 day trial and $300 credits to spend at
             your own pace.
           </SuiText>
-          <CUIButton
-            type='primary-dark'
-            size='lg'
-            className='group mx-auto mt-8 px-10'
-            target='_blank'
-            href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
-            onClick={useGalaxyOnClick(
-              'observabilityUseCasePage.footerCta.getStartedSelect'
-            )}>
-            Get Started
-          </CUIButton>
+          <p className='mt-8 flex flex-col justify-center gap-2 sm:flex-row sm:gap-4'>
+            <CUIButton
+              type='primary-dark'
+              size='lg'
+              className='group mx-auto w-full px-10 md:w-auto'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
+              onClick={useGalaxyOnClick(
+                'observabilityUseCasePage.footerCta.getStartedSelect'
+              )}>
+              Get started
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              className='group mx-auto w-full !border-neutral-800 px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
+              target='_blank'
+              href='/company/contact?loc=use-case-observability'
+              onClick={useGalaxyOnClick(
+                'observabilityUseCasePage.footerCta.requestDemoSelect'
+              )}>
+              Get a demo
+            </CUIButton>
+          </p>
         </div>
       </div>
     </Layout>
