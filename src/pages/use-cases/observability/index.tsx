@@ -395,7 +395,7 @@ export default function ClickHouseServerPage({
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
+              href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
               target='_blank'
               className='px-10'
               linkClass='inline-block'>
