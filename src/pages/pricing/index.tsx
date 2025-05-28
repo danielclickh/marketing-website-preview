@@ -254,9 +254,14 @@ export default function PricingPage({
                           <Link
                             href='/cloud/clickpipes/postgres-cdc-connector'
                             className='text-primary-300 underline'>
-                            Postgres ClickPipes
+                            Postgres CDC ClickPipes
+                          </Link>{' '}
+                          - for Postgres CDC pricing, visit{' '}
+                          <Link
+                            href='/docs/cloud/manage/billing/overview#clickpipes-for-postgres-cdc'
+                            className='text-primary-300 underline'>
+                            here
                           </Link>
-                          , currently in Beta.
                         </SuiText>
                         <SuiText size='sm'>
                           For more information about our billing and pricing
