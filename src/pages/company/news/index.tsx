@@ -70,7 +70,7 @@ export default function News({
         <SuiTitle type='h2' className='mb-10 text-center lg:mb-16'>
           Press releases
         </SuiTitle>
-        <div className='section-container grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {pressReleases.map((pressRelease, pressReleaseIndex) => (
             <NewsItem
               key={pressReleaseIndex}
