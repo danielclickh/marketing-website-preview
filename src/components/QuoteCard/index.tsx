@@ -7,11 +7,15 @@ import Tilt from 'react-parallax-tilt'
 
 interface QuoteProps {
   content: React.ReactNode | string
-  logo: Omit<ImageProps, 'className'>
+  logo: ImageProps
   className?: string
 }
 
-function Quote({ content, logo, className = '' }: QuoteProps) {
+function Quote({
+  content,
+  logo: { className: logoClassName = '', ...logo },
+  className = ''
+}: QuoteProps) {
   return (
     <div
       className={`animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-4 text-center shadow-card ${className}`}>
@@ -31,7 +35,7 @@ function Quote({ content, logo, className = '' }: QuoteProps) {
       </SuiText>
       <Image
         {...logo}
-        className='mt-auto inline-block h-auto max-w-[200px]'
+        className={`mt-auto inline-block h-auto max-w-[200px] ${logoClassName}`}
         alt='Quote'
       />
     </div>

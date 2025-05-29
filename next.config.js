@@ -507,12 +507,12 @@ const nextConfig = {
       },
       {
         source: '/o11y',
-        destination: '/use-cases/observability',
+        destination: '/use-cases/observability?loc=o11y',
         permanent: true
       },
       {
         source: '/olly',
-        destination: '/use-cases/observability',
+        destination: '/use-cases/observability?loc=olly',
         permanent: true
       }
     ]
