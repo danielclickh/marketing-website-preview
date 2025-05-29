@@ -1,5 +1,5 @@
-import { SuiText } from '../sui'
 import styles from './styles.module.scss'
+import EyebrowText from '@/components/EyebrowText'
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -89,12 +89,9 @@ export default function LogoCarouselV2({
 
   return (
     <div className={`my-16 text-primary-300 ${className}`} {...props}>
-      <SuiText
-        weight='bold'
-        size='sm'
-        className='mb-10 text-center uppercase tracking-[0.0875rem]'>
+      <EyebrowText className='mb-10 text-center text-primary-300'>
         {heading}
-      </SuiText>
+      </EyebrowText>
       <div
         className={`group/container relative ${styles.maskCarousel}`}
         style={{ '--logo-scale': logoScale } as React.CSSProperties}>
@@ -135,6 +132,7 @@ export default function LogoCarouselV2({
               d='M7.22354.204545 8.87127 1.84517 4.54599 6.16335H22.4082v2.40057H4.54599l4.32528 4.32528-1.64773 1.6335L.0644531 7.36364 7.22354.204545Z'
             />
           </svg>
+          <span className='sr-only'>Previous slide</span>
         </button>
         <button
           onClick={goNext}
@@ -151,6 +149,7 @@ export default function LogoCarouselV2({
               d='m15.8751 14.7955-1.6477-1.6407 4.3252-4.31815H.69043V6.43608H18.5526L14.2274 2.1108 15.8751.477273l7.1591 7.159087-7.1591 7.15914Z'
             />
           </svg>
+          <span className='sr-only'>Next slide</span>
         </button>
       </div>
     </div>

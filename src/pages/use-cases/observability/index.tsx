@@ -1,366 +1,709 @@
-import callouts from './callouts.json'
-import features from './features.json'
+import imageHero from './assets/hero.png'
+import iconCoins from './assets/icon-coins.svg'
+import iconFileSearch from './assets/icon-file-search.svg'
+import iconLightBulb from './assets/icon-light-bulb.svg'
+import iconSparkles from './assets/icon-sparkles.svg'
+import iconStack from './assets/icon-stack.svg'
+import iconTimer from './assets/icon-timer.svg'
+import integrationAws from './assets/integration-aws.svg'
+import integrationCloudflare from './assets/integration-cloudflare.svg'
+import integrationFluentd from './assets/integration-fluentd.svg'
+import integrationGo from './assets/integration-go.svg'
+import integrationJava from './assets/integration-java.svg'
+import integrationJavascript from './assets/integration-javascript.svg'
+import integrationKubernetes from './assets/integration-kubernetes.svg'
+import integrationNextjs from './assets/integration-nextjs.svg'
+import integrationNodejs from './assets/integration-nodejs.svg'
+import integrationOpentelemetry from './assets/integration-opentelemetry.svg'
+import integrationPython from './assets/integration-python.svg'
+import integrationRuby from './assets/integration-ruby.svg'
+import logoCisco from './assets/logo-cisco.svg'
+import logoCloudflare from './assets/logo-cloudflare.svg'
+import logoComcast from './assets/logo-comcast.svg'
+import logoDoorDash from './assets/logo-doordash.svg'
+import logoEbay from './assets/logo-ebay.svg'
+import logoGitLab from './assets/logo-gitlab.svg'
+import logoLovable from './assets/logo-lovable.svg'
+import logoNetflix from './assets/logo-netflix.svg'
+import logoSony from './assets/logo-sony.svg'
+import shareImage from './assets/share-image.png'
+import AccordionItem from '@/components-cleaned/AccordionItem'
+import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
-import GetStartedFree from '@/components/GetStartedFree'
+import EyebrowText from '@/components/EyebrowText'
 import Layout from '@/components/Layout'
-import AccordionComponent from '@/components/LoggingDiagram/Accordion'
-import LogoCarousel from '@/components/LogoCarousel'
-import Markdown from '@/components/Markdown'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import QuoteCard from '@/components/QuoteCard'
+import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findOne } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect } from 'react'
-import ReactMarkdown from 'react-markdown'
+import React, { CSSProperties, useState } from 'react'
 
-interface ObservabilityProps extends CommonProps {
-  customerStories: any
-}
-
-export const getStaticProps: GetStaticProps<ObservabilityProps> =
+export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
-    const params = {
-      populate: [
-        'seo',
-        'seo.image',
-        'customerStories',
-        'customerStories.*',
-        'customerStories.logos.*',
-        'customerStories.logos.darkLogoPng'
-      ]
-    }
-
-    const data = await findOne('homepage', params)
-
-    data.seo.path = '/use-cases/observability'
-    data.seo.title = 'Observability with ClickHouse | ClickHouse for logging'
-    data.seo.description =
-      'ClickHouse is the fastest and most resource-efficient database for real-time analytics, making it the perfect fit for observability use cases.'
-    data.seo.image = [{ url: '/images/use-cases/logging/og.png' }]
-
     const commonProps = await getCommonProps()
     return {
       props: {
-        ...data,
+        seo: {
+          title:
+            'ClickStack: High-Performance Open-Source Observability | Logs, Metrics, Traces with ClickHouse',
+          description:
+            'ClickStack is a high-performance, open-source observability stack powered by ClickHouse. Unify logs, metrics, traces, and session replays with lightning-fast queries and 10-100x cost savings on even your highest-cardinality data.',
+          path: '/use-cases/observability',
+          image: [{ url: shareImage.src }]
+        },
         ...commonProps
       }
     }
   }
 
 export default function ClickHouseServerPage({
-  customerStories,
   seo,
   headerData,
   footerData
-}: ObservabilityProps) {
+}: CommonProps) {
   useGalaxyOnPage('observabilityUseCasePage')
-  useEffect(() => {
-    const container = document.getElementById('regionsContainer')
-    if (container) {
-      const middlePosition =
-        container.scrollWidth / 2 - container.clientWidth / 2
-      container.scrollLeft = middlePosition
-    }
-  }, [])
+  const [hyperdxActive, setHyperdxActive] = useState(true)
+  const [clickhouseActive, setClickhouseActive] = useState(false)
+  const [opentelemetryActive, setOpentelemetryActive] = useState(false)
+  const allAreInactive =
+    !hyperdxActive && !clickhouseActive && !opentelemetryActive
   return (
-    <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='bg-contain bg-center bg-no-repeat'>
-          <div className='relative z-20 overflow-hidden bg-grid pt-10'>
-            <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-40 lg:h-[524px] lg:bg-speed-lines-ml'></div>
-            <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>
-              <div className='flex'>
-                <div className='flex-col xl:mt-16 xl:w-7/12'>
-                  <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                    <Link href='/use-cases'>Use cases</Link> / Observability
-                  </h4>
-                  <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-2xl lg:text-left'>
-                    Observability with ClickHouse
-                  </h1>
-                  <SuiText
-                    size='base'
-                    color='secondary'
-                    className='mt-6 text-center md:pr-16 lg:text-left'>
-                    <p className='mb-6'>
-                      Transform your logs, events, and traces with
-                      industry-leading compression ratios, sub-second query
-                      response times, powerful aggregation functions, and an
-                      extensive suite of integrations.
-                    </p>
-                    <p className='mb-6'>
-                      ClickHouse provides the cost-efficiency and blazing speed
-                      you need to power observability platforms at any scale.
-                    </p>
-                  </SuiText>
-                  <div className='relative z-40 mt-6 flex gap-6'>
-                    <CUIButton
-                      type='primary'
-                      size='lg'
-                      weight='semibold'
-                      href='https://console.clickhouse.cloud/signUp?loc=use-case-logging'
-                      target='_blank'
-                      linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
-                      className='w-full'>
-                      Get started today
-                    </CUIButton>
-                    <CUIButton
-                      type='secondary'
-                      size='lg'
-                      weight='semibold'
-                      href='/company/contact?loc=use-case-ml-and-ds'
-                      target='_self'
-                      linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
-                      className='w-full'>
-                      Contact sales
-                    </CUIButton>
-                  </div>
-                </div>
-                <div className='relative z-20 mx-auto mt-4 hidden md:flex md:w-4/12'>
-                  <Image
-                    src='/images/use-cases/logging/logging-use-cases-hero.svg'
-                    alt='Open source ClickHouse'
-                    width={488}
-                    height={318}
-                    className='h-auto w-full min-w-[54rem]'
-                    loading='eager'
-                    priority
-                  />
-                </div>
-              </div>
+    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      {/* Hero */}
+      <section className='overflow-hidden py-20 lg:py-24'>
+        <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
+          {/* Content */}
+          <div className='relative z-10 w-full max-w-2xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
+            <SuiText className='flip-selection !text-3xl lg:mb-16 lg:!text-[3.5rem]'>
+              <TiltedText type='black-on-yellow' className='px-2 py-1'>
+                <strong>ClickStack</strong>
+              </TiltedText>
+            </SuiText>
+            <SuiTitle
+              type='h1'
+              className='font-basier text-[1.75rem] font-semibold md:text-4xl'>
+              The high performance <br className='hidden md:block' />
+              open-source observability stack
+            </SuiTitle>
+            <SuiText size='lg' className='text-neutral-200'>
+              Lightning-fast queries and powerful aggregations on logs, metrics,
+              traces, session replays and errors with unmatched resource
+              efficiency for even your highest-cardinality data.
+            </SuiText>
+            <SuiText size='lg' className='text-neutral-200'>
+              All in one stack - powered by ClickHouse.
+            </SuiText>
+            <div className='flex w-full flex-col justify-center gap-6 md:flex-row lg:justify-start'>
+              <CUIButton
+                type='primary'
+                size='lg'
+                weight='semibold'
+                href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+                target='_blank'
+                linkClass='w-full md:w-auto'
+                className='w-full px-10 md:w-auto'>
+                Get started
+              </CUIButton>
+              <CUIButton
+                type='secondary'
+                size='lg'
+                weight='semibold'
+                href='/company/contact?loc=use-case-observability'
+                target='_self'
+                linkClass='w-full md:w-auto'
+                className='w-full px-10 md:w-auto'>
+                Talk to sales
+              </CUIButton>
             </div>
           </div>
-        </div>
 
-        <div className='bg-neutral-725 text-neutral-0'>
-          <div className='container mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-8 md:px-8 2xl:px-0'>
-            <h2 className='text-center font-basier text-2xl font-semibold lg:text-4xl lg:leading-relaxed'>
-              Discover why companies are choosing ClickHouse as their blazing
-              fast SQL-based{' '}
-              <span className='tilted tilted-yellow'>
-                <span className='tilted-content'>observability</span>
-              </span>{' '}
-              store
-            </h2>
-          </div>
-          <div className='mx-auto flex max-w-5xl flex-col gap-10 pb-24 md:flex-row'>
-            {features.map((feature) => {
-              return (
-                <div key={feature.id} className='flex-1 text-center'>
-                  <Image
-                    src={feature.icon}
-                    width={32}
-                    height={32}
-                    alt={feature.content}
-                    className='mx-auto h-11 w-auto'
-                  />
-                  <div className='rich_content px-12 pt-4 text-lg text-neutral-200'>
-                    <ReactMarkdown>{feature.content}</ReactMarkdown>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-        <div className='clip-inverted-triangle bg-neutral-725'>
-          <div className='section-container max-w-7xl'>
-            <div className='relative flex flex-col rounded-lg border-t-2 border-primary-300 bg-neutral-900 text-left text-neutral-0 shadow-lg'>
-              <div className='p-10'>
-                <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
-                  <QuoteCard
-                    content={
-                      '“At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.”'
-                    }
-                    logo={{
-                      src: '/images/sony.svg',
-                      width: 80,
-                      height: 17,
-                      alt: 'Sony'
-                    }}
-                  />
-                  <QuoteCard
-                    content={
-                      '"Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!"'
-                    }
-                    link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
-                    logo={{
-                      src: '/images/use-cases/logging/tripdotcom.svg',
-                      width: 135,
-                      height: 33,
-                      alt: 'Trip.com'
-                    }}
-                  />
-                  <QuoteCard
-                    content={
-                      '"Migrating logs from Elasticsearch to ClickHouse has not only significantly reduced storage costs but also provided us with a faster querying experience."'
-                    }
-                    link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
-                    logo={{
-                      src: '/images/didi-logo-white.svg',
-                      width: 110,
-                      height: 30,
-                      alt: 'didi'
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='-mt-1 h-1 w-full bg-primary-300'></div>
-        </div>
-        <div className='bg-primary-300 py-12'></div>
-
-        <div className='relative z-10 mx-auto -mt-10 bg-primary-300'>
-          <div className='relative z-10 mx-auto -mt-10 max-w-7xl'>
-            <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0'>
-              <div className='flip-selection mx-auto flex flex-col text-center'>
-                <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                  Trusted by developers that work with data at{' '}
-                  <span className='tilted tilted-black'>
-                    <span className='tilted-content leading-8'>scale</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
-              <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-              <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-              <LogoCarousel
-                logos={customerStories.logos}
-                speedClass1='animate-marqueeLeft5'
-                speedClass2='animate-marqueeLeft6'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='bg-neutral-725 pb-24'>
-          <div className='relative mx-auto pt-12 md:px-0 md:pt-24'>
-            <div className='mx-auto max-w-7xl'>
-              <AccordionComponent />
-              <div className='mx-auto max-w-5xl px-4 xl:px-0'>
-                <div className='grid justify-between gap-20 pt-20 lg:grid-cols-2'>
-                  {callouts.map((feature) => (
-                    <div key={feature.id} className='px-3'>
-                      <Image
-                        src={feature.icon}
-                        alt={feature.title}
-                        width={32}
-                        height={32}
-                        className='mb-4'
-                      />
-                      <h3 className='mb-4 text-lg font-bold'>
-                        {feature.title}
-                      </h3>
-                      <div className='rich_content text-base text-neutral-200'>
-                        <Markdown>{feature.content}</Markdown>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className='bg-shadow-element-right yellow-shadow'>
-          <div className='section-container mb-24 flex w-full pt-24 text-neutral-0 md:px-8 2xl:px-0'>
-            <div className='mx-auto flex w-full flex-col justify-center rounded-xl border border-neutral-700/80 bg-neutral-900/50 bg-right bg-no-repeat px-4 py-16 xl:px-24'>
-              <div className='flex flex-col text-center'>
-                <SuiTitle type='h2' color='white'>
-                  Supporting{' '}
-                  <span className='tilted tilted-yellow'>
-                    <span className='tilted-content'>references</span>
-                  </span>{' '}
-                </SuiTitle>
-                <div className='mx-auto mb-8 mt-6 max-w-2xl text-left text-neutral-300'>
-                  For much more detailed guides about how to get started
-                  building an observability solution with ClickHouse, follow
-                  along in our blog:
-                </div>
-                <div className='bg-neutral-725 p-8'>
-                  <ol className='list-decimal space-y-2 text-left text-primary-300'>
-                    <li>
-                      <Link
-                        href='/blog/storing-log-data-in-clickhouse-fluent-bit-vector-open-telemetry'
-                        className='text-primary-300'>
-                        Building an Observability Solution with ClickHouse -
-                        Part 1 - Logs
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
-                        className='text-primary-300'>
-                        Docs: Using ClickHouse for log analytics
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/blog/nginx-logs-to-clickhouse-fluent-bit'
-                        className='text-primary-300'>
-                        Sending Nginx logs to ClickHouse with Fluent Bit
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/blog/working-with-time-series-data-and-functions-ClickHouse'
-                        className='text-primary-300'>
-                        Working with Time Series Data in ClickHouse
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        target='_blank'
-                        href='https://www.zomato.com/blog/building-a-cost-effective-logging-platform-using-clickhouse-for-petabyte-scale'
-                        className='text-primary-300'>
-                        Building a cost-effective logging platform using
-                        ClickHouse for petabyte scale
-                      </a>
-                    </li>
-                    <li>
-                      <Link
-                        href='/blog/helicones-migration-from-postgres-to-clickhouse-for-advanced-llm-monitoring'
-                        className='text-primary-300'>
-                        Helicone's Migration from Postgres to ClickHouse for
-                        Advanced LLM Monitoring
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
-                        className='text-primary-300'>
-                        How trip.com migrated from Elasticsearch and built a
-                        50PB logging solution with ClickHouse
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href='/blog/building-a-logging-platform-with-clickhouse-and-saving-millions-over-datadog'
-                        className='text-primary-300'>
-                        How we Built a 19 PiB Logging Platform with ClickHouse
-                        and Saved Millions
-                      </Link>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
-            <GetStartedFree
-              href='https://console.clickhouse.cloud/signUp?loc=logging-use-case-getstarted-footer'
-              textBefore='Get started with ClickHouse'
-              textSlanted='Cloud'
-              textAfter='for free'
+          {/* Image */}
+          <div className='relative order-first -mb-8 -mt-16 w-full sm:-mb-32 sm:-mt-12 lg:order-last lg:mb-0 lg:mt-0 lg:flex-1'>
+            <Image
+              src={imageHero}
+              width={1772 / 2}
+              height={1038 / 2}
+              alt='HyperDX Dashboard'
+              className='bottom-0 left-0 top-0 h-auto w-full origin-left from-40% gradient-mask-to-b md:from-25% lg:absolute lg:h-full lg:w-auto lg:max-w-none lg:gradient-mask-to-none xl:scale-110 2xl:scale-125'
+              loading='eager'
+              priority={true}
             />
           </div>
         </div>
-      </Layout>
-    </>
+      </section>
+
+      {/* Trusted by */}
+      <section className='section-container mb-20 lg:mb-24 lg:mt-10'>
+        <EyebrowText className='mb-10 text-center text-primary-300'>
+          Trusted by
+        </EyebrowText>
+        <div className='flex flex-wrap items-center justify-center gap-8 md:gap-10 xl:justify-between xl:gap-12'>
+          <Image
+            src={logoNetflix}
+            width={95}
+            height={27}
+            alt='Netflix'
+            className='h-5 w-auto md:h-auto'
+          />
+          <Image
+            src={logoCloudflare}
+            width={106}
+            height={36}
+            alt='Cloudflare'
+            className='h-6 w-auto md:h-auto'
+          />
+          <Image
+            src={logoSony}
+            width={100}
+            height={19}
+            alt='Sony'
+            className='h-4 w-auto md:h-auto'
+          />
+          <Image
+            src={logoComcast}
+            width={108}
+            height={44}
+            alt='Comcast'
+            className='h-6 w-auto md:h-auto'
+          />
+          <Image
+            src={logoEbay}
+            width={84}
+            height={34}
+            alt='Ebay'
+            className='h-6 w-auto md:h-auto'
+          />
+          <Image
+            src={logoCisco}
+            width={71}
+            height={38}
+            alt='Cisco'
+            className='h-6 w-auto md:h-auto'
+          />
+          <Image
+            src={logoDoorDash}
+            width={187}
+            height={23}
+            alt='DoorDash'
+            className='h-5 w-auto md:h-auto'
+          />
+          <Image
+            src={logoGitLab}
+            width={122}
+            height={38}
+            alt='GitLab'
+            className='h-6 w-auto md:h-auto'
+          />
+        </div>
+      </section>
+
+      {/* Customer quotes */}
+      <section className='relative z-10 bg-neutral-950/60 pb-12 pt-20 lg:pb-16 lg:pt-24'>
+        <div className='section-container'>
+          <SuiTitle
+            type='h2'
+            className='mx-auto mb-12 max-w-4xl text-center lg:mb-24 lg:px-7'>
+            Join the companies choosing ClickStack as their high-performance
+            observability solution
+          </SuiTitle>
+          <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-9 lg:space-y-0'>
+            <QuoteCard
+              className='!bg-neutral-750'
+              content={
+                'At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.'
+              }
+              logo={{
+                src: '/images/sony.svg',
+                width: 136.36,
+                height: 24,
+                alt: 'Sony'
+              }}
+            />
+            <QuoteCard
+              className='!bg-neutral-750'
+              content={
+                'Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!'
+              }
+              link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
+              logo={{
+                src: '/images/use-cases/logging/tripdotcom.svg',
+                width: 141,
+                height: 34.01,
+                alt: 'Trip.com',
+                className: '-mb-1'
+              }}
+            />
+            <QuoteCard
+              className='!bg-neutral-750'
+              content={
+                'ClickHouse’s analytics capabilities and open ecosystem make it a powerful technology for observability. HyperDX is very exciting, bringing together an enhanced query experience with a more intuitive UI for exploratory observability workflows.'
+              }
+              logo={{
+                src: logoLovable,
+                width: 159,
+                height: 27,
+                alt: 'Lovable',
+                className: 'mb-0.5'
+              }}
+            />
+          </div>
+        </div>
+        <div className='mt-12 text-center lg:mt-16'>
+          <LinkWithArrow
+            href='/use-cases?log=use-case-observability'
+            className='text-slate-300 hover:underline'>
+            Read more case studies
+          </LinkWithArrow>
+        </div>
+      </section>
+
+      {/* ClickStack */}
+      <section
+        className='section-container bg-shadow-element yellow-shadow shadow-circle my-20 lg:my-24'
+        style={
+          {
+            '--top-side': '0',
+            '--left-side': '50%'
+          } as CSSProperties
+        }>
+        {/* Intro */}
+        <div className='space-y-2 text-center'>
+          <EyebrowText className='text-primary-300'>
+            The clickhouse powered observability stack
+          </EyebrowText>
+          <SuiTitle
+            type='h2'
+            className='font-basier text-4xl font-semibold leading-tight md:text-6.5xl'>
+            ClickStack
+          </SuiTitle>
+        </div>
+
+        {/* Features */}
+        <div className='my-20 grid grid-cols-1 gap-12 lg:grid-cols-3'>
+          <div className='flex flex-1 flex-col items-center gap-4 text-center'>
+            <Image src={iconTimer} width={48} height={49} alt='Timer icon' />
+            <SuiTitle
+              type='h3'
+              className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
+              Sub-second queries
+            </SuiTitle>
+            <SuiText className='text-balance'>
+              Even on petabytes of high <br className='hidden lg:block' />
+              cardinality data
+            </SuiText>
+          </div>
+          <div className='flex flex-1 flex-col items-center gap-4 text-center'>
+            <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
+            <SuiTitle
+              type='h3'
+              className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
+              10-100x cost savings
+            </SuiTitle>
+            <SuiText className='text-balance'>
+              Best in class ingestion and <br className='hidden lg:block' />
+              compression rates (30x)
+            </SuiText>
+          </div>
+          <div className='flex flex-1 flex-col items-center gap-4 text-center'>
+            <Image src={iconStack} width={48} height={49} alt='Stack icon' />
+            <SuiTitle
+              type='h3'
+              className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
+              Full stack observability
+            </SuiTitle>
+            <SuiText className='text-balance'>
+              Unify Session Replays, Logs, <br className='hidden lg:block' />
+              Traces, Metrics and Errors
+            </SuiText>
+          </div>
+        </div>
+
+        {/* Diagram */}
+        <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row lg:items-start lg:gap-20'>
+          <div className='px-6'>
+            <ClickStack
+              hyperdx={hyperdxActive || allAreInactive}
+              clickhouse={clickhouseActive || allAreInactive}
+              opentelemetry={opentelemetryActive || allAreInactive}
+              onClick={(stack) => {
+                switch (stack) {
+                  case 'hyperdx':
+                    setHyperdxActive(true)
+                    setClickhouseActive(false)
+                    setOpentelemetryActive(false)
+                    break
+                  case 'clickhouse':
+                    setHyperdxActive(false)
+                    setClickhouseActive(true)
+                    setOpentelemetryActive(false)
+                    break
+                  case 'opentelemetry':
+                    setHyperdxActive(false)
+                    setClickhouseActive(false)
+                    setOpentelemetryActive(true)
+                    break
+                }
+              }}
+            />
+          </div>
+          <div className='flex w-full flex-1 flex-col items-center gap-6 lg:items-start'>
+            <AccordionItem
+              handle={
+                <SuiTitle type='h3'>Searches, dashboards, and alerts</SuiTitle>
+              }
+              onToggle={(isOpen) => {
+                setHyperdxActive(isOpen)
+                if (isOpen) {
+                  setClickhouseActive(false)
+                  setOpentelemetryActive(false)
+                }
+              }}
+              open={hyperdxActive}
+              className='w-full !bg-neutral-750'>
+              <div className='space-y-4'>
+                <SuiText>
+                  ClickStack unifies logs, metrics, traces, and session replays
+                  in one platform via the HyperDX UI. Optimized for ClickHouse,
+                  it supports fast Lucene-style search and full SQL access for
+                  advanced analysis and deeper analysis powered by over 100+
+                  built-in functions.
+                </SuiText>
+                <SuiText>
+                  Create dashboards and alerts with minimal setup. Spot
+                  anomalies with event deltas and speed up root cause analysis
+                  using event patterns.
+                </SuiText>
+              </div>
+            </AccordionItem>
+            <AccordionItem
+              handle={<SuiTitle type='h3'>ClickHouse powered storage</SuiTitle>}
+              onToggle={(isOpen) => {
+                setClickhouseActive(isOpen)
+                if (isOpen) {
+                  setHyperdxActive(false)
+                  setOpentelemetryActive(false)
+                }
+              }}
+              open={clickhouseActive}
+              className='w-full !bg-neutral-750'>
+              <div className='space-y-4'>
+                <SuiText>
+                  Powered by ClickHouse, HyperDX searches terabytes in seconds
+                  and ingests billions of high-cardinality events daily.
+                  ClickStack ships with optimized schemas, removing the need for
+                  manual tuning and letting you focus on insights.
+                </SuiText>
+                <SuiText>
+                  On ClickHouse Cloud, ClickStack gains elastic scaling and cost
+                  efficiency through full separation of storage and compute.
+                  Ingestion and queries can run independently on dedicated
+                  resources, thanks to compute-compute separation, ensuring
+                  consistent performance at any scale.
+                </SuiText>
+              </div>
+            </AccordionItem>
+            <AccordionItem
+              handle={<SuiTitle type='h3'>Data collection</SuiTitle>}
+              onToggle={(isOpen) => {
+                setOpentelemetryActive(isOpen)
+                if (isOpen) {
+                  setHyperdxActive(false)
+                  setClickhouseActive(false)
+                }
+              }}
+              open={opentelemetryActive}
+              className='w-full !bg-neutral-750'>
+              <div className='space-y-4'>
+                <SuiText>
+                  ClickStack natively supports the OpenTelemetry standard,
+                  capturing logs, metrics, and traces as wide events -
+                  context-rich records that unify observability data in
+                  ClickHouse.
+                </SuiText>
+                <SuiText>
+                  With native JSON support, ClickHouse efficiently handles
+                  evolving, semi-structured data. Fields are created
+                  automatically on ingest, with compressed columnar storage
+                  delivering fast queries and high compression with no upfront
+                  schema required.
+                </SuiText>
+              </div>
+            </AccordionItem>
+            <CUIButton
+              type='primary'
+              size='lg'
+              weight='semibold'
+              href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+              target='_blank'
+              className='px-10'
+              linkClass='inline-block'>
+              Get started with ClickStack
+            </CUIButton>
+          </div>
+        </div>
+      </section>
+
+      {/* Custom stack */}
+      <section className='section-container my-20 lg:my-24'>
+        <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
+          <div className='absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent' />
+
+          <div className='mx-auto max-w-4xl space-y-8 text-center lg:px-2'>
+            <SuiTitle type='h2'>Want to compose your own stack?</SuiTitle>
+            <SuiText>
+              Need a custom pipeline or schema? The HyperDX UI is
+              schema-agnostic and works with any telemetry pipeline, connecting
+              to any ClickHouse instance for full control over your
+              observability data.
+            </SuiText>
+            <SuiText>
+              Building your own stack? ClickHouse provides the tools: a
+              high-performance SQL engine, HTTP ingestion, scalable MergeTree
+              storage, and materialized views for real-time transformation. For
+              flexible dashboarding, use the Grafana plugin to correlate
+              ClickHouse data with other sources.
+            </SuiText>
+          </div>
+        </div>
+      </section>
+
+      {/* Get started */}
+      <section className='section-container my-20 grid grid-cols-1 gap-8 lg:my-24 lg:grid-cols-2 lg:gap-16'>
+        <SuiTitle type='h2' className='col-span-full text-center'>
+          Get started with ClickStack
+        </SuiTitle>
+        <div className='space-y-6'>
+          <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
+          <SuiTitle
+            type='h3'
+            className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
+            Reduce your observability costs
+          </SuiTitle>
+          <SuiText className='text-neutral-200'>
+            ClickHouse delivers exceptional cost efficiency, avoiding the
+            overhead of JVM-based systems, with a hardware-optimized
+            column-oriented design that reduces storage by up to 90% without
+            sacrificing speed.
+          </SuiText>
+          <SuiText className='text-neutral-200'>
+            Scaling seamlessly from a single machine to hundreds of cores, with
+            automatic tiering between local disks and object storage for maximum
+            performance and efficiency.
+          </SuiText>
+        </div>
+        <div className='space-y-6'>
+          <Image
+            src={iconSparkles}
+            width={48}
+            height={49}
+            alt='Sparkles icon'
+          />
+          <SuiTitle
+            type='h3'
+            className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
+            Simple deployment and maintenance
+          </SuiTitle>
+          <SuiText className='text-neutral-200'>
+            Experience operational simplicity with ClickHouse's homogenous
+            architecture—a single executable handles everything from standalone
+            deployments to massive clusters.
+          </SuiText>
+          <SuiText className='text-neutral-200'>
+            For zero overhead, choose ClickStack on ClickHouse Cloud for
+            automated scaling, backups, and maintenance. The separation of
+            storage and compute ensures both infinite scalability and sub-second
+            query performance through intelligent caching.
+          </SuiText>
+        </div>
+        <div className='space-y-6'>
+          <Image src={iconFileSearch} width={48} height={49} alt='File icon' />
+          <SuiTitle
+            type='h3'
+            className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
+            Unlock real-time observability
+          </SuiTitle>
+          <SuiText className='text-neutral-200'>
+            ClickHouse is designed to handle huge volumes of continuous streams
+            of ingest data, supporting ingestion rates of gigabytes per second
+            while ensuring new data is searchable with sub-second latency.
+          </SuiText>
+          <SuiText className='text-neutral-200'>
+            Built for the most intensive real-time workloads, HyperDX exploits
+            ClickHouse’s powerful suite of aggregation and analytical functions
+            with deep optimizations to deliver blazingly fast observability
+            queries.
+          </SuiText>
+        </div>
+        <div className='space-y-6'>
+          <Image
+            src={iconLightBulb}
+            width={48}
+            height={49}
+            alt='Light bulb icon'
+          />
+          <SuiTitle
+            type='h3'
+            className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
+            Not just observability
+          </SuiTitle>
+          <SuiText className='text-neutral-200'>
+            ClickHouse isn’t just an observability store - it’s a
+            high-performance SQL database built for fast analytics.
+          </SuiText>
+          <SuiText className='text-neutral-200'>
+            Observability is just another data problem, and with ClickHouse you
+            can seamlessly join observability, business, and security data in a
+            single system, unlocking deeper insights across your entire stack
+            with your favorite visualization tool.
+          </SuiText>
+        </div>
+      </section>
+
+      {/* Integrations */}
+      <section className='section-container my-24 lg:my-36'>
+        <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16 lg:px-12'>
+          <SuiTitle type='h2'>Instrument your applications</SuiTitle>
+          <SuiText size='lg' className='text-neutral-200'>
+            Trace every log, API request, DB query, and more with just a few
+            lines of code. Instrument and observe your stack in minutes with
+            ClickStack.
+          </SuiText>
+        </div>
+        <div className='flex flex-wrap items-center justify-center gap-8 md:gap-10 xl:justify-between xl:gap-12'>
+          <Image
+            src={integrationNodejs}
+            width={49}
+            height={55}
+            alt='NodeJS'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationGo}
+            width={49}
+            height={19}
+            alt='Go'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationJava}
+            width={37}
+            height={49}
+            alt='Java'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationJavascript}
+            width={49}
+            height={49}
+            alt='Javascript'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationNextjs}
+            width={92}
+            height={19}
+            alt='NextJS'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationPython}
+            width={49}
+            height={49}
+            alt='Python'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationRuby}
+            width={46}
+            height={45}
+            alt='Ruby'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationCloudflare}
+            width={49}
+            height={23}
+            alt='Cloudflare'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationKubernetes}
+            width={49}
+            height={47}
+            alt='Kubernetes'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationOpentelemetry}
+            width={49}
+            height={49}
+            alt='OpenTelemetry'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationAws}
+            width={70}
+            height={42}
+            alt='AWS'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationFluentd}
+            width={49}
+            height={49}
+            alt='Fluentd'
+            className='w-8 md:w-auto'
+          />
+        </div>
+      </section>
+
+      {/* Try ClickHouse */}
+      <div className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
+        <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
+          <SuiTitle type='h2' color='text-default'>
+            Try{' '}
+            <TiltedText type='white-on-black' className='px-2 py-1'>
+              ClickStack
+            </TiltedText>{' '}
+            in ClickHouse Cloud
+          </SuiTitle>
+          <SuiText size='base' color='text-default' weight='normal'>
+            Experience the full power of HyperDX + ClickHouse in just minutes.
+            <br />
+            We’ll get you started on a 30 day trial and $300 credits to spend at
+            your own pace.
+          </SuiText>
+          <p className='mt-8 flex flex-col justify-center gap-2 sm:flex-row sm:gap-4'>
+            <CUIButton
+              type='primary-dark'
+              size='lg'
+              className='group mx-auto w-full px-10 md:w-auto'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
+              onClick={useGalaxyOnClick(
+                'observabilityUseCasePage.footerCta.getStartedSelect'
+              )}>
+              Get started
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              className='group mx-auto w-full !border-neutral-800 px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
+              target='_blank'
+              href='/company/contact?loc=use-case-observability'
+              onClick={useGalaxyOnClick(
+                'observabilityUseCasePage.footerCta.requestDemoSelect'
+              )}>
+              Get a demo
+            </CUIButton>
+          </p>
+        </div>
+      </div>
+    </Layout>
   )
 }
