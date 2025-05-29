@@ -176,8 +176,7 @@ export default function ClickHouseServerPage({
                     },
                     {
                       logo: '/images/cloud/integrations/postgres.svg',
-                      name: 'Postgres CDC',
-                      badge: 'Beta'
+                      name: 'Postgres CDC'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/aws-kinesis.svg',

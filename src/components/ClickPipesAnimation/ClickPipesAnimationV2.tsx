@@ -79,7 +79,6 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
               src='/images/cloud/integrations/postgres.svg'
               alt='Postgres CDC'
               active={true}
-              badge='Beta'
             />
           </li>
           {/* Row 3 */}
