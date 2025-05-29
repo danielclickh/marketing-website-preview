@@ -504,6 +504,16 @@ const nextConfig = {
         source: '/air-gapped',
         destination: '/government',
         permanent: true
+      },
+      {
+        source: '/o11y',
+        destination: '/use-cases/observability',
+        permanent: true
+      },
+      {
+        source: '/olly',
+        destination: '/use-cases/observability',
+        permanent: true
       }
     ]
   }
