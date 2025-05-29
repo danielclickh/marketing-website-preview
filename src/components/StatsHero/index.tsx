@@ -22,7 +22,7 @@ type CtaProps =
   | CtaWithHrefProps
   | CtaWithOnClickProps
   | (CtaBaseProps & {
-      href: ButtonProps['onClick']
+      href: ButtonProps['href']
       onClick: ButtonProps['onClick']
     })
 

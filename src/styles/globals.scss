@@ -11,24 +11,30 @@
     @apply mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0;
   }
   .bg-shadow-element {
-    --color-shadow: rgba(255, 117, 117, 0.07);
     --left-side: 33%;
     --right-side: auto;
     --top-side: 50%;
+    --scale: 1;
+    --opacity: 0.07;
+    --color-shadow: rgba(255, 117, 117, #{var(--opacity)});
     &.yellow-shadow {
-      --color-shadow: rgba(251, 255, 70, 0.07);
+      --color-shadow: rgba(251, 255, 70, #{var(--opacity)});
     }
     &.red-shadow {
-      --color-shadow: rgba(225, 117, 117, 0.07);
+      --color-shadow: rgba(225, 117, 117, #{var(--opacity)});
     }
     @apply relative;
     &::before {
       content: '';
       @apply absolute;
+      border-radius: 50%;
+      width: 1px;
+      height: 1px;
       left: var(--left-side);
       right: var(--right-side);
       top: var(--top-side);
-      box-shadow: 0px 0px 250px 370px var(--color-shadow);
+      box-shadow: 0 0 800px 470px var(--color-shadow);
+      transform:  scale(var(--scale));
     }
     &.align-shadow-left {
       --left-side: 0;
