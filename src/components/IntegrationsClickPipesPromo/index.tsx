@@ -74,7 +74,7 @@ export default function IntegrationsClickPipesPromo() {
         <LogoAnnouncementLink
           mode='dark'
           className='mt-8 !bg-neutral-700/60'
-          href='/cloud/clickpipes/azure-blob-storage-connector?loc=integrations-promo'
+          href='/cloud/clickpipes/postgres-cdc-connector?loc=integrations-promo'
           logo={{
             src: '/images/cloud/integrations/postgres.svg',
             alt: 'Postgres',
