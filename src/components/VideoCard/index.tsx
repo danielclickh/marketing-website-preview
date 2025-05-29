@@ -1,5 +1,6 @@
 import { CUICard } from '../ClickUI'
 import fallbackTumbnail from './fallback.png'
+import MarketingVideoThumbnail from '@/components/MarketingVideoThumbnail'
 import { Video } from '@/types/videos'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,13 +14,6 @@ export default function VideoCard({
   IntroText,
   seo
 }: Video) {
-  const [displayFallback, setDisplayFallback] = useState<boolean>(false)
-  let thumbnail = `https://img.youtube.com/vi/${VideoID}/maxresdefault.jpg`
-
-  if (seo?.image) {
-    thumbnail = seo.image.url
-  }
-
   return (
     <Link
       href={`/videos/${Slug}`}
@@ -28,28 +22,7 @@ export default function VideoCard({
         <CUICard.Body>
           <div className='relative overflow-hidden rounded-t-lg'>
             <div className='absolute h-full w-full bg-black/[0.65] opacity-0 transition group-hover:opacity-100'></div>
-
-            <div className='relative aspect-[774/420] bg-primary-300'>
-              <Image
-                src={thumbnail}
-                alt={Title || ''}
-                width={774}
-                height={420}
-                onError={() => setDisplayFallback(true)}
-                className={'absolute z-0 h-full origin-top-left object-cover'}
-              />
-              <Image
-                src={fallbackTumbnail}
-                alt={Title || ''}
-                width={774}
-                height={420}
-                className={
-                  displayFallback
-                    ? 'absolute z-10 h-full object-cover'
-                    : 'hidden'
-                }
-              />
-            </div>
+            <MarketingVideoThumbnail videoId={VideoID} />
           </div>
 
           <div className='p-6 font-basier text-xl font-medium leading-tight text-neutral-100'>

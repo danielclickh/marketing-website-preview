@@ -37,6 +37,9 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/jp/blog/${body.entry.slug}`)
     }
 
+    // Revalidate open house page because it uses tagged content
+    paths.push('/openhouse')
+
     await revalidate(response, paths)
   },
   'api::comparison.comparison': async function (body, response) {
@@ -91,6 +94,9 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/videos/${body.entry.Slug}`)
       paths.push(`/jp/videos/${body.entry.Slug}`)
     }
+
+    // Revalidate open house page because it uses tagged content
+    paths.push('/openhouse')
 
     await revalidate(response, paths)
   },
