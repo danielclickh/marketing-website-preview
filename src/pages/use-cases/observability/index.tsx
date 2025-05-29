@@ -87,8 +87,8 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h1'
               className='font-basier text-[1.75rem] font-semibold md:text-4xl'>
-              The High Performance <br className='hidden md:block' />
-              Open-source Observability Stack
+              The high performance <br className='hidden md:block' />
+              open-source observability stack
             </SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               Lightning-fast queries and powerful aggregations on logs, metrics,
@@ -142,20 +142,63 @@ export default function ClickHouseServerPage({
         <EyebrowText className='mb-10 text-center text-primary-300'>
           Trusted by
         </EyebrowText>
-        <div className='flex flex-wrap items-center justify-center gap-10 xl:justify-between xl:gap-12'>
-          <Image src={logoNetflix} width={95} height={27} alt='Netflix' />
+        <div className='flex flex-wrap items-center justify-center gap-8 md:gap-10 xl:justify-between xl:gap-12'>
+          <Image
+            src={logoNetflix}
+            width={95}
+            height={27}
+            alt='Netflix'
+            className='h-5 w-auto md:h-auto'
+          />
           <Image
             src={logoCloudflare}
             width={106}
             height={36}
             alt='Cloudflare'
+            className='h-6 w-auto md:h-auto'
           />
-          <Image src={logoSony} width={100} height={19} alt='Sony' />
-          <Image src={logoComcast} width={108} height={44} alt='Comcast' />
-          <Image src={logoEbay} width={84} height={34} alt='Ebay' />
-          <Image src={logoCisco} width={71} height={38} alt='Cisco' />
-          <Image src={logoDoorDash} width={187} height={23} alt='DoorDash' />
-          <Image src={logoGitLab} width={122} height={38} alt='GitLab' />
+          <Image
+            src={logoSony}
+            width={100}
+            height={19}
+            alt='Sony'
+            className='h-4 w-auto md:h-auto'
+          />
+          <Image
+            src={logoComcast}
+            width={108}
+            height={44}
+            alt='Comcast'
+            className='h-6 w-auto md:h-auto'
+          />
+          <Image
+            src={logoEbay}
+            width={84}
+            height={34}
+            alt='Ebay'
+            className='h-6 w-auto md:h-auto'
+          />
+          <Image
+            src={logoCisco}
+            width={71}
+            height={38}
+            alt='Cisco'
+            className='h-6 w-auto md:h-auto'
+          />
+          <Image
+            src={logoDoorDash}
+            width={187}
+            height={23}
+            alt='DoorDash'
+            className='h-5 w-auto md:h-auto'
+          />
+          <Image
+            src={logoGitLab}
+            width={122}
+            height={38}
+            alt='GitLab'
+            className='h-6 w-auto md:h-auto'
+          />
         </div>
       </section>
 
@@ -531,43 +574,90 @@ export default function ClickHouseServerPage({
             ClickStack.
           </SuiText>
         </div>
-        <div className='flex flex-wrap items-center justify-center gap-10 xl:justify-between xl:gap-12'>
-          <Image src={integrationNodejs} width={49} height={55} alt='NodeJS' />
-          <Image src={integrationGo} width={49} height={19} alt='Go' />
-          <Image src={integrationJava} width={37} height={49} alt='Java' />
+        <div className='flex flex-wrap items-center justify-center gap-8 md:gap-10 xl:justify-between xl:gap-12'>
+          <Image
+            src={integrationNodejs}
+            width={49}
+            height={55}
+            alt='NodeJS'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationGo}
+            width={49}
+            height={19}
+            alt='Go'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationJava}
+            width={37}
+            height={49}
+            alt='Java'
+            className='w-8 md:w-auto'
+          />
           <Image
             src={integrationJavascript}
             width={49}
             height={49}
             alt='Javascript'
+            className='w-8 md:w-auto'
           />
-          <Image src={integrationNextjs} width={92} height={19} alt='NextJS' />
-          <Image src={integrationPython} width={49} height={49} alt='Python' />
-          <Image src={integrationRuby} width={46} height={45} alt='Ruby' />
+          <Image
+            src={integrationNextjs}
+            width={92}
+            height={19}
+            alt='NextJS'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationPython}
+            width={49}
+            height={49}
+            alt='Python'
+            className='w-8 md:w-auto'
+          />
+          <Image
+            src={integrationRuby}
+            width={46}
+            height={45}
+            alt='Ruby'
+            className='w-8 md:w-auto'
+          />
           <Image
             src={integrationCloudflare}
             width={49}
             height={23}
             alt='Cloudflare'
+            className='w-8 md:w-auto'
           />
           <Image
             src={integrationKubernetes}
             width={49}
             height={47}
             alt='Kubernetes'
+            className='w-8 md:w-auto'
           />
           <Image
             src={integrationOpentelemetry}
             width={49}
             height={49}
             alt='OpenTelemetry'
+            className='w-8 md:w-auto'
           />
-          <Image src={integrationAws} width={70} height={42} alt='AWS' />
+          <Image
+            src={integrationAws}
+            width={70}
+            height={42}
+            alt='AWS'
+            className='w-8 md:w-auto'
+          />
           <Image
             src={integrationFluentd}
             width={49}
             height={49}
             alt='Fluentd'
+            className='w-8 md:w-auto'
           />
         </div>
       </section>
