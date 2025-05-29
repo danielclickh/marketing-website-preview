@@ -226,7 +226,7 @@ const trainingCards: Array<TrainingCardProps> = [
     description:
       'Learn from ClickHouse experts by attending one of our virtual training sessions. Instructors deliver the content live.',
     perks: ['Hands-on lab activities', 'Live Q&A and engaging interactions'],
-    link: '/company/news-events?category=Free+Training#upcoming-events',
+    link: '/company/events?category=Free+Training#upcoming-events',
     button: 'See upcoming training'
   },
   {
@@ -466,7 +466,7 @@ export default function LearnPage({
               size='lg'
               linkClass='inline-block'
               className='!border-primary-800 md:!px-20'
-              href='/company/news-events'>
+              href='/company/events'>
               Check our calendar
             </CUIButton>
           </div>

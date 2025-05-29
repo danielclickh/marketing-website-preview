@@ -34,15 +34,13 @@ export interface NewsItemProps {
   ctaButton: StrapiButton
 }
 
-export interface NewsEventProps extends CommonProps {
-  title: string
-  description: string
+export interface EventsPageProps extends CommonProps {
   featuredEvent: EventType | null
-  newsItems: Array<NewsItem>
-  latestNewsTitle: string
-  upcomingEventsTitle: string
-  pressReleasesTitle: string
-  pressReleases: Array<NewsItem>
   allEvents: Array<EventType>
   recentEvents: Array<EventType>
+}
+
+export interface NewsPageProps extends CommonProps {
+  newsItems: Array<NewsItem>
+  pressReleases: Array<NewsItem>
 }

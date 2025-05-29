@@ -67,7 +67,7 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>
-            <LogoAnnouncementLink
+            {/*<LogoAnnouncementLink
               className='mt-6'
               href='/cloud/clickpipes/azure-blob-storage-connector?loc=homepage-hero'
               logo={{
@@ -82,7 +82,7 @@ export default function HomepageHeroAlt({
                 request early access today
               </span>
               !
-            </LogoAnnouncementLink>
+            </LogoAnnouncementLink>*/}
           </div>
         </div>
 

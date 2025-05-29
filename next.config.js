@@ -496,12 +496,22 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/company/news-events',
+        destination: '/company/events',
+        permanent: true
+      },
+      {
         source: '/air-gapped',
         destination: '/government',
         permanent: true
       },
       {
         source: '/o11y',
+        destination: '/use-cases/observability',
+        permanent: true
+      },
+      {
+        source: '/olly',
         destination: '/use-cases/observability',
         permanent: true
       }

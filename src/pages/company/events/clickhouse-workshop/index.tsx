@@ -7,11 +7,11 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
 
-export const getServerSideProps: GetServerSideProps<EventProps> =
-  async function getServerSideProps() {
+export const getStaticProps: GetStaticProps<EventProps> =
+  async function getStaticProps() {
     const { data } = await findAll('events', {
       filters: {
         slug: {
@@ -126,10 +126,8 @@ function EventPage({
           featuredImage={thumbnailPng}>
           <div className='section_metadata mb-20'>
             <h4 className='mb-2 text-base font-semibold text-primary-300'>
-              <Link
-                className='hover:text-primary-400'
-                href='/company/news-events'>
-                News &amp; Events
+              <Link className='hover:text-primary-400' href='/company/events'>
+                Events
               </Link>{' '}
               / {category}
             </h4>

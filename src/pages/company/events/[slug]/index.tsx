@@ -153,10 +153,8 @@ function EventPage({
           featuredImage={thumbnailPng}>
           <div className='section_metadata mb-20'>
             <h4 className='mb-2 text-base font-semibold text-primary-300'>
-              <Link
-                className='hover:text-primary-400'
-                href='/company/news-events'>
-                News &amp; Events
+              <Link className='hover:text-primary-400' href='/company/events'>
+                Events
               </Link>{' '}
               / {category}
             </h4>
