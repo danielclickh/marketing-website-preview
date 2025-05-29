@@ -76,17 +76,15 @@ export default function IntegrationsClickPipesPromo() {
           className='mt-8 !bg-neutral-700/60'
           href='/cloud/clickpipes/azure-blob-storage-connector?loc=integrations-promo'
           logo={{
-            src: '/images/cloud/integrations/azure-blob-storage.svg',
-            alt: 'Azure Blob Storage',
+            src: '/images/cloud/integrations/postgres.svg',
+            alt: 'Postgres',
             width: 46,
             height: 37
           }}>
-          Seamless data ingestion from Azure Blob Storage to ClickHouse with our
-          new ClickPipe connector — now in Private Preview.
-          <br />
-          <span className='text-primary-300 group-hover:underline'>
-            Learn more
-          </span>
+          Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
+          connector — now Generally Available.{' '}
+          <span className='underline group-hover:decoration-2'>Learn more</span>
+          !
         </LogoAnnouncementLink>
       </div>
     </div>
