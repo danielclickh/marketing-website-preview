@@ -257,7 +257,7 @@ export default function ClickHouseServerPage({
           <LinkWithArrow
             href='/use-cases?log=use-case-observability'
             className='text-slate-300 hover:underline'>
-            Read More Case Studies
+            Read more case studies
           </LinkWithArrow>
         </div>
       </section>

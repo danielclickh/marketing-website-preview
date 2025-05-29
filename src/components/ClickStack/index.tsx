@@ -81,7 +81,7 @@ function Layer({
       }>
       <div
         onClick={onClick}
-        className={`flex items-center justify-center overflow-hidden rounded-[8%] border-2 bg-gradient-to-br from-[rgba(38,38,35,0.9)] to-[rgba(16,16,16,0.9)] backdrop-blur-sm transition duration-300 ${active ? '' : `opacity-15 ${onClick ? 'pointer-events-auto cursor-pointer hover:opacity-40' : ''}`} ${styles.layer}`}>
+        className={`flex items-center justify-center overflow-hidden rounded-[8%] border-2 bg-gradient-to-br from-[rgba(38,38,35,0.9)] to-[rgba(16,16,16,0.9)] backdrop-blur-sm transition duration-300 ${onClick ? 'pointer-events-auto cursor-pointer' : ''} ${active ? '' : `opacity-15 ${onClick ? 'hover:opacity-40' : ''}`} ${styles.layer}`}>
         <Image
           src={logo}
           width={180}
