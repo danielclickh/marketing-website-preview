@@ -69,17 +69,17 @@ export default function HomepageHeroAlt({
             </div>
             {/*<LogoAnnouncementLink
               className='mt-6'
-              href='/cloud/clickpipes/azure-blob-storage-connector?loc=homepage-hero'
+              href='/cloud/clickpipes/postgres-cdc-connector?loc=homepage-hero'
               logo={{
-                src: '/images/cloud/integrations/azure-blob-storage.svg',
-                alt: 'Azure Blob Storage',
+                src: '/images/cloud/integrations/postgres.svg',
+                alt: 'Postgres',
                 width: 46,
                 height: 37
               }}>
-              Azure Blob Storage ClickPipe is now in Private Preview - be among
-              the first to explore its power and{' '}
+              Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
+              connector — now Generally Available.{' '}
               <span className='underline group-hover:decoration-2'>
-                request early access today
+                Learn more
               </span>
               !
             </LogoAnnouncementLink>*/}

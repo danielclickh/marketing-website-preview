@@ -3,8 +3,11 @@ import DataSize from '../../ui/DataSize'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 import HRSeparator from '@/components/HRSeparator'
+import Markdown from '@/components/Markdown'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import Link from 'next/link'
 import { useCallback, useMemo } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 const INSTANCES = Array.from({ length: 10 }, (_, i) => ({
   value: i + 1,
@@ -91,15 +94,45 @@ export default function DataSourcesSelector() {
                         maxHeight={275}
                       />
                     </div>
-                    {sourceEntry?.excludeFromCalculations && (
-                      <div className='flex items-end md:col-span-3'>
-                        <div className='flex h-10 items-center'>
-                          <span className='text-success-500'>
-                            {sourceEntry?.excludeFromCalculationsLabel}
-                          </span>
+                    {sourceEntry?.excludeFromCalculations &&
+                      sourceEntry.excludeFromCalculationsLabel && (
+                        <div className='flex items-end md:col-span-3'>
+                          <div className='flex h-10 items-center text-success-500'>
+                            <div>
+                              <ReactMarkdown
+                                components={{
+                                  a({
+                                    className = '',
+                                    children,
+                                    href,
+                                    target = '_self'
+                                  }) {
+                                    return (
+                                      <Link
+                                        href={href || '#'}
+                                        target={target}
+                                        className={`underline ${className}`}>
+                                        {children}
+                                      </Link>
+                                    )
+                                  }
+                                }}
+                                allowedElements={[
+                                  'a',
+                                  'strong',
+                                  'b',
+                                  'u',
+                                  'em',
+                                  'i',
+                                  'p',
+                                  'br'
+                                ]}>
+                                {sourceEntry.excludeFromCalculationsLabel}
+                              </ReactMarkdown>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
                     {!sourceEntry?.excludeFromCalculations && (
                       <>
                         <div>

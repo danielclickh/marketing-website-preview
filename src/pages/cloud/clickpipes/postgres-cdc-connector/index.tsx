@@ -11,10 +11,13 @@ import imageDataSource8 from './assets/data-source-logo-8.png'
 import imageDataSource9 from './assets/data-source-logo-9.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
 import logoAdoraPng from './assets/logo-adora.png'
+import logoAshby from './assets/logo-ashby.svg'
+import logoAutoNation from './assets/logo-autonation.svg'
 import logoBlacksmithPng from './assets/logo-blacksmith.png'
 import logoDaisychainPng from './assets/logo-dailsychain.png'
 import logoNeon from './assets/logo-neon.svg'
 import logoOttimate from './assets/logo-ottimate.svg'
+import logoSeemplicity from './assets/logo-seemplicity.svg'
 import logoSellerFetchPng from './assets/logo-seller-fetch.png'
 import logoSpotonPng from './assets/logo-spoton.png'
 import logoSyntagePng from './assets/logo-syntage.png'
@@ -43,7 +46,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Postgres CDC connector in ClickPipes is now in Public Beta',
+          title:
+            'Postgres CDC connector in ClickPipes is now Generally Available',
           description:
             'Replicate your Postgres data to ClickHouse Cloud in just a few clicks for blazing fast analytics.',
           path: '/cloud/clickpipes/postgres-cdc-connector'
@@ -74,6 +78,24 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       width: 247 / 2,
       height: 81 / 2,
       alt: 'Vueling'
+    },
+    {
+      src: logoAshby,
+      width: 91.71,
+      height: 30,
+      alt: 'Ashby'
+    },
+    {
+      src: logoAutoNation,
+      width: 141.95,
+      height: 30,
+      alt: 'AutoNation'
+    },
+    {
+      src: logoSeemplicity,
+      width: 186,
+      height: 30,
+      alt: 'Seemplicity'
     },
     {
       src: logoBlacksmithPng,
@@ -154,7 +176,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               <span className='tilted tilted-yellow'>
                 <span className='tilted-content'>Postgres CDC</span>
               </span>{' '}
-              connector is now in Public Beta
+              connector is now Generally Available
             </SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               Replicate your Postgres data to ClickHouse Cloud in just a few
@@ -343,13 +365,13 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <QuoteCard
               className='bg-neutral-900/80'
               content={
-                'ClickPipes for Postgres has made it incredibly easy for us to keep our billing data in Postgres synchronized with ClickHouse for efficient analytics. The CDC experience is blazing fast, ensuring data freshness within seconds while minimizing the load on our production Postgres database. An invaluable solution for seamlessly integrating Postgres with ClickHouse!'
+                "ClickHouse powers Ashby's customer-facing analytics, delivering lightning-fast, fully dynamic insights, while Postgres handles core transactions. With Postgres CDC via ClickPipes, we seamlessly replicate terabytes of data and speed up our real-time analytics without disrupting operations. Reports that once took minutes now finish within a second. Complementing Postgres with ClickHouse enables us to provide a lightning-fast and fully reliable experience and handle even larger data as we scale."
               }
               logo={{
-                src: logoNeon,
-                width: 102 * 1.2,
-                height: 28 * 1.2,
-                alt: 'Neon'
+                src: logoAshby,
+                width: 91.71 * 1.2,
+                height: 30 * 1.2,
+                alt: 'Ashby'
               }}
             />
             <QuoteCard
