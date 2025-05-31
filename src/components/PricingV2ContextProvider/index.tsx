@@ -450,19 +450,18 @@ export default function PricingV2ContextProvider({
   // Calculate the price of clickpipes
   //
   const clickpipesPrice: ContextClickpipesPrice = useMemo(() => {
-    if (!planEntry || !clickpipes?.length) return null
+    if (!planEntry || !clickpipes?.length || hours === null) return null
 
     // No pricing needed for plans that don't allow data sources/clickpipes
     if (!planEntry.allowDataSources) return null
 
     const {
-      computeUnit,
-      computeUsdPerHour,
       replicaComputeUsdPerHour,
-      ingestedUsdPerHour
-    } = config.clickpipePircingDimentions
+      ingestedUsdPerGb
+    } = config.clickpipePricingDimensions
 
-    let dailyCost = 0
+    let computeCosts = 0
+    let ingestCosts = 0
 
     clickpipes.forEach(({ source, dataIngested, instances }) => {
       const sourceEntry = sourceData.dataSources.find(
@@ -474,37 +473,24 @@ export default function PricingV2ContextProvider({
         return
       }
 
-      const replicaCost = instances * replicaComputeUsdPerHour * 24
-      let ingestCost = 0
-      let computeCost = 0
+      // Compute costs (per instance per month, respecting active hours)
+      const monthlyComputeCost = instances * replicaComputeUsdPerHour * hours * config.averageDaysPerMonth
+      computeCosts += monthlyComputeCost
 
-      // If the source entry allows data streaming/ingestion
+      // Ingestion costs (only for data streaming sources)
       if (sourceEntry.ingestsData) {
-        // Calculations are based on gigabytes so we need to conver the users value accordingly
         const dataIngestedInGb = dataIngested
           ? humanReadableTo(dataIngested, 'GB')
           : null
 
         if (dataIngestedInGb) {
-          ingestCost =
-            computeUnit * computeUsdPerHour * 24 +
-            ingestedUsdPerHour * dataIngestedInGb
+          ingestCosts += ingestedUsdPerGb * dataIngestedInGb
         }
-      }
-
-      // Else it must be object storage
-      else {
-        computeCost = computeUnit * computeUsdPerHour * 24
-      }
-
-      // Apply cost for replicas
-      if (ingestCost || computeCost) {
-        dailyCost += ingestCost + computeCost + replicaCost
       }
     })
 
-    return dailyCost * config.averageDaysPerMonth
-  }, [planEntry, clickpipes, sourceData])
+    return computeCosts + ingestCosts
+  }, [planEntry, clickpipes, sourceData, hours])
 
   // Calculate the price of data transfer
   //
@@ -1308,3 +1294,4 @@ export default function PricingV2ContextProvider({
     </PricingV2Context.Provider>
   )
 }
+
