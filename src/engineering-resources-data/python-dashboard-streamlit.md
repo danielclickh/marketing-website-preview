@@ -441,7 +441,7 @@ Daily Trends (Right Chart):
 
 ## Additional examples and wrap-up
 
-The [code repository](https://github.com/ClickHouse/examples/tree/main/engineering-resources/python-dashboard-streamlit) includes several more visualizations and features that we haven't covered in this guide - including post types, most liked users, and posts by language.
+The [code repository](https://github.com/ClickHouse/examples/tree/main/blog-examples/python-dashboard-streamlit) includes several more visualizations and features that we haven't covered in this guide - including post types, most liked users, and posts by language.
 While we won't walk through these examples individually, you can explore them in the code and adapt them for your own needs.
 
 ## What we're learned
