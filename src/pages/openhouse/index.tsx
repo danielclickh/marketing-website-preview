@@ -188,14 +188,9 @@ const ALL_SPEAKERS: Array<{
     image: speakerKrithikaBalagurunathan
   },
   {
-    name: 'Martin Casado',
-    title: 'Partner, Andreessen Horowitz',
-    image: speakerMartinCasado
-  },
-  {
-    name: 'Lukas Biewald',
-    title: 'Founder, CEO, Weights & Biases',
-    image: speakerLukasBiewald
+    name: 'Alon Tal',
+    title: 'Senior Staff Software Engineer, Tesla',
+    image: speakerAlonTal
   },
   {
     name: 'Yury Izrailevsky',
@@ -206,11 +201,6 @@ const ALL_SPEAKERS: Array<{
     name: 'Ritesh Varyani',
     title: 'Staff Software Engineer, Lyft',
     image: speakerRiteshVaryani
-  },
-  {
-    name: 'Arup Malakar',
-    title: 'Software Engineer, Sierra',
-    image: speakerArupMalakar
   },
   {
     name: 'Akshay Nanavati',
@@ -233,6 +223,16 @@ const ALL_SPEAKERS: Array<{
     image: speakerArunmozhiRa
   },
   {
+    name: 'Arup Malakar',
+    title: 'Software Engineer, Sierra',
+    image: speakerArupMalakar
+  },
+  {
+    name: 'Martin Casado',
+    title: 'Partner, Andreessen Horowitz',
+    image: speakerMartinCasado
+  },
+  {
     name: 'Chris Crane',
     title: 'Co-Founder & CPO, FiveOneFour',
     image: speakerChrisCrane
@@ -243,6 +243,11 @@ const ALL_SPEAKERS: Array<{
     image: speakerJohananOttensooser
   },
   {
+    name: 'Lukas Biewald',
+    title: 'Founder, CEO, Weights & Biases',
+    image: speakerLukasBiewald
+  },
+  {
     name: 'Alan Braithwaite',
     title: 'Co-Founder & CTO, RunReveal',
     image: speakerAlanBraithwaite
@@ -251,11 +256,6 @@ const ALL_SPEAKERS: Array<{
     name: 'Mike Driscoll',
     title: 'Co-Founder, CEO, Rill Data',
     image: speakerMikeDriscoll
-  },
-  {
-    name: 'Alon Tal',
-    title: 'Senior Staff Software Engineer, Tesla',
-    image: speakerAlonTal
   },
   {
     name: 'Robert Schulze',
