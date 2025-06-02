@@ -455,10 +455,8 @@ export default function PricingV2ContextProvider({
     // No pricing needed for plans that don't allow data sources/clickpipes
     if (!planEntry.allowDataSources) return null
 
-    const {
-      replicaComputeUsdPerHour,
-      ingestedUsdPerGb
-    } = config.clickpipePricingDimensions
+    const { replicaComputeUsdPerHour, ingestedUsdPerGb } =
+      config.clickpipePricingDimensions
 
     let computeCosts = 0
     let ingestCosts = 0
@@ -474,7 +472,11 @@ export default function PricingV2ContextProvider({
       }
 
       // Compute costs (per instance per month, respecting active hours)
-      const monthlyComputeCost = instances * replicaComputeUsdPerHour * hours * config.averageDaysPerMonth
+      const monthlyComputeCost =
+        instances *
+        replicaComputeUsdPerHour *
+        hours *
+        config.averageDaysPerMonth
       computeCosts += monthlyComputeCost
 
       // Ingestion costs (only for data streaming sources)
@@ -1294,4 +1296,3 @@ export default function PricingV2ContextProvider({
     </PricingV2Context.Provider>
   )
 }
-
