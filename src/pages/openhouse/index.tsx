@@ -10,6 +10,7 @@ import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
 import speakerAlanBraithwaite from './assets/speaker-alan-braithwaite.png'
 import speakerAlexyMilovidov from './assets/speaker-alexey-milovidov.png'
+import speakerAlonTal from './assets/speaker-alon-tal.png'
 import speakerArunmozhiRa from './assets/speaker-arunmozhi-ra.png'
 import speakerArupMalakar from './assets/speaker-arup-malakar.png'
 import speakerChloeCarassoDitCarson from './assets/speaker-chloe-carasso-dit-carson.png'
@@ -250,6 +251,11 @@ const ALL_SPEAKERS: Array<{
     name: 'Mike Driscoll',
     title: 'Co-Founder, CEO, Rill Data',
     image: speakerMikeDriscoll
+  },
+  {
+    name: 'Alon Tal',
+    title: 'Senior Staff Software Engineer, Tesla',
+    image: speakerAlonTal
   },
   {
     name: 'Robert Schulze',
