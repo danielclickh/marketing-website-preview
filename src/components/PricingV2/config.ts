@@ -10,11 +10,11 @@ export const computes = [8, 12, 16, 32, 64, 120, 236, 356]
 export const backupIntervals = [6, 8, 12, 16, 20, 24, 36, 48]
 
 // @link https://clickhouse.com/docs/cloud/manage/jan-2025-faq/pricing-dimensions#what-are-the-clickpipes-public-prices
-export const clickpipePircingDimentions = {
+export const clickpipePricingDimensions = {
   computeUnit: 0.25,
   computeUsdPerHour: 0.2,
   replicaComputeUsdPerHour: 0.05,
-  ingestedUsdPerHour: 0.04
+  ingestedUsdPerGb: 0.04
 }
 
 export const meter: MeterConfig = {
