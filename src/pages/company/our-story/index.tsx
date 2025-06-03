@@ -1,5 +1,4 @@
 import founders from './founders.json'
-import investors from './investors.json'
 import styles from './styles.module.scss'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
@@ -194,17 +193,6 @@ While we’re in different places, we all have the same goals, and we trust each
               className='mb-14 text-center text-neutral-100'>
               Our investors
             </SuiTitle>
-
-            <div className='investor min-[340px]:grid-cols-2 grid grid-cols-1 flex-wrap justify-evenly gap-2 md:grid-cols-3 lg:grid-cols-6'>
-              {investors.map((investor) => (
-                <Person
-                  small
-                  key={investor.name}
-                  avatar={investor.imgSrc}
-                  name={investor.name}
-                />
-              ))}
-            </div>
 
             <div className='flex flex-wrap justify-evenly gap-x-20 gap-y-16 pt-12'>
               {team.darkInvestorLogosPng.map((image, index) => (
