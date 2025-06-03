@@ -109,7 +109,19 @@ export async function fetchBlogs({
           content: {
             $containsi: search
           }
-        }
+        },
+        {
+          keywords: {
+            $containsi: search
+          }
+        },
+        {
+          author: {
+            name: {
+              $containsi: search
+            }
+          }
+        },
       ]
     })
   }
