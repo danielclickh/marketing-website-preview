@@ -200,7 +200,7 @@ While we’re in different places, we all have the same goals, and we trust each
                   key={`investors-${index}`}
                   {...image}
                   sizes='small'
-                  className='mx-auto h-10 w-auto max-w-[min(250px,100%)] object-contain'
+                  className='mx-auto h-10 w-auto max-w-[min(208px,100%)] object-contain'
                 />
               ))}
             </div>
