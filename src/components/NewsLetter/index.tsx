@@ -1,16 +1,11 @@
-import { SuiPanel, SuiText, SuiTitle } from '../sui'
+import { SuiText, SuiTitle } from '../sui'
 import NewsLetterForm from './NewsLetterForm'
 import { NewsLetterData } from '@/types/homepage'
 
-function NewsLetter({
-  title,
-  description,
-  emailLabel,
-  submitButtonLabel
-}: NewsLetterData) {
+function NewsLetter({ title, description }: NewsLetterData) {
   return (
-    <SuiPanel color='bg-c4/10' padding='lg' isRounded>
-      <div className='flex flex-col justify-between py-2 md:flex-row md:items-start'>
+    <div className='rounded bg-white/5 p-6'>
+      <div className='flex flex-col justify-between gap-6 md:flex-row md:items-center'>
         <div className='flex w-full flex-col md:w-1/2'>
           <SuiTitle type='h3' className='mb-2.5'>
             {title}
@@ -19,9 +14,11 @@ function NewsLetter({
             {description}
           </SuiText>
         </div>
-        <NewsLetterForm />
+        <div className='flex-1'>
+          <NewsLetterForm />
+        </div>
       </div>
-    </SuiPanel>
+    </div>
   )
 }
 
