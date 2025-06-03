@@ -2,7 +2,7 @@ import founders from './founders.json'
 import styles from './styles.module.scss'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { Person } from '@/components/person_area'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
@@ -196,7 +196,7 @@ While we’re in different places, we all have the same goals, and we trust each
 
             <div className='flex flex-wrap justify-evenly gap-x-20 gap-y-16 pt-12'>
               {team.darkInvestorLogosPng.map((image, index) => (
-                <StrapiImage
+                <StrapiImageUrl
                   key={`investors-${index}`}
                   {...image}
                   sizes='small'
