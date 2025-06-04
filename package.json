@@ -14,7 +14,8 @@
     "lint": "next lint && yarn format:check",
     "format:check": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --check",
     "format": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --write",
-    "export": "next export"
+    "export": "next export",
+    "check:unused": "knip"
   },
   "dependencies": {
     "@clickhouse/click-ui": "^0.0.188",
