@@ -14,7 +14,8 @@
     "lint": "next lint && yarn format:check",
     "format:check": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --check",
     "format": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --write",
-    "export": "next export"
+    "export": "next export",
+    "check:unused": "knip"
   },
   "dependencies": {
     "@clickhouse/click-ui": "^0.0.188",
@@ -96,6 +97,7 @@
     "dotenv": "^16.5.0",
     "eslint": "^9.24.0",
     "eslint-config-next": "^14.2.25",
+    "knip": "^5.60.0",
     "postcss": "^8.4.38",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",

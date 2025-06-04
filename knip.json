@@ -1,0 +1,13 @@
+{
+  "entry": ["src/pages/**/*.{js,jsx,ts,tsx}"],
+  "project": ["src/**/*.{js,jsx,ts,tsx}"],
+  "ignore": [
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/__tests__/**",
+    "**/*.stories.{js,jsx,ts,tsx}",
+    "**/*.spec.{js,jsx,ts,tsx}",
+    "**/mocks/**",
+    "**/node_modules/**"
+  ],
+  "next": true
+}
