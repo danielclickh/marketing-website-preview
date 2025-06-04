@@ -303,6 +303,7 @@ export default async function handler(
 
   // Handle revalidation based on strapi UID
   const body = req.body
+  console.log('Revalidation request', body)
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
     try {
       await CONTENT_TYPE_HANDLERS[body.uid](body, res)
