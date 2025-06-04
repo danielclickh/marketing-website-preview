@@ -17,7 +17,6 @@ import founders from './founders.json'
 import styles from './styles.module.scss'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import { Person } from '@/components/person_area'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
@@ -25,7 +24,6 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { OurStoryData } from '@/types/ourStory'
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import { Battery } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 
@@ -210,115 +208,119 @@ While we’re in different places, we all have the same goals, and we trust each
               Our investors
             </SuiTitle>
 
-            <div className='flex flex-wrap items-center justify-around gap-x-6 gap-y-12 2xl:flex-nowrap'>
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:flex xl:flex-row xl:flex-wrap xl:items-center xl:justify-around'>
               <Image
                 src={indexventures}
                 width={672 / 3}
                 height={177 / 3}
                 alt='Index Ventures'
-                className='flex-1 flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={benchmark}
                 width={651 / 3}
                 height={177 / 3}
                 alt='Benchmark'
-                className='flex-1 flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={coatue}
                 width={141}
                 height={59}
                 alt='Coatue'
-                className='flex-1 flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={altimeter}
                 width={609 / 3}
                 height={177 / 3}
                 alt='Altimeter'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={khosla}
                 width={213}
                 height={59}
                 alt='Khosla'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
-            </div>
-            <div className='flex flex-wrap items-center justify-around gap-x-6 gap-y-12 2xl:flex-nowrap'>
+              <div
+                className='hidden h-0 w-full basis-full xl:block'
+                aria-hidden='true'
+              />
               <Image
                 src={lightspeed}
                 width={492 / 3}
                 height={177 / 3}
                 alt='Lightspeed'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={bond}
                 width={144}
                 height={59}
                 alt='Bond'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={bessemer}
                 width={119}
                 height={59}
                 alt='Bessemer'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={battery}
                 width={186}
                 height={59}
                 alt='Battery'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={ivp}
                 width={75}
                 height={59}
                 alt='IVP'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={nebius}
                 width={504 / 3}
                 height={177 / 3}
                 alt='Nebius'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
-            </div>
-            <div className='flex flex-wrap items-center justify-around gap-x-6 gap-y-12 2xl:flex-nowrap'>
+              <div
+                className='hidden h-0 w-full basis-full xl:block'
+                aria-hidden='true'
+              />
               <Image
                 src={redpoint}
                 width={483 / 3}
                 height={177 / 3}
                 alt='Redpoint'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={almazcapital}
                 width={489 / 3}
                 height={177 / 3}
                 alt='AlmazCapital'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={firstmark}
                 width={528 / 3}
                 height={177 / 3}
                 alt='Firstmark'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
               <Image
                 src={leadedge}
                 width={576 / 3}
                 height={177 / 3}
                 alt='Lead Edge'
-                className='flex-shrink flex-grow-0'
+                className='mx-auto flex-1 flex-grow-0'
               />
             </div>
           </div>
