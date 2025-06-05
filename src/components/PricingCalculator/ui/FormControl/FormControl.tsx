@@ -1,6 +1,5 @@
 import { FormControlProps } from '../../CalculatorTypesOptions'
 import TooltipInfo from '../Tooltip/tooltip'
-import styles from './FormControl.module.scss'
 import React from 'react'
 
 export const FormControl: React.FC<FormControlProps> = ({
@@ -42,12 +41,12 @@ export const FormControl: React.FC<FormControlProps> = ({
           <p
             className={` ${
               id === 'storageSize' ? 'text-[#66FF73]' : 'text-white'
-            } ${styles.helpText} text-xs`}>
+            } text-xs`}>
             {helpText}
           </p>
         </div>
       )}
-      {errorText && <p className={styles.helpText}>{errorText}</p>}
+      {errorText && <p>{errorText}</p>}
     </div>
   )
 }
