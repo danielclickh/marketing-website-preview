@@ -124,14 +124,14 @@ export default function Header({
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        <AnnouncementBar
+        {/* <AnnouncementBar
           link={headerBannerUrl}
           text={headerBannerText}
           dismissible={true}
           onShow={resizeHandler}
           onHide={resizeHandler}
           className={eyebrow?.className || ''}
-        />
+        /> */}
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>

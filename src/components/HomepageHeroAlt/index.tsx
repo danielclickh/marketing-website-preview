@@ -67,22 +67,7 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>
-            <LogoAnnouncementLink
-              className='mt-6'
-              href='/cloud/clickpipes/postgres-cdc-connector?loc=homepage-hero'
-              logo={{
-                src: '/images/cloud/integrations/postgres.svg',
-                alt: 'Postgres',
-                width: 46,
-                height: 37
-              }}>
-              Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
-              connector — now Generally Available.{' '}
-              <span className='underline group-hover:decoration-2'>
-                Learn more
-              </span>
-              !
-            </LogoAnnouncementLink>
+          
           </div>
         </div>
 
