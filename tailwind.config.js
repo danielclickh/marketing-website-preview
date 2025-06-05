@@ -73,9 +73,7 @@ module.exports = {
       fontSize: {
         '2.75xl': '1.75rem',
         '5.5xl': '3.5rem',
-        '5.5xl': '3.5rem',
-        '6.5xl': '4rem',
-        '7.5xl': '5.25rem'
+        '6.5xl': '4rem'
       },
       fontFamily: {
         inter: 'var(--font-inter), sans-serif',
@@ -83,9 +81,7 @@ module.exports = {
         basier: 'var(--font-basier), Arial, Helvetica, sans-serif'
       },
       colors: {
-        rangitoto: '#28281D',
         'base-color': '#FBFF46',
-        'eerie-black': '#1A1918',
         jet: '#343434',
 
         // Generated from:
@@ -162,32 +158,6 @@ module.exports = {
           800: '#302e32',
           900: '#161517'
         },
-        indigo: {
-          DEFAULT: '#2F2C3A',
-          50: '#F4F1FC',
-          100: '#e4e2e9',
-          200: '#c8c5d3',
-          300: '#ada8bd',
-          400: '#918ba7',
-          500: '#766e91',
-          600: '#5e5874',
-          700: '#474257',
-          800: '#23212c',
-          900: '#18161d'
-        },
-        info: {
-          DEFAULT: '#2F2C3A',
-          50: '#dae6fc',
-          100: '#b5cdf9',
-          200: '#91b3f6',
-          300: '#6c9af3',
-          400: '#135be6',
-          500: '#0e44ad',
-          600: '#092e73',
-          700: '#061d48',
-          800: '#05173a',
-          900: '#041330'
-        },
         success: {
           DEFAULT: '#62DE85',
           50: '#e0f8e7',
@@ -228,11 +198,6 @@ module.exports = {
           900: '#300000'
         },
 
-        //
-        navigation: {
-          background: '#212121'
-        },
-
         c1: {
           light: '#FFFFFF',
           DEFAULT: 'rgba(var(--clickhouse-color-1), <alpha-value>)',
@@ -248,11 +213,6 @@ module.exports = {
           light: '#6D7386',
           DEFAULT: 'rgba(var(--clickhouse-color-4), <alpha-value>)',
           dark: '#B0B4BC'
-        },
-        c5: {
-          light: '#2F2C3A',
-          DEFAULT: 'rgba(var(--clickhouse-color-5), <alpha-value>)',
-          dark: '#FFFFFF'
         },
         c6: {
           DEFAULT: '#FAFF69',
@@ -291,12 +251,9 @@ module.exports = {
         input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
         'click-card':
           '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
-        'click-pill': '0px -1px 5px rgba(16, 24, 40, 0.07)',
-        'click-twitter': '0px 4px 48px rgba(250, 255, 72, 0.2)',
         'footer-line': '0px -1px 1px #000000',
         codeblock:
           '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
-        header_bottom: 'inset 0px -1px 0px rgba(78, 78, 78, 0.25);',
         noOffset: '0 0 100px -12px rgb(0 0 0 / 0.25)',
         'noOffset-sm': '0 0 48px rgb(0 0 0 / 0.25)',
         stackIntegrationGraphic: '0 4px 60px rgb(251, 255, 70)',
@@ -307,7 +264,6 @@ module.exports = {
         focus_size: '100%, 100%'
       },
       backgroundImage: {
-        'air-gapped': 'url("/images/air-gapped.svg")',
         'half-highlight':
           'linear-gradient(to bottom, rgba(65,65,65,1) 56%, transparent 56%)',
         snowflakeGradient:
@@ -322,55 +278,17 @@ module.exports = {
           'linear-gradient(270deg, #1D1D1D 30%, rgba(29, 29, 29, 0.09) 99.99%)',
         field_focus:
           'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
-        navDropdown:
-          'linear-gradient(to bottom, rgba(65, 65, 65, 0.3) 0px, rgba(65, 65, 65, 0.3) 1px, #282828 1px, #282828 44px, rgba(65, 65, 65, 0.3) 44px, rgba(65, 65, 65, 0.3)45px, #1F1F1C 45px, #1F1F1C 100%)',
         grid: 'url("/dot_grid.svg")',
         'click-grid': 'url("/bg-grid.svg")',
-        'home-grid':
-          'linear-gradient(117.08deg, rgba(0, 0, 0, 0) 14.55%, rgba(22, 22, 0, 0.167461) 34.15%, rgba(47, 47, 47, 0.22751) 40.54%, rgba(22, 22, 0, 0.611327) 46.65%, #161600 95.98%), url("/bg-grid.png");',
         'speed-lines': 'url("/speed-lines.svg")',
         'speed-lines-ml': 'url("/speed-lines-ml.svg")',
         calendar: 'url("/calendar.svg")',
-        'body-image': 'linear-gradient(272.48deg, #292924 1.95%, #0F0F0F 100%)',
-        'menu-options':
-          'linear-gradient(255.48deg, rgba(41, 41, 36, 0.95) 1.95%, rgba(15, 15, 15, 0.95) 100%)'
+        'body-image': 'linear-gradient(272.48deg, #292924 1.95%, #0F0F0F 100%)'
       },
       spacing: {
         '30': '7.5rem'
       },
       keyframes: {
-        enterFromRight: {
-          from: { opacity: 0, transform: 'translateX(200px)' },
-          to: { opacity: 1, transform: 'translateX(0)' }
-        },
-        enterFromLeft: {
-          from: { opacity: 0, transform: 'translateX(-200px)' },
-          to: { opacity: 1, transform: 'translateX(0)' }
-        },
-        exitToRight: {
-          from: { opacity: 1, transform: 'translateX(0)' },
-          to: { opacity: 0, transform: 'translateX(200px)' }
-        },
-        exitToLeft: {
-          from: { opacity: 1, transform: 'translateX(0)' },
-          to: { opacity: 0, transform: 'translateX(-200px)' }
-        },
-        scaleIn: {
-          from: { opacity: 0, transform: 'rotateX(-10deg) scale(0.9)' },
-          to: { opacity: 1, transform: 'rotateX(0deg) scale(1)' }
-        },
-        scaleOut: {
-          from: { opacity: 1, transform: 'rotateX(0deg) scale(1)' },
-          to: { opacity: 0, transform: 'rotateX(-10deg) scale(0.95)' }
-        },
-        fadeIn: {
-          from: { opacity: 0 },
-          to: { opacity: 1 }
-        },
-        fadeOut: {
-          from: { opacity: 1 },
-          to: { opacity: 0 }
-        },
         marqueeLeftTransform: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' }
@@ -378,35 +296,15 @@ module.exports = {
         marqueeLeftTransform2: {
           '0%': { transform: 'translateX(100%)' },
           '100%': { transform: 'translateX(0%)' }
-        },
-        loggingFadeSection1: {
-          '0%': { opacity: '0.05', transform: 'scale(0.9)' },
-          '50%': { opacity: '0.15', transform: 'scale(1.1)' },
-          '100%': { opacity: '0.05', transform: 'scale(0.9)' }
-        },
-        loggingFadeSection2: {
-          '0%': { opacity: '0.05', transform: 'scale(0.9)' },
-          '50%': { opacity: '0.25', transform: 'scale(1.1)' },
-          '100%': { opacity: '0.05', transform: 'scale(0.9)' }
         }
       },
       animation: {
-        scaleIn: 'scaleIn 200ms ease',
-        scaleOut: 'scaleOut 200ms ease',
-        fadeIn: 'fadeIn 200ms ease',
-        fadeOut: 'fadeOut 200ms ease',
-        enterFromLeft: 'enterFromLeft 250ms ease',
-        enterFromRight: 'enterFromRight 250ms ease',
-        exitToLeft: 'exitToLeft 250ms ease',
-        exitToRight: 'exitToRight 250ms ease',
         marqueeLeft: 'marqueeLeftTransform 75s linear infinite',
         marqueeLeft2: 'marqueeLeftTransform2 75s linear infinite ',
         marqueeLeft3: 'marqueeLeftTransform 90s linear infinite',
         marqueeLeft4: 'marqueeLeftTransform2 90s linear infinite ',
         marqueeLeft5: 'marqueeLeftTransform 190s linear infinite',
-        marqueeLeft6: 'marqueeLeftTransform2 190s linear infinite ',
-        loggingFadeSection1: 'loggingFadeSection1 5s ease-in-out infinite',
-        loggingFadeSection2: 'loggingFadeSection2 5s ease-in-out infinite'
+        marqueeLeft6: 'marqueeLeftTransform2 190s linear infinite '
       }
     }
   }
