@@ -454,7 +454,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='/company/events?category=Free+Training#upcoming-events'
+                    href='/company/events?category=Live+Training#upcoming-events'
                     className='font text-primary-300 hover:underline'>
                     Upcoming training
                   </Link>
