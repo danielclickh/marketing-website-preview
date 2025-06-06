@@ -1,6 +1,6 @@
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
-import { CUICard } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
@@ -12,7 +12,7 @@ import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import { StrapiImage } from '@/components/StrapiElements'
 import TableOfContents from '@/components/TableOfContents'
-import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
+import { SuiText, SuiTitle } from '@/components/sui'
 import {
   fetchAll,
   findAll,
@@ -22,12 +22,13 @@ import {
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { slugify } from '@/lib/utils/strings'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef } from 'react'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -83,7 +84,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         'date',
         'StagingOnly'
       ],
-      pagination: { limit: 3 },
+      pagination: { limit: 4 },
       filters: {
         slug: {
           $ne: slug
@@ -169,46 +170,44 @@ export default function BlogPage({
   promotion
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
-  const contentRef = React.createRef<HTMLDivElement>()
-  const footerRef = React.createRef<HTMLDivElement>()
+  const contentRef = useRef<null | HTMLDivElement>(null)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
-        <div style={{ position: 'relative' }}>
-          <ReadingProgress target={contentRef} />
-        </div>
-        <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
-          <div className='block pt-10 lg:pl-0 2xl:pr-8'>
-            <Link href='/blog'>
-              <button className='mr-8 flex items-center text-base font-semibold'>
-                <ArrowLeftIcon className='mr-2 w-4' />
-                Back
-              </button>
-            </Link>
-          </div>
-          <div className='flex flex-col pt-10 text-left lg:pr-[180px] xl:pl-4'>
-            <h4 className='text-base font-semibold text-primary-300'>
-              <Link href='/blog'>Blog</Link> /{' '}
-              <Link
-                href={`/blog?category=${category
-                  .split(' ')
-                  .join('-')
-                  .toLowerCase()}`}>
-                {category}
-              </Link>
-            </h4>
-            <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
-              <span className='leading-snug'>{title}</span>
-            </h1>
-            <div className='flex flex-row items-center space-x-4 pt-2'>
-              <Avatars
-                avatars={
-                  Array.isArray(author.avatarPng)
-                    ? author.avatarPng
-                    : [author.avatarPng]
-                }
-              />
-              <div className='flex'>
+        <ReadingProgress target={contentRef} />
+
+        <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
+          <Link
+            href='/blog'
+            className='group/backButton -mx-3 -my-1.5 mr-8 inline-flex items-center whitespace-nowrap rounded px-3 py-1.5 text-base font-semibold transition-colors hover:bg-white/5'>
+            <ArrowLeftIcon className='mr-2 w-4 transition-transform group-hover/backButton:-translate-x-1' />
+            Back
+          </Link>
+          <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
+            {/* Blog meta */}
+            <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
+              <h4 className='text-base font-semibold text-primary-300'>
+                <Link href='/blog' className='hover:underline'>
+                  Blog
+                </Link>{' '}
+                /{' '}
+                <Link
+                  href={`/blog?category=${slugify(category)}`}
+                  className='hover:underline'>
+                  {category}
+                </Link>
+              </h4>
+              <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
+                <span className='leading-snug'>{title}</span>
+              </h1>
+              <div className='flex flex-row items-center space-x-4 pt-2'>
+                <Avatars
+                  avatars={
+                    Array.isArray(author.avatarPng)
+                      ? author.avatarPng
+                      : [author.avatarPng]
+                  }
+                />
                 <div className='flex flex-col items-start'>
                   <SuiText size='base' weight='normal'>
                     {author.name}
@@ -220,117 +219,122 @@ export default function BlogPage({
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className='absolute right-0 z-0 hidden h-full pr-10 transition-opacity duration-500 xl:block 2xl:pr-30'>
-          <TableOfContents
-            contentRef={contentRef}
-            footerRef={footerRef}
-            headersSelector={table_contents_headers}
-          />
-        </div>
-        <div className='section-container mx-auto flex pt-20 xl:pl-32 xl:pr-40'>
-          <div className='flex w-full flex-col pb-20 lg:pr-[180px] xl:pl-4'>
-            {ShowCloudCTAHeader && (
-              <>
+
+            {/* Blog content */}
+            <article className='order-3 lg:order-none lg:col-span-11 xl:col-span-9'>
+              {ShowCloudCTAHeader && (
                 <Markdown
                   className='rich-text-content mb-8 leading-6'
                   allowHeaderLink>
                   {CloudCTAHeader}
                 </Markdown>
-              </>
-            )}
-            {content && (
-              <div className='flex flex-col lg:flex-row'>
-                <div ref={contentRef}>
+              )}
+
+              {content && (
+                <div className='flex flex-col lg:flex-row' ref={contentRef}>
                   <Markdown
                     className='rich-text-content leading-6'
                     allowHeaderLink>
                     {content}
                   </Markdown>
                 </div>
-              </div>
-            )}
+              )}
 
-            {promotion && (
-              <div className='mt-8'>
-                <CUICard className='border-primary-300'>
-                  <CUICard.Body className='p-6 text-sm'>
-                    <p className='mb-3'>
-                      <strong>{promotion.title}</strong>
-                    </p>
-                    <div className='flex flex-col gap-6 md:flex-row md:items-start'>
-                      <p>{promotion.description}</p>
-                      <StrapiImage
-                        {...promotion.image}
-                        className='mx-auto !h-auto !w-36 flex-shrink-0 flex-grow-0 md:mr-0'
-                      />
-                    </div>
-                  </CUICard.Body>
-                </CUICard>
-              </div>
-            )}
+              {promotion && (
+                <div className='mt-8'>
+                  <CUICard className='border-primary-300'>
+                    <CUICard.Body className='p-6 text-sm'>
+                      <p className='mb-3'>
+                        <strong>{promotion.title}</strong>
+                      </p>
+                      <div className='flex flex-col gap-6 md:flex-row md:items-start'>
+                        <p>{promotion.description}</p>
+                        <StrapiImage
+                          {...promotion.image}
+                          className='mx-auto !h-auto !w-36 flex-shrink-0 flex-grow-0 md:mr-0'
+                        />
+                      </div>
+                    </CUICard.Body>
+                  </CUICard>
+                </div>
+              )}
 
-            {ShowCloudCTAFooter && (
-              <>
+              {ShowCloudCTAFooter && (
                 <Markdown
                   className='rich-text-content mt-8 leading-6'
                   allowHeaderLink>
                   {CloudCTAFooter}
                 </Markdown>
-              </>
-            )}
+              )}
+            </article>
 
-            <HRSeparator className='my-8' />
-            <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
-              <div className='flex'>
+            {/* Blog sidebar */}
+            <aside className='order-2 hidden lg:order-none xl:col-span-3 xl:block'>
+              <TableOfContents
+                contentRef={contentRef}
+                headersSelector={table_contents_headers}
+              />
+            </aside>
+
+            {/* Blog footer */}
+            <div className='order-4 lg:order-none lg:col-span-11 xl:col-span-9'>
+              <HRSeparator className='mb-8 !max-w-none' />
+
+              {/* Sharer */}
+              <div className='mb-8 flex flex-col items-center justify-between gap-4 md:flex-row'>
                 <SuiText size='sm' weight='medium' color='primary'>
                   Share this post
                 </SuiText>
+                <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
+                  <CopyUrlButton />
+                  {[
+                    'y_combinator',
+                    'twitter',
+                    'bluesky',
+                    'facebook',
+                    'linkedin'
+                  ].map((social) => (
+                    <SocialButton key={social} type={social} title={title} />
+                  ))}
+                </div>
               </div>
-              <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
-                <CopyUrlButton />
-                {[
-                  'y_combinator',
-                  'twitter',
-                  'bluesky',
-                  'facebook',
-                  'linkedin'
-                ].map((social) => (
-                  <SocialButton key={social} type={social} title={title} />
-                ))}
-              </div>
+
+              {/* Form */}
+              <NewsLetter {...newsLetterData} />
             </div>
-            <NewsLetter {...newsLetterData} />
           </div>
         </div>
       </div>
 
-      <div className='flex w-full pb-8 text-neutral-0' ref={footerRef}>
-        <div className='section-container mx-auto flex flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
-          <div className='flex justify-between pb-8'>
-            <SuiTitle
-              type='h2'
-              className='!text-3xl text-neutral-100'
-              weight='semibold'>
-              Recent posts
-            </SuiTitle>
+      {/* Recent posts */}
+      <div className='section-container my-20 flex flex-col'>
+        <div className='flex justify-between pb-8'>
+          <SuiTitle
+            type='h2'
+            className='!text-3xl text-neutral-100'
+            weight='semibold'>
+            Recent posts
+          </SuiTitle>
 
-            <SuiButton
-              path='/blog'
-              type='empty'
-              color='primary'
-              className='font-base border border-primary-300/50'>
-              View all Blogs
-            </SuiButton>
-          </div>
-          <div className='grid grid-cols-1 justify-center gap-8 lg:grid-cols-3'>
-            {otherBlogs.map((blog) => (
-              <BlogPost key={blog.id} {...blog} />
-            ))}
-          </div>
+          <CUIButton href='/blog' type='secondary-dark'>
+            View all Blogs
+          </CUIButton>
+        </div>
+        <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+          {otherBlogs.map((recentBlog, recentBlogIndex) => {
+            return (
+              <div
+                className={
+                  recentBlogIndex > 2 ? 'hidden md:block lg:hidden' : ''
+                }>
+                <BlogPost key={recentBlogIndex} {...recentBlog} />
+              </div>
+            )
+          })}
         </div>
       </div>
+
+      {/* Socials */}
       <FollowUs />
     </Layout>
   )

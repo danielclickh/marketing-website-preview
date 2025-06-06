@@ -1,3 +1,4 @@
+import { CUIButton } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import DemoCard from '@/components/DemoCard'
 import FollowUs from '@/components/FollowUs'
@@ -9,7 +10,7 @@ import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
-import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
+import { SuiText, SuiTitle } from '@/components/sui'
 import { fetchAll, findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -19,7 +20,7 @@ import { ParamsType } from '@/types/homepage'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef } from 'react'
 
 export const getStaticProps: GetStaticProps<DemoProps> =
   async function getStaticProps({ params }) {
@@ -49,7 +50,7 @@ export const getStaticProps: GetStaticProps<DemoProps> =
       populate: ['Image'],
       sort: ['SortOrder:ASC', 'publishedAt:DESC'],
       fields: ['Title', 'Description', 'Link', 'GitHubLink', 'External'],
-      pagination: { limit: 3 },
+      pagination: { limit: 4 },
       filters: {
         Link: {
           $ne: link
@@ -118,98 +119,100 @@ export default function DemoPage({
   otherDemos = []
 }: DemoProps) {
   useGalaxyOnPage('demo_page')
-  const contentRef = React.createRef<HTMLDivElement>()
-  const footerRef = React.createRef<HTMLDivElement>()
+  const contentRef = useRef<null | HTMLDivElement>(null)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
-        <div style={{ position: 'relative' }}>
-          <ReadingProgress target={contentRef} />
-        </div>
-        <div className='section-container mx-auto flex flex-col xl:flex-row xl:pt-20'>
-          <div className='block pt-10 lg:pl-0 2xl:pr-8'>
-            <Link href='/demos'>
-              <button className='mr-8 flex items-center text-base font-semibold'>
-                <ArrowLeftIcon className='mr-2 w-4' />
-                Back
-              </button>
-            </Link>
-          </div>
-          {/* <div className='flex w-full flex-col pt-2 items-center lg:pr-80'>
-            <h1 className='flex mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100 '>
-              <span className='leading-snug'>{Title}</span>
-            </h1>
-          </div> */}
-        </div>
-        <div className='absolute right-0 z-0 hidden h-full pr-10 transition-opacity duration-500 xl:block 2xl:pr-30'>
-          <TableOfContents
-            contentRef={contentRef}
-            footerRef={footerRef}
-            headersSelector={'h1, h2, h3'}
-          />
-        </div>
-        <div className='section-container mx-auto flex xl:pl-32 xl:pr-40'>
-          <div className='flex w-full flex-col pb-20 lg:pr-[180px] xl:pl-4'>
-            {Content && (
-              <div className='flex flex-col lg:flex-row'>
-                <div ref={contentRef} className='w-full'>
+        <ReadingProgress target={contentRef} />
+
+        <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
+          <Link
+            href='/demos'
+            className='group/backButton -mx-3 -my-1.5 mr-8 inline-flex items-center rounded px-3 py-1.5 text-base font-semibold transition-colors hover:bg-white/5'>
+            <ArrowLeftIcon className='mr-2 w-4 transition-transform group-hover/backButton:-translate-x-1' />
+            Back
+          </Link>
+          <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
+            {/* Demo content */}
+            <article className='order-3 lg:order-none lg:col-span-11 xl:col-span-9'>
+              {Content && (
+                <div className='flex flex-col lg:flex-row' ref={contentRef}>
                   <Markdown
                     className='rich-text-content leading-6'
                     allowHeaderLink>
                     {Content}
                   </Markdown>
                 </div>
-              </div>
-            )}
-            <HRSeparator className='my-8' />
-            <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
-              <div className='flex'>
+              )}
+            </article>
+
+            {/* Demo sidebar */}
+            <aside className='order-2 hidden lg:order-none xl:col-span-3 xl:block'>
+              <TableOfContents
+                contentRef={contentRef}
+                headersSelector='h1, h2, h3'
+              />
+            </aside>
+
+            {/* Blog footer */}
+            <div className='order-4 lg:order-none lg:col-span-11 xl:col-span-9'>
+              <HRSeparator className='mb-8 !max-w-none' />
+
+              {/* Sharer */}
+              <div className='mb-8 flex flex-col items-center justify-between gap-4 md:flex-row'>
                 <SuiText size='sm' weight='medium' color='primary'>
                   Share this demo
                 </SuiText>
+                <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
+                  <CopyUrlButton />
+                  {[
+                    'y_combinator',
+                    'twitter',
+                    'bluesky',
+                    'facebook',
+                    'linkedin'
+                  ].map((social) => (
+                    <SocialButton key={social} type={social} title={Title} />
+                  ))}
+                </div>
               </div>
-              <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
-                <CopyUrlButton />
-                {[
-                  'y_combinator',
-                  'twitter',
-                  'bluesky',
-                  'facebook',
-                  'linkedin'
-                ].map((social) => (
-                  <SocialButton key={social} type={social} title={Title} />
-                ))}
-              </div>
+
+              {/* Form */}
+              <NewsLetter {...newsLetterData} />
             </div>
-            <NewsLetter {...newsLetterData} />
           </div>
         </div>
       </div>
 
-      <div className='flex w-full pb-8 text-neutral-0' ref={footerRef}>
-        <div className='section-container mx-auto flex flex-col bg-opacity-10 px-8 pb-8 pt-12 md:bg-no-repeat 2xl:px-0'>
-          <div className='flex justify-between pb-8'>
-            <SuiTitle
-              type='h2'
-              className='!text-3xl text-neutral-100'
-              weight='semibold'>
-              Other demos
-            </SuiTitle>
-            <SuiButton
-              path='/demos'
-              type='empty'
-              color='primary'
-              className='font-base border border-primary-300/50'>
-              View all Demos
-            </SuiButton>
-          </div>
-          <div className='grid grid-cols-1 justify-center gap-8 lg:grid-cols-3'>
-            {otherDemos.map((demo) => (
-              <DemoCard key={demo.id} {...demo} />
-            ))}
-          </div>
+      {/* Recent posts */}
+      <div className='section-container my-20 flex flex-col'>
+        <div className='flex justify-between pb-8'>
+          <SuiTitle
+            type='h2'
+            className='!text-3xl text-neutral-100'
+            weight='semibold'>
+            Other demos
+          </SuiTitle>
+
+          <CUIButton href='/demos' type='secondary-dark'>
+            View all Demos
+          </CUIButton>
+        </div>
+        <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+          {otherDemos.map((recentDemo, recentDemoIndex) => {
+            return (
+              <div
+                className={
+                  recentDemoIndex > 2 ? 'hidden md:block lg:hidden' : ''
+                }>
+                <DemoCard key={recentDemoIndex} {...recentDemo} />
+              </div>
+            )
+          })}
         </div>
       </div>
+
+      {/* Socials */}
       <FollowUs />
     </Layout>
   )
