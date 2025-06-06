@@ -203,7 +203,7 @@ export default function News({
   }
 
   const filteredEvents = useMemo(() => {
-    return selectedCategoryObject
+    return selectedCategoryObject?.value
       ? allEvents.filter((event) => {
           return [
             selectedCategoryObject.value,
