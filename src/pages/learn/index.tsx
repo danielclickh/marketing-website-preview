@@ -221,12 +221,11 @@ const trainingCards: Array<TrainingCardProps> = [
   },
   {
     icon: <Webcam />,
-    badge: 'Free',
-    title: 'Free live training',
+    title: 'Live training',
     description:
       'Learn from ClickHouse experts by attending one of our virtual training sessions. Instructors deliver the content live.',
     perks: ['Hands-on lab activities', 'Live Q&A and engaging interactions'],
-    link: '/company/events?category=Free+Training#upcoming-events',
+    link: '/company/events?category=Live+Training#upcoming-events',
     button: 'See upcoming training'
   },
   {
@@ -333,7 +332,7 @@ export default function LearnPage({
           <div className='max-w-lg px-2'>
             <UserListSquare />
             <SuiTitle type='h2' className='my-6'>
-              Free instructor-led training
+              Instructor-led training
             </SuiTitle>
             <p className='my-6'>
               Our live, online training events are a great way to get started on
