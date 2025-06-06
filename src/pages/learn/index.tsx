@@ -332,7 +332,7 @@ export default function LearnPage({
           <div className='max-w-lg px-2'>
             <UserListSquare />
             <SuiTitle type='h2' className='my-6'>
-              Free instructor-led training
+              Instructor-led training
             </SuiTitle>
             <p className='my-6'>
               Our live, online training events are a great way to get started on
