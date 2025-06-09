@@ -193,7 +193,7 @@ export default function BigQueryPage({
             </CUIButton>
           </div>
           <SuiText className='text-sm'>
-            ClickHouseからBigQueryへの移行{' '}
+            BigQueryからClickHouseへの移行{' '}
             <Link
               href={`https://clickhouse.com/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
               target='_blank'
