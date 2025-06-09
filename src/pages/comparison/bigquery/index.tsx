@@ -204,7 +204,7 @@ export default function BigQueryPage({
               prefetch={false}
               className='text-primary-300 hover:underline'
               onClick={handleMigrationDocClick}>
-              migrating from ClickHouse to BigQuery
+              migrating from BigQuery to ClickHouse
             </Link>
           </SuiText>
         </div>
