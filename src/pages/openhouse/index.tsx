@@ -1,4 +1,3 @@
-import clapperboard from './assets/clapperboard.png'
 import imageGallery from './assets/gallery.png'
 import imageIconBinary from './assets/icon-binary.svg'
 import imageIconFaq from './assets/icon-faq.svg'
@@ -401,11 +400,13 @@ const AGENDA: Array<{
   time: string
   title: string
   description?: string | React.ReactNode
+  videoCategory?: string
 }> = [
   { time: '8:00 a.m.', title: 'Registration and light refreshments' },
   {
     time: '9:00 a.m.',
     title: 'Keynote: Product vision and roadmap',
+    videoCategory: 'Keynote',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -465,6 +466,7 @@ const AGENDA: Array<{
   {
     time: '11:00 a.m.',
     title: 'Real-time analytics: technical deep dives and user stories',
+    videoCategory: 'Real-time analytics',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -527,6 +529,7 @@ const AGENDA: Array<{
   {
     time: '1:00 p.m.',
     title: 'Observability: technical deep dives and user stories',
+    videoCategory: 'Observability',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -565,6 +568,7 @@ const AGENDA: Array<{
   {
     time: '2:00 p.m.',
     title: 'Data warehousing: technical deep dives and user stories',
+    videoCategory: 'Data warehousing',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -617,6 +621,7 @@ const AGENDA: Array<{
   {
     time: '3:30 p.m.',
     title: 'AI/ML: technical deep dives and user stories',
+    videoCategory: 'AI/ML',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -666,6 +671,7 @@ const AGENDA: Array<{
   {
     time: '4:30 p.m.',
     title: 'Fireside chat',
+    videoCategory: 'Fireside chat',
     description: (
       <p>
         As AI and ML workloads explode, data requirements are evolving quickly.
@@ -737,6 +743,19 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
 
   const [videoFilter, setVideoFilter] = useState<null | string>(null)
   const [activeVideo, setActiveVideo] = useState<null | Video>(null)
+  const videosRef = useRef<HTMLDivElement | null>(null)
+  const scrollToVideos = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>, category?: string | null) => {
+      const videosEl = videosRef.current
+      if (!videosEl) return
+      if (category !== undefined) setVideoFilter(category)
+      event.preventDefault()
+      videosEl.scrollIntoView({
+        behavior: 'smooth'
+      })
+    },
+    [videosRef, setVideoFilter]
+  )
 
   const videoCategoryList = useMemo(() => {
     const unique = [...new Set(VIDEOS.map((video) => video.category))]
@@ -919,83 +938,60 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
                     )}
                   </div>
                 </Modal>
-                <div className='overflow-hidden'>
+                <div className='overflow-hidden' ref={videosRef}>
                   <div className='section-container'>
-                    {filteredVideos.length > 0 ? (
-                      <>
-                        <h2 className='mb-10 text-center text-4xl'>
-                          Open House videos
-                        </h2>
-                        <CategorySelector
-                          className='mb-10 md:mb-14 lg:mb-20'
-                          options={videoCategoryList}
-                          activeClassName='bg-ch-yellow text-neutral-800'
-                          inactiveClassName='text-neutral-0 hover:border-ch-yellow'
-                        />
-                        <ContentCarousel mode='dark'>
-                          {filteredVideos.map((video, videoIndex) => {
-                            return (
-                              <div
-                                key={videoIndex}
-                                className='group/videoItem relative flex h-full flex-col bg-white text-black'>
-                                <div className='relative'>
-                                  <MarketingVideoThumbnail
-                                    videoId={video.youtubeId}
-                                    className='z-0'
-                                  />
-                                  <Image
-                                    src={playButton}
-                                    width={89}
-                                    height={89}
-                                    alt='Play'
-                                    className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover/videoItem:scale-105'
-                                  />
-                                </div>
-                                <div className='flex flex-1 flex-col p-4 lg:p-6'>
-                                  <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
-                                    {video.category}
-                                  </p>
-                                  <h3 className='mb-3 text-xl'>
-                                    <Link
-                                      target='_blank'
-                                      href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
-                                      onClick={(event) => {
-                                        event.preventDefault()
-                                        setActiveVideo(video)
-                                      }}>
-                                      <span className='absolute inset-0 z-10' />
-                                      {video.title}
-                                    </Link>
-                                  </h3>
-                                  <strong className='mt-auto group-hover/videoItem:underline'>
-                                    Watch now
-                                  </strong>
-                                </div>
-                              </div>
-                            )
-                          })}
-                        </ContentCarousel>
-                      </>
-                    ) : (
-                      <div className='py-4 text-center'>
-                        <Image
-                          src={clapperboard}
-                          width={322 / 2}
-                          height={298 / 2}
-                          alt='Clapperboard'
-                          className='mx-auto mb-10 h-auto w-28 md:mb-12 md:w-40'
-                        />
-                        <h2 className='mb-8 text-4xl'>
-                          Open House videos are on the way
-                        </h2>
-                        <p className='text-balance text-lg md:text-2xl'>
-                          We’re curating the best moments to share with you.{' '}
-                          <br />
-                          Check back soon to watch the highlights and relive the
-                          energy.
-                        </p>
-                      </div>
-                    )}
+                    <h2 className='mb-10 text-center text-4xl'>
+                      Open House videos
+                    </h2>
+                    <CategorySelector
+                      className='mb-10 md:mb-14 lg:mb-20'
+                      options={videoCategoryList}
+                      activeClassName='bg-ch-yellow text-neutral-800'
+                      inactiveClassName='text-neutral-0 hover:border-ch-yellow'
+                    />
+                    <ContentCarousel mode='dark'>
+                      {filteredVideos.map((video, videoIndex) => {
+                        return (
+                          <div
+                            key={videoIndex}
+                            className='group/videoItem relative flex h-full flex-col bg-white text-black'>
+                            <div className='relative'>
+                              <MarketingVideoThumbnail
+                                videoId={video.youtubeId}
+                                className='z-0'
+                              />
+                              <Image
+                                src={playButton}
+                                width={89}
+                                height={89}
+                                alt='Play'
+                                className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover/videoItem:scale-105'
+                              />
+                            </div>
+                            <div className='flex flex-1 flex-col p-4 lg:p-6'>
+                              <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
+                                {video.category}
+                              </p>
+                              <h3 className='mb-3 text-xl'>
+                                <Link
+                                  target='_blank'
+                                  href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+                                  onClick={(event) => {
+                                    event.preventDefault()
+                                    setActiveVideo(video)
+                                  }}>
+                                  <span className='absolute inset-0 z-10' />
+                                  {video.title}
+                                </Link>
+                              </h3>
+                              <strong className='mt-auto group-hover/videoItem:underline'>
+                                Watch now
+                              </strong>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </ContentCarousel>
                   </div>
                 </div>
               </section>
@@ -1129,7 +1125,32 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
                       key={rowIndex}
                       title={row.title}
                       time={row.time}>
-                      {row.description}
+                      {(row.description ||
+                        (row.videoCategory && VIDEOS.length > 0)) && (
+                        <>
+                          {row.description}
+                          {row.videoCategory && VIDEOS.length > 0 && (
+                            <button
+                              onClick={(event) =>
+                                scrollToVideos(event, row.videoCategory)
+                              }
+                              className='group mt-6 inline-flex items-center rounded-full border-2 border-neutral-950 bg-neutral-950 text-white transition-colors hover:bg-transparent hover:text-neutral-950'>
+                              <Image
+                                src={playButton}
+                                width={50}
+                                height={50}
+                                alt='Icon'
+                                className='rounded-full border-2 border-white'
+                              />
+                              <FontSohneBreit
+                                as='span'
+                                className='inline-block pl-4 pr-6'>
+                                Watch session replays
+                              </FontSohneBreit>
+                            </button>
+                          )}
+                        </>
+                      )}
                     </AgendaItem>
                   )
                 })}
