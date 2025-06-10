@@ -7,9 +7,17 @@ interface OptionType extends HTMLAttributes<HTMLLIElement> {
 
 interface Props extends HTMLAttributes<HTMLUListElement> {
   options: OptionType[]
+  activeClassName?: string
+  inactiveClassName?: string
 }
 
-function CategorySelector({ options, className = '', ...props }: Props) {
+function CategorySelector({
+  options,
+  className = '',
+  activeClassName = 'bg-primary-300 text-neutral-800',
+  inactiveClassName = 'text-neutral-0 hover:border-primary-300',
+  ...props
+}: Props) {
   return (
     <ul
       className={`flex-nowrap justify-center gap-2.5 overflow-auto md:flex md:flex-wrap ${className}`}
@@ -19,9 +27,7 @@ function CategorySelector({ options, className = '', ...props }: Props) {
           key={index}
           onClick={option.onClick}
           className={`mb-2 flex h-[36px] transform cursor-pointer items-center whitespace-nowrap rounded-full border border-primary-600/60 px-4 text-sm font-medium transition-colors duration-500 ease-in-out lg:mb-0 ${
-            option.selected
-              ? 'bg-primary-300 text-neutral-800'
-              : 'text-neutral-0 hover:border-primary-300'
+            option.selected ? activeClassName : inactiveClassName
           }`}>
           {option.text}
         </li>
