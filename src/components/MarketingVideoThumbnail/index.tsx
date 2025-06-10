@@ -4,15 +4,17 @@ import { useState } from 'react'
 
 export interface MarketingVideoThumbnailProps {
   videoId: string
+  className?: string
 }
 
 export default function MarketingVideoThumbnail({
-  videoId
+  videoId,
+  className = ''
 }: MarketingVideoThumbnailProps) {
   const [displayFallback, setDisplayFallback] = useState<boolean>(false)
   let thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
   return (
-    <div className='relative aspect-[774/420] bg-primary-300'>
+    <div className={`relative aspect-[774/420] bg-primary-300 ${className}`}>
       <Image
         src={thumbnail}
         alt={`YouTube Video: ${videoId}`}
