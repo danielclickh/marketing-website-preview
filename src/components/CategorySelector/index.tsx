@@ -14,8 +14,8 @@ interface Props extends HTMLAttributes<HTMLUListElement> {
 function CategorySelector({
   options,
   className = '',
-  activeClassName = 'bg-primary-300 text-neutral-800',
-  inactiveClassName = 'text-neutral-0 hover:border-primary-300',
+  activeClassName = 'bg-primary-300 border-primary-600/60 text-neutral-800',
+  inactiveClassName = 'border-primary-600/60 text-neutral-0 hover:border-primary-300',
   ...props
 }: Props) {
   return (
@@ -26,7 +26,7 @@ function CategorySelector({
         <li
           key={index}
           onClick={option.onClick}
-          className={`mb-2 flex h-[36px] transform cursor-pointer items-center whitespace-nowrap rounded-full border border-primary-600/60 px-4 text-sm font-medium transition-colors duration-500 ease-in-out lg:mb-0 ${
+          className={`mb-2 flex h-9 transform cursor-pointer items-center whitespace-nowrap rounded-full border px-4 text-sm font-medium transition-colors duration-500 ease-in-out lg:mb-0 ${
             option.selected ? activeClassName : inactiveClassName
           }`}>
           {option.text}

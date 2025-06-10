@@ -946,8 +946,8 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
                     <CategorySelector
                       className='mb-10 md:mb-14 lg:mb-20'
                       options={videoCategoryList}
-                      activeClassName='bg-ch-yellow text-neutral-800'
-                      inactiveClassName='text-neutral-0 hover:border-ch-yellow'
+                      activeClassName='bg-ch-yellow text-neutral-800 border-ch-yellow'
+                      inactiveClassName='text-neutral-0 border-ch-yellow/30 hover:border-ch-yellow'
                     />
                     <ContentCarousel mode='dark'>
                       {filteredVideos.map((video, videoIndex) => {
