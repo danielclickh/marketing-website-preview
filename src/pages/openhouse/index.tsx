@@ -6,6 +6,7 @@ import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
 import navigationArrow from './assets/navigation-arrow.svg'
+import playButton from './assets/play-button.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
 import speakerAlanBraithwaite from './assets/speaker-alan-braithwaite.png'
@@ -41,13 +42,16 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import CategorySelector from '@/components/CategorySelector'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
 import MarketingVideoThumbnail from '@/components/MarketingVideoThumbnail'
+import Modal from '@/components/Modal'
 import OpenHouseAccordionItem from '@/components/OpenHouseAccordionItem'
 import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
+import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
@@ -55,12 +59,11 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { limitStringByWord, stripHtmlTags } from '@/lib/utils/strings'
 import { BlogPost } from '@/types/blogs'
 import { CommonProps } from '@/types/homepage'
-import { Video } from '@/types/videos'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { isValidElement, Children } from 'react'
 import 'swiper/css'
 import { Navigation } from 'swiper/modules'
@@ -79,20 +82,6 @@ interface OpenHousePageProps extends CommonProps {
       | 'shortDescription'
       | 'content'
       | 'thumbnailPng'
-      | 'publishedAt'
-    >
-  >
-  videos: Array<
-    Pick<
-      Video,
-      | 'id'
-      | 'Slug'
-      | 'VideoID'
-      | 'Title'
-      | 'IntroText'
-      | 'Description'
-      | 'categories'
-      | 'VideoDate'
       | 'publishedAt'
     >
   >
@@ -115,21 +104,6 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
       sort: ['date:DESC', 'publishedAt:DESC']
     })
 
-    const videos: OpenHousePageProps['videos'] = await fetchAll(
-      'marketing-videos',
-      {
-        filters: {
-          tags: {
-            slug: {
-              $eq: 'open-house'
-            }
-          }
-        },
-        populate: ['categories'],
-        sort: ['VideoDate:DESC', 'publishedAt:DESC']
-      }
-    )
-
     return {
       props: {
         seo: {
@@ -139,7 +113,6 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
           image: [{ url: '/images/social-open-house.png' }]
         },
         blogs,
-        videos,
         ...commonProps
       }
     }
@@ -321,6 +294,106 @@ const ALL_SPEAKERS: Array<{
     name: 'Dale McDiarmid',
     title: 'Principal PME, ClickHouse',
     image: speakerDaleMcDiarmid
+  }
+]
+
+type Video = {
+  title: string
+  youtubeId: string
+  category: string
+}
+
+const VIDEOS: Array<Video> = [
+  {
+    title: 'ClickHouse Open House keynote 2025',
+    youtubeId: 'N_THorP0HbM',
+    category: 'Keynote'
+  },
+  {
+    title: 'Weights & Biases + ClickHouse: Powering developer tools for AI',
+    youtubeId: 'yJJF41oz9Wk',
+    category: 'Keynote'
+  },
+  {
+    title: 'Scaling Clickhouse to petabytes of logs at OpenAI',
+    youtubeId: 'yIVz0NKwQvA',
+    category: 'Keynote'
+  },
+  {
+    title: 'Postgres and ClickHouse: the default data stack',
+    youtubeId: 'pwOEYtNtk9k',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'ClickHouse core database innovations for real-time analytics',
+    youtubeId: 'UN0RM56uiFI',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'Tesla-scale metrics with ClickHouse',
+    youtubeId: 'z5t3b3EAc84',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'How Sierra.ai unifies observability & analytics with ClickHouse',
+    youtubeId: 'Hr2t7SvzV6A',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'ClickHouse at Exabeam: Scalable search for security analytics',
+    youtubeId: 'T87D6FTDGX0',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'ClickHouse observability: Introducing ClickStack',
+    youtubeId: 'qb87h5ScI5k',
+    category: 'Observability'
+  },
+  {
+    title: 'LogHouse: How ClickHouse built our internal logging platform',
+    youtubeId: 'PagFmmCziYE',
+    category: 'Observability'
+  },
+  {
+    title: 'How ClickHouse helps Anthropic scale observability',
+    youtubeId: 'SrLKbzdFEWA',
+    category: 'Observability'
+  },
+  {
+    title: 'ClickHouse and JOINs',
+    youtubeId: 'gd3OyQzB_Fc',
+    category: 'Data warehousing'
+  },
+  {
+    title: 'Lakehouse with ClickHouse',
+    youtubeId: 'V6C6zyR4rq0',
+    category: 'Data warehousing'
+  },
+  {
+    title:
+      'Batch and real-time analytics at Lyft: Powering decisions with ClickHouse',
+    youtubeId: 'DWkuhCBA7B4',
+    category: 'Data warehousing'
+  },
+  {
+    title: 'ClickHouse internal data warehouse',
+    youtubeId: '950P-QEd-rc',
+    category: 'Data warehousing'
+  },
+  {
+    title: 'ClickHouse for AI/ML: An overview',
+    youtubeId: 'GfvZHSdJ4CU',
+    category: 'AI/ML'
+  },
+  {
+    title: 'MCP for real-time anaytics panel discussion',
+    youtubeId: '-K64C-iKHwM',
+    category: 'AI/ML'
+  },
+  {
+    title: 'Data infrastructure for AI at scale',
+    youtubeId: 'QCrZNqJ9AHU',
+    category: 'Fireside chat'
   }
 ]
 
@@ -616,12 +689,7 @@ const AGENDA: Array<{
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
-export default function Page({
-  seo,
-  footerData,
-  blogs,
-  videos
-}: OpenHousePageProps) {
+export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
@@ -666,6 +734,37 @@ export default function Page({
     },
     [blogsRef]
   )
+
+  const [videoFilter, setVideoFilter] = useState<null | string>(null)
+  const [activeVideo, setActiveVideo] = useState<null | Video>(null)
+
+  const videoCategoryList = useMemo(() => {
+    const unique = [...new Set(VIDEOS.map((video) => video.category))]
+
+    const list = unique.map((category) => ({
+      text: category,
+      onClick: () => {
+        setVideoFilter(category)
+      },
+      selected: videoFilter === category
+    }))
+
+    list.unshift({
+      text: 'View All',
+      onClick: () => {
+        setVideoFilter(null)
+      },
+      selected: !videoFilter
+    })
+
+    return list
+  }, [VIDEOS, videoFilter, setVideoFilter])
+
+  const filteredVideos = useMemo(() => {
+    return videoFilter
+      ? VIDEOS.filter((video) => video.category === videoFilter)
+      : VIDEOS
+  }, [VIDEOS, videoFilter])
 
   return (
     <>
@@ -800,35 +899,70 @@ export default function Page({
                 <div
                   className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-900 ${styles.textureMaskBottom}`}
                 />
+                <Modal
+                  isOpen={!!activeVideo}
+                  onClose={() => setActiveVideo(null)}>
+                  <div className='w-full flex-shrink-0'>
+                    {activeVideo && (
+                      <>
+                        <h3 className='mb-6 mt-1 text-2xl md:-mt-1'>
+                          {activeVideo.title}
+                        </h3>
+                        <ResponsiveEmbed>
+                          <iframe
+                            src={`https://www.youtube-nocookie.com/embed/${activeVideo.youtubeId}?rel=0&autoplay=1`}
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                            allowFullScreen
+                          />
+                        </ResponsiveEmbed>
+                      </>
+                    )}
+                  </div>
+                </Modal>
                 <div className='overflow-hidden'>
                   <div className='section-container'>
-                    {videos.length > 0 ? (
+                    {filteredVideos.length > 0 ? (
                       <>
-                        <h2 className='mb-10 text-center text-4xl md:mb-14 lg:mb-20'>
+                        <h2 className='mb-10 text-center text-4xl'>
                           Open House videos
                         </h2>
+                        <CategorySelector
+                          className='mb-10 md:mb-14 lg:mb-20'
+                          options={videoCategoryList}
+                        />
                         <ContentCarousel mode='dark'>
-                          {videos.map((video, videoIndex) => {
+                          {filteredVideos.map((video, videoIndex) => {
                             return (
                               <div
                                 key={videoIndex}
                                 className='group/videoItem relative flex h-full flex-col bg-white text-black'>
-                                <MarketingVideoThumbnail
-                                  videoId={video.VideoID}
-                                />
+                                <div className='relative'>
+                                  <MarketingVideoThumbnail
+                                    videoId={video.youtubeId}
+                                    className='z-0'
+                                  />
+                                  <Image
+                                    src={playButton}
+                                    width={89}
+                                    height={89}
+                                    alt='Play'
+                                    className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover/videoItem:scale-105'
+                                  />
+                                </div>
                                 <div className='flex flex-1 flex-col p-4 lg:p-6'>
                                   <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
-                                    {video.categories[0]?.CategoryName ||
-                                      'Video'}{' '}
-                                    <span>·</span>
-                                    {convertDateToString(
-                                      video.VideoDate || video.publishedAt
-                                    )}
+                                    {video.category}
                                   </p>
                                   <h3 className='mb-3 text-xl'>
-                                    <Link href={`/videos/${video.Slug}`}>
-                                      <span className='absolute inset-0' />
-                                      {video.Title}
+                                    <Link
+                                      target='_blank'
+                                      href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+                                      onClick={(event) => {
+                                        event.preventDefault()
+                                        setActiveVideo(video)
+                                      }}>
+                                      <span className='absolute inset-0 z-10' />
+                                      {video.title}
                                     </Link>
                                   </h3>
                                   <strong className='mt-auto group-hover/videoItem:underline'>
