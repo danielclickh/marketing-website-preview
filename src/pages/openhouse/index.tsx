@@ -769,7 +769,7 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
     }))
 
     list.unshift({
-      text: 'View All',
+      text: 'View all',
       onClick: () => {
         setVideoFilter(null)
       },
