@@ -323,6 +323,11 @@ const VIDEOS: Array<Video> = [
     category: 'Keynote'
   },
   {
+    title: 'ClickHouse for Real-Time Analytics',
+    youtubeId: 'SnFff0KYwuo',
+    category: 'Real-time analytics'
+  },
+  {
     title: 'Postgres and ClickHouse: the default data stack',
     youtubeId: 'pwOEYtNtk9k',
     category: 'Real-time analytics'
@@ -1001,7 +1006,9 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
               </section>
 
               {/* Videos */}
-              <section className='relative bg-neutral-900 py-10 text-white md:py-20 xl:py-24'>
+              <section
+                id='videos'
+                className='relative bg-neutral-900 py-10 text-white md:py-20 xl:py-24'>
                 <div
                   className={`absolute -top-8 left-0 right-0 h-8 bg-neutral-900 ${styles.textureMaskTop}`}
                 />
