@@ -144,6 +144,7 @@ export const generateVideoObjectSchema = ({
   embedUrl
 })
 
+// @todo
 export const generateProductIntegrationSchema = ({
   name,
   description
@@ -160,6 +161,7 @@ export const generateProductIntegrationSchema = ({
   publisher: defaultOrganization
 })
 
+// @todo
 export const generateComparisonSchema = ({
   title,
   description,
@@ -184,6 +186,7 @@ export const generateComparisonSchema = ({
   }
 })
 
+// @todo
 export const generateContactPageSchema = ({
   path
 }: {
@@ -195,6 +198,7 @@ export const generateContactPageSchema = ({
   url: absoluteUrl(path)
 })
 
+// @todo
 export const generatePricingPageSchema = ({
   path,
   description
@@ -209,6 +213,7 @@ export const generatePricingPageSchema = ({
   description
 })
 
+// @todo
 export const generateUseCaseSchema = ({
   title,
   description
