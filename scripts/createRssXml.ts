@@ -1,8 +1,9 @@
+import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import dotenv from 'dotenv'
 import { Feed } from 'feed'
 import fs from 'fs'
 import path from 'path'
-import { fetchAll, getStagingOnlyFilters } from '../src/lib/api/strapi'
+
 dotenv.config({
   path: [
     path.join(__dirname, '..', '.env.local'),
