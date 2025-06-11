@@ -359,6 +359,11 @@ const VIDEOS: Array<Video> = [
     category: 'Observability'
   },
   {
+    title: 'Evolutions in Data Warehousing',
+    youtubeId: 'LgtfMhXU8gE',
+    category: 'Data warehousing'
+  },
+  {
     title: 'ClickHouse and JOINs',
     youtubeId: 'gd3OyQzB_Fc',
     category: 'Data warehousing'
@@ -393,6 +398,36 @@ const VIDEOS: Array<Video> = [
     title: 'Data infrastructure for AI at scale',
     youtubeId: 'QCrZNqJ9AHU',
     category: 'Fireside chat'
+  },
+  {
+    title: 'Ramp + ClickHouse',
+    youtubeId: 'Hec3S7_26Mw',
+    category: 'User interviews'
+  },
+  {
+    title: 'Huntress + ClickHouse',
+    youtubeId: 'h-dkVkEh5ec',
+    category: 'User interviews'
+  },
+  {
+    title: 'Klaviyo + ClickHouse',
+    youtubeId: '3K8Cz5dWwl0',
+    category: 'User interviews'
+  },
+  {
+    title: 'RunReveal + ClickHouse',
+    youtubeId: 'N2z_a9GnACA',
+    category: 'User interviews'
+  },
+  {
+    title: 'Attentive + ClickHouse',
+    youtubeId: '4hFHdGdwvAs',
+    category: 'User interviews'
+  },
+  {
+    title: 'Blacksmith + ClickHouse',
+    youtubeId: 'dSwT5sP1Ryw',
+    category: 'User interviews'
   }
 ]
 
