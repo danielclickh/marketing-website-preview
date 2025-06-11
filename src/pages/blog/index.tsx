@@ -7,10 +7,11 @@ import { CUILink } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import Pagination from '@/components/Pagination'
-import { StrapiImage, StrapiImageUrl } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateBlogArchiveSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BlogApiResponse, BlogProps } from '@/types/blogs'
@@ -31,6 +32,7 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
     const initialData = await fetchBlogs({ page, category, search })
 
     seo.path = '/blog'
+    seo.schema = generateBlogArchiveSchema({ path: '/blog' })
 
     return {
       props: {

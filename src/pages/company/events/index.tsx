@@ -12,6 +12,7 @@ import {
   getUnlistedFilters
 } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateEventsArchiveSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventType } from '@/types/events'
@@ -100,6 +101,7 @@ export const getStaticProps: GetStaticProps<EventsPageProps> =
 
     seo.title = 'Events - ClickHouse'
     seo.path = '/company/events'
+    seo.schema = generateEventsArchiveSchema({ path: '/company/events' })
 
     let featuredEvent: EventType | undefined
     let featuredEventIndex = allEvents.findIndex((e) => e.featured)

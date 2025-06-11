@@ -12,6 +12,7 @@ import JoinCommunity from '@/components/JoinCommunity'
 import Layout from '@/components/Layout'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateHomepageSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { HomepageCustomerStoryLogo, HomePageProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -48,6 +49,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
     )
 
     data.seo.path = ''
+    data.seo.schema = generateHomepageSchema()
     return {
       props: {
         ...data,

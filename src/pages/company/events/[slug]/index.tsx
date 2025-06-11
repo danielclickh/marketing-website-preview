@@ -6,11 +6,13 @@ import { StrapiImage } from '@/components/StrapiElements'
 import { SuiText, SuiTitle } from '@/components/sui'
 import {
   findAll,
+  getProxiedMediaUrl,
   getStagingOnlyFilters,
   getUnlistedFilters
 } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateInnerEventSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
 import { ParamsType } from '@/types/homepage'
@@ -107,10 +109,16 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
     const seo: SeoMetadata = {
       title: page.title,
       description: page.shortDescription,
-      image: [data[0].thumbnailPng],
+      image: [page.thumbnailPng],
       type: 'website',
       siteName: 'ClickHouse',
-      path: `/company/events/${slug}`
+      path: `/company/events/${slug}`,
+      schema: generateInnerEventSchema({
+        name: page.title,
+        description: page.shortDescription || '',
+        startDate: page.localDatetime,
+        imageUrl: getProxiedMediaUrl(page.thumbnailPng.url)
+      })
     }
 
     if (page.unlisted) {

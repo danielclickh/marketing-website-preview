@@ -4,7 +4,12 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { StrapiImage } from '@/components/StrapiElements'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
+import {
+  findAll,
+  getProxiedMediaUrl,
+  getUnlistedFilters
+} from '@/lib/api/strapi'
+import { generateInnerEventSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
 import { GetStaticProps } from 'next'
@@ -92,10 +97,16 @@ export const getStaticProps: GetStaticProps<EventProps> =
         seo: {
           title: page.title,
           description: page.shortDescription,
-          image: [data[0].thumbnailPng],
+          image: [page.thumbnailPng],
           type: 'website',
           siteName: 'ClickHouse',
-          path: '/company/events/clickhouse-workshop'
+          path: '/company/events/clickhouse-workshop',
+          schema: generateInnerEventSchema({
+            name: page.title,
+            description: page.shortDescription || '',
+            startDate: page.localDatetime,
+            imageUrl: getProxiedMediaUrl(page.thumbnailPng.url)
+          })
         },
         recentEvents,
         ...commonProps
