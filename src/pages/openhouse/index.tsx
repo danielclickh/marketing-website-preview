@@ -107,7 +107,7 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
       props: {
         seo: {
           title:
-            'Open House User Conference - Free conference in San Francisco, CA.',
+            'Open House 2025, The ClickHouse User Conference - Watch the Sessions.',
           path: '/openhouse',
           image: [{ url: '/images/social-open-house.png' }]
         },
