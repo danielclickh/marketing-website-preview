@@ -1,15 +1,15 @@
-import fs from 'fs'
-import path from 'path'
 import {
   acceptableRegions,
   config
-} from '../src/components/PricingCalculator/CalculatorTypesOptions'
-import { meter as pricingV2Config } from '../src/components/PricingV2/config'
+} from '@/components/PricingCalculator/CalculatorTypesOptions'
+import { meter as pricingV2Config } from '@/components/PricingV2/config'
 import {
   getPricingsByPlan,
   getPricingsByPlanTemplate,
   Pricing
-} from '../src/lib/m3ter/m3ter-api'
+} from '@/lib/m3ter/m3ter-api'
+import fs from 'fs'
+import path from 'path'
 
 function log(message: string) {
   console.log(`[${new Date().toTimeString()}] ${message}`)
