@@ -55,7 +55,7 @@ import SeoContainer from '@/components/SeoContainer'
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { limitStringByWord, stripHtmlTags } from '@/lib/utils/strings'
+import { limitStringByWord, slugify, stripHtmlTags } from '@/lib/utils/strings'
 import { BlogPost } from '@/types/blogs'
 import { CommonProps } from '@/types/homepage'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -298,6 +298,7 @@ const ALL_SPEAKERS: Array<{
 
 type Video = {
   title: string
+  slug?: string
   youtubeId: string
   category: string
 }
@@ -305,16 +306,19 @@ type Video = {
 const VIDEOS: Array<Video> = [
   {
     title: 'ClickHouse Open House keynote 2025',
+    slug: 'keynote',
     youtubeId: 'N_THorP0HbM',
     category: 'Keynote'
   },
   {
     title: 'Weights & Biases + ClickHouse: Powering developer tools for AI',
+    slug: 'weights-and-biases',
     youtubeId: 'yJJF41oz9Wk',
     category: 'Keynote'
   },
   {
     title: 'Scaling Clickhouse to petabytes of logs at OpenAI',
+    slug: 'openai',
     youtubeId: 'yIVz0NKwQvA',
     category: 'Keynote'
   },
@@ -330,31 +334,37 @@ const VIDEOS: Array<Video> = [
   },
   {
     title: 'Tesla-scale metrics with ClickHouse',
+    slug: 'tesla',
     youtubeId: 'z5t3b3EAc84',
     category: 'Real-time analytics'
   },
   {
     title: 'How Sierra.ai unifies observability & analytics with ClickHouse',
+    slug: 'Sierraai',
     youtubeId: 'Hr2t7SvzV6A',
     category: 'Real-time analytics'
   },
   {
     title: 'ClickHouse at Exabeam: Scalable search for security analytics',
+    slug: 'exabeam',
     youtubeId: 'T87D6FTDGX0',
     category: 'Real-time analytics'
   },
   {
     title: 'ClickHouse observability: Introducing ClickStack',
+    slug: 'clickstack',
     youtubeId: 'qb87h5ScI5k',
     category: 'Observability'
   },
   {
     title: 'LogHouse: How ClickHouse built our internal logging platform',
+    slug: 'loghouse',
     youtubeId: 'PagFmmCziYE',
     category: 'Observability'
   },
   {
     title: 'How ClickHouse helps Anthropic scale observability',
+    slug: 'anthropic',
     youtubeId: 'SrLKbzdFEWA',
     category: 'Observability'
   },
@@ -376,6 +386,7 @@ const VIDEOS: Array<Video> = [
   {
     title:
       'Batch and real-time analytics at Lyft: Powering decisions with ClickHouse',
+    slug: 'lyft',
     youtubeId: 'DWkuhCBA7B4',
     category: 'Data warehousing'
   },
@@ -386,6 +397,7 @@ const VIDEOS: Array<Video> = [
   },
   {
     title: 'ClickHouse for AI/ML: An overview',
+    slug: 'clickhouse-for-ai',
     youtubeId: 'GfvZHSdJ4CU',
     category: 'AI/ML'
   },
@@ -401,31 +413,37 @@ const VIDEOS: Array<Video> = [
   },
   {
     title: 'Ramp + ClickHouse',
+    slug: 'ramp',
     youtubeId: 'Hec3S7_26Mw',
     category: 'User interviews'
   },
   {
     title: 'Huntress + ClickHouse',
+    slug: 'huntress',
     youtubeId: 'h-dkVkEh5ec',
     category: 'User interviews'
   },
   {
     title: 'Klaviyo + ClickHouse',
+    slug: 'klaviyo',
     youtubeId: '3K8Cz5dWwl0',
     category: 'User interviews'
   },
   {
     title: 'RunReveal + ClickHouse',
+    slug: 'runreveal',
     youtubeId: 'N2z_a9GnACA',
     category: 'User interviews'
   },
   {
     title: 'Attentive + ClickHouse',
+    slug: 'attentive',
     youtubeId: '4hFHdGdwvAs',
     category: 'User interviews'
   },
   {
     title: 'Blacksmith + ClickHouse',
+    slug: 'blacksmith',
     youtubeId: 'dSwT5sP1Ryw',
     category: 'User interviews'
   }
@@ -820,6 +838,43 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
       : VIDEOS
   }, [VIDEOS, videoFilter])
 
+  const setFeaturedVideoAndUrl = useCallback(
+    (video: Video | null) => {
+      setActiveVideo(video)
+      const newUrl = new URL(window.location.toString())
+      newUrl.hash = video ? `video-${video.slug || slugify(video.title)}` : ''
+      window.history.replaceState(null, '', newUrl.toString())
+    },
+    [setActiveVideo]
+  )
+
+  const hashChangeHandler = useCallback(() => {
+    const hashValue = window.location.hash.replace(/^#/, '')
+
+    if (hashValue.length && hashValue.startsWith('video-')) {
+      const videoSlug = hashValue.replace(/^video-/, '')
+      const matchingVideo = VIDEOS.find(
+        (video) => (video.slug || slugify(video.title)) === videoSlug
+      )
+      if (matchingVideo) {
+        setActiveVideo(matchingVideo)
+        return
+      }
+    }
+
+    if (activeVideo) {
+      setActiveVideo(null)
+    }
+  }, [setActiveVideo, activeVideo, VIDEOS])
+
+  useEffect(() => {
+    hashChangeHandler()
+    window.addEventListener('hashchange', hashChangeHandler)
+    return () => {
+      window.removeEventListener('hashchange', hashChangeHandler)
+    }
+  }, [])
+
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -955,7 +1010,7 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
                 />
                 <Modal
                   isOpen={!!activeVideo}
-                  onClose={() => setActiveVideo(null)}>
+                  onClose={() => setFeaturedVideoAndUrl(null)}>
                   <div className='w-full flex-shrink-0'>
                     {activeVideo && (
                       <>
@@ -1013,7 +1068,7 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
                                   href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
                                   onClick={(event) => {
                                     event.preventDefault()
-                                    setActiveVideo(video)
+                                    setFeaturedVideoAndUrl(video)
                                   }}>
                                   <span className='absolute inset-0 z-10' />
                                   {video.title}
