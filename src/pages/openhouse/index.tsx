@@ -1000,7 +1000,7 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
                                 width={89}
                                 height={89}
                                 alt='Play'
-                                className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover/videoItem:scale-105'
+                                className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white transition-transform group-hover/videoItem:scale-105'
                               />
                             </div>
                             <div className='flex flex-1 flex-col p-4 lg:p-6'>
