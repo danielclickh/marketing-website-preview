@@ -101,7 +101,7 @@ export const generateInnerEventSchema = ({
   '@type': 'Event',
   name,
   startDate,
-  eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+  //eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
   eventStatus: 'https://schema.org/EventScheduled',
   image: imageUrl,
   description,
