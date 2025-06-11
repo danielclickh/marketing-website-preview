@@ -311,15 +311,15 @@ const VIDEOS: Array<Video> = [
     category: 'Keynote'
   },
   {
-    title: 'Weights & Biases + ClickHouse: Powering developer tools for AI',
-    slug: 'weights-and-biases',
-    youtubeId: 'yJJF41oz9Wk',
+    title: 'Scaling ClickHouse to petabytes of logs at OpenAI',
+    slug: 'openai',
+    youtubeId: 'yIVz0NKwQvA',
     category: 'Keynote'
   },
   {
-    title: 'Scaling Clickhouse to petabytes of logs at OpenAI',
-    slug: 'openai',
-    youtubeId: 'yIVz0NKwQvA',
+    title: 'Weights & Biases + ClickHouse: Powering developer tools for AI',
+    slug: 'weights-and-biases',
+    youtubeId: 'yJJF41oz9Wk',
     category: 'Keynote'
   },
   {
