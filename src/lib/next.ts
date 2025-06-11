@@ -2,12 +2,22 @@ export const IS_PRODUCTION =
   process?.env?.NEXT_IS_PROD === 'true' ||
   (process?.env?.VERCEL_ENV || process?.env?.NODE_ENV) === 'production'
 
-export const BASE_URL =
-  process?.env?.NEXT_PUBLIC_WEBSITE_URL ||
-  process?.env?.VERCEL_URL ||
-  'clickhouse.com'
-
 export const BASE_PROTOCOL = process?.env?.NEXT_PUBLIC_PROTOCOL || 'https://'
+
+// The app url WITHOUT protocol
+export const BASE_URL = (() => {
+  let base = process?.env?.NEXT_PUBLIC_WEBSITE_URL || process?.env?.VERCEL_URL
+  if (!base || !isValidUrl(base)) {
+    base = 'clickhouse.com'
+  }
+
+  if (!base.startsWith('http') && !base.startsWith('//')) {
+    base = `${BASE_PROTOCOL}${base}`
+  }
+
+  const obj = new URL(base)
+  return obj.hostname + ':' + obj.port
+})()
 
 export const BASE_URL_AND_PROTOCOL = `${BASE_PROTOCOL}${BASE_URL}`
 

@@ -17,9 +17,11 @@ import {
   fetchAll,
   findAll,
   findOne,
+  getProxiedMediaUrl,
   getStagingOnlyFilters
 } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateBlogArticleSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { slugify } from '@/lib/utils/strings'
@@ -118,7 +120,17 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
           path: canonical,
-          keywords: blog?.keywords || ''
+          keywords: blog?.keywords || '',
+          schema: generateBlogArticleSchema({
+            title: blog.title,
+            description: blog.shortDescription,
+            imageUrl: getProxiedMediaUrl(blog.thumbnailPng.url),
+            authorName: blog?.author?.name
+              ? blog.author.name
+              : 'ClickHouse Team',
+            publishedDate: blog.publishedAt,
+            modifiedDate: blog.updatedAt
+          })
         },
         newsLetterData,
         ...commonData

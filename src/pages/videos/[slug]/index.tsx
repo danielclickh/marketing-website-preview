@@ -4,8 +4,10 @@ import Markdown from '@/components/Markdown'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import VideoCard from '@/components/VideoCard'
 import { SuiButton, SuiTitle } from '@/components/sui'
-import { fetchAll, findAll } from '@/lib/api/strapi'
+import { fetchAll, findAll, getProxiedMediaUrl } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
+import { absoluteUrl } from '@/lib/next'
+import { generateVideoObjectSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { slugify } from '@/lib/utils/strings'
 import { ParamsType } from '@/types/homepage'
@@ -132,8 +134,20 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   if (video.seo?.image) seo.image = [video.seo.image]
 
   // Use YT thumbnail as fallback seo image
-  if (!seo.image)
+  if (!seo.image) {
     seo.imageUrl = `https://img.youtube.com/vi/${video.VideoID}/maxresdefault.jpg`
+  }
+
+  seo.schema = generateVideoObjectSchema({
+    title: video.Title || seo.title || `Video: ${video.VideoID}`,
+    description: seo.description || video.Description || video.IntroText || '',
+    thumbnailUrl: video.seo?.image
+      ? getProxiedMediaUrl(video.seo.image.url)
+      : `https://img.youtube.com/vi/${video.VideoID}/maxresdefault.jpg`,
+    uploadDate: video.publishedAt,
+    contentUrl: absoluteUrl(seo.path),
+    embedUrl: `https://www.youtube-nocookie.com/embed/${video.VideoID}?rel=0`
+  })
 
   return {
     props: {

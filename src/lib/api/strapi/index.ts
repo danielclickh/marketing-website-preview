@@ -1,4 +1,5 @@
 import { PricingV2 } from './types'
+import { absoluteUrl } from '@/lib/next'
 import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
 
@@ -58,6 +59,10 @@ export function getRelativeMediaUrl(path: string) {
   }
 
   return path
+}
+
+export function getProxiedMediaUrl(path: string) {
+  return absoluteUrl(getRelativeMediaUrl(path))
 }
 
 export async function getPathsValues(
