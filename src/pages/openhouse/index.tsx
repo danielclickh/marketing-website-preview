@@ -338,12 +338,6 @@ const VIDEOS: Array<Video> = [
     category: 'Real-time analytics'
   },
   {
-    title: 'Tesla-scale metrics with ClickHouse',
-    slug: 'tesla',
-    youtubeId: 'z5t3b3EAc84',
-    category: 'Real-time analytics'
-  },
-  {
     title: 'How Sierra.ai unifies observability & analytics with ClickHouse',
     slug: 'Sierraai',
     youtubeId: 'Hr2t7SvzV6A',
@@ -359,6 +353,12 @@ const VIDEOS: Array<Video> = [
     title: 'ClickHouse observability: Introducing ClickStack',
     slug: 'clickstack',
     youtubeId: 'qb87h5ScI5k',
+    category: 'Observability'
+  },
+  {
+    title: 'Tesla-scale metrics with ClickHouse',
+    slug: 'tesla',
+    youtubeId: 'z5t3b3EAc84',
     category: 'Observability'
   },
   {
@@ -624,6 +624,13 @@ const AGENDA: Array<{
             </strong>
             , Member of Technical Staff at Anthropic will share how ClickHouse
             is used to improve observability.
+          </li>
+          <li>
+            <strong>
+              <u>Alon Tal</u>
+            </strong>
+            , Senior Staff Software Engineer at Tesla will discuss how they
+            ingest, store and query metrics at massive scale.
           </li>
         </ul>
       </>
