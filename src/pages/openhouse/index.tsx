@@ -407,6 +407,12 @@ const VIDEOS: Array<Video> = [
     category: 'AI/ML'
   },
   {
+    title: 'How is the AI Made? The Data Behind Language Models',
+    slug: 'alexey',
+    youtubeId: '8yH3rY1fZEA',
+    category: 'AI/ML'
+  },
+  {
     title: 'MCP for real-time anaytics panel discussion',
     youtubeId: '-K64C-iKHwM',
     category: 'AI/ML'
