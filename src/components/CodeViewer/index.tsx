@@ -20,6 +20,7 @@ function CodeViewer({
   chart_config = '',
   clickhouse_settings = '{}',
   show_statistics = false,
+  raw_code = '',
   children,
   ...props
 }: any) {
@@ -27,15 +28,20 @@ function CodeViewer({
   const runBoolean = run === 'true'
   const runnableBoolean = runnable === 'true'
   if (type === 'click-ui') {
-    const codeContent = (
-      Array.isArray(children)
-        ? children
-            .map((child) =>
-              typeof child === 'object' ? child.props?.children || '' : child
-            )
-            .join('')
-        : children.toString()
-    ).trim()
+    let codeContent = ''
+    if (raw_code !== '') {
+      codeContent = raw_code
+    } else {
+      codeContent = (
+        Array.isArray(children)
+          ? children
+              .map((child) =>
+                typeof child === 'object' ? child.props?.children || '' : child
+              )
+              .join('')
+          : children.toString()
+      ).trim()
+    }
 
     let chart: { type: ChartType; config?: ChartConfig } | undefined
     try {
@@ -77,6 +83,7 @@ function CodeViewer({
     )
   }
   return (
+
     <code
       className={`${className} mb-9 border border-solid border-c3`}
       style={{ wordBreak: 'break-word' }}
