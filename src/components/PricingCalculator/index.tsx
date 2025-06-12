@@ -707,7 +707,7 @@ const PricingCalculator: React.FC<{
                 <div
                   className={` ${
                     storageCompressed === 'no' ? 'text-[#66FF73]' : 'text-white'
-                  } ${styles.helpText} mb-10 mt-3 text-xs`}>
+                  } mb-10 mt-3 text-xs`}>
                   {storageCompressed === 'no' ? (
                     <p>
                       {humanReadableStorage(

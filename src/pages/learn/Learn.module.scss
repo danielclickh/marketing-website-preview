@@ -1,9 +1,0 @@
-.videoPlaceHolder {
-  @apply mx-auto;
-  max-width: 800px;
-  width: 100%;
-  width: fill-available;
-  & > div {
-    @apply relative z-10 h-full w-full rounded-xl bg-c4/10 p-4;
-  }
-}
