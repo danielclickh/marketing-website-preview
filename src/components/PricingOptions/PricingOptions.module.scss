@@ -16,21 +16,3 @@
     @apply cursor-not-allowed border-neutral-725 bg-neutral-725 #{!important};
   }
 }
-
-.richTextLink {
-  @apply text-center text-sm text-neutral-200;
-
-  :global a {
-    @apply text-primary-300 #{!important};
-
-    strong {
-      @apply font-semibold;
-    }
-  }
-}
-
-.gcpTextLink {
-  :global(.hide-gcp) {
-    @apply hidden;
-  }
-}
