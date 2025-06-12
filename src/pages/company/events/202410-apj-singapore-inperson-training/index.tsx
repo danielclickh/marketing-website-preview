@@ -107,7 +107,10 @@ export const getStaticProps: GetStaticProps<EventProps> =
             name: page.title,
             description: page.shortDescription || '',
             startDate: page.localDatetime,
-            imageUrl: getProxiedMediaUrl(page.thumbnailPng.url)
+            imageUrl: getProxiedMediaUrl(page.thumbnailPng.url),
+            path: '/company/events/202410-apj-singapore-inperson-training',
+            locationCity: page.location.city,
+            locationCountry: page.location.country
           })
         },
         recentEvents,

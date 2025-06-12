@@ -117,7 +117,10 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
         name: page.title,
         description: page.shortDescription || '',
         startDate: page.localDatetime,
-        imageUrl: getProxiedMediaUrl(page.thumbnailPng.url)
+        imageUrl: getProxiedMediaUrl(page.thumbnailPng.url),
+        path: `/company/events/${slug}`,
+        locationCity: page.location.city,
+        locationCountry: page.location.country
       })
     }
 
