@@ -104,25 +104,6 @@ export const generateInnerEventSchema = ({
   locationCity: string
   locationCountry: string
 }): WithContext<Event> => {
-  const virtualTypes = ['online', 'virtual']
-  const isVirtual =
-    virtualTypes.includes(locationCity.trim().toLowerCase()) ||
-    virtualTypes.includes(locationCountry.trim().toLowerCase())
-
-  const location: Event['location'] = isVirtual
-    ? {
-        '@type': 'VirtualLocation',
-        url: absoluteUrl(path)
-      }
-    : {
-        '@type': 'Place',
-        name: `${locationCity},  ${locationCountry}`,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: `${locationCity}, ${locationCountry}`
-        }
-      }
-
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -133,7 +114,14 @@ export const generateInnerEventSchema = ({
     image: imageUrl,
     description,
     organizer: defaultOrganization,
-    location
+    location: {
+      '@type': 'Place',
+      name: `${locationCity},  ${locationCountry}`,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: `${locationCity}, ${locationCountry}`
+      }
+    }
   }
 }
 
