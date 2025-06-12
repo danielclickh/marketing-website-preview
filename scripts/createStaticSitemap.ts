@@ -2,11 +2,11 @@ import {
   fetchAll,
   getStagingOnlyFilters,
   getUnlistedFilters
-} from '../src/lib/api/strapi'
-import { getEngineeringResources } from '../src/lib/engineering-resources'
-import { getVideos } from '../src/lib/videos'
-import { Video } from '../src/lib/videos/types'
-import { Integration } from '../src/types/integrations'
+} from '@/lib/api/strapi'
+import { getEngineeringResources } from '@/lib/engineering-resources'
+import { getVideos } from '@/lib/videos'
+import { Video } from '@/lib/videos/types'
+import { Integration } from '@/types/integrations'
 import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'

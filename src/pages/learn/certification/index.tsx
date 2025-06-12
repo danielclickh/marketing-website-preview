@@ -170,7 +170,7 @@ export default function CertificationPage({
               Check out our{' '}
               <Link
                 className='text-primary-300'
-                href='/company/events?category=Free+Training#upcoming-events'>
+                href='/company/events?category=Live+Training#upcoming-events'>
                 Live Events page
               </Link>{' '}
               to register for the next Instructor-led ClickHouse Developer

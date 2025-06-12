@@ -1,3 +1,5 @@
+import { WithContext, Thing } from 'schema-dts'
+
 export type LinkTarget = '_self' | '_blank'
 
 export interface StrapiEntry {
@@ -57,6 +59,7 @@ export interface SeoMetadata {
   path: string
   robots?: string
   locale?: string
+  schema?: WithContext<Thing>
 }
 
 // ------

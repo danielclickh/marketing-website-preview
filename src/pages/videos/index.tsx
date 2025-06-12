@@ -7,6 +7,7 @@ import Pagination from '@/components/Pagination'
 import VideoCard from '@/components/VideoCard'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateVideosArchiveSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { VideosApiResponse, VideosPageProps } from '@/types/videos'
 import { GetServerSideProps } from 'next'
@@ -28,7 +29,8 @@ export const getServerSideProps: GetServerSideProps<VideosPageProps> =
           title: 'ClickHouse Videos | ClickHouse How to videos',
           description:
             'Discover a rich collection of customer testimonials, informative how-to tutorials, and engaging Meetup recordings. Elevate your data analytics game with our diverse video library.\n',
-          path: '/videos'
+          path: '/videos',
+          schema: generateVideosArchiveSchema({ path: '/videos' })
         },
         ...commonProps
       }

@@ -6,10 +6,10 @@
     "build": "next build",
     "start": "next start",
     "build:analyze": "ANALYZE=true yarn build",
-    "create-rss-xml": "ts-node  -O '{\"module\": \"commonjs\"}' ./scripts/createRssXml",
-    "create-static-sitemap": "ts-node  -O '{\"module\": \"commonjs\"}' ./scripts/createStaticSitemap",
-    "create-pricing-file": "ts-node  -O '{\"module\": \"commonjs\"}' ./scripts/createPricingFile",
-    "create-githubstars-file": "ts-node  -O '{\"module\": \"commonjs\"}' ./scripts/getGitHubStars",
+    "create-rss-xml": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/createRssXml",
+    "create-static-sitemap": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/createStaticSitemap",
+    "create-pricing-file": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/createPricingFile",
+    "create-githubstars-file": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/getGitHubStars",
     "deploy": "yarn create-rss-xml && yarn create-githubstars-file && yarn create-static-sitemap && yarn create-pricing-file && next build",
     "lint": "next lint && yarn format:check",
     "format:check": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --check",
@@ -58,6 +58,8 @@
     "rehype-slug-custom-id": "^1.1.0",
     "remark-gfm": "^3.0.1",
     "sass": "^1.51.0",
+    "schema-dts": "^1.1.5",
+    "sharp": "^0.32.6",
     "short-uuid": "^5.2.0",
     "swiper": "^11.0.7",
     "swr": "^2.0.0",
@@ -90,6 +92,7 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "styled-components": "^6.1.11",
     "tailwindcss": "^3.4.4",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "5.7.3"
   }
 }

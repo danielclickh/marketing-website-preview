@@ -1,122 +1,129 @@
-import React, { useEffect, useRef, useState } from 'react'
-
-interface HeadingData {
-  id: string
-  text: string
-  level: number
-}
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 interface TableOfContentsProps {
   contentRef: React.RefObject<HTMLDivElement>
-  footerRef: React.RefObject<HTMLElement>
   headersSelector: string
 }
 
 export default function TableOfContents({
   contentRef,
-  footerRef,
   headersSelector
 }: TableOfContentsProps) {
-  const [headings, setHeadings] = useState<HeadingData[]>([])
   const [activeId, setActiveId] = useState<string>('')
-  const [isVisible, setIsVisible] = useState(true)
-  const [headers, setHeaders] = useState(
-    headersSelector ? headersSelector : 'h1, h2'
-  )
-  const navRef = useRef<HTMLElement>(null)
+  const navRef = useRef<null | HTMLElement>(null)
+  const [headingElements, setHeadingElements] = useState<Array<HTMLElement>>([])
 
   useEffect(() => {
-    if (!footerRef.current) return
+    const contentEl = contentRef.current
+    if (!contentEl) return
 
-    // Create an Intersection Observer for the footer
-    const footerObserver = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(!entry.isIntersecting)
-      },
-      { threshold: 0.15 }
-    )
+    const observer = new MutationObserver(() => {
+      const headings = Array.from(
+        contentEl.querySelectorAll(headersSelector || 'h1, h2')
+      ).filter((el): el is HTMLElement => el instanceof HTMLElement)
 
-    footerObserver.observe(footerRef.current)
-
-    return () => footerObserver.disconnect()
-  }, [footerRef])
-
-  useEffect(() => {
-    if (!contentRef.current) return
-
-    // Get all headings from the blog content
-    const elements = contentRef.current.querySelectorAll(headers)
-    const headingElements = Array.from(elements).map((element) => ({
-      id: element.id,
-      text: element.textContent || '',
-      level: Number(element.tagName.charAt(1))
-    }))
-
-    setHeadings(headingElements)
-
-    // Create an Intersection Observer to track active heading
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveId(entry.target.id)
-        }
-      })
-    }
-
-    const observer = new IntersectionObserver(callback, {
-      rootMargin: '-100px 0px -60% 0px'
+      setHeadingElements(headings)
     })
 
-    elements.forEach((element) => observer.observe(element))
+    observer.observe(contentEl, {
+      childList: true,
+      subtree: true
+    })
+
+    // Run once initially in case content is already rendered
+    const initialHeadings = Array.from(
+      contentEl.querySelectorAll(headersSelector || 'h1, h2')
+    ).filter((el): el is HTMLElement => el instanceof HTMLElement)
+
+    setHeadingElements(initialHeadings)
 
     return () => observer.disconnect()
-  }, [contentRef])
+  }, [contentRef, headersSelector])
 
-  // Add this effect to scroll the nav when activeId changes
-  useEffect(() => {
-    if (activeId && navRef.current) {
-      const activeElement = navRef.current.querySelector(
-        `a[href="#${activeId}"]`
-      )
-      if (activeElement) {
-        activeElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest'
-        })
+  // Set active heading
+  const scrollHanlder = useCallback(() => {
+    const scrollPosition = window.scrollY
+    const windowHeight = window.innerHeight
+
+    // Map headings to how much of their "section" is visible
+    const visibilityMap = headingElements.map((heading, index) => {
+      const nextHeading = headingElements[index + 1]
+      const start = heading.offsetTop
+      const end = nextHeading
+        ? nextHeading.offsetTop
+        : document.body.scrollHeight
+      const visibleStart = Math.max(start, scrollPosition)
+      const visibleEnd = Math.min(end, scrollPosition + windowHeight)
+      const visibleHeight = Math.max(0, visibleEnd - visibleStart)
+      const sectionHeight = end - start
+      const ratio = visibleHeight / sectionHeight
+      return {
+        id: heading.id,
+        ratio
       }
-    }
-  }, [activeId])
+    })
 
-  return headings.length === 0 ? null : (
-    <nav
-      ref={navRef}
-      className={`sticky top-30 mt-20 max-h-[calc(100vh-160px)] max-w-[280px] overflow-y-auto rounded-lg bg-white/5 p-4 transition-opacity duration-300 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}>
-      <ul className='space-y-2 text-base'>
-        {headings.map((heading) => (
-          <li
-            key={heading.id}
-            style={{ paddingLeft: `${(heading.level - 1) * 16}px` }}>
-            <a
-              href={`#${heading.id}`}
-              className={`block break-words py-1 transition-colors hover:text-primary-300 ${
-                activeId === heading.id
-                  ? 'font-medium text-primary-300'
-                  : 'text-neutral-400'
-              }`}
-              title={heading.text}
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById(heading.id)?.scrollIntoView({
-                  behavior: 'smooth'
-                })
-              }}>
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    const mostVisible = visibilityMap.sort((a, b) => b.ratio - a.ratio)[0]
+
+    if (mostVisible) {
+      setActiveId(mostVisible.id)
+    }
+  }, [setActiveId, headingElements])
+
+  // Update active heading on scroll and resize
+  useEffect(() => {
+    const content = contentRef.current
+    if (!content) return
+
+    scrollHanlder()
+    window.addEventListener('scroll', scrollHanlder)
+    window.addEventListener('resize', scrollHanlder)
+
+    const resizeObserver = new ResizeObserver(scrollHanlder)
+    resizeObserver.observe(contentRef.current)
+
+    return () => {
+      window.removeEventListener('scroll', scrollHanlder)
+      window.removeEventListener('resize', scrollHanlder)
+
+      resizeObserver.disconnect()
+    }
+  }, [contentRef.current, scrollHanlder])
+
+  return (
+    <>
+      {headingElements.length > 0 && (
+        <nav
+          ref={navRef}
+          className='sticky top-30 max-h-[calc(100vh_-_8rem)] overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
+          <ul className='space-y-2'>
+            {headingElements.map((heading) => (
+              <li
+                key={heading.id}
+                style={{
+                  paddingLeft: `${Number(heading.tagName.charAt(1)) - 1}rem`
+                }}>
+                <a
+                  href={`#${heading.id}`}
+                  className={`block break-words py-1 transition-colors hover:text-primary-300 ${
+                    activeId === heading.id
+                      ? 'font-medium text-primary-300'
+                      : 'text-neutral-400'
+                  }`}
+                  title={heading.textContent || ''}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document.getElementById(heading.id)?.scrollIntoView({
+                      behavior: 'smooth'
+                    })
+                  }}>
+                  {heading.textContent}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </>
   )
 }

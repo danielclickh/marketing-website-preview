@@ -13,7 +13,8 @@ function SeoContainer({
   path,
   robots,
   locale,
-  keywords
+  keywords,
+  schema
 }: SeoMetadata) {
   // Default social image
   let socialImageUrl = `${siteUrl}/images/social_share.png`
@@ -80,6 +81,14 @@ function SeoContainer({
       <meta name='twitter:title' content={title} />
       <meta name='twitter:description' content={description} />
       <meta name='twitter:image' content={socialImageUrl} />
+
+      {/* Schema.org Markup */}
+      {schema && (
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      )}
     </Head>
   )
 }

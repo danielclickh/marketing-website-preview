@@ -1,4 +1,3 @@
-import clapperboard from './assets/clapperboard.png'
 import imageGallery from './assets/gallery.png'
 import imageIconBinary from './assets/icon-binary.svg'
 import imageIconFaq from './assets/icon-faq.svg'
@@ -6,6 +5,7 @@ import imageIconMegaphone from './assets/icon-megaphone.svg'
 import imageIconNetwork from './assets/icon-network.svg'
 import imageOpenhouseLogo from './assets/logo.svg'
 import navigationArrow from './assets/navigation-arrow.svg'
+import playButton from './assets/play-button.svg'
 import speakerAaronKatz from './assets/speaker-aaron-katz.png'
 import speakerAkshayNanavati from './assets/speaker-akshay-nanavati.png'
 import speakerAlanBraithwaite from './assets/speaker-alan-braithwaite.png'
@@ -41,26 +41,28 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import CategorySelector from '@/components/CategorySelector'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
 import MarketingVideoThumbnail from '@/components/MarketingVideoThumbnail'
+import Modal from '@/components/Modal'
 import OpenHouseAccordionItem from '@/components/OpenHouseAccordionItem'
 import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
+import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { limitStringByWord, stripHtmlTags } from '@/lib/utils/strings'
+import { limitStringByWord, slugify, stripHtmlTags } from '@/lib/utils/strings'
 import { BlogPost } from '@/types/blogs'
 import { CommonProps } from '@/types/homepage'
-import { Video } from '@/types/videos'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { isValidElement, Children } from 'react'
 import 'swiper/css'
 import { Navigation } from 'swiper/modules'
@@ -79,20 +81,6 @@ interface OpenHousePageProps extends CommonProps {
       | 'shortDescription'
       | 'content'
       | 'thumbnailPng'
-      | 'publishedAt'
-    >
-  >
-  videos: Array<
-    Pick<
-      Video,
-      | 'id'
-      | 'Slug'
-      | 'VideoID'
-      | 'Title'
-      | 'IntroText'
-      | 'Description'
-      | 'categories'
-      | 'VideoDate'
       | 'publishedAt'
     >
   >
@@ -115,31 +103,15 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
       sort: ['date:DESC', 'publishedAt:DESC']
     })
 
-    const videos: OpenHousePageProps['videos'] = await fetchAll(
-      'marketing-videos',
-      {
-        filters: {
-          tags: {
-            slug: {
-              $eq: 'open-house'
-            }
-          }
-        },
-        populate: ['categories'],
-        sort: ['VideoDate:DESC', 'publishedAt:DESC']
-      }
-    )
-
     return {
       props: {
         seo: {
           title:
-            'Open House User Conference - Free conference in San Francisco, CA.',
+            'Open House 2025, The ClickHouse User Conference - Watch the Sessions.',
           path: '/openhouse',
           image: [{ url: '/images/social-open-house.png' }]
         },
         blogs,
-        videos,
         ...commonProps
       }
     }
@@ -324,15 +296,181 @@ const ALL_SPEAKERS: Array<{
   }
 ]
 
+type Video = {
+  title: string
+  slug?: string
+  youtubeId: string
+  category: string
+}
+
+const VIDEOS: Array<Video> = [
+  {
+    title: 'ClickHouse Open House keynote 2025',
+    slug: 'keynote',
+    youtubeId: 'N_THorP0HbM',
+    category: 'Keynote'
+  },
+  {
+    title: 'Scaling ClickHouse to petabytes of logs at OpenAI',
+    slug: 'openai',
+    youtubeId: 'yIVz0NKwQvA',
+    category: 'Keynote'
+  },
+  {
+    title: 'Weights & Biases + ClickHouse: Powering developer tools for AI',
+    slug: 'weights-and-biases',
+    youtubeId: 'yJJF41oz9Wk',
+    category: 'Keynote'
+  },
+  {
+    title: 'ClickHouse for Real-Time Analytics',
+    youtubeId: 'SnFff0KYwuo',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'Postgres and ClickHouse: the default data stack',
+    youtubeId: 'pwOEYtNtk9k',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'ClickHouse core database innovations for real-time analytics',
+    youtubeId: 'UN0RM56uiFI',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'Tesla-scale metrics with ClickHouse',
+    slug: 'tesla',
+    youtubeId: 'z5t3b3EAc84',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'How Sierra.ai unifies observability & analytics with ClickHouse',
+    slug: 'Sierraai',
+    youtubeId: 'Hr2t7SvzV6A',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'ClickHouse at Exabeam: Scalable search for security analytics',
+    slug: 'exabeam',
+    youtubeId: 'T87D6FTDGX0',
+    category: 'Real-time analytics'
+  },
+  {
+    title: 'ClickHouse observability: Introducing ClickStack',
+    slug: 'clickstack',
+    youtubeId: 'qb87h5ScI5k',
+    category: 'Observability'
+  },
+  {
+    title: 'LogHouse: How ClickHouse built our internal logging platform',
+    slug: 'loghouse',
+    youtubeId: 'PagFmmCziYE',
+    category: 'Observability'
+  },
+  {
+    title: 'How ClickHouse helps Anthropic scale observability',
+    slug: 'anthropic',
+    youtubeId: 'SrLKbzdFEWA',
+    category: 'Observability'
+  },
+  {
+    title: 'Evolutions in Data Warehousing',
+    youtubeId: 'LgtfMhXU8gE',
+    category: 'Data warehousing'
+  },
+  {
+    title: 'ClickHouse and JOINs',
+    youtubeId: 'gd3OyQzB_Fc',
+    category: 'Data warehousing'
+  },
+  {
+    title: 'Lakehouse with ClickHouse',
+    youtubeId: 'V6C6zyR4rq0',
+    category: 'Data warehousing'
+  },
+  {
+    title:
+      'Batch and real-time analytics at Lyft: Powering decisions with ClickHouse',
+    slug: 'lyft',
+    youtubeId: 'DWkuhCBA7B4',
+    category: 'Data warehousing'
+  },
+  {
+    title: 'ClickHouse internal data warehouse',
+    youtubeId: '950P-QEd-rc',
+    category: 'Data warehousing'
+  },
+  {
+    title: 'ClickHouse for AI/ML: An overview',
+    slug: 'clickhouse-for-ai',
+    youtubeId: 'GfvZHSdJ4CU',
+    category: 'AI/ML'
+  },
+  {
+    title: 'How is the AI Made? The Data Behind Language Models',
+    slug: 'alexey',
+    youtubeId: '8yH3rY1fZEA',
+    category: 'AI/ML'
+  },
+  {
+    title: 'MCP for real-time anaytics panel discussion',
+    youtubeId: '-K64C-iKHwM',
+    category: 'AI/ML'
+  },
+  {
+    title: 'Data infrastructure for AI at scale',
+    youtubeId: 'QCrZNqJ9AHU',
+    category: 'Fireside chat'
+  },
+  {
+    title: 'Ramp + ClickHouse',
+    slug: 'ramp',
+    youtubeId: 'Hec3S7_26Mw',
+    category: 'User interviews'
+  },
+  {
+    title: 'Huntress + ClickHouse',
+    slug: 'huntress',
+    youtubeId: 'h-dkVkEh5ec',
+    category: 'User interviews'
+  },
+  {
+    title: 'Klaviyo + ClickHouse',
+    slug: 'klaviyo',
+    youtubeId: '3K8Cz5dWwl0',
+    category: 'User interviews'
+  },
+  {
+    title: 'RunReveal + ClickHouse',
+    slug: 'runreveal',
+    youtubeId: 'N2z_a9GnACA',
+    category: 'User interviews'
+  },
+  {
+    title: 'Attentive + ClickHouse',
+    slug: 'attentive',
+    youtubeId: '4hFHdGdwvAs',
+    category: 'User interviews'
+  },
+  {
+    title: 'Blacksmith + ClickHouse',
+    slug: 'blacksmith',
+    youtubeId: 'dSwT5sP1Ryw',
+    category: 'User interviews'
+  }
+]
+
 const AGENDA: Array<{
   time: string
   title: string
   description?: string | React.ReactNode
+  videoCategory?: string
 }> = [
   { time: '8:00 a.m.', title: 'Registration and light refreshments' },
   {
     time: '9:00 a.m.',
     title: 'Keynote: Product vision and roadmap',
+    videoCategory: 'Keynote',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -392,6 +530,7 @@ const AGENDA: Array<{
   {
     time: '11:00 a.m.',
     title: 'Real-time analytics: technical deep dives and user stories',
+    videoCategory: 'Real-time analytics',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -454,6 +593,7 @@ const AGENDA: Array<{
   {
     time: '1:00 p.m.',
     title: 'Observability: technical deep dives and user stories',
+    videoCategory: 'Observability',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -492,6 +632,7 @@ const AGENDA: Array<{
   {
     time: '2:00 p.m.',
     title: 'Data warehousing: technical deep dives and user stories',
+    videoCategory: 'Data warehousing',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -544,6 +685,7 @@ const AGENDA: Array<{
   {
     time: '3:30 p.m.',
     title: 'AI/ML: technical deep dives and user stories',
+    videoCategory: 'AI/ML',
     description: (
       <>
         <ul className='list-disc space-y-2 pl-4'>
@@ -593,6 +735,7 @@ const AGENDA: Array<{
   {
     time: '4:30 p.m.',
     title: 'Fireside chat',
+    videoCategory: 'Fireside chat',
     description: (
       <p>
         As AI and ML workloads explode, data requirements are evolving quickly.
@@ -616,12 +759,7 @@ const AGENDA: Array<{
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
-export default function Page({
-  seo,
-  footerData,
-  blogs,
-  videos
-}: OpenHousePageProps) {
+export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
@@ -666,6 +804,87 @@ export default function Page({
     },
     [blogsRef]
   )
+
+  const [videoFilter, setVideoFilter] = useState<null | string>(null)
+  const [activeVideo, setActiveVideo] = useState<null | Video>(null)
+  const videosRef = useRef<HTMLDivElement | null>(null)
+  const scrollToVideos = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>, category?: string | null) => {
+      const videosEl = videosRef.current
+      if (!videosEl) return
+      if (category !== undefined) setVideoFilter(category)
+      event.preventDefault()
+      videosEl.scrollIntoView({
+        behavior: 'smooth'
+      })
+    },
+    [videosRef, setVideoFilter]
+  )
+
+  const videoCategoryList = useMemo(() => {
+    const unique = [...new Set(VIDEOS.map((video) => video.category))]
+
+    const list = unique.map((category) => ({
+      text: category,
+      onClick: () => {
+        setVideoFilter(category)
+      },
+      selected: videoFilter === category
+    }))
+
+    list.unshift({
+      text: 'View all',
+      onClick: () => {
+        setVideoFilter(null)
+      },
+      selected: !videoFilter
+    })
+
+    return list
+  }, [VIDEOS, videoFilter, setVideoFilter])
+
+  const filteredVideos = useMemo(() => {
+    return videoFilter
+      ? VIDEOS.filter((video) => video.category === videoFilter)
+      : VIDEOS
+  }, [VIDEOS, videoFilter])
+
+  const setFeaturedVideoAndUrl = useCallback(
+    (video: Video | null) => {
+      setActiveVideo(video)
+      const newUrl = new URL(window.location.toString())
+      newUrl.hash = video ? `video-${video.slug || slugify(video.title)}` : ''
+      window.history.replaceState(null, '', newUrl.toString())
+    },
+    [setActiveVideo]
+  )
+
+  const hashChangeHandler = useCallback(() => {
+    const hashValue = window.location.hash.replace(/^#/, '')
+
+    if (hashValue.length && hashValue.startsWith('video-')) {
+      const videoSlug = hashValue.replace(/^video-/, '')
+      const matchingVideo = VIDEOS.find(
+        (video) => (video.slug || slugify(video.title)) === videoSlug
+      )
+      if (matchingVideo) {
+        setActiveVideo(matchingVideo)
+        return
+      }
+    }
+
+    if (activeVideo) {
+      setActiveVideo(null)
+    }
+  }, [setActiveVideo, activeVideo, VIDEOS])
+
+  useEffect(() => {
+    hashChangeHandler()
+    window.addEventListener('hashchange', hashChangeHandler)
+    return () => {
+      window.removeEventListener('hashchange', hashChangeHandler)
+    }
+  }, [])
 
   return (
     <>
@@ -793,73 +1012,89 @@ export default function Page({
               </section>
 
               {/* Videos */}
-              <section className='relative bg-neutral-900 py-10 text-white md:py-20 xl:py-24'>
+              <section
+                id='videos'
+                className='relative bg-neutral-900 py-10 text-white md:py-20 xl:py-24'>
                 <div
                   className={`absolute -top-8 left-0 right-0 h-8 bg-neutral-900 ${styles.textureMaskTop}`}
                 />
                 <div
                   className={`absolute -bottom-8 left-0 right-0 h-8 bg-neutral-900 ${styles.textureMaskBottom}`}
                 />
-                <div className='overflow-hidden'>
-                  <div className='section-container'>
-                    {videos.length > 0 ? (
+                <Modal
+                  isOpen={!!activeVideo}
+                  onClose={() => setFeaturedVideoAndUrl(null)}>
+                  <div className='w-full flex-shrink-0'>
+                    {activeVideo && (
                       <>
-                        <h2 className='mb-10 text-center text-4xl md:mb-14 lg:mb-20'>
-                          Open House videos
-                        </h2>
-                        <ContentCarousel mode='dark'>
-                          {videos.map((video, videoIndex) => {
-                            return (
-                              <div
-                                key={videoIndex}
-                                className='group/videoItem relative flex h-full flex-col bg-white text-black'>
-                                <MarketingVideoThumbnail
-                                  videoId={video.VideoID}
-                                />
-                                <div className='flex flex-1 flex-col p-4 lg:p-6'>
-                                  <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
-                                    {video.categories[0]?.CategoryName ||
-                                      'Video'}{' '}
-                                    <span>·</span>
-                                    {convertDateToString(
-                                      video.VideoDate || video.publishedAt
-                                    )}
-                                  </p>
-                                  <h3 className='mb-3 text-xl'>
-                                    <Link href={`/videos/${video.Slug}`}>
-                                      <span className='absolute inset-0' />
-                                      {video.Title}
-                                    </Link>
-                                  </h3>
-                                  <strong className='mt-auto group-hover/videoItem:underline'>
-                                    Watch now
-                                  </strong>
-                                </div>
-                              </div>
-                            )
-                          })}
-                        </ContentCarousel>
+                        <h3 className='mb-6 mt-1 text-2xl md:-mt-1'>
+                          {activeVideo.title}
+                        </h3>
+                        <ResponsiveEmbed>
+                          <iframe
+                            src={`https://www.youtube-nocookie.com/embed/${activeVideo.youtubeId}?rel=0&autoplay=1`}
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                            allowFullScreen
+                          />
+                        </ResponsiveEmbed>
                       </>
-                    ) : (
-                      <div className='py-4 text-center'>
-                        <Image
-                          src={clapperboard}
-                          width={322 / 2}
-                          height={298 / 2}
-                          alt='Clapperboard'
-                          className='mx-auto mb-10 h-auto w-28 md:mb-12 md:w-40'
-                        />
-                        <h2 className='mb-8 text-4xl'>
-                          Open House videos are on the way
-                        </h2>
-                        <p className='text-balance text-lg md:text-2xl'>
-                          We’re curating the best moments to share with you.{' '}
-                          <br />
-                          Check back soon to watch the highlights and relive the
-                          energy.
-                        </p>
-                      </div>
                     )}
+                  </div>
+                </Modal>
+                <div className='overflow-hidden' ref={videosRef}>
+                  <div className='section-container'>
+                    <h2 className='mb-10 text-center text-4xl'>
+                      Open House videos
+                    </h2>
+                    <CategorySelector
+                      className='mb-10 md:mb-14 lg:mb-20'
+                      options={videoCategoryList}
+                      activeClassName='bg-ch-yellow text-neutral-800 border-ch-yellow'
+                      inactiveClassName='text-neutral-0 border-ch-yellow/30 hover:border-ch-yellow'
+                    />
+                    <ContentCarousel mode='dark'>
+                      {filteredVideos.map((video, videoIndex) => {
+                        return (
+                          <div
+                            key={videoIndex}
+                            className='group/videoItem relative flex h-full flex-col bg-white text-black'>
+                            <div className='relative'>
+                              <MarketingVideoThumbnail
+                                videoId={video.youtubeId}
+                                className='z-0'
+                              />
+                              <Image
+                                src={playButton}
+                                width={89}
+                                height={89}
+                                alt='Play'
+                                className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white transition-transform group-hover/videoItem:scale-105'
+                              />
+                            </div>
+                            <div className='flex flex-1 flex-col p-4 lg:p-6'>
+                              <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
+                                {video.category}
+                              </p>
+                              <h3 className='mb-3 text-xl'>
+                                <Link
+                                  target='_blank'
+                                  href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+                                  onClick={(event) => {
+                                    event.preventDefault()
+                                    setFeaturedVideoAndUrl(video)
+                                  }}>
+                                  <span className='absolute inset-0 z-10' />
+                                  {video.title}
+                                </Link>
+                              </h3>
+                              <strong className='mt-auto group-hover/videoItem:underline'>
+                                Watch now
+                              </strong>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </ContentCarousel>
                   </div>
                 </div>
               </section>
@@ -993,7 +1228,32 @@ export default function Page({
                       key={rowIndex}
                       title={row.title}
                       time={row.time}>
-                      {row.description}
+                      {(row.description ||
+                        (row.videoCategory && VIDEOS.length > 0)) && (
+                        <>
+                          {row.description}
+                          {row.videoCategory && VIDEOS.length > 0 && (
+                            <button
+                              onClick={(event) =>
+                                scrollToVideos(event, row.videoCategory)
+                              }
+                              className='group mt-6 inline-flex items-center rounded-full border-2 border-neutral-950 bg-neutral-950 text-white transition-colors hover:bg-transparent hover:text-neutral-950'>
+                              <Image
+                                src={playButton}
+                                width={50}
+                                height={50}
+                                alt='Icon'
+                                className='rounded-full border-2 border-white'
+                              />
+                              <FontSohneBreit
+                                as='span'
+                                className='inline-block pl-4 pr-6'>
+                                Watch session replays
+                              </FontSohneBreit>
+                            </button>
+                          )}
+                        </>
+                      )}
                     </AgendaItem>
                   )
                 })}

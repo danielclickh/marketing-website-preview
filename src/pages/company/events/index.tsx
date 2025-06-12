@@ -12,6 +12,7 @@ import {
   getUnlistedFilters
 } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateEventsArchiveSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventType } from '@/types/events'
@@ -19,7 +20,44 @@ import { NewsAndEventsData, EventsPageProps } from '@/types/newsEvents'
 import { CalendarIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+
+const CATEGORIES: Array<{
+  label: string
+  value: null | string
+  aliases: Array<string>
+}> = [
+  {
+    label: 'View all',
+    value: null,
+    aliases: []
+  },
+  {
+    label: 'Event',
+    value: 'Event',
+    aliases: []
+  },
+  {
+    label: 'Live Training',
+    value: 'Live Training',
+    aliases: ['Free Training', 'Paid Training']
+  },
+  {
+    label: 'Meetup',
+    value: 'Meetup',
+    aliases: []
+  },
+  {
+    label: 'Webinar',
+    value: 'Webinar',
+    aliases: []
+  },
+  {
+    label: 'On-Demand Webinar',
+    value: 'On-Demand Webinar',
+    aliases: []
+  }
+]
 
 export const getStaticProps: GetStaticProps<EventsPageProps> =
   async function getStaticProps() {
@@ -63,6 +101,7 @@ export const getStaticProps: GetStaticProps<EventsPageProps> =
 
     seo.title = 'Events - ClickHouse'
     seo.path = '/company/events'
+    seo.schema = generateEventsArchiveSchema({ path: '/company/events' })
 
     let featuredEvent: EventType | undefined
     let featuredEventIndex = allEvents.findIndex((e) => e.featured)
@@ -133,6 +172,9 @@ export default function News({
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     category ? category.toString() : null
   )
+  const selectedCategoryObject = useMemo(() => {
+    return CATEGORIES.find((category) => category.value === selectedCategory)
+  }, [selectedCategory, CATEGORIES])
 
   useEffect(() => {
     if (category) {
@@ -140,8 +182,8 @@ export default function News({
     }
   }, [category])
 
-  const handleCategoryClick = (category: string) => {
-    if (category === 'View all') {
+  const handleCategoryClick = (category: null | string) => {
+    if (!category) {
       setSelectedCategory(null)
       router.push(
         {
@@ -162,9 +204,16 @@ export default function News({
     }
   }
 
-  const filteredEvents = selectedCategory
-    ? allEvents.filter((event) => event.category === selectedCategory)
-    : allEvents
+  const filteredEvents = useMemo(() => {
+    return selectedCategoryObject?.value
+      ? allEvents.filter((event) => {
+          return [
+            selectedCategoryObject.value,
+            ...selectedCategoryObject.aliases
+          ].includes(event.category)
+        })
+      : allEvents
+  }, [allEvents, selectedCategoryObject])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -261,38 +310,15 @@ export default function News({
           </h2>
           <CategorySelector
             className='mb-6 lg:mb-0'
-            options={[
-              {
-                text: 'View all',
-                selected: selectedCategory === null,
-                onClick: () => handleCategoryClick('View all')
-              },
-              {
-                text: 'Event',
-                selected: selectedCategory === 'Event',
-                onClick: () => handleCategoryClick('Event')
-              },
-              {
-                text: 'Free Training',
-                selected: selectedCategory === 'Free Training',
-                onClick: () => handleCategoryClick('Free Training')
-              },
-              {
-                text: 'Meetup',
-                selected: selectedCategory === 'Meetup',
-                onClick: () => handleCategoryClick('Meetup')
-              },
-              {
-                text: 'Webinar',
-                selected: selectedCategory === 'Webinar',
-                onClick: () => handleCategoryClick('Webinar')
-              },
-              {
-                text: 'On-Demand Webinar',
-                selected: selectedCategory === 'On-Demand Webinar',
-                onClick: () => handleCategoryClick('On-Demand Webinar')
+            options={CATEGORIES.map((category) => {
+              return {
+                text: category.label,
+                selected: [category.value, ...category.aliases].includes(
+                  selectedCategory
+                ),
+                onClick: () => handleCategoryClick(category.value)
               }
-            ]}
+            })}
           />
         </div>
 

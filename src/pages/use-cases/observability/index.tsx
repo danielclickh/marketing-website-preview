@@ -117,7 +117,7 @@ export default function ClickHouseServerPage({
                 target='_self'
                 linkClass='w-full md:w-auto'
                 className='w-full px-10 md:w-auto'>
-                Talk to sales
+                Contact sales
               </CUIButton>
             </div>
           </div>

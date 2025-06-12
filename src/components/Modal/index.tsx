@@ -30,9 +30,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
       className={`fixed left-0 right-0 top-0 z-50 flex h-dvh overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
         isOpen ? '' : 'pointer-events-none opacity-0'
       }`}>
-      <div className='m-auto p-4'>
+      <div className='m-auto flex-1 p-4'>
         <div
-          className='relative w-full max-w-2xl rounded-lg bg-[#323232] p-8 shadow-2xl'
+          className='relative mx-auto w-full max-w-2xl rounded-lg bg-[#323232] p-4 shadow-2xl md:p-6'
           ref={innerRef}>
           <button
             className='absolute right-4 top-4 opacity-60 transition-opacity hover:opacity-80'
