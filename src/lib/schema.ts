@@ -18,6 +18,7 @@ import {
 const defaultOrganization: Organization = {
   '@type': 'Organization',
   name: 'ClickHouse',
+  url: absoluteUrl('/'),
   logo: {
     '@type': 'ImageObject',
     url: absoluteUrl(logo.src)
@@ -90,23 +91,51 @@ export const generateInnerEventSchema = ({
   name,
   description,
   startDate,
-  imageUrl
+  imageUrl,
+  path,
+  locationCity,
+  locationCountry
 }: {
   name: string
   description: string
   startDate: string
   imageUrl: string
-}): WithContext<Event> => ({
-  '@context': 'https://schema.org',
-  '@type': 'Event',
-  name,
-  startDate,
-  //eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
-  eventStatus: 'https://schema.org/EventScheduled',
-  image: imageUrl,
-  description,
-  organizer: defaultOrganization
-})
+  path: string
+  locationCity: string
+  locationCountry: string
+}): WithContext<Event> => {
+  const virtualTypes = ['online', 'virtual']
+  const isVirtual =
+    virtualTypes.includes(locationCity.trim().toLowerCase()) ||
+    virtualTypes.includes(locationCountry.trim().toLowerCase())
+
+  const location: Event['location'] = isVirtual
+    ? {
+        '@type': 'VirtualLocation',
+        url: absoluteUrl(path)
+      }
+    : {
+        '@type': 'Place',
+        name: `${locationCity},  ${locationCountry}`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: `${locationCity}, ${locationCountry}`
+        }
+      }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name,
+    startDate,
+    //eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+    image: imageUrl,
+    description,
+    organizer: defaultOrganization,
+    location
+  }
+}
 
 export const generateVideosArchiveSchema = ({
   path
