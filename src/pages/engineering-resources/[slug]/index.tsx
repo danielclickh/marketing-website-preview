@@ -113,8 +113,9 @@ export default function Page({
                 <Image
                   src={engResource.image}
                   alt={engResource.title}
+                  width={1200}
                   height={630}
-                  className='w-full'
+                  className='mb-8 w-full'
                 />
               )}
               <Markdown className='rich-text-content leading-6' allowHeaderLink>

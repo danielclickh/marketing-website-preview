@@ -1,4 +1,4 @@
-import { getRelativeMediaUrl } from '@/lib/api/strapi'
+import { getProxiedMediaUrl } from '@/lib/api/strapi'
 import { useState, useEffect } from 'react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
@@ -27,7 +27,7 @@ export default function BlogImage({
         <img
           loading='lazy'
           alt={alt ?? 'Markdown Image'}
-          src={getRelativeMediaUrl(preview ?? src)}
+          src={getProxiedMediaUrl(preview ?? src)}
           width={width}
         />
       </Zoom>
