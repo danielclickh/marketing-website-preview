@@ -1,5 +1,5 @@
 import { PricingV2 } from './types'
-import { absoluteUrl } from '@/lib/next'
+import { absoluteUrl, relativeUrl } from '@/lib/next'
 import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
 
@@ -49,13 +49,11 @@ export function getAbsoluteMediaUrl(path: string | null = '') {
 export function getRelativeMediaUrl(path: string) {
   path = getAbsoluteMediaUrl(path)
 
-  const base =
-    process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL || `${strapiApiUrl}/uploads/`
+  const base = process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL || strapiApiUrl
 
   if (base.trim().length && path.startsWith(base)) {
     path = path.replace(base, '')
     path = path.replace(/^\//, '')
-    path = `/uploads/${path}`
   }
 
   return path
