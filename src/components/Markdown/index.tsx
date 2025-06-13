@@ -13,7 +13,9 @@ import {
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug-custom-id'
+import remarkDirective from 'remark-directive'
 import remarkGfm from 'remark-gfm'
+import { visit } from 'unist-util-visit'
 
 const commonPlugIns: PluggableList = [
   rehypeRaw,
@@ -104,10 +106,28 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
   }
 }
 
+function directivePlugin() {
+  return (tree: any) => {
+    visit(tree, (node) => {
+      if (
+        node.type === 'textDirective' ||
+        node.type === 'containerDirective' ||
+        node.type === 'leafDirective'
+      ) {
+        const data = node.data || (node.data = {})
+
+        data.hName = node.name // This is the tag that ReactMarkdown will "see" in components map.
+        data.hProperties = node.attributes || {} // These are the props you can pass to your component.
+      }
+    })
+  }
+}
+
 interface Props extends ReactMarkdownOptions {
   encloseByDiv?: boolean
   ignoreAnchor?: boolean
   allowHeaderLink?: boolean
+  allowDirectives?: boolean
 }
 
 const getIgnoreAnchor = () => ({
@@ -123,6 +143,7 @@ function Markdown({
   rehypePlugins = [],
   remarkPlugins = [],
   allowHeaderLink = false,
+  allowDirectives = false,
   ...props
 }: Props) {
   const newComponents = getDefaultComponents({
@@ -144,6 +165,11 @@ function Markdown({
   }
 
   children = sanitizeMarkdown(children)
+
+  if (allowDirectives) {
+    remarkPlugins.push(remarkDirective)
+    remarkPlugins.push(directivePlugin)
+  }
 
   rehypePlugins = commonPlugIns.concat(rehypePlugins)
   remarkPlugins.push(remarkGfm)

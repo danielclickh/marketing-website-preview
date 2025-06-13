@@ -17,4 +17,13 @@ export interface BlogProps extends BlogPost, CommonProps {
     description: string
     image: StrapiImageType
   }
+  enableSidebarGlobalCta: boolean
+  globalCta?: null | {
+    content: string
+    link: {
+      href: string
+      text: string
+      target: '_self' | '_blank'
+    }
+  }
 }

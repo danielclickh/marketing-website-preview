@@ -158,6 +158,11 @@ const CONTENT_TYPE_HANDLERS: Record<
             ShowCloudCTAFooter: {
               $eq: true
             }
+          },
+          {
+            enableSidebarGlobalCta: {
+              $eq: true
+            }
           }
         ]
       },
