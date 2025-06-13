@@ -95,7 +95,7 @@ export default function TableOfContents({
       {headingElements.length > 0 && (
         <nav
           ref={navRef}
-          className='sticky top-30 max-h-[calc(100vh_-_8rem)] overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
+          className='overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
           <ul className='space-y-2'>
             {headingElements.map((heading) => (
               <li

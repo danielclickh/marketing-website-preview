@@ -13,7 +13,9 @@ import {
 import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug-custom-id'
+import remarkDirective from 'remark-directive'
 import remarkGfm from 'remark-gfm'
+import { visit } from 'unist-util-visit'
 
 const commonPlugIns: PluggableList = [
   rehypeRaw,
@@ -145,8 +147,27 @@ function Markdown({
 
   children = sanitizeMarkdown(children)
 
+  function directivePlugin() {
+    return (tree: any) => {
+      visit(tree, (node) => {
+        if (
+          node.type === 'textDirective' ||
+          node.type === 'containerDirective' ||
+          node.type === 'leafDirective'
+        ) {
+          const data = node.data || (node.data = {})
+
+          data.hName = node.name // This is the tag that ReactMarkdown will "see" in components map.
+          data.hProperties = node.attributes || {} // These are the props you can pass to your component.
+        }
+      })
+    }
+  }
+
   rehypePlugins = commonPlugIns.concat(rehypePlugins)
   remarkPlugins.push(remarkGfm)
+  remarkPlugins.push(remarkDirective)
+  remarkPlugins.push(directivePlugin)
   if (encloseByDiv) {
     rehypePlugins.push([rehypeHighlight, HighLightOptions])
   }

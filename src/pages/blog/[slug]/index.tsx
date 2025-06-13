@@ -1,3 +1,4 @@
+import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -24,7 +25,7 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateBlogArticleSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { slugify } from '@/lib/utils/strings'
+import { camel, slugify } from '@/lib/utils/strings'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
@@ -69,7 +70,12 @@ export const getStaticProps: GetStaticProps<BlogProps> =
     }
 
     const cloudCtaContent = await findOne('blog', {
-      populate: ['CloudCTAHeader', 'CloudCTAFooter']
+      populate: [
+        'CloudCTAHeader',
+        'CloudCTAFooter',
+        'globalCta',
+        'globalCta.link'
+      ]
     })
 
     const blogsParams = {
@@ -179,10 +185,43 @@ export default function BlogPage({
   CloudCTAHeader,
   seo,
   table_contents_headers,
-  promotion
+  promotion,
+  enableSidebarGlobalCta,
+  globalCta
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
   const contentRef = useRef<null | HTMLDivElement>(null)
+
+  const GlobalBlogCta = ({ location }: { location: string }) => {
+    return (
+      <>
+        {globalCta && (
+          <SimpleCtaCard
+            link={globalCta.link}
+            galaxyEventName={`blogPage.${location}GlobalCta.${camel(globalCta.link.text)}`}>
+            <Markdown allowHeaderLink={false}>{globalCta.content}</Markdown>
+          </SimpleCtaCard>
+        )}
+      </>
+    )
+  }
+
+  const markdownDirectives: Record<string, () => React.ReactNode> = {
+    'global-blog-cta': () => (
+      <div className='my-6'>
+        <GlobalBlogCta location='content' />
+      </div>
+    )
+  }
+
+  // Ensure correct directive syntax is used
+  Object.keys(markdownDirectives).forEach((directiveKey) => {
+    content = content.replaceAll(
+      `:::${directiveKey}:::`,
+      `:::${directiveKey}\n:::`
+    )
+  })
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
@@ -246,7 +285,8 @@ export default function BlogPage({
                 <div className='flex flex-col lg:flex-row' ref={contentRef}>
                   <Markdown
                     className='rich-text-content leading-6'
-                    allowHeaderLink>
+                    allowHeaderLink={true}
+                    components={markdownDirectives}>
                     {content}
                   </Markdown>
                 </div>
@@ -282,10 +322,17 @@ export default function BlogPage({
 
             {/* Blog sidebar */}
             <aside className='order-2 hidden lg:order-none xl:col-span-3 xl:block'>
-              <TableOfContents
-                contentRef={contentRef}
-                headersSelector={table_contents_headers}
-              />
+              <div className='sticky top-30 flex max-h-[calc(100vh_-_9rem)] flex-col gap-6'>
+                <TableOfContents
+                  contentRef={contentRef}
+                  headersSelector={table_contents_headers}
+                />
+                {enableSidebarGlobalCta && (
+                  <div className='flex-shrink-0'>
+                    <GlobalBlogCta location='sidebar' />
+                  </div>
+                )}
+              </div>
             </aside>
 
             {/* Blog footer */}
