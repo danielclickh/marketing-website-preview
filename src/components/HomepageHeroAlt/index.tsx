@@ -66,8 +66,23 @@ export default function HomepageHeroAlt({
                 className='w-full !border-black !text-black !transition-all hover:!text-white'>
                 Download open-source
               </CUIButton>
-            </div>
-          
+            </div>{' '}
+            <LogoAnnouncementLink
+              className='mt-6'
+              href='/videos?category=open-house&loc=homepage-hero'
+              logo={{
+                src: '/images/open-house-black.svg',
+                alt: 'Open House',
+                width: 60,
+                height: 60
+              }}>
+              Open House videos: ClickHouse deep dives, customer stories and
+              user interviews.{' '}
+              <span className='underline group-hover:decoration-2'>
+                Watch now
+              </span>
+              !
+            </LogoAnnouncementLink>
           </div>
         </div>
 

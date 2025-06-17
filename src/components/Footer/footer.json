@@ -1,73 +1,62 @@
 [
   {
-    "id": 5,
     "title": "Products",
     "items": [
       {
-        "id": 17,
         "name": "ClickHouse Cloud",
         "href": "/cloud",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.clickHouseCloudSelect"
       },
       {
-        "id": 15,
         "name": "ClickHouse",
         "href": "/clickhouse",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.clickHouseSelect"
       },
       {
-        "id": 300,
         "name": "Bring Your Own Cloud",
         "href": "/cloud/bring-your-own-cloud",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.byocSelect"
       },
       {
-        "id": 301,
         "name": "ClickHouse Government",
         "href": "/government",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.governmentSelect"
       },
       {
-        "id": 22,
         "name": "ClickHouse Keeper",
         "href": "/clickhouse/keeper",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.keeperSelect"
       },
       {
-        "id": 20,
         "name": "ClickPipes",
         "href": "/cloud/clickpipes",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.clickpipesSelect"
       },
       {
-        "id": 18,
         "name": "Integrations",
         "href": "/integrations",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.integrationsSelect"
       },
       {
-        "id": 500,
         "name": "chDB",
         "href": "/chdb",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.chdbSelect"
       },
       {
-        "id": 400,
         "name": "Trust center",
         "href": "https://trust.clickhouse.com",
         "target": "_blank",
         "galaxyEvent": "footerNav.productMenu.trustCenterSelect"
       },
       {
-        "id": 200,
         "name": "Pricing",
         "href": "/pricing",
         "target": "_self",
@@ -76,122 +65,104 @@
     ]
   },
   {
-    "id": 4,
     "title": "Resources",
     "items": [
       {
-        "id": 16,
         "name": "Documentation",
         "href": "https://clickhouse.com/docs",
         "target": "_blank",
         "galaxyEvent": "footerNav.resourcesMenu.docsSelect"
       },
       {
-        "id": 13,
         "name": "Training",
         "href": "/learn/",
         "target": "_self",
         "galaxyEvent": "footerNav.resourcesMenu.trainingSelect"
       },
       {
-        "id": 14,
         "name": "Support",
         "href": "/support/program",
         "target": "_self",
         "galaxyEvent": "footerNav.resourcesMenu.supportSelect"
       },
       {
-        "id": 18,
         "name": "Benchmarks",
         "href": "https://benchmark.clickhouse.com",
         "target": "_blank",
         "galaxyEvent": "footerNav.resourcesMenu.benchmarkSelect"
       },
       {
-        "id": 19,
         "name": "Use cases",
         "href": "/use-cases",
         "target": "_self",
         "galaxyEvent": "footerNav.resourcesMenu.useCasesSelect"
       },
       {
-        "id": 20,
         "name": "Videos",
         "href": "/videos",
         "target": "_self",
         "galaxyEvent": "footerNav.resourcesMenu.videosSelect"
       },
       {
-        "id": 22,
         "name": "Demos",
         "href": "/demos",
         "target": "_self",
         "galaxyEvent": "footerNav.resourcesMenu.demosSelect"
       },
       {
-        "id": 123,
         "name": "Real-time data warehouse",
         "href": "/real-time-data-warehouse",
         "target": "_self",
         "galaxyEvent": "footerNav.productMenu.realtimeDWSelect"
       },
       {
-        "id": 21,
-        "name": "Site map",
-        "href": "/sitemap",
+        "name": "Open House videos",
+        "href": "/videos?category=open-house",
         "target": "_self",
-        "galaxyEvent": "footerNav.resourcesMenu.siteMapSelect"
+        "galaxyEvent": "footerNav.resourcesMenu.openHouseVideosSelect"
       }
     ]
   },
   {
-    "id": 6,
     "title": "Company",
     "items": [
       {
-        "id": 20,
         "name": "Blog",
         "href": "/blog",
         "target": "_self",
         "galaxyEvent": "footerNav.companyMenu.blogSelect"
       },
       {
-        "id": 21,
         "name": "Our story",
         "href": "/company/our-story",
         "target": "_self",
         "galaxyEvent": "footerNav.companyMenu.ourStorySelect"
       },
       {
-        "id": 22,
         "name": "Careers",
         "href": "/company/careers",
         "target": "_self",
         "galaxyEvent": "footerNav.companyMenu.careersSelect"
       },
       {
-        "id": 23,
         "name": "Contact us",
         "href": "/company/contact?loc=footer",
         "target": "_self",
         "galaxyEvent": "footerNav.companyMenu.contactSelect"
       },
       {
-        "id": 26,
         "name": "Events",
         "href": "/company/events",
         "target": "_self",
         "galaxyEvent": "footerNav.companyMenu.eventsSelect"
       },
       {
-        "id": 262,
         "name": "News",
         "href": "/company/news",
         "target": "_self",
         "galaxyEvent": "footerNav.companyMenu.newsSelect"
       },
       {
-        "id": 27,
         "name": "Media",
         "href": "/media",
         "target": "_blank",
@@ -200,53 +171,45 @@
     ]
   },
   {
-    "id": 7,
     "title": "Join our community",
     "items": [
       {
-        "id": 20,
         "name": "GitHub",
         "href": "https://github.com/ClickHouse/ClickHouse",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.gitHubSelect"
       },
       {
-        "id": 21,
         "name": "Slack",
         "href": "/slack",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.slackSelect"
       },
       {
-        "id": 22,
         "name": "LinkedIn",
         "href": "https://www.linkedin.com/company/clickhouseinc",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.linkedInSelect"
       },
       {
-        "id": 22,
         "name": "X",
         "href": "https://x.com/ClickhouseDB",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.twitterSelect"
       },
       {
-        "id": 23,
         "name": "Bluesky",
         "href": "https://bsky.app/profile/clickhouse.com",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.blueSkySelect"
       },
       {
-        "id": 24,
         "name": "Telegram",
         "href": "https://telegram.me/clickhouse_en",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.telegramSelect"
       },
       {
-        "id": 25,
         "name": "Meetup",
         "href": "https://www.meetup.com/pro/clickhouse",
         "target": "_blank",
@@ -255,32 +218,27 @@
     ]
   },
   {
-    "id": 80,
     "title": "Comparisons",
     "items": [
       {
-        "id": 30,
         "name": "BigQuery",
         "href": "/comparison/bigquery",
         "target": "_self",
         "galaxyEvent": "footerNav.comparisonsMenu.bigQuerySelect"
       },
       {
-        "id": 10,
         "name": "PostgreSQL",
         "href": "/comparison/postgresql",
         "target": "_self",
         "galaxyEvent": "footerNav.comparisonsMenu.postgresSelect"
       },
       {
-        "id": 20,
         "name": "Redshift",
         "href": "/comparison/redshift",
         "target": "_self",
         "galaxyEvent": "footerNav.comparisonsMenu.redshiftSelect"
       },
       {
-        "id": 40,
         "name": "Snowflake",
         "href": "/comparison/snowflake",
         "target": "_self",
@@ -289,18 +247,15 @@
     ]
   },
   {
-    "id": 83,
     "title": "Partners",
     "items": [
       {
-        "id": 84,
         "name": "AWS",
         "href": "/partners/aws",
         "target": "_self",
         "galaxyEvent": "footerNav.partnersMenu.awsSelect"
       },
       {
-        "id": 85,
         "name": "Azure",
         "href": "/partners/azure",
         "target": "_self",
