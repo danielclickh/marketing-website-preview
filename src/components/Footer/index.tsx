@@ -30,8 +30,8 @@ export default function Footer({
                     {topMenu.title}
                   </h3>
                   <ul className='flex flex-col'>
-                    {topMenu.items.map((item) => (
-                      <li key={item.id}>
+                    {topMenu.items.map((item, itemIndex) => (
+                      <li key={itemIndex}>
                         <FooterLink
                           {...item}
                           text={item.name}
@@ -48,8 +48,8 @@ export default function Footer({
                         </h3>
                         {topLevelFooterMenu
                           .find((m) => m.title === 'Partners')
-                          ?.items.map((item) => (
-                            <li key={item.id}>
+                          ?.items.map((item, itemIndex) => (
+                            <li key={itemIndex}>
                               <FooterLink
                                 {...item}
                                 text={item.name}
