@@ -1,15 +1,17 @@
 import { StrapiImageUrl } from '../../../StrapiElements'
 import { StrapiImageType } from '@/lib/api/strapi/types'
+import { slugify } from '@/lib/utils/strings'
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { isEqual } from 'lodash'
-import { memo, useMemo } from 'react'
+import { Fragment, memo, useMemo } from 'react'
 
 export type Option = {
   value: any
   label: string | React.ReactNode
   disabled?: boolean
   icon?: StrapiImageType | null
+  group?: string | null
 }
 export type Options = Array<Option>
 
@@ -57,6 +59,29 @@ const Select = memo(function Select({
   maxHeight,
   placeholder = ''
 }: SelectProps) {
+  const groupedOptions = useMemo(() => {
+    const grouped: Array<{
+      key: string
+      label: string
+      options: Array<Option>
+    }> = []
+    options.forEach((option) => {
+      const groupName = (option?.group || '').trim()
+      const groupKey = slugify(groupName)
+
+      let group = grouped.find((item) => item.key === groupKey)
+
+      if (!group) {
+        group = { key: groupKey, label: groupName, options: [] }
+        grouped.push(group)
+      }
+
+      group.options.push(option)
+    })
+
+    return grouped
+  }, [options])
+
   const selectedOption = useMemo(() => {
     return options.find((option) => isEqual(option.value, value))
   }, [options, value])
@@ -90,22 +115,33 @@ const Select = memo(function Select({
         <Listbox.Options
           style={{ maxHeight }}
           className='absolute z-50 -mt-1 w-full overflow-auto rounded-md rounded-t-none border border-t-0 border-primary-300 bg-neutral-725 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-          {options.map((item, index) => (
-            <Listbox.Option
-              key={index}
-              value={item.value}
-              disabled={item.disabled}
-              className='hover:bg-neutral-700'>
-              {({ selected, disabled }) => (
-                <SelectOption
-                  label={item.label}
-                  selected={selected}
-                  disabled={disabled}
-                  icon={item.icon}
-                />
-              )}
-            </Listbox.Option>
-          ))}
+          {groupedOptions.map((group, groupIndex) => {
+            return (
+              <Fragment key={groupIndex}>
+                {group.label.length > 0 && (
+                  <span className='mt-2 block bg-white/5 px-3 py-1 text-xs text-neutral-200'>
+                    {group.label}
+                  </span>
+                )}
+                {group.options.map((item, index) => (
+                  <Listbox.Option
+                    key={index}
+                    value={item.value}
+                    disabled={item.disabled}
+                    className='hover:bg-neutral-700'>
+                    {({ selected, disabled }) => (
+                      <SelectOption
+                        label={item.label}
+                        selected={selected}
+                        disabled={disabled}
+                        icon={item.icon}
+                      />
+                    )}
+                  </Listbox.Option>
+                ))}
+              </Fragment>
+            )
+          })}
         </Listbox.Options>
       </div>
     </Listbox>
