@@ -11,10 +11,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
-export default function Header({
-  github = { stars: 38000 },
-  eyebrow
-}: HeaderProps) {
+export default function Header({ github, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [headerHeight, setHeaderHeight] = useState<number>(72)
