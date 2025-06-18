@@ -1,4 +1,4 @@
-import githubStars from '../../../public/githubStars.json'
+import githubApiData from '@/../public/githubApiData.json'
 import { getFooterData } from '@/components/Footer/getFooterData'
 import { FooterData } from '@/components/Footer/types'
 import { getGetStartedData } from '@/components/GetStarted/getStartedData'
@@ -17,15 +17,28 @@ export async function getCommonProps(): Promise<Props> {
 
   // Set default fallback
   let stars = 36719
+  let contributors = 1300
+  let prs = 36000
 
-  if (
-    typeof githubStars === 'object' &&
-    'stars' in githubStars &&
-    typeof githubStars.stars === 'number'
-  ) {
-    stars = githubStars.stars
-  } else if (process.env.NEXT_IS_PROD === 'true') {
-    throw new Error('Failed to get GitHub stars.')
+  if (typeof githubApiData === 'object') {
+    if (
+      githubApiData.hasOwnProperty('stars') &&
+      typeof githubApiData.stars === 'number'
+    ) {
+      stars = githubApiData.stars
+    }
+    if (
+      githubApiData.hasOwnProperty('contributors') &&
+      typeof githubApiData.contributors === 'number'
+    ) {
+      contributors = githubApiData.contributors
+    }
+    if (
+      githubApiData.hasOwnProperty('prs') &&
+      typeof githubApiData.prs === 'number'
+    ) {
+      prs = githubApiData.prs
+    }
   }
 
   return {
@@ -33,7 +46,9 @@ export async function getCommonProps(): Promise<Props> {
     platforms: getStartedData.platforms,
     headerData: {
       github: {
-        stars
+        stars,
+        contributors,
+        prs
       }
     }
   }
