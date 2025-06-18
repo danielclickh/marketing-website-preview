@@ -21,7 +21,8 @@ export default function RegionSelector({
       return {
         value: item.key,
         label: item.label || item.key,
-        icon: item.icon
+        icon: item.icon,
+        group: item.category
       }
     })
   }, [providerEntry])
