@@ -429,7 +429,7 @@ function RegionRequest() {
             setIsModalOpen(true)
             handleRegionRequestClick()
           }}>
-          request another region
+          request a private/other region
         </span>
       </p>
 
