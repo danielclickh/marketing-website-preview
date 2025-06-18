@@ -1,3 +1,5 @@
+import iconClock from './assets/icon-clock.svg'
+import iconPuzzle from './assets/icon-puzzle.svg'
 import { CUICard } from '@/components/ClickUI'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -8,8 +10,8 @@ export interface LearningPathCardProps {
   title: string
   description: string
   href: string
-  duration: string
-  modules: string
+  duration?: string
+  modules?: string
 }
 
 export default function LearningPathCard({
@@ -22,7 +24,7 @@ export default function LearningPathCard({
 }: LearningPathCardProps) {
   return (
     <CUICard className='relative'>
-      <CUICard.Body className='flex flex-1 flex-col gap-4 p-4'>
+      <CUICard.Body className='flex flex-1 flex-col gap-4 p-6'>
         <Image
           src={icon}
           alt={title}
@@ -41,9 +43,19 @@ export default function LearningPathCard({
           Explore <span className='sr-only'>{title}</span> learning path
         </LinkWithArrow>
       </CUICard.Body>
-      <CUICard.Footer className='grid flex-1 flex-shrink-0 flex-grow-0 grid-cols-2 border-t border-neutral-700/80'>
-        <div>{duration}</div>
-        <div className='border-l border-neutral-700/80'>{modules}</div>
+      <CUICard.Footer className='flex flex-1 flex-shrink-0 flex-grow-0 divide-x divide-neutral-700/80 border-t border-neutral-700/80'>
+        {typeof duration !== 'undefined' && (
+          <div className='flex flex-1 items-center justify-center gap-2 py-2.5 text-sm text-neutral-200'>
+            <Image src={iconClock} width={20} height={20} alt='Duration' />
+            <span>{duration}</span>
+          </div>
+        )}
+        {typeof modules !== 'undefined' && (
+          <div className='flex flex-1 items-center justify-center gap-2 py-2.5 text-sm'>
+            <Image src={iconPuzzle} width={20} height={20} alt='Duration' />
+            <span>{modules}</span>
+          </div>
+        )}
       </CUICard.Footer>
     </CUICard>
   )
