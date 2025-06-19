@@ -1,3 +1,4 @@
+import iconCalendar from './assets/icon-calendar.svg'
 import iconCareerAdvantage from './assets/icon-career-advantage.svg'
 import iconContributors from './assets/icon-contributors.svg'
 import iconDataWarehousing from './assets/icon-data-warehousing.svg'
@@ -5,6 +6,7 @@ import iconDevelopers from './assets/icon-developers.svg'
 import iconImprovedResults from './assets/icon-improved-results.svg'
 import iconIndustryCredibility from './assets/icon-industry-credibility.svg'
 import iconLiveTraining from './assets/icon-live-training.svg'
+import iconMapPin from './assets/icon-map-pin.svg'
 import iconMlGenAi from './assets/icon-ml-genai.svg'
 import iconObservability from './assets/icon-observability.svg'
 import iconOnDemand from './assets/icon-on-demand.svg'
@@ -19,7 +21,7 @@ import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImage, StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import {
   SuiCodeblock,
@@ -179,7 +181,7 @@ export default function LearnPage({
                 On-demand training
               </CUIButton>
               <CUIButton
-                href='#live'
+                href='/learn#live-training'
                 type='secondary-dark'
                 size='lg'
                 className='px-8'>
@@ -259,8 +261,8 @@ export default function LearnPage({
             } as CSSProperties
           }
         />
-        <div className='section-container'>
-          <div className='mx-auto mb-24 max-w-xl space-y-4 text-center'>
+        <div className='section-container space-y-12'>
+          <div className='mx-auto max-w-xl space-y-4 text-center'>
             <Image
               src={iconOnDemand}
               width={72}
@@ -316,8 +318,8 @@ export default function LearnPage({
         <section
           id='live-training'
           className='bg-primary-300 py-24 text-neutral-950'>
-          <div className='section-container'>
-            <div className='mx-auto mb-24 max-w-xl space-y-4 text-center'>
+          <div className='section-container space-y-12'>
+            <div className='mx-auto max-w-xl space-y-4 text-center'>
               <Image
                 src={iconLiveTraining}
                 width={72}
@@ -347,22 +349,44 @@ export default function LearnPage({
               </div>
               <div>
                 {filteredEvents.length > 0 ? (
-                  <ul className='space-y-2'>
+                  <ul className='grid grid-cols-10 space-y-2'>
                     {filteredEvents.map((event, eventIndex) => {
                       return (
                         <li
                           key={eventIndex}
-                          className='relative flex justify-between rounded bg-neutral-900/30 px-4 py-2'>
-                          <Link
-                            href={`/company/events/${event.slug}`}
-                            className='font-bold text-primary-300 hover:underline'>
-                            <span className='absolute inset-0' />
-                            {event.title}
-                          </Link>
-                          <span>
-                            {convertDateToString(event.localDatetime)}
+                          className='relative col-span-full grid grid-cols-subgrid rounded bg-neutral-900/30 px-4 py-2'>
+                          <div className='col-span-6 flex'>
+                            <Link
+                              href={`/company/events/${event.slug}`}
+                              className='my-auto font-bold text-primary-300 hover:underline'>
+                              <span className='absolute inset-0' />
+                              {event.title}
+                            </Link>
+                          </div>
+                          <span className='col-span-2 flex items-center gap-2 text-sm text-neutral-200'>
+                            <Image
+                              src={iconCalendar}
+                              width={20}
+                              height={20}
+                              alt='Datetime'
+                              className='flex-shrink-0 flex-grow-0'
+                            />
+                            <span className='leading-tight'>
+                              {convertDateToString(event.localDatetime)}
+                              <br />
+                              <small className='opacity-70'>
+                                Example timezone
+                              </small>
+                            </span>
                           </span>
-                          <span>
+                          <span className='col-span-2 flex items-center gap-2 text-sm text-neutral-200'>
+                            <Image
+                              src={iconMapPin}
+                              width={20}
+                              height={20}
+                              alt='Location'
+                              className='flex-shrink-0 flex-grow-0'
+                            />
                             {event.location.city} ({event.location.country})
                           </span>
                         </li>
@@ -453,6 +477,8 @@ export default function LearnPage({
           </div>
         </section>
       </AngledSection>
+
+      {/* Get started */}
       <section
         className='bg-shadow-element yellow-shadow overflow-hidden bg-grid py-32'
         style={
@@ -485,6 +511,8 @@ export default function LearnPage({
           </SuiCodeblock>
         </div>
       </section>
+
+      {/* Trusted by */}
       <section className='bg-primary-300 py-20 text-neutral-950'>
         <div className='section-container'>
           <SuiTitle type='h3' className='mb-10 text-center'>
@@ -501,7 +529,7 @@ export default function LearnPage({
                     <div
                       key={logoIndex}
                       className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                      <StrapiImage {...logo.darkLogoPng} />
+                      <StrapiImageUrl {...logo.darkLogoPng} />
                     </div>
                   )
                 })}
@@ -512,7 +540,7 @@ export default function LearnPage({
                     <div
                       key={logoIndex}
                       className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                      <StrapiImage {...logo.darkLogoPng} />
+                      <StrapiImageUrl {...logo.darkLogoPng} />
                     </div>
                   )
                 })}
