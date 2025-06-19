@@ -1,7 +1,0 @@
-.codeBlock {
-  @apply relative;
-  &::before {
-    @apply absolute right-full top-0;
-    content: '$ ';
-  }
-}
