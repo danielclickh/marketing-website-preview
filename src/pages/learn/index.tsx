@@ -521,7 +521,7 @@ export default function LearnPage({
               at scale
             </TiltedText>
           </SuiTitle>
-          <div className='mask-logos-carousel opacity-90 brightness-0 grayscale'>
+          <div className='mask-logos-carousel opacity-90 brightness-50 grayscale'>
             <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
               <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
                 {customerStories.logos.map((logo, logoIndex) => {
