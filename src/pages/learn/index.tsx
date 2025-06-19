@@ -1,6 +1,9 @@
+import iconCareerAdvantage from './assets/icon-career-advantage.svg'
 import iconContributors from './assets/icon-contributors.svg'
 import iconDataWarehousing from './assets/icon-data-warehousing.svg'
 import iconDevelopers from './assets/icon-developers.svg'
+import iconImprovedResults from './assets/icon-improved-results.svg'
+import iconIndustryCredibility from './assets/icon-industry-credibility.svg'
 import iconLiveTraining from './assets/icon-live-training.svg'
 import iconMlGenAi from './assets/icon-ml-genai.svg'
 import iconObservability from './assets/icon-observability.svg'
@@ -8,13 +11,14 @@ import iconOnDemand from './assets/icon-on-demand.svg'
 import iconPrs from './assets/icon-prs.svg'
 import iconRealTimeAnalytics from './assets/icon-real-time-analytics.svg'
 import iconStars from './assets/icon-stars.svg'
+import iconTeamRecognition from './assets/icon-team-recognition.svg'
+import AngledSection from '@/components-cleaned/AngledSection'
 import LearningPathCard from '@/components-cleaned/LearningPathCard'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import { SuiSearchField, SuiText, SuiTitle } from '@/components/sui'
-import { useDebounce } from '@/hooks'
 import {
   findAll,
   findOne,
@@ -28,7 +32,7 @@ import formatStat from '@/lib/utils/numbers'
 import { EventType } from '@/types/events'
 import { LearnProps } from '@/types/learn'
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
+import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import { ChangeEvent, useMemo, useState } from 'react'
 
@@ -280,80 +284,147 @@ export default function LearnPage({
       </section>
 
       {/* Live training */}
-      <section
-        id='live-training'
-        className='bg-primary-300 py-24 text-neutral-950'>
-        <div className='section-container'>
-          <div className='mx-auto mb-24 max-w-xl space-y-4 text-center'>
-            <Image
-              src={iconLiveTraining}
-              width={72}
-              height={72}
-              alt='Live training'
-              className='inline-block'
-            />
-            <SuiTitle type='h2'>Instructor-led training</SuiTitle>
-            <SuiText className='opacity-70'>
-              Join live, instructor-led sessions led by our head of training,
-              Rich Raposa, and supported by ClickHouse engineers. Get hands-on
-              with real labs, ask questions in real time, and build the skills
-              you need.
-            </SuiText>
-          </div>
-          <div className='rounded-xl border border-neutral-600 bg-neutral-900/80 p-4 text-white'>
-            <div className='mb-4 flex items-center'>
-              <SuiTitle type='h3'>Upcoming live training</SuiTitle>
-              <SuiSearchField
-                placeholder='Search live training...'
-                htmlFor='search'
-                className='ml-auto w-full md:max-w-sm'
-                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  setEventsSearch(event.target.value)
-                }}
+      <AngledSection topDirection='down' className='text-primary-300'>
+        <section
+          id='live-training'
+          className='bg-primary-300 py-24 text-neutral-950'>
+          <div className='section-container'>
+            <div className='mx-auto mb-24 max-w-xl space-y-4 text-center'>
+              <Image
+                src={iconLiveTraining}
+                width={72}
+                height={72}
+                alt='Live training'
+                className='inline-block'
               />
+              <SuiTitle type='h2'>Instructor-led training</SuiTitle>
+              <SuiText className='opacity-70'>
+                Join live, instructor-led sessions led by our head of training,
+                Rich Raposa, and supported by ClickHouse engineers. Get hands-on
+                with real labs, ask questions in real time, and build the skills
+                you need.
+              </SuiText>
             </div>
-            <div>
-              {filteredEvents.length > 0 ? (
-                <ul className='space-y-2'>
-                  {filteredEvents.map((event, eventIndex) => {
-                    return (
-                      <li
-                        key={eventIndex}
-                        className='relative flex justify-between rounded bg-neutral-900/30 px-4 py-2'>
-                        <Link
-                          href={`/company/events/${event.slug}`}
-                          className='font-bold text-primary-300 hover:underline'>
-                          <span className='absolute inset-0' />
-                          {event.title}
-                        </Link>
-                        <span>{convertDateToString(event.localDatetime)}</span>
-                        <span>
-                          {event.location.city} ({event.location.country})
-                        </span>
-                      </li>
-                    )
-                  })}
-                </ul>
-              ) : (
-                <div>No results found.</div>
-              )}
+            <div className='rounded-xl border border-neutral-600 bg-neutral-900/80 p-4 text-white'>
+              <div className='mb-4 flex items-center'>
+                <SuiTitle type='h3'>Upcoming live training</SuiTitle>
+                <SuiSearchField
+                  placeholder='Search live training...'
+                  htmlFor='search'
+                  className='ml-auto w-full md:max-w-sm'
+                  onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    setEventsSearch(event.target.value)
+                  }}
+                />
+              </div>
+              <div>
+                {filteredEvents.length > 0 ? (
+                  <ul className='space-y-2'>
+                    {filteredEvents.map((event, eventIndex) => {
+                      return (
+                        <li
+                          key={eventIndex}
+                          className='relative flex justify-between rounded bg-neutral-900/30 px-4 py-2'>
+                          <Link
+                            href={`/company/events/${event.slug}`}
+                            className='font-bold text-primary-300 hover:underline'>
+                            <span className='absolute inset-0' />
+                            {event.title}
+                          </Link>
+                          <span>
+                            {convertDateToString(event.localDatetime)}
+                          </span>
+                          <span>
+                            {event.location.city} ({event.location.country})
+                          </span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                ) : (
+                  <div>No results found.</div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AngledSection>
 
       {/* Certification */}
-      <section id='certification' className='bg-neutral-600 py-24'>
-        <div className='section-container'>
-          <div className='mx-auto mb-24 max-w-xl space-y-4 text-center'>
-            <SuiTitle type='h2'>Get ClickHouse Certified</SuiTitle>
-            <SuiText>
-              Become a recognized ClickHouse expert by validating your skills
-              with our official ClickHouse Certification.
-            </SuiText>
+      <AngledSection
+        topDirection='down'
+        className='bg-primary-300 text-neutral-600'>
+        <section id='certification' className='bg-neutral-600 py-24 text-white'>
+          <div className='section-container space-y-12'>
+            <div className='mx-auto max-w-xl space-y-4 text-center'>
+              <SuiTitle type='h2'>Get ClickHouse Certified</SuiTitle>
+              <SuiText>
+                Become a recognized ClickHouse expert by validating your skills
+                with our official ClickHouse Certification.
+              </SuiText>
+            </div>
+            <ul className='mx-auto flex max-w-6xl flex-wrap justify-center gap-6'>
+              {(
+                [
+                  {
+                    title: 'Career advantage',
+                    description: 'Showcase your capabilities',
+                    icon: iconCareerAdvantage
+                  },
+                  {
+                    title: 'Industry credibility',
+                    description: 'Skills that translate to real-world impact',
+                    icon: iconIndustryCredibility
+                  },
+                  {
+                    title: 'Improved results',
+                    description: 'Unlock the full potential of ClickHouse',
+                    icon: iconImprovedResults
+                  },
+                  {
+                    title: 'Team recognition',
+                    description: 'Stand out as the go-to ClickHouse expert',
+                    icon: iconTeamRecognition
+                  }
+                ] satisfies Array<{
+                  title: string
+                  description: string
+                  icon: ImageProps['src']
+                }>
+              ).map((item, itemIndex) => {
+                return (
+                  <li
+                    key={itemIndex}
+                    className='flex w-full max-w-sm rounded border border-white'>
+                    <span className='flex flex-shrink-0 flex-grow-0 items-center justify-center bg-white px-5 text-neutral-950'>
+                      <Image
+                        src={item.icon}
+                        alt={item.title}
+                        width={24}
+                        height={25}
+                        className='aspect-square w-6 object-contain object-center'
+                      />
+                    </span>
+                    <span className='flex flex-1 flex-col px-5 py-2'>
+                      <span className='font-bold'>{item.title}</span>
+                      <span className='text-sm'>{item.description}</span>
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
+            <div className='text-center'>
+              <CUIButton
+                type='primary'
+                className='inline-block px-8'
+                size='lg'
+                href='/learn/certification'>
+                View certification guide
+              </CUIButton>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AngledSection>
     </Layout>
   )
 }
