@@ -78,6 +78,7 @@ export interface PricingV2ComponentRegion {
   icon: null | StrapiImageType
   internetEgress: number
   interRegionEgress: number
+  category: null | string
 }
 
 export interface PricingV2ComponentPlan {
