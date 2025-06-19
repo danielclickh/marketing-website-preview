@@ -18,6 +18,7 @@ import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
+import { StrapiImage } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import {
   SuiCodeblock,
@@ -40,7 +41,7 @@ import { LearnProps } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import { ChangeEvent, CSSProperties, useMemo, useState } from 'react'
+import React, { ChangeEvent, CSSProperties, useMemo, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -461,6 +462,42 @@ export default function LearnPage({
             <span className='text-primary'>$</span>
             <span>curl https://clickhouse.com/ | sh</span>
           </SuiCodeblock>
+        </div>
+      </section>
+      <section className='bg-primary-300 py-20 text-neutral-950'>
+        <div className='section-container'>
+          <SuiTitle type='h3' className='mb-10 text-center'>
+            Trusted by the best developers that work with data{' '}
+            <TiltedText type='white-on-black' className='px-1 py-0.5'>
+              at scale
+            </TiltedText>
+          </SuiTitle>
+          <div className='mask-logos-carousel opacity-90 brightness-0 grayscale'>
+            <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
+                {customerStories.logos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                      <StrapiImage {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
+                {customerStories.logos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                      <StrapiImage {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </Layout>
