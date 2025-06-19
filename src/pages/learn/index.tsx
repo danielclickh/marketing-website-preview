@@ -237,7 +237,27 @@ export default function LearnPage({
       </section>
 
       {/* On-demand */}
-      <section id='on-demand' className='py-24'>
+      <section id='on-demand' className='relative overflow-hidden py-24'>
+        <div
+          className='bg-shadow-element yellow-shadow absolute inset-0 from-90% gradient-mask-to-b'
+          style={
+            {
+              '--top-side': '50px',
+              '--left-side': '80%',
+              '--opacity': '0.05'
+            } as CSSProperties
+          }
+        />
+        <div
+          className='bg-shadow-element red-shadow absolute inset-0 from-90% gradient-mask-to-b'
+          style={
+            {
+              '--top-side': '70%',
+              '--left-side': '20%',
+              '--opacity': '0.05'
+            } as CSSProperties
+          }
+        />
         <div className='section-container'>
           <div className='mx-auto mb-24 max-w-xl space-y-4 text-center'>
             <Image
