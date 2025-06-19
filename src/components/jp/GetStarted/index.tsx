@@ -1,7 +1,5 @@
 import { CUILink } from '../../ClickUI'
-import Markdown from '../../Markdown'
 import { SuiCodeblock, SuiTitle } from '../../sui'
-import styles from './GetStarted.module.scss'
 import { GettingStartedData } from './types'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import Link from 'next/link'
@@ -23,10 +21,10 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             MacOS、Linux、FreeBSD用のClickHouseをインストールできます。
           </div>
         </div>
-        <SuiCodeblock className='show-copy-paste w-full self-center overflow-hidden md:w-full'>
-          <Markdown ignoreAnchor className={styles.codeBlock}>
-            {platforms[0].instructions}
-          </Markdown>
+        <SuiCodeblock
+          className='overflow-hidden'
+          copyValue={platforms[0].instructions}>
+          $ {platforms[0].instructions}
         </SuiCodeblock>
         <div className='mt-4 text-sm font-medium text-neutral-500'>
           <CUILink
