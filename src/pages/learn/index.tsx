@@ -12,6 +12,7 @@ import iconPrs from './assets/icon-prs.svg'
 import iconRealTimeAnalytics from './assets/icon-real-time-analytics.svg'
 import iconStars from './assets/icon-stars.svg'
 import iconTeamRecognition from './assets/icon-team-recognition.svg'
+import videoThumbnail from './assets/video-thumbnail.png'
 import AngledSection from '@/components-cleaned/AngledSection'
 import LearningPathCard from '@/components-cleaned/LearningPathCard'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
@@ -194,7 +195,7 @@ export default function LearnPage({
           <div className='w-full max-w-xl'>
             <YouTubeVideo
               id='V6C6zyR4rq0'
-              thumbnail='/images/clickhouse-learning-og.png'
+              thumbnail={videoThumbnail}
               playButtonEyebrow='New to ClickHouse?'
               playButtonLabel='Watch the introduction'
             />
