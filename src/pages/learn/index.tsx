@@ -163,16 +163,16 @@ export default function LearnPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section className='bg-grid py-24'>
-        <div className='section-container flex items-center gap-16'>
-          <div className='space-y-4'>
+      <section className='bg-grid py-16 lg:py-24'>
+        <div className='section-container flex flex-col items-center gap-16 lg:flex-row'>
+          <div className='space-y-4 text-center lg:text-left'>
             <SuiTitle type='h1'>ClickHouse training</SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               Master ClickHouse with expert-led training designed for every
               skill level and delivered through self-paced paths, live sessions,
               or certification.
             </SuiText>
-            <div className='!my-8 flex gap-4'>
+            <div className='!my-8 flex flex-wrap justify-center gap-4 lg:justify-start'>
               <CUIButton
                 href='/learn#on-demand'
                 type='primary'
@@ -206,33 +206,47 @@ export default function LearnPage({
       </section>
 
       {/* Stats bar */}
-      <section className='bg-white/10 py-8'>
+      <section className='bg-white/10 py-4 lg:py-7'>
         <div className='section-container'>
-          <ul className='flex items-center justify-between text-xl font-bold'>
-            <li className='flex items-center gap-4'>
+          <ul className='flex flex-wrap items-center justify-center gap-6 gap-y-4 font-bold lg:justify-between lg:text-xl'>
+            <li className='flex items-center gap-2 lg:gap-4'>
               <Image
                 src={iconDevelopers}
                 alt='Developers'
                 width={32}
                 height={32}
+                className='w-6 lg:w-8'
               />
               100k+ developers
             </li>
-            <li className='flex items-center gap-4'>
-              <Image src={iconStars} alt='Stars' width={32} height={32} />
+            <li className='flex items-center gap-2 lg:gap-4'>
+              <Image
+                src={iconStars}
+                alt='Stars'
+                width={32}
+                height={32}
+                className='w-6 lg:w-8'
+              />
               {formatStat(headerData.github.stars)}+ GitHub stars
             </li>
-            <li className='flex items-center gap-4'>
+            <li className='flex items-center gap-2 lg:gap-4'>
               <Image
                 src={iconContributors}
                 alt='Contributors'
                 width={32}
                 height={32}
+                className='w-6 lg:w-8'
               />
               {formatStat(headerData.github.contributors)}+ contributors
             </li>
-            <li className='flex items-center gap-4'>
-              <Image src={iconPrs} alt='PRs' width={32} height={32} />
+            <li className='flex items-center gap-2 lg:gap-4'>
+              <Image
+                src={iconPrs}
+                alt='PRs'
+                width={32}
+                height={32}
+                className='w-6 lg:w-8'
+              />
               {formatStat(headerData.github.prs)}+ PRs
             </li>
           </ul>
@@ -240,7 +254,9 @@ export default function LearnPage({
       </section>
 
       {/* On-demand */}
-      <section id='on-demand' className='relative overflow-hidden py-24'>
+      <section
+        id='on-demand'
+        className='relative overflow-hidden py-16 lg:py-24'>
         <div
           className='bg-shadow-element yellow-shadow absolute inset-0 from-90% gradient-mask-to-b'
           style={
@@ -276,7 +292,7 @@ export default function LearnPage({
               your goals. Self-paced and beginner-friendly.
             </SuiText>
           </div>
-          <div className='grid grid-cols-4 gap-8'>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-4 xl:gap-8'>
             <LearningPathCard
               icon={iconRealTimeAnalytics}
               title='Real-time analytics'
@@ -317,7 +333,7 @@ export default function LearnPage({
       <AngledSection topDirection='down' className='text-primary-300'>
         <section
           id='live-training'
-          className='bg-primary-300 py-24 text-neutral-950'>
+          className='bg-primary-300 py-16 text-neutral-950 lg:py-24'>
           <div className='section-container space-y-12'>
             <div className='mx-auto max-w-xl space-y-4 text-center'>
               <Image
@@ -336,7 +352,7 @@ export default function LearnPage({
               </SuiText>
             </div>
             <div className='rounded-xl border border-neutral-600 bg-neutral-900/80 p-4 text-white'>
-              <div className='mb-4 flex items-center'>
+              <div className='mb-4 flex flex-col items-center gap-y-4 md:flex-row'>
                 <SuiTitle type='h3'>Upcoming live training</SuiTitle>
                 <SuiSearchField
                   placeholder='Search live training...'
@@ -349,13 +365,13 @@ export default function LearnPage({
               </div>
               <div>
                 {filteredEvents.length > 0 ? (
-                  <ul className='grid grid-cols-10 space-y-2'>
+                  <ul className='grid grid-cols-2 space-y-2 lg:grid-cols-10'>
                     {filteredEvents.map((event, eventIndex) => {
                       return (
                         <li
                           key={eventIndex}
-                          className='relative col-span-full grid grid-cols-subgrid rounded bg-neutral-900/30 px-4 py-2'>
-                          <div className='col-span-6 flex'>
+                          className='relative col-span-full grid grid-cols-subgrid gap-y-2 rounded bg-neutral-900/30 px-4 py-2'>
+                          <div className='col-span-full flex lg:col-span-6'>
                             <Link
                               href={`/company/events/${event.slug}`}
                               className='my-auto font-bold text-primary-300 hover:underline'>
@@ -363,7 +379,7 @@ export default function LearnPage({
                               {event.title}
                             </Link>
                           </div>
-                          <span className='col-span-2 flex items-center gap-2 text-sm text-neutral-200'>
+                          <span className='flex items-center gap-2 text-sm text-neutral-200 lg:col-span-2'>
                             <Image
                               src={iconCalendar}
                               width={20}
@@ -379,7 +395,7 @@ export default function LearnPage({
                               </small>
                             </span>
                           </span>
-                          <span className='col-span-2 flex items-center gap-2 text-sm text-neutral-200'>
+                          <span className='flex items-center gap-2 text-sm text-neutral-200 lg:col-span-2'>
                             <Image
                               src={iconMapPin}
                               width={20}
