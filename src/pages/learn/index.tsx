@@ -18,7 +18,13 @@ import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
-import { SuiSearchField, SuiText, SuiTitle } from '@/components/sui'
+import TiltedText from '@/components/TiltedText'
+import {
+  SuiCodeblock,
+  SuiSearchField,
+  SuiText,
+  SuiTitle
+} from '@/components/sui'
 import {
   findAll,
   findOne,
@@ -34,7 +40,7 @@ import { LearnProps } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import { ChangeEvent, useMemo, useState } from 'react'
+import { ChangeEvent, CSSProperties, useMemo, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -425,6 +431,38 @@ export default function LearnPage({
           </div>
         </section>
       </AngledSection>
+      <section
+        className='bg-shadow-element yellow-shadow overflow-hidden bg-grid py-32'
+        style={
+          {
+            '--top-side': '0',
+            '--left-side': '50%',
+            '--scale': '0.75',
+            '--opacity': '0.05'
+          } as CSSProperties
+        }>
+        <div className='section-container space-y-12'>
+          <div className='space-y-8 text-center'>
+            <SuiTitle type='h2'>
+              Start using{' '}
+              <TiltedText type='black-on-yellow' className='px-2 py-1'>
+                ClickHouse
+              </TiltedText>{' '}
+              in minutes
+            </SuiTitle>
+            <SuiText className='opacity-70'>
+              Install ClickHouse for macOS, Linux, and FreeBSD
+            </SuiText>
+          </div>
+          <SuiCodeblock
+            showCopy={true}
+            copyValue='curl https://clickhouse.com/ | sh'
+            className='mx-auto flex w-max items-center gap-3 pr-24'>
+            <span className='text-primary'>$</span>
+            <span>curl https://clickhouse.com/ | sh</span>
+          </SuiCodeblock>
+        </div>
+      </section>
     </Layout>
   )
 }
