@@ -25,7 +25,7 @@ const NavigationLink = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
     return (
       <Link
         ref={ref}
-        href={href} // Ensure href is a string
+        href={href || '#'} // Ensure href is a string
         prefetch={prefetch}
         target={target}
         {...props}
