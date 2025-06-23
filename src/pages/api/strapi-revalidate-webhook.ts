@@ -1,4 +1,5 @@
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { PAGES } from '@/pages/learn/[slug]'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const revalidate = async (
@@ -62,7 +63,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::event.event': async function (body, response) {
-    const paths = [`/sitemap`, `/company/events`]
+    const paths = [`/sitemap`, `/company/events`, `/learn`]
 
     if (body?.entry?.slug) {
       paths.push(`/company/events/${body.entry.slug}`)
@@ -230,6 +231,7 @@ const CONTENT_TYPE_HANDLERS: Record<
       `/`,
       `/learn`,
       `/learn/certification`,
+      ...PAGES.map((page) => `/learn/${page.slug}`),
       `/monitorama-2023`,
       `/launch-week/may-2024`,
       `/industries/gaming`,
