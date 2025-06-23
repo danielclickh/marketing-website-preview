@@ -37,12 +37,12 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
 import { limitStringByWord, slugify } from '@/lib/utils/strings'
 import { PAGES } from '@/pages/learn/[slug]'
-import { EventType } from '@/types/events'
-import { LearnProps } from '@/types/learn'
+import { LearnProps, TrainingSimpleEvent } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { ChangeEvent, CSSProperties, useMemo, useState } from 'react'
+import removeMarkdown from 'remove-markdown'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -56,27 +56,42 @@ export const getStaticProps: GetStaticProps<LearnProps> =
       ]
     })
 
-    const { data: events }: { data: EventType[] } = await findAll('events', {
-      filters: {
-        $and: [
-          {
-            localDatetime: {
-              $gte: startOfToday().toISOString()
+    let { data: events }: { data: Array<TrainingSimpleEvent> } = await findAll(
+      'events',
+      {
+        filters: {
+          $and: [
+            {
+              localDatetime: {
+                $gte: startOfToday().toISOString()
+              },
+              category: {
+                $in: ['Live Training', 'Free Training', 'Paid Training']
+              }
             },
-            category: {
-              $in: ['Live Training', 'Free Training', 'Paid Training']
+            {
+              $or: getStagingOnlyFilters()
+            },
+            {
+              $or: getUnlistedFilters()
             }
-          },
-          {
-            $or: getStagingOnlyFilters()
-          },
-          {
-            $or: getUnlistedFilters()
-          }
-        ]
-      },
-      sort: ['localDatetime:ASC'],
-      populate: ['location']
+          ]
+        },
+        sort: ['localDatetime:ASC'],
+        populate: ['location']
+      }
+    )
+
+    events = events.map((event) => {
+      if (event.richDescription) {
+        const stripped = removeMarkdown(event.richDescription)
+        const regex =
+          /(?:^times?\s*:\s*(.+)$)|(?:dates?\s*:\s*(?:.+)\sat\s(.+)$)/im
+
+        const matches = stripped.match(regex)
+        event.extractedTime = matches?.[1] || matches?.[2] || null
+      }
+      return event
     })
 
     return {
@@ -351,7 +366,7 @@ export default function LearnPage({
                               {convertDateToString(event.localDatetime)}
                               <br />
                               <small className='opacity-70'>
-                                Example timezone
+                                {event.extractedTime}
                               </small>
                             </span>
                           </span>

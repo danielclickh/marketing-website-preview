@@ -59,6 +59,7 @@
     "rehype-slug-custom-id": "^1.1.0",
     "remark-directive": "^4.0.0",
     "remark-gfm": "^3.0.1",
+    "remove-markdown": "^0.6.2",
     "sass": "^1.51.0",
     "schema-dts": "^1.1.5",
     "short-uuid": "^5.2.0",
