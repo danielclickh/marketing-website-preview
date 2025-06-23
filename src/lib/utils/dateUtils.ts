@@ -7,6 +7,16 @@ export function convertDateToString(value: string): string {
   })
 }
 
+export function convertTimeToString(value: string): string {
+  return new Date(value).toLocaleString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+    timeZoneName: 'short',
+    timeZone: 'UTC'
+  })
+}
+
 export function startOfToday() {
   const startOfToday = new Date()
   startOfToday.setHours(0, 0, 0, 0)

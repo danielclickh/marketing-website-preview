@@ -32,7 +32,11 @@ import {
   getUnlistedFilters
 } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { convertDateToString, startOfToday } from '@/lib/utils/dateUtils'
+import {
+  convertDateToString,
+  convertTimeToString,
+  startOfToday
+} from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
 import { limitStringByWord, slugify } from '@/lib/utils/strings'
@@ -91,6 +95,11 @@ export const getStaticProps: GetStaticProps<LearnProps> =
         const matches = stripped.match(regex)
         event.extractedTime = matches?.[1] || matches?.[2] || null
       }
+
+      if (!event?.extractedTime) {
+        event.extractedTime = convertTimeToString(event.localDatetime)
+      }
+
       return event
     })
 
