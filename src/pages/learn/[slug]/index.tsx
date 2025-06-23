@@ -8,8 +8,7 @@ import iconObservability from '../assets/icon-observability.svg'
 import iconQuiz from '../assets/icon-quiz.svg'
 import iconQuizzes from '../assets/icon-quizzes.svg'
 import iconRealTimeAnalytics from '../assets/icon-real-time-analytics.svg'
-import DebugTailwindBreakpoints from '@/components-cleaned/DebugTailwindBreakpoints'
-import { CUIButton, CUICard } from '@/components/ClickUI'
+import { CUIButton } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
@@ -18,7 +17,9 @@ import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { camel } from '@/lib/utils/strings'
 import videoThumbnail from '@/pages/learn/assets/video-thumbnail.png'
 import {
   CommonProps,
@@ -358,7 +359,8 @@ export const getStaticProps: GetStaticProps<PageProps> =
         seo: {
           title: `${page.title} | ClickHouse Training`,
           description: page.intro,
-          path: `/learn/${page.slug}`
+          path: `/learn/${page.slug}`,
+          imageUrl: 'https://clickhouse.com/images/clickhouse-learning-og.png'
         }
       }
     }
@@ -372,6 +374,8 @@ export default function Page({
   customerStories,
   ...props
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  useGalaxyOnPage(`learn${camel(props.slug)}`)
+
   const [timelineCoords, setTimelineCoords] = useState<null | {
     top: number
     right: number
@@ -444,7 +448,6 @@ export default function Page({
               </CUIButton>
             </div>
           </div>
-          <DebugTailwindBreakpoints className='fixed bottom-0 left-0 z-[9999]' />
           <div className='-mt-10 px-4 md:px-10'>
             <div className='mx-auto w-full max-w-4xl rounded-lg border border-neutral-700/80 bg-neutral-800 px-6 py-4'>
               <ul className='grid w-full gap-y-6 sm:grid-cols-2 lg:grid-cols-4'>
