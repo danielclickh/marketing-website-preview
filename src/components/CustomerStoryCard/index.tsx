@@ -1,10 +1,10 @@
+import { StrapiImageType } from '../../lib/api/strapi/types'
+import { CUICard } from '../ClickUI'
+import { StrapiImageUrl } from '../StrapiElements'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { CirclePlay } from 'lucide-react'
 import Link from 'next/link'
-import { StrapiImageType } from '../../lib/api/strapi/types'
-import { CUICard } from '../ClickUI'
-import { StrapiImageUrl } from '../StrapiElements'
 
 export interface CustomerStoryCardProps {
   title: string
@@ -38,25 +38,23 @@ export default function CustomerStoryCard({
   const hasProviders = !!cloudProviders?.length
   return (
     <CUICard
-      className={`relative transition shadow-xl hover:shadow-2xl shadow-black/25 ${highlight ? 'border-primary-300 !bg-neutral-700' : ''}`}>
+      className={`relative shadow-xl shadow-black/25 transition hover:shadow-2xl ${highlight ? 'border-primary-300 !bg-neutral-700' : ''}`}>
       <CUICard.Header>
-        <div className='rounded-t-lg bg-primary-300 p-4'>
-          <div className='flex h-[40px] items-center justify-center'>
-            {logo && (
-              <StrapiImageUrl
-                {...logo}
-                loading='eager'
-                className='max-h-[35px]'
-              />
-            )}
-          </div>
+        <div className='rounded-t-lg bg-primary-300 px-4 py-5'>
+          {logo && (
+            <StrapiImageUrl
+              {...logo}
+              loading='eager'
+              className='h-9 w-full object-scale-down object-center'
+            />
+          )}
         </div>
       </CUICard.Header>
 
-      <CUICard.Body className='p-6 mb-auto'>
+      <CUICard.Body className='mb-auto p-6'>
         {categories && (
-          <div className='flex gap-2 justify-start items-center'>
-            <div className='story-categories font-inconsolata text-primary-300 flex-shrink-0 flex-grow-0'>
+          <div className='flex items-center justify-start gap-2'>
+            <div className='story-categories flex-shrink-0 flex-grow-0 font-inconsolata text-primary-300'>
               {categories.join(', ')}
             </div>
 
@@ -68,8 +66,8 @@ export default function CustomerStoryCard({
                   <Tooltip.Trigger asChild>
                     <button
                       type='button'
-                      className='hidden has-hover:inline-flex h-4 w-4'>
-                      <InformationCircleIcon className='w-full h-auto' />
+                      className='hidden h-4 w-4 has-hover:inline-flex'>
+                      <InformationCircleIcon className='h-auto w-full' />
                     </button>
                   </Tooltip.Trigger>
                   <Tooltip.Portal>
@@ -78,11 +76,11 @@ export default function CustomerStoryCard({
                       align='start'
                       className='max-w-[300px] whitespace-pre-wrap rounded-[4px] bg-neutral-725 px-[15px] py-[10px] text-sm leading-normal will-change-[transform,opacity]'
                       sideOffset={5}>
-                      <table className='text-left -my-2'>
+                      <table className='-my-2 text-left'>
                         <tbody className='divide-y divide-white/10'>
                           {hasVerticals && (
                             <tr className='align-top'>
-                              <th className='whitespace-nowrap pr-2 py-2'>
+                              <th className='whitespace-nowrap py-2 pr-2'>
                                 Vertical
                               </th>
                               <td className='py-2'>{verticals.join(', ')}</td>
@@ -90,7 +88,7 @@ export default function CustomerStoryCard({
                           )}
                           {hasMigrations && (
                             <tr className='align-top'>
-                              <th className='whitespace-nowrap pr-2 py-2'>
+                              <th className='whitespace-nowrap py-2 pr-2'>
                                 Migration
                               </th>
                               <td className='py-2'>{migrations.join(', ')}</td>
@@ -98,7 +96,7 @@ export default function CustomerStoryCard({
                           )}
                           {hasProviders && (
                             <tr className='align-top'>
-                              <th className='whitespace-nowrap pr-2 py-2'>
+                              <th className='whitespace-nowrap py-2 pr-2'>
                                 Cloud Provider
                               </th>
                               <td className='py-2'>
