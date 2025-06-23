@@ -35,7 +35,7 @@ export default function LogoAnnouncementLink({
   return (
     <Link
       {...link}
-      className={`group flex min-h-20 flex-row rounded-[4px] border shadow-sm ${theme.link} ${className}`}>
+      className={`group flex min-h-20 flex-row rounded border shadow-sm backdrop-blur ${theme.link} ${className}`}>
       <div
         className={`flex flex-shrink-0 flex-grow-0 items-center justify-center rounded-l-sm p-4 md:py-0 ${theme.logo}`}>
         <Image {...logo} alt='logo' />

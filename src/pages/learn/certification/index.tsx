@@ -1,7 +1,13 @@
+import iconPlay from '../assets/icon-play.svg'
 import Accordion from '@/components-cleaned/Accordion'
+import CertifiedDeveloperCoin from '@/components-cleaned/CertifiedDeveloperCoin'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
-import LogoCarousel from '@/components/LogoCarousel'
+import LogoAnnouncementLink from '@/components/LogoAnnouncementLink'
+import Modal from '@/components/Modal'
+import ResponsiveEmbed from '@/components/ResponsiveEmbed'
+import { StrapiImageUrl } from '@/components/StrapiElements'
+import TiltedText from '@/components/TiltedText'
 import Bullseye from '@/components/icons/Bullseye'
 import Clock from '@/components/icons/Clock'
 import Coins from '@/components/icons/Coins'
@@ -15,6 +21,7 @@ import { LearnProps } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import React, { useState } from 'react'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -108,6 +115,8 @@ export default function CertificationPage({
 }: LearnProps) {
   useGalaxyOnPage('certificationPage')
 
+  const [watchWebinar, setWatchWebinar] = useState(false)
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -124,7 +133,7 @@ export default function CertificationPage({
               ClickHouse Certification exam to validate your ClickHouse
               expertise.
             </SuiText>
-            <div className='mt-8 flex flex-col items-start gap-x-6 gap-y-6 md:flex-row md:items-center md:gap-y-0'>
+            <div className='my-8 flex flex-col items-start gap-x-6 gap-y-6 md:flex-row md:items-center md:gap-y-0'>
               <CUIButton
                 type='primary'
                 size='lg'
@@ -148,6 +157,42 @@ export default function CertificationPage({
                 Purchase as individual
               </CUIButton>
             </div>
+            <LogoAnnouncementLink
+              mode='dark'
+              className='bg-white/5'
+              logo={{
+                src: iconPlay,
+                width: 44,
+                height: 44,
+                alt: 'Play'
+              }}
+              href='#'
+              onClick={(event) => {
+                event.preventDefault()
+                setWatchWebinar(true)
+              }}>
+              Preparing for the ClickHouse Certified Developer exam
+              <br />
+              <span className='text-primary-300 group-hover:underline'>
+                Watch the webinar
+              </span>
+            </LogoAnnouncementLink>
+            <Modal isOpen={watchWebinar} onClose={() => setWatchWebinar(false)}>
+              <div className='w-full flex-shrink-0'>
+                <h3 className='mb-6 mt-1 pr-20 text-2xl md:-mt-1'>
+                  Preparing for the ClickHouse Certified Developer exam
+                </h3>
+                {watchWebinar && (
+                  <ResponsiveEmbed>
+                    <iframe
+                      src='https://www.youtube-nocookie.com/embed/bLXCYhf5G8Q?rel=0&autoplay=1'
+                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                      allowFullScreen
+                    />
+                  </ResponsiveEmbed>
+                )}
+              </div>
+            </Modal>
           </div>
 
           {/* Form column */}
@@ -228,9 +273,9 @@ export default function CertificationPage({
 
           {/* Objectives */}
           <div className='mx-auto my-8 max-w-3xl'>
-            <div className='flex flex-col gap-6 rounded bg-primary-800/95 p-6 text-white'>
+            <div className='flex flex-col gap-2 rounded bg-primary-800/95 p-2 text-white sm:gap-6 sm:p-6'>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>Modeling data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -255,7 +300,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>Inserting data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -277,7 +322,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>Analyzing data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -305,7 +350,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>
                     Optimizing query performance
                   </p>
@@ -329,7 +374,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>
                     Deduplication and mutations
                   </p>
@@ -349,18 +394,18 @@ export default function CertificationPage({
                   </ul>
                 </CUICard.Body>
               </CUICard>
-              <div className='mx-auto w-full'>
+              <div>
                 <CUIButton
                   type='primary'
                   size='lg'
                   weight='semibold'
                   href='https://buy.stripe.com/14keYf7q55tn2Jy001'
-                  linkClass='w-full max-w-[14rem]'
+                  linkClass='w-full'
                   onClick={useGalaxyOnClick(
                     'certificationPage.objectives.purchaseCertification'
                   )}
                   target='_blank'
-                  className='mx-auto w-full max-w-[150px]'>
+                  className='w-full sm:mx-auto sm:w-auto'>
                   Purchase now
                 </CUIButton>
               </div>
@@ -368,14 +413,8 @@ export default function CertificationPage({
           </div>
 
           {/* Footnote */}
-          <div className='mx-auto mt-16 max-w-3xl text-center'>
-            <Image
-              src='/images/learn/certified-developer-badge.png'
-              alt={'ClickHouse Certified Developer'}
-              width={417}
-              height={363}
-              className='mb-16 inline-block max-w-[208px]'
-            />
+          <div className='mx-auto max-w-3xl text-center'>
+            <CertifiedDeveloperCoin className='mx-auto -mt-4 max-w-80' />
 
             <p className='mb-6'>
               To become a ClickHouse Certified Developer, you will need to pass
@@ -403,21 +442,35 @@ export default function CertificationPage({
           {/* Logo carousel */}
           <SuiTitle type='h3' className='mb-6 mt-28 text-center'>
             Trusted by the best developers that work with data{' '}
-            <span className='tilted tilted-black'>
-              <span className='tilted-content text-white'>at scale</span>
-            </span>
+            <TiltedText type='white-on-black' className='px-1 py-0.5'>
+              at scale
+            </TiltedText>
           </SuiTitle>
-          <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
-            <div className='absolute left-0 z-10 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-            <div className='absolute right-0 z-10 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-            <LogoCarousel
-              logos={customerStories.logos.slice(
-                0,
-                Math.ceil(customerStories.logos.length / 2)
-              )}
-              speedClass1='animate-marqueeLeft'
-              speedClass2='animate-marqueeLeft2'
-            />
+          <div className='mask-logos-carousel mx-auto max-w-5xl opacity-90 brightness-50 grayscale'>
+            <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
+                {customerStories.logos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                      <StrapiImageUrl {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
+                {customerStories.logos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                      <StrapiImageUrl {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
