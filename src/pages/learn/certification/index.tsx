@@ -156,10 +156,7 @@ export default function CertificationPage({
               There is no required prerequisite for attempting this exam, but we
               highly recommend taking the ClickHouse Developer training course -
               available either{' '}
-              <a
-                href='https://learn.clickhouse.com/visitor_catalog_class/show/1328973'
-                target='_blank'
-                className='text-primary-300'>
+              <a href='/learn#on-demand' className='text-primary-300'>
                 On-demand
               </a>{' '}
               or Instructor-led, which covers all the exam objectives listed
@@ -168,10 +165,8 @@ export default function CertificationPage({
 
             <p className='mb-4'>
               Check out our{' '}
-              <Link
-                className='text-primary-300'
-                href='/company/events?category=Live+Training#upcoming-events'>
-                Live Events page
+              <Link href='/learn#live-training' className='text-primary-300'>
+                Live Events
               </Link>{' '}
               to register for the next Instructor-led ClickHouse Developer
               training.
