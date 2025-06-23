@@ -121,11 +121,17 @@ export default function CertificationPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='bg-grid'>
-        <div className='section-container flex flex-row flex-wrap items-start justify-between gap-6 py-16 md:py-20 lg:flex-nowrap'>
+        <div className='section-container flex flex-row flex-wrap items-start justify-between gap-x-6 gap-y-16 py-16 md:py-20 lg:flex-nowrap'>
           {/* Content column */}
-          <div className='w-full lg:max-w-[600px]'>
-            <SuiTitle type='h1' color='white' className='mb-6 md:!text-6xl'>
-              ClickHouse Certified Developer Exam
+          <div className='w-full space-y-6 text-center lg:max-w-[600px] lg:text-left'>
+            <p className='text-base font-bold text-primary-300'>
+              <Link href='/learn' className='hover:underline'>
+                Training
+              </Link>{' '}
+              / <span>Certification</span>
+            </p>
+            <SuiTitle type='h1' color='white' className='md:!text-6xl'>
+              ClickHouse&nbsp;Certified Developer&nbsp;Exam
             </SuiTitle>
             <SuiText color='secondary'>
               Elevate your career to industry-leading heights! Take our official{' '}
@@ -133,11 +139,11 @@ export default function CertificationPage({
               ClickHouse Certification exam to validate your ClickHouse
               expertise.
             </SuiText>
-            <div className='my-8 flex flex-col items-start gap-x-6 gap-y-6 md:flex-row md:items-center md:gap-y-0'>
+            <div className='!my-8 flex flex-wrap justify-center gap-4 lg:justify-start'>
               <CUIButton
                 type='primary'
                 size='lg'
-                weight='semibold'
+                className='px-8'
                 href='https://buy.stripe.com/14keYf7q55tn2Jy001'
                 onClick={useGalaxyOnClick(
                   'certificationPage.hero.purchaseCertificationBusinessSelect'
@@ -146,9 +152,9 @@ export default function CertificationPage({
                 Purchase as business
               </CUIButton>
               <CUIButton
-                type='secondary'
+                type='secondary-dark'
                 size='lg'
-                weight='semibold'
+                className='px-8'
                 href='https://buy.stripe.com/3csbM36m1cVPgAo147'
                 onClick={useGalaxyOnClick(
                   'certificationPage.hero.purchaseCertificationPersonalSelect'
@@ -159,7 +165,7 @@ export default function CertificationPage({
             </div>
             <LogoAnnouncementLink
               mode='dark'
-              className='bg-white/5'
+              className='mx-auto max-w-max bg-white/5 lg:ml-0 lg:max-w-none'
               logo={{
                 src: iconPlay,
                 width: 44,
