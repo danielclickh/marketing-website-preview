@@ -1,27 +1,23 @@
 import iconCalendar from './assets/icon-calendar.svg'
 import iconCareerAdvantage from './assets/icon-career-advantage.svg'
 import iconContributors from './assets/icon-contributors.svg'
-import iconDataWarehousing from './assets/icon-data-warehousing.svg'
 import iconDevelopers from './assets/icon-developers.svg'
 import iconImprovedResults from './assets/icon-improved-results.svg'
 import iconIndustryCredibility from './assets/icon-industry-credibility.svg'
 import iconLiveTraining from './assets/icon-live-training.svg'
 import iconMapPin from './assets/icon-map-pin.svg'
-import iconMlGenAi from './assets/icon-ml-genai.svg'
-import iconObservability from './assets/icon-observability.svg'
 import iconOnDemand from './assets/icon-on-demand.svg'
 import iconPrs from './assets/icon-prs.svg'
-import iconRealTimeAnalytics from './assets/icon-real-time-analytics.svg'
 import iconStars from './assets/icon-stars.svg'
 import iconTeamRecognition from './assets/icon-team-recognition.svg'
 import videoThumbnail from './assets/video-thumbnail.png'
 import AngledSection from '@/components-cleaned/AngledSection'
 import LearningPathCard from '@/components-cleaned/LearningPathCard'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
-import { CUIButton, CUICard } from '@/components/ClickUI'
+import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
-import { StrapiImage, StrapiImageUrl } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import {
   SuiCodeblock,
@@ -39,6 +35,7 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
+import { PAGES } from '@/pages/learn/[slug]'
 import { EventType } from '@/types/events'
 import { LearnProps } from '@/types/learn'
 import { GetStaticProps } from 'next'
@@ -293,38 +290,19 @@ export default function LearnPage({
             </SuiText>
           </div>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-4 xl:gap-8'>
-            <LearningPathCard
-              icon={iconRealTimeAnalytics}
-              title='Real-time analytics'
-              description='Learn how to power real-time dashboards, alerts, and event-driven apps with ClickHouse.'
-              href='/learn/real-time-analytics'
-              duration='2.5 hours'
-              modules='3 modules'
-            />
-            <LearningPathCard
-              icon={iconMlGenAi}
-              title='ML and GenAI'
-              description='Use ClickHouse to prepare data, feed models, and support GenAI workflows at scale.'
-              href='/learn/machine-learning-and-data-science'
-              duration='1 hour'
-              modules='2 modules'
-            />
-            <LearningPathCard
-              icon={iconDataWarehousing}
-              title='Data warehousing'
-              description='Design, build, and optimize modern data warehouses using ClickHouse.'
-              href='/learn/data-warehousing'
-              duration='4.5 hours'
-              modules='6 modules'
-            />
-            <LearningPathCard
-              icon={iconObservability}
-              title='Observability'
-              description='Ingest logs, metrics, and traces to monitor systems and power observability dashboards.'
-              href='/learn/observability'
-              duration='2.5 hours'
-              modules='4 modules'
-            />
+            {PAGES.map((path, pathIndex) => {
+              return (
+                <LearningPathCard
+                  key={pathIndex}
+                  icon={path.icon}
+                  title={path.title}
+                  description={path.intro}
+                  href={`/learn/${path.slug}`}
+                  duration={path.duration}
+                  modules={path.modules}
+                />
+              )
+            })}
           </div>
         </div>
       </section>
