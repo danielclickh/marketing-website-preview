@@ -32,9 +32,10 @@ import {
   getUnlistedFilters
 } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { convertDateToString } from '@/lib/utils/dateUtils'
+import { convertDateToString, startOfToday } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
+import { limitStringByWord, slugify } from '@/lib/utils/strings'
 import { PAGES } from '@/pages/learn/[slug]'
 import { EventType } from '@/types/events'
 import { LearnProps } from '@/types/learn'
@@ -60,7 +61,7 @@ export const getStaticProps: GetStaticProps<LearnProps> =
         $and: [
           {
             localDatetime: {
-              $gte: new Date().toISOString()
+              $gte: startOfToday().toISOString()
             },
             category: {
               $in: ['Live Training', 'Free Training', 'Paid Training']
@@ -113,48 +114,29 @@ export default function LearnPage({
       return events
     }
 
-    const includesSearch = (value: string) => {
-      return searchTerm.split(/\s+/).filter((part) => {
-        return value.toLowerCase().includes(part)
-      }).length
+    const includesSearch = (value: string | null) => {
+      return (value || '')
+        .trim()
+        .toLowerCase()
+        .includes(searchTerm.trim().toLowerCase())
     }
 
-    const weightedEvents: Array<{
-      event: EventType
-      weight: number
-    }> = []
+    const todayStart = startOfToday()
 
-    events.forEach((event) => {
-      let weight = 0
-      if (includesSearch(event.title)) {
-        weight++
-      }
-      if (event.shortDescription) {
-        weight += includesSearch(event.shortDescription)
-      }
-      if (event.richDescription) {
-        weight += includesSearch(event.richDescription)
-      }
-      if (event.location.city) {
-        weight += includesSearch(event.location.city)
-      }
-      if (event.location.country) {
-        weight += includesSearch(event.location.country)
+    return events.filter((event) => {
+      // Remove any event's that have passsed since the page was last built
+      if (new Date(event.localDatetime) < todayStart) {
+        return false
       }
 
-      if (weight > 0) {
-        weightedEvents.push({
-          event,
-          weight
-        })
-      }
+      return (
+        includesSearch(event.title) ||
+        includesSearch(event.shortDescription) ||
+        includesSearch(event.richDescription) ||
+        includesSearch(event.location.city) ||
+        includesSearch(event.location.country)
+      )
     })
-
-    // weightedEvents.sort((a, b) => {
-    //   return a.weight - b.weight
-    // })
-
-    return weightedEvents.map(({ event }) => event)
   }, [events, eventsSearch])
 
   return (
@@ -388,7 +370,29 @@ export default function LearnPage({
                     })}
                   </ul>
                 ) : (
-                  <div>No results found.</div>
+                  <div className='py-16 text-center lg:py-24'>
+                    {eventsSearch && eventsSearch.length > 0 ? (
+                      <p className='text-xl font-bold'>
+                        No search results for "
+                        {limitStringByWord(eventsSearch, 20, '...')}"
+                      </p>
+                    ) : (
+                      <>
+                        <p className='mb-4 text-xl font-bold'>
+                          We don’t have any live training at the moment
+                        </p>
+                        <p>
+                          Check back soon or explore our{' '}
+                          <Link
+                            href='#on-demand'
+                            className='text-primary-300 hover:underline'>
+                            on-demand
+                          </Link>{' '}
+                          learning resources in the meantime.
+                        </p>
+                      </>
+                    )}
+                  </div>
                 )}
               </div>
             </div>

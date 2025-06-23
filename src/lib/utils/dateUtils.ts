@@ -6,3 +6,15 @@ export function convertDateToString(value: string): string {
     timeZone: 'UTC'
   })
 }
+
+export function startOfToday() {
+  const startOfToday = new Date()
+  startOfToday.setHours(0, 0, 0, 0)
+  return startOfToday
+}
+
+export function endOfToday() {
+  const endOfToday = new Date()
+  endOfToday.setHours(23, 59, 59, 999)
+  return endOfToday
+}
