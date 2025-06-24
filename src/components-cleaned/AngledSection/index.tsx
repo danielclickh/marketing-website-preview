@@ -24,13 +24,13 @@ interface BottomProps extends BaseProps {
 export type AngledSectionProps = TopProps | BottomProps
 
 const topPaths: Record<Direction, string> = {
-  up: 'M1440 64 747.39 1.04a260 260 0 0 0-46.19-.02L0 64h1440Z',
-  down: 'm0 0 701.2 62.16a260 260 0 0 0 46.19-.02L1440 0v64H0V0Z'
+  up: 'M 700 2 a 260 260 0 0 1 46 0 l 694 62 H 0 L 700 2 Z',
+  down: 'M 0 0 L 700 62 a 260 260 0 0 0 46 -0 L 1440 0 V 64 H 0 V 0 Z'
 }
 
 const bottomPaths: Record<Direction, string> = {
-  up: 'M0 64 701.2 2.05a260 260 0 0 1 46.19.02L1440 64V0H0v64Z',
-  down: 'M1440 0 747.39 62.14a260 260 0 0 1-46.19.02L0 0h144  0Z'
+  up: 'M 0 64 700 2 a 260 260 0 0 1 46 0 l 694 62 V 0 H 0 V 64 Z',
+  down: 'M 1440 0 L 746 62 a 260 260 0 0 1 -46 0 L 0 0 H 1440 Z'
 }
 
 export default function AngledSection({
@@ -50,7 +50,8 @@ export default function AngledSection({
           height='64'
           fill='none'
           className='h-auto w-full'
-          viewBox='0 0 1440 64'>
+          viewBox='0 0 1440 64'
+          style={{ transform: 'translateY(1%)' }}>
           <path fill={topFill} d={topPaths[topDirection]} />
         </svg>
       )}
@@ -62,7 +63,8 @@ export default function AngledSection({
           height='64'
           fill='none'
           className='h-auto w-full'
-          viewBox='0 0 1440 64'>
+          viewBox='0 0 1440 64'
+          style={{ transform: 'translateY(-1%)' }}>
           <path fill={bottomFill} d={bottomPaths[bottomDirection]} />
         </svg>
       )}
