@@ -7,13 +7,16 @@ export function convertDateToString(value: string): string {
   })
 }
 
-export function convertTimeToString(value: string): string {
+export function convertTimeToString(
+  value: string,
+  timeZone: string = 'UTC'
+): string {
   return new Date(value).toLocaleString('en-US', {
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
     timeZoneName: 'short',
-    timeZone: 'UTC'
+    timeZone
   })
 }
 

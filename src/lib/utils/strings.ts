@@ -1,3 +1,5 @@
+import removeMarkdown from 'remove-markdown'
+
 export function upperCaseFirst(string: string) {
   return string.charAt(0).toLocaleUpperCase() + string.slice(1)
 }
@@ -121,4 +123,45 @@ export function limitStringByWord(
 
 export function escapeForRegex(input: string) {
   return input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+export function extractEventTime(markdown: string) {
+  // Remove all markdown syntax
+  const stripped = removeMarkdown(markdown)
+
+  // Extract times from markdown, for example:
+  // `Time: 11:00 AM` => 11:00 AM
+  // `Times: 1PM EDT / 3PM BST` => 1PM EDT / 3PM BST
+  // `Date: 4th November at 4PM` => 4PM
+  const regex = /(?:^times?\s*:\s*(.+)$)|(?:dates?\s*:\s*(?:.+)\sat\s(.+)$)/im
+  const matches = stripped.match(regex)
+  const extractedValue = matches?.[1] || matches?.[2] || null
+
+  // Bail early if time not found
+  if (!extractedValue) {
+    return null
+  }
+
+  // Remove parentheses notes text
+  const cleaned = extractedValue.replace(/\(.*?\)|note:.*/gi, '').trim()
+
+  // Split on known separators while preserving timezone groups
+  const segments = cleaned.split(/\s*[-/]\s*/)
+
+  const formattedSegments = segments.map((segment) => {
+    // Match time + optional minutes + optional AM/PM + timezone
+    const timeRegex = /(\d{1,2})(?::(\d{2}))?\s*(AM|PM)?\s*([A-Z]{2,5})/i
+    const match = segment.match(timeRegex)
+
+    if (!match) return segment.trim() // fallback
+
+    const [, hour, minutes = '00', meridian = '', tz] = match
+
+    return `${String(hour).padStart(2, '0')}:${minutes} ${meridian.toUpperCase()} ${tz.toUpperCase()}`
+  })
+
+  // Choose separator based on original
+  if (extractedValue.includes('/')) return formattedSegments.join(' / ')
+  if (extractedValue.includes('-')) return formattedSegments.join(' - ')
+  return formattedSegments[0]
 }

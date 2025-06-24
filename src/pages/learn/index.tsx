@@ -39,7 +39,11 @@ import {
 } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
-import { limitStringByWord, slugify } from '@/lib/utils/strings'
+import {
+  extractEventTime,
+  limitStringByWord,
+  slugify
+} from '@/lib/utils/strings'
 import { PAGES } from '@/pages/learn/[slug]'
 import { LearnProps, TrainingSimpleEvent } from '@/types/learn'
 import { GetStaticProps } from 'next'
@@ -88,12 +92,7 @@ export const getStaticProps: GetStaticProps<LearnProps> =
 
     events = events.map((event) => {
       if (event.richDescription) {
-        const stripped = removeMarkdown(event.richDescription)
-        const regex =
-          /(?:^times?\s*:\s*(.+)$)|(?:dates?\s*:\s*(?:.+)\sat\s(.+)$)/im
-
-        const matches = stripped.match(regex)
-        event.extractedTime = matches?.[1] || matches?.[2] || null
+        event.extractedTime = extractEventTime(event.richDescription)
       }
 
       if (!event?.extractedTime) {
