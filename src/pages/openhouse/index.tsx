@@ -787,7 +787,6 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
         // Only scroll into view if it's not already in view
         if (!isInView) {
           speakersToggle.scrollIntoView({
-            behavior: 'smooth',
             block: 'center'
           })
         }
@@ -805,9 +804,7 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
       const blogsEl = blogsRef.current
       if (!blogsEl) return
       event.preventDefault()
-      blogsEl.scrollIntoView({
-        behavior: 'smooth'
-      })
+      blogsEl.scrollIntoView()
     },
     [blogsRef]
   )
@@ -821,9 +818,7 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
       if (!videosEl) return
       if (category !== undefined) setVideoFilter(category)
       event.preventDefault()
-      videosEl.scrollIntoView({
-        behavior: 'smooth'
-      })
+      videosEl.scrollIntoView()
     },
     [videosRef, setVideoFilter]
   )

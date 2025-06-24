@@ -80,9 +80,7 @@ export default function ContactPage({
 
                       // Delay needed to allow the ref to update before scrolling
                       setTimeout(() => {
-                        formSuccessRef.current?.scrollIntoView({
-                          behavior: 'smooth'
-                        })
+                        formSuccessRef.current?.scrollIntoView()
                       }, 10)
 
                       return false // Stops page from reloading

@@ -164,9 +164,7 @@ export default function ComparisonPage({
                             setFormSuccess(true)
                             // Delay needed to allow the ref to update before scrolling
                             setTimeout(() => {
-                              formSuccessRef1.current?.scrollIntoView({
-                                behavior: 'smooth'
-                              })
+                              formSuccessRef1.current?.scrollIntoView()
                             }, 10)
 
                             return false // Stops page from reloading
@@ -441,9 +439,7 @@ export default function ComparisonPage({
                     setFormSuccess(true)
                     // Delay needed to allow the ref to update before scrolling
                     setTimeout(() => {
-                      formSuccessRef.current?.scrollIntoView({
-                        behavior: 'smooth'
-                      })
+                      formSuccessRef.current?.scrollIntoView()
                     }, 10)
 
                     return false // Stops page from reloading
