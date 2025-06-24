@@ -353,11 +353,11 @@ export default function LearnPage({
                       return (
                         <li
                           key={eventIndex}
-                          className='relative col-span-full grid grid-cols-subgrid gap-y-2 rounded bg-neutral-900/30 px-4 py-2'>
+                          className='relative col-span-full grid grid-cols-subgrid gap-y-2 rounded bg-neutral-900/30 px-4 py-2 transition-colors hover:bg-neutral-900/60'>
                           <div className='col-span-full flex lg:col-span-6'>
                             <Link
                               href={`/company/events/${event.slug}`}
-                              className='my-auto font-bold text-primary-300 hover:underline'>
+                              className='my-auto font-bold text-primary-300 transition-colors hover:text-white'>
                               <span className='absolute inset-0' />
                               {event.title}
                             </Link>
