@@ -198,9 +198,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 const target = document.querySelector('#waitlist')
                 if (target) {
                   event.preventDefault()
-                  target.scrollIntoView({
-                    behavior: 'smooth'
-                  })
+                  target.scrollIntoView()
                 }
               }}>
               Join waitlist

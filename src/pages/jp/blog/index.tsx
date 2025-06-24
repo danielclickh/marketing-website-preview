@@ -102,8 +102,7 @@ export default function BlogsPage({
   const backToTop = () => {
     setTimeout(() => {
       window.scroll({
-        top: (scrollToContainer?.current?.offsetTop || 0) - 100,
-        behavior: 'smooth'
+        top: (scrollToContainer?.current?.offsetTop || 0) - 100
       })
     }, 0)
   }
