@@ -198,7 +198,7 @@ export default function LearnPage({
           </div>
           <div className='w-full max-w-xl'>
             <YouTubeVideo
-              id='V6C6zyR4rq0'
+              id='6mmQUOmA-T0'
               thumbnail={videoThumbnail}
               playButtonEyebrow='New to ClickHouse?'
               playButtonLabel='Watch the introduction'
@@ -348,7 +348,7 @@ export default function LearnPage({
               </div>
               <div>
                 {filteredEvents.length > 0 ? (
-                  <ul className='grid grid-cols-2 space-y-2 lg:grid-cols-10'>
+                  <ul className='grid grid-cols-1 space-y-2 sm:grid-cols-2 lg:grid-cols-10'>
                     {filteredEvents.map((event, eventIndex) => {
                       return (
                         <li
@@ -526,8 +526,8 @@ export default function LearnPage({
           <SuiCodeblock
             showCopy={true}
             copyValue='curl https://clickhouse.com/ | sh'
-            className='mx-auto flex w-max items-center gap-3 pr-24'>
-            <span className='text-primary'>$</span>
+            className='mx-auto flex w-full items-center gap-3 pr-24 sm:w-max'>
+            <span className='hidden text-primary sm:inline'>$</span>
             <span>curl https://clickhouse.com/ | sh</span>
           </SuiCodeblock>
         </div>
