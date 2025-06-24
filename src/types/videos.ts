@@ -1,4 +1,5 @@
 import { CommonProps } from './homepage'
+import { StrapiImageType } from '@/lib/api/strapi/types'
 
 export interface VideoCategory {
   id: number
@@ -15,6 +16,11 @@ export interface Video {
   categories: Array<VideoCategory>
   RelatedVideos: Array<Video>
   VideoDate?: null | string
+  promotion?: {
+    title: string
+    description: string
+    image: StrapiImageType
+  }
   seo?: CommonProps['seo']
   publishedAt: string
 }

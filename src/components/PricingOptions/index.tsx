@@ -308,7 +308,6 @@ function PricingOptions({
                                       )
                                     if (calculatorElement) {
                                       calculatorElement.scrollIntoView({
-                                        behavior: 'smooth',
                                         block: 'start'
                                       })
                                       router.push(
@@ -351,7 +350,6 @@ function PricingOptions({
                                     )
                                   if (calculatorElement) {
                                     calculatorElement.scrollIntoView({
-                                      behavior: 'smooth',
                                       block: 'start'
                                     })
                                     router.push(

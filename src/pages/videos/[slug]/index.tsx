@@ -1,7 +1,9 @@
+import { CUICard } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
+import { StrapiImage } from '@/components/StrapiElements'
 import VideoCard from '@/components/VideoCard'
 import { SuiButton, SuiTitle } from '@/components/sui'
 import { fetchAll, findAll, getProxiedMediaUrl } from '@/lib/api/strapi'
@@ -14,6 +16,7 @@ import { ParamsType } from '@/types/homepage'
 import { Video } from '@/types/videos'
 import { GetStaticPropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
+import React from 'react'
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const { slug } = context.params as ParamsType
@@ -25,7 +28,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       'RelatedVideos.categories',
       'RelatedVideos.seo.image',
       'seo',
-      'seo.image'
+      'seo.image',
+      'promotion',
+      'promotion.image'
     ],
     filters: {
       Slug: {
@@ -296,6 +301,24 @@ export default function VideoPage({
             <h2 className='whitespace-pre-wrap text-xl'>{video.IntroText}</h2>
           )}
           {video.Description && <Markdown>{video.Description}</Markdown>}
+          {video.promotion && (
+            <div className='mt-8'>
+              <CUICard className='border-primary-300'>
+                <CUICard.Body className='p-6 text-sm'>
+                  <p className='mb-3'>
+                    <strong>{video.promotion.title}</strong>
+                  </p>
+                  <div className='flex flex-col gap-6 md:flex-row md:items-start'>
+                    <p>{video.promotion.description}</p>
+                    <StrapiImage
+                      {...video.promotion.image}
+                      className='mx-auto !h-auto !w-36 flex-shrink-0 flex-grow-0 md:mr-0'
+                    />
+                  </div>
+                </CUICard.Body>
+              </CUICard>
+            </div>
+          )}
         </div>
       </div>
 

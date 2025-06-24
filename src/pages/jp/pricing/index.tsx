@@ -204,9 +204,7 @@ export default function PricingPage({
                             onClick={(event) => {
                               if (pocFormRef.current) {
                                 event.preventDefault()
-                                pocFormRef.current.scrollIntoView({
-                                  behavior: 'smooth'
-                                })
+                                pocFormRef.current.scrollIntoView()
                               }
                             }}>
                             お問合せ
@@ -294,9 +292,7 @@ export default function PricingPage({
                               onClick={(event) => {
                                 if (pocFormRef.current) {
                                   event.preventDefault()
-                                  pocFormRef.current.scrollIntoView({
-                                    behavior: 'smooth'
-                                  })
+                                  pocFormRef.current.scrollIntoView()
                                 }
                               }}>
                               お問合せ
@@ -454,9 +450,7 @@ function RegionRequest() {
               setModalFormSuccess(true)
               // Delay needed to allow the ref to update before scrolling
               setTimeout(() => {
-                modalFormSuccessRef.current?.scrollIntoView({
-                  behavior: 'smooth'
-                })
+                modalFormSuccessRef.current?.scrollIntoView()
               }, 10)
 
               return false // Stops page from reloading

@@ -201,9 +201,7 @@ export default function PricingPage({
                             onClick={(event) => {
                               if (pocFormRef.current) {
                                 event.preventDefault()
-                                pocFormRef.current.scrollIntoView({
-                                  behavior: 'smooth'
-                                })
+                                pocFormRef.current.scrollIntoView()
                               }
                             }}>
                             Contact us
@@ -294,9 +292,7 @@ export default function PricingPage({
                               onClick={(event) => {
                                 if (pocFormRef.current) {
                                   event.preventDefault()
-                                  pocFormRef.current.scrollIntoView({
-                                    behavior: 'smooth'
-                                  })
+                                  pocFormRef.current.scrollIntoView()
                                 }
                               }}>
                               Contact us
@@ -315,9 +311,8 @@ export default function PricingPage({
               />
             )}
           </div>
-          <div className='clip-inverted-triangle bg-shadow-element pb-60 pt-10'></div>
-          <div className='philosophy -mt-1 bg-primary-300 text-neutral-900'>
-            <div className='flip-selection mx-auto max-w-7xl px-4 pb-16 sm:px-8 2xl:px-0'>
+          <div className='philosophy mt-24 bg-primary-300 text-neutral-900'>
+            <div className='flip-selection mx-auto max-w-7xl px-4 py-16 sm:px-8 2xl:px-0'>
               <SuiTitle
                 type='h2'
                 className='pb-16 text-center text-neutral-900'>
@@ -454,9 +449,7 @@ function RegionRequest() {
               setModalFormSuccess(true)
               // Delay needed to allow the ref to update before scrolling
               setTimeout(() => {
-                modalFormSuccessRef.current?.scrollIntoView({
-                  behavior: 'smooth'
-                })
+                modalFormSuccessRef.current?.scrollIntoView()
               }, 10)
 
               return false // Stops page from reloading

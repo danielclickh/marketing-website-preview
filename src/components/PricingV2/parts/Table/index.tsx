@@ -45,9 +45,7 @@ const TableColumn = memo(function TableColumn({
               onEstimateCostClick()
               const calculator = document.getElementById('pricing-calculator')
               if (calculator) {
-                calculator.scrollIntoView({
-                  behavior: 'smooth'
-                })
+                calculator.scrollIntoView()
               }
             }}
             weight='medium'

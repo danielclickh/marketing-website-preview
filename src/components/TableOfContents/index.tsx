@@ -113,9 +113,7 @@ export default function TableOfContents({
                   title={heading.textContent || ''}
                   onClick={(e) => {
                     e.preventDefault()
-                    document.getElementById(heading.id)?.scrollIntoView({
-                      behavior: 'smooth'
-                    })
+                    document.getElementById(heading.id)?.scrollIntoView()
                   }}>
                   {heading.textContent}
                 </a>

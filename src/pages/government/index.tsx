@@ -85,7 +85,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                   <CheckItem>
                     Access{' '}
                     <strong>
-                      NIST 800-53 (Risk Management Framework) compliance 
+                      NIST 800-53 (Risk Management Framework) compliance
                       documentation
                     </strong>{' '}
                     and robust <strong>FIPS 140-3 support</strong>.
@@ -594,9 +594,7 @@ function Form({
 
               // Delay needed to allow the ref to update before scrolling
               setTimeout(() => {
-                formSuccessRef.current?.scrollIntoView({
-                  behavior: 'smooth'
-                })
+                formSuccessRef.current?.scrollIntoView()
               }, 10)
 
               return false // Stops page from reloading

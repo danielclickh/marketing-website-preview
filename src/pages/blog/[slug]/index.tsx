@@ -32,6 +32,9 @@ import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React, { useRef } from 'react'
+import ReactMarkdown from 'react-markdown'
+
+import children = ReactMarkdown.propTypes.children
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -192,26 +195,40 @@ export default function BlogPage({
   useGalaxyOnPage('blogPage')
   const contentRef = useRef<null | HTMLDivElement>(null)
 
-  const GlobalBlogCta = ({ location }: { location: string }) => {
+  const GlobalBlogCta = ({
+    location,
+    children
+  }: {
+    location: string
+    children?: React.ReactNode
+  }) => {
     return (
       <>
         {globalCta && (
           <SimpleCtaCard
             link={globalCta.link}
             galaxyEventName={`blogPage.${location}GlobalCta.${camel(globalCta.link.text)}`}>
-            <Markdown allowHeaderLink={false}>{globalCta.content}</Markdown>
+            {!children && (
+              <Markdown allowHeaderLink={false}>{globalCta.content}</Markdown>
+            )}
+            {children}
           </SimpleCtaCard>
         )}
       </>
     )
   }
 
-  const markdownDirectives: Record<string, () => React.ReactNode> = {
-    'global-blog-cta': () => (
-      <div className='my-6'>
-        <GlobalBlogCta location='content' />
-      </div>
-    )
+  const markdownDirectives: Record<
+    string,
+    (props: Record<string, any>) => React.ReactNode
+  > = {
+    'global-blog-cta': ({ node, children }) => {
+      return (
+        <div className='my-6'>
+          <GlobalBlogCta location='content'>{children}</GlobalBlogCta>
+        </div>
+      )
+    }
   }
 
   // Ensure correct directive syntax is used
