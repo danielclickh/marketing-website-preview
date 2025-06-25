@@ -29,6 +29,7 @@ import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ComparisonPage, ComparisonProps } from '@/types/comparisons'
 import { HomepageCustomerStories } from '@/types/homepage'
+import { useFeatureValue, useGrowthBook } from '@growthbook/growthbook-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useRef, useState } from 'react'
@@ -150,7 +151,22 @@ export default function BigQueryCostsPage({
 }: BigQueryCostsPageProps) {
   useGalaxyOnPage(`${comparison.slug}CostsComparisonPage`)
 
-  const pageLayout: number = 0
+  const gb = useGrowthBook()
+
+  if (gb?.ready) {
+    const testTarget = document.querySelector('#test-target')
+
+    setTimeout(() => {
+      updateLinks(
+        'mktg-bigquery-costs',
+        gb.getFeatureValue('mktg-bigquery-costs-hero', 0).toString(),
+        '.readable-content'
+      )
+      testTarget?.classList.remove('hidden')
+    }, 100)
+  }
+
+  const pageLayout = useFeatureValue('mktg-bigquery-costs-hero', 0)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalFormLocValue, setModalFormLocValue] = useState<null | string>(

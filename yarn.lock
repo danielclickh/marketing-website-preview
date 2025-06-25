@@ -289,6 +289,20 @@
   dependencies:
     "@floating-ui/dom" "^1.0.0"
 
+"@growthbook/growthbook-react@^0.25.0":
+  version "0.25.0"
+  resolved "https://registry.npmjs.org/@growthbook/growthbook-react/-/growthbook-react-0.25.0.tgz"
+  integrity sha512-EPkdDvpm9YzAnE1xy+kRxiOaKODhAQD1yBDMNyI96nzOu52p8yKsaTIOdoH0URpeSSbgCc8mtI7K6WCFFrLtEw==
+  dependencies:
+    "@growthbook/growthbook" "^0.35.0"
+
+"@growthbook/growthbook@^0.35.0":
+  version "0.35.0"
+  resolved "https://registry.npmjs.org/@growthbook/growthbook/-/growthbook-0.35.0.tgz"
+  integrity sha512-QgTXq3nGh4QU0zYiEpiWWomNNPemagHOAN0wL0vgKvRl1FE3pPMqFwABtMXqytHyq9YOgeSRXys8JlCc09CzbQ==
+  dependencies:
+    dom-mutator "^0.6.0"
+
 "@h6s/calendar@^2.0.1":
   version "2.0.1"
   resolved "https://registry.npmjs.org/@h6s/calendar/-/calendar-2.0.1.tgz"
@@ -2364,6 +2378,11 @@ dom-helpers@^5.0.1:
   dependencies:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
+
+dom-mutator@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/dom-mutator/-/dom-mutator-0.6.0.tgz"
+  integrity sha512-iCt9o0aYfXMUkz/43ZOAUFQYotjGB+GNbYJiJdz4TgXkyToXbbRy5S6FbTp72lRBtfpUMwEc1KmpFEU4CZeoNg==
 
 dotenv@^16.5.0:
   version "16.5.0"
