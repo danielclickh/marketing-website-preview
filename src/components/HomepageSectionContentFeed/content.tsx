@@ -44,12 +44,12 @@ export type EntryStat = {
 }
 
 export type Entry = {
-  body: string
-  logo: React.ComponentType
+  body: React.ReactNode | string
+  logo?: React.ComponentType
   categories: EntryCategory[]
   stats?: EntryStat[]
   featured: boolean
-  embed?: string
+  embed?: React.ReactNode | string
 }
 
 export function getCategories(): EntryCategory[] {
@@ -61,6 +61,61 @@ export function getCategories(): EntryCategory[] {
 
 export function getContent(): Entry[] {
   return [
+    // Open house
+    {
+      featured: true,
+      body: (
+        <>
+          <p className='mb-4 text-balance text-2xl'>
+            “ClickHouse played an instrumental role in helping us develop and
+            ship Claude 4.”
+          </p>
+          <p className='text-2xl'>
+            <strong>Anthropic</strong>
+          </p>
+        </>
+      ),
+      embed:
+        '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SrLKbzdFEWA?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+      categories: []
+    },
+    {
+      featured: true,
+      body: (
+        <>
+          <p className='mb-4 text-balance text-2xl'>
+            “ClickHouse checked every box. We have availability, we have speed,
+            we have durability. We have everything we could want.”
+          </p>
+          <p className='text-2xl'>
+            <strong>Tesla</strong>
+          </p>
+        </>
+      ),
+      embed:
+        '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/z5t3b3EAc84?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+      categories: []
+    },
+    {
+      featured: true,
+      body: (
+        <>
+          <p className='mb-4 text-balance text-2xl'>
+            “We needed something to slice and dice real-time data, like rides
+            and driver hours across cities and regions where Lyft runs. Using
+            ClickHouse resulted into a lot of performance benefits for us with
+            huge cost savings for the org.”
+          </p>
+          <p className='text-2xl'>
+            <strong>Lyft</strong>
+          </p>
+        </>
+      ),
+      embed:
+        '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/DWkuhCBA7B4?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+      categories: []
+    },
+
     // Langchain
     {
       featured: false,
@@ -70,7 +125,7 @@ export function getContent(): Entry[] {
     },
     // Cloudflare
     {
-      featured: true,
+      featured: false,
       body: '“ClickHouse helps us efficiently and reliably analyze logs across trillions of Internet requests to identify malicious traffic and provide customers with rich analytics.” [Read blog](https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/)',
       logo: LogoCloudflare,
       categories: ['Real-time analytics'],
@@ -188,7 +243,7 @@ export function getContent(): Entry[] {
 
     // Lyft
     {
-      featured: true,
+      featured: false,
       body: '“We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.” [Read blog](https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd)',
       logo: LogoLyft,
       categories: ['Business intelligence'],
@@ -235,7 +290,7 @@ export function getContent(): Entry[] {
 
     // Vimeo
     {
-      featured: true,
+      featured: false,
       body: '“In the post-evaluation of each database against our criteria (with metrics ranging from query performance to cost), ClickHouse emerged as the unrivalled frontrunner. It excelled across the board, even astonishingly so in certain domains, and proved more cost-efficient.” [Read blog](https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28)',
       logo: LogoVimeo,
       categories: ['Media & entertainment'],
