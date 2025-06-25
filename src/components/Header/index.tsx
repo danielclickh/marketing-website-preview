@@ -19,7 +19,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
-  const [headerBannerVisible, setHeaderBannerVisible] = useState(false)
+  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
   const [headerBannerText, setHeaderBannerText] = useState(
     'Join a ClickStack live demo and Q&A on July 8th'
   )
@@ -36,7 +36,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   }
 
   useEffect(() => {
-    setHeaderBannerVisible(pathname === '/use-cases/observability')
+    setHeaderBannerEnabled(pathname === '/use-cases/observability')
   }, [pathname])
 
   useEffect(() => {
@@ -128,16 +128,16 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        {headerBannerVisible && (
-          <AnnouncementBar
-            link={headerBannerUrl}
-            text={headerBannerText}
-            dismissible={true}
-            onShow={resizeHandler}
-            onHide={resizeHandler}
-            className={eyebrow?.className || ''}
-          />
-        )}
+        <AnnouncementBar
+          enabled={headerBannerEnabled}
+          link={headerBannerUrl}
+          text={headerBannerText}
+          expires={new Date('2025-07-08T00:00:00')}
+          dismissible={true}
+          onShow={resizeHandler}
+          onHide={resizeHandler}
+          className={eyebrow?.className || ''}
+        />
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
