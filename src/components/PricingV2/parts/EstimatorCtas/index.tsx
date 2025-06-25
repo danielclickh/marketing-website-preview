@@ -143,7 +143,7 @@ export default function EstimatorCtas() {
   )
 }
 
-function PricingButton({
+export function PricingButton({
   type,
   href,
   target,
@@ -171,7 +171,7 @@ function PricingButton({
   )
 }
 
-function ShareButton({ handler }: { handler: () => void }) {
+export function ShareButton({ handler }: { handler: () => void }) {
   const [copied, setCopied] = useState(false)
 
   // Reset share "copied" label

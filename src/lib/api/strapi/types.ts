@@ -79,6 +79,7 @@ export interface PricingV2ComponentRegion {
   internetEgress: number
   interRegionEgress: number
   category: null | string
+  private: null | boolean
 }
 
 export interface PricingV2ComponentPlan {
