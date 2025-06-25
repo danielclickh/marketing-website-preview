@@ -1,7 +1,5 @@
 import { getProxiedMediaUrl } from '@/lib/api/strapi'
-import { useState, useEffect } from 'react'
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import Image from 'next/image'
 
 export default function BlogImage({
   src,
@@ -11,42 +9,14 @@ export default function BlogImage({
   alt,
   ...props
 }: any) {
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  return isClient ? (
-    <div className='mb-9 flex w-full justify-center'>
-      <Zoom
-        zoomImg={{
-          src: src
-        }}
-        classDialog='custom-zoom'>
-        <img
-          loading='lazy'
-          alt={alt ?? 'Markdown Image'}
-          src={getProxiedMediaUrl(preview ?? src)}
-          width={width}
-        />
-      </Zoom>
-      <style jsx global>{`
-        .custom-zoom [data-rmiz-modal-overlay],
-        .custom-zoom [data-rmiz-modal-img] {
-          transition-duration: 0.2s;
-          transition-timing-function: linear;
-        }
-        .custom-zoom [data-rmiz-modal-overlay='hidden'] {
-          background-color: rgb(0, 0, 0);
-        }
-        .custom-zoom [data-rmiz-modal-overlay='visible'] {
-          background-color: rgb(0, 0, 0);
-        }
-        .custom-zoom [data-rmiz-btn-unzoom] {
-          display: none;
-        }
-      `}</style>
-    </div>
-  ) : null
+  return (
+    <Image
+      loading='lazy'
+      className='mb-9 block h-auto w-full'
+      alt={alt ?? 'Markdown Image'}
+      src={getProxiedMediaUrl(preview ?? src)}
+      width={width}
+      height={height}
+    />
+  )
 }
