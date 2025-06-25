@@ -19,13 +19,31 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
+  // Eyebrow default settings
   const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
-  const [headerBannerText, setHeaderBannerText] = useState(
-    'Join a ClickStack live demo and Q&A on July 8th'
-  )
-  const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/company/events/introducing-clickstack?loc=eyebrow'
-  )
+  const [headerBannerText, setHeaderBannerText] = useState('')
+  const [headerBannerUrl, setHeaderBannerUrl] = useState('')
+  const [headerBannerExpires, setHeaderBannerExpires] = useState<
+    undefined | Date
+  >(undefined)
+
+  useEffect(() => {
+    // Specific eyebrow for observability page
+    if (pathname === '/use-cases/observability') {
+      setHeaderBannerEnabled(true)
+      setHeaderBannerText('Join a ClickStack live demo and Q&A on July 8th')
+      setHeaderBannerUrl('/company/events/introducing-clickstack?loc=eyebrow')
+      setHeaderBannerExpires(new Date('2025-07-08T00:00:00'))
+    }
+
+    // Reset eyebrow for all pages
+    else {
+      setHeaderBannerEnabled(false)
+      setHeaderBannerText('')
+      setHeaderBannerUrl('')
+      setHeaderBannerExpires(undefined)
+    }
+  }, [pathname])
 
   const resizeHandler = () => {
     if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
@@ -34,10 +52,6 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
   }
-
-  useEffect(() => {
-    setHeaderBannerEnabled(pathname === '/use-cases/observability')
-  }, [pathname])
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler)
@@ -132,7 +146,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           enabled={headerBannerEnabled}
           link={headerBannerUrl}
           text={headerBannerText}
-          expires={new Date('2025-07-08T00:00:00')}
+          expires={headerBannerExpires}
           dismissible={true}
           onShow={resizeHandler}
           onHide={resizeHandler}
