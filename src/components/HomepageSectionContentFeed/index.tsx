@@ -107,28 +107,40 @@ export default function HomepageSectionContentFeed({
               statsColumnClasses = 'md:grid-cols-3'
               break
           }
+
           return (
             isActive && (
               <div
                 key={index}
                 className='flip-selection mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
-                {entry.embed && <ResponsiveEmbed html={entry.embed} />}
+                {!!entry.embed && typeof entry.embed === 'string' && (
+                  <ResponsiveEmbed html={entry.embed} />
+                )}
+                {!!entry.embed && typeof entry.embed !== 'string' && (
+                  <>{entry.embed}</>
+                )}
                 <div className='text-center text-inherit'>
-                  <Markdown
-                    encloseByDiv={false}
-                    components={{
-                      a: ({ children, ...props }) => (
-                        <a {...props} className='font-bold underline'>
-                          {children}
-                        </a>
-                      )
-                    }}>
-                    {entry.body}
-                  </Markdown>
+                  {typeof entry.body === 'string' ? (
+                    <Markdown
+                      encloseByDiv={false}
+                      components={{
+                        a: ({ children, ...props }) => (
+                          <a {...props} className='font-bold underline'>
+                            {children}
+                          </a>
+                        )
+                      }}>
+                      {entry.body}
+                    </Markdown>
+                  ) : (
+                    <>{entry.body}</>
+                  )}
                 </div>
-                <div className='flex justify-center'>
-                  <entry.logo />
-                </div>
+                {!!entry.logo && (
+                  <div className='flex justify-center'>
+                    <entry.logo />
+                  </div>
+                )}
                 {entry.stats && entry.stats.length && (
                   <div
                     className={`grid grid-cols-1 gap-2 ${statsColumnClasses}`}>
