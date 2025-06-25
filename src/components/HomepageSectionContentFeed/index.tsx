@@ -113,10 +113,10 @@ export default function HomepageSectionContentFeed({
               <div
                 key={index}
                 className='flip-selection mb-11 space-y-8 rounded-lg bg-primary-300 p-6 text-lg text-primary-800 transition-all md:p-8 lg:p-10'>
-                {entry.embed && typeof entry.embed === 'string' && (
+                {!!entry.embed && typeof entry.embed === 'string' && (
                   <ResponsiveEmbed html={entry.embed} />
                 )}
-                {entry.embed && typeof entry.embed !== 'string' && (
+                {!!entry.embed && typeof entry.embed !== 'string' && (
                   <>{entry.embed}</>
                 )}
                 <div className='text-center text-inherit'>

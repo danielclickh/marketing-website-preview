@@ -34,6 +34,7 @@ import LogoSynq from './assets/logo-synq'
 import LogoTrip from './assets/logo-trip'
 import LogoVantage from './assets/logo-vantage'
 import LogoVimeo from './assets/logo-vimeo'
+import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 
 export type EntryCategory = string
 
@@ -75,8 +76,12 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed:
-        '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SrLKbzdFEWA?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+      embed: (
+        <YouTubeVideo
+          id='SrLKbzdFEWA'
+          thumbnail='https://img.youtube.com/vi/SrLKbzdFEWA/maxresdefault.jpg'
+        />
+      ),
       categories: []
     },
     {
@@ -92,8 +97,12 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed:
-        '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/z5t3b3EAc84?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+      embed: (
+        <YouTubeVideo
+          id='z5t3b3EAc84'
+          thumbnail='https://img.youtube.com/vi/z5t3b3EAc84/maxresdefault.jpg'
+        />
+      ),
       categories: []
     },
     {
@@ -111,8 +120,12 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed:
-        '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/DWkuhCBA7B4?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+      embed: (
+        <YouTubeVideo
+          id='DWkuhCBA7B4'
+          thumbnail='https://img.youtube.com/vi/DWkuhCBA7B4/maxresdefault.jpg'
+        />
+      ),
       categories: []
     },
 
