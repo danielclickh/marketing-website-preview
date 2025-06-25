@@ -15,8 +15,8 @@ export default function BlogImage({
       className='mb-9 block h-auto w-full'
       alt={alt ?? 'Markdown Image'}
       src={getProxiedMediaUrl(preview ?? src)}
-      width={width || 1000}
-      height={height || 3000}
+      width={width || 2000}
+      height={height || 2000}
     />
   )
 }

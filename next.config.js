@@ -39,7 +39,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '**-clickhouse.vercel.app',
+        hostname: '*-clickhouse.vercel.app',
         pathname: '/uploads/**'
       }
     ]
