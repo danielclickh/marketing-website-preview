@@ -1,5 +1,4 @@
 import { Galaxy } from '@/lib/galaxy/web/browser'
-import { Experiment, Result } from '@growthbook/growthbook'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -27,15 +26,6 @@ export const updateLinks = (
       }
     }
   }
-}
-
-export const onExperimentViewed = (
-  experiment: Experiment<any>,
-  result: Result<any>
-) => {
-  const experimentId = experiment.key
-  const variationId = result.key
-  updateLinks(experimentId, variationId)
 }
 
 const UTMPersist = () => {
