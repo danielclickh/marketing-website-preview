@@ -1,5 +1,4 @@
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
-import { SnackbarContextProvider } from '@/components/sui'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
 import { Galaxy } from '@/lib/galaxy/web/browser'
 import '@/styles/globals.scss'
@@ -142,11 +141,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <main
             id='main-site-container'
             className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-            <SnackbarContextProvider>
-              <div className='flex min-h-screen flex-col'>
-                <Component {...pageProps} />
-              </div>
-            </SnackbarContextProvider>
+            <div className='flex min-h-screen flex-col'>
+              <Component {...pageProps} />
+            </div>
           </main>
           <UTMPersist />
         </GrowthBookProvider>
