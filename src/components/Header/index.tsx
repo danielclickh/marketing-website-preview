@@ -9,20 +9,41 @@ import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Header({ github, eyebrow }: HeaderProps) {
+  const pathname = usePathname()
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
-  const [headerBannerText, setHeaderBannerText] = useState(
-    'ClickHouse raises $350 million Series C to power analytics for the AI era.'
-  )
-  const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/clickhouse-raises-350-million-series-c-to-power-analytics-for-ai-era?loc=eyebrow'
-  )
+  // Eyebrow default settings
+  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
+  const [headerBannerText, setHeaderBannerText] = useState('')
+  const [headerBannerUrl, setHeaderBannerUrl] = useState('')
+  const [headerBannerExpires, setHeaderBannerExpires] = useState<
+    undefined | Date
+  >(undefined)
+
+  useEffect(() => {
+    // Specific eyebrow for observability page
+    if (pathname === '/use-cases/observability') {
+      setHeaderBannerEnabled(true)
+      setHeaderBannerText('Join a ClickStack live demo and Q&A on July 8th')
+      setHeaderBannerUrl('/company/events/introducing-clickstack?loc=eyebrow')
+      setHeaderBannerExpires(new Date('2025-07-08T00:00:00'))
+    }
+
+    // Reset eyebrow for all pages
+    else {
+      setHeaderBannerEnabled(false)
+      setHeaderBannerText('')
+      setHeaderBannerUrl('')
+      setHeaderBannerExpires(undefined)
+    }
+  }, [pathname])
 
   const resizeHandler = () => {
     if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
@@ -121,14 +142,16 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        {/* <AnnouncementBar
+        <AnnouncementBar
+          enabled={headerBannerEnabled}
           link={headerBannerUrl}
           text={headerBannerText}
+          expires={headerBannerExpires}
           dismissible={true}
           onShow={resizeHandler}
           onHide={resizeHandler}
           className={eyebrow?.className || ''}
-        /> */}
+        />
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
