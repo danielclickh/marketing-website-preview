@@ -17,6 +17,7 @@ export default function BlogImage({
       src={getProxiedMediaUrl(preview ?? src)}
       width={width || 2000}
       height={height || 2000}
+      unoptimized
     />
   )
 }
