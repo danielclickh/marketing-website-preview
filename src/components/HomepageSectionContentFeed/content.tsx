@@ -65,58 +65,6 @@ export function getCategories(): EntryCategory[] {
 
 export function getContent(): Entry[] {
   return [
-    // Open house
-    {
-      featured: true,
-      body: (
-        <>
-          <p className='mb-4 text-balance text-2xl'>
-            “ClickHouse played an instrumental role in helping us develop and
-            ship Claude 4.”
-          </p>
-          <p className='text-2xl'>
-            <strong>Anthropic</strong>
-          </p>
-        </>
-      ),
-      embed: <YouTubeVideo id='SrLKbzdFEWA' thumbnail={thumbAnthropic} />,
-      categories: []
-    },
-    {
-      featured: true,
-      body: (
-        <>
-          <p className='mb-4 text-balance text-2xl'>
-            “ClickHouse checked every box. We have availability, we have speed,
-            we have durability. We have everything we could want.”
-          </p>
-          <p className='text-2xl'>
-            <strong>Tesla</strong>
-          </p>
-        </>
-      ),
-      embed: <YouTubeVideo id='z5t3b3EAc84' thumbnail={thumbTesla} />,
-      categories: []
-    },
-    {
-      featured: true,
-      body: (
-        <>
-          <p className='mb-4 text-balance text-2xl'>
-            “We needed something to slice and dice real-time data, like rides
-            and driver hours across cities and regions where Lyft runs. Using
-            ClickHouse resulted into a lot of performance benefits for us with
-            huge cost savings for the org.”
-          </p>
-          <p className='text-2xl'>
-            <strong>Lyft</strong>
-          </p>
-        </>
-      ),
-      embed: <YouTubeVideo id='DWkuhCBA7B4' thumbnail={thumbLyft} />,
-      categories: []
-    },
-
     // Langchain
     {
       featured: false,
@@ -218,6 +166,42 @@ export function getContent(): Entry[] {
           label: 'faster queries'
         }
       ]
+    },
+
+    // Open house: Anthropic
+    {
+      featured: true,
+      body: (
+        <>
+          <p className='mb-4 text-balance text-2xl'>
+            “ClickHouse played an instrumental role in helping us develop and
+            ship Claude 4.”
+          </p>
+          <p className='text-2xl'>
+            <strong>Anthropic</strong>
+          </p>
+        </>
+      ),
+      embed: <YouTubeVideo id='SrLKbzdFEWA' thumbnail={thumbAnthropic} />,
+      categories: ['Observability']
+    },
+
+    // Open house: Tesla
+    {
+      featured: true,
+      body: (
+        <>
+          <p className='mb-4 text-balance text-2xl'>
+            “ClickHouse checked every box. We have availability, we have speed,
+            we have durability. We have everything we could want.”
+          </p>
+          <p className='text-2xl'>
+            <strong>Tesla</strong>
+          </p>
+        </>
+      ),
+      embed: <YouTubeVideo id='z5t3b3EAc84' thumbnail={thumbTesla} />,
+      categories: ['Observability']
     },
 
     // Clearbit
@@ -516,6 +500,26 @@ export function getContent(): Entry[] {
       body: '“The benefits were immediate, with faster data processing and accurate analytics that allowed me to make strategic decisions with confidence. ClickHouse opened new horizons for the growth and success of my company, raising our executive vision to levels never reached before.” [Read blog](/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system?loc=homepage)',
       logo: LogoExitlag,
       categories: ['Gaming']
+    },
+
+    // Open house: Lyft
+    {
+      featured: true,
+      body: (
+        <>
+          <p className='mb-4 text-balance text-2xl'>
+            “We needed something to slice and dice real-time data, like rides
+            and driver hours across cities and regions where Lyft runs. Using
+            ClickHouse resulted into a lot of performance benefits for us with
+            huge cost savings for the org.”
+          </p>
+          <p className='text-2xl'>
+            <strong>Lyft</strong>
+          </p>
+        </>
+      ),
+      embed: <YouTubeVideo id='DWkuhCBA7B4' thumbnail={thumbLyft} />,
+      categories: []
     }
   ]
 }
