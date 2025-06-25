@@ -11,6 +11,10 @@ This is where observability comes in. It's evolved from simple system monitoring
 
 This article covers what observability means in practice, how it works, its benefits, and common implementation challenges. We'll explore how organizations use observability to improve system reliability and team productivity.
 
+<iframe width="768" height="432" src="https://www.youtube.com/embed/eKlZoT6hPwI?si=XDqIKLxSQQqtT9gG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<br />
+
 Let's start with what observability means.
 
 ## What is observability?
