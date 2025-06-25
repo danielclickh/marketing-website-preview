@@ -34,6 +34,9 @@ import LogoSynq from './assets/logo-synq'
 import LogoTrip from './assets/logo-trip'
 import LogoVantage from './assets/logo-vantage'
 import LogoVimeo from './assets/logo-vimeo'
+import thumbAnthropic from './assets/thumb-anthropic.jpeg'
+import thumbLyft from './assets/thumb-lyft.jpeg'
+import thumbTesla from './assets/thumb-tesla.jpeg'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 
 export type EntryCategory = string
@@ -76,12 +79,7 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed: (
-        <YouTubeVideo
-          id='SrLKbzdFEWA'
-          thumbnail='https://img.youtube.com/vi/SrLKbzdFEWA/maxresdefault.jpg'
-        />
-      ),
+      embed: <YouTubeVideo id='SrLKbzdFEWA' thumbnail={thumbAnthropic} />,
       categories: []
     },
     {
@@ -97,12 +95,7 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed: (
-        <YouTubeVideo
-          id='z5t3b3EAc84'
-          thumbnail='https://img.youtube.com/vi/z5t3b3EAc84/maxresdefault.jpg'
-        />
-      ),
+      embed: <YouTubeVideo id='z5t3b3EAc84' thumbnail={thumbTesla} />,
       categories: []
     },
     {
@@ -120,12 +113,7 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed: (
-        <YouTubeVideo
-          id='DWkuhCBA7B4'
-          thumbnail='https://img.youtube.com/vi/DWkuhCBA7B4/maxresdefault.jpg'
-        />
-      ),
+      embed: <YouTubeVideo id='DWkuhCBA7B4' thumbnail={thumbLyft} />,
       categories: []
     },
 
