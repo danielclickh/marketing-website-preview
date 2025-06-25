@@ -1,11 +1,13 @@
-import UTMPersist from '@/components/UTMPersist'
+import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { SnackbarContextProvider } from '@/components/sui'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
+import { Galaxy } from '@/lib/galaxy/web/browser'
 import '@/styles/globals.scss'
 import '@/styles/highlightjs.scss'
 import '@/styles/securiti-cookie-banner.scss'
 import '@/styles/securiti-overrides.scss'
 import { ClickUIProvider, ThemeName } from '@clickhouse/click-ui'
+import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { AppProps } from 'next/app'
 import { Inconsolata, Inter } from 'next/font/google'
@@ -59,6 +61,21 @@ const basier = localFont({
   ]
 })
 
+// Create a client-side GrowthBook instance
+const gb = new GrowthBook({
+  apiHost: process.env.NEXT_PUBLIC_GROWTHBOOK_API_HOST,
+  clientKey: process.env.NEXT_PUBLIC_GROWTHBOOK_CLIENT_KEY,
+  decryptionKey: process.env.NEXT_PUBLIC_GROWTHBOOK_DECRYPTION_KEY,
+  enableDevMode: true,
+  trackingCallback: onExperimentViewed
+})
+
+// Let the GrowthBook instance know when the URL changes so the active
+// experiments can update accordingly
+function updateGrowthBookURL() {
+  gb.setURL(window.location.href)
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState<ThemeName>('dark')
 
@@ -73,6 +90,21 @@ function MyApp({ Component, pageProps }: AppProps) {
       })
     }
   })
+
+  useEffect(() => {
+    const glx_id = Galaxy.getGalaxySessionId()
+
+    // Load features from the GrowthBook API and keep them up-to-date
+    gb.loadFeatures({ autoRefresh: true })
+    gb.setAttributes({
+      user_id: undefined,
+      session_id: glx_id,
+      id: glx_id
+    })
+    // Subscribe to route change events and update GrowthBook
+    router.events.on('routeChangeComplete', updateGrowthBookURL)
+    return () => router.events.off('routeChangeComplete', updateGrowthBookURL)
+  }, [])
 
   return (
     <>
@@ -106,16 +138,18 @@ function MyApp({ Component, pageProps }: AppProps) {
             href='/favicons/apple-touch-icon.png'
           />
         </Head>
-        <main
-          id='main-site-container'
-          className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-          <SnackbarContextProvider>
-            <div className='flex min-h-screen flex-col'>
-              <Component {...pageProps} />
-            </div>
-          </SnackbarContextProvider>
-        </main>
-        <UTMPersist />
+        <GrowthBookProvider growthbook={gb}>
+          <main
+            id='main-site-container'
+            className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
+            <SnackbarContextProvider>
+              <div className='flex min-h-screen flex-col'>
+                <Component {...pageProps} />
+              </div>
+            </SnackbarContextProvider>
+          </main>
+          <UTMPersist />
+        </GrowthBookProvider>
 
         {/* Exclude tracking from marketo iframe routes */}
         {router.pathname !== '/marketo-forms/[id]' && (

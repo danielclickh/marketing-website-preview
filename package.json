@@ -20,6 +20,7 @@
   "dependencies": {
     "@clickhouse/click-ui": "^0.0.188",
     "@clickhouse/client-web": "^1.10.1",
+    "@growthbook/growthbook-react": "^0.25.0",
     "@headlessui/react": "^1.7.10",
     "@heroicons/react": "^1.0.6",
     "@next/bundle-analyzer": "^15.3.0",
