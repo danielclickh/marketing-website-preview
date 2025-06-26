@@ -93,7 +93,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               <div
                 className={`relative rounded-lg bg-neutral-900 p-4 shadow-lg sm:p-6 lg:p-8 ${formLoaded ? '' : 'min-h-full'}`}>
                 <SuiTitle type='h2' className='mb-8 text-center'>
-                  Download the Report
+                  Download the report
                 </SuiTitle>
 
                 {!formLoaded && (
