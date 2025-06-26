@@ -57,9 +57,6 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                 Moving the needle on AI adoption, speed to market, and ROI
               </SuiTitle>
               <p className='text-lg text-neutral-200'>
-                Report brought to you by Confluent and ClickHouse.
-              </p>
-              <p className='text-lg text-neutral-200'>
                 Discover insights from 4,175 IT leaders on how real-time data
                 has become the foundation for AI success.
               </p>
@@ -68,23 +65,26 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                 <li>
                   <strong className='text-white'>The AI advantage:</strong> How
                   data streaming platforms are helping 89% of IT leaders
-                  overcome critical barriers to AI adoption
+                  overcome critical barriers to AI adoption.
                 </li>
                 <li>
                   <strong className='text-white'>Real business impact:</strong>{' '}
                   Organizations report 84% faster time to market and significant
-                  revenue increases from real-time data capabilities
+                  revenue increases from real-time data capabilities.
                 </li>
                 <li>
                   <strong className='text-white'>Architecture insights:</strong>{' '}
                   What IT leaders look for when evaluating modern data streaming
-                  platforms
+                  platforms.
                 </li>
               </ul>
               <p className='text-neutral-200'>
                 Discover how ClickHouse fits into the modern real-time data
                 stack—delivering the sub-second performance needed to power AI
                 applications.
+              </p>
+              <p className='text-neutral-200'>
+                Report brought to you by Confluent and ClickHouse.
               </p>
             </div>
 
