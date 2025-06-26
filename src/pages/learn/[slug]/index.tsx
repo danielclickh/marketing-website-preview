@@ -443,7 +443,7 @@ export default function Page({
               <SuiText size='lg' className='max-w-lg'>
                 {props.intro}
               </SuiText>
-              <CUIButton type='primary-dark' size='lg' className='px-8'>
+              <CUIButton type='primary-dark' size='lg' className='!px-8'>
                 Start learning
               </CUIButton>
             </div>

@@ -39,18 +39,13 @@ import {
 } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
-import {
-  extractEventTime,
-  limitStringByWord,
-  slugify
-} from '@/lib/utils/strings'
+import { extractEventTime, limitStringByWord } from '@/lib/utils/strings'
 import { PAGES } from '@/pages/learn/[slug]'
 import { LearnProps, TrainingSimpleEvent } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { ChangeEvent, CSSProperties, useMemo, useState } from 'react'
-import removeMarkdown from 'remove-markdown'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -179,14 +174,14 @@ export default function LearnPage({
                 href='/learn#on-demand'
                 type='primary'
                 size='lg'
-                className='px-8'>
+                className='!px-8'>
                 On-demand training
               </CUIButton>
               <CUIButton
                 href='/learn#live-training'
                 type='secondary-dark'
                 size='lg'
-                className='px-8'>
+                className='!px-8'>
                 Live training
               </CUIButton>
             </div>
@@ -489,7 +484,7 @@ export default function LearnPage({
             <div className='text-center'>
               <CUIButton
                 type='primary'
-                className='inline-block px-8'
+                className='!inline-block !px-8'
                 size='lg'
                 href='/learn/certification'>
                 View certification guide
