@@ -25,6 +25,22 @@ const nextConfig = {
         hostname: 'cms.clickhouse-dev.com',
         port: '1337',
         pathname: '/uploads/**'
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3005',
+        pathname: '/uploads/**'
+      },
+      {
+        protocol: 'https',
+        hostname: '**.clickhouse.com',
+        pathname: '/uploads/**'
+      },
+      {
+        protocol: 'https',
+        hostname: '*.vercel.app',
+        pathname: '/uploads/**'
       }
     ]
   },

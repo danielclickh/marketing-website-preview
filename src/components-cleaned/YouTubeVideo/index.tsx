@@ -34,17 +34,16 @@ export default function YouTubeVideo({
       {/* Thumbnail */}
       <div
         className={`absolute inset-0 z-10 bg-neutral-900 transition-opacity ${playing ? 'pointer-events-none opacity-0' : ''}`}>
-        <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
-          <VideoPlayButton
-            eyebrow={playButtonEyebrow}
-            label={playButtonLabel}
-            loading={play && !playing}
-            onClick={(event) => {
-              event.preventDefault()
-              setPlay(true)
-            }}
-          />
-        </div>
+        <VideoPlayButton
+          className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'
+          eyebrow={playButtonEyebrow}
+          label={playButtonLabel}
+          loading={play && !playing}
+          onClick={(event) => {
+            event.preventDefault()
+            setPlay(true)
+          }}
+        />
         <Image
           src={thumbnail}
           width={1280}
@@ -58,7 +57,9 @@ export default function YouTubeVideo({
         className='absolute inset-0 h-full w-full'
         iframeClassName='w-full h-full'
         opts={{
-          rel: 0
+          playerVars: {
+            rel: 0
+          }
         }}
         onPlay={() => {
           setPlaying(true)
