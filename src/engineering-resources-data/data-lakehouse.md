@@ -9,6 +9,11 @@ The data lakehouse is a convergent architecture that applies database principles
 
 The lakehouse is not just taking a database apart but building database-like capabilities onto a fundamentally different foundation (cloud object storage) that focuses on supporting traditional analytics and modern AI/ML workloads in a unified platform.
 
+<iframe width="768" height="432" src="https://www.youtube.com/embed/mueG6z1mo8Y?si=RXuT-we2eANPAkvY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<br />
+
+
 ## What are the components of the data lakehouse?
 
 The modern data lakehouse architecture represents a convergence of data warehouse and data lake technologies, combining the best aspects of both approaches. This architecture comprises several distinct but interconnected layers providing a flexible, robust data storage, management, and analysis platform.
