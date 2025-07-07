@@ -3,6 +3,8 @@ import Panzoom, { PanzoomObject } from '@panzoom/panzoom'
 import { useState, useEffect, useRef } from 'react'
 
 export default function BlogImage({
+  node,
+  children,
   src,
   preview,
   width,
