@@ -530,6 +530,13 @@ const nextConfig = {
         source: '/olly',
         destination: '/use-cases/observability?loc=olly',
         permanent: true
+      },
+      {
+        source:
+          '/blog/why-openai-chose-clickhouse-for-petabyte-scale-observability',
+        destination:
+          '/blog/why-openai-uses-clickhouse-for-petabyte-scale-observability',
+        permanent: true
       }
     ]
   }
