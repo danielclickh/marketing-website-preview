@@ -104,7 +104,7 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
     ),
     code: CodeViewer,
     p({ children }: any) {
-      const child = children[0]
+      const child = children?.[0]
       if (typeof child === 'object' && child?.type === BlogImage) {
         return <>{children}</> // render image directly without <p>
       }
