@@ -1,5 +1,5 @@
 import { PricingV2 } from './types'
-import { absoluteUrl, relativeUrl } from '@/lib/next'
+import { absoluteUrl } from '@/lib/next'
 import _fetch from 'cross-fetch'
 import { stringify } from 'qs'
 
