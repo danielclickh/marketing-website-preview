@@ -1,5 +1,5 @@
 import { getProxiedMediaUrl } from '@/lib/api/strapi'
-import Panzoom from '@panzoom/panzoom'
+import Panzoom, { PanzoomObject } from '@panzoom/panzoom'
 import { useState, useEffect, useRef } from 'react'
 
 export default function BlogImage({
@@ -13,22 +13,26 @@ export default function BlogImage({
   const imgRef = useRef<null | HTMLImageElement>(null)
   const [canZoom, setCanZoom] = useState(false)
   const [isZoom, setIsZoom] = useState(false)
-  const [holdingShift, setHoldingShift] = useState(false)
+
+  const panzoomRef = useRef<PanzoomObject | null>(null)
   const zoomContainerRef = useRef<null | HTMLDivElement>(null)
   const zoomImgRef = useRef<null | HTMLImageElement>(null)
 
   useEffect(() => {
-    const toggleShift = (event: MouseEvent) => {
-      setHoldingShift(event.shiftKey)
-    }
-    window.addEventListener('mousedown', toggleShift)
-    window.addEventListener('mouseup', toggleShift)
+    if (isZoom) {
+      const closeZoom = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          setIsZoom(false)
+        }
+      }
 
-    return () => {
-      window.removeEventListener('mousedown', toggleShift)
-      window.removeEventListener('mouseup', toggleShift)
+      window.addEventListener('keyup', closeZoom)
+
+      return () => {
+        window.removeEventListener('keyup', closeZoom)
+      }
     }
-  }, [])
+  }, [isZoom])
 
   useEffect(() => {
     const imgEl = imgRef.current
@@ -42,11 +46,23 @@ export default function BlogImage({
     const zoomContainerEl = zoomContainerRef.current
     const zoomImgEl = zoomImgRef.current
     if (zoomContainerEl && zoomImgEl && isZoom) {
-      const panzoom = Panzoom(zoomImgEl)
-      zoomContainerEl.addEventListener('wheel', panzoom.zoomWithWheel)
+      const panzoom = Panzoom(zoomImgEl, {
+        pinchAndPan: true
+      })
+
+      // Enable zooming by scroll
+      const zoomWithWheel = (event: WheelEvent) => {
+        panzoom.zoomWithWheel(event, { step: 0.05 })
+      }
+
+      // Store ref
+      panzoomRef.current = panzoom
+
+      zoomContainerEl.addEventListener('wheel', zoomWithWheel)
       return () => {
-        zoomContainerEl.removeEventListener('wheel', panzoom.zoomWithWheel)
+        zoomContainerEl.removeEventListener('wheel', zoomWithWheel)
         panzoom.destroy()
+        panzoomRef.current = null
       }
     }
   }, [zoomContainerRef.current, zoomImgRef.current, isZoom])
@@ -69,23 +85,80 @@ export default function BlogImage({
           </button>
           {isZoom && (
             <div className='fixed inset-0 z-[9999] bg-black bg-opacity-80 backdrop-blur'>
-              <div className='absolute left-0 right-0 top-0 z-10'>
-                <button
-                  className='cursor-pointer'
-                  onClick={() => setIsZoom(false)}>
-                  close
-                </button>
+              <div className='absolute right-2 top-2 z-10 flex gap-1'>
+                <ZoomUiButton
+                  onClick={(event) => {
+                    event.preventDefault()
+                    panzoomRef.current?.zoomIn()
+                  }}>
+                  <span className='sr-only'>Zoom in</span>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    className='h-5 w-5'>
+                    <circle cx='11' cy='11' r='8' />
+                    <path d='m21 21-4.35-4.35M11 8v6m-3-3h6' />
+                  </svg>
+                </ZoomUiButton>
+                <ZoomUiButton
+                  onClick={(event) => {
+                    event.preventDefault()
+                    panzoomRef.current?.zoomOut()
+                  }}>
+                  <span className='sr-only'>Zoom out</span>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    className='h-5 w-5'>
+                    <circle cx='11' cy='11' r='8' />
+                    <path d='m21 21-4.35-4.35M8 11h6' />
+                  </svg>
+                </ZoomUiButton>
+                <ZoomUiButton onClick={() => setIsZoom(false)}>
+                  <span className='sr-only'>Minimize image</span>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    className='h-5 w-5'>
+                    <path d='M18 6 6 18M6 6l12 12' />
+                  </svg>
+                </ZoomUiButton>
               </div>
               <div
-                className='absolute inset-0 flex items-center justify-center'
-                ref={zoomContainerRef}>
+                className='absolute inset-0 flex cursor-zoom-out items-center justify-center'
+                ref={zoomContainerRef}
+                onClick={(event) => setIsZoom(false)}>
                 <img
-                  className={`max-h-full max-w-full ${holdingShift ? '!cursor-move' : '!cursor-zoom-out'}`}
+                  className='max-h-full max-w-full'
                   loading='eager'
                   alt={alt ?? ''}
                   src={getProxiedMediaUrl(preview ?? src)}
                   width={width}
                   ref={zoomImgRef}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                  }}
                 />
               </div>
             </div>
@@ -93,5 +166,20 @@ export default function BlogImage({
         </>
       )}
     </div>
+  )
+}
+
+function ZoomUiButton({
+  className = '',
+  children,
+  ...props
+}: Omit<React.HTMLProps<HTMLButtonElement>, 'type'>) {
+  return (
+    <button
+      type='button'
+      className={`flex aspect-square w-8 cursor-pointer items-center justify-center rounded bg-black/60 backdrop-blur backdrop-saturate-50 transition-colors hover:bg-neutral-700/80 ${className}`}
+      {...props}>
+      {children}
+    </button>
   )
 }
