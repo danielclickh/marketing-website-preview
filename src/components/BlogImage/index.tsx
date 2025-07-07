@@ -1,4 +1,4 @@
-import { getProxiedMediaUrl } from '@/lib/api/strapi'
+import { getProxiedMediaPath, getProxiedMediaUrl } from '@/lib/api/strapi'
 import Panzoom, { PanzoomObject } from '@panzoom/panzoom'
 import { useState, useEffect, useRef } from 'react'
 
@@ -12,7 +12,7 @@ export default function BlogImage({
   alt,
   ...props
 }: any) {
-  const imageUrl = getProxiedMediaUrl(preview ?? src)
+  const imageUrl = getProxiedMediaPath(preview ?? src)
 
   const imgRef = useRef<HTMLImageElement | null>(null)
   const zoomContainerRef = useRef<HTMLDivElement | null>(null)
