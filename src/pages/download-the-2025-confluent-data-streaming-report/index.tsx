@@ -1,5 +1,6 @@
 import background from './assets/background.png'
 import socialImage from './assets/social-image.jpg'
+import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import MarketoForm from '@/components/MarketoForm'
 import { SuiTitle } from '@/components/sui'
@@ -121,10 +122,22 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                 <div
                   ref={formSuccessRef}
                   className={`absolute inset-2 z-10 flex bg-neutral-900/90 text-center backdrop-blur transition-opacity ${formSuccess ? '' : 'pointer-events-none -z-50 opacity-0'}`}>
-                  <div className='m-auto w-full'>
+                  <div className='m-auto w-full max-w-md'>
                     <h3 className='text-2xl font-bold'>Thank you!</h3>
+                    <h3 className='text-2xl font-bold'>
+                      Thank you for your submission!
+                    </h3>
+                    <CUIButton
+                      type='primary'
+                      size='lg'
+                      weight='semibold'
+                      href='https://discover.clickhouse.com/rs/238-FPC-317/images/20250625-RSI-DataStreamingReport-DPF-ClickHouse.pdf'
+                      target='_blank'
+                      className='my-6 w-full'>
+                      Download PDF
+                    </CUIButton>
                     <p className='mt-2 text-neutral-200'>
-                      We'll be in touch shortly.
+                      You'll also receive an email shortly with the report.
                     </p>
                   </div>
                 </div>
