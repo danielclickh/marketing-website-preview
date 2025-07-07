@@ -102,7 +102,14 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
     h6: (props: any) => (
       <Header type='h6' allowHeaderLink={allowHeaderLink} {...props} />
     ),
-    code: CodeViewer
+    code: CodeViewer,
+    p({ children }: any) {
+      const child = children[0]
+      if (typeof child === 'object' && child?.type === BlogImage) {
+        return <>{children}</> // render image directly without <p>
+      }
+      return <p>{children}</p>
+    }
   }
 }
 

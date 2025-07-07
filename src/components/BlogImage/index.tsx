@@ -20,9 +20,12 @@ export default function BlogImage({
   const [canZoom, setCanZoom] = useState(false)
   const [isZoom, setIsZoom] = useState(false)
 
+  // Only enable zooming if the image is not linked
   useEffect(() => {
     const el = imgRef.current
-    if (el && !el.closest('a')) setCanZoom(true)
+    if (el) {
+      setCanZoom(!el.closest('a'))
+    }
   }, [])
 
   useEffect(() => {
