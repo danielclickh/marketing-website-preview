@@ -1,6 +1,7 @@
 import { PricingV2 } from './types'
 import { absoluteUrl, relativeUrl } from '@/lib/next'
 import _fetch from 'cross-fetch'
+import { relative } from 'knip/dist/util/path'
 import { stringify } from 'qs'
 
 export function fetch(uri: string, init: any = {}) {
@@ -61,6 +62,10 @@ export function getRelativeMediaUrl(path: string) {
 
 export function getProxiedMediaUrl(path: string) {
   return absoluteUrl(getRelativeMediaUrl(path))
+}
+
+export function getProxiedMediaPath(path: string) {
+  return relativeUrl(getProxiedMediaUrl(path))
 }
 
 export async function getPathsValues(
