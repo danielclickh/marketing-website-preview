@@ -1,3 +1,10 @@
+import complianceCcpa from './assets/compliance-ccpa.svg'
+import complianceEuUsDpf from './assets/compliance-eu-us-dpf.svg'
+import complianceGdpr from './assets/compliance-gdpr.svg'
+import complianceHipaa from './assets/compliance-hipaa.svg'
+import complianceIsoSoa from './assets/compliance-iso-27001-soa.svg'
+import complianceIso from './assets/compliance-iso-27001.svg'
+import compliancePciDss from './assets/compliance-pci-dss.svg'
 import logoCisco from './assets/logo-cisco.svg'
 import logoCloudflare from './assets/logo-cloudflare.svg'
 import logoHuntress from './assets/logo-huntress.svg'
@@ -6,11 +13,8 @@ import logoMicrosoft from './assets/logo-microsoft.svg'
 import logoSeemplicity from './assets/logo-seemplicity.svg'
 import TickItem from '@/components-cleaned/TickItem'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
-import thumbAnthropic from '@/components/HomepageSectionContentFeed/assets/thumb-anthropic.jpeg'
-import faqs from '@/components/Industries/Gaming/faqs.json'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
-import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -332,12 +336,12 @@ export default function GamingIndustryPage({
             '--opacity': '0.05'
           } as React.CSSProperties
         }>
-        <div className='clip-inverted-triangle !absolute bottom-0 left-0 right-0 top-40' />
-        <div className='section-container'>
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
+        <div className='section-container relative z-10'>
           <SuiTitle type='h2' className='mb-16 text-center'>
             Performance x Scale x Trust
           </SuiTitle>
-          <div className='relative z-20 flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-10 text-neutral-0 shadow-lg'>
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-10 text-neutral-0 shadow-lg'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
               <QuoteCard
@@ -372,6 +376,62 @@ export default function GamingIndustryPage({
               />
             </div>
           </div>
+
+          {/* Compliace */}
+          <ul className='mt-16 flex items-center justify-between xl:px-10'>
+            {(
+              [
+                {
+                  src: complianceCcpa,
+                  width: 86,
+                  height: 108,
+                  alt: 'CCPA Compliant'
+                },
+                {
+                  src: complianceEuUsDpf,
+                  width: 87,
+                  height: 108,
+                  alt: 'EU-US DPF Compliant'
+                },
+                {
+                  src: complianceGdpr,
+                  width: 90,
+                  height: 108,
+                  alt: 'GDPR Compliant'
+                },
+                {
+                  src: complianceHipaa,
+                  width: 158,
+                  height: 108,
+                  alt: 'HIPAA Compliant'
+                },
+                {
+                  src: complianceIso,
+                  width: 104,
+                  height: 108,
+                  alt: 'ISO 27001 Compliant'
+                },
+                {
+                  src: complianceIsoSoa,
+                  width: 104,
+                  height: 108,
+                  alt: 'ISO 27001 SoA Compliant'
+                },
+                {
+                  src: compliancePciDss,
+                  width: 86,
+                  height: 108,
+                  alt: 'PCI DSS Compliant'
+                }
+              ] satisfies Array<ImageProps>
+            ).map((logo, logoIndex) => {
+              return (
+                <li key={logoIndex}>
+                  <Image {...logo} />
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </section>
 
