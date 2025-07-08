@@ -17,6 +17,10 @@ import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
+import enterprise from '@/components/LinedIconCard/assets/enterprise.svg'
+import guage from '@/components/LinedIconCard/assets/guage.svg'
+import sparkles from '@/components/LinedIconCard/assets/sparkles.svg'
+import tada from '@/components/LinedIconCard/assets/tada.svg'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
@@ -499,6 +503,76 @@ export default function GamingIndustryPage({
             linkClass='inline-block'>
             Talk to an expert
           </CUIButton>
+        </div>
+      </section>
+
+      {/* Callouts */}
+      <section className='section-container my-16 grid justify-between gap-20 lg:my-24 lg:grid-cols-2'>
+        <div className='space-y-6'>
+          <Image
+            src={guage}
+            alt='guage'
+            width={72}
+            height={72}
+            className='aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
+          />
+          <SuiTitle type='h3'>
+            Unlock real-time insights and user experiences
+          </SuiTitle>
+          <SuiText className='text-neutral-200'>
+            Whether you’re performing live analysis to drive business outcomes
+            or building interactive user-facing applications, ClickHouse
+            delivers the unparalleled speed-to-insight you can depend on.
+          </SuiText>
+        </div>
+        <div className='space-y-6'>
+          <Image
+            src={tada}
+            alt='tada'
+            width={72}
+            height={72}
+            className='aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
+          />
+          <SuiTitle type='h3'>Simplify your SQL</SuiTitle>
+          <SuiText className='text-neutral-200'>
+            ClickHouse supports an extensive library of domain-specific
+            functions that transform even the most complex queries into simple
+            SQL statements. With ClickHouse, real-time data exploration is easy
+            and powerful.
+          </SuiText>
+        </div>
+        <div className='space-y-6'>
+          <Image
+            src={sparkles}
+            alt='sparkles'
+            width={72}
+            height={72}
+            className='aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
+          />
+          <SuiTitle type='h3'>Manage data efficiently</SuiTitle>
+          <SuiText className='text-neutral-200'>
+            With highly optimized compression techniques and our fully
+            parallelized query pipeline, ClickHouse maximizes CPU efficiency and
+            provides the power to quickly process huge volumes of compressed
+            data.
+          </SuiText>
+        </div>
+        <div className='space-y-6'>
+          <Image
+            src={enterprise}
+            alt='enterprise'
+            width={72}
+            height={72}
+            className='aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
+          />
+          <SuiTitle type='h3'>Scale effortessly</SuiTitle>
+          <SuiText className='text-neutral-200'>
+            ClickHouse scales both vertically and horizontally to meet the
+            demands of any workload — read and write — to systems with hundreds
+            of cores and petabytes of storage. ClickHouse provides the
+            scalability you need to effortlessly handle increasing data volumes
+            and workloads over time.
+          </SuiText>
         </div>
       </section>
 
