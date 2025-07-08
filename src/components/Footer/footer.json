@@ -33,6 +33,12 @@
         "galaxyEvent": "footerNav.productMenu.keeperSelect"
       },
       {
+        "name": "ClickStack",
+        "href": "/use-cases/observability",
+        "target": "_self",
+        "galaxyEvent": "footerNav.productMenu.clickstackSelect"
+      },
+      {
         "name": "ClickPipes",
         "href": "/cloud/clickpipes",
         "target": "_self",
