@@ -11,8 +11,11 @@ import logoHuntress from './assets/logo-huntress.svg'
 import logoIbm from './assets/logo-ibm.svg'
 import logoMicrosoft from './assets/logo-microsoft.svg'
 import logoSeemplicity from './assets/logo-seemplicity.svg'
+import logoWallarm from './assets/logo-wallarm.svg'
 import TickItem from '@/components-cleaned/TickItem'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
+import { CUIButton } from '@/components/ClickUI'
+import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import MarketoForm from '@/components/MarketoForm'
@@ -139,7 +142,7 @@ export default function GamingIndustryPage({
           </div>
 
           {/* Form column */}
-          <div className='w-full lg:max-w-lg'>
+          <div className='w-full lg:max-w-lg' id='get-in-touch'>
             <div className='rounded-lg bg-neutral-900/80 p-8 text-center shadow-lg'>
               <SuiTitle type='h3' className='mb-2'>
                 Get in touch with a ClickHouse expert
@@ -258,7 +261,7 @@ export default function GamingIndustryPage({
 
       {/* Features */}
       <section
-        className='section-container bg-shadow-element yellow-shadow relative my-16 lg:my-24 lg:flex lg:items-center lg:justify-between lg:gap-x-12'
+        className='section-container bg-shadow-element yellow-shadow relative my-24 lg:my-36 lg:flex lg:items-center lg:justify-between lg:gap-x-12'
         style={
           {
             '--top-side': '120%',
@@ -272,7 +275,7 @@ export default function GamingIndustryPage({
           <Image
             src='/images/icon-shield.svg'
             alt='icon'
-            className='mx-auto mb-6 xl:mx-0'
+            className='mx-auto xl:mx-0'
             width={72}
             height={72}
           />
@@ -284,6 +287,12 @@ export default function GamingIndustryPage({
             Discover why companies are choosing ClickHouse for their
             cybersecurity platforms.
           </SuiText>
+          <CUIButton
+            type='primary'
+            href='/industries/cybersecurity#get-in-touch'
+            linkClass='inline-block'>
+            Talk to an expert
+          </CUIButton>
         </div>
         <div className='mx-auto w-full max-w-2xl space-y-8 lg:mr-0'>
           <div className='flex items-center rounded-md border border-neutral-700/80 bg-neutral-900/80 p-3 pr-6 shadow-xl'>
@@ -348,19 +357,19 @@ export default function GamingIndustryPage({
                 link='/blog/seemplicity-scaled-real-time-security-analytics-with-postgres-cdc-and-clickhouse'
                 content='I knew a managed product built by engineers, whose goal in life is to transform bits from Postgres into ClickHouse, would be better than anything we could do ourselves.'
                 logo={{
-                  src: '/images/industries/gaming/logo-azur.svg',
-                  width: 123,
-                  height: 40,
-                  alt: 'Azur Games'
+                  src: logoSeemplicity,
+                  width: 173,
+                  height: 30,
+                  alt: 'Seemplicity'
                 }}
               />
               <QuoteCard
                 content='We need our platform to operate in real time. The moment we detect suspicious activity, we aim to block the API user before they can attack the site or exploit a vulnerability.'
                 link='/blog/how-wallarms-api-security-platform-relies-on-clickhouse-cloud'
                 logo={{
-                  src: '/images/industries/gaming/logo-exitlag.svg',
-                  width: 175,
-                  height: 40,
+                  src: logoWallarm,
+                  width: 111,
+                  height: 56,
                   alt: 'ExitLag'
                 }}
               />
@@ -368,10 +377,10 @@ export default function GamingIndustryPage({
                 content='ClickHouse plays a pivotal role as a key component in both Instana and QRadar. IBM has deployed hundreds of ClickHouse servers across its various product offerings'
                 link='/videos/ibm-contributions-to-clickhouse'
                 logo={{
-                  src: '/images/industries/gaming/logo-roblox.svg',
-                  width: 231,
-                  height: 40,
-                  alt: 'Roblox'
+                  src: logoIbm,
+                  width: 91,
+                  height: 34,
+                  alt: 'IBM'
                 }}
               />
             </div>
@@ -436,10 +445,72 @@ export default function GamingIndustryPage({
       </section>
 
       {/* Features */}
-      <section></section>
+      <section className='section-container my-16 lg:my-24'>
+        <div className='space-y-6 text-center'>
+          <Image
+            src='/images/icon-shield.svg'
+            alt='icon'
+            className='mx-auto inline-block'
+            width={72}
+            height={72}
+          />
+          <SuiTitle type='h2'>Real-time speed at warehouse scale</SuiTitle>
+          <SuiText className='text-neutral-200'>
+            ClickHouse is used across industries to power systems and
+            applications where real-time analysis, evaluation, and querying are
+            critical.
+          </SuiText>
+        </div>
+        <div className='my-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-6 xl:px-0'>
+          <div className='relative items-center space-y-6 overflow-hidden rounded-md border border-neutral-700 bg-neutral-725 p-6 text-left lg:w-1/3'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <TickItem className='!mt-1 text-sm'>
+              User-facing dashboards and apps
+            </TickItem>
+            <TickItem className='text-sm'>E-commerce optimisation</TickItem>
+            <TickItem className='text-sm'>Retailanalytics</TickItem>
+            <TickItem className='text-sm'>Supply chain optimisation</TickItem>
+          </div>
+          <div className='relative items-center space-y-6 overflow-hidden rounded-md border border-neutral-700 bg-neutral-725 p-6 text-left lg:w-1/3'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <TickItem className='!mt-1 text-sm'>Fraud selection</TickItem>
+            <TickItem className='text-sm'>Threat prevention</TickItem>
+            <TickItem className='text-sm'>Proactive maintenance</TickItem>
+            <TickItem className='text-sm'>Inteligent, automation</TickItem>
+          </div>
+          <div className='relative items-center space-y-6 overflow-hidden rounded-md border border-neutral-700 bg-neutral-725 p-6 text-left lg:w-1/3'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <TickItem className='!mt-1 text-sm'>
+              User centric analytics
+            </TickItem>
+            <TickItem className='text-sm'>
+              Trend evaluation and monitoring
+            </TickItem>
+            <TickItem className='text-sm'>Gaming analytics</TickItem>
+            <TickItem className='text-sm'>
+              Advertising and marketing analysis
+            </TickItem>
+          </div>
+        </div>
+        <div className='space-y-6 text-center'>
+          <CUIButton
+            type='primary'
+            href='/industries/cybersecurity#get-in-touch'
+            linkClass='inline-block'>
+            Talk to an expert
+          </CUIButton>
+        </div>
+      </section>
 
       {/* Get started */}
-      <section></section>
+      <section className='section-container my-16 lg:my-24'>
+        <GetStartedFree
+          href='https://console.clickhouse.cloud/signUp?loc=industry-cybersecurity-getstarted-footer'
+          textBefore='Get started with ClickHouse'
+          textSlanted='Cloud'
+          textAfter='for free'
+        />
+      </section>
     </Layout>
   )
 }
