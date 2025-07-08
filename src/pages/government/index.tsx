@@ -4,6 +4,7 @@ import comparisonRedshift from './assets/comparison-redshift.png'
 import comparisonSnowflake from './assets/comparison-snowflake.png'
 import diagram from './assets/diagram.png'
 import languageInterface from './assets/language-interface.svg'
+import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import FitText from '@/components/FitText'
 import HRSeparator from '@/components/HRSeparator'
@@ -75,28 +76,28 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               </SuiText>
               <ul className='mx-auto w-max max-w-full space-y-6 lg:ml-0'>
                 <li>
-                  <CheckItem>
+                  <TickItem>
                     Deploy <strong>self-managed on AWS</strong> within any{' '}
                     <br />
                     government network (FedRAMP, IL2, 4, 5, 6).
-                  </CheckItem>
+                  </TickItem>
                 </li>
                 <li>
-                  <CheckItem>
+                  <TickItem>
                     Access{' '}
                     <strong>
                       NIST 800-53 (Risk Management Framework) compliance
                       documentation
                     </strong>{' '}
                     and robust <strong>FIPS 140-3 support</strong>.
-                  </CheckItem>
+                  </TickItem>
                 </li>
                 <li>
-                  <CheckItem>
+                  <TickItem>
                     Experience <strong>3-5x cost reduction</strong> and
                     <br />
                     <strong>2-10x performance improvements</strong>.
-                  </CheckItem>
+                  </TickItem>
                 </li>
               </ul>
             </div>
@@ -201,23 +202,23 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               ClickHouse Government <br />
               self-managed on AWS
             </SuiTitle>
-            <CheckItem className='text-balance'>
+            <TickItem className='text-balance'>
               Deploy the full power of ClickHouse Cloud as a{' '}
               <strong>self-managed solution</strong> on AWS.
-            </CheckItem>
-            <CheckItem className='text-balance'>
+            </TickItem>
+            <TickItem className='text-balance'>
               Integrates within <strong>any government network</strong>,
               including FedRAMP Moderate, High, and IL levels 2-6.
-            </CheckItem>
-            <CheckItem className='text-balance'>
+            </TickItem>
+            <TickItem className='text-balance'>
               Benefit from{' '}
               <strong>included NIST 800-53 compliance documentation</strong> for
               simplified Authority to Operate (ATO).
-            </CheckItem>
-            <CheckItem className='text-balance'>
+            </TickItem>
+            <TickItem className='text-balance'>
               Delivers all ClickHouse Cloud features with enhanced security,
               including <strong>FIPS 140-3 support</strong>.
-            </CheckItem>
+            </TickItem>
             <CUIButton
               type='primary'
               className='inline-block'
@@ -374,48 +375,48 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
           {/* Features */}
           <ul className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-4 lg:grid-cols-2 lg:gap-y-8'>
             <li>
-              <CheckItem>
+              <TickItem>
                 Installable via container images for Kubernetes deployments
-              </CheckItem>
+              </TickItem>
             </li>
             <li>
-              <CheckItem>
+              <TickItem>
                 Automated backups ensure system resiliency and data protection
-              </CheckItem>
+              </TickItem>
             </li>
             <li>
-              <CheckItem>
+              <TickItem>
                 Kubernetes management is streamlined with our proprietary
                 ClickHouse Operator
-              </CheckItem>
+              </TickItem>
             </li>
             <li>
-              <CheckItem>
+              <TickItem>
                 End-to-end encryption leveraging FIPS 140-3 compliant OpenSSL
-              </CheckItem>
+              </TickItem>
             </li>
             <li>
-              <CheckItem>
+              <TickItem>
                 APIs facilitate automation for efficient resource management
-              </CheckItem>
+              </TickItem>
             </li>
             <li>
-              <CheckItem>
+              <TickItem>
                 Automatic vertical scaling dynamically manages fluctuating
                 workload demands
-              </CheckItem>
+              </TickItem>
             </li>
             <li>
-              <CheckItem>
+              <TickItem>
                 Comprehensive NIST 800-53 documentation facilitates ATO from
                 FedRAMP Moderate to IL-6.
-              </CheckItem>
+              </TickItem>
             </li>
             <li>
-              <CheckItem>
+              <TickItem>
                 Granular access controls and data masking to ensure strict data
                 privacy and compliance.
-              </CheckItem>
+              </TickItem>
             </li>
           </ul>
         </div>
@@ -674,21 +675,5 @@ function ComparisonCard({
         </div>
       </CUICard.Footer>
     </CUICard>
-  )
-}
-
-function CheckItem({
-  children,
-  className = ''
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <div
-      className={`item-center flex space-x-4 pb-2 text-left last:pb-0 ${className}`}>
-      <Image src='/images/cloud/check.svg' width={32} height={32} alt='Icon' />
-      <SuiText>{children}</SuiText>
-    </div>
   )
 }

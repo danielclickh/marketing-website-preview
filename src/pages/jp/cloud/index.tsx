@@ -1,6 +1,6 @@
 import featureBlocks from './feature_blocks.json'
 import features from './features.json'
-import BulletPoint from '@/components/BulletPoint'
+import TickItem from '@/components-cleaned/TickItem'
 import Lines from '@/components/ClickPipesAnimation/Lines'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
@@ -207,7 +207,9 @@ export default function CloudPage({
                         {item.description}
                       </SuiText>
                       {item.bullets.map((bullet, index: number) => (
-                        <BulletPoint key={index} text={bullet.text} />
+                        <TickItem key={index} className='my-4'>
+                          {bullet.text}
+                        </TickItem>
                       ))}
                     </div>
                   </div>
@@ -322,54 +324,22 @@ export default function CloudPage({
                 Cloudサービスにバンドルして提供しています。
               </div>
 
-              <ul className='flex max-w-lg flex-col justify-start gap-2 px-4 py-8 md:px-0'>
+              <ul className='flex max-w-lg flex-col justify-start gap-4 px-4 py-8 md:px-0'>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>制限なしの24時間年中無休サポート</div>
-                  </div>
+                  <TickItem>制限なしの24時間年中無休サポート</TickItem>
                 </li>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      オンデマンドのトレーニングとオンボーディングワークショップ
-                    </div>
-                  </div>
+                  <TickItem>
+                    オンデマンドのトレーニングとオンボーディングワークショップ
+                  </TickItem>
                 </li>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      エキスパートセッションによるコンサルティングサポート
-                    </div>
-                  </div>
+                  <TickItem>
+                    エキスパートセッションによるコンサルティングサポート
+                  </TickItem>
                 </li>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>ClickHouse Cloudへの移行をサポート</div>
-                  </div>
+                  <TickItem>ClickHouse Cloudへの移行をサポート</TickItem>
                 </li>
               </ul>
             </div>

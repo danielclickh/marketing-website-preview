@@ -1,5 +1,6 @@
 import features from './features.json'
 import replacements from './replacements.json'
+import TickItem from '@/components-cleaned/TickItem'
 import GetStarted from '@/components/GetStarted'
 import Layout from '@/components/Layout'
 import { SuiText } from '@/components/sui'
@@ -120,17 +121,11 @@ export default function KeeperPage({
               building a ClickHouse native Keeper from scratch based on our own
               requirements, optimized for usage in ClickHouse.
             </p>
-            <div className='grid gap-4 rounded-md border border-primary-300 bg-neutral-900 p-8 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid gap-5 rounded-md border border-primary-300 bg-neutral-900 p-8 md:grid-cols-2 lg:grid-cols-3'>
               {features.map((feature, index: number) => (
-                <div key={index} className='flex items-center gap-4'>
-                  <Image
-                    src='/images/cloud/check.svg'
-                    width={32}
-                    height={33}
-                    alt='Icon'
-                  />
-                  <h4 className='font-inter font-semibold'>{feature.title}</h4>
-                </div>
+                <TickItem key={index}>
+                  <h4 className='font-semibold'>{feature.title}</h4>
+                </TickItem>
               ))}
             </div>
           </div>

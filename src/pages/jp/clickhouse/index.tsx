@@ -1,5 +1,5 @@
 import features from './features.json'
-import BulletPoint from '@/components/BulletPoint'
+import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import { StrapiPicture } from '@/components/StrapiElements'
@@ -285,66 +285,26 @@ export default function ClickHouseServerPage({
             </div>
 
             <div className='flex flex-col flex-wrap pt-12 md:mx-auto md:max-w-4xl md:flex-row md:pt-6'>
-              <BulletPoint
-                key='ウェブおよびアプリの分析'
-                text='ウェブおよびアプリの分析'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='Eコマースおよび金融'
-                text='Eコマースおよび金融'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='時系列分析'
-                text='時系列分析'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='広告ネットワークおよびRTB'
-                text='広告ネットワークおよびRTB'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='情報セキュリティ'
-                text='情報セキュリティ'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='ビジネスインテリジェンス'
-                text='ビジネスインテリジェンス'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='通信業界'
-                text='通信業界'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='監視とテレメトリ'
-                text='監視とテレメトリ'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='オンラインゲーム'
-                text='オンラインゲーム'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='モノのインターネット（IoT）'
-                text='モノのインターネット（IoT）'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='オブザーバビリティ'
-                text='オブザーバビリティ'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
-              <BulletPoint
-                key='ユーザー行動分析'
-                text='ユーザー行動分析'
-                className='w-full md:w-1/2 lg:w-1/3'
-              />
+              {[
+                'ウェブおよびアプリの分析',
+                'Eコマースおよび金融',
+                '時系列分析',
+                '広告ネットワークおよびRTB',
+                '情報セキュリティ',
+                'ビジネスインテリジェンス',
+                '通信業界',
+                '監視とテレメトリ',
+                'オンラインゲーム',
+                'モノのインターネット（IoT）',
+                'オブザーバビリティ',
+                'ユーザー行動分析'
+              ].map((feature, featureIndex) => (
+                <TickItem
+                  key={featureIndex}
+                  className='my-2 w-full md:w-1/2 lg:w-1/3'>
+                  {feature}
+                </TickItem>
+              ))}
             </div>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import featureBlocks from './feature_blocks.json'
 import features from './features.json'
+import TickItem from '@/components-cleaned/TickItem'
 import AnimatedIntegrationLogos from '@/components/AnimatedIntegrationLogos'
 import { BYOCSection } from '@/components/BYOCSection'
-import BulletPoint from '@/components/BulletPoint'
 import Lines from '@/components/ClickPipesAnimation/Lines'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import CloudProviders from '@/components/CloudProviders'
@@ -220,7 +220,9 @@ export default function CloudPage({
                         {item.description}
                       </SuiText>
                       {item.bullets.map((bullet, index: number) => (
-                        <BulletPoint key={index} text={bullet.text} />
+                        <TickItem key={index} className='my-4'>
+                          {bullet.text}
+                        </TickItem>
                       ))}
                     </div>
                   </div>
@@ -346,56 +348,22 @@ export default function CloudPage({
                 service.
               </div>
 
-              <ul className='flex max-w-lg flex-col justify-start gap-2 px-4 py-8 md:px-0'>
+              <ul className='flex max-w-lg flex-col justify-start gap-4 px-4 py-8 md:px-0'>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>Unlimited 24x7 support</div>
-                  </div>
+                  <TickItem>Unlimited 24x7 support</TickItem>
                 </li>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      On-Demand training and onboarding workshops
-                    </div>
-                  </div>
+                  <TickItem>
+                    On-Demand training and onboarding workshops
+                  </TickItem>
                 </li>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      Consultative support via Expert Sessions
-                    </div>
-                  </div>
+                  <TickItem>Consultative support via Expert Sessions</TickItem>
                 </li>
                 <li>
-                  <div className='flex items-center gap-4'>
-                    <Image
-                      src='/images/cloud/check.svg'
-                      width={32}
-                      height={33}
-                      alt='Icon'
-                    />
-                    <div className=''>
-                      Assistance in migration to ClickHouse Cloud
-                    </div>
-                  </div>
+                  <TickItem>
+                    Assistance in migration to ClickHouse Cloud
+                  </TickItem>
                 </li>
               </ul>
             </div>

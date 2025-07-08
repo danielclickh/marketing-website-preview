@@ -1,10 +1,9 @@
+import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import GamingDiagramAndAccordion from '@/components/GamingDiagramAndAccordion'
 import GetStartedFree from '@/components/GetStartedFree'
 import callouts from '@/components/Industries/Gaming/callouts.json'
 import faqs from '@/components/Industries/Gaming/faqs.json'
-import Feature from '@/components/Industries/Gaming/feature-check'
-import features from '@/components/Industries/Gaming/features.json'
 import heroCheckItems from '@/components/Industries/Gaming/hero-check-items.json'
 import Layout from '@/components/Layout'
 import LogoCarousel from '@/components/LogoCarousel'
@@ -97,24 +96,15 @@ export default function GamingIndustryPage({
                       </p>
                     </SuiText>
                   </div>
-                  <div className='lg:max-w-2xl'>
+                  <div className='space-y-2 lg:max-w-2xl'>
                     {heroCheckItems.map((item) => {
                       return (
-                        <div
-                          className={'item-center flex space-x-4 pb-2'}
-                          key={item.id}>
-                          <Image
-                            src='/images/cloud/check.svg'
-                            width='0'
-                            height='0'
-                            alt='Icon'
-                            className='w-8'
-                          />
+                        <TickItem key={item.id}>
                           <Markdown>{item.content}</Markdown>
-                        </div>
+                        </TickItem>
                       )
                     })}
-                    <div className='relative z-40 mt-6 flex gap-6'>
+                    <div className='relative z-40 !mt-8 flex gap-6'>
                       <CUIButton
                         type='primary'
                         size='lg'
@@ -295,17 +285,60 @@ export default function GamingIndustryPage({
                   safety, player behavior, and revenue optimization.
                 </p>
                 <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-6 xl:px-0'>
-                  {[10, 20, 30].map((section) => (
-                    <div
-                      key={section}
-                      className='items-center rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
-                      {features
-                        .filter((feature) => feature.section === section)
-                        .map((feature) => (
-                          <Feature key={feature.id} feature={feature} />
-                        ))}
-                    </div>
-                  ))}
+                  <div className='items-center space-y-4 rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
+                    <SuiText size='lg' weight='bold' color='white'>
+                      Customer intelligence
+                    </SuiText>
+                    <TickItem className='text-sm'>
+                      Player retention and churn prediction
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Real-time ad tech and marketing
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Critical KPI monitoring on metrics such as concurrent
+                      users
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Personalized in-game content and A/B testing with user
+                      segmentation
+                    </TickItem>
+                  </div>
+                  <div className='items-center space-y-4 rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
+                    <SuiText size='lg' weight='bold' color='white'>
+                      Real-time in-game analytics
+                    </SuiText>
+                    <TickItem className='text-sm'>
+                      Real-time leaderboards and rankings
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Player behavior analytics and experience segmentation
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Live in-game event processing
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Trust &amp; safety monitoring
+                    </TickItem>
+                  </div>
+                  <div className='items-center space-y-4 rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
+                    <SuiText size='lg' weight='bold' color='white'>
+                      Security and operations
+                    </SuiText>
+                    <TickItem className='text-sm'>
+                      Fraud detection and anti-cheat analytics
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Crash analytics and performance debugging
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Log, key performance indicators (KPIs) and application
+                      monitoring
+                    </TickItem>
+                    <TickItem className='text-sm'>
+                      Network optimization and routing
+                    </TickItem>
+                  </div>
                 </div>
               </div>
 

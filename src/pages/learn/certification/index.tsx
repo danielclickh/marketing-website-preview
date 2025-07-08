@@ -1,7 +1,11 @@
+import iconPlay from '../assets/icon-play.svg'
 import Accordion from '@/components-cleaned/Accordion'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
+import LogoAnnouncementLink from '@/components/LogoAnnouncementLink'
 import LogoCarousel from '@/components/LogoCarousel'
+import Modal from '@/components/Modal'
+import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import Bullseye from '@/components/icons/Bullseye'
 import Clock from '@/components/icons/Clock'
 import Coins from '@/components/icons/Coins'
@@ -15,6 +19,7 @@ import { LearnProps } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -108,15 +113,17 @@ export default function CertificationPage({
 }: LearnProps) {
   useGalaxyOnPage('certificationPage')
 
+  const [watchWebinar, setWatchWebinar] = useState(false)
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='bg-grid'>
         <div className='section-container flex flex-row flex-wrap items-start justify-between gap-6 py-16 md:py-20 lg:flex-nowrap'>
           {/* Content column */}
-          <div className='w-full lg:max-w-[600px]'>
-            <SuiTitle type='h1' color='white' className='mb-6 md:!text-6xl'>
-              ClickHouse Certified Developer Exam
+          <div className='w-full space-y-6 text-center lg:max-w-[600px] lg:text-left'>
+            <SuiTitle type='h1' color='white' className='md:!text-6xl'>
+              ClickHouse&nbsp;Certified Developer&nbsp;Exam
             </SuiTitle>
             <SuiText color='secondary'>
               Elevate your career to industry-leading heights! Take our official{' '}
@@ -124,11 +131,11 @@ export default function CertificationPage({
               ClickHouse Certification exam to validate your ClickHouse
               expertise.
             </SuiText>
-            <div className='mt-8 flex flex-col items-start gap-x-6 gap-y-6 md:flex-row md:items-center md:gap-y-0'>
+            <div className='!my-8 flex flex-wrap justify-center gap-4 lg:justify-start'>
               <CUIButton
                 type='primary'
                 size='lg'
-                weight='semibold'
+                className='px-8'
                 href='https://buy.stripe.com/14keYf7q55tn2Jy001'
                 onClick={useGalaxyOnClick(
                   'certificationPage.hero.purchaseCertificationBusinessSelect'
@@ -137,9 +144,9 @@ export default function CertificationPage({
                 Purchase as business
               </CUIButton>
               <CUIButton
-                type='secondary'
+                type='secondary-dark'
                 size='lg'
-                weight='semibold'
+                className='px-8'
                 href='https://buy.stripe.com/3csbM36m1cVPgAo147'
                 onClick={useGalaxyOnClick(
                   'certificationPage.hero.purchaseCertificationPersonalSelect'
@@ -148,6 +155,42 @@ export default function CertificationPage({
                 Purchase as individual
               </CUIButton>
             </div>
+            <LogoAnnouncementLink
+              mode='dark'
+              className='mx-auto max-w-max bg-white/5 lg:ml-0 lg:max-w-none'
+              logo={{
+                src: iconPlay,
+                width: 44,
+                height: 44,
+                alt: 'Play'
+              }}
+              href='#'
+              onClick={(event) => {
+                event.preventDefault()
+                setWatchWebinar(true)
+              }}>
+              Preparing for the ClickHouse Certified Developer exam
+              <br />
+              <span className='text-primary-300 group-hover:underline'>
+                Watch the webinar
+              </span>
+            </LogoAnnouncementLink>
+            <Modal isOpen={watchWebinar} onClose={() => setWatchWebinar(false)}>
+              <div className='w-full flex-shrink-0'>
+                <h3 className='mb-6 mt-1 pr-20 text-2xl md:-mt-1'>
+                  Preparing for the ClickHouse Certified Developer exam
+                </h3>
+                {watchWebinar && (
+                  <ResponsiveEmbed>
+                    <iframe
+                      src='https://www.youtube-nocookie.com/embed/bLXCYhf5G8Q?rel=0&autoplay=1'
+                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                      allowFullScreen
+                    />
+                  </ResponsiveEmbed>
+                )}
+              </div>
+            </Modal>
           </div>
 
           {/* Form column */}

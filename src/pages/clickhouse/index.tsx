@@ -1,5 +1,5 @@
 import features from './features.json'
-import BulletPoint from '@/components/BulletPoint'
+import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStarted from '@/components/GetStarted'
 import HRSeparator from '@/components/HRSeparator'
@@ -303,12 +303,12 @@ export default function ClickHouseServerPage({
             </div>
 
             <div className='flex flex-col flex-wrap pt-12 md:mx-auto md:max-w-4xl md:flex-row md:pt-6'>
-              {features5.items.map((feature) => (
-                <BulletPoint
-                  key={feature.text}
-                  text={feature.text}
-                  className='w-full md:w-1/2 lg:w-1/3'
-                />
+              {features5.items.map((feature, featureIndex) => (
+                <TickItem
+                  key={featureIndex}
+                  className='my-2 w-full md:w-1/2 lg:w-1/3'>
+                  {feature.text}
+                </TickItem>
               ))}
             </div>
           </div>

@@ -537,6 +537,11 @@ const nextConfig = {
         destination:
           '/blog/why-openai-uses-clickhouse-for-petabyte-scale-observability',
         permanent: true
+      },
+      {
+        source: '/company/events/202508-APJ-Manila-Data&AIConference',
+        destination: '/company/events/202508-APJ-Manila-DataAIConference',
+        permanent: true
       }
     ]
   }
