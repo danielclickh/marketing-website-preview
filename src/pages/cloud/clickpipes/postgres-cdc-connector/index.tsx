@@ -26,6 +26,7 @@ import logoVapiPng from './assets/logo-vapi.png'
 import logoVuelingPng from './assets/logo-vueling.png'
 import logoVueling from './assets/logo-vueling.svg'
 import imageMonitorPipe from './assets/monitor-pipe.png'
+import TickItem from '@/components-cleaned/TickItem'
 import CdcAnimation from '@/components/CdcAnimation'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
@@ -530,36 +531,6 @@ function FeatureSection({
       <div className='flex items-center justify-center md:w-1/2'>
         <Image {...image} alt={image.alt || ''} />
       </div>
-    </div>
-  )
-}
-
-function TickItem({
-  children,
-  className = ''
-}: {
-  children: React.ReactNode
-  className?: React.HTMLProps<HTMLDivElement>['className']
-}) {
-  return (
-    <div className={`flex items-center gap-4 ${className}`}>
-      <div className='flex-shrink-0 flex-grow-0'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='25'
-          height='18'
-          fill='none'
-          viewBox='0 0 25 18'>
-          <path
-            stroke='#FCFF74'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M23.32 1.67 8.65 16.33 2 9.67'
-          />
-        </svg>
-      </div>
-      <div className='flex-1'>{children}</div>
     </div>
   )
 }
