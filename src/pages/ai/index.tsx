@@ -8,6 +8,7 @@ import heroCenter from './assets/hero-center.png'
 import heroLeft from './assets/hero-left.png'
 import heroRightBig from './assets/hero-right-big.png'
 import heroRightSmall from './assets/hero-right-small.png'
+import TickItem from '@/components-cleaned/TickItem'
 import AnimatedFlare from '@/components/AnimatedFlare'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -568,36 +569,6 @@ function FeatureSection({
       <div className='relative z-10 flex items-center justify-center md:w-1/2'>
         <Image {...image} alt={image.alt || ''} />
       </div>
-    </div>
-  )
-}
-
-function TickItem({
-  children,
-  className = ''
-}: {
-  children: React.ReactNode
-  className?: React.HTMLProps<HTMLDivElement>['className']
-}) {
-  return (
-    <div className={`flex items-center gap-4 ${className}`}>
-      <div className='flex-shrink-0 flex-grow-0'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='25'
-          height='18'
-          fill='none'
-          viewBox='0 0 25 18'>
-          <path
-            stroke='#FCFF74'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M23.32 1.67 8.65 16.33 2 9.67'
-          />
-        </svg>
-      </div>
-      <div className='flex-1'>{children}</div>
     </div>
   )
 }

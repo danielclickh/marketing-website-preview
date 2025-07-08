@@ -1,6 +1,7 @@
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
+import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import LogoCarousel from '@/components/LogoCarousel'
 import Markdown from '@/components/Markdown'
@@ -16,7 +17,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 interface MLProps extends CommonProps {
@@ -97,28 +98,16 @@ export default function MLUseCasePage({
                     </SuiText>
                   </div>
                   <div className='lg:max-w-2xl xl:max-w-full'>
-                    {checkpoints.map((checkpoint) => {
+                    {checkpoints.map(({ content }, checkpointIndex) => {
                       return (
-                        <div
-                          className={'item-center flex space-x-4 pb-2'}
-                          key={checkpoint.id}>
-                          <Image
-                            src='/images/cloud/check.svg'
-                            width={32}
-                            height={33}
-                            alt='Icon'
-                          />
-                          <SuiText
-                            size='base'
-                            weight='normal'
-                            color='secondary'
-                            className='flex items-center'>
-                            <p>{checkpoint.content}</p>
-                          </SuiText>
-                        </div>
+                        <TickItem
+                          key={checkpointIndex}
+                          className='my-4 text-neutral-200'>
+                          {content}
+                        </TickItem>
                       )
                     })}
-                    <div className='relative z-40 mt-6 flex gap-6'>
+                    <div className='relative z-40 mt-8 flex gap-6'>
                       <CUIButton
                         type='primary'
                         size='lg'
