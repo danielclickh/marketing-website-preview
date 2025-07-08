@@ -12,6 +12,7 @@ import logoIbm from './assets/logo-ibm.svg'
 import logoMicrosoft from './assets/logo-microsoft.svg'
 import logoSeemplicity from './assets/logo-seemplicity.svg'
 import logoWallarm from './assets/logo-wallarm.svg'
+import DebugTailwindBreakpoints from '@/components-cleaned/DebugTailwindBreakpoints'
 import TickItem from '@/components-cleaned/TickItem'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton } from '@/components/ClickUI'
@@ -61,6 +62,7 @@ export default function GamingIndustryPage({
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <DebugTailwindBreakpoints className='fixed bottom-0 left-0 z-[9999]' />
       {/* Hero */}
       <section
         className='bg-shadow-element yellow-shadow my-16 lg:my-24'
@@ -73,7 +75,7 @@ export default function GamingIndustryPage({
         }>
         <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:gap-16'>
           {/* Content column */}
-          <div className='mx-auto w-full max-w-lg space-y-6 text-center lg:ml-0 lg:max-w-2xl lg:pr-9 lg:text-left'>
+          <div className='mx-auto w-full max-w-lg space-y-6 text-center lg:ml-0 lg:max-w-2xl lg:text-left xl:pr-9'>
             <p className='font-bold text-primary-300'>
               Industries / Cybersecurity
             </p>
@@ -95,7 +97,7 @@ export default function GamingIndustryPage({
             <SuiText>
               Trusted by developers that work with data at scale
             </SuiText>
-            <ul className='flex items-center justify-between'>
+            <ul className='flex flex-wrap items-center justify-between md:-mx-8 lg:mx-0 lg:flex-nowrap'>
               {(
                 [
                   {
@@ -137,8 +139,10 @@ export default function GamingIndustryPage({
                 ] satisfies Array<ImageProps>
               ).map((logo, logoIndex) => {
                 return (
-                  <li key={logoIndex}>
-                    <Image {...logo} />
+                  <li
+                    key={logoIndex}
+                    className='w-1/2 p-3 md:w-1/3 lg:w-auto lg:p-1'>
+                    <Image {...logo} className='mx-auto' />
                   </li>
                 )
               })}
@@ -147,7 +151,7 @@ export default function GamingIndustryPage({
 
           {/* Form column */}
           <div className='w-full lg:max-w-lg' id='get-in-touch'>
-            <div className='rounded-lg bg-neutral-900/80 p-8 text-center shadow-lg'>
+            <div className='rounded-lg bg-neutral-900/80 p-6 text-center shadow-lg lg:p-8'>
               <SuiTitle type='h3' className='mb-2'>
                 Get in touch with a ClickHouse expert
               </SuiTitle>
@@ -354,7 +358,7 @@ export default function GamingIndustryPage({
           <SuiTitle type='h2' className='mb-16 text-center'>
             Performance x Scale x Trust
           </SuiTitle>
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-10 text-neutral-0 shadow-lg'>
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
               <QuoteCard
@@ -391,7 +395,7 @@ export default function GamingIndustryPage({
           </div>
 
           {/* Compliace */}
-          <ul className='mt-16 flex items-center justify-between xl:px-10'>
+          <ul className='mt-16 flex flex-wrap items-center justify-center lg:justify-between xl:px-10'>
             {(
               [
                 {
@@ -439,8 +443,10 @@ export default function GamingIndustryPage({
               ] satisfies Array<ImageProps>
             ).map((logo, logoIndex) => {
               return (
-                <li key={logoIndex}>
-                  <Image {...logo} />
+                <li
+                  key={logoIndex}
+                  className='w-1/3 p-3 md:w-1/4 lg:w-auto lg:p-1'>
+                  <Image {...logo} className='mx-auto' />
                 </li>
               )
             })}
