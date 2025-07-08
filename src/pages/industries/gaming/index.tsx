@@ -460,7 +460,7 @@ export default function GamingIndustryPage({
 
           <div className='section-container my-20 text-neutral-0 md:px-8 xl:my-44 2xl:px-0'>
             <GetStartedFree
-              href='https://console.clickhouse.cloud/signUp?loc=real-time-use-case-getstarted-footer'
+              href='https://console.clickhouse.cloud/signUp?loc=industry-gaming-getstarted-footer'
               textBefore='Get started with ClickHouse'
               textSlanted='Cloud'
               textAfter='for free'
