@@ -41,8 +41,12 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         seo: {
           path: '/industries/cybersecurity',
-          title: 'ClickHouse for cybersecurity',
-          description: 'ClickHouse is the database for cybersecurity'
+          title:
+            'The fastest real-time analytic database for Cybersecurity — ClickHouse',
+          description:
+            'Power real-time cybersecurity analytics with ClickHouse. The fastest open-source database for high-throughput data ingest, scalable querying, and low-latency insights.',
+          keywords:
+            'clickhouse cybersecurity, real-time cybersecurity analytics, fast analytical database for security, high-throughput data ingest, scalable security data platform, real-time security dashboards, security data warehouse, fast SQL for cybersecurity, open-source analytics database, clickhouse for security teams, real-time SIEM backend, build cybersecurity analytics pipeline'
         },
         ...commonProps
       }
