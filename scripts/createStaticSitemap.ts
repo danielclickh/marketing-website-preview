@@ -174,6 +174,9 @@ function generateSiteMap(
     <url>
         <loc>${siteURL}/industries/gaming</loc>
     </url>
+    <url>
+        <loc>${siteURL}/industries/cybersecurity</loc>
+    </url>
     ${blogPosts
       .map((post) => {
         const prefix = post.category === 'Japanese' ? '/jp' : ''

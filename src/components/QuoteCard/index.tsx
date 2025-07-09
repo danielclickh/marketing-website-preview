@@ -71,7 +71,7 @@ export default function QuoteCard({
           className='flex-1'>
           <Link {...link}>
             <Quote
-              className={`hover:bg-neutral-725/90 hover:shadow-lg ${className}`}
+              className={`transition hover:border-neutral-700 hover:bg-neutral-725/90 hover:shadow-lg ${className}`}
               {...quote}
             />
           </Link>
