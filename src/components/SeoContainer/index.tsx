@@ -16,14 +16,20 @@ function SeoContainer({
   keywords,
   schema
 }: SeoMetadata) {
-  // Default social image
-  let socialImageUrl = `${siteUrl}/images/social_share.png`
+  // Default social image with cache-busting version
+  const imageVersion = 'v1' // Update this when the image changes
+  let socialImageUrl = `${siteUrl}/images/social_share.png?v=${imageVersion}`
 
   // If image is passed as an object
-  if (image?.[0]?.url) socialImageUrl = siteUrl + image?.[0]?.url
-
+  if (image?.[0]?.url) {
+    const baseUrl = image[0].url.startsWith('http') ? '' : siteUrl
+    socialImageUrl = `${baseUrl}${image[0].url}?v=${imageVersion}`
+  }
   // If the image is passed as a string
-  if (imageUrl) socialImageUrl = imageUrl
+  else if (imageUrl) {
+    const baseUrl = imageUrl.startsWith('http') ? '' : siteUrl
+    socialImageUrl = `${baseUrl}${imageUrl}?v=${imageVersion}`
+  }
 
   const canonicalUrl = (() => {
     const predefinedUrls: { [key: string]: string } = {
@@ -78,9 +84,13 @@ function SeoContainer({
 
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
+      <meta name='twitter:site' content='@ClickHouseDB' />
+      <meta name='twitter:creator' content='@ClickHouseDB' />
       <meta name='twitter:title' content={title} />
       <meta name='twitter:description' content={description} />
       <meta name='twitter:image' content={socialImageUrl} />
+      <meta name='twitter:image:alt' content={title} />
+      <meta name='twitter:domain' content='clickhouse.com' />
 
       {/* Schema.org Markup */}
       {schema && (
