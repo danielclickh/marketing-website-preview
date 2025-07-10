@@ -393,7 +393,7 @@ export default function BlogPage({
             Recent posts
           </SuiTitle>
 
-          <CUIButton href='/blog' type='secondary-dark'>
+          <CUIButton href='/blog' type='secondary'>
             View all Blogs
           </CUIButton>
         </div>
