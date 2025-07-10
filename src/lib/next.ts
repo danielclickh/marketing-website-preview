@@ -42,6 +42,11 @@ export function absoluteUrl(relative: string) {
 }
 
 export function isLocalUrl(url: string) {
-  if (!isValidUrl(url)) return absoluteUrl(url)
-  return url.startsWith(relativeUrl('/'))
+  try {
+    const urlObj = new URL(url)
+    const localObj = new URL(BASE_URL_AND_PROTOCOL)
+    return urlObj.origin === localObj.origin
+  } catch {
+    return false
+  }
 }

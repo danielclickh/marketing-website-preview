@@ -30,17 +30,22 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '3005',
-        pathname: '/uploads/**'
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'clickhouse.com',
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: '**.clickhouse.com',
-        pathname: '/uploads/**'
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: '*.vercel.app',
-        pathname: '/uploads/**'
+        pathname: '/**'
       }
     ]
   },
