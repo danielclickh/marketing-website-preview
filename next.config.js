@@ -34,6 +34,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'clickhouse.com',
+        pathname: '/uploads/**'
+      },
+      {
+        protocol: 'https',
         hostname: '**.clickhouse.com',
         pathname: '/uploads/**'
       },
