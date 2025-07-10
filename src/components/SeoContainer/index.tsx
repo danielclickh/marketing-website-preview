@@ -1,4 +1,5 @@
 import { SeoMetadata } from '@/lib/api/strapi/types'
+import { absoluteUrl, isLocalUrl, relativeUrl } from '@/lib/next'
 import Head from 'next/head'
 
 const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? 'https://clickhouse.com'
@@ -16,20 +17,23 @@ function SeoContainer({
   keywords,
   schema
 }: SeoMetadata) {
-  // Default social image with cache-busting version
-  const imageVersion = 'v1' // Update this when the image changes
-  let socialImageUrl = `${siteUrl}/images/social_share.png?v=${imageVersion}`
+  // Default social image
+  let socialImageUrl = '/images/social_share.png'
 
   // If image is passed as an object
-  if (image?.[0]?.url) {
-    const baseUrl = image[0].url.startsWith('http') ? '' : siteUrl
-    socialImageUrl = `${baseUrl}${image[0].url}?v=${imageVersion}`
+  if (image?.[0]?.url && image[0].url.trim().length > 0) {
+    socialImageUrl = image[0].url
   }
+
   // If the image is passed as a string
-  else if (imageUrl) {
-    const baseUrl = imageUrl.startsWith('http') ? '' : siteUrl
-    socialImageUrl = `${baseUrl}${imageUrl}?v=${imageVersion}`
+  else if (imageUrl && imageUrl.trim().length > 0) {
+    socialImageUrl = imageUrl
   }
+
+  // Automatically resize the image
+  socialImageUrl = absoluteUrl(
+    `/_next/image?url=${encodeURIComponent(socialImageUrl)}&w=1200&h=630&q=100`
+  )
 
   const canonicalUrl = (() => {
     const predefinedUrls: { [key: string]: string } = {
