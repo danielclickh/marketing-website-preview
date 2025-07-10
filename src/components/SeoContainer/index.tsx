@@ -1,8 +1,6 @@
 import { SeoMetadata } from '@/lib/api/strapi/types'
-import { absoluteUrl, isLocalUrl, relativeUrl } from '@/lib/next'
+import { absoluteUrl } from '@/lib/next'
 import Head from 'next/head'
-
-const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? 'https://clickhouse.com'
 
 function SeoContainer({
   image,
@@ -47,7 +45,7 @@ function SeoContainer({
       return path
     }
 
-    return predefinedUrls[path] || `${siteUrl}${path}`
+    return predefinedUrls[path] || absoluteUrl(path)
   })()
 
   const canonicalUrlJP = (() => {
@@ -55,7 +53,7 @@ function SeoContainer({
       return path
     }
 
-    return `${siteUrl}/jp${path}`
+    return absoluteUrl(`/jp${path}`)
   })()
 
   title = title && title.length > 0 ? title : ''
