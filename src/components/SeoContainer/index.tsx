@@ -30,7 +30,7 @@ function SeoContainer({
 
   // Automatically resize the image
   socialImageUrl = absoluteUrl(
-    `/_next/image?url=${encodeURIComponent(socialImageUrl)}&w=1200&h=630&q=100`
+    `/_next/image?url=${encodeURIComponent(socialImageUrl)}&w=1200&h=630&q=80`
   )
 
   const canonicalUrl = (() => {
