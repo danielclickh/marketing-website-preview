@@ -589,7 +589,7 @@ const AGENDA: Array<{
       </>
     )
   },
-  { time: '12:00 a.m.', title: 'Lunch' },
+  { time: '12:00 p.m.', title: 'Lunch' },
   {
     time: '1:00 p.m.',
     title: 'Observability: technical deep dives and user stories',
