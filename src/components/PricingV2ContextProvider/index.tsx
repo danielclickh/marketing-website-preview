@@ -842,7 +842,10 @@ export default function PricingV2ContextProvider({
         // Enforce limits if a single replica
         if (newReplicas === 1) {
           // Limit to a max 12 compute size
-          if (newComputeMinSize && newComputeMinSize > 12) {
+          if (
+            newComputeMinSize &&
+            !(newComputeMinSize > 8 && newComputeMinSize <= 12)
+          ) {
             newComputeMinSize = 12
           }
 
