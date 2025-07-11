@@ -840,7 +840,7 @@ export default function PricingV2ContextProvider({
         }
 
         // Enforce limits if a single replica
-        if (newReplicas === 1) {
+        if (newReplicas === 1 && !newPlanEntry?.packages.length) {
           // Limit to a max 12 compute size
           if (
             newComputeMinSize &&
