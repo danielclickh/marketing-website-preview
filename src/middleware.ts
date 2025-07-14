@@ -1,4 +1,3 @@
-import { slugify } from '@/lib/utils/strings'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
@@ -57,7 +56,7 @@ export function middleware(request: NextRequest) {
     request.geo?.country ||
     'unknown'
 
-  let response: null | NextResponse<any> = null
+  let response: null | NextResponse<any> = NextResponse.next()
 
   // Check if there are redirections set up for the user’s country
   if (i18nRedirectionMap.hasOwnProperty(countryCode)) {
@@ -85,15 +84,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Create a blank response so we can store the user country code.
-  // This fixes an issue where a user is unable to switch languages
-  // when on a page that doesn't exist in the redirect map.
-  if (!response && countryCode !== cookieCountryCode) {
-    response = NextResponse.next()
-  }
-
-  if (response) {
-    response.cookies.set(cookieKey, countryCode)
-    return response
-  }
+  response.cookies.set(cookieKey, countryCode)
+  return response
 }
