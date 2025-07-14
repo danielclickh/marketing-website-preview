@@ -58,19 +58,16 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
 }
 
 export function middleware(request: NextRequest) {
+  const cookieKey = 'user-country-code-v2'
+
   // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
   // Note: geo data is only available on Vercel deployment; defaults to 'unknown' otherwise
-  const cookieCountryCode = request.cookies.get('user-country-code')?.value
+  const cookieCountryCode = request.cookies.get(cookieKey)?.value
   const countryCode =
     request.nextUrl.searchParams.get('country')?.toUpperCase() ||
     cookieCountryCode ||
     request.geo?.country ||
     'unknown'
-
-  // Key for the redirect cookie to avoid multiple redirects for the same user session
-  const redirectCookieKey = `geo-redirect-${countryCode}_${
-    slugify(request.nextUrl.pathname) || 'home'
-  }`
 
   let response: null | NextResponse<any> = null
 
@@ -108,7 +105,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (response) {
-    response.cookies.set('user-country-code', countryCode)
+    response.cookies.set(cookieKey, countryCode)
     return response
   }
 }
