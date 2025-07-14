@@ -12,7 +12,6 @@ import logoIbm from './assets/logo-ibm.svg'
 import logoMicrosoft from './assets/logo-microsoft.svg'
 import logoSeemplicity from './assets/logo-seemplicity.svg'
 import logoWallarm from './assets/logo-wallarm.svg'
-import DebugTailwindBreakpoints from '@/components-cleaned/DebugTailwindBreakpoints'
 import TickItem from '@/components-cleaned/TickItem'
 import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton } from '@/components/ClickUI'
@@ -66,7 +65,6 @@ export default function GamingIndustryPage({
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <DebugTailwindBreakpoints className='fixed bottom-0 left-0 z-[9999]' />
       {/* Hero */}
       <section
         className='bg-shadow-element yellow-shadow my-16 lg:my-24'
