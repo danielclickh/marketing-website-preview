@@ -42,8 +42,8 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
     '/use-cases/machine-learning-and-data-science':
       '/jp/use-cases/machine-learning-and-data-science',
     '/use-cases/real-time-analytics': '/jp/use-cases/real-time-analytics'
-  },
-  EN: {
+  }
+  /*EN: {
     '/jp': '/',
     '/jp/clickhouse': '/clickhouse',
     '/jp/cloud': '/cloud',
@@ -54,7 +54,7 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
     '/jp/use-cases/machine-learning-and-data-science':
       '/use-cases/machine-learning-and-data-science',
     '/jp/use-cases/real-time-analytics': '/use-cases/real-time-analytics'
-  }
+  }*/
 }
 
 export function middleware(request: NextRequest) {
