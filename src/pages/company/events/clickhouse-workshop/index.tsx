@@ -1,3 +1,4 @@
+import fallbackSocialImage from '@/../public/images/social_share.png'
 import EventPost from '@/components/EventPostList/EventPost'
 import EventsContainerMarketo from '@/components/EventsContainer-Marketo'
 import Layout from '@/components/Layout'
@@ -9,6 +10,7 @@ import {
   getProxiedMediaUrl,
   getUnlistedFilters
 } from '@/lib/api/strapi'
+import { absoluteUrl } from '@/lib/next'
 import { generateInnerEventSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
@@ -105,7 +107,9 @@ export const getStaticProps: GetStaticProps<EventProps> =
             name: page.title,
             description: page.shortDescription || '',
             startDate: page.localDatetime,
-            imageUrl: getProxiedMediaUrl(page.thumbnailPng.url),
+            imageUrl: page?.thumbnailPng?.url
+              ? getProxiedMediaUrl(page.thumbnailPng.url)
+              : absoluteUrl(fallbackSocialImage.src),
             path: '/company/events/clickhouse-workshop',
             locationCity: page.location.city,
             locationCountry: page.location.country

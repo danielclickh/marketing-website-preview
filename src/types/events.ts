@@ -50,7 +50,7 @@ export type EventType = {
   featured: boolean
   StagingOnly?: boolean | null
   location: EventLocation
-  thumbnailPng: StrapiImageType
+  thumbnailPng: StrapiImageType | null
   eventVideoUrl: string | null
   shortDescription: string | null
   richDescription: string | null

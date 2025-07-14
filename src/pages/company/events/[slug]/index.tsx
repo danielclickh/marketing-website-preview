@@ -1,3 +1,4 @@
+import fallbackSocialImage from '@/../public/images/social_share.png'
 import EventPost from '@/components/EventPostList/EventPost'
 import EventsContainer from '@/components/EventsContainer'
 import Layout from '@/components/Layout'
@@ -12,6 +13,7 @@ import {
 } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { absoluteUrl } from '@/lib/next'
 import { generateInnerEventSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
@@ -117,7 +119,9 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
         name: page.title,
         description: page.shortDescription || '',
         startDate: page.localDatetime,
-        imageUrl: getProxiedMediaUrl(page.thumbnailPng.url),
+        imageUrl: page?.thumbnailPng?.url
+          ? getProxiedMediaUrl(page.thumbnailPng.url)
+          : absoluteUrl(fallbackSocialImage.src),
         path: `/company/events/${slug}`,
         locationCity: page.location.city,
         locationCountry: page.location.country
