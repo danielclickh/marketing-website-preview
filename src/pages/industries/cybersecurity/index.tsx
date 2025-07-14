@@ -153,7 +153,7 @@ export default function GamingIndustryPage({
 
           {/* Form column */}
           <div className='w-full lg:max-w-lg' id='get-in-touch'>
-            <div className='rounded-lg bg-neutral-900/80 p-6 text-center shadow-lg lg:p-8'>
+            <div className='relative overflow-hidden rounded-lg bg-neutral-900/80 p-6 text-center shadow-lg lg:p-8'>
               <SuiTitle type='h3' className='mb-2'>
                 Get in touch with a ClickHouse expert
               </SuiTitle>
@@ -181,7 +181,9 @@ export default function GamingIndustryPage({
                 <div className='my-auto text-center'>Loading form...</div>
               )}
               {formSuccess && (
-                <div ref={formSuccessRef} className='my-auto text-center'>
+                <div
+                  ref={formSuccessRef}
+                  className='absolute inset-0 z-10 my-auto flex flex-col items-center justify-center bg-neutral-900/90 text-center backdrop-blur'>
                   <h3 className='text-2xl font-bold'>Thank you!</h3>
                   <p className='mt-2 text-neutral-200'>
                     We'll be in touch shortly.
