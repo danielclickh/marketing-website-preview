@@ -45,7 +45,7 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
 }
 
 export function middleware(request: NextRequest) {
-  const cookieKey = 'user-country-code-v3'
+  const cookieKey = `user-country-code-v4`
 
   // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
   // Note: geo data is only available on Vercel deployment; defaults to 'unknown' otherwise
