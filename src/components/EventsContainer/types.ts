@@ -6,11 +6,11 @@ export interface EventsContainerProps {
   children: ReactNode
   form?: EventForm | null
   recordedVimeoUrl?: string | null
-  featuredImage?: StrapiImage
+  featuredImage?: StrapiImage | null
 }
 
 export interface EventsFormProps {
-  featuredImage?: StrapiImage
+  featuredImage?: StrapiImage | null
   form?: EventForm | null
   recordedVimeoUrl?: string | null
 }

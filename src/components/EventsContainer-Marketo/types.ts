@@ -7,12 +7,12 @@ export interface EventsContainerProps {
   localDatetime: string
   form: EventForm
   recordedVimeoUrl?: string
-  featuredImage?: StrapiImage
+  featuredImage?: StrapiImage | null
 }
 
 export interface EventsFormProps {
   submitted: boolean
   onSubmit: () => void
-  featuredImage?: StrapiImage
+  featuredImage?: StrapiImage | null
   form: EventForm
 }
