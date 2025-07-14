@@ -1,4 +1,3 @@
-import { slugify } from '@/lib/utils/strings'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
@@ -9,7 +8,7 @@ export const config = {
     // - _next/static (excludes static files)
     // - _next/image (excludes image optimization files)
     // - favicon.ico (excludes favicon file)
-    //'/((?!api|_next/static|_next/image|favicon.ico).*)'
+    '/((?!api|_next/static|_next/image|favicon.ico).*)'
   ]
 }
 
@@ -43,22 +42,10 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
       '/jp/use-cases/machine-learning-and-data-science',
     '/use-cases/real-time-analytics': '/jp/use-cases/real-time-analytics'
   }
-  /*EN: {
-    '/jp': '/',
-    '/jp/clickhouse': '/clickhouse',
-    '/jp/cloud': '/cloud',
-    '/jp/company/contact': '/company/contact',
-    '/jp/use-cases': '/use-cases',
-    '/jp/use-cases/business-intelligence': '/use-cases/data-warehousing',
-    '/jp/use-cases/logging-and-metrics': '/use-cases/observability',
-    '/jp/use-cases/machine-learning-and-data-science':
-      '/use-cases/machine-learning-and-data-science',
-    '/jp/use-cases/real-time-analytics': '/use-cases/real-time-analytics'
-  }*/
 }
 
 export function middleware(request: NextRequest) {
-  const cookieKey = 'user-country-code-v2'
+  const cookieKey = 'user-country-code-v3'
 
   // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
   // Note: geo data is only available on Vercel deployment; defaults to 'unknown' otherwise
@@ -69,7 +56,7 @@ export function middleware(request: NextRequest) {
     request.geo?.country ||
     'unknown'
 
-  let response: null | NextResponse<any> = null
+  let response: null | NextResponse<any> = NextResponse.next()
 
   // Check if there are redirections set up for the user’s country
   if (i18nRedirectionMap.hasOwnProperty(countryCode)) {
@@ -97,15 +84,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Create a blank response so we can store the user country code.
-  // This fixes an issue where a user is unable to switch languages
-  // when on a page that doesn't exist in the redirect map.
-  if (!response && countryCode !== cookieCountryCode) {
-    response = NextResponse.next()
-  }
-
-  if (response) {
-    response.cookies.set(cookieKey, countryCode)
-    return response
-  }
+  response.cookies.set(cookieKey, countryCode)
+  return response
 }
