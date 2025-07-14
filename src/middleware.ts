@@ -42,15 +42,28 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
     '/use-cases/machine-learning-and-data-science':
       '/jp/use-cases/machine-learning-and-data-science',
     '/use-cases/real-time-analytics': '/jp/use-cases/real-time-analytics'
+  },
+  EN: {
+    '/jp': '/',
+    '/jp/clickhouse': '/clickhouse',
+    '/jp/cloud': '/cloud',
+    '/jp/company/contact': '/company/contact',
+    '/jp/use-cases': '/use-cases',
+    '/jp/use-cases/business-intelligence': '/use-cases/data-warehousing',
+    '/jp/use-cases/logging-and-metrics': '/use-cases/observability',
+    '/jp/use-cases/machine-learning-and-data-science':
+      '/use-cases/machine-learning-and-data-science',
+    '/jp/use-cases/real-time-analytics': '/use-cases/real-time-analytics'
   }
 }
 
 export function middleware(request: NextRequest) {
   // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
   // Note: geo data is only available on Vercel deployment; defaults to 'unknown' otherwise
+  const cookieCountryCode = request.cookies.get('user-country-code')?.value
   const countryCode =
     request.nextUrl.searchParams.get('country')?.toUpperCase() ||
-    request.cookies.get('user-country-code')?.value ||
+    cookieCountryCode ||
     request.geo?.country ||
     'unknown'
 
@@ -85,6 +98,13 @@ export function middleware(request: NextRequest) {
       // Create a redirect response
       response = NextResponse.redirect(destinationUrl)
     }
+  }
+
+  // Create a blank response so we can store the user country code.
+  // This fixes an issue where a user is unable to switch languages
+  // when on a page that doesn't exist in the redirect map.
+  if (!response && countryCode !== cookieCountryCode) {
+    response = NextResponse.next()
   }
 
   if (response) {
