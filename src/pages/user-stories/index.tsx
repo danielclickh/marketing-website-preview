@@ -372,15 +372,6 @@ export default function CustomerStoriesPage({
         } else if (!a.highlight && b.highlight) {
           return 1
         }
-
-        // If both have the same highlight status, sort by sortOrder
-        const sortOrderA = a.SortOrder ?? Number.MAX_SAFE_INTEGER
-        const sortOrderB = b.SortOrder ?? Number.MAX_SAFE_INTEGER
-
-        // Ascending order by sortOrder
-        if (sortOrderA !== sortOrderB) {
-          return sortOrderA - sortOrderB
-        }
       }
 
       // Fall back to latest (decending order)
