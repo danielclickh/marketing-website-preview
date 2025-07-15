@@ -1,3 +1,4 @@
+import GlobalSearchProvider from '@/components-cleaned/GlobalSearchProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
 import { Galaxy } from '@/lib/galaxy/web/browser'
@@ -138,14 +139,16 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </Head>
         <GrowthBookProvider growthbook={gb}>
-          <main
-            id='main-site-container'
-            className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-            <div className='flex min-h-screen flex-col'>
-              <Component {...pageProps} />
-            </div>
-          </main>
-          <UTMPersist />
+          <GlobalSearchProvider>
+            <main
+              id='main-site-container'
+              className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
+              <div className='flex min-h-screen flex-col'>
+                <Component {...pageProps} />
+              </div>
+            </main>
+            <UTMPersist />
+          </GlobalSearchProvider>
         </GrowthBookProvider>
 
         {/* Exclude tracking from marketo iframe routes */}
