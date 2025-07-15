@@ -94,7 +94,7 @@ export default function GamingIndustryPage({
               sources
             </TickItem>
             <TickItem className='text-left'>
-              ISO 27001, PCI DSS, HIPAA, GDPR, SOC 2 Type 2, and FedRAMP
+              ISO 27001, PCI DSS, HIPAA, GDPR and SOC 2 Type 2
             </TickItem>
             <SuiText>
               Trusted by developers that work with data at scale
