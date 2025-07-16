@@ -10,11 +10,15 @@ type Direction = 'vertical' | 'horizontal'
 const classes: Record<string, Record<Direction, string>> = {
   container: {
     vertical: 'flex flex-col',
-    horizontal: 'flex flex-col lg:flex-row lg:gap-6'
+    horizontal: 'flex flex-col lg:flex-row lg:gap-8 lg:p-8'
   },
   icon: {
     vertical: 'mb-4 mt-2',
     horizontal: 'mb-4 mt-2 lg:my-0 lg:ml-2 lg:self-start'
+  },
+  text: {
+    vertical: 'mb-8 text-left',
+    horizontal: 'mb-8 text-left lg:mb-0'
   },
   logo: {
     vertical: 'mt-auto max-w-[200px]',
@@ -46,7 +50,7 @@ function Quote({
         alt='Quote'
         className={`block ${classes.icon[direction]}`}
       />
-      <SuiText color='secondary' className='mb-8 text-left'>
+      <SuiText color='secondary' className={classes.text[direction]}>
         {typeof content === 'string' ? (
           <Markdown>{content}</Markdown>
         ) : (
