@@ -203,6 +203,9 @@ function SearchContainer() {
       },
       docs(results: Array<Hit<BaseHit>>) {
         context.setResults((old) => normalizeHits(old, 'docs', results))
+      },
+      pages(results: Array<Hit<BaseHit>>) {
+        context.setResults((old) => normalizeHits(old, 'pages', results))
       }
     }
   }, [])
@@ -265,6 +268,10 @@ function SearchContainer() {
       <Index indexName='clickhouse'>
         <Configure getRankingInfo={true} hitsPerPage={5} />
         <SearchHits onHitsUpdate={handlers.docs} />
+      </Index>
+      <Index indexName='non_strapi_pages'>
+        <Configure getRankingInfo={true} hitsPerPage={5} />
+        <SearchHits onHitsUpdate={handlers.pages} />
       </Index>
 
       {/* Field UI */}
@@ -407,6 +414,10 @@ function SearchResultLink({ hit }: { hit: NormalizedHit }) {
       target = '_blank'
       label = hit.title
       icon = iconDocs
+      break
+    case 'pages':
+      link = hit.path
+      label = hit.h1 || hit.title
       break
   }
 
