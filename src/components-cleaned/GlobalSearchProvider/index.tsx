@@ -1,11 +1,19 @@
 'use client'
 
+import iconBlogs from './assets/icon-blogs.svg'
+import iconDefault from './assets/icon-default.svg'
+import iconDemos from './assets/icon-demos.svg'
+import iconDocs from './assets/icon-docs.svg'
+import iconEvents from './assets/icon-events.svg'
+import iconIntegrations from './assets/icon-integrations.svg'
+import iconVideos from './assets/icon-videos.svg'
 import { useClickOutside } from '@/hooks'
 import { BASE_URL_AND_PROTOCOL } from '@/lib/next'
 import { SearchIcon, XIcon } from '@heroicons/react/outline'
 import { Hit, liteClient as algoliasearch } from 'algoliasearch/lite'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BaseHit } from 'instantsearch.js'
+import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import {
   createContext,
@@ -34,6 +42,8 @@ type GlobalSearchContextType = {
   setSearchTerm: Dispatch<SetStateAction<GlobalSearchContextType['searchTerm']>>
   open: (searchTerm?: GlobalSearchContextType['searchTerm']) => void
   close: () => void
+  results: Array<NormalizedHit>
+  setResults: Dispatch<SetStateAction<GlobalSearchContextType['results']>>
 }
 
 type NormalizedHit = Hit<BaseHit> & {
@@ -46,7 +56,9 @@ const GlobalSearchContext = createContext<GlobalSearchContextType>({
   searchTerm: '',
   setSearchTerm() {},
   open() {},
-  close() {}
+  close() {},
+  results: [],
+  setResults() {}
 })
 
 export function useGlobalSearch() {
@@ -80,11 +92,9 @@ export default function GlobalSearchProvider({
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [isOpen, setIsOpen] = useState(false)
+  const [results, setResults] = useState<Array<NormalizedHit>>([])
   const open = (openWithSearchTerm?: string) => {
-    openWithSearchTerm = openWithSearchTerm || ''
-    if (openWithSearchTerm !== searchTerm) {
-      setSearchTerm(openWithSearchTerm)
-    }
+    setSearchTerm(openWithSearchTerm || '')
     setIsOpen(true)
   }
   const close = () => {
@@ -96,6 +106,11 @@ export default function GlobalSearchProvider({
     close()
   })
 
+  // Reset results on term change
+  useEffect(() => {
+    setResults([])
+  }, [searchTerm])
+
   return (
     <GlobalSearchContext.Provider
       value={{
@@ -103,7 +118,9 @@ export default function GlobalSearchProvider({
         open,
         close,
         searchTerm,
-        setSearchTerm
+        setSearchTerm,
+        results,
+        setResults
       }}>
       {children}
       <AnimatePresence>
@@ -121,7 +138,7 @@ export default function GlobalSearchProvider({
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.2 }}
               className='relative mx-auto mt-0 max-h-full w-full max-w-xl overflow-y-auto rounded-lg border border-white/5 bg-neutral-900 text-white shadow-2xl'>
-              <SearchContainer searchTerm={searchTerm} />
+              <SearchContainer />
             </motion.div>
           </motion.div>
         )}
@@ -130,7 +147,9 @@ export default function GlobalSearchProvider({
   )
 }
 
-function SearchContainer({ searchTerm }: { searchTerm?: string | null }) {
+function SearchContainer() {
+  const context = useGlobalSearch()
+
   const searchClient = useMemo(() => {
     return algoliasearch(
       process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || '',
@@ -138,68 +157,75 @@ function SearchContainer({ searchTerm }: { searchTerm?: string | null }) {
     )
   }, [])
 
-  const [combinedResults, setCombinedResults] = useState<Array<NormalizedHit>>(
-    []
-  )
-
   const handlers = useMemo(() => {
-    function normalizeHits(type: string, hits: Array<Hit<BaseHit>>) {
-      const maxUserScore =
-        Math.max(...hits.map((hit) => hit._rankingInfo?.userScore || 0)) || 1
+    function normalizeHits(
+      oldHits: Array<Hit<BaseHit>>,
+      type: string,
+      newHits: Array<Hit<BaseHit>>
+    ) {
+      const tagHits = (hits: Array<Hit<BaseHit>>) => {
+        return hits.map((hit) => ({
+          ...hit,
+          __type: type
+        })) as Array<Omit<NormalizedHit, '__normalizedScore'>>
+      }
 
-      return hits.map((hit) => ({
-        ...hit,
-        __type: type,
-        __normalizedScore: (hit._rankingInfo?.userScore || 0) / maxUserScore
-      }))
+      const scoreHits = (
+        hits: Array<Omit<NormalizedHit, '__normalizedScore'>>
+      ) => {
+        const maxUserScore =
+          Math.max(...hits.map((hit) => hit._rankingInfo?.userScore || 0)) || 1
+
+        return hits.map((hit) => ({
+          ...hit,
+          __normalizedScore: (hit._rankingInfo?.userScore || 0) / maxUserScore
+        })) as Array<NormalizedHit>
+      }
+
+      return scoreHits([...oldHits, ...tagHits(newHits)])
     }
 
     return {
       blogs(results: Array<Hit<BaseHit>>) {
-        setCombinedResults((old) => [
-          ...old,
-          ...normalizeHits('blogs', results)
-        ])
+        context.setResults((old) => normalizeHits(old, 'blogs', results))
       },
       events(results: Array<Hit<BaseHit>>) {
-        setCombinedResults((old) => [
-          ...old,
-          ...normalizeHits('events', results)
-        ])
+        context.setResults((old) => normalizeHits(old, 'events', results))
       },
       demos(results: Array<Hit<BaseHit>>) {
-        setCombinedResults((old) => [
-          ...old,
-          ...normalizeHits('demos', results)
-        ])
+        context.setResults((old) => normalizeHits(old, 'demos', results))
       },
       integrations(results: Array<Hit<BaseHit>>) {
-        setCombinedResults((old) => [
-          ...old,
-          ...normalizeHits('integrations', results)
-        ])
+        context.setResults((old) => normalizeHits(old, 'integrations', results))
       },
       videos(results: Array<Hit<BaseHit>>) {
-        setCombinedResults((old) => [
-          ...old,
-          ...normalizeHits('videos', results)
-        ])
+        context.setResults((old) => normalizeHits(old, 'videos', results))
       },
       docs(results: Array<Hit<BaseHit>>) {
-        setCombinedResults((old) => [...old, ...normalizeHits('docs', results)])
+        context.setResults((old) => normalizeHits(old, 'docs', results))
       }
     }
   }, [])
 
-  const sortedAndLimitedResults = combinedResults
-    .sort((a, b) => {
-      return b.__normalizedScore - a.__normalizedScore
+  const filteredResults = useMemo(() => {
+    const seen = new Set()
+
+    const deduped = context.results.filter((hit) => {
+      const key = `${hit.__type}_${hit.objectID}`
+      if (seen.has(key)) return false
+      seen.add(key)
+      return true
     })
-    .slice(0, MAXIMUM_RESULTS_TO_DISPLAY)
 
-  const hasResults = sortedAndLimitedResults.length > 0
+    return deduped
+      .sort((a, b) => {
+        return b.__normalizedScore - a.__normalizedScore
+      })
+      .slice(0, MAXIMUM_RESULTS_TO_DISPLAY)
+  }, [context.results])
 
-  const context = useGlobalSearch()
+  const hasValidQuery = context.searchTerm.length >= MINIMUM_QUERY_LENGTH
+  const hasResults = filteredResults.length > 0
 
   return (
     <InstantSearch searchClient={searchClient}>
@@ -243,9 +269,9 @@ function SearchContainer({ searchTerm }: { searchTerm?: string | null }) {
 
       {/* Field UI */}
       <div
-        className={`sticky top-0 z-10 flex bg-neutral-900 backdrop-blur ${hasResults ? 'border-b border-white/5' : ''}`}>
+        className={`sticky top-0 z-10 flex bg-neutral-900 backdrop-blur ${hasValidQuery ? 'border-b border-white/5' : ''}`}>
         <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
-        <SearchInput defaultValue={searchTerm} className='flex-1 p-4 pl-14' />
+        <SearchInput className='flex-1 p-4 pl-14' />
         <button
           type='button'
           className='border-l border-white/5 p-4 transition-colors hover:bg-white/5'
@@ -260,7 +286,7 @@ function SearchContainer({ searchTerm }: { searchTerm?: string | null }) {
       {/* Results UI */}
       {hasResults && (
         <ul className='p-4'>
-          {sortedAndLimitedResults.map((result, resultIndex) => {
+          {filteredResults.map((result, resultIndex) => {
             return (
               <li key={resultIndex}>
                 <SearchResultLink hit={result} />
@@ -269,27 +295,26 @@ function SearchContainer({ searchTerm }: { searchTerm?: string | null }) {
           })}
         </ul>
       )}
+      {hasValidQuery && !hasResults && (
+        <p className='py-6 text-center'>No search results</p>
+      )}
     </InstantSearch>
   )
 }
 
-function SearchInput({
-  className = '',
-  defaultValue
-}: {
-  className?: string
-  defaultValue?: string | null
-}) {
+function SearchInput({ className = '' }: { className?: string }) {
   const inputRef = useRef<null | HTMLInputElement>(null)
   const { query, refine } = useSearchBox()
+  const context = useGlobalSearch()
 
-  // Perform query for default value
+  // Perform query everytime the search term changes
   useEffect(() => {
-    if (typeof defaultValue === 'string' && defaultValue !== query) {
-      refine(defaultValue)
+    if (context.searchTerm !== query) {
+      refine(context.searchTerm)
     }
-  }, [defaultValue, query, refine])
+  }, [context.searchTerm, query, refine])
 
+  // Focus input on mount
   useEffect(() => {
     const inputEl = inputRef.current
     if (!inputEl) return
@@ -300,11 +325,11 @@ function SearchInput({
     <input
       ref={inputRef}
       type='search'
-      defaultValue={defaultValue || ''}
+      defaultValue={context.searchTerm}
       className={`appearance-none border-none bg-transparent text-lg outline-none ${className}`}
       placeholder='Search anything...'
       onChange={(event) => {
-        refine(event.target.value)
+        context.setSearchTerm(event.target.value)
       }}
     />
   )
@@ -331,12 +356,13 @@ function SearchHits({
 function SearchResultLink({ hit }: { hit: NormalizedHit }) {
   let badge: null | string = null
   let link: null | string = null
+  let icon: ImageProps['src'] = iconDefault
   let label: null | string = null
   let target: React.HTMLProps<HTMLAnchorElement>['target'] = '_self'
 
   const joinPaths = (first: string, last: string) => {
     const firstTrimmed = first.replace(/\/$/, '')
-    const lastTrimmed = first.replace(/^\//, '')
+    const lastTrimmed = last.replace(/^\//, '')
     return `${firstTrimmed}/${lastTrimmed}`
   }
 
@@ -345,22 +371,26 @@ function SearchResultLink({ hit }: { hit: NormalizedHit }) {
       badge = 'Blog'
       link = joinPaths('/blog', hit.slug)
       label = hit.title
+      icon = iconBlogs
       break
     case 'demos':
       badge = 'Demo'
       link = hit.External ? hit.Link : joinPaths('/demos', hit.Link)
       target = hit.External ? '_blank' : '_self'
       label = hit.Title
+      icon = iconDemos
       break
     case 'events':
       badge = 'Event'
       link = joinPaths('/company/events', hit.slug)
       label = hit.title
+      icon = iconEvents
       break
     case 'videos':
       badge = 'Video'
       link = `/videos/${hit.Slug}`
       label = hit.Title
+      icon = iconVideos
       break
     case 'integrations':
       badge = 'Integration'
@@ -369,32 +399,42 @@ function SearchResultLink({ hit }: { hit: NormalizedHit }) {
         : joinPaths('/integrations', hit.slug)
       target = hit.openInNewWindow ? '_blank' : '_self'
       label = hit.name
+      icon = iconIntegrations
       break
     case 'docs':
       badge = 'Docs'
       link = joinPaths('/docs', hit.slug)
       target = '_blank'
       label = hit.title
+      icon = iconDocs
       break
   }
 
   if (!link) return null
 
+  const absoluteLink = new URL(link, BASE_URL_AND_PROTOCOL).toString()
+
   return (
     <Link
       href={link}
       target={target}
-      className='group/searchItem block rounded-lg px-4 py-2 transition-colors hover:bg-white/5'>
-      {badge && (
-        <small className='-ml-2 mb-1 inline-block rounded-sm bg-white/15 px-2 py-1 leading-none opacity-70'>
-          {badge}
-        </small>
-      )}
-      <strong className='block group-hover/searchItem:text-primary-300'>
-        {label}
-      </strong>
-      <span className='block truncate text-sm opacity-70'>
-        {new URL(link, BASE_URL_AND_PROTOCOL).toString()}
+      className='group/searchItem flex w-full items-center gap-4 rounded-lg p-2 transition-colors hover:bg-white/5'>
+      <small className='inline-block aspect-square w-12 flex-shrink-0 flex-grow-0 rounded bg-white/10 px-2 py-1 leading-none'>
+        <Image
+          src={icon}
+          alt={badge || ''}
+          width={48}
+          height={48}
+          className='h-full w-full max-w-none object-scale-down object-center opacity-80 invert'
+        />
+      </small>
+      <span className='min-w-0 flex-1'>
+        <strong className='block break-words group-hover/searchItem:text-primary-300'>
+          {label}
+        </strong>
+        <span className='block truncate text-sm opacity-70'>
+          {absoluteLink}
+        </span>
       </span>
     </Link>
   )
