@@ -5,37 +5,57 @@ import Link, { LinkProps } from 'next/link'
 import React from 'react'
 import Tilt from 'react-parallax-tilt'
 
+type Direction = 'vertical' | 'horizontal'
+
+const classes: Record<string, Record<Direction, string>> = {
+  container: {
+    vertical: 'flex flex-col',
+    horizontal: 'flex flex-row gap-6'
+  },
+  icon: {
+    vertical: 'mb-4 mt-2',
+    horizontal: 'ml-2 self-start'
+  },
+  logo: {
+    vertical: 'mt-auto max-w-[200px]',
+    horizontal:
+      'w-40 object-scale-down rounded-2xl bg-gradient-to-r from-neutral-600/40 to-neutral-600/10 px-4 border border-neutral-600/40'
+  }
+} as const
+
 interface QuoteProps {
   content: React.ReactNode | string
   logo: ImageProps
   className?: string
+  direction?: Direction
 }
 
 function Quote({
   content,
   logo: { className: logoClassName = '', ...logo },
-  className = ''
+  className = '',
+  direction = 'vertical'
 }: QuoteProps) {
   return (
     <div
-      className={`animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-4 text-center shadow-card ${className}`}>
+      className={`animate-fade-in relative h-full w-full rounded-lg border border-neutral-725 bg-neutral-900/50 p-4 text-center shadow-card ${classes.container[direction]} ${className}`}>
       <Image
         src='/images/Quote.svg'
         width={37}
         height={28}
         alt='Quote'
-        className='mb-4 mt-2 block'
+        className={`block ${classes.icon[direction]}`}
       />
       <SuiText color='secondary' className='mb-8 text-left'>
         {typeof content === 'string' ? (
           <Markdown>{content}</Markdown>
         ) : (
-          <>content</>
+          <>{content}</>
         )}
       </SuiText>
       <Image
         {...logo}
-        className={`mt-auto inline-block h-auto max-w-[200px] ${logoClassName}`}
+        className={`inline-block h-auto ${classes.logo[direction]} ${logoClassName}`}
         alt='Quote'
       />
     </div>
