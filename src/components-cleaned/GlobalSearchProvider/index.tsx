@@ -236,7 +236,7 @@ function SearchContainer() {
       <Index indexName='strapi_api::blog-post.blog-post'>
         <Configure
           getRankingInfo={true}
-          hitsPerPage={5}
+          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
           filters='ListOnBlogs:true AND StagingOnly:false'
         />
         <SearchHits onHitsUpdate={handlers.blogs} />
@@ -244,7 +244,7 @@ function SearchContainer() {
       <Index indexName='strapi_api::demo.demo'>
         <Configure
           getRankingInfo={true}
-          hitsPerPage={5}
+          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
           filters='ListOnDemos:true AND StagingOnly:false'
         />
         <SearchHits onHitsUpdate={handlers.demos} />
@@ -252,25 +252,37 @@ function SearchContainer() {
       <Index indexName='strapi_api::event.event'>
         <Configure
           getRankingInfo={true}
-          hitsPerPage={5}
+          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
           filters='unlisted:false AND StagingOnly:false'
         />
         <SearchHits onHitsUpdate={handlers.events} />
       </Index>
       <Index indexName='strapi_api::integration.integration'>
-        <Configure getRankingInfo={true} hitsPerPage={5} />
+        <Configure
+          getRankingInfo={true}
+          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
+        />
         <SearchHits onHitsUpdate={handlers.integrations} />
       </Index>
       <Index indexName='strapi_api::marketing-video.marketing-video'>
-        <Configure getRankingInfo={true} hitsPerPage={5} />
+        <Configure
+          getRankingInfo={true}
+          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
+        />
         <SearchHits onHitsUpdate={handlers.videos} />
       </Index>
       <Index indexName='clickhouse'>
-        <Configure getRankingInfo={true} hitsPerPage={5} />
+        <Configure
+          getRankingInfo={true}
+          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
+        />
         <SearchHits onHitsUpdate={handlers.docs} />
       </Index>
       <Index indexName='non_strapi_pages'>
-        <Configure getRankingInfo={true} hitsPerPage={5} />
+        <Configure
+          getRankingInfo={true}
+          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
+        />
         <SearchHits onHitsUpdate={handlers.pages} />
       </Index>
 
