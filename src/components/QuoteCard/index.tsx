@@ -10,16 +10,16 @@ type Direction = 'vertical' | 'horizontal'
 const classes: Record<string, Record<Direction, string>> = {
   container: {
     vertical: 'flex flex-col',
-    horizontal: 'flex flex-row gap-6'
+    horizontal: 'flex flex-col lg:flex-row lg:gap-6'
   },
   icon: {
     vertical: 'mb-4 mt-2',
-    horizontal: 'ml-2 self-start'
+    horizontal: 'mb-4 mt-2 lg:my-0 lg:ml-2 lg:self-start'
   },
   logo: {
     vertical: 'mt-auto max-w-[200px]',
     horizontal:
-      'w-40 object-scale-down rounded-2xl bg-gradient-to-r from-neutral-600/40 to-neutral-600/10 px-4 border border-neutral-600/40'
+      'mt-auto max-w-[200px] lg:mt-0 lg:max-w-none lg:w-40 lg:object-scale-down lg:rounded-2xl lg:bg-gradient-to-r lg:from-neutral-600/40 lg:to-neutral-600/10 lg:px-4 lg:border lg:border-neutral-600/40'
   }
 } as const
 
