@@ -1,13 +1,16 @@
 import imageAddMysqlSource from './assets/add-mysql-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
+import logoBrainRocket from './assets/logo-brainrocket.svg'
+import logoNocd from './assets/logo-nocd.svg'
+import logoTicketSwap from './assets/logo-ticketswap.svg'
 import imageMonitorPipe from './assets/monitor-pipe.png'
+import TickItem from '@/components-cleaned/TickItem'
 import CdcAnimation from '@/components/CdcAnimation'
-import CdcWaitlistForm from '@/components/CdcWaitlistForm'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import DotsContainer from '@/components/DotsContainer'
+import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
+import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -23,7 +26,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'MySQL CDC connector in ClickPipes is now in Private Preview',
+          title: 'MySQL CDC connector in ClickPipes is now in Public Beta',
           description:
             'Replicate your MySQL data to ClickHouse Cloud in just a few clicks for blazing fast analytics.',
           path: '/cloud/clickpipes/mysql-cdc-connector'
@@ -39,24 +42,17 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative my-10 lg:mb-20'>
-        <div className='section-container relative z-10 lg:py-20'>
-          <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
-            <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
-              <h4 className='text-base font-semibold text-primary-300'>
-                <Link href='/cloud'>Cloud</Link> / Data ingestion
-              </h4>
-              <SuiTitle type='h1' className='lg:!text-4xl'>
-                MySQL CDC connector in ClickPipes is now in Private Preview
-              </SuiTitle>
-              <SuiText size='lg' className='text-neutral-200'>
-                Seamlessly replicate your MySQL data to ClickHouse Cloud with
-                just a few clicks. Get real-time analytics without the
-                complexity or cost of external ETL tools.
-              </SuiText>
-              <SuiText size='lg' className='text-neutral-200'>
-                Join the waitlist today!
-              </SuiText>
+      <div
+        className='bg-shadow-element yellow-shadow shadow-circle relative my-20 lg:my-24'
+        style={
+          {
+            '--top-side': '130%',
+            '--left-side': '80%'
+          } as CSSProperties
+        }>
+        <div className='section-container relative z-10'>
+          <div className='mx-auto w-full space-y-6 text-center lg:max-w-4xl'>
+            <div className='mb-10 flex justify-center'>
               <CdcAnimation
                 logo={
                   <div className='-mr-4 flex aspect-square items-center justify-center rounded-lg border border-neutral-700 p-3'>
@@ -70,19 +66,40 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 }
               />
             </div>
-            <div className='w-full lg:max-w-lg'>
-              <CUICard>
-                <CUICard.Body className='p-4 lg:p-6'>
-                  <CdcWaitlistForm formId='1365' />
-                </CUICard.Body>
-              </CUICard>
-            </div>
+            <SuiTitle type='h1'>
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content'>MySQL CDC</span>
+              </span>{' '}
+              connector is now in Public Beta
+            </SuiTitle>
+            <SuiText size='lg' className='text-neutral-200'>
+              Seamlessly replicate your MySQL data to ClickHouse Cloud with just
+              a few clicks. Get real-time analytics without the complexity or
+              cost of external ETL tools.{' '}
+              <Link
+                href='/docs/integrations/clickpipes/mysql'
+                className='text-primary-300 hover:underline'>
+                Learn more
+              </Link>
+              .
+            </SuiText>
+            <CUIButton
+              type='primary'
+              size='lg'
+              className='group mx-auto mt-8 px-10'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=mysqlCdcPageHeroCta'
+              onClick={useGalaxyOnClick(
+                'mysqlCdcPage.heroCta.startFreeCloudTrialSelect'
+              )}>
+              Start a free cloud trial
+            </CUIButton>
           </div>
         </div>
       </div>
 
       {/* Cards  */}
-      <div className='relative z-10 bg-neutral-700 py-20'>
+      <div className='relative z-10 pb-20'>
         <div className='section-container'>
           <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/2'>
@@ -117,6 +134,64 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 className='bg-neutral-900/80'
               />
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quotes */}
+      <div className='relative z-10 bg-neutral-700 py-20'>
+        <div className='section-container'>
+          <SuiTitle type='h2' className='mb-16 text-center'>
+            What our customers are saying
+          </SuiTitle>
+          <div className='grid grid-cols-1 gap-8 lg:gap-10'>
+            <QuoteCard
+              className='bg-neutral-900/80'
+              direction='horizontal'
+              content={
+                "Previously, our CDC workflows relied on a complex broker-based streaming infrastructure. This approach was not only resource-intensive but also required significant operational overhead.\n\nWe've transitioned to using the MySQL CDC connector in ClickPipes, and the impact has been transformative. ClickPipes has allowed us to modernize our data pipeline, reduce maintenance costs, and focus on delivering value through analytics rather than infrastructure management. No more managing clusters, brokers, or custom connectors - ClickPipes just works out of the box."
+              }
+              logo={{
+                src: logoBrainRocket,
+                width: 110,
+                height: 36,
+                alt: 'Brain Rocket',
+                className:
+                  'saturate-0 brightness-0 invert lg:saturate-100 lg:brightness-100 lg:invert-0'
+              }}
+            />
+            <QuoteCard
+              className='bg-neutral-900/80'
+              direction='horizontal'
+              content={
+                'ClickPipes MySQL CDC connector has been an excellent tool for us to stream our data into Clickhouse . It offered reliable, real-time replication with about a one-minute delay. It was simple to set up, cost-effective, handled both historical and ongoing sync smoothly, and supports private VPC networking to keep our data secure. ClickPipes, paired with ClickHouse Cloud, gives us true real-time analytics without the complexity. It just works!'
+              }
+              logo={{
+                src: logoNocd,
+                width: 110,
+                height: 36,
+                alt: 'NOCD',
+                className:
+                  'saturate-0 brightness-0 invert lg:saturate-100 lg:brightness-100 lg:invert-0'
+              }}
+            />
+            <QuoteCard
+              className='bg-neutral-900/80'
+              direction='horizontal'
+              content={
+                'We’ve been using the MySQL CDC connector in ClickPipes and are thoroughly impressed. Data transfer speeds are excellent, even when syncing our largest tables (over 1TB) and performance has been consistently reliable. It’s a robust solution for moving high-volume data from OLTP databases to ClickHouse Cloud for real-time analytics.\n' +
+                '\n' +
+                'Throughout the beta, the team was incredibly responsive, resolving issues quickly and clearly.'
+              }
+              logo={{
+                src: logoTicketSwap,
+                width: 110,
+                height: 36,
+                alt: 'TicketSwap',
+                className:
+                  'saturate-0 brightness-0 invert lg:saturate-100 lg:brightness-100 lg:invert-0'
+              }}
+            />
           </div>
         </div>
       </div>
@@ -204,23 +279,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
 
-      {/* Footer form */}
-      <DotsContainer className='my-20'>
-        <div className='mx-auto w-full lg:max-w-xl'>
-          <CUICard className='bg-neutral-900/80'>
-            <div className='my-4 space-y-4 text-center lg:mb-4 lg:mt-6'>
-              <SuiTitle type='h2'>Get early access</SuiTitle>
-              <SuiText className='opacity-70'>
-                Join the waitlist to get access to the MySQL CDC connector
-              </SuiText>
-            </div>
-            <CUICard.Body className='p-4 lg:p-6'>
-              <CdcWaitlistForm formId='1365' />
-            </CUICard.Body>
-          </CUICard>
-        </div>
-      </DotsContainer>
-
       {/* Get started */}
       <div className='section-container my-20 md:px-8 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
@@ -252,28 +310,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
   )
 }
 
-function IconCard({
-  icon,
-  children
-}: {
-  icon: ImageProps
-  children: React.ReactNode
-}) {
-  return (
-    <CUICard className='relative overflow-hidden p-8'>
-      <div className='absolute left-0 right-0 top-0 h-1 bg-primary-300' />
-      <CUICard.Body className='space-y-4 text-center'>
-        <Image
-          {...icon}
-          className='mx-auto aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
-          alt='icon image'
-        />
-        {children}
-      </CUICard.Body>
-    </CUICard>
-  )
-}
-
 function FeatureSection({
   image,
   children,
@@ -296,36 +332,6 @@ function FeatureSection({
       <div className='flex items-center justify-center md:w-1/2'>
         <Image {...image} alt={image.alt || ''} />
       </div>
-    </div>
-  )
-}
-
-function TickItem({
-  children,
-  className = ''
-}: {
-  children: React.ReactNode
-  className?: React.HTMLProps<HTMLDivElement>['className']
-}) {
-  return (
-    <div className={`flex items-center gap-4 ${className}`}>
-      <div className='flex-shrink-0 flex-grow-0'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='25'
-          height='18'
-          fill='none'
-          viewBox='0 0 25 18'>
-          <path
-            stroke='#FCFF74'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M23.32 1.67 8.65 16.33 2 9.67'
-          />
-        </svg>
-      </div>
-      <div className='flex-1'>{children}</div>
     </div>
   )
 }
