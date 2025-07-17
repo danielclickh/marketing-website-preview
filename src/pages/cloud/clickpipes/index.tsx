@@ -88,15 +88,15 @@ export default function ClickHouseServerPage({
                   <LogoAnnouncementLink
                     mode='dark'
                     className='mt-8 !bg-neutral-700/60'
-                    href='/cloud/clickpipes/postgres-cdc-connector?loc=clickpipes-hero'
+                    href='/cloud/clickpipes/mysql-cdc-connector?loc=clickpipes-hero'
                     logo={{
-                      src: '/images/cloud/integrations/postgres.svg',
-                      alt: 'Postgres',
+                      src: '/images/cloud/integrations/mysql.svg',
+                      alt: 'MySQL',
                       width: 46,
                       height: 37
                     }}>
-                    Blazing-fast Postgres to ClickHouse CDC with our new
-                    ClickPipe connector — now Generally Available.{' '}
+                    Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
+                    connector — now in Public Beta.{' '}
                     <span className='underline group-hover:decoration-2'>
                       Learn more
                     </span>

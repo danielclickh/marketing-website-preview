@@ -69,17 +69,18 @@ export default function HomepageHeroAlt({
             </div>{' '}
             <LogoAnnouncementLink
               className='mt-6'
-              href='/videos?category=open-house&loc=homepage-hero'
+              href='/cloud/clickpipes/mysql-cdc-connector?loc=homepage-hero'
               logo={{
-                src: '/images/open-house-black.svg',
-                alt: 'Open House',
-                width: 60,
-                height: 60
+                src: '/images/cloud/integrations/mysql.svg',
+                alt: 'MySQL',
+                width: 46,
+                height: 37,
+                className: 'saturate-0 brightness-0'
               }}>
-              Open House videos: ClickHouse deep dives, customer stories and
-              user interviews.{' '}
+              Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
+              connector — now in Public Beta.{' '}
               <span className='underline group-hover:decoration-2'>
-                Watch now
+                Learn more
               </span>
               !
             </LogoAnnouncementLink>
