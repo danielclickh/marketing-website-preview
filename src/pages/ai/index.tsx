@@ -39,7 +39,7 @@ const featues: Array<Feature> = [
       <>
         &bull; Chat like a teammate
         <br />
-        &bull; Ask data question in plane English
+        &bull; Ask data question in plain English
         <br />
         &bull; Generate SQL queries, visualisations or summaries
       </>
