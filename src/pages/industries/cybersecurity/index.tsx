@@ -482,7 +482,7 @@ export default function GamingIndustryPage({
               User-facing dashboards and apps
             </TickItem>
             <TickItem className='text-sm'>E-commerce optimisation</TickItem>
-            <TickItem className='text-sm'>Retailanalytics</TickItem>
+            <TickItem className='text-sm'>Retail analytics</TickItem>
             <TickItem className='text-sm'>Supply chain optimisation</TickItem>
           </div>
           <div className='relative items-center space-y-6 overflow-hidden rounded-md border border-neutral-700 bg-neutral-725 p-6 text-left lg:w-1/3'>
@@ -490,7 +490,7 @@ export default function GamingIndustryPage({
             <TickItem className='!mt-1 text-sm'>Fraud selection</TickItem>
             <TickItem className='text-sm'>Threat prevention</TickItem>
             <TickItem className='text-sm'>Proactive maintenance</TickItem>
-            <TickItem className='text-sm'>Inteligent, automation</TickItem>
+            <TickItem className='text-sm'>Inteligent automation</TickItem>
           </div>
           <div className='relative items-center space-y-6 overflow-hidden rounded-md border border-neutral-700 bg-neutral-725 p-6 text-left lg:w-1/3'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
