@@ -10,6 +10,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { HomePageProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { forwardRef, useEffect, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps = async function getStaticProps() {
@@ -547,37 +548,60 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
           <SuiTitle type='h2' className='text-center text-white'>
             Relied on across industries
           </SuiTitle>
-          <div className='section-container mt-16 grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6'>
-            <IndustryCard
-              title='Financial services'
-              text='Trading and market analytics, fraud detection, risk monitoring, blockchain, and more.'
-              icon='/images/real-time-data-warehouse/icon-money.svg'
-            />
-            <IndustryCard
-              title='E-Commerce and retail'
-              text='Real-time inventory monitoring and overall tracking for online businesses.'
-              icon='/images/real-time-data-warehouse/icon-retail.svg'
-            />
-            <IndustryCard
-              title='Marketing and sales'
-              text='Data store for Adtech, web analytics, SEO, and much more.'
-              icon='/images/real-time-data-warehouse/icon-marketing.svg'
-            />
-            <IndustryCard
-              title='Technology'
-              text='Including IoT, Energy, Biotech, Manufacturing, and others.'
-              icon='/images/real-time-data-warehouse/icon-technology.svg'
-            />
-            <IndustryCard
-              title='Media and entertainment'
-              text='Assess the performance of videos, assets, and other media in real‑time.'
-              icon='/images/real-time-data-warehouse/icon-media.svg'
-            />
-            <IndustryCard
-              title='Gaming'
-              text='Understand player behavior, gaming dynamics, and other key insights used to improve overall gameplay.'
-              icon='/images/real-time-data-warehouse/icon-gaming.svg'
-            />
+          <div className='section-container mt-16'>
+            <div className='-m-2 flex flex-wrap justify-center lg:-m-3'>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Financial services'
+                  text='Trading and market analytics, fraud detection, risk monitoring, blockchain, and more.'
+                  icon='/images/real-time-data-warehouse/icon-money.svg'
+                />
+              </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='E-Commerce and retail'
+                  text='Real-time inventory monitoring and overall tracking for online businesses.'
+                  icon='/images/real-time-data-warehouse/icon-retail.svg'
+                />
+              </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Marketing and sales'
+                  text='Data store for Adtech, web analytics, SEO, and much more.'
+                  icon='/images/real-time-data-warehouse/icon-marketing.svg'
+                />
+              </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Technology'
+                  text='Including IoT, Energy, Biotech, Manufacturing, and others.'
+                  icon='/images/real-time-data-warehouse/icon-technology.svg'
+                />
+              </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Media and entertainment'
+                  text='Assess the performance of videos, assets, and other media in real‑time.'
+                  icon='/images/real-time-data-warehouse/icon-media.svg'
+                />
+              </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Gaming'
+                  href='/industries/gaming'
+                  text='Understand player behavior, gaming dynamics, and other key insights used to improve overall gameplay.'
+                  icon='/images/real-time-data-warehouse/icon-gaming.svg'
+                />
+              </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Cybersecurity'
+                  href='/industries/cybersecurity'
+                  text='Proactive threat detection and response with real-time speed, at any scale.'
+                  icon='/images/real-time-data-warehouse/icon-cybersecurity.svg'
+                />
+              </div>
+            </div>
           </div>
           <CUIButton
             href='https://console.clickhouse.cloud/signUp?loc=rt-page-industries'
@@ -953,6 +977,7 @@ interface IndustryCardProps extends React.HTMLProps<HTMLDivElement> {
   title: string
   text: string
   icon: string
+  href?: string
 }
 
 function IndustryCard({
@@ -960,12 +985,13 @@ function IndustryCard({
   text,
   icon,
   className,
+  href,
   ...props
 }: IndustryCardProps) {
   return (
     <div
       {...props}
-      className={`flex divide-x divide-neutral-600 rounded bg-neutral-800 p-4 pl-0 ${
+      className={`relative flex min-h-full divide-x divide-neutral-600 rounded bg-neutral-800 p-4 pl-0 ${
         className || ''
       }`}>
       <div className='flex w-20 flex-shrink-0 flex-grow-0 items-start justify-center'>
@@ -981,7 +1007,14 @@ function IndustryCard({
       </div>
       <div className='flex-1 pl-4'>
         <SuiTitle type='h3' className='mb-4 !text-2xl text-primary-300'>
-          {title}
+          {href && (
+            <Link
+              href={href}
+              className='text-primary-300 before:absolute before:inset-0 hover:underline'>
+              {title}
+            </Link>
+          )}
+          {!href && title}
         </SuiTitle>
         <SuiText>{text}</SuiText>
       </div>
