@@ -2,6 +2,7 @@ import Accordion from '@/components-cleaned/Accordion'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import { StrapiImage, StrapiImageUrl } from '@/components/StrapiElements'
 import UseCasesComparisons from '@/components/UseCasesComparisons'
 import { SuiTitle } from '@/components/sui'
@@ -437,7 +438,21 @@ function UseCasesPage({
                       className='-my-1'
                     />
                   ),
-                  content: industry.description
+                  content: (
+                    <p>
+                      {industry.description}
+                      {industry.href && (
+                        <>
+                          <br />
+                          <LinkWithArrow
+                            href={industry.href}
+                            className='mt-3 inline-block whitespace-nowrap text-primary-300 hover:underline'>
+                            Find out more
+                          </LinkWithArrow>
+                        </>
+                      )}
+                    </p>
+                  )
                 }
               })}
             />
