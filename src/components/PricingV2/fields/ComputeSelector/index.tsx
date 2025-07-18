@@ -258,9 +258,7 @@ export default function ComputeSelector() {
                   <Select
                     options={
                       replicas === 1
-                        ? COMPUTES.filter(
-                            (option) => option.value > 8 && option.value <= 12
-                          )
+                        ? COMPUTES.filter((option) => option.value <= 12)
                         : COMPUTES
                     }
                     value={computeMinSize}
@@ -272,7 +270,8 @@ export default function ComputeSelector() {
                 <div>
                   {replicas === 1 && (
                     <div className='text-sm sm:mt-6'>
-                      Single-replica services are limited to 12&nbsp;GiB RAM.
+                      Single-replica services are limited to 8&nbsp;GiB and
+                      12&nbsp;GiB RAM.
                     </div>
                   )}
                   {replicas !== 1 && (

@@ -145,9 +145,9 @@ export default function BackupsSelector() {
             estimatedBackupsPerMonth &&
             estimatedBackupSizeFormatted && (
               <p className='mt-4 text-sm'>
-                You will have {estimatedBackupsPerMonth} backups with an
-                estimated total size of {estimatedBackupSizeFormatted}. This is
-                based on a storage volume of {storage} of{' '}
+                You will have {estimatedBackupsPerMonth} backups per month with
+                an estimated total size of {estimatedBackupSizeFormatted}. This
+                is based on a storage volume of {storage} of{' '}
                 {storageCompressed ? 'compressed' : 'uncompressed'} data,
                 expected to grow or change by 1% between backups.
               </p>
