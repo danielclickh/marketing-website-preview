@@ -1,5 +1,6 @@
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
+import { findClosestCompute } from '../PricingV2/config'
 import {
   Adhoc,
   Context,
@@ -75,47 +76,41 @@ function getUseCaseCompute(
   // Apply 10x compression
   if (!storageCompressed) storageInGb /= 10
 
-  // E.g. 100
-  const storageRatioGb = storageInGb / useCase.ratio
-
   // Ensure computes are sorted low to high
   const sortedComputes = [...config.computes].sort((a, b) => a - b)
   const minCompute = sortedComputes[0]
   const maxCompute = sortedComputes[sortedComputes.length - 1]
 
-  // Ideal compute sizes
-  const idealComputeMinSize = storageRatioGb - storageRatioGb * 0.2
-  const idealComputeMaxSize = storageRatioGb + storageRatioGb * 0.2
-
-  // Recommended replicas for this use case
   let replicas = useCase.replicas
-
-  // Start by using the ideal compute values
-  let computeMinSize = idealComputeMinSize
-  let computeMaxSize = idealComputeMaxSize
-
-  // If the compute values are less than the minimum
-  // decrease the number of replicas and increase the compute size
-  while (
-    computeMinSize < minCompute &&
-    computeMaxSize <= minCompute &&
-    replicas > 2
-  ) {
-    computeMinSize = idealComputeMinSize * replicas
-    computeMaxSize = idealComputeMaxSize * replicas
-    replicas -= 1
+  const calcIdeaCompute = () => {
+    return Math.round(storageInGb / (useCase.ratio * replicas))
+  }
+  const calcMinCompute = () => {
+    return findClosestCompute(
+      Math.round(calcIdeaCompute() - calcIdeaCompute() * 0.2)
+    )
+  }
+  const calcMaxCompute = () => {
+    return findClosestCompute(
+      Math.round(calcIdeaCompute() + calcIdeaCompute() * 0.2)
+    )
   }
 
-  // If the compute values are less than the maximum
-  // increase the number of replicas and decrease the compute size
+  let computeMinSize = calcMinCompute()
+  let computeMaxSize = calcMaxCompute()
+
   while (
-    computeMinSize >= maxCompute &&
-    computeMaxSize > maxCompute &&
-    replicas < 25
+    replicas > 1 &&
+    replicas < 25 &&
+    (computeMinSize < minCompute || computeMaxSize > maxCompute)
   ) {
-    computeMinSize = idealComputeMinSize / replicas
-    computeMaxSize = idealComputeMaxSize / replicas
-    replicas += 1
+    if (computeMinSize < minCompute && replicas > 1) {
+      replicas -= 1
+    } else if (computeMaxSize > maxCompute && replicas < 25) {
+      replicas += 1
+    }
+    computeMinSize = calcMinCompute()
+    computeMaxSize = calcMaxCompute()
   }
 
   return {
