@@ -36,19 +36,20 @@ import {
 const MINIMUM_QUERY_LENGTH = 3
 const MAXIMUM_RESULTS_TO_DISPLAY = 5
 
+type Results = Partial<{
+  strapi: Array<Hit<BaseHit>>
+  crawled: Array<Hit<BaseHit>>
+  docs: Array<Hit<BaseHit>>
+}>
+
 type GlobalSearchContextType = {
   isOpen: boolean
   searchTerm: string
   setSearchTerm: Dispatch<SetStateAction<GlobalSearchContextType['searchTerm']>>
   open: (searchTerm?: GlobalSearchContextType['searchTerm']) => void
   close: () => void
-  results: Array<NormalizedHit>
+  results: Results
   setResults: Dispatch<SetStateAction<GlobalSearchContextType['results']>>
-}
-
-type NormalizedHit = Hit<BaseHit> & {
-  __type: string
-  __normalizedScore: number
 }
 
 const GlobalSearchContext = createContext<GlobalSearchContextType>({
@@ -57,7 +58,7 @@ const GlobalSearchContext = createContext<GlobalSearchContextType>({
   setSearchTerm() {},
   open() {},
   close() {},
-  results: [],
+  results: {},
   setResults() {}
 })
 
@@ -67,19 +68,6 @@ export function useGlobalSearch() {
     throw new Error('Context used outside of the <GlobalSearch> component!')
   }
   return result
-}
-
-function getRankingScore(hit: NormalizedHit): number {
-  const info = hit._rankingInfo
-  if (!info) return 0
-
-  // Sample scoring logic (you can tweak this):
-  return (
-    (info.words || 0) * 10 +
-    (10 - (info.proximityDistance || 10)) * 2 -
-    (info.nbTypos || 0) * 5 +
-    (info.userScore || 0)
-  )
 }
 
 export interface GlobalSearchProviderProps {
@@ -92,7 +80,7 @@ export default function GlobalSearchProvider({
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const [results, setResults] = useState<Array<NormalizedHit>>([])
+  const [results, setResults] = useState<Results>({})
   const open = (openWithSearchTerm?: string) => {
     setSearchTerm(openWithSearchTerm || '')
     setIsOpen(true)
@@ -108,7 +96,7 @@ export default function GlobalSearchProvider({
 
   // Reset results on term change
   useEffect(() => {
-    setResults([])
+    setResults({})
   }, [searchTerm])
 
   return (
@@ -158,118 +146,38 @@ function SearchContainer() {
   }, [])
 
   const handlers = useMemo(() => {
-    function normalizeHits(
-      oldHits: Array<Hit<BaseHit>>,
-      type: string,
-      newHits: Array<Hit<BaseHit>>
-    ) {
-      const tagHits = (hits: Array<Hit<BaseHit>>) => {
-        return hits.map((hit) => ({
-          ...hit,
-          __type: type
-        })) as Array<Omit<NormalizedHit, '__normalizedScore'>>
-      }
-
-      const scoreHits = (
-        hits: Array<Omit<NormalizedHit, '__normalizedScore'>>
-      ) => {
-        const maxUserScore =
-          Math.max(...hits.map((hit) => hit._rankingInfo?.userScore || 0)) || 1
-
-        return hits.map((hit) => ({
-          ...hit,
-          __normalizedScore: (hit._rankingInfo?.userScore || 0) / maxUserScore
-        })) as Array<NormalizedHit>
-      }
-
-      return scoreHits([...oldHits, ...tagHits(newHits)])
-    }
-
     return {
-      blogs(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => normalizeHits(old, 'blogs', results))
+      strapi(results: Array<Hit<BaseHit>>) {
+        context.setResults((old) => ({ ...old, strapi: results }))
       },
-      events(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => normalizeHits(old, 'events', results))
-      },
-      demos(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => normalizeHits(old, 'demos', results))
-      },
-      integrations(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => normalizeHits(old, 'integrations', results))
-      },
-      videos(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => normalizeHits(old, 'videos', results))
+      crawled(results: Array<Hit<BaseHit>>) {
+        context.setResults((old) => ({ ...old, crawled: results }))
       },
       docs(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => normalizeHits(old, 'docs', results))
-      },
-      pages(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => normalizeHits(old, 'pages', results))
+        context.setResults((old) => ({ ...old, docs: results }))
       }
     }
   }, [])
 
-  const filteredResults = useMemo(() => {
-    const seen = new Set()
-
-    const deduped = context.results.filter((hit) => {
-      const key = `${hit.__type}_${hit.objectID}`
-      if (seen.has(key)) return false
-      seen.add(key)
-      return true
-    })
-
-    return deduped
-      .sort((a, b) => {
-        return b.__normalizedScore - a.__normalizedScore
-      })
-      .slice(0, MAXIMUM_RESULTS_TO_DISPLAY)
-  }, [context.results])
-
   const hasValidQuery = context.searchTerm.length >= MINIMUM_QUERY_LENGTH
-  const hasResults = filteredResults.length > 0
+  const hasResults = Object.values(context.results).flat(1).length > 0
 
   return (
     <InstantSearch searchClient={searchClient}>
       {/* Search handlers */}
-      <Index indexName='strapi_api::blog-post.blog-post'>
+      <Index indexName='marketing_site'>
         <Configure
           getRankingInfo={true}
           hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-          filters='ListOnBlogs:true AND StagingOnly:false'
         />
-        <SearchHits onHitsUpdate={handlers.blogs} />
+        <SearchHits onHitsUpdate={handlers.strapi} />
       </Index>
-      <Index indexName='strapi_api::demo.demo'>
-        <Configure
-          getRankingInfo={true}
-          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-          filters='ListOnDemos:true AND StagingOnly:false'
-        />
-        <SearchHits onHitsUpdate={handlers.demos} />
-      </Index>
-      <Index indexName='strapi_api::event.event'>
-        <Configure
-          getRankingInfo={true}
-          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-          filters='unlisted:false AND StagingOnly:false'
-        />
-        <SearchHits onHitsUpdate={handlers.events} />
-      </Index>
-      <Index indexName='strapi_api::integration.integration'>
+      <Index indexName='marketing_site_crawled'>
         <Configure
           getRankingInfo={true}
           hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
         />
-        <SearchHits onHitsUpdate={handlers.integrations} />
-      </Index>
-      <Index indexName='strapi_api::marketing-video.marketing-video'>
-        <Configure
-          getRankingInfo={true}
-          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-        />
-        <SearchHits onHitsUpdate={handlers.videos} />
+        <SearchHits onHitsUpdate={handlers.crawled} />
       </Index>
       <Index indexName='clickhouse'>
         <Configure
@@ -277,13 +185,6 @@ function SearchContainer() {
           hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
         />
         <SearchHits onHitsUpdate={handlers.docs} />
-      </Index>
-      <Index indexName='non_strapi_pages'>
-        <Configure
-          getRankingInfo={true}
-          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-        />
-        <SearchHits onHitsUpdate={handlers.pages} />
       </Index>
 
       {/* Field UI */}
@@ -305,12 +206,14 @@ function SearchContainer() {
       {/* Results UI */}
       {hasResults && (
         <ul className='p-4'>
-          {filteredResults.map((result, resultIndex) => {
-            return (
-              <li key={resultIndex}>
-                <SearchResultLink hit={result} />
-              </li>
-            )
+          {Object.entries(context.results).map(([type, results], typeIndex) => {
+            return results.map((result, resultIndex) => {
+              return (
+                <li key={`${typeIndex}-${resultIndex}`}>
+                  <SearchResultLink type={type as keyof Results} hit={result} />
+                </li>
+              )
+            })
           })}
         </ul>
       )}
@@ -372,7 +275,13 @@ function SearchHits({
   return null
 }
 
-function SearchResultLink({ hit }: { hit: NormalizedHit }) {
+function SearchResultLink({
+  type,
+  hit
+}: {
+  type: keyof Results
+  hit: Hit<BaseHit>
+}) {
   let badge: null | string = null
   let link: null | string = null
   let icon: ImageProps['src'] = iconDefault
@@ -385,52 +294,55 @@ function SearchResultLink({ hit }: { hit: NormalizedHit }) {
     return `${firstTrimmed}/${lastTrimmed}`
   }
 
-  switch (hit.__type) {
-    case 'blogs':
-      badge = 'Blog'
-      link = joinPaths('/blog', hit.slug)
-      label = hit.title
-      icon = iconBlogs
-      break
-    case 'demos':
-      badge = 'Demo'
-      link = hit.External ? hit.Link : joinPaths('/demos', hit.Link)
-      target = hit.External ? '_blank' : '_self'
-      label = hit.Title
-      icon = iconDemos
-      break
-    case 'events':
-      badge = 'Event'
-      link = joinPaths('/company/events', hit.slug)
-      label = hit.title
-      icon = iconEvents
-      break
-    case 'videos':
-      badge = 'Video'
-      link = `/videos/${hit.Slug}`
-      label = hit.Title
-      icon = iconVideos
-      break
-    case 'integrations':
-      badge = 'Integration'
-      link = hit.openInNewWindow
-        ? hit.docsLink
-        : joinPaths('/integrations', hit.slug)
-      target = hit.openInNewWindow ? '_blank' : '_self'
-      label = hit.name
-      icon = iconIntegrations
-      break
-    case 'docs':
-      badge = 'Docs'
-      link = joinPaths('/docs', hit.slug)
-      target = '_blank'
-      label = hit.title
-      icon = iconDocs
-      break
-    case 'pages':
-      link = hit.path
-      label = hit.h1 || hit.title
-      break
+  if (type === 'strapi') {
+    switch (hit.type) {
+      case 'blog':
+        badge = 'Blog'
+        link = joinPaths('/blog', hit.attributes.slug)
+        label = hit.title
+        icon = iconBlogs
+        break
+      case 'demo':
+        badge = 'Demo'
+        link = hit.attributes.slug
+          ? joinPaths('/demos', hit.attributes.slug)
+          : hit.attributes.link
+        target = hit.attributes.slug ? '_self' : '_blank'
+        label = hit.title
+        icon = iconDemos
+        break
+      case 'event':
+        badge = 'Event'
+        link = joinPaths('/company/events', hit.attributes.slug)
+        label = hit.title
+        icon = iconEvents
+        break
+      case 'integration':
+        badge = 'Integration'
+        link = hit.attributes.slug
+          ? joinPaths('/integrations', hit.attributes.slug)
+          : hit.attributes.link
+        target = hit.attributes.slug ? '_self' : '_blank'
+        label = hit.title
+        icon = iconIntegrations
+        break
+      case 'video':
+        badge = 'Video'
+        link = joinPaths('/videos', hit.attributes.slug)
+        label = hit.title
+        icon = iconVideos
+        break
+    }
+  } else if (type === 'crawled') {
+    link = hit.attributes.path
+    label = hit.title
+    icon = iconDefault
+  } else if (type === 'docs') {
+    badge = 'Docs'
+    link = joinPaths('/docs', hit.slug)
+    target = '_blank'
+    label = hit.title
+    icon = iconDocs
   }
 
   if (!link) return null
