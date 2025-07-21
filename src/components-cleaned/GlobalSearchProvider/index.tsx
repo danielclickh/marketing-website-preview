@@ -149,7 +149,7 @@ function SearchContainer() {
         <ResultsManager
           fallback={<p className='py-6 text-center'>No results found.</p>}>
           <Index indexName='marketing_site'>
-            <Configure getRankingInfo={true} hitsPerPage={5} />
+            <Configure hitsPerPage={5} />
             <Hits
               hitComponent={SearchResultLink}
               classNames={{
@@ -158,7 +158,7 @@ function SearchContainer() {
             />
           </Index>
           <Index indexName='clickhouse'>
-            <Configure getRankingInfo={true} hitsPerPage={3} />
+            <Configure hitsPerPage={3} />
             <Hits
               hitComponent={DocsResultLink}
               classNames={{
