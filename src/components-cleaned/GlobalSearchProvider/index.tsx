@@ -19,6 +19,7 @@ import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -27,20 +28,15 @@ import {
 } from 'react'
 import {
   Configure,
+  Hits,
   Index,
   InstantSearch,
   useHits,
+  useInstantSearch,
   useSearchBox
 } from 'react-instantsearch'
 
-const MINIMUM_QUERY_LENGTH = 3
-const MAXIMUM_RESULTS_TO_DISPLAY = 5
-
-type Results = Partial<{
-  strapi: Array<Hit<BaseHit>>
-  crawled: Array<Hit<BaseHit>>
-  docs: Array<Hit<BaseHit>>
-}>
+const MINIMUM_QUERY_LENGTH = 0
 
 type GlobalSearchContextType = {
   isOpen: boolean
@@ -48,8 +44,6 @@ type GlobalSearchContextType = {
   setSearchTerm: Dispatch<SetStateAction<GlobalSearchContextType['searchTerm']>>
   open: (searchTerm?: GlobalSearchContextType['searchTerm']) => void
   close: () => void
-  results: Results
-  setResults: Dispatch<SetStateAction<GlobalSearchContextType['results']>>
 }
 
 const GlobalSearchContext = createContext<GlobalSearchContextType>({
@@ -57,9 +51,7 @@ const GlobalSearchContext = createContext<GlobalSearchContextType>({
   searchTerm: '',
   setSearchTerm() {},
   open() {},
-  close() {},
-  results: {},
-  setResults() {}
+  close() {}
 })
 
 export function useGlobalSearch() {
@@ -80,7 +72,6 @@ export default function GlobalSearchProvider({
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const [results, setResults] = useState<Results>({})
   const open = (openWithSearchTerm?: string) => {
     setSearchTerm(openWithSearchTerm || '')
     setIsOpen(true)
@@ -94,11 +85,6 @@ export default function GlobalSearchProvider({
     close()
   })
 
-  // Reset results on term change
-  useEffect(() => {
-    setResults({})
-  }, [searchTerm])
-
   return (
     <GlobalSearchContext.Provider
       value={{
@@ -106,9 +92,7 @@ export default function GlobalSearchProvider({
         open,
         close,
         searchTerm,
-        setSearchTerm,
-        results,
-        setResults
+        setSearchTerm
       }}>
       {children}
       <AnimatePresence>
@@ -145,82 +129,48 @@ function SearchContainer() {
     )
   }, [])
 
-  const handlers = useMemo(() => {
-    return {
-      strapi(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => ({ ...old, strapi: results }))
-      },
-      crawled(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => ({ ...old, crawled: results }))
-      },
-      docs(results: Array<Hit<BaseHit>>) {
-        context.setResults((old) => ({ ...old, docs: results }))
-      }
-    }
-  }, [])
-
-  const hasValidQuery = context.searchTerm.length >= MINIMUM_QUERY_LENGTH
-  const hasResults = Object.values(context.results).flat(1).length > 0
-
   return (
-    <InstantSearch searchClient={searchClient}>
-      {/* Search handlers */}
-      <Index indexName='marketing_site'>
-        <Configure
-          getRankingInfo={true}
-          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-        />
-        <SearchHits onHitsUpdate={handlers.strapi} />
-      </Index>
-      <Index indexName='marketing_site_crawled'>
-        <Configure
-          getRankingInfo={true}
-          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-        />
-        <SearchHits onHitsUpdate={handlers.crawled} />
-      </Index>
-      <Index indexName='clickhouse'>
-        <Configure
-          getRankingInfo={true}
-          hitsPerPage={MAXIMUM_RESULTS_TO_DISPLAY}
-        />
-        <SearchHits onHitsUpdate={handlers.docs} />
-      </Index>
+    <div className='divide-y divide-white/5'>
+      <InstantSearch searchClient={searchClient}>
+        {/* Field UI */}
+        <div className='sticky top-0 z-10 flex bg-neutral-900 backdrop-blur'>
+          <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
+          <SearchInput className='flex-1 p-4 pl-14' />
+          <button
+            type='button'
+            className='border-l border-white/5 p-4 transition-colors hover:bg-white/5'
+            onClick={(event) => {
+              event.preventDefault()
+              context.close()
+            }}>
+            <XIcon className='h-6 w-6' />
+          </button>
+        </div>
 
-      {/* Field UI */}
-      <div
-        className={`sticky top-0 z-10 flex bg-neutral-900 backdrop-blur ${hasValidQuery ? 'border-b border-white/5' : ''}`}>
-        <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
-        <SearchInput className='flex-1 p-4 pl-14' />
-        <button
-          type='button'
-          className='border-l border-white/5 p-4 transition-colors hover:bg-white/5'
-          onClick={(event) => {
-            event.preventDefault()
-            context.close()
-          }}>
-          <XIcon className='h-6 w-6' />
-        </button>
-      </div>
-
-      {/* Results UI */}
-      {hasResults && (
-        <ul className='p-4'>
-          {Object.entries(context.results).map(([type, results], typeIndex) => {
-            return results.map((result, resultIndex) => {
-              return (
-                <li key={`${typeIndex}-${resultIndex}`}>
-                  <SearchResultLink type={type as keyof Results} hit={result} />
-                </li>
-              )
-            })
-          })}
-        </ul>
-      )}
-      {hasValidQuery && !hasResults && (
-        <p className='py-6 text-center'>No search results</p>
-      )}
-    </InstantSearch>
+        {/* Search handlers */}
+        <ResultsManager
+          fallback={<p className='py-6 text-center'>No results found.</p>}>
+          <Index indexName='marketing_site'>
+            <Configure getRankingInfo={true} hitsPerPage={5} />
+            <Hits
+              hitComponent={SearchResultLink}
+              classNames={{
+                list: 'p-2 empty:hidden'
+              }}
+            />
+          </Index>
+          <Index indexName='clickhouse'>
+            <Configure getRankingInfo={true} hitsPerPage={3} />
+            <Hits
+              hitComponent={DocsResultLink}
+              classNames={{
+                list: `p-2 bg-white/15 empty:hidden before:content-[\'Docs\'] before:block before:uppercase before:py-2 before:px-4 before:-mx-2 before:-mt-2 before:mb-2 before:text-primary-300 before:font-bold before:leading-none before:text-sm before:bg-white/15`
+              }}
+            />
+          </Index>
+        </ResultsManager>
+      </InstantSearch>
+    </div>
   )
 }
 
@@ -257,92 +207,61 @@ function SearchInput({ className = '' }: { className?: string }) {
   )
 }
 
-function SearchHits({
-  onHitsUpdate
-}: {
-  onHitsUpdate: (hits: Array<Hit<BaseHit>>) => void
-}) {
-  const { items, results } = useHits()
-
-  useEffect(() => {
-    if (results?.query && results.query.trim().length >= MINIMUM_QUERY_LENGTH) {
-      onHitsUpdate(items)
-    } else {
-      onHitsUpdate([])
-    }
-  }, [results?.query, items, onHitsUpdate])
-
-  return null
+function joinPaths(first: string, last: string | undefined) {
+  const firstTrimmed = first.replace(/\/$/, '')
+  const lastTrimmed = (last || '').replace(/^\//, '')
+  return `${firstTrimmed}/${lastTrimmed}`
 }
 
-function SearchResultLink({
-  type,
-  hit
-}: {
-  type: keyof Results
-  hit: Hit<BaseHit>
-}) {
+function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
   let badge: null | string = null
   let link: null | string = null
   let icon: ImageProps['src'] = iconDefault
   let label: null | string = null
   let target: React.HTMLProps<HTMLAnchorElement>['target'] = '_self'
 
-  const joinPaths = (first: string, last: string) => {
-    const firstTrimmed = first.replace(/\/$/, '')
-    const lastTrimmed = last.replace(/^\//, '')
-    return `${firstTrimmed}/${lastTrimmed}`
-  }
-
-  if (type === 'strapi') {
-    switch (hit.type) {
-      case 'blog':
-        badge = 'Blog'
-        link = joinPaths('/blog', hit.attributes.slug)
-        label = hit.title
-        icon = iconBlogs
-        break
-      case 'demo':
-        badge = 'Demo'
-        link = hit.attributes.slug
-          ? joinPaths('/demos', hit.attributes.slug)
-          : hit.attributes.link
-        target = hit.attributes.slug ? '_self' : '_blank'
-        label = hit.title
-        icon = iconDemos
-        break
-      case 'event':
-        badge = 'Event'
-        link = joinPaths('/company/events', hit.attributes.slug)
-        label = hit.title
-        icon = iconEvents
-        break
-      case 'integration':
-        badge = 'Integration'
-        link = hit.attributes.slug
-          ? joinPaths('/integrations', hit.attributes.slug)
-          : hit.attributes.link
-        target = hit.attributes.slug ? '_self' : '_blank'
-        label = hit.title
-        icon = iconIntegrations
-        break
-      case 'video':
-        badge = 'Video'
-        link = joinPaths('/videos', hit.attributes.slug)
-        label = hit.title
-        icon = iconVideos
-        break
-    }
-  } else if (type === 'crawled') {
-    link = hit.attributes.path
-    label = hit.title
-    icon = iconDefault
-  } else if (type === 'docs') {
-    badge = 'Docs'
-    link = joinPaths('/docs', hit.slug)
-    target = '_blank'
-    label = hit.title
-    icon = iconDocs
+  switch (hit.type) {
+    case 'blog':
+      badge = 'Blog'
+      link = joinPaths('/blog', hit.attributes.slug)
+      label = hit.title
+      icon = iconBlogs
+      break
+    case 'demo':
+      badge = 'Demo'
+      link = hit.attributes.slug
+        ? joinPaths('/demos', hit.attributes.slug)
+        : hit.attributes.link
+      target = hit.attributes.slug ? '_self' : '_blank'
+      label = hit.title
+      icon = iconDemos
+      break
+    case 'event':
+      badge = 'Event'
+      link = joinPaths('/company/events', hit.attributes.slug)
+      label = hit.title
+      icon = iconEvents
+      break
+    case 'integration':
+      badge = 'Integration'
+      link = hit.attributes.slug
+        ? joinPaths('/integrations', hit.attributes.slug)
+        : hit.attributes.link
+      target = hit.attributes.slug ? '_self' : '_blank'
+      label = hit.title
+      icon = iconIntegrations
+      break
+    case 'video':
+      badge = 'Video'
+      link = joinPaths('/videos', hit.attributes.slug)
+      label = hit.title
+      icon = iconVideos
+      break
+    default:
+      link = hit.attributes?.path || hit.attributes?.slug
+      label = hit.title
+      icon = iconDefault
+      break
   }
 
   if (!link) return null
@@ -373,4 +292,55 @@ function SearchResultLink({
       </span>
     </Link>
   )
+}
+
+function DocsResultLink({ hit }: { hit: Hit<BaseHit> }) {
+  let link: string = joinPaths('/docs', hit.slug)
+  const absoluteLink = new URL(link, BASE_URL_AND_PROTOCOL).toString()
+  return (
+    <Link
+      href={link}
+      className='group/searchItem block w-full rounded px-2 py-1 transition-colors hover:bg-white/10'>
+      <strong className='block break-words group-hover/searchItem:text-primary-300'>
+        {hit.title}
+      </strong>
+      <span className='block truncate text-sm opacity-70'>{absoluteLink}</span>
+    </Link>
+  )
+}
+
+function ResultsManager({
+  children,
+  fallback
+}: {
+  children?: React.ReactNode
+  fallback?: React.ReactNode
+}) {
+  const context = useGlobalSearch()
+  const { scopedResults } = useInstantSearch()
+
+  const totalHits = scopedResults.reduce((acc, current) => {
+    return acc + (current.results?.nbHits || 0)
+  }, 0)
+
+  const hasQuery = context.searchTerm.length > MINIMUM_QUERY_LENGTH
+
+  if (!hasQuery) {
+    return (
+      <>
+        <div hidden>{children}</div>
+      </>
+    )
+  }
+
+  if (hasQuery && totalHits === 0) {
+    return (
+      <>
+        {fallback}
+        <div hidden>{children}</div>
+      </>
+    )
+  }
+
+  return <>{children}</>
 }
