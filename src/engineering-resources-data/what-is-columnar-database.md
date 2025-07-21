@@ -162,12 +162,6 @@ Column stores truly shine in analytics queries, particularly those involving lar
 1. Efficient I/O utilization: Column stores can skip vast amounts of irrelevant data by reading only the columns relevant to a query. For instance, in a query like `SELECT AVG(salary) FROM employees WHERE department = 'Sales` , a column store only needs to read the `salary` and `department` columns, potentially ignoring dozens or hundreds of other columns.
 2. Vectorized query execution: The columnar data layout aligns perfectly with modern CPU architectures, enabling efficient vectorized processing. Instead of processing data row-by-row, column stores can simultaneously operate on large chunks (vectors) of a single column. This approach maximizes CPU cache usage and allows for SIMD (Single Instruction, Multiple Data) operations, dramatically speeding up calculations.
 
-### Query performance
-
-Column stores excel at analytics queries. They make efficient use of I/O, as they can quickly skip irrelevant data since they only need to read the columns involved in a query, not entire rows.
-
-The data layout in column stores is also ideal for vectorized query execution, an essential characteristic of how column stores achieve query performance by efficiently using modern CPU architectures.
-
 ## Challenges of using a column store
 
 While column stores offer significant advantages for analytical workloads, they also present unique challenges, especially for users accustomed to traditional row-based systems. Understanding these challenges is crucial for effectively implementing and managing a column store database.
