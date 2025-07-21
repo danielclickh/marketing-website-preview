@@ -19,7 +19,6 @@ import {
   createContext,
   Dispatch,
   SetStateAction,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -31,7 +30,6 @@ import {
   Hits,
   Index,
   InstantSearch,
-  useHits,
   useInstantSearch,
   useSearchBox
 } from 'react-instantsearch'
@@ -267,11 +265,13 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
   if (!link) return null
 
   const absoluteLink = new URL(link, BASE_URL_AND_PROTOCOL).toString()
+  const context = useGlobalSearch()
 
   return (
     <Link
       href={link}
       target={target}
+      onClick={() => context.close()}
       className='group/searchItem flex w-full items-center gap-4 rounded-lg p-2 transition-colors hover:bg-white/5'>
       <small className='inline-block aspect-square w-12 flex-shrink-0 flex-grow-0 rounded bg-white/10 px-2 py-1 leading-none'>
         <Image
@@ -297,9 +297,11 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
 function DocsResultLink({ hit }: { hit: Hit<BaseHit> }) {
   let link: string = joinPaths('/docs', hit.slug)
   const absoluteLink = new URL(link, BASE_URL_AND_PROTOCOL).toString()
+  const context = useGlobalSearch()
   return (
     <Link
       href={link}
+      onClick={() => context.close()}
       className='group/searchItem block w-full rounded px-2 py-1 transition-colors hover:bg-white/10'>
       <strong className='block break-words group-hover/searchItem:text-primary-300'>
         {hit.title}
