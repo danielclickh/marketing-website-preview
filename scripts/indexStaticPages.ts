@@ -29,6 +29,7 @@ const algoliaIndexName = 'marketing_site'
 const typePathsToMatch: Record<string, Array<string>> = {
   pages: [
     '/**',
+    '!/500',
     '!/404',
     '!/engineering-resources/**',
     '!/blog/**',
@@ -160,6 +161,12 @@ matchedFiles.forEach((file) => {
 
   const title = $('h1').first().text().trim() || $('title').text().trim()
   const description = $('meta[name="description"]').attr('content') || ''
+  const noindex = !!$('meta[name="robots"]')
+    .attr('content')
+    ?.includes('noindex')
+
+  // Respect noindex
+  if (noindex) return
 
   recordsToSave.push({
     objectID: `static::${file.type}[${file.uri}]`,
