@@ -167,7 +167,7 @@ function SearchContainer() {
             <Hits
               hitComponent={DocsResultLink}
               classNames={{
-                list: `p-2 bg-white/15 empty:hidden before:content-[\'Docs\'] before:block before:uppercase before:py-2 before:px-4 before:-mx-2 before:-mt-2 before:mb-2 before:text-primary-300 before:font-bold before:leading-none before:text-sm before:bg-white/15`
+                list: `p-2 bg-white/15 empty:hidden before:content-['Docs'] before:block before:uppercase before:py-2 before:px-4 before:-mx-2 before:-mt-2 before:mb-2 before:text-primary-300 before:font-bold before:leading-none before:text-sm before:bg-white/15`
               }}
             />
           </Index>
