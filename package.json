@@ -11,7 +11,7 @@
     "create-pricing-file": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/createPricingFile",
     "create-githubstars-file": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/getGitHubStars",
     "index-static-pages": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/indexStaticPages",
-    "deploy": "yarn create-rss-xml && yarn create-githubstars-file && yarn create-static-sitemap && yarn create-pricing-file && next build",
+    "deploy": "yarn create-rss-xml && yarn create-githubstars-file && yarn create-static-sitemap && yarn create-pricing-file && next build && yarn index-static-pages",
     "lint": "next lint && yarn format:check",
     "format:check": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --check",
     "format": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --write",
