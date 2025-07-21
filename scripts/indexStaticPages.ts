@@ -30,18 +30,30 @@ const typePathsToMatch: Record<string, Array<string>> = {
   pages: [
     '/**',
     '!/404',
+    '!/engineering-resources/**',
     '!/blog/**',
     '!/company/events/**',
     '!/videos/**',
     '!/integrations/**',
     '!/demos/**',
     '!/jp/**'
-  ]
+  ],
+  'engineering-resources': ['/engineering-resources/**']
 }
 
 //
 // Start indexing process
 //
+
+function log(message: string) {
+  console.log(`[${new Date().toTimeString()}] ${message}`)
+}
+
+function warn(message: string) {
+  console.warn(`[${new Date().toTimeString()}] ${message}`)
+}
+
+log('Staring Algolia indexing...')
 
 // A local reference of indexed pages allows us to remove records when pages are deleted
 const OUTPUT_FILE_NAME = 'indexedStaticPages.json'
@@ -142,6 +154,7 @@ const recordsToDelete: Array<string> = []
 
 // Extract record details from html
 matchedFiles.forEach((file) => {
+  log(`[${file.uri}] Extracting record details...`)
   const html = fs.readFileSync(file.path, 'utf8')
   const $ = cheerio.load(html)
 
@@ -180,6 +193,7 @@ try {
 // Send to Algolia
 ;(async () => {
   if (recordsToSave.length > 0) {
+    log(`Indexing ${recordsToSave.length} records...`)
     await algoliaClient.saveObjects({
       indexName: algoliaIndexName,
       objects: recordsToSave
@@ -187,6 +201,7 @@ try {
   }
 
   if (recordsToDelete.length > 0) {
+    log(`Deleting ${recordsToDelete.length} records...`)
     await algoliaClient.deleteObjects({
       indexName: algoliaIndexName,
       objectIDs: recordsToDelete
@@ -194,5 +209,6 @@ try {
   }
 
   // Update local index file
+  log(`Saving local index file...`)
   fs.writeFileSync(OUTPUT_FILE_PATH, JSON.stringify(recordsToSave))
 })()
