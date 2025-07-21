@@ -149,7 +149,12 @@ function SearchContainer() {
         <ResultsManager
           fallback={<p className='py-6 text-center'>No results found.</p>}>
           <Index indexName='marketing_site'>
-            <Configure hitsPerPage={5} />
+            <Configure
+              hitsPerPage={5}
+              optionalFilters={[
+                `type:event AND datetime < ${Date.now()} <score=0>`
+              ]}
+            />
             <Hits
               hitComponent={SearchResultLink}
               classNames={{
@@ -214,6 +219,7 @@ function joinPaths(first: string, last: string | undefined) {
 function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
   let badge: null | string = null
   let link: null | string = null
+  let date: null | Date = null
   let icon: ImageProps['src'] = iconDefault
   let label: null | string = null
   let target: React.HTMLProps<HTMLAnchorElement>['target'] = '_self'
@@ -224,6 +230,7 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
       link = joinPaths('/blog', hit.attributes.slug)
       label = hit.title
       icon = iconBlogs
+      date = new Date(hit.datetime)
       break
     case 'demo':
       badge = 'Demo'
@@ -239,6 +246,7 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
       link = joinPaths('/company/events', hit.attributes.slug)
       label = hit.title
       icon = iconEvents
+      date = new Date(hit.datetime)
       break
     case 'integration':
       badge = 'Integration'
@@ -255,8 +263,15 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
       label = hit.title
       icon = iconVideos
       break
+    case 'engineering-resources':
+      badge = 'Engineering Resource'
+      link = hit.attributes?.path
+      label = hit.title
+      icon = iconDocs
+      break
     default:
-      link = hit.attributes?.path || hit.attributes?.slug
+      link =
+        hit.attributes?.path || hit.attributes?.slug || hit.attributes?.link
       label = hit.title
       icon = iconDefault
       break
@@ -273,22 +288,38 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
       target={target}
       onClick={() => context.close()}
       className='group/searchItem flex w-full items-center gap-4 rounded-lg p-2 transition-colors hover:bg-white/5'>
-      <small className='inline-block aspect-square w-12 flex-shrink-0 flex-grow-0 rounded bg-white/10 px-2 py-1 leading-none'>
+      <span className='block w-14 flex-shrink-0 flex-grow-0 rounded bg-white/10'>
         <Image
           src={icon}
           alt={badge || ''}
           width={48}
           height={48}
-          className='h-full w-full max-w-none object-scale-down object-center opacity-80 invert'
+          className='aspect-square h-auto w-full max-w-none object-scale-down object-center opacity-80 invert'
         />
-      </small>
-      <span className='min-w-0 flex-1'>
-        <strong className='block break-words group-hover/searchItem:text-primary-300'>
+      </span>
+      <span className='flex min-w-0 flex-1 flex-col leading-tight'>
+        {(date || badge) && (
+          <span className='mb-1'>
+            <small className='whitespace-nowrap rounded-sm bg-white/10 py-0.5 leading-none opacity-70'>
+              {badge && <span className='px-2'>{badge}</span>}
+              {badge && date && <span>&bull;</span>}
+              {date && (
+                <span className='px-2'>
+                  {date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: '2-digit',
+                    timeZone: 'UTC'
+                  })}
+                </span>
+              )}
+            </small>
+          </span>
+        )}
+        <strong className='break-words group-hover/searchItem:text-primary-300'>
           {label}
         </strong>
-        <span className='block truncate text-sm opacity-70'>
-          {absoluteLink}
-        </span>
+        <span className='truncate text-sm opacity-70'>{absoluteLink}</span>
       </span>
     </Link>
   )
