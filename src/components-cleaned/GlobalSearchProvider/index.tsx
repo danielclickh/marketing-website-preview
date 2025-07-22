@@ -194,50 +194,52 @@ function SearchContainer() {
   }, [])
 
   return (
-    <InstantSearch searchClient={searchClient}>
-      {/* Field UI */}
-      <div className='sticky top-0 z-10 flex border-b border-white/5 bg-neutral-900 backdrop-blur'>
-        <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
-        <SearchInput className='flex-1 p-4 pl-14' />
-        <button
-          type='button'
-          className='border-l border-white/5 p-4 outline-none transition-colors hover:bg-white/5 focus:bg-white/5'
-          onClick={(event) => {
-            event.preventDefault()
-            context.close()
-          }}>
-          <XIcon className='h-6 w-6' />
-        </button>
-      </div>
+    <div className='divide-y divide-white/5'>
+      <InstantSearch searchClient={searchClient}>
+        {/* Field UI */}
+        <div className='sticky top-0 z-10 -mb-px flex border-b border-white/5 bg-neutral-900 backdrop-blur'>
+          <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
+          <SearchInput className='flex-1 p-4 pl-14' />
+          <button
+            type='button'
+            className='border-l border-white/5 p-4 outline-none transition-colors hover:bg-white/5 focus:bg-white/5'
+            onClick={(event) => {
+              event.preventDefault()
+              context.close()
+            }}>
+            <XIcon className='h-6 w-6' />
+          </button>
+        </div>
 
-      {/* Search handlers */}
-      <ResultsManager
-        fallback={<p className='py-6 text-center'>No results found.</p>}>
-        <Index indexName='marketing_site'>
-          <Configure
-            hitsPerPage={5}
-            optionalFilters={[
-              `type:event AND datetime < ${Date.now()} <score=0>`
-            ]}
-          />
-          <Hits
-            hitComponent={StaticResult}
-            classNames={{
-              list: 'p-2 empty:hidden'
-            }}
-          />
-        </Index>
-        <Index indexName='clickhouse'>
-          <Configure hitsPerPage={3} />
-          <Hits
-            hitComponent={DocsResult}
-            classNames={{
-              list: `p-2 border-t border-white/5 empty:hidden before:content-['Docs_results'] before:block before:py-1 before:px-4 before:font-bold`
-            }}
-          />
-        </Index>
-      </ResultsManager>
-    </InstantSearch>
+        {/* Search handlers */}
+        <ResultsManager
+          fallback={<p className='py-6 text-center'>No results found.</p>}>
+          <Index indexName='marketing_site'>
+            <Configure
+              hitsPerPage={5}
+              optionalFilters={[
+                `type:event AND datetime < ${Date.now()} <score=0>`
+              ]}
+            />
+            <Hits
+              hitComponent={StaticResult}
+              classNames={{
+                list: 'p-2 empty:hidden'
+              }}
+            />
+          </Index>
+          <Index indexName='clickhouse'>
+            <Configure hitsPerPage={3} />
+            <Hits
+              hitComponent={DocsResult}
+              classNames={{
+                list: `p-2 empty:hidden before:content-['Docs_results'] before:block before:py-1 before:px-4 before:font-bold`
+              }}
+            />
+          </Index>
+        </ResultsManager>
+      </InstantSearch>
+    </div>
   )
 }
 
