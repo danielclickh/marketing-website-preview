@@ -6,9 +6,11 @@ import iconDemos from './assets/icon-demos.svg'
 import iconDocs from './assets/icon-docs.svg'
 import iconEvents from './assets/icon-events.svg'
 import iconIntegrations from './assets/icon-integrations.svg'
+import iconResources from './assets/icon-resources.svg'
 import iconVideos from './assets/icon-videos.svg'
 import { useClickOutside } from '@/hooks'
 import { BASE_URL_AND_PROTOCOL } from '@/lib/next'
+import { convertDateToString } from '@/lib/utils/dateUtils'
 import { SearchIcon, XIcon } from '@heroicons/react/outline'
 import { Hit, liteClient as algoliasearch } from 'algoliasearch/lite'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -83,6 +85,65 @@ export default function GlobalSearchProvider({
     close()
   })
 
+  // Keyboard shortcuts
+  useEffect(() => {
+    const keypressHandler = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase()
+      const dialogEl = dialogRef.current
+
+      // Toggle on [cmd + k] or [ctrl + k]
+      if ((event.ctrlKey || event.metaKey) && key === 'k') {
+        event.preventDefault()
+        isOpen ? close() : open()
+      }
+
+      // Close on [esc]
+      else if (key === 'escape' && isOpen) {
+        event.preventDefault()
+        close()
+      }
+
+      //
+      else if (
+        (key === 'arrowdown' || key === 'arrowup') &&
+        isOpen &&
+        dialogEl
+      ) {
+        event.preventDefault()
+        const results = Array.from(
+          dialogEl.querySelectorAll(
+            '.ais-Hits ol.ais-Hits-list li.ais-Hits-item'
+          )
+        ) as Array<HTMLElement>
+        const activeIndex = results.findIndex(
+          (result) => document.activeElement === result.firstChild
+        )
+        let nextIndex = 0
+
+        switch (key) {
+          case 'arrowup':
+            nextIndex = activeIndex - 1 < 0 ? 0 : activeIndex - 1
+            break
+          case 'arrowdown':
+            nextIndex =
+              activeIndex + 1 >= results.length
+                ? results.length - 1
+                : activeIndex + 1
+            break
+        }
+
+        const linkEl = results[nextIndex].firstElementChild
+
+        if (linkEl instanceof HTMLElement) {
+          linkEl.scrollIntoView({ block: 'nearest', behavior: 'instant' })
+          linkEl.focus()
+        }
+      }
+    }
+    window.addEventListener('keydown', keypressHandler)
+    return () => window.removeEventListener('keydown', keypressHandler)
+  }, [isOpen, dialogRef])
+
   return (
     <GlobalSearchContext.Provider
       value={{
@@ -107,7 +168,7 @@ export default function GlobalSearchProvider({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className='relative mx-auto mt-0 max-h-full w-full max-w-xl overflow-y-auto rounded-lg border border-white/5 bg-neutral-900 text-white shadow-2xl'>
+              className='relative mx-auto mt-0 max-h-full w-full max-w-xl scroll-pt-16 overflow-y-auto rounded-lg border border-white/5 bg-neutral-900 text-white shadow-2xl'>
               <SearchContainer />
             </motion.div>
           </motion.div>
@@ -128,52 +189,50 @@ function SearchContainer() {
   }, [])
 
   return (
-    <div className='divide-y divide-white/5'>
-      <InstantSearch searchClient={searchClient}>
-        {/* Field UI */}
-        <div className='sticky top-0 z-10 flex bg-neutral-900 backdrop-blur'>
-          <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
-          <SearchInput className='flex-1 p-4 pl-14' />
-          <button
-            type='button'
-            className='border-l border-white/5 p-4 transition-colors hover:bg-white/5'
-            onClick={(event) => {
-              event.preventDefault()
-              context.close()
-            }}>
-            <XIcon className='h-6 w-6' />
-          </button>
-        </div>
+    <InstantSearch searchClient={searchClient}>
+      {/* Field UI */}
+      <div className='sticky top-0 z-10 flex border-b border-white/5 bg-neutral-900 backdrop-blur'>
+        <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
+        <SearchInput className='flex-1 p-4 pl-14' />
+        <button
+          type='button'
+          className='border-l border-white/5 p-4 outline-none transition-colors hover:bg-white/5 focus:bg-white/5'
+          onClick={(event) => {
+            event.preventDefault()
+            context.close()
+          }}>
+          <XIcon className='h-6 w-6' />
+        </button>
+      </div>
 
-        {/* Search handlers */}
-        <ResultsManager
-          fallback={<p className='py-6 text-center'>No results found.</p>}>
-          <Index indexName='marketing_site'>
-            <Configure
-              hitsPerPage={5}
-              optionalFilters={[
-                `type:event AND datetime < ${Date.now()} <score=0>`
-              ]}
-            />
-            <Hits
-              hitComponent={SearchResultLink}
-              classNames={{
-                list: 'p-2 empty:hidden'
-              }}
-            />
-          </Index>
-          <Index indexName='clickhouse'>
-            <Configure hitsPerPage={3} />
-            <Hits
-              hitComponent={DocsResultLink}
-              classNames={{
-                list: `p-2 bg-white/15 empty:hidden before:content-['Docs'] before:block before:uppercase before:py-2 before:px-4 before:-mx-2 before:-mt-2 before:mb-2 before:text-primary-300 before:font-bold before:leading-none before:text-sm before:bg-white/15`
-              }}
-            />
-          </Index>
-        </ResultsManager>
-      </InstantSearch>
-    </div>
+      {/* Search handlers */}
+      <ResultsManager
+        fallback={<p className='py-6 text-center'>No results found.</p>}>
+        <Index indexName='marketing_site'>
+          <Configure
+            hitsPerPage={5}
+            optionalFilters={[
+              `type:event AND datetime < ${Date.now()} <score=0>`
+            ]}
+          />
+          <Hits
+            hitComponent={StaticResult}
+            classNames={{
+              list: 'p-2 empty:hidden'
+            }}
+          />
+        </Index>
+        <Index indexName='clickhouse'>
+          <Configure hitsPerPage={3} />
+          <Hits
+            hitComponent={DocsResult}
+            classNames={{
+              list: `p-2 border-t border-white/5 empty:hidden before:content-['Docs_results'] before:block before:py-1 before:px-4 before:font-bold`
+            }}
+          />
+        </Index>
+      </ResultsManager>
+    </InstantSearch>
   )
 }
 
@@ -216,7 +275,7 @@ function joinPaths(first: string, last: string | undefined) {
   return `${firstTrimmed}/${lastTrimmed}`
 }
 
-function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
+function StaticResult({ hit }: { hit: Hit<BaseHit> }) {
   let badge: null | string = null
   let link: null | string = null
   let date: null | Date = null
@@ -267,7 +326,7 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
       badge = 'Engineering Resource'
       link = hit.attributes?.path
       label = hit.title
-      icon = iconDocs
+      icon = iconResources
       break
     default:
       link =
@@ -279,6 +338,45 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
 
   if (!link) return null
 
+  return (
+    <SearchResultLink
+      badge={badge}
+      link={link}
+      label={label}
+      date={date}
+      target={target}
+      icon={icon}
+    />
+  )
+}
+
+function DocsResult({ hit }: { hit: Hit<BaseHit> }) {
+  let link: string = joinPaths('/docs', hit.slug)
+  return (
+    <SearchResultLink
+      badge='Docs'
+      link={link}
+      label={hit.title}
+      icon={iconDocs}
+    />
+  )
+}
+
+function SearchResultLink({
+  badge,
+  link,
+  date,
+  icon = iconDefault,
+  label,
+  target = '_self'
+}: {
+  link: string
+  badge?: null | string
+  date?: null | Date
+  icon?: ImageProps['src']
+  label?: null | string
+  target?: React.HTMLProps<HTMLAnchorElement>['target']
+}) {
   const absoluteLink = new URL(link, BASE_URL_AND_PROTOCOL).toString()
   const context = useGlobalSearch()
 
@@ -287,7 +385,7 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
       href={link}
       target={target}
       onClick={() => context.close()}
-      className='group/searchItem flex w-full items-center gap-4 rounded-lg p-2 transition-colors hover:bg-white/5'>
+      className='group/searchItem flex w-full items-center gap-4 rounded-lg p-2 outline-none transition-colors hover:bg-white/5 focus:bg-white/5'>
       <span className='block w-14 flex-shrink-0 flex-grow-0 rounded bg-white/10'>
         <Image
           src={icon}
@@ -300,44 +398,18 @@ function SearchResultLink({ hit }: { hit: Hit<BaseHit> }) {
       <span className='flex min-w-0 flex-1 flex-col leading-tight'>
         {(date || badge) && (
           <span className='mb-1'>
-            <small className='whitespace-nowrap rounded-sm bg-white/10 py-0.5 leading-none opacity-70'>
-              {badge && <span className='px-2'>{badge}</span>}
+            <small className='flex w-max gap-1 whitespace-nowrap rounded-full border border-white/40 px-2 py-0.5 lowercase leading-none opacity-40 transition-opacity group-hover/searchItem:opacity-60 group-focus/searchItem:opacity-60'>
+              {badge && <span>{badge}</span>}
               {badge && date && <span>&bull;</span>}
-              {date && (
-                <span className='px-2'>
-                  {date.toLocaleString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: '2-digit',
-                    timeZone: 'UTC'
-                  })}
-                </span>
-              )}
+              {date && <span>{convertDateToString(date)}</span>}
             </small>
           </span>
         )}
-        <strong className='break-words group-hover/searchItem:text-primary-300'>
+        <strong className='break-words group-hover/searchItem:text-primary-300 group-focus/searchItem:text-primary-300'>
           {label}
         </strong>
         <span className='truncate text-sm opacity-70'>{absoluteLink}</span>
       </span>
-    </Link>
-  )
-}
-
-function DocsResultLink({ hit }: { hit: Hit<BaseHit> }) {
-  let link: string = joinPaths('/docs', hit.slug)
-  const absoluteLink = new URL(link, BASE_URL_AND_PROTOCOL).toString()
-  const context = useGlobalSearch()
-  return (
-    <Link
-      href={link}
-      onClick={() => context.close()}
-      className='group/searchItem block w-full rounded px-2 py-1 transition-colors hover:bg-white/10'>
-      <strong className='block break-words group-hover/searchItem:text-primary-300'>
-        {hit.title}
-      </strong>
-      <span className='block truncate text-sm opacity-70'>{absoluteLink}</span>
     </Link>
   )
 }
