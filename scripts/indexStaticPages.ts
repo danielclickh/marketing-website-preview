@@ -29,6 +29,7 @@ const algoliaIndexName = 'marketing_site'
 const typePathsToMatch: Record<string, Array<string>> = {
   pages: [
     '/**',
+    '!/index',
     '!/500',
     '!/404',
     '!/engineering-resources/**',

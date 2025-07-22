@@ -36,7 +36,7 @@ import {
   useSearchBox
 } from 'react-instantsearch'
 
-const MINIMUM_QUERY_LENGTH = 0
+const MINIMUM_QUERY_LENGTH = 1
 
 type GlobalSearchContextType = {
   isOpen: boolean
@@ -197,7 +197,8 @@ function SearchContainer() {
     <div className='divide-y divide-white/5'>
       <InstantSearch searchClient={searchClient}>
         {/* Field UI */}
-        <div className='sticky top-0 z-10 -mb-px flex border-b border-white/5 bg-neutral-900 backdrop-blur'>
+        <div
+          className={`sticky top-0 z-10 flex border-b border-white/5 bg-neutral-900 backdrop-blur ${context.searchTerm.length >= MINIMUM_QUERY_LENGTH ? '-mb-px' : ''}`}>
           <SearchIcon className='pointer-events-none absolute left-4 top-1/2 h-6 w-6 flex-shrink-0 flex-grow-0 -translate-y-1/2' />
           <SearchInput className='flex-1 p-4 pl-14' />
           <button
@@ -435,7 +436,7 @@ function ResultsManager({
     return acc + (current.results?.nbHits || 0)
   }, 0)
 
-  const hasQuery = context.searchTerm.length > MINIMUM_QUERY_LENGTH
+  const hasQuery = context.searchTerm.length >= MINIMUM_QUERY_LENGTH
 
   if (!hasQuery) {
     return (
