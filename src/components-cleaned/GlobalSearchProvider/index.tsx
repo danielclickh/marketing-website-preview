@@ -122,21 +122,26 @@ export default function GlobalSearchProvider({
 
         switch (key) {
           case 'arrowup':
-            nextIndex = activeIndex - 1 < 0 ? 0 : activeIndex - 1
+            nextIndex = activeIndex - 1
             break
           case 'arrowdown':
-            nextIndex =
-              activeIndex + 1 >= results.length
-                ? results.length - 1
-                : activeIndex + 1
+            nextIndex = activeIndex + 1
             break
         }
 
-        const linkEl = results[nextIndex].firstElementChild
+        // Refocus input when navigating back up the list
+        if (nextIndex < 0) {
+          dialogEl.querySelector('input')?.focus()
+        }
 
-        if (linkEl instanceof HTMLElement) {
-          linkEl.scrollIntoView({ block: 'nearest', behavior: 'instant' })
-          linkEl.focus()
+        // Focus next result
+        else if (results[nextIndex]) {
+          const linkEl = results[nextIndex].firstElementChild
+
+          if (linkEl instanceof HTMLElement) {
+            linkEl.scrollIntoView({ block: 'nearest', behavior: 'instant' })
+            linkEl.focus()
+          }
         }
       }
     }
