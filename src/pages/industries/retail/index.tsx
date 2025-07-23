@@ -106,7 +106,7 @@ export default function GamingIndustryPage({
               <strong>Optimize monetization and drive ad decisions</strong> with
               real-time event data personalizing offers and recommendations.
             </TickItem>
-            <div className='!mt-8 flex flex-col gap-6 sm:flex-row'>
+            <div className='!mt-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
               <CUIButton
                 type='primary'
                 size='lg'
