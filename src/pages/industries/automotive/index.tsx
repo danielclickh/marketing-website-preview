@@ -1,3 +1,4 @@
+import hero from './assets/hero.png'
 import logoJerry from './assets/logo-jerry.svg'
 import logoTekion from './assets/logo-tekion.svg'
 import logoTesla from './assets/logo-tesla.svg'
@@ -9,7 +10,6 @@ import enterprise from '@/components/LinedIconCard/assets/enterprise.svg'
 import guage from '@/components/LinedIconCard/assets/guage.svg'
 import sparkles from '@/components/LinedIconCard/assets/sparkles.svg'
 import tada from '@/components/LinedIconCard/assets/tada.svg'
-import Markdown from '@/components/Markdown'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -17,7 +17,6 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -48,52 +47,42 @@ export default function GamingIndustryPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section
-        className='bg-shadow-element yellow-shadow bg-grid py-16 lg:py-24'
-        style={
-          {
-            '--top-side': '0%',
-            '--right-side': '20%',
-            '--left-side': 'auto'
-          } as React.CSSProperties
-        }>
-        <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:gap-16'>
+      <section className='bg-grid py-16 lg:py-24'>
+        <div className='section-container relative z-10 flex flex-wrap items-center justify-between lg:flex-nowrap lg:items-start'>
           {/* Content column */}
-          <div className='mx-auto w-full space-y-6 text-center lg:max-w-4xl'>
+          <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-xl'>
             <p className='font-bold text-primary-300'>
               Industries / Automotive
             </p>
-            <SuiTitle type='h1'>
+            <SuiTitle type='h1' className='text-white md:!text-5.5xl'>
               Automotive, accelerated in real-time with ClickHouse
             </SuiTitle>
-            <SuiText size='lg' className='text-neutral-200'>
+            <SuiText>
               <strong>The real-time database that never lags.</strong> Ingest
               millions of rows per second. Handle the most heavily concurrent
               workloads. All without compromising query speed.
             </SuiText>
-            <div className='!my-10 grid gap-6 md:grid-cols-2'>
-              <TickItem className='text-left'>
-                <strong>Automotive Performance Monitoring (APM)</strong> - track
-                vehicle performance, logs, and telemetry in real time with crash
-                analytics and performance tracking.
-              </TickItem>
-              <TickItem className='text-left'>
-                <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
-                needed to power real-time dashboards, live vehicle state
-                tracking, EV charging analytics, and telemetry.
-              </TickItem>
-              <TickItem className='text-left'>
-                <strong>Factory monitoring</strong> - ingest metrics, machine
-                monitoring, assembly line analytics, and predictive maintenance
-                & asset health.
-              </TickItem>
-              <TickItem className='text-left'>
-                <strong>Connected Car</strong> - predictive maintenance, remote
-                diagnostics, EV charging station analytics, battery-health
-                optimization, and track update roll-outs.
-              </TickItem>
-            </div>
-            <div className='flex flex-col gap-6 sm:flex-row sm:justify-center'>
+            <TickItem className='text-left'>
+              <strong>Automotive Performance Monitoring (APM)</strong> - track
+              vehicle performance, logs, and telemetry in real time with crash
+              analytics and performance tracking.
+            </TickItem>
+            <TickItem className='text-left'>
+              <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
+              needed to power real-time dashboards, live vehicle state tracking,
+              EV charging analytics, and telemetry.
+            </TickItem>
+            <TickItem className='text-left'>
+              <strong>Factory monitoring</strong> - ingest metrics, machine
+              monitoring, assembly line analytics, and predictive maintenance &
+              asset health.
+            </TickItem>
+            <TickItem className='text-left'>
+              <strong>Connected Car</strong> - predictive maintenance, remote
+              diagnostics, EV charging station analytics, battery-health
+              optimization, and track update roll-outs.
+            </TickItem>
+            <div className='!mt-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
               <CUIButton
                 type='primary'
                 size='lg'
@@ -117,6 +106,19 @@ export default function GamingIndustryPage({
                 Contact sales
               </CUIButton>
             </div>
+          </div>
+
+          {/* Image column */}
+          <div className='mx-auto mt-16 hidden w-full lg:block'>
+            <Image
+              src={hero}
+              alt='Automtive'
+              width={509}
+              height={397}
+              className='h-auto w-full'
+              loading='eager'
+              priority
+            />
           </div>
         </div>
       </section>
