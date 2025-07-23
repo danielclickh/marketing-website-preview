@@ -73,51 +73,40 @@ export default function GamingIndustryPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section
-        className='bg-shadow-element yellow-shadow bg-grid py-16 lg:py-24'
-        style={
-          {
-            '--top-side': '0%',
-            '--right-side': '20%',
-            '--left-side': 'auto'
-          } as React.CSSProperties
-        }>
-        <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:gap-16'>
+      <section className='bg-grid py-16 lg:py-24'>
+        <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:items-start lg:gap-16'>
           {/* Content column */}
-          <div className='mx-auto w-full space-y-6 text-center lg:max-w-4xl'>
+          <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-2xl'>
             <p className='font-bold text-primary-300'>Industries / Retail</p>
-            <SuiTitle type='h1'>
+            <SuiTitle type='h1' className='text-white md:!text-5.5xl'>
               Retail, re-imagined in real-time with ClickHouse
             </SuiTitle>
-            <SuiText size='lg' className='text-neutral-200'>
+            <SuiText>
               Transform every retail signal into actionable insight in the blink
               of an eye. ClickHouse streams, stores, and queries live data,
               enabling you to respond in real time.
             </SuiText>
-            <div className='!my-10 grid gap-6 md:grid-cols-2'>
-              <TickItem className='text-left'>
-                <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
-                that power real-time business intelligence dashboards and
-                real-time inventory tracking, with instant responsiveness.
-              </TickItem>
-              <TickItem className='text-left'>
-                <strong>Retail Performance Monitoring (RPM)</strong> - track
-                physical and digital store performance, logs, and telemetry in
-                real time with transaction analytics and performance tracking.
-              </TickItem>
-              <TickItem className='text-left'>
-                <strong>End-to-end customer journey analytics</strong> that
-                track the entire funnel - site performance, error logs, campaign
-                KPIs, email CTRs, notifications, ad performance, and A/B tests;
-                all in real time.
-              </TickItem>
-              <TickItem className='text-left'>
-                <strong>Optimize monetization and drive ad decisions</strong>{' '}
-                with real-time event data personalizing offers and
-                recommendations.
-              </TickItem>
-            </div>
-            <div className='flex flex-col gap-6 sm:flex-row sm:justify-center'>
+            <TickItem className='text-left'>
+              <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
+              that power real-time business intelligence dashboards and
+              real-time inventory tracking, with instant responsiveness.
+            </TickItem>
+            <TickItem className='text-left'>
+              <strong>Retail Performance Monitoring (RPM)</strong> - track
+              physical and digital store performance, logs, and telemetry in
+              real time with transaction analytics and performance tracking.
+            </TickItem>
+            <TickItem className='text-left'>
+              <strong>End-to-end customer journey analytics</strong> that track
+              the entire funnel - site performance, error logs, campaign KPIs,
+              email CTRs, notifications, ad performance, and A/B tests; all in
+              real time.
+            </TickItem>
+            <TickItem className='text-left'>
+              <strong>Optimize monetization and drive ad decisions</strong> with
+              real-time event data personalizing offers and recommendations.
+            </TickItem>
+            <div className='!mt-8 flex flex-col gap-6 sm:flex-row'>
               <CUIButton
                 type='primary'
                 size='lg'
@@ -130,7 +119,7 @@ export default function GamingIndustryPage({
                 Get started today
               </CUIButton>
               <CUIButton
-                type='primary-dark'
+                type='secondary'
                 size='lg'
                 className='w-full !px-10 sm:w-auto'
                 target='_blank'
@@ -141,6 +130,19 @@ export default function GamingIndustryPage({
                 Contact sales
               </CUIButton>
             </div>
+          </div>
+
+          {/* Image column */}
+          <div className='mx-auto hidden md:w-4/12 lg:flex lg:w-[400px] xl:w-[525px]'>
+            <Image
+              src='/images/use-cases/real-time-analytics/real-time-analytics-hero.svg'
+              alt='ClickHouse'
+              width={509}
+              height={397}
+              className='h-auto w-full'
+              loading='eager'
+              priority
+            />
           </div>
         </div>
       </section>
