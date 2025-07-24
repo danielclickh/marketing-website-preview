@@ -113,8 +113,8 @@ export default function GamingIndustryPage({
             <Image
               src={hero}
               alt='Automtive'
-              width={509}
-              height={397}
+              width={1295 / 1.5}
+              height={891 / 1.5}
               className='h-auto w-full'
               loading='eager'
               priority
