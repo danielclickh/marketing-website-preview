@@ -5,7 +5,9 @@ import HeaderRegionSelector from '../HeaderRegionSelector'
 import Navigation from '../Navigation'
 import GitHub from '../icons/GitHub'
 import { HeaderProps } from './types'
+import { useGlobalSearch } from '@/components-cleaned/GlobalSearchProvider'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { SearchIcon } from '@heroicons/react/outline'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -125,6 +127,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     }
   }, [headerRef])
 
+  const globalSearch = useGlobalSearch()
+
   return (
     <>
       {/* Add empty space for fixed header */}
@@ -159,7 +163,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           <Link
             href='/'
             prefetch={false}
-            onClick={useGalaxyOnClick('topNav.logo.select')}>
+            onClick={useGalaxyOnClick('topNav.logo.select')}
+            className='mr-auto'>
             <Image
               src={logoFull}
               priority
@@ -169,8 +174,24 @@ export default function Header({ github, eyebrow }: HeaderProps) {
             />
           </Link>
 
+          {/* Mobile search */}
+          <button
+            type='button'
+            className='md-mid:hidden'
+            onClick={() => globalSearch.open()}>
+            {globalSearch.isOpen && (
+              <span className='sr-only'>Close search</span>
+            )}
+            {!globalSearch.isOpen && (
+              <span className='sr-only'>Open search</span>
+            )}
+            <span className='flex aspect-square w-10 items-center justify-center rounded-lg transition-colors hover:bg-white/5 hover:text-primary-300'>
+              <SearchIcon className='h-4 w-4' />
+            </span>
+          </button>
+
           {/* Mobile region selector */}
-          <HeaderRegionSelector className='z-10 ml-auto mr-4 md-mid:hidden' />
+          <HeaderRegionSelector className='z-10 mx-4 md-mid:hidden' />
 
           {/* Mobile Burger */}
           <button
@@ -204,6 +225,18 @@ export default function Header({ github, eyebrow }: HeaderProps) {
 
             {/* CTAs */}
             <div className='mt-auto flex flex-col-reverse flex-nowrap items-center gap-4 md-mid:ml-auto md-mid:mt-0 md-mid:flex-row lg:gap-6'>
+              <button type='button' onClick={() => globalSearch.open()}>
+                {globalSearch.isOpen && (
+                  <span className='sr-only'>Close search</span>
+                )}
+                {!globalSearch.isOpen && (
+                  <span className='sr-only'>Open search</span>
+                )}
+                <span className='flex aspect-square w-10 items-center justify-center rounded-lg transition-colors hover:bg-white/5 hover:text-primary-300'>
+                  <SearchIcon className='h-4 w-4' />
+                </span>
+              </button>
+
               {/* Desktop region selector */}
               <HeaderRegionSelector className='hidden md-mid:block' />
 
