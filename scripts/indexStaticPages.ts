@@ -16,11 +16,6 @@ dotenv.config({
 //
 const applicationId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID
 const apiKey = process.env.ALGOLIA_ADMIN_KEY
-
-if (!applicationId || !apiKey) {
-  throw new Error('No Algolia app ID or admin key provided')
-}
-
 const algoliaIndexName = 'marketing_site'
 
 // `!` for negative match
@@ -61,8 +56,6 @@ log('Staring Algolia indexing...')
 const OUTPUT_FILE_NAME = 'indexedStaticPages.json'
 const OUTPUT_FILE_PATH = path.join(__dirname, '..', 'public', OUTPUT_FILE_NAME)
 const NEXTJS_BUILD_PATH = path.join(__dirname, '..', '.next', 'server', 'pages')
-
-const algoliaClient = algoliasearch(applicationId, apiKey)
 
 type FileInfo = {
   uri: string
@@ -198,8 +191,19 @@ try {
   //
 }
 
+// Update local index file
+log(`Saving ${recordsToSave.length} records to local index file...`)
+fs.writeFileSync(OUTPUT_FILE_PATH, JSON.stringify(recordsToSave))
+
 // Send to Algolia
 ;(async () => {
+  if (!applicationId || !apiKey) {
+    console.warn('⚠️ No Algolia app ID or admin key provided. Skipping...')
+    return
+  }
+
+  const algoliaClient = algoliasearch(applicationId, apiKey)
+
   if (recordsToSave.length > 0) {
     log(`Indexing ${recordsToSave.length} records...`)
     await algoliaClient.saveObjects({
@@ -215,8 +219,4 @@ try {
       objectIDs: recordsToDelete
     })
   }
-
-  // Update local index file
-  log(`Saving local index file...`)
-  fs.writeFileSync(OUTPUT_FILE_PATH, JSON.stringify(recordsToSave))
 })()
