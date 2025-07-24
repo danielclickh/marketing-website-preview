@@ -106,6 +106,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => router.events.off('routeChangeComplete', updateGrowthBookURL)
   }, [])
 
+  const isMarketoIframe = router.pathname === '/marketo-forms/[id]'
+
   return (
     <>
       <ClickUIProvider theme={theme}>
@@ -139,7 +141,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </Head>
         <GrowthBookProvider growthbook={gb}>
-          <GlobalSearchProvider>
+          <GlobalSearchProvider enabled={!isMarketoIframe}>
             <main
               id='main-site-container'
               className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
@@ -152,7 +154,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </GrowthBookProvider>
 
         {/* Exclude tracking from marketo iframe routes */}
-        {router.pathname !== '/marketo-forms/[id]' && (
+        {!isMarketoIframe && (
           <>
             {/* GTM */}
             <GoogleTagManager gtmId={gtmId} />

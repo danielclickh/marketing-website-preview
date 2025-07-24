@@ -64,11 +64,15 @@ export function useGlobalSearch() {
 
 export interface GlobalSearchProviderProps {
   children: React.ReactNode
+  enabled?: boolean
 }
 
 export default function GlobalSearchProvider({
-  children
+  children,
+  enabled = true
 }: GlobalSearchProviderProps) {
+  if (!enabled) return <>{children}</>
+
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [isOpen, setIsOpen] = useState(false)
