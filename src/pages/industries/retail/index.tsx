@@ -1,3 +1,4 @@
+import hero from './assets/hero.png'
 import logoInstacart from './assets/logo-instacart.svg'
 import logoShopee from './assets/logo-shopee.svg'
 import logoWalmart from './assets/logo-walmart.svg'
@@ -74,7 +75,7 @@ export default function GamingIndustryPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='bg-grid py-16 lg:py-24'>
-        <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:items-start lg:gap-16'>
+        <div className='section-container relative z-10 flex flex-wrap items-center justify-between lg:flex-nowrap lg:items-start'>
           {/* Content column */}
           <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-2xl'>
             <p className='font-bold text-primary-300'>Industries / Retail</p>
@@ -133,12 +134,12 @@ export default function GamingIndustryPage({
           </div>
 
           {/* Image column */}
-          <div className='mx-auto hidden md:w-4/12 lg:flex lg:w-[400px] xl:w-[525px]'>
+          <div className='mx-auto mt-16 hidden w-full lg:block'>
             <Image
-              src='/images/use-cases/real-time-analytics/real-time-analytics-hero.svg'
+              src={hero}
               alt='ClickHouse'
-              width={509}
-              height={397}
+              width={1215 / 1.5}
+              height={798 / 1.5}
               className='h-auto w-full'
               loading='eager'
               priority
