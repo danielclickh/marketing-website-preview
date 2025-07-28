@@ -1,4 +1,4 @@
-import { StrapiImageType } from '@/lib/api/strapi/types'
+import { StrapiImageType, StrapiVideoType } from '@/lib/api/strapi/types'
 
 type OpenhouseDateYear = `${number}${number}${number}${number}`
 type OpenhouseDateMonth = `${number}${number}`
@@ -54,7 +54,7 @@ export interface OpenhouseEntry {
   startDate: OpenhouseDate
   endDate: OpenhouseDate
   applyToSpeakLink: string | null
-  gallery: Array<StrapiImageType>
+  gallery: Array<StrapiImageType | StrapiVideoType>
   cards: Array<OpenhouseCard>
   days: Array<OpenhouseDay>
   featuredSpeakers: Array<OpenhouseSpeakerEntry>

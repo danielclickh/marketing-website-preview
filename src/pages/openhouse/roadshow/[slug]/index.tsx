@@ -2,7 +2,6 @@ import heroGradientBottom from './assets/hero-gradient-bottom.png'
 import heroGradientTop from './assets/hero-gradient-top.png'
 import linesPattern from './assets/lines-pattern.svg'
 import logo from './assets/logo.svg'
-import photoMask from './assets/photo-mask.png'
 import photoTexture from './assets/photo-texture.svg'
 import { OpenhouseDayAgenda, OpenhouseEntry, OpenhouseLogo } from './types'
 import ContentTicker from '@/components-cleaned/ContentTicker'
@@ -10,9 +9,10 @@ import FitText from '@/components/FitText'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
+import Parallax from '@/components/Parallax'
 import SeoContainer from '@/components/SeoContainer'
 import { StrapiImageUrl } from '@/components/StrapiElements'
-import { fetchAll, findAll } from '@/lib/api/strapi'
+import { fetchAll, findAll, getProxiedMediaUrl } from '@/lib/api/strapi'
 import { shuffleArraySeeded } from '@/lib/utils/arrays'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getOrdinal } from '@/lib/utils/numbers'
@@ -135,30 +135,10 @@ export default function Page({
   const startDateObject = new Date(startDate)
   const endDateObject = new Date(endDate)
 
-  const heroImagesRef = useRef<HTMLDivElement | null>(null)
-
   // Add's scroll offset to <html> tag
   useEffect(() => {
     document.documentElement.classList.add('scroll-pt-32')
   }, [])
-
-  useEffect(() => {
-    const scrollHanlder = () => {
-      const scrollTop = window.scrollY
-      if (heroImagesRef.current) {
-        // Prevent negative offset
-        const translateY = Math.max(0, scrollTop / 3)
-        heroImagesRef.current.style.transform = `translateY(${translateY}px)`
-      }
-    }
-
-    scrollHanlder()
-    window.addEventListener('scroll', scrollHanlder)
-
-    return () => {
-      window.removeEventListener('scroll', scrollHanlder)
-    }
-  }, [heroImagesRef])
 
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
@@ -211,8 +191,8 @@ export default function Page({
           />
           <div className='grid grid-cols-1 grid-rows-1'>
             {/* Hero images */}
-            <div
-              ref={heroImagesRef}
+            <Parallax
+              speed={3}
               className='relative z-0 col-start-1 row-start-1 flex -translate-y-28 flex-col gap-1.5'>
               <ContentTicker
                 gap='0.375rem'
@@ -220,7 +200,16 @@ export default function Page({
                 direction='ltr'>
                 {shuffleArraySeeded(gallery, 321429833423423111339978).map(
                   (item, itemIndex) => {
-                    return (
+                    return item.mime.startsWith('video/') ? (
+                      <video
+                        src={getProxiedMediaUrl(item.url)}
+                        autoPlay={true}
+                        muted={true}
+                        loop={true}
+                        controls={false}
+                        className='h-72 w-auto max-w-none'
+                      />
+                    ) : (
                       <StrapiImageUrl
                         key={itemIndex}
                         {...item}
@@ -232,7 +221,16 @@ export default function Page({
               </ContentTicker>
               <ContentTicker gap='0.375rem' pixelsPerSecond={15}>
                 {gallery.map((item, itemIndex) => {
-                  return (
+                  return item.mime.startsWith('video/') ? (
+                    <video
+                      src={getProxiedMediaUrl(item.url)}
+                      autoPlay={true}
+                      muted={true}
+                      loop={true}
+                      controls={false}
+                      className='h-72 w-auto max-w-none'
+                    />
+                  ) : (
                     <StrapiImageUrl
                       key={itemIndex}
                       {...item}
@@ -247,7 +245,16 @@ export default function Page({
                 direction='ltr'>
                 {shuffleArraySeeded(gallery, 42311232345837213).map(
                   (item, itemIndex) => {
-                    return (
+                    return item.mime.startsWith('video/') ? (
+                      <video
+                        src={getProxiedMediaUrl(item.url)}
+                        autoPlay={true}
+                        muted={true}
+                        loop={true}
+                        controls={false}
+                        className='h-72 w-auto max-w-none'
+                      />
+                    ) : (
                       <StrapiImageUrl
                         key={itemIndex}
                         {...item}
@@ -257,7 +264,7 @@ export default function Page({
                   }
                 )}
               </ContentTicker>
-            </div>
+            </Parallax>
 
             {/* Hero content */}
             <div className='relative z-20 col-start-1 row-start-1 flex items-end pb-8'>
