@@ -18,6 +18,7 @@ export interface ContentTickerProps {
   gradientMask?: boolean
   direction?: 'ltr' | 'rtl'
   gap?: React.CSSProperties['gap']
+  className?: string
 }
 
 export default function ContentTicker({
@@ -26,7 +27,8 @@ export default function ContentTicker({
   pixelsPerSecond = 30,
   gradientMask = false,
   direction = 'ltr',
-  gap
+  gap,
+  className = ''
 }: ContentTickerProps) {
   const groupRef = useRef<null | HTMLDivElement>(null)
   const [clonesNeeded, setClonesNeeded] = useState<number>(0)
@@ -67,7 +69,7 @@ export default function ContentTicker({
 
   return (
     <div
-      className={`flex overflow-hidden ${gradientMask ? styles.mask : ''}`}
+      className={`flex overflow-hidden ${gradientMask ? styles.mask : ''} ${className}`}
       style={
         {
           '--carousel-offset': startOffset || '0%',

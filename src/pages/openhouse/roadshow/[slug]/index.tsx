@@ -186,19 +186,20 @@ export default function Page({
         {/* Hero */}
         <section className='relative overflow-hidden'>
           <div
-            className='absolute inset-x-0 bottom-0 z-10 h-96 bg-contain'
+            className='absolute inset-x-0 bottom-0 z-10 h-72 bg-contain lg:h-96'
             style={{ backgroundImage: `url(${heroGradientBottom.src})` }}
           />
           <div className='grid grid-cols-1 grid-rows-1'>
             {/* Hero images */}
             <Parallax
               speed={3}
-              className='relative z-0 col-start-1 row-start-1 flex -translate-y-28 flex-col gap-1.5'>
+              className='relative z-0 col-start-1 row-start-1 flex flex-col gap-1.5'>
               <ContentTicker
                 gap='0.375rem'
                 pixelsPerSecond={20}
-                direction='ltr'>
-                {shuffleArraySeeded(gallery, 321429833423423111339978).map(
+                direction='ltr'
+                className='-translate-y-16 lg:-translate-y-28'>
+                {shuffleArraySeeded(gallery, 2 + gallery.length).map(
                   (item, itemIndex) => {
                     return item.mime.startsWith('video/') ? (
                       <video
@@ -207,19 +208,22 @@ export default function Page({
                         muted={true}
                         loop={true}
                         controls={false}
-                        className='h-72 w-auto max-w-none'
+                        className='h-44 w-auto max-w-none lg:h-72'
                       />
                     ) : (
                       <StrapiImageUrl
                         key={itemIndex}
                         {...item}
-                        className='h-72 w-auto max-w-none'
+                        className='h-44 w-auto max-w-none lg:h-72'
                       />
                     )
                   }
                 )}
               </ContentTicker>
-              <ContentTicker gap='0.375rem' pixelsPerSecond={15}>
+              <ContentTicker
+                gap='0.375rem'
+                pixelsPerSecond={15}
+                className='-translate-y-16 lg:-translate-y-28'>
                 {gallery.map((item, itemIndex) => {
                   return item.mime.startsWith('video/') ? (
                     <video
@@ -228,13 +232,13 @@ export default function Page({
                       muted={true}
                       loop={true}
                       controls={false}
-                      className='h-72 w-auto max-w-none'
+                      className='h-44 w-auto max-w-none lg:h-72'
                     />
                   ) : (
                     <StrapiImageUrl
                       key={itemIndex}
                       {...item}
-                      className='h-72 w-auto max-w-none'
+                      className='h-44 w-auto max-w-none lg:h-72'
                     />
                   )
                 })}
@@ -242,8 +246,9 @@ export default function Page({
               <ContentTicker
                 gap='0.375rem'
                 pixelsPerSecond={12}
-                direction='ltr'>
-                {shuffleArraySeeded(gallery, 42311232345837213).map(
+                direction='ltr'
+                className='-translate-y-16 lg:-translate-y-28'>
+                {shuffleArraySeeded(gallery, 3 + gallery.length).map(
                   (item, itemIndex) => {
                     return item.mime.startsWith('video/') ? (
                       <video
@@ -252,13 +257,13 @@ export default function Page({
                         muted={true}
                         loop={true}
                         controls={false}
-                        className='h-72 w-auto max-w-none'
+                        className='h-44 w-auto max-w-none lg:h-72'
                       />
                     ) : (
                       <StrapiImageUrl
                         key={itemIndex}
                         {...item}
-                        className='h-72 w-auto max-w-none'
+                        className='h-44 w-auto max-w-none lg:h-72'
                       />
                     )
                   }
@@ -268,9 +273,9 @@ export default function Page({
 
             {/* Hero content */}
             <div className='relative z-20 col-start-1 row-start-1 flex items-end pb-8'>
-              <div className='section-container flex w-full items-end justify-between'>
-                <h1 className='flex flex-col uppercase leading-none'>
-                  <span className='text-[1.75rem] font-extrabold'>
+              <div className='section-container w-full items-end justify-between md:flex'>
+                <h1 className='flex flex-col uppercase'>
+                  <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
                     Free conference in
                   </span>
                   {heading.split(`\n`).map((item, itemIndex) => {
@@ -278,18 +283,23 @@ export default function Page({
                       <FontSohneBreit
                         as='span'
                         key={itemIndex}
-                        className='text-[4rem] font-black text-ch-yellow'>
+                        className='text-4xl font-black leading-none text-ch-yellow lg:text-[4rem]'>
                         {item}
                       </FontSohneBreit>
                     )
                   })}
                 </h1>
-                <h2 className='flex flex-col text-right text-[1.75rem] font-black uppercase leading-none'>
-                  <span className='text-ch-yellow'>
-                    {formateHeroDate(startDateObject, endDateObject)}.
+                <h2 className='flex flex-col text-xl font-black uppercase leading-none md:text-right md:text-[1.75rem]'>
+                  <span className='text-white md:text-ch-yellow'>
+                    {formateHeroDate(startDateObject, endDateObject)}
+                    <span className='hidden md:inline'>.</span>
                   </span>
                   {strapline.split(`\n`).map((item, itemIndex) => {
-                    return <span key={itemIndex}>{item}</span>
+                    return (
+                      <span key={itemIndex} className='hidden md:inline'>
+                        {item}
+                      </span>
+                    )
                   })}
                 </h2>
               </div>
@@ -299,23 +309,27 @@ export default function Page({
 
         {/* Cards */}
         {cards.length > 0 && (
-          <section className='section-container flex flex-wrap gap-4'>
-            {cards.map((card, cardIndex) => {
-              return (
-                <div
-                  key={cardIndex}
-                  className='flex-1 basis-0 space-y-6 bg-white p-6 text-black'>
-                  <StrapiImageUrl
-                    {...card.icon}
-                    className='h-11 w-11 object-scale-down object-left-top'
-                  />
-                  <FontSohneBreit as='h3' className='text-2xl font-black'>
-                    {card.title}
-                  </FontSohneBreit>
-                  <p className='text-sm leading-loose'>{card.content}</p>
-                </div>
-              )
-            })}
+          <section className='section-container'>
+            <div className='-m-2 flex flex-col md:flex-row md:flex-wrap'>
+              {cards.map((card, cardIndex) => {
+                return (
+                  <div
+                    key={cardIndex}
+                    className='relative w-full p-2 md:w-1/2 lg:w-1/4'>
+                    <div className='min-h-full space-y-6 bg-white p-6 text-black'>
+                      <StrapiImageUrl
+                        {...card.icon}
+                        className='h-11 w-11 object-scale-down object-left-top'
+                      />
+                      <FontSohneBreit as='h3' className='text-2xl font-black'>
+                        {card.title}
+                      </FontSohneBreit>
+                      <p className='text-sm leading-loose'>{card.content}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </section>
         )}
 
@@ -327,9 +341,9 @@ export default function Page({
               return (
                 <div
                   key={dayIndex}
-                  className='grid grid-cols-[13rem_1fr] border border-white'>
+                  className='border border-white lg:grid lg:grid-cols-[13rem_1fr]'>
                   <div
-                    className='px-4 py-12 text-center uppercase leading-none text-ch-yellow'
+                    className='px-8 py-6 text-center uppercase leading-none text-ch-yellow lg:px-4 lg:py-12'
                     style={{
                       backgroundImage: `url('${linesPattern.src}')`
                     }}>
@@ -348,13 +362,13 @@ export default function Page({
                       })}
                     </FitText>
                   </div>
-                  <OpenhouseMarkdown className='border-l border-white p-6'>
+                  <OpenhouseMarkdown className='border-t border-white p-6 lg:border-l lg:border-t-0'>
                     {day.description}
                   </OpenhouseMarkdown>
                   {day.agenda.length > 0 && (
                     <>
-                      <div className='border-t border-white' />
-                      <ol className='border-l border-white'>
+                      <div className='hidden border-t border-white lg:block' />
+                      <ol className='border-white lg:border-l'>
                         {day.agenda.map((agenda, agendaIndex) => {
                           const isDivider =
                             !agenda.time &&
@@ -398,7 +412,7 @@ export default function Page({
           </section>
         )}
 
-        <div className='mt-12 space-y-16 bg-white py-16 text-black'>
+        <div className='space-y-4 bg-white py-4 text-black lg:mt-12 lg:space-y-16 lg:py-16'>
           {/* Speakers */}
           {(featuredSpeakers.length > 0 || speakers.length > 0) && (
             <section id='speakers' className='section-container'>
@@ -412,13 +426,13 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                     <Link
                       href={applyToSpeakLink}
                       target='_blank'
-                      className='mr-2 bg-black px-4 py-2 font-medium uppercase leading-normal text-white'>
+                      className='mr-2 hidden bg-black px-4 py-2 font-medium uppercase leading-normal text-white lg:inline-block'>
                       Apply to speak
                     </Link>
                   )}
                 </div>
                 {featuredSpeakers.length > 0 && (
-                  <ol className='grid grid-cols-2 gap-px'>
+                  <ol className='flex flex-col gap-px md:grid md:grid-cols-2'>
                     {featuredSpeakers.map((speaker, speakerIndex) => {
                       return (
                         <li
@@ -462,8 +476,8 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                 )}
 
                 {speakers.length > 0 && (
-                  <>
-                    <ul className='grid grid-cols-6 gap-px'>
+                  <div className='relative'>
+                    <ul className='grid grid-cols-2 gap-px lg:grid-cols-6'>
                       {displayAllSpeakers &&
                         speakers.map((speaker, speakerIndex) => {
                           return (
@@ -482,7 +496,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                                   className='grayscale transition group-hover/speaker:grayscale-0'
                                 />
                               </div>
-                              <div className='flex flex-col p-6'>
+                              <div className='flex flex-col px-3 py-2 lg:p-6'>
                                 <OpenhouseMarkdown>{`#### ${speaker.name}\n${speaker.title}`}</OpenhouseMarkdown>
                                 {speaker.logo && (
                                   <StrapiImageUrl
@@ -509,19 +523,19 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
 
                     <div
                       ref={speakersToggleRef}
-                      className='sticky bottom-0 z-40 -mx-6 bg-white/60 px-6 py-2 text-center backdrop-blur sm:relative sm:bg-transparent sm:backdrop-blur-0'>
+                      className='sticky bottom-0 z-40 text-center sm:relative'>
                       <button
                         onClick={(event) => {
                           event.preventDefault()
                           setDisplayAllSpeakers((old) => !old)
                           scrollToSpeakersToggle()
                         }}
-                        className='px-4 py-1 font-medium uppercase leading-normal text-white'>
+                        className='w-full bg-black px-4 py-3 font-medium uppercase leading-normal text-white'>
                         {!displayAllSpeakers && 'View all speakers'}
                         {displayAllSpeakers && 'Collapse all speakers'}
                       </button>
                     </div>
-                  </>
+                  </div>
                 )}
               </div>
             </section>
@@ -529,8 +543,8 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
 
           {/* Location */}
           <section id='location' className='section-container'>
-            <div className='grid grid-cols-3 border border-black'>
-              <div className='flex flex-col justify-center space-y-6 border-r border-inherit p-16'>
+            <div className='flex flex-col-reverse border border-black lg:grid lg:grid-cols-3'>
+              <div className='flex flex-col justify-center space-y-6 border-inherit p-6 lg:border-r lg:p-16'>
                 <OpenhouseMarkdown>
                   {`### ${heading.replaceAll(`\n`, ', ')}\n${locationAddress.replaceAll(`\n`, '  \n')}`}
                 </OpenhouseMarkdown>
@@ -639,20 +653,27 @@ function Header({
         width={230}
         height={49}
         alt='Open House by ClickHouse'
-        className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'
+        className='absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 lg:block'
       />
-      <div className='section-container relative z-10'>
+      <div className='section-container relative z-10 flex items-center justify-between lg:block'>
+        <Image
+          src={logo}
+          width={230}
+          height={49}
+          alt='Open House by ClickHouse'
+          className='max-w-44 lg:hidden'
+        />
         <nav>
           <ul className='flex items-center gap-6 font-medium uppercase leading-loose tracking-wider'>
             {agenda && (
-              <li>
+              <li className='hidden lg:block'>
                 <Link href='#agenda' className='underline hover:text-ch-yellow'>
                   Agenda
                 </Link>
               </li>
             )}
             {speakers && (
-              <li>
+              <li className='hidden lg:block'>
                 <Link
                   href='#speakers'
                   className='underline hover:text-ch-yellow'>
@@ -661,15 +682,15 @@ function Header({
               </li>
             )}
             {faqs && (
-              <li>
+              <li className='hidden lg:block'>
                 <Link href='#faqs' className='underline hover:text-ch-yellow'>
                   FAQ
                 </Link>
               </li>
             )}
-            <li className='mx-auto' />
+            <li className='mx-auto hidden lg:block' />
             {applyToSpeak && (
-              <li>
+              <li className='hidden lg:block'>
                 <Link
                   href={applyToSpeak}
                   target='_blank'
@@ -869,7 +890,7 @@ function AgendaHandle({ agenda }: { agenda: OpenhouseDayAgenda }) {
       {agenda.speakers.map((speaker, speakerIndex) => {
         return (
           <span
-            className='relative -mr-3 block h-11 w-11 overflow-hidden rounded-full border-2 border-black bg-white'
+            className='relative -mr-3 hidden h-11 w-11 overflow-hidden rounded-full border-2 border-black bg-white lg:block'
             title={speaker.name}
             style={{
               zIndex: agenda.speakers.length - speakerIndex
