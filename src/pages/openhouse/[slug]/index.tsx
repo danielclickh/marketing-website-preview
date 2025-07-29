@@ -339,54 +339,23 @@ export default function Page({
         </div>
 
         {/* Hero */}
-        <section className='relative overflow-hidden'>
+        <section className='relative h-dvh max-h-[600px] min-h-[450px] overflow-hidden lg:max-h-[900px] lg:min-h-[600px]'>
           <div
             className='absolute inset-x-0 bottom-0 z-10 h-72 bg-contain lg:h-96'
             style={{ backgroundImage: `url(${heroGradientBottom.src})` }}
           />
-          <div className='grid grid-cols-1 grid-rows-1'>
-            {/* Hero images */}
-            <Parallax
-              speed={3}
-              className='relative z-0 col-start-1 row-start-1 flex flex-col gap-1.5'>
-              <ContentTicker
-                gap='0.375rem'
-                pixelsPerSecond={20}
-                direction='ltr'
-                className='-translate-y-16 lg:-translate-y-28'
-                pause={formOpen}>
-                {shuffleArraySeeded(gallery, 2 + gallery.length).map(
-                  (item, itemIndex) => {
-                    return item.mime.startsWith('video/') ? (
-                      <video
-                        src={getProxiedMediaUrl(item.url)}
-                        autoPlay={true}
-                        muted={true}
-                        loop={true}
-                        controls={false}
-                        className='h-44 w-auto max-w-none lg:h-72'
-                      />
-                    ) : (
-                      <StrapiImageUrl
-                        key={itemIndex}
-                        {...item}
-                        height={176}
-                        width={704}
-                        unoptimized={false}
-                        priority={true}
-                        loading='eager'
-                        className='h-44 w-auto max-w-none lg:h-72'
-                      />
-                    )
-                  }
-                )}
-              </ContentTicker>
-              <ContentTicker
-                gap='0.375rem'
-                pixelsPerSecond={15}
-                className='-translate-y-16 lg:-translate-y-28'
-                pause={formOpen}>
-                {gallery.map((item, itemIndex) => {
+          {/* Hero images */}
+          <Parallax
+            speed={3}
+            className='absolute inset-0 z-0 flex flex-col gap-1.5'>
+            <ContentTicker
+              gap='0.375rem'
+              pixelsPerSecond={20}
+              direction='ltr'
+              className='-translate-y-16 lg:-translate-y-28'
+              pause={formOpen}>
+              {shuffleArraySeeded(gallery, 2 + gallery.length).map(
+                (item, itemIndex) => {
                   return item.mime.startsWith('video/') ? (
                     <video
                       src={getProxiedMediaUrl(item.url)}
@@ -394,7 +363,7 @@ export default function Page({
                       muted={true}
                       loop={true}
                       controls={false}
-                      className='h-44 w-auto max-w-none lg:h-72'
+                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
                     />
                   ) : (
                     <StrapiImageUrl
@@ -405,77 +374,106 @@ export default function Page({
                       unoptimized={false}
                       priority={true}
                       loading='eager'
-                      className='h-44 w-auto max-w-none lg:h-72'
+                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
                     />
                   )
-                })}
-              </ContentTicker>
-              <ContentTicker
-                gap='0.375rem'
-                pixelsPerSecond={12}
-                direction='ltr'
-                className='-translate-y-16 lg:-translate-y-28'
-                pause={formOpen}>
-                {shuffleArraySeeded(gallery, 3 + gallery.length).map(
-                  (item, itemIndex) => {
-                    return item.mime.startsWith('video/') ? (
-                      <video
-                        src={getProxiedMediaUrl(item.url)}
-                        autoPlay={true}
-                        muted={true}
-                        loop={true}
-                        controls={false}
-                        className='h-44 w-auto max-w-none lg:h-72'
-                      />
-                    ) : (
-                      <StrapiImageUrl
-                        key={itemIndex}
-                        {...item}
-                        height={176}
-                        width={704}
-                        unoptimized={false}
-                        priority={true}
-                        loading='eager'
-                        className='h-44 w-auto max-w-none lg:h-72'
-                      />
-                    )
-                  }
-                )}
-              </ContentTicker>
-            </Parallax>
+                }
+              )}
+            </ContentTicker>
+            <ContentTicker
+              gap='0.375rem'
+              pixelsPerSecond={15}
+              className='-translate-y-16 lg:-translate-y-28'
+              pause={formOpen}>
+              {gallery.map((item, itemIndex) => {
+                return item.mime.startsWith('video/') ? (
+                  <video
+                    src={getProxiedMediaUrl(item.url)}
+                    autoPlay={true}
+                    muted={true}
+                    loop={true}
+                    controls={false}
+                    className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
+                  />
+                ) : (
+                  <StrapiImageUrl
+                    key={itemIndex}
+                    {...item}
+                    height={176}
+                    width={704}
+                    unoptimized={false}
+                    priority={true}
+                    loading='eager'
+                    className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
+                  />
+                )
+              })}
+            </ContentTicker>
+            <ContentTicker
+              gap='0.375rem'
+              pixelsPerSecond={12}
+              direction='ltr'
+              className='-translate-y-16 lg:-translate-y-28'
+              pause={formOpen}>
+              {shuffleArraySeeded(gallery, 3 + gallery.length).map(
+                (item, itemIndex) => {
+                  return item.mime.startsWith('video/') ? (
+                    <video
+                      src={getProxiedMediaUrl(item.url)}
+                      autoPlay={true}
+                      muted={true}
+                      loop={true}
+                      controls={false}
+                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
+                    />
+                  ) : (
+                    <StrapiImageUrl
+                      key={itemIndex}
+                      {...item}
+                      height={176}
+                      width={704}
+                      unoptimized={false}
+                      priority={true}
+                      loading='eager'
+                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
+                    />
+                  )
+                }
+              )}
+            </ContentTicker>
+          </Parallax>
 
-            {/* Hero content */}
-            <div className='relative z-20 col-start-1 row-start-1 flex items-end pb-8'>
-              <div className='section-container w-full items-end justify-between md:flex'>
-                <h1 className='flex flex-col uppercase'>
-                  <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
-                    Free conference in
-                  </span>
-                  {heading.split(`\n`).map((item, itemIndex) => {
-                    return (
-                      <FontSohneBreit
-                        as='span'
-                        key={itemIndex}
-                        className='text-4xl font-black leading-none text-ch-yellow lg:text-[4rem]'>
-                        {item}
-                      </FontSohneBreit>
-                    )
-                  })}
-                </h1>
-                <h2 className='flex flex-col text-xl font-black uppercase leading-none md:text-right md:text-[1.75rem]'>
-                  <span className='text-white md:text-ch-yellow'>
-                    {formateHeroDate(startDateObject, endDateObject)}
-                    <span className='hidden md:inline'>.</span>
-                  </span>
-                  {strapline.split(`\n`).map((item, itemIndex) => {
-                    return (
-                      <span key={itemIndex} className='hidden md:inline'>
-                        {item}
-                      </span>
-                    )
-                  })}
-                </h2>
-              </div>
+          {/* Hero content */}
+          <div className='relative z-20 flex h-full items-end pb-8'>
+            <div className='section-container w-full items-end justify-between md:flex'>
+              <h1 className='flex flex-col uppercase'>
+                <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
+                  Free conference in
+                </span>
+                {heading.split(`\n`).map((item, itemIndex) => {
+                  return (
+                    <FontSohneBreit
+                      as='span'
+                      key={itemIndex}
+                      className='text-4xl font-black leading-none text-ch-yellow lg:text-[4rem]'>
+                      {item}
+                    </FontSohneBreit>
+                  )
+                })}
+              </h1>
+              <h2 className='flex flex-col text-xl font-black uppercase leading-none md:text-right md:text-[1.75rem]'>
+                <span className='text-white md:text-ch-yellow'>
+                  {formateHeroDate(startDateObject, endDateObject)}
+                  <span className='hidden md:inline'>.</span>
+                </span>
+                {strapline.split(`\n`).map((item, itemIndex) => {
+                  return (
+                    <span key={itemIndex} className='hidden md:inline'>
+                      {item}
+                    </span>
+                  )
+                })}
+              </h2>
             </div>
           </div>
         </section>
