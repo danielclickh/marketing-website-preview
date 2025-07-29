@@ -84,7 +84,7 @@ export default function ContentTicker({
       }>
       {/* Original slide group */}
       <SlideGroup direction={direction} pause={pause}>
-        <div ref={groupRef} className='flex w-max' style={{ gap }}>
+        <div ref={groupRef} className='flex w-fit' style={{ gap }}>
           {children}
         </div>
 
@@ -94,7 +94,7 @@ export default function ContentTicker({
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
+                <div key={cloneIndex} className='flex w-fit' style={{ gap }}>
                   {clone}
                 </div>
               )
@@ -108,7 +108,7 @@ export default function ContentTicker({
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
+                <div key={cloneIndex} className='flex w-fit' style={{ gap }}>
                   {clone}
                 </div>
               )
@@ -122,7 +122,7 @@ export default function ContentTicker({
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-max gap-4'>
+                <div key={cloneIndex} className='flex w-fit gap-4'>
                   {clone}
                 </div>
               )
@@ -143,7 +143,7 @@ function SlideGroup({
 }) {
   return (
     <div
-      className={`flex w-max ${styles.animated}`}
+      className={`flex w-fit ${styles.animated}`}
       style={{
         animationDirection: direction === 'rtl' ? 'reverse' : 'forwards',
         animationPlayState: pause ? 'paused' : 'running'
