@@ -166,6 +166,8 @@ export default function Page({
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
+  const hasFeaturedSpeakers = featuredSpeakers.length > 0
+
   const logoSpans = logos.map((logo) => logoWidthToColSpan[logo.width])
   const totalLogoSpans = logoSpans.reduce((a, b) => a + b, 0)
   const logoFillerSpan = Math.ceil(totalLogoSpans / 12) * 12 - totalLogoSpans
@@ -596,7 +598,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                     <Link
                       href={applyToSpeakLink}
                       target='_blank'
-                      className='mr-2 hidden bg-black px-4 py-2 font-medium uppercase leading-normal text-white lg:inline-block'>
+                      className='mr-2 hidden bg-black px-4 py-2 font-medium uppercase leading-normal text-white hover:underline lg:inline-block'>
                       Apply to speak
                     </Link>
                   )}
@@ -657,7 +659,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
 
                 {speakers.length > 0 && (
                   <div className='relative grid grid-cols-2 gap-px sm:grid-cols-3 md-mid:grid-cols-4 lg:grid-cols-6'>
-                    {displayAllSpeakers &&
+                    {(!hasFeaturedSpeakers || displayAllSpeakers) &&
                       speakers.map((speaker, speakerIndex) => {
                         return (
                           <div
@@ -691,7 +693,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                           </div>
                         )
                       })}
-                    {displayAllSpeakers &&
+                    {(!hasFeaturedSpeakers || displayAllSpeakers) &&
                       Array(6 - (speakers.length % 6))
                         .fill(null)
                         .map((value, fillerIndex) => {
@@ -703,31 +705,33 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                           )
                         })}
 
-                    <div
-                      ref={speakersToggleRef}
-                      className='sticky bottom-0 z-40 col-span-full text-center ring-1 ring-black sm:relative'>
-                      <button
-                        onClick={(event) => {
-                          event.preventDefault()
-                          setDisplayAllSpeakers((old) => !old)
-                          scrollToSpeakersToggle()
-                        }}
-                        className='flex w-full items-center justify-center gap-4 bg-black px-4 py-3 font-medium uppercase leading-normal text-white'>
-                        {!displayAllSpeakers && 'View all speakers'}
-                        {displayAllSpeakers && 'Collapse all speakers'}
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          width='13'
-                          height='13'
-                          fill='none'
-                          className={displayAllSpeakers ? '-rotate-90' : ''}>
-                          <path
-                            fill='currentColor'
-                            d='M10.4 9V.4h2v12H.4v-2H9l-9-9L1.4 0l9 9Z'
-                          />
-                        </svg>
-                      </button>
-                    </div>
+                    {hasFeaturedSpeakers && (
+                      <div
+                        ref={speakersToggleRef}
+                        className='sticky bottom-0 z-40 col-span-full text-center ring-1 ring-black sm:relative'>
+                        <button
+                          onClick={(event) => {
+                            event.preventDefault()
+                            setDisplayAllSpeakers((old) => !old)
+                            scrollToSpeakersToggle()
+                          }}
+                          className='flex w-full items-center justify-center gap-4 bg-black px-4 py-3 font-medium uppercase leading-normal text-white hover:underline'>
+                          {!displayAllSpeakers && 'View all speakers'}
+                          {displayAllSpeakers && 'Collapse all speakers'}
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='13'
+                            height='13'
+                            fill='none'
+                            className={displayAllSpeakers ? '-rotate-90' : ''}>
+                            <path
+                              fill='currentColor'
+                              d='M10.4 9V.4h2v12H.4v-2H9l-9-9L1.4 0l9 9Z'
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -739,13 +743,13 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
             <div className='flex flex-col-reverse border border-black lg:grid lg:grid-cols-3'>
               <div className='flex flex-col justify-center space-y-6 border-inherit p-6 lg:border-r lg:p-16'>
                 <OpenhouseMarkdown>
-                  {`### ${heading.replaceAll(`\n`, ', ')}\n${locationAddress.replaceAll(`\n`, '  \n')}`}
+                  {`## ${heading.replaceAll(`\n`, ', ')}\n${locationAddress.replaceAll(`\n`, '  \n')}`}
                 </OpenhouseMarkdown>
                 {registrationIsOpen && (
                   <p>
                     <Link
                       href='#register'
-                      className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black'>
+                      className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black hover:underline'>
                       Get your ticket
                     </Link>
                   </p>
@@ -891,7 +895,7 @@ function Header({
             <li>
               <Link
                 href={register ? '#register' : '/company/contact'}
-                className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black'>
+                className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black hover:underline'>
                 {register ? 'Register' : 'Get in touch'}
               </Link>
             </li>
