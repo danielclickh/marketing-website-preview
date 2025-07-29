@@ -503,7 +503,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                         </div>
                       )
                     })}
-                    {Array(featuredSpeakers.length % 2)
+                    {Array(2 - (featuredSpeakers.length % 2))
                       .fill(null)
                       .map((value, fillerIndex) => {
                         return (
@@ -553,7 +553,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                         )
                       })}
                     {displayAllSpeakers &&
-                      Array(speakers.length % 6)
+                      Array(6 - (speakers.length % 6))
                         .fill(null)
                         .map((value, fillerIndex) => {
                           return (
