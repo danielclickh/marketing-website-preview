@@ -21,7 +21,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 export type RoadshowProps = CommonProps & OpenhouseEntry
@@ -163,7 +163,7 @@ export default function Page({
 
   const scrollToSpeakersToggle = useCallback(() => {
     const speakersToggle = speakersToggleRef.current
-    if (speakersToggle) {
+    if (speakersToggle && displayAllSpeakers) {
       const timer = window.setTimeout(() => {
         const boundingRect = speakersToggle.getBoundingClientRect()
         const isInView =
@@ -182,7 +182,7 @@ export default function Page({
 
       return () => window.clearTimeout(timer)
     }
-  }, [speakersToggleRef])
+  }, [speakersToggleRef, displayAllSpeakers])
 
   const registrationIsOpen =
     startDateObject > nowDateObject && endDateObject > nowDateObject
@@ -230,6 +230,11 @@ export default function Page({
                       <StrapiImageUrl
                         key={itemIndex}
                         {...item}
+                        height={176}
+                        width={704}
+                        unoptimized={false}
+                        priority={true}
+                        loading='eager'
                         className='h-44 w-auto max-w-none lg:h-72'
                       />
                     )
@@ -254,6 +259,11 @@ export default function Page({
                     <StrapiImageUrl
                       key={itemIndex}
                       {...item}
+                      height={176}
+                      width={704}
+                      unoptimized={false}
+                      priority={true}
+                      loading='eager'
                       className='h-44 w-auto max-w-none lg:h-72'
                     />
                   )
@@ -279,6 +289,11 @@ export default function Page({
                       <StrapiImageUrl
                         key={itemIndex}
                         {...item}
+                        height={176}
+                        width={704}
+                        unoptimized={false}
+                        priority={true}
+                        loading='eager'
                         className='h-44 w-auto max-w-none lg:h-72'
                       />
                     )
@@ -463,7 +478,10 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                             />
                             <StrapiImageUrl
                               {...speaker.headshot}
-                              className='grayscale transition group-hover/speaker:grayscale-0'
+                              width={400}
+                              height={400}
+                              unoptimized={false}
+                              className='aspect-square object-cover grayscale transition group-hover/speaker:grayscale-0'
                             />
                           </div>
                           <div className='col-span-4 flex flex-col p-3 pt-2 lg:p-6 lg:pt-5'>
@@ -515,14 +533,17 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                               />
                               <StrapiImageUrl
                                 {...speaker.headshot}
-                                className='grayscale transition group-hover/speaker:grayscale-0'
+                                width={400}
+                                height={400}
+                                unoptimized={false}
+                                className='aspect-square object-cover grayscale transition group-hover/speaker:grayscale-0'
                               />
                             </div>
                             <div className='flex flex-col p-3 pt-2 lg:p-4 lg:pt-3'>
                               <FontSohneBreit
                                 as='h3'
                                 className='font-black lg:text-xl'>
-                                {speaker.name}
+                                <SpeakerName name={speaker.name} />
                               </FontSohneBreit>
                               <p className='text-sm opacity-70 lg:text-base'>
                                 {speaker.title}
@@ -894,6 +915,44 @@ function formateHeroDate(start: Date, end: Date) {
   return `${startMonth} ${startDay} ${startYear}-${endMonth} ${endDay} ${endYear}`
 }
 
+function SpeakerName({ name }: { name: string }) {
+  const whitespaceIndices = []
+  for (let i = 0; i < name.length; i++) {
+    if (/\s/.test(name[i])) {
+      whitespaceIndices.push(i)
+    }
+  }
+
+  // No whitespace, return whole string
+  if (whitespaceIndices.length === 0) {
+    return <>{name}</>
+  }
+
+  const center = name.length / 2
+  // Find the whitespace index closest to the center
+  let closest = whitespaceIndices[0]
+  let minDiff = Math.abs(closest - center)
+
+  for (let i = 1; i < whitespaceIndices.length; i++) {
+    const diff = Math.abs(whitespaceIndices[i] - center)
+    if (diff < minDiff) {
+      closest = whitespaceIndices[i]
+      minDiff = diff
+    }
+  }
+
+  const left = name.slice(0, closest).trim()
+  const right = name.slice(closest + 1).trim()
+
+  return (
+    <>
+      {left}
+      <br />
+      {right}
+    </>
+  )
+}
+
 function formatTimeTo12Hour(timeString: string) {
   const [hours, minutes] = timeString.split(':')
   let hour = parseInt(hours, 10)
@@ -925,6 +984,9 @@ function AgendaHandle({ agenda }: { agenda: OpenhouseDayAgenda }) {
             <StrapiImageUrl
               key={speakerIndex}
               {...speaker.headshot}
+              width={44}
+              height={44}
+              unoptimized={false}
               className='absolute inset-0 h-full w-full max-w-none object-contain object-center saturate-0'
             />
           </span>
