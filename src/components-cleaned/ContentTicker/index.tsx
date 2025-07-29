@@ -2,6 +2,7 @@
 
 import styles from './styles.module.scss'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
+import { EventPropsOf } from '@/types/global'
 import {
   CSSProperties,
   useCallback,
@@ -11,7 +12,7 @@ import {
   useState
 } from 'react'
 
-export interface ContentTickerProps {
+export interface ContentTickerProps extends EventPropsOf<'div'> {
   children: React.ReactNode
   startOffset?: string
   pixelsPerSecond?: number
@@ -19,6 +20,7 @@ export interface ContentTickerProps {
   direction?: 'ltr' | 'rtl'
   gap?: React.CSSProperties['gap']
   className?: string
+  pause?: boolean
 }
 
 export default function ContentTicker({
@@ -28,7 +30,9 @@ export default function ContentTicker({
   gradientMask = false,
   direction = 'ltr',
   gap,
-  className = ''
+  className = '',
+  pause = false,
+  ...events
 }: ContentTickerProps) {
   const groupRef = useRef<null | HTMLDivElement>(null)
   const [clonesNeeded, setClonesNeeded] = useState<number>(0)
@@ -69,6 +73,7 @@ export default function ContentTicker({
 
   return (
     <div
+      {...events}
       className={`flex overflow-hidden ${gradientMask ? styles.mask : ''} ${className}`}
       style={
         {
@@ -78,7 +83,7 @@ export default function ContentTicker({
         } as CSSProperties
       }>
       {/* Original slide group */}
-      <SlideGroup direction={direction}>
+      <SlideGroup direction={direction} pause={pause}>
         <div ref={groupRef} className='flex w-max' style={{ gap }}>
           {children}
         </div>
@@ -97,7 +102,7 @@ export default function ContentTicker({
       </SlideGroup>
 
       {/* Slide group */}
-      <SlideGroup direction={direction}>
+      <SlideGroup direction={direction} pause={pause}>
         {isValidCloneRequirementAdditional &&
           Array(clonesNeeded + 1)
             .fill(children)
@@ -111,7 +116,7 @@ export default function ContentTicker({
       </SlideGroup>
 
       {/* Slide group */}
-      <SlideGroup direction={direction}>
+      <SlideGroup direction={direction} pause={pause}>
         {isValidCloneRequirementAdditional &&
           Array(clonesNeeded + 1)
             .fill(children)
@@ -129,16 +134,19 @@ export default function ContentTicker({
 
 function SlideGroup({
   children,
-  direction
+  direction,
+  pause = false
 }: {
   children: React.ReactNode
   direction: 'ltr' | 'rtl'
+  pause: boolean
 }) {
   return (
     <div
       className={`flex w-max ${styles.animated}`}
       style={{
-        animationDirection: direction === 'rtl' ? 'reverse' : 'forwards'
+        animationDirection: direction === 'rtl' ? 'reverse' : 'forwards',
+        animationPlayState: pause ? 'paused' : 'running'
       }}>
       {children}
     </div>

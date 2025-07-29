@@ -58,4 +58,5 @@ export interface OpenhouseEntry {
   locationImage: StrapiImageType
   faqs: Array<OpenhouseFaq>
   logos: Array<OpenhouseLogo>
+  marketoFormId: string
 }

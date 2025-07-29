@@ -3,24 +3,31 @@ import heroGradientTop from './assets/hero-gradient-top.png'
 import linesPattern from './assets/lines-pattern.svg'
 import logo from './assets/logo.svg'
 import photoTexture from './assets/photo-texture.svg'
+import styles from './styles.module.scss'
 import { OpenhouseDayAgenda, OpenhouseEntry, OpenhouseLogo } from './types'
 import ContentTicker from '@/components-cleaned/ContentTicker'
+import CopyUrlButton from '@/components/CopyUrlButton'
 import FitText from '@/components/FitText'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
+import MarketoForm from '@/components/MarketoForm'
 import Parallax from '@/components/Parallax'
 import SeoContainer from '@/components/SeoContainer'
+import SocialButton from '@/components/SocialButton'
 import { StrapiImageUrl } from '@/components/StrapiElements'
+import { useClickOutside } from '@/hooks'
 import { fetchAll, findAll, getProxiedMediaUrl } from '@/lib/api/strapi'
 import { shuffleArraySeeded } from '@/lib/utils/arrays'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getOrdinal } from '@/lib/utils/numbers'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { AnimatePresence, motion } from 'framer-motion'
+import { X } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 
@@ -143,8 +150,10 @@ export default function Page({
   locationAddress,
   locationImage,
   faqs,
-  logos
+  logos,
+  marketoFormId
 }: RoadshowProps) {
+  const router = useRouter()
   const nowDateObject = new Date()
   const startDateObject = new Date(startDate)
   const endDateObject = new Date(endDate)
@@ -187,6 +196,28 @@ export default function Page({
   const registrationIsOpen =
     startDateObject > nowDateObject && endDateObject > nowDateObject
 
+  const formModalRef = useRef<HTMLDivElement | null>(null)
+  const [formOpen, setFormOpen] = useState(false)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+
+  useClickOutside(formModalRef, () => {
+    setFormOpen(false)
+  })
+
+  useEffect(() => {
+    const onHashChangeStart = (path: string) => {
+      const url = new URL(path, window.location.toString())
+      setFormOpen(url.hash === '#register')
+    }
+
+    router.events.on('hashChangeStart', onHashChangeStart)
+
+    return () => {
+      router.events.off('hashChangeStart', onHashChangeStart)
+    }
+  }, [router.events])
+
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -198,6 +229,111 @@ export default function Page({
           register={registrationIsOpen}
           applyToSpeak={applyToSpeakLink}
         />
+
+        <div
+          className={`fixed inset-0 z-[9999] overflow-y-auto sm:p-6 ${styles.modalBackground} ${formOpen ? 'block' : 'hidden'}`}>
+          <div
+            className='mx-auto min-h-dvh max-w-2xl bg-white p-6 text-black sm:min-h-0'
+            ref={formModalRef}>
+            {!formSuccess && (
+              <>
+                <div className='mb-6 flex items-center justify-between'>
+                  <FontSohneBreit className='flex-1 text-3xl font-black'>
+                    Get your ticket
+                  </FontSohneBreit>
+
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault()
+                      setFormOpen(false)
+                    }}
+                    className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center gap-1 text-center text-neutral-500 transition-colors hover:bg-neutral-400/10'>
+                    <X height={24} />
+                    <span className='sr-only'>Close</span>
+                  </button>
+                </div>
+                <MarketoForm
+                  theme='light'
+                  formId={marketoFormId}
+                  clearbitTracking={true}
+                  onLoad={() => setFormLoaded(true)}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+                    return false // Stops page from reloading
+                  }}
+                  disclaimer={
+                    <>
+                      By registering, you acknowledge that ClickHouse will
+                      process your personal information in accordance with our{' '}
+                      <Link href='/legal/privacy-policy' className='underline'>
+                        Privacy Policy
+                      </Link>
+                      .
+                    </>
+                  }
+                />
+              </>
+            )}
+            {!formLoaded && (
+              <div className='mb-12 mt-10 text-center'>Loading form...</div>
+            )}
+
+            {formSuccess && (
+              <div className='my-auto flex flex-col items-center py-6 text-center lg:py-10'>
+                <svg
+                  width='48'
+                  height='48'
+                  viewBox='0 0 48 48'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <path
+                    fillRule='evenodd'
+                    clipRule='evenodd'
+                    d='M24 48.0091V48.0091C10.744 48.0091 0 37.2651 0 24.0091V24.0091C0 10.7531 10.744 0.00909424 24 0.00909424V0.00909424C37.256 0.00909424 48 10.7531 48 24.0091V24.0091C48 37.2651 37.256 48.0091 24 48.0091Z'
+                    fill='#EBFF00'
+                  />
+                  <path
+                    d='M34.6666 18.6758L21.3333 32.0091L13.3333 24.0091'
+                    stroke='black'
+                    strokeWidth='1.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  />
+                </svg>
+                <p className='mt-6 text-xl font-bold'>
+                  Thanks for your interest in OpenHouse.
+                  <br />
+                  Check your email for next steps.
+                </p>
+                <p className='mb-3 mt-12 text-center font-bold text-neutral-400'>
+                  Share this event
+                </p>
+                <div className='flex flex-wrap justify-center gap-2 text-neutral-0'>
+                  <CopyUrlButton className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow' />
+                  {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
+                    (social) => (
+                      <SocialButton
+                        className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                        key={social}
+                        type={social}
+                        title='Open House by ClickHouse'
+                      />
+                    )
+                  )}
+                </div>
+                <button
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setFormOpen(false)
+                  }}
+                  className='mt-12 flex items-center gap-1 border border-neutral-400 py-1 pl-1 pr-3 text-center text-neutral-500 transition-colors hover:bg-neutral-400/10'>
+                  <X height={16} />
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* Hero */}
         <section className='relative overflow-hidden'>
@@ -214,7 +350,8 @@ export default function Page({
                 gap='0.375rem'
                 pixelsPerSecond={20}
                 direction='ltr'
-                className='-translate-y-16 lg:-translate-y-28'>
+                className='-translate-y-16 lg:-translate-y-28'
+                pause={formOpen}>
                 {shuffleArraySeeded(gallery, 2 + gallery.length).map(
                   (item, itemIndex) => {
                     return item.mime.startsWith('video/') ? (
@@ -244,7 +381,8 @@ export default function Page({
               <ContentTicker
                 gap='0.375rem'
                 pixelsPerSecond={15}
-                className='-translate-y-16 lg:-translate-y-28'>
+                className='-translate-y-16 lg:-translate-y-28'
+                pause={formOpen}>
                 {gallery.map((item, itemIndex) => {
                   return item.mime.startsWith('video/') ? (
                     <video
@@ -273,7 +411,8 @@ export default function Page({
                 gap='0.375rem'
                 pixelsPerSecond={12}
                 direction='ltr'
-                className='-translate-y-16 lg:-translate-y-28'>
+                className='-translate-y-16 lg:-translate-y-28'
+                pause={formOpen}>
                 {shuffleArraySeeded(gallery, 3 + gallery.length).map(
                   (item, itemIndex) => {
                     return item.mime.startsWith('video/') ? (
