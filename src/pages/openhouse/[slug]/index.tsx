@@ -97,13 +97,14 @@ export const getStaticProps: GetStaticProps<RoadshowProps> =
       }
     }
 
+    const startDateObject = new Date(page.startDate)
+
     return {
       props: {
         ...page,
         seo: {
-          title:
-            'Open House 2025, The ClickHouse User Conference - Sydney, Australia.',
-          path: '/openhouse',
+          title: `Open House ${startDateObject.getFullYear()}, The ClickHouse User Conference - ${page.heading.replaceAll(`\n`, ', ')}.`,
+          path: `/openhouse/${page.slug}`,
           image: [{ url: '/images/social-open-house.png' }]
         },
         ...commonProps
