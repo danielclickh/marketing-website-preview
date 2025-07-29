@@ -1,5 +1,5 @@
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
-import { OpenhouseEntry } from '@/pages/openhouse/roadshow/[slug]/types'
+import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const revalidate = async (
