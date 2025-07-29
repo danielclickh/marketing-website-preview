@@ -140,7 +140,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     const paths: Array<string> = []
 
     if (body?.entry?.slug) {
-      paths.push(`/openhouse/roadshow/${body.entry.slug}`)
+      paths.push(`/openhouse/${body.entry.slug}`)
     }
 
     await revalidate(response, paths)
@@ -157,7 +157,7 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     if (data) {
       data.forEach((page) => {
-        paths.push(`/openhouse/roadshow/${page.slug}`)
+        paths.push(`/openhouse/${page.slug}`)
       })
     }
 
