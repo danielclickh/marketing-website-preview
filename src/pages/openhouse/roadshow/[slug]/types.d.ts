@@ -39,12 +39,7 @@ export interface OpenhouseFaq {
 
 export interface OpenhouseLogo {
   logo: StrapiImageType
-  width:
-    | 'Extra small (1/5)'
-    | 'Small (1/4)'
-    | 'Medium (1/3)'
-    | 'Large (1/2)'
-    | 'Extra large (1/1)'
+  width: 'Small (1/4)' | 'Medium (1/3)' | 'Large (1/2)' | 'Full (1/1)'
 }
 
 export interface OpenhouseEntry {

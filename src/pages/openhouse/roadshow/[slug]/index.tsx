@@ -26,12 +26,26 @@ import ReactMarkdown from 'react-markdown'
 
 export type RoadshowProps = CommonProps & OpenhouseEntry
 
-const logoWidthToPercent: Record<OpenhouseLogo['width'], number> = {
-  'Extra small (1/5)': 20,
-  'Small (1/4)': 25,
-  'Medium (1/3)': 33.33,
-  'Large (1/2)': 50,
-  'Extra large (1/1)': 100
+const logoColSpanToTailwind: Record<number, string> = {
+  1: 'md:col-span-1',
+  2: 'md:col-span-2',
+  3: 'md:col-span-3',
+  4: 'md:col-span-4',
+  5: 'md:col-span-5',
+  6: 'md:col-span-6',
+  7: 'md:col-span-7',
+  8: 'md:col-span-8',
+  9: 'md:col-span-9',
+  10: 'md:col-span-10',
+  11: 'md:col-span-11',
+  12: 'md:col-span-12'
+}
+
+const logoWidthToColSpan: Record<OpenhouseLogo['width'], number> = {
+  'Small (1/4)': 3,
+  'Medium (1/3)': 4,
+  'Large (1/2)': 6,
+  'Full (1/1)': 12
 }
 
 export const getStaticProps: GetStaticProps<RoadshowProps> =
@@ -143,10 +157,9 @@ export default function Page({
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
-  const logoWidths = logos.map((logo) => logoWidthToPercent[logo.width])
-  const totalLogoWidths = logoWidths.reduce((a, b) => a + b, 0)
-  const logoFillerWidth =
-    Math.ceil(totalLogoWidths / 100) * 100 - totalLogoWidths
+  const logoSpans = logos.map((logo) => logoWidthToColSpan[logo.width])
+  const totalLogoSpans = logoSpans.reduce((a, b) => a + b, 0)
+  const logoFillerSpan = Math.ceil(totalLogoSpans / 12) * 12 - totalLogoSpans
 
   const scrollToSpeakersToggle = useCallback(() => {
     const speakersToggle = speakersToggleRef.current
@@ -171,6 +184,9 @@ export default function Page({
     }
   }, [speakersToggleRef])
 
+  const registrationIsOpen =
+    startDateObject > nowDateObject && endDateObject > nowDateObject
+
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -179,7 +195,7 @@ export default function Page({
           agenda={days.length > 0}
           speakers={speakers.length > 0}
           faqs={faqs.length > 0}
-          register={startDateObject > nowDateObject}
+          register={registrationIsOpen}
           applyToSpeak={applyToSpeakLink}
         />
 
@@ -316,7 +332,7 @@ export default function Page({
                   <div
                     key={cardIndex}
                     className='relative w-full p-2 md:w-1/2 lg:w-1/4'>
-                    <div className='min-h-full space-y-6 bg-white p-6 text-black'>
+                    <div className='min-h-full space-y-4 bg-white p-4 pt-6 text-black lg:space-y-6 lg:p-6'>
                       <StrapiImageUrl
                         {...card.icon}
                         className='h-11 w-11 object-scale-down object-left-top'
@@ -362,7 +378,7 @@ export default function Page({
                       })}
                     </FitText>
                   </div>
-                  <OpenhouseMarkdown className='border-t border-white p-6 lg:border-l lg:border-t-0'>
+                  <OpenhouseMarkdown className='border-t border-white p-4 pt-3 lg:border-l lg:border-t-0 lg:p-6 lg:pt-5'>
                     {day.description}
                   </OpenhouseMarkdown>
                   {day.agenda.length > 0 && (
@@ -392,8 +408,8 @@ export default function Page({
                                   classNames={{
                                     container: '-mx-6 -my-2',
                                     handle:
-                                      'px-6 py-2 text-left transition-colors hover:bg-white/10',
-                                    body: 'px-6 pb-4 pt-2'
+                                      'px-4 lg:px-6 py-2 text-left transition-colors hover:bg-white/10',
+                                    body: 'px-4 lg:px-6 pb-4 pt-2'
                                   }}>
                                   <OpenhouseMarkdown>
                                     {agenda.description}
@@ -416,8 +432,8 @@ export default function Page({
           {/* Speakers */}
           {(featuredSpeakers.length > 0 || speakers.length > 0) && (
             <section id='speakers' className='section-container'>
-              <div className='flex flex-col gap-px border bg-black p-px'>
-                <div className='flex items-center bg-white p-6 pt-5'>
+              <div className='p-px'>
+                <div className='flex items-center bg-white p-4 pt-3 ring-1 ring-black lg:p-6 lg:pt-5'>
                   <OpenhouseMarkdown className='flex-1'>
                     {`## Speakers 
 Our lineup is stacked with engineers, founders, and operators changing the game with data`}
@@ -432,13 +448,13 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                   )}
                 </div>
                 {featuredSpeakers.length > 0 && (
-                  <ol className='flex flex-col gap-px md:grid md:grid-cols-2'>
+                  <div className='grid grid-cols-6 gap-px md-mid:grid-cols-12'>
                     {featuredSpeakers.map((speaker, speakerIndex) => {
                       return (
-                        <li
+                        <div
                           key={speakerIndex}
-                          className='group/speaker flex bg-white'>
-                          <div className='relative w-56 border-r border-black bg-neutral-50'>
+                          className='group/speaker col-span-3 bg-white ring-1 ring-black md-mid:col-span-6 lg:grid lg:grid-cols-subgrid'>
+                          <div className='relative bg-neutral-50 ring-1 ring-black lg:col-span-2'>
                             <div
                               className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
                               style={{
@@ -450,89 +466,106 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                               className='grayscale transition group-hover/speaker:grayscale-0'
                             />
                           </div>
-                          <div className='flex flex-col p-6'>
-                            <OpenhouseMarkdown>{`### ${speaker.name}\n${speaker.title}`}</OpenhouseMarkdown>
+                          <div className='col-span-4 flex flex-col p-3 pt-2 lg:p-6 lg:pt-5'>
+                            <FontSohneBreit
+                              as='h3'
+                              className='font-black lg:text-xl'>
+                              {speaker.name}
+                            </FontSohneBreit>
+                            <p className='text-sm opacity-70 lg:text-base'>
+                              {speaker.title}
+                            </p>
                             {speaker.logo && (
                               <StrapiImageUrl
                                 {...speaker.logo}
-                                className='mt-auto'
+                                className='mt-auto hidden lg:inline-block'
                               />
                             )}
                           </div>
-                        </li>
+                        </div>
                       )
                     })}
                     {Array(featuredSpeakers.length % 2)
                       .fill(null)
                       .map((value, fillerIndex) => {
                         return (
-                          <li
+                          <div
                             key={featuredSpeakers.length - 1 + fillerIndex}
-                            className='bg-white'
+                            className='col-span-6 hidden ring-1 ring-black md-mid:block'
                           />
                         )
                       })}
-                  </ol>
+                  </div>
                 )}
 
                 {speakers.length > 0 && (
-                  <div className='relative'>
-                    <ul className='grid grid-cols-2 gap-px lg:grid-cols-6'>
-                      {displayAllSpeakers &&
-                        speakers.map((speaker, speakerIndex) => {
+                  <div className='relative grid grid-cols-2 gap-px sm:grid-cols-3 md-mid:grid-cols-4 lg:grid-cols-6'>
+                    {displayAllSpeakers &&
+                      speakers.map((speaker, speakerIndex) => {
+                        return (
+                          <div
+                            key={speakerIndex}
+                            className='group/speaker flex flex-col overflow-hidden bg-white ring-1 ring-black'>
+                            <div className='relative bg-neutral-50 ring-1 ring-black'>
+                              <div
+                                className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
+                                style={{
+                                  backgroundImage: `url('${photoTexture.src}')`
+                                }}
+                              />
+                              <StrapiImageUrl
+                                {...speaker.headshot}
+                                className='grayscale transition group-hover/speaker:grayscale-0'
+                              />
+                            </div>
+                            <div className='flex flex-col p-3 pt-2 lg:p-4 lg:pt-3'>
+                              <FontSohneBreit
+                                as='h3'
+                                className='font-black lg:text-xl'>
+                                {speaker.name}
+                              </FontSohneBreit>
+                              <p className='text-sm opacity-70 lg:text-base'>
+                                {speaker.title}
+                              </p>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    {displayAllSpeakers &&
+                      Array(speakers.length % 6)
+                        .fill(null)
+                        .map((value, fillerIndex) => {
                           return (
-                            <li
-                              key={speakerIndex}
-                              className='group/speaker flex flex-col overflow-hidden bg-white'>
-                              <div className='relative border-b border-black bg-neutral-50'>
-                                <div
-                                  className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
-                                  style={{
-                                    backgroundImage: `url('${photoTexture.src}')`
-                                  }}
-                                />
-                                <StrapiImageUrl
-                                  {...speaker.headshot}
-                                  className='grayscale transition group-hover/speaker:grayscale-0'
-                                />
-                              </div>
-                              <div className='flex flex-col px-3 py-2 lg:p-6'>
-                                <OpenhouseMarkdown>{`#### ${speaker.name}\n${speaker.title}`}</OpenhouseMarkdown>
-                                {speaker.logo && (
-                                  <StrapiImageUrl
-                                    {...speaker.logo}
-                                    className='mt-auto'
-                                  />
-                                )}
-                              </div>
-                            </li>
+                            <div
+                              key={speakers.length - 1 + fillerIndex}
+                              className='bg-white ring-1 ring-black'
+                            />
                           )
                         })}
-                      {displayAllSpeakers &&
-                        Array(speakers.length % 6)
-                          .fill(null)
-                          .map((value, fillerIndex) => {
-                            return (
-                              <li
-                                key={speakers.length - 1 + fillerIndex}
-                                className='bg-white'
-                              />
-                            )
-                          })}
-                    </ul>
 
                     <div
                       ref={speakersToggleRef}
-                      className='sticky bottom-0 z-40 text-center sm:relative'>
+                      className='sticky bottom-0 z-40 col-span-full text-center ring-1 ring-black sm:relative'>
                       <button
                         onClick={(event) => {
                           event.preventDefault()
                           setDisplayAllSpeakers((old) => !old)
                           scrollToSpeakersToggle()
                         }}
-                        className='w-full bg-black px-4 py-3 font-medium uppercase leading-normal text-white'>
+                        className='flex w-full items-center justify-center gap-4 bg-black px-4 py-3 font-medium uppercase leading-normal text-white'>
                         {!displayAllSpeakers && 'View all speakers'}
                         {displayAllSpeakers && 'Collapse all speakers'}
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='13'
+                          height='13'
+                          fill='none'
+                          className={displayAllSpeakers ? '-rotate-90' : ''}>
+                          <path
+                            fill='currentColor'
+                            d='M10.4 9V.4h2v12H.4v-2H9l-9-9L1.4 0l9 9Z'
+                          />
+                        </svg>
                       </button>
                     </div>
                   </div>
@@ -548,13 +581,15 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                 <OpenhouseMarkdown>
                   {`### ${heading.replaceAll(`\n`, ', ')}\n${locationAddress.replaceAll(`\n`, '  \n')}`}
                 </OpenhouseMarkdown>
-                <p>
-                  <Link
-                    href='#register'
-                    className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black'>
-                    Get your ticket
-                  </Link>
-                </p>
+                {registrationIsOpen && (
+                  <p>
+                    <Link
+                      href='#register'
+                      className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black'>
+                      Get your ticket
+                    </Link>
+                  </p>
+                )}
               </div>
               <StrapiImageUrl {...locationImage} className='col-span-2' />
             </div>
@@ -564,7 +599,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
           {faqs.length > 0 && (
             <section id='faqs' className='section-container !mt-0'>
               <div className='bg-black text-white'>
-                <OpenhouseMarkdown className='p-6 pt-5'>
+                <OpenhouseMarkdown className='p-4 pt-3 lg:p-6 lg:pt-5'>
                   {`## FAQs 
 For questions about the event or general inquiries, please reach out to [openhouse@clickhouse.com](mailto:openhouse@clickhouse.com)`}
                 </OpenhouseMarkdown>
@@ -577,8 +612,8 @@ For questions about the event or general inquiries, please reach out to [openhou
                             handle={faq.question}
                             classNames={{
                               handle:
-                                'text-left px-6 py-3 transition-colors hover:bg-white/10',
-                              body: 'px-6 pb-4 pt-0'
+                                'text-left px-4 lg:px-6 py-3 transition-colors hover:bg-white/10',
+                              body: 'px-4 lg:px-6 pb-4 pt-0'
                             }}>
                             <OpenhouseMarkdown className='text-neutral-200'>
                               {faq.answer}
@@ -595,28 +630,22 @@ For questions about the event or general inquiries, please reach out to [openhou
           {/* Logo wall */}
           {logos.length > 0 && (
             <section id='logos' className='section-container'>
-              <div className='flex flex-wrap gap-px bg-gray-200 p-px'>
+              <div className='grid grid-cols-1 md:grid-cols-12'>
                 {logos.map((logo, logoIndex) => {
                   return (
                     <div
                       key={logoIndex}
-                      className='flex items-center justify-center bg-white py-4'
-                      style={{
-                        width: `calc(${logoWidthToPercent[logo.width]}% - 1px)`
-                      }}>
+                      className={`flex items-center justify-center bg-white px-2 py-6 ring-1 ring-gray-200 ${logoColSpanToTailwind[logoWidthToColSpan[logo.width]]}`}>
                       <StrapiImageUrl
                         {...logo.logo}
-                        className='h-12 w-48 max-w-none object-scale-down object-center'
+                        className='h-12 w-full max-w-48 object-scale-down object-center'
                       />
                     </div>
                   )
                 })}
-                {logoFillerWidth > 0 && (
+                {logoFillerSpan > 0 && (
                   <div
-                    className='bg-white'
-                    style={{
-                      width: `calc(${logoFillerWidth}% - 1px)`
-                    }}
+                    className={`hidden bg-white ring-1 ring-gray-200 md:block ${logoColSpanToTailwind[logoFillerSpan]}`}
                   />
                 )}
               </div>
@@ -643,9 +672,9 @@ function Header({
   applyToSpeak: null | string
 }) {
   return (
-    <header className='fixed inset-x-0 top-0 z-50 py-9'>
+    <header className='fixed inset-x-0 top-0 z-50 py-4 md:py-9'>
       <div
-        className='absolute inset-x-0 top-0 z-0 h-32 bg-contain'
+        className='absolute inset-x-0 top-0 z-0 h-24 bg-contain md:h-32'
         style={{ backgroundImage: `url(${heroGradientTop.src})` }}
       />
       <Image
@@ -661,9 +690,9 @@ function Header({
           width={230}
           height={49}
           alt='Open House by ClickHouse'
-          className='max-w-44 lg:hidden'
+          className='w-full max-w-44 flex-shrink flex-grow-0 lg:hidden'
         />
-        <nav>
+        <nav className='flex-shrink-0'>
           <ul className='flex items-center gap-6 font-medium uppercase leading-loose tracking-wider'>
             {agenda && (
               <li className='hidden lg:block'>
@@ -699,15 +728,13 @@ function Header({
                 </Link>
               </li>
             )}
-            {register && (
-              <li>
-                <Link
-                  href='#register'
-                  className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black'>
-                  Register
-                </Link>
-              </li>
-            )}
+            <li>
+              <Link
+                href={register ? '#register' : '/company/contact'}
+                className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black'>
+                {register ? 'Register' : 'Get in touch'}
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
