@@ -3,6 +3,8 @@ import heroGradientTop from './assets/hero-gradient-top.png'
 import linesPattern from './assets/lines-pattern.svg'
 import logo from './assets/logo.svg'
 import photoTexture from './assets/photo-texture.svg'
+import speakersPlaceholderDesktop from './assets/speakers-placeholder-desktop.jpg'
+import speakersPlaceholderMobile from './assets/speakers-placeholder-mobile.jpg'
 import styles from './styles.module.scss'
 import { OpenhouseDayAgenda, OpenhouseEntry, OpenhouseLogo } from './types'
 import ContentTicker from '@/components-cleaned/ContentTicker'
@@ -28,7 +30,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 export type RoadshowProps = CommonProps & OpenhouseEntry
@@ -227,7 +229,7 @@ export default function Page({
       <FontSohne className='flex flex-col gap-4 bg-black tracking-wider text-white selection:bg-ch-yellow'>
         <Header
           agenda={days.length > 0}
-          speakers={speakers.length > 0}
+          speakers={true}
           faqs={faqs.length > 0}
           register={registrationIsOpen}
           applyToSpeak={applyToSpeakLink}
@@ -585,31 +587,112 @@ export default function Page({
 
         <div className='space-y-4 bg-white py-4 text-black lg:mt-12 lg:space-y-16 lg:py-16'>
           {/* Speakers */}
-          {(featuredSpeakers.length > 0 || speakers.length > 0) && (
-            <section id='speakers' className='section-container'>
-              <div className='p-px'>
-                <div className='flex items-center bg-white p-4 pt-3 ring-1 ring-black lg:p-6 lg:pt-5'>
-                  <OpenhouseMarkdown className='flex-1'>
-                    {`## Speakers 
+          <section id='speakers' className='section-container'>
+            <div className='p-px'>
+              <div className='flex items-center bg-white p-4 pt-3 ring-1 ring-black lg:p-6 lg:pt-5'>
+                <OpenhouseMarkdown className='flex-1'>
+                  {`## Speakers 
 Our lineup is stacked with engineers, founders, and operators changing the game with data`}
-                  </OpenhouseMarkdown>
-                  {applyToSpeakLink && (
-                    <Link
-                      href={applyToSpeakLink}
-                      target='_blank'
-                      className='mr-2 hidden bg-black px-4 py-2 font-medium uppercase leading-normal text-white hover:underline lg:inline-block'>
-                      Apply to speak
-                    </Link>
-                  )}
+                </OpenhouseMarkdown>
+                {applyToSpeakLink && (
+                  <Link
+                    href={applyToSpeakLink}
+                    target='_blank'
+                    className='mr-2 hidden bg-black px-4 py-2 font-medium uppercase leading-normal text-white hover:underline lg:inline-block'>
+                    Apply to speak
+                  </Link>
+                )}
+              </div>
+              {!featuredSpeakers.length && !speakers.length && (
+                <div className='relative mt-px ring-1 ring-black'>
+                  <div className='absolute left-8 right-8 top-1/2 z-10 -translate-y-1/2 border border-black bg-white p-8 text-center lg:left-1/2 lg:right-auto lg:max-w-96 lg:-translate-x-1/2 lg:px-10'>
+                    <FontSohneBreit as='h4' className='text-xl font-black'>
+                      Coming soon!
+                    </FontSohneBreit>
+                    <p>
+                      We’re curating an incredible lineup of engineers,
+                      founders, and data pioneers. Stay tuned!
+                    </p>
+                  </div>
+                  <Image
+                    src={speakersPlaceholderMobile}
+                    alt=''
+                    width={1204 / 2}
+                    height={1600 / 2}
+                    className='w-full max-w-none opacity-20 md:hidden'
+                  />
+                  <Image
+                    src={speakersPlaceholderDesktop}
+                    alt=''
+                    width={1200}
+                    height={400}
+                    className='hidden w-full max-w-none opacity-20 md:block'
+                  />
                 </div>
-                {featuredSpeakers.length > 0 && (
-                  <div className='grid grid-cols-6 gap-px md-mid:grid-cols-12'>
-                    {featuredSpeakers.map((speaker, speakerIndex) => {
+              )}
+              {featuredSpeakers.length > 0 && (
+                <div className='grid grid-cols-6 gap-px md-mid:grid-cols-12'>
+                  {featuredSpeakers.map((speaker, speakerIndex) => {
+                    return (
+                      <div
+                        key={speakerIndex}
+                        className='group/speaker col-span-3 bg-white ring-1 ring-black md-mid:col-span-6 lg:grid lg:grid-cols-subgrid'>
+                        <div className='relative bg-neutral-50 ring-1 ring-black lg:col-span-2'>
+                          <div
+                            className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
+                            style={{
+                              backgroundImage: `url('${photoTexture.src}')`
+                            }}
+                          />
+                          <StrapiImageUrl
+                            {...speaker.headshot}
+                            width={400}
+                            height={400}
+                            unoptimized={false}
+                            className='aspect-square object-cover grayscale transition group-hover/speaker:grayscale-0'
+                          />
+                        </div>
+                        <div className='col-span-4 flex flex-col p-3 pt-2 lg:p-6 lg:pt-5'>
+                          <FontSohneBreit
+                            as='h3'
+                            className='font-black lg:text-xl'>
+                            {speaker.name}
+                          </FontSohneBreit>
+                          <p className='text-sm opacity-70 lg:text-base'>
+                            {speaker.title}
+                          </p>
+                          {speaker.logo && (
+                            <StrapiImageUrl
+                              {...speaker.logo}
+                              className='mt-auto hidden lg:inline-block'
+                            />
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+                  {Array(2 - (featuredSpeakers.length % 2))
+                    .fill(null)
+                    .map((value, fillerIndex) => {
+                      return (
+                        <div
+                          key={featuredSpeakers.length - 1 + fillerIndex}
+                          className='col-span-6 hidden ring-1 ring-black md-mid:block'
+                        />
+                      )
+                    })}
+                </div>
+              )}
+
+              {speakers.length > 0 && (
+                <div className='relative grid grid-cols-2 gap-px sm:grid-cols-3 md-mid:grid-cols-4 lg:grid-cols-6'>
+                  {(!hasFeaturedSpeakers || displayAllSpeakers) &&
+                    speakers.map((speaker, speakerIndex) => {
                       return (
                         <div
                           key={speakerIndex}
-                          className='group/speaker col-span-3 bg-white ring-1 ring-black md-mid:col-span-6 lg:grid lg:grid-cols-subgrid'>
-                          <div className='relative bg-neutral-50 ring-1 ring-black lg:col-span-2'>
+                          className='group/speaker flex flex-col overflow-hidden bg-white ring-1 ring-black'>
+                          <div className='relative bg-neutral-50 ring-1 ring-black'>
                             <div
                               className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
                               style={{
@@ -624,118 +707,62 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                               className='aspect-square object-cover grayscale transition group-hover/speaker:grayscale-0'
                             />
                           </div>
-                          <div className='col-span-4 flex flex-col p-3 pt-2 lg:p-6 lg:pt-5'>
+                          <div className='flex flex-col p-3 pt-2 lg:p-4 lg:pt-3'>
                             <FontSohneBreit
                               as='h3'
                               className='font-black lg:text-xl'>
-                              {speaker.name}
+                              <SpeakerName name={speaker.name} />
                             </FontSohneBreit>
                             <p className='text-sm opacity-70 lg:text-base'>
                               {speaker.title}
                             </p>
-                            {speaker.logo && (
-                              <StrapiImageUrl
-                                {...speaker.logo}
-                                className='mt-auto hidden lg:inline-block'
-                              />
-                            )}
                           </div>
                         </div>
                       )
                     })}
-                    {Array(2 - (featuredSpeakers.length % 2))
+                  {(!hasFeaturedSpeakers || displayAllSpeakers) &&
+                    Array(6 - (speakers.length % 6))
                       .fill(null)
                       .map((value, fillerIndex) => {
                         return (
                           <div
-                            key={featuredSpeakers.length - 1 + fillerIndex}
-                            className='col-span-6 hidden ring-1 ring-black md-mid:block'
+                            key={speakers.length - 1 + fillerIndex}
+                            className='bg-white ring-1 ring-black'
                           />
                         )
                       })}
-                  </div>
-                )}
 
-                {speakers.length > 0 && (
-                  <div className='relative grid grid-cols-2 gap-px sm:grid-cols-3 md-mid:grid-cols-4 lg:grid-cols-6'>
-                    {(!hasFeaturedSpeakers || displayAllSpeakers) &&
-                      speakers.map((speaker, speakerIndex) => {
-                        return (
-                          <div
-                            key={speakerIndex}
-                            className='group/speaker flex flex-col overflow-hidden bg-white ring-1 ring-black'>
-                            <div className='relative bg-neutral-50 ring-1 ring-black'>
-                              <div
-                                className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
-                                style={{
-                                  backgroundImage: `url('${photoTexture.src}')`
-                                }}
-                              />
-                              <StrapiImageUrl
-                                {...speaker.headshot}
-                                width={400}
-                                height={400}
-                                unoptimized={false}
-                                className='aspect-square object-cover grayscale transition group-hover/speaker:grayscale-0'
-                              />
-                            </div>
-                            <div className='flex flex-col p-3 pt-2 lg:p-4 lg:pt-3'>
-                              <FontSohneBreit
-                                as='h3'
-                                className='font-black lg:text-xl'>
-                                <SpeakerName name={speaker.name} />
-                              </FontSohneBreit>
-                              <p className='text-sm opacity-70 lg:text-base'>
-                                {speaker.title}
-                              </p>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    {(!hasFeaturedSpeakers || displayAllSpeakers) &&
-                      Array(6 - (speakers.length % 6))
-                        .fill(null)
-                        .map((value, fillerIndex) => {
-                          return (
-                            <div
-                              key={speakers.length - 1 + fillerIndex}
-                              className='bg-white ring-1 ring-black'
-                            />
-                          )
-                        })}
-
-                    {hasFeaturedSpeakers && (
-                      <div
-                        ref={speakersToggleRef}
-                        className='sticky bottom-0 z-40 col-span-full text-center ring-1 ring-black sm:relative'>
-                        <button
-                          onClick={(event) => {
-                            event.preventDefault()
-                            setDisplayAllSpeakers((old) => !old)
-                            scrollToSpeakersToggle()
-                          }}
-                          className='flex w-full items-center justify-center gap-4 bg-black px-4 py-3 font-medium uppercase leading-normal text-white hover:underline'>
-                          {!displayAllSpeakers && 'View all speakers'}
-                          {displayAllSpeakers && 'Collapse all speakers'}
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            width='13'
-                            height='13'
-                            fill='none'
-                            className={displayAllSpeakers ? '-rotate-90' : ''}>
-                            <path
-                              fill='currentColor'
-                              d='M10.4 9V.4h2v12H.4v-2H9l-9-9L1.4 0l9 9Z'
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </section>
-          )}
+                  {hasFeaturedSpeakers && (
+                    <div
+                      ref={speakersToggleRef}
+                      className='sticky bottom-0 z-40 col-span-full text-center ring-1 ring-black sm:relative'>
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault()
+                          setDisplayAllSpeakers((old) => !old)
+                          scrollToSpeakersToggle()
+                        }}
+                        className='flex w-full items-center justify-center gap-4 bg-black px-4 py-3 font-medium uppercase leading-normal text-white hover:underline'>
+                        {!displayAllSpeakers && 'View all speakers'}
+                        {displayAllSpeakers && 'Collapse all speakers'}
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='13'
+                          height='13'
+                          fill='none'
+                          className={displayAllSpeakers ? '-rotate-90' : ''}>
+                          <path
+                            fill='currentColor'
+                            d='M10.4 9V.4h2v12H.4v-2H9l-9-9L1.4 0l9 9Z'
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </section>
 
           {/* Location */}
           <section id='location' className='section-container'>
@@ -749,7 +776,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                     <Link
                       href='#register'
                       className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black hover:underline'>
-                      Get your ticket
+                      Register
                     </Link>
                   </p>
                 )}
