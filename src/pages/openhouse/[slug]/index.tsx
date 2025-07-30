@@ -1,61 +1,34 @@
-import heroGradientBottom from './assets/hero-gradient-bottom.png'
-import heroGradientTop from './assets/hero-gradient-top.png'
 import linesPattern from './assets/lines-pattern.svg'
-import logo from './assets/logo.svg'
-import photoTexture from './assets/photo-texture.svg'
 import speakersPlaceholderDesktop from './assets/speakers-placeholder-desktop.jpg'
 import speakersPlaceholderMobile from './assets/speakers-placeholder-mobile.jpg'
-import styles from './styles.module.scss'
-import { OpenhouseDayAgenda, OpenhouseEntry, OpenhouseLogo } from './types'
-import ContentTicker from '@/components-cleaned/ContentTicker'
-import CopyUrlButton from '@/components/CopyUrlButton'
+import { OpenhouseEntry } from './types'
+import OpenhouseAgendaHandle from '@/components-cleaned/openhouse/AgendaHandle'
+import OpenhouseButton from '@/components-cleaned/openhouse/Button'
+import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
+import OpenhouseFormModal from '@/components-cleaned/openhouse/FormModal'
+import OpenhouseHeader from '@/components-cleaned/openhouse/Header'
+import OpenhouseHero from '@/components-cleaned/openhouse/Hero'
+import OpenhouseLogoWall from '@/components-cleaned/openhouse/LogoWall'
+import OpenhouseMarkdown from '@/components-cleaned/openhouse/Markdown'
+import OpenhouseSpeaker from '@/components-cleaned/openhouse/Speaker'
+import OpenhouseSpeakerFeatured from '@/components-cleaned/openhouse/SpeakerFeatured'
 import FitText from '@/components/FitText'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
-import MarketoForm from '@/components/MarketoForm'
-import Parallax from '@/components/Parallax'
 import SeoContainer from '@/components/SeoContainer'
-import SocialButton from '@/components/SocialButton'
 import { StrapiImageUrl } from '@/components/StrapiElements'
-import { useClickOutside } from '@/hooks'
-import { fetchAll, findAll, getProxiedMediaUrl } from '@/lib/api/strapi'
-import { shuffleArraySeeded } from '@/lib/utils/arrays'
+import { fetchAll, findAll } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getOrdinal } from '@/lib/utils/numbers'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, X } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 
 export type RoadshowProps = CommonProps & OpenhouseEntry
-
-const logoColSpanToTailwind: Record<number, string> = {
-  1: 'md:col-span-1',
-  2: 'md:col-span-2',
-  3: 'md:col-span-3',
-  4: 'md:col-span-4',
-  5: 'md:col-span-5',
-  6: 'md:col-span-6',
-  7: 'md:col-span-7',
-  8: 'md:col-span-8',
-  9: 'md:col-span-9',
-  10: 'md:col-span-10',
-  11: 'md:col-span-11',
-  12: 'md:col-span-12'
-}
-
-const logoWidthToColSpan: Record<OpenhouseLogo['width'], number> = {
-  'Small (1/4)': 3,
-  'Medium (1/3)': 4,
-  'Large (1/2)': 6,
-  'Full (1/1)': 12
-}
 
 export const getStaticProps: GetStaticProps<RoadshowProps> =
   async function getStaticProps({ params }) {
@@ -174,12 +147,13 @@ export default function Page({
 
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
+  const [formOpen, setFormOpen] = useState(false)
 
   const hasFeaturedSpeakers = featuredSpeakers.length > 0
+  const hasSpeakers = speakers.length > 0
 
-  const logoSpans = logos.map((logo) => logoWidthToColSpan[logo.width])
-  const totalLogoSpans = logoSpans.reduce((a, b) => a + b, 0)
-  const logoFillerSpan = Math.ceil(totalLogoSpans / 12) * 12 - totalLogoSpans
+  const registrationIsOpen =
+    startDateObject > nowDateObject && endDateObject > nowDateObject
 
   const scrollToSpeakersToggle = useCallback(() => {
     const speakersToggle = speakersToggleRef.current
@@ -204,18 +178,6 @@ export default function Page({
     }
   }, [speakersToggleRef, displayAllSpeakers])
 
-  const registrationIsOpen =
-    startDateObject > nowDateObject && endDateObject > nowDateObject
-
-  const formModalRef = useRef<HTMLDivElement | null>(null)
-  const [formOpen, setFormOpen] = useState(false)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
-
-  useClickOutside(formModalRef, () => {
-    setFormOpen(false)
-  })
-
   useEffect(() => {
     const onHashChangeStart = (path: string) => {
       const url = new URL(path, window.location.toString())
@@ -233,7 +195,7 @@ export default function Page({
     <>
       {seo && <SeoContainer {...seo} />}
       <FontSohne className='flex flex-col gap-4 bg-black tracking-wider text-white selection:bg-ch-yellow'>
-        <Header
+        <OpenhouseHeader
           agenda={days.length > 0}
           speakers={true}
           faqs={faqs.length > 0}
@@ -242,250 +204,52 @@ export default function Page({
           registerLabel={navRegisterLabel}
         />
 
-        <div
-          className={`fixed inset-0 z-[9999] overflow-y-auto sm:p-6 ${styles.modalBackground} ${formOpen ? 'block' : 'hidden'}`}>
-          <div
-            className='mx-auto min-h-dvh max-w-2xl bg-white p-6 text-black sm:min-h-0'
-            ref={formModalRef}>
-            {!formSuccess && (
-              <>
-                <div className='mb-6 flex items-center justify-between'>
-                  <FontSohneBreit className='flex-1 text-3xl font-black'>
-                    Get your ticket
-                  </FontSohneBreit>
-
-                  <button
-                    onClick={(event) => {
-                      event.preventDefault()
-                      setFormOpen(false)
-                    }}
-                    className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center gap-1 text-center text-neutral-500 transition-colors hover:bg-neutral-400/10'>
-                    <X height={24} />
-                    <span className='sr-only'>Close</span>
-                  </button>
-                </div>
-                <MarketoForm
-                  theme='light'
-                  formId={marketoFormId}
-                  clearbitTracking={true}
-                  onLoad={() => setFormLoaded(true)}
-                  onSuccess={() => {
-                    setFormSuccess(true)
-                    return false // Stops page from reloading
-                  }}
-                  disclaimer={
-                    <>
-                      By registering, you acknowledge that ClickHouse will
-                      process your personal information in accordance with our{' '}
-                      <Link href='/legal/privacy-policy' className='underline'>
-                        Privacy Policy
-                      </Link>
-                      .
-                    </>
-                  }
-                />
-              </>
-            )}
-            {!formLoaded && (
-              <div className='mb-12 mt-10 text-center'>Loading form...</div>
-            )}
-
-            {formSuccess && (
-              <div className='my-auto flex flex-col items-center py-6 text-center lg:py-10'>
-                <svg
-                  width='48'
-                  height='48'
-                  viewBox='0 0 48 48'
-                  fill='none'
-                  xmlns='http://www.w3.org/2000/svg'>
-                  <path
-                    fillRule='evenodd'
-                    clipRule='evenodd'
-                    d='M24 48.0091V48.0091C10.744 48.0091 0 37.2651 0 24.0091V24.0091C0 10.7531 10.744 0.00909424 24 0.00909424V0.00909424C37.256 0.00909424 48 10.7531 48 24.0091V24.0091C48 37.2651 37.256 48.0091 24 48.0091Z'
-                    fill='#EBFF00'
-                  />
-                  <path
-                    d='M34.6666 18.6758L21.3333 32.0091L13.3333 24.0091'
-                    stroke='black'
-                    strokeWidth='1.5'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  />
-                </svg>
-                <p className='mt-6 text-xl font-bold'>
-                  Thanks for your interest in OpenHouse.
-                  <br />
-                  Check your email for next steps.
-                </p>
-                <p className='mb-3 mt-12 text-center font-bold text-neutral-400'>
-                  Share this event
-                </p>
-                <div className='flex flex-wrap justify-center gap-2 text-neutral-0'>
-                  <CopyUrlButton className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow' />
-                  {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
-                    (social) => (
-                      <SocialButton
-                        className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
-                        key={social}
-                        type={social}
-                        title='Open House by ClickHouse'
-                      />
-                    )
-                  )}
-                </div>
-                <button
-                  onClick={(event) => {
-                    event.preventDefault()
-                    setFormOpen(false)
-                  }}
-                  className='mt-12 flex items-center gap-1 border border-neutral-400 py-1 pl-1 pr-3 text-center text-neutral-500 transition-colors hover:bg-neutral-400/10'>
-                  <X height={16} />
-                  Close
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+        {registrationIsOpen && (
+          <OpenhouseFormModal
+            formId={marketoFormId}
+            open={formOpen}
+            onClose={() => {
+              setFormOpen(false)
+            }}
+          />
+        )}
 
         {/* Hero */}
-        <section className='relative h-dvh max-h-[600px] min-h-[450px] overflow-hidden lg:max-h-[900px] lg:min-h-[600px]'>
-          <div
-            className='absolute inset-x-0 bottom-0 z-10 h-72 bg-contain lg:h-96'
-            style={{ backgroundImage: `url(${heroGradientBottom.src})` }}
-          />
-          {/* Hero images */}
-          <Parallax
-            speed={3}
-            className='absolute inset-0 z-0 flex flex-col gap-1.5'>
-            <ContentTicker
-              gap='0.375rem'
-              pixelsPerSecond={20}
-              direction='ltr'
-              className='-translate-y-16 lg:-translate-y-28'
-              pause={formOpen}>
-              {shuffleArraySeeded(gallery, 2 + gallery.length).map(
-                (item, itemIndex) => {
-                  return item.mime.startsWith('video/') ? (
-                    <video
-                      src={getProxiedMediaUrl(item.url)}
-                      autoPlay={true}
-                      muted={true}
-                      loop={true}
-                      controls={false}
-                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
-                    />
-                  ) : (
-                    <StrapiImageUrl
-                      key={itemIndex}
-                      {...item}
-                      height={176}
-                      width={704}
-                      unoptimized={false}
-                      priority={true}
-                      loading='eager'
-                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
-                    />
-                  )
-                }
-              )}
-            </ContentTicker>
-            <ContentTicker
-              gap='0.375rem'
-              pixelsPerSecond={15}
-              className='-translate-y-16 lg:-translate-y-28'
-              pause={formOpen}>
-              {gallery.map((item, itemIndex) => {
-                return item.mime.startsWith('video/') ? (
-                  <video
-                    src={getProxiedMediaUrl(item.url)}
-                    autoPlay={true}
-                    muted={true}
-                    loop={true}
-                    controls={false}
-                    className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
-                  />
-                ) : (
-                  <StrapiImageUrl
+        <OpenhouseHero gallery={gallery} pause={formOpen}>
+          <div className='section-container w-full items-end justify-between md:flex'>
+            <h1 className='flex flex-col uppercase'>
+              <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
+                Free conference in
+              </span>
+              {heading.split(`\n`).map((item, itemIndex) => {
+                return (
+                  <FontSohneBreit
+                    as='span'
                     key={itemIndex}
-                    {...item}
-                    height={176}
-                    width={704}
-                    unoptimized={false}
-                    priority={true}
-                    loading='eager'
-                    className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
-                  />
+                    className='text-4xl font-black leading-none text-ch-yellow lg:text-[4rem]'>
+                    {item}
+                  </FontSohneBreit>
                 )
               })}
-            </ContentTicker>
-            <ContentTicker
-              gap='0.375rem'
-              pixelsPerSecond={12}
-              direction='ltr'
-              className='-translate-y-16 lg:-translate-y-28'
-              pause={formOpen}>
-              {shuffleArraySeeded(gallery, 3 + gallery.length).map(
-                (item, itemIndex) => {
-                  return item.mime.startsWith('video/') ? (
-                    <video
-                      src={getProxiedMediaUrl(item.url)}
-                      autoPlay={true}
-                      muted={true}
-                      loop={true}
-                      controls={false}
-                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
-                    />
-                  ) : (
-                    <StrapiImageUrl
-                      key={itemIndex}
-                      {...item}
-                      height={176}
-                      width={704}
-                      unoptimized={false}
-                      priority={true}
-                      loading='eager'
-                      className='h-full max-h-44 w-auto max-w-none lg:max-h-72'
-                    />
-                  )
-                }
-              )}
-            </ContentTicker>
-          </Parallax>
-
-          {/* Hero content */}
-          <div className='relative z-20 flex h-full items-end pb-8'>
-            <div className='section-container w-full items-end justify-between md:flex'>
-              <h1 className='flex flex-col uppercase'>
-                <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
-                  Free conference in
-                </span>
-                {heading.split(`\n`).map((item, itemIndex) => {
-                  return (
-                    <FontSohneBreit
-                      as='span'
-                      key={itemIndex}
-                      className='text-4xl font-black leading-none text-ch-yellow lg:text-[4rem]'>
-                      {item}
-                    </FontSohneBreit>
-                  )
-                })}
-              </h1>
-              <h2 className='flex flex-col text-xl font-black uppercase leading-none md:text-right md:text-[1.75rem]'>
-                <span className='text-white md:text-ch-yellow'>
-                  {formateHeroDate(startDateObject, endDateObject)}
-                  <span className='hidden md:inline'>.</span>
-                </span>
-                {strapline.split(`\n`).map((item, itemIndex) => {
-                  return (
-                    <span key={itemIndex} className='hidden md:inline'>
-                      {item}
-                    </span>
-                  )
-                })}
-              </h2>
-            </div>
+            </h1>
+            <h2 className='flex flex-col text-xl font-black uppercase leading-none md:text-right md:text-[1.75rem]'>
+              <span className='text-white md:text-ch-yellow'>
+                <OpenhouseDateRange
+                  start={startDateObject}
+                  end={endDateObject}
+                />
+                <span className='hidden md:inline'>.</span>
+              </span>
+              {strapline.split(`\n`).map((item, itemIndex) => {
+                return (
+                  <span key={itemIndex} className='hidden md:inline'>
+                    {item}
+                  </span>
+                )
+              })}
+            </h2>
           </div>
-        </section>
+        </OpenhouseHero>
 
         {/* Cards */}
         {cards.length > 0 && (
@@ -554,6 +318,16 @@ export default function Page({
                             !agenda.time &&
                             !agenda.description &&
                             !agenda.speakers.length
+
+                          const Handle = () => (
+                            <OpenhouseAgendaHandle
+                              title={agenda.title}
+                              time={agenda.time}
+                              speakers={agenda.speakers.map(
+                                (speaker) => speaker.headshot
+                              )}
+                            />
+                          )
                           return (
                             <li
                               key={agendaIndex}
@@ -563,12 +337,10 @@ export default function Page({
                                   {agenda.title}
                                 </span>
                               )}
-                              {!isDivider && !agenda.description && (
-                                <AgendaHandle agenda={agenda} />
-                              )}
+                              {!isDivider && !agenda.description && <Handle />}
                               {!isDivider && agenda.description && (
                                 <RiggedAccordion
-                                  handle={<AgendaHandle agenda={agenda} />}
+                                  handle={<Handle />}
                                   classNames={{
                                     container: '-mx-6 -my-2',
                                     handle:
@@ -590,17 +362,13 @@ export default function Page({
               )
             })}
             {registrationIsOpen && (
-              <Link
+              <OpenhouseButton
                 href='#register'
-                className={`${styles.primaryButton} !-mt-px !flex border border-white !py-4 lg:text-2xl`}>
-                {agendaRegisterLabel}{' '}
-                <ArrowRight
-                  strokeWidth={2}
-                  height={20}
-                  className='inline lg:hidden'
-                />
-                <ArrowRight strokeWidth={2.5} className='hidden lg:inline' />
-              </Link>
+                size='lg'
+                arrow={true}
+                className='!-mt-px w-full border border-white'>
+                {agendaRegisterLabel}
+              </OpenhouseButton>
             )}
           </section>
         )}
@@ -614,16 +382,19 @@ export default function Page({
                   {speakersIntro}
                 </OpenhouseMarkdown>
                 {applyToSpeakLink && (
-                  <Link
+                  <OpenhouseButton
+                    variant='secondary'
                     href={applyToSpeakLink}
                     target='_blank'
-                    className={`${styles.secondaryButton} mr-2 !hidden lg:!inline-block`}>
+                    className='mr-2 !hidden lg:!inline-flex'>
                     Apply to speak
-                  </Link>
+                  </OpenhouseButton>
                 )}
               </div>
+
+              {/* Coming soon */}
               {!featuredSpeakers.length && !speakers.length && (
-                <div className='relative mt-px ring-1 ring-black'>
+                <div className='relative my-px ring-1 ring-black'>
                   <div className='absolute left-8 right-8 top-1/2 z-10 -translate-y-1/2 border border-black bg-white p-8 text-center lg:left-1/2 lg:right-auto lg:max-w-96 lg:-translate-x-1/2 lg:px-10'>
                     <FontSohneBreit as='h4' className='text-xl font-black'>
                       Coming soon!
@@ -649,45 +420,16 @@ export default function Page({
                   />
                 </div>
               )}
+
+              {/* Featured speakers */}
               {featuredSpeakers.length > 0 && (
                 <div className='grid grid-cols-6 gap-px md-mid:grid-cols-12'>
                   {featuredSpeakers.map((speaker, speakerIndex) => {
                     return (
-                      <div
+                      <OpenhouseSpeakerFeatured
                         key={speakerIndex}
-                        className='group/speaker col-span-3 bg-white ring-1 ring-black md-mid:col-span-6 lg:grid lg:grid-cols-subgrid'>
-                        <div className='relative bg-neutral-50 ring-1 ring-black lg:col-span-2'>
-                          <div
-                            className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
-                            style={{
-                              backgroundImage: `url('${photoTexture.src}')`
-                            }}
-                          />
-                          <StrapiImageUrl
-                            {...speaker.headshot}
-                            width={400}
-                            height={400}
-                            unoptimized={false}
-                            className='aspect-square object-cover grayscale transition group-hover/speaker:grayscale-0'
-                          />
-                        </div>
-                        <div className='col-span-4 flex flex-col p-3 pt-2 lg:p-6 lg:pt-5'>
-                          <FontSohneBreit
-                            as='h3'
-                            className='font-black lg:text-xl'>
-                            {speaker.name}
-                          </FontSohneBreit>
-                          <p className='text-sm opacity-70 lg:text-base'>
-                            {speaker.title}
-                          </p>
-                          {speaker.logo && (
-                            <StrapiImageUrl
-                              {...speaker.logo}
-                              className='mt-auto hidden lg:inline-block'
-                            />
-                          )}
-                        </div>
-                      </div>
+                        {...speaker}
+                      />
                     )
                   })}
                   {Array(2 - (featuredSpeakers.length % 2))
@@ -703,40 +445,13 @@ export default function Page({
                 </div>
               )}
 
-              {speakers.length > 0 && (
+              {/* Non-featured speakers */}
+              {hasSpeakers && (
                 <div className='relative grid grid-cols-2 gap-px sm:grid-cols-3 md-mid:grid-cols-4 lg:grid-cols-6'>
                   {(!hasFeaturedSpeakers || displayAllSpeakers) &&
                     speakers.map((speaker, speakerIndex) => {
                       return (
-                        <div
-                          key={speakerIndex}
-                          className='group/speaker flex flex-col overflow-hidden bg-white ring-1 ring-black'>
-                          <div className='relative bg-neutral-50 ring-1 ring-black'>
-                            <div
-                              className='absolute inset-0 z-10 opacity-55 mix-blend-screen'
-                              style={{
-                                backgroundImage: `url('${photoTexture.src}')`
-                              }}
-                            />
-                            <StrapiImageUrl
-                              {...speaker.headshot}
-                              width={400}
-                              height={400}
-                              unoptimized={false}
-                              className='aspect-square object-cover grayscale transition group-hover/speaker:grayscale-0'
-                            />
-                          </div>
-                          <div className='flex flex-col p-3 pt-2 lg:p-4 lg:pt-3'>
-                            <FontSohneBreit
-                              as='h3'
-                              className='font-black lg:text-xl'>
-                              <SpeakerName name={speaker.name} />
-                            </FontSohneBreit>
-                            <p className='text-sm opacity-70 lg:text-base'>
-                              {speaker.title}
-                            </p>
-                          </div>
-                        </div>
+                        <OpenhouseSpeaker key={speakerIndex} {...speaker} />
                       )
                     })}
                   {(!hasFeaturedSpeakers || displayAllSpeakers) &&
@@ -780,21 +495,17 @@ export default function Page({
                   )}
                 </div>
               )}
-            </div>
 
-            {registrationIsOpen && (
-              <Link
-                href='#register'
-                className={`${styles.primaryButton} -mt-px !flex border border-black !py-4 lg:text-2xl`}>
-                {speakersRegisterLabel}{' '}
-                <ArrowRight
-                  strokeWidth={2}
-                  height={20}
-                  className='inline lg:hidden'
-                />
-                <ArrowRight strokeWidth={2.5} className='hidden lg:inline' />
-              </Link>
-            )}
+              {registrationIsOpen && (!hasFeaturedSpeakers || !hasSpeakers) && (
+                <OpenhouseButton
+                  href='#register'
+                  size='lg'
+                  arrow={true}
+                  className='w-full ring-1 ring-black'>
+                  {speakersRegisterLabel}
+                </OpenhouseButton>
+              )}
+            </div>
           </section>
 
           {/* Location */}
@@ -806,20 +517,13 @@ export default function Page({
                 </OpenhouseMarkdown>
 
                 {registrationIsOpen && (
-                  <Link
+                  <OpenhouseButton
                     href='#register'
-                    className={`${styles.primaryButton} -mx-px mt-auto !flex border border-black !py-4 lg:text-2xl`}>
-                    {locationRegisterLabel}{' '}
-                    <ArrowRight
-                      strokeWidth={2}
-                      height={20}
-                      className='inline lg:hidden'
-                    />
-                    <ArrowRight
-                      strokeWidth={2.5}
-                      className='hidden lg:inline'
-                    />
-                  </Link>
+                    size='lg'
+                    arrow={true}
+                    className='-mx-px mt-auto border border-black'>
+                    {locationRegisterLabel}
+                  </OpenhouseButton>
                 )}
               </div>
               <StrapiImageUrl
@@ -863,350 +567,13 @@ export default function Page({
           {/* Logo wall */}
           {logos.length > 0 && (
             <section id='logos' className='section-container'>
-              <div className='grid grid-cols-1 md:grid-cols-12'>
-                {logos.map((logo, logoIndex) => {
-                  return (
-                    <div
-                      key={logoIndex}
-                      className={`flex items-center justify-center bg-white px-2 py-6 ring-1 ring-gray-200 ${logoColSpanToTailwind[logoWidthToColSpan[logo.width]]}`}>
-                      <StrapiImageUrl
-                        {...logo.logo}
-                        className='h-12 w-full max-w-48 object-scale-down object-center'
-                      />
-                    </div>
-                  )
-                })}
-                {logoFillerSpan > 0 && (
-                  <div
-                    className={`hidden bg-white ring-1 ring-gray-200 md:block ${logoColSpanToTailwind[logoFillerSpan]}`}
-                  />
-                )}
-              </div>
+              <OpenhouseLogoWall logos={logos} />
             </section>
           )}
         </div>
       </FontSohne>
       <Footer {...footerData} />
     </>
-  )
-}
-
-function Header({
-  agenda,
-  speakers,
-  faqs,
-  register,
-  applyToSpeak,
-  registerLabel
-}: {
-  agenda: boolean
-  speakers: boolean
-  faqs: boolean
-  register: boolean
-  applyToSpeak: null | string
-  registerLabel: string
-}) {
-  return (
-    <header className='fixed inset-x-0 top-0 z-50 py-4 md:py-9'>
-      <div
-        className='absolute inset-x-0 top-0 z-0 h-24 bg-contain md:h-32'
-        style={{ backgroundImage: `url(${heroGradientTop.src})` }}
-      />
-      <Image
-        src={logo}
-        width={230}
-        height={49}
-        alt='Open House by ClickHouse'
-        className='absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 lg:block'
-      />
-      <div className='section-container relative z-10 flex items-center justify-between lg:block'>
-        <Image
-          src={logo}
-          width={230}
-          height={49}
-          alt='Open House by ClickHouse'
-          className='w-full max-w-44 flex-shrink flex-grow-0 lg:hidden'
-        />
-        <nav className='flex-shrink-0'>
-          <ul className='flex items-center gap-6 font-medium uppercase leading-loose tracking-wider'>
-            {agenda && (
-              <li className='hidden lg:block'>
-                <Link href='#agenda' className='underline hover:text-ch-yellow'>
-                  Agenda
-                </Link>
-              </li>
-            )}
-            {speakers && (
-              <li className='hidden lg:block'>
-                <Link
-                  href='#speakers'
-                  className='underline hover:text-ch-yellow'>
-                  Speakers
-                </Link>
-              </li>
-            )}
-            {faqs && (
-              <li className='hidden lg:block'>
-                <Link href='#faqs' className='underline hover:text-ch-yellow'>
-                  FAQ
-                </Link>
-              </li>
-            )}
-            <li className='mx-auto hidden lg:block' />
-            {applyToSpeak && (
-              <li className='hidden lg:block'>
-                <Link
-                  href={applyToSpeak}
-                  target='_blank'
-                  className='underline hover:text-ch-yellow'>
-                  Apply to speak
-                </Link>
-              </li>
-            )}
-            <li>
-              <Link
-                href={register ? '#register' : '/company/contact'}
-                className={styles.primaryButton}>
-                {register ? registerLabel : 'Get in touch'}
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-  )
-}
-
-function OpenhouseMarkdown({
-  children,
-  className = ''
-}: {
-  children: string
-  className?: string
-}) {
-  return (
-    <div className={`space-y-6 ${className}`}>
-      <ReactMarkdown
-        components={{
-          h1({ node, children, className = '', ...props }) {
-            return (
-              <FontSohneBreit
-                as='h1'
-                className={`!-mb-6 text-4xl font-black ${className}`}
-                {...props}>
-                {children}
-              </FontSohneBreit>
-            )
-          },
-          h2({ node, children, className = '', ...props }) {
-            return (
-              <FontSohneBreit
-                as='h2'
-                className={`!-mb-6 text-2xl font-black ${className}`}
-                {...props}>
-                {children}
-              </FontSohneBreit>
-            )
-          },
-          h3({ node, children, className = '', ...props }) {
-            return (
-              <FontSohneBreit
-                as='h3'
-                className={`!-mb-6 text-xl font-black ${className}`}
-                {...props}>
-                {children}
-              </FontSohneBreit>
-            )
-          },
-          h4({ node, children, className = '', ...props }) {
-            return (
-              <FontSohneBreit
-                as='h4'
-                className={`!-mb-6 text-lg font-black ${className}`}
-                {...props}>
-                {children}
-              </FontSohneBreit>
-            )
-          },
-          h5({ node, children, className = '', ...props }) {
-            return (
-              <FontSohneBreit
-                as='h5'
-                className={`!-mb-6 text-base font-black ${className}`}
-                {...props}>
-                {children}
-              </FontSohneBreit>
-            )
-          },
-          h6({ node, children, className = '', ...props }) {
-            return (
-              <FontSohneBreit
-                as='h6'
-                className={`!-mb-6 text-sm font-black ${className}`}
-                {...props}>
-                {children}
-              </FontSohneBreit>
-            )
-          },
-          p({ node, children, className = '', ...props }) {
-            return (
-              <p className={`${className}`} {...props}>
-                {children}
-              </p>
-            )
-          },
-          ul({ node, children, className = '', ...props }) {
-            return (
-              <ul
-                className={`list-disc space-y-3 pl-5 ${className}`}
-                {...props}>
-                {children}
-              </ul>
-            )
-          },
-          ol({ node, children, className = '', ...props }) {
-            return (
-              <ol
-                className={`list-decimal space-y-3 pl-5 ${className}`}
-                {...props}>
-                {children}
-              </ol>
-            )
-          },
-          li({ node, children, className = '', ...props }) {
-            return (
-              <li className={`${className}`} {...props}>
-                {children}
-              </li>
-            )
-          },
-          a({ node, children, className = '', ...props }) {
-            return (
-              <a className={`underline ${className}`} {...props}>
-                {children}
-              </a>
-            )
-          }
-        }}>
-        {children}
-      </ReactMarkdown>
-    </div>
-  )
-}
-
-function formateHeroDate(start: Date, end: Date) {
-  const startDay = start.toLocaleString('en-US', {
-    day: 'numeric'
-  })
-  const endDay = end.toLocaleString('en-US', {
-    day: 'numeric'
-  })
-  const startMonth = start.toLocaleString('en-US', {
-    month: 'short'
-  })
-  const endMonth = end.toLocaleString('en-US', {
-    month: 'short'
-  })
-  const startYear = start.toLocaleString('en-US', {
-    year: 'numeric'
-  })
-  const endYear = end.toLocaleString('en-US', {
-    year: 'numeric'
-  })
-
-  if (startDay === endDay && startMonth === endMonth && startYear === endYear) {
-    return `${startMonth} ${startDay} ${startYear}`
-  }
-
-  if (startDay !== endDay && startMonth === endMonth && startYear === endYear) {
-    return `${startMonth} ${startDay}-${endDay} ${startYear}`
-  }
-
-  if (startDay !== endDay && startMonth !== endMonth && startYear === endYear) {
-    return `${startMonth} ${startDay}-${endMonth} ${endDay} ${startYear}`
-  }
-
-  return `${startMonth} ${startDay} ${startYear}-${endMonth} ${endDay} ${endYear}`
-}
-
-function SpeakerName({ name }: { name: string }) {
-  const whitespaceIndices = []
-  for (let i = 0; i < name.length; i++) {
-    if (/\s/.test(name[i])) {
-      whitespaceIndices.push(i)
-    }
-  }
-
-  // No whitespace, return whole string
-  if (whitespaceIndices.length === 0) {
-    return <>{name}</>
-  }
-
-  const center = name.length / 2
-  // Find the whitespace index closest to the center
-  let closest = whitespaceIndices[0]
-  let minDiff = Math.abs(closest - center)
-
-  for (let i = 1; i < whitespaceIndices.length; i++) {
-    const diff = Math.abs(whitespaceIndices[i] - center)
-    if (diff < minDiff) {
-      closest = whitespaceIndices[i]
-      minDiff = diff
-    }
-  }
-
-  const left = name.slice(0, closest).trim()
-  const right = name.slice(closest + 1).trim()
-
-  return (
-    <>
-      {left}
-      <br />
-      {right}
-    </>
-  )
-}
-
-function formatTimeTo12Hour(timeString: string) {
-  const [hours, minutes] = timeString.split(':')
-  let hour = parseInt(hours, 10)
-  const ampm = hour >= 12 ? 'PM' : 'AM'
-  hour = hour % 12 || 12 // Convert 0 to 12 for midnight
-  return `${hour}:${minutes}${ampm}`
-}
-
-function AgendaHandle({ agenda }: { agenda: OpenhouseDayAgenda }) {
-  return (
-    <div className='mr-6 flex items-center'>
-      <span className='mr-auto font-bold'>
-        {agenda.time && (
-          <span className='block font-normal opacity-70'>
-            {formatTimeTo12Hour(agenda.time)}
-          </span>
-        )}
-        {agenda.title}
-      </span>
-
-      {agenda.speakers.map((speaker, speakerIndex) => {
-        return (
-          <span
-            className='relative -mr-3 hidden h-11 w-11 overflow-hidden rounded-full border-2 border-black bg-white lg:block'
-            title={speaker.name}
-            style={{
-              zIndex: agenda.speakers.length - speakerIndex
-            }}>
-            <StrapiImageUrl
-              key={speakerIndex}
-              {...speaker.headshot}
-              width={44}
-              height={44}
-              unoptimized={false}
-              className='absolute inset-0 h-full w-full max-w-none object-contain object-center saturate-0'
-            />
-          </span>
-        )
-      })}
-    </div>
   )
 }
 
