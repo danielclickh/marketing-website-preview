@@ -1,3 +1,11 @@
+.primaryButton {
+  @apply inline-flex justify-center items-center gap-1 text-center bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black hover:underline
+}
+
+.secondaryButton {
+  @apply inline-flex justify-center items-center gap-1 text-center bg-black px-4 py-2 font-medium uppercase leading-normal text-white hover:underline
+}
+
 .modalBackground {
   &:before {
     content: '';

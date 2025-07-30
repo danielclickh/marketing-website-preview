@@ -59,4 +59,10 @@ export interface OpenhouseEntry {
   faqs: Array<OpenhouseFaq>
   logos: Array<OpenhouseLogo>
   marketoFormId: string
+  speakersIntro: string
+  faqsIntro: string
+  navRegisterLabel: string
+  agendaRegisterLabel: string
+  speakersRegisterLabel: string
+  locationRegisterLabel: string
 }

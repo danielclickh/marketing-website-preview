@@ -25,7 +25,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getOrdinal } from '@/lib/utils/numbers'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { AnimatePresence, motion } from 'framer-motion'
-import { X } from 'lucide-react'
+import { ArrowRight, X } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -154,7 +154,13 @@ export default function Page({
   locationImage,
   faqs,
   logos,
-  marketoFormId
+  marketoFormId,
+  faqsIntro,
+  speakersIntro,
+  navRegisterLabel,
+  agendaRegisterLabel,
+  speakersRegisterLabel,
+  locationRegisterLabel
 }: RoadshowProps) {
   const router = useRouter()
   const nowDateObject = new Date()
@@ -233,6 +239,7 @@ export default function Page({
           faqs={faqs.length > 0}
           register={registrationIsOpen}
           applyToSpeak={applyToSpeakLink}
+          registerLabel={navRegisterLabel}
         />
 
         <div
@@ -582,6 +589,19 @@ export default function Page({
                 </div>
               )
             })}
+            {registrationIsOpen && (
+              <Link
+                href='#register'
+                className={`${styles.primaryButton} !-mt-px !flex border border-white !py-4 lg:text-2xl`}>
+                {agendaRegisterLabel}{' '}
+                <ArrowRight
+                  strokeWidth={2}
+                  height={20}
+                  className='inline lg:hidden'
+                />
+                <ArrowRight strokeWidth={2.5} className='hidden lg:inline' />
+              </Link>
+            )}
           </section>
         )}
 
@@ -591,14 +611,13 @@ export default function Page({
             <div className='p-px'>
               <div className='flex items-center bg-white p-4 pt-3 ring-1 ring-black lg:p-6 lg:pt-5'>
                 <OpenhouseMarkdown className='flex-1'>
-                  {`## Speakers 
-Our lineup is stacked with engineers, founders, and operators changing the game with data`}
+                  {speakersIntro}
                 </OpenhouseMarkdown>
                 {applyToSpeakLink && (
                   <Link
                     href={applyToSpeakLink}
                     target='_blank'
-                    className='mr-2 hidden bg-black px-4 py-2 font-medium uppercase leading-normal text-white hover:underline lg:inline-block'>
+                    className={`${styles.secondaryButton} mr-2 !hidden lg:!inline-block`}>
                     Apply to speak
                   </Link>
                 )}
@@ -762,6 +781,20 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                 </div>
               )}
             </div>
+
+            {registrationIsOpen && (
+              <Link
+                href='#register'
+                className={`${styles.primaryButton} -mt-px !flex border border-black !py-4 lg:text-2xl`}>
+                {speakersRegisterLabel}{' '}
+                <ArrowRight
+                  strokeWidth={2}
+                  height={20}
+                  className='inline lg:hidden'
+                />
+                <ArrowRight strokeWidth={2.5} className='hidden lg:inline' />
+              </Link>
+            )}
           </section>
 
           {/* Location */}
@@ -773,15 +806,16 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
                 </OpenhouseMarkdown>
                 {registrationIsOpen && (
                   <p>
-                    <Link
-                      href='#register'
-                      className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black hover:underline'>
-                      Register
+                    <Link href='#register' className={styles.primaryButton}>
+                      {locationRegisterLabel}
                     </Link>
                   </p>
                 )}
               </div>
-              <StrapiImageUrl {...locationImage} className='col-span-2' />
+              <StrapiImageUrl
+                {...locationImage}
+                className='col-span-2 h-full w-full object-cover'
+              />
             </div>
           </section>
 
@@ -790,8 +824,7 @@ Our lineup is stacked with engineers, founders, and operators changing the game 
             <section id='faqs' className='section-container !mt-0'>
               <div className='bg-black text-white'>
                 <OpenhouseMarkdown className='p-4 pt-3 lg:p-6 lg:pt-5'>
-                  {`## FAQs 
-For questions about the event or general inquiries, please reach out to [openhouse@clickhouse.com](mailto:openhouse@clickhouse.com)`}
+                  {faqsIntro}
                 </OpenhouseMarkdown>
                 <ul>
                   {faqs.length > 0 &&
@@ -853,13 +886,15 @@ function Header({
   speakers,
   faqs,
   register,
-  applyToSpeak
+  applyToSpeak,
+  registerLabel
 }: {
   agenda: boolean
   speakers: boolean
   faqs: boolean
   register: boolean
   applyToSpeak: null | string
+  registerLabel: string
 }) {
   return (
     <header className='fixed inset-x-0 top-0 z-50 py-4 md:py-9'>
@@ -921,8 +956,8 @@ function Header({
             <li>
               <Link
                 href={register ? '#register' : '/company/contact'}
-                className='inline-block bg-ch-yellow px-4 py-2 font-medium uppercase leading-normal text-black hover:underline'>
-                {register ? 'Register' : 'Get in touch'}
+                className={styles.primaryButton}>
+                {register ? registerLabel : 'Get in touch'}
               </Link>
             </li>
           </ul>
