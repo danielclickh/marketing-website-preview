@@ -800,16 +800,26 @@ export default function Page({
           {/* Location */}
           <section id='location' className='section-container'>
             <div className='flex flex-col-reverse border border-black lg:grid lg:grid-cols-3'>
-              <div className='flex flex-col justify-center space-y-6 border-inherit p-6 lg:border-r lg:p-16'>
-                <OpenhouseMarkdown>
+              <div className='flex flex-col justify-center border-inherit lg:border-r'>
+                <OpenhouseMarkdown className='my-auto space-y-6 p-6 lg:p-16'>
                   {`## ${heading.replaceAll(`\n`, ', ')}\n${locationAddress.replaceAll(`\n`, '  \n')}`}
                 </OpenhouseMarkdown>
+
                 {registrationIsOpen && (
-                  <p>
-                    <Link href='#register' className={styles.primaryButton}>
-                      {locationRegisterLabel}
-                    </Link>
-                  </p>
+                  <Link
+                    href='#register'
+                    className={`${styles.primaryButton} -mx-px mt-auto !flex border border-black !py-4 lg:text-2xl`}>
+                    {locationRegisterLabel}{' '}
+                    <ArrowRight
+                      strokeWidth={2}
+                      height={20}
+                      className='inline lg:hidden'
+                    />
+                    <ArrowRight
+                      strokeWidth={2.5}
+                      className='hidden lg:inline'
+                    />
+                  </Link>
                 )}
               </div>
               <StrapiImageUrl
