@@ -377,7 +377,7 @@ export default function Page({
           {/* Speakers */}
           <section id='speakers' className='section-container'>
             <div className='p-px'>
-              <div className='flex items-center bg-white p-4 pt-3 ring-1 ring-black lg:p-6 lg:pt-5'>
+              <div className='flex items-center bg-white p-4 pt-3 ring-1 ring-black lg:gap-6 lg:p-6 lg:pt-5'>
                 <OpenhouseMarkdown className='flex-1'>
                   {speakersIntro}
                 </OpenhouseMarkdown>

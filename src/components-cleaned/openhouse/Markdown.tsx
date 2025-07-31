@@ -106,9 +106,20 @@ export default function OpenhouseMarkdown({
           },
           a({ node, children, className = '', ...props }) {
             return (
-              <a className={`underline ${className}`} {...props}>
+              <a
+                className={`underline hover:decoration-2 ${className}`}
+                {...props}>
                 {children}
               </a>
+            )
+          },
+          blockquote({ node, children, className = '', ...props }) {
+            return (
+              <blockquote
+                className={`relative space-y-3 p-4 before:pointer-events-none before:absolute before:inset-0 before:block before:bg-current before:opacity-10 ${className}`}
+                {...props}>
+                {children}
+              </blockquote>
             )
           }
         }}>
