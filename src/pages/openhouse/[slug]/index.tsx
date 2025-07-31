@@ -438,7 +438,7 @@ export default function Page({
                       return (
                         <div
                           key={featuredSpeakers.length - 1 + fillerIndex}
-                          className='col-span-6 hidden ring-1 ring-black md-mid:block'
+                          className='col-span-6 hidden bg-white ring-1 ring-black md-mid:block'
                         />
                       )
                     })}
