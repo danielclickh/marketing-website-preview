@@ -80,17 +80,17 @@ export default function GamingIndustryPage({
           <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-2xl'>
             <p className='font-bold text-primary-300'>Industries / Retail</p>
             <SuiTitle type='h1' className='text-white md:!text-5.5xl'>
-              Retail, re-imagined in real-time with ClickHouse
+              ClickHouse for Retail
             </SuiTitle>
             <SuiText>
-              Transform every retail signal into actionable insight in the blink
-              of an eye. ClickHouse streams, stores, and queries live data,
-              enabling you to respond in real time.
+              Transform every retail signal into actionable insights. ClickHouse
+              streams, stores, and queries live data, enabling you to respond in
+              real time.
             </SuiText>
             <TickItem className='text-left'>
               <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
-              that power real-time business intelligence dashboards and
-              real-time inventory tracking, with instant responsiveness.
+              that power real-time inventory tracking, with instant
+              responsiveness.
             </TickItem>
             <TickItem className='text-left'>
               <strong>Retail Performance Monitoring (RPM)</strong> - track
@@ -99,9 +99,9 @@ export default function GamingIndustryPage({
             </TickItem>
             <TickItem className='text-left'>
               <strong>End-to-end customer journey analytics</strong> that track
-              the entire funnel - site performance, error logs, campaign KPIs,
-              email CTRs, notifications, ad performance, and A/B tests; all in
-              real time.
+              the entire funnel, from site performance, to error logs, campaign
+              KPIs, email CTRs, notifications, ad performance, and A/B tests.
+              All in real time.
             </TickItem>
             <TickItem className='text-left'>
               <strong>Optimize monetization and drive ad decisions</strong> with
@@ -172,7 +172,7 @@ export default function GamingIndustryPage({
               Total visibility into every digital interaction
             </SuiTitle>
             <SuiText className='text-neutral-200'>
-              Gain full-fidelity insight into customer behavior in real time—and
+              Get full-fidelity insight into customer behavior in real time—and
               see why leading retailers trust ClickHouse for their analytics.
             </SuiText>
             <CUIButton
@@ -201,7 +201,7 @@ export default function GamingIndustryPage({
               </span>
               <div className='pl-6'>
                 <span className='text-primary'>
-                  Built for high-speed event ingestion.
+                  Built for high-speed ingestion.
                 </span>{' '}
                 Process millions of in-store events per second with native
                 support for streaming sources like Kafka, Kinesis, and Pub/Sub.
@@ -213,20 +213,6 @@ export default function GamingIndustryPage({
               </span>
               <div className='pl-6'>
                 <span className='text-primary'>
-                  Powerful domain-specific functions.
-                </span>{' '}
-                SQL functions designed for event-driven data, help you analyze
-                customer behavior, optimize store mechanics, and improve ad
-                performance.
-              </div>
-            </div>
-
-            <div className='flex items-center rounded-md border border-neutral-700/80 bg-neutral-900/80 p-3 pr-6 shadow-xl'>
-              <span className='border-r border-neutral-700/80 p-2 pr-4 text-center text-lg text-[#B3B6BD]/60'>
-                04
-              </span>
-              <div className='pl-6'>
-                <span className='text-primary'>
                   High concurrency, zero slowdown.
                 </span>{' '}
                 ClickHouse powers real-time dashboards, customer dashboards,
@@ -234,10 +220,9 @@ export default function GamingIndustryPage({
                 with instant responsiveness, unlike traditional data warehouses.
               </div>
             </div>
-
             <div className='flex items-center rounded-md border border-neutral-700/80 bg-neutral-900/80 p-3 pr-6 shadow-xl'>
               <span className='border-r border-neutral-700/80 p-2 pr-4 text-center text-lg text-[#B3B6BD]/60'>
-                05
+                04
               </span>
               <div className='pl-6'>
                 <span className='text-primary'>
