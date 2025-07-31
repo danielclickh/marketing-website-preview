@@ -1,5 +1,7 @@
+import OpenhouseButton from '@/components-cleaned/openhouse/Button'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 export default function OpenhouseMarkdown({
   children,
@@ -11,6 +13,7 @@ export default function OpenhouseMarkdown({
   return (
     <div className={`space-y-6 ${className}`}>
       <ReactMarkdown
+        rehypePlugins={[rehypeRaw]}
         components={{
           h1({ node, children, className = '', ...props }) {
             return (
@@ -104,7 +107,29 @@ export default function OpenhouseMarkdown({
               </li>
             )
           },
-          a({ node, children, className = '', ...props }) {
+          a({ node, children, href = '', target, className = '', ...props }) {
+            if (className.includes('btn-primary')) {
+              return (
+                <OpenhouseButton
+                  href={href}
+                  target={target}
+                  arrow={className.includes('with-arrow')}
+                  variant='primary'>
+                  {children}
+                </OpenhouseButton>
+              )
+            }
+            if (className.includes('btn-secondary')) {
+              return (
+                <OpenhouseButton
+                  href={href}
+                  target={target}
+                  arrow={className.includes('with-arrow')}
+                  variant='secondary'>
+                  {children}
+                </OpenhouseButton>
+              )
+            }
             return (
               <a
                 className={`underline hover:decoration-2 ${className}`}
