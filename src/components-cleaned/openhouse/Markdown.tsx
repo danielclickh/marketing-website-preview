@@ -132,6 +132,8 @@ export default function OpenhouseMarkdown({
             }
             return (
               <a
+                href={href}
+                target={target}
                 className={`underline hover:decoration-2 ${className}`}
                 {...props}>
                 {children}
