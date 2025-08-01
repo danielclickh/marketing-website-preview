@@ -302,7 +302,8 @@ export default function Page({
                       maxFontSize={72}
                       className='font-bold'>
                       {dayDateObject.toLocaleString('en-US', {
-                        month: 'long'
+                        month: 'long',
+                        timeZone: 'UTC'
                       })}
                     </FitText>
                   </div>

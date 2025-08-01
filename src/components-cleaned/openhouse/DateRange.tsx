@@ -8,22 +8,28 @@ export default function OpenhouseDateRange({
   end
 }: OpenhouseDateRangeProps) {
   const startDay = start.toLocaleString('en-US', {
-    day: 'numeric'
+    day: 'numeric',
+    timeZone: 'UTC'
   })
   const endDay = end.toLocaleString('en-US', {
-    day: 'numeric'
+    day: 'numeric',
+    timeZone: 'UTC'
   })
   const startMonth = start.toLocaleString('en-US', {
-    month: 'short'
+    month: 'short',
+    timeZone: 'UTC'
   })
   const endMonth = end.toLocaleString('en-US', {
-    month: 'short'
+    month: 'short',
+    timeZone: 'UTC'
   })
   const startYear = start.toLocaleString('en-US', {
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'UTC'
   })
   const endYear = end.toLocaleString('en-US', {
-    year: 'numeric'
+    year: 'numeric',
+    timeZone: 'UTC'
   })
 
   if (startDay === endDay && startMonth === endMonth && startYear === endYear) {
