@@ -4,10 +4,20 @@ import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 import HRSeparator from '@/components/HRSeparator'
 import Markdown from '@/components/Markdown'
+import {
+  clickpipeBaseSize,
+  clickpipeSizes
+} from '@/components/PricingV2/config'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { bytesToHumanReadable, humanReadableToBytes } from '@/lib/utils/memory'
 import Link from 'next/link'
 import { useCallback, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
+
+const REPLICAS: Options = Array.from({ length: 25 }, (_, i) => ({
+  value: i + 1,
+  label: (i + 1).toString()
+}))
 
 const INSTANCES = Array.from({ length: 10 }, (_, i) => ({
   value: i + 1,
@@ -25,6 +35,24 @@ export default function DataSourcesSelector() {
         value: source.slug,
         label: source.name,
         disabled: !!clickpipes?.find((pipe) => pipe.source === source.slug)
+      }
+    })
+  }, [sourceData, clickpipes])
+
+  // Format clickpipe replica sizes for select field
+  const sourceSizeOptions: Options = useMemo(() => {
+    return Object.entries(clickpipeSizes).map(([label, size], sizeIndex) => {
+      return {
+        value: size,
+        label: (
+          <>
+            {label}
+            <span className='opacity-70'>
+              ({bytesToHumanReadable(humanReadableToBytes(`${size}GB`))} RAM,{' '}
+              {size / 4} vCPUs)
+            </span>
+          </>
+        )
       }
     })
   }, [sourceData, clickpipes])
@@ -76,6 +104,8 @@ export default function DataSourcesSelector() {
         <div className='space-y-4'>
           {clickpipes.map((item, clickpipeIndex) => {
             const sourceEntry = findSourceBySlug(item.source)
+            const itemReplicas = item.replicas || 1
+            const itemSize = item.size || clickpipeBaseSize
             return (
               <>
                 <div key={clickpipeIndex} className='flex items-end gap-2'>
@@ -194,6 +224,56 @@ export default function DataSourcesSelector() {
                     </button>
                   </div>
                 </div>
+                {!sourceEntry?.excludeFromCalculations &&
+                  sourceEntry?.scalable && (
+                    <details className='group/dataSourceSize'>
+                      <div className='grid grid-cols-1 gap-6 md:grid-cols-6'>
+                        <div className='md:col-span-3'>
+                          <Label>Replica size</Label>
+                          <Select
+                            options={sourceSizeOptions}
+                            value={itemSize}
+                            onChange={(value) => {
+                              createOrUpdateClickpipe(clickpipeIndex, {
+                                ...item,
+                                size: value
+                              })
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <Label>Replicas</Label>
+                          <Select
+                            options={REPLICAS}
+                            value={itemReplicas}
+                            onChange={(value) => {
+                              createOrUpdateClickpipe(clickpipeIndex, {
+                                ...item,
+                                replicas: value
+                              })
+                            }}
+                            maxHeight={275}
+                          />
+                        </div>
+                      </div>
+                      <summary className='pointer-events-none cursor-pointer select-none list-none appearance-none'>
+                        <span className='group-open/dataSourceSize:hidden'>
+                          Running on{' '}
+                          {itemReplicas === 1 ? 'a single' : 'multiple'}{' '}
+                          {Object.entries(clickpipeSizes).find(
+                            ([key, value]) => value === itemSize
+                          )?.[0] || 'XS'}{' '}
+                          {itemReplicas === 1 ? 'replica' : 'replicas'}.{' '}
+                          <span className='pointer-events-auto text-primary-300 hover:underline'>
+                            Edit
+                          </span>
+                        </span>
+                        <span className='pointer-events-auto hidden cursor-pointer text-primary-300 hover:underline group-open/dataSourceSize:block'>
+                          Hide replica details
+                        </span>
+                      </summary>
+                    </details>
+                  )}
                 <HRSeparator />
               </>
             )

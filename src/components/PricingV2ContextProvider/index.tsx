@@ -1,6 +1,6 @@
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
-import { findClosestCompute } from '../PricingV2/config'
+import { clickpipeBaseSize, findClosestCompute } from '../PricingV2/config'
 import {
   Adhoc,
   Context,
@@ -456,35 +456,43 @@ export default function PricingV2ContextProvider({
     let computeCosts = 0
     let ingestCosts = 0
 
-    clickpipes.forEach(({ source, dataIngested, instances }) => {
-      const sourceEntry = sourceData.dataSources.find(
-        (item) => item.slug === source
-      )
+    clickpipes.forEach(
+      ({ source, dataIngested, instances, size, replicas }) => {
+        const sourceEntry = sourceData.dataSources.find(
+          (item) => item.slug === source
+        )
 
-      // Skip clickpipe if it's invalid or is excluded from calculations (e.g. free for public beta)
-      if (!sourceEntry || sourceEntry.excludeFromCalculations) {
-        return
-      }
+        // Skip clickpipe if it's invalid or is excluded from calculations (e.g. free for public beta)
+        if (!sourceEntry || sourceEntry.excludeFromCalculations) {
+          return
+        }
 
-      // Compute costs (per instance per month, respecting active hours)
-      const monthlyComputeCost =
-        instances *
-        replicaComputeUsdPerHour *
-        hours *
-        config.averageDaysPerMonth
-      computeCosts += monthlyComputeCost
+        // Compute costs (per instance per month, respecting active hours)
+        let monthlyComputeCost =
+          instances *
+          replicaComputeUsdPerHour *
+          hours *
+          config.averageDaysPerMonth
 
-      // Ingestion costs (only for data streaming sources)
-      if (sourceEntry.ingestsData) {
-        const dataIngestedInGb = dataIngested
-          ? humanReadableTo(dataIngested, 'GB')
-          : null
+        if (sourceEntry.scalable && !sourceEntry.excludeFromCalculations) {
+          monthlyComputeCost *=
+            ((size || clickpipeBaseSize) / clickpipeBaseSize) * (replicas || 1)
+        }
 
-        if (dataIngestedInGb) {
-          ingestCosts += ingestedUsdPerGb * dataIngestedInGb
+        computeCosts += monthlyComputeCost
+
+        // Ingestion costs (only for data streaming sources)
+        if (sourceEntry.ingestsData) {
+          const dataIngestedInGb = dataIngested
+            ? humanReadableTo(dataIngested, 'GB')
+            : null
+
+          if (dataIngestedInGb) {
+            ingestCosts += ingestedUsdPerGb * dataIngestedInGb
+          }
         }
       }
-    })
+    )
 
     return computeCosts + ingestCosts
   }, [planEntry, clickpipes, sourceData, hours])

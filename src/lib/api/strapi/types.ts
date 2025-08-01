@@ -133,6 +133,7 @@ export interface PricingV2ComponentDataSource {
   ingestsData: boolean
   excludeFromCalculations: boolean
   excludeFromCalculationsLabel: null | string
+  scalable: boolean
 }
 
 export interface PricingV2 {
