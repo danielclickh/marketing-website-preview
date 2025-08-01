@@ -19,6 +19,7 @@ import Footer from '@/components/Footer'
 import SeoContainer from '@/components/SeoContainer'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import { fetchAll, findAll } from '@/lib/api/strapi'
+import { IS_PRODUCTION } from '@/lib/next'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getOrdinal } from '@/lib/utils/numbers'
 import { CommonProps, ParamsType } from '@/types/homepage'
@@ -61,7 +62,8 @@ export const getStaticProps: GetStaticProps<RoadshowProps> =
         'logos',
         'logos.logo'
       ],
-      pagination: { limit: 1 }
+      pagination: { limit: 1 },
+      publicationState: IS_PRODUCTION ? 'live' : 'preview'
     })
 
     const page = data?.[0] as null | OpenhouseEntry
@@ -94,7 +96,8 @@ export async function getStaticPaths() {
   const data: Array<Pick<OpenhouseEntry, 'slug'>> = await fetchAll(
     'openhouses',
     {
-      fields: ['slug']
+      fields: ['slug'],
+      publicationState: IS_PRODUCTION ? 'live' : 'preview'
     }
   )
 
@@ -227,7 +230,7 @@ export default function Page({
                     as='span'
                     key={itemIndex}
                     className='text-4xl font-black leading-none text-ch-yellow lg:text-[4rem]'>
-                    {item}
+                    {item.trim()}
                   </FontSohneBreit>
                 )
               })}
