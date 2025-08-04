@@ -137,7 +137,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::openhouse.openhouse': async function (body, response) {
-    const paths: Array<string> = []
+    const paths: Array<string> = ['/openhouse']
 
     if (body?.entry?.slug) {
       paths.push(`/openhouse/${body.entry.slug}`)
