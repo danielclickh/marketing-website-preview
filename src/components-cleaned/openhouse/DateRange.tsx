@@ -1,41 +1,62 @@
+import { getOrdinal } from '@/lib/utils/numbers'
+
 export interface OpenhouseDateRangeProps {
   start: Date
   end: Date
+  dayFormat?:
+    | Intl.DateTimeFormatOptions['day']
+    | 'numeric-ordinal'
+    | '2-digit-ordinal'
+  monthFormat?: Intl.DateTimeFormatOptions['month']
+  yearFormat?: Intl.DateTimeFormatOptions['year']
 }
 
 export default function OpenhouseDateRange({
   start,
-  end
+  end,
+  dayFormat = 'numeric',
+  monthFormat = 'short',
+  yearFormat = 'numeric'
 }: OpenhouseDateRangeProps) {
+  const ordinal =
+    dayFormat === '2-digit-ordinal' || dayFormat === 'numeric-ordinal'
+
+  if (dayFormat === '2-digit-ordinal') dayFormat = '2-digit'
+  if (dayFormat === 'numeric-ordinal') dayFormat = 'numeric'
+
+  const startOrdinal = ordinal ? getOrdinal(start.getDate()) : null
+  const endOrdinal = ordinal ? getOrdinal(end.getDate()) : null
+
   const startDay = start.toLocaleString('en-US', {
-    day: 'numeric',
+    day: dayFormat,
     timeZone: 'UTC'
   })
   const endDay = end.toLocaleString('en-US', {
-    day: 'numeric',
+    day: dayFormat,
     timeZone: 'UTC'
   })
   const startMonth = start.toLocaleString('en-US', {
-    month: 'short',
+    month: monthFormat,
     timeZone: 'UTC'
   })
   const endMonth = end.toLocaleString('en-US', {
-    month: 'short',
+    month: monthFormat,
     timeZone: 'UTC'
   })
   const startYear = start.toLocaleString('en-US', {
-    year: 'numeric',
+    year: yearFormat,
     timeZone: 'UTC'
   })
   const endYear = end.toLocaleString('en-US', {
-    year: 'numeric',
+    year: yearFormat,
     timeZone: 'UTC'
   })
 
   if (startDay === endDay && startMonth === endMonth && startYear === endYear) {
     return (
       <>
-        {startMonth} {startDay} {startYear}
+        {startMonth} {startDay}
+        {startOrdinal} {startYear}
       </>
     )
   }
@@ -44,8 +65,10 @@ export default function OpenhouseDateRange({
     return (
       <>
         {startMonth} {startDay}
+        {startOrdinal}
         {'-'}
-        {endDay} {startYear}
+        {endDay}
+        {endOrdinal} {startYear}
       </>
     )
   }
@@ -54,17 +77,21 @@ export default function OpenhouseDateRange({
     return (
       <>
         {startMonth} {startDay}
+        {startOrdinal}
         {'-'}
-        {endMonth} {endDay} {startYear}
+        {endMonth} {endDay}
+        {endOrdinal} {startYear}
       </>
     )
   }
 
   return (
     <>
-      {startMonth} {startDay} {startYear}
+      {startMonth} {startDay}
+      {startOrdinal} {startYear}
       {'-'}
-      {endMonth} {endDay} {endYear}
+      {endMonth} {endDay}
+      {endOrdinal} {endYear}
     </>
   )
 }
