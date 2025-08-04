@@ -217,7 +217,7 @@ export default function PricingPage({
                         またはいつまでも無料の
                         <Link
                           href='https://clickhouse.com/docs/en/quick-start'
-                          className='text-primary-300 underline'>
+                          className='text-primary-300 hover:underline'>
                           ClickHouseオープンソースディストリビューション
                         </Link>
                         をダウンロード
@@ -226,7 +226,7 @@ export default function PricingPage({
                         請求と料金の詳細については、{' '}
                         <Link
                           href='https://clickhouse.com/docs/en/manage/billing/#faqs'
-                          className='text-primary-300 underline'>
+                          className='text-primary-300 hover:underline'>
                           請求と料金に関するFAQ
                         </Link>
                         をご覧ください。
@@ -256,7 +256,7 @@ export default function PricingPage({
                           です。現在ベータ版の
                           <Link
                             href='/cloud/clickpipes/postgres-cdc-connector'
-                            className='text-primary-300 underline'>
+                            className='text-primary-300 hover:underline'>
                             Postgres ClickPipes
                           </Link>
                           は含まれません。
@@ -265,7 +265,7 @@ export default function PricingPage({
                           請求と料金の詳細については、{' '}
                           <Link
                             href='https://clickhouse.com/docs/en/manage/billing/#faqs'
-                            className='text-primary-300 underline'>
+                            className='text-primary-300 hover:underline'>
                             請求と料金に関するFAQ
                           </Link>
                           をご覧ください。 .
@@ -276,7 +276,7 @@ export default function PricingPage({
                         またはいつまでも無料の{' '}
                         <Link
                           href='https://clickhouse.com/docs/en/quick-start'
-                          className='text-primary-300 underline'>
+                          className='text-primary-300 hover:underline'>
                           ClickHouseオープンソースディストリビューション
                         </Link>
                         をダウンロード
@@ -420,7 +420,7 @@ function RegionRequest() {
       <p className='text-center'>
         Or{' '}
         <span
-          className='text-primary-300 hover:cursor-pointer'
+          className='text-primary-300 hover:cursor-pointer hover:underline'
           onClick={() => {
             setIsModalOpen(true)
             handleRegionRequestClick()

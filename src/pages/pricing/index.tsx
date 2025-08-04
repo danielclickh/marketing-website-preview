@@ -214,7 +214,7 @@ export default function PricingPage({
                         Or download the forever-free{' '}
                         <LinkWithArrow
                           href='https://clickhouse.com/docs/en/quick-start'
-                          className='text-primary-300 underline'>
+                          className='text-primary-300 hover:underline'>
                           open source distribution of ClickHouse
                         </LinkWithArrow>
                       </SuiText>
@@ -223,7 +223,7 @@ export default function PricingPage({
                         please refer to our{' '}
                         <Link
                           href='https://clickhouse.com/docs/en/manage/billing/#faqs'
-                          className='text-primary-300 underline'>
+                          className='text-primary-300 hover:underline'>
                           Billing & Pricing FAQ
                         </Link>
                         .
@@ -251,13 +251,13 @@ export default function PricingPage({
                           compute unit. Does not include{' '}
                           <Link
                             href='/cloud/clickpipes/postgres-cdc-connector'
-                            className='text-primary-300 underline'>
+                            className='text-primary-300 hover:underline'>
                             Postgres CDC ClickPipes
                           </Link>{' '}
                           - for Postgres CDC pricing, visit{' '}
                           <Link
                             href='/docs/cloud/manage/billing/overview#clickpipes-for-postgres-cdc'
-                            className='text-primary-300 underline'>
+                            className='text-primary-300 hover:underline'>
                             here
                           </Link>
                         </SuiText>
@@ -266,7 +266,7 @@ export default function PricingPage({
                           please refer to our{' '}
                           <Link
                             href='https://clickhouse.com/docs/en/manage/billing/#faqs'
-                            className='text-primary-300 underline'>
+                            className='text-primary-300 hover:underline'>
                             Billing & Pricing FAQ
                           </Link>
                           .
@@ -277,7 +277,7 @@ export default function PricingPage({
                         Or download the forever-free{' '}
                         <LinkWithArrow
                           href='https://clickhouse.com/docs/en/quick-start'
-                          className='text-primary-300 underline'>
+                          className='text-primary-300 hover:underline'>
                           open source distribution of ClickHouse
                         </LinkWithArrow>
                       </SuiText>
@@ -419,7 +419,7 @@ function RegionRequest() {
       <p className='text-center'>
         Or{' '}
         <span
-          className='text-primary-300 hover:cursor-pointer'
+          className='text-primary-300 hover:cursor-pointer hover:underline'
           onClick={() => {
             setIsModalOpen(true)
             handleRegionRequestClick()
