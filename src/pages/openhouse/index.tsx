@@ -41,6 +41,7 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
 import CategorySelector from '@/components/CategorySelector'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
@@ -53,12 +54,15 @@ import OpenHouseHeader from '@/components/OpenHouseHeader'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { IS_PRODUCTION } from '@/lib/next'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { limitStringByWord, slugify, stripHtmlTags } from '@/lib/utils/strings'
+import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import { BlogPost } from '@/types/blogs'
 import { CommonProps } from '@/types/homepage'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
@@ -84,11 +88,26 @@ interface OpenHousePageProps extends CommonProps {
       | 'publishedAt'
     >
   >
+  roadshows: Array<
+    Pick<
+      OpenhouseEntry,
+      'slug' | 'heading' | 'locationImage' | 'startDate' | 'endDate'
+    >
+  >
 }
 
 export const getStaticProps: GetStaticProps<OpenHousePageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
+
+    const roadshows: OpenHousePageProps['roadshows'] = await fetchAll(
+      'openhouses',
+      {
+        fields: ['slug', 'heading', 'startDate', 'endDate'],
+        populate: ['locationImage'],
+        publicationState: IS_PRODUCTION ? 'live' : 'preview'
+      }
+    )
 
     const blogs: OpenHousePageProps['blogs'] = await fetchAll('blog-posts', {
       filters: {
@@ -112,6 +131,7 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
           image: [{ url: '/images/social-open-house.png' }]
         },
         blogs,
+        roadshows,
         ...commonProps
       }
     }
@@ -766,7 +786,12 @@ const AGENDA: Array<{
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
-export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
+export default function Page({
+  seo,
+  footerData,
+  blogs,
+  roadshows
+}: OpenHousePageProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
@@ -923,21 +948,60 @@ export default function Page({ seo, footerData, blogs }: OpenHousePageProps) {
                   />
                 </div>
                 <div className='flex-shrink-0 flex-grow-0 text-center md:self-center md:text-left'>
-                  <h2 className='text-2xl font-bold leading-loose'>
-                    May 28-29, 2025
-                  </h2>
-                  <p className='mb-4 text-xl leading-loose'>
-                    Free conference in San Francisco, CA
-                  </p>
-                  {hasBlogs && (
-                    <OpenHouseButton
-                      href='#whats-new'
-                      variant='primary'
-                      size='lg'
-                      className='min-w-48'
-                      onClick={scrollToBlogs}>
-                      See what's new
-                    </OpenHouseButton>
+                  {!roadshows.length && (
+                    <>
+                      <h2 className='text-2xl font-bold leading-loose'>
+                        May 28-29, 2025
+                      </h2>
+                      <p className='mb-4 text-xl leading-loose'>
+                        Free conference in San Francisco, CA
+                      </p>
+                      {hasBlogs && (
+                        <OpenHouseButton
+                          href='#whats-new'
+                          variant='primary'
+                          size='lg'
+                          className='min-w-48'
+                          onClick={scrollToBlogs}>
+                          See what's new
+                        </OpenHouseButton>
+                      )}
+                    </>
+                  )}
+                  {roadshows.length > 0 && (
+                    <div className='mx-auto flex w-full max-w-80 flex-col divide-y divide-white border border-white md:mr-0 md:w-80'>
+                      <FontSohne
+                        as='h2'
+                        className='block bg-white py-2 text-center font-bold uppercase tracking-wider text-black'>
+                        Roadshows
+                      </FontSohne>
+                      {roadshows.map((roadshow, roadshowIndex) => {
+                        return (
+                          <Link
+                            href={`/openhouse/${roadshow.slug}`}
+                            key={roadshowIndex}
+                            className='group/roadshow flex items-center gap-2 px-4 py-2 text-left'>
+                            <span className='flex-1'>
+                              <FontSohne className='block font-bold tracking-wide transition-colors group-hover/roadshow:text-ch-yellow'>
+                                {roadshow.heading.replaceAll(/\n+/g, ', ')}
+                              </FontSohne>
+                              <small className='text-sm opacity-70'>
+                                <OpenhouseDateRange
+                                  monthFormat='long'
+                                  dayFormat='numeric-ordinal'
+                                  start={new Date(roadshow.startDate)}
+                                  end={new Date(roadshow.endDate)}
+                                />
+                              </small>
+                            </span>
+                            <ArrowRight
+                              strokeWidth={2.5}
+                              className='flex-shrink-0 flex-grow-0 transition group-hover/roadshow:translate-x-1 group-hover/roadshow:text-ch-yellow lg:inline'
+                            />
+                          </Link>
+                        )
+                      })}
+                    </div>
                   )}
                 </div>
               </div>
