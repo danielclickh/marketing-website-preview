@@ -224,7 +224,7 @@ export default function Page({
               <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
                 Free conference in
               </span>
-              {heading.split(`\n`).map((item, itemIndex) => {
+              {heading.split(/\n+/g).map((item, itemIndex) => {
                 return (
                   <FontSohneBreit
                     as='span'
@@ -298,6 +298,7 @@ export default function Page({
                       minFontSize={16}
                       maxFontSize={55}
                       className='font-black'>
+                      {dayDateObject.getDate()}
                       {getOrdinal(dayDateObject.getDate())}
                     </FitText>
                     <FitText
