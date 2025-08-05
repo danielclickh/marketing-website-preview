@@ -44,7 +44,7 @@ export default function ContactPage({
         <div className='mx-auto w-full lg:max-w-4xl'>
           <div className='mb-16 text-center'>
             <SuiTitle type='h1' className='md:!text-5xl'>
-              ClickStack is now available in private preview on ClickHouse Cloud
+              ClickStack is now available in Private Preview on ClickHouse Cloud
             </SuiTitle>
           </div>
           <div className='mx-auto lg:max-w-xl'>
