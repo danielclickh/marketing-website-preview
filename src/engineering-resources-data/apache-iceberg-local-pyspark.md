@@ -2,7 +2,7 @@
 title: 'Setting up Apache Iceberg locally using PySpark'
 slug: 'apache-iceberg-local-pyspark'
 excerpt: "In this guide, we'll learn how to set up Apache Iceberg locally using PySpark."
-index: 25
+index: 26
 ---
 
 In this guide, we'll learn how to set up [Apache Iceberg](https://clickhouse.com/engineering-resources/apache-iceberg) locally using PySpark.
