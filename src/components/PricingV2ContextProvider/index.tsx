@@ -444,7 +444,7 @@ export default function PricingV2ContextProvider({
   // Calculate the price of clickpipes
   //
   const clickpipesPrice: ContextClickpipesPrice = useMemo(() => {
-    if (!planEntry || !clickpipes?.length || hours === null) return null
+    if (!planEntry || !clickpipes?.length) return null
 
     // No pricing needed for plans that don't allow data sources/clickpipes
     if (!planEntry.allowDataSources) return null
@@ -466,7 +466,7 @@ export default function PricingV2ContextProvider({
         }
 
         let pipeComputeCostPerHour = replicaComputeUsdPerHour
-        let pipeTrasnferCostPerHour = 0
+        let pipeTrasnferCost = 0
 
         // Adjust compute hourly cost based on scale options
         if (sourceEntry.scalable) {
@@ -483,17 +483,20 @@ export default function PricingV2ContextProvider({
             : null
 
           if (dataIngestedInGb) {
-            pipeTrasnferCostPerHour += ingestedUsdPerGb * dataIngestedInGb
+            pipeTrasnferCost += ingestedUsdPerGb * dataIngestedInGb
           }
         }
 
+        // ClickPipes run continously so we multiply by 24,
+        // then add the transfer cost and times all
+        // of that by the number of clickpipes/instances
         totalPipesCostPerDay +=
-          (pipeComputeCostPerHour * hours + pipeTrasnferCostPerHour) * instances
+          (pipeComputeCostPerHour * 24 + pipeTrasnferCost) * instances
       }
     )
 
     return totalPipesCostPerDay * config.averageDaysPerMonth
-  }, [planEntry, clickpipes, sourceData, hours])
+  }, [planEntry, clickpipes, sourceData])
 
   // Calculate the price of data transfer
   //
