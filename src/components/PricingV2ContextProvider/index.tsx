@@ -1,6 +1,5 @@
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
-import { clickpipeBaseSize, findClosestCompute } from '../PricingV2/config'
 import {
   Adhoc,
   Context,
@@ -86,12 +85,12 @@ function getUseCaseCompute(
     return Math.round(storageInGb / (useCase.ratio * replicas))
   }
   const calcMinCompute = () => {
-    return findClosestCompute(
+    return config.findClosestCompute(
       Math.round(calcIdeaCompute() - calcIdeaCompute() * 0.2)
     )
   }
   const calcMaxCompute = () => {
-    return findClosestCompute(
+    return config.findClosestCompute(
       Math.round(calcIdeaCompute() + calcIdeaCompute() * 0.2)
     )
   }
@@ -453,8 +452,7 @@ export default function PricingV2ContextProvider({
     const { replicaComputeUsdPerHour, ingestedUsdPerGb } =
       config.clickpipePricingDimensions
 
-    let computeCosts = 0
-    let ingestCosts = 0
+    let totalPipesCostPerDay = 0
 
     clickpipes.forEach(
       ({ source, dataIngested, instances, size, replicas }) => {
@@ -467,19 +465,16 @@ export default function PricingV2ContextProvider({
           return
         }
 
-        // Compute costs (per instance per month, respecting active hours)
-        let monthlyComputeCost =
-          instances *
-          replicaComputeUsdPerHour *
-          hours *
-          config.averageDaysPerMonth
+        let pipeComputeCostPerHour = replicaComputeUsdPerHour
+        let pipeTrasnferCostPerHour = 0
 
-        if (sourceEntry.scalable && !sourceEntry.excludeFromCalculations) {
-          monthlyComputeCost *=
-            ((size || clickpipeBaseSize) / clickpipeBaseSize) * (replicas || 1)
+        // Adjust compute hourly cost based on scale options
+        if (sourceEntry.scalable) {
+          pipeComputeCostPerHour =
+            replicaComputeUsdPerHour *
+            ((size || config.clickpipeBaseSize) / config.clickpipeBaseSize) *
+            (replicas || 1)
         }
-
-        computeCosts += monthlyComputeCost
 
         // Ingestion costs (only for data streaming sources)
         if (sourceEntry.ingestsData) {
@@ -488,13 +483,16 @@ export default function PricingV2ContextProvider({
             : null
 
           if (dataIngestedInGb) {
-            ingestCosts += ingestedUsdPerGb * dataIngestedInGb
+            pipeTrasnferCostPerHour += ingestedUsdPerGb * dataIngestedInGb
           }
         }
+
+        totalPipesCostPerDay +=
+          (pipeComputeCostPerHour * hours + pipeTrasnferCostPerHour) * instances
       }
     )
 
-    return computeCosts + ingestCosts
+    return totalPipesCostPerDay * config.averageDaysPerMonth
   }, [planEntry, clickpipes, sourceData, hours])
 
   // Calculate the price of data transfer
