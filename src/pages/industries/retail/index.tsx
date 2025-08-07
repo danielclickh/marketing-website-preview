@@ -12,6 +12,7 @@ import sparkles from '@/components/LinedIconCard/assets/sparkles.svg'
 import tada from '@/components/LinedIconCard/assets/tada.svg'
 import QuoteCard from '@/components/QuoteCard'
 import { StrapiImageUrl } from '@/components/StrapiElements'
+import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { fetchAll } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -42,7 +43,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
             }
           }
         },
-        pagination: { limit: 9 },
         sort: ['createdAt:desc']
       }
     )
@@ -74,8 +74,8 @@ export default function GamingIndustryPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section className='bg-grid py-16 lg:py-24'>
-        <div className='section-container relative z-10 flex flex-wrap items-center justify-between lg:flex-nowrap lg:items-start'>
+      <section className='bg-grid py-16 lg:pb-24 lg:pt-0'>
+        <div className='section-container relative z-10 flex flex-wrap items-center justify-between lg:flex-nowrap'>
           {/* Content column */}
           <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-2xl'>
             <p className='font-bold text-primary-300'>Industries / Retail</p>
@@ -83,30 +83,10 @@ export default function GamingIndustryPage({
               ClickHouse for Retail
             </SuiTitle>
             <SuiText>
-              Transform every retail signal into actionable insights. ClickHouse
-              streams, stores, and queries live data, enabling you to respond in
-              real time.
+              Retail and e-commerce move fast; your data stack must keep up.
+              With rising expectations, thin margins, and real-time stakes,
+              ClickHouse delivers the speed, scale, and insight to stay ahead.
             </SuiText>
-            <TickItem className='text-left'>
-              <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
-              that power real-time inventory tracking, with instant
-              responsiveness.
-            </TickItem>
-            <TickItem className='text-left'>
-              <strong>Retail Performance Monitoring (RPM)</strong> - track
-              physical and digital store performance, logs, and telemetry in
-              real time with transaction analytics and performance tracking.
-            </TickItem>
-            <TickItem className='text-left'>
-              <strong>End-to-end customer journey analytics</strong> that track
-              the entire funnel, from site performance, to error logs, campaign
-              KPIs, email CTRs, notifications, ad performance, and A/B tests.
-              All in real time.
-            </TickItem>
-            <TickItem className='text-left'>
-              <strong>Optimize monetization and drive ad decisions</strong> with
-              real-time event data personalizing offers and recommendations.
-            </TickItem>
             <div className='!mt-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
               <CUIButton
                 type='primary'
@@ -128,7 +108,7 @@ export default function GamingIndustryPage({
                 onClick={useGalaxyOnClick(
                   'retailIndustryPage.heroCta.contactSalesSelect'
                 )}>
-                Contact sales
+                Contact a retail expert
               </CUIButton>
             </div>
           </div>
@@ -144,6 +124,134 @@ export default function GamingIndustryPage({
               loading='eager'
               priority
             />
+          </div>
+        </div>
+
+        {/* Ticklists */}
+        <div className='section-container mt-12 md:mt-6'>
+          <div className='-m-3 flex flex-wrap text-neutral-200'>
+            <TickItem className='p-3 text-left md:w-1/2'>
+              <strong>Instant customer understanding:</strong> Personalization
+              is no longer optional. Analyze millions of real-time interactions
+              to adapt pricing, offers, and experiences without delay instantly.
+            </TickItem>
+            <TickItem className='p-3 text-left md:w-1/2'>
+              <strong>Real-time supply chain & inventory insights:</strong>{' '}
+              Inventory visibility must be live, not delayed, from warehouse to
+              doorstep. Monitor stock levels, identify anomalies, and respond
+              immediately to disruptions.
+            </TickItem>
+            <TickItem className='p-3 text-left md:w-1/2'>
+              <strong>Fraud & risk detection at scale:</strong> As threats
+              become more complex, the ability to detect patterns in real time
+              is crucial. Continuously monitoring across all transactions and
+              channels, catching issues before they escalate.
+            </TickItem>
+            <TickItem className='p-3 text-left md:w-1/2'>
+              <strong>Unified view across channels:</strong> Today’s customers
+              switch between physical and digital touchpoints seamlessly. Get a
+              360° view, so you’re not guessing you’re acting on real data.
+            </TickItem>
+            <TickItem className='p-3 text-left md:w-1/2'>
+              <strong>Track the entire funnel in real-time:</strong> End-to-end
+              customer journey analytics - site performance, error logs,
+              campaign KPIs, email CTRs, notifications, ad performance, and A/B
+              tests.
+            </TickItem>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section
+        className='bg-shadow-element relative pb-16'
+        style={
+          {
+            '--top-side': '45%',
+            '--right-side': '20%',
+            '--left-side': 'auto',
+            '--scale': '0.8',
+            '--opacity': '0.05'
+          } as React.CSSProperties
+        }>
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/3 bg-primary-300' />
+        <div className='section-container relative z-10'>
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
+              <QuoteCard
+                content='ClickHouse enables the business users to make smart business decisions based on huge volume of data in a matter of seconds'
+                link={{
+                  href: 'https://medium.com/walmartglobaltech/interactive-analytics-at-scale-c8e32dd0e910',
+                  target: '_blank'
+                }}
+                logo={{
+                  src: logoWalmart,
+                  width: 233.58 * 0.6,
+                  height: 56.01 * 0.6,
+                  alt: 'Walmart'
+                }}
+              />
+              <QuoteCard
+                content='ClickHouse is a fast and highly performant analytical database, widely used across Instacart to power other use-cases such as critical retailer and ads dashboards, calculating results for A/B testing, and machine learning signals.'
+                link={{
+                  href: 'https://tech.instacart.com/real-time-fraud-detection-with-yoda-and-clickhouse-bd08e9dbe3f4',
+                  target: '_blank'
+                }}
+                logo={{
+                  src: logoInstacart,
+                  width: 150,
+                  height: 24,
+                  alt: 'Instacart'
+                }}
+              />
+              <QuoteCard
+                content='ClickHouse has become the backbone for all of our data applications. Adopting ClickHouse has enhanced our data analytics capabilities, supporting the growing demands of our internal teams efficiently and cost-effectively'
+                link='/blog/seeing-the-big-picture-shopees-journey-to-distributed-tracing-with-clickhouse'
+                logo={{
+                  src: logoShopee,
+                  width: 889 * 0.14,
+                  height: 281 * 0.14,
+                  alt: 'Jerry'
+                }}
+              />
+            </div>
+          </div>
+          <div className='mx-auto max-w-5xl'>
+            {/* Trusted by */}
+            <div className='flip-selection mx-auto mb-8 w-fit max-w-2xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+              Leading retailers choose ClickHouse for real-time speed optimizing
+              fulfillment, loyalty, and peak demand at{' '}
+              <TiltedText type='white-on-black' className='px-2'>
+                scale
+              </TiltedText>
+            </div>
+            <div className='mask-logos-carousel brightness-0 saturate-0'>
+              <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
+                <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
+                  {stories.map((story, logoIndex) => {
+                    return (
+                      <div
+                        key={logoIndex}
+                        className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                        <StrapiImageUrl {...story.User.logo} />
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
+                  {stories.map((story, logoIndex) => {
+                    return (
+                      <div
+                        key={logoIndex}
+                        className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                        <StrapiImageUrl {...story.User.logo} />
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -230,91 +338,6 @@ export default function GamingIndustryPage({
                 </span>{' '}
                 Safeguard customer data with CMEK, BYOC support, fine-grained
                 access controls, and built-in GDPR-compliant TTLs and deletes.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section
-        className='bg-shadow-element relative bg-neutral-725 pb-16'
-        style={
-          {
-            '--top-side': '45%',
-            '--right-side': '20%',
-            '--left-side': 'auto',
-            '--scale': '0.8',
-            '--opacity': '0.05'
-          } as React.CSSProperties
-        }>
-        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/3 bg-primary-300' />
-        <div className='section-container relative z-10'>
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
-            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-            <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
-              <QuoteCard
-                content='ClickHouse enables the business users to make smart business decisions based on huge volume of data in a matter of seconds'
-                logo={{
-                  src: logoWalmart,
-                  width: 233.58 * 0.6,
-                  height: 56.01 * 0.6,
-                  alt: 'Walmart'
-                }}
-              />
-              <QuoteCard
-                content='ClickHouse is a fast and highly performant analytical database, widely used across Instacart to power other use-cases such as critical retailer and ads dashboards, calculating results for A/B testing, and machine learning signals.'
-                logo={{
-                  src: logoInstacart,
-                  width: 150,
-                  height: 24,
-                  alt: 'Instacar'
-                }}
-              />
-              <QuoteCard
-                content='ClickHouse has become the backbone for all of our data applications. Adopting ClickHouse has enhanced our data analytics capabilities, supporting the growing demands of our internal teams efficiently and cost-effectively'
-                link='/blog/seeing-the-big-picture-shopees-journey-to-distributed-tracing-with-clickhouse'
-                logo={{
-                  src: logoShopee,
-                  width: 889 * 0.14,
-                  height: 281 * 0.14,
-                  alt: 'Jerry'
-                }}
-              />
-            </div>
-          </div>
-          <div className='mx-auto max-w-5xl'>
-            {/* Trusted by */}
-            <div className='flip-selection mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-              Trusted by developers that work with data at{' '}
-              <span className='tilted tilted-black'>
-                <span className='tilted-content leading-8'>scale</span>
-              </span>
-            </div>
-            <div className='mask-logos-carousel brightness-0 saturate-0'>
-              <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
-                <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
-                  {stories.map((story, logoIndex) => {
-                    return (
-                      <div
-                        key={logoIndex}
-                        className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                        <StrapiImageUrl {...story.User.logo} />
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
-                  {stories.map((story, logoIndex) => {
-                    return (
-                      <div
-                        key={logoIndex}
-                        className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                        <StrapiImageUrl {...story.User.logo} />
-                      </div>
-                    )
-                  })}
-                </div>
               </div>
             </div>
           </div>
