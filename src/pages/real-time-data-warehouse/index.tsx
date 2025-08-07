@@ -601,6 +601,14 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
                   icon='/images/real-time-data-warehouse/icon-cybersecurity.svg'
                 />
               </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Automotive'
+                  href='/industries/automotive'
+                  text='Vehicle telemetry, factory analytics, predictive maintenance, and connected car insights—delivered in real time.'
+                  icon='/images/real-time-data-warehouse/icon-automotive.svg'
+                />
+              </div>
             </div>
           </div>
           <CUIButton
