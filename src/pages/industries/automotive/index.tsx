@@ -48,40 +48,20 @@ export default function GamingIndustryPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='bg-grid py-16 lg:py-24'>
-        <div className='section-container relative z-10 flex flex-wrap items-center justify-between lg:flex-nowrap lg:items-start'>
+        <div className='section-container relative z-10 flex flex-wrap items-center justify-between lg:flex-nowrap'>
           {/* Content column */}
-          <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-xl'>
+          <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-2xl'>
             <p className='font-bold text-primary-300'>
               Industries / Automotive
             </p>
             <SuiTitle type='h1' className='text-white md:!text-5.5xl'>
-              Automotive, accelerated in real-time with ClickHouse
+              ClickHouse for Automotive
             </SuiTitle>
             <SuiText>
-              <strong>The real-time database that never lags.</strong> Ingest
-              millions of rows per second. Handle the most heavily concurrent
-              workloads. All without compromising query speed.
+              <strong>Real-time performance without the tradeoffs.</strong>{' '}
+              Ingest millions of rows per second. Handle the most heavily
+              concurrent workloads. All without compromising query speed.
             </SuiText>
-            <TickItem className='text-left'>
-              <strong>Automotive Performance Monitoring (APM)</strong> - track
-              vehicle performance, logs, and telemetry in real time with crash
-              analytics and performance tracking.
-            </TickItem>
-            <TickItem className='text-left'>
-              <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
-              needed to power real-time dashboards, live vehicle state tracking,
-              EV charging analytics, and telemetry.
-            </TickItem>
-            <TickItem className='text-left'>
-              <strong>Factory monitoring</strong> - ingest metrics, machine
-              monitoring, assembly line analytics, and predictive maintenance &
-              asset health.
-            </TickItem>
-            <TickItem className='text-left'>
-              <strong>Connected Car</strong> - predictive maintenance, remote
-              diagnostics, EV charging station analytics, battery-health
-              optimization, and track update roll-outs.
-            </TickItem>
             <div className='!mt-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
               <CUIButton
                 type='primary'
@@ -103,22 +83,46 @@ export default function GamingIndustryPage({
                 onClick={useGalaxyOnClick(
                   'automotiveIndustryPage.heroCta.contactSalesSelect'
                 )}>
-                Contact sales
+                Talk to an expert
               </CUIButton>
             </div>
           </div>
 
           {/* Image column */}
-          <div className='mx-auto mt-16 hidden w-full lg:block'>
+          <div className='mx-auto hidden w-full pl-8 lg:block'>
             <Image
               src={hero}
               alt='Automtive'
-              width={1295 / 1.5}
-              height={891 / 1.5}
+              width={1085 / 1.5}
+              height={662 / 1.5}
               className='h-auto w-full'
               loading='eager'
               priority
             />
+          </div>
+        </div>
+        <div className='section-container mt-12'>
+          <div className='-m-3 flex flex-wrap items-start text-neutral-200'>
+            <TickItem className='p-2 text-left md:w-1/2'>
+              <strong>Automotive Performance Monitoring (APM)</strong> - track
+              vehicle performance, logs, and telemetry in real time with crash
+              analytics and performance tracking.
+            </TickItem>
+            <TickItem className='p-2 text-left md:w-1/2'>
+              <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
+              needed to power real-time dashboards, live vehicle state tracking,
+              EV charging analytics, and telemetry.
+            </TickItem>
+            <TickItem className='p-2 text-left md:w-1/2'>
+              <strong>Factory monitoring</strong> - ingest metrics, machine
+              monitoring, assembly line analytics, and predictive maintenance &
+              asset health.
+            </TickItem>
+            <TickItem className='p-2 text-left md:w-1/2'>
+              <strong>Connected Car</strong> - predictive maintenance, remote
+              diagnostics, EV charging station analytics, battery-health
+              optimization, and track update roll-outs.
+            </TickItem>
           </div>
         </div>
       </section>
@@ -244,6 +248,9 @@ export default function GamingIndustryPage({
         <div className='section-container relative z-10'>
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <p className='mb-6 text-center text-xl font-semibold leading-normal lg:-mt-3'>
+              Trusted by the world’s most ambitious OEMs and mobility innovators
+            </p>
             <div className='space-y-6 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0'>
               <QuoteCard
                 link='/blog/how-tesla-built-quadrillion-scale-observability-platform-on-clickhouse'
@@ -267,6 +274,10 @@ export default function GamingIndustryPage({
               />
               <QuoteCard
                 content='Auto-insurance ecommerce use-case - real-time funnel, A/B-test, and pricing analytics for car-insurance and loan comparison at 20× faster queries and a fraction of Redshift’s cost with ClickHouse'
+                link={{
+                  href: 'https://juicefs.com/en/blog/user-stories/read-write-separation',
+                  target: '_blank'
+                }}
                 logo={{
                   src: logoJerry,
                   width: 82 * 1.2,
