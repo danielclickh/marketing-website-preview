@@ -68,7 +68,7 @@ export const getStaticProps: GetStaticProps<RoadshowProps> =
 
     const page = data?.[0] as null | OpenhouseEntry
 
-    if (!page) {
+    if (!page || (page.comingSoon && IS_PRODUCTION)) {
       return {
         notFound: true
       }

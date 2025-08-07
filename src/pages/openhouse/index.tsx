@@ -91,7 +91,12 @@ interface OpenHousePageProps extends CommonProps {
   roadshows: Array<
     Pick<
       OpenhouseEntry,
-      'slug' | 'heading' | 'locationImage' | 'startDate' | 'endDate'
+      | 'slug'
+      | 'heading'
+      | 'locationImage'
+      | 'startDate'
+      | 'endDate'
+      | 'comingSoon'
     >
   >
 }
@@ -103,9 +108,10 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
     const roadshows: OpenHousePageProps['roadshows'] = await fetchAll(
       'openhouses',
       {
-        fields: ['slug', 'heading', 'startDate', 'endDate'],
+        fields: ['slug', 'heading', 'startDate', 'endDate', 'comingSoon'],
         populate: ['locationImage'],
-        publicationState: IS_PRODUCTION ? 'live' : 'preview'
+        publicationState: IS_PRODUCTION ? 'live' : 'preview',
+        sort: ['comingSoon', 'startDate:DESC']
       }
     )
 
@@ -978,26 +984,36 @@ export default function Page({
                       {roadshows.map((roadshow, roadshowIndex) => {
                         return (
                           <Link
-                            href={`/openhouse/${roadshow.slug}`}
+                            href={
+                              roadshow.comingSoon
+                                ? '#'
+                                : `/openhouse/${roadshow.slug}`
+                            }
                             key={roadshowIndex}
-                            className='group/roadshow flex items-center gap-2 px-4 py-2 text-left'>
+                            className={`group/roadshow flex items-center gap-2 px-4 py-2 text-left ${roadshow.comingSoon ? 'pointer-events-none' : ''}`}>
                             <span className='flex-1'>
                               <FontSohne className='block font-bold tracking-wide transition-colors group-hover/roadshow:text-ch-yellow'>
                                 {roadshow.heading.replaceAll(/\n+/g, ', ')}
                               </FontSohne>
                               <small className='text-sm opacity-70'>
-                                <OpenhouseDateRange
-                                  monthFormat='long'
-                                  dayFormat='numeric-ordinal'
-                                  start={new Date(roadshow.startDate)}
-                                  end={new Date(roadshow.endDate)}
-                                />
+                                {roadshow.comingSoon ? (
+                                  <>Coming soon</>
+                                ) : (
+                                  <OpenhouseDateRange
+                                    monthFormat='long'
+                                    dayFormat='numeric-ordinal'
+                                    start={new Date(roadshow.startDate)}
+                                    end={new Date(roadshow.endDate)}
+                                  />
+                                )}
                               </small>
                             </span>
-                            <ArrowRight
-                              strokeWidth={2.5}
-                              className='flex-shrink-0 flex-grow-0 transition group-hover/roadshow:translate-x-1 group-hover/roadshow:text-ch-yellow lg:inline'
-                            />
+                            {!roadshow.comingSoon && (
+                              <ArrowRight
+                                strokeWidth={2.5}
+                                className='flex-shrink-0 flex-grow-0 transition group-hover/roadshow:translate-x-1 group-hover/roadshow:text-ch-yellow lg:inline'
+                              />
+                            )}
                           </Link>
                         )
                       })}

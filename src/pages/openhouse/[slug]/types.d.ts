@@ -65,4 +65,5 @@ export interface OpenhouseEntry {
   agendaRegisterLabel: string
   speakersRegisterLabel: string
   locationRegisterLabel: string
+  comingSoon: boolean
 }
