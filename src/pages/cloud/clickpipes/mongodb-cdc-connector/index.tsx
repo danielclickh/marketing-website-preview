@@ -55,7 +55,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 Replicate your MongoDB data to ClickHouse Cloud in just a few
                 clicks for blazing fast analytics. Eliminates the need for
                 external ETL tools that are expensive, slow and not purpose
-                built for Mongo.
+                built for MongoDB.
               </SuiText>
               <SuiText size='lg' className='text-neutral-200'>
                 Join the waitlist today!
@@ -101,7 +101,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               <LinedIconCard
                 icon='maximize'
                 title='Advanced JSON Support'
-                text={`Seamlessly replicate MongoDB's rich document structures using ClickHouse's powerful native JSON data types. The connector preserves document structure and enables high-performance analytical queries on semi-structured data.`}
+                text={`Seamlessly replicate MongoDB's rich document structures using ClickHouse's powerful native JSON data type. The connector preserves document structure and enables high-performance analytical queries on semi-structured data.`}
                 className='bg-neutral-900/80'
               />
             </div>
@@ -125,7 +125,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               <LinedIconCard
                 icon='sparkles'
                 title='Simple'
-                text='Easily replicate your Postgres databases to ClickHouse Cloud in just a few clicks and few minutes!'
+                text='Easily replicate your MongoDB databases to ClickHouse Cloud in just a few clicks and few minutes!'
                 className='bg-neutral-900/80'
               />
             </div>
@@ -166,7 +166,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               MongoDB can be running anywhere - cloud or on-prem
             </TickItem>
             <TickItem>
-              Multiple replication modes: one-time, CDC, or both.
+              Multiple replication modes: one-time load, CDC, or both
             </TickItem>
           </FeatureSection>
           <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
@@ -200,7 +200,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               Track throughput (rows or GB ingested) and latency over time
             </TickItem>
             <TickItem>Detailed table-level metrics</TickItem>
-            <TickItem>Inbuilt logging for full visibility</TickItem>
+            <TickItem>Built-in logging for full visibility</TickItem>
           </FeatureSection>
           <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
