@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 interface StrapiImageUrlProps extends Omit<StrapiImageProps, 'mime'> {
   priority?: boolean
+  unoptimized?: boolean
 }
 
 export function StrapiImageUrl({
@@ -17,6 +18,7 @@ export function StrapiImageUrl({
   height,
   loading = 'lazy',
   priority,
+  unoptimized = true,
   ...props
 }: StrapiImageUrlProps) {
   const src = sizes && formats && formats[sizes] ? formats[sizes].url : url
@@ -30,7 +32,7 @@ export function StrapiImageUrl({
       height={height as number}
       loading={loading}
       priority={priority}
-      unoptimized
+      unoptimized={unoptimized}
     />
   )
 }

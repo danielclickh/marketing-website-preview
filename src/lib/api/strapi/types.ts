@@ -27,6 +27,10 @@ export interface BaseStrapiImage {
   svgText?: string
 }
 
+export interface StrapiVideoType extends Omit<BaseStrapiImage, 'svgText'> {
+  mime: `video/${string}`
+}
+
 export interface StrapiImageType extends BaseStrapiImage {
   formats?: Record<string, BaseStrapiImage>
 }
