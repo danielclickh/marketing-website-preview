@@ -18,7 +18,7 @@ export default function Hero({
   pause = false
 }: OpenhouseHeroProps) {
   return (
-    <section className='relative h-dvh max-h-[600px] min-h-[450px] overflow-hidden lg:max-h-[900px] lg:min-h-[600px]'>
+    <section className='relative h-[75dvh] max-h-[600px] min-h-[450px] overflow-hidden lg:max-h-[900px] lg:min-h-[600px]'>
       <div
         className='absolute inset-x-0 bottom-0 z-10 h-72 bg-contain lg:h-96'
         style={{ backgroundImage: `url(${heroGradientBottom.src})` }}
