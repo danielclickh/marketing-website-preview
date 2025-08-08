@@ -11,7 +11,7 @@ import { HomePageProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { forwardRef, useEffect, useRef, useState } from 'react'
+import React, { forwardRef, Fragment, useEffect, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps = async function getStaticProps() {
   const commonProps = await getCommonProps()
@@ -602,6 +602,14 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
                   icon='/images/real-time-data-warehouse/icon-cybersecurity.svg'
                 />
               </div>
+              <div className='w-full p-2 lg:w-1/2 lg:p-3'>
+                <IndustryCard
+                  title='Automotive'
+                  href='/industries/automotive'
+                  text='Deliver vehicle telemetry, factory analytics, predictive maintenance, and connected car insights in real time.'
+                  icon='/images/real-time-data-warehouse/icon-automotive.svg'
+                />
+              </div>
             </div>
           </div>
           <CUIButton
@@ -912,8 +920,8 @@ const TimelineCard = forwardRef(function TimelineCard(
         )}
         <div className='mt-auto flex flex-wrap items-center gap-6'>
           {logos &&
-            logos.map((logo) => {
-              return <>{logo}</>
+            logos.map((logo, logoIndex) => {
+              return <Fragment key={logoIndex}>{logo}</Fragment>
             })}
         </div>
       </div>
