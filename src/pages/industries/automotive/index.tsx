@@ -3,8 +3,10 @@ import logoJerry from './assets/logo-jerry.svg'
 import logoTekion from './assets/logo-tekion.svg'
 import logoTesla from './assets/logo-tesla.svg'
 import TickItem from '@/components-cleaned/TickItem'
+import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
+import thumbTesla from '@/components/HomepageSectionContentFeed/assets/thumb-tesla.jpeg'
 import Layout from '@/components/Layout'
 import enterprise from '@/components/LinedIconCard/assets/enterprise.svg'
 import guage from '@/components/LinedIconCard/assets/guage.svg'
@@ -234,7 +236,7 @@ export default function GamingIndustryPage({
 
       {/* Testimonials */}
       <section
-        className='bg-shadow-element relative bg-neutral-725 pb-16'
+        className='bg-shadow-element relative bg-neutral-725'
         style={
           {
             '--top-side': '45%',
@@ -263,7 +265,7 @@ export default function GamingIndustryPage({
                 }}
               />
               <QuoteCard
-                content='Over one quadrillion rows ingested, “with not a single hiccup, not a single issue. Memory was flat, CPU consumption was flat. It was just a thing of beauty to behold."'
+                content='Over one quadrillion rows ingested, with not a single hiccup, not a single issue. Memory was flat, CPU consumption was flat. It was just a thing of beauty to behold.'
                 link='/blog/how-tesla-built-quadrillion-scale-observability-platform-on-clickhouse'
                 logo={{
                   src: logoTesla,
@@ -296,6 +298,21 @@ export default function GamingIndustryPage({
                 }}
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tesla video */}
+      <section className='bg-primary-300 py-16'>
+        <div className='section-container !max-w-3xl space-y-6 text-center text-neutral-900'>
+          <SuiTitle type='h2'>Tesla-scale metrics with ClickHouse</SuiTitle>
+          <SuiText>
+            Alon Tal, Senior Staff Software Engineer at Tesla, talks about
+            Comet, Tesla's internal system built with ClickHouse for ingesting,
+            storing and querying metrics at massive scale.
+          </SuiText>
+          <div className='!mt-10 rounded-lg bg-neutral-900 p-2'>
+            <YouTubeVideo thumbnail={thumbTesla} id='z5t3b3EAc84' />
           </div>
         </div>
       </section>
