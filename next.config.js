@@ -547,6 +547,11 @@ const nextConfig = {
         source: '/company/events/202508-APJ-Manila-Data&AIConference',
         destination: '/company/events/202508-APJ-Manila-DataAIConference',
         permanent: true
+      },
+      {
+        source: '/cloud/hyperdx-waitlist',
+        destination: '/cloud/clickstack-private-preview',
+        permanent: true
       }
     ]
   }

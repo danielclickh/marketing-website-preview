@@ -560,6 +560,7 @@ With ClickHouse Cloud's production instance, we are getting **sub-second query t
               <div className='w-full p-2 lg:w-1/2 lg:p-3'>
                 <IndustryCard
                   title='E-Commerce and retail'
+                  href='/industries/retails'
                   text='Real-time inventory monitoring and overall tracking for online businesses.'
                   icon='/images/real-time-data-warehouse/icon-retail.svg'
                 />

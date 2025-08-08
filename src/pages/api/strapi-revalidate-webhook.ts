@@ -1,4 +1,5 @@
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const revalidate = async (
@@ -133,6 +134,33 @@ const CONTENT_TYPE_HANDLERS: Record<
   },
   'api::user-story.user-story': async function (body, response) {
     const paths = [`/user-stories`]
+    await revalidate(response, paths)
+  },
+  'api::openhouse.openhouse': async function (body, response) {
+    const paths: Array<string> = ['/openhouse']
+
+    if (body?.entry?.slug) {
+      paths.push(`/openhouse/${body.entry.slug}`)
+    }
+
+    await revalidate(response, paths)
+  },
+  'api::openhouse-speaker.openhouse-speaker': async function (body, response) {
+    const paths: Array<string> = []
+
+    const data: Array<Pick<OpenhouseEntry, 'slug'>> = await fetchAll(
+      'openhouses',
+      {
+        fields: ['slug']
+      }
+    )
+
+    if (data) {
+      data.forEach((page) => {
+        paths.push(`/openhouse/${page.slug}`)
+      })
+    }
+
     await revalidate(response, paths)
   },
 
