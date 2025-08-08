@@ -66,7 +66,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                 type='primary'
                 size='lg'
                 weight='semibold'
-                href='#'
+                href='/deals/ycombinator#apply'
                 className='!px-10'
                 onClick={useGalaxyOnClick('ycStartupsPage.hero.applyNow')}>
                 Apply now
@@ -148,57 +148,69 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
 
       {/* Who? */}
       <section className='bg-primary-300 py-16 lg:py-24'>
-        <div className='section-container grid grid-cols-2 gap-6'>
+        <div className='section-container grid grid-cols-1 gap-6 lg:grid-cols-2'>
           <div className='text-center'>
-            <CUICard className='bg-neutral-900/90'>
+            <CUICard className='bg-neutral-900/90 p-6 lg:p-12'>
               <CUICard.Body>
                 <SuiTitle type='h2'>Who can apply?</SuiTitle>
+                <ul className='mt-6 space-y-6 text-left lg:mt-12'>
+                  <li>
+                    <TickItem>You’re part of the YC 2025 batch</TickItem>
+                  </li>
+                  <li>
+                    <TickItem>Your company is less than 3 years old</TickItem>
+                  </li>
+                  <li>
+                    <TickItem>
+                      You haven’t raised a Series B or later round
+                    </TickItem>
+                  </li>
+                  <li>
+                    <TickItem>
+                      You haven’t been a paid ClickHouse Cloud customer before
+                    </TickItem>
+                  </li>
+                </ul>
               </CUICard.Body>
             </CUICard>
           </div>
           <div className='text-center'>
-            <CUICard className='bg-neutral-900/90'>
+            <CUICard className='bg-neutral-900/90 p-6 lg:p-12'>
               <CUICard.Body>
                 <SuiTitle type='h2'>What do you get?</SuiTitle>
+                <ul className='mt-6 space-y-6 text-left lg:mt-12'>
+                  <li>
+                    <TickItem>
+                      $10,000 in ClickHouse Cloud credits, valid for 12 months
+                    </TickItem>
+                  </li>
+                  <li>
+                    <TickItem>ClickHouse Basic support included</TickItem>
+                  </li>
+                  <li>
+                    <TickItem>One-hour expert training session</TickItem>
+                  </li>
+                  <li>
+                    <TickItem>
+                      Get featured in a joint blog post and promoted on our
+                      channels
+                    </TickItem>
+                  </li>
+                  <li>
+                    <TickItem>
+                      Speaking opportunities at ClickHouse community events
+                    </TickItem>
+                  </li>
+                </ul>
               </CUICard.Body>
             </CUICard>
           </div>
         </div>
       </section>
 
-      <section className='py-16 lg:py-24'>
-        <div className='section-container -mt-4 flex flex-col gap-16 lg:mt-0 lg:grid lg:grid-cols-12 lg:gap-24'>
-          {/* Content column */}
-          <div className='space-y-6 lg:col-span-7'>
-            <p>With ClickHouse Cloud, you get:</p>
-
-            <p className='font-bold'>Highlights</p>
-            <ul className='space-y-4'>
-              <li>
-                <TickItem>
-                  <strong>Seamless scaling</strong> - automatic scaling adjusts
-                  to variable workloads so you don't have to over-provision for
-                  peak usage
-                </TickItem>
-              </li>
-              <li>
-                <TickItem>
-                  <strong>Transparent pricing</strong> - pay only for what you
-                  use, with resource reservations and scaling controls
-                </TickItem>
-              </li>
-              <li>
-                <TickItem>
-                  <strong>Broad ecosystem</strong> - bring your favorite data
-                  connectors, visualization tools, SQL and language clients with
-                  you
-                </TickItem>
-              </li>
-            </ul>
-          </div>
-
-          {/* Form column */}
-          <div className='lg:col-span-5'>
+      <section className='py-16 lg:py-24' id='apply'>
+        <div className='section-container'>
+          <div className='mx-auto max-w-2xl'>
             <div
               className={`relative rounded-lg bg-neutral-900 p-4 shadow-lg sm:p-6 lg:p-8 ${formLoaded ? '' : 'min-h-full'}`}>
               <div className='mb-8 text-center'>
