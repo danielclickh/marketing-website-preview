@@ -60,7 +60,9 @@ export const getStaticProps: GetStaticProps<RoadshowProps> =
         'locationImage',
         'faqs',
         'logos',
-        'logos.logo'
+        'logos.logo',
+        'seo',
+        'seo.image'
       ],
       pagination: { limit: 1 },
       publicationState: IS_PRODUCTION ? 'live' : 'preview'
@@ -80,9 +82,13 @@ export const getStaticProps: GetStaticProps<RoadshowProps> =
       props: {
         ...page,
         seo: {
-          title: `Open House ${startDateObject.getFullYear()}, The ClickHouse User Conference - ${page.heading.replaceAll(`\n`, ', ')}.`,
+          title: page.seo?.title?.trim().length
+            ? page.seo.title
+            : `Open House ${startDateObject.getFullYear()}, The ClickHouse User Conference - ${page.heading.replaceAll(`\n`, ', ')}.`,
+          description: page.seo?.description || '',
+          keywords: page.seo?.keywords || '',
           path: `/openhouse/${page.slug}`,
-          image: [{ url: '/images/social-open-house.png' }]
+          image: page.seo?.image ? page.seo?.image : []
         },
         ...commonProps
       }
