@@ -222,7 +222,7 @@ export default function Page({
           <div className='section-container w-full items-end justify-between md:flex'>
             <h1 className='flex flex-col uppercase'>
               <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
-                Free conference in
+                Free conference in{' '}
               </span>
               {heading.split(/\n+/g).map((item, itemIndex) => {
                 return (
@@ -230,7 +230,7 @@ export default function Page({
                     as='span'
                     key={itemIndex}
                     className='text-4xl font-black leading-none text-ch-yellow lg:text-[4rem]'>
-                    {item.trim()}
+                    {item.trim()}{' '}
                   </FontSohneBreit>
                 )
               })}
@@ -241,12 +241,12 @@ export default function Page({
                   start={startDateObject}
                   end={endDateObject}
                 />
-                <span className='hidden md:inline'>.</span>
+                <span className='hidden md:inline'>.</span>{' '}
               </span>
               {strapline.split(`\n`).map((item, itemIndex) => {
                 return (
                   <span key={itemIndex} className='hidden md:inline'>
-                    {item}
+                    {item}{' '}
                   </span>
                 )
               })}
