@@ -108,7 +108,7 @@ export default function GamingIndustryPage({
                 onClick={useGalaxyOnClick(
                   'retailIndustryPage.heroCta.contactSalesSelect'
                 )}>
-                Contact a retail expert
+                Talk to an expert
               </CUIButton>
             </div>
           </div>
