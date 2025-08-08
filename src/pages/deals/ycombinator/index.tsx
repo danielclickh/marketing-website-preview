@@ -1,4 +1,4 @@
-import { CUIButton } from '@/components/ClickUI'
+import TickItem from '@/components-cleaned/TickItem'
 import Layout from '@/components/Layout'
 import MarketoForm from '@/components/MarketoForm'
 import { SuiTitle } from '@/components/sui'
@@ -49,16 +49,6 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               applying, please review the deal requirements below and complete
               the form.
             </p>
-            <p>
-              Should you have any further questions, do not hesitate to{' '}
-              <Link
-                href='mailto:ycombinatorprogram@clickhouse.com'
-                target='_blank'
-                className='text-primary-300 hover:underline'>
-                reach out
-              </Link>
-              .
-            </p>
             <p className='font-bold'>What is ClickHouse?</p>
             <p>
               ClickHouse is a fast, open-source columnar database management
@@ -71,6 +61,68 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               drive decision-making with its scalable, efficient, and robust
               data infrastructure.{' '}
             </p>
+            <ul className='space-y-4'>
+              <li>
+                <TickItem>
+                  <strong>Instant onboarding</strong> - All the speed and power
+                  that you expect from ClickHouse is now available in a cloud
+                  offering.
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Best price/performance</strong> - Cloud-native
+                  architecture enables effective data tiering and scaling,
+                  resulting in the leading price/performance ratio on the
+                  market.
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Uncompromising reliability</strong> - Reliable by
+                  default, each service is automatically replicated across
+                  multiple availability zones.
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>World-class security</strong> - Let our experts sweat
+                  the security, privacy, and compliance details. Always-on
+                  industry standard defaults and customizable policies. You can
+                  read more about ClickHouse security on trust.clickhouse.com
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Vibrant ecosystem</strong> - We curate the most
+                  popular ways to work ClickHouse. Explore our growing library
+                  of ecosystem integration.
+                </TickItem>
+              </li>
+            </ul>
+
+            <ul className='space-y-4'>
+              <li>
+                <TickItem>
+                  <strong>Seamless scaling</strong> - automatic scaling adjusts
+                  to variable workloads so you don't have to over-provision for
+                  peak usage
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Transparent pricing</strong> - pay only for what you
+                  use, with resource reservations and scaling controls
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Broad ecosystem</strong> - bring your favorite data
+                  connectors, visualization tools, SQL and language clients with
+                  you
+                </TickItem>
+              </li>
+            </ul>
           </div>
 
           {/* Form column */}
@@ -78,7 +130,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
             <div
               className={`relative rounded-lg bg-neutral-900 p-4 shadow-lg sm:p-6 lg:p-8 ${formLoaded ? '' : 'min-h-full'}`}>
               <SuiTitle type='h2' className='mb-8 text-center'>
-                Register
+                Apply now
               </SuiTitle>
 
               {!formLoaded && (
@@ -86,7 +138,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               )}
 
               <MarketoForm
-                formId='1423'
+                formId='1442'
                 clearbitTracking={true}
                 onLoad={() => {
                   setFormLoaded(true)
