@@ -66,4 +66,10 @@ export interface OpenhouseEntry {
   speakersRegisterLabel: string
   locationRegisterLabel: string
   comingSoon: boolean
+  seo: null | {
+    title: null | string
+    keywords: null | string
+    description: null | string
+    image: null | Array<StrapiImageType>
+  }
 }
