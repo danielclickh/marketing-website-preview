@@ -1,14 +1,20 @@
+import iconDoubleTick from './assets/icon-double-tick.svg'
+import iconGuage from './assets/icon-guage.svg'
+import iconIntegrations from './assets/icon-integrations.svg'
+import iconMaximize from './assets/icon-maximize.svg'
+import iconSecure from './assets/icon-secure.svg'
+import iconUsers from './assets/icon-users.svg'
 import ycLogo from './assets/ycombinator.svg'
 import TickItem from '@/components-cleaned/TickItem'
 import ClickHousePartnerLogo from '@/components/ClickHousePartnerLogo'
 import { CUIButton, CUICard } from '@/components/ClickUI'
+import DotsContainer from '@/components/DotsContainer'
 import Layout from '@/components/Layout'
 import MarketoForm from '@/components/MarketoForm'
 import TiltedText from '@/components/TiltedText'
 import { SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import azureLogo from '@/pages/partners/azure/assets/azure-logo.svg'
 import iconCode from '@/pages/partners/azure/assets/icon-code.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -77,9 +83,8 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
       </section>
 
       {/* Why? */}
-      <section className='bg-white/5 py-16 lg:py-20'>
+      <section className='bg-neutral-725 py-16 lg:py-20'>
         <div className='section-container'>
-          {/* Intro */}
           <div className='mb-10 space-y-6 text-center lg:mb-16'>
             <Image
               src={iconCode}
@@ -89,70 +94,143 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               className='inline-block'
             />
             <SuiTitle type='h2'>Why ClickHouse?</SuiTitle>
-            <p className='mx-auto max-w-xl text-white/70'>
+            <p className='mx-auto max-w-3xl text-white/70'>
               ClickHouse is the fastest way to explore and analyze data at
               scale. It’s trusted by OpenAI, Anthropic, Tesla, Weights & Biases,
               eBay, and LangChain to handle billions of rows in milliseconds.
             </p>
           </div>
 
-          {/* Checks */}
-          <ul className='mx-auto grid max-w-4xl grid-cols-1 gap-6 lg:grid-cols-2'>
-            <li>
-              <TickItem>
-                <strong>Instant onboarding</strong>
-                <br />
-                Start running queries in minutes, no infrastructure to manage.
-              </TickItem>
+          <ul className='grid grid-cols-1 gap-x-12 gap-y-10 pl-2 sm:pl-0 md:grid-cols-2 lg:grid-cols-3'>
+            <li className='flex items-start gap-4'>
+              <div className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center'>
+                <Image
+                  src={iconUsers}
+                  alt='Onboarding'
+                  width={32}
+                  height={32}
+                  className='object-contain object-center'
+                />
+              </div>
+              <div>
+                <h4 className='mb-3 font-inter font-bold'>
+                  Instant onboarding
+                </h4>
+                <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                  Start running queries in minutes, no infrastructure to manage.
+                </p>
+              </div>
             </li>
-            <li>
-              <TickItem>
-                <strong>Best price performance</strong>
-                <br />
-                Process more data for less with our cloud-native architecture.
-              </TickItem>
+            <li className='flex items-start gap-4'>
+              <div className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center'>
+                <Image
+                  src={iconGuage}
+                  alt='Performance'
+                  width={32}
+                  height={32}
+                  className='object-contain object-center'
+                />
+              </div>
+              <div>
+                <h4 className='mb-3 font-inter font-bold'>
+                  Best price performance
+                </h4>
+                <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                  Process more data for less with our cloud-native architecture.
+                </p>
+              </div>
             </li>
-            <li>
-              <TickItem>
-                <strong>Uncompromising reliability</strong>
-                <br />
-                Automatic replication across multiple availability zones.
-              </TickItem>
+            <li className='flex items-start gap-4'>
+              <div className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center'>
+                <Image
+                  src={iconDoubleTick}
+                  alt='Reliability'
+                  width={32}
+                  height={32}
+                  className='object-contain object-center'
+                />
+              </div>
+              <div>
+                <h4 className='mb-3 font-inter font-bold'>
+                  Uncompromising reliability
+                </h4>
+                <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                  Automatic replication across multiple availability zones.
+                </p>
+              </div>
             </li>
-            <li>
-              <TickItem>
-                <strong>Enterprise-grade security</strong>
-                <br />
-                Security and compliance handled by our experts, with always-on
-                encryption.
-              </TickItem>
+            <li className='flex items-start gap-4'>
+              <div className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center'>
+                <Image
+                  src={iconSecure}
+                  alt='Security'
+                  width={32}
+                  height={32}
+                  className='object-contain object-center'
+                />
+              </div>
+              <div>
+                <h4 className='mb-3 font-inter font-bold'>
+                  Enterprise-grade security
+                </h4>
+                <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                  Security and compliance handled by our experts, with always-on
+                  encryption.
+                </p>
+              </div>
             </li>
-            <li>
-              <TickItem>
-                <strong>Ecosystem integrations</strong>
-                <br />
-                Connect with your favorite tools, languages, and data sources.
-              </TickItem>
+            <li className='flex items-start gap-4'>
+              <div className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center'>
+                <Image
+                  src={iconIntegrations}
+                  alt='Integrations'
+                  width={32}
+                  height={32}
+                  className='object-contain object-center'
+                />
+              </div>
+              <div>
+                <h4 className='mb-3 font-inter font-bold'>
+                  Ecosystem integrations
+                </h4>
+                <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                  Connect with your favorite tools, languages, and data sources.
+                </p>
+              </div>
             </li>
-            <li>
-              <TickItem>
-                <strong>Seamless scaling</strong>
-                <br />
-                Automatically adjusts to changing workloads so you can focus on
-                building, not capacity planning.
-              </TickItem>
+            <li className='flex items-start gap-4'>
+              <div className='flex aspect-square w-8 flex-shrink-0 flex-grow-0 items-center justify-center'>
+                <Image
+                  src={iconMaximize}
+                  alt='Scaling'
+                  width={21}
+                  height={12}
+                  className='object-contain object-center'
+                />
+              </div>
+              <div>
+                <h4 className='mb-3 font-inter font-bold'>Seamless scaling</h4>
+                <p className='font-inter text-sm font-light leading-relaxed text-neutral-200'>
+                  Automatically adjusts to changing workloads so you can focus
+                  on building, not capacity planning.
+                </p>
+              </div>
             </li>
           </ul>
         </div>
       </section>
 
       {/* Who? */}
-      <section className='bg-primary-300 py-16 lg:py-24'>
-        <div className='section-container grid grid-cols-1 gap-6 lg:grid-cols-2'>
+      <section className='bg-primary-300 py-4 sm:py-16 lg:py-24'>
+        <div className='section-container grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2'>
           <div className='text-center'>
-            <CUICard className='bg-neutral-900/90 p-6 lg:p-12'>
+            <CUICard className='bg-neutral-900/90 p-6 lg:p-12 lg:pt-8'>
               <CUICard.Body>
                 <SuiTitle type='h2'>Who can apply?</SuiTitle>
+                <p className='mt-4 text-neutral-200'>
+                  Eligible startups are in the YC 2025 batch, less than three
+                  years old, pre-Series B, and new to ClickHouse Cloud.
+                </p>
                 <ul className='mt-6 space-y-6 text-left lg:mt-12'>
                   <li>
                     <TickItem>You’re part of the YC 2025 batch</TickItem>
@@ -175,9 +253,14 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
             </CUICard>
           </div>
           <div className='text-center'>
-            <CUICard className='bg-neutral-900/90 p-6 lg:p-12'>
+            <CUICard className='bg-neutral-900/90 p-6 lg:p-12 lg:pt-8'>
               <CUICard.Body>
                 <SuiTitle type='h2'>What do you get?</SuiTitle>
+                <p className='mt-4 text-neutral-200'>
+                  Get $10,000 in ClickHouse Cloud credits for 12 months, with
+                  support, expert training, and opportunities for promotion and
+                  speaking.
+                </p>
                 <ul className='mt-6 space-y-6 text-left lg:mt-12'>
                   <li>
                     <TickItem>
@@ -208,54 +291,50 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
         </div>
       </section>
 
-      <section className='py-16 lg:py-24' id='apply'>
-        <div className='section-container'>
-          <div className='mx-auto max-w-2xl'>
+      <DotsContainer id='apply'>
+        <div className='mx-auto max-w-2xl'>
+          <div
+            className={`relative rounded-lg bg-neutral-900 p-4 shadow-lg sm:p-6 lg:p-8 ${formLoaded ? '' : 'min-h-full'}`}>
+            <div className='mb-8 text-center'>
+              <SuiTitle type='h2' className='mb-4'>
+                Apply now
+              </SuiTitle>
+              <p className='text-neutral-200'>
+                Complete the form to claim your credits and start using
+                ClickHouse Cloud.
+              </p>
+            </div>
+
+            {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+            <MarketoForm
+              formId='1442'
+              clearbitTracking={true}
+              onLoad={() => {
+                setFormLoaded(true)
+              }}
+              onSuccess={() => {
+                setFormSuccess(true)
+
+                // Delay needed to allow the ref to update before scrolling
+                setTimeout(() => {
+                  formSuccessRef.current?.scrollIntoView()
+                }, 10)
+
+                return false // Stops page from reloading
+              }}
+            />
+
             <div
-              className={`relative rounded-lg bg-neutral-900 p-4 shadow-lg sm:p-6 lg:p-8 ${formLoaded ? '' : 'min-h-full'}`}>
-              <div className='mb-8 text-center'>
-                <SuiTitle type='h2' className='mb-4'>
-                  Apply now
-                </SuiTitle>
-                <p className='text-neutral-200'>
-                  Complete the form to claim your credits and start using
-                  ClickHouse Cloud.
-                </p>
-              </div>
-
-              {!formLoaded && (
-                <div className='text-center'>Loading form...</div>
-              )}
-
-              <MarketoForm
-                formId='1442'
-                clearbitTracking={true}
-                onLoad={() => {
-                  setFormLoaded(true)
-                }}
-                onSuccess={() => {
-                  setFormSuccess(true)
-
-                  // Delay needed to allow the ref to update before scrolling
-                  setTimeout(() => {
-                    formSuccessRef.current?.scrollIntoView()
-                  }, 10)
-
-                  return false // Stops page from reloading
-                }}
-              />
-
-              <div
-                ref={formSuccessRef}
-                className={`absolute inset-2 z-10 flex bg-neutral-900/90 text-center backdrop-blur transition-opacity ${formSuccess ? '' : 'pointer-events-none -z-50 opacity-0'}`}>
-                <div className='m-auto w-full max-w-md'>
-                  <h3 className='text-2xl font-bold'>Thank you!</h3>
-                </div>
+              ref={formSuccessRef}
+              className={`absolute inset-2 z-10 flex bg-neutral-900/90 text-center backdrop-blur transition-opacity ${formSuccess ? '' : 'pointer-events-none -z-50 opacity-0'}`}>
+              <div className='m-auto w-full max-w-md'>
+                <h3 className='text-2xl font-bold'>Thank you!</h3>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </DotsContainer>
     </Layout>
   )
 }
