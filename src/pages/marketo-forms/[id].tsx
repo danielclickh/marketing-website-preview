@@ -408,11 +408,21 @@ function removeMarketoStyles(marketoFormObject: MarketoFormObject) {
 
     // Remove form <style> elements
     const scopedStyles = formElement.querySelectorAll('style')
-    Array.from(scopedStyles).forEach((el) => el.remove())
+    Array.from(scopedStyles).forEach((el) => {
+      // Don't remove styles from html blocks
+      if (!el.closest('.mktoHtmlText')) {
+        el.remove()
+      }
+    })
 
     // Remove inline style attributes
     const inlineStyles = formElement.querySelectorAll('[style]')
-    Array.from(inlineStyles).forEach((el) => el.removeAttribute('style'))
+    Array.from(inlineStyles).forEach((el) => {
+      // Don't remove styles from html blocks
+      if (!el.closest('.mktoHtmlText')) {
+        el.removeAttribute('style')
+      }
+    })
 
     // Remove inline style from <form> element
     formElement.removeAttribute('style')
