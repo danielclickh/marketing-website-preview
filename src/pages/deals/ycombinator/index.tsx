@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'ClickHouse x YCombinator',
+          title: 'ClickHouse x Y Combinator',
           description: '',
           keywords: '',
           path: '/deals/ycombinator'
@@ -228,12 +228,15 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               <CUICard.Body>
                 <SuiTitle type='h2'>Who can apply?</SuiTitle>
                 <p className='mt-4 text-neutral-200'>
-                  Eligible startups are in the YC 2025 batch, less than three
-                  years old, pre-Series B, and new to ClickHouse Cloud.
+                  Eligible startups are in the Y Combinator 2025 batch, less
+                  than three years old, pre-Series B, and new to ClickHouse
+                  Cloud.
                 </p>
                 <ul className='mt-6 space-y-6 text-left lg:mt-12'>
                   <li>
-                    <TickItem>You’re part of the YC 2025 batch</TickItem>
+                    <TickItem>
+                      You’re part of the Y Combinator 2025 batch
+                    </TickItem>
                   </li>
                   <li>
                     <TickItem>Your company is less than 3 years old</TickItem>
