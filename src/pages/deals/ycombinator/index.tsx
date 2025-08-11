@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         ...commonProps,
         seo: {
           title:
-            'ClickHouse x Y Combinator | $10,000 in Cloud Credits for YC Startups',
+            'ClickHouse x Y Combinator | $10,000 in ClickHouse Cloud credits for YC Startups',
           description:
             'YC 2025 founders can apply for $10,000 in ClickHouse Cloud credits, expert training, and promotion opportunities. Build and scale analytics faster with the fastest columnar database.',
           keywords:
