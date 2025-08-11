@@ -29,9 +29,12 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'ClickHouse x Y Combinator',
-          description: '',
-          keywords: '',
+          title:
+            'ClickHouse x Y Combinator | $10,000 in Cloud Credits for YC Startups',
+          description:
+            'YC 2025 founders can apply for $10,000 in ClickHouse Cloud credits, expert training, and promotion opportunities. Build and scale analytics faster with the fastest columnar database.',
+          keywords:
+            'clickhouse y combinator deal, yc startup credits, yc 2025 perks, clickhouse cloud credits, clickhouse startup program, yc founder offer, yc startup analytics tool, fastest database for startups, clickhouse cloud free credits, yc partner benefits',
           path: '/deals/ycombinator'
         }
       }
