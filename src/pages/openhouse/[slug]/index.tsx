@@ -291,6 +291,10 @@ export default function Page({
           <section id='agenda' className='section-container w-full space-y-4'>
             {days.map((day, dayIndex) => {
               const dayDateObject = new Date(`${day.date}T00:00:00Z`)
+              const dayNumber = dayDateObject.toLocaleString('en-US', {
+                day: 'numeric',
+                timeZone: 'UTC'
+              })
               return (
                 <div
                   key={dayIndex}
@@ -304,8 +308,8 @@ export default function Page({
                       minFontSize={16}
                       maxFontSize={55}
                       className='font-black'>
-                      {dayDateObject.getDate()}
-                      {getOrdinal(dayDateObject.getDate())}
+                      {dayNumber}
+                      {getOrdinal(parseInt(dayNumber))}
                     </FitText>
                     <FitText
                       minFontSize={16}
