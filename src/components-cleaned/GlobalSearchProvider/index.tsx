@@ -234,7 +234,10 @@ function SearchContainer() {
             />
           </Index>
           <Index indexName='clickhouse'>
-            <Configure hitsPerPage={3} />
+            <Configure
+              hitsPerPage={3}
+              attributesToRetrieve={['slug', 'title']}
+            />
             <Hits
               hitComponent={DocsResult}
               classNames={{
