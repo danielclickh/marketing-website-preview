@@ -146,8 +146,8 @@ export default function Page({
 }: RoadshowProps) {
   const router = useRouter()
   const nowDateObject = new Date()
-  const startDateObject = new Date(startDate)
-  const endDateObject = new Date(endDate)
+  const startDateObject = new Date(`${startDate}T00:00:00Z`)
+  const endDateObject = new Date(`${endDate}T00:00:00Z`)
 
   // Add's scroll offset to <html> tag
   useEffect(() => {
@@ -290,7 +290,7 @@ export default function Page({
         {days.length > 0 && (
           <section id='agenda' className='section-container w-full space-y-4'>
             {days.map((day, dayIndex) => {
-              const dayDateObject = new Date(day.date)
+              const dayDateObject = new Date(`${day.date}T00:00:00Z`)
               return (
                 <div
                   key={dayIndex}
