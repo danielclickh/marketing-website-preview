@@ -3,7 +3,6 @@ import DataSize from '../../ui/DataSize'
 import Label from '../../ui/Label'
 import Select, { Options } from '../../ui/Select'
 import HRSeparator from '@/components/HRSeparator'
-import Markdown from '@/components/Markdown'
 import {
   clickpipeBaseSize,
   clickpipeSizes
@@ -127,36 +126,9 @@ export default function DataSourcesSelector() {
                         <div className='flex items-end md:col-span-3'>
                           <div className='flex h-10 items-center text-success-500'>
                             <div>
-                              <ReactMarkdown
-                                components={{
-                                  a({
-                                    className = '',
-                                    children,
-                                    href,
-                                    target = '_self'
-                                  }) {
-                                    return (
-                                      <Link
-                                        href={href || '#'}
-                                        target={target}
-                                        className={`underline ${className}`}>
-                                        {children}
-                                      </Link>
-                                    )
-                                  }
-                                }}
-                                allowedElements={[
-                                  'a',
-                                  'strong',
-                                  'b',
-                                  'u',
-                                  'em',
-                                  'i',
-                                  'p',
-                                  'br'
-                                ]}>
+                              <MinimalMarkdown>
                                 {sourceEntry.excludeFromCalculationsLabel}
-                              </ReactMarkdown>
+                              </MinimalMarkdown>
                             </div>
                           </div>
                         </div>
@@ -179,7 +151,16 @@ export default function DataSourcesSelector() {
                         </div>
                         {sourceEntry?.ingestsData && (
                           <div className='md:col-span-2'>
-                            <Label>Data ingested / month</Label>
+                            <Label
+                              tooltip={
+                                sourceEntry.ingestsDataHelperText ? (
+                                  <MinimalMarkdown>
+                                    {sourceEntry.ingestsDataHelperText}
+                                  </MinimalMarkdown>
+                                ) : null
+                              }>
+                              Data ingested / month
+                            </Label>
                             <DataSize
                               uiSplit='1/1'
                               min='1GB'
@@ -257,6 +238,27 @@ export default function DataSourcesSelector() {
         </button>
       )}
     </>
+  )
+}
+
+function MinimalMarkdown({ children }: { children: string }) {
+  return (
+    <ReactMarkdown
+      components={{
+        a({ className = '', children, href, target = '_self' }) {
+          return (
+            <Link
+              href={href || '#'}
+              target={target}
+              className={`underline hover:decoration-2 ${className}`}>
+              {children}
+            </Link>
+          )
+        }
+      }}
+      allowedElements={['a', 'strong', 'b', 'u', 'em', 'i', 'p', 'br']}>
+      {children}
+    </ReactMarkdown>
   )
 }
 

@@ -131,6 +131,7 @@ export interface PricingV2ComponentDataSource {
   slug: string
   icon: StrapiImageType | null
   ingestsData: boolean
+  ingestsDataHelperText: null | string
   excludeFromCalculations: boolean
   excludeFromCalculationsLabel: null | string
   scalable: boolean
