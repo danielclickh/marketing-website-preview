@@ -129,6 +129,89 @@ export default function GamingIndustryPage({
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section
+        className='bg-shadow-element relative'
+        style={
+          {
+            '--top-side': '45%',
+            '--right-side': '20%',
+            '--left-side': 'auto',
+            '--scale': '0.8',
+            '--opacity': '0.05'
+          } as React.CSSProperties
+        }>
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
+        <div className='section-container relative z-10'>
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <p className='mb-6 text-center text-xl font-semibold leading-normal lg:-mt-3'>
+              Trusted by the world’s most ambitious OEMs and mobility innovators
+            </p>
+            <div className='space-y-6 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0'>
+              <QuoteCard
+                link='/blog/how-tesla-built-quadrillion-scale-observability-platform-on-clickhouse'
+                content='Data in ClickHouse is better than data anywhere else. No other system lets you slice and dice your data, ask interesting questions, and get answers in an acceptable amount of time.'
+                logo={{
+                  src: logoTesla,
+                  width: 173 * 0.8,
+                  height: 24 * 0.8,
+                  alt: 'Tesla'
+                }}
+              />
+              <QuoteCard
+                content='Over one quadrillion rows ingested, with not a single hiccup, not a single issue. Memory was flat, CPU consumption was flat. It was just a thing of beauty to behold.'
+                link='/blog/how-tesla-built-quadrillion-scale-observability-platform-on-clickhouse'
+                logo={{
+                  src: logoTesla,
+                  width: 173 * 0.8,
+                  height: 24 * 0.8,
+                  alt: 'Tesla'
+                }}
+              />
+              <QuoteCard
+                content='Auto-insurance ecommerce use-case - real-time funnel, A/B-test, and pricing analytics for car-insurance and loan comparison at 20× faster queries and a fraction of Redshift’s cost with ClickHouse'
+                link={{
+                  href: 'https://juicefs.com/en/blog/user-stories/read-write-separation',
+                  target: '_blank'
+                }}
+                logo={{
+                  src: logoJerry,
+                  width: 82 * 1.2,
+                  height: 20 * 1.2,
+                  alt: 'Jerry'
+                }}
+              />
+              <QuoteCard
+                content='Tekion’s automotive retail cloud provides real-time dealer-software insights powered by ClickHouse Cloud, slashing storage 10×, sustaining 1.2 million records-per-minute ingest without lag, and cutting query latency to sub-0.5s'
+                link='/blog/tekion-adopts-clickhouse-cloud-to-power-application-performance-and-metrics-monitoring'
+                logo={{
+                  src: logoTekion,
+                  width: 179 * 0.8,
+                  height: 20 * 0.8,
+                  alt: 'Tekion'
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tesla video */}
+      <section className='bg-primary-300 py-16'>
+        <div className='section-container !max-w-3xl space-y-6 text-center text-neutral-900'>
+          <SuiTitle type='h2'>Tesla-scale metrics with ClickHouse</SuiTitle>
+          <SuiText>
+            Alon Tal, Senior Staff Software Engineer at Tesla, talks about
+            Comet, Tesla's internal system built with ClickHouse for ingesting,
+            storing and querying metrics at massive scale.
+          </SuiText>
+          <div className='!mt-10 rounded-lg bg-neutral-900 p-2'>
+            <YouTubeVideo thumbnail={thumbTesla} id='z5t3b3EAc84' />
+          </div>
+        </div>
+      </section>
+
       {/* Features */}
       <section
         className='bg-shadow-element relative bg-neutral-725 py-16 lg:py-24'
@@ -230,89 +313,6 @@ export default function GamingIndustryPage({
                 access controls, and built-in GDPR-compliant TTLs and deletes.
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section
-        className='bg-shadow-element relative bg-neutral-725'
-        style={
-          {
-            '--top-side': '45%',
-            '--right-side': '20%',
-            '--left-side': 'auto',
-            '--scale': '0.8',
-            '--opacity': '0.05'
-          } as React.CSSProperties
-        }>
-        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
-        <div className='section-container relative z-10'>
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
-            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-            <p className='mb-6 text-center text-xl font-semibold leading-normal lg:-mt-3'>
-              Trusted by the world’s most ambitious OEMs and mobility innovators
-            </p>
-            <div className='space-y-6 lg:grid lg:grid-cols-4 lg:gap-6 lg:space-y-0'>
-              <QuoteCard
-                link='/blog/how-tesla-built-quadrillion-scale-observability-platform-on-clickhouse'
-                content='Data in ClickHouse is better than data anywhere else. No other system lets you slice and dice your data, ask interesting questions, and get answers in an acceptable amount of time.'
-                logo={{
-                  src: logoTesla,
-                  width: 173 * 0.8,
-                  height: 24 * 0.8,
-                  alt: 'Tesla'
-                }}
-              />
-              <QuoteCard
-                content='Over one quadrillion rows ingested, with not a single hiccup, not a single issue. Memory was flat, CPU consumption was flat. It was just a thing of beauty to behold.'
-                link='/blog/how-tesla-built-quadrillion-scale-observability-platform-on-clickhouse'
-                logo={{
-                  src: logoTesla,
-                  width: 173 * 0.8,
-                  height: 24 * 0.8,
-                  alt: 'Tesla'
-                }}
-              />
-              <QuoteCard
-                content='Auto-insurance ecommerce use-case - real-time funnel, A/B-test, and pricing analytics for car-insurance and loan comparison at 20× faster queries and a fraction of Redshift’s cost with ClickHouse'
-                link={{
-                  href: 'https://juicefs.com/en/blog/user-stories/read-write-separation',
-                  target: '_blank'
-                }}
-                logo={{
-                  src: logoJerry,
-                  width: 82 * 1.2,
-                  height: 20 * 1.2,
-                  alt: 'Jerry'
-                }}
-              />
-              <QuoteCard
-                content='Tekion’s automotive retail cloud provides real-time dealer-software insights powered by ClickHouse Cloud, slashing storage 10×, sustaining 1.2 million records-per-minute ingest without lag, and cutting query latency to sub-0.5s'
-                link='/blog/tekion-adopts-clickhouse-cloud-to-power-application-performance-and-metrics-monitoring'
-                logo={{
-                  src: logoTekion,
-                  width: 179 * 0.8,
-                  height: 20 * 0.8,
-                  alt: 'Tekion'
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Tesla video */}
-      <section className='bg-primary-300 py-16'>
-        <div className='section-container !max-w-3xl space-y-6 text-center text-neutral-900'>
-          <SuiTitle type='h2'>Tesla-scale metrics with ClickHouse</SuiTitle>
-          <SuiText>
-            Alon Tal, Senior Staff Software Engineer at Tesla, talks about
-            Comet, Tesla's internal system built with ClickHouse for ingesting,
-            storing and querying metrics at massive scale.
-          </SuiText>
-          <div className='!mt-10 rounded-lg bg-neutral-900 p-2'>
-            <YouTubeVideo thumbnail={thumbTesla} id='z5t3b3EAc84' />
           </div>
         </div>
       </section>
