@@ -19,6 +19,7 @@ import iconCode from '@/pages/partners/azure/assets/icon-code.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -67,8 +68,15 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
             </SuiTitle>
             <p className='font-medium text-neutral-200 lg:text-xl'>
               If you’re building fast, you need your data to keep up. As part of
-              the Y Combinator 2025 batch, you can claim $10,000 in ClickHouse
-              Cloud credits to supercharge your analytics and ship faster.
+              the{' '}
+              <Link
+                href='https://www.ycombinator.com/'
+                target='_blank'
+                className='hover:underline'>
+                Y Combinator
+              </Link>{' '}
+              2025 batch, you can claim $10,000 in ClickHouse Cloud credits to
+              supercharge your analytics and ship faster.
             </p>
             <div className='!mt-12 flex flex-wrap justify-center gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
               <CUIButton
@@ -231,14 +239,27 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               <CUICard.Body>
                 <SuiTitle type='h2'>Who can apply?</SuiTitle>
                 <p className='mt-4 text-neutral-200'>
-                  Eligible startups are in the Y Combinator 2025 batch, less
-                  than three years old, pre-Series B, and new to ClickHouse
-                  Cloud.
+                  Eligible startups are in the{' '}
+                  <Link
+                    href='https://www.ycombinator.com/'
+                    target='_blank'
+                    className='hover:underline'>
+                    Y Combinator
+                  </Link>{' '}
+                  2025 batch, less than three years old, pre-Series B, and new
+                  to ClickHouse Cloud.
                 </p>
                 <ul className='mt-6 space-y-6 text-left lg:mt-12'>
                   <li>
                     <TickItem>
-                      You’re part of the Y Combinator 2025 batch
+                      You’re part of the{' '}
+                      <Link
+                        href='https://www.ycombinator.com/'
+                        target='_blank'
+                        className='hover:underline'>
+                        Y Combinator
+                      </Link>{' '}
+                      2025 batch
                     </TickItem>
                   </li>
                   <li>
@@ -252,6 +273,11 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                   <li>
                     <TickItem>
                       You haven’t been a paid ClickHouse Cloud customer before
+                    </TickItem>
+                  </li>
+                  <li>
+                    <TickItem>
+                      You have a valid YC secret code for verification
                     </TickItem>
                   </li>
                 </ul>
@@ -274,7 +300,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                     </TickItem>
                   </li>
                   <li>
-                    <TickItem>ClickHouse Basic support included</TickItem>
+                    <TickItem>ClickHouse Basic Support included</TickItem>
                   </li>
                   <li>
                     <TickItem>One-hour expert training session</TickItem>
