@@ -118,8 +118,8 @@ export default function ContactPage({
                       You’ve been added to the waitlist!
                     </h3>
                     <p className='mt-2 text-center text-neutral-200'>
-                      Thank you for your interest in HyperDX ClickHouse Cloud
-                      integration.
+                      Thank you for your interest in ClickStack on ClickHouse
+                      Cloud.
                       <br />
                       We’ll be in touch soon.
                     </p>
