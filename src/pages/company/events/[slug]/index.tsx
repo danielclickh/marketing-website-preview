@@ -1,6 +1,6 @@
 import fallbackSocialImage from '@/../public/images/social_share.png'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import { CUICard } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import EventPost from '@/components/EventPostList/EventPost'
 import HRSeparator from '@/components/HRSeparator'
@@ -28,8 +28,7 @@ import { ParamsType } from '@/types/homepage'
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import { GetServerSideProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<EventProps> =
   async function getServerSideProps({ params }) {
@@ -169,10 +168,17 @@ function EventPage({
 }: EventProps) {
   useGalaxyOnPage('eventPage')
 
+  const hasSidebar = !!thumbnailPng || !form?.disabled
+  const hasVimeo = form?.type === 'recordedGatedContent' && !!recordedVimeoUrl
+  const formId = form?.marketoFormId?.trim()?.length
+    ? form.marketoFormId
+    : '1127'
+
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
-  const checkVimeoCode = (video: string) => {
+  const [formSuccess, setFormSuccess] = useState(true)
+  const [formLoaded, setFormLoaded] = useState(true)
+
+  const getVideoCode = (video: string) => {
     const regex = /\/video\/(\d+)/
     const match = video?.match(regex)
     if (match) {
@@ -186,16 +192,14 @@ function EventPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <section className='section-container my-16 flex flex-col items-start gap-x-16 gap-y-8 lg:my-24 lg:flex-row'>
         {/* Content column */}
-        <div className='space-y-6'>
+        <div className={`space-y-6 ${hasSidebar ? '' : 'mx-auto max-w-4xl'}`}>
           <Breadcrumbs>
             <Breadcrumbs.Link href='/company/events'>Events</Breadcrumbs.Link>
             <Breadcrumbs.Link href={`/company/events?category=${category}`}>
               {category}
             </Breadcrumbs.Link>
           </Breadcrumbs>
-          <h1 className='mb-8 font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
-            {title}
-          </h1>
+          <SuiTitle type='h1'>{title}</SuiTitle>
 
           {richDescription && <Markdown>{richDescription}</Markdown>}
 
@@ -245,9 +249,9 @@ function EventPage({
         </div>
 
         {/* Form column */}
-        {(!form?.disabled || thumbnailPng) && (
+        {hasSidebar && (
           <div className='w-full lg:max-w-lg'>
-            <CUICard>
+            <CUICard className='overflow-hidden'>
               {thumbnailPng && (
                 <CUICard.Header className='hidden border-b border-neutral-700/80 lg:block'>
                   <Image
@@ -257,7 +261,7 @@ function EventPage({
                     loading='eager'
                     priority
                     alt='Featured image'
-                    className='h-auto w-full rounded-t-lg object-cover'
+                    className='h-auto w-full object-cover'
                   />
                 </CUICard.Header>
               )}
@@ -266,11 +270,7 @@ function EventPage({
                   <>
                     {!formSuccess && (
                       <MarketoForm
-                        formId={
-                          form?.marketoFormId?.trim()?.length
-                            ? form.marketoFormId
-                            : '1127'
-                        }
+                        formId={formId}
                         onLoad={() => setFormLoaded(true)}
                         submitButtonLabel={form?.submitButtonLabel}
                         clearbitTracking={true}
@@ -292,72 +292,39 @@ function EventPage({
 
                     {formSuccess && (
                       <div ref={formSuccessRef}>
-                        <div className='success-container text-center'>
+                        <div className='text-center'>
                           <CheckCircleIcon className='mx-auto mb-4 h-16 w-16 stroke-1 text-primary-300' />
-                          {form?.SuccessMessage && (
-                            <Markdown>{form.SuccessMessage}</Markdown>
-                          )}
-                          {!form?.SuccessMessage && (
-                            <p className='mb-12 px-10 text-xl font-bold'>
-                              {form?.type === 'recordedGatedContent' ? (
-                                <>Thanks for registering! </>
-                              ) : form?.submitButtonLabel ===
-                                'Request your spot' ? (
-                                <>
-                                  Thanks for your interest, we'll be in touch to
-                                  let you know if a space is available
-                                </>
-                              ) : (
-                                <>
-                                  You've been successfully registered. See you
-                                  there!
-                                </>
-                              )}
-                            </p>
-                          )}
+                          <Markdown>
+                            {form?.SuccessMessage || hasVimeo
+                              ? 'Thanks for registering!'
+                              : "You've been successfully registered. See you there!"}
+                          </Markdown>
                           {form?.stripeBuyButtonId && (
-                            <div
-                              className={
-                                !form?.SuccessMessage ? 'mb-10 mt-4' : 'my-10'
-                              }>
-                              <CUICard>
-                                <CUICard.Body className='p-4'>
-                                  <StripeBuyButton
-                                    id={form.stripeBuyButtonId}
-                                  />
-                                </CUICard.Body>
-                              </CUICard>
+                            <CUICard className='my-10'>
+                              <CUICard.Body className='p-4'>
+                                <StripeBuyButton id={form.stripeBuyButtonId} />
+                              </CUICard.Body>
+                            </CUICard>
+                          )}
+                          {hasVimeo && (
+                            <div className='my-10'>
+                              <p className='mb-4'>Watch the recording below</p>
+                              <VideoPlayerCustom
+                                fullWidth={true}
+                                videos={[
+                                  {
+                                    videoId: getVideoCode(recordedVimeoUrl),
+                                    type: 'vimeo',
+                                    vimeoCode: '979264b085',
+                                    image: thumbnailPng?.url
+                                  }
+                                ]}
+                              />
                             </div>
                           )}
-                          {form?.type === 'recordedGatedContent' &&
-                            recordedVimeoUrl && (
-                              <div
-                                className='my-10'
-                                id='custom-video-container-player'>
-                                <p className='mb-4'>
-                                  Watch the recording below
-                                </p>
-                                <VideoPlayerCustom
-                                  fullWidth={true}
-                                  videos={[
-                                    {
-                                      videoId: checkVimeoCode(recordedVimeoUrl),
-                                      type: 'vimeo',
-                                      vimeoCode: '979264b085',
-                                      image: thumbnailPng?.url
-                                    }
-                                  ]}
-                                />
-                              </div>
-                            )}
 
                           <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
-                            {form?.type == 'recordedGatedContent' &&
-                            recordedVimeoUrl ? (
-                              <>Share the recording</>
-                            ) : (
-                              <>Share</>
-                            )}
+                            {hasVimeo ? 'Share the recording' : 'Share'}
                           </p>
                           <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                             <CopyUrlButton />
@@ -366,7 +333,7 @@ function EventPage({
                                 <SocialButton
                                   key={social}
                                   type={social}
-                                  title='title'
+                                  title={title}
                                 />
                               )
                             )}
@@ -382,16 +349,27 @@ function EventPage({
         )}
       </section>
 
-      <div className='bg-shadow-element yellow-shadow align-shadow-right mx-auto mb-40 max-w-7xl px-4 pb-10 sm:px-8 2xl:px-0'>
-        <div className='relative z-20'>
-          <h3 className='mb-10 font-basier text-4xl'>Upcoming events</h3>
+      <section className='bg-shadow-element yellow-shadow my-16 lg:my-24'>
+        <div className='section-container flex flex-col'>
+          <div className='flex justify-between pb-8'>
+            <SuiTitle
+              type='h2'
+              className='!text-3xl text-neutral-100'
+              weight='semibold'>
+              Upcoming events
+            </SuiTitle>
+
+            <CUIButton href='/company/events' type='secondary'>
+              View all Events
+            </CUIButton>
+          </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
             {recentEvents.map((event: EventType) => (
               <EventPost key={event.id} {...event} />
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </Layout>
   )
 }
