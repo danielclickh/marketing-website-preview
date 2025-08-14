@@ -48,7 +48,9 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
               <Breadcrumbs>
                 <Breadcrumbs.Link href='/cloud'>Cloud</Breadcrumbs.Link>
-                <Breadcrumbs.Item>Data ingestion</Breadcrumbs.Item>
+                <Breadcrumbs.Link href='/cloud/clickpipes'>
+                  Data ingestion
+                </Breadcrumbs.Link>
               </Breadcrumbs>
               <SuiTitle type='h1' className='lg:!text-4xl'>
                 MongoDB CDC connector in ClickPipes is now in Private Preview
