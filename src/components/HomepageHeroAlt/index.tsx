@@ -69,16 +69,16 @@ export default function HomepageHeroAlt({
             </div>{' '}
             <LogoAnnouncementLink
               className='mt-6'
-              href='/cloud/clickpipes/mysql-cdc-connector?loc=homepage-hero'
+              href='/cloud/clickpipes/mongodb-cdc-connector?loc=homepage-hero'
               logo={{
-                src: '/images/cloud/integrations/mysql.svg',
-                alt: 'MySQL',
-                width: 46,
-                height: 37,
-                className: 'saturate-0 brightness-0'
+                src: '/images/cloud/integrations/mongodb.svg',
+                alt: 'MongoDB',
+                width: 24,
+                height: 50,
+                className: 'saturate-0 brightness-0 mx-3'
               }}>
-              Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
-              connector — now in Public Beta.{' '}
+              Blazing-fast MongoDB to ClickHouse CDC with our new ClickPipe
+              connector — now in Private Preview.{' '}
               <span className='underline group-hover:decoration-2'>
                 Learn more
               </span>

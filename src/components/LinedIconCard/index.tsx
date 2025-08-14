@@ -5,6 +5,7 @@ import chartLine from './assets/chart-line.svg'
 import chatTeardropText from './assets/chat-teardrop-text.svg'
 import cloudTick from './assets/cloud-tick.svg'
 import database from './assets/database.svg'
+import doubleTick from './assets/double-tick.svg'
 import enterprise from './assets/enterprise.svg'
 import filePy from './assets/file-py.svg'
 import gear from './assets/gear.svg'
@@ -50,7 +51,8 @@ const icons = {
   sidebar: sidebar,
   'squares-four': squaresFour,
   'toggle-right': toggleRight,
-  'users-three': usersThree
+  'users-three': usersThree,
+  'double-tick': doubleTick
 }
 
 type Icons = keyof typeof icons

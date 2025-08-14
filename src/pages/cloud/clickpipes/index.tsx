@@ -1,4 +1,5 @@
 import features from './features.json'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import CdcAnimation from '@/components/CdcAnimation'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import ClickPipesAnimationV2 from '@/components/ClickPipesAnimation/ClickPipesAnimationV2'
@@ -51,9 +52,10 @@ export default function ClickHouseServerPage({
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
               <div className='flex items-center justify-between'>
                 <div className='flex-col space-y-6 text-center lg:mt-16 lg:max-w-xl lg:text-left'>
-                  <h4 className='mb-4 text-base font-semibold text-primary-300'>
-                    <Link href='/cloud'>Cloud</Link> / Data ingestion
-                  </h4>
+                  <Breadcrumbs>
+                    <Breadcrumbs.Link href='/cloud'>Cloud</Breadcrumbs.Link>
+                    <Breadcrumbs.Item>Data ingestion</Breadcrumbs.Item>
+                  </Breadcrumbs>
                   <h1 className='font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     ClickPipes
                   </h1>
@@ -88,15 +90,16 @@ export default function ClickHouseServerPage({
                   <LogoAnnouncementLink
                     mode='dark'
                     className='mt-8 !bg-neutral-700/60'
-                    href='/cloud/clickpipes/mysql-cdc-connector?loc=clickpipes-hero'
+                    href='/cloud/clickpipes/mongodb-cdc-connector?loc=clickpipes-hero'
                     logo={{
-                      src: '/images/cloud/integrations/mysql.svg',
-                      alt: 'MySQL',
-                      width: 46,
-                      height: 37
+                      src: '/images/cloud/integrations/mongodb.svg',
+                      alt: 'MongoDB',
+                      width: 24,
+                      height: 50,
+                      className: 'mx-3'
                     }}>
-                    Blazing-fast MySQL to ClickHouse CDC with our new ClickPipe
-                    connector — now in Public Beta.{' '}
+                    Blazing-fast MongoDB to ClickHouse CDC with our new
+                    ClickPipe connector — now in Private Preview.{' '}
                     <span className='underline group-hover:decoration-2'>
                       Learn more
                     </span>
@@ -195,9 +198,13 @@ export default function ClickHouseServerPage({
                       name: 'MySQL CDC'
                     },
                     {
-                      logo: '/images/cloud/integrations/azure-blob-storage.svg',
-                      name: 'Azure Blob Storage',
+                      logo: '/images/cloud/integrations/mongodb.svg',
+                      name: 'MongoDB CDC',
                       badge: 'New'
+                    },
+                    {
+                      logo: '/images/cloud/integrations/azure-blob-storage.svg',
+                      name: 'Azure Blob Storage'
                     },
                     {
                       logo: '/images/cloud/integrations/diagram/azure-event-hub.svg',
@@ -266,67 +273,38 @@ export default function ClickHouseServerPage({
           <div className='mx-auto w-full lg:max-w-xl'>
             <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
               <div className='mb-10 flex justify-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='208'
-                  height='80'
-                  fill='none'>
-                  <path
-                    fill='#FAFF69'
-                    d='m124 39-9.86-5.7v11.4L124 39Zm-44 0v.99h1.83V38H80v1Zm5.5 0v.99h3.67V38H85.5v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.34 0v.99h3.66V38h-3.66v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.33 0v.99h3.67V38h-3.67v1Zm9.17 0-9.86-5.7v11.4L124 39Zm-44 0v.99h1.83V38H80v1Zm5.5 0v.99h3.67V38H85.5v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.34 0v.99h3.66V38h-3.66v1Zm7.33 0v.99h3.67V38h-3.67v1Zm7.33 0v.99h3.67V38h-3.67v1Z'
-                  />
-                  <rect
-                    width='79.17'
-                    height='79.17'
-                    x='.42'
-                    y='.42'
-                    stroke='#414141'
-                    stroke-width='.83'
-                    rx='6.25'
-                  />
-                  <path
-                    fill='#32BEDD'
-                    d='M9.78 28.58h60.44v33.7a2.02 2.02 0 0 1-2.02 2.02H11.8a2.02 2.02 0 0 1-2.02-2.02v-33.7Z'
-                  />
-                  <path
-                    fill='#0078D4'
-                    d='M11.8 15.7h56.4a2.02 2.02 0 0 1 2.01 2.02v10.86H9.78V17.72a2.02 2.02 0 0 1 2.03-2.02Zm25.8 17.36H17.28a1 1 0 0 0-1 1v10.11a1 1 0 0 0 1 1.01H37.6a1 1 0 0 0 1.01-1V34.06a1 1 0 0 0-1-1Z'
-                  />
-                  <path
-                    fill='#fff'
-                    d='M62.52 33.06H42.2a1 1 0 0 0-1 1v10.11a1 1 0 0 0 1 1.01h20.32a1 1 0 0 0 1-1V34.06a1 1 0 0 0-1-1Z'
-                  />
-                  <path
-                    fill='#0078D4'
-                    d='M37.49 47.57H17.17a1 1 0 0 0-1 1v10.1a1 1 0 0 0 1 1.01h20.32a1 1 0 0 0 1-1v-10.1a1 1 0 0 0-1-1.01Zm24.91 0H42.1a1 1 0 0 0-1 1v10.1a1 1 0 0 0 1 1.01h20.3a1 1 0 0 0 1-1v-10.1a1 1 0 0 0-1-1.01Z'
-                  />
-                  <rect
-                    width='79.17'
-                    height='79.17'
-                    x='128.42'
-                    y='.42'
-                    stroke='#414141'
-                    stroke-width='.83'
-                    rx='6.25'
-                  />
-                  <path
-                    fill='#fff'
-                    d='M141.23 13.56c0-.32.27-.64.64-.64h4.72c.32 0 .65.27.65.64v52.4c0 .32-.27.64-.65.64h-4.72a.65.65 0 0 1-.64-.65V13.56Zm11.9 0c0-.32.27-.64.65-.64h4.72c.32 0 .64.27.64.64v52.4c0 .32-.27.64-.64.64h-4.72a.65.65 0 0 1-.65-.65V13.56Zm11.91 0c0-.32.27-.64.64-.64h4.72c.32 0 .64.27.64.64v52.4c0 .32-.26.64-.64.64h-4.72a.65.65 0 0 1-.64-.65V13.56Zm11.9 0c0-.32.27-.64.65-.64h4.72c.32 0 .64.27.64.64v52.4c0 .32-.27.64-.64.64h-4.72a.65.65 0 0 1-.65-.65V13.56Zm11.96 20.86c0-.32.27-.64.65-.64h4.71c.33 0 .65.27.65.64V45.1c0 .33-.27.65-.65.65h-4.71a.65.65 0 0 1-.65-.65V34.42Z'
-                  />
-                </svg>
+                <CdcAnimation
+                  logo={
+                    <div className='-mr-4 flex aspect-square w-20 items-center justify-center rounded-lg border border-[#113C55] bg-[#081E2B]'>
+                      <Image
+                        src='/images/cloud/integrations/mongodb.svg'
+                        width={24}
+                        height={50}
+                        alt='MongoDB'
+                        className='m-3'
+                      />
+                    </div>
+                  }
+                  badges={[
+                    { label: 'insert', theme: 'yellow' },
+                    { label: 'insert', theme: 'yellow' },
+                    { label: 'update', theme: 'blue' },
+                    { label: 'delete', theme: 'red' },
+                    { label: 'replace', theme: 'blue' },
+                    { label: 'add col', theme: 'yellow' }
+                  ]}
+                />
               </div>
-              <SuiTitle type='h2'>
-                Azure Blob Storage ClickPipes is in Private Preview
-              </SuiTitle>
+              <SuiTitle type='h2'>MongoDB CDC is in Private Preview</SuiTitle>
               <SuiText className='opacity-70'>
-                Seamlessly load files from Azure Blob Storage into ClickHouse
-                Cloud. Get blazing fast analytics without the complexity or cost
-                of external ETL tools.
+                Stream your MongoDB data into ClickHouse Cloud to bridge the gap
+                between transactional and analytical workloads — blazing fast
+                with our new ClickPipes MongoDB CDC connector!
               </SuiText>
             </div>
             <CUICard className='bg-neutral-900/80'>
               <CUICard.Body className='p-4 lg:p-6'>
-                <CdcWaitlistForm formId='1390' />
+                <CdcWaitlistForm formId='1441' />
               </CUICard.Body>
             </CUICard>
           </div>

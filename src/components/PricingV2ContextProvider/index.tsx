@@ -1,6 +1,5 @@
 import pricingFile from '../../../public/pricingV2File.json'
 import * as config from '../PricingV2/config'
-import { findClosestCompute } from '../PricingV2/config'
 import {
   Adhoc,
   Context,
@@ -86,12 +85,12 @@ function getUseCaseCompute(
     return Math.round(storageInGb / (useCase.ratio * replicas))
   }
   const calcMinCompute = () => {
-    return findClosestCompute(
+    return config.findClosestCompute(
       Math.round(calcIdeaCompute() - calcIdeaCompute() * 0.2)
     )
   }
   const calcMaxCompute = () => {
-    return findClosestCompute(
+    return config.findClosestCompute(
       Math.round(calcIdeaCompute() + calcIdeaCompute() * 0.2)
     )
   }
@@ -445,7 +444,7 @@ export default function PricingV2ContextProvider({
   // Calculate the price of clickpipes
   //
   const clickpipesPrice: ContextClickpipesPrice = useMemo(() => {
-    if (!planEntry || !clickpipes?.length || hours === null) return null
+    if (!planEntry || !clickpipes?.length) return null
 
     // No pricing needed for plans that don't allow data sources/clickpipes
     if (!planEntry.allowDataSources) return null
@@ -453,41 +452,51 @@ export default function PricingV2ContextProvider({
     const { replicaComputeUsdPerHour, ingestedUsdPerGb } =
       config.clickpipePricingDimensions
 
-    let computeCosts = 0
-    let ingestCosts = 0
+    let totalPipesCostPerDay = 0
 
-    clickpipes.forEach(({ source, dataIngested, instances }) => {
-      const sourceEntry = sourceData.dataSources.find(
-        (item) => item.slug === source
-      )
+    clickpipes.forEach(
+      ({ source, dataIngested, instances, size, replicas }) => {
+        const sourceEntry = sourceData.dataSources.find(
+          (item) => item.slug === source
+        )
 
-      // Skip clickpipe if it's invalid or is excluded from calculations (e.g. free for public beta)
-      if (!sourceEntry || sourceEntry.excludeFromCalculations) {
-        return
-      }
-
-      // Compute costs (per instance per month, respecting active hours)
-      const monthlyComputeCost =
-        instances *
-        replicaComputeUsdPerHour *
-        hours *
-        config.averageDaysPerMonth
-      computeCosts += monthlyComputeCost
-
-      // Ingestion costs (only for data streaming sources)
-      if (sourceEntry.ingestsData) {
-        const dataIngestedInGb = dataIngested
-          ? humanReadableTo(dataIngested, 'GB')
-          : null
-
-        if (dataIngestedInGb) {
-          ingestCosts += ingestedUsdPerGb * dataIngestedInGb
+        // Skip clickpipe if it's invalid or is excluded from calculations (e.g. free for public beta)
+        if (!sourceEntry || sourceEntry.excludeFromCalculations) {
+          return
         }
-      }
-    })
 
-    return computeCosts + ingestCosts
-  }, [planEntry, clickpipes, sourceData, hours])
+        let pipeComputeCostPerHour = replicaComputeUsdPerHour
+        let pipeTrasnferCost = 0
+
+        // Adjust compute hourly cost based on scale options
+        if (sourceEntry.scalable) {
+          pipeComputeCostPerHour =
+            replicaComputeUsdPerHour *
+            ((size || config.clickpipeBaseSize) / config.clickpipeBaseSize) *
+            (replicas || 1)
+        }
+
+        // Ingestion costs (only for data streaming sources)
+        if (sourceEntry.ingestsData) {
+          const dataIngestedInGb = dataIngested
+            ? humanReadableTo(dataIngested, 'GB')
+            : null
+
+          if (dataIngestedInGb) {
+            pipeTrasnferCost += ingestedUsdPerGb * dataIngestedInGb
+          }
+        }
+
+        // ClickPipes run continously so we multiply by 24,
+        // then add the transfer cost and times all
+        // of that by the number of clickpipes/instances
+        totalPipesCostPerDay +=
+          (pipeComputeCostPerHour * 24 + pipeTrasnferCost) * instances
+      }
+    )
+
+    return totalPipesCostPerDay * config.averageDaysPerMonth
+  }, [planEntry, clickpipes, sourceData])
 
   // Calculate the price of data transfer
   //

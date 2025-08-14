@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
@@ -254,17 +255,12 @@ export default function BlogPage({
           <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
             {/* Blog meta */}
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
-              <h4 className='text-base font-semibold text-primary-300'>
-                <Link href='/blog' className='hover:underline'>
-                  Blog
-                </Link>{' '}
-                /{' '}
-                <Link
-                  href={`/blog?category=${slugify(category)}`}
-                  className='hover:underline'>
+              <Breadcrumbs>
+                <Breadcrumbs.Link href='/blog'>Blog</Breadcrumbs.Link>
+                <Breadcrumbs.Link href={`/blog?category=${slugify(category)}`}>
                   {category}
-                </Link>
-              </h4>
+                </Breadcrumbs.Link>
+              </Breadcrumbs>
               <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
                 <span className='leading-snug'>{title}</span>
               </h1>
