@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
@@ -98,14 +99,11 @@ export default function Page({
         <div className='container mx-auto max-w-7xl px-6 pt-20 2xl:px-0'>
           <div className='flex-row items-start gap-16 lg:flex'>
             <div className='flex-shrink flex-grow'>
-              <h4 className='text-base font-semibold'>
-                <Link
-                  href='/engineering-resources'
-                  className='text-primary-300'>
+              <Breadcrumbs className='mb-6'>
+                <Breadcrumbs.Link href='/engineering-resources'>
                   Engineering Resources
-                </Link>{' '}
-                / <strong>{engResource.title}</strong>
-              </h4>
+                </Breadcrumbs.Link>
+              </Breadcrumbs>
               <SuiTitle type='h1' className='my-6 text-balance md:!text-5xl'>
                 {engResource.title}
               </SuiTitle>

@@ -1,6 +1,7 @@
 import bigNumbers from './big-numbers.json'
 import features from './features.json'
 import references from './supporting-references.json'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import AccordionComponent from '@/components/BusinessIntelligenceDiagram/Accordion'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
@@ -16,7 +17,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 interface RealTimeAnalyticsPageProps extends CommonProps {
   customerStories: any
@@ -75,10 +76,12 @@ export default function RealTimeAnalyticsPage({
               <div className='flex items-center'>
                 <div className='flex-col items-center xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
-                    <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>Use cases</Link> / Data
-                      warehousing
-                    </h4>
+                    <Breadcrumbs className='mb-6'>
+                      <Breadcrumbs.Link href='/use-cases'>
+                        Use cases
+                      </Breadcrumbs.Link>
+                      <Breadcrumbs.Item>Data warehousing</Breadcrumbs.Item>
+                    </Breadcrumbs>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
                       Data warehousing with ClickHouse
                     </h1>

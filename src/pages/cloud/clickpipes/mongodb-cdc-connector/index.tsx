@@ -2,6 +2,7 @@ import imageAddMongoSource from './assets/add-mongodb-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
 import imageMonitorPipe from './assets/monitor-pipe.png'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import TickItem from '@/components-cleaned/TickItem'
 import CdcAnimation from '@/components/CdcAnimation'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
@@ -45,9 +46,10 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
             <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
-              <h4 className='text-base font-semibold text-primary-300'>
-                <Link href='/cloud'>Cloud</Link> / Data ingestion
-              </h4>
+              <Breadcrumbs>
+                <Breadcrumbs.Link href='/cloud'>Cloud</Breadcrumbs.Link>
+                <Breadcrumbs.Item>Data ingestion</Breadcrumbs.Item>
+              </Breadcrumbs>
               <SuiTitle type='h1' className='lg:!text-4xl'>
                 MongoDB CDC connector in ClickPipes is now in Private Preview
               </SuiTitle>

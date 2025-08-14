@@ -2,6 +2,7 @@ import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
@@ -77,10 +78,12 @@ export default function RealTimeAnalyticsPage({
               <div className='flex'>
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
-                    <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>Use cases</Link> / Real-time
-                      analytics
-                    </h4>
+                    <Breadcrumbs className='mb-6'>
+                      <Breadcrumbs.Link href='/use-cases'>
+                        Use cases
+                      </Breadcrumbs.Link>
+                      <Breadcrumbs.Item>Real-time analytics</Breadcrumbs.Item>
+                    </Breadcrumbs>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
                       Real-time analytics with ClickHouse
                     </h1>

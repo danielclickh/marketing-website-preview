@@ -1,6 +1,7 @@
 import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import features from './features.json'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import TickItem from '@/components-cleaned/TickItem'
 import AnimatedFlare from '@/components/AnimatedFlare'
 import { CUIButton } from '@/components/ClickUI'
@@ -82,10 +83,14 @@ export default function MLUseCasePage({
               <div className='flex'>
                 <div className='flex-col xl:mt-16'>
                   <div className='w-full lg:max-w-xl xl:max-w-full'>
-                    <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      <Link href='/use-cases'>Use cases</Link> / Machine
-                      learning and GenAI
-                    </h4>
+                    <Breadcrumbs className='mb-6'>
+                      <Breadcrumbs.Link href='/use-cases'>
+                        Use cases
+                      </Breadcrumbs.Link>
+                      <Breadcrumbs.Item>
+                        Machine learning and GenAI
+                      </Breadcrumbs.Item>
+                    </Breadcrumbs>
                     <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-lg lg:text-left'>
                       Machine learning and GenAI
                     </h1>
