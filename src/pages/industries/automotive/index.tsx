@@ -3,7 +3,7 @@ import logoJerry from './assets/logo-jerry.svg'
 import logoTekion from './assets/logo-tekion.svg'
 import logoTesla from './assets/logo-tesla.svg'
 import TickItem from '@/components-cleaned/TickItem'
-import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
+import VideoEmbed from '@/components-cleaned/VideoEmbed'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import thumbTesla from '@/components/HomepageSectionContentFeed/assets/thumb-tesla.jpeg'
@@ -207,7 +207,11 @@ export default function GamingIndustryPage({
             storing and querying metrics at massive scale.
           </SuiText>
           <div className='!mt-10 rounded-lg bg-neutral-900 p-2'>
-            <YouTubeVideo thumbnail={thumbTesla} id='z5t3b3EAc84' />
+            <VideoEmbed
+              thumbnail={thumbTesla}
+              provider='youtube'
+              id='z5t3b3EAc84'
+            />
           </div>
         </div>
       </section>

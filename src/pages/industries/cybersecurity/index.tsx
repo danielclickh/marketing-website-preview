@@ -13,7 +13,7 @@ import logoMicrosoft from './assets/logo-microsoft.svg'
 import logoSeemplicity from './assets/logo-seemplicity.svg'
 import logoWallarm from './assets/logo-wallarm.svg'
 import TickItem from '@/components-cleaned/TickItem'
-import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
+import VideoEmbed from '@/components-cleaned/VideoEmbed'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
@@ -200,7 +200,8 @@ export default function GamingIndustryPage({
         <div className='hide-scrollbar -mx-4 overflow-x-auto px-6 sm:-mx-8 sm:px-8 lg:mx-0 lg:overflow-x-visible lg:px-0'>
           <div className='-mx-2 flex flex-row lg:-mx-4 lg:flex-wrap lg:justify-center'>
             <div className='lg:min-w-none flex w-[90vw] min-w-64 max-w-md flex-shrink-0 flex-grow-0 flex-col p-2 lg:w-1/3 lg:max-w-none lg:flex-1 lg:p-4'>
-              <YouTubeVideo
+              <VideoEmbed
+                provider='youtube'
                 id='T87D6FTDGX0'
                 thumbnail='https://img.youtube.com/vi/T87D6FTDGX0/maxresdefault.jpg'
               />
@@ -222,7 +223,8 @@ export default function GamingIndustryPage({
               </p>
             </div>
             <div className='lg:min-w-none flex w-[90vw] min-w-64 max-w-md flex-shrink-0 flex-grow-0 flex-col p-2 lg:w-1/3 lg:max-w-none lg:flex-1 lg:p-4'>
-              <YouTubeVideo
+              <VideoEmbed
+                provider='youtube'
                 id='h-dkVkEh5ec'
                 thumbnail='https://img.youtube.com/vi/h-dkVkEh5ec/maxresdefault.jpg'
               />
@@ -244,7 +246,8 @@ export default function GamingIndustryPage({
               </p>
             </div>
             <div className='lg:min-w-none flex w-[90vw] min-w-64 max-w-md flex-shrink-0 flex-grow-0 flex-col p-2 lg:w-1/3 lg:max-w-none lg:flex-1 lg:p-4'>
-              <YouTubeVideo
+              <VideoEmbed
+                provider='youtube'
                 id='N2z_a9GnACA'
                 thumbnail='https://img.youtube.com/vi/N2z_a9GnACA/maxresdefault.jpg'
               />
