@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import { CUICard } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
@@ -198,18 +199,17 @@ export default function VideoPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='container mx-auto my-20 flex max-w-3xl flex-col px-6 2xl:px-0'>
         <div className='mx-auto flex flex-col text-center'>
-          <h4 className='text-base font-semibold text-primary-300'>
-            <Link href='/videos'>Videos</Link>
-            {video.categories?.[0] && ' / '}
+          <Breadcrumbs className='justify-center'>
+            <Breadcrumbs.Link href='/videos'>Videos</Breadcrumbs.Link>
             {video.categories?.[0] && (
-              <Link
+              <Breadcrumbs.Link
                 href={`/videos?category=${slugify(
                   video.categories?.[0]?.CategoryName
                 )}`}>
                 {video.categories?.[0]?.CategoryName}
-              </Link>
+              </Breadcrumbs.Link>
             )}
-          </h4>
+          </Breadcrumbs>
           <h1 className='mt-6 font-basier text-4xl font-bold text-neutral-100'>
             <span className='leading-snug'>{video.Title}</span>
           </h1>

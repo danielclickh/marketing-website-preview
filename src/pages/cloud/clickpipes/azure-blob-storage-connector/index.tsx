@@ -3,6 +3,7 @@ import imageCustomizeIncomingData from './assets/containers-files-ingestion-mode
 import imageDefineMappings from './assets/define-mappings.png'
 import imageManagePipe from './assets/manage-pipe.png'
 import imageMonitorPipe from './assets/monitoring.png'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import ConnectorAnimation from '@/components/ConnectorAnimation'
@@ -44,9 +45,12 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
             <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
-              <h4 className='text-base font-semibold text-primary-300'>
-                <Link href='/cloud'>Cloud</Link> / Data ingestion
-              </h4>
+              <Breadcrumbs>
+                <Breadcrumbs.Link href='/cloud'>Cloud</Breadcrumbs.Link>
+                <Breadcrumbs.Link href='/cloud/clickpipes'>
+                  Data ingestion
+                </Breadcrumbs.Link>
+              </Breadcrumbs>
               <SuiTitle type='h1' className='lg:!text-4xl'>
                 Azure Blob Storage ClickPipe is now in Private Preview
               </SuiTitle>

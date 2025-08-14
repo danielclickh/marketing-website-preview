@@ -1,4 +1,5 @@
 import features from './features.json'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import CdcAnimation from '@/components/CdcAnimation'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import ClickPipesAnimationV2 from '@/components/ClickPipesAnimation/ClickPipesAnimationV2'
@@ -51,9 +52,10 @@ export default function ClickHouseServerPage({
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>
               <div className='flex items-center justify-between'>
                 <div className='flex-col space-y-6 text-center lg:mt-16 lg:max-w-xl lg:text-left'>
-                  <h4 className='mb-4 text-base font-semibold text-primary-300'>
-                    <Link href='/cloud'>Cloud</Link> / Data ingestion
-                  </h4>
+                  <Breadcrumbs>
+                    <Breadcrumbs.Link href='/cloud'>Cloud</Breadcrumbs.Link>
+                    <Breadcrumbs.Item>Data ingestion</Breadcrumbs.Item>
+                  </Breadcrumbs>
                   <h1 className='font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>
                     ClickPipes
                   </h1>
