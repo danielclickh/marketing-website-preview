@@ -175,8 +175,8 @@ function EventPage({
     : '1127'
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(true)
-  const [formLoaded, setFormLoaded] = useState(true)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
 
   const getVideoCode = (video: string) => {
     const regex = /\/video\/(\d+)/
@@ -324,7 +324,7 @@ function EventPage({
                           )}
 
                           <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
-                            {hasVimeo ? 'Share the recording' : 'Share'}
+                            Share with others
                           </p>
                           <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                             <CopyUrlButton />
