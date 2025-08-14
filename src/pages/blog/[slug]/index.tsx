@@ -35,8 +35,6 @@ import Link from 'next/link'
 import React, { useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 
-import children = ReactMarkdown.propTypes.children
-
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
     const stagingOnlyFilters = getStagingOnlyFilters()
@@ -177,6 +175,7 @@ export default function BlogPage({
   content,
   category,
   reading_time,
+  reading_time_override,
   otherBlogs,
   date,
   publishedAt,
@@ -277,8 +276,8 @@ export default function BlogPage({
                     {author.name}
                   </SuiText>
                   <SuiText size='sm' weight='normal' color='secondary'>
-                    {convertDateToString(date || publishedAt)} - {reading_time}{' '}
-                    minutes read
+                    {convertDateToString(date || publishedAt)} -{' '}
+                    {reading_time_override || reading_time} minutes read
                   </SuiText>
                 </div>
               </div>
