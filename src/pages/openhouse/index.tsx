@@ -111,7 +111,7 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
         fields: ['slug', 'heading', 'startDate', 'endDate', 'comingSoon'],
         populate: ['locationImage'],
         publicationState: IS_PRODUCTION ? 'live' : 'preview',
-        sort: ['comingSoon', 'startDate:DESC']
+        sort: ['comingSoon', 'startDate:ASC']
       }
     )
 
