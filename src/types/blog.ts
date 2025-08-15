@@ -11,6 +11,7 @@ export interface BlogProps extends BlogPost, CommonProps {
   CloudCTAFooter: string
   CloudCTAHeader: string
   reading_time: number
+  reading_time_override: null | number
   table_contents_headers: string
   promotion?: {
     title: string

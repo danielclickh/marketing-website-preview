@@ -97,7 +97,7 @@ export default function OpenhouseFormModal({
               />
             </svg>
             <p className='mt-6 text-xl font-bold'>
-              Thanks for your interest in OpenHouse.
+              Thanks for your interest in Open House.
               <br />
               Check your email for next steps.
             </p>

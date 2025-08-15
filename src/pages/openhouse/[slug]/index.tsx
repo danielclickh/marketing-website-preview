@@ -300,7 +300,7 @@ export default function Page({
                   key={dayIndex}
                   className='border border-white lg:grid lg:grid-cols-[13rem_1fr]'>
                   <div
-                    className='px-8 py-6 text-center uppercase leading-none text-ch-yellow lg:px-4 lg:py-12'
+                    className={`flex px-8 py-6 text-center uppercase leading-none text-ch-yellow lg:px-4 lg:py-12 ${day.useAmericanDateFormat ? 'flex-col-reverse justify-end' : 'flex-col'}`}
                     style={{
                       backgroundImage: `url('${linesPattern.src}')`
                     }}>

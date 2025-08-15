@@ -24,9 +24,6 @@ export default function OpenhouseDateRange({
   if (dayFormat === '2-digit-ordinal') dayFormat = '2-digit'
   if (dayFormat === 'numeric-ordinal') dayFormat = 'numeric'
 
-  const startOrdinal = ordinal ? getOrdinal(start.getDate()) : null
-  const endOrdinal = ordinal ? getOrdinal(end.getDate()) : null
-
   const startDay = start.toLocaleString('en-US', {
     day: dayFormat,
     timeZone: 'UTC'
@@ -51,6 +48,9 @@ export default function OpenhouseDateRange({
     year: yearFormat,
     timeZone: 'UTC'
   })
+
+  const startOrdinal = ordinal ? getOrdinal(parseInt(startDay)) : null
+  const endOrdinal = ordinal ? getOrdinal(parseInt(endDay)) : null
 
   if (startDay === endDay && startMonth === endMonth && startYear === endYear) {
     return (
