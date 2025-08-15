@@ -537,12 +537,15 @@
      Marketo Forms:
        - Bring Your Own Cloud (BYOC)
        - Government Waitlist
+       - Distributed Cache Waitlist
+       - Inverted Index Waitlist
      ================================
      */
 
     form.mktoForm#mktoForm_1135,
     form.mktoForm#mktoForm_1391,
-    form.mktoForm#mktoForm_1407 {
+    form.mktoForm#mktoForm_1407,
+    form.mktoForm#mktoForm_1469 {
       label#LblmiscBlankField15 + .mktoGutter + .mktoRadioList {
         @apply flex flex-row flex-nowrap items-stretch gap-2 pt-1;
 

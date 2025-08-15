@@ -16,10 +16,10 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Distributed Cache Private Preview – Join the Waitlist',
+          title: 'Inverted Index Private Preview – Join the Waitlist',
           description:
-            'Sign up for the ClickHouse Distributed Cache Private Preview. Join the waitlist to test our new distributed cache before public release.',
-          path: '/cloud/distributed-cache-waitlist'
+            'Sign up for the Inverted Index Private Preview. Join the waitlist to test our new inverted index before public release.',
+          path: '/cloud/inverted-index-waitlist'
         },
         ...commonProps
       }
@@ -31,7 +31,7 @@ export default function ContactPage({
   headerData,
   seo
 }: CommonProps) {
-  useGalaxyOnPage('cloudDistributedCacheWaitlistPage')
+  useGalaxyOnPage('cloudInvertedIndexWaitlistPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
@@ -43,7 +43,7 @@ export default function ContactPage({
         <div className='mx-auto w-full lg:max-w-xl'>
           <div className='mb-16 text-center'>
             <SuiTitle type='h1' className='text-[28px] md:text-4xl'>
-              Distributed cache private preview
+              Inverted Index Private Preview
             </SuiTitle>
           </div>
           <CUICard className='bg-neutral-900/80'>
@@ -56,19 +56,13 @@ export default function ContactPage({
                     </SuiTitle>
                     <SuiText>
                       <span className='opacity-70'>
-                        ClickHouse distributed cache is coming to Private
-                        Preview! To join the waitlist, simply answer the
-                        questions below.
-                      </span>{' '}
-                      <Link
-                        href='/blog/building-a-distributed-cache-for-s3'
-                        className='text-primary-300 hover:underline'>
-                        Read more
-                      </Link>
+                        Test the new Inverted Index in Private Preview! To join
+                        the waitlist, simply answer the questions below.
+                      </span>
                     </SuiText>
                   </div>
                   <MarketoForm
-                    formId={'1407'}
+                    formId={'1469'}
                     clearbitTracking={true}
                     onLoad={() => {
                       setFormLoaded(true)
@@ -120,8 +114,7 @@ export default function ContactPage({
                     You’ve been added to the waitlist!
                   </h3>
                   <p className='mt-2 text-center text-neutral-200'>
-                    Thank you for your interest in ClickHouse’s distributed
-                    cache.
+                    Thank you for your interest in ClickHouse’s Inverted Index.
                     <br />
                     We’ll be in touch soon.
                   </p>
