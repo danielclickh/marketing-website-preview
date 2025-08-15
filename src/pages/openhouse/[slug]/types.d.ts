@@ -30,6 +30,7 @@ export interface OpenhouseDay {
   date: OpenhouseDate
   description: string
   agenda: Array<OpenhouseDayAgenda>
+  useAmericanDateFormat: boolean
 }
 
 export interface OpenhouseFaq {
