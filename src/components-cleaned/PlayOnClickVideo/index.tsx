@@ -1,9 +1,10 @@
 'use client'
 
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
-import type VimeoPlayer from '@vimeo/player'
+import VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
 import { useRef, useState, useEffect } from 'react'
+import YouTubePlayer from 'youtube-player'
 import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/types'
 
 type EmbedProviders = 'youtube' | 'vimeo'
@@ -42,13 +43,12 @@ export default function PlayOnClickVideo({
     }
   }
 
-  const ensurePlayer = async () => {
+  const ensurePlayer = () => {
     if (playerRef.current) return playerRef.current
     const el = containerRef.current
     if (!el) return null
 
     if (provider === 'youtube') {
-      const { default: YouTubePlayer } = await import('youtube-player')
       const yt = YouTubePlayer(el, {
         videoId: String(id),
         playerVars: { rel: 0 }
@@ -58,19 +58,18 @@ export default function PlayOnClickVideo({
       })
       playerRef.current = yt
     } else {
-      const { default: VimeoCtor } = await import('@vimeo/player')
-      const vimeo = new VimeoCtor(el, { id: Number(id) })
+      const vimeo = new VimeoPlayer(el, { id: Number(id) })
       vimeo.on('play', () => setPlaying(true))
       playerRef.current = vimeo
     }
     return playerRef.current
   }
 
-  const handlePlay = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handlePlay = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setLoading(true)
     try {
-      const player = await ensurePlayer()
+      const player = ensurePlayer()
       if (!player) return
       setPlaying(true)
       if (isYT(player)) player.playVideo()
