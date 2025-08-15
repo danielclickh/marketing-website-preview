@@ -8,7 +8,7 @@ import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/ty
 
 type EmbedProviders = 'youtube' | 'vimeo'
 
-export interface VideoEmbedProps {
+export interface PlayOnClickVideoProps {
   provider: EmbedProviders
   thumbnail: ImageProps['src']
   id: string | number
@@ -16,13 +16,13 @@ export interface VideoEmbedProps {
   playButtonLabel?: string
 }
 
-export default function VideoEmbed({
+export default function PlayOnClickVideo({
   provider,
   thumbnail,
   id,
   playButtonLabel,
   playButtonEyebrow
-}: VideoEmbedProps) {
+}: PlayOnClickVideoProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const playerRef = useRef<
     YouTubePlayerClass | InstanceType<typeof VimeoPlayer> | null
