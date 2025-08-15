@@ -1,5 +1,5 @@
 import { CUICard } from '../ClickUI'
-import VideoThumbnail from '@/components-cleaned/VideoThumbnail'
+import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { Video } from '@/types/videos'
 import Link from 'next/link'
 
@@ -20,11 +20,8 @@ export default function VideoCard({
           <div className='relative overflow-hidden rounded-t-lg'>
             <div className='absolute h-full w-full bg-black/[0.65] opacity-0 transition group-hover:opacity-100'></div>
             <div className='relative aspect-[774/420] bg-primary-300'>
-              <VideoThumbnail
-                provider='youtube'
+              <YouTubeThumbnail
                 videoId={VideoID}
-                width={774}
-                height={420}
                 className='absolute z-0 h-full origin-top-left object-cover'
               />
             </div>

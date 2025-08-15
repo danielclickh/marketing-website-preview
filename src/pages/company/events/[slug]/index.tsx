@@ -168,12 +168,6 @@ function EventPage({
 }: EventProps) {
   useGalaxyOnPage('eventPage')
 
-  const hasSidebar = !!thumbnailPng || !form?.disabled
-  const hasVimeo = form?.type === 'recordedGatedContent' && !!recordedVimeoUrl
-  const formId = form?.marketoFormId?.trim()?.length
-    ? form.marketoFormId
-    : '1127'
-
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
@@ -181,17 +175,30 @@ function EventPage({
   const getVimeoId = (video: string) => {
     const regex = /\/video\/(\d+)/
     const match = video?.match(regex)
+    let id = video
+
     if (match) {
-      return match[1]
-    } else {
-      return video
+      id = match[1]
     }
+
+    const asNumber = Number(id)
+    return isNaN(asNumber) ? null : asNumber
   }
+
+  const vimeoId =
+    form?.type === 'recordedGatedContent' && !!recordedVimeoUrl
+      ? getVimeoId(recordedVimeoUrl)
+      : null
+  const hasSidebar = !!thumbnailPng || !form?.disabled
+  const hasVimeo = !!vimeoId
+  const formId = form?.marketoFormId?.trim()?.length
+    ? form.marketoFormId
+    : '1127'
 
   const SuccessMessage = () => (
     <div ref={formSuccessRef}>
       <div className='space-y-6 text-center'>
-        {!hasVimeo && (
+        {!vimeoId && (
           <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
         )}
         <Markdown className='mx-auto w-max text-center'>
@@ -210,7 +217,7 @@ function EventPage({
             <PlayOnClickVideo
               thumbnail={thumbnailPng?.url}
               provider='vimeo'
-              id={getVimeoId(recordedVimeoUrl!)}
+              id={vimeoId}
             />
           </div>
         )}

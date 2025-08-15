@@ -41,7 +41,7 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
-import VideoThumbnail from '@/components-cleaned/VideoThumbnail'
+import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
 import CategorySelector from '@/components/CategorySelector'
 import FontSohne from '@/components/FontSohne'
@@ -1141,12 +1141,9 @@ export default function Page({
                             key={videoIndex}
                             className='group/videoItem relative flex h-full flex-col bg-white text-black'>
                             <div className='relative'>
-                              <VideoThumbnail
-                                provider='youtube'
+                              <YouTubeThumbnail
                                 videoId={video.youtubeId}
-                                width={774}
-                                height={420}
-                                className='aspect-video h-auto w-full max-w-none object-cover'
+                                className='z-0 aspect-video h-auto w-full max-w-none origin-top-left object-cover'
                               />
                               <Image
                                 src={playButton}
