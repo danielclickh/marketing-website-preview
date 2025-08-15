@@ -1,10 +1,9 @@
 'use client'
 
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
-import VimeoPlayer from '@vimeo/player'
-import Image, { ImageProps } from 'next/image'
-import { useEffect, useRef, useState } from 'react'
-import YouTubePlayer from 'youtube-player'
+import type VimeoPlayer from '@vimeo/player'
+import Image, { type ImageProps } from 'next/image'
+import { useRef, useState, useEffect } from 'react'
 import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/types'
 
 type EmbedProviders = 'youtube' | 'vimeo'
@@ -25,78 +24,74 @@ export default function VideoEmbed({
   playButtonEyebrow
 }: VideoEmbedProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [playing, setPlaying] = useState(false)
-
   const playerRef = useRef<
     YouTubePlayerClass | InstanceType<typeof VimeoPlayer> | null
   >(null)
 
-  // Simple type guards
-  const isYT = (
-    p: YouTubePlayerClass | InstanceType<typeof VimeoPlayer> | null
-  ): p is YouTubePlayerClass => !!p && 'playVideo' in p
+  const [loading, setLoading] = useState(false)
+  const [playing, setPlaying] = useState(false)
 
-  const isVimeo = (
-    p: YouTubePlayerClass | InstanceType<typeof VimeoPlayer> | null
-  ): p is InstanceType<typeof VimeoPlayer> => !!p && 'play' in p
+  const isYT = (p: any): p is YouTubePlayerClass => !!p && 'playVideo' in p
+  const isVimeo = (p: any): p is InstanceType<typeof VimeoPlayer> =>
+    !!p && 'play' in p
 
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-
-    // destroy any previous instance
-    if (playerRef.current) {
-      if ('destroy' in playerRef.current) {
-        playerRef.current.destroy()
-      }
+  const destroy = () => {
+    if (playerRef.current && 'destroy' in playerRef.current) {
+      playerRef.current.destroy()
       playerRef.current = null
     }
+  }
 
-    setPlaying(false)
+  const ensurePlayer = async () => {
+    if (playerRef.current) return playerRef.current
+    const el = containerRef.current
+    if (!el) return null
 
     if (provider === 'youtube') {
+      const { default: YouTubePlayer } = await import('youtube-player')
       const yt = YouTubePlayer(el, {
         videoId: String(id),
         playerVars: { rel: 0 }
       })
       yt.on('stateChange', (event: any) => {
-        if (event.data === 1) setPlaying(true) // 1 = playing
+        if (event?.data === 1) setPlaying(true)
       })
       playerRef.current = yt
     } else {
-      const vimeo = new VimeoPlayer(el, { id: Number(id) })
+      const { default: VimeoCtor } = await import('@vimeo/player')
+      const vimeo = new VimeoCtor(el, { id: Number(id) })
       vimeo.on('play', () => setPlaying(true))
       playerRef.current = vimeo
     }
+    return playerRef.current
+  }
 
-    return () => {
-      if (playerRef.current && 'destroy' in playerRef.current) {
-        playerRef.current.destroy()
-        playerRef.current = null
-      }
-    }
-  }, [provider, id])
-
-  const handlePlay = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handlePlay = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    const player = playerRef.current
-    if (!player) return
-
-    setPlaying(true)
-
-    if (isYT(player)) {
-      player.playVideo()
-    } else if (isVimeo(player)) {
-      player.play()
+    setLoading(true)
+    try {
+      const player = await ensurePlayer()
+      if (!player) return
+      setPlaying(true)
+      if (isYT(player)) player.playVideo()
+      else if (isVimeo(player)) player.play()
+    } finally {
+      setLoading(false)
     }
   }
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => destroy()
+  }, [])
+
   return (
     <div className='relative aspect-video overflow-hidden rounded bg-neutral-900'>
-      {/* Thumbnail */}
+      {/* Thumbnail overlay */}
       <div
-        className={`absolute inset-0 z-10 bg-neutral-900 transition-opacity ${playing ? 'pointer-events-none opacity-0' : ''}`}>
+        className={`absolute inset-0 z-10 bg-neutral-900 transition-opacity ${
+          playing ? 'pointer-events-none opacity-0' : ''
+        }`}>
         <VideoPlayButton
           className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'
           eyebrow={playButtonEyebrow}
@@ -113,7 +108,7 @@ export default function VideoEmbed({
         />
       </div>
 
-      {/* Player container (pass the element, not an id) */}
+      {/* Player container */}
       <div
         ref={containerRef}
         className='absolute inset-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
