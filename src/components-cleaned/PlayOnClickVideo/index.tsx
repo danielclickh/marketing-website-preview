@@ -1,6 +1,7 @@
 'use client'
 
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
+import VideoThumbnail from '@/components-cleaned/VideoThumbnail'
 import type VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
 import { useRef, useState, useEffect } from 'react'
@@ -10,8 +11,8 @@ type EmbedProviders = 'youtube' | 'vimeo'
 
 export interface PlayOnClickVideoProps {
   provider: EmbedProviders
-  thumbnail: ImageProps['src']
-  id: string | number
+  thumbnail?: ImageProps['src']
+  id: string
   playButtonEyebrow?: string
   playButtonLabel?: string
 }
@@ -100,13 +101,21 @@ export default function PlayOnClickVideo({
           loading={loading && !playing}
           onClick={handlePlay}
         />
-        <Image
-          src={thumbnail}
-          width={1280}
-          height={720}
-          alt='Video Thumbnail'
-          className='absolute inset-0 z-0 h-full w-full object-cover object-center'
-        />
+        {thumbnail ? (
+          <Image
+            src={thumbnail}
+            width={1280}
+            height={720}
+            alt='Video Thumbnail'
+            className='absolute inset-0 z-0 h-full w-full object-cover object-center'
+          />
+        ) : (
+          <VideoThumbnail
+            provider={provider}
+            videoId={id}
+            className='absolute inset-0 z-0 h-full w-full object-cover object-center'
+          />
+        )}
       </div>
 
       {/* Player container */}

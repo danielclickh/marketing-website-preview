@@ -22,6 +22,7 @@ export default function StripeBuyButton({
   return (
     <div>
       <stripe-buy-button
+        class='flex'
         buy-button-id={id}
         customer-email={customerEmail}
         publishable-key={

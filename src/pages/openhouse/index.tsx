@@ -41,12 +41,12 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import VideoThumbnail from '@/components-cleaned/VideoThumbnail'
 import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
 import CategorySelector from '@/components/CategorySelector'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
-import MarketingVideoThumbnail from '@/components/MarketingVideoThumbnail'
 import Modal from '@/components/Modal'
 import OpenHouseAccordionItem from '@/components/OpenHouseAccordionItem'
 import OpenHouseButton from '@/components/OpenHouseButton'
@@ -1141,9 +1141,12 @@ export default function Page({
                             key={videoIndex}
                             className='group/videoItem relative flex h-full flex-col bg-white text-black'>
                             <div className='relative'>
-                              <MarketingVideoThumbnail
+                              <VideoThumbnail
+                                provider='youtube'
                                 videoId={video.youtubeId}
-                                className='z-0'
+                                width={774}
+                                height={420}
+                                className='aspect-video h-auto w-full max-w-none object-cover'
                               />
                               <Image
                                 src={playButton}

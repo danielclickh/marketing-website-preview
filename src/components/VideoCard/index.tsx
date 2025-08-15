@@ -1,10 +1,7 @@
 import { CUICard } from '../ClickUI'
-import fallbackTumbnail from './fallback.png'
-import MarketingVideoThumbnail from '@/components/MarketingVideoThumbnail'
+import VideoThumbnail from '@/components-cleaned/VideoThumbnail'
 import { Video } from '@/types/videos'
-import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 
 export default function VideoCard({
   Slug,
@@ -22,7 +19,15 @@ export default function VideoCard({
         <CUICard.Body>
           <div className='relative overflow-hidden rounded-t-lg'>
             <div className='absolute h-full w-full bg-black/[0.65] opacity-0 transition group-hover:opacity-100'></div>
-            <MarketingVideoThumbnail videoId={VideoID} />
+            <div className='relative aspect-[774/420] bg-primary-300'>
+              <VideoThumbnail
+                provider='youtube'
+                videoId={VideoID}
+                width={774}
+                height={420}
+                className='absolute z-0 h-full origin-top-left object-cover'
+              />
+            </div>
           </div>
 
           <div className='p-6 font-basier text-xl font-medium leading-tight text-neutral-100'>
