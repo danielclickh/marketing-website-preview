@@ -191,11 +191,14 @@ function EventPage({
   const SuccessMessage = () => (
     <div ref={formSuccessRef}>
       <div className='space-y-6 text-center'>
-        <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
-        <Markdown>
-          {form?.SuccessMessage || hasVimeo
-            ? 'Thanks for registering!'
-            : "You've been successfully registered. See you there!"}
+        {!hasVimeo && (
+          <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
+        )}
+        <Markdown className='mx-auto w-max text-center'>
+          {form?.SuccessMessage ||
+            (hasVimeo
+              ? '## Thanks for registering. Watch below!'
+              : "You've been successfully registered. See you there!")}
         </Markdown>
         {form?.stripeBuyButtonId && (
           <div className='mx-auto w-max overflow-hidden rounded-xl border-2 border-primary-300'>
@@ -291,21 +294,19 @@ function EventPage({
 
           {/* Form column */}
           {hasSidebar && (
-            <div className='w-full lg:max-w-lg'>
-              <CUICard className='overflow-hidden'>
-                {thumbnailPng && (
-                  <CUICard.Header className='hidden border-b border-neutral-700/80 lg:block'>
-                    <Image
-                      src={thumbnailPng.url}
-                      width={512}
-                      height={293}
-                      loading='eager'
-                      priority
-                      alt='Featured image'
-                      className='h-auto w-full object-cover'
-                    />
-                  </CUICard.Header>
-                )}
+            <div className='w-full space-y-6 lg:max-w-lg'>
+              {thumbnailPng && (
+                <Image
+                  src={thumbnailPng.url}
+                  width={512}
+                  height={293}
+                  loading='eager'
+                  priority
+                  alt='Featured image'
+                  className='hidden h-auto w-full rounded-lg border border-neutral-700/80 object-cover shadow-lg lg:block'
+                />
+              )}
+              <CUICard>
                 <CUICard.Body className='p-4 lg:p-6'>
                   {!form?.disabled && (
                     <>
