@@ -114,7 +114,7 @@ export default function ContactPage({
                     You’ve been added to the waitlist!
                   </h3>
                   <p className='mt-2 text-center text-neutral-200'>
-                    Thank you for your interest in ClickHouse’s inverted index.
+                    Thank you for your interest in ClickHouse’s Inverted Index.
                     <br />
                     We’ll be in touch soon.
                   </p>
