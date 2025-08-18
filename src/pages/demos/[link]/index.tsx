@@ -165,15 +165,11 @@ export default function DemoPage({
                 </SuiText>
                 <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                   <CopyUrlButton />
-                  {[
-                    'y_combinator',
-                    'twitter',
-                    'bluesky',
-                    'facebook',
-                    'linkedin'
-                  ].map((social) => (
-                    <SocialButton key={social} type={social} title={Title} />
-                  ))}
+                  <SocialButton type='y_combinator' title={Title} />
+                  <SocialButton type='twitter' title={Title} />
+                  <SocialButton type='bluesky' title={Title} />
+                  <SocialButton type='facebook' title={Title} />
+                  <SocialButton type='linkedin' title={Title} />
                 </div>
               </div>
 
