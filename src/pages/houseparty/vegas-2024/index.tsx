@@ -280,19 +280,21 @@ export default function Page({
                         </SuiText>
                         <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
                           <CopyUrlButton className='!px-3' />
-                          {[
-                            //'y_combinator',
-                            'twitter',
-                            'facebook',
-                            'linkedin'
-                          ].map((social) => (
-                            <SocialButton
-                              key={social}
-                              type={social}
-                              title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
-                              className='!px-3'
-                            />
-                          ))}
+                          <SocialButton
+                            type='twitter'
+                            title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
+                            className='!px-3'
+                          />
+                          <SocialButton
+                            type='facebook'
+                            title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
+                            className='!px-3'
+                          />
+                          <SocialButton
+                            type='linkedin'
+                            title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
+                            className='!px-3'
+                          />
                         </div> */}
                       </div>
                     )}

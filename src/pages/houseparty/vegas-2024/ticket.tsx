@@ -3,7 +3,7 @@ import imageHeroTexture from './hero-texture.png'
 import styles from './styles.module.scss'
 import imageTicket from './ticket.png'
 import Layout from '@/components/Layout'
-import SocialButtonWithText from '@/components/SocialButtonWithText'
+import SocialButton from '@/components/SocialButton'
 import { SuiText } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -129,17 +129,18 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
                     attending!
                   </SuiText>
                   <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
-                    {['twitter', 'linkedin'].map((social) => (
-                      <SocialButtonWithText
-                        key={social}
-                        type={social}
-                        url='https://clickhou.se/houseparty2024'
-                        title={
-                          "Just grabbed my ticket to the [Click]House Party during re:Invent in Vegas—who's joining me for an epic night?"
-                        }
-                        className='!px-3'
-                      />
-                    ))}
+                    <SocialButton
+                      type='twitter'
+                      url='https://clickhou.se/houseparty2024'
+                      title="Just grabbed my ticket to the [Click]House Party during re:Invent in Vegas—who's joining me for an epic night?"
+                      className='!px-3'
+                    />
+                    <SocialButton
+                      type='linkedin'
+                      url='https://clickhou.se/houseparty2024'
+                      title="Just grabbed my ticket to the [Click]House Party during re:Invent in Vegas—who's joining me for an epic night?"
+                      className='!px-3'
+                    />
                   </div>
                 </div>
                 <SuiText

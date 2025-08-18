@@ -18,7 +18,9 @@ const socialConfig: Record<
   }
 > = {
   bluesky: {
-    url: (url) => `https://bsky.app/intent/compose?text=${url}`,
+    url: (url, title = '') => {
+      return `https://bsky.app/intent/compose?text=${title ? `${title} ` : ''}${url}`
+    },
     icon: (
       <svg
         width='20'
@@ -34,7 +36,9 @@ const socialConfig: Record<
     )
   },
   linkedin: {
-    url: (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+    url: (url, title) => {
+      return `https://www.linkedin.com/sharing/share-offsite/?url=${url}${title ? `&text=${title}` : ''}`
+    },
     icon: (
       <svg
         fill='none'
@@ -50,7 +54,9 @@ const socialConfig: Record<
     )
   },
   twitter: {
-    url: (url) => `https://twitter.com/intent/tweet?text=${url}`,
+    url: (url, title) => {
+      return `https://twitter.com/intent/tweet?text=${title ? `${title} ` : ''}${url}`
+    },
     icon: (
       <svg
         width='20'
