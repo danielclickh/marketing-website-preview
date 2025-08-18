@@ -142,24 +142,10 @@ body {
 }
 
 .rich_content {
-  @apply text-neutral-200;
-  .md-header-container {
-    @apply mb-6 flex items-center gap-2;
-    &:not(:first-child) {
-      @apply mt-6;
-    }
-    h2 {
-      @apply text-2xl font-semibold;
-    }
-    .link {
-      @apply hidden;
-      &.open {
-        @apply block;
-      }
-    }
-    &:hover .link {
-      @apply block;
-    }
+  @apply text-neutral-200 space-y-6;
+
+  h2 {
+    @apply text-2xl font-semibold;
   }
 
   h1,

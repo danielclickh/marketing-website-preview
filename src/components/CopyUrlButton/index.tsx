@@ -2,13 +2,14 @@ import { ButtonProps } from '../sui/SuiButton'
 import { SuiButton } from '../sui/client'
 import { DuplicateIcon } from '@heroicons/react/outline'
 
-function CopyUrlButton({
-  className = ''
-}: {
+interface CopyUrlButtonProps {
   className?: ButtonProps['className']
-}) {
+  url?: string
+}
+
+function CopyUrlButton({ url, className = '' }: CopyUrlButtonProps) {
   const onClick = () => {
-    navigator.clipboard.writeText(window.location.href)
+    navigator.clipboard.writeText(url || window.location.href)
   }
   return (
     <SuiButton

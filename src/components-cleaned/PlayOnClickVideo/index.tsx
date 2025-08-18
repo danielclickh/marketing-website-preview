@@ -3,14 +3,14 @@
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
 import type VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, isValidElement } from 'react'
 import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/types'
 
 type EmbedProviders = 'youtube' | 'vimeo'
 
 export interface PlayOnClickVideoProps {
   provider: EmbedProviders
-  thumbnail: ImageProps['src']
+  thumbnail?: ImageProps['src']
   id: string | number
   playButtonEyebrow?: string
   playButtonLabel?: string
@@ -51,7 +51,7 @@ export default function PlayOnClickVideo({
       const { default: YouTubePlayer } = await import('youtube-player')
       const yt = YouTubePlayer(el, {
         videoId: String(id),
-        playerVars: { rel: 0 }
+        playerVars: { rel: 0, controls: 1, modestbranding: 1 }
       })
       yt.on('stateChange', (event: any) => {
         if (event?.data === 1) setPlaying(true)
@@ -59,7 +59,11 @@ export default function PlayOnClickVideo({
       playerRef.current = yt
     } else {
       const { default: VimeoCtor } = await import('@vimeo/player')
-      const vimeo = new VimeoCtor(el, { id: Number(id) })
+      const vimeo = new VimeoCtor(el, {
+        id: Number(id),
+        controls: true,
+        title: false
+      })
       vimeo.on('play', () => setPlaying(true))
       playerRef.current = vimeo
     }
@@ -90,23 +94,25 @@ export default function PlayOnClickVideo({
     <div className='relative aspect-video overflow-hidden rounded bg-neutral-900'>
       {/* Thumbnail overlay */}
       <div
-        className={`absolute inset-0 z-10 bg-neutral-900 transition-opacity ${
+        className={`absolute inset-0 z-10 transition-opacity ${thumbnail ? 'bg-neutral-900' : 'pointer-events-none'} ${
           playing ? 'pointer-events-none opacity-0' : ''
         }`}>
         <VideoPlayButton
-          className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'
+          className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${thumbnail ? '' : 'pointer-events-auto'}`}
           eyebrow={playButtonEyebrow}
           label={playButtonLabel}
           loading={loading && !playing}
           onClick={handlePlay}
         />
-        <Image
-          src={thumbnail}
-          width={1280}
-          height={720}
-          alt='Video Thumbnail'
-          className='absolute inset-0 z-0 h-full w-full object-cover object-center'
-        />
+        {thumbnail && (
+          <Image
+            src={thumbnail}
+            width={1280}
+            height={720}
+            alt='Video Thumbnail'
+            className='absolute inset-0 z-0 h-full w-full object-cover object-center'
+          />
+        )}
       </div>
 
       {/* Player container */}

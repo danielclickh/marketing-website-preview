@@ -106,16 +106,26 @@ export default function OpenhouseFormModal({
             </p>
             <div className='flex flex-wrap justify-center gap-2 text-neutral-0'>
               <CopyUrlButton className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow' />
-              {['y_combinator', 'twitter', 'facebook', 'linkedin'].map(
-                (social) => (
-                  <SocialButton
-                    className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
-                    key={social}
-                    type={social}
-                    title='Open House by ClickHouse'
-                  />
-                )
-              )}
+              <SocialButton
+                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                type='y_combinator'
+                title='Open House by ClickHouse'
+              />
+              <SocialButton
+                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                type='twitter'
+                title='Open House by ClickHouse'
+              />
+              <SocialButton
+                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                type='facebook'
+                title='Open House by ClickHouse'
+              />
+              <SocialButton
+                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                type='linkedin'
+                title='Open House by ClickHouse'
+              />
             </div>
             <button
               onClick={(event) => {
