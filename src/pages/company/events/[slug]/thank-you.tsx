@@ -136,6 +136,9 @@ export const getStaticProps: GetStaticProps<EventProps> =
 export async function getStaticPaths() {
   const data = await fetchAll('events', {
     filters: {
+      eventVideoUrl: {
+        $null: true
+      },
       $or: getStagingOnlyFilters()
     },
     fields: ['slug']
