@@ -28,7 +28,7 @@ const commonPlugIns: PluggableList = [
 ]
 
 function Header(props: any) {
-  let { id, allowHeaderLink, ...otherProps } = props
+  let { id, allowHeaderLink, className = '', children, ...otherProps } = props
   if (!allowHeaderLink) {
     id = id.replaceAll('-', '')
   }
@@ -44,36 +44,38 @@ function Header(props: any) {
     }, 2000)
   }
   return (
-    <div className='md-header-container'>
-      <SuiTitle {...otherProps} id={id} />
+    <SuiTitle {...otherProps} className={`group/mdHeader ${className}`} id={id}>
+      {children}
       {(isOpen || allowHeaderLink) && (
-        <Tooltip.Provider delayDuration={200}>
-          <Tooltip.Root open={isOpen}>
-            <Tooltip.Trigger asChild>
-              <div>
-                <CUILink
-                  href={{
-                    hash: id
-                  }}
-                  className={`link ${isOpen ? 'open' : ''}`}
-                  onClick={onClick}>
-                  #
-                </CUILink>
-              </div>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                className='rounded-lg bg-neutral-750 px-3 py-2 shadow-click-card'
-                sideOffset={5}
-                side='top'>
-                Copied
-                <Tooltip.Arrow className='fill-neutral-750' />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
+        <>
+          {' '}
+          <Tooltip.Provider delayDuration={200}>
+            <Tooltip.Root open={isOpen}>
+              <Tooltip.Trigger asChild>
+                <span className='opacity-0 transition-opacity group-hover/mdHeader:opacity-100'>
+                  <CUILink
+                    href={{
+                      hash: id
+                    }}
+                    onClick={onClick}>
+                    #
+                  </CUILink>
+                </span>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content
+                  className='rounded-lg bg-neutral-750 px-3 py-2 shadow-click-card'
+                  sideOffset={5}
+                  side='top'>
+                  Copied
+                  <Tooltip.Arrow className='fill-neutral-750' />
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+          </Tooltip.Provider>
+        </>
       )}
-    </div>
+    </SuiTitle>
   )
 }
 
