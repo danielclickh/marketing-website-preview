@@ -90,6 +90,16 @@ export default function TableOfContents({
     }
   }, [contentRef.current, scrollHanlder])
 
+  const getOwnText = (el: HTMLElement) => {
+    let text = ''
+    for (let node of el.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        text += node.textContent
+      }
+    }
+    return text.trim()
+  }
+
   return (
     <>
       {headingElements.length > 0 && (
@@ -97,28 +107,31 @@ export default function TableOfContents({
           ref={navRef}
           className='overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
           <ul className='space-y-2'>
-            {headingElements.map((heading) => (
-              <li
-                key={heading.id}
-                style={{
-                  paddingLeft: `${Number(heading.tagName.charAt(1)) - 1}rem`
-                }}>
-                <a
-                  href={`#${heading.id}`}
-                  className={`block break-words py-1 transition-colors hover:text-primary-300 ${
-                    activeId === heading.id
-                      ? 'font-medium text-primary-300'
-                      : 'text-neutral-400'
-                  }`}
-                  title={heading.textContent || ''}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document.getElementById(heading.id)?.scrollIntoView()
+            {headingElements.map((heading, headingIndex) => {
+              const innerText = getOwnText(heading)
+              return (
+                <li
+                  key={`${headingIndex}-${heading.id}`}
+                  style={{
+                    paddingLeft: `${(Number(heading.tagName.charAt(1)) || 1) - 1}rem`
                   }}>
-                  {heading.textContent}
-                </a>
-              </li>
-            ))}
+                  <a
+                    href={`#${heading.id}`}
+                    className={`block break-words py-1 transition-colors hover:text-primary-300 ${
+                      activeId === heading.id
+                        ? 'font-medium text-primary-300'
+                        : 'text-neutral-400'
+                    }`}
+                    title={innerText}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      document.getElementById(heading.id)?.scrollIntoView()
+                    }}>
+                    {innerText}
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         </nav>
       )}
