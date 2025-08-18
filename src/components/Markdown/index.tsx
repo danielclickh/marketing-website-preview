@@ -52,7 +52,7 @@ function Header(props: any) {
           <Tooltip.Provider delayDuration={200}>
             <Tooltip.Root open={isOpen}>
               <Tooltip.Trigger asChild>
-                <span className='opacity-0 transition-opacity group-hover/mdHeader:opacity-100'>
+                <span className='transition-opacity group-hover/mdHeader:opacity-100 has-hover:opacity-0'>
                   <CUILink
                     href={{
                       hash: id
