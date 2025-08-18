@@ -169,7 +169,7 @@ function EventPage({
         {!vimeoId && (
           <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
         )}
-        <Markdown className='text-center'>
+        <Markdown className='rich-text-content text-center'>
           {form?.SuccessMessage ||
             (hasVimeo
               ? '## Thanks for registering. Watch below!'

@@ -209,7 +209,9 @@ function EventPage({
           </Breadcrumbs>
           <SuiTitle type='h1'>{title}</SuiTitle>
 
-          {richDescription && <Markdown>{richDescription}</Markdown>}
+          {richDescription && (
+            <Markdown className='rich-text-content'>{richDescription}</Markdown>
+          )}
 
           {hostedBy && (
             <>
@@ -292,7 +294,7 @@ function EventPage({
                       <div ref={formSuccessRef}>
                         <div className='space-y-6 text-center'>
                           <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
-                          <Markdown className='text-center'>
+                          <Markdown className='rich-text-content text-center'>
                             {form?.SuccessMessage ||
                               "You've been successfully registered. See you there!"}
                           </Markdown>
