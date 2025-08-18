@@ -12,6 +12,7 @@ import { StrapiImage } from '@/components/StrapiElements'
 import StripeBuyButton from '@/components/StripeBuyButton'
 import { SuiTitle } from '@/components/sui'
 import {
+  fetchAll,
   findAll,
   getProxiedMediaUrl,
   getStagingOnlyFilters,
@@ -25,13 +26,13 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { EventProps, EventType } from '@/types/events'
 import { ParamsType } from '@/types/homepage'
 import { CheckCircleIcon } from '@heroicons/react/outline'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useRef, useState } from 'react'
 
-export const getServerSideProps: GetServerSideProps<EventProps> =
-  async function getServerSideProps({ params }) {
+export const getStaticProps: GetStaticProps<EventProps> =
+  async function getStaticProps({ params }) {
     const { slug } = params as ParamsType
     const { data } = await findAll('events', {
       filters: {
@@ -151,7 +152,29 @@ export const getServerSideProps: GetServerSideProps<EventProps> =
     }
   }
 
-function EventPage({
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
+export async function getStaticPaths() {
+  const data = await fetchAll('events', {
+    filters: {
+      $or: getStagingOnlyFilters()
+    },
+    fields: ['slug']
+  })
+
+  // Get the paths we want to pre-render based on posts
+  const paths = data.map((post) => ({
+    params: { slug: post.slug }
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: 'blocking' } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: 'blocking' }
+}
+
+export default function Page({
   slug,
   agenda,
   hostedBy,
@@ -350,5 +373,3 @@ function EventPage({
     </Layout>
   )
 }
-
-export default EventPage

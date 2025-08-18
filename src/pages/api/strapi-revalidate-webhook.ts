@@ -67,6 +67,7 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     if (body?.entry?.slug) {
       paths.push(`/company/events/${body.entry.slug}`)
+      paths.push(`/company/events/${body.entry.slug}/thank-you`)
     }
 
     await revalidate(response, paths)
