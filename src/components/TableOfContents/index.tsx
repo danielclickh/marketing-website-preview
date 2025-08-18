@@ -108,7 +108,7 @@ export default function TableOfContents({
           className='overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
           <ul className='space-y-2'>
             {headingElements.map((heading, headingIndex) => {
-              const innerText = getOwnText(heading)
+              const innerText = heading.textContent?.replace(/\s+#$/, '')
               return (
                 <li
                   key={`${headingIndex}-${heading.id}`}
