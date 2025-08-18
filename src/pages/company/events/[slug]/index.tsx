@@ -258,7 +258,7 @@ function EventPage({
 
         {/* Form column */}
         {hasSidebar && (
-          <div className='w-full space-y-6 lg:max-w-lg'>
+          <div className='w-full flex-shrink-0 flex-grow-0 space-y-6 lg:max-w-lg'>
             {thumbnailPng && (
               <Image
                 src={thumbnailPng.url}
@@ -292,7 +292,7 @@ function EventPage({
                       <div ref={formSuccessRef}>
                         <div className='space-y-6 text-center'>
                           <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
-                          <Markdown className='mx-auto w-full max-w-max text-center'>
+                          <Markdown className='text-center'>
                             {form?.SuccessMessage ||
                               "You've been successfully registered. See you there!"}
                           </Markdown>
