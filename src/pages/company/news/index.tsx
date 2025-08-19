@@ -1,3 +1,4 @@
+import PaginateChildren from '@/components-cleaned/PaginateChildren'
 import { CUICard } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
@@ -91,34 +92,41 @@ export default function News({
         {/* Main */}
         <div>
           <SuiTitle type='h1'>Press releases</SuiTitle>
-          <ul className='space-y-6 divide-y divide-white/5'>
-            {pressItems.map((item, itemIndex) => (
-              <li key={itemIndex} className='pt-6'>
-                <div className='group/newsItem relative'>
-                  <p className='mb-2 font-inconsolata text-primary-300'>
-                    {item.publisherName} •{' '}
-                    {convertDateToString(item.publishedDate)}
-                  </p>
-                  <SuiTitle type='h3'>
-                    <Link href={item.redirectUrl}>
-                      <span className='absolute inset-0' />
-                      {item.title}
-                    </Link>
-                  </SuiTitle>
-                  <div className='flex flex-col'>
-                    <SuiText
-                      className='mb-6 leading-relaxed text-neutral-200'
-                      size='sm'>
-                      {item.excerpt}
-                    </SuiText>
-                    <div className='mt-auto text-primary-300 group-hover/newsItem:underline'>
-                      Read more -&gt;
+          <PaginateChildren perPage={2} mode='loadMore'>
+            <PaginateChildren.Items
+              as='ol'
+              className='space-y-6 divide-y divide-white/5'>
+              {pressItems.map((item, itemIndex) => (
+                <li key={itemIndex} className='pt-6'>
+                  <div className='group/newsItem relative'>
+                    <p className='mb-2 font-inconsolata text-primary-300'>
+                      {item.publisherName} •{' '}
+                      {convertDateToString(item.publishedDate)}
+                    </p>
+                    <SuiTitle type='h3'>
+                      <Link href={item.redirectUrl}>
+                        <span className='absolute inset-0' />
+                        {item.title}
+                      </Link>
+                    </SuiTitle>
+                    <div className='flex flex-col'>
+                      <SuiText
+                        className='mb-6 leading-relaxed text-neutral-200'
+                        size='sm'>
+                        {item.excerpt}
+                      </SuiText>
+                      <div className='mt-auto text-primary-300 group-hover/newsItem:underline'>
+                        Read more -&gt;
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </PaginateChildren.Items>
+            <PaginateChildren.NextButton className='disabled:hidden'>
+              Load more
+            </PaginateChildren.NextButton>
+          </PaginateChildren>
         </div>
 
         {/* Sidebar */}
@@ -126,36 +134,46 @@ export default function News({
           <CUICard>
             <CUICard.Body className='p-4 lg:p-6'>
               <SuiTitle type='h2'>In the news</SuiTitle>
-              <ul className='space-y-6 divide-y divide-white/5'>
-                {newsItems.map((item, itemIndex) => (
-                  <li key={itemIndex} className='pt-6'>
-                    <div className='group/newsItem relative'>
-                      <SuiTitle type='h3'>
-                        <Link
-                          href={item.redirectUrl}
-                          className='text-primary-300 hover:underline'>
-                          <span className='absolute inset-0' />
-                          {item.title}
-                        </Link>
-                      </SuiTitle>
-                      <div className='mt-4 flex items-center gap-4'>
-                        <StrapiImageUrl
-                          {...item.publisherAvatar}
-                          width={100}
-                          height={100}
-                          unoptimized={false}
-                          className='size-11 rounded-full object-cover object-center'
-                        />
-                        <p className='font-inconsolata leading-tight text-neutral-200'>
-                          {item.publisherName}
-                          <br />
-                          {convertDateToString(item.publishedDate)}
-                        </p>
+              <PaginateChildren perPage={2}>
+                <PaginateChildren.Items
+                  as='ol'
+                  className='space-y-6 divide-y divide-white/5'>
+                  {newsItems.map((item, itemIndex) => (
+                    <li key={itemIndex} className='pt-6'>
+                      <div className='group/newsItem relative'>
+                        <SuiTitle type='h3'>
+                          <Link
+                            href={item.redirectUrl}
+                            className='text-primary-300 hover:underline'>
+                            <span className='absolute inset-0' />
+                            {item.title}
+                          </Link>
+                        </SuiTitle>
+                        <div className='mt-4 flex items-center gap-4'>
+                          <StrapiImageUrl
+                            {...item.publisherAvatar}
+                            width={100}
+                            height={100}
+                            unoptimized={false}
+                            className='size-11 rounded-full object-cover object-center'
+                          />
+                          <p className='font-inconsolata leading-tight text-neutral-200'>
+                            {item.publisherName}
+                            <br />
+                            {convertDateToString(item.publishedDate)}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </PaginateChildren.Items>
+                <PaginateChildren.PrevButton className='disabled:hidden'>
+                  prev
+                </PaginateChildren.PrevButton>
+                <PaginateChildren.NextButton className='disabled:hidden'>
+                  Next
+                </PaginateChildren.NextButton>
+              </PaginateChildren>
             </CUICard.Body>
           </CUICard>
         </div>
