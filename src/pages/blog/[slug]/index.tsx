@@ -1,5 +1,6 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
+import SmartBackButton from '@/components-cleaned/SmartBackButton'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -245,12 +246,12 @@ export default function BlogPage({
         <ReadingProgress target={contentRef} />
 
         <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
-          <Link
-            href='/blog'
+          <SmartBackButton
+            fallbackPath='/blog'
             className='group/backButton -mx-3 -my-1.5 mr-8 inline-flex items-center whitespace-nowrap rounded px-3 py-1.5 text-base font-semibold transition-colors hover:bg-white/5'>
             <ArrowLeftIcon className='mr-2 w-4 transition-transform group-hover/backButton:-translate-x-1' />
             Back
-          </Link>
+          </SmartBackButton>
           <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
             {/* Blog meta */}
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
