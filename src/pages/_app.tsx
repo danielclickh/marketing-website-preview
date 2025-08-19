@@ -1,4 +1,5 @@
 import GlobalSearchProvider from '@/components-cleaned/GlobalSearchProvider'
+import SmartBackProvider from '@/components-cleaned/SmartBackProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
 import { Galaxy } from '@/lib/galaxy/web/browser'
@@ -142,14 +143,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <GrowthBookProvider growthbook={gb}>
           <GlobalSearchProvider enabled={!isMarketoIframe}>
-            <main
-              id='main-site-container'
-              className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-              <div className='flex min-h-screen flex-col'>
-                <Component {...pageProps} />
-              </div>
-            </main>
-            <UTMPersist />
+            <SmartBackProvider>
+              <main
+                id='main-site-container'
+                className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
+                <div className='flex min-h-screen flex-col'>
+                  <Component {...pageProps} />
+                </div>
+              </main>
+              <UTMPersist />
+            </SmartBackProvider>
           </GlobalSearchProvider>
         </GrowthBookProvider>
 
