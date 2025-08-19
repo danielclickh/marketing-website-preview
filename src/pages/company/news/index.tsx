@@ -1,5 +1,5 @@
 import PaginateChildren from '@/components-cleaned/PaginateChildren'
-import { CUICard } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import NewsItem from '@/components/NewsItem'
@@ -69,7 +69,9 @@ export const getStaticProps: GetStaticProps<PageProps> =
         newsItems,
         pressItems,
         seo: {
-          title: 'News & Press releases - ClickHouse',
+          title: 'Latest news and press releases from ClickHouse',
+          description:
+            'Read the latest news and press releases from ClickHouse, including company updates and external media coverage.',
           path: '/company/news'
         },
         ...commonProps
@@ -92,14 +94,14 @@ export default function News({
         {/* Main */}
         <div>
           <SuiTitle type='h1'>Press releases</SuiTitle>
-          <PaginateChildren perPage={2} mode='loadMore'>
+          <PaginateChildren perPage={6} mode='loadMore'>
             <PaginateChildren.Items
               as='ol'
               className='space-y-6 divide-y divide-white/5'>
               {pressItems.map((item, itemIndex) => (
                 <li key={itemIndex} className='pt-6'>
-                  <div className='group/newsItem relative'>
-                    <p className='mb-2 font-inconsolata text-primary-300'>
+                  <div className='group/newsItem relative space-y-2'>
+                    <p className='font-inconsolata text-primary-300'>
                       {item.publisherName} •{' '}
                       {convertDateToString(item.publishedDate)}
                     </p>
@@ -109,22 +111,18 @@ export default function News({
                         {item.title}
                       </Link>
                     </SuiTitle>
-                    <div className='flex flex-col'>
-                      <SuiText
-                        className='mb-6 leading-relaxed text-neutral-200'
-                        size='sm'>
-                        {item.excerpt}
-                      </SuiText>
-                      <div className='mt-auto text-primary-300 group-hover/newsItem:underline'>
-                        Read more -&gt;
-                      </div>
+                    <SuiText className='leading-relaxed text-neutral-200'>
+                      {item.excerpt}
+                    </SuiText>
+                    <div className='text-primary-300 group-hover/newsItem:underline'>
+                      Read more -&gt;
                     </div>
                   </div>
                 </li>
               ))}
             </PaginateChildren.Items>
-            <PaginateChildren.NextButton className='disabled:hidden'>
-              Load more
+            <PaginateChildren.NextButton className='mx-auto mt-6 flex items-center justify-center gap-1 rounded border border-primary-600 bg-transparent px-6 py-2 text-sm text-neutral-0 hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl active:border-primary-500 active:bg-neutral-725 active:bg-opacity-80 active:shadow-xl disabled:hidden'>
+              Load more articles
             </PaginateChildren.NextButton>
           </PaginateChildren>
         </div>
@@ -134,7 +132,7 @@ export default function News({
           <CUICard>
             <CUICard.Body className='p-4 lg:p-6'>
               <SuiTitle type='h2'>In the news</SuiTitle>
-              <PaginateChildren perPage={2}>
+              <PaginateChildren perPage={4}>
                 <PaginateChildren.Items
                   as='ol'
                   className='space-y-6 divide-y divide-white/5'>
@@ -167,12 +165,20 @@ export default function News({
                     </li>
                   ))}
                 </PaginateChildren.Items>
-                <PaginateChildren.PrevButton className='disabled:hidden'>
-                  prev
-                </PaginateChildren.PrevButton>
-                <PaginateChildren.NextButton className='disabled:hidden'>
-                  Next
-                </PaginateChildren.NextButton>
+                <div className='mt-6 flex justify-center gap-2 border-t border-white/5 pt-6'>
+                  <PaginateChildren.PrevButton className='group rounded border border-transparent px-3 py-1 text-sm font-bold text-neutral-200 transition-colors hover:border-primary-300/50 hover:text-neutral-100 disabled:pointer-events-none disabled:opacity-40'>
+                    <span className='tanslate-x-0 mr-2 inline-block transition-transform group-hover:-translate-x-1'>
+                      &lt;-
+                    </span>{' '}
+                    Prev
+                  </PaginateChildren.PrevButton>
+                  <PaginateChildren.NextButton className='group rounded border border-transparent px-3 py-1 text-sm font-bold text-neutral-200 transition-colors hover:border-primary-300/50 hover:text-neutral-100 disabled:pointer-events-none disabled:opacity-40'>
+                    Next{' '}
+                    <span className='tanslate-x-0 ml-2 inline-block transition-transform group-hover:translate-x-1'>
+                      -&gt;
+                    </span>
+                  </PaginateChildren.NextButton>
+                </div>
               </PaginateChildren>
             </CUICard.Body>
           </CUICard>
