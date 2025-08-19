@@ -290,6 +290,10 @@ const CONTENT_TYPE_HANDLERS: Record<
     const paths = [`/sitemap`, `/company/events`, `/company/news`]
     await revalidate(response, paths)
   },
+  'api::news-item.news-item': async function (body, response) {
+    const paths: Array<string> = ['/company/news']
+    await revalidate(response, paths)
+  },
   'api::newsletter-form.newsletter-form': async function (body, response) {
     // @todo revalidate all blogs, jp blogs, demos
   },
