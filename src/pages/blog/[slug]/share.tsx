@@ -57,7 +57,7 @@ export const getServerSideProps = (async ({ req, params }) => {
   return {
     props: {
       seo: {
-        title: `Sharing: ${blog.title}`,
+        title: blog.title,
         description: blog.shortDescription,
         type: 'article',
         siteName: 'ClickHouse',
