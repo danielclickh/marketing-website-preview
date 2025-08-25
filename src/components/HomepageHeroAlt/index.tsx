@@ -69,18 +69,17 @@ export default function HomepageHeroAlt({
             </div>{' '}
             <LogoAnnouncementLink
               className='mt-6'
-              href='/cloud/clickpipes/mongodb-cdc-connector?loc=homepage-hero'
+              href='/openhouse?loc=homepage-hero'
               logo={{
-                src: '/images/cloud/integrations/mongodb.svg',
+                src: '/images/open-house-black.svg',
                 alt: 'MongoDB',
-                width: 24,
+                width: 50,
                 height: 50,
                 className: 'saturate-0 brightness-0 mx-3'
               }}>
-              Blazing-fast MongoDB to ClickHouse CDC with our new ClickPipe
-              connector — now in Private Preview.{' '}
+             We're taking Open House on the road! Join us for free events in Sydney, NYC, Bangalore & Amsterdam.{" "}
               <span className='underline group-hover:decoration-2'>
-                Learn more
+              Register now
               </span>
               !
             </LogoAnnouncementLink>
