@@ -31,6 +31,10 @@ declare global {
   }
 }
 
+type HttpLikeResponse = Response & {
+  _transport?: 'fetch' | 'beacon'
+}
+
 export const useInitGalaxy = (): void => {
   useEffect(() => {
     const galaxyOptions: GalaxyOptions = {
@@ -39,9 +43,30 @@ export const useInitGalaxy = (): void => {
           url: string,
           requestBody: Record<string, unknown>
         ): Promise<Response> => {
+          // Try beacon if requested and available
+          if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
+            const blob = new Blob([JSON.stringify(requestBody)], {
+              type: 'application/json;charset=UTF-8'
+            })
+            const sent = navigator.sendBeacon(url, blob)
+
+            // Return a synthetic Response-shaped object so callers can await and branch on .ok
+            const synthetic = new Response(null, {
+              status: sent ? 202 : 500,
+              statusText: sent ? 'Sent (beacon)' : 'Failed (beacon)'
+            }) as HttpLikeResponse
+            synthetic._transport = 'beacon'
+            return synthetic
+          }
+
+          // Default to fetch API
           return fetch(url, {
             method: 'POST',
-            body: JSON.stringify(requestBody)
+            body: JSON.stringify(requestBody),
+            keepalive: true // keepalive helps during page unload
+          }).then((res) => {
+            ;(res as HttpLikeResponse)._transport = 'fetch'
+            return res as HttpLikeResponse
           })
         }
       },
