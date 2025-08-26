@@ -552,6 +552,11 @@ const nextConfig = {
         source: '/cloud/hyperdx-waitlist',
         destination: '/cloud/clickstack-private-preview',
         permanent: true
+      },
+      {
+        source: '/houseparty/vegas-2024',
+        destination: '/company/events/2025-reinvent-house-party',
+        permanent: false
       }
     ]
   }
