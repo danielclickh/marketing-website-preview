@@ -17,6 +17,7 @@ import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import iconCode from '@/pages/partners/azure/assets/icon-code.svg'
 import { CommonProps } from '@/types/homepage'
+import { ExternalLink } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -78,7 +79,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               2025 batch, you can claim $10,000 in ClickHouse Cloud credits to
               supercharge your analytics and ship faster.
             </p>
-            <div className='!mt-12 flex flex-wrap justify-center gap-4 sm:gap-8 md:flex-nowrap md:gap-6'>
+            <div className='!mt-12 flex justify-center'>
               <CUIButton
                 type='primary'
                 size='lg'
@@ -231,9 +232,10 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
         </div>
       </section>
 
-      {/* Who? */}
+      {/* Who? What? How? */}
       <section className='bg-primary-300 py-4 sm:py-16 lg:py-24'>
         <div className='section-container grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2'>
+          {/* Who? */}
           <div className='text-center'>
             <CUICard className='bg-neutral-900/90 p-6 lg:p-12 lg:pt-8'>
               <CUICard.Body>
@@ -284,6 +286,8 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               </CUICard.Body>
             </CUICard>
           </div>
+
+          {/* What? */}
           <div className='text-center'>
             <CUICard className='bg-neutral-900/90 p-6 lg:p-12 lg:pt-8'>
               <CUICard.Body>
@@ -317,6 +321,84 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                     </TickItem>
                   </li>
                 </ul>
+              </CUICard.Body>
+            </CUICard>
+          </div>
+
+          {/* How? */}
+          <div className='col-span-full text-center'>
+            <CUICard className='bg-neutral-900/90 p-6 lg:p-12 lg:pt-8'>
+              <CUICard.Body>
+                <SuiTitle type='h2'>How to apply?</SuiTitle>
+                <p className='mt-4 text-neutral-200'>
+                  It only takes three quick steps to apply for $10,000 in
+                  ClickHouse Cloud credits
+                </p>
+                <ol className='mt-6 grid grid-cols-1 gap-6 text-left lg:mt-12 lg:grid-cols-3'>
+                  <li className='flex gap-4'>
+                    <span className='text-3xl font-bold text-primary-300'>
+                      1.
+                    </span>
+                    <span>
+                      <Link
+                        href='https://console.clickhouse.cloud/signUp?loc=y-combinator-startup-program'
+                        className='group inline-block'>
+                        <strong className='mb-1 inline-flex items-center group-hover:underline'>
+                          Sign up for a ClickHouse Cloud trial{' '}
+                          <ExternalLink height={14} />
+                        </strong>
+                        <br />
+                        <span className='text-neutral-200'>
+                          Get started in minutes with a free ClickHouse Cloud
+                          trial.
+                        </span>
+                      </Link>
+                    </span>
+                  </li>
+                  <li className='flex gap-4'>
+                    <span className='text-3xl font-bold text-primary-300'>
+                      2.
+                    </span>
+                    <span>
+                      <strong className='mb-1 inline-block'>
+                        Complete the application form
+                      </strong>
+                      <br />
+                      <span className='text-neutral-200'>
+                        Include your ClickHouse Organization ID and company
+                        details.
+                      </span>
+                    </span>
+                  </li>
+                  <li className='flex gap-4'>
+                    <span className='text-3xl font-bold text-primary-300'>
+                      3.
+                    </span>
+                    <span>
+                      <strong className='mb-1 inline-block'>
+                        Wait for approval
+                      </strong>
+                      <br />
+                      <span className='text-neutral-200'>
+                        Our team will review your application and confirm your
+                        credits.
+                      </span>
+                    </span>
+                  </li>
+                </ol>
+                <div className='!mt-12 flex justify-center'>
+                  <CUIButton
+                    type='primary'
+                    size='lg'
+                    weight='semibold'
+                    href='/deals/ycombinator#apply'
+                    className='!px-10'
+                    onClick={useGalaxyOnClick(
+                      'ycStartupsPage.howToApply.applyNow'
+                    )}>
+                    Apply now
+                  </CUIButton>
+                </div>
               </CUICard.Body>
             </CUICard>
           </div>
