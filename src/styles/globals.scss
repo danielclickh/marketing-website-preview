@@ -1,5 +1,25 @@
 @tailwind base;
 @tailwind components;
+
+@layer utilities {
+  .branded-scrollbar {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.primary.300') transparent;
+  }
+
+  /* WebKit (Chrome, Edge, Safari) */
+  .branded-scrollbar::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  .branded-scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded bg-primary-300;
+  }
+  .branded-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+}
+
 @layer components {
   .section-container {
     @apply mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0;

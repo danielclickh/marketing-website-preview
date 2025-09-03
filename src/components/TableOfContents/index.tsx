@@ -105,7 +105,7 @@ export default function TableOfContents({
       {headingElements.length > 0 && (
         <nav
           ref={navRef}
-          className='overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
+          className='branded-scrollbar overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
           <ul className='space-y-2'>
             {headingElements.map((heading, headingIndex) => {
               const innerText = heading.textContent?.replace(/\s+#$/, '')
