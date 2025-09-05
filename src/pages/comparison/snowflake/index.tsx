@@ -1,93 +1,39 @@
-import BlogPost from '@/components/BlogPostList/BlogPost'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import GetStarted from '@/components/GetStarted'
-import HRSeparator from '@/components/HRSeparator'
+import heroLogos from './assets/hero-logos.png'
+import logoAdgreetz from './assets/logo-adgreetz.svg'
+import logoChartmetric from './assets/logo-chartmetric.svg'
+import logoInigo from './assets/logo-inigo.svg'
+import logoM3ter from './assets/logo-m3ter.svg'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import { CUIButton } from '@/components/ClickUI'
+import thumbTesla from '@/components/HomepageSectionContentFeed/assets/thumb-tesla.jpeg'
 import Layout from '@/components/Layout'
-import LogoCarousel from '@/components/LogoCarousel'
-import Markdown from '@/components/Markdown'
-import MarketoForm from '@/components/MarketoForm'
-import { StrapiImage } from '@/components/StrapiElements'
-import { findAll, findOne } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import LinedIconCard from '@/components/LinedIconCard'
+import MoreComparisons from '@/components/MoreComparisons'
+import QuoteCard from '@/components/QuoteCard'
+import TiltedText from '@/components/TiltedText'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { BigNumber, ComparisonProps } from '@/types/comparisons'
+import logoPostgress from '@/pages/comparison/bigquery/logo-postgress.svg'
+import logoRedshift from '@/pages/comparison/bigquery/logo-redshift.svg'
+import logoSnowflake from '@/pages/comparison/bigquery/logo-snowflake.svg'
+import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
+import React from 'react'
 
-interface SnowflakePageProps extends ComparisonProps {
-  customerStories: any
-  comparison: any
-}
-
-export const getStaticProps: GetStaticProps<SnowflakePageProps> =
+export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
-    const params = {
-      populate: [
-        'hero',
-        'hero.ctaButton',
-        'seo',
-        'seo.image',
-        'customerStories',
-        'customerStories.*',
-        'customerStories.logos.*',
-        'customerStories.logos.darkLogoPng'
-      ]
-    }
-
     const commonProps = await getCommonProps()
-    const data = await findOne('homepage', params)
-
-    const comparison = await findAll('comparisons', {
-      populate: [
-        'painpoint',
-        'paintpoint.customer.*',
-        'painpoint.customer.description',
-        'painpoint.customer.logo',
-        'painpointsTitle',
-        'painpointsIcon',
-        'seo',
-        'seo.*',
-        'Testimonials',
-        'Testimonials.*',
-        'Testimonials.logo.*',
-        'customerStories',
-        'customerStories.*',
-        'customerStories.logos.*',
-        'customerStories.logos.darkLogoPng',
-        'image',
-        'formTitle',
-        'testimonialsTitle',
-        'testimonialsIcon',
-        'Content',
-        'Content.customContent',
-        'Content.customContent.Image',
-        'Content.RelatedBlogs',
-        'Content.RelatedBlogs.blog_posts',
-        'Content.RelatedBlogs.blog_posts.*',
-        'Content.RelatedBlogs.blog_posts.author',
-        'Content.RelatedBlogs.blog_posts.thumbnailPng',
-        'BigNumbers',
-        'BigNumbers.*'
-      ],
-      filters: {
-        slug: {
-          $eq: 'snowflake'
-        }
-      }
-    })
-
-    data.seo = comparison.data[0].seo
-    data.seo.path = '/comparison/snowflake'
-    data.seo.image = [{ url: '/images/clickhouse-vs-snowflake-og.png' }]
-
     return {
       props: {
-        comparison,
-        ...data,
-        ...commonProps
+        ...commonProps,
+        seo: {
+          title: 'Snowflake vs ClickHouse',
+          path: '/comparison/snowflake',
+          image: [{ url: '/images/clickhouse-vs-snowflake-og.png' }]
+        }
       }
     }
   }
@@ -95,394 +41,303 @@ export const getStaticProps: GetStaticProps<SnowflakePageProps> =
 export default function SnowflakePage({
   footerData,
   headerData,
-  customerStories,
-  seo,
-  platforms,
-  comparison
-}: SnowflakePageProps) {
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
-  const {
-    Title: comparisonTitle,
-    HeroDescription: heroDescription,
-    BigNumbers: BigNumbers
-  } = comparison.data[0]
+  seo
+}: CommonProps) {
   useGalaxyOnPage('snowflakeComparisonPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='homepage'>
-        <div className='relative pt-16 lg:pb-20'>
-          <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-            <div className='items-start justify-between lg:flex lg:grid-cols-2'>
-              <div>
-                <div className='items-center'>
-                  <div className='w-full lg:max-w-xl'>
-                    <h4 className='mb-2 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      Comparisons
-                    </h4>
-                    <h1 className='mb-4 text-center font-basier text-4xl font-semibold leading-tight text-neutral-0 lg:text-left lg:text-5xl xl:text-5.5xl'>
-                      {comparisonTitle}
-                    </h1>
-                    <h4 className='mb-6 w-full text-center text-base font-medium text-neutral-0/60 lg:text-left'>
-                      For real-time analytics
-                    </h4>
-                  </div>
-                </div>
-                <div className='rich_content mt-8 w-full text-center text-base text-neutral-200 lg:max-w-xl lg:text-left'>
-                  <Markdown>{heroDescription}</Markdown>
-                </div>
+      {/* Hero */}
+      <section className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 md:flex-row 2xl:px-0'>
+        <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
+          <div>
+            <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
+              Comparisons
+            </span>
+          </div>
+          <SuiTitle type='h1' weight='bold'>
+            ClickHouse <span className='text-primary-300'>vs</span> Snowflake
+          </SuiTitle>
+
+          <Image
+            src={heroLogos}
+            alt='ClickHouse vs Snowflake'
+            width={240}
+            height={245}
+            loading='eager'
+            priority
+            className='mx-auto lg:hidden'
+          />
+          <SuiText className='text-neutral-200'>
+            ClickHouse is a high-performance, SQL-based analytics database built
+            to power everything from traditional data warehouse workloads to
+            real-time dashboards and user-facing applications. Snowflake, while
+            effective for data warehousing, often struggles with
+            latency-sensitive or highly concurrent workloads.
+            <br />
+            <br />
+            Whether you’re building real-time applications, running large-scale
+            event analytics, or simply looking to accelerate existing warehouse
+            workloads, ClickHouse provides superior performance, significantly
+            lower cost, simpler pricing, and industry-leading efficiency.
+          </SuiText>
+          <div className='mt-6 flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
+            <CUIButton
+              href='https://console.clickhouse.cloud/signUp?loc=snowflake-comparison-page-hero'
+              type='primary'
+              size='lg'
+              weight='semibold'
+              className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
+              Start a free trial
+            </CUIButton>
+            <CUIButton
+              href='/company/contact?loc=snowflake-comparison-page-hero'
+              type='secondary'
+              size='lg'
+              weight='semibold'
+              target='_blank'
+              className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
+              Contact sales
+            </CUIButton>
+          </div>
+          <SuiText className='text-sm'>
+            Read our comprehensive guide about{' '}
+            <Link
+              href={`https://clickhouse.com/docs/en/migrations/snowflake?loc=snowflake-comparison-page-hero`}
+              target='_blank'
+              prefetch={false}
+              className='text-primary-300 hover:underline'>
+              migrating from Snowflake to ClickHouse
+            </Link>
+          </SuiText>
+        </div>
+        <Image
+          src={heroLogos}
+          alt='ClickHouse vs Snowflake'
+          width={240}
+          height={245}
+          loading='eager'
+          priority
+          className='mx-auto hidden lg:block'
+        />
+      </section>
+
+      {/* Stats & testimonials */}
+      <section className='relative overflow-hidden bg-[#363636]'>
+        {/* Red orb */}
+        <div
+          className='bg-shadow-element absolute inset-0'
+          style={
+            {
+              '--top-side': '35%',
+              '--left-side': '25%',
+              '--scale': '0.9',
+              '--opacity': '0.08'
+            } as React.CSSProperties
+          }
+        />
+        {/* Yellow orb */}
+        <div
+          className='bg-shadow-element yellow-shadow absolute inset-0'
+          style={
+            {
+              '--top-side': '10%',
+              '--right-side': '25%',
+              '--left-side': 'auto',
+              '--scale': '0.8',
+              '--opacity': '0.06'
+            } as React.CSSProperties
+          }
+        />
+        {/* Yellow triangle */}
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
+        <div className='section-container relative z-10'>
+          {/* Stats */}
+          <div className='py-16 text-center lg:py-24'>
+            <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
+            <div className='mx-auto mt-16 flex max-w-3xl justify-evenly'>
+              <div className='flex flex-col items-center'>
+                <span className='text-7xl font-black text-primary-300'>4x</span>
+                <strong>Reduction in costs</strong>
               </div>
-              <div className='mb-6 hidden lg:mb-0 lg:block lg:max-w-[400px] xl:max-w-[575px]'>
-                <div className=''>
-                  {comparison.data[0].image && (
-                    <StrapiImage
-                      {...comparison.data[0].image}
-                      loading='eager'
-                      priority
-                      className='mx-auto lg:mx-0'
-                    />
-                  )}
-                </div>
+              <div className='flex flex-col items-center'>
+                <span className='text-7xl font-black text-primary-300'>
+                  3-5x
+                </span>
+                <strong>Faster queries</strong>
               </div>
+              <div className='flex flex-col items-center'>
+                <span className='text-7xl font-black text-primary-300'>
+                  38%
+                </span>
+                <strong>Better compression</strong>
+              </div>
+            </div>
+          </div>
+          {/* Testimonials */}
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <p className='mb-6 text-center text-xl font-semibold leading-normal lg:-mt-3'>
+              Join others migrating to ClickHouse from Snowflake
+            </p>
+            <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
+              <QuoteCard
+                content="With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud's production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us."
+                link='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
+                logo={{
+                  src: logoAdgreetz,
+                  width: 178,
+                  height: 23,
+                  alt: 'Adgreetz'
+                }}
+              />
+              <QuoteCard
+                content='After comparing against Snowflake, Firebolt, Amazon Redshift, Amazon Aurora (Postgres), we found that for our specific workload, ClickHouse Cloud provided both the best performance, and best value for money. More subjective criteria (where differences between implementations in each service make direct comparisons difficult), such as monitoring, HA/DR, scaling etc. also scored highly for ClickHouse Cloud.'
+                link='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'
+                logo={{
+                  src: logoInigo,
+                  width: 111,
+                  height: 34,
+                  alt: 'Inigo'
+                }}
+              />
+              <QuoteCard
+                content="Snowflake [was] too slow and costly for our needs. While it performs well for processing in-house data, it becomes quite expensive when handling real-time customer data within a product, which negatively impacts the product's unit economics."
+                link='/blog/chartmetric-uses-clickhouse-to-turn-artist-data-into-music-intelligence'
+                logo={{
+                  src: logoChartmetric,
+                  width: 189,
+                  height: 35,
+                  alt: 'Chartmetric'
+                }}
+              />
+              <QuoteCard
+                content='Over time, those queries had become painfully slow in Snowflake and Postgres. Some took over a minute. Others timed out entirely...The payoff [of migrating to ClickHouse] came right away. Queries that once failed now ran in six seconds, with no caching required.'
+                link='/blog/why-m3ter-clickhouse-cloud'
+                logo={{
+                  src: logoM3ter,
+                  width: 102,
+                  height: 29,
+                  alt: 'M3ter'
+                }}
+              />
             </div>
           </div>
         </div>
+      </section>
 
-        <div className='relative pt-12 lg:pt-0'>
-          <div className='mx-auto flex flex-col text-center'>
-            <div className='mx-auto w-fit max-w-[850px] px-4 pb-4 pt-2 text-center font-basier text-2xl font-semibold text-white md:px-0 lg:mb-8 lg:text-4xl'>
-              ClickHouse performance compared to Snowflake for{' '}
-              <span className='tilted tilted-yellow leading-relaxed'>
-                <span className='tilted-content'>real-time</span>
-              </span>{' '}
-              analytics
+      {/* Tesla video */}
+      <section className='bg-primary-300 py-16'>
+        <div className='section-container !max-w-3xl space-y-6 text-center text-neutral-900'>
+          <SuiTitle type='h2'>Tesla-scale metrics with ClickHouse</SuiTitle>
+          <SuiText>
+            Alon Tal, Senior Staff Software Engineer at Tesla, talks about
+            Comet, Tesla's internal system built with ClickHouse for ingesting,
+            storing and querying metrics at massive scale.
+          </SuiText>
+          <div className='!mt-10 rounded-lg bg-neutral-900 p-2'>
+            <PlayOnClickVideo
+              thumbnail={thumbTesla}
+              provider='youtube'
+              id='z5t3b3EAc84'
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Cards  */}
+      <section className='relative z-10 bg-neutral-700 py-16 lg:py-20'>
+        <div className='section-container'>
+          <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='guage'
+                title='Lower costs'
+                text='Achieve 3–5x better performance per dollar than Snowflake'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='tada'
+                title='Predictable pricing'
+                text='No surprise bills or penalties for usage spikes or tiered feature pricing'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='lightning'
+                title='Built for real-time'
+                text='Power always-on, low-latency, high-concurrency workloads'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='maximize'
+                title='No tiered lock-in'
+                text='Access advanced features without upgrading to expensive plans'
+                className='bg-neutral-900/80'
+              />
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className='clip-inverted-triangle -mt-16 xl:-mt-28'>
-            <div className='relative z-40 mx-auto mt-4 max-w-4xl pb-0 pt-20 lg:mt-12'>
-              <div className='mx-auto flex items-center gap-4 px-4 md:px-0'>
-                {BigNumbers.map((stat: BigNumber, index: number) => (
-                  <div
-                    key={index}
-                    className='w-1/3 rounded-md border border-white/40 bg-[#363531] px-3 py-6 shadow-lg'>
-                    <h3 className='mb-2 text-center font-basier text-2xl font-bold leading-none text-primary-300 lg:text-[69px]'>
-                      {stat.Number}
-                    </h3>
-                    <p className='min-h-[30px] text-center font-basier text-sm font-bold leading-none lg:text-base'>
-                      {stat.Text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className='relative z-10 bg-primary-300 pt-4'>
-            <div className='section-container max-w-4xl'>
-              <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
-                <div className='flex w-full flex-col rounded-md border border-white/40 bg-[#363531] p-6 shadow-lg'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={37}
-                    height={28}
-                    alt='Quote'
-                    className='mb-4 flex-none'
-                  />
-                  <h3 className='mb-4 text-base'>
-                    "With Snowflake, we were using the standard plan, small
-                    compute, which <strong>cost nearly six times more</strong>{' '}
-                    than ClickHouse Cloud. We got several seconds query time and
-                    no materialized views. With ClickHouse Cloud's production
-                    instance, we are getting sub-second query time along with
-                    materialized views. The decision to switch was a no-brainer
-                    for us.”
-                  </h3>
-                  <p className='mb-6'>
-                    <Link
-                      href='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
-                      className='text-sm text-primary-300 hover:underline lg:text-base'>
-                      Read more
-                    </Link>
-                  </p>
-                  <Image
-                    src='/images/adgreetz-logo.svg'
-                    alt='Adgreetz'
-                    width={224}
-                    height={29}
-                    className='mt-auto'
-                  />
-                </div>
-                <div className='flex w-full flex-col rounded-md border border-white/40 bg-[#363531] p-6 shadow-lg'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={37}
-                    height={28}
-                    alt='Quote'
-                    className='mb-4 flex-none'
-                  />
-                  <h3 className='mb-4 text-base'>
-                    “Snowflake [was] too slow and costly for our needs. While it
-                    performs well for processing in-house data, it becomes quite
-                    expensive when handling real-time customer data within a
-                    product, which negatively impacts the product's unit
-                    economics.”
-                  </h3>
-                  <p className='mb-6'>
-                    <Link
-                      href='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'
-                      className='text-sm text-primary-300 hover:underline lg:text-base'>
-                      Read more
-                    </Link>
-                  </p>
-                  <Image
-                    src='/images/inigo-logo.svg'
-                    alt='inigo'
-                    width={135}
-                    height={40}
-                    className='mt-auto'
-                  />
-                </div>
-                <div className='col-span-full flex w-full flex-col rounded-md border border-white/40 bg-[#363531] p-6 shadow-lg'>
-                  <Image
-                    src='/images/Quote.svg'
-                    width={37}
-                    height={28}
-                    alt='Quote'
-                    className='mb-4 flex-none'
-                  />
-                  <h3 className='mb-4 text-base'>
-                    “Over time, those queries had become painfully slow in
-                    Snowflake and Postgres. Some took over a minute. Others
-                    timed out entirely...The payoff [of migrating to ClickHouse]
-                    came right away. Queries that once failed now ran in six
-                    seconds, with no caching required.”
-                  </h3>
-                  <p className='mb-6'>
-                    <Link
-                      href='/blog/chartmetric-uses-clickhouse-to-turn-artist-data-into-music-intelligence'
-                      className='text-sm text-primary-300 hover:underline lg:text-base'>
-                      Read more
-                    </Link>
-                  </p>
-                  <Image
-                    src='/images/logo-chartmetric-gray.svg'
-                    alt='Chartmetric'
-                    width={221.85}
-                    height={40}
-                    className='mt-auto'
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className='relative z-10 mx-auto -mt-10 max-w-7xl'>
-              <div className='container mx-auto flex max-w-7xl flex-col px-8 2xl:px-0'>
-                <div className='flip-selection mx-auto flex flex-col pt-30 text-center'>
-                  <h2 className='mb-8 font-basier text-4xl font-semibold text-primary-800'>
-                    Executive summary
-                  </h2>
-                  <div className='relative max-w-4xl text-left text-neutral-800'>
-                    <p>
-                      <strong>Overview</strong>
-                    </p>
-                    <p className='mb-8'>
-                      Our benchmark analysis demonstrates that ClickHouse Cloud
-                      outperforms Snowflake across the critical dimensions for
-                      real-time analytics: query latency and cost.
-                    </p>
-
-                    <p>
-                      <strong>Objective</strong>
-                    </p>
-                    <p className='mb-8'>
-                      Reports from customers have indicated that{' '}
-                      <strong>
-                        migrating real-time analytics workloads from Snowflake
-                        to ClickHouse Cloud has not only increased query
-                        performance but also reduced expenses
-                      </strong>{' '}
-                      for their businesses. Thus, the objective of our benchmark
-                      analysis is to deeply understand and outline the
-                      differences and similarities between ClickHouse Cloud and
-                      Snowflake for real-time analytics. We compare the
-                      performance and cost of both systems.
-                    </p>
-
-                    <p>
-                      <strong>Approach</strong>
-                    </p>
-                    <p className='mb-8'>
-                      We benchmark, in ClickHouse Cloud and Snowflake, a set of
-                      real-time analytics queries that are representative of
-                      many real-time data applications. The cost is recorded for
-                      running each benchmark test, considering data loading and
-                      storage. Finally, this expense analysis is projected and
-                      compared for a production environment and workload.
-                    </p>
-                    <div className='absolute bottom-0 left-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px]'></div>
-                  </div>
-                  <div className='relative z-40 -mt-30 lg:-mt-20'>
-                    <div className='mx-auto max-w-xl rounded-lg bg-neutral-900 p-5 text-white lg:p-10'>
-                      {formLoaded && !formSuccess && (
-                        <>
-                          <p
-                            className='mb-4 text-2xl font-bold lg:text-3xl'
-                            ref={formSuccessRef}>
-                            Ready to learn more?
-                          </p>
-                          <p className='mb-6'>
-                            Access the PDF executive summary.
-                          </p>
-                        </>
-                      )}
-                      {!formSuccess && (
-                        <MarketoForm
-                          formId='1073'
-                          clearbitTracking={true}
-                          onLoad={() => setFormLoaded(true)}
-                          onSuccess={() => {
-                            setFormSuccess(true)
-
-                            // Delay needed to allow the ref to update before scrolling
-                            setTimeout(() => {
-                              formSuccessRef.current?.scrollIntoView()
-                            }, 10)
-
-                            return false // Stops page from reloading
-                          }}
-                        />
-                      )}
-
-                      {!formLoaded && (
-                        <div className='text-center'>Loading form...</div>
-                      )}
-
-                      {formSuccess && (
-                        <div className='text-center'>
-                          <h3 className='text-2xl font-bold'>
-                            Thank you for your submission!
-                          </h3>
-                          <CUIButton
-                            type='primary'
-                            size='lg'
-                            weight='semibold'
-                            href=' https://discover.clickhouse.com/rs/238-FPC-317/images/ClickHouse-vs-Snowflake.pdf'
-                            target='_blank'
-                            className='my-6 w-full'>
-                            Download PDF
-                          </CUIButton>
-                          <p className='mt-2 text-neutral-200'>
-                            You'll also receive an email shortly with the
-                            executive summary.
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className='mx-auto mb-8 w-fit max-w-4xl px-4 pb-4 pt-12 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
-                    Trusted by developers that work with data at{' '}
-                    <span className='tilted tilted-black'>
-                      <span className='tilted-content leading-8'>scale</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-16 md:gap-x-14'>
-                <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-                <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-                <LogoCarousel
-                  logos={customerStories.logos}
-                  speedClass1='animate-marqueeLeft3'
-                  speedClass2='animate-marqueeLeft4'
-                />
-              </div>
-            </div>
-          </div>
+      {/* Get started */}
+      <div className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
+        <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
+          <SuiTitle type='h2' color='text-default'>
+            Migrate your workload from Snowflake today
+          </SuiTitle>
+          <SuiText size='base' color='text-default' weight='normal'>
+            Cut costs, boost performance, and unlock real-time analytics with
+            ClickHouse.
+            <br />
+            We’ll get you started on a 30 day trial and $300 credits to spend at
+            your own pace.
+          </SuiText>
+          <p className='mt-8 flex flex-col justify-center gap-2 sm:flex-row sm:gap-4'>
+            <CUIButton
+              type='primary-dark'
+              size='lg'
+              className='mx-auto w-full sm:!px-10 md:w-auto'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=snowflake-comparison-page-get-started'>
+              Create a free account
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              className='mx-auto w-full !border-neutral-800 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white sm:!px-10 md:w-auto'
+              target='_blank'
+              href='/company/contact?loc=snowflake-comparison-page-get-started'>
+              Contact sales
+            </CUIButton>
+          </p>
         </div>
       </div>
 
-      <div className='mx-auto max-w-7xl px-4 pt-20 md:px-8 2xl:px-0'>
-        <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-          {comparison.data[0].Content.map((content: any, index: number) => {
-            return (
-              <div key={index} className='mx-auto mb-10 max-w-7xl'>
-                <h3 className='mb-4 text-2xl font-semibold'>
-                  {content.SectionTitle}
-                </h3>
-                {content.Description && (
-                  <div className='rich_content mb-6'>
-                    <ReactMarkdown>{content.Description}</ReactMarkdown>
-                  </div>
-                )}
-                <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-                  {content.customContent.length > 0 && (
-                    <>
-                      {content.customContent?.map(
-                        (custom: any, index: number) => {
-                          if (!custom.href) {
-                            return null
-                          }
-                          return (
-                            <Link
-                              key={index}
-                              href={custom.href}
-                              target='_blank'
-                              className={
-                                'hover:scale-102 blog-post-card transition ease-in-out hover:-translate-y-1 hover:no-underline'
-                              }>
-                              <CUICard className='h-full'>
-                                <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
-                                  {custom.Image && (
-                                    <StrapiImage
-                                      {...custom.Image}
-                                      sizes='medium'
-                                      alt={custom.Image.alternativeText}
-                                      className='w-full rounded-t-lg xl:h-52'
-                                      width={100}
-                                      height={100}
-                                    />
-                                  )}
-                                  <div className='flex flex-col items-start justify-center gap-2 px-6 pt-6'>
-                                    <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
-                                      {custom.Category}
-                                    </div>
-                                    <div className='cursor-pointer font-basier text-xl font-medium leading-tight text-neutral-100'>
-                                      {custom.Title}
-                                    </div>
-                                  </div>
-                                </CUICard.Body>
-                                <CUICard.Footer className='flex w-full items-center p-6 text-sm text-neutral-300'>
-                                  {custom.Footer}
-                                </CUICard.Footer>
-                              </CUICard>
-                            </Link>
-                          )
-                        }
-                      )}
-                    </>
-                  )}
-                  {content.RelatedBlogs.length > 0 && (
-                    <>
-                      {content.RelatedBlogs.flatMap((custom: any) =>
-                        custom.blog_posts.map((blog: any) => (
-                          <div id='snowflake-relatedcontent' key={blog.id}>
-                            <BlogPost {...blog} />
-                          </div>
-                        ))
-                      )}
-                    </>
-                  )}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-      <HRSeparator className='my-24' />
-
-      <GetStarted platforms={platforms} />
+      {/* More comparisons */}
+      <MoreComparisons
+        comparisons={[
+          {
+            name: 'PostgreSQL',
+            link: `/comparison/postgresql?loc=snowflake-comparison-page`,
+            logo: logoPostgress
+          },
+          {
+            name: 'Redshift',
+            link: `/comparison/redshift?loc=snowflake-comparison-page`,
+            logo: logoRedshift
+          },
+          {
+            name: 'BigQuery',
+            link: `/comparison/bigquery?loc=snowflake-comparison-page`,
+            logo: logoSnowflake
+          }
+        ]}
+      />
     </Layout>
   )
 }
