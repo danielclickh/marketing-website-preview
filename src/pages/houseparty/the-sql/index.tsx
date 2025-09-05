@@ -1,5 +1,8 @@
 import imageTexture from './assets/background.png'
 import heroText from './assets/hero-text.svg'
+import image1 from './assets/image-1.png'
+import image2 from './assets/image-2.png'
+import image3 from './assets/image-3.png'
 import socialImage from './assets/social.png'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
@@ -72,21 +75,21 @@ export default function Page({
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='relative'>
+        <div className='relative bg-[#010203]'>
           {/* Background texture */}
           <Image
             src={imageTexture}
             width={1966}
             height={4096}
             alt=''
-            className='pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-40'
+            className='pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-25'
           />
 
           <div className='relative z-10'>
             {/* Form section */}
             <section className='section-container py-10 lg:py-20'>
-              <div className='flex flex-col gap-12 lg:flex-row lg:items-center'>
-                <div className='flex-1 space-y-6'>
+              <div className='flex flex-col gap-12 lg:flex-row lg:justify-between'>
+                <div className='mx-auto max-w-xl flex-1 space-y-12 lg:ml-0'>
                   <SuiTitle type='h1' weight='bold'>
                     House Party, <br />
                     The SQL
@@ -118,8 +121,6 @@ export default function Page({
                     id='luma-checkout'
                     src='https://embed.lu.ma/checkout-button.js'
                   />
-                </div>
-                <div className='flex-1 space-y-6'>
                   <SuiText className='space-y-6 lg:text-xl'>
                     <h3 className='!-mb-6 font-semibold text-primary-300'>
                       What’s going down
@@ -158,6 +159,26 @@ export default function Page({
                       fellow data enthusiasts. Some combinations just work.
                     </p>
                   </SuiText>
+                </div>
+                <div className='mx-auto max-w-lg flex-1 space-y-10 lg:mr-0'>
+                  <Image
+                    src={image1}
+                    width={1166 / 2}
+                    height={1016 / 2}
+                    alt='House Party 2024'
+                  />
+                  <Image
+                    src={image2}
+                    width={1198 / 2}
+                    height={966 / 2}
+                    alt='House Party 2024'
+                  />
+                  <Image
+                    src={image3}
+                    width={1122 / 2}
+                    height={836 / 2}
+                    alt='House Party 2024'
+                  />
                 </div>
               </div>
             </section>
