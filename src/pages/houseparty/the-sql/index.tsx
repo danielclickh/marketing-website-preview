@@ -1,5 +1,6 @@
 import imageTexture from './assets/background.png'
 import heroText from './assets/hero-text.svg'
+import socialImage from './assets/social.png'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -48,7 +49,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
           description:
             'Ready to trade dashboards for dance floors? Join us in Vegas during AWS re:Invent for House Party, The SQL with The Chainsmokers 2025. Step away from the tech talk, grab a drink, and get ready for a night of music, energy, and unforgettable vibes.',
           path: '/houseparty/the-sql',
-          image: [{ url: '/images/houseparty-2024.png' }]
+          image: [{ url: socialImage.src }]
         },
         recentEvents,
         ...commonProps
