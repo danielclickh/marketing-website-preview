@@ -5,18 +5,20 @@ export interface ClickHousePartnerLogoProps {
   logo: ImageProps['src']
   partnerName: string
   className?: string
+  inset?: boolean
 }
 
 export default function ClickHousePartnerLogo({
   logo,
   partnerName,
-  className = ''
+  className = '',
+  inset = true
 }: ClickHousePartnerLogoProps) {
   return (
     <figure
       className={`flex items-center justify-center gap-4 lg:gap-8 ${className}`}>
       <figcaption className='sr-only'>{partnerName} + ClickHouse</figcaption>
-      <Tile src={logo} alt={partnerName} className='bg-white' />
+      <Tile src={logo} alt={partnerName} className='bg-white' inset={inset} />
       <span>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -31,7 +33,12 @@ export default function ClickHousePartnerLogo({
           />
         </svg>
       </span>
-      <Tile src={clickhouse} alt='ClickHouse' className='bg-primary-300' />
+      <Tile
+        src={clickhouse}
+        alt='ClickHouse'
+        inset={true}
+        className='bg-primary-300'
+      />
     </figure>
   )
 }
@@ -39,16 +46,18 @@ export default function ClickHousePartnerLogo({
 function Tile({
   className = '',
   src,
-  alt
+  alt,
+  inset
 }: {
   className?: string
   src: ImageProps['src']
   alt: ImageProps['alt']
+  inset?: boolean
 }) {
   return (
     <div
       className={`relative flex aspect-square w-16 flex-shrink-0 flex-grow-0 items-center justify-center lg:w-32 ${className}`}>
-      <div className='absolute inset-3 lg:inset-4'>
+      <div className={`absolute ${inset ? 'inset-3 lg:inset-4' : 'inset-0'}`}>
         <Image
           src={src}
           alt={alt}
