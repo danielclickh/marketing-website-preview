@@ -228,7 +228,6 @@ export default function BigQueryPage({
                 />
               ),
               width: '45%',
-              rowIcon: <YesIcon />,
               highlight: true
             },
             {
@@ -241,51 +240,94 @@ export default function BigQueryPage({
                   className='mx-auto -mb-2 -mt-1'
                 />
               ),
-              width: '35%',
-              rowIcon: <NoIcon />
+              width: '35%'
             }
           ]}
           rows={[
             {
               heading: '速度と効率',
               values: [
-                '最大95%のクエリ速度向上、さらにストレージ使用量を60%削減。',
-                'クエリ速度が遅く、ストレージ消費量も多い。'
+                {
+                  value: true,
+                  label:
+                    '最大95%のクエリ速度向上、さらにストレージ使用量を60%削減。'
+                },
+                {
+                  value: false,
+                  label: 'クエリ速度が遅く、ストレージ消費量も多い。'
+                }
               ]
             },
             {
               heading: 'コスト効率が高い',
               values: [
-                '最大100倍のコスト効率を実現。',
-                'BigQueryを分析処理に使用すると費用が高くなる。'
+                {
+                  value: true,
+                  label: '最大100倍のコスト効率を実現。'
+                },
+                {
+                  value: false,
+                  label: 'BigQueryを分析処理に使用すると費用が高くなる。'
+                }
               ]
             },
             {
               heading: '最新のSQL',
               values: [
-                '標準SQLを多数の拡張機能 (Lambda関数や高階関数など) で強化および改善しているため使いやすく、簡単に分析タスクを実行できる。',
-                '標準SQLのみに対応しているため、分析タスクが複雑になりやすい。'
+                {
+                  value: true,
+                  label:
+                    '標準SQLを多数の拡張機能 (Lambda関数や高階関数など) で強化および改善しているため使いやすく、簡単に分析タスクを実行できる。'
+                },
+                {
+                  value: false,
+                  label:
+                    '標準SQLのみに対応しているため、分析タスクが複雑になりやすい。'
+                }
               ]
             },
             {
               heading: '簡単なデータ分析',
               values: [
-                '150以上の事前定義された集計関数に加え、パワフルな集計関数を組み合わせることが可能。ベクトル化と並列化に完全に対応。\n\n数値計算、地理情報、機械学習、時系列などの処理に1,300以上のデータ処理関数を使用できる。',
-                '集計関数や標準データ処理関数の数が少ないため、非常に複雑なSQLを作成する必要がある。'
+                {
+                  value: true,
+                  label:
+                    '150以上の事前定義された集計関数に加え、パワフルな集計関数を組み合わせることが可能。ベクトル化と並列化に完全に対応。\n\n数値計算、地理情報、機械学習、時系列などの処理に1,300以上のデータ処理関数を使用できる。'
+                },
+                {
+                  value: false,
+                  label:
+                    '集計関数や標準データ処理関数の数が少ないため、非常に複雑なSQLを作成する必要がある。'
+                }
               ]
             },
             {
               heading: 'リッチデータ型のサポート',
               values: [
-                'JSON、マップ、配列などの高度なデータ型と、80を超える配列関数を使用し、シンプルかつ直感的な方法で問題をモデル化して解決できる。',
-                '配列関数がわずか8つなど、データ型の数に制限がある。'
+                {
+                  value: true,
+                  label:
+                    'JSON、マップ、配列などの高度なデータ型と、80を超える配列関数を使用し、シンプルかつ直感的な方法で問題をモデル化して解決できる。'
+                },
+                {
+                  value: false,
+                  label: '配列関数がわずか8つなど、データ型の数に制限がある。'
+                }
               ]
             },
             {
               heading: '世界クラスの相互運用性',
               values: [
-                'ほとんどのデータソースから、90を超えるファイル形式でデータをネイティブに読み取ることができるため、形状や場所に関係なく、データを簡単に分析できる。',
-                '相互運用性が低い。5つのファイル形式と19のデータソースのみに対応。'
+                {
+                  value: true,
+                  label:
+                    'ほとんどのデータソースから、90を超えるファイル形式でデータをネイティブに読み取ることができるため、形状や場所に関係なく、データを簡単に分析できる。'
+                },
+                {
+                  value: false,
+                  label:
+                    '相互運用性が低い。5つのファイル形式と19のデータソースのみに対応。'
+                }
               ]
             }
           ]}
@@ -627,46 +669,6 @@ export default function BigQueryPage({
         </div>
       </div>
     </Layout>
-  )
-}
-
-function YesIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-primary'
-      width='16'
-      height='16'
-      fill='none'
-      viewBox='0 0 16 16'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='2'
-        d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
-      />
-    </svg>
-  )
-}
-
-function NoIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-[#FFBABA]'
-      width='24'
-      height='24'
-      fill='none'
-      viewBox='0 0 24 24'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='1.5'
-        d='m8 8 8 8m0-8-8 8'
-      />
-    </svg>
   )
 }
 

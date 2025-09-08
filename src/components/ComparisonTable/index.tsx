@@ -1,42 +1,15 @@
 import Markdown from '../Markdown'
 import React, { createRef, useEffect, useRef, useState } from 'react'
 
-type Cell = string | React.ReactNode
-
 type Column = {
-  heading: Cell
+  heading: string | React.ReactNode
   width?: string | number
   highlight?: boolean
-  rowIcon?: React.ReactNode
 }
 
 type Row = {
-  heading: Cell
-  values: Array<Cell>
-}
-
-interface RowItemProps {
-  heading: Cell
-  value: Cell
-  icon: Column['rowIcon']
-}
-
-function RowItem({ heading, value, icon }: RowItemProps) {
-  const valueIsString = typeof value === 'string'
-  return (
-    <div className='flex items-center gap-4'>
-      {!!icon && <div className='w-4 flex-shrink-0 flex-grow-0'>{icon}</div>}
-      <div className='flex-1'>
-        <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
-          {heading}
-        </div>
-        <div className='grid grid-cols-1 gap-3 font-medium'>
-          {valueIsString && <Markdown encloseByDiv={false}>{value}</Markdown>}
-          {!valueIsString && value}
-        </div>
-      </div>
-    </div>
-  )
+  heading: string | React.ReactNode
+  values: Array<{ value: boolean; label: string | React.ReactNode }>
 }
 
 export interface ComparisonTableProps {
@@ -104,8 +77,8 @@ export default function ComparisonTable({
                       className='mt-4 border-t border-neutral-700 pt-4'>
                       <RowItem
                         heading={heading}
-                        value={values[columnIndex]}
-                        icon={column.rowIcon}
+                        yesNo={values[columnIndex].value ? 'yes' : 'no'}
+                        label={values[columnIndex].label}
                       />
                     </li>
                   )
@@ -164,8 +137,8 @@ export default function ComparisonTable({
                         className='border-b border-neutral-700 px-6 py-4 lg:px-8'>
                         <RowItem
                           heading={heading}
-                          value={value}
-                          icon={columns[columnIndex].rowIcon}
+                          yesNo={value.value ? 'yes' : 'no'}
+                          label={value.label}
                         />
                       </td>
                     )
@@ -177,5 +150,73 @@ export default function ComparisonTable({
         </table>
       </div>
     </>
+  )
+}
+
+interface RowItemProps {
+  heading: string | React.ReactNode
+  label: string | React.ReactNode
+  yesNo?: 'yes' | 'no'
+}
+
+function RowItem({ heading, yesNo, label }: RowItemProps) {
+  const labelIsString = typeof label === 'string'
+  return (
+    <div className='flex items-center gap-4'>
+      {typeof yesNo !== 'undefined' && (
+        <div className='w-4 flex-shrink-0 flex-grow-0'>
+          {yesNo === 'yes' ? <YesIcon /> : <NoIcon />}
+        </div>
+      )}
+      <div className='flex-1'>
+        <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
+          {heading}
+        </div>
+        <div className='grid grid-cols-1 gap-3 text-base font-medium text-neutral-200'>
+          {labelIsString && <Markdown encloseByDiv={false}>{label}</Markdown>}
+          {!labelIsString && label}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function YesIcon() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='text-primary'
+      width='16'
+      height='16'
+      fill='none'
+      viewBox='0 0 16 16'>
+      <path
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+        d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
+      />
+    </svg>
+  )
+}
+
+function NoIcon() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='text-[#FFBABA]'
+      width='24'
+      height='24'
+      fill='none'
+      viewBox='0 0 24 24'>
+      <path
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='1.5'
+        d='m8 8 8 8m0-8-8 8'
+      />
+    </svg>
   )
 }

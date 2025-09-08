@@ -3,16 +3,19 @@ import logoAdgreetz from './assets/logo-adgreetz.svg'
 import logoChartmetric from './assets/logo-chartmetric.svg'
 import logoInigo from './assets/logo-inigo.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
+import snowflakeTableLogo from './assets/snowflake-table-logo.svg'
+import logoClickhouse from '@/../public/logo-full.svg'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import { CUIButton } from '@/components/ClickUI'
+import ComparisonTable from '@/components/ComparisonTable'
 import thumbTesla from '@/components/HomepageSectionContentFeed/assets/thumb-tesla.jpeg'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
-import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import tables, { Table } from '@/data/snowflake-comparison'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import logoPostgress from '@/pages/comparison/bigquery/logo-postgress.svg'
 import logoRedshift from '@/pages/comparison/bigquery/logo-redshift.svg'
@@ -21,7 +24,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -225,7 +228,7 @@ export default function SnowflakePage({
         </div>
       </section>
 
-      {/* Tesla video */}
+      {/* Video */}
       <section className='bg-primary-300 py-16'>
         <div className='section-container !max-w-3xl space-y-6 text-center text-neutral-900'>
           <SuiTitle type='h2'>Tesla-scale metrics with ClickHouse</SuiTitle>
@@ -242,6 +245,23 @@ export default function SnowflakePage({
             />
           </div>
         </div>
+      </section>
+
+      {/* Tabbed table */}
+      <section className='section-container my-16 lg:my-24'>
+        <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16'>
+          <SuiTitle type='h2'>
+            Tired of unpredictable costs, gated features, and pricing models
+            that penalize interactivity?
+          </SuiTitle>
+          <SuiText className='text-neutral-200'>
+            <strong>You’re not alone.</strong> Many teams are rethinking their
+            architecture.
+            <br /> Discover why they’re moving real-time and user-facing
+            workloads to ClickHouse.
+          </SuiText>
+        </div>
+        <TabbedTable />
       </section>
 
       {/* Cards  */}
@@ -339,5 +359,76 @@ export default function SnowflakePage({
         ]}
       />
     </Layout>
+  )
+}
+
+function TabbedTable() {
+  const [activeTabIndex, setActiveTabIndex] = useState(0)
+  const activeTableData = tables[activeTabIndex] as Table
+  return (
+    <div>
+      <ul className='mb-16 flex flex-wrap justify-center gap-4'>
+        {tables.map((table, tableIndex) => {
+          const isActive = activeTabIndex === tableIndex
+          return (
+            <li key={tableIndex}>
+              <button
+                disabled={isActive}
+                className='inline-block rounded-full border border-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-primary-800'
+                onClick={(event) => {
+                  event.preventDefault()
+                  setActiveTabIndex(tableIndex)
+                }}>
+                {table.name}
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+      <ComparisonTable
+        columns={[
+          {
+            heading: (
+              <Image
+                src={logoClickhouse}
+                alt='ClickHouse'
+                width={149}
+                height={44}
+                className='mx-auto -mb-2 -mt-1'
+              />
+            ),
+            width: '35%',
+            highlight: true
+          },
+          {
+            heading: (
+              <Image
+                src={snowflakeTableLogo}
+                alt='Snowflake'
+                width={142}
+                height={33}
+                className='mx-auto -mb-2 -mt-1'
+              />
+            ),
+            width: '35%'
+          }
+        ]}
+        rows={activeTableData.rows.map((row) => {
+          return {
+            heading: (
+              <>
+                {row.heading}
+                {row?.subHeading && (
+                  <small className='block font-normal normal-case'>
+                    {row.subHeading}
+                  </small>
+                )}
+              </>
+            ),
+            values: [row.clickhouse, row.snowflake]
+          }
+        })}
+      />
+    </div>
   )
 }
