@@ -103,12 +103,14 @@ export default function Page({
                     />
                   </SuiTitle>
                   <SuiText className='space-y-6 lg:text-xl'>
-                    <p className='font-semibold'>
+                    <p>
                       You've survived another day of AWS re:Invent sessions and
                       vendor demos. Time to trade your conference badge for some
                       good vibes and join the party.
                     </p>
-                    <p>Tuesday, December 2, 9:00 PM - 12:00 AM PT</p>
+                    <p className='font-semibold'>
+                      Tuesday, December 2, 9:00 PM - 12:00 AM PT
+                    </p>
                   </SuiText>
                   <Link
                     href='https://luma.com/event/evt-okMsbH8gdBGotLV'
@@ -195,14 +197,9 @@ export default function Page({
                 <div className='mt-10 space-y-2.5'>
                   {[
                     {
-                      title: 'When will I find out if I’m in?',
-                      content:
-                        'We are rolling tickets out in waves weekly. There is limited space in the venue and the waitlist is already filling up quickly. As we receive confirmation of attendance, we will release tickets in waves weekly starting September 19. Keep an eye on your registered email for the tickets and then make sure to share to your favorite social network.'
-                    },
-                    {
                       title: 'What if I don’t know ClickHouse?',
                       content:
-                        'No worries at all! That is something we specialize in, and we help people learn. Since you\'re curious, ClickHouse is an open-source analytics database that’s super fast — like, "query billions of rows in milliseconds" fast. It is the real-time data warehouse for analytics. If you want to learn more, [join a training](/company/events?loc=houseparty&category=Live+Training#upcoming-events), peruse our [videos online](/videos?loc=houseparty), check out some [use cases](/use-cases?loc=houseparty) and [user stories](/user-stories?loc=houseparty), and get started with a [free trial](https://console.clickhouse.cloud/signUp?loc=houseparty-faq) of ClickHouse Cloud (it’s ClickHouse, we just run it for you).'
+                        'No worries at all! We\'d still love to have you join the party. Since you\'re curious, ClickHouse is an open-source analytics database that’s super fast — like, "query billions of rows in milliseconds" fast. It is the real-time data warehouse for analytics. If you want to learn more, [join a training](/company/events?loc=houseparty&category=Live+Training#upcoming-events), peruse our [videos online](/videos?loc=houseparty), check out some [use cases](/use-cases?loc=houseparty) and [user stories](/user-stories?loc=houseparty), and get started with a [free trial](https://console.clickhouse.cloud/signUp?loc=houseparty-faq) of ClickHouse Cloud (it’s ClickHouse, we just run it for you).'
                     },
                     {
                       title: 'What should I wear?',
@@ -210,19 +207,14 @@ export default function Page({
                         'We’re all about keeping it chill. Think casual, cool, and comfortable—something you can dance in. But hey, if you’ve got a sparkly outfit you’ve been dying to wear, this is Vegas after all. Go ahead and shine!'
                     },
                     {
-                      title: 'Do I know The Chainsmokers?',
-                      content:
-                        'Yes. You do. I almost guarantee that if you hit up their discography on your favorite streaming service. You will know at least 2 or 3.'
-                    },
-                    {
                       title: 'Will there be food and drinks?',
                       content:
-                        'We’ve got you covered with a selection of drinks from an open bar throughout the evening. There is no food at the venue so…you know…get dinner first.'
+                        'We’ve got you covered with a selection of drinks from an open bar throughout the evening. There is no food at the venue.'
                     },
                     {
                       title: 'Can I bring a friend (or two, or three)?',
                       content:
-                        'You can request an extra +1 ticket. It’s never fun to go to a party alone. We wouldn’t want anyone to miss out on the fun because, well, FOMO is real. Do note, you will be responsible for ensuring your +1 has read the Code of Conduct.'
+                        'Yes, please invite your friends but note that [everyone must register](https://luma.com/clickhouse-house-party-2025) to receive a QR code. Each person will need to present their QR code to enter the event.'
                     },
                     {
                       title: 'What if I don’t know anyone?',
@@ -233,7 +225,7 @@ export default function Page({
                       title:
                         'Is a party at a club in Vegas during a tech conference safe?',
                       content:
-                        'To be serious for a moment. A Code of Conduct governs the evening and we are working closely with venue staff and security. Please ensure you are familiar with the [Code of Conduct](/events-code-of-conduct) and prepared to report issues should they arise.'
+                        'We are working with venue staff and security to create a safe event for everyone. We will be enforcing a [Code of Conduct](/events-code-of-conduct) at the event with a monitored email where attendees can report any issues should they arise.'
                     }
                   ].map((faq, index) => {
                     return (
@@ -268,17 +260,17 @@ function FaqAccordion({
     <div className='rounded bg-neutral-725 text-white'>
       <button
         className={`flex w-full items-center justify-between px-8 py-6 text-left transition-colors lg:px-14 lg:text-xl ${
-          isOpen ? 'text-[#EBFF00]' : 'text-white/80 hover:text-white'
+          isOpen ? 'text-primary-300' : 'text-white/80 hover:text-white'
         }`}
         onClick={() => setIsOpen((old) => !old)}>
         <span className='flex-1'>{question}</span>
         <span className='relative block h-4 w-4 flex-shrink-0 flex-grow-0'>
           <span
-            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-[#EBFF00] transition-all duration-300 ${
+            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-primary-300 transition-all duration-300 ${
               isOpen ? '-rotate-90 opacity-0' : ''
             }`}></span>
           <span
-            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-[#EBFF00] transition-all duration-300 ${
+            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-primary-300 transition-all duration-300 ${
               isOpen ? '' : 'rotate-90'
             }`}></span>
         </span>
