@@ -2,6 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Scalability',
+  description: `ClickHouse and Snowflake take fundamentally different approaches to scaling - one dynamic, one rigid. Snowflake’s model is based on static, pre-sized “warehouses” that must be manually configured and scaled. Scaling concurrency in Snowflake requires enabling multi-cluster warehouses, which adds complexity and further inflates costs.
+
+ClickHouse Cloud, by contrast, is built to scale elastically. Resources scale up and down automatically based on actual demand within user-defined limits - vertically to handle heavier queries, or horizontally to accommodate high concurrency. This means better performance under load, simpler operations, and predictable pricing.`,
   rows: [
     {
       heading: 'Elastic scaling',

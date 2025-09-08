@@ -2,6 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Performance',
+  description: `ClickHouse is engineered for speed. Its vectorized execution engine, efficient memory usage, and native support for columnar compression deliver sub-second query performance - even at scale. Snowflake, while strong for long-running batch queries, often struggles to keep pace in real-time scenarios or under high concurrency without expensive compute configurations.
+
+Recent benchmark results, including a public, join-heavy workload originally designed for Snowflake and Databricks - show that ClickHouse not only keeps up but outperforms Snowflake in speed and cost. With no tuning, schema changes, or query rewrites, ClickHouse completed complex multi-billion-row joins in a fraction of the time - and at a fraction of the cost.`,
   rows: [
     {
       heading: 'Vectorized query execution',

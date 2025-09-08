@@ -2,6 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Architecture',
+  description: `Snowflake is a proprietary cloud-native data warehouse designed around a hybrid architecture that combines elements of shared-disk and shared-nothing systems. It uses object storage as a central data layer, accessible by stateless compute clusters (“warehouses”) that can scale horizontally.
+
+ClickHouse’s self-managed, open-source deployment uses a shared-nothing architecture, giving you full control over distribution and scaling. In contrast, ClickHouse Cloud, similar to Snowflake, adopts a shared storage architecture with separate storage and compute for greater elasticity and simplicity. However, it takes this further by elastically scaling compute over a single copy of data in object storage. Combined with high-throughput local caches and massively parallel execution, this design delivers lower latency and better cost efficiency.`,
   rows: [
     {
       heading: 'High query concurrency',

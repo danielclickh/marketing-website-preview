@@ -6,6 +6,7 @@ import useCases from './use-cases'
 
 export type Table = {
   name: string
+  description?: string
   rows: Array<{
     heading: string
     subHeading?: null | string
@@ -20,6 +21,7 @@ export type Table = {
   }>
 }
 
+// The order of items here defines the tab sequence in the UI
 export default [
   architecture,
   scalability,

@@ -1,5 +1,6 @@
 import heroLogos from './assets/hero-logos.png'
 import logoAdgreetz from './assets/logo-adgreetz.svg'
+import logoBigquery from './assets/logo-bigquery.svg'
 import logoChartmetric from './assets/logo-chartmetric.svg'
 import logoInigo from './assets/logo-inigo.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
@@ -11,6 +12,7 @@ import ComparisonTable from '@/components/ComparisonTable'
 import thumbTesla from '@/components/HomepageSectionContentFeed/assets/thumb-tesla.jpeg'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
+import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -19,7 +21,6 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import logoPostgress from '@/pages/comparison/bigquery/logo-postgress.svg'
 import logoRedshift from '@/pages/comparison/bigquery/logo-redshift.svg'
-import logoSnowflake from '@/pages/comparison/bigquery/logo-snowflake.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -294,7 +295,7 @@ export default function SnowflakePage({
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='maximize'
+                icon='unlock'
                 title='No tiered lock-in'
                 text='Access advanced features without upgrading to expensive plans'
                 className='bg-neutral-900/80'
@@ -354,7 +355,7 @@ export default function SnowflakePage({
           {
             name: 'BigQuery',
             link: `/comparison/bigquery?loc=snowflake-comparison-page`,
-            logo: logoSnowflake
+            logo: logoBigquery
           }
         ]}
       />
@@ -429,6 +430,13 @@ function TabbedTable() {
           }
         })}
       />
+      {activeTableData.description && (
+        <div className='mx-auto mt-16 max-w-5xl space-y-6 text-center text-sm text-neutral-200'>
+          <Markdown encloseByDiv={false}>
+            {activeTableData.description}
+          </Markdown>
+        </div>
+      )}
     </div>
   )
 }

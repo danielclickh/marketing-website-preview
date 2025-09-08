@@ -23,6 +23,7 @@ import sparkles from './assets/sparkles.svg'
 import squaresFour from './assets/squares-four.svg'
 import tada from './assets/tada.svg'
 import toggleRight from './assets/toggle-right.svg'
+import unlock from './assets/unlock.svg'
 import usersThree from './assets/users-three.svg'
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
@@ -52,7 +53,8 @@ const icons = {
   'squares-four': squaresFour,
   'toggle-right': toggleRight,
   'users-three': usersThree,
-  'double-tick': doubleTick
+  'double-tick': doubleTick,
+  unlock
 }
 
 type Icons = keyof typeof icons
