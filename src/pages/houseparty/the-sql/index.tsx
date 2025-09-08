@@ -108,6 +108,7 @@ export default function Page({
                       vendor demos. Time to trade your conference badge for some
                       good vibes and join the party.
                     </p>
+                    <p>Tuesday, December 2, 9:00 PM - 12:00 AM PT</p>
                   </SuiText>
                   <Link
                     href='https://luma.com/event/evt-okMsbH8gdBGotLV'
