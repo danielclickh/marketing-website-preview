@@ -158,7 +158,7 @@ export default function SnowflakePage({
           {/* Stats */}
           <div className='py-16 text-center lg:py-24'>
             <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
-            <div className='mx-auto mt-16 flex max-w-3xl justify-evenly'>
+            <div className='mx-auto mt-10 flex max-w-3xl flex-col justify-evenly gap-y-10 md:flex-row md:flex-wrap lg:mt-16'>
               <div className='flex flex-col items-center'>
                 <span className='text-7xl font-black text-primary-300'>4x</span>
                 <strong>Reduction in costs</strong>
@@ -432,7 +432,19 @@ function TabbedTable() {
       />
       {activeTableData.description && (
         <div className='mx-auto mt-16 max-w-5xl space-y-6 text-center text-sm text-neutral-200'>
-          <Markdown encloseByDiv={false}>
+          <Markdown
+            encloseByDiv={false}
+            components={{
+              a({ node, children, className = '', ...props }) {
+                return (
+                  <a
+                    {...props}
+                    className={`text-primary-300 hover:underline ${className}`}>
+                    {children}
+                  </a>
+                )
+              }
+            }}>
             {activeTableData.description}
           </Markdown>
         </div>
