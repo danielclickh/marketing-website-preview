@@ -555,8 +555,8 @@ const nextConfig = {
       },
       {
         source: '/houseparty/vegas-2024',
-        destination: '/company/events/2025-reinvent-house-party',
-        permanent: false
+        destination: '/houseparty/the-sql',
+        permanent: true
       }
     ]
   }
