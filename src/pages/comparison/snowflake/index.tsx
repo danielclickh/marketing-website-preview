@@ -194,13 +194,13 @@ export default function SnowflakePage({
             </p>
             <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
               <QuoteCard
-                content="With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud's production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us."
-                link='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
+                content="It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that."
+                link='/blog/how-braze-rebuilt-real-time-analytics-pipeline-with-clickHouse-cloud'
                 logo={{
-                  src: logoAdgreetz,
-                  width: 178,
-                  height: 23,
-                  alt: 'Adgreetz'
+                  src: logoBraze,
+                  width: 93,
+                  height: 44,
+                  alt: 'Braze'
                 }}
               />
               <QuoteCard
@@ -224,13 +224,13 @@ export default function SnowflakePage({
                 }}
               />
               <QuoteCard
-                content="It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that."
-                link='/blog/how-braze-rebuilt-real-time-analytics-pipeline-with-clickHouse-cloud'
+                content="With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud's production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us."
+                link='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
                 logo={{
-                  src: logoBraze,
-                  width: 93,
-                  height: 44,
-                  alt: 'Braze'
+                  src: logoAdgreetz,
+                  width: 178,
+                  height: 23,
+                  alt: 'Adgreetz'
                 }}
               />
             </div>
