@@ -1,8 +1,8 @@
 import heroLogos from './assets/hero-logos.png'
 import logoAdgreetz from './assets/logo-adgreetz.svg'
 import logoBigquery from './assets/logo-bigquery.svg'
+import logoBraze from './assets/logo-braze.svg'
 import logoChartmetric from './assets/logo-chartmetric.svg'
-import logoInigo from './assets/logo-inigo.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
 import snowflakeTableLogo from './assets/snowflake-table-logo.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
@@ -158,18 +158,18 @@ export default function SnowflakePage({
           {/* Stats */}
           <div className='pb-16 text-center lg:pb-24'>
             <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
-            <div className='mx-auto mt-10 flex max-w-3xl flex-col justify-evenly gap-y-10 md:flex-row md:flex-wrap lg:mt-16'>
-              <div className='flex flex-col items-center'>
+            <div className='mx-auto mt-10 flex flex-col gap-6 md:flex-row md:flex-wrap lg:mt-16'>
+              <div className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-6'>
                 <span className='text-7xl font-black text-primary-300'>4x</span>
                 <strong>Reduction in costs</strong>
               </div>
-              <div className='flex flex-col items-center'>
+              <div className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-6'>
                 <span className='text-7xl font-black text-primary-300'>
                   3-5x
                 </span>
                 <strong>Faster queries</strong>
               </div>
-              <div className='flex flex-col items-center'>
+              <div className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-6'>
                 <span className='text-7xl font-black text-primary-300'>
                   38%
                 </span>
@@ -195,13 +195,13 @@ export default function SnowflakePage({
                 }}
               />
               <QuoteCard
-                content='After comparing against Snowflake, Firebolt, Amazon Redshift, Amazon Aurora (Postgres), we found that for our specific workload, ClickHouse Cloud provided both the best performance, and best value for money. More subjective criteria (where differences between implementations in each service make direct comparisons difficult), such as monitoring, HA/DR, scaling etc. also scored highly for ClickHouse Cloud.'
-                link='/blog/harnessing-the-power-of-materialized-views-and-clickhouse-for-high-performance-analytics-at-inigo'
+                content='Over time, those queries had become painfully slow in Snowflake and Postgres. Some took over a minute. Others timed out entirely...The payoff [of migrating to ClickHouse] came right away. Queries that once failed now ran in six seconds, with no caching required.'
+                link='/blog/why-m3ter-clickhouse-cloud'
                 logo={{
-                  src: logoInigo,
-                  width: 111,
-                  height: 34,
-                  alt: 'Inigo'
+                  src: logoM3ter,
+                  width: 102,
+                  height: 29,
+                  alt: 'M3ter'
                 }}
               />
               <QuoteCard
@@ -215,13 +215,13 @@ export default function SnowflakePage({
                 }}
               />
               <QuoteCard
-                content='Over time, those queries had become painfully slow in Snowflake and Postgres. Some took over a minute. Others timed out entirely...The payoff [of migrating to ClickHouse] came right away. Queries that once failed now ran in six seconds, with no caching required.'
-                link='/blog/why-m3ter-clickhouse-cloud'
+                content="It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that."
+                link='/blog/how-braze-rebuilt-real-time-analytics-pipeline-with-clickHouse-cloud'
                 logo={{
-                  src: logoM3ter,
-                  width: 102,
-                  height: 29,
-                  alt: 'M3ter'
+                  src: logoBraze,
+                  width: 93,
+                  height: 44,
+                  alt: 'Braze'
                 }}
               />
             </div>
