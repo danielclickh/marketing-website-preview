@@ -14,7 +14,7 @@ ClickHouse’s self-managed, open-source deployment uses a shared-nothing archit
         label: 'Handles **1,000+ QPS per node** natively'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Needs multi-cluster setup with extra cost'
       }
     },
@@ -80,7 +80,7 @@ ClickHouse’s self-managed, open-source deployment uses a shared-nothing archit
         label: '**<1s latency** for streaming data'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: '5–10s latency with Snowpipe Streaming'
       }
     },
@@ -91,7 +91,7 @@ ClickHouse’s self-managed, open-source deployment uses a shared-nothing archit
         label: '**JSON with type fidelity**'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Semi-structured data but no type preservation'
       }
     },

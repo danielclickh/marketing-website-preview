@@ -25,7 +25,7 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
         label: 'Up to **1,000 concurrent queries per node**'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Default 8 queries per warehouse'
       }
     },
@@ -47,7 +47,7 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
         label: 'Includes **vertical scaling** for high-memory queries'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Horizontal only, nodes are fixed size'
       }
     },
@@ -58,7 +58,7 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
         label: '**Custom hardware profiles** supported'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Fixed sizes only'
       }
     },
@@ -80,7 +80,7 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
         label: '**Query-predicate-level controls** on cache'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Cache layer shared across warehouses'
       }
     },

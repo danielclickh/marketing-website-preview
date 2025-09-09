@@ -13,7 +13,7 @@ Public benchmarks, including a join-heavy workload built for Snowflake and Datab
         label: '**Sub-second latency** at scale (no extra charges)'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Requires clustering + materialized views (enterprise tier)'
       }
     },
@@ -36,7 +36,7 @@ Public benchmarks, including a join-heavy workload built for Snowflake and Datab
         label: '**1,000+ concurrent queries per node**'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: '8 QPS/warehouse default; needs multi-cluster scaling'
       }
     },
@@ -47,7 +47,7 @@ Public benchmarks, including a join-heavy workload built for Snowflake and Datab
         label: '**Incremental & refreshable** with full SQL support'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Enterprise-only; refreshable with limited SQL'
       }
     },
@@ -70,7 +70,7 @@ Public benchmarks, including a join-heavy workload built for Snowflake and Datab
         label: '**38% better compression** in benchmarks'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Standard columnar compression'
       }
     },

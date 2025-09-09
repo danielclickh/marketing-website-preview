@@ -13,7 +13,7 @@ Snowflake typically requires staging data in internal tables or external stages 
         label: '**70+ formats** including Parquet, ORC, Avro, JSON, CSV'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Limited to common formats (e.g. Parquet, CSV)'
       }
     },
@@ -24,7 +24,7 @@ Snowflake typically requires staging data in internal tables or external stages 
         label: '**Connect to Postgres, MongoDB, MySQL, S3, Kafka, and more**'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Object stores only'
       }
     },
@@ -35,7 +35,7 @@ Snowflake typically requires staging data in internal tables or external stages 
         label: '**Query in-place** via table engines (e.g. Postgres, S3)'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Requires ingestion or external functions'
       }
     },

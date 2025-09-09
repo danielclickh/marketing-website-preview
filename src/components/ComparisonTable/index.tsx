@@ -2,7 +2,7 @@ import Markdown from '../Markdown'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import React, { createRef, useRef, useState } from 'react'
 
-export type CellIcons = 'yes' | 'no' | 'intermediate' | 'dash'
+export type CellIcons = 'yes' | 'no' | 'intermediate'
 
 export type Column = {
   heading: string | React.ReactNode
@@ -171,15 +171,18 @@ interface ValueCellProps {
 const icons: Record<CellIcons, React.ReactNode> = {
   yes: <YesIcon />,
   no: <NoIcon />,
-  intermediate: <NoIcon />,
-  dash: <>—</>
+  intermediate: <span className='opacity-80'>—</span>
 }
 
 function ValueCell({ heading, icon, label }: ValueCellProps) {
   const labelIsString = typeof label === 'string'
   return (
-    <div className='flex items-center gap-4'>
-      {typeof icon !== 'undefined' && icons[icon]}
+    <div className='flex items-center gap-6'>
+      {typeof icon !== 'undefined' && (
+        <div className='flex w-6 flex-shrink-0 flex-grow-0 items-center justify-center text-center'>
+          {icons[icon]}
+        </div>
+      )}
       <div className='flex-1'>
         <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
           {heading}

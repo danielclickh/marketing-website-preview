@@ -156,25 +156,34 @@ export default function SnowflakePage({
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
         <div className='section-container relative z-10'>
           {/* Stats */}
-          <div className='pb-16 text-center lg:pb-24'>
+          <div className='-mt-6 pb-10 text-center lg:mt-0 lg:pb-24'>
             <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
-            <div className='mx-auto mt-10 flex flex-col gap-6 md:flex-row md:flex-wrap lg:mt-16'>
-              <div className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-6'>
-                <span className='text-7xl font-black text-primary-300'>4x</span>
-                <strong>Reduction in costs</strong>
-              </div>
-              <div className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-6'>
-                <span className='text-7xl font-black text-primary-300'>
-                  3-5x
-                </span>
-                <strong>Faster queries</strong>
-              </div>
-              <div className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-6'>
-                <span className='text-7xl font-black text-primary-300'>
-                  38%
-                </span>
-                <strong>Better compression</strong>
-              </div>
+            <div className='mx-auto mt-10 flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-6'>
+              {[
+                {
+                  stat: '4x',
+                  label: 'Reduction in costs'
+                },
+                {
+                  stat: '3-5x',
+                  label: 'Faster queries'
+                },
+                {
+                  stat: '38%',
+                  label: 'Better compression'
+                }
+              ].map((item, itemIndex) => {
+                return (
+                  <div
+                    key={itemIndex}
+                    className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-8'>
+                    <span className='text-7xl font-black text-primary-300'>
+                      {item.stat}
+                    </span>
+                    <strong>{item.label}</strong>
+                  </div>
+                )
+              })}
             </div>
           </div>
           {/* Testimonials */}

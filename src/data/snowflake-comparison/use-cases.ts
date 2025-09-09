@@ -15,7 +15,7 @@ Snowflake is built for batch analytics and BI. Strong for reporting, it lacks th
         label: '**Real-time analytics** with low latency'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'Limited by latency and cost'
       }
     },
@@ -49,7 +49,7 @@ Snowflake is built for batch analytics and BI. Strong for reporting, it lacks th
         label: '**Continuous ingestion** at scale'
       },
       snowflake: {
-        icon: 'yes',
+        icon: 'intermediate',
         label: 'Expensive at scale'
       }
     },
@@ -60,7 +60,7 @@ Snowflake is built for batch analytics and BI. Strong for reporting, it lacks th
         label: '**Low-latency SQL over vectors + events**'
       },
       snowflake: {
-        icon: 'no',
+        icon: 'intermediate',
         label: 'High-concurrency workloads not recommended'
       }
     }
