@@ -437,6 +437,7 @@ function TabbedTable() {
 
       <ComparisonTable
         columns={tableColumns}
+        seoCaption='Feature comparison of ClickHouse and Snowflake'
         rows={tables
           .map((table, tableIndex) => {
             const isActive = activeTabIndex === tableIndex

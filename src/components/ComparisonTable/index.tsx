@@ -1,5 +1,6 @@
 import Markdown from '../Markdown'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
+import { upperCaseWords } from '@/lib/utils/strings'
 import React, { createRef, useRef, useState } from 'react'
 
 export type CellIcons = 'yes' | 'no' | 'intermediate'
@@ -22,11 +23,13 @@ export type Row = {
 }
 
 export interface ComparisonTableProps {
+  seoCaption?: string
   columns: Array<Column>
   rows: Array<Row>
 }
 
 export default function ComparisonTable({
+  seoCaption,
   columns,
   rows
 }: ComparisonTableProps) {
@@ -111,12 +114,18 @@ export default function ComparisonTable({
           )
         })}
         <table className='w-full text-left'>
+          {seoCaption && <caption className='sr-only'>{seoCaption}</caption>}
           <thead>
             <tr>
-              <th className='hidden border-b border-neutral-700 py-6 pr-8 text-xl font-semibold lg:table-cell xl:pr-16'></th>
+              <th
+                scope='col'
+                className='hidden border-b border-neutral-700 py-6 pr-8 text-xl font-semibold lg:table-cell xl:pr-16'>
+                <span className='sr-only'>Featured</span>
+              </th>
               {columns.map((column, columnIndex) => {
                 return (
                   <th
+                    scope='col'
                     key={columnIndex}
                     ref={columnRefs.current[columnIndex]}
                     style={{ width: column.width }}
@@ -130,10 +139,10 @@ export default function ComparisonTable({
           <tbody>
             {rows.map(({ heading, values, hidden }, rowIndex) => {
               return (
-                <tr
-                  className={`min-h-12 ${hidden ? 'hidden' : ''}`}
-                  key={rowIndex}>
-                  <th className='hidden border-b border-neutral-700 py-4 pr-8 lg:table-cell xl:pr-16'>
+                <tr hidden={hidden} className='min-h-12' key={rowIndex}>
+                  <th
+                    scope='row'
+                    className='hidden border-b border-neutral-700 py-4 pr-8 lg:table-cell xl:pr-16'>
                     <span className='text-sm font-bold uppercase text-[#B3B6BD]'>
                       {heading}
                     </span>
@@ -180,11 +189,14 @@ function ValueCell({ heading, icon, label }: ValueCellProps) {
     <div className='flex items-center gap-6'>
       {typeof icon !== 'undefined' && (
         <div className='flex w-6 flex-shrink-0 flex-grow-0 items-center justify-center text-center'>
+          <span className='sr-only'>{upperCaseWords(icon)}</span>
           {icons[icon]}
         </div>
       )}
       <div className='flex-1'>
-        <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
+        <div
+          className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'
+          aria-hidden='true'>
           {heading}
         </div>
         <div className='grid grid-cols-1 gap-3 text-base font-medium text-neutral-200'>
