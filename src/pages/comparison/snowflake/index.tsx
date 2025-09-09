@@ -246,8 +246,8 @@ export default function SnowflakePage({
             that penalize interactivity?
           </SuiTitle>
           <SuiText className='text-neutral-200'>
-            <strong>You’re not alone.</strong> Many teams are rethinking their
-            architecture.
+            <strong className='text-white'>You’re not alone.</strong> Many teams
+            are rethinking their architecture.
             <br /> Discover why they’re moving real-time and user-facing
             workloads to ClickHouse.
           </SuiText>
