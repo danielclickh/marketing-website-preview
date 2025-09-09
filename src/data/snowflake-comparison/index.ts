@@ -3,6 +3,7 @@ import interoperability from './interoperability'
 import performance from './performance'
 import scalability from './scalability'
 import useCases from './use-cases'
+import { CellIcons } from '@/components/ComparisonTable'
 
 export type Table = {
   name: string
@@ -11,11 +12,11 @@ export type Table = {
     heading: string
     subHeading?: null | string
     clickhouse: {
-      value: boolean
+      icon: CellIcons
       label: string
     }
     snowflake: {
-      value: boolean
+      icon: CellIcons
       label: string
     }
   }>

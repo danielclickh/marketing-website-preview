@@ -6,17 +6,17 @@ import logoInigo from './assets/logo-inigo.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
 import snowflakeTableLogo from './assets/snowflake-table-logo.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
-import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import { CUIButton } from '@/components/ClickUI'
-import ComparisonTable from '@/components/ComparisonTable'
-import thumbTesla from '@/components/HomepageSectionContentFeed/assets/thumb-tesla.jpeg'
+import ComparisonTable, {
+  ComparisonTableProps
+} from '@/components/ComparisonTable'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
-import tables, { Table } from '@/data/snowflake-comparison'
+import tables from '@/data/snowflake-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import logoPostgress from '@/pages/comparison/bigquery/logo-postgress.svg'
@@ -25,7 +25,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -65,8 +65,8 @@ export default function SnowflakePage({
           <Image
             src={heroLogos}
             alt='ClickHouse vs Snowflake'
-            width={240}
-            height={245}
+            width={698 / 2}
+            height={646 / 2}
             loading='eager'
             priority
             className='mx-auto lg:hidden'
@@ -117,8 +117,8 @@ export default function SnowflakePage({
         <Image
           src={heroLogos}
           alt='ClickHouse vs Snowflake'
-          width={240}
-          height={245}
+          width={698 / 2}
+          height={646 / 2}
           loading='eager'
           priority
           className='mx-auto hidden lg:block'
@@ -126,7 +126,7 @@ export default function SnowflakePage({
       </section>
 
       {/* Stats & testimonials */}
-      <section className='relative overflow-hidden bg-[#363636]'>
+      <section className='relative overflow-hidden bg-[#363636] py-16 lg:py-24'>
         {/* Red orb */}
         <div
           className='bg-shadow-element absolute inset-0'
@@ -156,7 +156,7 @@ export default function SnowflakePage({
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
         <div className='section-container relative z-10'>
           {/* Stats */}
-          <div className='py-16 text-center lg:py-24'>
+          <div className='pb-16 text-center lg:pb-24'>
             <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
             <div className='mx-auto mt-10 flex max-w-3xl flex-col justify-evenly gap-y-10 md:flex-row md:flex-wrap lg:mt-16'>
               <div className='flex flex-col items-center'>
@@ -225,25 +225,6 @@ export default function SnowflakePage({
                 }}
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Video */}
-      <section className='bg-primary-300 py-16'>
-        <div className='section-container !max-w-3xl space-y-6 text-center text-neutral-900'>
-          <SuiTitle type='h2'>Tesla-scale metrics with ClickHouse</SuiTitle>
-          <SuiText>
-            Alon Tal, Senior Staff Software Engineer at Tesla, talks about
-            Comet, Tesla's internal system built with ClickHouse for ingesting,
-            storing and querying metrics at massive scale.
-          </SuiText>
-          <div className='!mt-10 rounded-lg bg-neutral-900 p-2'>
-            <PlayOnClickVideo
-              thumbnail={thumbTesla}
-              provider='youtube'
-              id='z5t3b3EAc84'
-            />
           </div>
         </div>
       </section>
@@ -365,10 +346,38 @@ export default function SnowflakePage({
 
 function TabbedTable() {
   const [activeTabIndex, setActiveTabIndex] = useState(0)
-  const activeTableData = tables[activeTabIndex] as Table
+
+  const tableColumns: ComparisonTableProps['columns'] = [
+    {
+      heading: (
+        <Image
+          src={logoClickhouse}
+          alt='ClickHouse'
+          width={149}
+          height={44}
+          className='mx-auto -mb-2 -mt-1'
+        />
+      ),
+      width: '35%',
+      highlight: true
+    },
+    {
+      heading: (
+        <Image
+          src={snowflakeTableLogo}
+          alt='Snowflake'
+          width={142}
+          height={33}
+          className='mx-auto -mb-2 -mt-1'
+        />
+      ),
+      width: '35%'
+    }
+  ]
+
   return (
     <div>
-      <ul className='mb-16 flex flex-wrap justify-center gap-4'>
+      <ul className='flex flex-wrap justify-center gap-4'>
         {tables.map((table, tableIndex) => {
           const isActive = activeTabIndex === tableIndex
           return (
@@ -386,69 +395,61 @@ function TabbedTable() {
           )
         })}
       </ul>
-      <ComparisonTable
-        columns={[
-          {
-            heading: (
-              <Image
-                src={logoClickhouse}
-                alt='ClickHouse'
-                width={149}
-                height={44}
-                className='mx-auto -mb-2 -mt-1'
-              />
-            ),
-            width: '35%',
-            highlight: true
-          },
-          {
-            heading: (
-              <Image
-                src={snowflakeTableLogo}
-                alt='Snowflake'
-                width={142}
-                height={33}
-                className='mx-auto -mb-2 -mt-1'
-              />
-            ),
-            width: '35%'
-          }
-        ]}
-        rows={activeTableData.rows.map((row) => {
-          return {
-            heading: (
-              <>
-                {row.heading}
-                {row?.subHeading && (
-                  <small className='block font-normal normal-case'>
-                    {row.subHeading}
-                  </small>
-                )}
-              </>
-            ),
-            values: [row.clickhouse, row.snowflake]
-          }
+
+      <div className='mx-auto my-12 max-w-5xl grid-cols-1 grid-rows-1 text-center text-sm text-neutral-200 lg:grid lg:px-6'>
+        {tables.map((table, tableIndex) => {
+          const isActive = activeTabIndex === tableIndex
+          return (
+            <Fragment key={tableIndex}>
+              {table.description && (
+                <div
+                  className={`relative col-start-1 row-start-1 space-y-6 ${isActive ? 'z-10' : 'pointer-events-none -z-10 hidden lg:block lg:opacity-0'}`}>
+                  <Markdown
+                    encloseByDiv={false}
+                    components={{
+                      a({ node, children, className = '', ...props }) {
+                        return (
+                          <a
+                            {...props}
+                            className={`text-primary-300 hover:underline ${className}`}>
+                            {children}
+                          </a>
+                        )
+                      }
+                    }}>
+                    {table.description}
+                  </Markdown>
+                </div>
+              )}
+            </Fragment>
+          )
         })}
-      />
-      {activeTableData.description && (
-        <div className='mx-auto mt-16 max-w-5xl space-y-6 text-center text-sm text-neutral-200'>
-          <Markdown
-            encloseByDiv={false}
-            components={{
-              a({ node, children, className = '', ...props }) {
-                return (
-                  <a
-                    {...props}
-                    className={`text-primary-300 hover:underline ${className}`}>
-                    {children}
-                  </a>
-                )
+      </div>
+
+      <ComparisonTable
+        columns={tableColumns}
+        rows={tables
+          .map((table, tableIndex) => {
+            const isActive = activeTabIndex === tableIndex
+            return table.rows.map((row) => {
+              return {
+                hidden: !isActive,
+                heading: (
+                  <>
+                    {row.heading}
+                    {row?.subHeading && (
+                      <small className='block font-normal normal-case'>
+                        {row.subHeading}
+                      </small>
+                    )}
+                  </>
+                ),
+                values: [row.clickhouse, row.snowflake]
               }
-            }}>
-            {activeTableData.description}
-          </Markdown>
-        </div>
-      )}
+            })
+          })
+          .flat(1)}
+      />
     </div>
   )
 }

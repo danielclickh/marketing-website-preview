@@ -1,15 +1,24 @@
 import Markdown from '../Markdown'
-import React, { createRef, useEffect, useRef, useState } from 'react'
+import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
+import React, { createRef, useRef, useState } from 'react'
 
-type Column = {
+export type CellIcons = 'yes' | 'no' | 'intermediate' | 'dash'
+
+export type Column = {
   heading: string | React.ReactNode
   width?: string | number
   highlight?: boolean
 }
 
-type Row = {
+export type Cell = {
+  icon?: CellIcons
+  label: string | React.ReactNode
+}
+
+export type Row = {
   heading: string | React.ReactNode
-  values: Array<{ value: boolean; label: string | React.ReactNode }>
+  values: Array<Cell>
+  hidden?: boolean
 }
 
 export interface ComparisonTableProps {
@@ -26,6 +35,8 @@ export default function ComparisonTable({
     throw new Error('Row values should be equal to the number of columns.')
   }
 
+  const desktopRef = useRef<HTMLDivElement | null>(null)
+
   const columnRefs = useRef(
     columns.map(() => createRef<HTMLTableHeaderCellElement>())
   )
@@ -34,26 +45,22 @@ export default function ComparisonTable({
     Array<null | React.HTMLProps<HTMLTableHeaderCellElement>['style']>
   >([])
 
-  useEffect(() => {
-    const calculateCoords = () => {
-      if (columnRefs.current) {
-        setHighlightCoords(
-          columnRefs.current.map((ref) => {
-            if (ref.current) {
-              let left = ref.current.offsetLeft
-              let width = ref.current.offsetWidth
-              return { left, width }
-            }
-            return null
-          })
-        )
-      }
+  const calculateCoords = () => {
+    if (columnRefs.current) {
+      setHighlightCoords(
+        columnRefs.current.map((ref) => {
+          if (ref.current) {
+            let left = ref.current.offsetLeft
+            let width = ref.current.offsetWidth
+            return { left, width }
+          }
+          return null
+        })
+      )
     }
+  }
 
-    calculateCoords()
-    window.addEventListener('resize', calculateCoords)
-    return () => window.removeEventListener('resize', calculateCoords)
-  }, [columnRefs])
+  useResizeObserverSsr(desktopRef, calculateCoords)
 
   return (
     <>
@@ -70,14 +77,14 @@ export default function ComparisonTable({
               }>
               <h3 className='mb-6 text-xl font-semibold'>{column.heading}</h3>
               <ul>
-                {rows.map(({ heading, values }, rowIndex) => {
+                {rows.map(({ heading, values, hidden }, rowIndex) => {
                   return (
                     <li
                       key={rowIndex}
-                      className='mt-4 border-t border-neutral-700 pt-4'>
-                      <RowItem
+                      className={`mt-4 border-t border-neutral-700 pt-4 ${hidden ? 'hidden' : ''}`}>
+                      <ValueCell
                         heading={heading}
-                        yesNo={values[columnIndex].value ? 'yes' : 'no'}
+                        icon={values[columnIndex].icon}
                         label={values[columnIndex].label}
                       />
                     </li>
@@ -90,7 +97,7 @@ export default function ComparisonTable({
       </div>
 
       {/* Desktop table */}
-      <div className='relative hidden pb-3 md:block'>
+      <div className='relative hidden pb-3 md:block' ref={desktopRef}>
         {columns.map((column, columnIndex) => {
           return (
             <div
@@ -121,9 +128,11 @@ export default function ComparisonTable({
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ heading, values }, rowIndex) => {
+            {rows.map(({ heading, values, hidden }, rowIndex) => {
               return (
-                <tr className='min-h-12' key={rowIndex}>
+                <tr
+                  className={`min-h-12 ${hidden ? 'hidden' : ''}`}
+                  key={rowIndex}>
                   <th className='hidden border-b border-neutral-700 py-4 pr-8 lg:table-cell xl:pr-16'>
                     <span className='text-sm font-bold uppercase text-[#B3B6BD]'>
                       {heading}
@@ -135,9 +144,9 @@ export default function ComparisonTable({
                         key={columnIndex}
                         valign='middle'
                         className='border-b border-neutral-700 px-6 py-4 lg:px-8'>
-                        <RowItem
+                        <ValueCell
                           heading={heading}
-                          yesNo={value.value ? 'yes' : 'no'}
+                          icon={value.icon}
                           label={value.label}
                         />
                       </td>
@@ -153,21 +162,24 @@ export default function ComparisonTable({
   )
 }
 
-interface RowItemProps {
+interface ValueCellProps {
   heading: string | React.ReactNode
   label: string | React.ReactNode
-  yesNo?: 'yes' | 'no'
+  icon?: CellIcons
 }
 
-function RowItem({ heading, yesNo, label }: RowItemProps) {
+const icons: Record<CellIcons, React.ReactNode> = {
+  yes: <YesIcon />,
+  no: <NoIcon />,
+  intermediate: <NoIcon />,
+  dash: <>—</>
+}
+
+function ValueCell({ heading, icon, label }: ValueCellProps) {
   const labelIsString = typeof label === 'string'
   return (
     <div className='flex items-center gap-4'>
-      {typeof yesNo !== 'undefined' && (
-        <div className='w-4 flex-shrink-0 flex-grow-0'>
-          {yesNo === 'yes' ? <YesIcon /> : <NoIcon />}
-        </div>
-      )}
+      {typeof icon !== 'undefined' && icons[icon]}
       <div className='flex-1'>
         <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
           {heading}

@@ -254,12 +254,12 @@ export default function BigQueryPage({
               heading: 'Fast and efficient',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     'Up to **95% faster** querying speeds and 60% less storage space required.'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label: 'Slower querying speeds and requires more storage.'
                 }
               ]
@@ -268,11 +268,11 @@ export default function BigQueryPage({
               heading: 'Cost-effective',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label: 'Up to **100x** more cost-effective.'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label: 'More costly for BigQuery for analytics workloads.'
                 }
               ]
@@ -281,12 +281,12 @@ export default function BigQueryPage({
               heading: 'Modern SQL',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     'Standard SQL enhanced with numerous **extensions and improvements** (e.g. lambda functions and higher-order functions), that make analytical tasks very user-friendly.'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label:
                     'Support for only standard SQL can make analytics more complex.'
                 }
@@ -296,12 +296,12 @@ export default function BigQueryPage({
               heading: 'Easy data analytics',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     '**150+ pre-built aggregation functions** plus powerful aggregation combinators, fully vectorized and parallelized.\n\n**1300+ data processing functions** for domains like mathematics, geo, machine learning, time series, and more.'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label:
                     'Requires writing more complex SQL due to its limited set of aggregate and regular data processing functions.'
                 }
@@ -311,12 +311,12 @@ export default function BigQueryPage({
               heading: 'Rich data type support',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     'Advanced data types like JSON, maps, and arrays plus over **80 array functions** for modeling and solving a wide range of problems simply and intuitively.'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label:
                     'Support for limited number of data types including only 8 array functions.'
                 }
@@ -326,12 +326,12 @@ export default function BigQueryPage({
               heading: 'World class\ninteroperability',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     'Native support for reading data in over **90 file formats** from most data sources which makes it easy to analyze data regardless of its shape and location. '
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label:
                     'Limited interoperability. Supports only 5 file formats and 19 data sources.'
                 }

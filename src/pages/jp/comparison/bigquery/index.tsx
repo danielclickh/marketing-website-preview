@@ -248,12 +248,12 @@ export default function BigQueryPage({
               heading: '速度と効率',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     '最大95%のクエリ速度向上、さらにストレージ使用量を60%削減。'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label: 'クエリ速度が遅く、ストレージ消費量も多い。'
                 }
               ]
@@ -262,11 +262,11 @@ export default function BigQueryPage({
               heading: 'コスト効率が高い',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label: '最大100倍のコスト効率を実現。'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label: 'BigQueryを分析処理に使用すると費用が高くなる。'
                 }
               ]
@@ -275,12 +275,12 @@ export default function BigQueryPage({
               heading: '最新のSQL',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     '標準SQLを多数の拡張機能 (Lambda関数や高階関数など) で強化および改善しているため使いやすく、簡単に分析タスクを実行できる。'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label:
                     '標準SQLのみに対応しているため、分析タスクが複雑になりやすい。'
                 }
@@ -290,12 +290,12 @@ export default function BigQueryPage({
               heading: '簡単なデータ分析',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     '150以上の事前定義された集計関数に加え、パワフルな集計関数を組み合わせることが可能。ベクトル化と並列化に完全に対応。\n\n数値計算、地理情報、機械学習、時系列などの処理に1,300以上のデータ処理関数を使用できる。'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label:
                     '集計関数や標準データ処理関数の数が少ないため、非常に複雑なSQLを作成する必要がある。'
                 }
@@ -305,12 +305,12 @@ export default function BigQueryPage({
               heading: 'リッチデータ型のサポート',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     'JSON、マップ、配列などの高度なデータ型と、80を超える配列関数を使用し、シンプルかつ直感的な方法で問題をモデル化して解決できる。'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label: '配列関数がわずか8つなど、データ型の数に制限がある。'
                 }
               ]
@@ -319,12 +319,12 @@ export default function BigQueryPage({
               heading: '世界クラスの相互運用性',
               values: [
                 {
-                  value: true,
+                  icon: 'yes',
                   label:
                     'ほとんどのデータソースから、90を超えるファイル形式でデータをネイティブに読み取ることができるため、形状や場所に関係なく、データを簡単に分析できる。'
                 },
                 {
-                  value: false,
+                  icon: 'no',
                   label:
                     '相互運用性が低い。5つのファイル形式と19のデータソースのみに対応。'
                 }

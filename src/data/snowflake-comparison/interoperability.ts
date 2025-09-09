@@ -2,51 +2,51 @@ import { Table } from './index'
 
 export default {
   name: 'Interoperability',
-  description: `With fully-managed CDC via ClickPipes, ClickHouse makes it easy to stream changes from operational databases like Postgres or MySQL, enabling real-time analytics with minimal lag. Users benefit from unmatched interoperability, with support for over 70 file formats, external catalogs like Hive and Glue, and lakehouse formats such as Iceberg. External table engines let you query systems like Postgres, MongoDB, or S3 directly.
+  description: `ClickHouse, with fully managed CDC via ClickPipes, streams changes from databases like Postgres or MySQL for real-time analytics. With support for 70+ file formats, catalogs like Hive and Glue, lakehouse formats such as Iceberg, and external engines to query sources like Postgres, MongoDB, or S3 directly, ClickHouse offers unmatched interoperability.
 
-By contrast, Snowflake generally requires data to be staged in internal tables or external stages before it can be queried, with fewer direct “in-place” query options and no built-in engines to transparently join data from live transactional systems. While Snowflake does support external tables, these primarily target data lakes (e.g., in S3) and still typically rely on materialized metadata. `,
+Snowflake typically requires staging data in internal tables or external stages before querying. It offers fewer direct query options and no built-in engines for joins against external systems. External tables mainly target data lakes (e.g., S3) and still rely on materialized metadata.`,
   rows: [
     {
       heading: 'File format support',
       clickhouse: {
-        value: true,
+        icon: 'yes',
         label: '**70+ formats** including Parquet, ORC, Avro, JSON, CSV'
       },
       snowflake: {
-        value: false,
+        icon: 'no',
         label: 'Limited to common formats (e.g. Parquet, CSV)'
       }
     },
     {
       heading: 'External table engines',
       clickhouse: {
-        value: true,
+        icon: 'yes',
         label: '**Connect to Postgres, MongoDB, MySQL, S3, Kafka, and more**'
       },
       snowflake: {
-        value: false,
+        icon: 'no',
         label: 'Object stores only'
       }
     },
     {
       heading: 'Query external data in-place',
       clickhouse: {
-        value: true,
+        icon: 'yes',
         label: '**Query in-place** via table engines (e.g. Postgres, S3)'
       },
       snowflake: {
-        value: false,
+        icon: 'no',
         label: 'Requires ingestion or external functions'
       }
     },
     {
       heading: 'Change Data Capture (CDC)',
       clickhouse: {
-        value: true,
+        icon: 'yes',
         label: '**ClickPipes CDC** for MySQL and Postgres'
       },
       snowflake: {
-        value: true,
+        icon: 'yes',
         label: 'CDC supported'
       }
     },
@@ -54,22 +54,22 @@ By contrast, Snowflake generally requires data to be staged in internal tables o
       heading: 'Support for open table and file formats',
       subHeading: 'e.g. Iceberg, Parquet, ORC',
       clickhouse: {
-        value: true,
+        icon: 'yes',
         label: '**Open format support**'
       },
       snowflake: {
-        value: true,
+        icon: 'yes',
         label: 'Open format support'
       }
     },
     {
       heading: 'Support for third-party catalogs',
       clickhouse: {
-        value: true,
+        icon: 'yes',
         label: '**Third-party catalogs supported**'
       },
       snowflake: {
-        value: false,
+        icon: 'no',
         label: 'Third-party catalogs supported'
       }
     }
