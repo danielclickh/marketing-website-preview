@@ -7,6 +7,29 @@ export default {
 Public benchmarks, including a join-heavy workload built for Snowflake and Databricks, show ClickHouse not only matching but outperforming on speed and cost. Without tuning or schema changes, it executed multi-billion-row joins in a fraction of the time and cost.`,
   rows: [
     {
+      heading: 'Native aggregate optimization',
+      subHeading: 'Merge states, projections',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Merge states & projections** for fast aggregates'
+      },
+      snowflake: {
+        icon: 'no',
+        label: 'Not supported'
+      }
+    },
+    {
+      heading: 'Dictionaries for dimension table acceleration',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Dictionary acceleration** for dimension tables'
+      },
+      snowflake: {
+        icon: 'no',
+        label: 'Not supported'
+      }
+    },
+    {
       heading: 'Sub-second query latency at scale',
       clickhouse: {
         icon: 'yes',
@@ -15,18 +38,6 @@ Public benchmarks, including a join-heavy workload built for Snowflake and Datab
       snowflake: {
         icon: 'intermediate',
         label: 'Requires clustering + materialized views (enterprise tier)'
-      }
-    },
-    {
-      heading: 'Join performance',
-      subHeading: 'Multi-billion rows',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Joins across billions of rows**'
-      },
-      snowflake: {
-        icon: 'yes',
-        label: 'Joins across billions of rows'
       }
     },
     {
@@ -52,18 +63,6 @@ Public benchmarks, including a join-heavy workload built for Snowflake and Datab
       }
     },
     {
-      heading: 'Native aggregate optimization',
-      subHeading: 'Merge states, projections',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Merge states & projections** for fast aggregates'
-      },
-      snowflake: {
-        icon: 'no',
-        label: 'Not supported'
-      }
-    },
-    {
       heading: 'Data compression',
       clickhouse: {
         icon: 'yes',
@@ -75,14 +74,15 @@ Public benchmarks, including a join-heavy workload built for Snowflake and Datab
       }
     },
     {
-      heading: 'Dictionaries for dimension table acceleration',
+      heading: 'Join performance',
+      subHeading: 'Multi-billion rows',
       clickhouse: {
         icon: 'yes',
-        label: '**Dictionary acceleration** for dimension tables'
+        label: '**Joins across billions of rows**'
       },
       snowflake: {
-        icon: 'no',
-        label: 'Not supported'
+        icon: 'yes',
+        label: 'Joins across billions of rows'
       }
     }
   ]

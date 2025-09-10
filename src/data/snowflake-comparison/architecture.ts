@@ -7,6 +7,17 @@ export default {
 ClickHouse’s self-managed, open-source deployment uses a shared-nothing architecture, giving you full control over distribution and scaling. In contrast, ClickHouse Cloud uses a shared storage architecture with full separation of storage and compute, scaling elastically over a single copy of data in object storage.`,
   rows: [
     {
+      heading: 'Flexible deployment',
+      clickhouse: {
+        icon: 'yes',
+        label: 'Available on both **self-managed** and **ClickHouse Cloud**'
+      },
+      snowflake: {
+        icon: 'no',
+        label: 'Cloud only option, no self-managed'
+      }
+    },
+    {
       heading: 'High query concurrency',
       subHeading: '1,000+ QPS per node',
       clickhouse: {
@@ -19,14 +30,25 @@ ClickHouse’s self-managed, open-source deployment uses a shared-nothing archit
       }
     },
     {
-      heading: 'Flexible deployment',
+      heading: 'Real-time ingest',
       clickhouse: {
         icon: 'yes',
-        label: 'Available on both **self-managed** and **ClickHouse Cloud**'
+        label: '**<1s latency** for streaming data'
       },
       snowflake: {
-        icon: 'no',
-        label: 'Cloud only option, no self-managed'
+        icon: 'intermediate',
+        label: '5–10s latency with Snowpipe Streaming'
+      }
+    },
+    {
+      heading: 'Native semi-structured data type with type preservation',
+      clickhouse: {
+        icon: 'yes',
+        label: '**JSON with type fidelity**'
+      },
+      snowflake: {
+        icon: 'intermediate',
+        label: 'Semi-structured data but no type preservation'
       }
     },
     {
@@ -71,28 +93,6 @@ ClickHouse’s self-managed, open-source deployment uses a shared-nothing archit
       snowflake: {
         icon: 'yes',
         label: 'Streaming via Snowpipe'
-      }
-    },
-    {
-      heading: 'Real-time ingest',
-      clickhouse: {
-        icon: 'yes',
-        label: '**<1s latency** for streaming data'
-      },
-      snowflake: {
-        icon: 'intermediate',
-        label: '5–10s latency with Snowpipe Streaming'
-      }
-    },
-    {
-      heading: 'Native semi-structured data type with type preservation',
-      clickhouse: {
-        icon: 'yes',
-        label: '**JSON with type fidelity**'
-      },
-      snowflake: {
-        icon: 'intermediate',
-        label: 'Semi-structured data but no type preservation'
       }
     },
     {

@@ -7,6 +7,17 @@ export default {
 Snowflake typically requires staging data in internal tables or external stages before querying. It offers fewer direct query options and no built-in engines for joins against external systems. External tables mainly target data lakes (e.g., S3) and still rely on materialized metadata.`,
   rows: [
     {
+      heading: 'Support for third-party catalogs',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Third-party catalogs supported**'
+      },
+      snowflake: {
+        icon: 'no',
+        label: 'Third-party catalogs supported'
+      }
+    },
+    {
       heading: 'File format support',
       clickhouse: {
         icon: 'yes',
@@ -60,17 +71,6 @@ Snowflake typically requires staging data in internal tables or external stages 
       snowflake: {
         icon: 'yes',
         label: 'Open format support'
-      }
-    },
-    {
-      heading: 'Support for third-party catalogs',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Third-party catalogs supported**'
-      },
-      snowflake: {
-        icon: 'no',
-        label: 'Third-party catalogs supported'
       }
     }
   ]

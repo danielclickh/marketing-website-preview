@@ -19,6 +19,17 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
       }
     },
     {
+      heading: 'Distributes query execution across nodes',
+      clickhouse: {
+        icon: 'yes',
+        label: 'Yes, via parallel replicas'
+      },
+      snowflake: {
+        icon: 'no',
+        label: 'Not supported'
+      }
+    },
+    {
       heading: 'High query concurrency per node',
       clickhouse: {
         icon: 'yes',
@@ -27,17 +38,6 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
       snowflake: {
         icon: 'intermediate',
         label: 'Default 8 queries per warehouse'
-      }
-    },
-    {
-      heading: 'Compute compute separation',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Separation of compute and storage**'
-      },
-      snowflake: {
-        icon: 'yes',
-        label: 'Separation of compute and storage'
       }
     },
     {
@@ -63,17 +63,6 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
       }
     },
     {
-      heading: 'Distributed cache across warehouse',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Distributed cache** across nodes'
-      },
-      snowflake: {
-        icon: 'yes',
-        label: 'Distributed cache supported'
-      }
-    },
-    {
       heading: 'Granular cache control',
       clickhouse: {
         icon: 'yes',
@@ -85,14 +74,25 @@ ClickHouse Cloud, by contrast, scales elastically. Resources expand or contract 
       }
     },
     {
-      heading: 'Distributes query execution across nodes',
+      heading: 'Compute compute separation',
       clickhouse: {
         icon: 'yes',
-        label: 'Yes, via parallel replicas'
+        label: '**Separation of compute and storage**'
       },
       snowflake: {
-        icon: 'no',
-        label: 'Not supported'
+        icon: 'yes',
+        label: 'Separation of compute and storage'
+      }
+    },
+    {
+      heading: 'Distributed cache across warehouse',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Distributed cache** across nodes'
+      },
+      snowflake: {
+        icon: 'yes',
+        label: 'Distributed cache supported'
       }
     }
   ]

@@ -7,6 +7,18 @@ export default {
 Snowflake is built for batch analytics and BI. Strong for reporting, it lacks the cost efficiency, latency, and flexibility needed for real-time, agentic, or observability use cases.`,
   rows: [
     {
+      heading: 'Observability',
+      subHeading: 'Logs, metrics, traces',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Native support via ClickStack**'
+      },
+      snowflake: {
+        icon: 'no',
+        label: 'No viable solution; cost prohibitive'
+      }
+    },
+    {
       heading: 'Real-time analytics ',
       subHeading:
         'External dashboards, product analytics, customer-facing applications',
@@ -17,29 +29,6 @@ Snowflake is built for batch analytics and BI. Strong for reporting, it lacks th
       snowflake: {
         icon: 'intermediate',
         label: 'Limited by latency and cost'
-      }
-    },
-    {
-      heading: 'Internal analytics and operational dashboards',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Internal dashboards** supported'
-      },
-      snowflake: {
-        icon: 'yes',
-        label: 'Best for batch workloads'
-      }
-    },
-    {
-      heading: 'Observability',
-      subHeading: 'Logs, metrics, traces',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Native support via ClickStack**'
-      },
-      snowflake: {
-        icon: 'no',
-        label: 'No viable solution; cost prohibitive'
       }
     },
     {
@@ -62,6 +51,17 @@ Snowflake is built for batch analytics and BI. Strong for reporting, it lacks th
       snowflake: {
         icon: 'intermediate',
         label: 'High-concurrency workloads not recommended'
+      }
+    },
+    {
+      heading: 'Internal analytics and operational dashboards',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Internal dashboards** supported'
+      },
+      snowflake: {
+        icon: 'yes',
+        label: 'Best for batch workloads'
       }
     }
   ]
