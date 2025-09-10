@@ -228,7 +228,7 @@ export default function Page({
           <div className='section-container w-full items-end justify-between md:flex'>
             <h1 className='flex flex-col uppercase'>
               <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
-                Free conference in{' '}
+                Free database and AI conference{' '}
               </span>
               {heading.split(/\n+/g).map((item, itemIndex) => {
                 return (
