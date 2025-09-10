@@ -1,4 +1,7 @@
 import heroLogos from './assets/hero-logos.png'
+import iconDatabase from './assets/icon-database.svg'
+import iconGuage from './assets/icon-guage.svg'
+import iconHandCoins from './assets/icon-hand-coins.svg'
 import logoAdgreetz from './assets/logo-adgreetz.svg'
 import logoBigquery from './assets/logo-bigquery.svg'
 import logoBraze from './assets/logo-braze.svg'
@@ -161,14 +164,17 @@ export default function SnowflakePage({
             <div className='mx-auto mt-10 flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-6'>
               {[
                 {
+                  icon: iconHandCoins,
                   stat: '4x',
                   label: 'Reduction in costs'
                 },
                 {
+                  icon: iconGuage,
                   stat: '3-5x',
                   label: 'Faster queries'
                 },
                 {
+                  icon: iconDatabase,
                   stat: '38%',
                   label: 'Better compression'
                 }
@@ -177,10 +183,17 @@ export default function SnowflakePage({
                   <div
                     key={itemIndex}
                     className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-8'>
-                    <span className='text-7xl font-black text-primary-300'>
+                    <Image
+                      src={item.icon}
+                      alt={`${item.label} icon`}
+                      width={32}
+                      height={32}
+                      className='size-8 object-contain object-center'
+                    />
+                    <span className='mb-2 mt-3 text-6xl font-black text-white'>
                       {item.stat}
                     </span>
-                    <strong>{item.label}</strong>
+                    <strong className='text-neutral-200'>{item.label}</strong>
                   </div>
                 )
               })}
@@ -261,7 +274,7 @@ export default function SnowflakePage({
           <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='guage'
+                icon='hand-coins'
                 title='Lower costs'
                 text='Achieve 3–5x better performance per dollar than Snowflake'
                 className='bg-neutral-900/80'
@@ -269,7 +282,7 @@ export default function SnowflakePage({
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='tada'
+                icon='coins'
                 title='Predictable pricing'
                 text='No surprise bills or penalties for usage spikes or tiered feature pricing'
                 className='bg-neutral-900/80'

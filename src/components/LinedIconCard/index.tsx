@@ -4,12 +4,14 @@ import book from './assets/book.svg'
 import chartLine from './assets/chart-line.svg'
 import chatTeardropText from './assets/chat-teardrop-text.svg'
 import cloudTick from './assets/cloud-tick.svg'
+import coins from './assets/coins.svg'
 import database from './assets/database.svg'
 import doubleTick from './assets/double-tick.svg'
 import enterprise from './assets/enterprise.svg'
 import filePy from './assets/file-py.svg'
 import gear from './assets/gear.svg'
 import guage from './assets/guage.svg'
+import handCoins from './assets/hand-coins.svg'
 import keyhole from './assets/keyhole.svg'
 import lightning from './assets/lightning.svg'
 import listSearch from './assets/list-search.svg'
@@ -54,7 +56,9 @@ const icons = {
   'toggle-right': toggleRight,
   'users-three': usersThree,
   'double-tick': doubleTick,
-  unlock
+  unlock,
+  'hand-coins': handCoins,
+  coins
 }
 
 type Icons = keyof typeof icons
