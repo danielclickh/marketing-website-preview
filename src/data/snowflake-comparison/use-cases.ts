@@ -2,7 +2,7 @@ import { Table } from './index'
 
 export default {
   name: 'Use cases',
-  description: `ClickHouse is a high-performance analytics database used for real-time dashboards, product analytics, and observability - natively supported via [ClickStack](/use-cases/observability). With support for wide events, high compression, and fast aggregations, it delivers low-latency queries at scale and excels in high-concurrency scenarios, including agentic workflows.
+  description: `ClickHouse is a high-performance analytics database used for real-time dashboards, product analytics, and observability - **natively supported via [ClickStack](/use-cases/observability)**. With support for wide events, high compression, and fast aggregations, it delivers low-latency queries at scale and excels in **high-concurrency scenarios**, including agentic workflows.
 
 Snowflake is built for batch analytics and BI. Strong for reporting, it lacks the cost efficiency, latency, and flexibility needed for real-time, agentic, or observability use cases.`,
   rows: [

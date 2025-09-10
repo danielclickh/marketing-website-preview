@@ -274,22 +274,6 @@ export default function SnowflakePage({
           <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='hand-coins'
-                title='Lower costs'
-                text='Achieve 3–5x better performance per dollar than Snowflake'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='coins'
-                title='Predictable pricing'
-                text='No surprise bills or penalties for usage spikes or tiered feature pricing'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
                 icon='lightning'
                 title='Built for real-time'
                 text='Power always-on, low-latency, high-concurrency workloads'
@@ -298,9 +282,25 @@ export default function SnowflakePage({
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
+                icon='coins'
+                title='Predictable pricing'
+                text='No surprise bills or penalties for usage spikes or need to upgrade to expensive plans to access advanced features'
+                className='bg-neutral-900/80'
+              />
+            </div>{' '}
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='hand-coins'
+                title='Lower costs'
+                text='3–5x better performance per dollar than Snowflake, less spend, and more headroom.'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
                 icon='unlock'
-                title='No tiered lock-in'
-                text='Access advanced features without upgrading to expensive plans'
+                title='Open source and open standards'
+                text='Flexible deployments models from open source to managed cloud and BYOC, with support for external data catalogues and lake formats'
                 className='bg-neutral-900/80'
               />
             </div>
@@ -436,6 +436,15 @@ function TabbedTable() {
                             className={`text-primary-300 hover:underline ${className}`}>
                             {children}
                           </a>
+                        )
+                      },
+                      strong({ node, children, className = '', ...props }) {
+                        return (
+                          <strong
+                            className={`text-white ${className}`}
+                            {...props}>
+                            {children}
+                          </strong>
                         )
                       }
                     }}>

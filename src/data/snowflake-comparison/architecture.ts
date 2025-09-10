@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Architecture',
-  description: `Snowflake is a proprietary cloud data warehouse built on a hybrid of shared-disk and shared-nothing designs. It stores data in object storage, accessed by stateless compute clusters (“warehouses”) that scale horizontally. 
+  description: `Snowflake is a **proprietary cloud data warehouse** built on a **hybrid of shared-disk and shared-nothing designs**. It stores data in object storage, accessed by stateless compute clusters (“warehouses”) that scale horizontally. 
   
-ClickHouse’s self-managed, open-source deployment uses a shared-nothing architecture, giving you full control over distribution and scaling. In contrast, ClickHouse Cloud uses a shared storage architecture with full separation of storage and compute, scaling elastically over a single copy of data in object storage.`,
+ClickHouse’s self-managed, open-source deployment uses a shared-nothing architecture, giving you full control over distribution and scaling. In contrast, ClickHouse Cloud uses a **shared storage architecture** with **full separation of storage and compute, scaling elastically** over a single copy of data in object storage.`,
   rows: [
     {
       heading: 'Flexible deployment',

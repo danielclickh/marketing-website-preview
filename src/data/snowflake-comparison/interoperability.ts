@@ -2,7 +2,7 @@ import { Table } from './index'
 
 export default {
   name: 'Interoperability',
-  description: `ClickHouse, with fully managed CDC via ClickPipes, streams changes from databases like Postgres or MySQL for real-time analytics. With support for 70+ file formats, catalogs like Hive and Glue, lakehouse formats such as Iceberg, and external engines to query sources like Postgres, MongoDB, or S3 directly, ClickHouse offers unmatched interoperability.
+  description: `ClickHouse, with fully managed CDC via ClickPipes, streams changes from databases like Postgres or MySQL for real-time analytics. With support for **70+ file formats, catalogs like Hive and Glue, lakehouse formats such as Iceberg**, and external engines to query sources like Postgres, MongoDB, or S3 directly, ClickHouse offers unmatched interoperability.
 
 Snowflake typically requires staging data in internal tables or external stages before querying. It offers fewer direct query options and no built-in engines for joins against external systems. External tables mainly target data lakes (e.g., S3) and still rely on materialized metadata.`,
   rows: [

@@ -2,7 +2,7 @@ import { Table } from './index'
 
 export default {
   name: 'Performance',
-  description: `ClickHouse is engineered for speed. Its vectorized engine, efficient memory use, and columnar compression deliver sub-second queries at scale. Snowflake, while strong for long batch jobs, struggles in real-time or high-concurrency scenarios without costly compute
+  description: `ClickHouse is engineered for speed. Its vectorized engine, efficient memory use, and columnar compression deliver **sub-second queries at scale**. Snowflake, while strong for long batch jobs, struggles in real-time or high-concurrency scenarios without costly compute
 
 Public benchmarks, including a join-heavy workload built for Snowflake and Databricks, show ClickHouse not only matching but outperforming on speed and cost. Without tuning or schema changes, it executed multi-billion-row joins in a fraction of the time and cost.`,
   rows: [
