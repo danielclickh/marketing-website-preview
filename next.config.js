@@ -557,6 +557,11 @@ const nextConfig = {
         source: '/houseparty/vegas-2024',
         destination: '/houseparty/the-sql',
         permanent: true
+      },
+      {
+        source: '/cloud/manage/cloud-tiers',
+        destination: '/docs/cloud/manage/cloud-tiers',
+        permanent: true
       }
     ]
   }
