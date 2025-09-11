@@ -9,6 +9,10 @@ Time-series data is everywhere in modern systems - from IoT sensors and financia
 
 This article explores time-series databases, their use cases, and how different database solutions handle time-based data. Whether you're dealing with millions of sensor readings, tracking user behavior, or monitoring system performance, understanding your options for time-series data storage is crucial for building effective data systems.
 
+<iframe width="768" height="432" src="https://www.youtube.com/embed/ddk2qOdulWY?si=Vj50gfj01vEbDaZq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<br />
+
 To get a taste of time-series analysis in action, here’s a sample query that looks at average yearly precipitation across the UK, France, and the US using weather station data from NOAA. It's a simple example, but it shows how powerful time-based queries can be for uncovering trends over time.
 
 <pre><code

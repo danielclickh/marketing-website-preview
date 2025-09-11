@@ -8,6 +8,10 @@ index: 2
 In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym”
 How do they differ from row-based databases? What are they good at? What are the advantages of using a column store?
 
+<iframe width="768" height="432" src="https://www.youtube.com/embed/a7rmLeGK1v8?si=036RABTFULyrWRFl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<br />
+
 We’ll answer these questions and more, but first, a brief history lesson.
 
 ## A brief history of columnar databases
