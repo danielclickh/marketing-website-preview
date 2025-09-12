@@ -578,7 +578,7 @@ function ClickHouseAnimation() {
         <AnimatedDataLine
           size={lineHeight}
           direction='down'
-          trackColor='rgba(255,255,255,0.5)'
+          trackColor='rgba(255,255,255,0.2)'
           trackProps={{
             className: 'backdrop-saturate-150'
           }}
@@ -591,7 +591,7 @@ function ClickHouseAnimation() {
         <AnimatedDataLine
           size={lineHeight}
           direction='down'
-          trackColor='rgba(255,255,255,0.5)'
+          trackColor='rgba(255,255,255,0.2)'
           trackProps={{
             className: 'backdrop-saturate-150'
           }}
@@ -604,7 +604,7 @@ function ClickHouseAnimation() {
         <AnimatedDataLine
           size={lineHeight}
           direction='down'
-          trackColor='rgba(255,255,255,0.5)'
+          trackColor='rgba(255,255,255,0.2)'
           trackProps={{
             className: 'backdrop-saturate-150'
           }}
@@ -639,7 +639,7 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='up'
-              trackColor='rgba(255,255,255,0.5)'
+              trackColor='rgba(255,255,255,0.2)'
               trackProps={{
                 className: 'backdrop-saturate-150'
               }}
@@ -657,7 +657,7 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='up'
-              trackColor='rgba(255,255,255,0.5)'
+              trackColor='rgba(255,255,255,0.2)'
               trackProps={{
                 className: 'backdrop-saturate-150'
               }}
@@ -674,7 +674,7 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='up'
-              trackColor='rgba(255,255,255,0.5)'
+              trackColor='rgba(255,255,255,0.2)'
               trackProps={{
                 className: 'backdrop-saturate-150'
               }}
@@ -699,7 +699,7 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='down'
-              trackColor='rgba(255,255,255,0.5)'
+              trackColor='rgba(255,255,255,0.2)'
               trackProps={{
                 className: 'backdrop-saturate-150'
               }}
@@ -717,7 +717,7 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='down'
-              trackColor='rgba(255,255,255,0.5)'
+              trackColor='rgba(255,255,255,0.2)'
               trackProps={{
                 className: 'backdrop-saturate-150'
               }}
@@ -739,7 +739,7 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='down'
-              trackColor='rgba(255,255,255,0.5)'
+              trackColor='rgba(255,255,255,0.2)'
               trackProps={{
                 className: 'backdrop-saturate-150'
               }}
