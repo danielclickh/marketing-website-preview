@@ -2,6 +2,7 @@ import heroLogos from './assets/hero-logos.png'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
+import iconVs from './assets/icon-vs.png'
 import logoAdgreetz from './assets/logo-adgreetz.svg'
 import logoBigquery from './assets/logo-bigquery.svg'
 import logoBraze from './assets/logo-braze.svg'
@@ -9,15 +10,18 @@ import logoChartmetric from './assets/logo-chartmetric.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
 import snowflakeTableLogo from './assets/snowflake-table-logo.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
-import { CUIButton } from '@/components/ClickUI'
+import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
 } from '@/components/ComparisonTable'
+import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
+import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
 import tables from '@/data/snowflake-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -26,7 +30,7 @@ import logoPostgress from '@/pages/comparison/bigquery/logo-postgress.svg'
 import logoRedshift from '@/pages/comparison/bigquery/logo-redshift.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
+import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { Fragment, useState } from 'react'
 
@@ -54,17 +58,11 @@ export default function SnowflakePage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 md:flex-row 2xl:px-0'>
+      <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
-          <div>
-            <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
-              Comparisons
-            </span>
-          </div>
           <SuiTitle type='h1' weight='bold'>
             ClickHouse <span className='text-primary-300'>vs</span> Snowflake
           </SuiTitle>
-
           <Image
             src={heroLogos}
             alt='ClickHouse vs Snowflake'
@@ -87,24 +85,31 @@ export default function SnowflakePage({
             workloads, ClickHouse provides superior performance, significantly
             lower cost, simpler pricing, and industry-leading efficiency.
           </SuiText>
-          <div className='mt-6 flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
-            <CUIButton
-              href='https://console.clickhouse.cloud/signUp?loc=snowflake-comparison-page-hero'
-              type='primary'
-              size='lg'
-              weight='semibold'
-              className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
-              Start a free trial
-            </CUIButton>
-            <CUIButton
-              href='/company/contact?loc=snowflake-comparison-page-hero'
-              type='secondary'
-              size='lg'
-              weight='semibold'
-              target='_blank'
-              className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
-              Contact sales
-            </CUIButton>
+          <div className='flex flex-col items-stretch gap-y-5 rounded-lg border border-neutral-700/80 bg-neutral-900/50 px-3 py-4 shadow-card hover:shadow-lg lg:flex-row lg:divide-x lg:divide-neutral-700/80'>
+            {[
+              {
+                icon: iconHandCoins,
+                stat: '4x',
+                label: 'Reduction in costs'
+              },
+              {
+                icon: iconGuage,
+                stat: '3-5x',
+                label: 'Faster queries'
+              },
+              {
+                icon: iconDatabase,
+                stat: '38%',
+                label: 'Better compression'
+              }
+            ].map((item, itemIndex) => {
+              return (
+                <div key={itemIndex} className='flex-1 p-3 text-center'>
+                  <p className='mb-2 text-5xl font-bold'>{item.stat}</p>
+                  <p className='font-medium text-primary-300'>{item.label}</p>
+                </div>
+              )
+            })}
           </div>
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
@@ -128,7 +133,7 @@ export default function SnowflakePage({
         />
       </section>
 
-      {/* Stats & testimonials */}
+      {/* Testimonials */}
       <section className='relative overflow-hidden bg-[#363636] py-16 lg:py-24'>
         {/* Red orb */}
         <div
@@ -158,53 +163,11 @@ export default function SnowflakePage({
         {/* Yellow triangle */}
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
         <div className='section-container relative z-10'>
-          {/* Stats */}
-          <div className='-mt-6 pb-10 text-center lg:mt-0 lg:pb-24'>
-            <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
-            <div className='mx-auto mt-10 flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-6'>
-              {[
-                {
-                  icon: iconHandCoins,
-                  stat: '4x',
-                  label: 'Reduction in costs'
-                },
-                {
-                  icon: iconGuage,
-                  stat: '3-5x',
-                  label: 'Faster queries'
-                },
-                {
-                  icon: iconDatabase,
-                  stat: '38%',
-                  label: 'Better compression'
-                }
-              ].map((item, itemIndex) => {
-                return (
-                  <div
-                    key={itemIndex}
-                    className='flex flex-1 flex-col items-center rounded-md bg-neutral-750/70 px-4 py-8'>
-                    <Image
-                      src={item.icon}
-                      alt={`${item.label} icon`}
-                      width={32}
-                      height={32}
-                      className='size-8 object-contain object-center'
-                    />
-                    <span className='mb-2 mt-3 text-6xl font-black text-white'>
-                      {item.stat}
-                    </span>
-                    <strong className='text-neutral-200'>{item.label}</strong>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-          {/* Testimonials */}
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-            <p className='mb-6 text-center text-xl font-semibold leading-normal lg:-mt-3'>
+            <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
               Join others migrating to ClickHouse from Snowflake
-            </p>
+            </h2>
             <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
               <QuoteCard
                 content="It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that."
@@ -251,19 +214,37 @@ export default function SnowflakePage({
         </div>
       </section>
 
+      {/* Animation */}
+      <section className='section-container my-16 lg:my-24'>
+        <div className='mx-auto'>
+          <CUICard className='p-4 lg:py-12'>
+            <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16'>
+              <SuiTitle type='h2'>
+                Tired of unpredictable costs, gated features, and pricing models
+                that penalize interactivity?
+              </SuiTitle>
+              <SuiText className='text-neutral-200'>
+                <strong className='text-white'>You’re not alone.</strong> Many
+                teams are rethinking their architecture.
+                <br /> Discover why they’re moving real-time and user-facing
+                workloads to ClickHouse.
+              </SuiText>
+            </div>
+            <div className='flex flex-col items-center gap-16 lg:flex-row lg:flex-nowrap lg:px-12'>
+              <ClickHouseAnimation />
+              <Image src={iconVs} width={60} height={60} alt='VS' />
+              <SnowflakeAnimation />
+            </div>
+          </CUICard>
+        </div>
+      </section>
+
+      <HRSeparator className='!my-0' />
+
       {/* Tabbed table */}
       <section className='section-container my-16 lg:my-24'>
-        <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16'>
-          <SuiTitle type='h2'>
-            Tired of unpredictable costs, gated features, and pricing models
-            that penalize interactivity?
-          </SuiTitle>
-          <SuiText className='text-neutral-200'>
-            <strong className='text-white'>You’re not alone.</strong> Many teams
-            are rethinking their architecture.
-            <br /> Discover why they’re moving real-time and user-facing
-            workloads to ClickHouse.
-          </SuiText>
+        <div className='mx-auto mb-12 max-w-4xl space-y-6 text-center'>
+          <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
         </div>
         <TabbedTable />
       </section>
@@ -483,5 +464,262 @@ function TabbedTable() {
           .flat(1)}
       />
     </div>
+  )
+}
+
+type AnimationBadgeColors = 'red' | 'yellow' | 'blue' | 'green'
+
+function AnimationBadge({
+  label,
+  theme,
+  className = ''
+}: {
+  label: string
+  theme: AnimationBadgeColors
+  className?: string
+}) {
+  const badgeThemes: Record<AnimationBadgeColors, string> = {
+    red: 'bg-[#451919] border-[#FFBABA]',
+    yellow: 'bg-neutral-750 border-primary-300',
+    blue: 'bg-[#162540] border-[#B5CDF9]',
+    green: 'bg-[#172516] border-[#CCFFD0]'
+  }
+  return (
+    <div
+      className={`relative z-10 h-9 w-28 rounded border font-mono uppercase ${badgeThemes[theme]} ${className}`}>
+      <span className='absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-sm'>
+        {label}
+      </span>
+    </div>
+  )
+}
+
+function ClickHouseAnimation() {
+  const lineHeight = 84
+  const speedModifier = 0.5
+
+  return (
+    <ScaleToContainer scaleUp={false}>
+      <div className='w-64'>
+        <AnimationBadge label='Inserts' theme='yellow' className='mx-auto' />
+        <div className='mx-auto flex w-max gap-3.5'>
+          <AnimatedDataLine
+            size={lineHeight}
+            direction='down'
+            keyframes={[
+              { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
+              { startSize: 0.5, endSize: 1.5, duration: 0.8 + speedModifier },
+              { startSize: 1.1, endSize: 1, duration: 0.4 + speedModifier }
+            ]}
+          />
+          <AnimatedDataLine
+            size={lineHeight}
+            direction='down'
+            keyframes={[
+              { startSize: 0.25, endSize: 1, duration: 0.5 + speedModifier },
+              { startSize: 1, endSize: 0.8, duration: 0.2 + speedModifier },
+              { startSize: 0.8, endSize: 1.2, duration: 0.8 + speedModifier }
+            ]}
+          />
+          <AnimatedDataLine
+            size={lineHeight}
+            direction='down'
+            keyframes={[
+              { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
+              { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier },
+              { startSize: 1.1, endSize: 1, duration: 1 + speedModifier }
+            ]}
+          />
+        </div>
+
+        <div className='relative'>
+          <div className='absolute inset-0 z-0 animate-fadeInOut bg-primary-300/80 blur-lg' />
+          <div className='relative z-10 rounded bg-primary-300 p-3.5'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='55'
+              height='56'
+              fill='none'
+              className='mx-auto'>
+              <path
+                fill='#000'
+                d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div className='flex justify-between'>
+          <div>
+            <div className='mx-auto flex w-max gap-3.5'>
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='up'
+                keyframes={[
+                  {
+                    startSize: 0.8,
+                    endSize: 1.2,
+                    duration: 0.5 + speedModifier
+                  },
+                  { startSize: 1, endSize: 1.5, duration: 0.8 + speedModifier },
+                  { startSize: 2, endSize: 1.3, duration: 0.4 + speedModifier },
+                  { startSize: 1.1, endSize: 2, duration: 0.2 + speedModifier }
+                ]}
+              />
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='up'
+                keyframes={[
+                  { startSize: 2, endSize: 1.2, duration: 0.2 + speedModifier },
+                  {
+                    startSize: 1.1,
+                    endSize: 1.8,
+                    duration: 0.8 + speedModifier
+                  },
+                  { startSize: 1, endSize: 1.4, duration: 0.6 + speedModifier }
+                ]}
+              />
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='up'
+                keyframes={[
+                  { startSize: 0.5, endSize: 1.3, duration: 1 + speedModifier },
+                  { startSize: 2, endSize: 1.5, duration: 0.3 + speedModifier },
+                  {
+                    startSize: 1.2,
+                    endSize: 1.9,
+                    duration: 0.6 + speedModifier
+                  }
+                ]}
+              />
+            </div>
+            <AnimationBadge label='Queries' theme='blue' />
+          </div>
+          <div>
+            <div className='mx-auto flex w-max gap-3.5'>
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='down'
+                keyframes={[
+                  {
+                    startSize: 0.5,
+                    endSize: 1.5,
+                    duration: 0.8 + speedModifier
+                  },
+                  { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
+                  { startSize: 1.1, endSize: 1, duration: 0.4 + speedModifier },
+                  { startSize: 2, endSize: 1.5, duration: 0.3 + speedModifier }
+                ]}
+              />
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='down'
+                keyframes={[
+                  {
+                    startSize: 0.8,
+                    endSize: 1.2,
+                    duration: 0.8 + speedModifier
+                  },
+                  { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier },
+                  {
+                    startSize: 0.25,
+                    endSize: 1,
+                    duration: 0.5 + speedModifier
+                  },
+                  { startSize: 1, endSize: 0.8, duration: 0.2 + speedModifier }
+                ]}
+              />
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='down'
+                keyframes={[
+                  { startSize: 1.1, endSize: 1, duration: 1 + speedModifier },
+                  { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
+                  { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier }
+                ]}
+              />
+            </div>
+            <AnimationBadge label='Responses' theme='green' />
+          </div>
+        </div>
+      </div>
+    </ScaleToContainer>
+  )
+}
+
+function SnowflakeAnimation() {
+  const lineHeight = 84
+
+  return (
+    <ScaleToContainer scaleUp={false}>
+      <div className='w-64'>
+        <AnimationBadge label='Inserts' theme='yellow' className='mx-auto' />
+        <div className='mx-auto flex w-max gap-3.5'>
+          <AnimatedDataLine
+            size={lineHeight}
+            direction='down'
+            lineColor='#29B5E8'
+            strokeWidth={16}
+            lineProps={{
+              strokeDasharray: '6 8'
+            }}
+            keyframes={[{ startSize: 1, endSize: 1, duration: 4 }]}
+          />
+        </div>
+
+        <div className='relative'>
+          <div className='relative z-10 rounded bg-[#29B5E8] p-3.5'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='52'
+              height='52'
+              fill='none'
+              className='mx-auto'>
+              <path
+                fill='#fff'
+                fill-rule='evenodd'
+                d='M17.9 26.66a3.14 3.14 0 0 1-1.45 1.8l-10.8 6.19a3.2 3.2 0 0 1-4.34-1.15 3.14 3.14 0 0 1 1.16-4.31l6.04-3.46-6.04-3.46a3.13 3.13 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16L16.45 23a3.14 3.14 0 0 1 1.45 3.66Zm2.93 5.8a3.16 3.16 0 0 1 2.95 3.14v12.37a3.17 3.17 0 0 1-3.18 3.15 3.17 3.17 0 0 1-3.18-3.15v-6.92l-6.06 3.46a3.19 3.19 0 0 1-4.34-1.15 3.15 3.15 0 0 1 1.16-4.31l10.8-6.18a3.14 3.14 0 0 1 1.85-.42ZM31.9 19a3.17 3.17 0 0 1-2.94-3.14V3.49A3.16 3.16 0 0 1 32.14.34a3.17 3.17 0 0 1 3.18 3.15v6.93l6.05-3.47a3.2 3.2 0 0 1 4.34 1.15 3.14 3.14 0 0 1-1.16 4.31l-10.8 6.19a3.2 3.2 0 0 1-1.85.41ZM8.18 12.4a3.14 3.14 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16l6.06 3.47V3.49A3.17 3.17 0 0 1 20.6.34a3.17 3.17 0 0 1 3.18 3.15v12.38c0 1.65-1.3 3.02-2.95 3.14A3.2 3.2 0 0 1 19 18.6L8.19 12.4Zm19.42 19a.9.9 0 0 1-.56.24H25.7a.92.92 0 0 1-.56-.24l-4.49-4.45a.9.9 0 0 1-.23-.55v-1.31c0-.19.1-.44.23-.56l4.5-4.45a.92.92 0 0 1 .55-.24h1.33c.18 0 .43.1.56.24l4.5 4.45a.9.9 0 0 1 .22.56v1.3a.9.9 0 0 1-.23.56L27.6 31.4Zm.9-5.68c0-.18-.1-.43-.24-.56l-1.3-1.29a.92.92 0 0 0-.56-.23h-.05a.9.9 0 0 0-.56.23l-1.3 1.29a.92.92 0 0 0-.23.56v.05c0 .18.1.42.23.55l1.3 1.29a.9.9 0 0 0 .56.23h.05a.9.9 0 0 0 .56-.23l1.3-1.29a.91.91 0 0 0 .24-.55v-.05Zm16.06 13.34a3.15 3.15 0 0 1 1.16 4.31 3.19 3.19 0 0 1-4.34 1.15l-6.05-3.46v6.92a3.17 3.17 0 0 1-3.18 3.15 3.16 3.16 0 0 1-3.18-3.15V35.6a3.17 3.17 0 0 1 4.78-2.73l10.8 6.18Zm-.32-13.32 6.03 3.46a3.14 3.14 0 0 1 1.17 4.3 3.2 3.2 0 0 1-4.35 1.16l-10.8-6.19a3.13 3.13 0 0 1-1.48-3.57c.22-.77.73-1.46 1.48-1.9l10.8-6.18a3.2 3.2 0 0 1 4.35 1.16c.88 1.5.36 3.43-1.17 4.3l-6.03 3.46Z'
+                clip-rule='evenodd'
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div className='flex justify-between'>
+          <div>
+            <div className='mx-auto flex w-max gap-3.5'>
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='up'
+                lineColor='#29B5E8'
+                keyframes={[
+                  { startSize: 0.8, endSize: 1.2, duration: 3.5 },
+                  { startSize: 1, endSize: 1.5, duration: 3.8 },
+                  { startSize: 2, endSize: 1.3, duration: 3.4 },
+                  { startSize: 1.1, endSize: 2, duration: 3.2 }
+                ]}
+              />
+            </div>
+            <AnimationBadge label='Queries' theme='blue' />
+          </div>
+          <div>
+            <div className='mx-auto flex w-max gap-3.5'>
+              <AnimatedDataLine
+                size={lineHeight}
+                direction='down'
+                lineColor='#29B5E8'
+                keyframes={[
+                  { startSize: 0.5, endSize: 1.5, duration: 3.8 },
+                  { startSize: 1, endSize: 2, duration: 3.75 },
+                  { startSize: 1.1, endSize: 1, duration: 3.4 },
+                  { startSize: 2, endSize: 1.5, duration: 3.3 }
+                ]}
+              />
+            </div>
+            <AnimationBadge label='Responses' theme='green' />
+          </div>
+        </div>
+      </div>
+    </ScaleToContainer>
   )
 }
