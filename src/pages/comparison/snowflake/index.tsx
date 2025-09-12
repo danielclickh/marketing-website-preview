@@ -11,14 +11,15 @@ import logoM3ter from './assets/logo-m3ter.svg'
 import snowflakeTableLogo from './assets/snowflake-table-logo.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
-import { CUIButton, CUICard } from '@/components/ClickUI'
+import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
 } from '@/components/ComparisonTable'
-import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import Markdown from '@/components/Markdown'
+import MarketoForm from '@/components/MarketoForm'
+import Modal from '@/components/Modal'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
@@ -30,7 +31,7 @@ import logoPostgress from '@/pages/comparison/bigquery/logo-postgress.svg'
 import logoRedshift from '@/pages/comparison/bigquery/logo-redshift.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
-import Image, { ImageProps } from 'next/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { Fragment, useEffect, useState } from 'react'
 
@@ -55,8 +56,51 @@ export default function SnowflakePage({
   seo
 }: CommonProps) {
   useGalaxyOnPage('snowflakeComparisonPage')
+
+  const [formModalOpen, setFormModalOpen] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+  const [formSuccess, setFormSuccess] = useState(false)
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      {/* Popup form */}
+      <Modal
+        className='!bg-black/60 backdrop-blur'
+        isOpen={formModalOpen}
+        onClose={() => setFormModalOpen(false)}>
+        {!formSuccess && (
+          <>
+            <SuiTitle type='h3' className='mb-6'>
+              Read the comparison guide
+            </SuiTitle>
+            <MarketoForm
+              formId='1073'
+              clearbitTracking={true}
+              onLoad={() => setFormLoaded(true)}
+              onSuccess={() => setFormSuccess(true)}
+            />
+          </>
+        )}
+        {!formLoaded && 'Loading form...'}
+        {formSuccess && (
+          <div className='p-4 text-center'>
+            <SuiTitle type='h3'>Thank you for your submission!</SuiTitle>
+            <CUIButton
+              type='primary'
+              size='lg'
+              weight='semibold'
+              href='https://discover.clickhouse.com/rs/238-FPC-317/images/ClickHouse-vs-Snowflake.pdf'
+              target='_blank'
+              className='my-6 w-full'>
+              Download PDF
+            </CUIButton>
+            <p className='text-neutral-200'>
+              You'll also receive an email shortly with the executive summary.
+            </p>
+          </div>
+        )}
+      </Modal>
+
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
@@ -137,32 +181,60 @@ export default function SnowflakePage({
       <section className='relative overflow-hidden bg-[#363636] py-16 lg:py-24'>
         {/* Red orb */}
         <div
-          className='bg-shadow-element absolute inset-0'
+          className='bg-shadow-element yellow-shadow absolute inset-0'
           style={
             {
               '--top-side': '35%',
               '--left-side': '25%',
               '--scale': '0.9',
-              '--opacity': '0.08'
+              '--opacity': '0.03'
             } as React.CSSProperties
           }
         />
         {/* Yellow orb */}
         <div
-          className='bg-shadow-element yellow-shadow absolute inset-0'
+          className='bg-shadow-element absolute inset-0'
           style={
             {
               '--top-side': '10%',
               '--right-side': '25%',
               '--left-side': 'auto',
               '--scale': '0.8',
-              '--opacity': '0.06'
+              '--opacity': '0.04'
             } as React.CSSProperties
           }
         />
         {/* Yellow triangle */}
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
         <div className='section-container relative z-10'>
+          <div className='mb-16 space-y-12 lg:mb-24'>
+            <SuiTitle type='h2' className='text-center'>
+              ClickHouse compared to Snowflake
+            </SuiTitle>
+            <ScaleToContainer scaleUp={false} className='mx-auto'>
+              <div className='flex w-fit flex-col items-center gap-x-16 gap-y-8 lg:flex-row lg:flex-nowrap lg:px-12'>
+                <ClickHouseAnimation />
+                <Image
+                  src={iconVs}
+                  width={60}
+                  height={60}
+                  alt='VS'
+                  className='rounded-full shadow-xl'
+                />
+                <SnowflakeAnimation />
+              </div>
+            </ScaleToContainer>
+            <CUIButton
+              type='primary'
+              size='lg'
+              className='mx-auto'
+              onClick={(event) => {
+                event.preventDefault()
+                setFormModalOpen(true)
+              }}>
+              Read the comparison guide
+            </CUIButton>
+          </div>
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
@@ -214,36 +286,20 @@ export default function SnowflakePage({
         </div>
       </section>
 
-      {/* Animation */}
-      <section className='section-container my-16 lg:my-24'>
-        <CUICard className='mx-auto p-4 lg:py-12'>
-          <div className='mx-auto max-w-4xl space-y-6 text-center'>
-            <SuiTitle type='h2'>
-              Tired of unpredictable costs, gated features, and pricing models
-              that penalize interactivity?
-            </SuiTitle>
-            <SuiText className='text-neutral-200'>
-              <strong className='text-white'>You’re not alone.</strong> Many
-              teams are rethinking their architecture.
-              <br /> Discover why they’re moving real-time and user-facing
-              workloads to ClickHouse.
-            </SuiText>
-          </div>
-        </CUICard>
-      </section>
-
       {/* Tabbed table */}
       <section className='section-container my-16 lg:my-24'>
-        <div className='mx-auto space-y-6 text-center'>
-          <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
+        <div className='mx-auto mb-12 max-w-4xl space-y-6 text-center'>
+          <SuiTitle type='h2'>
+            Tired of unpredictable costs, gated features, and pricing models
+            that penalize interactivity?
+          </SuiTitle>
+          <SuiText className='text-neutral-200'>
+            <strong className='text-white'>You’re not alone.</strong> Many teams
+            are rethinking their architecture.
+            <br /> Discover why they’re moving real-time and user-facing
+            workloads to ClickHouse.
+          </SuiText>
         </div>
-        <ScaleToContainer scaleUp={false} className='mx-auto my-12'>
-          <div className='flex w-fit flex-col items-center gap-16 lg:flex-row lg:flex-nowrap lg:px-12'>
-            <ClickHouseAnimation />
-            <Image src={iconVs} width={60} height={60} alt='VS' />
-            <SnowflakeAnimation />
-          </div>
-        </ScaleToContainer>
         <TabbedTable />
       </section>
 
@@ -474,7 +530,7 @@ function AnimationBadge({
 }) {
   return (
     <div
-      className={`whitespace-nowrap rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm ${className}`}>
+      className={`whitespace-nowrap rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg ${className}`}>
       {children}
     </div>
   )
@@ -522,6 +578,10 @@ function ClickHouseAnimation() {
         <AnimatedDataLine
           size={lineHeight}
           direction='down'
+          trackColor='rgba(255,255,255,0.5)'
+          trackProps={{
+            className: 'backdrop-saturate-150'
+          }}
           keyframes={[
             { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
             { startSize: 0.5, endSize: 1.5, duration: 0.8 + speedModifier },
@@ -531,6 +591,10 @@ function ClickHouseAnimation() {
         <AnimatedDataLine
           size={lineHeight}
           direction='down'
+          trackColor='rgba(255,255,255,0.5)'
+          trackProps={{
+            className: 'backdrop-saturate-150'
+          }}
           keyframes={[
             { startSize: 0.25, endSize: 1, duration: 0.5 + speedModifier },
             { startSize: 1, endSize: 0.8, duration: 0.2 + speedModifier },
@@ -540,6 +604,10 @@ function ClickHouseAnimation() {
         <AnimatedDataLine
           size={lineHeight}
           direction='down'
+          trackColor='rgba(255,255,255,0.5)'
+          trackProps={{
+            className: 'backdrop-saturate-150'
+          }}
           keyframes={[
             { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
             { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier },
@@ -571,6 +639,10 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='up'
+              trackColor='rgba(255,255,255,0.5)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 {
                   startSize: 0.8,
@@ -585,6 +657,10 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='up'
+              trackColor='rgba(255,255,255,0.5)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 { startSize: 2, endSize: 1.2, duration: 0.2 + speedModifier },
                 {
@@ -598,6 +674,10 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='up'
+              trackColor='rgba(255,255,255,0.5)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 { startSize: 0.5, endSize: 1.3, duration: 1 + speedModifier },
                 { startSize: 2, endSize: 1.5, duration: 0.3 + speedModifier },
@@ -619,6 +699,10 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='down'
+              trackColor='rgba(255,255,255,0.5)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 {
                   startSize: 0.5,
@@ -633,6 +717,10 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='down'
+              trackColor='rgba(255,255,255,0.5)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 {
                   startSize: 0.8,
@@ -651,6 +739,10 @@ function ClickHouseAnimation() {
             <AnimatedDataLine
               size={lineHeight}
               direction='down'
+              trackColor='rgba(255,255,255,0.5)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 { startSize: 1.1, endSize: 1, duration: 1 + speedModifier },
                 { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
@@ -688,6 +780,10 @@ function SnowflakeAnimation() {
           direction='down'
           lineColor='#29B5E8'
           strokeWidth={16}
+          trackColor='rgba(255,255,255,0.2)'
+          trackProps={{
+            className: 'backdrop-saturate-150'
+          }}
           lineProps={{
             strokeDasharray: '6 8'
           }}
@@ -720,6 +816,10 @@ function SnowflakeAnimation() {
               size={lineHeight}
               direction='up'
               lineColor='#29B5E8'
+              trackColor='rgba(255,255,255,0.2)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 { startSize: 0.8, endSize: 1.2, duration: 3.5 },
                 { startSize: 1, endSize: 1.5, duration: 3.8 },
@@ -739,6 +839,10 @@ function SnowflakeAnimation() {
               size={lineHeight}
               direction='down'
               lineColor='#29B5E8'
+              trackColor='rgba(255,255,255,0.2)'
+              trackProps={{
+                className: 'backdrop-saturate-150'
+              }}
               keyframes={[
                 { startSize: 0.5, endSize: 1.5, duration: 3.8 },
                 { startSize: 1, endSize: 2, duration: 3.75 },
