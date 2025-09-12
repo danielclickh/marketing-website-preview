@@ -214,41 +214,37 @@ export default function SnowflakePage({
         </div>
       </section>
 
-      {/* Tabbed table */}
-      <section className='section-container my-16 lg:my-24'>
-        <div className='mx-auto mb-12 max-w-4xl space-y-6 text-center'>
-          <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
-        </div>
-        <TabbedTable />
-      </section>
-
-      <HRSeparator className='!my-0' />
-
       {/* Animation */}
       <section className='section-container my-16 lg:my-24'>
-        <div className='mx-auto'>
-          <CUICard className='p-4 lg:py-12'>
-            <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16'>
-              <SuiTitle type='h2'>
-                Tired of unpredictable costs, gated features, and pricing models
-                that penalize interactivity?
-              </SuiTitle>
-              <SuiText className='text-neutral-200'>
-                <strong className='text-white'>You’re not alone.</strong> Many
-                teams are rethinking their architecture.
-                <br /> Discover why they’re moving real-time and user-facing
-                workloads to ClickHouse.
-              </SuiText>
-            </div>
-            <ScaleToContainer scaleUp={false}>
-              <div className='flex w-fit flex-col items-center gap-16 lg:flex-row lg:flex-nowrap lg:px-12'>
-                <ClickHouseAnimation />
-                <Image src={iconVs} width={60} height={60} alt='VS' />
-                <SnowflakeAnimation />
-              </div>
-            </ScaleToContainer>
-          </CUICard>
+        <CUICard className='mx-auto p-4 lg:py-12'>
+          <div className='mx-auto max-w-4xl space-y-6 text-center'>
+            <SuiTitle type='h2'>
+              Tired of unpredictable costs, gated features, and pricing models
+              that penalize interactivity?
+            </SuiTitle>
+            <SuiText className='text-neutral-200'>
+              <strong className='text-white'>You’re not alone.</strong> Many
+              teams are rethinking their architecture.
+              <br /> Discover why they’re moving real-time and user-facing
+              workloads to ClickHouse.
+            </SuiText>
+          </div>
+        </CUICard>
+      </section>
+
+      {/* Tabbed table */}
+      <section className='section-container my-16 lg:my-24'>
+        <div className='mx-auto space-y-6 text-center'>
+          <SuiTitle type='h2'>ClickHouse compared to Snowflake</SuiTitle>
         </div>
+        <ScaleToContainer scaleUp={false} className='mx-auto my-12'>
+          <div className='flex w-fit flex-col items-center gap-16 lg:flex-row lg:flex-nowrap lg:px-12'>
+            <ClickHouseAnimation />
+            <Image src={iconVs} width={60} height={60} alt='VS' />
+            <SnowflakeAnimation />
+          </div>
+        </ScaleToContainer>
+        <TabbedTable />
       </section>
 
       {/* Cards  */}
@@ -664,7 +660,7 @@ function ClickHouseAnimation() {
           </div>
           <AnimationBadge className='flex divide-x divide-neutral-700 !p-0'>
             <span className='px-4 py-2'>
-              <AnimationCounter interval={100} />
+              <AnimationCounter interval={25} />
             </span>
             <span className='px-4 py-2'>...</span>
             <span className='px-4 py-2'>...</span>
