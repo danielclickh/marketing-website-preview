@@ -104,6 +104,11 @@ export default function SnowflakePage({
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
+          <div>
+            <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
+              Comparisons
+            </span>
+          </div>
           <SuiTitle type='h1' weight='bold'>
             ClickHouse <span className='text-primary-300'>vs</span> Snowflake
           </SuiTitle>
@@ -116,20 +121,24 @@ export default function SnowflakePage({
             priority
             className='mx-auto lg:hidden'
           />
-          <SuiText className='text-neutral-200'>
-            ClickHouse is a high-performance, SQL-based analytics database built
-            to power everything from traditional data warehouse workloads to
-            real-time dashboards and user-facing applications. Snowflake, while
-            effective for data warehousing, often struggles with
-            latency-sensitive or highly concurrent workloads.
-            <br />
-            <br />
-            Whether you’re building real-time applications, running large-scale
-            event analytics, or simply looking to accelerate existing warehouse
-            workloads, ClickHouse provides superior performance, significantly
-            lower cost, simpler pricing, and industry-leading efficiency.
+          <SuiText className='space-y-6 text-neutral-200'>
+            <p>
+              ClickHouse is a high-performance, SQL-based analytics database
+              built to power everything from traditional data warehouse
+              workloads to real-time dashboards and user-facing applications.
+              Snowflake, while effective for data warehousing, often struggles
+              with latency-sensitive or highly concurrent workloads.
+            </p>
+            <p>
+              Whether you’re building real-time applications, running
+              large-scale event analytics, or simply looking to accelerate
+              existing warehouse workloads, ClickHouse provides superior
+              performance, significantly lower cost, simpler pricing, and
+              industry-leading efficiency.
+            </p>
+            <p className='font-bold text-white'>Why ClickHouse is better:</p>
           </SuiText>
-          <div className='flex flex-col items-stretch gap-y-5 rounded-lg border border-neutral-700/80 bg-neutral-900/50 px-3 py-4 shadow-card hover:shadow-lg lg:flex-row lg:divide-x lg:divide-neutral-700/80'>
+          <div className='flex flex-col items-stretch gap-y-5 rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-lg lg:flex-row lg:divide-x lg:divide-neutral-700/80'>
             {[
               {
                 icon: iconHandCoins,
@@ -148,7 +157,7 @@ export default function SnowflakePage({
               }
             ].map((item, itemIndex) => {
               return (
-                <div key={itemIndex} className='flex-1 p-3 text-center'>
+                <div key={itemIndex} className='flex-1 px-3 py-4 text-center'>
                   <p className='mb-2 text-5xl font-bold'>{item.stat}</p>
                   <p className='font-medium text-primary-300'>{item.label}</p>
                 </div>
@@ -803,7 +812,7 @@ function SnowflakeAnimation() {
               fill='#fff'
               fill-rule='evenodd'
               d='M17.9 26.66a3.14 3.14 0 0 1-1.45 1.8l-10.8 6.19a3.2 3.2 0 0 1-4.34-1.15 3.14 3.14 0 0 1 1.16-4.31l6.04-3.46-6.04-3.46a3.13 3.13 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16L16.45 23a3.14 3.14 0 0 1 1.45 3.66Zm2.93 5.8a3.16 3.16 0 0 1 2.95 3.14v12.37a3.17 3.17 0 0 1-3.18 3.15 3.17 3.17 0 0 1-3.18-3.15v-6.92l-6.06 3.46a3.19 3.19 0 0 1-4.34-1.15 3.15 3.15 0 0 1 1.16-4.31l10.8-6.18a3.14 3.14 0 0 1 1.85-.42ZM31.9 19a3.17 3.17 0 0 1-2.94-3.14V3.49A3.16 3.16 0 0 1 32.14.34a3.17 3.17 0 0 1 3.18 3.15v6.93l6.05-3.47a3.2 3.2 0 0 1 4.34 1.15 3.14 3.14 0 0 1-1.16 4.31l-10.8 6.19a3.2 3.2 0 0 1-1.85.41ZM8.18 12.4a3.14 3.14 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16l6.06 3.47V3.49A3.17 3.17 0 0 1 20.6.34a3.17 3.17 0 0 1 3.18 3.15v12.38c0 1.65-1.3 3.02-2.95 3.14A3.2 3.2 0 0 1 19 18.6L8.19 12.4Zm19.42 19a.9.9 0 0 1-.56.24H25.7a.92.92 0 0 1-.56-.24l-4.49-4.45a.9.9 0 0 1-.23-.55v-1.31c0-.19.1-.44.23-.56l4.5-4.45a.92.92 0 0 1 .55-.24h1.33c.18 0 .43.1.56.24l4.5 4.45a.9.9 0 0 1 .22.56v1.3a.9.9 0 0 1-.23.56L27.6 31.4Zm.9-5.68c0-.18-.1-.43-.24-.56l-1.3-1.29a.92.92 0 0 0-.56-.23h-.05a.9.9 0 0 0-.56.23l-1.3 1.29a.92.92 0 0 0-.23.56v.05c0 .18.1.42.23.55l1.3 1.29a.9.9 0 0 0 .56.23h.05a.9.9 0 0 0 .56-.23l1.3-1.29a.91.91 0 0 0 .24-.55v-.05Zm16.06 13.34a3.15 3.15 0 0 1 1.16 4.31 3.19 3.19 0 0 1-4.34 1.15l-6.05-3.46v6.92a3.17 3.17 0 0 1-3.18 3.15 3.16 3.16 0 0 1-3.18-3.15V35.6a3.17 3.17 0 0 1 4.78-2.73l10.8 6.18Zm-.32-13.32 6.03 3.46a3.14 3.14 0 0 1 1.17 4.3 3.2 3.2 0 0 1-4.35 1.16l-10.8-6.19a3.13 3.13 0 0 1-1.48-3.57c.22-.77.73-1.46 1.48-1.9l10.8-6.18a3.2 3.2 0 0 1 4.35 1.16c.88 1.5.36 3.43-1.17 4.3l-6.03 3.46Z'
-              clip-rule='evenodd'
+              clipRule='evenodd'
             />
           </svg>
         </div>
