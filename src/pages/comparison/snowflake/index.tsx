@@ -136,6 +136,27 @@ export default function SnowflakePage({
               performance, significantly lower cost, simpler pricing, and
               industry-leading efficiency.
             </p>
+          </SuiText>
+          <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
+            <CUIButton
+              href='https://console.clickhouse.cloud/signUp?loc=snowflake-comparison-page-hero'
+              type='primary'
+              size='lg'
+              weight='semibold'
+              className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
+              Start a free trial
+            </CUIButton>
+            <CUIButton
+              href='/company/contact?loc=snowflake-comparison-page-hero'
+              type='secondary'
+              size='lg'
+              weight='semibold'
+              target='_blank'
+              className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
+              Contact sales
+            </CUIButton>
+          </div>
+          <SuiText>
             <p className='font-bold text-white'>Why ClickHouse is better:</p>
           </SuiText>
           <div className='flex flex-col items-stretch gap-y-5 rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-lg lg:flex-row lg:divide-x lg:divide-neutral-700/80'>
