@@ -86,7 +86,7 @@ export default function ClickHouseServerPage({
       <section className='overflow-hidden py-20 lg:py-24'>
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
           {/* Content */}
-          <div className='relative z-10 w-full max-w-2xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
+          <div className='relative z-10 w-full max-w-3xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
             <SuiText className='flip-selection !text-3xl lg:mb-16 lg:!text-[3.5rem]'>
               <TiltedText type='black-on-yellow' className='px-2 py-1'>
                 <strong>ClickStack</strong>
@@ -138,6 +138,7 @@ export default function ClickHouseServerPage({
               height={1038 / 2}
               alt='HyperDX Dashboard'
               className='bottom-0 left-0 top-0 h-auto w-full origin-left from-40% gradient-mask-to-b md:from-25% lg:absolute lg:h-full lg:w-auto lg:max-w-none lg:gradient-mask-to-none xl:scale-110 2xl:scale-125'
+              quality={100}
               loading='eager'
               priority={true}
             />
@@ -333,10 +334,9 @@ export default function ClickHouseServerPage({
         }>
         {/* Intro */}
         <div className='space-y-2 text-center'>
-          <EyebrowText className='text-primary-300'>
-            The clickhouse powered observability stack
-          </EyebrowText>
-          <SuiTitle type='h2'>ClickStack</SuiTitle>
+          <SuiTitle type='h2' className='mx-auto max-w-2xl'>
+            ClickStack: The ClickHouse powered observability stack
+          </SuiTitle>
         </div>
 
         {/* Features */}
