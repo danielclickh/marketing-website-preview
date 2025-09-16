@@ -29,6 +29,7 @@ import logoNetflix from './assets/logo-netflix.svg'
 import logoSony from './assets/logo-sony.svg'
 import shareImage from './assets/share-image.png'
 import AccordionItem from '@/components-cleaned/AccordionItem'
+import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import ClickStack from '@/components/ClickStack'
@@ -43,7 +44,7 @@ import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
+import Image, { ImageProps } from 'next/image'
 import React, { CSSProperties, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -145,64 +146,83 @@ export default function ClickHouseServerPage({
         <EyebrowText className='mb-10 text-center text-primary-300'>
           Trusted by
         </EyebrowText>
-        <div className='flex flex-wrap items-center justify-center gap-8 md:gap-10 xl:justify-between xl:gap-12'>
-          <Image
-            src={logoNetflix}
-            width={95}
-            height={27}
-            alt='Netflix'
-            className='h-5 w-auto md:h-auto'
-          />
-          <Image
-            src={logoCloudflare}
-            width={106}
-            height={36}
-            alt='Cloudflare'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoSony}
-            width={100}
-            height={19}
-            alt='Sony'
-            className='h-4 w-auto md:h-auto'
-          />
-          <Image
-            src={logoComcast}
-            width={108}
-            height={44}
-            alt='Comcast'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoEbay}
-            width={84}
-            height={34}
-            alt='Ebay'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoCisco}
-            width={71}
-            height={38}
-            alt='Cisco'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoDoorDash}
-            width={187}
-            height={23}
-            alt='DoorDash'
-            className='h-5 w-auto md:h-auto'
-          />
-          <Image
-            src={logoGitLab}
-            width={122}
-            height={38}
-            alt='GitLab'
-            className='h-6 w-auto md:h-auto'
-          />
-        </div>
+        <ContentTicker gap='3rem' gradientMask={true} pause={false}>
+          {(
+            [
+              {
+                src: logoNetflix,
+                alt: 'Netflix',
+                width: 95,
+                height: 27
+              },
+              {
+                src: logoCloudflare,
+                alt: 'Cloudflare',
+                width: 106,
+                height: 36
+              },
+              {
+                src: logoSony,
+                alt: 'Sony',
+                width: 100,
+                height: 19
+              },
+              {
+                src: logoComcast,
+                alt: 'Comcast',
+                width: 108,
+                height: 44
+              },
+              {
+                src: logoAnthropic,
+                alt: 'Anthropic',
+                width: 143,
+                height: 16,
+                className: 'opacity-70'
+              },
+              {
+                src: logoCharacterai,
+                alt: 'Character.ai',
+                width: 102 * 1.5,
+                height: 14 * 1.5,
+                className: 'opacity-70'
+              },
+              {
+                src: logoEbay,
+                alt: 'Ebay',
+                width: 84,
+                height: 34
+              },
+              {
+                src: logoCisco,
+                alt: 'Cisco',
+                width: 71,
+                height: 38
+              },
+              {
+                src: logoDoorDash,
+                alt: 'DoorDash',
+                width: 187,
+                height: 23
+              },
+              {
+                src: logoGitLab,
+                alt: 'GitLab',
+                width: 122,
+                height: 38
+              }
+            ] as Array<ImageProps>
+          ).map(({ className = '', ...logo }, logoIndex) => {
+            return (
+              <Image
+                key={logoIndex}
+                {...logo}
+                loading='eager'
+                className={`my-auto flex-shrink-0 flex-grow-0 ${className}`}
+              />
+            )
+          })}
+        </ContentTicker>
       </section>
 
       {/* Customer quotes */}
