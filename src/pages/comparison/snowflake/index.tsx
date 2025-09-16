@@ -234,7 +234,7 @@ export default function SnowflakePage({
           }
         />
         {/* Yellow triangle */}
-        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/2 bg-primary-300' />
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-2/3 bg-primary-300' />
         <div className='section-container relative z-10'>
           <div className='mb-16 space-y-12 lg:mb-24'>
             <SuiTitle type='h2' className='text-center'>
