@@ -270,7 +270,7 @@ export default function SnowflakePage({
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
               Join others migrating to ClickHouse from Snowflake
             </h2>
-            <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
+            <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
               <QuoteCard
                 content="It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that."
                 link='/blog/how-braze-rebuilt-real-time-analytics-pipeline-with-clickHouse-cloud'
@@ -281,7 +281,7 @@ export default function SnowflakePage({
                   alt: 'Braze'
                 }}
               />
-              <QuoteCard
+              {/*<QuoteCard
                 content='Our data was growing way faster than before, and the complexity of managing nine or ten different databases, including Snowflake, was slowing us down. By consolidating everything into ClickHouse Cloud, the installation was super easy, the first queries were confoundingly fast, and the efficiency and scalability have been a game changer.'
                 link='/videos/attentive'
                 logo={{
@@ -290,7 +290,7 @@ export default function SnowflakePage({
                   height: 32 * 0.9,
                   alt: 'Attentive'
                 }}
-              />
+              />*/}
               <QuoteCard
                 content="Snowflake [was] too slow and costly for our needs. While it performs well for processing in-house data, it becomes quite expensive when handling real-time customer data within a product, which negatively impacts the product's unit economics."
                 link='/blog/chartmetric-uses-clickhouse-to-turn-artist-data-into-music-intelligence'
@@ -831,7 +831,7 @@ function SnowflakeAnimation() {
             className='mx-auto'>
             <path
               fill='#fff'
-              fill-rule='evenodd'
+              fillRule='evenodd'
               d='M17.9 26.66a3.14 3.14 0 0 1-1.45 1.8l-10.8 6.19a3.2 3.2 0 0 1-4.34-1.15 3.14 3.14 0 0 1 1.16-4.31l6.04-3.46-6.04-3.46a3.13 3.13 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16L16.45 23a3.14 3.14 0 0 1 1.45 3.66Zm2.93 5.8a3.16 3.16 0 0 1 2.95 3.14v12.37a3.17 3.17 0 0 1-3.18 3.15 3.17 3.17 0 0 1-3.18-3.15v-6.92l-6.06 3.46a3.19 3.19 0 0 1-4.34-1.15 3.15 3.15 0 0 1 1.16-4.31l10.8-6.18a3.14 3.14 0 0 1 1.85-.42ZM31.9 19a3.17 3.17 0 0 1-2.94-3.14V3.49A3.16 3.16 0 0 1 32.14.34a3.17 3.17 0 0 1 3.18 3.15v6.93l6.05-3.47a3.2 3.2 0 0 1 4.34 1.15 3.14 3.14 0 0 1-1.16 4.31l-10.8 6.19a3.2 3.2 0 0 1-1.85.41ZM8.18 12.4a3.14 3.14 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16l6.06 3.47V3.49A3.17 3.17 0 0 1 20.6.34a3.17 3.17 0 0 1 3.18 3.15v12.38c0 1.65-1.3 3.02-2.95 3.14A3.2 3.2 0 0 1 19 18.6L8.19 12.4Zm19.42 19a.9.9 0 0 1-.56.24H25.7a.92.92 0 0 1-.56-.24l-4.49-4.45a.9.9 0 0 1-.23-.55v-1.31c0-.19.1-.44.23-.56l4.5-4.45a.92.92 0 0 1 .55-.24h1.33c.18 0 .43.1.56.24l4.5 4.45a.9.9 0 0 1 .22.56v1.3a.9.9 0 0 1-.23.56L27.6 31.4Zm.9-5.68c0-.18-.1-.43-.24-.56l-1.3-1.29a.92.92 0 0 0-.56-.23h-.05a.9.9 0 0 0-.56.23l-1.3 1.29a.92.92 0 0 0-.23.56v.05c0 .18.1.42.23.55l1.3 1.29a.9.9 0 0 0 .56.23h.05a.9.9 0 0 0 .56-.23l1.3-1.29a.91.91 0 0 0 .24-.55v-.05Zm16.06 13.34a3.15 3.15 0 0 1 1.16 4.31 3.19 3.19 0 0 1-4.34 1.15l-6.05-3.46v6.92a3.17 3.17 0 0 1-3.18 3.15 3.16 3.16 0 0 1-3.18-3.15V35.6a3.17 3.17 0 0 1 4.78-2.73l10.8 6.18Zm-.32-13.32 6.03 3.46a3.14 3.14 0 0 1 1.17 4.3 3.2 3.2 0 0 1-4.35 1.16l-10.8-6.19a3.13 3.13 0 0 1-1.48-3.57c.22-.77.73-1.46 1.48-1.9l10.8-6.18a3.2 3.2 0 0 1 4.35 1.16c.88 1.5.36 3.43-1.17 4.3l-6.03 3.46Z'
               clipRule='evenodd'
             />
