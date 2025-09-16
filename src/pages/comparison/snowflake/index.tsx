@@ -3,7 +3,6 @@ import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
 import iconVs from './assets/icon-vs.png'
-import logoAttentive from './assets/logo-attentive.svg'
 import logoBigquery from './assets/logo-bigquery.svg'
 import logoBraze from './assets/logo-braze.svg'
 import logoChartmetric from './assets/logo-chartmetric.svg'
@@ -281,16 +280,6 @@ export default function SnowflakePage({
                   alt: 'Braze'
                 }}
               />
-              {/*<QuoteCard
-                content='Our data was growing way faster than before, and the complexity of managing nine or ten different databases, including Snowflake, was slowing us down. By consolidating everything into ClickHouse Cloud, the installation was super easy, the first queries were confoundingly fast, and the efficiency and scalability have been a game changer.'
-                link='/videos/attentive'
-                logo={{
-                  src: logoAttentive,
-                  width: 186 * 0.9,
-                  height: 32 * 0.9,
-                  alt: 'Attentive'
-                }}
-              />*/}
               <QuoteCard
                 content="Snowflake [was] too slow and costly for our needs. While it performs well for processing in-house data, it becomes quite expensive when handling real-time customer data within a product, which negatively impacts the product's unit economics."
                 link='/blog/chartmetric-uses-clickhouse-to-turn-artist-data-into-music-intelligence'
