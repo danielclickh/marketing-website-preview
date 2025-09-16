@@ -234,7 +234,6 @@ export default function BigQueryPage({
                 />
               ),
               width: '45%',
-              rowIcon: <YesIcon />,
               highlight: true
             },
             {
@@ -247,51 +246,95 @@ export default function BigQueryPage({
                   className='mx-auto -mb-2 -mt-1'
                 />
               ),
-              width: '35%',
-              rowIcon: <NoIcon />
+              width: '35%'
             }
           ]}
           rows={[
             {
               heading: 'Fast and efficient',
               values: [
-                'Up to **95% faster** querying speeds and 60% less storage space required.',
-                'Slower querying speeds and requires more storage.'
+                {
+                  icon: 'yes',
+                  label:
+                    'Up to **95% faster** querying speeds and 60% less storage space required.'
+                },
+                {
+                  icon: 'no',
+                  label: 'Slower querying speeds and requires more storage.'
+                }
               ]
             },
             {
               heading: 'Cost-effective',
               values: [
-                'Up to **100x** more cost-effective.',
-                'More costly for BigQuery for analytics workloads.'
+                {
+                  icon: 'yes',
+                  label: 'Up to **100x** more cost-effective.'
+                },
+                {
+                  icon: 'no',
+                  label: 'More costly for BigQuery for analytics workloads.'
+                }
               ]
             },
             {
               heading: 'Modern SQL',
               values: [
-                'Standard SQL enhanced with numerous **extensions and improvements** (e.g. lambda functions and higher-order functions), that make analytical tasks very user-friendly.',
-                'Support for only standard SQL can make analytics more complex.'
+                {
+                  icon: 'yes',
+                  label:
+                    'Standard SQL enhanced with numerous **extensions and improvements** (e.g. lambda functions and higher-order functions), that make analytical tasks very user-friendly.'
+                },
+                {
+                  icon: 'no',
+                  label:
+                    'Support for only standard SQL can make analytics more complex.'
+                }
               ]
             },
             {
               heading: 'Easy data analytics',
               values: [
-                '**150+ pre-built aggregation functions** plus powerful aggregation combinators, fully vectorized and parallelized.\n\n**1300+ data processing functions** for domains like mathematics, geo, machine learning, time series, and more.',
-                'Requires writing more complex SQL due to its limited set of aggregate and regular data processing functions.'
+                {
+                  icon: 'yes',
+                  label:
+                    '**150+ pre-built aggregation functions** plus powerful aggregation combinators, fully vectorized and parallelized.\n\n**1300+ data processing functions** for domains like mathematics, geo, machine learning, time series, and more.'
+                },
+                {
+                  icon: 'no',
+                  label:
+                    'Requires writing more complex SQL due to its limited set of aggregate and regular data processing functions.'
+                }
               ]
             },
             {
               heading: 'Rich data type support',
               values: [
-                'Advanced data types like JSON, maps, and arrays plus over **80 array functions** for modeling and solving a wide range of problems simply and intuitively.',
-                'Support for limited number of data types including only 8 array functions.'
+                {
+                  icon: 'yes',
+                  label:
+                    'Advanced data types like JSON, maps, and arrays plus over **80 array functions** for modeling and solving a wide range of problems simply and intuitively.'
+                },
+                {
+                  icon: 'no',
+                  label:
+                    'Support for limited number of data types including only 8 array functions.'
+                }
               ]
             },
             {
               heading: 'World class\ninteroperability',
               values: [
-                'Native support for reading data in over **90 file formats** from most data sources which makes it easy to analyze data regardless of its shape and location. ',
-                'Limited interoperability. Supports only 5 file formats and 19 data sources.'
+                {
+                  icon: 'yes',
+                  label:
+                    'Native support for reading data in over **90 file formats** from most data sources which makes it easy to analyze data regardless of its shape and location. '
+                },
+                {
+                  icon: 'no',
+                  label:
+                    'Limited interoperability. Supports only 5 file formats and 19 data sources.'
+                }
               ]
             }
           ]}
@@ -666,46 +709,6 @@ export default function BigQueryPage({
         </div>
       </div>
     </Layout>
-  )
-}
-
-function YesIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-primary'
-      width='16'
-      height='16'
-      fill='none'
-      viewBox='0 0 16 16'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='2'
-        d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
-      />
-    </svg>
-  )
-}
-
-function NoIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='text-[#FFBABA]'
-      width='24'
-      height='24'
-      fill='none'
-      viewBox='0 0 24 24'>
-      <path
-        stroke='currentColor'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='1.5'
-        d='m8 8 8 8m0-8-8 8'
-      />
-    </svg>
   )
 }
 
