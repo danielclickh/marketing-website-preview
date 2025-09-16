@@ -83,8 +83,8 @@ export default function ContentTicker({
         } as CSSProperties
       }>
       {/* Original slide group */}
-      <SlideGroup direction={direction} pause={pause}>
-        <div ref={groupRef} className='flex w-fit' style={{ gap }}>
+      <SlideGroup direction={direction} pause={pause} gap={gap}>
+        <div ref={groupRef} className='flex w-max' style={{ gap }}>
           {children}
         </div>
 
@@ -94,7 +94,7 @@ export default function ContentTicker({
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-fit' style={{ gap }}>
+                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
                   {clone}
                 </div>
               )
@@ -102,13 +102,13 @@ export default function ContentTicker({
       </SlideGroup>
 
       {/* Slide group */}
-      <SlideGroup direction={direction} pause={pause}>
+      <SlideGroup direction={direction} pause={pause} gap={gap}>
         {isValidCloneRequirementAdditional &&
           Array(clonesNeeded + 1)
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-fit' style={{ gap }}>
+                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
                   {clone}
                 </div>
               )
@@ -116,13 +116,13 @@ export default function ContentTicker({
       </SlideGroup>
 
       {/* Slide group */}
-      <SlideGroup direction={direction} pause={pause}>
+      <SlideGroup direction={direction} pause={pause} gap={gap}>
         {isValidCloneRequirementAdditional &&
           Array(clonesNeeded + 1)
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-fit gap-4'>
+                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
                   {clone}
                 </div>
               )
@@ -135,18 +135,21 @@ export default function ContentTicker({
 function SlideGroup({
   children,
   direction,
-  pause = false
+  pause = false,
+  gap
 }: {
   children: React.ReactNode
   direction: 'ltr' | 'rtl'
   pause: boolean
+  gap: React.CSSProperties['gap']
 }) {
   return (
     <div
       className={`flex w-fit ${styles.animated}`}
       style={{
         animationDirection: direction === 'rtl' ? 'reverse' : 'forwards',
-        animationPlayState: pause ? 'paused' : 'running'
+        animationPlayState: pause ? 'paused' : 'running',
+        gap
       }}>
       {children}
     </div>
