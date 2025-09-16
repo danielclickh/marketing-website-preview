@@ -154,7 +154,7 @@ export default function GamingIndustryPage({
                 content='Data in ClickHouse is better than data anywhere else. No other system lets you slice and dice your data, ask interesting questions, and get answers in an acceptable amount of time.'
                 logo={{
                   src: logoTesla,
-                  width: 173 * 0.8,
+                  width: 100 * 0.8,
                   height: 24 * 0.8,
                   alt: 'Tesla'
                 }}
@@ -164,7 +164,7 @@ export default function GamingIndustryPage({
                 link='/blog/how-tesla-built-quadrillion-scale-observability-platform-on-clickhouse'
                 logo={{
                   src: logoTesla,
-                  width: 173 * 0.8,
+                  width: 100 * 0.8,
                   height: 24 * 0.8,
                   alt: 'Tesla'
                 }}
