@@ -44,7 +44,6 @@ Below is a table that compares row-based and column-based databases at a glance:
 | I/O | Reads data row-by-row. | Reads only the columns relevant to the query. |
 | Examples | Postgres, MySQL | ClickHouse, Snowflake, BigQuery |
 
-
 The diagram below shows how some weather data would be stored in a row-based and column-based database:
 
 ![](/images/engineering-resources/0_columnstore.png)
@@ -52,6 +51,44 @@ The diagram below shows how some weather data would be stored in a row-based and
 In the row-based approach, all the values for a given row are adjacent, whereas in the column-based approach, the values for a given column are adjacent.
 
 The row-based approach works better for single-row lookups. The column-based approach is preferable for executing analytics queries that aggregate or filter a few columns, especially when working with large datasets.
+
+In summary, row-based systems excel at OLTP, columnar at OLAP. Most modern architectures use both.
+
+## What is a column database?
+
+A columnar database (also called a column-oriented database management system) stores data by columns instead of rows. 
+This design means that when a query only needs a few columns out of a large table, the database can read just those columns from disk, skipping all the rest. 
+The trade-off is that operations touching entire rows become more expensive.
+
+Benefits of column databases include:
+
+* Efficient queries on subsets of columns — ideal for analytics, dashboards, and BI workloads.
+* Fast aggregations on large datasets — scanning fewer columns reduces I/O and improves throughput.
+* Better compression — similar values stored together compress much more effectively, reducing storage needs.
+
+This makes columnar databases the preferred choice for analytical applications. They allow tables to have many columns without incurring a cost for unused columns at query time. Unlike traditional OLTP systems that always read entire rows, columnar systems are optimized for big data processing, data warehousing, and reporting use cases.
+
+Modern columnar databases are designed to scale horizontally. ClickHouse, for example, combines real-time query performance with distributed scalability, making it well-suited for both traditional BI and real-time analytics use cases.
+
+## What are popular column storage formats? 
+
+Columnar storage isn’t limited to databases - it’s also used in widely adopted file formats. 
+These formats store data by columns on disk and are often used as the storage layer for modern data platforms.
+
+The three most popular open-source columnar formats are Apache Parquet, Apache ORC, and Apache Arrow.
+The table below describes each of these formats:
+
+| Format | Description | Common Use Cases |
+| ------ | ----------- | ---------------- |
+| Apache Parquet | Open-source, widely adopted columnar format with strong compression and encoding support. | Cloud data lakes, Spark, Presto/Trino, AWS Athena, Azure Synapse |
+| Apache ORC (Optimized Row Columnar) | Designed for the Hadoop ecosystem - efficient storage for Hive and Spark workloads. | Hadoop/Hive environments, legacy big data pipelines |
+| Apache Arrow** | An in-memory columnar format designed for fast analytics and data interchange. | DataFrames (e.g., Pandas, R), machine learning pipelines, cross-system data exchange |
+
+These formats differ from full columnar databases like ClickHouse:
+
+* File formats provide the on-disk storage representation.  
+* Databases add query execution, indexing, clustering, distribution, and more.
+* Many columnar databases can query open formats directly (e.g., Parquet or ORC), but they also use their own optimized internal storage formats to achieve higher performance and feature integration.  
 
 ## When should I use a column store?
 
@@ -212,17 +249,26 @@ Key considerations include:
 
 For example, sorting data primarily by date could yield substantial performance benefits if most queries filter on date ranges. However, if this isn't considered during initial data loading, achieving optimal performance may require a costly data reorganization process.
 
-## What are some examples of columnar databases?
+## What are some examples of columnar databases in 2025?
 
-There are a large number of databases that have column-oriented storage, so we’ll cover just the most popular ones at the time of writing.
+There are a large number of databases that implement column-oriented storage. Below is a summary of some of the most notable ones:
 
-As mentioned earlier, MonetDB is the original column store, and it’s still around today. Since then, other column stores have emerged, including SAP IQ, Greenplum DB, Vertica, and more.
+| Database | Era | Notes |
+| -------- | --- | ----- |
+| MonetDB | 1990s | One of the first column stores, pioneered vertical fragmentation and influenced later systems. |
+| Vertica, SAP IQ, Greenplum | 2000s | Early commercial columnar systems designed for enterprise data warehousing. |
+| Amazon Redshift, Google BigQuery, Snowflake | Early 2010s | Cloud-native columnar data warehouses, widely used for large-scale internal analytics. |
+| ClickHouse, Apache Pinot, Apache Druid (Imply) | Late 2010s | High-performance, [real-time analytics](https://clickhouse.com/engineering-resources/what-is-real-time-analytics) engines, supporting both internal BI and external-facing use cases. |
+| Postgres (with Citus or Timescale extensions) | 2010s | Primarily a row-based system, but supports columnar-like storage through extensions. |
 
-Amazon Redshift, Google BigQuery, and Snowflake were released in the early 2010s as cloud data warehouses. They all store data in columns and are predominantly used for internal-facing analytics on large volumes of data.
+As mentioned earlier, MonetDB is the original column store, and it remains active today. Building on these early ideas, systems like SAP IQ, Greenplum, and Vertica appeared in the 2000s to support enterprise-scale analytics.  
 
-Apache Pinot, Apache Imply, and ClickHouse emerged in the late 2010s. They can be used for internal-facing analytics but also support [real-time analytics](https://clickhouse.com/engineering-resources/what-is-real-time-analytics), a prerequisite for databases to serve insights to external users and customers.
+In the early 2010s, cloud-native warehouses such as Amazon Redshift, Google BigQuery, and Snowflake brought columnar storage to the cloud, enabling massively parallel analytics on large volumes of data.  
 
-In addition, row-based stores like Postgres have columnar add-ons via Citus or Timescale.
+Later in the decade, systems such as ClickHouse, Apache Pinot, and Apache Druid/Imply emerged. 
+Among these, ClickHouse stands out for combining sub-second query performance with distributed scalability and native support for real-time analytics at scale. This makes it a strong choice not only for traditional BI workloads but also for powering external-facing applications and customer-facing analytics
+
+Finally, even traditional row-based databases like Postgres gained columnar features through extensions like Citus and Timescale, showing how widely the columnar approach has influenced database design.  
 
 ## Is ClickHouse a column database?
 
@@ -231,6 +277,13 @@ Yes, [ClickHouse is a column database](https://clickhouse.com/docs/en/intro). It
 ClickHouse Cloud is used by Sony, Lyft, Cisco, GitLab, and many others.
 
 You can learn more about the problems that ClickHouse solves in the [user stories](https://clickhouse.com/user-stories) section.
+
+## Why is ClickHouse a popular columnar database today?
+
+ClickHouse is widely adopted in 2025 because it delivers extremely fast analytical queries on large datasets while remaining efficient to operate. 
+Its combination of real-time performance, distributed scalability, and open-source availability makes it a strong choice for organizations building both internal BI tools and external-facing analytics applications.
+
+ClickHouse continues to evolve rapidly, with an active open-source community and a growing cloud service used by companies of all sizes.
 
 ## Can I use row-based and column-based stores together?
 
