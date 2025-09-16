@@ -3,7 +3,18 @@
 import Image, { ImageProps } from 'next/image'
 import { useState } from 'react'
 
-export interface YouTubeThumbnailProps extends Omit<ImageProps, 'src' | 'alt'> {
+export interface YouTubeThumbnailProps
+  extends Omit<
+    ImageProps &
+      Omit<
+        React.DetailedHTMLProps<
+          React.ImgHTMLAttributes<HTMLImageElement>,
+          HTMLImageElement
+        >,
+        keyof ImageProps
+      >,
+    'src' | 'alt' | 'ref'
+  > {
   videoId: string
   fallbackSrc?: ImageProps['src']
   alt?: ImageProps['alt']

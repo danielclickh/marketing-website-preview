@@ -17,17 +17,20 @@ import integrationNodejs from './assets/integration-nodejs.svg'
 import integrationOpentelemetry from './assets/integration-opentelemetry.svg'
 import integrationPython from './assets/integration-python.svg'
 import integrationRuby from './assets/integration-ruby.svg'
+import logoAnthropic from './assets/logo-anthropic.svg'
+import logoCharacterai from './assets/logo-characterai.svg'
 import logoCisco from './assets/logo-cisco.svg'
 import logoCloudflare from './assets/logo-cloudflare.svg'
 import logoComcast from './assets/logo-comcast.svg'
 import logoDoorDash from './assets/logo-doordash.svg'
 import logoEbay from './assets/logo-ebay.svg'
 import logoGitLab from './assets/logo-gitlab.svg'
-import logoLovable from './assets/logo-lovable.svg'
 import logoNetflix from './assets/logo-netflix.svg'
 import logoSony from './assets/logo-sony.svg'
 import shareImage from './assets/share-image.png'
 import AccordionItem from '@/components-cleaned/AccordionItem'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
@@ -106,7 +109,7 @@ export default function ClickHouseServerPage({
                 href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
                 target='_blank'
                 linkClass='w-full md:w-auto'
-                className='w-full px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'>
                 Get started
               </CUIButton>
               <CUIButton
@@ -116,7 +119,7 @@ export default function ClickHouseServerPage({
                 href='/company/contact?loc=use-case-observability'
                 target='_self'
                 linkClass='w-full md:w-auto'
-                className='w-full px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'>
                 Contact sales
               </CUIButton>
             </div>
@@ -227,28 +230,29 @@ export default function ClickHouseServerPage({
             <QuoteCard
               className='!bg-neutral-750'
               content={
-                'Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!'
+                'ClickHouse played an instrumental role in helping us develop and ship Claude 4. With ClickHouse, the database is green, queries are lightning-fast, and money is not on fire. ClickHouse has already delivered significant value in helping us create state-of-the-art language models.'
               }
-              link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
+              link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
               logo={{
-                src: '/images/use-cases/logging/tripdotcom.svg',
-                width: 141,
-                height: 34.01,
-                alt: 'Trip.com',
-                className: '-mb-1'
+                src: logoAnthropic,
+                width: 143 * 1.1,
+                height: 16 * 1.1,
+                alt: 'Antrhopic',
+                className: 'mb-1'
               }}
             />
             <QuoteCard
               className='!bg-neutral-750'
               content={
-                'ClickHouse’s analytics capabilities and open ecosystem make it a powerful technology for observability. HyperDX is very exciting, bringing together an enhanced query experience with a more intuitive UI for exploratory observability workflows.'
+                'Previously, querying the last 10 minutes would take 1-2 minutes. With ClickStack, it was just a case of how fast I could blink. The performance is real. When you’re digging into logs during an incident, every second matters.'
               }
+              link='/blog/scaling-observabilty-for-thousands-of-gpus-at-character-ai'
               logo={{
-                src: logoLovable,
-                width: 159,
-                height: 27,
-                alt: 'Lovable',
-                className: 'mb-0.5'
+                src: logoCharacterai,
+                width: 102 * 1.5,
+                height: 14 * 1.5,
+                alt: 'Character.ai',
+                className: 'mb-1'
               }}
             />
           </div>
@@ -276,11 +280,7 @@ export default function ClickHouseServerPage({
           <EyebrowText className='text-primary-300'>
             The clickhouse powered observability stack
           </EyebrowText>
-          <SuiTitle
-            type='h2'
-            className='font-basier text-4xl font-semibold leading-tight md:text-6.5xl'>
-            ClickStack
-          </SuiTitle>
+          <SuiTitle type='h2'>ClickStack</SuiTitle>
         </div>
 
         {/* Features */}
@@ -445,6 +445,20 @@ export default function ClickHouseServerPage({
               Get started with ClickStack
             </CUIButton>
           </div>
+        </div>
+      </section>
+
+      {/* Introdcuction video */}
+      <section className='section-container my-20 lg:my-24'>
+        <div className='mx-auto max-w-4xl text-center'>
+          <SuiTitle type='h2' className='mb-10'>
+            Watch the ClickStack introduction
+          </SuiTitle>
+          <PlayOnClickVideo
+            provider='youtube'
+            id='3waDYancX_c'
+            thumbnail={<YouTubeThumbnail videoId='3waDYancX_c' />}
+          />
         </div>
       </section>
 
@@ -682,7 +696,7 @@ export default function ClickHouseServerPage({
             <CUIButton
               type='primary-dark'
               size='lg'
-              className='group mx-auto w-full px-10 md:w-auto'
+              className='group mx-auto w-full !px-10 md:w-auto'
               target='_blank'
               href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
               onClick={useGalaxyOnClick(
@@ -693,7 +707,7 @@ export default function ClickHouseServerPage({
             <CUIButton
               type='secondary'
               size='lg'
-              className='group mx-auto w-full !border-neutral-800 px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
+              className='group mx-auto w-full !border-neutral-800 !px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
               target='_blank'
               href='/company/contact?loc=use-case-observability'
               onClick={useGalaxyOnClick(
