@@ -12,6 +12,8 @@ import {
   useState
 } from 'react'
 
+type SizingMethods = 'fit' | 'max' | 'min'
+
 export interface ContentTickerProps extends EventPropsOf<'div'> {
   children: React.ReactNode
   startOffset?: string
@@ -21,6 +23,13 @@ export interface ContentTickerProps extends EventPropsOf<'div'> {
   gap?: React.CSSProperties['gap']
   className?: string
   pause?: boolean
+  sizingMethod?: SizingMethods
+}
+
+const sizingClasses: Record<SizingMethods, string> = {
+  fit: 'w-fit',
+  max: 'w-max',
+  min: 'w-min'
 }
 
 export default function ContentTicker({
@@ -32,6 +41,7 @@ export default function ContentTicker({
   gap,
   className = '',
   pause = false,
+  sizingMethod = 'fit',
   ...events
 }: ContentTickerProps) {
   const groupRef = useRef<null | HTMLDivElement>(null)
@@ -78,13 +88,15 @@ export default function ContentTicker({
       style={
         {
           '--carousel-offset': startOffset || '0%',
-          '--carousel-duration': `${duration}s`,
-          gap
+          '--carousel-duration': `${duration}s`
         } as CSSProperties
       }>
       {/* Original slide group */}
       <SlideGroup direction={direction} pause={pause} gap={gap}>
-        <div ref={groupRef} className='flex w-max' style={{ gap }}>
+        <div
+          ref={groupRef}
+          className={`flex ${sizingClasses[sizingMethod]}`}
+          style={{ gap }}>
           {children}
         </div>
 
@@ -94,7 +106,10 @@ export default function ContentTicker({
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
+                <div
+                  key={cloneIndex}
+                  className={`flex ${sizingClasses[sizingMethod]}`}
+                  style={{ gap }}>
                   {clone}
                 </div>
               )
@@ -102,32 +117,22 @@ export default function ContentTicker({
       </SlideGroup>
 
       {/* Slide group */}
-      <SlideGroup direction={direction} pause={pause} gap={gap}>
-        {isValidCloneRequirementAdditional &&
-          Array(clonesNeeded + 1)
+      {isValidCloneRequirementAdditional && (
+        <SlideGroup direction={direction} pause={pause} gap={gap}>
+          {Array(clonesNeeded + 1)
             .fill(children)
             .map((clone, cloneIndex) => {
               return (
-                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
+                <div
+                  key={cloneIndex}
+                  className={`flex ${sizingClasses[sizingMethod]}`}
+                  style={{ gap }}>
                   {clone}
                 </div>
               )
             })}
-      </SlideGroup>
-
-      {/* Slide group */}
-      <SlideGroup direction={direction} pause={pause} gap={gap}>
-        {isValidCloneRequirementAdditional &&
-          Array(clonesNeeded + 1)
-            .fill(children)
-            .map((clone, cloneIndex) => {
-              return (
-                <div key={cloneIndex} className='flex w-max' style={{ gap }}>
-                  {clone}
-                </div>
-              )
-            })}
-      </SlideGroup>
+        </SlideGroup>
+      )}
     </div>
   )
 }
@@ -149,7 +154,8 @@ function SlideGroup({
       style={{
         animationDirection: direction === 'rtl' ? 'reverse' : 'forwards',
         animationPlayState: pause ? 'paused' : 'running',
-        gap
+        gap,
+        paddingRight: gap
       }}>
       {children}
     </div>

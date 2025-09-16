@@ -25,8 +25,12 @@ import logoComcast from './assets/logo-comcast.svg'
 import logoDoorDash from './assets/logo-doordash.svg'
 import logoEbay from './assets/logo-ebay.svg'
 import logoGitLab from './assets/logo-gitlab.svg'
+import logoIbm from './assets/logo-ibm.svg'
 import logoNetflix from './assets/logo-netflix.svg'
+import logoSierra from './assets/logo-sierra.svg'
+import logoSolarwinds from './assets/logo-solarwinds.svg'
 import logoSony from './assets/logo-sony.svg'
+import logoVimeo from './assets/logo-vimeo.svg'
 import shareImage from './assets/share-image.png'
 import AccordionItem from '@/components-cleaned/AccordionItem'
 import ContentTicker from '@/components-cleaned/ContentTicker'
@@ -144,9 +148,13 @@ export default function ClickHouseServerPage({
       {/* Trusted by */}
       <section className='section-container mb-20 lg:mb-24 lg:mt-10'>
         <EyebrowText className='mb-10 text-center text-primary-300'>
-          Trusted by
+          Trusted for observability by
         </EyebrowText>
-        <ContentTicker gap='3rem' gradientMask={true} pause={false}>
+        <ContentTicker
+          gap='3rem'
+          gradientMask={true}
+          pause={false}
+          sizingMethod='max'>
           {(
             [
               {
@@ -188,6 +196,13 @@ export default function ClickHouseServerPage({
                 className: 'opacity-70'
               },
               {
+                src: logoSierra,
+                alt: 'Sierra',
+                width: 118,
+                height: 39,
+                className: 'opacity-70'
+              },
+              {
                 src: logoEbay,
                 alt: 'Ebay',
                 width: 84,
@@ -210,6 +225,27 @@ export default function ClickHouseServerPage({
                 alt: 'GitLab',
                 width: 122,
                 height: 38
+              },
+              {
+                src: logoIbm,
+                alt: 'IBM',
+                width: 70,
+                height: 29,
+                className: 'opacity-70'
+              },
+              {
+                src: logoSolarwinds,
+                alt: 'SolarWinds',
+                width: 200,
+                height: 40,
+                className: 'opacity-70'
+              },
+              {
+                src: logoVimeo,
+                alt: 'Vimeo',
+                width: 90,
+                height: 26,
+                className: 'opacity-70'
               }
             ] as Array<ImageProps>
           ).map(({ className = '', ...logo }, logoIndex) => {
