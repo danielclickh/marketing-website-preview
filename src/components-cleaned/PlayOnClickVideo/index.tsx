@@ -3,14 +3,28 @@
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
 import type VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
-import { useRef, useState, useEffect, isValidElement } from 'react'
+import {
+  useRef,
+  useState,
+  useEffect,
+  isValidElement,
+  useMemo,
+  cloneElement
+} from 'react'
 import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/types'
 
 type EmbedProviders = 'youtube' | 'vimeo'
 
+type ThumbElWithClassName = { className?: string }
+
+// Accept EITHER a src for <Image> OR an already-instantiated element
+type ThumbnailProp =
+  | ImageProps['src']
+  | React.ReactElement<ThumbElWithClassName>
+
 export interface PlayOnClickVideoProps {
   provider: EmbedProviders
-  thumbnail?: ImageProps['src']
+  thumbnail?: ThumbnailProp
   id: string | number
   playButtonEyebrow?: string
   playButtonLabel?: string
@@ -90,6 +104,30 @@ export default function PlayOnClickVideo({
     return () => destroy()
   }, [])
 
+  const renderedThumbnail = useMemo(() => {
+    if (!thumbnail) return null
+
+    const thumbnailClasses =
+      'absolute inset-0 z-0 h-full w-full object-cover object-center'
+
+    // Add our thumbnail classes to the element
+    if (isValidElement<ThumbElWithClassName>(thumbnail)) {
+      return cloneElement(thumbnail, {
+        className: `${thumbnail.props?.className || ''} ${thumbnailClasses}`
+      })
+    }
+
+    return (
+      <Image
+        src={thumbnail}
+        width={1280}
+        height={720}
+        alt='Video Thumbnail'
+        className={thumbnailClasses}
+      />
+    )
+  }, [thumbnail])
+
   return (
     <div className='relative aspect-video overflow-hidden rounded bg-neutral-900'>
       {/* Thumbnail overlay */}
@@ -104,15 +142,7 @@ export default function PlayOnClickVideo({
           loading={loading && !playing}
           onClick={handlePlay}
         />
-        {thumbnail && (
-          <Image
-            src={thumbnail}
-            width={1280}
-            height={720}
-            alt='Video Thumbnail'
-            className='absolute inset-0 z-0 h-full w-full object-cover object-center'
-          />
-        )}
+        {renderedThumbnail}
       </div>
 
       {/* Player container */}
