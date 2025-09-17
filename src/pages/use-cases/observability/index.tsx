@@ -334,8 +334,9 @@ export default function ClickHouseServerPage({
         }>
         {/* Intro */}
         <div className='space-y-2 text-center'>
-          <SuiTitle type='h2' className='mx-auto max-w-2xl'>
-            ClickStack: The ClickHouse powered observability stack
+          <EyebrowText className='text-primary-300'>ClickStack</EyebrowText>
+          <SuiTitle type='h2'>
+            The ClickHouse powered observability stack
           </SuiTitle>
         </div>
 
