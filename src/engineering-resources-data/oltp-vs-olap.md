@@ -4,6 +4,7 @@ slug: 'oltp-vs-olap'
 image: '/images/engineering-resources/oltp_vs_olap.png'
 excerpt: 'Explore the differences between OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) systems, examining how they serve unique purposes, the challenges of implementing OLAP, and guidelines for selecting the right system for various use cases. Real-world examples will illustrate when and why each system excels, providing practical insights for application.'
 index: 1
+lastUpdated: '2025-04-11'
 ---
 
 ## Introduction

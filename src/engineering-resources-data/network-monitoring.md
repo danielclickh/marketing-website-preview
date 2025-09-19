@@ -3,6 +3,7 @@ title: 'Network monitoring'
 slug: 'network-monitoring'
 excerpt: "In this guide, we'll explore how organizations implement network monitoring to gain visibility, troubleshoot issues, and ensure optimal performance across distributed infrastructures."
 index: 17
+lastUpdated: '2025-04-11'
 ---
 
 Network monitoring has evolved from simple uptime checks to sophisticated systems that track millions of connections per second. This guide examines how organizations implement effective network visibility to maintain reliable services and quickly resolve performance bottlenecks.

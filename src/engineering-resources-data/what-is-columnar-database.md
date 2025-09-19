@@ -3,6 +3,7 @@ title: 'Columnar databases explained'
 slug: 'what-is-columnar-database'
 excerpt: 'In this guide, we’ll explore columnar databases. How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?'
 index: 2
+lastUpdated: '2025-09-16'
 ---
 
 In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym”

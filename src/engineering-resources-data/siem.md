@@ -3,6 +3,7 @@ title: 'Security Information and Event Management (SIEM)'
 slug: 'siem'
 excerpt: "In this guide, we'll explore SIEM (Security Information and Event Management) - the central security system that collects, analyzes, and responds to security threats across your organization's entire infrastructure."
 index: 15
+lastUpdated: '2025-04-11'
 ---
 
 SIEM (Security Information and Event Management) is your organization's security radar system. While regular monitoring tools tell you when systems break, SIEM tells you when you're under attack.

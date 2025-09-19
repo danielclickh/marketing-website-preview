@@ -3,6 +3,7 @@ title: 'Telemetry data explained'
 slug: 'telemetry-data'
 excerpt: "In this guide, we'll explore telemetry data - the vital information that helps us understand, monitor, and improve our software systems through the collection of metrics, logs, and traces."
 index: 13
+lastUpdated: '2025-04-11'
 ---
 
 Most applications today aren't just programs running on one machine - they're distributed across multiple services, cloud providers, and regions worldwide. When something goes wrong (and it will), figuring out what happened can feel like searching for a needle in a haystack.

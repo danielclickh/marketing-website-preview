@@ -3,6 +3,7 @@ title: 'Avro vs Parquet'
 slug: 'avro-vs-parquet'
 excerpt: "In this guide, we'll learn all about the Apache Avro and Apache Parquet big data formats."
 index: 8
+lastUpdated: '2025-04-11'
 ---
 
 The emergence of Apache Hadoop in the mid-2000s marked the beginning of the big data era, fundamentally changing how organizations store and process massive datasets. This transformation created a need for specialized file formats designed to handle data analysis and cross-system data transfer at scale efficiently.

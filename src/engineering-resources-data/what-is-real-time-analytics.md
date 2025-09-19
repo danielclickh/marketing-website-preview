@@ -3,6 +3,7 @@ title: 'What is real-time analytics?'
 slug: 'what-is-real-time-analytics'
 excerpt: "In this guide, we'll learn all about real-time analytics - how does it compare to batch analytics, what are its main characteristics, use cases, and more."
 index: 3
+lastUpdated: '2025-04-11'
 ---
 
 Real-time analytics refers to data processing that delivers insights to end users and customers as soon as the data is generated. It differs from traditional or batch analytics, where data is collected in batches and processed, often a long time after it was generated.

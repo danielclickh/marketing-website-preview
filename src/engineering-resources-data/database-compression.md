@@ -3,6 +3,7 @@ title: 'Database compression'
 slug: 'database-compression'
 excerpt: "Learn how databases compress data, the trade-offs between row and column storage, and why ClickHouse delivers industry-leading compression ratios."
 index: 32
+lastUpdated: '2025-09-17'
 ---
 
 Modern applications generate staggering amounts of data: logs, metrics, events, transactions, user activity, telemetry. Storing and querying all of it at scale quickly becomes expensive and slow if the database simply writes every byte as-is. That’s why compression is a cornerstone of database design. By reducing how much space data consumes on disk and in memory, compression lowers storage costs, improves query performance, and enables use cases that would otherwise be impractical.  
@@ -116,7 +117,7 @@ Across systems, some common principles help maximize compression:
 - Match codecs to data patterns: Use delta encoding for time or sequence columns, run-length encoding for repeated values, and dictionary encoding for low-cardinality strings.
 - Measure and iterate: Compression results vary by dataset. Always measure per column - many systems provide tools or system tables to check compressed vs. uncompressed size.
 
-We appied these best praactices when optimizing a large NOAA weather dataset:
+We applied these best practices when optimizing a large NOAA weather dataset:
 
 - Narrowing integer types from `Int64` to `Int16` where appropriate.
 - Converting string columns like weather type into `Enum8`.

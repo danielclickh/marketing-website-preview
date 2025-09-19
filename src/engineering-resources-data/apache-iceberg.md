@@ -3,6 +3,7 @@ title: 'Apache Iceberg'
 slug: 'apache-iceberg'
 excerpt: "Apache Iceberg transforms data lakes into robust lakehouse architectures with its high-performance table format. This article explores Iceberg's origins, key features like ACID transactions and schema evolution, and demonstrates how to query Iceberg tables in ClickHouse using both direct and catalog-based approaches."
 index: 22
+lastUpdated: '2025-05-21'
 ---
   
 [Apache Iceberg](https://iceberg.apache.org/) has emerged as a pivotal innovation in data management, fundamentally transforming the traditional "Data Lake" concept into the more robust "Lake House" architecture. At its core, Iceberg provides a high-performance table format that brings sophisticated table-like semantics to structured data stored in data lakes, addressing many limitations previously constrained by these systems.

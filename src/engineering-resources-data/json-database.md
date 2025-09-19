@@ -3,6 +3,7 @@ title: 'What is a JSON database?'
 slug: 'json-database'
 excerpt: "In this guide, we'll learn about JSON, the types of databases that can store JSON, and how to work with JSON data in ClickHouse."
 index: 5
+lastUpdated: '2025-04-11'
 ---
 
 There isn’t really such a thing as a JSON (JavaScript Object Notation) database, but there are databases that are designed to work well with JSON data or have strong JSON support.

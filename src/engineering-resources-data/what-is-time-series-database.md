@@ -3,6 +3,7 @@ title: 'An intro to time-series databases'
 slug: 'what-is-time-series-database'
 excerpt: 'In this guide, we’ll learn all about time-series data and its use cases, time-series databases, and how to query time-series data.'
 index: 4
+lastUpdated: '2025-09-11'
 ---
 
 Time-series data is everywhere in modern systems - from IoT sensors and financial markets to application monitoring and user analytics. As organizations collect more temporal data, they need efficient ways to store, process, and analyze it.

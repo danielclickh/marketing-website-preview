@@ -3,6 +3,7 @@ title: 'Data lakehouse'
 slug: 'data-lakehouse'
 excerpt: "The data lakehouse combines the best of data warehouses and data lakes into a unified architecture. We'll explore its key components, advantages, and how ClickHouse fits into this modern analytics platform."
 index: 21
+lastUpdated: '2025-06-30'
 ---
 
 The data lakehouse is a convergent architecture that applies database principles to data lake infrastructure while maintaining the flexibility and scale of cloud storage systems.

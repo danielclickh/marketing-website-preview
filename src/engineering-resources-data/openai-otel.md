@@ -3,6 +3,7 @@ title: 'Instrumenting OpenAI with OpenTelemetry (OTel)'
 slug: 'openai-otel'
 excerpt: 'In this guide, we’ll learn how to instrument the OpenAI client with OpenTelemetry (OTel) so that we can generate and collect observability data about our LLM calls.'
 index: 25
+lastUpdated: '2025-08-01'
 ---
 
 If you've been building anything with OpenAI's APIs lately, you've probably run into some familiar headaches. 

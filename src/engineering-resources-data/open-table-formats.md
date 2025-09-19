@@ -3,6 +3,7 @@ title: 'Open table formats'
 slug: 'open-table-formats'
 excerpt: "In this guide, we'll explore the Iceberg, Delta Lake, and Hudi open table formats."
 index: 19
+lastUpdated: '2025-05-09'
 ---
 
 Data lakes are popular for storing [structured, semi-structured, or unstructured data](https://clickhouse.com/engineering-resources/structured-unstructured-semi-structured-data). Parquet files, which can handle large volumes efficiently, are often used to store this data. 

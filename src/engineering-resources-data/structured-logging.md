@@ -3,6 +3,7 @@ title: 'Structured logging'
 slug: 'structured-logging'
 excerpt: "In this guide, we'll explore how structured logging transforms traditional text-based logs into queryable data, enabling organizations to build powerful monitoring, analysis, and automation capabilities at scale."
 index: 18
+lastUpdated: '2025-04-11'
 ---
 
 Modern software systems generate vast amounts of log data to help teams monitor, troubleshoot, and understand their applications. How we capture and use this data has evolved significantly, from simple text files to structured formats that enable sophisticated analysis and automation.

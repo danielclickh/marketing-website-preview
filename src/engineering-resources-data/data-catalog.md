@@ -3,6 +3,7 @@ title: 'Data catalog'
 slug: 'data-catalog'
 excerpt: "In this guide, we'll explore data catalogs for open table formats like Iceberg, Delta Lake, and Hudi, explaining how these metadata systems make modern data lakes more powerful and accessible."
 index: 20
+lastUpdated: '2025-05-09'
 ---
 
 Data catalogs are essential for modern data architectures, but they're often misunderstood or overlooked. Let's explore what data catalogs are, why they matter for open table formats, and how they enable powerful analytical capabilities.

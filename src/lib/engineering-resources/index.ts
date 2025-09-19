@@ -36,6 +36,7 @@ export function getEngineeringResources(): EngineeringResource[] {
             slug,
             excerpt: data.excerpt,
             image: data.image ? data.image : '',
+            lastUpdated: data.lastUpdated || '',
             index: data.index ?? 9999, // Add index property with default value -1
             body: content
           } as EngineeringResource

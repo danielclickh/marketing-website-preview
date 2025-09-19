@@ -51,14 +51,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const newsLetterData = await getNewsLetterData()
 
   const engResource = getEngineeringResource(slug)
+  console.log("engResources", engResource)
 
   if (engResource) {
     const moreLikeThis = getEngineeringResources()
       .filter((item) => item.slug !== engResource.slug)
       .map((item) => {
+        console.log(item)
         return {
           link: `/engineering-resources/${item.slug}`,
-          title: item.title
+          title: item.title,
         } as MoreLikeThisItem
       })
       .slice(0, 3) // Limit number of items to 3
@@ -93,6 +95,8 @@ export default function Page({
   footerData,
   newsLetterData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const date = new Date(engResource.lastUpdated);
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <main className='bg-grid'>
@@ -107,6 +111,9 @@ export default function Page({
               <SuiTitle type='h1' className='my-6 text-balance md:!text-5xl'>
                 {engResource.title}
               </SuiTitle>
+              <p className="pb-5 -mt-5 italic">
+                Last updated: {date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
+              </p>
               {engResource.image !== '' && (
                 <Image
                   src={engResource.image}
