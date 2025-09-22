@@ -10,6 +10,7 @@ import logoChartmetric from './assets/logo-chartmetric.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoRedshift from './assets/logo-redshift.svg'
+import logoSnowflake from './assets/logo-snowflake.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import { CUIButton } from '@/components/ClickUI'
@@ -19,8 +20,6 @@ import ComparisonTable, {
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import Markdown from '@/components/Markdown'
-import MarketoForm from '@/components/MarketoForm'
-import Modal from '@/components/Modal'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
@@ -358,9 +357,9 @@ export default function BigQueryPage({
             logo: logoRedshift
           },
           {
-            name: 'BigQuery',
-            link: `/comparison/bigquery?loc=bigquery-comparison-page`,
-            logo: logoBigquery
+            name: 'Snowflake',
+            link: `/comparison/snowflake?loc=bigquery-comparison-page`,
+            logo: logoSnowflake
           }
         ]}
       />
