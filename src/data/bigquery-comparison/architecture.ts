@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Architecture',
-  description: `BigQuery and ClickHouse differ sharply in architecture, pricing, and focus. BigQuery’s unpredictable costs, charging for both reads and writes, make it less suited for workloads with continuous streaming data and fluctuating query or insert volumes. Its architecture relies on shared slots and orchestrators that add latency and limit concurrency under load, with caching focused on identical query reuse.
+  description: `BigQuery and ClickHouse differ sharply in architecture, pricing, and focus. BigQuery’s **unpredictable costs**, charging for both reads and writes, make it less suited for workloads with continuous streaming data and fluctuating query or insert volumes. Its architecture relies on shared slots and orchestrators that add latency and limit concurrency under load, with caching focused on identical query reuse.
 
-ClickHouse, by contrast, is designed for real-time analytics and high concurrency, using distributed caches and local execution to avoid centralized slot funnels. It handles thousands of simultaneous queries per node without orchestration delays, with predictable resource-based pricing and support for on-prem and multi-cloud deployments. This makes it ideal for dynamic, low-latency, high-ingest workloads with high query concurrency.`,
+ClickHouse, by contrast, is designed for **real-time analytics and high concurrency**, using distributed caches and local execution to avoid centralized slot funnels. It handles thousands of simultaneous queries per node without orchestration delays, with **predictable resource-based pricing** and support for on-prem and multi-cloud deployments. This makes it ideal for dynamic, low-latency, high-ingest workloads with high query concurrency.`,
   rows: [
     {
       heading: 'Flexible deployment',

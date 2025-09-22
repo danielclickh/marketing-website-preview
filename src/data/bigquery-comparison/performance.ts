@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Performance',
-  description: `ClickHouse is built for ultra-fast analytics at scale, delivering sub-second query latency on multi-billion-row datasets through vectorized execution, native aggregate optimizations, and dictionary acceleration. Its highly efficient compression reduces I/O by up to 60%, while incremental, fully flexible materialized views and granular cache controls keep hot data instantly accessible, ensuring consistent speed for demanding workloads.
+  description: `**ClickHouse is built for ultra-fast analytics at scale**, delivering **sub-second query latency on multi-billion-row datasets** through vectorized execution, native aggregate optimizations, and dictionary acceleration. Its highly efficient compression reduces I/O by up to 60%, while **flexible materialized views** and granular cache controls keep hot data instantly accessible, ensuring consistent speed for demanding workloads.
 
-BigQuery’s serverless model simplifies infrastructure but relies on reserved slots for concurrency, often requiring upfront commitments to handle high query volumes. While it supports large joins and vectorized execution, typical latencies start at 1–2 seconds. Its materialized views have notable SQL constraints, and caching is coarse, primarily skipping broad data segments without fine predicate-level tuning, making it more suited to batch and moderately interactive analytics.`,
+**BigQuery’s serverless model simplifies infrastructure** but relies on reserved slots for concurrency, often requiring upfront commitments to handle high query volumes. While it supports large joins and vectorized execution, **typical latencies start at 1–2 seconds**. Its materialized views have notable SQL constraints, and caching is coarse, primarily skipping broad data segments without fine predicate-level tuning, making it more suited to batch and moderately interactive analytics.`,
   rows: [
     {
       heading: 'Dictionaries for dimension table acceleration',
