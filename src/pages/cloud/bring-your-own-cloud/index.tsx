@@ -1,3 +1,7 @@
+import socialImage from './assets/byoc-og-image.png'
+import diagram from './assets/diagram.svg'
+import heroImage from './assets/hero.svg'
+import uploadIcon from './assets/upload-icon.svg'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import MarketoForm from '@/components/MarketoForm'
@@ -15,9 +19,9 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
       seo: {
         title: 'Bring Your Own Cloud - ClickHouse',
         description:
-          'Request access for Bring Your Own Cloud. A fully managed ClickHouse Cloud service, deployed in your own AWS account.',
+          'Request access for Bring Your Own Cloud. A fully managed ClickHouse Cloud service, deployed in your own AWS and GCP account.',
         path: '/cloud/bring-your-own-cloud',
-        image: [{ url: '/images/cloud/bring-your-own-cloud/byoc-og-image.png' }]
+        image: [{ url: socialImage.src }]
       },
       ...commonProps
     }
@@ -39,24 +43,27 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               {/* Content column */}
               <div className='flip-selection w-full text-neutral-900 lg:w-1/2'>
                 <Image
-                  width={469}
-                  height={208}
-                  src='/images/cloud/bring-your-own-cloud/hero.svg'
-                  alt='Bring your own cloud graphic'
-                  className='mx-auto'
+                  width={487}
+                  height={220}
+                  src={heroImage}
+                  alt='Bring Your Own Cloud on AWS and GCP'
                 />
 
                 <h1 className='mb-5 mt-12 text-center font-basier text-3xl font-bold !leading-snug lg:text-left lg:text-4xl xl:text-[56px]'>
-                  Bring Your Own Cloud is now available on AWS
+                  Bring Your Own Cloud available on AWS and GCP*
                 </h1>
-                <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
+                <p className='text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-xl'>
                   A fully managed ClickHouse Cloud service deployed in your own
-                  AWS&nbsp;account.
+                  AWS or GCP account.
                 </p>
-                <p className='mt-5 text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-[678px]'>
+                <p className='mt-5 text-center text-[20px] leading-[180%] lg:text-left 2xl:max-w-xl'>
                   Designed for large-scale deployments, with personalized
-                  support and onboarding. SOC 2 and ISO 27001 aligned. Request
-                  access today.
+                  support and onboarding. SOC 2 and ISO 27001 aligned.
+                </p>
+                <p className='mt-5 italic'>
+                  <small>
+                    * GCP BYOC is in private preview. Join the watlist today!
+                  </small>
                 </p>
               </div>
 
@@ -118,16 +125,16 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
         {/* BYOC on AWS */}
         <div className='my-16 lg:my-24'>
           <div className='section-container mx-auto'>
-            <div className='mx-auto max-w-[710px] text-center'>
+            <div className='mx-auto max-w-3xl text-center'>
               <Image
                 width={72}
                 height={72}
-                src='/images/cloud/bring-your-own-cloud/upload-icon.svg'
-                alt={'BYOC on AWS icon'}
+                src={uploadIcon}
+                alt='BYOC Architecture icon'
                 className='mx-auto mb-10'
               />
               <h2 className='mb-10 font-basier text-3xl font-bold lg:text-5xl'>
-                BYOC on AWS
+                BYOC Architecture
               </h2>
               <p className='mb-10 text-neutral-200'>
                 Do you have strict data residency and compliance requirements
@@ -138,15 +145,15 @@ export default function Page({ footerData, headerData, seo }: HomePageProps) {
               </p>
               <p className='mb-10 text-neutral-200'>
                 No regulatory headaches. No operational complexity. All the
-                benefits of cloud, tailored for large-scale deployments.
+                benefits of cloud.
               </p>
             </div>
 
             <Image
               width={1020}
-              height={738}
-              src='/images/cloud/bring-your-own-cloud/diagram.png'
-              alt={'BYOC on AWS diagram'}
+              height={712}
+              src={diagram}
+              alt='BYOC on AWS diagram'
               className='mx-auto mt-20'
             />
           </div>
