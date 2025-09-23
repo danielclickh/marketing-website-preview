@@ -1,6 +1,7 @@
 import hero from './assets/hero.png'
 import logoNovo from './assets/logo-novo.png'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
+import ContentTicker from '@/components-cleaned/ContentTicker'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
@@ -45,11 +46,12 @@ export const getStaticProps: GetStaticProps<PageProps> =
         stories,
         seo: {
           path: '/industries/energy',
-          title: 'Energy analytics in real time with ClickHouse',
+          title:
+            'The fastest real-time database for Energy analytics — ClickHouse',
           description:
-            'Explore how ClickHouse enables instant insights for energy businesses. From high-speed dashboards to customer journey tracking, ClickHouse powers real-time analytics for inventory, ads, and store performance at scale.',
+            'Harness ClickHouse for energy data at scale. Ingest millions of rows per second, enable predictive maintenance, optimize grids, and deliver real-time insights with the fastest open-source database.',
           keywords:
-            'real-time energy analytics, ClickHouse energy, energy dashboards, inventory tracking, customer journey analytics, ad performance, streaming data, high-concurrency analytics, energy data warehouse, in-store analytics, digital energy insights'
+            'energy analytics, real-time energy analytics, energy database, energy data platform, ClickHouse energy, smart grid analytics, renewable energy data, predictive maintenance energy, energy supply chain optimization, energy facility monitoring, energy asset management, energy operations analytics, real-time insights energy, energy cost optimization, energy customer experience, energy data monetization, energy performance monitoring'
         },
         ...commonProps
       }
@@ -114,8 +116,8 @@ export default function EnergyIndustryPage({
             <Image
               src={hero}
               alt='ClickHouse'
-              width={1215 / 1.5}
-              height={798 / 1.5}
+              width={1208 / 1.5}
+              height={692 / 1.5}
               className='h-auto w-full'
               loading='eager'
               priority
@@ -195,32 +197,21 @@ export default function EnergyIndustryPage({
             </div>
           </div>
           <div className='mx-auto max-w-5xl pb-4 pt-16'>
-            <div className='mask-logos-carousel brightness-0 saturate-0'>
-              <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
-                <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
-                  {stories.customerStories.logos.map((story, logoIndex) => {
-                    return (
-                      <div
-                        key={logoIndex}
-                        className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                        <StrapiImageUrl {...story.darkLogoPng} />
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className='flex animate-marqueeLeft items-center whitespace-nowrap'>
-                  {stories.customerStories.logos.map((story, logoIndex) => {
-                    return (
-                      <div
-                        key={logoIndex}
-                        className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                        <StrapiImageUrl {...story.darkLogoPng} />
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
+            <ContentTicker
+              gap='3rem'
+              gradientMask={true}
+              pause={false}
+              sizingMethod='max'>
+              {stories.customerStories.logos.map((story, logoIndex) => {
+                return (
+                  <StrapiImageUrl
+                    key={logoIndex}
+                    className='my-auto flex-shrink-0 flex-grow-0'
+                    {...story.darkLogoPng}
+                  />
+                )
+              })}
+            </ContentTicker>
           </div>
         </div>
       </section>
