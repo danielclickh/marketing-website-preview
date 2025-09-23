@@ -280,9 +280,11 @@ export default function GamingIndustryPage({
                   Gaming analytics applications
                 </SuiTitle>
                 <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
-                  ClickHouse powers real-time analytics for the world’s largest
-                  gaming platforms, delivering low-latency insights for trust &
-                  safety, player behavior, and revenue optimization.
+                  ClickHouse powers real-time analytics for the world's largest
+                  gaming and betting platforms, delivering low-latency insights
+                  for trust & safety, player behavior, gambling compliance, and
+                  revenue optimization across both gaming and wagering
+                  activities.
                 </p>
                 <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-6 xl:px-0'>
                   <div className='items-center space-y-4 rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
