@@ -210,147 +210,169 @@ export default function BigQueryPage({
           {/* Latency */}
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-            <div className='space-y-8 md:space-y-10'>
-              <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
-                <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
-                  <div className='flex items-center gap-4 lg:gap-6'>
-                    <Image src={iconGuage} alt='Icon' width={36} height={36} />
-                    <SuiTitle type='h3' className='text-white'>
-                      BigQuery’s query latency
-                    </SuiTitle>
-                  </div>
-                  <SuiText>
-                    BigQuery often struggles with sub-second queries due to
-                    baseline latency on uncached results.
-                  </SuiText>
-                  <SuiText>
-                    ClickHouse, built for real-time analytics at scale, delivers
-                    the fastest and most resource-efficient performance -
-                    consistently serving queries in under a second.
-                  </SuiText>
-                  <SuiText>
-                    Whether you’re aggregating large volumes of data in
-                    real-time, interactively slicing and dicing on the fly, or
-                    powering customer-facing dashboards, ClickHouse ensures
-                    blazing speed.
-                  </SuiText>
+            <div className='flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between'>
+              <div className='space-y-6 text-neutral-200'>
+                <div className='flex items-center gap-4 lg:gap-6'>
+                  <Image src={iconGuage} alt='Icon' width={36} height={36} />
+                  <SuiTitle type='h3' className='text-white'>
+                    BigQuery’s query latency
+                  </SuiTitle>
                 </div>
+                <SuiText>
+                  BigQuery often struggles with sub-second queries due to
+                  baseline latency on uncached results.
+                </SuiText>
+                <SuiText>
+                  ClickHouse, built for real-time analytics at scale, delivers
+                  the fastest and most resource-efficient performance -
+                  consistently serving queries in under a second.
+                </SuiText>
+                <SuiText>
+                  Whether you’re aggregating large volumes of data in real-time,
+                  interactively slicing and dicing on the fly, or powering
+                  customer-facing dashboards, ClickHouse ensures blazing speed.
+                </SuiText>
+
+                {/* Mobile chart */}
                 <Image
                   src={chartLatency}
                   alt='Latency when querying 1 billion rows'
                   width={342}
                   height={305}
-                  className='mx-auto flex-shrink flex-grow-0 lg:mx-0'
+                  className='mx-auto flex-shrink flex-grow-0 lg:mx-0 lg:hidden'
                 />
-              </div>
-              <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
-                <div className='flex flex-col items-center gap-6 self-stretch sm:flex-row lg:max-w-3xl'>
-                  <Image
-                    src={iconQuote}
-                    alt='Quote'
-                    width={36}
-                    height={28}
-                    className='flex-shrink-0 flex-grow-0 self-start'
-                  />
-                  <div className='grid grid-cols-1 gap-6'>
-                    <SuiText>
-                      We needed a solution that could scale, but also provide
-                      end-user facing analytics capabilities with low latency
-                      and high throughput.{' '}
-                      <Link
-                        href='/blog/serving-real-time-analytics-across-marketplaces-at-adevinta?loc=bigquery-comparison-page'
-                        className='text-primary-300 hover:underline'>
-                        Read blog
-                      </Link>
-                    </SuiText>
+
+                <CUICard className='!h-auto gap-6 !bg-[#323232] p-6 lg:flex-row lg:items-stretch lg:pr-10'>
+                  <div className='flex flex-col items-center gap-6 self-stretch lg:max-w-3xl lg:flex-row'>
+                    <Image
+                      src={iconQuote}
+                      alt='Quote'
+                      width={36}
+                      height={28}
+                      className='flex-shrink-0 flex-grow-0 self-start'
+                    />
+                    <div className='space-y-6'>
+                      <SuiText>
+                        We needed a solution that could scale, but also provide
+                        end-user facing analytics capabilities with low latency
+                        and high throughput.{' '}
+                        <Link
+                          href='/blog/serving-real-time-analytics-across-marketplaces-at-adevinta?loc=bigquery-comparison-page'
+                          className='text-primary-300 hover:underline'>
+                          <span className='absolute inset-0' />
+                          Read blog
+                        </Link>
+                      </SuiText>
+                    </div>
                   </div>
-                </div>
-                <Image
-                  src={logoAdevinta}
-                  alt='Adevinta logo'
-                  width={110}
-                  height={25}
-                  className='mr-auto flex-shrink flex-grow-0 lg:ml-auto lg:mr-0'
-                />
-              </CUICard>
+                  <Image
+                    src={logoAdevinta}
+                    alt='Adevinta logo'
+                    width={110}
+                    height={25}
+                    className='mr-auto flex-shrink flex-grow-0 lg:ml-auto lg:mr-0'
+                  />
+                </CUICard>
+              </div>
+
+              {/* Desktop chart */}
+              <Image
+                src={chartLatency}
+                alt='Latency when querying 1 billion rows'
+                width={342}
+                height={305}
+                className='mx-auto hidden flex-shrink flex-grow-0 lg:mx-0 lg:block'
+              />
             </div>
           </div>
 
           {/* Costs */}
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
-            <div className='space-y-8 md:space-y-10'>
-              <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
-                <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
-                  <div className='flex items-center gap-4 lg:gap-6'>
-                    <Image
-                      src={iconHandCoins}
-                      alt='Icon'
-                      width={36}
-                      height={36}
-                    />
-                    <SuiTitle type='h3' className='text-white'>
-                      BigQuery’s high cost
-                    </SuiTitle>
-                  </div>
-                  <SuiText>
-                    BigQuery’s per-query pricing and streaming insert fees often
-                    limit usage, reduce ROI, and penalize frequent ingestion.
-                    ClickHouse Cloud avoids these trade-offs with fixed pricing,
-                    no per-query or insert costs, and best-in-class resource
-                    efficiency - delivering maximum cost-effectiveness at scale.
-                  </SuiText>
+            <div className='flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between'>
+              <div className='space-y-6 text-neutral-200'>
+                <div className='flex items-center gap-4 lg:gap-6'>
+                  <Image
+                    src={iconHandCoins}
+                    alt='Icon'
+                    width={36}
+                    height={36}
+                  />
+                  <SuiTitle type='h3' className='text-white'>
+                    BigQuery’s high cost
+                  </SuiTitle>
                 </div>
+                <SuiText>
+                  BigQuery’s per-query pricing and streaming insert fees often
+                  limit usage, reduce ROI, and penalize frequent ingestion.
+                  ClickHouse Cloud avoids these trade-offs with fixed pricing,
+                  no per-query or insert costs, and best-in-class resource
+                  efficiency - delivering maximum cost-effectiveness at scale.
+                </SuiText>
+
+                {/* Mobile chart */}
                 <Image
                   src={chartCosts}
                   alt='Cost for querying 1 billion rows'
                   width={336}
                   height={273}
-                  className='mx-auto flex-shrink flex-grow-0 lg:mx-0'
+                  className='mx-auto flex-shrink flex-grow-0 lg:mx-0 lg:hidden'
                 />
-              </div>
-              <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:pr-10'>
-                <div className='flex flex-col items-center gap-6 self-stretch sm:flex-row lg:max-w-3xl'>
-                  <Image
-                    src={iconQuote}
-                    alt='Quote'
-                    width={36}
-                    height={28}
-                    className='flex-shrink-0 flex-grow-0 self-start'
-                  />
-                  <div className='grid grid-cols-1 gap-6'>
-                    <SuiText>
-                      ClickHouse solves most of our problems very efficiently at
-                      a small fraction of the price in terms of infrastructure.
-                      This is a far better advantage for us in our books
-                    </SuiText>
-                    <SuiText>
-                      We simply don’t want the hassle of trying to figure out in
-                      advance of how many BigQuery slots to purchase - what a
-                      headache!{' '}
-                      <Link
-                        href='/blog/hifis-migration-from-bigquery-to-clickhouse?loc=bigquery-comparison-page'
-                        className='text-primary-300 hover:underline'>
-                        Read blog
-                      </Link>
-                    </SuiText>
+
+                <CUICard className='!h-auto gap-6 !bg-[#323232] p-6 lg:flex-row lg:pr-10'>
+                  <div className='flex flex-col items-center gap-6 self-stretch lg:max-w-3xl lg:flex-row'>
+                    <Image
+                      src={iconQuote}
+                      alt='Quote'
+                      width={36}
+                      height={28}
+                      className='flex-shrink-0 flex-grow-0 self-start'
+                    />
+                    <div className='space-y-6'>
+                      <SuiText>
+                        ClickHouse solves most of our problems very efficiently
+                        at a small fraction of the price in terms of
+                        infrastructure. This is a far better advantage for us in
+                        our books
+                      </SuiText>
+                      <SuiText>
+                        We simply don’t want the hassle of trying to figure out
+                        in advance of how many BigQuery slots to purchase - what
+                        a headache!{' '}
+                        <Link
+                          href='/blog/hifis-migration-from-bigquery-to-clickhouse?loc=bigquery-comparison-page'
+                          className='text-primary-300 hover:underline'>
+                          <span className='absolute inset-0' />
+                          Read blog
+                        </Link>
+                      </SuiText>
+                    </div>
                   </div>
-                </div>
-                <Image
-                  src={logoBlock}
-                  alt='Block logo'
-                  width={61}
-                  height={86}
-                  className='mr-auto flex-shrink flex-grow-0 lg:ml-auto lg:mr-0'
-                />
-              </CUICard>
+                  <Image
+                    src={logoBlock}
+                    alt='Block logo'
+                    width={61}
+                    height={86}
+                    className='mr-auto flex-shrink flex-grow-0 lg:ml-auto lg:mr-0'
+                  />
+                </CUICard>
+              </div>
+
+              {/* Desktop chart */}
+              <Image
+                src={chartCosts}
+                alt='Cost for querying 1 billion rows'
+                width={336}
+                height={273}
+                className='mx-auto hidden flex-shrink flex-grow-0 lg:mx-0 lg:block'
+              />
             </div>
           </div>
 
           {/* Concurrency */}
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='space-y-8 md:space-y-10'>
-              <div className='flex flex-col gap-10 xl:flex-row xl:justify-between'>
-                <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
+              <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
+                <div className='space-y-6 text-neutral-200'>
                   <div className='flex items-center gap-4 lg:gap-6'>
                     <Image
                       src={iconConcurrent}
@@ -375,8 +397,8 @@ export default function BigQueryPage({
                     or complex tuning.
                   </SuiText>
                 </div>
-                <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:pr-10'>
-                  <div className='flex flex-col items-center gap-6 self-stretch sm:flex-row lg:max-w-3xl'>
+                <CUICard className='!bg-[#323232] p-6 lg:pr-10'>
+                  <CUICard.Body className='space-y-6'>
                     <Image
                       src={iconQuote}
                       alt='Quote'
@@ -384,29 +406,27 @@ export default function BigQueryPage({
                       height={28}
                       className='flex-shrink-0 flex-grow-0 self-start'
                     />
-                    <div className='space-y-6'>
-                      <SuiText>
-                        Another issue was BigQuery's limit of 100 concurrent
-                        queries, which created bottlenecks for Gumlet's
-                        customers. "If our customers needed to fire more
-                        analytics API requests than that, they would fail or go
-                        into a queue.
-                        <br />
-                        <Link
-                          href='/blog/gumlet-processing-billions-of-video-image-requests-with-clickhouse'
-                          className='text-primary-300 hover:underline'>
-                          Read blog
-                        </Link>
-                      </SuiText>
-                      <Image
-                        src={logoGumlet}
-                        alt='Gumlet logo'
-                        width={215 / 1.5}
-                        height={50 / 1.5}
-                        className='flex-shrink flex-grow-0'
-                      />
-                    </div>
-                  </div>
+                    <SuiText>
+                      Another issue was BigQuery's limit of 100 concurrent
+                      queries, which created bottlenecks for Gumlet's customers.
+                      "If our customers needed to fire more analytics API
+                      requests than that, they would fail or go into a queue.
+                      <br />
+                      <Link
+                        href='/blog/gumlet-processing-billions-of-video-image-requests-with-clickhouse'
+                        className='text-primary-300 hover:underline'>
+                        <span className='absolute inset-0' />
+                        Read blog
+                      </Link>
+                    </SuiText>
+                    <Image
+                      src={logoGumlet}
+                      alt='Gumlet logo'
+                      width={215 / 1.5}
+                      height={50 / 1.5}
+                      className='flex-shrink flex-grow-0'
+                    />
+                  </CUICard.Body>
                 </CUICard>
               </div>
             </div>
