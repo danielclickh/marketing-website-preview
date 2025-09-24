@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Use cases',
-  description: `**ClickHouse shines in real-time, high-frequency workloads**, powering external dashboards, product analytics, and customer-facing apps with **sub-second responses**. Its **native support for logs, metrics, and traces (via ClickStack)** makes it a natural fit for observability, while efficient streaming keeps costs low even at scale. With optimizations like projections, dictionaries, and fine-grained caching, ClickHouse is also ideal for **GenAI agentic and vector workloads** demanding fast, high-volume queries.
+  description: `ClickHouse shines at real-time, high-frequency workloads, powering dashboards, product analytics, and customer apps with sub-second responses. Native support for logs, metrics, and traces (via ClickStack) makes it a strong fit for observability, while efficient streaming keeps costs low. Optimizations like projections, dictionaries, and fine-grained caching also make it ideal for GenAI agentic and vector workloads needing fast, high-volume queries.
 
-**BigQuery is well-suited for internal analytics and periodic workloads**, benefiting from its managed environment and straightforward scaling. However, use cases requiring **low-latency, high-concurrency reads**—such as real-time product analytics, observability, or GenAI agentic interactions—can face challenges due to **baseline query delays** and **higher costs for continuous ingestion and data writes**. Basic caching and limited support for materialized view SQL further shape it towards batch or moderately interactive scenarios.`,
+BigQuery fits internal analytics and operational dashboards, with managed scaling for periodic workloads. But low-latency, high-concurrency use cases, like product analytics, observability, or GenAI agents will struggle with baseline query delays and costly continuous ingestion. Basic caching and SQL-limited materialized views further orient it toward batch scenarios.`,
   rows: [
     {
       heading: 'Real-time analytics',
@@ -68,7 +68,7 @@ export default {
       heading: 'Vector search',
       clickhouse: {
         icon: 'yes',
-        label: '**Approximate & exact vector search**'
+        label: '**Vector search supported**'
       },
       bigquery: {
         icon: 'yes',

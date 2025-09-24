@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Scalability',
-  description: `Both BigQuery and ClickHouse scale effectively, but with different levels of control exposed to the user. **ClickHouse offers precise control over scaling** with workload quotas, manual and automatic vertical and horizontal scaling, custom hardware profiles, and rapid resume from idle. It supports up to **1,000 concurrent queries per node** providing granular cache control down to predicate-level reuse – ideal for high-concurrency, low-latency analytics.
+  description: `ClickHouse provides fine-grained scaling control with workload quotas, **vertical and horizontal scaling** (manual or automatic), **custom hardware profiles**, and rapid resume from idle. It supports **1,000+ concurrent queries per node** with predicate-level cache reuse \\- ideal for high-concurrency, low-latency analytics.
 
-Conversely, **BigQuery excels at elastic scaling for large, batch-style analytical jobs** by dynamically allocating slots. However, this comes with **less transparency and control**: concurrency is tied to slot reservations, there’s no vertical tuning or custom hardware selection, with caching primarily aiding data skipping without fine predicate reuse. This makes BigQuery’s scalability well-suited to high-throughput, large-scale workloads, but less tailored for workloads needing **consistent high concurrency and predictable performance**.`,
+BigQuery scales elastically for large batch jobs by dynamically allocating slots, but with less transparency and control. Concurrency depends on slot reservations, there’s no vertical tuning or custom hardware choice, and caching mainly aids data skipping. This suits high-throughput batch workloads, but not workloads needing consistent concurrency and predictable performance.`,
   rows: [
     {
       heading: 'Auto-resume from idle',
@@ -86,7 +86,7 @@ Conversely, **BigQuery excels at elastic scaling for large, batch-style analytic
     },
     {
       heading: 'Elastic scaling',
-      subHeading: 'up/down with load',
+      subHeading: 'Up/down with load',
       clickhouse: {
         icon: 'yes',
         label: '**Elastic scaling** up/down with load'

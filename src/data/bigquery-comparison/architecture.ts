@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Architecture',
-  description: `BigQuery and ClickHouse differ sharply in architecture, pricing, and focus. BigQuery’s **unpredictable costs**, charging for both reads and writes, make it less suited for workloads with continuous streaming data and fluctuating query or insert volumes. Its architecture relies on shared slots and orchestrators that add latency and limit concurrency under load, with caching focused on identical query reuse.
+  description: `ClickHouse Cloud gives users precise scaling control with workload quotas, **vertical and horizontal scaling** (manual or automatic), **custom hardware profiles**, and fast resume from idle. Users benefit from ClickHouse being **open source**, making it ideal for **hybrid and multi-cloud deployments.**
 
-ClickHouse, by contrast, is designed for **real-time analytics and high concurrency**, using distributed caches and local execution to avoid centralized slot funnels. It handles thousands of simultaneous queries per node without orchestration delays, with **predictable resource-based pricing** and support for on-prem and multi-cloud deployments. This makes it ideal for dynamic, low-latency, high-ingest workloads with high query concurrency.`,
+BigQuery, by contrast, shines at **elastic scaling for large batch jobs** through dynamic slot allocation. But this limits transparency and control: **concurrency depends on slot reservations**, there’s no vertical tuning or custom hardware choice, and caching mainly aids data skipping. It works well for **high-throughput batch workloads**, but less so for use cases demanding consistent concurrency and predictable performance.`,
   rows: [
     {
       heading: 'Flexible deployment',
@@ -15,18 +15,6 @@ ClickHouse, by contrast, is designed for **real-time analytics and high concurre
       bigquery: {
         icon: 'no',
         label: 'GCP only'
-      }
-    },
-    {
-      heading: 'Distributed cache for data reuse',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Distributed cache with predicate support**'
-      },
-      bigquery: {
-        icon: 'intermediate',
-        label:
-          'No predicate cache; limited to exact queries; disabled with column-based security'
       }
     },
     {
@@ -83,7 +71,7 @@ ClickHouse, by contrast, is designed for **real-time analytics and high concurre
       },
       bigquery: {
         icon: 'yes',
-        label: 'Compute/storage separation'
+        label: 'Separation of compute and storage'
       }
     },
     {
@@ -112,7 +100,7 @@ ClickHouse, by contrast, is designed for **real-time analytics and high concurre
       heading: 'Allows partitioning of data for data skipping',
       clickhouse: {
         icon: 'yes',
-        label: '**Partitioning for data skipping**'
+        label: '**Partitioning supported**'
       },
       bigquery: {
         icon: 'yes',

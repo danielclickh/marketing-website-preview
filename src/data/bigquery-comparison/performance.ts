@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Performance',
-  description: `**ClickHouse is built for ultra-fast analytics at scale**, delivering **sub-second query latency on multi-billion-row datasets** through vectorized execution, native aggregate optimizations, and dictionary acceleration. Its highly efficient compression reduces I/O by up to 60%, while **flexible materialized views** and granular cache controls keep hot data instantly accessible, ensuring consistent speed for demanding workloads.
+  description: `ClickHouse delivers **sub-second latency** on **multi-billion-row dataset**s with vectorized execution, native aggregates, and dictionary acceleration. **Efficient compression reduces I/O**, while **flexible materialized views and granular cache controls** keep hot data instantly accessible for demanding workloads.
 
-**BigQuery’s serverless model simplifies infrastructure** but relies on reserved slots for concurrency, often requiring upfront commitments to handle high query volumes. While it supports large joins and vectorized execution, **typical latencies start at 1–2 seconds**. Its materialized views have notable SQL constraints, and caching is coarse, primarily skipping broad data segments without fine predicate-level tuning, making it more suited to batch and moderately interactive analytics.`,
+BigQuery simplifies infrastructure with a serverless model but depends on reserved slots for concurrency and upfront commitments at scale. It supports large joins and vectorized execution, yet typical latencies are 1–2 seconds. Materialized views have SQL limits, and caching is coarse - skipping broad segments rather than fine predicate-levels - making it better for batch and moderately interactive analytics.`,
   rows: [
     {
       heading: 'Dictionaries for dimension table acceleration',
@@ -54,7 +54,7 @@ export default {
     },
     {
       heading: 'Native aggregate optimization',
-      subHeading: 'merge states, projections',
+      subHeading: 'Merge states, projections',
       clickhouse: {
         icon: 'yes',
         label: '**Merge states & projections** for fast aggregates'
@@ -79,7 +79,7 @@ export default {
       heading: 'Vectorized query execution',
       clickhouse: {
         icon: 'yes',
-        label: '**Vectorized execution engine**'
+        label: '**Vectorized execution supported**'
       },
       bigquery: {
         icon: 'yes',
@@ -88,14 +88,14 @@ export default {
     },
     {
       heading: 'Join performance',
-      subHeading: 'multi-billion rows',
+      subHeading: 'Multi-billion rows',
       clickhouse: {
         icon: 'yes',
         label: '**Efficient joins** across billions of rows'
       },
       bigquery: {
         icon: 'yes',
-        label: 'Joins supported at scale'
+        label: 'Joins supported'
       }
     }
   ]

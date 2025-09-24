@@ -1,5 +1,4 @@
 import bigqueryTableLogo from './assets/bigquery-table-logo.svg'
-import chartCompression from './assets/chart-compression.svg'
 import chartCosts from './assets/chart-costs.svg'
 import chartLatency from './assets/chart-latency.svg'
 import heroLogos from './assets/hero-logos.png'
@@ -10,6 +9,7 @@ import iconQuote from './assets/icon-quote.svg'
 import iconVs from './assets/icon-vs.png'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import logoBlock from './assets/logo-block.png'
+import logoGumlet from './assets/logo-gumlet.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoRedshift from './assets/logo-redshift.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
@@ -88,13 +88,12 @@ export default function BigQueryPage({
               supported features.
             </p>
             <p>
-              While limited to GCP, BigQuery excels at complex, long-running
-              queries and ad-hoc analysis. However, its per-query pricing means
-              more users or traffic leads to higher costs, penalizing use case
-              expansion and success. ClickHouse offers a stable, resource-based
-              pricing model with built-in high concurrency and dynamic scaling
-              which is ideal for interactive, user-facing workloads without
-              surprise bills. Deployable on any Cloud.
+              BigQuery, limited to GCP, excels at complex, long-running queries
+              and ad-hoc analysis. But per-query pricing drives up costs as
+              usage grows, penalizing expansion. ClickHouse offers stable,
+              resource-based pricing with high concurrency and dynamic scaling -
+              ideal for interactive, user-facing workloads without surprise
+              bills. Deployable on any Cloud.
             </p>
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
@@ -196,7 +195,7 @@ export default function BigQueryPage({
         />
         {/* Yellow triangle */}
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[67rem] bg-primary-300 lg:top-[47rem]' />
-        <div className='section-container relative z-10'>
+        <div className='section-container relative z-10 space-y-6'>
           <div className='mb-16 space-y-12 lg:mb-24'>
             <SuiTitle type='h2' className='text-center'>
               ClickHouse compared to BigQuery
@@ -215,26 +214,25 @@ export default function BigQueryPage({
               </div>
             </ScaleToContainer>
           </div>
+
+          {/* Latency */}
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-
-            {/* Latency */}
             <div className='space-y-8 md:space-y-10'>
               <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
                 <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
+                  <Image src={iconGuage} alt='Icon' width={36} height={24} />
                   <SuiTitle type='h3' className='text-white'>
                     BigQuery’s query latency
                   </SuiTitle>
                   <SuiText>
-                    Achieving sub-second query response times can be painful in
-                    BigQuery, with users experiencing a baseline latency for
-                    un-cached queries which prevents sub-second queries.
+                    BigQuery often struggles with sub-second queries due to
+                    baseline latency on uncached results.
                   </SuiText>
                   <SuiText>
-                    ClickHouse is purpose-built for real-time, large-volume,
-                    data analytics. It’s the fastest and most resource-efficient
-                    database for analytics and is designed to serve queries
-                    sub-second.
+                    ClickHouse, built for real-time analytics at scale, delivers
+                    the fastest and most resource-efficient performance -
+                    consistently serving queries in under a second.
                   </SuiText>
                   <SuiText>
                     Whether you’re aggregating large volumes of data in
@@ -282,30 +280,28 @@ export default function BigQueryPage({
                 />
               </CUICard>
             </div>
+          </div>
 
-            <HRSeparator className='-mx-6 my-10 !w-auto !max-w-none lg:-mx-10' />
-
-            {/* Costs */}
+          {/* Costs */}
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='space-y-8 md:space-y-10'>
               <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
                 <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
+                  <Image
+                    src={iconHandCoins}
+                    alt='Icon'
+                    width={36}
+                    height={24}
+                  />
                   <SuiTitle type='h3' className='text-white'>
                     BigQuery’s high cost
                   </SuiTitle>
                   <SuiText>
-                    BigQuery’s per-query pricing model often forces companies to
-                    limit usage or data access, reducing overall ROI. Additional
-                    costs for streaming inserts also penalize frequent data
-                    ingestion, pushing teams to rethink how, and how often, they
-                    store valuable data.
-                  </SuiText>
-                  <SuiText>
-                    ClickHouse Cloud pricing is fixed - no per query or data
-                    insertion charges. ClickHouse is designed to manage huge
-                    volumes of data efficiently. Its efficient management of
-                    resources helps to maximize its cost-effectiveness.
-                    ClickHouse was designed from the ground up for best-in-class
-                    resource utilization.
+                    BigQuery’s per-query pricing and streaming insert fees often
+                    limit usage, reduce ROI, and penalize frequent ingestion.
+                    ClickHouse Cloud avoids these trade-offs with fixed pricing,
+                    no per-query or insert costs, and best-in-class resource
+                    efficiency - delivering maximum cost-effectiveness at scale.
                   </SuiText>
                 </div>
                 <Image
@@ -327,11 +323,9 @@ export default function BigQueryPage({
                   />
                   <div className='grid grid-cols-1 gap-6'>
                     <SuiText>
-                      [BigQuery] discourages data usage. Instead of encouraging
-                      analysts to query the database in any and all ways they
-                      can imagine you’ll end up worrying about needing to limit
-                      them and come up with processes for controlling the volume
-                      of data being used.
+                      ClickHouse solves most of our problems very efficiently at
+                      a small fraction of the price in terms of infrastructure.
+                      This is a far better advantage for us in our books
                     </SuiText>
                     <SuiText>
                       We simply don’t want the hassle of trying to figure out in
@@ -354,64 +348,63 @@ export default function BigQueryPage({
                 />
               </CUICard>
             </div>
+          </div>
 
-            <HRSeparator className='-mx-6 my-10 !w-auto !max-w-none lg:-mx-10' />
-
-            {/* Concurrency */}
+          {/* Concurrency */}
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='space-y-8 md:space-y-10'>
-              <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
+              <div className='flex flex-col gap-10 xl:flex-row xl:justify-between'>
                 <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
                   <SuiTitle type='h3' className='text-white'>
                     BigQuery’s query concurrency
                   </SuiTitle>
                   <SuiText>
-                    ClickHouse is built for high concurrency by default,
-                    handling 1,000+ simultaneous queries per node with ease.
-                    Need more? Simply scale horizontally to meet demand with no
-                    complex slot management or manual tuning required.
+                    BigQuery caps concurrency based on compute availability,
+                    queuing or rejecting queries while charging per query -
+                    making high-concurrency workloads costly and unpredictable.
                   </SuiText>
                   <SuiText>
-                    By contrast, BigQuery dynamically limits concurrency based
-                    on available compute, queuing excess queries or rejecting
-                    them outright. Managing higher concurrency means configuring
-                    slot reservations, setting targets, and hoping resources are
-                    available - adding cost and complexity without guaranteed
-                    throughput.
+                    ClickHouse takes the opposite approach: reserve compute
+                    once, pay a fixed price, and run 1,000+ queries per node.
+                    Need more capacity? Simply add nodes. Costs stay
+                    predictable, and scalability comes without slot management
+                    or complex tuning.
                   </SuiText>
                 </div>
-                <Image
-                  src={chartCompression}
-                  alt='Storage required for 1 billion rows'
-                  width={336}
-                  height={273}
-                  className='mx-auto flex-shrink flex-grow-0 lg:mx-0'
-                />
-              </div>
-              <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:pr-10'>
-                <div className='flex flex-col items-center gap-6 self-stretch sm:flex-row lg:max-w-3xl'>
-                  <Image
-                    src={iconQuote}
-                    alt='Quote'
-                    width={36}
-                    height={28}
-                    className='flex-shrink-0 flex-grow-0 self-start'
-                  />
-                  <div className='grid grid-cols-1 gap-6'>
-                    <SuiText>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Alias blanditiis enim eveniet ipsam laudantium libero
-                      minus neque obcaecati, officia quisquam rem, repellendus.
-                      Delectus dolorum esse ex mollitia nulla quod tenetur?{' '}
-                      <Link
-                        href='#'
-                        className='text-primary-300 hover:underline'>
-                        Read blog
-                      </Link>
-                    </SuiText>
+                <CUICard className='gap-6 !bg-[#323232] p-6 lg:flex-row lg:pr-10'>
+                  <div className='flex flex-col items-center gap-6 self-stretch sm:flex-row lg:max-w-3xl'>
+                    <Image
+                      src={iconQuote}
+                      alt='Quote'
+                      width={36}
+                      height={28}
+                      className='flex-shrink-0 flex-grow-0 self-start'
+                    />
+                    <div className='space-y-6'>
+                      <SuiText>
+                        Another issue was BigQuery's limit of 100 concurrent
+                        queries, which created bottlenecks for Gumlet's
+                        customers. "If our customers needed to fire more
+                        analytics API requests than that, they would fail or go
+                        into a queue.
+                        <br />
+                        <Link
+                          href='/blog/gumlet-processing-billions-of-video-image-requests-with-clickhouse'
+                          className='text-primary-300 hover:underline'>
+                          Read blog
+                        </Link>
+                      </SuiText>
+                      <Image
+                        src={logoGumlet}
+                        alt='Gumlet logo'
+                        width={215 / 1.5}
+                        height={50 / 1.5}
+                        className='flex-shrink flex-grow-0'
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className='mr-auto size-24 flex-shrink flex-grow-0 rounded-full bg-white lg:ml-auto lg:mr-0' />
-              </CUICard>
+                </CUICard>
+              </div>
             </div>
           </div>
         </div>
@@ -419,14 +412,16 @@ export default function BigQueryPage({
 
       {/* Tabbed table */}
       <section className='section-container my-16 lg:my-24'>
-        <div className='mx-auto mb-12 max-w-4xl space-y-6 text-center'>
+        <div className='mx-auto mb-12 max-w-5xl space-y-6 text-center'>
           <SuiTitle type='h2'>
-            Tired of unpredictable costs? Need milliseconds when queries take
-            seconds? Want predictable, high concurrency without the headaches?
+            Tired of unpredictable costs?
+            <br />
+            Need milliseconds when queries take seconds?
+            <br />
+            Want predictable, high concurrency without the headaches?
           </SuiTitle>
-          <SuiText className='text-neutral-200'>
-            Explore the differences for why users are migrating from BigQuery to
-            ClickHouse for analytical workloads.
+          <SuiText className='text-lg text-neutral-200'>
+            Explore why users are migrating from BigQuery to ClickHouse.
           </SuiText>
         </div>
         <TabbedTable />

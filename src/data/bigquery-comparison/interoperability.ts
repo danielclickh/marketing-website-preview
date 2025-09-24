@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Interoperability',
-  description: `With **fully-managed CDC via ClickPipes**, ClickHouse makes it easy to stream changes from operational databases like Postgres or MySQL, enabling **real-time analytics with minimal lag**. Users benefit from **unmatched interoperability**, with support for **70+ file formats**, external catalogs like Hive and Glue, and lakehouse formats such as Iceberg. **External table engines** let you query systems like Postgres, MongoDB, or S3 directly.
+  description: `With fully-managed CDC via ClickPipes, ClickHouse makes it easy to stream changes from operational databases like Postgres, MySQL or Mongo, enabling real-time analytics with minimal lag. Users benefit from unmatched interoperability, with support for over 70 file formats, external catalogs like Hive and Glue, and lakehouse formats such as Iceberg. External table engines let you query systems like Postgres, MongoDB, or S3 directly.
 
-**BigQuery focuses interoperability around object stores and standard lake formats**. It supports common formats like Avro, CSV, JSON, ORC, Parquet, and Iceberg, with in-place queries primarily through BigLake on object storage. Catalog integrations are **limited to AWS Glue**. For CDC, it uses **Datastream pipelines**. This positions BigQuery well for classic data warehouse and lakehouse setups but with **less direct multi-system reach**.`,
+BigQuery emphasizes interoperability with object stores and lake formats, supporting Avro, CSV, JSON, ORC, Parquet, and Iceberg, with in-place queries via BigLake. Catalog integration is limited to AWS Glue, and CDC relies on Datastream pipelines. This makes BigQuery strong for warehouse and lakehouse setups, but with less direct multi-system reach.`,
   rows: [
     {
       heading: 'File format support',
