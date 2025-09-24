@@ -2,16 +2,16 @@ import heroLogos from './assets/hero-logos.png'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
-import iconVs from './assets/icon-vs.png'
 import logoBigquery from './assets/logo-bigquery.svg'
 import logoBraze from './assets/logo-braze.svg'
 import logoChartmetric from './assets/logo-chartmetric.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoRedshift from './assets/logo-redshift.svg'
+import snowflakeAnimationLogo from './assets/snowflake-animation-logo.svg'
 import snowflakeTableLogo from './assets/snowflake-table-logo.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
-import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
+import ClickHouseVersusAnimation from '@/components-cleaned/ClickHouseVersusAnimation'
 import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
@@ -23,7 +23,6 @@ import MarketoForm from '@/components/MarketoForm'
 import Modal from '@/components/Modal'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
-import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
 import tables from '@/data/snowflake-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -32,7 +31,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -240,19 +239,12 @@ export default function SnowflakePage({
             <SuiTitle type='h2' className='text-center'>
               ClickHouse compared to Snowflake
             </SuiTitle>
-            <ScaleToContainer scaleUp={false} className='mx-auto'>
-              <div className='flex w-fit flex-col items-center gap-x-16 gap-y-8 lg:flex-row lg:flex-nowrap lg:px-12'>
-                <ClickHouseAnimation />
-                <Image
-                  src={iconVs}
-                  width={60}
-                  height={60}
-                  alt='VS'
-                  className='rounded-full shadow-xl'
-                />
-                <SnowflakeAnimation />
-              </div>
-            </ScaleToContainer>
+            <ClickHouseVersusAnimation
+              competitorName='snowflake'
+              competitorLogo={snowflakeAnimationLogo}
+              competitorLineColor='#29B5E8'
+              competitorCardColor='#29B5E8'
+            />
             <CUIButton
               type='primary'
               size='lg'
@@ -536,349 +528,6 @@ function TabbedTable() {
           })
           .flat(1)}
       />
-    </div>
-  )
-}
-
-function AnimationBadge({
-  children,
-  className = ''
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <div
-      className={`whitespace-nowrap rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg ${className}`}>
-      {children}
-    </div>
-  )
-}
-
-function AnimationCounter({
-  interval = 1000,
-  max = 99
-}: {
-  interval?: number
-  max?: number
-}) {
-  const [count, setCount] = useState(1)
-
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setCount((prev) => (prev === max ? 1 : prev + 1))
-    }, interval)
-
-    return () => window.clearInterval(intervalId)
-  }, [interval, max])
-
-  return (
-    <span
-      className='inline-block'
-      style={{ width: `${max.toString().length}ch` }}>
-      {count}
-    </span>
-  )
-}
-
-function ClickHouseAnimation() {
-  const lineHeight = 84
-  const speedModifier = 0.5
-
-  return (
-    <div className='w-96'>
-      <div className='flex justify-center'>
-        <AnimationBadge>
-          <span className='text-[#88AECE]'>INSERT INTO</span>{' '}
-          <span className='text-[#B6BD68]'>'clickhouse'</span>...
-        </AnimationBadge>
-      </div>
-      <div className='mx-auto flex w-max gap-3.5'>
-        <AnimatedDataLine
-          size={lineHeight}
-          direction='down'
-          trackColor='rgba(255,255,255,0.2)'
-          trackProps={{
-            className: 'backdrop-saturate-150'
-          }}
-          keyframes={[
-            { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-            { startSize: 0.5, endSize: 1.5, duration: 0.8 + speedModifier },
-            { startSize: 1.1, endSize: 1, duration: 0.4 + speedModifier }
-          ]}
-        />
-        <AnimatedDataLine
-          size={lineHeight}
-          direction='down'
-          trackColor='rgba(255,255,255,0.2)'
-          trackProps={{
-            className: 'backdrop-saturate-150'
-          }}
-          keyframes={[
-            { startSize: 0.25, endSize: 1, duration: 0.5 + speedModifier },
-            { startSize: 1, endSize: 0.8, duration: 0.2 + speedModifier },
-            { startSize: 0.8, endSize: 1.2, duration: 0.8 + speedModifier }
-          ]}
-        />
-        <AnimatedDataLine
-          size={lineHeight}
-          direction='down'
-          trackColor='rgba(255,255,255,0.2)'
-          trackProps={{
-            className: 'backdrop-saturate-150'
-          }}
-          keyframes={[
-            { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-            { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier },
-            { startSize: 1.1, endSize: 1, duration: 1 + speedModifier }
-          ]}
-        />
-      </div>
-
-      <div className='relative mx-auto w-72'>
-        <div className='absolute inset-0 z-0 animate-fadeInOut bg-primary-300/80 blur-lg' />
-        <div className='relative z-10 rounded bg-primary-300 p-3.5'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='55'
-            height='56'
-            fill='none'
-            className='mx-auto'>
-            <path
-              fill='#000'
-              d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
-            />
-          </svg>
-        </div>
-      </div>
-
-      <div className='flex justify-center gap-6'>
-        <div>
-          <div className='mx-auto flex w-max gap-3.5'>
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='up'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                {
-                  startSize: 0.8,
-                  endSize: 1.2,
-                  duration: 0.5 + speedModifier
-                },
-                { startSize: 1, endSize: 1.5, duration: 0.8 + speedModifier },
-                { startSize: 2, endSize: 1.3, duration: 0.4 + speedModifier },
-                { startSize: 1.1, endSize: 2, duration: 0.2 + speedModifier }
-              ]}
-            />
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='up'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                { startSize: 2, endSize: 1.2, duration: 0.2 + speedModifier },
-                {
-                  startSize: 1.1,
-                  endSize: 1.8,
-                  duration: 0.8 + speedModifier
-                },
-                { startSize: 1, endSize: 1.4, duration: 0.6 + speedModifier }
-              ]}
-            />
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='up'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                { startSize: 0.5, endSize: 1.3, duration: 1 + speedModifier },
-                { startSize: 2, endSize: 1.5, duration: 0.3 + speedModifier },
-                {
-                  startSize: 1.2,
-                  endSize: 1.9,
-                  duration: 0.6 + speedModifier
-                }
-              ]}
-            />
-          </div>
-          <AnimationBadge>
-            <span className='text-[#88AECE]'>SELECT</span> *{' '}
-            <span className='text-[#88AECE]'>FROM</span>...
-          </AnimationBadge>
-        </div>
-        <div>
-          <div className='mx-auto flex w-max gap-3.5'>
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='down'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                {
-                  startSize: 0.5,
-                  endSize: 1.5,
-                  duration: 0.8 + speedModifier
-                },
-                { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-                { startSize: 1.1, endSize: 1, duration: 0.4 + speedModifier },
-                { startSize: 2, endSize: 1.5, duration: 0.3 + speedModifier }
-              ]}
-            />
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='down'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                {
-                  startSize: 0.8,
-                  endSize: 1.2,
-                  duration: 0.8 + speedModifier
-                },
-                { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier },
-                {
-                  startSize: 0.25,
-                  endSize: 1,
-                  duration: 0.5 + speedModifier
-                },
-                { startSize: 1, endSize: 0.8, duration: 0.2 + speedModifier }
-              ]}
-            />
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='down'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                { startSize: 1.1, endSize: 1, duration: 1 + speedModifier },
-                { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-                { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier }
-              ]}
-            />
-          </div>
-          <AnimationBadge className='flex divide-x divide-neutral-700 !p-0'>
-            <span className='px-4 py-2'>
-              <AnimationCounter interval={25} />
-            </span>
-            <span className='px-4 py-2'>...</span>
-            <span className='px-4 py-2'>...</span>
-          </AnimationBadge>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function SnowflakeAnimation() {
-  const lineHeight = 84
-
-  return (
-    <div className='w-96'>
-      <div className='flex justify-center'>
-        <AnimationBadge>
-          <span className='text-[#88AECE]'>INSERT INTO</span>{' '}
-          <span className='text-[#B6BD68]'>'snowflake'</span>...
-        </AnimationBadge>
-      </div>
-      <div className='mx-auto flex w-max gap-3.5'>
-        <AnimatedDataLine
-          size={lineHeight}
-          direction='down'
-          lineColor='#29B5E8'
-          strokeWidth={16}
-          trackColor='rgba(255,255,255,0.2)'
-          trackProps={{
-            className: 'backdrop-saturate-150'
-          }}
-          lineProps={{
-            strokeDasharray: '6 8'
-          }}
-          keyframes={[{ startSize: 1, endSize: 1, duration: 4 }]}
-        />
-      </div>
-
-      <div className='relative mx-auto w-72'>
-        <div className='relative z-10 rounded bg-[#29B5E8] p-3.5'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='52'
-            height='52'
-            fill='none'
-            className='mx-auto'>
-            <path
-              fill='#fff'
-              fillRule='evenodd'
-              d='M17.9 26.66a3.14 3.14 0 0 1-1.45 1.8l-10.8 6.19a3.2 3.2 0 0 1-4.34-1.15 3.14 3.14 0 0 1 1.16-4.31l6.04-3.46-6.04-3.46a3.13 3.13 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16L16.45 23a3.14 3.14 0 0 1 1.45 3.66Zm2.93 5.8a3.16 3.16 0 0 1 2.95 3.14v12.37a3.17 3.17 0 0 1-3.18 3.15 3.17 3.17 0 0 1-3.18-3.15v-6.92l-6.06 3.46a3.19 3.19 0 0 1-4.34-1.15 3.15 3.15 0 0 1 1.16-4.31l10.8-6.18a3.14 3.14 0 0 1 1.85-.42ZM31.9 19a3.17 3.17 0 0 1-2.94-3.14V3.49A3.16 3.16 0 0 1 32.14.34a3.17 3.17 0 0 1 3.18 3.15v6.93l6.05-3.47a3.2 3.2 0 0 1 4.34 1.15 3.14 3.14 0 0 1-1.16 4.31l-10.8 6.19a3.2 3.2 0 0 1-1.85.41ZM8.18 12.4a3.14 3.14 0 0 1-1.16-4.3 3.2 3.2 0 0 1 4.34-1.16l6.06 3.47V3.49A3.17 3.17 0 0 1 20.6.34a3.17 3.17 0 0 1 3.18 3.15v12.38c0 1.65-1.3 3.02-2.95 3.14A3.2 3.2 0 0 1 19 18.6L8.19 12.4Zm19.42 19a.9.9 0 0 1-.56.24H25.7a.92.92 0 0 1-.56-.24l-4.49-4.45a.9.9 0 0 1-.23-.55v-1.31c0-.19.1-.44.23-.56l4.5-4.45a.92.92 0 0 1 .55-.24h1.33c.18 0 .43.1.56.24l4.5 4.45a.9.9 0 0 1 .22.56v1.3a.9.9 0 0 1-.23.56L27.6 31.4Zm.9-5.68c0-.18-.1-.43-.24-.56l-1.3-1.29a.92.92 0 0 0-.56-.23h-.05a.9.9 0 0 0-.56.23l-1.3 1.29a.92.92 0 0 0-.23.56v.05c0 .18.1.42.23.55l1.3 1.29a.9.9 0 0 0 .56.23h.05a.9.9 0 0 0 .56-.23l1.3-1.29a.91.91 0 0 0 .24-.55v-.05Zm16.06 13.34a3.15 3.15 0 0 1 1.16 4.31 3.19 3.19 0 0 1-4.34 1.15l-6.05-3.46v6.92a3.17 3.17 0 0 1-3.18 3.15 3.16 3.16 0 0 1-3.18-3.15V35.6a3.17 3.17 0 0 1 4.78-2.73l10.8 6.18Zm-.32-13.32 6.03 3.46a3.14 3.14 0 0 1 1.17 4.3 3.2 3.2 0 0 1-4.35 1.16l-10.8-6.19a3.13 3.13 0 0 1-1.48-3.57c.22-.77.73-1.46 1.48-1.9l10.8-6.18a3.2 3.2 0 0 1 4.35 1.16c.88 1.5.36 3.43-1.17 4.3l-6.03 3.46Z'
-              clipRule='evenodd'
-            />
-          </svg>
-        </div>
-      </div>
-
-      <div className='flex justify-center gap-6'>
-        <div>
-          <div className='mx-auto flex w-max gap-3.5'>
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='up'
-              lineColor='#29B5E8'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                { startSize: 0.8, endSize: 1.2, duration: 3.5 },
-                { startSize: 1, endSize: 1.5, duration: 3.8 },
-                { startSize: 2, endSize: 1.3, duration: 3.4 },
-                { startSize: 1.1, endSize: 2, duration: 3.2 }
-              ]}
-            />
-          </div>
-          <AnimationBadge>
-            <span className='text-[#88AECE]'>SELECT</span> *{' '}
-            <span className='text-[#88AECE]'>FROM</span>...
-          </AnimationBadge>
-        </div>
-        <div>
-          <div className='mx-auto flex w-max gap-3.5'>
-            <AnimatedDataLine
-              size={lineHeight}
-              direction='down'
-              lineColor='#29B5E8'
-              trackColor='rgba(255,255,255,0.2)'
-              trackProps={{
-                className: 'backdrop-saturate-150'
-              }}
-              keyframes={[
-                { startSize: 0.5, endSize: 1.5, duration: 3.8 },
-                { startSize: 1, endSize: 2, duration: 3.75 },
-                { startSize: 1.1, endSize: 1, duration: 3.4 },
-                { startSize: 2, endSize: 1.5, duration: 3.3 }
-              ]}
-            />
-          </div>
-          <AnimationBadge className='flex divide-x divide-neutral-700 !p-0'>
-            <span className='px-4 py-2'>
-              <AnimationCounter />
-            </span>
-            <span className='px-4 py-2'>...</span>
-            <span className='px-4 py-2'>...</span>
-          </AnimationBadge>
-        </div>
-      </div>
     </div>
   )
 }
