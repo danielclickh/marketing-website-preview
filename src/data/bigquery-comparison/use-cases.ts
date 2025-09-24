@@ -2,7 +2,7 @@ import { Table } from './index'
 
 export default {
   name: 'Use cases',
-  description: `ClickHouse shines at real-time, high-frequency workloads, powering dashboards, product analytics, and customer apps with sub-second responses. Native support for logs, metrics, and traces (via ClickStack) makes it a strong fit for observability, while efficient streaming keeps costs low. Optimizations like projections, dictionaries, and fine-grained caching also make it ideal for GenAI agentic and vector workloads needing fast, high-volume queries.
+  description: `ClickHouse shines at real-time, **high-frequency workloads,** powering **dashboards**, product **analytics**, and **customer apps** with **sub-second responses**. Native support for logs, metrics, and traces (via ClickStack) makes it a **strong fit for observability** Optimizations like projections, dictionaries, and fine-grained caching also make it ideal for **GenAI agentic and vector workloads** needing fast, high-volume queries.
 
 BigQuery fits internal analytics and operational dashboards, with managed scaling for periodic workloads. But low-latency, high-concurrency use cases, like product analytics, observability, or GenAI agents will struggle with baseline query delays and costly continuous ingestion. Basic caching and SQL-limited materialized views further orient it toward batch scenarios.`,
   rows: [

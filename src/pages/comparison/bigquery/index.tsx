@@ -3,6 +3,7 @@ import bigqueryTableLogo from './assets/bigquery-table-logo.svg'
 import chartCosts from './assets/chart-costs.svg'
 import chartLatency from './assets/chart-latency.svg'
 import heroLogos from './assets/hero-logos.png'
+import iconConcurrent from './assets/icon-concurrent.svg'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
@@ -212,10 +213,12 @@ export default function BigQueryPage({
             <div className='space-y-8 md:space-y-10'>
               <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
                 <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
-                  <Image src={iconGuage} alt='Icon' width={36} height={24} />
-                  <SuiTitle type='h3' className='text-white'>
-                    BigQuery’s query latency
-                  </SuiTitle>
+                  <div className='flex items-center gap-4 lg:gap-6'>
+                    <Image src={iconGuage} alt='Icon' width={36} height={36} />
+                    <SuiTitle type='h3' className='text-white'>
+                      BigQuery’s query latency
+                    </SuiTitle>
+                  </div>
                   <SuiText>
                     BigQuery often struggles with sub-second queries due to
                     baseline latency on uncached results.
@@ -278,15 +281,17 @@ export default function BigQueryPage({
             <div className='space-y-8 md:space-y-10'>
               <div className='flex flex-col gap-10 lg:flex-row lg:justify-between'>
                 <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
-                  <Image
-                    src={iconHandCoins}
-                    alt='Icon'
-                    width={36}
-                    height={24}
-                  />
-                  <SuiTitle type='h3' className='text-white'>
-                    BigQuery’s high cost
-                  </SuiTitle>
+                  <div className='flex items-center gap-4 lg:gap-6'>
+                    <Image
+                      src={iconHandCoins}
+                      alt='Icon'
+                      width={36}
+                      height={36}
+                    />
+                    <SuiTitle type='h3' className='text-white'>
+                      BigQuery’s high cost
+                    </SuiTitle>
+                  </div>
                   <SuiText>
                     BigQuery’s per-query pricing and streaming insert fees often
                     limit usage, reduce ROI, and penalize frequent ingestion.
@@ -346,9 +351,17 @@ export default function BigQueryPage({
             <div className='space-y-8 md:space-y-10'>
               <div className='flex flex-col gap-10 xl:flex-row xl:justify-between'>
                 <div className='space-y-6 text-neutral-200 lg:max-w-2xl'>
-                  <SuiTitle type='h3' className='text-white'>
-                    BigQuery’s query concurrency
-                  </SuiTitle>
+                  <div className='flex items-center gap-4 lg:gap-6'>
+                    <Image
+                      src={iconConcurrent}
+                      alt='Icon'
+                      width={36}
+                      height={36}
+                    />
+                    <SuiTitle type='h3' className='text-white'>
+                      BigQuery’s query concurrency
+                    </SuiTitle>
+                  </div>
                   <SuiText>
                     BigQuery caps concurrency based on compute availability,
                     queuing or rejecting queries while charging per query -
@@ -403,16 +416,16 @@ export default function BigQueryPage({
 
       {/* Tabbed table */}
       <section className='section-container my-16 lg:my-24'>
-        <div className='mx-auto mb-12 max-w-5xl space-y-6 text-center'>
+        <div className='mx-auto mb-12 max-w-3xl space-y-6 text-center'>
           <SuiTitle type='h2'>
+            Explore why users are migrating from BigQuery to ClickHouse.
+          </SuiTitle>
+          <SuiText className='text-lg text-neutral-200'>
             Tired of unpredictable costs?
             <br />
             Need milliseconds when queries take seconds?
             <br />
             Want predictable, high concurrency without the headaches?
-          </SuiTitle>
-          <SuiText className='text-lg text-neutral-200'>
-            Explore why users are migrating from BigQuery to ClickHouse.
           </SuiText>
         </div>
         <TabbedTable />
