@@ -80,19 +80,18 @@ export default function BigQueryPage({
           />
           <SuiText className='space-y-6 text-neutral-200'>
             <p>
-              BigQuery handles ad-hoc queries and smaller data volumes
-              effectively, but scaling turns cost and performance management
-              into a significant challenge. Read more below to learn about how
-              ClickHouse and BigQuery compare in cost, performance, and
-              supported features.
+              BigQuery, limited to GCP, handles ad-hoc queries and complex,
+              long-running analysis effectively, but scaling introduces major
+              challenges in both cost and performance management. A per-query
+              pricing model drives up expenses as usage grows, penalizing
+              expansion.
             </p>
             <p>
-              BigQuery, limited to GCP, excels at complex, long-running queries
-              and ad-hoc analysis. But per-query pricing drives up costs as
-              usage grows, penalizing expansion. ClickHouse offers stable,
-              resource-based pricing with high concurrency and dynamic scaling -
-              ideal for interactive, user-facing workloads without surprise
-              bills. Deployable on any Cloud.
+              In contrast, ClickHouse is deployable on any cloud and delivers
+              stable, resource-based pricing with high concurrency and dynamic
+              scaling - ideal for interactive, user-facing workloads without
+              surprise bills. Read more below to see how ClickHouse and BigQuery
+              compare across cost, performance, and supported features.
             </p>
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
