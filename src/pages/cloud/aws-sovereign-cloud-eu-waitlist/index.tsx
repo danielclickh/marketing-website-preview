@@ -19,18 +19,14 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           title:
             'Join the waitlist for ClickHouse Cloud on AWS Sovereign Cloud (EU)',
           description: '',
-          path: '/cloud/hyperdx-waitlist'
+          path: '/cloud/aws-sovereign-cloud-eu-waitlist'
         },
         ...commonProps
       }
     }
   }
 
-export default function ContactPage({
-  footerData,
-  headerData,
-  seo
-}: CommonProps) {
+export default function Page({ footerData, headerData, seo }: CommonProps) {
   useGalaxyOnPage('cloudAwsSovereignCloudEuPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
