@@ -20,7 +20,7 @@ import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
-import tables from '@/data/bigquery-comparison'
+import tables from '@/data/elastic-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import logoBraze from '@/pages/comparison/snowflake/assets/logo-braze.svg'
@@ -193,7 +193,7 @@ export default function ElasticPage({
         {/* Yellow triangle */}
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-2/3 bg-primary-300' />
         <div className='section-container relative z-10'>
-          <div className='mb-16 space-y-12 lg:mb-24'>
+          {/*<div className='mb-16 space-y-12 lg:mb-24'>
             <SuiTitle type='h2' className='text-center'>
               ClickHouse compared to Elastic
             </SuiTitle>
@@ -203,7 +203,7 @@ export default function ElasticPage({
               competitorLineColor='#29B5E8'
               competitorCardColor='#29B5E8'
             />
-          </div>
+          </div>*/}
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
@@ -485,7 +485,7 @@ function TabbedTable() {
                       )}
                     </>
                   ),
-                  values: [row.clickhouse, row.bigquery]
+                  values: [row.clickhouse, row.elastic]
                 }
               })
             })

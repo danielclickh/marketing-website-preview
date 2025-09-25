@@ -2,7 +2,6 @@ import architecture from './architecture'
 import interoperability from './interoperability'
 import performance from './performance'
 import scalability from './scalability'
-import useCases from './use-cases'
 import { CellIcons } from '@/components/ComparisonTable'
 
 export type Table = {
@@ -15,7 +14,7 @@ export type Table = {
       icon: CellIcons
       label: string
     }
-    bigquery: {
+    elastic: {
       icon: CellIcons
       label: string
     }
@@ -27,6 +26,5 @@ export default [
   architecture,
   scalability,
   performance,
-  useCases,
   interoperability
 ] as Array<Table>

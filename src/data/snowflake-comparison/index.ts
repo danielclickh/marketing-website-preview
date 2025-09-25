@@ -29,4 +29,4 @@ export default [
   performance,
   useCases,
   interoperability
-] satisfies Array<Table>
+] as Array<Table>
