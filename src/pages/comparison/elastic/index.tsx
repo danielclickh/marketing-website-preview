@@ -253,17 +253,18 @@ export default function ElasticPage({
 
       {/* Tabbed table */}
       <section className='py-16 lg:py-24'>
-        <div className='mx-auto mb-6 max-w-3xl space-y-6 text-center'>
-          <SuiTitle type='h2'>
-            Explore why users are migrating from Elastic to ClickHouse.
-          </SuiTitle>
-          <SuiText className='text-lg text-neutral-200'>
-            Tired of unpredictable costs?
-            <br />
-            Need milliseconds when queries take seconds?
-            <br />
-            Want predictable, high concurrency without the headaches?
-          </SuiText>
+        <div className='section-container'>
+          <div className='mx-auto mb-6 max-w-5xl space-y-6 text-center'>
+            <SuiTitle type='h2'>
+              Frustrated with slow queries, soaring disk usage at scale and
+              costs and hours spent watching clusters rebalance?
+            </SuiTitle>
+            <SuiText className='mx-auto max-w-2xl text-lg text-neutral-200'>
+              <strong className='text-white'>You’re not alone.</strong> Teams
+              are moving to ClickStack for faster analytics, lower costs, and a
+              unified engine for logs, metrics, and traces.
+            </SuiText>
+          </div>
         </div>
         <TabbedTable />
       </section>
