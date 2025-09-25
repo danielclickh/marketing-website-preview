@@ -586,24 +586,28 @@ function TabbedTable() {
       <Sticky
         className='z-40 border-b border-transparent py-4 transition'
         stuckClassName='bg-neutral-900/80 border-white/5 backdrop-blur'>
-        <ul className='section-container flex flex-wrap justify-center gap-2 lg:gap-4'>
-          {tables.map((table, tableIndex) => {
-            const isActive = activeTabIndex === tableIndex
-            return (
-              <li key={tableIndex}>
-                <button
-                  disabled={isActive}
-                  className='inline-block rounded-full border border-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-primary-800'
-                  onClick={(event) => {
-                    event.preventDefault()
-                    setActiveTabIndex(tableIndex)
-                  }}>
-                  {table.name}
-                </button>
-              </li>
-            )
-          })}
-        </ul>
+        <div className='section-container'>
+          <div className='hide-scrollbar -mx-4 overflow-x-auto sm:-mx-8 sm:px-8 lg:mx-0 lg:overflow-x-visible lg:px-0'>
+            <ul className='mx-auto flex w-min justify-center whitespace-nowrap px-2'>
+              {tables.map((table, tableIndex) => {
+                const isActive = activeTabIndex === tableIndex
+                return (
+                  <li key={tableIndex} className='px-1 lg:px-2'>
+                    <button
+                      disabled={isActive}
+                      className='inline-block rounded-full border border-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-primary-800'
+                      onClick={(event) => {
+                        event.preventDefault()
+                        setActiveTabIndex(tableIndex)
+                      }}>
+                      {table.name}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
       </Sticky>
 
       <div className='section-container'>
