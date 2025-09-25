@@ -199,7 +199,7 @@ function ValueCell({ heading, icon, label }: ValueCellProps) {
           aria-hidden='true'>
           {heading}
         </div>
-        <div className='grid grid-cols-1 gap-3 text-base font-medium text-neutral-200'>
+        <div className='rich_content grid grid-cols-1 gap-3 text-base font-medium text-neutral-200'>
           {labelIsString && <Markdown encloseByDiv={false}>{label}</Markdown>}
           {!labelIsString && label}
         </div>
