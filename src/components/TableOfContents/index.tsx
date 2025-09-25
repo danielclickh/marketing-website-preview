@@ -17,12 +17,14 @@ export default function TableOfContents({
     const contentEl = contentRef.current
     if (!contentEl) return
 
-    const observer = new MutationObserver(() => {
-      const headings = Array.from(
-        contentEl.querySelectorAll(headersSelector || 'h1, h2')
-      ).filter((el): el is HTMLElement => el instanceof HTMLElement)
+    const findHeadings = () => {
+      return Array.from(contentEl.querySelectorAll(headersSelector || 'h1, h2'))
+        .filter((el): el is HTMLElement => el instanceof HTMLElement)
+        .filter((el) => !el.classList.contains('toc-ignore'))
+    }
 
-      setHeadingElements(headings)
+    const observer = new MutationObserver(() => {
+      setHeadingElements(findHeadings())
     })
 
     observer.observe(contentEl, {
@@ -31,11 +33,7 @@ export default function TableOfContents({
     })
 
     // Run once initially in case content is already rendered
-    const initialHeadings = Array.from(
-      contentEl.querySelectorAll(headersSelector || 'h1, h2')
-    ).filter((el): el is HTMLElement => el instanceof HTMLElement)
-
-    setHeadingElements(initialHeadings)
+    setHeadingElements(findHeadings())
 
     return () => observer.disconnect()
   }, [contentRef, headersSelector])
