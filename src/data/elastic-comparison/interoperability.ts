@@ -20,8 +20,8 @@ Beyond instrumentation, ClickStack inherits ClickHouse’s broad interoperabilit
       elastic: { icon: 'no', label: 'Not supported' }
     },
     {
-      heading:
-        'Support for open table and file formats (e.g. Iceberg, Parquet, ORC)',
+      heading: 'Support for open table and file formats',
+      subHeading: 'e.g. Iceberg, Parquet, ORC',
       clickhouse: { icon: 'yes', label: '**Open format support**' },
       elastic: { icon: 'no', label: 'Not supported' }
     },

@@ -58,7 +58,8 @@ ClickStack, powered by ClickHouse, scales for petabyte workloads. Queries are fu
       elastic: { icon: 'yes', label: 'Elastic Cloud Serverless' }
     },
     {
-      heading: 'Elastic scaling (up/down with load)',
+      heading: 'Elastic scaling',
+      subHeading: 'Up/down with load',
       clickhouse: {
         icon: 'yes',
         label: '**Elastic scaling** with load (ClickHouse Cloud)'

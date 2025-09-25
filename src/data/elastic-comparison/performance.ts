@@ -9,7 +9,8 @@ Elastic, by contrast, was **designed for search**: aggregations are slow, term a
 Public benchmarks and user reports show **ClickHouse outperforming Elasticsearch by 10–100x on analytical workloads** with **at least 2x greater compression**. Without tuning or schema changes, it executes complex aggregations and joins across billions of rows in a fraction of the time and cost.`,
   rows: [
     {
-      heading: 'Join performance (multi-billion rows)',
+      heading: 'Join performance',
+      subHeading: 'Multi-billion rows',
       clickhouse: {
         icon: 'yes',
         label: '**Efficient joins** across billions of rows'

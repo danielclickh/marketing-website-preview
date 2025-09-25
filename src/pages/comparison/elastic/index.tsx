@@ -4,13 +4,17 @@ import heroLogos from './assets/hero-logos.png'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
+import logoDidi from './assets/logo-didi.svg'
+import logoNetflix from './assets/logo-netflix.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoRedshift from './assets/logo-redshift.svg'
+import logoShopee from './assets/logo-shopee.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
+import logoZomato from './assets/logo-zomato.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
 import ClickHouseVersusAnimation from '@/components-cleaned/ClickHouseVersusAnimation'
 import Sticky from '@/components-cleaned/Sticky'
-import { CUIButton, CUICard } from '@/components/ClickUI'
+import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
 } from '@/components/ComparisonTable'
@@ -23,9 +27,6 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import tables from '@/data/elastic-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import logoBraze from '@/pages/comparison/snowflake/assets/logo-braze.svg'
-import logoChartmetric from '@/pages/comparison/snowflake/assets/logo-chartmetric.svg'
-import logoM3ter from '@/pages/comparison/snowflake/assets/logo-m3ter.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -212,38 +213,42 @@ export default function ElasticPage({
             <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
               <QuoteCard
                 content='ClickHouse logging cluster has now exceeded 400 physical nodes, with a peak writing traffic of over 40 GB/s. This supports approximately 15 million queries per day, with a peak QPS of about 200. Compared to Elasticsearch, the machine cost of ClickHouse has decreased by 30%. The query speed has improved by about 4 times compared to Elasticsearch'
+                link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
                 logo={{
-                  src: logoBraze,
-                  width: 93,
-                  height: 44,
-                  alt: 'Braze'
+                  src: logoDidi,
+                  width: 80 * 1.2,
+                  height: 25 * 1.2,
+                  alt: 'Didi'
                 }}
               />
               <QuoteCard
                 content='Elasticsearch was fast but prohibitively, laughably expensive. With ClickHouse, queries that once took seconds came back in milliseconds, logs were searchable within 20 seconds, and the system finally felt absurdly fast'
+                link='/blog/seeing-the-big-picture-shopees-journey-to-distributed-tracing-with-clickhouse'
                 logo={{
-                  src: logoChartmetric,
-                  width: 189,
-                  height: 35,
-                  alt: 'Chartmetric'
+                  src: logoShopee,
+                  width: 127,
+                  height: 40,
+                  alt: 'Shopee'
                 }}
               />
               <QuoteCard
                 content='Extensive testing and comparison showed that ClickHouse outperformed other solutions like Elasticsearch in three key areas: performance, compatibility, and cost-efficiency for large-scale operations.'
+                link='/videos/meetupsf_march_2025_04'
                 logo={{
-                  src: logoM3ter,
-                  width: 102,
-                  height: 29,
-                  alt: 'M3ter'
+                  src: logoNetflix,
+                  width: 111,
+                  height: 30,
+                  alt: 'Netflix'
                 }}
               />
               <QuoteCard
                 content='In the past, we stored all of these logs on self-hosted Elasticsearch. Clickhouse emerged to be the best candidate for our use case, and we decided to move forward with it.'
+                link='/videos/zomatos-logging-platform-journey'
                 logo={{
-                  src: logoM3ter,
-                  width: 102,
-                  height: 29,
-                  alt: 'M3ter'
+                  src: logoZomato,
+                  width: 190 * 0.7,
+                  height: 40 * 0.7,
+                  alt: 'Zomato'
                 }}
               />
             </div>
@@ -275,33 +280,33 @@ export default function ElasticPage({
           <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='lightning'
-                title='Built for real-time'
-                text='Power always-on, low-latency, high-concurrency workloads'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='coins'
-                title='Predictable pricing'
-                text='No surprise bills or penalties for usage spikes or need to upgrade to expensive plans to access advanced features'
-                className='bg-neutral-900/80'
-              />
-            </div>{' '}
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
                 icon='hand-coins'
                 title='Lower costs'
-                text='3–5x better performance per dollar than Elastic, less spend, and more headroom.'
+                text='10x cost savings thanks to high compression and resource efficiency'
                 className='bg-neutral-900/80'
               />
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='unlock'
-                title='Open source and open standards'
-                text='Flexible deployments models from open source to managed cloud and BYOC, with support for external data catalogues and lake formats'
+                icon='squares-four'
+                title='Simpler at scale'
+                text='Homogenous architecture and vertical scaling simplifies and reduces nodes'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='chart-line'
+                title='Built for high cardinality analytics'
+                text='Column orientation designed for high cardinality queries'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='list-search'
+                title='Open and interoperable'
+                text='Supports open standards like OpenTelemetry and integrates directly with systems and formats such as Postgres, Kafka, Parquet, and Iceberg.'
                 className='bg-neutral-900/80'
               />
             </div>
@@ -316,7 +321,7 @@ export default function ElasticPage({
             Migrate your workload from Elastic today
           </SuiTitle>
           <SuiText size='base' color='text-default' weight='normal'>
-            Cut costs, boost performance, and unlock real-time analytics with
+            Cut costs, boost performance, and unlock observability at scale with
             ClickHouse.
             <br />
             We’ll get you started on a 30 day trial and $300 credits to spend at
