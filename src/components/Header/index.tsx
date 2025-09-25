@@ -6,6 +6,7 @@ import Navigation from '../Navigation'
 import GitHub from '../icons/GitHub'
 import { HeaderProps } from './types'
 import { useGlobalSearch } from '@/components-cleaned/GlobalSearchProvider'
+import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { SearchIcon } from '@heroicons/react/outline'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
@@ -18,7 +19,6 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const pathname = usePathname()
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
-  const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   // Eyebrow default settings
@@ -47,18 +47,19 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     }
   }, [pathname])
 
-  const resizeHandler = () => {
-    if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
-  }
-
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
   }
 
+  useResizeObserverSsr(headerRef, (el) => {
+    document.documentElement.style.setProperty(
+      '--header-height',
+      `${el.target.clientHeight}px`
+    )
+  })
+
   useEffect(() => {
-    window.addEventListener('resize', resizeHandler)
     window.addEventListener('scroll', scrollHandler)
-    resizeHandler()
     scrollHandler()
 
     //=== Country specific eyebrow ===//
@@ -122,7 +123,6 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     //=== Country specific eyebrow ===//
 
     return () => {
-      window.removeEventListener('resize', resizeHandler)
       window.removeEventListener('scroll', scrollHandler)
     }
   }, [headerRef])
@@ -132,7 +132,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   return (
     <>
       {/* Add empty space for fixed header */}
-      <div style={{ height: headerHeight + 1 }} />
+      <div style={{ height: 'calc(var(--header-height, 72px) + 1px)' }} />
 
       <header
         ref={headerRef}
@@ -152,8 +152,6 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           text={headerBannerText}
           expires={headerBannerExpires}
           dismissible={true}
-          onShow={resizeHandler}
-          onHide={resizeHandler}
           className={eyebrow?.className || ''}
         />
 
@@ -213,8 +211,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           {/* Nav container */}
           <div
             style={{
-              top: headerHeight,
-              height: `calc(100dvh - ${headerHeight}px)`
+              top: 'var(--header-height, 72px)',
+              height: 'calc(100dvh - var(--header-height, 72px))'
             }}
             className={`${
               burgerMenuIsOpen

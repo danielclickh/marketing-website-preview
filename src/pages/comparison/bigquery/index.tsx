@@ -16,6 +16,7 @@ import logoRedshift from './assets/logo-redshift.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
 import ClickHouseVersusAnimation from '@/components-cleaned/ClickHouseVersusAnimation'
+import Sticky from '@/components-cleaned/Sticky'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
@@ -435,8 +436,8 @@ export default function BigQueryPage({
       </section>
 
       {/* Tabbed table */}
-      <section className='section-container my-16 lg:my-24'>
-        <div className='mx-auto mb-12 max-w-3xl space-y-6 text-center'>
+      <section className='py-16 lg:py-24'>
+        <div className='mx-auto mb-6 max-w-3xl space-y-6 text-center'>
           <SuiTitle type='h2'>
             Explore why users are migrating from BigQuery to ClickHouse.
           </SuiTitle>
@@ -581,90 +582,96 @@ function TabbedTable() {
   ]
 
   return (
-    <div>
-      <ul className='flex flex-wrap justify-center gap-4'>
-        {tables.map((table, tableIndex) => {
-          const isActive = activeTabIndex === tableIndex
-          return (
-            <li key={tableIndex}>
-              <button
-                disabled={isActive}
-                className='inline-block rounded-full border border-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-primary-800'
-                onClick={(event) => {
-                  event.preventDefault()
-                  setActiveTabIndex(tableIndex)
-                }}>
-                {table.name}
-              </button>
-            </li>
-          )
-        })}
-      </ul>
-
-      <div className='mx-auto my-12 max-w-5xl grid-cols-1 grid-rows-1 text-center text-sm text-neutral-200 lg:grid lg:px-6'>
-        {tables.map((table, tableIndex) => {
-          const isActive = activeTabIndex === tableIndex
-          return (
-            <Fragment key={tableIndex}>
-              {table.description && (
-                <div
-                  className={`relative col-start-1 row-start-1 space-y-6 ${isActive ? 'z-10' : 'pointer-events-none -z-10 hidden lg:block lg:opacity-0'}`}>
-                  <Markdown
-                    encloseByDiv={false}
-                    components={{
-                      a({ node, children, className = '', ...props }) {
-                        return (
-                          <a
-                            {...props}
-                            className={`text-primary-300 hover:underline ${className}`}>
-                            {children}
-                          </a>
-                        )
-                      },
-                      strong({ node, children, className = '', ...props }) {
-                        return (
-                          <strong
-                            className={`text-white ${className}`}
-                            {...props}>
-                            {children}
-                          </strong>
-                        )
-                      }
-                    }}>
-                    {table.description}
-                  </Markdown>
-                </div>
-              )}
-            </Fragment>
-          )
-        })}
-      </div>
-
-      <ComparisonTable
-        columns={tableColumns}
-        seoCaption='Feature comparison of ClickHouse and BigQuery'
-        rows={tables
-          .map((table, tableIndex) => {
+    <div className='relative'>
+      <Sticky
+        className='z-40 border-b border-transparent py-4 transition'
+        stuckClassName='bg-neutral-900/80 border-white/5 backdrop-blur'>
+        <ul className='section-container flex flex-wrap justify-center gap-2 lg:gap-4'>
+          {tables.map((table, tableIndex) => {
             const isActive = activeTabIndex === tableIndex
-            return table.rows.map((row) => {
-              return {
-                hidden: !isActive,
-                heading: (
-                  <>
-                    {row.heading}
-                    {row?.subHeading && (
-                      <small className='block font-normal normal-case'>
-                        {row.subHeading}
-                      </small>
-                    )}
-                  </>
-                ),
-                values: [row.clickhouse, row.bigquery]
-              }
+            return (
+              <li key={tableIndex}>
+                <button
+                  disabled={isActive}
+                  className='inline-block rounded-full border border-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-primary-300 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-primary-800'
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setActiveTabIndex(tableIndex)
+                  }}>
+                  {table.name}
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+      </Sticky>
+
+      <div className='section-container'>
+        <div className='mx-auto mb-12 mt-6 max-w-5xl grid-cols-1 grid-rows-1 text-center text-sm text-neutral-200 lg:grid lg:px-6'>
+          {tables.map((table, tableIndex) => {
+            const isActive = activeTabIndex === tableIndex
+            return (
+              <Fragment key={tableIndex}>
+                {table.description && (
+                  <div
+                    className={`relative col-start-1 row-start-1 space-y-6 ${isActive ? 'z-10' : 'pointer-events-none -z-10 hidden lg:block lg:opacity-0'}`}>
+                    <Markdown
+                      encloseByDiv={false}
+                      components={{
+                        a({ node, children, className = '', ...props }) {
+                          return (
+                            <a
+                              {...props}
+                              className={`text-primary-300 hover:underline ${className}`}>
+                              {children}
+                            </a>
+                          )
+                        },
+                        strong({ node, children, className = '', ...props }) {
+                          return (
+                            <strong
+                              className={`text-white ${className}`}
+                              {...props}>
+                              {children}
+                            </strong>
+                          )
+                        }
+                      }}>
+                      {table.description}
+                    </Markdown>
+                  </div>
+                )}
+              </Fragment>
+            )
+          })}
+        </div>
+
+        <ComparisonTable
+          columns={tableColumns}
+          seoCaption='Feature comparison of ClickHouse and BigQuery'
+          rows={tables
+            .map((table, tableIndex) => {
+              const isActive = activeTabIndex === tableIndex
+              return table.rows.map((row) => {
+                return {
+                  hidden: !isActive,
+                  heading: (
+                    <>
+                      {row.heading}
+                      {row?.subHeading && (
+                        <small className='block font-normal normal-case'>
+                          {row.subHeading}
+                        </small>
+                      )}
+                    </>
+                  ),
+                  values: [row.clickhouse, row.bigquery]
+                }
+              })
             })
-          })
-          .flat(1)}
-      />
+            .flat(1)}
+        />
+      </div>
     </div>
   )
 }
