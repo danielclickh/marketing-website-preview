@@ -60,7 +60,7 @@ function AnimationBadge({
 
 function AnimationCounter({
   interval = 1000,
-  max = 99
+  max = 1000
 }: {
   interval?: number
   max?: number
@@ -272,7 +272,7 @@ function ClickHouseAnimation() {
           </div>
           <AnimationBadge className='flex divide-x divide-neutral-700 !p-0'>
             <span className='px-4 py-2'>
-              <AnimationCounter interval={25} />
+              <AnimationCounter interval={10} />
             </span>
             <span className='px-4 py-2'>...</span>
             <span className='px-4 py-2'>...</span>
@@ -377,7 +377,7 @@ function CompetitorAnimation({
           </div>
           <AnimationBadge className='flex divide-x divide-neutral-700 !p-0'>
             <span className='px-4 py-2'>
-              <AnimationCounter />
+              <AnimationCounter interval={700} />
             </span>
             <span className='px-4 py-2'>...</span>
             <span className='px-4 py-2'>...</span>
