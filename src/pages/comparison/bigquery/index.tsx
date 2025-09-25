@@ -33,7 +33,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useCallback, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -437,17 +437,19 @@ export default function BigQueryPage({
 
       {/* Tabbed table */}
       <section className='py-16 lg:py-24'>
-        <div className='mx-auto mb-6 max-w-3xl space-y-6 text-center'>
-          <SuiTitle type='h2'>
-            Explore why users are migrating from BigQuery to ClickHouse.
-          </SuiTitle>
-          <SuiText className='text-lg text-neutral-200'>
-            Tired of unpredictable costs?
-            <br />
-            Need milliseconds when queries take seconds?
-            <br />
-            Want predictable, high concurrency without the headaches?
-          </SuiText>
+        <div className='section-container'>
+          <div className='mx-auto mb-6 max-w-3xl space-y-6 text-center'>
+            <SuiTitle type='h2'>
+              Explore why users are migrating from BigQuery to ClickHouse.
+            </SuiTitle>
+            <SuiText className='text-lg text-neutral-200'>
+              Tired of unpredictable costs?
+              <br />
+              Need milliseconds when queries take seconds?
+              <br />
+              Want predictable, high concurrency without the headaches?
+            </SuiText>
+          </div>
         </div>
         <TabbedTable />
       </section>
@@ -552,6 +554,30 @@ export default function BigQueryPage({
 
 function TabbedTable() {
   const [activeTabIndex, setActiveTabIndex] = useState(0)
+  const tableRef = useRef<null | HTMLDivElement>(null)
+
+  const scrollTableIntoView = useCallback(() => {
+    const table = tableRef.current
+    if (table) {
+      const timer = window.setTimeout(() => {
+        const boundingRect = table.getBoundingClientRect()
+        const isInView =
+          boundingRect.bottom > 0 &&
+          boundingRect.right > 0 &&
+          boundingRect.top < window.innerHeight &&
+          boundingRect.left < window.innerWidth
+
+        // Only scroll into view if it's not already in view
+        if (!isInView) {
+          table.scrollIntoView({
+            block: 'center'
+          })
+        }
+      }, 100)
+
+      return () => window.clearTimeout(timer)
+    }
+  }, [tableRef])
 
   const tableColumns: ComparisonTableProps['columns'] = [
     {
@@ -599,6 +625,7 @@ function TabbedTable() {
                       onClick={(event) => {
                         event.preventDefault()
                         setActiveTabIndex(tableIndex)
+                        scrollTableIntoView()
                       }}>
                       {table.name}
                     </button>
@@ -610,7 +637,7 @@ function TabbedTable() {
         </div>
       </Sticky>
 
-      <div className='section-container'>
+      <div className='section-container' ref={tableRef}>
         <div className='mx-auto mb-12 mt-6 max-w-5xl grid-cols-1 grid-rows-1 text-center text-sm text-neutral-200 lg:grid lg:px-6'>
           {tables.map((table, tableIndex) => {
             const isActive = activeTabIndex === tableIndex
