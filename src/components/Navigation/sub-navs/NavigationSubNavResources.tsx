@@ -121,6 +121,14 @@ export default function NavigationSubNavResources() {
               Snowflake
             </NavigationLink>
           </li>
+          <li>
+            <NavigationLink
+              href='/comparison/elastic'
+              onClick={useGalaxyOnClick('topNav.comparisonsMenu.elasticSelect')}
+              className='block w-full'>
+              Elastic
+            </NavigationLink>
+          </li>
         </NavigationSubNav>
       </li>
       <li>
