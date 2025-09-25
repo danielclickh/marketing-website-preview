@@ -192,6 +192,7 @@ export default function SnowflakePage({
               className='text-primary-300 hover:underline'>
               migrating from Snowflake to ClickHouse
             </Link>
+            .
           </SuiText>
         </div>
         <Image

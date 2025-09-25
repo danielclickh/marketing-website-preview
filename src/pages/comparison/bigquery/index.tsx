@@ -151,6 +151,7 @@ export default function BigQueryPage({
               className='text-primary-300 hover:underline'>
               migrating from BigQuery to ClickHouse
             </Link>
+            .
           </SuiText>
         </div>
         <Image
