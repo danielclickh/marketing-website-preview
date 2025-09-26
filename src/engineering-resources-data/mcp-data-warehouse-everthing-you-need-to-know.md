@@ -1,7 +1,7 @@
 ---
 title: 'MCP and Data Warehouses: everything you need to know'
 slug: 'mcp-data-warehouse-everthing-you-need-to-know'
-excerpt: "This article explores the suitability of MCP with Data Warehouses, and discusses the business and technical details you need to know to succeed."
+excerpt: "This article explores the suitability of MCP with Data Warehouses, and discusses the business and technical details you need to know to succeed"
 index: 4
 ---
 
