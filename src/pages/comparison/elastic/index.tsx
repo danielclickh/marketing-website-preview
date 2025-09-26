@@ -36,7 +36,13 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { Fragment, useCallback, useRef, useState } from 'react'
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -529,12 +535,29 @@ function TabbedTable() {
 
 function ClickStackVersusElkStack() {
   const layerGap = 72
-  const debounceTimeout = 50
+  const [userInteracting, setUserInteracting] = useState(false)
   const [activeLayer, setActiveLayer] = useState<null | number>(null)
-  const resetActiveLayer = useDebounce(
-    () => setActiveLayer(null),
-    debounceTimeout
-  )
+
+  const activateLayer = useDebounce((layer: number | null) => {
+    setUserInteracting(typeof layer === 'number')
+    setActiveLayer(layer)
+  }, 50)
+  const resetActiveLayer = () => activateLayer(null)
+
+  useEffect(() => {
+    if (!userInteracting) {
+      const interval = window.setInterval(() => {
+        setActiveLayer((old) => {
+          if (old === null) return 1
+          const newValue = old + 1
+          return newValue > 3 ? null : newValue
+        })
+      }, 1500)
+
+      return () => window.clearInterval(interval)
+    }
+  }, [userInteracting])
+
   const noActiveLayer = activeLayer === null
   const layer1Active = noActiveLayer || activeLayer === 1
   const layer2Active = noActiveLayer || activeLayer === 2
@@ -547,19 +570,19 @@ function ClickStackVersusElkStack() {
           hyperdx={layer1Active}
           clickhouse={layer2Active}
           opentelemetry={layer3Active}
-          onMouseEnter={useDebounce((stack) => {
+          onMouseEnter={(stack) => {
             switch (stack) {
               case 'hyperdx':
-                setActiveLayer(1)
+                activateLayer(1)
                 break
               case 'clickhouse':
-                setActiveLayer(2)
+                activateLayer(2)
                 break
               case 'opentelemetry':
-                setActiveLayer(3)
+                activateLayer(3)
                 break
             }
-          }, debounceTimeout)}
+          }}
           onMouseLeave={resetActiveLayer}
         />
         <Image
@@ -574,28 +597,19 @@ function ClickStackVersusElkStack() {
           layers={[
             {
               logo: { src: logoKibana },
-              onMouseEnter: useDebounce(
-                () => setActiveLayer(1),
-                debounceTimeout
-              ),
+              onMouseEnter: () => activateLayer(1),
               onMouseLeave: resetActiveLayer,
               active: layer1Active
             },
             {
               logo: { src: logoElasticsearch },
-              onMouseEnter: useDebounce(
-                () => setActiveLayer(2),
-                debounceTimeout
-              ),
+              onMouseEnter: () => activateLayer(2),
               onMouseLeave: resetActiveLayer,
               active: layer2Active
             },
             {
               logo: { src: logoLogstash },
-              onMouseEnter: useDebounce(
-                () => setActiveLayer(3),
-                debounceTimeout
-              ),
+              onMouseEnter: () => activateLayer(3),
               onMouseLeave: resetActiveLayer,
               active: layer3Active
             }
