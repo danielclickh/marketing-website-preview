@@ -1,8 +1,11 @@
+import elasticAnimationLogo from './assets/elastic-animation-logo.svg'
 import elasticTableLogo from './assets/elastic-table-logo.svg'
 import heroLogos from './assets/hero-logos.png'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
+import iconLightning from './assets/icon-lightning.svg'
+import iconUnlock from './assets/icon-unlock.svg'
 import logoDidi from './assets/logo-didi.svg'
 import logoElasticsearch from './assets/logo-elasticsearch.svg'
 import logoKibana from './assets/logo-kibana.svg'
@@ -18,7 +21,7 @@ import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-v
 import LogoStack from '@/components-cleaned/LogoStack'
 import Sticky from '@/components-cleaned/Sticky'
 import ClickStack from '@/components/ClickStack'
-import { CUIButton } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
 } from '@/components/ComparisonTable'
@@ -27,11 +30,15 @@ import LinedIconCard from '@/components/LinedIconCard'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
+import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
 import tables from '@/data/elastic-comparison'
 import { useDebounce } from '@/hooks'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import chartCosts from '@/pages/comparison/bigquery/assets/chart-costs.svg'
+import iconQuote from '@/pages/comparison/bigquery/assets/icon-quote.svg'
+import logoBlock from '@/pages/comparison/bigquery/assets/logo-block.png'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -203,14 +210,17 @@ export default function ElasticPage({
           }
         />
         {/* Yellow triangle */}
-        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-2/3 bg-primary-300' />
-        <div className='section-container relative z-10'>
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[70rem] bg-primary-300 lg:top-[47rem]' />
+        <div className='section-container relative z-10 space-y-6'>
           <div className='mb-16 space-y-12 lg:mb-24'>
             <SuiTitle type='h2' className='text-center'>
               ClickStack compared to Elastic
             </SuiTitle>
             <ClickStackVersusElkStack />
+            {/*<ClickHouseVersusElastic />*/}
           </div>
+
+          {/* Testimonials */}
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
@@ -257,6 +267,101 @@ export default function ElasticPage({
                   alt: 'Zomato'
                 }}
               />
+            </div>
+          </div>
+
+          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+            {/* Pillar 1 */}
+            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+              <div className='space-y-6 text-neutral-200'>
+                <div className='flex items-center gap-4 lg:gap-6'>
+                  <Image src={iconGuage} alt='Icon' width={36} height={36} />
+                  <SuiTitle type='h3' className='text-white'>
+                    Performance at Scale
+                  </SuiTitle>
+                </div>
+                <SuiText>
+                  Elastic slows under heavy ingest and high-cardinality queries,
+                  while ClickHouse powers sub-second analytics even at petabyte
+                  scale.
+                </SuiText>
+                <Image
+                  src={chartCosts}
+                  alt='Cost for querying 1 billion rows'
+                  width={336}
+                  height={273}
+                  className='mx-auto'
+                />
+              </div>
+            </div>
+
+            {/* Pillar 2 */}
+            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+              <div className='space-y-6 text-neutral-200'>
+                <div className='flex items-center gap-4 lg:gap-6'>
+                  <Image
+                    src={iconHandCoins}
+                    alt='Icon'
+                    width={36}
+                    height={36}
+                  />
+                  <SuiTitle type='h3' className='text-white'>
+                    Lower Cost, Higher Efficiency
+                  </SuiTitle>
+                </div>
+                <SuiText>
+                  ClickHouse’s columnar storage and advanced compression cut
+                  storage needs by &gt; 50%, reducing infrastructure costs
+                  dramatically and allowing for long term retention.
+                </SuiText>
+                <Image
+                  src={chartCosts}
+                  alt='Cost for querying 1 billion rows'
+                  width={336}
+                  height={273}
+                  className='mx-auto'
+                />
+              </div>
+            </div>
+
+            {/* Pillar 3 */}
+            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+              <div className='space-y-6 text-neutral-200'>
+                <div className='flex items-center gap-4 lg:gap-6'>
+                  <Image
+                    src={iconLightning}
+                    alt='Icon'
+                    width={36}
+                    height={36}
+                  />
+                  <SuiTitle type='h3' className='text-white'>
+                    Unified Observability
+                  </SuiTitle>
+                </div>
+                <SuiText>
+                  ClickStack runs logs, metrics, and traces in one engine
+                  alongside business and application data for unrivalled
+                  correlation. Elastic was never designed for analytical
+                  workloads leaving data fragmented.
+                </SuiText>
+              </div>
+            </div>
+
+            {/* Pillar 4 */}
+            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+              <div className='space-y-6 text-neutral-200'>
+                <div className='flex items-center gap-4 lg:gap-6'>
+                  <Image src={iconUnlock} alt='Icon' width={36} height={36} />
+                  <SuiTitle type='h3' className='text-white'>
+                    Open source and open standards
+                  </SuiTitle>
+                </div>
+                <SuiText>
+                  ClickStack is fully open source (MIT + Apache 2.0) and
+                  OpenTelemetry-native, ensuring interoperability and freedom
+                  from lock-in.
+                </SuiText>
+              </div>
             </div>
           </div>
         </div>
@@ -617,5 +722,66 @@ function ClickStackVersusElkStack() {
         />
       </div>
     </>
+  )
+}
+
+function ClickHouseVersusElastic() {
+  function ClickHouseLogo({ className = '' }: { className?: string }) {
+    return (
+      <div
+        className={`flex w-20 items-center justify-center rounded bg-primary shadow ${className}`}>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='55'
+          height='56'
+          fill='none'
+          className='mx-auto'>
+          <path
+            fill='#000'
+            d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
+          />
+        </svg>
+      </div>
+    )
+  }
+
+  function ElasticLogo({ className = '' }: { className?: string }) {
+    return (
+      <div
+        className={`flex size-20 items-center justify-center rounded bg-white shadow ${className}`}>
+        <Image
+          src={elasticAnimationLogo}
+          width={56}
+          height={56}
+          alt='Elastic'
+        />
+      </div>
+    )
+  }
+
+  return (
+    <ScaleToContainer scaleUp={false} className='mx-auto'>
+      <div className='flex w-fit flex-col gap-x-16 gap-y-8 lg:flex-row lg:flex-nowrap lg:px-12'>
+        <div className='grid grid-cols-2 grid-rows-3 gap-2.5'>
+          <ClickHouseLogo className='row-span-full' />
+          <ClickHouseLogo className='row-span-full' />
+        </div>
+        <Image
+          src={iconVs}
+          width={60}
+          height={60}
+          alt='VS'
+          className='self-center rounded-full shadow-xl'
+        />
+        <div className='grid grid-cols-2 grid-rows-3 gap-2.5'>
+          <ElasticLogo />
+          <ElasticLogo />
+          <ElasticLogo />
+          <ElasticLogo />
+          <ElasticLogo />
+          <ElasticLogo />
+        </div>
+      </div>
+    </ScaleToContainer>
   )
 }
