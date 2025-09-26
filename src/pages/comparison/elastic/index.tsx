@@ -573,7 +573,7 @@ function ClickStackVersusElkStack() {
           gap={layerGap}
           layers={[
             {
-              logo: { src: logoKibana, className: 'm-12' },
+              logo: { src: logoKibana },
               onMouseEnter: useDebounce(
                 () => setActiveLayer(1),
                 debounceTimeout
@@ -582,7 +582,7 @@ function ClickStackVersusElkStack() {
               active: layer1Active
             },
             {
-              logo: { src: logoElasticsearch, className: 'm-12' },
+              logo: { src: logoElasticsearch },
               onMouseEnter: useDebounce(
                 () => setActiveLayer(2),
                 debounceTimeout
@@ -591,7 +591,7 @@ function ClickStackVersusElkStack() {
               active: layer2Active
             },
             {
-              logo: { src: logoLogstash, className: 'm-12' },
+              logo: { src: logoLogstash },
               onMouseEnter: useDebounce(
                 () => setActiveLayer(3),
                 debounceTimeout
