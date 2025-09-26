@@ -227,13 +227,13 @@ export default function ElasticPage({
             </h2>
             <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
               <QuoteCard
-                content='ClickHouse logging cluster has now exceeded 400 physical nodes, with a peak writing traffic of over 40 GB/s. This supports approximately 15 million queries per day, with a peak QPS of about 200. Compared to Elasticsearch, the machine cost of ClickHouse has decreased by 30%. The query speed has improved by about 4 times compared to Elasticsearch'
-                link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
+                content='Extensive testing and comparison showed that ClickHouse outperformed other solutions like Elasticsearch in three key areas: performance, compatibility, and cost-efficiency for large-scale operations.'
+                link='/videos/meetupsf_march_2025_04'
                 logo={{
-                  src: logoDidi,
-                  width: 80 * 1.2,
-                  height: 25 * 1.2,
-                  alt: 'Didi'
+                  src: logoNetflix,
+                  width: 111,
+                  height: 30,
+                  alt: 'Netflix'
                 }}
               />
               <QuoteCard
@@ -247,13 +247,13 @@ export default function ElasticPage({
                 }}
               />
               <QuoteCard
-                content='Extensive testing and comparison showed that ClickHouse outperformed other solutions like Elasticsearch in three key areas: performance, compatibility, and cost-efficiency for large-scale operations.'
-                link='/videos/meetupsf_march_2025_04'
+                content='ClickHouse logging cluster has now exceeded 400 physical nodes, with a peak writing traffic of over 40 GB/s. This supports approximately 15 million queries per day, with a peak QPS of about 200. Compared to Elasticsearch, the machine cost of ClickHouse has decreased by 30%. The query speed has improved by about 4 times compared to Elasticsearch'
+                link='/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system'
                 logo={{
-                  src: logoNetflix,
-                  width: 111,
-                  height: 30,
-                  alt: 'Netflix'
+                  src: logoDidi,
+                  width: 80 * 1.2,
+                  height: 25 * 1.2,
+                  alt: 'Didi'
                 }}
               />
               <QuoteCard
