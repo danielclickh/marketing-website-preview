@@ -126,7 +126,10 @@ export default function NavigationSubNavResources() {
               href='/comparison/elastic'
               onClick={useGalaxyOnClick('topNav.comparisonsMenu.elasticSelect')}
               className='block w-full'>
-              Elastic
+              Elastic{' '}
+              <small className='ml-2 inline-block rounded-sm bg-white/10 px-2 text-white'>
+                For observability
+              </small>
             </NavigationLink>
           </li>
         </NavigationSubNav>

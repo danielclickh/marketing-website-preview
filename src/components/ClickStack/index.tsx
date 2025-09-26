@@ -9,35 +9,58 @@ export interface ClickStackProps {
   hyperdx?: boolean
   clickhouse?: boolean
   opentelemetry?: boolean
+  gap?: number
   onClick?: (stack: CallbackStack) => void
+  onMouseEnter?: (stack: CallbackStack) => void
+  onMouseLeave?: (stack: CallbackStack) => void
 }
 
 export default function ClickStack({
   hyperdx = true,
   clickhouse = true,
   opentelemetry = true,
-  onClick
+  gap,
+  onClick,
+  onMouseEnter,
+  onMouseLeave
 }: ClickStackProps) {
   return (
     <LogoStack
+      gap={gap}
       layers={[
         {
           logo: { src: logoHyperdx },
           active: hyperdx,
           color: '#4FFA7A',
-          onClick: onClick ? () => onClick('hyperdx') : undefined
+          onClick: onClick ? () => onClick('hyperdx') : undefined,
+          onMouseEnter: onMouseEnter
+            ? () => onMouseEnter('hyperdx')
+            : undefined,
+          onMouseLeave: onMouseLeave ? () => onMouseLeave('hyperdx') : undefined
         },
         {
           logo: { src: logoClickhouse },
           active: clickhouse,
           color: '#FAFF69',
-          onClick: onClick ? () => onClick('clickhouse') : undefined
+          onClick: onClick ? () => onClick('clickhouse') : undefined,
+          onMouseEnter: onMouseEnter
+            ? () => onMouseEnter('clickhouse')
+            : undefined,
+          onMouseLeave: onMouseLeave
+            ? () => onMouseLeave('clickhouse')
+            : undefined
         },
         {
           logo: { src: logoOpentelemetry },
           active: opentelemetry,
           color: '#F5A800',
-          onClick: onClick ? () => onClick('opentelemetry') : undefined
+          onClick: onClick ? () => onClick('opentelemetry') : undefined,
+          onMouseEnter: onMouseEnter
+            ? () => onMouseEnter('opentelemetry')
+            : undefined,
+          onMouseLeave: onMouseLeave
+            ? () => onMouseLeave('opentelemetry')
+            : undefined
         }
       ]}
     />

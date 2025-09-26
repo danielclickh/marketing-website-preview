@@ -11,6 +11,8 @@ type Layer = {
   color?: React.CSSProperties['backgroundColor']
   active?: boolean
   onClick?: () => void
+  onMouseEnter?: () => void
+  onMouseLeave?: () => void
 }
 
 export interface LogoStackProps {
@@ -41,6 +43,8 @@ export default function LogoStack({
               color={layer.color}
               active={layer.active}
               onClick={layer.onClick}
+              onMouseEnter={layer.onMouseEnter}
+              onMouseLeave={layer.onMouseLeave}
               style={{
                 zIndex: layers.length - layerIndex,
                 top: `${(gap * layerIndex).toFixed(2)}px`
@@ -58,14 +62,20 @@ function Layer({
   color = '#fff',
   style = {},
   active = true,
-  onClick
+  onClick,
+  onMouseEnter,
+  onMouseLeave
 }: {
   logo: Logo
   color?: string
   style?: Omit<React.CSSProperties, '--color' | 'left' | 'right'>
   active?: boolean
   onClick?: () => void
+  onMouseEnter?: () => void
+  onMouseLeave?: () => void
 }) {
+  const isInteractive = onClick || onMouseEnter || onMouseLeave
+
   return (
     <div
       className={`pointer-events-none absolute top-0 aspect-square ${styles.layerPerspective}`}
@@ -79,7 +89,9 @@ function Layer({
       }>
       <div
         onClick={onClick}
-        className={`flex items-center justify-center overflow-hidden rounded-[8%] border-2 bg-gradient-to-br from-[rgba(38,38,35,0.9)] to-[rgba(16,16,16,0.9)] backdrop-blur-sm transition duration-300 ${onClick ? 'pointer-events-auto cursor-pointer' : ''} ${active ? '' : `opacity-15 ${onClick ? 'hover:opacity-40' : ''}`} ${styles.layer}`}>
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        className={`flex items-center justify-center overflow-hidden rounded-[8%] border-2 bg-gradient-to-br from-[rgba(38,38,35,0.9)] to-[rgba(16,16,16,0.9)] backdrop-blur-sm transition duration-300 ${isInteractive ? 'pointer-events-auto cursor-pointer' : ''} ${active ? '' : `opacity-15 ${isInteractive ? 'hover:opacity-40' : ''}`} ${styles.layer}`}>
         <Image
           src={src}
           width={width ?? 180}

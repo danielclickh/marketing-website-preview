@@ -1,10 +1,12 @@
-import elasticAnimationLogo from './assets/elastic-animation-logo.svg'
 import elasticTableLogo from './assets/elastic-table-logo.svg'
 import heroLogos from './assets/hero-logos.png'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
 import logoDidi from './assets/logo-didi.svg'
+import logoElasticsearch from './assets/logo-elasticsearch.svg'
+import logoKibana from './assets/logo-kibana.svg'
+import logoLogstash from './assets/logo-logstash.svg'
 import logoNetflix from './assets/logo-netflix.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoRedshift from './assets/logo-redshift.svg'
@@ -12,8 +14,10 @@ import logoShopee from './assets/logo-shopee.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import logoZomato from './assets/logo-zomato.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
-import ClickHouseVersusAnimation from '@/components-cleaned/ClickHouseVersusAnimation'
+import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
+import LogoStack from '@/components-cleaned/LogoStack'
 import Sticky from '@/components-cleaned/Sticky'
+import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
@@ -25,6 +29,7 @@ import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import tables from '@/data/elastic-comparison'
+import { useDebounce } from '@/hooks'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
@@ -194,17 +199,12 @@ export default function ElasticPage({
         {/* Yellow triangle */}
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-2/3 bg-primary-300' />
         <div className='section-container relative z-10'>
-          {/*<div className='mb-16 space-y-12 lg:mb-24'>
+          <div className='mb-16 space-y-12 lg:mb-24'>
             <SuiTitle type='h2' className='text-center'>
-              ClickHouse compared to Elastic
+              ClickStack compared to Elastic
             </SuiTitle>
-            <ClickHouseVersusAnimation
-              competitorName='elastic'
-              competitorLogo={elasticAnimationLogo}
-              competitorLineColor='#29B5E8'
-              competitorCardColor='#29B5E8'
-            />
-          </div>*/}
+            <ClickStackVersusElkStack />
+          </div>
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
@@ -524,5 +524,84 @@ function TabbedTable() {
         />
       </div>
     </div>
+  )
+}
+
+function ClickStackVersusElkStack() {
+  const layerGap = 72
+  const debounceTimeout = 50
+  const [activeLayer, setActiveLayer] = useState<null | number>(null)
+  const resetActiveLayer = useDebounce(
+    () => setActiveLayer(null),
+    debounceTimeout
+  )
+  const noActiveLayer = activeLayer === null
+  const layer1Active = noActiveLayer || activeLayer === 1
+  const layer2Active = noActiveLayer || activeLayer === 2
+  const layer3Active = noActiveLayer || activeLayer === 3
+  return (
+    <>
+      <div className='flex flex-col items-center justify-center gap-x-16 gap-y-8 lg:flex-row'>
+        <ClickStack
+          gap={layerGap}
+          hyperdx={layer1Active}
+          clickhouse={layer2Active}
+          opentelemetry={layer3Active}
+          onMouseEnter={useDebounce((stack) => {
+            switch (stack) {
+              case 'hyperdx':
+                setActiveLayer(1)
+                break
+              case 'clickhouse':
+                setActiveLayer(2)
+                break
+              case 'opentelemetry':
+                setActiveLayer(3)
+                break
+            }
+          }, debounceTimeout)}
+          onMouseLeave={resetActiveLayer}
+        />
+        <Image
+          src={iconVs}
+          width={60}
+          height={60}
+          alt='VS'
+          className='rounded-full shadow-xl'
+        />
+        <LogoStack
+          gap={layerGap}
+          layers={[
+            {
+              logo: { src: logoKibana, className: 'm-12' },
+              onMouseEnter: useDebounce(
+                () => setActiveLayer(1),
+                debounceTimeout
+              ),
+              onMouseLeave: resetActiveLayer,
+              active: layer1Active
+            },
+            {
+              logo: { src: logoElasticsearch, className: 'm-12' },
+              onMouseEnter: useDebounce(
+                () => setActiveLayer(2),
+                debounceTimeout
+              ),
+              onMouseLeave: resetActiveLayer,
+              active: layer2Active
+            },
+            {
+              logo: { src: logoLogstash, className: 'm-12' },
+              onMouseEnter: useDebounce(
+                () => setActiveLayer(3),
+                debounceTimeout
+              ),
+              onMouseLeave: resetActiveLayer,
+              active: layer3Active
+            }
+          ]}
+        />
+      </div>
+    </>
   )
 }
