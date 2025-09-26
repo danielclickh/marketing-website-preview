@@ -1,3 +1,5 @@
+import chartQueries from './assets/chart-queries.svg'
+import chartStorage from './assets/chart-storage.svg'
 import elasticAnimationLogo from './assets/elastic-animation-logo.svg'
 import elasticTableLogo from './assets/elastic-table-logo.svg'
 import heroLogos from './assets/hero-logos.png'
@@ -36,9 +38,6 @@ import tables from '@/data/elastic-comparison'
 import { useDebounce } from '@/hooks'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import chartCosts from '@/pages/comparison/bigquery/assets/chart-costs.svg'
-import iconQuote from '@/pages/comparison/bigquery/assets/icon-quote.svg'
-import logoBlock from '@/pages/comparison/bigquery/assets/logo-block.png'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -272,96 +271,78 @@ export default function ElasticPage({
 
           <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
             {/* Pillar 1 */}
-            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
-              <div className='space-y-6 text-neutral-200'>
-                <div className='flex items-center gap-4 lg:gap-6'>
-                  <Image src={iconGuage} alt='Icon' width={36} height={36} />
-                  <SuiTitle type='h3' className='text-white'>
-                    Performance at Scale
-                  </SuiTitle>
-                </div>
-                <SuiText>
-                  Elastic slows under heavy ingest and high-cardinality queries,
-                  while ClickHouse powers sub-second analytics even at petabyte
-                  scale.
-                </SuiText>
-                <Image
-                  src={chartCosts}
-                  alt='Cost for querying 1 billion rows'
-                  width={336}
-                  height={273}
-                  className='mx-auto'
-                />
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+              <div className='flex items-center gap-4 lg:gap-6'>
+                <Image src={iconGuage} alt='Icon' width={36} height={36} />
+                <SuiTitle type='h3' className='text-white'>
+                  Performance at Scale
+                </SuiTitle>
               </div>
+              <SuiText>
+                Elastic slows under heavy ingest and high-cardinality queries,
+                while ClickHouse powers sub-second analytics even at petabyte
+                scale.
+              </SuiText>
+              <Image
+                src={chartQueries}
+                alt='Full data set aggregation for 1 billion JSON documents'
+                width={336}
+                height={273}
+                className='mx-auto mt-auto'
+              />
             </div>
 
             {/* Pillar 2 */}
-            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
-              <div className='space-y-6 text-neutral-200'>
-                <div className='flex items-center gap-4 lg:gap-6'>
-                  <Image
-                    src={iconHandCoins}
-                    alt='Icon'
-                    width={36}
-                    height={36}
-                  />
-                  <SuiTitle type='h3' className='text-white'>
-                    Lower Cost, Higher Efficiency
-                  </SuiTitle>
-                </div>
-                <SuiText>
-                  ClickHouse’s columnar storage and advanced compression cut
-                  storage needs by &gt; 50%, reducing infrastructure costs
-                  dramatically and allowing for long term retention.
-                </SuiText>
-                <Image
-                  src={chartCosts}
-                  alt='Cost for querying 1 billion rows'
-                  width={336}
-                  height={273}
-                  className='mx-auto'
-                />
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+              <div className='flex items-center gap-4 lg:gap-6'>
+                <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
+                <SuiTitle type='h3' className='text-white'>
+                  Lower Cost, Higher Efficiency
+                </SuiTitle>
               </div>
+              <SuiText>
+                ClickHouse’s columnar storage and advanced compression cut
+                storage needs by &gt; 50%, reducing infrastructure costs
+                dramatically and allowing for long term retention.
+              </SuiText>
+              <Image
+                src={chartStorage}
+                alt='Storage required for 1 billion JSON documents'
+                width={336}
+                height={273}
+                className='mx-auto mt-auto'
+              />
             </div>
 
             {/* Pillar 3 */}
-            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
-              <div className='space-y-6 text-neutral-200'>
-                <div className='flex items-center gap-4 lg:gap-6'>
-                  <Image
-                    src={iconLightning}
-                    alt='Icon'
-                    width={36}
-                    height={36}
-                  />
-                  <SuiTitle type='h3' className='text-white'>
-                    Unified Observability
-                  </SuiTitle>
-                </div>
-                <SuiText>
-                  ClickStack runs logs, metrics, and traces in one engine
-                  alongside business and application data for unrivalled
-                  correlation. Elastic was never designed for analytical
-                  workloads leaving data fragmented.
-                </SuiText>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+              <div className='flex items-center gap-4 lg:gap-6'>
+                <Image src={iconLightning} alt='Icon' width={36} height={36} />
+                <SuiTitle type='h3' className='text-white'>
+                  Unified Observability
+                </SuiTitle>
               </div>
+              <SuiText>
+                ClickStack runs logs, metrics, and traces in one engine
+                alongside business and application data for unrivalled
+                correlation. Elastic was never designed for analytical workloads
+                leaving data fragmented.
+              </SuiText>
             </div>
 
             {/* Pillar 4 */}
-            <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
-              <div className='space-y-6 text-neutral-200'>
-                <div className='flex items-center gap-4 lg:gap-6'>
-                  <Image src={iconUnlock} alt='Icon' width={36} height={36} />
-                  <SuiTitle type='h3' className='text-white'>
-                    Open source and open standards
-                  </SuiTitle>
-                </div>
-                <SuiText>
-                  ClickStack is fully open source (MIT + Apache 2.0) and
-                  OpenTelemetry-native, ensuring interoperability and freedom
-                  from lock-in.
-                </SuiText>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+              <div className='flex items-center gap-4 lg:gap-6'>
+                <Image src={iconUnlock} alt='Icon' width={36} height={36} />
+                <SuiTitle type='h3' className='text-white'>
+                  Open source and open standards
+                </SuiTitle>
               </div>
+              <SuiText>
+                ClickStack is fully open source (MIT + Apache 2.0) and
+                OpenTelemetry-native, ensuring interoperability and freedom from
+                lock-in.
+              </SuiText>
             </div>
           </div>
         </div>
