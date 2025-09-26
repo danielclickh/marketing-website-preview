@@ -34,8 +34,6 @@ Users require absolute confidence that AI-generated answers match official repor
 
 ### Response time expectations by user type
 
-TODO
-
 Response times impact user satisfaction, productivity, and decision-making speed. Slow queries can lead to frustration, decreased engagement, and missed opportunities.
 
 | User Type | Expected Response Time | Tolerance Notes |
@@ -48,16 +46,18 @@ Response times impact user satisfaction, productivity, and decision-making speed
 
 ### Data freshness requirements by use case
 
-TODO
+Data freshness requirements vary dramatically by use case, with real-time operational decisions requiring near-instant updates while strategic reporting can tolerate daily cycles.
 
 | Use Case | Freshness Requirement | Update Frequency |
 |----------|----------------------|------------------|
 | Operational Dashboards | Real-time to near-real-time | Within 1 minute |
 | Executive Reporting | Daily refresh cycles | Within 1 day |
-| Financial Reporting | Point-in-time consistency | Within 1 day |
+| Financial Reporting | Point-in-time consistency | End-of-day batch |
 | Customer Service | Current transaction history | Within 1 minute |
-| Sales Teams | Up-to-minute pipeline data | Within 1 minute |
-| Marketing Analytics | Hourly or daily aggregations | Within 1 hour |
+| Sales Teams | Up-to-minute pipeline data | Within 5 minutes |
+| Marketing Analytics | Hourly campaign metrics | Within 1 hour |
+| Fraud Detection | Real-time transaction monitoring | < 1 second |
+| Inventory Management | Near real-time stock levels | Within 5 minutes |
 
 ## Internal vs external user considerations
 
@@ -65,13 +65,19 @@ TODO
 
 Employees bring valuable context about company data structures and business logic to their interactions. They have access to training resources and documentation for system usage, which creates higher tolerance for initial learning curves and system limitations. Internal users can provide feedback for iterative improvements and understand data governance and compliance requirements. Most importantly, they know which questions are appropriate for the system and can work within its constraints.
 
-TODO: however MCP & natural language can make the system more accessible to employees without much of this knowledge and so the system shouldnt rely too heavily on the user having it
+However, MCP & natural language interfaces dramatically expand accessibility for employees without deep technical knowledge. The system shouldn't rely heavily on users understanding data structures or SQL. [As demonstrated in ClickHouse's internal Dwaine system](https://clickhouse.com/blog/agenthouse-demo-clickhouse-llm-mcp), natural language interfaces enable sales, ops, product, and finance teams to query data directly without BI tool training. This democratization means the system must be more forgiving of imprecise queries and provide helpful guidance when users ask ambiguous questions.
 
 ### External customer use cases
 
-TODO
+External customers can represent the most demanding user segment for MCP-enabled data warehouses. They arrive with zero context about your data model, expect immediate responses, and have no tolerance for technical errors or confusing messages.
 
-Customers have zero knowledge of internal data structures or naming conventions, and external users cannot access documentation or receive training, forcing the interface to be completely intuitive. Their questions may span multiple data domains without clear boundaries, and privacy and security concerns become paramount when providing customer data access. They expect consumer-grade response times under one second with zero tolerance for errors or confusing responses.
+Key challenges include:
+- Complete abstraction of complexity: Customers should never see table names, column names, or SQL errors
+- Intuitive query interpretation: Must understand natural variations in how customers phrase questions
+- Privacy-first design: Strict data isolation and row-level security enforcement
+- Consumer-grade UX: Sub-second response times matching Google or ChatGPT experiences
+- Graceful degradation: When data isn't available, provide helpful alternatives rather than errors
+- Multi-tenant performance: One customer's complex query cannot impact others' experience
 
 ### Partner and vendor access patterns
 
@@ -93,7 +99,16 @@ Additionally, company-specific terminology presents a unique challenge that gene
 
 For optimal user experience, the warehouse should return results within 1-2 seconds to maintain conversational flow. This is where warehouse architecture becomes critical: traditional warehouses with 10-30 second query times break the conversational experience, while modern real-time OLAP systems like ClickHouse that consistently deliver sub-second responses enable natural conversation flow. Users need the ability to cancel long-running queries based on initial results, potentially refining their question before full execution completes.
 
-TODO: include a table of ClickHouse vs XYZ for chat retrieval. Maybe include the GIF of Postgres?
+| Database | Query latencies | Benchmark Results |
+|------------|-------------|-------------------|
+| ClickHouse | < 1 second | [Most queries under 500ms even on 7.2B rows](https://clickhouse.com/blog/join-me-if-you-can-clickhouse-vs-databricks-snowflake-join-performance) |
+| PostgreSQL | > 1 minute | [380-390s for bulk updates, 4000× slower than ClickHouse](https://clickhouse.com/blog/update-performance-clickhouse-vs-postgresql) |
+| Snowflake | > 30 seconds | [5-30s for complex analytics, up to 5 minutes for joins](https://clickhouse.com/blog/clickhouse-vs-snowflake-for-real-time-analytics-benchmarks-cost-analysis) |
+| Databricks | > 30 seconds | [Similar performance profile to Snowflake](https://clickhouse.com/blog/join-me-if-you-can-clickhouse-vs-databricks-snowflake-join-performance) |
+
+The performance gap becomes even more pronounced with streaming results. ClickHouse can begin outputting results immediately while maintaining sub-second total query time, whereas traditional warehouses require full query completion before returning any results.
+
+![](/images/engineering-resources/postgres_vs_clickhouse_chat_speed.gif)
 
 The chat interface should leverage LLM streaming-output capabilities to begin outputting responses immediately, allowing users to read the answer as it is generated, rather than waiting for the entire response to be completed first. Clear visual indicators should show when MCP servers are being invoked, so that expectations are managed appropriately.
 
@@ -111,9 +126,7 @@ The system should also provide intelligent fallback options when primary approac
 
 ### Non-technical business users
 
-Non-technical users require natural language processing capabilities without any SQL knowledge whatsoever. The system must embed business metric definitions directly in responses and handle common calculations like growth rates automatically. These users prefer visual representations alongside numerical results and benefit from guided exploration rather than free-form querying. The platform must include safeguards to prevent accidentally expensive queries that could impact system performance or incur unexpected costs.
-
-TODO: include links to the Slack MCP analytics blogs, and talk about ability to generate viz in chat.
+Non-technical users require natural language processing capabilities without any SQL knowledge whatsoever. The system must embed business metric definitions directly in responses and handle common calculations like growth rates automatically. [These users prefer visual representations alongside numerical results](https://clickhouse.com/blog/agentic-bi-in-slack-mcp-visualisations) and benefit from guided exploration rather than free-form querying. The platform must include safeguards to prevent accidentally expensive queries that could impact system performance or incur unexpected costs.
 
 ### Technical analysts
 
@@ -121,88 +134,23 @@ Technical analysts expect visibility into generated SQL with the ability to modi
 
 ### Data scientists and engineers
 
-TODO: prompts as code?
-
-Data scientists and engineers require programmatic access to chat-generated queries for integration into larger workflows. They need flexible export capabilities for results in various formats including CSV, JSON, and Parquet. The ability to combine chat interfaces with code notebooks enhances their productivity. These users expect access to system metadata and statistics for optimization work. Query version control and comparison capabilities support their iterative development process. They often want to contribute custom functions and optimizations back to the system.
-
-## Usage patterns
-
-TODO: removed all the technical bits - make this into a user req section about usage patterns
-
-### Peak usage patterns
-
-TODO: keep?
-
-| Event Type | Load Impact | Duration | Predictability |
-|------------|-------------|----------|----------------|
-| Monday Morning Reviews | 10x normal | 2-3 hours | Highly predictable |
-| Month-End Reporting | 5x sustained | 2-3 days | Scheduled |
-| Quarterly Business Reviews | Complex queries | 1 week | Planned |
-| All-Hands Meetings | Synchronous spike | 1 hour | Scheduled |
-| Product Launches | Customer surge | Variable | Planned |
-| Incident Investigations | Unpredictable | Hours to days | Random |
-
-### Query frequency by user type
-
-TODO: keep?
-
-| User Type | Query Frequency | Use Pattern |
-|-----------|----------------|-------------|
-| Executives | 5-10 per week | Strategic decisions |
-| Managers | 10-20 per day | Operational oversight |
-| Analysts | 50-100 per day | Report creation |
-| Customer Service | 100-200 per day | Issue resolution |
-| Automated Systems | 1,000+ per hour | Continuous monitoring |
-| API Integrations | Continuous stream | Real-time updates |
-
-## Success metrics and user satisfaction
-
-TODO: did Rory & Pete's talk at BDL have something about measuring success? Also there was good stuff about the 80% quality barrier - add section about this somewhere?
-
-### Objective performance metrics
-
-**Response Performance**
-- Median query response time under 2 seconds indicates good performance
-- 95th percentile latency under 10 seconds prevents user frustration
-- Query success rate above 90% demonstrates system reliability
-
-**Adoption Metrics**
-- Daily active users growing month-over-month demonstrates value delivery
-- Questions per session increasing indicates growing user engagement
-- Time to first successful query under 30 seconds proves critical for adoption
+Data scientists and engineers require programmatic access to chat-generated queries for integration into larger workflows. They need flexible export capabilities for results in various formats including CSV, JSON, and Parquet. The ability to combine chat interfaces with code notebooks enhances their productivity. These users expect access to system metadata and statistics for optimization work. Query version control and comparison capabilities support their iterative development process. They often want to contribute custom functions and optimizations back to the system. "Prompts as code" practices become essential for these users, allowing them to version control prompt templates, track changes to query generation patterns, and collaborate on prompt optimization with the same rigor applied to software development.
 
 ## Business impact measurements
 
-TODO: something about reducing volume of tickets created for creating dashboards / datasets, self service etc.
-
 The ultimate measure of success lies in reducing time to insight from days to minutes, fundamentally changing how decisions are made. Organizations see decision-making velocity increase through immediate data access without intermediaries. Analyst productivity improves dramatically by automating routine queries that previously consumed hours. Data democratization can be measured by the number of unique users successfully accessing the warehouse. Cost per insight decreases significantly versus traditional BI tools when properly implemented. Revenue impact from faster customer query resolution provides direct ROI justification.
 
-## User interface preferences
+## User interface selection
 
-TODO: expand this into a section about user interfaces in general, Slack, Librechat, etc. use mark's blog as reference & link
+Choosing the right user interface is key to building an effective system. The user interface should support the features needed, such as being able to generate tables or visualizations, export results in various formats, and combine chat interfaces with code notebooks. The user interface also needs to fit into its users workflows.
 
-### Conversational interface patterns
+[It is possible to make LLM-powered chat available via existing productivity tools like Slack](https://clickhouse.com/blog/agentic-analytics-slack-clickhouse-mcp), Teams or Discord. This can make adoption easier and it meets users where they are.
 
-Chat interfaces leverage familiarity from consumer messaging applications, reducing the learning curve. Voice interfaces enable hands-free operation during meetings and on-the-go access. Slack and Teams integration brings data directly into existing workflows where decisions are made. Mobile apps support executive decision-making anywhere, anytime. Email interfaces allow asynchronous query and response for non-urgent requests. API access enables embedded analytics in custom applications.
-
-### Result presentation preferences
-
-| Result Type | Best Format | Use Case |
-|-------------|------------|----------|
-| Detailed Numbers | Tables with sorting/filtering | Financial analysis |
-| Trends & Comparisons | Interactive charts | Performance tracking |
-| Key Metrics | Summary statistics highlighted | Executive dashboards |
-| Explanations | Natural language summaries | Non-technical users |
-| Data Exports | Excel, CSV, BI tool formats | Further analysis |
-| Collaboration | Shareable links | Team discussions |
-
-## Geographic and timezone considerations
-
-TODO: expand on this around handling time zone and currency conversions etc. things that cause common mistakes in analytics
-
-### Global Access Requirements
-
-Multi-region deployment ensures low latency for users worldwide, maintaining sub-second response times regardless of location. Follow-the-sun support models require true 24/7 availability with no maintenance windows. The system must provide currency and unit localization for international users to avoid conversion errors. Language support beyond English becomes essential for global organizations with diverse workforces. Proper date and time handling across timezone boundaries prevents confusion in reports and ensures accuracy. Regional compliance with data residency requirements maintains legal compliance across jurisdictions.
+Alternatively, LLM-native interfaces can be used. [These are available as commercial offerings, like ChatGPT or Claude Desktop, or open-source alternatives such as](https://clickhouse.com/blog/llm-chat-mcp-support):
+- LibreChat
+- AnythingLLM
+- Open WebUI
+- Chainlit
 
 ## Data Warehouse query latency characteristics
 
@@ -210,26 +158,9 @@ Data warehouses are optimized for complex analytical queries over large datasets
 
 When users interact with a chatbot, they expect sub-second responses similar to human conversation. A [delay of even 2-3 seconds feels sluggish, and waiting 10-30 seconds for a response completely breaks the conversational flow](https://www.linkedin.com/posts/alasdair-brown_how-does-your-choice-of-database-affect-your-activity-7359584224250585089-QgQ1). This latency compounds when chat applications generate multiple queries to answer a single user question, creating cascade delays that can stretch simple interactions into minute-long waits.
 
-### Performance comparison table
+### ClickHouse query performance
 
-| Warehouse | Cold Start | Metadata Ops | Simple Queries | Complex Analytics | Special Features |
-|-----------|------------|--------------|----------------|-------------------|------------------|
-| **Snowflake** | 10-60s (resume) | 100-500ms | 250ms-1s | 5-30s (joins: 1-5min) | 50-200ms compilation overhead |
-| **Databricks** | 30-120s (cluster) | 200-800ms | 1-3s | 10-60s | Photon: 2-4x faster, Delta: +500ms-2s |
-| **BigQuery** | 1-5s (slots) | - | 2-5s | 10-90s | BI Engine: 100-500ms for cached |
-| **ClickHouse** | None | <100ms | <100ms | 50-500ms (billions) | Real-time ingestion, no cold start |
-
-### Snowflake query performance
-
-TODO: verify
-
-Snowflake virtual warehouses exhibit significant startup latency of 10-60 seconds when resuming from suspension. Metadata operations typically complete in 100-500ms, making schema exploration responsive. Simple SELECT queries on small tables execute in 250ms to 1 second with proper indexing. Complex analytical queries range from 5-30 seconds depending on data volume and complexity. Join operations across large tables can extend to 1-5 minutes without proper optimization. Query compilation adds a consistent 50-200ms overhead to all operations.
-
-### ClickHouse Query Performance
-
-TODO: expand and link out
-
-ClickHouse delivers sub-100ms query latency for properly indexed queries, making it ideal for interactive applications. Aggregations over billions of rows complete in 50-500ms when using appropriate table engines and data structures. The system maintains persistent connections, eliminating cold start penalties entirely. Real-time data ingestion allows querying of events within milliseconds of arrival, enabling true real-time analytics. Distributed queries across clusters maintain sub-second performance with proper sharding strategies.
+ClickHouse delivers [sub-100ms query latency](https://clickhouse.com/blog/clickhouse_vs_elasticsearch_the_billion_row_matchup) for properly indexed queries, making it ideal for interactive applications. Aggregations over billions of rows complete in 50-500ms. Real-time data ingestion allows querying of events within milliseconds of arrival through [native CDC capabilities](https://clickhouse.com/blog/timescale-to-clickhouse-clickpipe-cdc). [Distributed queries maintain sub-second performance for hundreds of billions of rows with instant horizontal scaling.](https://clickhouse.com/blog/clickhouse-group-by-parallel-replicas-8900-cores).
 
 ## Data Warehouse query volume and concurrency patterns
 
@@ -239,44 +170,40 @@ When an organization rolls out a chat interface to hundreds or thousands of empl
 
 ### User concurrency expectations
 
-Small organizations typically expect support for 10-50 concurrent users with predictable patterns. Mid-size companies need reliable performance for 100-500 concurrent users across departments. Enterprises require robust handling of 1,000-10,000 concurrent sessions globally. Customer-facing applications may experience 10,000-100,000 concurrent users during peak times. Geographic distribution creates follow-the-sun load patterns that require careful capacity planning. Mobile access adds sporadic, location-based usage spikes that are difficult to predict.
+Small organizations typically expect support for 10-50 concurrent users with predictable patterns. Mid-size companies need reliable performance for 100-500 concurrent users across departments. Enterprises require robust handling of 1,000-5,000 concurrent sessions globally. Customer-facing applications may experience 10,000-100,000 concurrent users during peak times. Geographic distribution creates follow-the-sun load patterns that require careful capacity planning. Mobile access adds sporadic, location-based usage spikes that are difficult to predict.
 
-TODO: maybe this is a table?
+| Organization Size | Concurrent Users | MCP-Specific Considerations |
+|-------------------|------------------|------------------------------|
+| Small (10-100 employees) | 10-50 | Each chat interaction may generate 2-5 backend queries |
+| Mid-size (100-1,000) | 100-500 | Peak usage during business hours, 3× multiplier for queries |
+| Enterprise (1,000-10,000) | 1,000-5,000 | Global distribution creates 24/7 load patterns |
+| Customer-facing (B2C) | 10,000-100,000+ | Unpredictable spikes, must handle viral moments |
+
+The query multiplier effect is critical: when 100 users are chatting concurrently, the warehouse may need to handle 300-500 actual SQL queries per second.
 
 ### Platform concurrency comparison
 
-TODO: intro sentence, does it need all the cols?
-
-| Platform | Default Limit | Scaling Method | Scale Ceiling | Queue Behavior |
-|----------|--------------|----------------|---------------|----------------|
-| **Snowflake** | 8 per warehouse | Multi-cluster (linear cost) | 80 (10 clusters) | Infinite wait |
-| **Databricks** | 10 per cluster | Auto-scaling clusters | 300 (30 clusters) | 2-min threshold |
-| **BigQuery** | 2,000 slots | Dynamic allocation | Project quota | Slot-based |
-| **ClickHouse** | Hardware limited | Add replicas | Unlimited | No queuing |
+| Platform | Default Limit |
+|----------|--------------|
+| **Snowflake** | 8 per warehouse |
+| **Databricks** | 10 per cluster |
+| **ClickHouse** | 1000+ per node |
 
 ### Snowflake concurrency limits
 
-TODO: verify facts
-
-Snowflake enforces a default maximum of 8 concurrent queries per warehouse, creating potential bottlenecks. Multi-cluster warehouses can scale to 10 clusters, supporting up to 80 concurrent queries at linear cost increases. Each additional cluster increases costs proportionally without volume discounts. Query queueing begins immediately when concurrency limits are reached. Queued queries wait indefinitely unless timeout parameters are explicitly configured.
+[Snowflake enforces a default maximum of 8 concurrent queries per warehouse](https://clickhouse.com/blog/clickhouse-vs-snowflake-for-real-time-analytics-comparison-migration-guide), creating immediate bottlenecks for chat interfaces. Multi-cluster warehouses can scale to 10 clusters, supporting up to 80 concurrent queries at linear cost increases - meaning 10× the cost for 10× the concurrency. Each additional cluster increases costs proportionally without volume discounts. Query queueing begins immediately when concurrency limits are reached, with no visibility into queue position. Queued queries wait indefinitely unless timeout parameters are explicitly configured. For chat interfaces generating multiple queries per interaction, even modest user counts quickly exhaust these limits.
 
 ### ClickHouse concurrency design
 
-TODO: verify & link out
-
-ClickHouse handles hundreds of concurrent queries per server without performance degradation through efficient resource utilization. Connection pooling supports thousands of concurrent connections with minimal overhead. The query pipeline processes multiple queries simultaneously using all available CPU cores. No artificial concurrency limits exist beyond actual hardware resource constraints. Linear scaling is achieved by adding replicas to distributed tables, providing predictable performance improvements.
+[ClickHouse handles up to 1000 concurrent queries per node](https://clickhouse.com/blog/clickhouse-vs-snowflake-for-real-time-analytics-comparison-migration-guide) without performance degradation through efficient resource utilization. The query pipeline processes multiple queries simultaneously using all available CPU cores through vectorized execution. No artificial concurrency limits exist beyond actual hardware resource constraints. [Concurrency is scaled linearly with instant horizontal scaling](https://clickhouse.com/blog/clickhouse-group-by-parallel-replicas-8900-cores). This architecture makes ClickHouse particularly suitable for the unpredictable, bursty query patterns generated by chat interfaces.
 
 ## Data Warehouse data freshness and streaming capabilities
-
-TODO: title?
 
 ### Batch loading patterns
 
 Traditional ETL processes in Snowflake and Databricks typically run on hourly or daily schedules, creating data lag. Data arrives in warehouses 1-24 hours after generation, limiting real-time decision-making capabilities. Micro-batch processing can reduce latency to 5-15 minutes but increases operational complexity. Each batch operation incurs fixed overhead costs regardless of data volume. Batch windows create data availability gaps that impact user experience during updates.
 
 ### Streaming ingestion comparison
-
-TODO: intro?
 
 | Platform | Technology | Latency | Cost Model | Use Case |
 |----------|------------|---------|------------|----------|
@@ -287,36 +214,27 @@ TODO: intro?
 
 ### Change data capture integration
 
-TODO: rework to cover ClickPipes
+[ClickPipes](https://clickhouse.com/cloud/clickpipes), ClickHouse's managed data ingestion service, provides native CDC integration with major databases. The [PostgreSQL CDC connector](https://clickhouse.com/docs/integrations/clickpipes/postgres) supports both one-time migrations and continuous replication with automatic schema change handling. For TimescaleDB users, [ClickPipes enables blazing-fast initial loads using parallel snapshotting](https://clickhouse.com/blog/timescale-to-clickhouse-clickpipe-cdc), moving terabytes in hours instead of days.
 
-CDC tools like Debezium stream database changes to warehouses with minimal latency overhead. Snowflake streams track table modifications with minute-level latency for downstream processing. Databricks Delta Live Tables maintain materialized views with 5-10 minute propagation delays. ClickHouse MaterializedMySQL and MaterializedPostgreSQL engines provide real-time replication with millisecond latency, enabling immediate query availability.
-
-## Cost Models for Interactive Workloads
-
-TODO: rework so we aren't including exact pricing amounts as these change and are hard to keep up to date. keep it short - should talk theoretically about how query time & concurrency means cost; the faster your queries are, the less compute time you pay for, the more queries you can handle at the same time, less horiz scaling, etc.
-
-### Platform Pricing Structures
-
-#### Snowflake Pricing Structure
-Snowflake implements per-second billing with minimum 60-second increments for all compute operations. Warehouse costs scale exponentially from $2/hour for X-Small instances to $128/hour for 4X-Large configurations. Multi-cluster warehouses multiply these base costs by the number of active clusters without volume discounts. Storage costs range from $23-40/TB/month depending on the selected tier and region. Additional charges apply for data egress, particularly for cross-region transfers.
-
-#### Databricks Pricing Components
-Databricks charges are based on DBU (Databricks Unit) consumption plus underlying cloud infrastructure costs. SQL warehouses consume 0.22-0.55 DBU/hour for serverless compute depending on size. Classic compute ranges from 0.75-6.00 DBU/hour based on instance types. DBU prices vary significantly by cloud provider and commitment level. Additional charges apply for Unity Catalog, Delta Lake, and Photon acceleration features.
-
-#### ClickHouse Cloud Pricing
-ClickHouse Cloud offers consumption-based pricing starting at $0.084/hour for compute resources. Storage costs only $0.024/GB/month for active data, significantly lower than competitors. The system incurs no charges for idle time or cold starts, reducing costs for sporadic workloads. Automatic scaling adjusts resources based on workload without manual intervention. Reserved capacity options are available for predictable workloads at discounted rates.
-
-### Cost Per Query Analysis
-
-Interactive chat workloads typically generate between 10-100 queries per user session, making per-query costs critical. Snowflake queries cost between $0.01-0.50 depending on warehouse size and execution duration. Databricks queries range from $0.02-1.00 based on cluster configuration and DBU consumption. ClickHouse queries typically cost $0.0001-0.01 due to faster execution times and more efficient resource usage. For high-volume interactive workloads, ClickHouse provides 100-1000x cost advantages over traditional warehouses.
+The service provides:
+- **Sub-second replication lag** for real-time analytics
+- **Automatic deduplication** using ReplacingMergeTree
+- **Schema evolution support** including column additions and drops
+- **Comprehensive monitoring** with metrics for throughput, latency, and replication slot size
+- **Enterprise-ready alerts** via Slack or email for replication issues
 
 ## Query optimization requirements
 
 ### AI-generated SQL challenges
 
-TODO: better title, rework
+Language models excel at producing syntactically correct SQL but often miss optimization opportunities that dramatically impact performance. Generated queries frequently exhibit these patterns:
 
-Language models can produce syntactically correct but semantically inefficient SQL that requires optimization. Generated queries often lack proper index usage hints, resulting in full table scans. Join order optimization is frequently suboptimal, causing unnecessary data shuffling. Partition pruning predicates may be missing, leading to scanning unnecessary data. Window functions are overused where simpler aggregations would suffice and perform better.
+**Common LLM SQL anti-patterns:**
+- Missing partition predicates, causing full table scans
+- Suboptimal join ordering, triggering expensive shuffles
+- Overuse of window functions where simple aggregations suffice
+- Lack of index hints or improper index usage
+- Unnecessary data type conversions impacting performance
 
 These inefficient queries not only take longer to execute but consume disproportionate compute resources. In Snowflake, a poorly optimized query can consume 10-100x more credits than an optimized version. In Databricks, inefficient queries can trigger unnecessary cluster scaling, driving up costs. While the "easy" answer is to optimize queries, it's not always feasible or practical.
 
@@ -324,114 +242,79 @@ These inefficient queries not only take longer to execute but consume disproport
 
 Each warehouse requires unique optimization strategies that generic AI models don't always understand, but the consequences of poor optimization vary dramatically between platforms. Snowflake requires clustering key alignment for optimal performance - without it, queries can scan 10-100x more data than necessary, translating directly to higher costs and slower responses. Databricks benefits from Z-ordering and file compaction to reduce data scanning, as unoptimized queries can take minutes instead of seconds. BigQuery needs partition and cluster specifications in WHERE clauses for cost control, where missing these can increase query costs by orders of magnitude.
 
-The impact of suboptimal queries is particularly severe in traditional cloud warehouses due to their limited raw scan performance. When Snowflake, Databricks, or BigQuery execute inefficient queries, they might scan data at 1-10GB/s per node, making full table scans prohibitively expensive and slow. In contrast, ClickHouse can scan at 100GB+/s per node, meaning even suboptimal queries complete in acceptable timeframes. While ClickHouse still benefits from proper primary key design and appropriate table engine selection, the penalty for inefficiency is measured in milliseconds rather than minutes.
+[The impact of suboptimal queries is particularly severe in traditional cloud warehouses due to their limited raw scan performance. When Snowflake, Databricks, or BigQuery execute inefficient queries, they might scan data at 1-10GB/s per node, making full table scans prohibitively expensive and slow. In contrast, ClickHouse can scan at 100GB+/s per node, meaning even suboptimal queries complete in acceptable timeframes.](https://clickhouse.com/blog/join-me-if-you-can-clickhouse-vs-databricks-snowflake-join-performance) While ClickHouse still benefits from proper primary key design and appropriate table engine selection, the penalty for inefficiency is measured in milliseconds rather than minutes.
 
 This performance difference creates a compounding effect on concurrency. With Snowflake's 8-query limit per warehouse, if each query takes 10 seconds due to poor optimization, the system processes just 48 queries per minute. If optimization reduces this to 1 second, throughput increases to 480 queries per minute. ClickHouse fundamentally changes this equation: with support for 1000+ concurrent queries and typical execution times of 50-500ms, a single ClickHouse cluster can handle thousands of queries per second. This means AI-generated queries that aren't perfectly optimized still deliver acceptable performance, reducing the need for manual intervention and making the chat experience more forgiving of LLM limitations.
 
-### Optimization with Materialized Views
-
-Data warehouses rely heavily on materialized views, pre-aggregated tables, and summary statistics to deliver acceptable query performance. However, chat interfaces generate novel queries that rarely align with existing materializations. This forces the warehouse to compute results from raw data, dramatically increasing query time and resource consumption.
-
-<TODO>
-
-## Semantic layer requirements
-
-TODO: rework, also add in something about metadata & data context
-
-### Schema complexity management
-
-Enterprise warehouses can contain 100-10,000 tables with complex relationships that overwhelm users. Business logic embedded in views and stored procedures often isn't exposed via MCP servers. Column naming conventions vary across departments and systems, creating confusion. Data types and formats remain inconsistent between sources, requiring transformation. Temporal aspects require point-in-time reconstruction logic that AI cannot infer.
-
-### Metadata infrastructure requirements
-
-| Component | Purpose | Implementation |
-|-----------|---------|----------------|
-| Data Catalogs | Accurate query generation | Document all tables and columns |
-| Business Glossaries | Term translation | Map technical to business names |
-| Lineage Tracking | Source identification | Trace data origins |
-| Quality Metrics | Reliability indicators | Flag trusted sources |
-| Access Controls | Security enforcement | User-specific datasets |
-
 ## Monitoring and observability
 
-TODO: rework, include ClickStack mentions, link out to librechat instrumenting blog. what do we need to monitor? MCP server, audit, performance, warehouse costs, etc.
+**MCP Server Monitoring:**
+- Request/response latencies per MCP method
+- Tool invocation frequency and success rates
+- Resource consumption by server instance
+- Error rates and retry patterns
 
-### Key Performance Metrics
+**LLM Observability:**
+Using [OpenTelemetry instrumentation as demonstrated with LibreChat](https://clickhouse.com/blog/llm-observability-clickstack-mcp):
+- Token consumption per query and user
+- LLM inference latencies
+- Prompt/completion pairs for quality analysis
+- Cost attribution by department or use case
 
-Query latency percentiles (P50, P95, P99) provide the most important indicators of user experience. Concurrent query count indicates system load and helps predict scaling needs. Queue depth reveals capacity constraints before they impact users significantly. Error rates highlight system issues requiring immediate attention. Cost per query measures economic efficiency and helps control expenses.
+**Warehouse Performance Tracking:**
+- Query execution time percentiles (P50, P95, P99)
+- Concurrent query count and queue depth
+- Resource utilization (CPU, memory, disk I/O)
+- Cost per query with detailed breakdown
 
-### Warehouse-Specific Monitoring
-
-| Platform | Monitoring Tools | Key Metrics |
-|----------|-----------------|-------------|
-| Snowflake | Query History, Performance Views | Warehouse utilization, spillage |
-| Databricks | SQL Analytics | Execution stages, DBU consumption |
-| BigQuery | Query Statistics | Slot utilization, bytes processed |
-| ClickHouse | System Tables | Memory usage, merge operations |
-
-CloudWatch, Datadog, and Grafana provide visualization and alerting across all platforms.
-
-### Alerting Strategies
-
-Latency threshold breaches should trigger automatic scaling actions to maintain performance. Error rate spikes must prompt immediate investigation to prevent user impact. Cost anomalies prevent budget overruns through early detection and intervention. Concurrency limit approaches trigger user notifications about potential delays. SLA violations escalate to on-call teams for rapid resolution.
-
-## Scaling Strategies for Growth
-
-TODO: rework to talk theoretically about the scaling capabilites of DWHs and how that supports chat
-
-### Vertical Scaling Limitations
-
-Warehouse size increases show diminishing returns beyond certain thresholds due to coordination overhead. The largest warehouse sizes become cost prohibitive for continuous operation in interactive workloads. Single-node limitations exist even in distributed systems for certain operations. Memory constraints limit result set sizes regardless of compute power. Network bandwidth becomes the bottleneck for large data transfers between systems.
-
-### Horizontal Scaling Approaches
-
-Multi-cluster warehouses in Snowflake provide linear scaling at linear cost increases. Databricks auto-scaling adds clusters dynamically based on workload demands. ClickHouse sharding distributes data across nodes for unlimited scalability. Read replicas offload analytical queries from primary systems effectively. Geographic distribution reduces latency for global users while improving availability.
-
-### Architectural Evolution Paths
-
-Organizations typically start with a single warehouse for pilot programs to prove value. As usage grows, adding a caching layer improves performance and reduces costs. Introduction of read replicas provides additional scale for concurrent users. Migration to specialized OLAP systems becomes necessary for truly interactive workloads. ClickHouse often serves as the ultimate destination for high-performance requirements due to its architecture optimized for analytics.
-
-## Data Modeling for Chat Interfaces
-
-TODO: potentially an interesting topic but unclear what to say about it...maybe cut and come back? how to save this idea
-
-### Denormalization Strategies
-
-Wide tables reduce join complexity for AI-generated queries, improving performance and accuracy. Pre-joined fact and dimension tables accelerate common analytical patterns. Nested data structures in ClickHouse eliminate joins entirely through columnar storage. Organizations must balance storage costs against query performance benefits. Update complexity increases with denormalization, requiring careful design decisions.
-
-### Aggregation Table Design
-
-Summary tables at various grain levels support different query patterns efficiently. Daily, weekly, and monthly aggregations serve time-series analysis needs. Hierarchical rollups enable drill-down exploration without scanning detail data. ClickHouse AggregatingMergeTree automates aggregation maintenance transparently. Partial aggregation states allow flexible re-aggregation for custom analyses.
-
-### Indexing Strategy Comparison
-
-| Index Type | Use Case | Platform Support | Performance Impact |
-|------------|----------|------------------|-------------------|
-| Primary Keys | Physical sort order | All platforms | Critical for scans |
-| Secondary Indexes | Specific patterns | Limited | Moderate improvement |
-| Bloom Filters | High cardinality | ClickHouse | Excellent for sparse |
-| Skip Indexes | Sparse conditions | ClickHouse | Reduces scanning |
-| Projections | Pre-computed aggregations | ClickHouse | Dramatic improvement |
+[ClickStack](https://clickhouse.com/blog/llm-observability-clickstack-mcp), ClickHouse's open-source observability platform, provides comprehensive monitoring for MCP-enabled chat interfaces. ClickStack enables distributed tracing from user input through LLM processing, MCP server execution, and warehouse query completion, providing complete visibility into the analytics pipeline.
 
 ## Integration with AI Frameworks
 
-TODO: rework to talk about all the example from the git repo dspy, pydantic, etc. and link to blog
+The [ClickHouse examples GitHub repository provides comprehensive examples for various AI framework integrations](https://github.com/ClickHouse/examples/tree/main/ai/mcp):
 
-### LangChain Integration
+**PydanticAI Integration:**
+[As demonstrated in the Slack bot implementation](https://clickhouse.com/blog/agentic-analytics-slack-clickhouse-mcp), PydanticAI offers the simplest integration path with type-safe schemas and automatic validation.
 
-LangChain SQL agents generate queries from natural language using chain-of-thought reasoning. Custom tools wrap MCP server connections for seamless integration. Memory systems cache conversation context to improve query relevance. Query validation prevents dangerous operations before execution. Response formatting improves answer quality through structured output.
+**DSPy Integration:**
+The repository includes examples of using DSPy for optimizing prompt chains that generate SQL, with automatic prompt tuning based on query success rates.
 
-### Claude MCP Integration
+**LangChain Integration:**
+LangChain's SQL agents can wrap MCP connections, providing chain-of-thought reasoning for complex multi-step analyses. The memory system caches conversation context to improve query relevance.
 
-Claude Desktop natively supports MCP server connections without additional configuration. Server discovery uses local configuration files for easy management. Capability negotiation determines available operations automatically. Tool use system messages expose MCP functions naturally in conversation. Response streaming enables progressive rendering for better user experience.
+**CopilotKit Integration:**
+[Building agentic applications with CopilotKit](https://clickhouse.com/blog/building-an-agentic-application-with-clickhouse-mcp-server-and-copilotkit) demonstrates creating custom dashboard builders using natural language, with automatic chart generation from MCP query results.
 
-### Custom AI Application Integration
+**Key Integration Patterns:**
+- Streaming responses for progressive result display
+- Automatic retry with query reformation on errors
+- Context preservation across conversation turns
+- Tool validation before execution
 
-MCP client libraries are available for Python, TypeScript, and Go, enabling broad integration. WebSocket transport enables browser-based applications without backend requirements. Authentication tokens pass via headers or parameters for security. Result transformation converts database types to JSON automatically. Error handling propagates meaningful messages to users for debugging.
+## Testing and evaluation
 
-## Testing and Validation
+[Implementing robust evaluation frameworks is critical for production MCP + Data Warehouse deployments, organizations should establish:](https://clickhouse.com/blog/agent-facing-analytics)
 
-TODO: talk about evals, rory/petes talk had some stuff about this as well.
+**Query Correctness Evaluations:**
+- Golden dataset with known correct SQL for common questions
+- Semantic equivalence testing (different SQL, same results)
+- Edge case coverage (empty results, nulls, data type mismatches)
+- Regression testing on prompt template changes
+
+**Performance Benchmarks:**
+- Latency targets for different query complexity tiers
+- Throughput testing under concurrent load
+- Resource consumption profiling
+- Cost tracking per query pattern
+
+**User Experience Metrics:**
+- Answer accuracy rates via user feedback
+- Query success rate (no errors)
+- Reformulation frequency (how often users need to clarify)
+- Time to successful answer
+
+**Continuous Improvement Loop:**
+Failed queries should feed back into the evaluation suite, creating an expanding test corpus that prevents regression and guides optimization efforts.
 
 ### Query Correctness Validation
 
@@ -459,22 +342,6 @@ User growth projections must inform warehouse sizing decisions to avoid bottlene
 
 Comprehensive runbook documentation covers common issues and their resolutions. Incident response procedures ensure quick resolution of production problems. Change management processes prevent disruptions during updates. Performance tuning should be scheduled during low-usage periods. ClickHouse's stability and simplicity significantly reduces operational overhead compared to alternatives.
 
-## Future Developments and Roadmap
-
-TODO
-
-### MCP protocol evolution
-
-Protocol v2 will support streaming results and partial responses for better interactivity. Binary data type support is planned for efficient large transfers between systems. Transaction support will enable complex multi-step operations with consistency. Federation capabilities will allow cross-server queries transparently. Standardized semantic layer integration is under active development.
-
-### Warehouse technology trends
-
-Lakehouse architectures increasingly blur the OLAP/OLTP boundaries, enabling unified analytics. Real-time materialized views are becoming standard features across platforms. AI-powered query optimization is emerging in all major platforms. Serverless compute models are reducing operational overhead significantly. ClickHouse continues leading in real-time analytics performance through architectural advantages.
-
-### AI model improvements
-
-Specialized SQL-generation models show significantly better query quality than general-purpose LLMs. Retrieval-augmented generation improves schema understanding and reduces hallucinations. Fine-tuning on warehouse-specific SQL dialects improves accuracy and performance. Multi-step reasoning enables handling of complex analytical questions. Integration with business context ensures accurate interpretations of ambiguous queries.
-
 ## The economics of warehouse-backed chat
 
 ### Understanding the true cost
@@ -487,7 +354,8 @@ The total cost of running chat interfaces on data warehouses extends beyond dire
 - **Semantic layer development and maintenance**
 - **Query optimization and monitoring tools**
 - **Increased data engineering support** for troubleshooting inefficient queries
-- TODO: cost of LLMs/chat interfaces
+- **Cost of access to LLMs**
+- **Build vs buy for chat interfaces**
 
 ### How to assess ROI of using MCP with your data warehouse
 
@@ -501,8 +369,7 @@ Organizations should carefully model the economics before committing to warehous
 ## Best practices for MCP and Data Warehouse integration
 
 ### 1. Start with read-only access
-TODO: avoid NEVER
-Never allow chat interfaces to perform write operations on your data warehouse. Implement MCP servers with read-only credentials and explicitly disable INSERT, UPDATE, and DELETE operations.
+Begin in read-only mode, do not allow chat interfaces to perform write operations on your data warehouse. Implement MCP servers with read-only credentials and explicitly disable INSERT, UPDATE, and DELETE operations.
 
 ### 2. Implement query timeouts and resource limits
 Configure aggressive query timeouts (e.g., 10-30 seconds) and resource consumption limits for MCP connections. This prevents runaway queries from consuming excessive warehouse resources.
@@ -513,7 +380,21 @@ Isolate chat workloads on dedicated warehouses or clusters with predictable sizi
 ### 4. Monitor and optimize continuously
 Implement comprehensive monitoring of query patterns, performance metrics, and cost attribution for chat-generated queries. Use this data to continuously optimize common query patterns and identify opportunities for materialization.
 
-TODO: add something about evals
-
 ### 5. Set realistic user expectations
 Educate users that warehouse-backed chat interfaces are designed for analytical questions rather than operational lookups. Set expectations about response times and data freshness to avoid frustration.
+
+### 6. Implement comprehensive evaluation frameworks
+Establish automated testing pipelines that continuously evaluate:
+- Query accuracy against golden datasets
+- Performance regression detection
+- Cost per query tracking
+- User satisfaction metrics
+
+Deploy A/B testing to compare different prompt strategies and measure their impact on query success rates and user satisfaction.
+
+### 7. Design for graceful degradation
+Build fallback strategies for when optimal queries aren't possible:
+- Pre-computed aggregates for common questions
+- Approximate query processing for faster results
+- Sampling strategies for exploratory analysis
+- Clear communication of limitations to users
