@@ -562,6 +562,11 @@ const nextConfig = {
         source: '/cloud/manage/cloud-tiers',
         destination: '/docs/cloud/manage/cloud-tiers',
         permanent: true
+      },
+      {
+        source: '/blog/clickhouse-group-by-parallel-replicas-8900-cores',
+        destination: '/blog/clickhouse-parallel-replicas',
+        permanent: true
       }
     ]
   }
