@@ -518,8 +518,8 @@ function TabbedTable() {
         <Image
           src={elasticTableLogo}
           alt='Elastic'
-          width={131}
-          height={29}
+          width={108}
+          height={32}
           className='mx-auto -mb-2 -mt-1'
         />
       ),
