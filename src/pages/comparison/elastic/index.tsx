@@ -815,7 +815,7 @@ function ClickHouseVersusElastic() {
 
   return (
     <ScaleToContainer scaleUp={false} className='mx-auto'>
-      <div className='relative flex w-fit flex-col gap-x-16 gap-y-8 lg:flex-row lg:flex-nowrap lg:px-12'>
+      <div className='relative flex w-fit flex-row flex-nowrap gap-x-12 lg:gap-x-16'>
         <GridAnimation
           step={
             pauseClickhouse ? clickhouseSteps.length - 1 : activeElasticStep
