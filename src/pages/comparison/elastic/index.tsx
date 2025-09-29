@@ -33,6 +33,7 @@ import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
+import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import tables from '@/data/elastic-comparison'
 import { useDebounce } from '@/hooks'
@@ -99,9 +100,9 @@ export default function ElasticPage({
           <SuiText className='space-y-6 text-neutral-200'>
             <p>
               ClickStack is a high-performance, open-source observability stack
-              built on ClickHouse. It delivers lightning-fast queries and
-              powerful aggregations across high cardinality logs, metrics,
-              traces, session replays at petabyte scale.
+              built on ClickHouse. It delivers high compression, lightning-fast
+              queries and powerful aggregations across high cardinality logs,
+              metrics, traces, session replays at petabyte scale.
             </p>
             <p>
               Elastic, by contrast, is rooted in a full-text search engine,
@@ -213,10 +214,18 @@ export default function ElasticPage({
         {/* Yellow triangle */}
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[70rem] bg-primary-300 lg:top-[47rem]' />
         <div className='section-container relative z-10 space-y-6'>
-          <div className='mb-16 space-y-12 lg:mb-24'>
-            <SuiTitle type='h2' className='text-center'>
-              ClickStack compared to Elastic
+          <div className='mb-16 text-center lg:mb-24'>
+            <SuiTitle type='h2' className='mx-auto max-w-4xl'>
+              Frustrated by slow queries, rising storage costs, expensive
+              rebalances, and endless horizontal sprawl?
             </SuiTitle>
+            <p className='mb-20 mt-8'>
+              <TiltedText
+                type='yellow-on-black'
+                className='px-2 py-2 text-xl font-bold'>
+                You’re not alone
+              </TiltedText>
+            </p>
             <ClickHouseVersusElastic />
           </div>
 
@@ -351,29 +360,22 @@ export default function ElasticPage({
 
       {/* Tabbed table */}
       <section className='my-16 lg:my-24'>
-        <div className='section-container'>
-          <div className='mx-auto mb-6 max-w-5xl space-y-6 text-center'>
+        <div className='section-container mb-16'>
+          <div className='mx-auto mb-16 max-w-5xl space-y-6 text-center'>
             <SuiTitle type='h2'>
-              Frustrated with slow queries, soaring disk usage at scale and
-              costs and hours spent watching clusters rebalance?
+              ClickStack compared to Elastic Observability
             </SuiTitle>
-            <SuiText className='mx-auto max-w-2xl text-lg text-neutral-200'>
-              <strong className='text-white'>You’re not alone.</strong> Teams
-              are moving to ClickStack for faster analytics, lower costs, and a
-              unified engine for logs, metrics, and traces.
+            <SuiText className='mx-auto max-w-3xl text-neutral-200'>
+              At a high level, Elastic and ClickStack share a familiar shape:
+              both have a data collection layer (Beats and Logstash vs.
+              OpenTelemetry), a storage engine (Elasticsearch vs. ClickHouse),
+              and a UI (Kibana vs. HyperDX). But beneath these parallels, the
+              architectures diverge.
             </SuiText>
           </div>
-        </div>
-        <TabbedTable />
-      </section>
-
-      <section className='section-container my-16 lg:my-24'>
-        <div className='mb-16 space-y-12 lg:mb-24'>
-          <SuiTitle type='h2' className='text-center'>
-            ClickStack compared to Elastic Stack
-          </SuiTitle>
           <ClickStackVersusElkStack />
         </div>
+        <TabbedTable />
       </section>
 
       {/* Cards  */}
@@ -631,6 +633,7 @@ function TabbedTable() {
 
 function ClickStackVersusElkStack() {
   const layerGap = 72
+  const autoplay = false
   const [userInteracting, setUserInteracting] = useState(false)
   const [activeLayer, setActiveLayer] = useState<null | number>(null)
 
@@ -641,7 +644,7 @@ function ClickStackVersusElkStack() {
   const resetActiveLayer = () => activateLayer(null)
 
   useEffect(() => {
-    if (!userInteracting) {
+    if (!userInteracting && autoplay) {
       const interval = window.setInterval(() => {
         setActiveLayer((old) => {
           if (old === null) return 1
@@ -652,15 +655,15 @@ function ClickStackVersusElkStack() {
 
       return () => window.clearInterval(interval)
     }
-  }, [userInteracting])
+  }, [autoplay, userInteracting])
 
   const noActiveLayer = activeLayer === null
   const layer1Active = noActiveLayer || activeLayer === 1
   const layer2Active = noActiveLayer || activeLayer === 2
   const layer3Active = noActiveLayer || activeLayer === 3
   return (
-    <>
-      <div className='flex flex-col items-center justify-center gap-x-16 gap-y-8 lg:flex-row'>
+    <ScaleToContainer className='mx-auto'>
+      <div className='flex w-max flex-row items-center justify-center gap-x-16 gap-y-8'>
         <ClickStack
           gap={layerGap}
           hyperdx={layer1Active}
@@ -712,7 +715,7 @@ function ClickStackVersusElkStack() {
           ]}
         />
       </div>
-    </>
+    </ScaleToContainer>
   )
 }
 
@@ -815,7 +818,7 @@ function ClickHouseVersusElastic() {
 
   return (
     <ScaleToContainer scaleUp={false} className='mx-auto'>
-      <div className='relative flex w-fit flex-row flex-nowrap gap-x-12 lg:gap-x-16'>
+      <div className='relative flex w-max flex-row flex-nowrap gap-x-12 lg:gap-x-16'>
         <GridAnimation
           step={
             pauseClickhouse ? clickhouseSteps.length - 1 : activeElasticStep

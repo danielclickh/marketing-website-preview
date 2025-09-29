@@ -4,7 +4,7 @@ export default {
   name: 'Interoperability',
   description: `ClickStack is **OpenTelemetry-native** but not exclusive, supporting OTel out of the box while also accommodating wide events and other flexible models. Elastic, by contrast, appends OTel support to its stack, with historical agents still migrating. 
 
-Beyond instrumentation, ClickStack inherits ClickHouse’s broad interoperability. Native table engines read directly from Postgres, MongoDB, or object storage, with Parquet and Iceberg supported natively and external catalogs like Hive and Glue queryable in place, allowing teams to build observability on **open standards without lock-in** or costly data duplication and transport. C lickPipes extends this in the cloud with **hosted ingestion from S3 and Kafka**, eliminating the need to manage external components.`,
+ClickStack inherits ClickHouse’s interoperability. Native table engines **read directly from Postgres, MongoDB, and object storage**, with **Parquet and Lake formats** supported natively and **external catalogs like Hive and Glue** queryable in place. This lets teams build observability on open standards without lock-in or costly duplication. ClickPipes extends this with hosted ingestion from S3 and Kafka, removing the need to manage external components.`,
   rows: [
     {
       heading: 'Query external data in-place',

@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Scalability',
-  description: `Elastic’s scalability is bound by shards and the JVM and designed for terabyte workloads. Each shard is **limited in size**, queries **parallelize only within shard boundaries**, and JVM constraints for the heap size (capped at ~64GB) force **horizontal sprawl**. This creates **network overhead and costly rebalances** on node outages, while ingest and queries contend for resources, leaving users to either **sample data to restrict what they monitor**.
+  description: `Elastic’s scalability is constrained by shards and the JVM, built for terabyte workloads. Shards are **size-limited**, queries parallelize only within shard boundaries, and **JVM heap caps (~64GB) force horizontal sprawl**. This drives **network overhead**, **costly rebalances** on outages, and resource contention between ingest and queries, often pushing users to sample data.
 
-ClickStack, powered by ClickHouse, scales for petabyte workloads. Queries are fully **parallelized across all cores** without the memory limits of a JVM. **Vertical scaling is encouraged** - reducing the need to spread workloads across shards. ClickHouse Cloud goes further: **compute and storage scale independently**, with all nodes accessing a single data copy on S3 - allowing **long-term cost efficient retention**. Reads and writes can be isolated with warehouses, with each elastically scalable on demand.`,
+ClickStack, powered by ClickHouse, scales to petabytes. Queries parallelize across all cores without JVM limits, and vertical scaling reduces reliance on shards. In ClickHouse Cloud, compute and storage scale independently, all nodes share a single S3 copy for cost-efficient retention, and reads/writes can be isolated with elastic warehouses.`,
   rows: [
     {
       heading: 'Unlimited shard sizes',
