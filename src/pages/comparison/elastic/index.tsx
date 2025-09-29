@@ -115,12 +115,12 @@ export default function ElasticPage({
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
-              href='https://console.clickhouse.cloud/signUp?loc=elastic-comparison-page-hero'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/overview'
               type='primary'
               size='lg'
               weight='semibold'
               className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
-              Get started with Cloud
+              Get started
             </CUIButton>
             <CUIButton
               href='/company/contact?loc=elastic-comparison-page-hero'
@@ -215,17 +215,13 @@ export default function ElasticPage({
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[70rem] bg-primary-300 lg:top-[47rem]' />
         <div className='section-container relative z-10 space-y-6'>
           <div className='mb-16 text-center lg:mb-24'>
-            <SuiTitle type='h2' className='mx-auto max-w-4xl'>
-              Frustrated by slow queries, rising storage costs, expensive
-              rebalances, and endless horizontal sprawl?
+            <SuiTitle
+              type='h2'
+              className='mx-auto mb-16 max-w-4xl text-neutral-200'>
+              Frustrated by slow queries, rising storage costs and endless
+              horizontal sprawl?{' '}
+              <strong className='text-white'>You’re not alone.</strong>
             </SuiTitle>
-            <p className='mb-20 mt-8'>
-              <TiltedText
-                type='yellow-on-black'
-                className='px-2 py-2 text-xl font-bold'>
-                You’re not alone
-              </TiltedText>
-            </p>
             <ClickHouseVersusElastic />
           </div>
 
@@ -811,14 +807,23 @@ function ClickHouseVersusElastic() {
       duration: 0.6,
       delay: 400
     },
+    {
+      cols: 16,
+      rows: 24,
+      cellWidth: 8.75,
+      cellHeight: 8.75,
+      gutter: 2,
+      duration: 0.6,
+      delay: 400
+    },
 
     // Long pause at end of animation
     {
-      cols: 8,
-      rows: 12,
-      cellWidth: 16.875,
-      cellHeight: 16.875,
-      gutter: 5,
+      cols: 16,
+      rows: 24,
+      cellWidth: 8.75,
+      cellHeight: 8.75,
+      gutter: 2,
       duration: 3
     }
   ]
