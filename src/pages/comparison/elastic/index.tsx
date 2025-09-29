@@ -39,6 +39,7 @@ import { useDebounce } from '@/hooks'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -47,7 +48,8 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
+  useMemo
 } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -215,8 +217,7 @@ export default function ElasticPage({
             <SuiTitle type='h2' className='text-center'>
               ClickStack compared to Elastic
             </SuiTitle>
-            <ClickStackVersusElkStack />
-            {/*<ClickHouseVersusElastic />*/}
+            <ClickHouseVersusElastic />
           </div>
 
           {/* Testimonials */}
@@ -349,7 +350,7 @@ export default function ElasticPage({
       </section>
 
       {/* Tabbed table */}
-      <section className='py-16 lg:py-24'>
+      <section className='my-16 lg:my-24'>
         <div className='section-container'>
           <div className='mx-auto mb-6 max-w-5xl space-y-6 text-center'>
             <SuiTitle type='h2'>
@@ -364,6 +365,15 @@ export default function ElasticPage({
           </div>
         </div>
         <TabbedTable />
+      </section>
+
+      <section className='section-container my-16 lg:my-24'>
+        <div className='mb-16 space-y-12 lg:mb-24'>
+          <SuiTitle type='h2' className='text-center'>
+            ClickStack compared to Elastic Stack
+          </SuiTitle>
+          <ClickStackVersusElkStack />
+        </div>
       </section>
 
       {/* Cards  */}
@@ -707,46 +717,10 @@ function ClickStackVersusElkStack() {
 }
 
 function ClickHouseVersusElastic() {
-  function ClickHouseLogo({ className = '' }: { className?: string }) {
-    return (
-      <div
-        className={`flex w-20 items-center justify-center rounded bg-primary shadow ${className}`}>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='55'
-          height='56'
-          fill='none'
-          className='mx-auto'>
-          <path
-            fill='#000'
-            d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
-          />
-        </svg>
-      </div>
-    )
-  }
-
-  function ElasticLogo({ className = '' }: { className?: string }) {
-    return (
-      <div
-        className={`flex size-20 items-center justify-center rounded bg-white shadow ${className}`}>
-        <Image
-          src={elasticAnimationLogo}
-          width={56}
-          height={56}
-          alt='Elastic'
-        />
-      </div>
-    )
-  }
-
   return (
     <ScaleToContainer scaleUp={false} className='mx-auto'>
       <div className='flex w-fit flex-col gap-x-16 gap-y-8 lg:flex-row lg:flex-nowrap lg:px-12'>
-        <div className='grid grid-cols-2 grid-rows-3 gap-2.5'>
-          <ClickHouseLogo className='row-span-full' />
-          <ClickHouseLogo className='row-span-full' />
-        </div>
+        <ClickhouseAnimation />
         <Image
           src={iconVs}
           width={60}
@@ -754,15 +728,275 @@ function ClickHouseVersusElastic() {
           alt='VS'
           className='self-center rounded-full shadow-xl'
         />
-        <div className='grid grid-cols-2 grid-rows-3 gap-2.5'>
-          <ElasticLogo />
-          <ElasticLogo />
-          <ElasticLogo />
-          <ElasticLogo />
-          <ElasticLogo />
-          <ElasticLogo />
-        </div>
+        <ElasticAnimation />
       </div>
     </ScaleToContainer>
+  )
+}
+
+function ClickhouseAnimation() {
+  return (
+    <GridAnimation
+      cell={
+        <div className='absolute inset-0 rounded-sm bg-primary-300'>
+          <div className='absolute inset-[10%]'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='55'
+              height='56'
+              fill='none'
+              viewBox='0 0 55 56'
+              className='absolute h-full w-full'>
+              <path
+                fill='#000'
+                d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
+              />
+            </svg>
+          </div>
+        </div>
+      }
+      steps={[
+        {
+          rows: 1,
+          cols: 1,
+          cellWidth: 80,
+          cellHeight: 80,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          rows: 1,
+          cols: 1,
+          cellWidth: 80,
+          cellHeight: 170,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          rows: 1,
+          cols: 2,
+          cellWidth: 80,
+          cellHeight: 170,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          rows: 1,
+          cols: 2,
+          cellWidth: 80,
+          cellHeight: 260,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          rows: 1,
+          cols: 2,
+          cellWidth: 80,
+          cellHeight: 260,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          rows: 1,
+          cols: 2,
+          cellWidth: 80,
+          cellHeight: 260,
+          gutter: 10,
+          duration: 0.6
+        }
+      ]}
+    />
+  )
+}
+
+function ElasticAnimation() {
+  return (
+    <GridAnimation
+      cell={
+        <div className='absolute inset-0 rounded-sm bg-white'>
+          <div className='absolute inset-[10%]'>
+            <Image
+              src={elasticAnimationLogo}
+              width={56}
+              height={56}
+              alt='Elastic'
+              className='absolute h-full w-full object-contain'
+            />
+          </div>
+        </div>
+      }
+      steps={[
+        {
+          cols: 1,
+          rows: 1,
+          cellWidth: 80,
+          cellHeight: 80,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          cols: 1,
+          rows: 2,
+          cellWidth: 80,
+          cellHeight: 80,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          cols: 2,
+          rows: 2,
+          cellWidth: 80,
+          cellHeight: 80,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          cols: 2,
+          rows: 3,
+          cellWidth: 80,
+          cellHeight: 80,
+          gutter: 10,
+          duration: 0.6
+        },
+        {
+          cols: 4,
+          rows: 6,
+          cellWidth: 38.75,
+          cellHeight: 38.75,
+          gutter: 5,
+          duration: 0.6
+        },
+        {
+          cols: 8,
+          rows: 12,
+          cellWidth: 16.875,
+          cellHeight: 16.875,
+          gutter: 5,
+          duration: 0.6
+        }
+      ]}
+    />
+  )
+}
+
+function GridAnimation({
+  cell,
+  steps
+}: {
+  cell: React.ReactNode
+  steps: Array<{
+    rows: number
+    cols: number
+    cellWidth: number
+    cellHeight: number
+    gutter: number
+    duration: number
+    delay?: number
+  }>
+}) {
+  const [stepIndex, setStepIndex] = useState(0)
+  const [direction, setDirection] = useState<1 | -1>(1)
+  const step = steps[stepIndex]
+  const nextStep = steps[stepIndex + 1]
+
+  // Width and height caclulated on cell size + gutter
+  const canvasWidth = steps
+    .map((a) => {
+      return a.cols * a.cellWidth + (a.cols - 1) * a.gutter
+    })
+    .toSorted((a, b) => b - a)[0]
+
+  const canvasHeight = steps
+    .map((a) => {
+      return a.rows * a.cellHeight + (a.rows - 1) * a.gutter
+    })
+    .toSorted((a, b) => b - a)[0]
+
+  const layout = useMemo(() => {
+    const { cols, rows, cellWidth, cellHeight, gutter } = step
+
+    const gridWidth = cols * cellWidth + (cols - 1) * gutter
+    const gridHeight = rows * cellHeight + (rows - 1) * gutter
+    const startX = Math.round((canvasWidth - gridWidth) / 2)
+    const startY = Math.round((canvasHeight - gridHeight) / 2)
+
+    const items: Array<{
+      id: string
+      x: number
+      y: number
+      width: number
+      height: number
+      index: number
+    }> = []
+
+    let index = 0
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const id = `${r}-${c}`
+        items.push({
+          id,
+          x: startX + c * (cellWidth + gutter),
+          y: startY + r * (cellHeight + gutter),
+          width: cellWidth,
+          height: cellHeight,
+          index
+        })
+        index++
+      }
+    }
+    return items
+  }, [step])
+
+  useEffect(() => {
+    const isAtEnd = stepIndex >= steps.length - 1
+    const isAtStart = stepIndex <= 0
+    if (isAtEnd) setDirection(-1)
+    if (isAtStart) setDirection(1)
+
+    const delay = step.duration * 1000 + 250 + (nextStep?.delay || 0)
+    const timer = window.setTimeout(() => {
+      setStepIndex((i) => {
+        return Math.min(Math.max(i + direction, 0), steps.length - 1)
+      })
+    }, delay)
+    return () => window.clearTimeout(timer)
+  }, [stepIndex, direction, step, nextStep])
+
+  return (
+    <div
+      className='relative'
+      style={{ width: canvasWidth, height: canvasHeight }}>
+      {layout.map((it) => (
+        <motion.div
+          key={it.id}
+          layout
+          initial={{
+            opacity: 0,
+            scale: 0.4,
+            x: it.x,
+            y: it.y,
+            width: it.width,
+            height: it.height,
+            originX: 0.5,
+            originY: 0.5
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            x: it.x,
+            y: it.y,
+            width: it.width,
+            height: it.height
+          }}
+          transition={{
+            type: 'tween',
+            ease: 'easeInOut',
+            duration: step.duration
+          }}
+          className='absolute left-0 top-0'>
+          {cell}
+        </motion.div>
+      ))}
+    </div>
   )
 }
