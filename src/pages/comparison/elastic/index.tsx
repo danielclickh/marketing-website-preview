@@ -717,10 +717,136 @@ function ClickStackVersusElkStack() {
 }
 
 function ClickHouseVersusElastic() {
+  const [activeElasticStep, setActiveElasticStep] = useState(0)
+  const clickhouseSteps = [
+    {
+      rows: 1,
+      cols: 1,
+      cellWidth: 80,
+      cellHeight: 80,
+      gutter: 10,
+      duration: 0.6
+    },
+    {
+      rows: 1,
+      cols: 1,
+      cellWidth: 80,
+      cellHeight: 170,
+      gutter: 10,
+      duration: 0.6
+    },
+    {
+      rows: 1,
+      cols: 1,
+      cellWidth: 80,
+      cellHeight: 260,
+      gutter: 10,
+      duration: 0.6
+    },
+    {
+      rows: 1,
+      cols: 2,
+      cellWidth: 80,
+      cellHeight: 260,
+      gutter: 10,
+      duration: 0.6
+    }
+  ]
+
+  const elasticSteps = [
+    {
+      cols: 1,
+      rows: 1,
+      cellWidth: 80,
+      cellHeight: 80,
+      gutter: 10,
+      duration: 0.6,
+      delay: 400
+    },
+    {
+      cols: 1,
+      rows: 2,
+      cellWidth: 80,
+      cellHeight: 80,
+      gutter: 10,
+      duration: 0.6,
+      delay: 400
+    },
+    {
+      cols: 1,
+      rows: 3,
+      cellWidth: 80,
+      cellHeight: 80,
+      gutter: 10,
+      duration: 0.6,
+      delay: 400
+    },
+    {
+      cols: 2,
+      rows: 3,
+      cellWidth: 80,
+      cellHeight: 80,
+      gutter: 10,
+      duration: 0.6,
+      delay: 400
+    },
+    {
+      cols: 4,
+      rows: 6,
+      cellWidth: 38.75,
+      cellHeight: 38.75,
+      gutter: 5,
+      duration: 0.6,
+      delay: 400
+    },
+    {
+      cols: 8,
+      rows: 12,
+      cellWidth: 16.875,
+      cellHeight: 16.875,
+      gutter: 5,
+      duration: 0.6,
+      delay: 400
+    }
+  ]
+
+  const pauseClickhouse = activeElasticStep >= clickhouseSteps.length - 1
+  const glowClickhouse = activeElasticStep >= clickhouseSteps.length
+
   return (
     <ScaleToContainer scaleUp={false} className='mx-auto'>
-      <div className='flex w-fit flex-col gap-x-16 gap-y-8 lg:flex-row lg:flex-nowrap lg:px-12'>
-        <ClickhouseAnimation />
+      <div className='relative flex w-fit flex-col gap-x-16 gap-y-8 lg:flex-row lg:flex-nowrap lg:px-12'>
+        <GridAnimation
+          step={
+            pauseClickhouse ? clickhouseSteps.length - 1 : activeElasticStep
+          }
+          auto={false}
+          steps={clickhouseSteps}
+          cell={
+            <>
+              <div
+                className={`absolute inset-0 transition-opacity duration-500 ${glowClickhouse ? '' : 'opacity-0'}`}>
+                <div className='absolute inset-0 animate-fadeInOut rounded-sm bg-primary-300 blur-lg' />
+              </div>
+              <div className='absolute inset-0 rounded-sm bg-primary-300'>
+                <div className='absolute inset-[10%]'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='55'
+                    height='56'
+                    fill='none'
+                    viewBox='0 0 55 56'
+                    className='absolute h-full w-full'>
+                    <path
+                      fill='#000'
+                      d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
+                    />
+                  </svg>
+                </div>
+              </div>
+            </>
+          }
+        />
         <Image
           src={iconVs}
           width={60}
@@ -728,154 +854,25 @@ function ClickHouseVersusElastic() {
           alt='VS'
           className='self-center rounded-full shadow-xl'
         />
-        <ElasticAnimation />
+        <GridAnimation
+          onStepChange={setActiveElasticStep}
+          steps={elasticSteps}
+          cell={
+            <div className='absolute inset-0 rounded-sm bg-white'>
+              <div className='absolute inset-[10%]'>
+                <Image
+                  src={elasticAnimationLogo}
+                  width={56}
+                  height={56}
+                  alt='Elastic'
+                  className='absolute h-full w-full object-contain'
+                />
+              </div>
+            </div>
+          }
+        />
       </div>
     </ScaleToContainer>
-  )
-}
-
-function ClickhouseAnimation() {
-  return (
-    <GridAnimation
-      cell={
-        <div className='absolute inset-0 rounded-sm bg-primary-300'>
-          <div className='absolute inset-[10%]'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='55'
-              height='56'
-              fill='none'
-              viewBox='0 0 55 56'
-              className='absolute h-full w-full'>
-              <path
-                fill='#000'
-                d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
-              />
-            </svg>
-          </div>
-        </div>
-      }
-      steps={[
-        {
-          rows: 1,
-          cols: 1,
-          cellWidth: 80,
-          cellHeight: 80,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          rows: 1,
-          cols: 1,
-          cellWidth: 80,
-          cellHeight: 170,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          rows: 1,
-          cols: 2,
-          cellWidth: 80,
-          cellHeight: 170,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          rows: 1,
-          cols: 2,
-          cellWidth: 80,
-          cellHeight: 260,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          rows: 1,
-          cols: 2,
-          cellWidth: 80,
-          cellHeight: 260,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          rows: 1,
-          cols: 2,
-          cellWidth: 80,
-          cellHeight: 260,
-          gutter: 10,
-          duration: 0.6
-        }
-      ]}
-    />
-  )
-}
-
-function ElasticAnimation() {
-  return (
-    <GridAnimation
-      cell={
-        <div className='absolute inset-0 rounded-sm bg-white'>
-          <div className='absolute inset-[10%]'>
-            <Image
-              src={elasticAnimationLogo}
-              width={56}
-              height={56}
-              alt='Elastic'
-              className='absolute h-full w-full object-contain'
-            />
-          </div>
-        </div>
-      }
-      steps={[
-        {
-          cols: 1,
-          rows: 1,
-          cellWidth: 80,
-          cellHeight: 80,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          cols: 1,
-          rows: 2,
-          cellWidth: 80,
-          cellHeight: 80,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          cols: 2,
-          rows: 2,
-          cellWidth: 80,
-          cellHeight: 80,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          cols: 2,
-          rows: 3,
-          cellWidth: 80,
-          cellHeight: 80,
-          gutter: 10,
-          duration: 0.6
-        },
-        {
-          cols: 4,
-          rows: 6,
-          cellWidth: 38.75,
-          cellHeight: 38.75,
-          gutter: 5,
-          duration: 0.6
-        },
-        {
-          cols: 8,
-          rows: 12,
-          cellWidth: 16.875,
-          cellHeight: 16.875,
-          gutter: 5,
-          duration: 0.6
-        }
-      ]}
-    />
   )
 }
 
@@ -889,31 +886,21 @@ type GridAnimationStep = {
   delay?: number
 }
 
-function GridAnimation({
+export function GridAnimation({
   cell,
-  steps
+  steps,
+  step, // controlled step (0-based). If provided, disables auto-advance.
+  onStepChange, // called when internal step changes (uncontrolled mode)
+  auto = true, // allow disabling internal timer even when uncontrolled
+  pingPong = true // keep your original ping-pong behaviour
 }: {
   cell: React.ReactNode
   steps: Array<GridAnimationStep>
+  step?: number
+  onStepChange?: (next: number) => void
+  auto?: boolean
+  pingPong?: boolean
 }) {
-  const [stepIndex, setStepIndex] = useState(0)
-  const [direction, setDirection] = useState<1 | -1>(1)
-  const step = steps[stepIndex]
-  const nextStep = steps[stepIndex + direction]
-
-  // Width and height caclulated on cell size + gutter
-  const canvasWidth = steps
-    .map((a) => {
-      return a.cols * a.cellWidth + (a.cols - 1) * a.gutter
-    })
-    .toSorted((a, b) => b - a)[0]
-
-  const canvasHeight = steps
-    .map((a) => {
-      return a.rows * a.cellHeight + (a.rows - 1) * a.gutter
-    })
-    .toSorted((a, b) => b - a)[0]
-
   type CellStep = {
     id: string
     x: number
@@ -921,134 +908,209 @@ function GridAnimation({
     width: number
     height: number
   }
-
-  const calcStepItems = (thisStep: GridAnimationStep) => {
-    const { cols, rows, cellWidth, cellHeight, gutter } = thisStep
-
-    const gridWidth = cols * cellWidth + (cols - 1) * gutter
-    const gridHeight = rows * cellHeight + (rows - 1) * gutter
-    const startX = Math.round((canvasWidth - gridWidth) / 2)
-    const startY = Math.round((canvasHeight - gridHeight) / 2)
-
-    const items: Array<CellStep> = []
-
-    let index = 0
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        items.push({
-          id: index.toString(),
-          x: startX + c * (cellWidth + gutter),
-          y: startY + r * (cellHeight + gutter),
-          width: cellWidth,
-          height: cellHeight
-        })
-        index++
-      }
-    }
-
-    return items
+  type StableCell = {
+    id: string
+    bornAt: number
+    birthRows: number
+    birthCols: number
+    birthRow: number
+    birthCol: number
   }
 
-  const allCellInitial = useMemo(() => {
-    const cells = new Map<string, CellStep>()
+  const clamp = (n: number, min: number, max: number) => {
+    return Math.min(Math.max(n, min), max)
+  }
 
-    steps.forEach((step) => {
-      calcStepItems(step).forEach((stepItem) => {
-        if (!cells.has(stepItem.id)) {
-          cells.set(stepItem.id, stepItem)
+  const scaleIndex = (i: number, fromN: number, toN: number) => {
+    if (toN <= 1 || fromN <= 1) return 0
+    return Math.round((i * (toN - 1)) / (fromN - 1))
+  }
+
+  const isControlled = step != null
+  const [uStep, setUStep] = useState(0)
+  const [direction, setDirection] = useState<1 | -1>(1)
+
+  // the effective step we render
+  const stepIndex = clamp(
+    isControlled ? (step as number) : uStep,
+    0,
+    steps.length - 1
+  )
+  const current = steps[stepIndex]
+  const next = steps[clamp(stepIndex + direction, 0, steps.length - 1)]
+
+  // canvas size
+  const canvasWidth = useMemo(
+    () =>
+      Math.max(
+        ...steps.map((s) => s.cols * s.cellWidth + (s.cols - 1) * s.gutter)
+      ),
+    [steps]
+  )
+  const canvasHeight = useMemo(
+    () =>
+      Math.max(
+        ...steps.map((s) => s.rows * s.cellHeight + (s.rows - 1) * s.gutter)
+      ),
+    [steps]
+  )
+
+  const gridMetrics = (s: GridAnimationStep) => {
+    const gridWidth = s.cols * s.cellWidth + (s.cols - 1) * s.gutter
+    const gridHeight = s.rows * s.cellHeight + (s.rows - 1) * s.gutter
+    const startX = Math.round((canvasWidth - gridWidth) / 2)
+    const startY = Math.round((canvasHeight - gridHeight) / 2)
+    return { startX, startY }
+  }
+
+  // build stable cells with “birth slots”
+  const stableCells = useMemo<StableCell[]>(() => {
+    const out: StableCell[] = []
+    for (let sIdx = 0; sIdx < steps.length; sIdx++) {
+      const s = steps[sIdx]
+      const targetCount = s.rows * s.cols
+      const prevCount =
+        sIdx === 0 ? 0 : steps[sIdx - 1].rows * steps[sIdx - 1].cols
+      const toCreate = Math.max(0, targetCount - prevCount)
+      if (toCreate === 0) continue
+
+      // mark occupied when scaling existing cells into this step
+      const occupied = new Set<string>()
+      for (const c of out) {
+        if (c.bornAt >= sIdx) continue
+        const rr = scaleIndex(c.birthRow, c.birthRows, s.rows)
+        const cc = scaleIndex(c.birthCol, c.birthCols, s.cols)
+        occupied.add(`${rr}:${cc}`)
+      }
+
+      // row-major fill for new births
+      let created = 0
+      outer: for (let r = 0; r < s.rows; r++) {
+        for (let c = 0; c < s.cols; c++) {
+          const key = `${r}:${c}`
+          if (!occupied.has(key)) {
+            out.push({
+              id: String(out.length),
+              bornAt: sIdx,
+              birthRows: s.rows,
+              birthCols: s.cols,
+              birthRow: r,
+              birthCol: c
+            })
+            created++
+            if (created >= toCreate) break outer
+          }
         }
-      })
-    })
-
-    return cells.values().toArray()
+      }
+    }
+    return out
   }, [steps])
 
-  const layout = useMemo(() => calcStepItems(step), [step])
+  const positionAtStep = (cell: StableCell, s: GridAnimationStep): CellStep => {
+    const { startX, startY } = gridMetrics(s)
+    const r = scaleIndex(cell.birthRow, cell.birthRows, s.rows)
+    const c = scaleIndex(cell.birthCol, cell.birthCols, s.cols)
+    return {
+      id: cell.id,
+      x: startX + c * (s.cellWidth + s.gutter),
+      y: startY + r * (s.cellHeight + s.gutter),
+      width: s.cellWidth,
+      height: s.cellHeight
+    }
+  }
 
+  const birthPositions = useMemo(() => {
+    const m = new Map<string, CellStep>()
+    for (const c of stableCells) m.set(c.id, positionAtStep(c, steps[c.bornAt]))
+    return m
+  }, [stableCells, steps])
+
+  const currentLayout = useMemo(
+    () =>
+      stableCells
+        .filter((c) => c.bornAt <= stepIndex)
+        .map((c) => positionAtStep(c, current)),
+    [stableCells, stepIndex, current]
+  )
+
+  // auto-advance (uncontrolled only)
   useEffect(() => {
-    const isAtEnd = stepIndex >= steps.length - 1
-    const isAtStart = stepIndex <= 0
-    if (isAtEnd) setDirection(-1)
-    if (isAtStart) setDirection(1)
+    if (isControlled || !auto) return
+    const atEnd = stepIndex >= steps.length - 1
+    const atStart = stepIndex <= 0
 
-    const delay = step.duration * 1000 + 250 + (nextStep?.delay || 0)
-    const timer = window.setTimeout(() => {
-      setStepIndex((i) => {
-        return Math.min(Math.max(i + direction, 0), steps.length - 1)
+    if (pingPong) {
+      if (atEnd) setDirection(-1)
+      if (atStart) setDirection(1)
+    } else {
+      if (atEnd) setUStep(0) // loop
+    }
+
+    const delay = current.duration * 1000 + 250 + (next?.delay || 0)
+    const t = window.setTimeout(() => {
+      setUStep((i) => {
+        const nextIndex = pingPong
+          ? clamp(i + direction, 0, steps.length - 1)
+          : (i + 1) % steps.length
+        onStepChange?.(nextIndex)
+        return nextIndex
       })
     }, delay)
-    return () => window.clearTimeout(timer)
-  }, [stepIndex, direction, step, nextStep])
+
+    return () => window.clearTimeout(t)
+  }, [
+    isControlled,
+    auto,
+    pingPong,
+    stepIndex,
+    direction,
+    current,
+    next,
+    steps.length,
+    onStepChange
+  ])
 
   return (
     <div
       className='relative'
       style={{ width: canvasWidth, height: canvasHeight }}>
-      {allCellInitial.map((cellItem, cellIndex) => {
-        const isActive = !!layout[cellIndex]?.id
+      {stableCells.map((c) => {
+        const birth = birthPositions.get(c.id)!
+        const target = currentLayout.find((p) => p.id === c.id)
+        const isActive = !!target
+        const to = target ?? birth
         return (
           <motion.div
-            key={cellItem.id}
-            layout
+            key={c.id}
+            layout={false}
             initial={{
               opacity: 0,
               scale: 0.4,
+              x: birth.x,
+              y: birth.y,
+              width: birth.width,
+              height: birth.height,
               originX: 0.5,
-              originY: 0.5,
-              width: cellItem.width,
-              height: cellItem.height,
-              x: cellItem.x,
-              y: cellItem.y
+              originY: 0.5
             }}
             animate={{
               opacity: isActive ? 1 : 0,
               scale: isActive ? 1 : 0.4,
-              width: isActive ? layout[cellIndex].width : cellItem.width,
-              height: isActive ? layout[cellIndex].height : cellItem.height,
-              x: isActive ? layout[cellIndex].x : cellItem.x,
-              y: isActive ? layout[cellIndex].y : cellItem.y
+              x: to.x,
+              y: to.y,
+              width: to.width,
+              height: to.height
             }}
             transition={{
               type: 'tween',
               ease: 'easeInOut',
-              duration: step.duration
+              duration: current.duration
             }}
             className='absolute left-0 top-0'>
             {cell}
           </motion.div>
         )
       })}
-      {layout.map((it) => (
-        <motion.div
-          key={it.id}
-          layout
-          initial={{
-            opacity: 0,
-            scale: 0.4,
-            x: it.x,
-            y: it.y,
-            width: it.width,
-            height: it.height,
-            originX: 0.5,
-            originY: 0.5
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            x: it.x,
-            y: it.y,
-            width: it.width,
-            height: it.height
-          }}
-          transition={{
-            type: 'tween',
-            ease: 'easeInOut',
-            duration: step.duration
-          }}
-          className='absolute left-0 top-0'>
-          {cell}
-        </motion.div>
-      ))}
     </div>
   )
 }
