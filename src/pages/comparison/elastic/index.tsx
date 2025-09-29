@@ -810,6 +810,16 @@ function ClickHouseVersusElastic() {
       gutter: 5,
       duration: 0.6,
       delay: 400
+    },
+
+    // Long pause at end of animation
+    {
+      cols: 8,
+      rows: 12,
+      cellWidth: 16.875,
+      cellHeight: 16.875,
+      gutter: 5,
+      duration: 3
     }
   ]
 
