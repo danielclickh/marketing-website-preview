@@ -879,25 +879,27 @@ function ElasticAnimation() {
   )
 }
 
+type GridAnimationStep = {
+  rows: number
+  cols: number
+  cellWidth: number
+  cellHeight: number
+  gutter: number
+  duration: number
+  delay?: number
+}
+
 function GridAnimation({
   cell,
   steps
 }: {
   cell: React.ReactNode
-  steps: Array<{
-    rows: number
-    cols: number
-    cellWidth: number
-    cellHeight: number
-    gutter: number
-    duration: number
-    delay?: number
-  }>
+  steps: Array<GridAnimationStep>
 }) {
   const [stepIndex, setStepIndex] = useState(0)
   const [direction, setDirection] = useState<1 | -1>(1)
   const step = steps[stepIndex]
-  const nextStep = steps[stepIndex + 1]
+  const nextStep = steps[stepIndex + direction]
 
   // Width and height caclulated on cell size + gutter
   const canvasWidth = steps
@@ -912,40 +914,56 @@ function GridAnimation({
     })
     .toSorted((a, b) => b - a)[0]
 
-  const layout = useMemo(() => {
-    const { cols, rows, cellWidth, cellHeight, gutter } = step
+  type CellStep = {
+    id: string
+    x: number
+    y: number
+    width: number
+    height: number
+  }
+
+  const calcStepItems = (thisStep: GridAnimationStep) => {
+    const { cols, rows, cellWidth, cellHeight, gutter } = thisStep
 
     const gridWidth = cols * cellWidth + (cols - 1) * gutter
     const gridHeight = rows * cellHeight + (rows - 1) * gutter
     const startX = Math.round((canvasWidth - gridWidth) / 2)
     const startY = Math.round((canvasHeight - gridHeight) / 2)
 
-    const items: Array<{
-      id: string
-      x: number
-      y: number
-      width: number
-      height: number
-      index: number
-    }> = []
+    const items: Array<CellStep> = []
 
     let index = 0
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        const id = `${r}-${c}`
         items.push({
-          id,
+          id: index.toString(),
           x: startX + c * (cellWidth + gutter),
           y: startY + r * (cellHeight + gutter),
           width: cellWidth,
-          height: cellHeight,
-          index
+          height: cellHeight
         })
         index++
       }
     }
+
     return items
-  }, [step])
+  }
+
+  const allCellInitial = useMemo(() => {
+    const cells = new Map<string, CellStep>()
+
+    steps.forEach((step) => {
+      calcStepItems(step).forEach((stepItem) => {
+        if (!cells.has(stepItem.id)) {
+          cells.set(stepItem.id, stepItem)
+        }
+      })
+    })
+
+    return cells.values().toArray()
+  }, [steps])
+
+  const layout = useMemo(() => calcStepItems(step), [step])
 
   useEffect(() => {
     const isAtEnd = stepIndex >= steps.length - 1
@@ -966,6 +984,40 @@ function GridAnimation({
     <div
       className='relative'
       style={{ width: canvasWidth, height: canvasHeight }}>
+      {allCellInitial.map((cellItem, cellIndex) => {
+        const isActive = !!layout[cellIndex]?.id
+        return (
+          <motion.div
+            key={cellItem.id}
+            layout
+            initial={{
+              opacity: 0,
+              scale: 0.4,
+              originX: 0.5,
+              originY: 0.5,
+              width: cellItem.width,
+              height: cellItem.height,
+              x: cellItem.x,
+              y: cellItem.y
+            }}
+            animate={{
+              opacity: isActive ? 1 : 0,
+              scale: isActive ? 1 : 0.4,
+              width: isActive ? layout[cellIndex].width : cellItem.width,
+              height: isActive ? layout[cellIndex].height : cellItem.height,
+              x: isActive ? layout[cellIndex].x : cellItem.x,
+              y: isActive ? layout[cellIndex].y : cellItem.y
+            }}
+            transition={{
+              type: 'tween',
+              ease: 'easeInOut',
+              duration: step.duration
+            }}
+            className='absolute left-0 top-0'>
+            {cell}
+          </motion.div>
+        )
+      })}
       {layout.map((it) => (
         <motion.div
           key={it.id}
