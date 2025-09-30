@@ -843,8 +843,9 @@ function ClickHouseVersusElastic() {
   const clickhouseCounterInterval = [150, 100, 50, 25, 5, 5, 5][
     activeElasticStep
   ]
+  const clickhouseCounterIncrement = [1, 2, 3, 4, 4, 4, 4][activeElasticStep]
 
-  const elasticCounterInterval = [500, 450, 400, 300, 200, 100, 50][
+  const elasticCounterInterval = [300, 250, 200, 150, 100, 50, 50][
     activeElasticStep
   ]
 
@@ -936,6 +937,7 @@ function ClickHouseVersusElastic() {
           <div className='mx-auto inline-block rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
             <CounterAnimation
               key={loopKey}
+              increment={clickhouseCounterIncrement}
               max={99999}
               interval={clickhouseCounterInterval}
             />

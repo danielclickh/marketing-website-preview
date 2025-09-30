@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
 export interface CounterAnimationProps {
-  interval?: number
   max: number
+  increment?: number
+  interval?: number
   fixedWidth?: boolean
   className?: string
 }
 
 export default function CounterAnimation({
   max,
+  increment = 1,
   interval = 1000,
   fixedWidth = true,
   className = ''
@@ -17,7 +19,7 @@ export default function CounterAnimation({
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
-      setCount((prev) => (prev === max ? 1 : prev + 1))
+      setCount((prev) => (prev === max ? 1 : prev + increment))
     }, interval)
 
     return () => window.clearInterval(intervalId)
