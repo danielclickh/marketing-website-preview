@@ -32,8 +32,8 @@ export default {
         label: '**1,000+ concurrent queries per node**'
       },
       elastic: {
-        icon: 'intermediate',
-        label: 'Limited; ~8 QPS/warehouse, needs multi-cluster scaling'
+        icon: 'yes',
+        label: 'Supported'
       }
     },
     {
@@ -44,7 +44,8 @@ export default {
       },
       elastic: {
         icon: 'intermediate',
-        label: 'Limited types; full scans required'
+        label:
+          'Supported with limited aggregation types and full scans required to update'
       }
     },
     {

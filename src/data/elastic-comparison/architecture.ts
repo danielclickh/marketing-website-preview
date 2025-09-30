@@ -81,9 +81,12 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
       elastic: { icon: 'intermediate', label: 'Limited syntax coverage' }
     },
     {
-      heading: 'Full text search',
-      clickhouse: { icon: 'yes', label: '**Full text search via HyperDX**' },
-      elastic: { icon: 'yes', label: 'Full text search supported' }
+      heading: 'Natural language search',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Natural language search via HyperDX**'
+      },
+      elastic: { icon: 'yes', label: 'Natural language search supported' }
     },
     {
       heading: 'Flexible deployment (self-managed & cloud)',

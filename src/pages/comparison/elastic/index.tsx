@@ -776,7 +776,7 @@ function ClickHouseVersusElastic() {
       cellHeight: 80,
       gutter: 10,
       duration: 0.6,
-      delay: 400
+      delay: 600
     },
     {
       cols: 1,
@@ -785,7 +785,7 @@ function ClickHouseVersusElastic() {
       cellHeight: 80,
       gutter: 10,
       duration: 0.6,
-      delay: 400
+      delay: 600
     },
     {
       cols: 1,
@@ -794,7 +794,7 @@ function ClickHouseVersusElastic() {
       cellHeight: 80,
       gutter: 10,
       duration: 0.6,
-      delay: 400
+      delay: 600
     },
     {
       cols: 2,
@@ -803,7 +803,7 @@ function ClickHouseVersusElastic() {
       cellHeight: 80,
       gutter: 10,
       duration: 0.6,
-      delay: 400
+      delay: 600
     },
     {
       cols: 4,
@@ -812,7 +812,7 @@ function ClickHouseVersusElastic() {
       cellHeight: 38.75,
       gutter: 5,
       duration: 0.6,
-      delay: 400
+      delay: 600
     },
     {
       cols: 8,
@@ -821,7 +821,7 @@ function ClickHouseVersusElastic() {
       cellHeight: 16.875,
       gutter: 5,
       duration: 0.6,
-      delay: 400
+      delay: 600
     },
 
     // Long pause at end of animation
@@ -840,11 +840,13 @@ function ClickHouseVersusElastic() {
   const pauseClickhouse = activeElasticStep >= clickhouseSteps.length - 1
   const glowClickhouse = activeElasticStep >= clickhouseSteps.length
 
-  const animationPercent = (activeElasticStep / (elasticSteps.length - 1)) * 100
-  const animationPercentInverted = 100 - animationPercent
+  const clickhouseCounterInterval = [150, 100, 50, 25, 5, 5, 5][
+    activeElasticStep
+  ]
 
-  const clickhouseCounterInterval = ((animationPercentInverted + 1) / 100) * 100
-  const elasticCounterInterval = ((animationPercentInverted + 1) / 100) * 800
+  const elasticCounterInterval = [500, 450, 400, 300, 200, 100, 50][
+    activeElasticStep
+  ]
 
   const clickhouseLines = useMemo(() => {
     return [
@@ -1162,6 +1164,7 @@ export function GridAnimation({
   // auto-advance (uncontrolled only)
   useEffect(() => {
     if (isControlled || !auto) return
+
     const atEnd = stepIndex >= steps.length - 1
     const atStart = stepIndex <= 0
 
@@ -1173,13 +1176,14 @@ export function GridAnimation({
     const delay = current.duration * 1000 + 250 + (next?.delay || 0)
     const t = window.setTimeout(() => {
       setUStep((i) => {
-        if (atEnd && !pingPong) return -1
-
-        const nextIndex = pingPong
+        let nextIndex = pingPong
           ? clamp(i + direction, 0, steps.length - 1)
           : (i + 1) % steps.length
 
+        if (atEnd && !pingPong) nextIndex = 0
+
         onStepChange?.(nextIndex)
+
         return nextIndex
       })
     }, delay)

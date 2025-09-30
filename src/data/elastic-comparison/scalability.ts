@@ -20,7 +20,10 @@ ClickStack, powered by ClickHouse, scales to petabytes. Queries parallelize acro
         icon: 'yes',
         label: '**Parallel replicas** distribute queries'
       },
-      elastic: { icon: 'no', label: 'Only 1 replica per shard' }
+      elastic: {
+        icon: 'no',
+        label: '1 replica of each shared used in query execution'
+      }
     },
     {
       heading: 'Vertical scaling to support large machines',

@@ -7,6 +7,25 @@ export default {
 Native table engines **read directly from Postgres, MongoDB, and object storage**, with **Parquet and Lake formats** supported natively with **external catalogs like Hive and Glue** for querying data in place \\- so teams can build observability on open standards without lock-in or data duplication. ClickPipes extends this with hosted ingestion from S3 and Kafka, removing the need to manage pipelines.`,
   rows: [
     {
+      heading: 'File format support for querying in place',
+      clickhouse: {
+        icon: 'yes',
+        label: '**70+ formats** including Parquet, ORC, Avro, JSON, CSV'
+      },
+      elastic: {
+        icon: 'no',
+        label: 'Not supported'
+      }
+    },
+    {
+      heading: 'File format support for data load',
+      clickhouse: {
+        icon: 'yes',
+        label: '**70+ formats** including Parquet, ORC, Avro, JSON, CSV'
+      },
+      elastic: { icon: 'no', label: 'Limited to JSON/CSV, relies on Logstash.' }
+    },
+    {
       heading: 'Query external data in-place',
       clickhouse: {
         icon: 'yes',
@@ -31,20 +50,20 @@ Native table engines **read directly from Postgres, MongoDB, and object storage*
       elastic: { icon: 'no', label: 'Not supported' }
     },
     {
-      heading: 'File format support',
-      clickhouse: {
-        icon: 'yes',
-        label: '**70+ formats** including Parquet, ORC, Avro, JSON, CSV'
-      },
-      elastic: { icon: 'intermediate', label: 'Limited to JSON/CSV' }
-    },
-    {
       heading: 'External table engines',
       clickhouse: {
         icon: 'yes',
         label: '**Connect to Postgres, MongoDB, MySQL, S3, Kafka, and more**'
       },
-      elastic: { icon: 'intermediate', label: 'Object stores only' }
+      elastic: { icon: 'intermediate', label: 'Requires Logstash' }
+    },
+    {
+      heading: 'Support for Open Telemetry',
+      clickhouse: {
+        icon: 'yes',
+        label: 'Supported'
+      },
+      elastic: { icon: 'yes', label: 'Supported' }
     }
   ]
 } satisfies Table
