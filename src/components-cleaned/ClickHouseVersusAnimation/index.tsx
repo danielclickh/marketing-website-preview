@@ -2,9 +2,9 @@
 
 import iconVs from './assets/icon-vs.png'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
+import CounterAnimation from '@/components-cleaned/CounterAnimation'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import Image, { ImageProps } from 'next/image'
-import React, { useEffect, useState } from 'react'
 
 const lineHeight = 84
 
@@ -58,34 +58,7 @@ function AnimationBadge({
   )
 }
 
-function AnimationCounter({
-  interval = 1000,
-  max = 1000
-}: {
-  interval?: number
-  max?: number
-}) {
-  const [count, setCount] = useState(1)
-
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setCount((prev) => (prev === max ? 1 : prev + 1))
-    }, interval)
-
-    return () => window.clearInterval(intervalId)
-  }, [interval, max])
-
-  return (
-    <span
-      className='inline-block'
-      style={{ width: `${max.toString().length}ch` }}>
-      {count}
-    </span>
-  )
-}
-
 function ClickHouseAnimation() {
-  const speedModifier = 0.5
   return (
     <div className='w-96'>
       <div className='flex justify-center'>
@@ -103,9 +76,9 @@ function ClickHouseAnimation() {
             className: 'backdrop-saturate-150'
           }}
           keyframes={[
-            { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-            { startSize: 0.5, endSize: 1.5, duration: 0.8 + speedModifier },
-            { startSize: 1.1, endSize: 1, duration: 0.4 + speedModifier }
+            { startSize: 1, endSize: 2, duration: 1.25 },
+            { startSize: 0.5, endSize: 1.5, duration: 1.3 },
+            { startSize: 1.1, endSize: 1, duration: 0.9 }
           ]}
         />
         <AnimatedDataLine
@@ -116,9 +89,9 @@ function ClickHouseAnimation() {
             className: 'backdrop-saturate-150'
           }}
           keyframes={[
-            { startSize: 0.25, endSize: 1, duration: 0.5 + speedModifier },
-            { startSize: 1, endSize: 0.8, duration: 0.2 + speedModifier },
-            { startSize: 0.8, endSize: 1.2, duration: 0.8 + speedModifier }
+            { startSize: 0.25, endSize: 1, duration: 1 },
+            { startSize: 1, endSize: 0.8, duration: 0.7 },
+            { startSize: 0.8, endSize: 1.2, duration: 1.3 }
           ]}
         />
         <AnimatedDataLine
@@ -129,9 +102,9 @@ function ClickHouseAnimation() {
             className: 'backdrop-saturate-150'
           }}
           keyframes={[
-            { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-            { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier },
-            { startSize: 1.1, endSize: 1, duration: 1 + speedModifier }
+            { startSize: 1, endSize: 2, duration: 1.25 },
+            { startSize: 0.5, endSize: 1.5, duration: 1.5 },
+            { startSize: 1.1, endSize: 1, duration: 1.5 }
           ]}
         />
       </div>
@@ -164,14 +137,10 @@ function ClickHouseAnimation() {
                 className: 'backdrop-saturate-150'
               }}
               keyframes={[
-                {
-                  startSize: 0.8,
-                  endSize: 1.2,
-                  duration: 0.5 + speedModifier
-                },
-                { startSize: 1, endSize: 1.5, duration: 0.8 + speedModifier },
-                { startSize: 2, endSize: 1.3, duration: 0.4 + speedModifier },
-                { startSize: 1.1, endSize: 2, duration: 0.2 + speedModifier }
+                { startSize: 0.8, endSize: 1.2, duration: 1 },
+                { startSize: 1, endSize: 1.5, duration: 1.3 },
+                { startSize: 2, endSize: 1.3, duration: 0.9 },
+                { startSize: 1.1, endSize: 2, duration: 0.7 }
               ]}
             />
             <AnimatedDataLine
@@ -182,13 +151,9 @@ function ClickHouseAnimation() {
                 className: 'backdrop-saturate-150'
               }}
               keyframes={[
-                { startSize: 2, endSize: 1.2, duration: 0.2 + speedModifier },
-                {
-                  startSize: 1.1,
-                  endSize: 1.8,
-                  duration: 0.8 + speedModifier
-                },
-                { startSize: 1, endSize: 1.4, duration: 0.6 + speedModifier }
+                { startSize: 2, endSize: 1.2, duration: 0.7 },
+                { startSize: 1.1, endSize: 1.8, duration: 1.3 },
+                { startSize: 1, endSize: 1.4, duration: 1.1 }
               ]}
             />
             <AnimatedDataLine
@@ -199,13 +164,9 @@ function ClickHouseAnimation() {
                 className: 'backdrop-saturate-150'
               }}
               keyframes={[
-                { startSize: 0.5, endSize: 1.3, duration: 1 + speedModifier },
-                { startSize: 2, endSize: 1.5, duration: 0.3 + speedModifier },
-                {
-                  startSize: 1.2,
-                  endSize: 1.9,
-                  duration: 0.6 + speedModifier
-                }
+                { startSize: 0.5, endSize: 1.3, duration: 1.5 },
+                { startSize: 2, endSize: 1.5, duration: 0.8 },
+                { startSize: 1.2, endSize: 1.9, duration: 1.1 }
               ]}
             />
           </div>
@@ -224,14 +185,10 @@ function ClickHouseAnimation() {
                 className: 'backdrop-saturate-150'
               }}
               keyframes={[
-                {
-                  startSize: 0.5,
-                  endSize: 1.5,
-                  duration: 0.8 + speedModifier
-                },
-                { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-                { startSize: 1.1, endSize: 1, duration: 0.4 + speedModifier },
-                { startSize: 2, endSize: 1.5, duration: 0.3 + speedModifier }
+                { startSize: 0.5, endSize: 1.5, duration: 1.3 },
+                { startSize: 1, endSize: 2, duration: 1.25 },
+                { startSize: 1.1, endSize: 1, duration: 0.9 },
+                { startSize: 2, endSize: 1.5, duration: 0.8 }
               ]}
             />
             <AnimatedDataLine
@@ -242,18 +199,10 @@ function ClickHouseAnimation() {
                 className: 'backdrop-saturate-150'
               }}
               keyframes={[
-                {
-                  startSize: 0.8,
-                  endSize: 1.2,
-                  duration: 0.8 + speedModifier
-                },
-                { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier },
-                {
-                  startSize: 0.25,
-                  endSize: 1,
-                  duration: 0.5 + speedModifier
-                },
-                { startSize: 1, endSize: 0.8, duration: 0.2 + speedModifier }
+                { startSize: 0.8, endSize: 1.2, duration: 1.3 },
+                { startSize: 0.5, endSize: 1.5, duration: 1.5 },
+                { startSize: 0.25, endSize: 1, duration: 1 },
+                { startSize: 1, endSize: 0.8, duration: 0.7 }
               ]}
             />
             <AnimatedDataLine
@@ -264,15 +213,15 @@ function ClickHouseAnimation() {
                 className: 'backdrop-saturate-150'
               }}
               keyframes={[
-                { startSize: 1.1, endSize: 1, duration: 1 + speedModifier },
-                { startSize: 1, endSize: 2, duration: 0.75 + speedModifier },
-                { startSize: 0.5, endSize: 1.5, duration: 1 + speedModifier }
+                { startSize: 1.1, endSize: 1, duration: 1.5 },
+                { startSize: 1, endSize: 2, duration: 1.25 },
+                { startSize: 0.5, endSize: 1.5, duration: 1.5 }
               ]}
             />
           </div>
           <AnimationBadge className='flex divide-x divide-neutral-700 !p-0'>
             <span className='px-4 py-2'>
-              <AnimationCounter interval={10} />
+              <CounterAnimation max={1000} interval={10} />
             </span>
             <span className='px-4 py-2'>...</span>
             <span className='px-4 py-2'>...</span>
@@ -377,7 +326,7 @@ function CompetitorAnimation({
           </div>
           <AnimationBadge className='flex divide-x divide-neutral-700 !p-0'>
             <span className='px-4 py-2'>
-              <AnimationCounter interval={700} />
+              <CounterAnimation max={1000} interval={700} />
             </span>
             <span className='px-4 py-2'>...</span>
             <span className='px-4 py-2'>...</span>

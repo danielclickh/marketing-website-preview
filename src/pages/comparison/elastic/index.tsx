@@ -18,12 +18,15 @@ import logoRedshift from './assets/logo-redshift.svg'
 import logoShopee from './assets/logo-shopee.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import logoZomato from './assets/logo-zomato.svg'
+import styles from './styles.module.scss'
 import logoClickhouse from '@/../public/logo-full.svg'
+import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
+import CounterAnimation from '@/components-cleaned/CounterAnimation'
 import LogoStack from '@/components-cleaned/LogoStack'
 import Sticky from '@/components-cleaned/Sticky'
 import ClickStack from '@/components/ClickStack'
-import { CUIButton, CUICard } from '@/components/ClickUI'
+import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
 } from '@/components/ComparisonTable'
@@ -33,7 +36,6 @@ import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
-import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import tables from '@/data/elastic-comparison'
 import { useDebounce } from '@/hooks'
@@ -715,6 +717,20 @@ function ClickStackVersusElkStack() {
   )
 }
 
+function useLoopKey(stage: number) {
+  const prev = useRef<number | null>(null)
+  const [key, setKey] = useState(0)
+
+  useEffect(() => {
+    if (prev.current !== null && stage < prev.current) {
+      setKey((k) => 1 - k) // toggle between 0 and 1
+    }
+    prev.current = stage
+  }, [stage])
+
+  return key
+}
+
 function ClickHouseVersusElastic() {
   const [activeElasticStep, setActiveElasticStep] = useState(0)
   const clickhouseSteps = [
@@ -807,88 +823,180 @@ function ClickHouseVersusElastic() {
       duration: 0.6,
       delay: 400
     },
-    {
-      cols: 16,
-      rows: 24,
-      cellWidth: 8.75,
-      cellHeight: 8.75,
-      gutter: 2,
-      duration: 0.6,
-      delay: 400
-    },
 
     // Long pause at end of animation
     {
-      cols: 16,
-      rows: 24,
-      cellWidth: 8.75,
-      cellHeight: 8.75,
-      gutter: 2,
+      cols: 8,
+      rows: 12,
+      cellWidth: 16.875,
+      cellHeight: 16.875,
+      gutter: 5,
       duration: 3
     }
   ]
 
+  const loopKey = useLoopKey(activeElasticStep)
+
   const pauseClickhouse = activeElasticStep >= clickhouseSteps.length - 1
   const glowClickhouse = activeElasticStep >= clickhouseSteps.length
+
+  const animationPercent = (activeElasticStep / (elasticSteps.length - 1)) * 100
+  const animationPercentInverted = 100 - animationPercent
+
+  const clickhouseCounterInterval = ((animationPercentInverted + 1) / 100) * 100
+  const elasticCounterInterval = ((animationPercentInverted + 1) / 100) * 800
+
+  const clickhouseLines = useMemo(() => {
+    return [
+      [
+        { startSize: 0.5, endSize: 1.5, duration: 1.3 },
+        { startSize: 1, endSize: 2, duration: 1.25 },
+        { startSize: 1.1, endSize: 1, duration: 0.9 },
+        { startSize: 2, endSize: 1.5, duration: 0.8 }
+      ],
+      [
+        { startSize: 0.8, endSize: 1.2, duration: 1.3 },
+        { startSize: 0.5, endSize: 1.5, duration: 1.5 },
+        { startSize: 0.25, endSize: 1, duration: 1 },
+        { startSize: 1, endSize: 0.8, duration: 0.7 }
+      ],
+      [
+        { startSize: 1.1, endSize: 1, duration: 1.5 },
+        { startSize: 1, endSize: 2, duration: 1.25 },
+        { startSize: 0.5, endSize: 1.5, duration: 1.5 }
+      ]
+    ]
+  }, [])
+
+  const elasticLines = useMemo(() => {
+    return [
+      [
+        { startSize: 0.5, endSize: 1.5, duration: 3.8 },
+        { startSize: 1, endSize: 2, duration: 3.75 },
+        { startSize: 1.1, endSize: 1, duration: 3.4 },
+        { startSize: 2, endSize: 1.5, duration: 3.3 }
+      ]
+    ]
+  }, [])
 
   return (
     <ScaleToContainer scaleUp={false} className='mx-auto'>
       <div className='relative flex w-max flex-row flex-nowrap gap-x-12 lg:gap-x-16'>
-        <GridAnimation
-          step={
-            pauseClickhouse ? clickhouseSteps.length - 1 : activeElasticStep
-          }
-          auto={false}
-          steps={clickhouseSteps}
-          cell={
-            <>
-              <div
-                className={`absolute inset-0 transition-opacity duration-500 ${glowClickhouse ? '' : 'opacity-0'}`}>
-                <div className='absolute inset-0 animate-fadeInOut rounded-sm bg-primary-300 blur-lg' />
-              </div>
-              <div className='absolute inset-0 rounded-sm bg-primary-300'>
-                <div className='absolute inset-[10%]'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='55'
-                    height='56'
-                    fill='none'
-                    viewBox='0 0 55 56'
-                    className='absolute h-full w-full'>
-                    <path
-                      fill='#000'
-                      d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
-                    />
-                  </svg>
+        {/* ClickHouse */}
+        <div className='w-max'>
+          <GridAnimation
+            step={
+              pauseClickhouse ? clickhouseSteps.length - 1 : activeElasticStep
+            }
+            auto={false}
+            pingPong={false}
+            steps={clickhouseSteps}
+            cell={
+              <>
+                <div
+                  className={`absolute inset-0 transition-opacity duration-500 ${glowClickhouse ? '' : 'opacity-0'}`}>
+                  <div className='absolute inset-0 animate-fadeInOut rounded-sm bg-primary-300 blur-lg' />
                 </div>
-              </div>
-            </>
-          }
-        />
+                <div className='absolute inset-0 rounded-sm bg-primary-300'>
+                  <div className='absolute inset-[10%]'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='55'
+                      height='56'
+                      fill='none'
+                      viewBox='0 0 55 56'
+                      className='absolute h-full w-full'>
+                      <path
+                        fill='#000'
+                        d='M4.87 5.37c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55H5.42a.55.55 0 0 1-.55-.55V5.37Zm10.12 0c0-.27.23-.55.55-.55h4c.28 0 .56.23.56.55V49.9c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.11 0c0-.27.24-.55.56-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37Zm10.13 0c0-.27.23-.55.55-.55h4c.28 0 .55.23.55.55V49.9c0 .28-.22.55-.54.55h-4.01a.55.55 0 0 1-.55-.55V5.37ZM45.4 23.1c0-.27.22-.54.54-.54h4.01c.28 0 .55.22.55.54v9.07c0 .28-.23.55-.55.55h-4.01a.55.55 0 0 1-.55-.55V23.1Z'
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </>
+            }
+          />
+          <div
+            className={`mx-auto flex w-max gap-3.5 ${styles.animationLineMask}`}
+            style={{ marginTop: -130 }}>
+            {clickhouseLines.map((keyframes, lineIndex) => {
+              return (
+                <AnimatedDataLine
+                  key={lineIndex}
+                  size={210}
+                  direction='down'
+                  trackColor='rgba(255,255,255,0.2)'
+                  keyframes={keyframes}
+                />
+              )
+            })}
+          </div>
+          <div className='mx-auto inline-block rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
+            <CounterAnimation
+              key={loopKey}
+              max={99999}
+              interval={clickhouseCounterInterval}
+            />
+          </div>
+        </div>
+
+        {/* VS icon */}
         <Image
           src={iconVs}
           width={60}
           height={60}
           alt='VS'
-          className='self-center rounded-full shadow-xl'
+          className='-mt-24 self-center rounded-full shadow-xl'
         />
-        <GridAnimation
-          onStepChange={setActiveElasticStep}
-          steps={elasticSteps}
-          cell={
-            <div className='absolute inset-0 rounded-sm bg-white'>
-              <div className='absolute inset-[10%]'>
-                <Image
-                  src={elasticAnimationLogo}
-                  width={56}
-                  height={56}
-                  alt='Elastic'
-                  className='absolute h-full w-full object-contain'
-                />
+
+        {/* Elastic */}
+        <div className='w-max'>
+          <GridAnimation
+            onStepChange={setActiveElasticStep}
+            steps={elasticSteps}
+            pingPong={false}
+            cell={
+              <div className='absolute inset-0 rounded-sm bg-white'>
+                <div className='absolute inset-[10%]'>
+                  <Image
+                    src={elasticAnimationLogo}
+                    width={56}
+                    height={56}
+                    alt='Elastic'
+                    className='absolute h-full w-full object-contain'
+                  />
+                </div>
               </div>
-            </div>
-          }
-        />
+            }
+          />
+          <div
+            className={`mx-auto flex w-max gap-3.5 ${styles.animationLineMask}`}
+            style={{ marginTop: -130 }}>
+            {elasticLines.map((keyframes, lineIndex) => {
+              return (
+                <AnimatedDataLine
+                  key={lineIndex}
+                  size={210}
+                  direction='down'
+                  strokeWidth={16}
+                  trackColor='rgba(255,255,255,0.2)'
+                  lineColor='#22BCB3'
+                  lineProps={{
+                    strokeDasharray: '6 8'
+                  }}
+                  keyframes={keyframes}
+                />
+              )
+            })}
+          </div>
+          <div className='mx-auto inline-block rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
+            <CounterAnimation
+              key={loopKey}
+              max={99999}
+              interval={elasticCounterInterval}
+            />
+          </div>
+        </div>
       </div>
     </ScaleToContainer>
   )
@@ -955,7 +1063,7 @@ export function GridAnimation({
     steps.length - 1
   )
   const current = steps[stepIndex]
-  const next = steps[clamp(stepIndex + direction, 0, steps.length - 1)]
+  const next = steps.at(stepIndex + direction) || steps[0]
 
   // canvas size
   const canvasWidth = useMemo(
@@ -1060,16 +1168,17 @@ export function GridAnimation({
     if (pingPong) {
       if (atEnd) setDirection(-1)
       if (atStart) setDirection(1)
-    } else {
-      if (atEnd) setUStep(0) // loop
     }
 
     const delay = current.duration * 1000 + 250 + (next?.delay || 0)
     const t = window.setTimeout(() => {
       setUStep((i) => {
+        if (atEnd && !pingPong) return -1
+
         const nextIndex = pingPong
           ? clamp(i + direction, 0, steps.length - 1)
           : (i + 1) % steps.length
+
         onStepChange?.(nextIndex)
         return nextIndex
       })
