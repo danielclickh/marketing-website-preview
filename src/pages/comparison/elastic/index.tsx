@@ -732,7 +732,7 @@ function useLoopKey(stage: number) {
 }
 
 function ClickHouseVersusElastic() {
-  const eachStepDuration = 1.2 // in seconds
+  const eachStepDuration = 1.8 // in seconds
   const eachStepDelay = 800 // in ms
 
   const [activeElasticStep, setActiveElasticStep] = useState(0)
@@ -938,13 +938,17 @@ function ClickHouseVersusElastic() {
               )
             })}
           </div>
-          <div className='mx-auto inline-block rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
+          <div className='mx-auto inline-flex flex-col rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
             <CounterAnimation
+              fixedWidth={false}
               key={loopKey}
               increment={clickhouseCounterIncrement}
               max={99999}
               interval={clickhouseCounterInterval}
-            />
+            />{' '}
+            <small className='uppercase text-neutral-300'>
+              Queries executed
+            </small>
           </div>
         </div>
 
@@ -997,12 +1001,16 @@ function ClickHouseVersusElastic() {
               )
             })}
           </div>
-          <div className='mx-auto inline-block rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
+          <div className='mx-auto inline-flex flex-col rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
             <CounterAnimation
+              fixedWidth={false}
               key={loopKey}
               max={99999}
               interval={elasticCounterInterval}
-            />
+            />{' '}
+            <small className='uppercase text-neutral-300'>
+              Queries executed
+            </small>
           </div>
         </div>
       </div>
