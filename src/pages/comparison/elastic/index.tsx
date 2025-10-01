@@ -732,9 +732,7 @@ function useLoopKey(stage: number) {
 }
 
 function ClickHouseVersusElastic() {
-  const eachStepDuration = 1.8 // in seconds
-  const eachStepDelay = 800 // in ms
-
+  const [activeClickhouseStep, setActiveClickhouseStep] = useState(0)
   const [activeElasticStep, setActiveElasticStep] = useState(0)
   const clickhouseSteps = [
     {
@@ -743,7 +741,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: eachStepDuration
+      duration: 600,
+      delay: 400
     },
     {
       rows: 1,
@@ -751,7 +750,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 170,
       gutter: 10,
-      duration: eachStepDuration
+      duration: 600,
+      delay: 400
     },
     {
       rows: 1,
@@ -759,7 +759,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 260,
       gutter: 10,
-      duration: eachStepDuration
+      duration: 600,
+      delay: 400
     },
     {
       rows: 1,
@@ -767,7 +768,19 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 260,
       gutter: 10,
-      duration: eachStepDuration
+      duration: 600,
+      delay: 400
+    },
+
+    // Long delay
+    {
+      rows: 1,
+      cols: 2,
+      cellWidth: 80,
+      cellHeight: 260,
+      gutter: 10,
+      duration: 0,
+      delay: 10000
     }
   ]
 
@@ -778,8 +791,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: eachStepDuration,
-      delay: eachStepDelay
+      duration: 1000,
+      delay: 800
     },
     {
       cols: 1,
@@ -787,8 +800,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: eachStepDuration,
-      delay: eachStepDelay
+      duration: 1000,
+      delay: 800
     },
     {
       cols: 1,
@@ -796,8 +809,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: eachStepDuration,
-      delay: eachStepDelay
+      duration: 1000,
+      delay: 800
     },
     {
       cols: 2,
@@ -805,8 +818,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: eachStepDuration,
-      delay: eachStepDelay
+      duration: 1000,
+      delay: 800
     },
     {
       cols: 4,
@@ -814,8 +827,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 38.75,
       cellHeight: 38.75,
       gutter: 5,
-      duration: eachStepDuration,
-      delay: eachStepDelay
+      duration: 1000,
+      delay: 800
     },
     {
       cols: 8,
@@ -823,8 +836,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 16.875,
       cellHeight: 16.875,
       gutter: 5,
-      duration: eachStepDuration,
-      delay: eachStepDelay
+      duration: 1000,
+      delay: 800
     },
 
     // Long pause at end of animation
@@ -834,20 +847,17 @@ function ClickHouseVersusElastic() {
       cellWidth: 16.875,
       cellHeight: 16.875,
       gutter: 5,
-      duration: eachStepDuration * 2,
-      delay: eachStepDelay
+      duration: 0,
+      delay: 3000
     }
   ]
 
   const loopKey = useLoopKey(activeElasticStep)
 
-  const pauseClickhouse = activeElasticStep >= clickhouseSteps.length - 1
-  const glowClickhouse = activeElasticStep >= clickhouseSteps.length
+  const glowClickhouse = activeClickhouseStep >= clickhouseSteps.length - 2
 
-  const clickhouseCounterInterval = [150, 100, 50, 25, 5, 5, 5][
-    activeElasticStep
-  ]
-  const clickhouseCounterIncrement = [1, 2, 3, 4, 4, 4, 4][activeElasticStep]
+  const clickhouseCounterInterval = [150, 100, 50, 25, 5][activeClickhouseStep]
+  const clickhouseCounterIncrement = [1, 2, 3, 4, 4][activeClickhouseStep]
 
   const elasticCounterInterval = [300, 250, 200, 150, 100, 50, 50][
     activeElasticStep
@@ -892,11 +902,7 @@ function ClickHouseVersusElastic() {
         {/* ClickHouse */}
         <div className='w-max'>
           <GridAnimation
-            step={
-              pauseClickhouse ? clickhouseSteps.length - 1 : activeElasticStep
-            }
-            auto={false}
-            pingPong={false}
+            onStepChange={setActiveClickhouseStep}
             steps={clickhouseSteps}
             cell={
               <>
@@ -966,7 +972,6 @@ function ClickHouseVersusElastic() {
           <GridAnimation
             onStepChange={setActiveElasticStep}
             steps={elasticSteps}
-            pingPong={false}
             cell={
               <div className='absolute inset-0 rounded-sm bg-white'>
                 <div className='absolute inset-[10%]'>
@@ -1031,17 +1036,11 @@ type GridAnimationStep = {
 export function GridAnimation({
   cell,
   steps,
-  step, // controlled step (0-based). If provided, disables auto-advance.
-  onStepChange, // called when internal step changes (uncontrolled mode)
-  auto = true, // allow disabling internal timer even when uncontrolled
-  pingPong = true // keep your original ping-pong behaviour
+  onStepChange // called when internal step changes (uncontrolled mode)
 }: {
   cell: React.ReactNode
   steps: Array<GridAnimationStep>
-  step?: number
   onStepChange?: (next: number) => void
-  auto?: boolean
-  pingPong?: boolean
 }) {
   type CellStep = {
     id: string
@@ -1068,18 +1067,11 @@ export function GridAnimation({
     return Math.round((i * (toN - 1)) / (fromN - 1))
   }
 
-  const isControlled = step != null
-  const [uStep, setUStep] = useState(0)
-  const [direction, setDirection] = useState<1 | -1>(1)
-
   // the effective step we render
-  const stepIndex = clamp(
-    isControlled ? (step as number) : uStep,
-    0,
-    steps.length - 1
-  )
-  const current = steps[stepIndex]
-  const next = steps.at(stepIndex + direction) || steps[0]
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const current = useMemo(() => {
+    return steps[currentIndex]
+  }, [steps.length, currentIndex])
 
   // canvas size
   const canvasWidth = useMemo(
@@ -1167,53 +1159,25 @@ export function GridAnimation({
     return m
   }, [stableCells, steps])
 
-  const currentLayout = useMemo(
-    () =>
-      stableCells
-        .filter((c) => c.bornAt <= stepIndex)
-        .map((c) => positionAtStep(c, current)),
-    [stableCells, stepIndex, current]
-  )
+  const currentLayout = useMemo(() => {
+    return stableCells
+      .filter((c) => c.bornAt <= currentIndex)
+      .map((c) => positionAtStep(c, current))
+  }, [stableCells, currentIndex, current])
 
   // auto-advance (uncontrolled only)
   useEffect(() => {
-    if (isControlled || !auto) return
+    onStepChange?.(currentIndex)
 
-    const atEnd = stepIndex >= steps.length - 1
-    const atStart = stepIndex <= 0
+    const next = steps[(currentIndex + 1) % steps.length]
+    const delay = current.duration + (next.delay || 0)
 
-    if (pingPong) {
-      if (atEnd) setDirection(-1)
-      if (atStart) setDirection(1)
-    }
-
-    const delay = current.duration * 1000 + 250 + (next?.delay || 0)
-    const t = window.setTimeout(() => {
-      setUStep((i) => {
-        let nextIndex = pingPong
-          ? clamp(i + direction, 0, steps.length - 1)
-          : (i + 1) % steps.length
-
-        if (atEnd && !pingPong) nextIndex = 0
-
-        onStepChange?.(nextIndex)
-
-        return nextIndex
-      })
+    const timer = window.setTimeout(() => {
+      setCurrentIndex((i) => (i + 1) % steps.length)
     }, delay)
 
-    return () => window.clearTimeout(t)
-  }, [
-    isControlled,
-    auto,
-    pingPong,
-    stepIndex,
-    direction,
-    current,
-    next,
-    steps.length,
-    onStepChange
-  ])
+    return () => window.clearTimeout(timer)
+  }, [currentIndex, current, steps.length, onStepChange])
 
   return (
     <div
@@ -1249,7 +1213,7 @@ export function GridAnimation({
             transition={{
               type: 'tween',
               ease: 'easeInOut',
-              duration: current.duration
+              duration: current.duration / 1000
             }}
             className='absolute left-0 top-0'>
             {cell}
