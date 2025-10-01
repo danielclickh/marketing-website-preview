@@ -214,12 +214,12 @@ export default function ElasticPage({
           }
         />
         {/* Yellow triangle */}
-        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[70rem] bg-primary-300 lg:top-[47rem]' />
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[44rem] bg-primary-300 lg:top-[50rem]' />
         <div className='section-container relative z-10 space-y-6'>
           <div className='mb-16 text-center lg:mb-24'>
             <SuiTitle
               type='h2'
-              className='mx-auto mb-16 max-w-4xl text-neutral-200'>
+              className='mx-auto mb-16 max-w-5xl text-neutral-200'>
               Frustrated by slow queries, rising storage costs and an endless
               need to scale horizontally?{' '}
               <strong className='text-white'>You’re not alone.</strong>
@@ -228,7 +228,7 @@ export default function ElasticPage({
           </div>
 
           {/* Testimonials */}
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
               Join others migrating to ClickStack from Elastic
@@ -279,7 +279,7 @@ export default function ElasticPage({
 
           <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
             {/* Pillar 1 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconGuage} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -301,7 +301,7 @@ export default function ElasticPage({
             </div>
 
             {/* Pillar 2 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -323,7 +323,7 @@ export default function ElasticPage({
             </div>
 
             {/* Pillar 3 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconLightning} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -339,7 +339,7 @@ export default function ElasticPage({
             </div>
 
             {/* Pillar 4 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconUnlock} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -888,10 +888,10 @@ function ClickHouseVersusElastic() {
   const elasticLines = useMemo(() => {
     return [
       [
-        { startSize: 0.5, endSize: 1.5, duration: 3.8 },
-        { startSize: 1, endSize: 2, duration: 3.75 },
-        { startSize: 1.1, endSize: 1, duration: 3.4 },
-        { startSize: 2, endSize: 1.5, duration: 3.3 }
+        { startSize: 0.5, endSize: 1.5, duration: 4.8 },
+        { startSize: 1, endSize: 2, duration: 4.75 },
+        { startSize: 1.1, endSize: 1, duration: 4.4 },
+        { startSize: 2, endSize: 1.5, duration: 5.3 }
       ]
     ]
   }, [])
