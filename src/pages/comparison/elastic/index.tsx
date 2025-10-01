@@ -220,8 +220,8 @@ export default function ElasticPage({
             <SuiTitle
               type='h2'
               className='mx-auto mb-16 max-w-4xl text-neutral-200'>
-              Frustrated by slow queries, rising storage costs and endless
-              horizontal sprawl?{' '}
+              Frustrated by slow queries, rising storage costs and endless need
+              to scale horizontally?{' '}
               <strong className='text-white'>You’re not alone.</strong>
             </SuiTitle>
             <ClickHouseVersusElastic />
@@ -732,6 +732,9 @@ function useLoopKey(stage: number) {
 }
 
 function ClickHouseVersusElastic() {
+  const eachStepDuration = 1.2 // in seconds
+  const eachStepDelay = 800 // in ms
+
   const [activeElasticStep, setActiveElasticStep] = useState(0)
   const clickhouseSteps = [
     {
@@ -740,7 +743,7 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: 0.6
+      duration: eachStepDuration
     },
     {
       rows: 1,
@@ -748,7 +751,7 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 170,
       gutter: 10,
-      duration: 0.6
+      duration: eachStepDuration
     },
     {
       rows: 1,
@@ -756,7 +759,7 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 260,
       gutter: 10,
-      duration: 0.6
+      duration: eachStepDuration
     },
     {
       rows: 1,
@@ -764,7 +767,7 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 260,
       gutter: 10,
-      duration: 0.6
+      duration: eachStepDuration
     }
   ]
 
@@ -775,8 +778,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: 0.6,
-      delay: 600
+      duration: eachStepDuration,
+      delay: eachStepDelay
     },
     {
       cols: 1,
@@ -784,8 +787,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: 0.6,
-      delay: 600
+      duration: eachStepDuration,
+      delay: eachStepDelay
     },
     {
       cols: 1,
@@ -793,8 +796,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: 0.6,
-      delay: 600
+      duration: eachStepDuration,
+      delay: eachStepDelay
     },
     {
       cols: 2,
@@ -802,8 +805,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 80,
       cellHeight: 80,
       gutter: 10,
-      duration: 0.6,
-      delay: 600
+      duration: eachStepDuration,
+      delay: eachStepDelay
     },
     {
       cols: 4,
@@ -811,8 +814,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 38.75,
       cellHeight: 38.75,
       gutter: 5,
-      duration: 0.6,
-      delay: 600
+      duration: eachStepDuration,
+      delay: eachStepDelay
     },
     {
       cols: 8,
@@ -820,8 +823,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 16.875,
       cellHeight: 16.875,
       gutter: 5,
-      duration: 0.6,
-      delay: 600
+      duration: eachStepDuration,
+      delay: eachStepDelay
     },
 
     // Long pause at end of animation
@@ -831,7 +834,8 @@ function ClickHouseVersusElastic() {
       cellWidth: 16.875,
       cellHeight: 16.875,
       gutter: 5,
-      duration: 3
+      duration: eachStepDuration * 2,
+      delay: eachStepDelay
     }
   ]
 
@@ -950,7 +954,7 @@ function ClickHouseVersusElastic() {
           width={60}
           height={60}
           alt='VS'
-          className='-mt-24 self-center rounded-full shadow-xl'
+          className='-mt-28 self-center rounded-full shadow-xl'
         />
 
         {/* Elastic */}
