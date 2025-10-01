@@ -19,8 +19,7 @@ import Script from 'next/script'
 import { useReportWebVitals } from 'next/web-vitals'
 import { useEffect, useState } from 'react'
 
-//const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K';
-const gtmId = 'GTM-WKSRXS8S' // Hardcoded for testing
+const GTM_ID = process?.env?.NEXT_PUBLIC_GTM
 
 const inter = Inter({
   subsets: [],
@@ -160,7 +159,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {!isMarketoIframe && (
           <>
             {/* GTM */}
-            <GoogleTagManager gtmId={gtmId} />
+            {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
 
             {/* Cleans marketo email tracking tokens */}
             <Script
