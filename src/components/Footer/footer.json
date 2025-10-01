@@ -249,6 +249,12 @@
         "href": "/comparison/snowflake",
         "target": "_self",
         "galaxyEvent": "footerNav.comparisonsMenu.snowflakeSelect"
+      },
+      {
+        "name": "Elastic",
+        "href": "/comparison/elastic-for-observability",
+        "target": "_self",
+        "galaxyEvent": "footerNav.comparisonsMenu.elasticSelect"
       }
     ]
   },
