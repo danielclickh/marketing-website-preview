@@ -11,6 +11,7 @@ import logoRedshift from './assets/logo-redshift.svg'
 import snowflakeAnimationLogo from './assets/snowflake-animation-logo.svg'
 import snowflakeTableLogo from './assets/snowflake-table-logo.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ClickHouseVersusAnimation from '@/components-cleaned/ClickHouseVersusAnimation'
 import Sticky from '@/components-cleaned/Sticky'
 import { CUIButton } from '@/components/ClickUI'
@@ -103,11 +104,9 @@ export default function SnowflakePage({
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
-          <div>
-            <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
-              Comparisons
-            </span>
-          </div>
+          <Breadcrumbs>
+            <Breadcrumbs.Item>Comparisons</Breadcrumbs.Item>
+          </Breadcrumbs>
           <SuiTitle type='h1' weight='bold'>
             ClickHouse <span className='text-primary-300'>vs</span> Snowflake
           </SuiTitle>
@@ -258,7 +257,7 @@ export default function SnowflakePage({
               Read the comparison guide
             </CUIButton>
           </div>
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-900 p-6 text-neutral-0 shadow-lg lg:p-10'>
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
               Join others migrating to ClickHouse from Snowflake

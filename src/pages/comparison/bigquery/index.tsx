@@ -15,6 +15,7 @@ import logoPostgress from './assets/logo-postgress.svg'
 import logoRedshift from './assets/logo-redshift.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import logoClickhouse from '@/../public/logo-full.svg'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ClickHouseVersusAnimation from '@/components-cleaned/ClickHouseVersusAnimation'
 import Sticky from '@/components-cleaned/Sticky'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -62,11 +63,9 @@ export default function BigQueryPage({
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
-          <div>
-            <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
-              Comparisons
-            </span>
-          </div>
+          <Breadcrumbs>
+            <Breadcrumbs.Item>Comparisons</Breadcrumbs.Item>
+          </Breadcrumbs>
           <SuiTitle type='h1' weight='bold'>
             ClickHouse <span className='text-primary-300'>vs</span> BigQuery
           </SuiTitle>

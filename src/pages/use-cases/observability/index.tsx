@@ -382,7 +382,7 @@ export default function ClickHouseServerPage({
 
         {/* Diagram */}
         <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row lg:items-start lg:gap-20'>
-          <div className='px-6'>
+          <div className='w-full max-w-max px-4'>
             <ClickStack
               hyperdx={hyperdxActive || allAreInactive}
               clickhouse={clickhouseActive || allAreInactive}
