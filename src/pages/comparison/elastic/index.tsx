@@ -151,7 +151,7 @@ export default function ElasticPage({
               },
               {
                 icon: iconDatabase,
-                stat: '2x',
+                stat: '3x',
                 label: 'Better compression'
               }
             ].map((item, itemIndex) => {
@@ -220,8 +220,8 @@ export default function ElasticPage({
             <SuiTitle
               type='h2'
               className='mx-auto mb-16 max-w-4xl text-neutral-200'>
-              Frustrated by slow queries, rising storage costs and endless need
-              to scale horizontally?{' '}
+              Frustrated by slow queries, rising storage costs and an endless
+              need to scale horizontally?{' '}
               <strong className='text-white'>You’re not alone.</strong>
             </SuiTitle>
             <ClickHouseVersusElastic />
