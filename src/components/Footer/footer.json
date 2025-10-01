@@ -252,7 +252,7 @@
       },
       {
         "name": "Elastic",
-        "href": "/comparison/elastic",
+        "href": "/comparison/elastic-for-observability",
         "target": "_self",
         "galaxyEvent": "footerNav.comparisonsMenu.elasticSelect"
       }

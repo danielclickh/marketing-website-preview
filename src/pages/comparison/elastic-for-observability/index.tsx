@@ -21,6 +21,7 @@ import logoZomato from './assets/logo-zomato.svg'
 import styles from './styles.module.scss'
 import logoClickhouse from '@/../public/logo-full.svg'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
 import CounterAnimation from '@/components-cleaned/CounterAnimation'
 import LogoStack from '@/components-cleaned/LogoStack'
@@ -82,11 +83,10 @@ export default function ElasticPage({
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
-          <div>
-            <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
-              Comparisons
-            </span>
-          </div>
+          <Breadcrumbs>
+            <Breadcrumbs.Item>Comparisons</Breadcrumbs.Item>
+            <Breadcrumbs.Item>Observability</Breadcrumbs.Item>
+          </Breadcrumbs>
           <SuiTitle type='h1' weight='bold'>
             ClickHouse <span className='text-primary-300'>vs</span> Elastic
           </SuiTitle>
