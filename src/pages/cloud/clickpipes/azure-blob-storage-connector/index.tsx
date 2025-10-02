@@ -3,11 +3,8 @@ import imageCustomizeIncomingData from './assets/containers-files-ingestion-mode
 import imageDefineMappings from './assets/define-mappings.png'
 import imageManagePipe from './assets/manage-pipe.png'
 import imageMonitorPipe from './assets/monitoring.png'
-import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import CdcWaitlistForm from '@/components/CdcWaitlistForm'
-import { CUIButton, CUICard } from '@/components/ClickUI'
+import { CUIButton } from '@/components/ClickUI'
 import ConnectorAnimation from '@/components/ConnectorAnimation'
-import DotsContainer from '@/components/DotsContainer'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -16,7 +13,6 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
-import Link from 'next/link'
 import React, { CSSProperties } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -25,7 +21,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Azure Blob Storage ClickPipe is now in Private Preview',
+          title: 'Azure Blob Storage ClickPipe is now Generally Available',
           description:
             'Seamlessly load files from Azure Blob Storage into ClickHouse Cloud. Get blazing fast analytics without the complexity or cost of external ETL tools.',
           path: '/cloud/clickpipes/azure-blob-storage-connector'
@@ -41,27 +37,17 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative bg-grid py-10 lg:pb-20'>
-        <div className='section-container relative z-10 lg:py-20'>
-          <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
-            <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
-              <Breadcrumbs>
-                <Breadcrumbs.Link href='/cloud'>Cloud</Breadcrumbs.Link>
-                <Breadcrumbs.Link href='/cloud/clickpipes'>
-                  Data ingestion
-                </Breadcrumbs.Link>
-              </Breadcrumbs>
-              <SuiTitle type='h1' className='lg:!text-4xl'>
-                Azure Blob Storage ClickPipe is now in Private Preview
-              </SuiTitle>
-              <SuiText size='lg' className='text-neutral-200'>
-                Seamlessly load files from Azure Blob Storage into ClickHouse
-                Cloud. Get blazing fast analytics without the complexity or cost
-                of external ETL tools.
-              </SuiText>
-              <SuiText size='lg' className='text-neutral-200'>
-                Join the waitlist today!
-              </SuiText>
+      <div
+        className='bg-shadow-element yellow-shadow shadow-circle relative my-20 lg:my-24'
+        style={
+          {
+            '--top-side': '130%',
+            '--left-side': '80%'
+          } as CSSProperties
+        }>
+        <div className='section-container relative z-10'>
+          <div className='mx-auto w-full space-y-6 text-center lg:max-w-4xl'>
+            <div className='mb-10 flex justify-center'>
               <ConnectorAnimation
                 logo={
                   <Image
@@ -73,13 +59,25 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 }
               />
             </div>
-            <div className='w-full lg:max-w-lg'>
-              <CUICard>
-                <CUICard.Body className='p-4 lg:p-6'>
-                  <CdcWaitlistForm formId='1390' />
-                </CUICard.Body>
-              </CUICard>
-            </div>
+            <SuiTitle type='h1'>
+              Azure Blob Storage ClickPipe is now Generally Available
+            </SuiTitle>
+            <SuiText size='lg' className='text-neutral-200 lg:px-12'>
+              Seamlessly load files from Azure Blob Storage into ClickHouse
+              Cloud. Get blazing fast analytics without the complexity or cost
+              of external ETL tools.
+            </SuiText>
+            <CUIButton
+              type='primary'
+              size='lg'
+              className='group mx-auto mt-8 px-10'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=azureBlobConnectorHeroCta'
+              onClick={useGalaxyOnClick(
+                'azureBlobConnectorPage.heroCta.startFreeCloudTrialSelect'
+              )}>
+              Start a free cloud trial
+            </CUIButton>
           </div>
         </div>
       </div>
@@ -212,24 +210,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
 
-      {/* Footer form */}
-      <DotsContainer className='my-20'>
-        <div className='mx-auto w-full lg:max-w-xl'>
-          <CUICard className='bg-neutral-900/80'>
-            <div className='my-4 space-y-4 text-center lg:mb-4 lg:mt-6'>
-              <SuiTitle type='h2'>Get early access</SuiTitle>
-              <SuiText className='opacity-70'>
-                Join the waitlist to get access to the Azure Blob Storage
-                connector
-              </SuiText>
-            </div>
-            <CUICard.Body className='p-4 lg:p-6'>
-              <CdcWaitlistForm formId='1365' />
-            </CUICard.Body>
-          </CUICard>
-        </div>
-      </DotsContainer>
-
       {/* Get started */}
       <div className='section-container my-20 md:px-8 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
@@ -258,28 +238,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
     </Layout>
-  )
-}
-
-function IconCard({
-  icon,
-  children
-}: {
-  icon: ImageProps
-  children: React.ReactNode
-}) {
-  return (
-    <CUICard className='relative overflow-hidden p-8'>
-      <div className='absolute left-0 right-0 top-0 h-1 bg-primary-300' />
-      <CUICard.Body className='space-y-4 text-center'>
-        <Image
-          {...icon}
-          className='mx-auto aspect-square w-[72px] rounded border border-jet bg-black/40 object-scale-down object-center shadow-sm'
-          alt='icon image'
-        />
-        {children}
-      </CUICard.Body>
-    </CUICard>
   )
 }
 
