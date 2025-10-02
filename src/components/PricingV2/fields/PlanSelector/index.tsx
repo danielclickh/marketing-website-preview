@@ -1,11 +1,10 @@
-import Label from '../../ui/Label'
+import FieldContainer from '../../ui/FieldContainer'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 
 export default function PlanSelector() {
   const { setValues, sourceData, plan } = usePricingV2Context()
   return (
-    <div>
-      <Label>Plan</Label>
+    <FieldContainer label='Plan'>
       <div className='flex gap-3'>
         {sourceData.plans.map((item, index) => {
           const isActive = plan === item.slug
@@ -26,6 +25,6 @@ export default function PlanSelector() {
           )
         })}
       </div>
-    </div>
+    </FieldContainer>
   )
 }

@@ -9,8 +9,10 @@ export const computes = [8, 12, 16, 32, 64, 120, 236, 356]
 // @link https://clickhouse.com/docs/cloud/manage/backups/configurable-backups
 export const backupIntervals = [6, 8, 12, 16, 20, 24, 36, 48]
 
+export type ClickPipeSizes = 'XS' | 'S' | 'M' | 'L' | 'XL'
+
 // Vertical scaling RAM GB sizes
-export const clickpipeSizes = {
+export const clickpipeSizes: Record<ClickPipeSizes, number> = {
   XS: 0.512,
   S: 1,
   M: 2,
@@ -21,11 +23,22 @@ export const clickpipeSizes = {
 export const clickpipeBaseSize = clickpipeSizes.XS
 
 // @link https://clickhouse.com/docs/cloud/manage/jan-2025-faq/pricing-dimensions#what-are-the-clickpipes-public-prices
-export const clickpipePricingDimensions = {
+export const clickpipePricingDimensions: {
+  computeUnit: number
+  computeUsdPerHour: number
+  ingestedUsdPerGbPerMonth: number
+  replicaComputeUsdPerHour: Record<ClickPipeSizes, number>
+} = {
   computeUnit: 0.25,
   computeUsdPerHour: 0.2,
-  replicaComputeUsdPerHour: 0.05,
-  ingestedUsdPerGb: 0.04
+  ingestedUsdPerGbPerMonth: 0.04,
+  replicaComputeUsdPerHour: {
+    XS: 0.0125,
+    S: 0.025,
+    M: 0.05,
+    L: 0.1,
+    XL: 0.2
+  }
 }
 
 export const meter: MeterConfig = {

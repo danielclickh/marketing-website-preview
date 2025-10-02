@@ -8,14 +8,20 @@ export interface RadiosProps {
   options: Options
   value: any
   onChange: (value: any) => void
+  className?: string
 }
 
-export default function Radios({ options, value, onChange }: RadiosProps) {
+export default function Radios({
+  options,
+  value,
+  onChange,
+  className = ''
+}: RadiosProps) {
   const groupId = useId()
   return (
     <>
       <RadioGroup.Root
-        className='mt-5 flex flex-row items-center gap-2.5 gap-x-6'
+        className={`mt-5 flex flex-row items-center gap-2.5 gap-x-6 ${className}`}
         value={value}
         onValueChange={onChange}
         aria-label='Is your data compressed?'>
