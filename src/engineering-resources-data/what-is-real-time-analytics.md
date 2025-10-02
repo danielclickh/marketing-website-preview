@@ -3,7 +3,7 @@ title: 'What is real-time analytics?'
 slug: 'what-is-real-time-analytics'
 excerpt: "In this guide, we'll learn all about real-time analytics - how does it compare to batch analytics, what are its main characteristics, use cases, and more."
 index: 3
-lastUpdated: '2025-04-11'
+lastUpdated: '2025-10-02'
 ---
 
 Real-time analytics refers to data processing that delivers insights to end users and customers as soon as the data is generated. It differs from traditional or batch analytics, where data is collected in batches and processed, often a long time after it was generated.
@@ -27,19 +27,39 @@ An example of an event (from an imaginary IoT sensor) is the following:
 
 Organizations can discover insights about their customers by aggregating and analyzing events like this. This has traditionally been done using batch analytics, and in the next section, we’ll compare batch and real-time analytics.
 
-## Real-Time Analytics vs Batch Analytics
+## What is the difference between real-time analytics and batch analytics?
 
-The diagram below shows what a typical batch analytics system would look like from the perspective of an individual event:
+When comparing real-time analytics with batch analytics, the key difference is latency i.e. how long it takes from when an event happens until you gain insight from it.
+
+### Batch analytics
+
+The diagram below shows what a typical batch analytics system looks like from the perspective of an individual event:
 
 ![](/images/engineering-resources/0_rta.png)
 
-You can see that there’s quite a big gap from when the event happens until we process and gain some insight from it. Traditionally, this was the only means of data analysis, and we’d need to create artificial time boundaries to process the data in batches. For example, we might process all the data collected at the end of a day. This worked for many use cases, but for others, it’s sub-optimal because we’re working with stale data, and it doesn’t allow us to react to the data quickly enough.
+In batch systems, data is collected over a period of time and then processed together. 
+That means there’s a significant gap between when an event occurs and when you can act on it. 
+Traditionally, this was the only way to analyze data: for example, aggregating all events at the end of each day. 
+This approach works well for use cases like daily reporting or long-term trend analysis, but it produces stale insights and prevents fast reactions.
 
-By contrast, in real-time analytics systems, we react to an event as soon as it happens, as shown in the following diagram:
+### Real-time analytics
+
+By contrast, real-time analytics processes each event as soon as it happens:
 
 ![](/images/engineering-resources/1_rta.png)
 
-We can now derive insights from events almost as soon as they’re generated. But why is this useful?
+With real-time analytics, insights are available almost instantly, enabling organizations to respond to changes, anomalies, or opportunities as they occur. 
+This is critical in domains like fraud detection, personalization, observability, and operational monitoring, where delays can mean missed opportunities or increased risk.
+
+While the diagrams show the flow, the table below summarizes the practical differences between real-time and batch analytics across a few key dimensions:
+
+| **Dimension**   | **Real-time analytics** | **Batch analytics** |
+|---|---|---|
+| **Latency** | Seconds / milliseconds | Minutes to hours |
+| **Processing model** | Continuous, event-driven | Periodic, bulk processing |
+| **Data freshness** | Up-to-the-moment | Delayed until batch completes |
+| **Best suited for** | Fraud detection, personalization, monitoring, anomaly detection | Reporting, historical analysis, trend tracking |
+
 
 ## Benefits of real-time analytics
 
@@ -163,7 +183,8 @@ You can see the architecture of ClickHouse Cloud in the following diagram:
 
 ![](/images/engineering-resources/4_rta.png)
 
-ClickHouse has the characteristics needed in a real-time analytics system, described earlier in this article.
+ClickHouse has the characteristics needed in a real-time analytics system, described earlier in this article - ingestion speed, query latency, and concurrency.
+Let's go through each of these characteristics in more detail.
 
 ### Ingestion speed
 
