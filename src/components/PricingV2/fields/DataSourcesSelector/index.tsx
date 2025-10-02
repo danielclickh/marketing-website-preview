@@ -10,7 +10,7 @@ import {
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { bytesToHumanReadable, humanReadableToBytes } from '@/lib/utils/memory'
 import Link from 'next/link'
-import { cloneElement, useCallback, useMemo, useState } from 'react'
+import { cloneElement, useCallback, useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 const REPLICAS: Options = Array.from({ length: 25 }, (_, i) => ({
@@ -202,21 +202,20 @@ export default function DataSourcesSelector() {
                     </button>
                   </div>
                 </div>
-                {!sourceEntry?.excludeFromCalculations &&
-                  sourceEntry?.scalable && (
-                    <ScalableSettings
-                      size={item.size}
-                      replicas={item.replicas}
-                      onChange={({ size, replicas }) => {
-                        console.log({ size, replicas })
-                        createOrUpdateClickpipe(clickpipeIndex, {
-                          ...item,
-                          size,
-                          replicas
-                        })
-                      }}
-                    />
-                  )}
+                {!sourceEntry?.excludeFromCalculations && (
+                  <ScalableSettings
+                    size={item.size}
+                    replicas={item.replicas}
+                    editable={sourceEntry?.scalable}
+                    onChange={({ size, replicas }) => {
+                      createOrUpdateClickpipe(clickpipeIndex, {
+                        ...item,
+                        size,
+                        replicas
+                      })
+                    }}
+                  />
+                )}
                 <HRSeparator />
               </>
             )
@@ -264,7 +263,8 @@ function MinimalMarkdown({ children }: { children: string }) {
 function ScalableSettings({
   replicas = 1,
   size = clickpipeBaseSize,
-  onChange
+  onChange,
+  editable = false
 }: {
   replicas: ClickPipe['replicas']
   size: ClickPipe['size']
@@ -272,6 +272,7 @@ function ScalableSettings({
     replicas?: ClickPipe['replicas']
     size?: ClickPipe['size']
   }) => void
+  editable?: boolean
 }) {
   const [open, setOpen] = useState(false)
   const isSingleReplica = replicas === 1
@@ -280,22 +281,32 @@ function ScalableSettings({
     event.preventDefault()
     setOpen((prev) => !prev)
   }
+
+  useEffect(() => {
+    if (!editable) {
+      setOpen(false)
+      onChange?.({ replicas: 1, size: clickpipeBaseSize })
+    }
+  }, [editable])
+
   return (
     <div>
       {!open && (
         <p>
-          Running on {isSingleReplica ? 'a single' : 'multiple'}{' '}
+          Running on {isSingleReplica ? 'a single' : replicas}{' '}
           {
             Object.entries(clickpipeSizes).find(
               ([key, value]) => value === size
             )?.[0]
           }{' '}
           {isSingleReplica ? 'replica' : 'replicas'}.{' '}
-          <button
-            onClick={handleClick}
-            className='text-primary-300 hover:underline'>
-            Edit
-          </button>
+          {editable && (
+            <button
+              onClick={handleClick}
+              className='text-primary-300 hover:underline'>
+              Edit
+            </button>
+          )}
         </p>
       )}
       {open && (
