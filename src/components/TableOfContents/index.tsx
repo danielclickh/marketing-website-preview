@@ -107,6 +107,8 @@ export default function TableOfContents({
           <ul className='space-y-2'>
             {headingElements.map((heading, headingIndex) => {
               const innerText = heading.textContent?.replace(/\s+#$/, '')
+              const url = new URL(window.location.toString())
+              url.hash = heading.id
               return (
                 <li
                   key={`${headingIndex}-${heading.id}`}
@@ -114,7 +116,7 @@ export default function TableOfContents({
                     paddingLeft: `${(Number(heading.tagName.charAt(1)) || 1) - 1}rem`
                   }}>
                   <a
-                    href={`#${heading.id}`}
+                    href={url.toString()}
                     className={`block break-words py-1 transition-colors hover:text-primary-300 ${
                       activeId === heading.id
                         ? 'font-medium text-primary-300'
