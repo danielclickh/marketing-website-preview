@@ -1,6 +1,6 @@
 import { ClickPipe } from '../../types'
 import DataSize from '../../ui/DataSize'
-import Label from '../../ui/Label'
+import FieldContainer from '../../ui/FieldContainer'
 import Select, { Options } from '../../ui/Select'
 import HRSeparator from '@/components/HRSeparator'
 import {
@@ -107,8 +107,9 @@ export default function DataSourcesSelector() {
               <>
                 <div key={clickpipeIndex} className='flex items-end gap-2'>
                   <div className='grid flex-1 grid-cols-1 gap-6 md:grid-cols-6'>
-                    <div className='md:col-span-3'>
-                      <Label>Data source</Label>
+                    <FieldContainer
+                      label='Data source'
+                      className='md:col-span-3'>
                       <Select
                         options={sourceOptions}
                         value={item.source}
@@ -120,7 +121,7 @@ export default function DataSourcesSelector() {
                         }}
                         maxHeight={275}
                       />
-                    </div>
+                    </FieldContainer>
                     {sourceEntry?.excludeFromCalculations &&
                       sourceEntry.excludeFromCalculationsLabel && (
                         <div className='flex items-end md:col-span-3'>
@@ -135,8 +136,7 @@ export default function DataSourcesSelector() {
                       )}
                     {!sourceEntry?.excludeFromCalculations && (
                       <>
-                        <div>
-                          <Label>ClickPipes</Label>
+                        <FieldContainer label='ClickPipes'>
                           <Select
                             options={INSTANCES}
                             value={item.instances}
@@ -148,19 +148,18 @@ export default function DataSourcesSelector() {
                             }}
                             maxHeight={275}
                           />
-                        </div>
+                        </FieldContainer>
                         {sourceEntry?.ingestsData && (
-                          <div className='md:col-span-2'>
-                            <Label
-                              tooltip={
-                                sourceEntry.ingestsDataHelperText ? (
-                                  <MinimalMarkdown>
-                                    {sourceEntry.ingestsDataHelperText}
-                                  </MinimalMarkdown>
-                                ) : null
-                              }>
-                              Data ingested / month
-                            </Label>
+                          <FieldContainer
+                            label='Data ingested / month'
+                            tooltip={
+                              sourceEntry.ingestsDataHelperText ? (
+                                <MinimalMarkdown>
+                                  {sourceEntry.ingestsDataHelperText}
+                                </MinimalMarkdown>
+                              ) : null
+                            }
+                            className='md:col-span-2'>
                             <DataSize
                               uiSplit='1/1'
                               min='1GB'
@@ -173,7 +172,7 @@ export default function DataSourcesSelector() {
                                 })
                               }}
                             />
-                          </div>
+                          </FieldContainer>
                         )}
                       </>
                     )}
@@ -302,8 +301,7 @@ function ScalableSettings({
       {open && (
         <div className='pr-12'>
           <div className='grid grid-cols-1 gap-6 md:grid-cols-6'>
-            <div className='md:col-span-3'>
-              <Label>Replica size</Label>
+            <FieldContainer label='Replica size' className='md:col-span-3'>
               <Select
                 options={SIZES}
                 value={size}
@@ -314,9 +312,8 @@ function ScalableSettings({
                   })
                 }}
               />
-            </div>
-            <div>
-              <Label>Replicas</Label>
+            </FieldContainer>
+            <FieldContainer label='Replicas'>
               <Select
                 options={REPLICAS}
                 value={replicas}
@@ -328,13 +325,13 @@ function ScalableSettings({
                 }}
                 maxHeight={275}
               />
-            </div>
+            </FieldContainer>
 
             <div className='flex items-end md:col-span-2'>
               <div className='flex items-center md:h-10'>
                 <button
                   onClick={handleClick}
-                  className='text-primary-300 hover:underline'>
+                  className='text-left text-primary-300 hover:underline'>
                   Hide replica details
                 </button>
               </div>

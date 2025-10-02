@@ -1,6 +1,6 @@
 import { Transfer } from '../../types'
 import DataSize from '../../ui/DataSize'
-import Label from '../../ui/Label'
+import FieldContainer from '../../ui/FieldContainer'
 import Select, { Options } from '../../ui/Select'
 import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
@@ -91,8 +91,7 @@ export default function DataTransferSelector() {
       {/* Fix inter-region egress */}
       {!providerEntry?.useDestinationInterRegionEgress && (
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
-          <div>
-            <Label>Public internet egress / month</Label>
+          <FieldContainer label='Public internet egress / month'>
             <DataSize
               min='1GB'
               max='999PB'
@@ -104,9 +103,8 @@ export default function DataTransferSelector() {
                 })
               }}
             />
-          </div>
-          <div>
-            <Label>Inter-region egress / month</Label>
+          </FieldContainer>
+          <FieldContainer label='Inter-region egress / month'>
             <DataSize
               min='1GB'
               max='999PB'
@@ -118,7 +116,7 @@ export default function DataTransferSelector() {
                 })
               }}
             />
-          </div>
+          </FieldContainer>
         </div>
       )}
 
@@ -128,17 +126,15 @@ export default function DataTransferSelector() {
           {transfers && transfers.length > 0 && (
             <div className='space-y-4'>
               {transfers.map((item, transferIndex) => {
+                const label = {
+                  'public-internet': 'Public internet egress / month',
+                  'inter-region': 'Inter-region egress / month'
+                }[item.type]
                 return (
                   <>
                     <div key={transferIndex} className='flex items-end gap-2'>
                       <div className='grid flex-1 grid-cols-1 gap-6 md:grid-cols-2'>
-                        <div>
-                          {item.type === 'public-internet' && (
-                            <Label>Public internet egress / month</Label>
-                          )}
-                          {item.type === 'inter-region' && (
-                            <Label>Inter-region egress / month</Label>
-                          )}
+                        <FieldContainer label={label}>
                           <DataSize
                             min='1GB'
                             max='999PB'
@@ -150,12 +146,11 @@ export default function DataTransferSelector() {
                               })
                             }}
                           />
-                        </div>
+                        </FieldContainer>
                         {item.type === 'inter-region' &&
                           providerEntry?.regions &&
                           providerEntry.regions.length > 0 && (
-                            <div>
-                              <Label>Region</Label>
+                            <FieldContainer label='Region'>
                               <Select
                                 options={regionOptions}
                                 value={
@@ -170,7 +165,7 @@ export default function DataTransferSelector() {
                                   })
                                 }}
                               />
-                            </div>
+                            </FieldContainer>
                           )}
                       </div>
                       <div className='flex h-10 flex-shrink-0 flex-grow-0 items-center'>
