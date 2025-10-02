@@ -256,7 +256,7 @@ export default function PricingPage({
                           </Link>{' '}
                           - for Postgres CDC pricing, visit{' '}
                           <Link
-                            href='/docs/cloud/manage/billing/overview#clickpipes-for-postgres-cdc'
+                            href='/docs/cloud/reference/billing/clickpipes/postgres-cdc'
                             className='text-primary-300 hover:underline'>
                             here
                           </Link>
