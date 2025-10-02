@@ -116,7 +116,6 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
               src='/images/cloud/integrations/azure-blob-storage.svg'
               alt='Azure Blob Storage'
               active={true}
-              badge='New'
             />
           </li>
           <li>
