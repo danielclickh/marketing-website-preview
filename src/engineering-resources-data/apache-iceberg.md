@@ -6,7 +6,7 @@ index: 22
 lastUpdated: '2025-05-21'
 ---
   
-[Apache Iceberg](https://iceberg.apache.org/) has emerged as a pivotal innovation in data management, fundamentally transforming the traditional "Data Lake" concept into the more robust "Lake House" architecture. At its core, Iceberg provides a high-performance table format that brings sophisticated table-like semantics to structured data stored in data lakes, addressing many limitations previously constrained by these systems.
+[Apache Iceberg](https://iceberg.apache.org/) has emerged as a pivotal innovation in data management, fundamentally transforming the traditional "Data Lake" concept into the more robust ["Lake House"](https://clickhouse.com/engineering-resources/data-lakehouse) architecture. At its core, Iceberg provides a high-performance table format that brings sophisticated table-like semantics to structured data stored in data lakes, addressing many limitations previously constrained by these systems.
 
 As a vendor-agnostic open table format, Iceberg creates an abstraction layer over structured data files (primarily Parquet) that exposes them as tables with advanced capabilities. These include schema evolution, deletes, updates, transactions, and ACID compliance—features traditionally associated with relational databases rather than data lakes. This represents a significant evolution beyond legacy data lake implementations based on technologies like Hadoop and Hive.
 
@@ -26,7 +26,7 @@ This approach lets you maintain metadata governance and ensure a consistent view
 
 Open table formats have emerged as a critical innovation in data lake architecture, addressing many limitations plaguing data lakes. These formats provide a structured approach to organizing and managing data while maintaining the flexibility and scalability that make data lakes attractive. Open table formats transform raw data storage into robust, database-like systems by introducing a metadata layer that tracks file locations, schema information, partitioning details, and data statistics.
 
-The key features of open table formats \- CRUD operations, ACID transactions, schema evolution, query optimizations, and time travel capabilities \- collectively solve the "small files problem," enable concurrent modifications, prevent data corruption, and dramatically improve query performance. These capabilities bridge the gap between data lakes' flexibility and traditional databases' reliability, creating a "lakehouse" architecture.
+The key features of open table formats - CRUD operations, ACID transactions, schema evolution, query optimizations, and time travel capabilities - collectively solve the "small files problem," enable concurrent modifications, prevent data corruption, and dramatically improve query performance. These capabilities bridge the gap between data lakes' flexibility and traditional databases' reliability, creating a "lakehouse" architecture.
 
 Apache Iceberg is one of today's most mature and feature-complete open table formats. It has gained widespread adoption across industries for its robust implementation of these critical features.
 

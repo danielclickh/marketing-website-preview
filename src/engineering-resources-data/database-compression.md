@@ -8,7 +8,7 @@ lastUpdated: '2025-09-17'
 
 Modern applications generate staggering amounts of data: logs, metrics, events, transactions, user activity, telemetry. Storing and querying all of it at scale quickly becomes expensive and slow if the database simply writes every byte as-is. That’s why compression is a cornerstone of database design. By reducing how much space data consumes on disk and in memory, compression lowers storage costs, improves query performance, and enables use cases that would otherwise be impractical.  
 
-In this article, we’ll explore why databases compress data, the main techniques used (row-based and column-based), the trade-offs between compression ratio and performance, and which systems achieve the best results. Along the way, we’ll see why columnar databases — and ClickHouse in particular — stand out for delivering both high compression ratios and fast analytical queries at scale.  
+In this article, we’ll explore why databases compress data, the main techniques used (row-based and [column-based](https://clickhouse.com/engineering-resources/what-is-columnar-database)), the trade-offs between compression ratio and performance, and which systems achieve the best results. Along the way, we’ll see why columnar databases — and ClickHouse in particular — stand out for delivering both high compression ratios and fast analytical queries at scale.  
 
 ## Why do databases compress data?
 

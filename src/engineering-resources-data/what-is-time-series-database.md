@@ -16,8 +16,8 @@ This article explores time-series databases, their use cases, and how different 
 
 To get a taste of time-series analysis in action, here’s a sample query that looks at average yearly precipitation across the UK, France, and the US using weather station data from NOAA. It's a simple example, but it shows how powerful time-based queries can be for uncovering trends over time.
 
-<pre><code
-  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHllYXIsCiAgICAgICBhdmcoYHByZWNpcGl0YXRpb25gKSBBUyBgYXZnX3ByZWNpcGl0YXRpb25gLAogICAgICAgZGljdEdldChgY291bnRyeWAuYGNvdW50cnlfaXNvX2NvZGVzYCwgJ25hbWUnLCBjb2RlKSBhcyBjb3VudHJ5CkZST00gYG5vYWFgLmBub2FhX3YyYApXSEVSRSBkYXRlID4gJzE5OTAtMDEtMDEnIEFORCBjb2RlIElOICgnVUsnLCAnRlInLCAnVVMnKQpHUk9VUCBCWSB0b1N0YXJ0T2ZZZWFyKGBkYXRlYCkgQVMgYHllYXJgLAogICAgICAgICBzdWJzdHJpbmcoc3RhdGlvbl9pZCwgMSwgMikgYXMgY29kZQpIQVZJTkcgYXZnX3ByZWNpcGl0YXRpb24gPiAwICAgICAgICAgCk9SREVSIEJZIGNvdW50cnksIHllYXIgQVNDCkxJTUlUIDEwMDAwMA&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'   show_statistics='true' view='chart'
+<pre><code
+  run='false'   type='click-ui'   language='sql'  runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHllYXIsCiAgICAgICBhdmcoYHByZWNpcGl0YXRpb25gKSBBUyBgYXZnX3ByZWNpcGl0YXRpb25gLAogICAgICAgZGljdEdldChgY291bnRyeWAuYGNvdW50cnlfaXNvX2NvZGVzYCwgJ25hbWUnLCBjb2RlKSBhcyBjb3VudHJ5CkZST00gYG5vYWFgLmBub2FhX3YyYApXSEVSRSBkYXRlID4gJzE5OTAtMDEtMDEnIEFORCBjb2RlIElOICgnVUsnLCAnRlInLCAnVVMnKQpHUk9VUCBCWSB0b1N0YXJ0T2ZZZWFyKGBkYXRlYCkgQVMgYHllYXJgLAogICAgICAgICBzdWJzdHJpbmcoc3RhdGlvbl9pZCwgMSwgMikgYXMgY29kZQpIQVZJTkcgYXZnX3ByZWNpcGl0YXRpb24gPiAwICAgICAgICAgCk9SREVSIEJZIGNvdW50cnksIHllYXIgQVNDCkxJTUlUIDEwMDAwMA&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'   show_statistics='true' view='chart'
   chart_config='eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'
 >
 SELECT year,
@@ -30,7 +30,8 @@ GROUP BY toStartOfYear(`date`) AS `year`,
 HAVING avg_precipitation > 0         
 ORDER BY country, year ASC
 LIMIT 100000;
-</code></pre>
+</code>
+</pre>
 
 You can see more queries like this in the [Is ClickHouse a time-series database?](/engineering-resources/what-is-time-series-database#clickhouse-times-series) section.
 
@@ -186,8 +187,8 @@ These architectural advantages enable organizations to maintain years of histori
 
 The following query analyzes New York City taxi data that contains over 3 billion records. For January 1, 2014, it groups rides by hour and cab type to show the number of rides, average trip distance, and average fare for each hourly period and taxi category.
 
-<pre><code
-  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIAogICAgdG9TdGFydE9mSG91cihwaWNrdXBfZGF0ZXRpbWUpIEFTIGhvdXIsCiAgICBjYWJfdHlwZSwKICAgIGNvdW50KCopIEFTIHJpZGVzLAogICAgcm91bmQoYXZnKHRyaXBfZGlzdGFuY2UpLCAyKSBBUyBhdmdfZGlzdGFuY2UsCiAgICByb3VuZChhdmcodG90YWxfYW1vdW50KSwgMikgQVMgYXZnX2ZhcmUKRlJPTSBueWNfdGF4aS50cmlwcwpXSEVSRSBwaWNrdXBfZGF0ZSA9ICcyMDE0LTAxLTAxJwpHUk9VUCBCWSAxLCAyCk9SREVSIEJZIDEsIDI&chart=eyJ0eXBlIjoiYmFyIiwiY29uZmlnIjp7InRpdGxlIjoiTmV3IFlvcmsgdGF4aSByaWRlcyBvbiAxc3QgSmFudWFyeSAyMDE0IiwieGF4aXMiOiJob3VyIiwieWF4aXMiOiJyaWRlcyIsInNlcmllcyI6ImNhYl90eXBlIiwic3RhY2siOnRydWV9fQ'   show_statistics='true' view='chart'
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIAogICAgdG9TdGFydE9mSG91cihwaWNrdXBfZGF0ZXRpbWUpIEFTIGhvdXIsCiAgICBjYWJfdHlwZSwKICAgIGNvdW50KCopIEFTIHJpZGVzLAogICAgcm91bmQoYXZnKHRyaXBfZGlzdGFuY2UpLCAyKSBBUyBhdmdfZGlzdGFuY2UsCiAgICByb3VuZChhdmcodG90YWxfYW1vdW50KSwgMikgQVMgYXZnX2ZhcmUKRlJPTSBueWNfdGF4aS50cmlwcwpXSEVSRSBwaWNrdXBfZGF0ZSA9ICcyMDE0LTAxLTAxJwpHUk9VUCBCWSAxLCAyCk9SREVSIEJZIDEsIDI&chart=eyJ0eXBlIjoiYmFyIiwiY29uZmlnIjp7InRpdGxlIjoiTmV3IFlvcmsgdGF4aSByaWRlcyBvbiAxc3QgSmFudWFyeSAyMDE0IiwieGF4aXMiOiJob3VyIiwieWF4aXMiOiJyaWRlcyIsInNlcmllcyI6ImNhYl90eXBlIiwic3RhY2siOnRydWV9fQ'   show_statistics='true' view='chart'
   chart_config='eyJ0eXBlIjoiYmFyIiwiY29uZmlnIjp7InRpdGxlIjoiTmV3IFlvcmsgdGF4aSByaWRlcyBvbiAxc3QgSmFudWFyeSAyMDE0IiwieGF4aXMiOiJob3VyIiwieWF4aXMiOiJyaWRlcyIsInNlcmllcyI6ImNhYl90eXBlIiwic3RhY2siOnRydWV9fQ'
 >
 SELECT 
@@ -200,7 +201,7 @@ FROM nyc_taxi.trips
 WHERE pickup_date = '2014-01-01'
 GROUP BY 1, 2
 ORDER BY 1, 2
-</code></pre>
+</code></pre>
 
 ### Comprehensive date/time type support
 
@@ -224,8 +225,8 @@ These comprehensive date/time capabilities provide the foundation for sophistica
 
 The following query aggregates total daily hits from the Wiki dataset, using the `toDate` function to convert `DateTime` values to `Date`:
 
-<pre><code
-  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com/?query_id=4RNIAAXZVWK2YLFFVGEC1O'   show_statistics='true'
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com/?query_id=4RNIAAXZVWK2YLFFVGEC1O'   show_statistics='true'
 >
 SELECT
     sum(hits) AS h,
@@ -233,7 +234,7 @@ SELECT
 FROM wiki.wikistat_small
 GROUP BY d
 ORDER BY d
-LIMIT 5;</code></pre>
+LIMIT 5;</code></pre>
 
 ### Rich set of temporal functions
 
@@ -256,8 +257,8 @@ Let’s have a look at a couple of examples.
 
 The following query computes the yearly average precipitation in the UK, France, and the US from 1990 onwards.
 
-<pre><code
-  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHllYXIsCiAgICAgICBhdmcoYHByZWNpcGl0YXRpb25gKSBBUyBgYXZnX3ByZWNpcGl0YXRpb25gLAogICAgICAgZGljdEdldChgY291bnRyeWAuYGNvdW50cnlfaXNvX2NvZGVzYCwgJ25hbWUnLCBjb2RlKSBhcyBjb3VudHJ5CkZST00gYG5vYWFgLmBub2FhX3YyYApXSEVSRSBkYXRlID4gJzE5OTAtMDEtMDEnIEFORCBjb2RlIElOICgnVUsnLCAnRlInLCAnVVMnKQpHUk9VUCBCWSB0b1N0YXJ0T2ZZZWFyKGBkYXRlYCkgQVMgYHllYXJgLAogICAgICAgICBzdWJzdHJpbmcoc3RhdGlvbl9pZCwgMSwgMikgYXMgY29kZQpIQVZJTkcgYXZnX3ByZWNpcGl0YXRpb24gPiAwICAgICAgICAgCk9SREVSIEJZIGNvdW50cnksIHllYXIgQVNDCkxJTUlUIDEwMDAwMA&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'   show_statistics='true' view='chart'
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHllYXIsCiAgICAgICBhdmcoYHByZWNpcGl0YXRpb25gKSBBUyBgYXZnX3ByZWNpcGl0YXRpb25gLAogICAgICAgZGljdEdldChgY291bnRyeWAuYGNvdW50cnlfaXNvX2NvZGVzYCwgJ25hbWUnLCBjb2RlKSBhcyBjb3VudHJ5CkZST00gYG5vYWFgLmBub2FhX3YyYApXSEVSRSBkYXRlID4gJzE5OTAtMDEtMDEnIEFORCBjb2RlIElOICgnVUsnLCAnRlInLCAnVVMnKQpHUk9VUCBCWSB0b1N0YXJ0T2ZZZWFyKGBkYXRlYCkgQVMgYHllYXJgLAogICAgICAgICBzdWJzdHJpbmcoc3RhdGlvbl9pZCwgMSwgMikgYXMgY29kZQpIQVZJTkcgYXZnX3ByZWNpcGl0YXRpb24gPiAwICAgICAgICAgCk9SREVSIEJZIGNvdW50cnksIHllYXIgQVNDCkxJTUlUIDEwMDAwMA&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'   show_statistics='true' view='chart'
   chart_config='eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6InllYXIiLCJ5YXhpcyI6ImF2Z19wcmVjaXBpdGF0aW9uIiwic2VyaWVzIjoiY291bnRyeSJ9fQ'
 >
 SELECT year,
@@ -270,12 +271,12 @@ GROUP BY toStartOfYear(`date`) AS `year`,
 HAVING avg_precipitation > 0         
 ORDER BY country, year ASC
 LIMIT 100000;
-</code></pre>
+</code></pre>
 
 The following query uses a window function to calculate the cumulative stars of the `deepseek-ai/DeepSeek-R1` repository:
 
-<pre><code
-  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHRvRGF0ZShjcmVhdGVkX2F0KSBBUyBkYXksIAogICAgICAgY291bnQoKSBBUyBkYWlseUNvdW50LAogICAgICAgc3VtKGRhaWx5Q291bnQpIE9WRVIgKE9SREVSIEJZIGRheSBBU0MpIEFTIGN1bFN0YXJzCkZST00gZ2l0aHViLmV2ZW50cyAKV0hFUkUgZXZlbnRfdHlwZSA9ICdXYXRjaEV2ZW50JyBBTkQgcmVwb19uYW1lID0gJ2RlZXBzZWVrLWFpL0RlZXBTZWVrLVIxJwpHUk9VUCBCWSBBTEwKT1JERVIgQlkgZGF5OwoK&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6ImRheSIsInlheGlzIjoiY3VsU3RhcnMifX0'   show_statistics='true'
+<pre><code
+  run='false'   type='click-ui'   language='sql'   runnable='true'   clickhouse_settings='{"enable_parallel_replicas": 0}'   play_link='https://sql.clickhouse.com?query=U0VMRUNUIHRvRGF0ZShjcmVhdGVkX2F0KSBBUyBkYXksIAogICAgICAgY291bnQoKSBBUyBkYWlseUNvdW50LAogICAgICAgc3VtKGRhaWx5Q291bnQpIE9WRVIgKE9SREVSIEJZIGRheSBBU0MpIEFTIGN1bFN0YXJzCkZST00gZ2l0aHViLmV2ZW50cyAKV0hFUkUgZXZlbnRfdHlwZSA9ICdXYXRjaEV2ZW50JyBBTkQgcmVwb19uYW1lID0gJ2RlZXBzZWVrLWFpL0RlZXBTZWVrLVIxJwpHUk9VUCBCWSBBTEwKT1JERVIgQlkgZGF5OwoK&chart=eyJ0eXBlIjoibGluZSIsImNvbmZpZyI6eyJ4YXhpcyI6ImRheSIsInlheGlzIjoiY3VsU3RhcnMifX0'   show_statistics='true'
 >
 SELECT toDate(created_at) AS day, 
        count() AS dailyCount,
@@ -284,7 +285,7 @@ FROM github.events
 WHERE event_type = 'WatchEvent' AND repo_name = 'deepseek-ai/DeepSeek-R1'
 GROUP BY ALL
 ORDER BY day;
-</code></pre>
+</code></pre>
 
 Additionally, ClickHouse offers features that are particularly valuable for long-term time-series data management:
 

@@ -75,7 +75,7 @@ ClickHouse is a powerful analytical query engine within the modern data lakehous
 
 Within the lakehouse architecture, ClickHouse functions as a specialized processing layer that can flexibly interact with the underlying data. It can directly query Parquet files stored in cloud object storage systems like S3, Azure Blob Storage, or Google Cloud Storage, leveraging its optimized columnar processing capabilities to deliver rapid results even on massive datasets. This direct query capability allows organizations to analyze their lake data without complex data movement or transformation processes.
 
-➡️Read more in [ClickHouse and Parquet: A foundation for fast Lakehouse analytics](https://clickhouse.com/blog/clickhouse-and-parquet-a-foundation-for-fast-lakehouse-analytics)
+➡️ Read more in [ClickHouse and Parquet: A foundation for fast Lakehouse analytics](https://clickhouse.com/blog/clickhouse-and-parquet-a-foundation-for-fast-lakehouse-analytics)
 
 ClickHouse integrates with open table formats such as Apache Iceberg, Delta Lake, or Apache Hudi for more sophisticated data management needs. This integration enables ClickHouse to take advantage of these formats' advanced features, while still delivering the exceptional query performance it's known for. Organizations can integrate these table formats directly or connect through metadata catalogs like AWS Glue, Unity, or other catalog services.
 

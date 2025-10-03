@@ -28,7 +28,7 @@ Key players in open table formats include Iceberg, Hudi, and Delta Lake. Differe
 
 ### Iceberg
 
-Netflix initially developed [Iceberg](https://iceberg.apache.org/) to address the challenges of managing large datasets in data lakes. As the project gained traction, the creators spun out a company called [Tabular](https://www.tabular.io/blog/introducing-tabular/) to continue its development. Eventually, [Tabular was acquired by Databricks](https://www.databricks.com/blog/databricks-tabular), which also develops the Delta Lake format. So while Iceberg started at Netflix, Databricks now plays a role in both formats.
+Netflix initially developed [Iceberg](https://clickhouse.com/engineering-resources/apache-iceberg) to address the challenges of managing large datasets in data lakes. As the project gained traction, the creators spun out a company called [Tabular](https://www.tabular.io/blog/introducing-tabular/) to continue its development. Eventually, [Tabular was acquired by Databricks](https://www.databricks.com/blog/databricks-tabular), which also develops the Delta Lake format. So while Iceberg started at Netflix, Databricks now plays a role in both formats.
 
 ### Delta Lake
 
