@@ -1,5 +1,6 @@
 import LinkWithArrow from '../LinkWithArrow'
 import { IconButton } from '@clickhouse/click-ui'
+import Link from 'next/link'
 import { MouseEvent, useEffect, useState } from 'react'
 
 export interface AnnouncementBarProps {
@@ -11,6 +12,7 @@ export interface AnnouncementBarProps {
   className?: string
   onShow?: () => void
   onHide?: () => void
+  arrow?: boolean
 }
 
 async function hashString(input: string) {
@@ -29,7 +31,8 @@ export default function AnnouncementBar({
   dismissible = false,
   expires,
   onShow,
-  onHide
+  onHide,
+  arrow = true
 }: AnnouncementBarProps) {
   const [expired, setExpired] = useState<boolean>(false)
   const [storageKey, setStorageKey] = useState('')
@@ -69,6 +72,8 @@ export default function AnnouncementBar({
     window.sessionStorage.setItem(storageKey, Date.now().toString())
   }
 
+  const LinkComponent = arrow ? LinkWithArrow : Link
+
   return (
     <>
       {enabled && !expired && (
@@ -76,12 +81,12 @@ export default function AnnouncementBar({
           className={`relative z-50 flex items-center bg-primary-300 text-primary-900 transition ${
             isVisible ? 'max-h-max' : 'max-h-0 overflow-hidden opacity-0'
           } ${className}`}>
-          <LinkWithArrow
+          <LinkComponent
             prefetch={false}
             href={link}
             className='block w-full flex-1 px-4 py-1 text-center text-sm font-medium'>
             {text}
-          </LinkWithArrow>
+          </LinkComponent>
           {dismissible && (
             <IconButton
               icon='cross'
