@@ -24,7 +24,9 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   // Eyebrow default settings
   const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
-  const [headerBannerText, setHeaderBannerText] = useState('')
+  const [headerBannerText, setHeaderBannerText] = useState<
+    string | React.ReactNode
+  >('')
   const [headerBannerUrl, setHeaderBannerUrl] = useState('')
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
@@ -48,8 +50,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     //=== Country specific eyebrow ===//
     ;(async () => {
       let countryCode: null | string =
-        window.sessionStorage.getItem('ch-user-country') ||
-        window.navigator.language.split('-')[0]
+        window.sessionStorage.getItem('ch-user-country') || null
 
       if (!countryCode) {
         try {
@@ -61,8 +62,10 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         } catch {}
       }
 
-      // Bail if country is unknown
-      if (!countryCode) return
+      // If country code not give, use the language country code
+      if (!countryCode) {
+        countryCode = window.navigator.language.split('-')[0]
+      }
 
       // Remember users country
       window.sessionStorage.setItem('ch-user-country', countryCode)
@@ -70,9 +73,13 @@ export default function Header({ github, eyebrow }: HeaderProps) {
       if (countryCode?.toUpperCase() === 'NL') {
         setHeaderBannerEnabled(true)
         setHeaderBannerText(
-          '🇳🇱 Join our free database and AI conference in Amsterdam, October 28th 🇳🇱'
+          <span className='inline-flex items-center gap-2'>
+            <span className='hidden text-xl md:inline'>🇳🇱</span> Join our free
+            database and AI conference in Amsterdam, October 28th{' '}
+            <span className='hidden text-xl md:inline'>🇳🇱</span>
+          </span>
         )
-        setHeaderBannerUrl('/openhouse/netherlands?loc=eyebrow')
+        setHeaderBannerUrl('/openhouse/amsterdam?loc=eyebrow')
         setHeaderBannerExpires(new Date('2025-10-28T00:00:00+00:00'))
         setHeaderBannerArrow(false)
       }

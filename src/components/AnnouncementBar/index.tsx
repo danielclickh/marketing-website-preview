@@ -5,7 +5,7 @@ import { MouseEvent, useEffect, useState } from 'react'
 
 export interface AnnouncementBarProps {
   enabled?: boolean
-  text: string
+  text: string | React.ReactNode
   link: string
   dismissible?: boolean
   expires?: Date
