@@ -23,29 +23,12 @@ export default function Header({ github, eyebrow }: HeaderProps) {
 
   // Eyebrow default settings
   const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
+  const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState('')
   const [headerBannerUrl, setHeaderBannerUrl] = useState('')
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
   >(undefined)
-
-  useEffect(() => {
-    // Specific eyebrow for observability page
-    if (pathname === '/use-cases/observability') {
-      setHeaderBannerEnabled(true)
-      setHeaderBannerText('Join a ClickStack live demo and Q&A on July 8th')
-      setHeaderBannerUrl('/company/events/introducing-clickstack?loc=eyebrow')
-      setHeaderBannerExpires(new Date('2025-07-08T00:00:00'))
-    }
-
-    // Reset eyebrow for all pages
-    else {
-      setHeaderBannerEnabled(false)
-      setHeaderBannerText('')
-      setHeaderBannerUrl('')
-      setHeaderBannerExpires(undefined)
-    }
-  }, [pathname])
 
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
@@ -63,64 +46,37 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     scrollHandler()
 
     //=== Country specific eyebrow ===//
-    // const hasCountryCode = document.cookie.includes('countryCode=')
-    // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+    ;(async () => {
+      let countryCode: null | string =
+        window.sessionStorage.getItem('ch-user-country') ||
+        window.navigator.language.split('-')[0]
 
-    // if (!hasCountryCode) {
-    //   // List of languages we want to exclude (e.g. China, Russia, etc.)
-    //   const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK']
+      if (!countryCode) {
+        try {
+          const request = await fetch('https://ipinfo.io?token=33cfa2cb7f422c')
+          const response = await request.json()
+          if (request.ok && !response.error) {
+            countryCode = response.country
+          }
+        } catch {}
+      }
 
-    //   // List of languages that correspond to Australia, New Zealand, and Singapore
-    //   const targetLanguages = ['en-AU', 'en-NZ', 'en-SG', 'zh-SG', 'ms-SG']
+      // Bail if country is unknown
+      if (!countryCode) return
 
-    //   if (excludedLanguages.includes(navigator.language)) {
-    //     return
-    //   } else if (targetLanguages.includes(navigator.language)) {
-    //     // If navigator.language matches target regions (AU, NZ, SG), set the country code
-    //     let countryCode
-    //     if (navigator.language === 'en-AU') {
-    //       countryCode = 'AU'
-    //     } else if (navigator.language === 'en-NZ') {
-    //       countryCode = 'NZ'
-    //     } else if (['en-SG', 'zh-SG', 'ms-SG'].includes(navigator.language)) {
-    //       countryCode = 'SG'
-    //     }
+      // Remember users country
+      window.sessionStorage.setItem('ch-user-country', countryCode)
 
-    //     document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-    //     setHeaderBannerText(
-    //       'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //     )
-    //     setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    //   } else {
-    //     fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-    //       .then((response) => response.json())
-    //       .then((data) => {
-    //         if (!data.error) {
-    //           const countryCode = data.country
-    //           document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-
-    //           if (['AU', 'NZ', 'SG'].includes(countryCode)) {
-    //             setHeaderBannerText(
-    //               'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //             )
-    //             setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    //           }
-    //         } else {
-    //           document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
-    //         }
-    //       })
-    //   }
-    // } else if (
-    //   document.cookie.includes('countryCode=AU') ||
-    //   document.cookie.includes('countryCode=NZ') ||
-    //   document.cookie.includes('countryCode=SG')
-    // ) {
-    //   setHeaderBannerText(
-    //     'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //   )
-    //   setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    // }
-    //=== Country specific eyebrow ===//
+      if (countryCode?.toUpperCase() === 'NL') {
+        setHeaderBannerEnabled(true)
+        setHeaderBannerText(
+          '🇳🇱 Join our free database and AI conference in Amsterdam, October 28th 🇳🇱'
+        )
+        setHeaderBannerUrl('/openhouse/netherlands?loc=eyebrow')
+        setHeaderBannerExpires(new Date('2025-10-28T00:00:00+00:00'))
+        setHeaderBannerArrow(false)
+      }
+    })()
 
     return () => {
       window.removeEventListener('scroll', scrollHandler)
@@ -153,6 +109,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           expires={headerBannerExpires}
           dismissible={true}
           className={eyebrow?.className || ''}
+          arrow={headerBannerArrow}
         />
 
         {/* Logo, navigtation, CTAs... */}
