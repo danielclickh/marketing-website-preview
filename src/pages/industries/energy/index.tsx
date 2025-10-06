@@ -1,4 +1,5 @@
 import hero from './assets/hero.png'
+import logoEnjins from './assets/logo-enjins.png'
 import logoNovo from './assets/logo-novo.png'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ContentTicker from '@/components-cleaned/ContentTicker'
@@ -13,7 +14,7 @@ import tada from '@/components/LinedIconCard/assets/tada.svg'
 import QuoteCard from '@/components/QuoteCard'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { fetchAll, findOne } from '@/lib/api/strapi'
+import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps, HomePageProps } from '@/types/homepage'
@@ -158,6 +159,11 @@ export default function EnergyIndustryPage({
               monitoring, production line analytics, and predictive maintenance
               & asset health for energy facilities.
             </TickItem>
+            <TickItem className='p-3 text-left md:w-1/2'>
+              <strong>Massive-scale data ingestion:</strong> Ingest and process
+              millions of logs, metrics, time series, events, and transactions
+              per second.
+            </TickItem>
           </div>
         </div>
       </section>
@@ -182,7 +188,7 @@ export default function EnergyIndustryPage({
               Trusted by the world’s most ambitious energy companies and
               innovators
             </p>
-            <div className='space-y-6 lg:grid lg:grid-cols-1 lg:gap-6 lg:space-y-0'>
+            <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
               <QuoteCard
                 content='Our primary business requirement for any database/store was that we own and control the data we store -- no vendor lock-in and no walled gardens. Going with ClickHouse Cloud on AWS was an easy decision because it allows us to focus on our primary work without having to worry about maintenance, upgrades, backups, and so on.'
                 link='/blog/powering-the-next-generation-of-electric-cars'
@@ -192,6 +198,15 @@ export default function EnergyIndustryPage({
                   height: 395 / 12,
                   alt: 'Novo Energy',
                   className: 'saturate-0 invert'
+                }}
+              />
+              <QuoteCard
+                content='The collaboration between Enjins and ClickHouse is built on our shared mission: accelerating the energy transition. At Enjins, we design and build AI solutions for the energy sector. By leveraging ClickHouse’s analytical database as a foundation, we enable our clients to make faster, smarter decisions – from optimizing grid performance and automating asset steering to forecasting renewable energy output with greater accuracy.'
+                logo={{
+                  src: logoEnjins,
+                  width: 209 / 2,
+                  height: 99 / 2,
+                  alt: 'Enjins'
                 }}
               />
             </div>
