@@ -1,3 +1,5 @@
+import GlobalSearchProvider from '@/components-cleaned/GlobalSearchProvider'
+import SmartBackProvider from '@/components-cleaned/SmartBackProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
 import { Galaxy } from '@/lib/galaxy/web/browser'
@@ -17,8 +19,7 @@ import Script from 'next/script'
 import { useReportWebVitals } from 'next/web-vitals'
 import { useEffect, useState } from 'react'
 
-//const gtmId = process.env.NEXT_PUBLIC_GTM ?? 'GTM-TL8H72K';
-const gtmId = 'GTM-WKSRXS8S' // Hardcoded for testing
+const GTM_ID = process?.env?.NEXT_PUBLIC_GTM
 
 const inter = Inter({
   subsets: [],
@@ -105,6 +106,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => router.events.off('routeChangeComplete', updateGrowthBookURL)
   }, [])
 
+  const isMarketoIframe = router.pathname === '/marketo-forms/[id]'
+
   return (
     <>
       <ClickUIProvider theme={theme}>
@@ -138,21 +141,25 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </Head>
         <GrowthBookProvider growthbook={gb}>
-          <main
-            id='main-site-container'
-            className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-            <div className='flex min-h-screen flex-col'>
-              <Component {...pageProps} />
-            </div>
-          </main>
-          <UTMPersist />
+          <GlobalSearchProvider enabled={!isMarketoIframe}>
+            <SmartBackProvider>
+              <main
+                id='main-site-container'
+                className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
+                <div className='flex min-h-screen flex-col'>
+                  <Component {...pageProps} />
+                </div>
+              </main>
+              <UTMPersist />
+            </SmartBackProvider>
+          </GlobalSearchProvider>
         </GrowthBookProvider>
 
         {/* Exclude tracking from marketo iframe routes */}
-        {router.pathname !== '/marketo-forms/[id]' && (
+        {!isMarketoIframe && (
           <>
             {/* GTM */}
-            <GoogleTagManager gtmId={gtmId} />
+            {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
 
             {/* Cleans marketo email tracking tokens */}
             <Script

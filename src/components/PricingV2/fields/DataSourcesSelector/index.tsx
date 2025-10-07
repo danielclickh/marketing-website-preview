@@ -1,18 +1,45 @@
 import { ClickPipe } from '../../types'
 import DataSize from '../../ui/DataSize'
-import Label from '../../ui/Label'
+import FieldContainer from '../../ui/FieldContainer'
 import Select, { Options } from '../../ui/Select'
 import HRSeparator from '@/components/HRSeparator'
-import Markdown from '@/components/Markdown'
+import {
+  clickpipeBaseSize,
+  clickpipeSizes
+} from '@/components/PricingV2/config'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
+import { bytesToHumanReadable, humanReadableToBytes } from '@/lib/utils/memory'
 import Link from 'next/link'
-import { useCallback, useMemo } from 'react'
+import { cloneElement, useCallback, useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+
+const REPLICAS: Options = Array.from({ length: 25 }, (_, i) => ({
+  value: i + 1,
+  label: (i + 1).toString()
+}))
 
 const INSTANCES = Array.from({ length: 10 }, (_, i) => ({
   value: i + 1,
   label: (i + 1).toString()
 }))
+
+// Format clickpipe replica sizes for select field
+const SIZES: Options = Object.entries(clickpipeSizes).map(
+  ([label, size], sizeIndex) => {
+    return {
+      value: size,
+      label: (
+        <>
+          {label}
+          <span className='opacity-70'>
+            ({bytesToHumanReadable(humanReadableToBytes(`${size}GB`))} RAM,{' '}
+            {size / 4} vCPUs)
+          </span>
+        </>
+      )
+    }
+  }
+)
 
 export default function DataSourcesSelector() {
   const { setValues, sourceData, clickpipes } = usePricingV2Context()
@@ -80,8 +107,9 @@ export default function DataSourcesSelector() {
               <>
                 <div key={clickpipeIndex} className='flex items-end gap-2'>
                   <div className='grid flex-1 grid-cols-1 gap-6 md:grid-cols-6'>
-                    <div className='md:col-span-3'>
-                      <Label>Data source</Label>
+                    <FieldContainer
+                      label='Data source'
+                      className='md:col-span-3'>
                       <Select
                         options={sourceOptions}
                         value={item.source}
@@ -93,50 +121,22 @@ export default function DataSourcesSelector() {
                         }}
                         maxHeight={275}
                       />
-                    </div>
+                    </FieldContainer>
                     {sourceEntry?.excludeFromCalculations &&
                       sourceEntry.excludeFromCalculationsLabel && (
                         <div className='flex items-end md:col-span-3'>
                           <div className='flex h-10 items-center text-success-500'>
                             <div>
-                              <ReactMarkdown
-                                components={{
-                                  a({
-                                    className = '',
-                                    children,
-                                    href,
-                                    target = '_self'
-                                  }) {
-                                    return (
-                                      <Link
-                                        href={href || '#'}
-                                        target={target}
-                                        className={`underline ${className}`}>
-                                        {children}
-                                      </Link>
-                                    )
-                                  }
-                                }}
-                                allowedElements={[
-                                  'a',
-                                  'strong',
-                                  'b',
-                                  'u',
-                                  'em',
-                                  'i',
-                                  'p',
-                                  'br'
-                                ]}>
+                              <MinimalMarkdown>
                                 {sourceEntry.excludeFromCalculationsLabel}
-                              </ReactMarkdown>
+                              </MinimalMarkdown>
                             </div>
                           </div>
                         </div>
                       )}
                     {!sourceEntry?.excludeFromCalculations && (
                       <>
-                        <div>
-                          <Label>ClickPipes</Label>
+                        <FieldContainer label='ClickPipes'>
                           <Select
                             options={INSTANCES}
                             value={item.instances}
@@ -148,10 +148,18 @@ export default function DataSourcesSelector() {
                             }}
                             maxHeight={275}
                           />
-                        </div>
+                        </FieldContainer>
                         {sourceEntry?.ingestsData && (
-                          <div className='md:col-span-2'>
-                            <Label>Data ingested / month</Label>
+                          <FieldContainer
+                            label='Data ingested / month'
+                            tooltip={
+                              sourceEntry.ingestsDataHelperText ? (
+                                <MinimalMarkdown>
+                                  {sourceEntry.ingestsDataHelperText}
+                                </MinimalMarkdown>
+                              ) : null
+                            }
+                            className='md:col-span-2'>
                             <DataSize
                               uiSplit='1/1'
                               min='1GB'
@@ -164,7 +172,7 @@ export default function DataSourcesSelector() {
                                 })
                               }}
                             />
-                          </div>
+                          </FieldContainer>
                         )}
                       </>
                     )}
@@ -194,6 +202,20 @@ export default function DataSourcesSelector() {
                     </button>
                   </div>
                 </div>
+                {!sourceEntry?.excludeFromCalculations && (
+                  <ScalableSettings
+                    size={item.size}
+                    replicas={item.replicas}
+                    editable={sourceEntry?.scalable}
+                    onChange={({ size, replicas }) => {
+                      createOrUpdateClickpipe(clickpipeIndex, {
+                        ...item,
+                        size,
+                        replicas
+                      })
+                    }}
+                  />
+                )}
                 <HRSeparator />
               </>
             )
@@ -214,5 +236,120 @@ export default function DataSourcesSelector() {
         </button>
       )}
     </>
+  )
+}
+
+function MinimalMarkdown({ children }: { children: string }) {
+  return (
+    <ReactMarkdown
+      components={{
+        a({ className = '', children, href, target = '_self' }) {
+          return (
+            <Link
+              href={href || '#'}
+              target={target}
+              className={`underline hover:decoration-2 ${className}`}>
+              {children}
+            </Link>
+          )
+        }
+      }}
+      allowedElements={['a', 'strong', 'b', 'u', 'em', 'i', 'p', 'br']}>
+      {children}
+    </ReactMarkdown>
+  )
+}
+
+function ScalableSettings({
+  replicas = 1,
+  size = clickpipeBaseSize,
+  onChange,
+  editable = false
+}: {
+  replicas: ClickPipe['replicas']
+  size: ClickPipe['size']
+  onChange: (value: {
+    replicas?: ClickPipe['replicas']
+    size?: ClickPipe['size']
+  }) => void
+  editable?: boolean
+}) {
+  const [open, setOpen] = useState(false)
+  const isSingleReplica = replicas === 1
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    setOpen((prev) => !prev)
+  }
+
+  useEffect(() => {
+    if (!editable) {
+      setOpen(false)
+      onChange?.({ replicas: 1, size: clickpipeBaseSize })
+    }
+  }, [editable])
+
+  return (
+    <div>
+      {!open && (
+        <p>
+          Running on {isSingleReplica ? 'a single' : replicas}{' '}
+          {
+            Object.entries(clickpipeSizes).find(
+              ([key, value]) => value === size
+            )?.[0]
+          }{' '}
+          {isSingleReplica ? 'replica' : 'replicas'}.{' '}
+          {editable && (
+            <button
+              onClick={handleClick}
+              className='text-primary-300 hover:underline'>
+              Edit
+            </button>
+          )}
+        </p>
+      )}
+      {open && (
+        <div className='pr-12'>
+          <div className='grid grid-cols-1 gap-6 md:grid-cols-6'>
+            <FieldContainer label='Replica size' className='md:col-span-3'>
+              <Select
+                options={SIZES}
+                value={size}
+                onChange={(value) => {
+                  onChange({
+                    size: value,
+                    replicas
+                  })
+                }}
+              />
+            </FieldContainer>
+            <FieldContainer label='Replicas'>
+              <Select
+                options={REPLICAS}
+                value={replicas}
+                onChange={(value) => {
+                  onChange({
+                    size,
+                    replicas: value
+                  })
+                }}
+                maxHeight={275}
+              />
+            </FieldContainer>
+
+            <div className='flex items-end md:col-span-2'>
+              <div className='flex items-center md:h-10'>
+                <button
+                  onClick={handleClick}
+                  className='text-left text-primary-300 hover:underline'>
+                  Hide replica details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }

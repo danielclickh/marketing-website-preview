@@ -3,6 +3,7 @@ title: 'Build a dashboard in Python with ClickHouse and Streamlit'
 slug: 'python-dashboard-streamlit'
 excerpt: "In this guide, you'll learn how to build a Python dashboard using ClickHouse and Streamlit. We'll create a real-world example that visualizes Bluesky social media data, walking through everything from basic setup to interactive visualizations. Perfect for data scientists and analysts who want to share their insights through custom dashboards."
 index: 10
+lastUpdated: '2025-06-02'
 ---
 
 Let's face it - if you're working with data, Python is probably your go-to language. It's got all the tools you need: Pandas for wrangling data, Polars for lightning-fast processing, NumPy for number crunching, and scikit-learn for when you want to get fancy with machine learning.

@@ -1,4 +1,6 @@
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
+import SmartBackButton from '@/components-cleaned/SmartBackButton'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -33,8 +35,6 @@ import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React, { useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
-
-import children = ReactMarkdown.propTypes.children
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -176,6 +176,7 @@ export default function BlogPage({
   content,
   category,
   reading_time,
+  reading_time_override,
   otherBlogs,
   date,
   publishedAt,
@@ -245,26 +246,21 @@ export default function BlogPage({
         <ReadingProgress target={contentRef} />
 
         <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
-          <Link
-            href='/blog'
+          <SmartBackButton
+            fallbackPath='/blog'
             className='group/backButton -mx-3 -my-1.5 mr-8 inline-flex items-center whitespace-nowrap rounded px-3 py-1.5 text-base font-semibold transition-colors hover:bg-white/5'>
             <ArrowLeftIcon className='mr-2 w-4 transition-transform group-hover/backButton:-translate-x-1' />
             Back
-          </Link>
+          </SmartBackButton>
           <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
             {/* Blog meta */}
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
-              <h4 className='text-base font-semibold text-primary-300'>
-                <Link href='/blog' className='hover:underline'>
-                  Blog
-                </Link>{' '}
-                /{' '}
-                <Link
-                  href={`/blog?category=${slugify(category)}`}
-                  className='hover:underline'>
+              <Breadcrumbs>
+                <Breadcrumbs.Link href='/blog'>Blog</Breadcrumbs.Link>
+                <Breadcrumbs.Link href={`/blog?category=${slugify(category)}`}>
                   {category}
-                </Link>
-              </h4>
+                </Breadcrumbs.Link>
+              </Breadcrumbs>
               <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
                 <span className='leading-snug'>{title}</span>
               </h1>
@@ -281,8 +277,8 @@ export default function BlogPage({
                     {author.name}
                   </SuiText>
                   <SuiText size='sm' weight='normal' color='secondary'>
-                    {convertDateToString(date || publishedAt)} - {reading_time}{' '}
-                    minutes read
+                    {convertDateToString(date || publishedAt)} -{' '}
+                    {reading_time_override || reading_time} minutes read
                   </SuiText>
                 </div>
               </div>
@@ -364,15 +360,11 @@ export default function BlogPage({
                 </SuiText>
                 <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                   <CopyUrlButton />
-                  {[
-                    'y_combinator',
-                    'twitter',
-                    'bluesky',
-                    'facebook',
-                    'linkedin'
-                  ].map((social) => (
-                    <SocialButton key={social} type={social} title={title} />
-                  ))}
+                  <SocialButton type='y_combinator' title={title} />
+                  <SocialButton type='twitter' title={title} />
+                  <SocialButton type='bluesky' title={title} />
+                  <SocialButton type='facebook' title={title} />
+                  <SocialButton type='linkedin' title={title} />
                 </div>
               </div>
 
@@ -393,7 +385,7 @@ export default function BlogPage({
             Recent posts
           </SuiTitle>
 
-          <CUIButton href='/blog' type='secondary-dark'>
+          <CUIButton href='/blog' type='secondary'>
             View all Blogs
           </CUIButton>
         </div>

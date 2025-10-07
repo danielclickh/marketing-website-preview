@@ -2,6 +2,7 @@ import callouts from './callouts.json'
 import checkpoints from './checkpoints.json'
 import faqs from './faqs.json'
 import features from './features.json'
+import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import LogoCarousel from '@/components/LogoCarousel'
 import Markdown from '@/components/Markdown'
@@ -9,7 +10,6 @@ import QuoteCard from '@/components/QuoteCard'
 import GetStartedFree from '@/components/jp/GetStartedFree'
 import Layout from '@/components/jp/Layout'
 import AccordionComponent from '@/components/jp/RealTimeDiagram/Accordion'
-import Feature from '@/components/jp/RealTimeDiagram/feature-check'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -95,28 +95,16 @@ export default function RealTimeAnalyticsPage({
                     </SuiText>
                   </div>
                   <div className='lg:max-w-2xl xl:max-w-full'>
-                    {checkpoints.map((checkpoint) => {
+                    {checkpoints.map(({ content }, checkpointIndex) => {
                       return (
-                        <div
-                          className={'item-center flex space-x-4 pb-2'}
-                          key={checkpoint.id}>
-                          <Image
-                            src='/images/cloud/check.svg'
-                            width={32}
-                            height={33}
-                            alt='Icon'
-                          />
-                          <SuiText
-                            size='base'
-                            weight='normal'
-                            color='secondary'
-                            className='flex items-center'>
-                            <p>{checkpoint.content}</p>
-                          </SuiText>
-                        </div>
+                        <TickItem
+                          key={checkpointIndex}
+                          className='my-4 text-neutral-200'>
+                          {content}
+                        </TickItem>
                       )
                     })}
-                    <div className='relative z-40 mt-6 flex gap-6'>
+                    <div className='relative z-40 mt-8 flex gap-6'>
                       <CUIButton
                         type='primary'
                         size='lg'
@@ -305,11 +293,13 @@ export default function RealTimeAnalyticsPage({
                   {[10, 20, 30].map((section) => (
                     <div
                       key={section}
-                      className='items-center rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
+                      className='items-center space-y-6 rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] p-6 text-left lg:w-1/3'>
                       {features
                         .filter((feature) => feature.section === section)
-                        .map((feature) => (
-                          <Feature key={feature.id} feature={feature} />
+                        .map(({ content }, featureIndex) => (
+                          <TickItem key={featureIndex} className='text-sm'>
+                            {content}
+                          </TickItem>
                         ))}
                     </div>
                   ))}

@@ -3,6 +3,7 @@ title: 'Structured, unstructured, and semi-structured data'
 slug: 'structured-unstructured-semi-structured-data'
 excerpt: 'In this guide, we explore the three main forms of data: structured data with rigid schemas like database tables, unstructured data like text and images with no predefined format, and semi-structured data like JSON that combines elements of both while maintaining flexibility.'
 index: 9
+lastUpdated: '2025-04-11'
 ---
 
 Data comes in different forms, each requiring different approaches for storage and analysis. This guide explores the three main types of data: structured, unstructured, and semi-structured.

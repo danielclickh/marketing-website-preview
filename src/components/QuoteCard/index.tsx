@@ -5,37 +5,61 @@ import Link, { LinkProps } from 'next/link'
 import React from 'react'
 import Tilt from 'react-parallax-tilt'
 
+type Direction = 'vertical' | 'horizontal'
+
+const classes: Record<string, Record<Direction, string>> = {
+  container: {
+    vertical: 'flex flex-col',
+    horizontal: 'flex flex-col lg:flex-row lg:gap-8 lg:p-8'
+  },
+  icon: {
+    vertical: 'mb-4 mt-2',
+    horizontal: 'mb-4 mt-2 lg:my-0 lg:ml-2 lg:self-start'
+  },
+  text: {
+    vertical: 'mb-8 text-left',
+    horizontal: 'mb-8 text-left lg:mb-0'
+  },
+  logo: {
+    vertical: 'mt-auto max-w-[200px]',
+    horizontal:
+      'mt-auto max-w-[200px] lg:mt-0 lg:max-w-none lg:w-40 lg:object-scale-down lg:rounded-2xl lg:bg-gradient-to-r lg:from-neutral-600/40 lg:to-neutral-600/10 lg:px-4 lg:border lg:border-neutral-600/40'
+  }
+} as const
+
 interface QuoteProps {
   content: React.ReactNode | string
   logo: ImageProps
   className?: string
+  direction?: Direction
 }
 
 function Quote({
   content,
   logo: { className: logoClassName = '', ...logo },
-  className = ''
+  className = '',
+  direction = 'vertical'
 }: QuoteProps) {
   return (
     <div
-      className={`animate-fade-in relative flex h-full w-full flex-col rounded-lg border border-neutral-725 bg-neutral-900/50 p-4 text-center shadow-card ${className}`}>
+      className={`animate-fade-in relative h-full w-full rounded-lg border border-neutral-725 bg-neutral-900/50 p-4 text-center shadow-card ${classes.container[direction]} ${className}`}>
       <Image
         src='/images/Quote.svg'
         width={37}
         height={28}
         alt='Quote'
-        className='mb-4 mt-2 block'
+        className={`block ${classes.icon[direction]}`}
       />
-      <SuiText color='secondary' className='mb-8 text-left'>
+      <SuiText color='secondary' className={classes.text[direction]}>
         {typeof content === 'string' ? (
           <Markdown>{content}</Markdown>
         ) : (
-          <>content</>
+          <>{content}</>
         )}
       </SuiText>
       <Image
         {...logo}
-        className={`mt-auto inline-block h-auto max-w-[200px] ${logoClassName}`}
+        className={`inline-block h-auto ${classes.logo[direction]} ${logoClassName}`}
         alt='Quote'
       />
     </div>
@@ -71,7 +95,7 @@ export default function QuoteCard({
           className='flex-1'>
           <Link {...link}>
             <Quote
-              className={`hover:bg-neutral-725/90 hover:shadow-lg ${className}`}
+              className={`transition hover:border-neutral-700 hover:bg-neutral-725/90 hover:shadow-lg ${className}`}
               {...quote}
             />
           </Link>

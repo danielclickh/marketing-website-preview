@@ -1,6 +1,5 @@
 import iconPlay from '../assets/icon-play.svg'
 import Accordion from '@/components-cleaned/Accordion'
-import CertifiedDeveloperCoin from '@/components-cleaned/CertifiedDeveloperCoin'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LogoAnnouncementLink from '@/components/LogoAnnouncementLink'
@@ -21,7 +20,7 @@ import { LearnProps } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 export const getStaticProps: GetStaticProps<LearnProps> =
   async function getStaticProps() {
@@ -419,8 +418,14 @@ export default function CertificationPage({
           </div>
 
           {/* Footnote */}
-          <div className='mx-auto max-w-3xl text-center'>
-            <CertifiedDeveloperCoin className='mx-auto -mt-4 max-w-80' />
+          <div className='mx-auto mt-16 max-w-3xl text-center'>
+            <Image
+              src='/images/learn/certified-developer-badge.png'
+              alt={'ClickHouse Certified Developer'}
+              width={417}
+              height={363}
+              className='mb-16 inline-block max-w-[208px]'
+            />
 
             <p className='mb-6'>
               To become a ClickHouse Certified Developer, you will need to pass

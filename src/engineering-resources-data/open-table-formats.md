@@ -3,6 +3,7 @@ title: 'Open table formats'
 slug: 'open-table-formats'
 excerpt: "In this guide, we'll explore the Iceberg, Delta Lake, and Hudi open table formats."
 index: 19
+lastUpdated: '2025-05-09'
 ---
 
 Data lakes are popular for storing [structured, semi-structured, or unstructured data](https://clickhouse.com/engineering-resources/structured-unstructured-semi-structured-data). Parquet files, which can handle large volumes efficiently, are often used to store this data. 
@@ -27,7 +28,7 @@ Key players in open table formats include Iceberg, Hudi, and Delta Lake. Differe
 
 ### Iceberg
 
-Netflix initially developed [Iceberg](https://iceberg.apache.org/) to address the challenges of managing large datasets in data lakes. As the project gained traction, the creators spun out a company called [Tabular](https://www.tabular.io/blog/introducing-tabular/) to continue its development. Eventually, [Tabular was acquired by Databricks](https://www.databricks.com/blog/databricks-tabular), which also develops the Delta Lake format. So while Iceberg started at Netflix, Databricks now plays a role in both formats.
+Netflix initially developed [Iceberg](https://clickhouse.com/engineering-resources/apache-iceberg) to address the challenges of managing large datasets in data lakes. As the project gained traction, the creators spun out a company called [Tabular](https://www.tabular.io/blog/introducing-tabular/) to continue its development. Eventually, [Tabular was acquired by Databricks](https://www.databricks.com/blog/databricks-tabular), which also develops the Delta Lake format. So while Iceberg started at Netflix, Databricks now plays a role in both formats.
 
 ### Delta Lake
 

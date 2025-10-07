@@ -17,17 +17,25 @@ import integrationNodejs from './assets/integration-nodejs.svg'
 import integrationOpentelemetry from './assets/integration-opentelemetry.svg'
 import integrationPython from './assets/integration-python.svg'
 import integrationRuby from './assets/integration-ruby.svg'
+import logoAnthropic from './assets/logo-anthropic.svg'
+import logoCharacterai from './assets/logo-characterai.svg'
 import logoCisco from './assets/logo-cisco.svg'
 import logoCloudflare from './assets/logo-cloudflare.svg'
 import logoComcast from './assets/logo-comcast.svg'
 import logoDoorDash from './assets/logo-doordash.svg'
 import logoEbay from './assets/logo-ebay.svg'
 import logoGitLab from './assets/logo-gitlab.svg'
-import logoLovable from './assets/logo-lovable.svg'
+import logoIbm from './assets/logo-ibm.svg'
 import logoNetflix from './assets/logo-netflix.svg'
+import logoSierra from './assets/logo-sierra.svg'
+import logoSolarwinds from './assets/logo-solarwinds.svg'
 import logoSony from './assets/logo-sony.svg'
+import logoVimeo from './assets/logo-vimeo.svg'
 import shareImage from './assets/share-image.png'
 import AccordionItem from '@/components-cleaned/AccordionItem'
+import ContentTicker from '@/components-cleaned/ContentTicker'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
@@ -40,7 +48,7 @@ import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
+import Image, { ImageProps } from 'next/image'
 import React, { CSSProperties, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -78,7 +86,7 @@ export default function ClickHouseServerPage({
       <section className='overflow-hidden py-20 lg:py-24'>
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
           {/* Content */}
-          <div className='relative z-10 w-full max-w-2xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
+          <div className='relative z-10 w-full max-w-3xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
             <SuiText className='flip-selection !text-3xl lg:mb-16 lg:!text-[3.5rem]'>
               <TiltedText type='black-on-yellow' className='px-2 py-1'>
                 <strong>ClickStack</strong>
@@ -106,7 +114,7 @@ export default function ClickHouseServerPage({
                 href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
                 target='_blank'
                 linkClass='w-full md:w-auto'
-                className='w-full px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'>
                 Get started
               </CUIButton>
               <CUIButton
@@ -116,7 +124,7 @@ export default function ClickHouseServerPage({
                 href='/company/contact?loc=use-case-observability'
                 target='_self'
                 linkClass='w-full md:w-auto'
-                className='w-full px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'>
                 Contact sales
               </CUIButton>
             </div>
@@ -130,6 +138,7 @@ export default function ClickHouseServerPage({
               height={1038 / 2}
               alt='HyperDX Dashboard'
               className='bottom-0 left-0 top-0 h-auto w-full origin-left from-40% gradient-mask-to-b md:from-25% lg:absolute lg:h-full lg:w-auto lg:max-w-none lg:gradient-mask-to-none xl:scale-110 2xl:scale-125'
+              quality={100}
               loading='eager'
               priority={true}
             />
@@ -140,66 +149,117 @@ export default function ClickHouseServerPage({
       {/* Trusted by */}
       <section className='section-container mb-20 lg:mb-24 lg:mt-10'>
         <EyebrowText className='mb-10 text-center text-primary-300'>
-          Trusted by
+          Trusted for observability by
         </EyebrowText>
-        <div className='flex flex-wrap items-center justify-center gap-8 md:gap-10 xl:justify-between xl:gap-12'>
-          <Image
-            src={logoNetflix}
-            width={95}
-            height={27}
-            alt='Netflix'
-            className='h-5 w-auto md:h-auto'
-          />
-          <Image
-            src={logoCloudflare}
-            width={106}
-            height={36}
-            alt='Cloudflare'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoSony}
-            width={100}
-            height={19}
-            alt='Sony'
-            className='h-4 w-auto md:h-auto'
-          />
-          <Image
-            src={logoComcast}
-            width={108}
-            height={44}
-            alt='Comcast'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoEbay}
-            width={84}
-            height={34}
-            alt='Ebay'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoCisco}
-            width={71}
-            height={38}
-            alt='Cisco'
-            className='h-6 w-auto md:h-auto'
-          />
-          <Image
-            src={logoDoorDash}
-            width={187}
-            height={23}
-            alt='DoorDash'
-            className='h-5 w-auto md:h-auto'
-          />
-          <Image
-            src={logoGitLab}
-            width={122}
-            height={38}
-            alt='GitLab'
-            className='h-6 w-auto md:h-auto'
-          />
-        </div>
+        <ContentTicker
+          gap='3rem'
+          gradientMask={true}
+          pause={false}
+          sizingMethod='max'>
+          {(
+            [
+              {
+                src: logoNetflix,
+                alt: 'Netflix',
+                width: 95,
+                height: 27
+              },
+              {
+                src: logoCloudflare,
+                alt: 'Cloudflare',
+                width: 106,
+                height: 36
+              },
+              {
+                src: logoSony,
+                alt: 'Sony',
+                width: 100,
+                height: 19
+              },
+              {
+                src: logoComcast,
+                alt: 'Comcast',
+                width: 108,
+                height: 44
+              },
+              {
+                src: logoAnthropic,
+                alt: 'Anthropic',
+                width: 143,
+                height: 16,
+                className: 'opacity-70'
+              },
+              {
+                src: logoCharacterai,
+                alt: 'Character.ai',
+                width: 102 * 1.5,
+                height: 14 * 1.5,
+                className: 'opacity-70'
+              },
+              {
+                src: logoSierra,
+                alt: 'Sierra',
+                width: 118,
+                height: 39,
+                className: 'opacity-70'
+              },
+              {
+                src: logoEbay,
+                alt: 'Ebay',
+                width: 84,
+                height: 34
+              },
+              {
+                src: logoCisco,
+                alt: 'Cisco',
+                width: 71,
+                height: 38
+              },
+              {
+                src: logoDoorDash,
+                alt: 'DoorDash',
+                width: 187,
+                height: 23
+              },
+              {
+                src: logoGitLab,
+                alt: 'GitLab',
+                width: 122,
+                height: 38
+              },
+              {
+                src: logoIbm,
+                alt: 'IBM',
+                width: 70,
+                height: 29,
+                className: 'opacity-70'
+              },
+              {
+                src: logoSolarwinds,
+                alt: 'SolarWinds',
+                width: 200,
+                height: 40,
+                className: 'opacity-70'
+              },
+              {
+                src: logoVimeo,
+                alt: 'Vimeo',
+                width: 90,
+                height: 26,
+                className: 'opacity-70'
+              }
+            ] as Array<ImageProps>
+          ).map(({ className = '', ...logo }, logoIndex) => {
+            return (
+              <Image
+                key={logoIndex}
+                {...logo}
+                loading='eager'
+                className={`my-auto flex-shrink-0 flex-grow-0 ${className}`}
+              />
+            )
+          })}
+        </ContentTicker>
       </section>
 
       {/* Customer quotes */}
@@ -227,28 +287,29 @@ export default function ClickHouseServerPage({
             <QuoteCard
               className='!bg-neutral-750'
               content={
-                'Trip.com was using Elasticsearch for their observability data until they made the switch to ClickHouse. The result? 40GB per second, 30% savings in costs, and queries that are up to 30x faster!'
+                'ClickHouse played an instrumental role in helping us develop and ship Claude 4. With ClickHouse, the database is green, queries are lightning-fast, and money is not on fire. ClickHouse has already delivered significant value in helping us create state-of-the-art language models.'
               }
-              link='/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse'
+              link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
               logo={{
-                src: '/images/use-cases/logging/tripdotcom.svg',
-                width: 141,
-                height: 34.01,
-                alt: 'Trip.com',
-                className: '-mb-1'
+                src: logoAnthropic,
+                width: 143 * 1.1,
+                height: 16 * 1.1,
+                alt: 'Antrhopic',
+                className: 'mb-1'
               }}
             />
             <QuoteCard
               className='!bg-neutral-750'
               content={
-                'ClickHouse’s analytics capabilities and open ecosystem make it a powerful technology for observability. HyperDX is very exciting, bringing together an enhanced query experience with a more intuitive UI for exploratory observability workflows.'
+                'Previously, querying the last 10 minutes would take 1-2 minutes. With ClickStack, it was just a case of how fast I could blink. The performance is real. When you’re digging into logs during an incident, every second matters.'
               }
+              link='/blog/scaling-observabilty-for-thousands-of-gpus-at-character-ai'
               logo={{
-                src: logoLovable,
-                width: 159,
-                height: 27,
-                alt: 'Lovable',
-                className: 'mb-0.5'
+                src: logoCharacterai,
+                width: 102 * 1.5,
+                height: 14 * 1.5,
+                alt: 'Character.ai',
+                className: 'mb-1'
               }}
             />
           </div>
@@ -273,13 +334,9 @@ export default function ClickHouseServerPage({
         }>
         {/* Intro */}
         <div className='space-y-2 text-center'>
-          <EyebrowText className='text-primary-300'>
-            The clickhouse powered observability stack
-          </EyebrowText>
-          <SuiTitle
-            type='h2'
-            className='font-basier text-4xl font-semibold leading-tight md:text-6.5xl'>
-            ClickStack
+          <EyebrowText className='text-primary-300'>ClickStack</EyebrowText>
+          <SuiTitle type='h2'>
+            The ClickHouse powered observability stack
           </SuiTitle>
         </div>
 
@@ -325,7 +382,7 @@ export default function ClickHouseServerPage({
 
         {/* Diagram */}
         <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row lg:items-start lg:gap-20'>
-          <div className='px-6'>
+          <div className='w-full max-w-max px-4'>
             <ClickStack
               hyperdx={hyperdxActive || allAreInactive}
               clickhouse={clickhouseActive || allAreInactive}
@@ -445,6 +502,20 @@ export default function ClickHouseServerPage({
               Get started with ClickStack
             </CUIButton>
           </div>
+        </div>
+      </section>
+
+      {/* Introdcuction video */}
+      <section className='section-container my-20 lg:my-24'>
+        <div className='mx-auto max-w-4xl text-center'>
+          <SuiTitle type='h2' className='mb-10'>
+            Watch the ClickStack introduction
+          </SuiTitle>
+          <PlayOnClickVideo
+            provider='youtube'
+            id='3waDYancX_c'
+            thumbnail={<YouTubeThumbnail videoId='3waDYancX_c' />}
+          />
         </div>
       </section>
 
@@ -682,7 +753,7 @@ export default function ClickHouseServerPage({
             <CUIButton
               type='primary-dark'
               size='lg'
-              className='group mx-auto w-full px-10 md:w-auto'
+              className='group mx-auto w-full !px-10 md:w-auto'
               target='_blank'
               href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
               onClick={useGalaxyOnClick(
@@ -693,7 +764,7 @@ export default function ClickHouseServerPage({
             <CUIButton
               type='secondary'
               size='lg'
-              className='group mx-auto w-full !border-neutral-800 px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
+              className='group mx-auto w-full !border-neutral-800 !px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
               target='_blank'
               href='/company/contact?loc=use-case-observability'
               onClick={useGalaxyOnClick(

@@ -42,6 +42,9 @@ export default function FitText({
     window.addEventListener('resize', resize)
     window.addEventListener('orientationchange', resize)
 
+    // On mount
+    resize()
+
     return () => {
       window.removeEventListener('resize', resize)
       window.removeEventListener('orientationchange', resize)

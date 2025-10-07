@@ -3,6 +3,7 @@ title: 'Understanding LLM Observability'
 slug: 'llm-observability'
 excerpt: "In this guide, we'll explore how teams monitor and debug their LLM applications, helping them understand everything from response accuracy and token usage to the complex reasoning chains of AI agents."
 index: 16
+lastUpdated: '2025-04-11'
 ---
 
 If you're building applications with Large Language Models (LLMs), you must know what's happening inside them. Are they giving accurate responses? Are they using the correct context? How much are they costing you? LLM observability helps answer these questions by adapting traditional monitoring approaches to handle the unique challenges of language models.

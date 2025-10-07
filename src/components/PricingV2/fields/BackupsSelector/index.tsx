@@ -1,7 +1,7 @@
 import { averageDaysPerMonth, backupIntervals } from '../../config'
 import { ContextBackupFrequency } from '../../types'
 import DataSize from '../../ui/DataSize'
-import Label from '../../ui/Label'
+import FieldContainer from '../../ui/FieldContainer'
 import Radios from '../../ui/Radios'
 import Select from '../../ui/Select'
 import StorageSelector from '../StorageSelector'
@@ -101,29 +101,28 @@ export default function BackupsSelector() {
   return (
     <>
       <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
-        <div>
-          <Label>Backup frequency</Label>
+        <FieldContainer label='Backup frequency'>
           <Select
             value={backupFrequency}
             options={frequencyOptions}
             onChange={(value) => setValues({ backupFrequency: value })}
           />
-        </div>
-        <div>
-          <Label>Retention period</Label>
+        </FieldContainer>
+        <FieldContainer label='Retention period'>
           <Select
             value={backupRetention}
             options={retentionOptions}
             onChange={(value) => setValues({ backupRetention: value })}
             maxHeight={320}
           />
-        </div>
+        </FieldContainer>
 
-        <div className='md:col-span-2'>
-          <Label tooltip='If you’re already a ClickHouse user, you can get this info from your service’s Backups page. '>
-            Do you know the size of your full and incremental backup?
-          </Label>
+        <FieldContainer
+          label='Do you know the size of your full and incremental backup?'
+          tooltip='If you’re already a ClickHouse user, you can get this info from your service’s Backups page.'
+          className='md:col-span-2'>
           <Radios
+            className='!mt-3'
             options={[
               { value: false, label: 'No' },
               { value: true, label: 'Yes' }
@@ -136,7 +135,7 @@ export default function BackupsSelector() {
           />
           {estimateBackup &&
             (!storageCameFrom || storageCameFrom === 'backups') && (
-              <div className='mt-4'>
+              <div className='mt-6'>
                 <StorageSelector cameFrom='backups' />
               </div>
             )}
@@ -145,28 +144,26 @@ export default function BackupsSelector() {
             estimatedBackupsPerMonth &&
             estimatedBackupSizeFormatted && (
               <p className='mt-4 text-sm'>
-                You will have {estimatedBackupsPerMonth} backups with an
-                estimated total size of {estimatedBackupSizeFormatted}. This is
-                based on a storage volume of {storage} of{' '}
+                You will have {estimatedBackupsPerMonth} backups per month with
+                an estimated total size of {estimatedBackupSizeFormatted}. This
+                is based on a storage volume of {storage} of{' '}
                 {storageCompressed ? 'compressed' : 'uncompressed'} data,
                 expected to grow or change by 1% between backups.
               </p>
             )}
-        </div>
+        </FieldContainer>
 
         {!estimateBackup && (
           <>
-            <div>
-              <Label>Full backup</Label>
+            <FieldContainer label='Full backup'>
               <DataSize
                 min='0MB'
                 max='999PB'
                 value={fullBackup}
                 onChange={(value) => setValues({ fullBackup: value.formatted })}
               />
-            </div>
-            <div>
-              <Label>Incremental backup</Label>
+            </FieldContainer>
+            <FieldContainer label='Incremental backup'>
               <DataSize
                 min='0MB'
                 max='999PB'
@@ -175,7 +172,7 @@ export default function BackupsSelector() {
                   setValues({ incrementalBackup: value.formatted })
                 }
               />
-            </div>
+            </FieldContainer>
           </>
         )}
       </div>

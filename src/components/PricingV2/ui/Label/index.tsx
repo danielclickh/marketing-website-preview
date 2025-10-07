@@ -3,7 +3,7 @@ import React from 'react'
 
 export interface LabelProps {
   children: React.ReactNode
-  tooltip?: string
+  tooltip?: string | null | React.ReactNode
   className?: string
 }
 

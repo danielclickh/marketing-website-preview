@@ -3,6 +3,7 @@ title: 'Log monitoring'
 slug: 'log-monitoring'
 excerpt: 'Discover the fundamentals of log monitoring systems, exploring different log types, monitoring techniques, and modern tools, with practical insights into how organizations leverage solutions like ClickHouse to manage massive log volumes efficiently and cost-effectively.'
 index: 11
+lastUpdated: '2025-04-11'
 ---
 
 Logs are the unsung heroes of the IT world, capturing the critical details of system operations with meticulous precision. While these records might seem like endless data streams, they hold the keys to optimizing performance, enhancing security, and ensuring system reliability.

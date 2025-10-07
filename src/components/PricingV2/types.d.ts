@@ -1,3 +1,4 @@
+import { clickpipeSizes } from '@/components/PricingV2/config'
 import {
   PricingV2,
   PricingV2ComponentPlan,
@@ -42,6 +43,8 @@ export type ClickPipe = {
   source: string
   instances: number
   dataIngested?: null | string | StorageValue
+  size?: number
+  replicas?: number
 }
 
 export type Transfer = {

@@ -39,10 +39,60 @@ export const useInitGalaxy = (): void => {
           url: string,
           requestBody: Record<string, unknown>
         ): Promise<Response> => {
-          return fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(requestBody)
+          type HttpLikeResponse = Response & {
+            _transport?: 'beacon' | 'fetch'
+            _queued?: boolean
+          }
+
+          // Conservative safety margin
+          // Beacon and keepalive are limited to payload size
+          const LIMIT_BYTES = 60 * 1024
+
+          const json = JSON.stringify(requestBody)
+          const blob = new Blob([json], {
+            type: 'application/json;charset=UTF-8'
           })
+
+          // If payload too large for beacon/keepalive, use normal fetch (no keepalive)
+          const tooLarge = blob.size > LIMIT_BYTES
+
+          // Try beacon first (only if small enough)
+          if (
+            !tooLarge &&
+            typeof navigator !== 'undefined' &&
+            'sendBeacon' in navigator
+          ) {
+            try {
+              const sent = navigator.sendBeacon(url, blob)
+              if (sent) {
+                const synthetic = new Response(null, {
+                  status: 202,
+                  statusText: 'Queued via beacon'
+                }) as HttpLikeResponse
+                synthetic._transport = 'beacon'
+                synthetic._queued = true // queued, not guaranteed delivered
+                return synthetic
+              }
+              // Fall through to fetch if the UA refused to queue it
+              // console.debug('[analytics] beacon refused; falling back')
+            } catch {
+              // Swallow and fall back to fetch
+            }
+          }
+
+          // Fallback to fetch
+          // - keepalive for small payloads (may complete during navigation)
+          // - normal fetch for large payloads (avoid keepalive body limit)
+          const useKeepalive = !tooLarge
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=UTF-8' },
+            body: json,
+            keepalive: useKeepalive
+          })
+
+          ;(res as HttpLikeResponse)._transport = 'fetch'
+          return res as HttpLikeResponse
         }
       },
       errorHandler: {

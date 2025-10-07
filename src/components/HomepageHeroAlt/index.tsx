@@ -69,17 +69,17 @@ export default function HomepageHeroAlt({
             </div>{' '}
             <LogoAnnouncementLink
               className='mt-6'
-              href='/videos?category=open-house&loc=homepage-hero'
+              href='/openhouse?loc=homepage-hero'
               logo={{
                 src: '/images/open-house-black.svg',
-                alt: 'Open House',
-                width: 60,
-                height: 60
+                alt: 'MongoDB',
+                width: 50,
+                height: 50,
+                className: 'saturate-0 brightness-0 mx-3'
               }}>
-              Open House videos: ClickHouse deep dives, customer stories and
-              user interviews.{' '}
+             We're taking Open House on the road! Join us for free events in Sydney, NYC, Bangalore & Amsterdam.{" "}
               <span className='underline group-hover:decoration-2'>
-                Watch now
+              Register now
               </span>
               !
             </LogoAnnouncementLink>

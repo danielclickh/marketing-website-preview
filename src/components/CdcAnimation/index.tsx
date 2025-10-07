@@ -1,55 +1,80 @@
 import ScaleToContainer from '../ScaleToContainer'
 import styles from './styles.module.scss'
 
-export interface CdcAnimationProps {
-  logo: React.ReactNode
+type BadgeColors = 'red' | 'blue' | 'yellow'
+
+type Badge = {
+  label: string
+  theme: BadgeColors
 }
 
-export default function CdcAnimation({ logo }: CdcAnimationProps) {
+export interface CdcAnimationProps {
+  logo: React.ReactNode
+  badges?: Array<Badge>
+}
+
+export default function CdcAnimation({ logo, badges }: CdcAnimationProps) {
+  badges = badges || [
+    { label: 'insert', theme: 'yellow' },
+    { label: 'insert', theme: 'yellow' },
+    { label: 'update', theme: 'blue' },
+    { label: 'delete', theme: 'red' },
+    { label: 'add col', theme: 'yellow' }
+  ]
+
+  const middleWidth = 71 * badges.length
+
   return (
     <ScaleToContainer scaleUp={false}>
-      <div className='pointer-events-none grid w-[507px] select-none grid-cols-1 grid-rows-1'>
-        <div className='relative z-10 col-start-1 row-start-1'>
-          <div className='mx-auto flex max-w-max gap-4 border border-neutral-700 bg-neutral-900/80 p-4'>
-            <Badge label='insert' theme='yellow' glowDelay={150} />
-            <Badge label='insert' theme='yellow' glowDelay={550} />
-            <Badge label='update' theme='blue' glowDelay={950} />
-            <Badge label='delete' theme='red' glowDelay={1350} />
-            <Badge label='add col' theme='yellow' glowDelay={1750} />
-          </div>
+      <div className='pointer-events-none relative w-max select-none'>
+        {/* Animated line */}
+        <div className='absolute inset-x-20 top-1/2 z-0 -translate-y-1/2'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='355'
+            height='2'
+            viewBox='0 0 355 2'
+            className='h-0.5 w-full'
+            preserveAspectRatio='none'>
+            <path fill='none' stroke='#414141' strokeWidth='2' d='M0 1h355' />
+            <path
+              fill='none'
+              stroke='#FAFF69'
+              strokeWidth='2'
+              d='M0 1h355'
+              className={styles.animatedLine}
+            />
+          </svg>
         </div>
 
-        <div className='relative z-0 col-start-1 row-start-1 flex items-center'>
+        <div className='relative z-10 flex items-center gap-12'>
           {/* Postgres logo */}
           <div className='flex w-20 flex-shrink-0 flex-grow-0 items-center justify-center pr-4'>
             {logo}
           </div>
 
-          {/* Animated line */}
+          {/* Badges */}
           <div className='flex-shrink-0 flex-grow-0'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='355'
-              height='2'
-              viewBox='0 0 355 2'>
-              <path fill='none' stroke='#414141' strokeWidth='2' d='M0 1h355' />
-              <path
-                fill='none'
-                stroke='#FAFF69'
-                strokeWidth='2'
-                d='M0 1h355'
-                className={styles.animatedLine}
-              />
-            </svg>
+            <div className='flex gap-4 border border-neutral-700 bg-neutral-900/80 p-4'>
+              {badges.map((badge, badgeIndex) => (
+                <Badge
+                  key={badgeIndex}
+                  label={badge.label}
+                  theme={badge.theme}
+                  glowDelay={150 + 400 * badgeIndex}
+                />
+              ))}
+            </div>
           </div>
 
           {/* ClickHouse logo */}
-          <div className='flex-shrink-0 flex-grow-0'>
+          <div className='w-20 flex-shrink-0 flex-grow-0'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='72'
               height='72'
-              viewBox='0 0 72 72'>
+              viewBox='0 0 72 72'
+              className='h-auto w-full'>
               <g fill='none'>
                 <rect width='72' height='72' fill='#FAFF69' rx='4' />
                 <path
@@ -64,8 +89,6 @@ export default function CdcAnimation({ logo }: CdcAnimationProps) {
     </ScaleToContainer>
   )
 }
-
-type BadgeColors = 'red' | 'blue' | 'yellow'
 
 interface BadgeProps {
   label: string

@@ -5,4 +5,5 @@ export interface EngineeringResource {
   excerpt: string
   body: string
   index: number
+  lastUpdated?: string
 }

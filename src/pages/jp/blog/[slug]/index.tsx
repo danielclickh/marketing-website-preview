@@ -281,15 +281,11 @@ export default function BlogPage({
                 </SuiText>
                 <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                   <CopyUrlButton />
-                  {[
-                    'y_combinator',
-                    'twitter',
-                    'bluesky',
-                    'facebook',
-                    'linkedin'
-                  ].map((social) => (
-                    <SocialButton key={social} type={social} title={title} />
-                  ))}
+                  <SocialButton type='y_combinator' title={title} />
+                  <SocialButton type='twitter' title={title} />
+                  <SocialButton type='bluesky' title={title} />
+                  <SocialButton type='facebook' title={title} />
+                  <SocialButton type='linkedin' title={title} />
                 </div>
               </div>
 

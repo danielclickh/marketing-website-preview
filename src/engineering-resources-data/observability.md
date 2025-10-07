@@ -3,6 +3,7 @@ title: 'Observability'
 slug: 'observability'
 excerpt: "In this guide, we'll explore observability - the practice of understanding a system's internal state through its outputs, and how modern approaches are helping organizations gain deeper insights into their systems' behavior."
 index: 14
+lastUpdated: '2025-06-25'
 ---
 
 Modern software systems are complex. Microservices, cloud infrastructure, and distributed systems have made it increasingly difficult to understand what's happening inside our applications. When something goes wrong, teams need to know where and why quickly.

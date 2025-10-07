@@ -83,7 +83,7 @@ export default function Page({
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='pb-24'>
           <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-8 sm:pt-8 md:pt-24 2xl:px-0'>
-            <div className='event-container mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
+            <div className='mx-auto block w-full lg:flex lg:items-start lg:justify-between'>
               <div className='mb-6 mr-0 flex-auto px-2 sm:px-6 md:mb-16 lg:mb-0 lg:mr-16 lg:max-w-2xl xl:px-2'>
                 <div className='section_metadata'>
                   <h1 className='mb-8 text-balance font-basier text-4xl font-semibold leading-tight md:text-5.5xl'>

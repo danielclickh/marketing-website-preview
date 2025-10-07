@@ -5,7 +5,10 @@ import HeaderRegionSelector from '../HeaderRegionSelector'
 import Navigation from '../Navigation'
 import GitHub from '../icons/GitHub'
 import { HeaderProps } from './types'
+import { useGlobalSearch } from '@/components-cleaned/GlobalSearchProvider'
+import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { SearchIcon } from '@heroicons/react/outline'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,119 +19,83 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const pathname = usePathname()
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
-  const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   // Eyebrow default settings
   const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
-  const [headerBannerText, setHeaderBannerText] = useState('')
+  const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
+  const [headerBannerText, setHeaderBannerText] = useState<
+    string | React.ReactNode
+  >('')
   const [headerBannerUrl, setHeaderBannerUrl] = useState('')
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
   >(undefined)
 
-  useEffect(() => {
-    // Specific eyebrow for observability page
-    if (pathname === '/use-cases/observability') {
-      setHeaderBannerEnabled(true)
-      setHeaderBannerText('Join a ClickStack live demo and Q&A on July 8th')
-      setHeaderBannerUrl('/company/events/introducing-clickstack?loc=eyebrow')
-      setHeaderBannerExpires(new Date('2025-07-08T00:00:00'))
-    }
-
-    // Reset eyebrow for all pages
-    else {
-      setHeaderBannerEnabled(false)
-      setHeaderBannerText('')
-      setHeaderBannerUrl('')
-      setHeaderBannerExpires(undefined)
-    }
-  }, [pathname])
-
-  const resizeHandler = () => {
-    if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
-  }
-
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
   }
 
+  useResizeObserverSsr(headerRef, (el) => {
+    document.documentElement.style.setProperty(
+      '--header-height',
+      `${el.target.clientHeight}px`
+    )
+  })
+
   useEffect(() => {
-    window.addEventListener('resize', resizeHandler)
     window.addEventListener('scroll', scrollHandler)
-    resizeHandler()
     scrollHandler()
 
     //=== Country specific eyebrow ===//
-    // const hasCountryCode = document.cookie.includes('countryCode=')
-    // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
+    ;(async () => {
+      let countryCode: null | string =
+        window.sessionStorage.getItem('ch-user-country') || null
 
-    // if (!hasCountryCode) {
-    //   // List of languages we want to exclude (e.g. China, Russia, etc.)
-    //   const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK']
+      if (!countryCode) {
+        try {
+          const request = await fetch('https://ipinfo.io?token=33cfa2cb7f422c')
+          const response = await request.json()
+          if (request.ok && !response.error) {
+            countryCode = response.country
+          }
+        } catch {}
+      }
 
-    //   // List of languages that correspond to Australia, New Zealand, and Singapore
-    //   const targetLanguages = ['en-AU', 'en-NZ', 'en-SG', 'zh-SG', 'ms-SG']
+      // If country code not give, use the language country code
+      if (!countryCode) {
+        countryCode = window.navigator.language.split('-')[0]
+      }
 
-    //   if (excludedLanguages.includes(navigator.language)) {
-    //     return
-    //   } else if (targetLanguages.includes(navigator.language)) {
-    //     // If navigator.language matches target regions (AU, NZ, SG), set the country code
-    //     let countryCode
-    //     if (navigator.language === 'en-AU') {
-    //       countryCode = 'AU'
-    //     } else if (navigator.language === 'en-NZ') {
-    //       countryCode = 'NZ'
-    //     } else if (['en-SG', 'zh-SG', 'ms-SG'].includes(navigator.language)) {
-    //       countryCode = 'SG'
-    //     }
+      // Remember users country
+      window.sessionStorage.setItem('ch-user-country', countryCode)
 
-    //     document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-    //     setHeaderBannerText(
-    //       'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //     )
-    //     setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    //   } else {
-    //     fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-    //       .then((response) => response.json())
-    //       .then((data) => {
-    //         if (!data.error) {
-    //           const countryCode = data.country
-    //           document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-
-    //           if (['AU', 'NZ', 'SG'].includes(countryCode)) {
-    //             setHeaderBannerText(
-    //               'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //             )
-    //             setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    //           }
-    //         } else {
-    //           document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
-    //         }
-    //       })
-    //   }
-    // } else if (
-    //   document.cookie.includes('countryCode=AU') ||
-    //   document.cookie.includes('countryCode=NZ') ||
-    //   document.cookie.includes('countryCode=SG')
-    // ) {
-    //   setHeaderBannerText(
-    //     'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //   )
-    //   setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    // }
-    //=== Country specific eyebrow ===//
+      if (countryCode?.toUpperCase() === 'NL') {
+        setHeaderBannerEnabled(true)
+        setHeaderBannerText(
+          <span className='inline-flex items-center gap-2'>
+            <span className='hidden text-xl md:inline'>🇳🇱</span> Join our free
+            database and AI conference in Amsterdam, October 28th{' '}
+            <span className='hidden text-xl md:inline'>🇳🇱</span>
+          </span>
+        )
+        setHeaderBannerUrl('/openhouse/amsterdam?loc=eyebrow')
+        setHeaderBannerExpires(new Date('2025-10-28T00:00:00+00:00'))
+        setHeaderBannerArrow(false)
+      }
+    })()
 
     return () => {
-      window.removeEventListener('resize', resizeHandler)
       window.removeEventListener('scroll', scrollHandler)
     }
   }, [headerRef])
 
+  const globalSearch = useGlobalSearch()
+
   return (
     <>
       {/* Add empty space for fixed header */}
-      <div style={{ height: headerHeight + 1 }} />
+      <div style={{ height: 'calc(var(--header-height, 72px) + 1px)' }} />
 
       <header
         ref={headerRef}
@@ -148,9 +115,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           text={headerBannerText}
           expires={headerBannerExpires}
           dismissible={true}
-          onShow={resizeHandler}
-          onHide={resizeHandler}
           className={eyebrow?.className || ''}
+          arrow={headerBannerArrow}
         />
 
         {/* Logo, navigtation, CTAs... */}
@@ -159,7 +125,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           <Link
             href='/'
             prefetch={false}
-            onClick={useGalaxyOnClick('topNav.logo.select')}>
+            onClick={useGalaxyOnClick('topNav.logo.select')}
+            className='mr-auto'>
             <Image
               src={logoFull}
               priority
@@ -169,8 +136,24 @@ export default function Header({ github, eyebrow }: HeaderProps) {
             />
           </Link>
 
+          {/* Mobile search */}
+          <button
+            type='button'
+            className='md-mid:hidden'
+            onClick={() => globalSearch.open()}>
+            {globalSearch.isOpen && (
+              <span className='sr-only'>Close search</span>
+            )}
+            {!globalSearch.isOpen && (
+              <span className='sr-only'>Open search</span>
+            )}
+            <span className='flex aspect-square w-10 items-center justify-center rounded-lg transition-colors hover:bg-white/5 hover:text-primary-300'>
+              <SearchIcon className='h-4 w-4' />
+            </span>
+          </button>
+
           {/* Mobile region selector */}
-          <HeaderRegionSelector className='z-10 ml-auto mr-4 md-mid:hidden' />
+          <HeaderRegionSelector className='z-10 mx-4 md-mid:hidden' />
 
           {/* Mobile Burger */}
           <button
@@ -192,8 +175,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           {/* Nav container */}
           <div
             style={{
-              top: headerHeight,
-              height: `calc(100dvh - ${headerHeight}px)`
+              top: 'var(--header-height, 72px)',
+              height: 'calc(100dvh - var(--header-height, 72px))'
             }}
             className={`${
               burgerMenuIsOpen
@@ -204,6 +187,18 @@ export default function Header({ github, eyebrow }: HeaderProps) {
 
             {/* CTAs */}
             <div className='mt-auto flex flex-col-reverse flex-nowrap items-center gap-4 md-mid:ml-auto md-mid:mt-0 md-mid:flex-row lg:gap-6'>
+              <button type='button' onClick={() => globalSearch.open()}>
+                {globalSearch.isOpen && (
+                  <span className='sr-only'>Close search</span>
+                )}
+                {!globalSearch.isOpen && (
+                  <span className='sr-only'>Open search</span>
+                )}
+                <span className='flex aspect-square w-10 items-center justify-center rounded-lg transition-colors hover:bg-white/5 hover:text-primary-300'>
+                  <SearchIcon className='h-4 w-4' />
+                </span>
+              </button>
+
               {/* Desktop region selector */}
               <HeaderRegionSelector className='hidden md-mid:block' />
 

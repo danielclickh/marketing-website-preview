@@ -27,6 +27,10 @@ export interface BaseStrapiImage {
   svgText?: string
 }
 
+export interface StrapiVideoType extends Omit<BaseStrapiImage, 'svgText'> {
+  mime: `video/${string}`
+}
+
 export interface StrapiImageType extends BaseStrapiImage {
   formats?: Record<string, BaseStrapiImage>
 }
@@ -131,8 +135,10 @@ export interface PricingV2ComponentDataSource {
   slug: string
   icon: StrapiImageType | null
   ingestsData: boolean
+  ingestsDataHelperText: null | string
   excludeFromCalculations: boolean
   excludeFromCalculationsLabel: null | string
+  scalable: boolean
 }
 
 export interface PricingV2 {

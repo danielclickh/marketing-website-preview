@@ -1,7 +1,6 @@
 import { SeoMetadata } from '@/lib/api/strapi/types'
+import { absoluteUrl } from '@/lib/next'
 import Head from 'next/head'
-
-const siteUrl = process.env.NEXT_PUBLIC_WEBSITE_URL ?? 'https://clickhouse.com'
 
 function SeoContainer({
   image,
@@ -17,13 +16,22 @@ function SeoContainer({
   schema
 }: SeoMetadata) {
   // Default social image
-  let socialImageUrl = `${siteUrl}/images/social_share.png`
+  let socialImageUrl = '/images/social_share.png'
 
   // If image is passed as an object
-  if (image?.[0]?.url) socialImageUrl = siteUrl + image?.[0]?.url
+  if (image?.[0]?.url && image[0].url.trim().length > 0) {
+    socialImageUrl = image[0].url
+  }
 
   // If the image is passed as a string
-  if (imageUrl) socialImageUrl = imageUrl
+  else if (imageUrl && imageUrl.trim().length > 0) {
+    socialImageUrl = imageUrl
+  }
+
+  // Automatically resize the image
+  socialImageUrl = absoluteUrl(
+    `/_next/image?url=${encodeURIComponent(socialImageUrl)}&w=1200&h=630&q=80`
+  )
 
   const canonicalUrl = (() => {
     const predefinedUrls: { [key: string]: string } = {
@@ -37,7 +45,7 @@ function SeoContainer({
       return path
     }
 
-    return predefinedUrls[path] || `${siteUrl}${path}`
+    return predefinedUrls[path] || absoluteUrl(path)
   })()
 
   const canonicalUrlJP = (() => {
@@ -45,7 +53,7 @@ function SeoContainer({
       return path
     }
 
-    return `${siteUrl}/jp${path}`
+    return absoluteUrl(`/jp${path}`)
   })()
 
   title = title && title.length > 0 ? title : ''
@@ -78,9 +86,13 @@ function SeoContainer({
 
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
+      <meta name='twitter:site' content='@ClickHouseDB' />
+      <meta name='twitter:creator' content='@ClickHouseDB' />
       <meta name='twitter:title' content={title} />
       <meta name='twitter:description' content={description} />
       <meta name='twitter:image' content={socialImageUrl} />
+      <meta name='twitter:image:alt' content={title} />
+      <meta name='twitter:domain' content='clickhouse.com' />
 
       {/* Schema.org Markup */}
       {schema && (

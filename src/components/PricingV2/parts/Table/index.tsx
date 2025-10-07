@@ -208,7 +208,7 @@ export default function Table({
           <SuiText size='sm'>
             <Link
               href='/docs/cloud/manage/network-data-transfer'
-              className='text-primary-300 underline'>
+              className='text-primary-300 hover:underline'>
               Data transfer
             </Link>{' '}
             for public internet egress starting at{' '}

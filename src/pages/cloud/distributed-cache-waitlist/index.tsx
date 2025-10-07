@@ -16,9 +16,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'Distributed Cache Private Preview',
+          title: 'Distributed Cache Private Preview – Join the Waitlist',
           description:
-            'ClickHouse Data Lakehouse capabilities are now in Private Preview, sign up now to get on the waitlist.',
+            'Sign up for the ClickHouse Distributed Cache Private Preview. Join the waitlist to test our new distributed cache before public release.',
           path: '/cloud/distributed-cache-waitlist'
         },
         ...commonProps

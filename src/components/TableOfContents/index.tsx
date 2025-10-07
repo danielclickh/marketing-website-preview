@@ -17,12 +17,14 @@ export default function TableOfContents({
     const contentEl = contentRef.current
     if (!contentEl) return
 
-    const observer = new MutationObserver(() => {
-      const headings = Array.from(
-        contentEl.querySelectorAll(headersSelector || 'h1, h2')
-      ).filter((el): el is HTMLElement => el instanceof HTMLElement)
+    const findHeadings = () => {
+      return Array.from(contentEl.querySelectorAll(headersSelector || 'h1, h2'))
+        .filter((el): el is HTMLElement => el instanceof HTMLElement)
+        .filter((el) => !el.classList.contains('toc-ignore'))
+    }
 
-      setHeadingElements(headings)
+    const observer = new MutationObserver(() => {
+      setHeadingElements(findHeadings())
     })
 
     observer.observe(contentEl, {
@@ -31,11 +33,7 @@ export default function TableOfContents({
     })
 
     // Run once initially in case content is already rendered
-    const initialHeadings = Array.from(
-      contentEl.querySelectorAll(headersSelector || 'h1, h2')
-    ).filter((el): el is HTMLElement => el instanceof HTMLElement)
-
-    setHeadingElements(initialHeadings)
+    setHeadingElements(findHeadings())
 
     return () => observer.disconnect()
   }, [contentRef, headersSelector])
@@ -90,35 +88,50 @@ export default function TableOfContents({
     }
   }, [contentRef.current, scrollHanlder])
 
+  const getOwnText = (el: HTMLElement) => {
+    let text = ''
+    for (let node of el.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        text += node.textContent
+      }
+    }
+    return text.trim()
+  }
+
   return (
     <>
       {headingElements.length > 0 && (
         <nav
           ref={navRef}
-          className='overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
+          className='branded-scrollbar overflow-y-auto rounded-lg bg-white/5 p-4 pl-2'>
           <ul className='space-y-2'>
-            {headingElements.map((heading) => (
-              <li
-                key={heading.id}
-                style={{
-                  paddingLeft: `${Number(heading.tagName.charAt(1)) - 1}rem`
-                }}>
-                <a
-                  href={`#${heading.id}`}
-                  className={`block break-words py-1 transition-colors hover:text-primary-300 ${
-                    activeId === heading.id
-                      ? 'font-medium text-primary-300'
-                      : 'text-neutral-400'
-                  }`}
-                  title={heading.textContent || ''}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document.getElementById(heading.id)?.scrollIntoView()
+            {headingElements.map((heading, headingIndex) => {
+              const innerText = heading.textContent?.replace(/\s+#$/, '')
+              const url = new URL(window.location.toString())
+              url.hash = heading.id
+              return (
+                <li
+                  key={`${headingIndex}-${heading.id}`}
+                  style={{
+                    paddingLeft: `${(Number(heading.tagName.charAt(1)) || 1) - 1}rem`
                   }}>
-                  {heading.textContent}
-                </a>
-              </li>
-            ))}
+                  <a
+                    href={url.toString()}
+                    className={`block break-words py-1 transition-colors hover:text-primary-300 ${
+                      activeId === heading.id
+                        ? 'font-medium text-primary-300'
+                        : 'text-neutral-400'
+                    }`}
+                    title={innerText}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      document.getElementById(heading.id)?.scrollIntoView()
+                    }}>
+                    {innerText}
+                  </a>
+                </li>
+              )
+            })}
           </ul>
         </nav>
       )}

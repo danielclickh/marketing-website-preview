@@ -37,7 +37,7 @@ import LogoVimeo from './assets/logo-vimeo'
 import thumbAnthropic from './assets/thumb-anthropic.jpeg'
 import thumbLyft from './assets/thumb-lyft.jpeg'
 import thumbTesla from './assets/thumb-tesla.jpeg'
-import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 
 export type EntryCategory = string
 
@@ -182,7 +182,13 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed: <YouTubeVideo id='SrLKbzdFEWA' thumbnail={thumbAnthropic} />,
+      embed: (
+        <PlayOnClickVideo
+          provider='youtube'
+          id='SrLKbzdFEWA'
+          thumbnail={thumbAnthropic}
+        />
+      ),
       categories: ['Observability']
     },
 
@@ -200,7 +206,13 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed: <YouTubeVideo id='z5t3b3EAc84' thumbnail={thumbTesla} />,
+      embed: (
+        <PlayOnClickVideo
+          provider='youtube'
+          id='z5t3b3EAc84'
+          thumbnail={thumbTesla}
+        />
+      ),
       categories: ['Observability']
     },
 
@@ -518,7 +530,13 @@ export function getContent(): Entry[] {
           </p>
         </>
       ),
-      embed: <YouTubeVideo id='DWkuhCBA7B4' thumbnail={thumbLyft} />,
+      embed: (
+        <PlayOnClickVideo
+          provider='youtube'
+          id='DWkuhCBA7B4'
+          thumbnail={thumbLyft}
+        />
+      ),
       categories: []
     }
   ]

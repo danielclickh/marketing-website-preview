@@ -3,6 +3,7 @@ title: 'What is a data application?'
 slug: 'data-application'
 excerpt: "In this guide, we'll learn all about data applications - what are they, what are the main components, and why would you want to create one?"
 index: 7
+lastUpdated: '2025-04-11'
 ---
 
 Data applications have become integral to many industries, from finance to healthcare. But what distinguishes these tools from other types of software?

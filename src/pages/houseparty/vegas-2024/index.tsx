@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
     return {
       props: {
         seo: {
-          title: 'House Party with The Chainsmokers',
+          title: 'House Party with The Chainsmokers 2024',
           description:
             "Hey, you! Yes, you — the one who’s ready to take a break from all the conference sessions and tech talk. We know you’ve been soaking in all the brilliance (and sales pitches) of AWS re:Invent, but now it’s time to let loose, have fun, and show off the dance moves you've been hiding.",
           path: '/houseparty/vegas-2024',
@@ -280,19 +280,21 @@ export default function Page({
                         </SuiText>
                         <div className='mx-auto flex max-w-80 flex-wrap justify-center gap-4 text-neutral-0'>
                           <CopyUrlButton className='!px-3' />
-                          {[
-                            //'y_combinator',
-                            'twitter',
-                            'facebook',
-                            'linkedin'
-                          ].map((social) => (
-                            <SocialButton
-                              key={social}
-                              type={social}
-                              title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
-                              className='!px-3'
-                            />
-                          ))}
+                          <SocialButton
+                            type='twitter'
+                            title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
+                            className='!px-3'
+                          />
+                          <SocialButton
+                            type='facebook'
+                            title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
+                            className='!px-3'
+                          />
+                          <SocialButton
+                            type='linkedin'
+                            title='ClickHouse + The Chainsmokers + Vegas = an epic House Party'
+                            className='!px-3'
+                          />
                         </div> */}
                       </div>
                     )}

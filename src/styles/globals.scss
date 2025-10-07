@@ -1,5 +1,25 @@
 @tailwind base;
 @tailwind components;
+
+@layer utilities {
+  .branded-scrollbar {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.primary.300') transparent;
+  }
+
+  /* WebKit (Chrome, Edge, Safari) */
+  .branded-scrollbar::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  .branded-scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded bg-primary-300;
+  }
+  .branded-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+}
+
 @layer components {
   .section-container {
     @apply mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0;
@@ -142,24 +162,10 @@ body {
 }
 
 .rich_content {
-  @apply text-neutral-200;
-  .md-header-container {
-    @apply mb-6 flex items-center gap-2;
-    &:not(:first-child) {
-      @apply mt-6;
-    }
-    h2 {
-      @apply text-2xl font-semibold;
-    }
-    .link {
-      @apply hidden;
-      &.open {
-        @apply block;
-      }
-    }
-    &:hover .link {
-      @apply block;
-    }
+  @apply text-neutral-200 space-y-6;
+
+  h2 {
+    @apply text-2xl font-semibold;
   }
 
   h1,
@@ -775,14 +781,6 @@ a.arrow-link {
   }
 }
 
-#mktoForm_1073 {
-  .mktoButtonWrap {
-    @apply w-auto;
-  }
-  .mktoButton {
-    @apply mx-0 inline-block w-auto;
-  }
-}
 
 #snowflake-relatedcontent img {
   @apply h-auto object-contain;

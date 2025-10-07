@@ -1,50 +1,35 @@
 import Markdown from '../Markdown'
-import React, { createRef, useEffect, useRef, useState } from 'react'
+import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
+import { upperCaseWords } from '@/lib/utils/strings'
+import React, { createRef, useRef, useState } from 'react'
 
-type Cell = string | React.ReactNode
+export type CellIcons = 'yes' | 'no' | 'intermediate'
 
-type Column = {
-  heading: Cell
+export type Column = {
+  heading: string | React.ReactNode
   width?: string | number
   highlight?: boolean
-  rowIcon?: React.ReactNode
 }
 
-type Row = {
-  heading: Cell
+export type Cell = {
+  icon?: CellIcons
+  label: string | React.ReactNode
+}
+
+export type Row = {
+  heading: string | React.ReactNode
   values: Array<Cell>
-}
-
-interface RowItemProps {
-  heading: Cell
-  value: Cell
-  icon: Column['rowIcon']
-}
-
-function RowItem({ heading, value, icon }: RowItemProps) {
-  const valueIsString = typeof value === 'string'
-  return (
-    <div className='flex items-center gap-4'>
-      {!!icon && <div className='w-4 flex-shrink-0 flex-grow-0'>{icon}</div>}
-      <div className='flex-1'>
-        <div className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'>
-          {heading}
-        </div>
-        <div className='grid grid-cols-1 gap-3 font-medium'>
-          {valueIsString && <Markdown encloseByDiv={false}>{value}</Markdown>}
-          {!valueIsString && value}
-        </div>
-      </div>
-    </div>
-  )
+  hidden?: boolean
 }
 
 export interface ComparisonTableProps {
+  seoCaption?: string
   columns: Array<Column>
   rows: Array<Row>
 }
 
 export default function ComparisonTable({
+  seoCaption,
   columns,
   rows
 }: ComparisonTableProps) {
@@ -52,6 +37,8 @@ export default function ComparisonTable({
   if (!rows.every((row) => row.values.length === columns.length)) {
     throw new Error('Row values should be equal to the number of columns.')
   }
+
+  const desktopRef = useRef<HTMLDivElement | null>(null)
 
   const columnRefs = useRef(
     columns.map(() => createRef<HTMLTableHeaderCellElement>())
@@ -61,26 +48,22 @@ export default function ComparisonTable({
     Array<null | React.HTMLProps<HTMLTableHeaderCellElement>['style']>
   >([])
 
-  useEffect(() => {
-    const calculateCoords = () => {
-      if (columnRefs.current) {
-        setHighlightCoords(
-          columnRefs.current.map((ref) => {
-            if (ref.current) {
-              let left = ref.current.offsetLeft
-              let width = ref.current.offsetWidth
-              return { left, width }
-            }
-            return null
-          })
-        )
-      }
+  const calculateCoords = () => {
+    if (columnRefs.current) {
+      setHighlightCoords(
+        columnRefs.current.map((ref) => {
+          if (ref.current) {
+            let left = ref.current.offsetLeft
+            let width = ref.current.offsetWidth
+            return { left, width }
+          }
+          return null
+        })
+      )
     }
+  }
 
-    calculateCoords()
-    window.addEventListener('resize', calculateCoords)
-    return () => window.removeEventListener('resize', calculateCoords)
-  }, [columnRefs])
+  useResizeObserverSsr(desktopRef, calculateCoords)
 
   return (
     <>
@@ -97,15 +80,15 @@ export default function ComparisonTable({
               }>
               <h3 className='mb-6 text-xl font-semibold'>{column.heading}</h3>
               <ul>
-                {rows.map(({ heading, values }, rowIndex) => {
+                {rows.map(({ heading, values, hidden }, rowIndex) => {
                   return (
                     <li
                       key={rowIndex}
-                      className='mt-4 border-t border-neutral-700 pt-4'>
-                      <RowItem
+                      className={`mt-4 border-t border-neutral-700 pt-4 ${hidden ? 'hidden' : ''}`}>
+                      <ValueCell
                         heading={heading}
-                        value={values[columnIndex]}
-                        icon={column.rowIcon}
+                        icon={values[columnIndex].icon}
+                        label={values[columnIndex].label}
                       />
                     </li>
                   )
@@ -117,7 +100,7 @@ export default function ComparisonTable({
       </div>
 
       {/* Desktop table */}
-      <div className='relative hidden pb-3 md:block'>
+      <div className='relative hidden pb-3 md:block' ref={desktopRef}>
         {columns.map((column, columnIndex) => {
           return (
             <div
@@ -131,12 +114,18 @@ export default function ComparisonTable({
           )
         })}
         <table className='w-full text-left'>
+          {seoCaption && <caption className='sr-only'>{seoCaption}</caption>}
           <thead>
             <tr>
-              <th className='hidden border-b border-neutral-700 py-6 pr-8 text-xl font-semibold lg:table-cell xl:pr-16'></th>
+              <th
+                scope='col'
+                className='hidden border-b border-neutral-700 py-6 pr-8 text-xl font-semibold lg:table-cell xl:pr-16'>
+                <span className='sr-only'>Featured</span>
+              </th>
               {columns.map((column, columnIndex) => {
                 return (
                   <th
+                    scope='col'
                     key={columnIndex}
                     ref={columnRefs.current[columnIndex]}
                     style={{ width: column.width }}
@@ -148,10 +137,12 @@ export default function ComparisonTable({
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ heading, values }, rowIndex) => {
+            {rows.map(({ heading, values, hidden }, rowIndex) => {
               return (
-                <tr className='min-h-12' key={rowIndex}>
-                  <th className='hidden border-b border-neutral-700 py-4 pr-8 lg:table-cell xl:pr-16'>
+                <tr hidden={hidden} className='min-h-12' key={rowIndex}>
+                  <th
+                    scope='row'
+                    className='hidden border-b border-neutral-700 py-4 pr-8 lg:table-cell xl:pr-16'>
                     <span className='text-sm font-bold uppercase text-[#B3B6BD]'>
                       {heading}
                     </span>
@@ -162,10 +153,10 @@ export default function ComparisonTable({
                         key={columnIndex}
                         valign='middle'
                         className='border-b border-neutral-700 px-6 py-4 lg:px-8'>
-                        <RowItem
+                        <ValueCell
                           heading={heading}
-                          value={value}
-                          icon={columns[columnIndex].rowIcon}
+                          icon={value.icon}
+                          label={value.label}
                         />
                       </td>
                     )
@@ -177,5 +168,82 @@ export default function ComparisonTable({
         </table>
       </div>
     </>
+  )
+}
+
+interface ValueCellProps {
+  heading: string | React.ReactNode
+  label: string | React.ReactNode
+  icon?: CellIcons
+}
+
+const icons: Record<CellIcons, React.ReactNode> = {
+  yes: <YesIcon />,
+  no: <NoIcon />,
+  intermediate: <span className='opacity-80'>—</span>
+}
+
+function ValueCell({ heading, icon, label }: ValueCellProps) {
+  const labelIsString = typeof label === 'string'
+  return (
+    <div className='flex items-center gap-6'>
+      {typeof icon !== 'undefined' && (
+        <div className='flex w-6 flex-shrink-0 flex-grow-0 items-center justify-center text-center'>
+          <span className='sr-only'>{upperCaseWords(icon)}</span>
+          {icons[icon]}
+        </div>
+      )}
+      <div className='flex-1'>
+        <div
+          className='text-sm font-bold uppercase text-[#B3B6BD] lg:hidden'
+          aria-hidden='true'>
+          {heading}
+        </div>
+        <div className='rich_content grid grid-cols-1 gap-3 text-base font-medium text-neutral-200'>
+          {labelIsString && <Markdown encloseByDiv={false}>{label}</Markdown>}
+          {!labelIsString && label}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function YesIcon() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='text-primary'
+      width='16'
+      height='16'
+      fill='none'
+      viewBox='0 0 16 16'>
+      <path
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+        d='M13.3337 4.33331 6.00033 11.6666 2.66699 8.33331'
+      />
+    </svg>
+  )
+}
+
+function NoIcon() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='text-[#FFBABA]'
+      width='24'
+      height='24'
+      fill='none'
+      viewBox='0 0 24 24'>
+      <path
+        stroke='currentColor'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='1.5'
+        d='m8 8 8 8m0-8-8 8'
+      />
+    </svg>
   )
 }

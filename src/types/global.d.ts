@@ -8,3 +8,12 @@ export type EventPropsOf<T extends keyof JSX.IntrinsicElements> = Pick<
   }[keyof React.HTMLProps<HTMLElementTagNameMap[T]>] &
     keyof React.HTMLProps<HTMLElementTagNameMap[T]>
 >
+
+// <MyComponent as='h1' />
+// <MyComponent as='span' />
+export type PolymorphicComponentProps<
+  T extends React.ElementType,
+  Props = {}
+> = Props & {
+  as?: T
+} & Omit<React.ComponentPropsWithoutRef<T>, keyof Props | 'as'>

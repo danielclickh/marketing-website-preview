@@ -1,4 +1,4 @@
-export function convertDateToString(value: string): string {
+export function convertDateToString(value: string | Date): string {
   return new Date(value).toLocaleString('en-US', {
     year: 'numeric',
     month: 'short',

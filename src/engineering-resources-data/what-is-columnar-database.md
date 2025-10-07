@@ -3,14 +3,19 @@ title: 'Columnar databases explained'
 slug: 'what-is-columnar-database'
 excerpt: 'In this guide, we’ll explore columnar databases. How do they differ from row-based databases? What are they good at?  What are the advantages of using a column store?'
 index: 2
+lastUpdated: '2025-09-16'
 ---
 
 In this guide, we’ll explore columnar databases, column stores, column-oriented databases, column-wise databases, or “insert your favorite acronym”
 How do they differ from row-based databases? What are they good at? What are the advantages of using a column store?
 
+<iframe width="768" height="432" src="https://www.youtube.com/embed/a7rmLeGK1v8?si=036RABTFULyrWRFl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<br />
+
 We’ll answer these questions and more, but first, a brief history lesson.
 
-## A brief history of columnar databases
+## When were columnar databases invented?
 
 The idea of storing data in columns is not new. In 1985, GP Copeland and SN Khoshafian introduced the concept in a paper titled [A decomposition storage model](https://scholar.google.com/scholar?hl=en&as_sdt=0,5&q=G.+P.+Copeland+and+S.+Khoshafian.+A+Decomposition+Storage+Model.&btnG=) (DSM).
 
@@ -24,15 +29,21 @@ In the years since then, further innovations, such as [vectorized processing](ht
 
 ## Row-based vs. column-based
 
-As column stores evolved from theoretical concepts to practical implementations, their fundamental difference from traditional row-based databases became increasingly apparent.
-
-This distinction in data organization is at the core of why column stores excel at specific queries while row-based systems remain preferable for others. Comparing their data layout with traditional row-based databases is essential to understanding the strengths and weaknesses of column stores.
-
 In a row-oriented database, consecutive table rows are stored sequentially, one after the other. This layout allows for quick retrieval of rows, as the column values of each row are stored together.
 
 In a column-oriented database, tables are stored as a collection of columns, i.e., the values of each column are stored sequentially, one after the other. This layout makes it harder to restore single rows (as there are now gaps between the row values), but column operations such as filters or aggregation become much faster than in a row-oriented database.
 
 > In a column store, column operations such as filters or aggregation are faster than in a row-oriented database.
+
+Below is a table that compares row-based and column-based databases at a glance:
+
+| Aspect    | Row-based | Column-based |
+| -------- | ------- | ------- |
+| Storage layout  | Data for each row is stored sequentially    | Data for each column is stored sequentially.    |
+| Mostly used for  | Online Transaction Processing (OLTP) - single row inserts and updates.     | Online Analytical Processing (OLAP) - filters and aggregations on large datasets.   |
+| Query patterns | Individual row lookups | Analytical queries across a subset of columns |
+| I/O | Reads data row-by-row. | Reads only the columns relevant to the query. |
+| Examples | Postgres, MySQL | ClickHouse, Snowflake, BigQuery |
 
 The diagram below shows how some weather data would be stored in a row-based and column-based database:
 
@@ -41,6 +52,44 @@ The diagram below shows how some weather data would be stored in a row-based and
 In the row-based approach, all the values for a given row are adjacent, whereas in the column-based approach, the values for a given column are adjacent.
 
 The row-based approach works better for single-row lookups. The column-based approach is preferable for executing analytics queries that aggregate or filter a few columns, especially when working with large datasets.
+
+In summary, row-based systems excel at OLTP, columnar at OLAP. Most modern architectures use both.
+
+## What is a column database?
+
+A columnar database (also called a column-oriented database management system) stores data by columns instead of rows. 
+This design means that when a query only needs a few columns out of a large table, the database can read just those columns from disk, skipping all the rest. 
+The trade-off is that operations touching entire rows become more expensive.
+
+Benefits of column databases include:
+
+* Efficient queries on subsets of columns — ideal for analytics, dashboards, and BI workloads.
+* Fast aggregations on large datasets — scanning fewer columns reduces I/O and improves throughput.
+* Better compression — similar values stored together compress much more effectively, reducing storage needs.
+
+This makes columnar databases the preferred choice for analytical applications. They allow tables to have many columns without incurring a cost for unused columns at query time. Unlike traditional OLTP systems that always read entire rows, columnar systems are optimized for big data processing, data warehousing, and reporting use cases.
+
+Modern columnar databases are designed to scale horizontally. ClickHouse, for example, combines real-time query performance with distributed scalability, making it well-suited for both traditional BI and real-time analytics use cases.
+
+## What are popular column storage formats? 
+
+Columnar storage isn’t limited to databases - it’s also used in widely adopted file formats. 
+These formats store data by columns on disk and are often used as the storage layer for modern data platforms.
+
+The three most popular open-source columnar formats are Apache Parquet, Apache ORC, and Apache Arrow.
+The table below describes each of these formats:
+
+| Format | Description | Common Use Cases |
+| ------ | ----------- | ---------------- |
+| Apache Parquet | Open-source, widely adopted columnar format with strong compression and encoding support. | Cloud data lakes, Spark, Presto/Trino, AWS Athena, Azure Synapse |
+| Apache ORC (Optimized Row Columnar) | Designed for the Hadoop ecosystem - efficient storage for Hive and Spark workloads. | Hadoop/Hive environments, legacy big data pipelines |
+| Apache Arrow** | An in-memory columnar format designed for fast analytics and data interchange. | DataFrames (e.g., Pandas, R), machine learning pipelines, cross-system data exchange |
+
+These formats differ from full columnar databases like ClickHouse:
+
+* File formats provide the on-disk storage representation.  
+* Databases add query execution, indexing, clustering, distribution, and more.
+* Many columnar databases can query open formats directly (e.g., Parquet or ORC), but they also use their own optimized internal storage formats to achieve higher performance and feature integration.  
 
 ## When should I use a column store?
 
@@ -98,7 +147,7 @@ While column stores excel in certain scenarios, particularly in analytical workl
 
 Let's explore situations where there might be better choices than column stores.
 
-### Row-based lookups and OLTP Workloads
+### Row-based lookups and OLTP workloads
 
 Column stores are designed for analytics queries that typically aggregate or scan a few columns across many rows. However, they can be suboptimal for row-based lookups, common in [Online Transaction Processing (OLTP) systems](https://clickhouse.com/engineering-resources/oltp-vs-olap).
 
@@ -120,7 +169,7 @@ This process can be inefficient, especially if you're fetching many columns. In 
 
 Real-world example: E-commerce platforms often need to retrieve all details of a specific order quickly. This operation is much more efficient in a row-based store.
 
-### Small Datasets
+### Small datasets
 
 The benefits of column stores often become apparent only at scale. When dealing with smaller datasets (e.g., millions of rows or less), the performance difference between column and row stores for analytical queries might need to be more significant to justify adding another database.
 
@@ -132,13 +181,11 @@ Most column stores don't support ACID (Atomicity, Consistency, Isolation, Durabi
 
 For instance, a banking system processing account transfers must ensure that debits and credits are applied atomically across accounts. This is typically easier to achieve with row-based, transactional databases.
 
-## Advantages of using a column store
+## What compression techniques do column stores use?
 
 Using column stores has two main advantages: query performance on large datasets and efficient data storage.
 These benefits are particularly valuable in data warehousing, business intelligence, and large-scale analytics scenarios.
 Let’s learn about the techniques used to achieve this.
-
-### Efficient storage
 
 At the start of this article, we learned that column stores store data from the same column next to each other. This means that identical values are often adjacent, which is [perfect for data compression](https://clickhouse.com/docs/en/data-compression/compression-in-clickhouse).
 
@@ -146,29 +193,25 @@ At the start of this article, we learned that column stores store data from the 
 
 Column stores leverage various encoding and compression techniques:
 
-1. Dictionary encoding: Replaces repeated string values with integer IDs, dramatically reducing storage for columns with low cardinality.
-2. Run length encoding (RLE): Compresses sequences of repeated values by storing the value and its count. For example, "AAAABBBCC" becomes "(A,4)(B,3)(C,2)".
-3. Bit packing uses the minimum number of bits required to represent integers in a given range, which is particularly effective for columns with a limited range of values.
-4. General-purpose compression: For further compression, algorithms like ZSTD, LZ4, and GZIP are applied to these specialized encodings.
+| Compression type    | Description
+| -------- | ------- | 
+| Dictionary encoding | Replaces repeated string values with integer IDs, dramatically reducing storage for columns with low cardinality. |
+| Run length encoding (RLE) | Compresses sequences of repeated values by storing the value and its count. For example, "AAAABBBCC" becomes "(A,4)(B,3)(C,2)". |
+| Bit packing | Uses the minimum number of bits required to represent integers in a given range, which is particularly effective for columns with a limited range of values. |
+| General-purpose compression | For further compression, algorithms like ZSTD, LZ4, and GZIP are applied to these specialized encodings. |
 
 For instance, consider a column storing country codes. Instead of repeatedly storing "USA" or "CAN," dictionary encoding might replace these with 1 and 2, respectively. If there are many consecutive "USA" entries, RLE could further compress this to (1, 1000), representing "USA" repeated 1000 times.
 
 The benefits extend beyond mere storage savings. Less data on disk translates to reduced I/O, accelerating queries and data insertions. While decompression does introduce some CPU overhead, the I/O reduction typically far outweighs this cost, especially in I/O-bound analytical workloads.
 
-## Query performance
+## What are the best query types for a column store?
 
 Column stores truly shine in analytics queries, particularly those involving large datasets. Their performance advantage stems from a couple of factors:
 
 1. Efficient I/O utilization: Column stores can skip vast amounts of irrelevant data by reading only the columns relevant to a query. For instance, in a query like `SELECT AVG(salary) FROM employees WHERE department = 'Sales` , a column store only needs to read the `salary` and `department` columns, potentially ignoring dozens or hundreds of other columns.
 2. Vectorized query execution: The columnar data layout aligns perfectly with modern CPU architectures, enabling efficient vectorized processing. Instead of processing data row-by-row, column stores can simultaneously operate on large chunks (vectors) of a single column. This approach maximizes CPU cache usage and allows for SIMD (Single Instruction, Multiple Data) operations, dramatically speeding up calculations.
 
-### Query performance
-
-Column stores excel at analytics queries. They make efficient use of I/O, as they can quickly skip irrelevant data since they only need to read the columns involved in a query, not entire rows.
-
-The data layout in column stores is also ideal for vectorized query execution, an essential characteristic of how column stores achieve query performance by efficiently using modern CPU architectures.
-
-## Challenges of using a column store
+## What are the challenges of using a column store?
 
 While column stores offer significant advantages for analytical workloads, they also present unique challenges, especially for users accustomed to traditional row-based systems. Understanding these challenges is crucial for effectively implementing and managing a column store database.
 
@@ -207,17 +250,26 @@ Key considerations include:
 
 For example, sorting data primarily by date could yield substantial performance benefits if most queries filter on date ranges. However, if this isn't considered during initial data loading, achieving optimal performance may require a costly data reorganization process.
 
-## Examples of columnar databases
+## What are some examples of columnar databases in 2025?
 
-There are a large number of databases that have column-oriented storage, so we’ll cover just the most popular ones at the time of writing.
+There are a large number of databases that implement column-oriented storage. Below is a summary of some of the most notable ones:
 
-As mentioned earlier, MonetDB is the original column store, and it’s still around today. Since then, other column stores have emerged, including SAP IQ, Greenplum DB, Vertica, and more.
+| Database | Era | Notes |
+| -------- | --- | ----- |
+| MonetDB | 1990s | One of the first column stores, pioneered vertical fragmentation and influenced later systems. |
+| Vertica, SAP IQ, Greenplum | 2000s | Early commercial columnar systems designed for enterprise data warehousing. |
+| Amazon Redshift, Google BigQuery, Snowflake | Early 2010s | Cloud-native columnar data warehouses, widely used for large-scale internal analytics. |
+| ClickHouse, Apache Pinot, Apache Druid (Imply) | Late 2010s | High-performance, [real-time analytics](https://clickhouse.com/engineering-resources/what-is-real-time-analytics) engines, supporting both internal BI and external-facing use cases. |
+| Postgres (with Citus or Timescale extensions) | 2010s | Primarily a row-based system, but supports columnar-like storage through extensions. |
 
-Amazon Redshift, Google BigQuery, and Snowflake were released in the early 2010s as cloud data warehouses. They all store data in columns and are predominantly used for internal-facing analytics on large volumes of data.
+As mentioned earlier, MonetDB is the original column store, and it remains active today. Building on these early ideas, systems like SAP IQ, Greenplum, and Vertica appeared in the 2000s to support enterprise-scale analytics.  
 
-Apache Pinot, Apache Imply, and ClickHouse emerged in the late 2010s. They can be used for internal-facing analytics but also support [real-time analytics](https://clickhouse.com/engineering-resources/what-is-real-time-analytics), a prerequisite for databases to serve insights to external users and customers.
+In the early 2010s, cloud-native warehouses such as Amazon Redshift, Google BigQuery, and Snowflake brought columnar storage to the cloud, enabling massively parallel analytics on large volumes of data.  
 
-In addition, row-based stores like Postgres have columnar add-ons via Citus or Timescale.
+Later in the decade, systems such as ClickHouse, Apache Pinot, and Apache Druid/Imply emerged. 
+Among these, ClickHouse stands out for combining sub-second query performance with distributed scalability and native support for real-time analytics at scale. This makes it a strong choice not only for traditional BI workloads but also for powering external-facing applications and customer-facing analytics
+
+Finally, even traditional row-based databases like Postgres gained columnar features through extensions like Citus and Timescale, showing how widely the columnar approach has influenced database design.  
 
 ## Is ClickHouse a column database?
 
@@ -226,6 +278,13 @@ Yes, [ClickHouse is a column database](https://clickhouse.com/docs/en/intro). It
 ClickHouse Cloud is used by Sony, Lyft, Cisco, GitLab, and many others.
 
 You can learn more about the problems that ClickHouse solves in the [user stories](https://clickhouse.com/user-stories) section.
+
+## Why is ClickHouse a popular columnar database today?
+
+ClickHouse is widely adopted in 2025 because it delivers extremely fast analytical queries on large datasets while remaining efficient to operate. 
+Its combination of real-time performance, distributed scalability, and open-source availability makes it a strong choice for organizations building both internal BI tools and external-facing analytics applications.
+
+ClickHouse continues to evolve rapidly, with an active open-source community and a growing cloud service used by companies of all sizes.
 
 ## Can I use row-based and column-based stores together?
 
@@ -246,3 +305,26 @@ Yes, and this is quite common. A hybrid architecture that used both types of sto
 Many organizations employ change data capture (CDC) techniques to keep these systems in sync. CDC is a set of software design patterns used to determine and track data changes so that action can be taken using the changed data.
 
 In the [OLAP vs OLTP guide](https://clickhouse.com/engineering-resources/oltp-vs-olap#oltp-to--olap-with-change-data-capture), you can read more about using CDC to move data between OLTP and OLAP.
+
+## How do column stores handle semi-structured data like JSON or logs?
+
+Column stores are primarily designed for structured data, but they can handle semi-structured formats like JSON or logs in a few ways:
+
+* Extracting fields into columns: If you know certain log fields are frequently queried (e.g. `timestamp`, `user_id`, `status_code`), it’s common to parse and store them in dedicated columns. This works best with structured logging or preprocessing pipelines that normalize the data.
+
+* Storing raw text: Logs can also be stored as plain text, with parsing done at query time. This is simpler but less efficient for analytics.
+
+* Native JSON support: Many modern column stores (including ClickHouse) provide JSON-specific data types and functions that make querying nested fields fast and efficient. See [ClickHouse’s JSON data type](https://clickhouse.com/blog/a-new-powerful-json-data-type-for-clickhouse)
+ for an example. 
+ 
+ This flexibility means you can choose the right balance between ease of ingestion and query performance, depending on your use case.
+
+## Do column stores support concurrent writes at scale?
+
+Yes. Modern column stores like ClickHouse are built to handle high write concurrency. Inserts create independent data parts that don’t block one another or ongoing `SELECT` queries. 
+Background merge processes later consolidate these parts, avoiding long locks and ensuring smooth operation.  
+
+For workloads with small, frequent events, [asynchronous inserts](https://clickhouse.com/docs/guides/inserting-data#use-asynchronous-inserts-for-small-batches) batch data on the server side, keeping client latency low while sustaining high ingest rates.
+Administrators can also set concurrency, memory, and I/O limits to isolate workloads and prevent resource contention.  
+
+In distributed setups such as ClickHouse Cloud, writes can be spread across replicas. Each replica supports [up to 1,000 concurrent queries](https://clickhouse.com/docs/cloud/reference/architecture#concurrency-limits), and adding replicas scales write concurrency further.  

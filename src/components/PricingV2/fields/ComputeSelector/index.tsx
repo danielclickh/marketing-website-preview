@@ -1,6 +1,6 @@
 import * as config from '../../config'
 import { findClosestCompute } from '../../config'
-import Label from '../../ui/Label'
+import FieldContainer from '../../ui/FieldContainer'
 import Select, { Options } from '../../ui/Select'
 import HoursSelector from '../HoursSelector'
 import HRSeparator from '@/components/HRSeparator'
@@ -128,8 +128,7 @@ export default function ComputeSelector() {
         <div>
           {/* Packages */}
           {hasPackages && (
-            <>
-              <Label>Compute resources</Label>
+            <FieldContainer label='Compute resources'>
               <div className='mb-8 grid flex-col gap-4 sm:grid-cols-2 lg:flex-row'>
                 {packages.map((item, index) => {
                   const isActive = item === activePackage
@@ -162,7 +161,7 @@ export default function ComputeSelector() {
                   )
                 })}
               </div>
-            </>
+            </FieldContainer>
           )}
 
           {/* Fixed user feedback */}
@@ -197,8 +196,7 @@ export default function ComputeSelector() {
 
           {/* Use cases */}
           {hasUseCases && !packages?.length && (
-            <>
-              <Label>What's your use case?</Label>
+            <FieldContainer label="What's your use case?">
               <Select
                 options={useCaseOptions}
                 value={useCaseEntry?.slug}
@@ -212,7 +210,7 @@ export default function ComputeSelector() {
                   })
                 }}
               />
-            </>
+            </FieldContainer>
           )}
 
           {/* Use Case heading and reset button */}
@@ -252,9 +250,12 @@ export default function ComputeSelector() {
           {canCustomize && (
             <>
               <div className='mt-8 grid gap-4 sm:grid-cols-2'>
-                <div>
-                  {replicas === 1 && <Label>Compute per replica</Label>}
-                  {replicas !== 1 && <Label>Minimum compute per replica</Label>}
+                <FieldContainer
+                  label={
+                    replicas === 1
+                      ? 'Compute per replica'
+                      : 'Minimum compute per replica'
+                  }>
                   <Select
                     options={
                       replicas === 1
@@ -265,39 +266,33 @@ export default function ComputeSelector() {
                     onChange={(value) => setValues({ computeMinSize: value })}
                     maxHeight={275}
                   />
-                </div>
+                </FieldContainer>
 
-                <div>
-                  {replicas === 1 && (
-                    <div className='text-sm sm:mt-6'>
-                      Single-replica services are limited to 8&nbsp;GiB and
-                      12&nbsp;GiB RAM.
-                    </div>
-                  )}
-                  {replicas !== 1 && (
-                    <>
-                      <Label>Maximum compute per replica</Label>
-                      <Select
-                        options={COMPUTES}
-                        value={computeMaxSize}
-                        onChange={(value) =>
-                          setValues({ computeMaxSize: value })
-                        }
-                        maxHeight={275}
-                      />
-                    </>
-                  )}
-                </div>
+                {replicas === 1 && (
+                  <div className='text-sm sm:mt-6'>
+                    Single-replica services are limited to 8&nbsp;GiB and
+                    12&nbsp;GiB RAM.
+                  </div>
+                )}
+                {replicas !== 1 && (
+                  <FieldContainer label='Maximum compute per replica'>
+                    <Select
+                      options={COMPUTES}
+                      value={computeMaxSize}
+                      onChange={(value) => setValues({ computeMaxSize: value })}
+                      maxHeight={275}
+                    />
+                  </FieldContainer>
+                )}
 
-                <div>
-                  <Label>Number of replicas</Label>
+                <FieldContainer label='Number of replicas'>
                   <Select
                     options={REPLICAS}
                     value={replicas}
                     onChange={(value) => setValues({ replicas: value })}
                     maxHeight={275}
                   />
-                </div>
+                </FieldContainer>
               </div>
 
               {/* Customizable user feedback */}

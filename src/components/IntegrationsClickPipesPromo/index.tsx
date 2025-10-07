@@ -74,15 +74,16 @@ export default function IntegrationsClickPipesPromo() {
         <LogoAnnouncementLink
           mode='dark'
           className='mt-8 !bg-neutral-700/60'
-          href='/cloud/clickpipes/postgres-cdc-connector?loc=integrations-promo'
+          href='/cloud/clickpipes/mongodb-cdc-connector?loc=integrations-promo'
           logo={{
-            src: '/images/cloud/integrations/postgres.svg',
-            alt: 'Postgres',
-            width: 46,
-            height: 37
+            src: '/images/cloud/integrations/mongodb.svg',
+            alt: 'MongoDB',
+            width: 24,
+            height: 50,
+            className: 'mx-3'
           }}>
-          Blazing-fast Postgres to ClickHouse CDC with our new ClickPipe
-          connector — now Generally Available.{' '}
+          Blazing-fast MongoDB to ClickHouse CDC with our new ClickPipe
+          connector — now in Private Preview.{' '}
           <span className='underline group-hover:decoration-2'>Learn more</span>
           !
         </LogoAnnouncementLink>

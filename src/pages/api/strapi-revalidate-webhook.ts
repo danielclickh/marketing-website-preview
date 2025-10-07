@@ -1,4 +1,5 @@
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import { PAGES } from '@/pages/learn/[slug]'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -67,6 +68,7 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     if (body?.entry?.slug) {
       paths.push(`/company/events/${body.entry.slug}`)
+      paths.push(`/company/events/${body.entry.slug}/thank-you`)
     }
 
     await revalidate(response, paths)
@@ -134,6 +136,33 @@ const CONTENT_TYPE_HANDLERS: Record<
   },
   'api::user-story.user-story': async function (body, response) {
     const paths = [`/user-stories`]
+    await revalidate(response, paths)
+  },
+  'api::openhouse.openhouse': async function (body, response) {
+    const paths: Array<string> = ['/openhouse']
+
+    if (body?.entry?.slug) {
+      paths.push(`/openhouse/${body.entry.slug}`)
+    }
+
+    await revalidate(response, paths)
+  },
+  'api::openhouse-speaker.openhouse-speaker': async function (body, response) {
+    const paths: Array<string> = []
+
+    const data: Array<Pick<OpenhouseEntry, 'slug'>> = await fetchAll(
+      'openhouses',
+      {
+        fields: ['slug']
+      }
+    )
+
+    if (data) {
+      data.forEach((page) => {
+        paths.push(`/openhouse/${page.slug}`)
+      })
+    }
+
     await revalidate(response, paths)
   },
 
@@ -261,6 +290,10 @@ const CONTENT_TYPE_HANDLERS: Record<
   },
   'api::news-and-event.news-and-event': async function (body, response) {
     const paths = [`/sitemap`, `/company/events`, `/company/news`]
+    await revalidate(response, paths)
+  },
+  'api::news-item.news-item': async function (body, response) {
+    const paths: Array<string> = ['/company/news']
     await revalidate(response, paths)
   },
   'api::newsletter-form.newsletter-form': async function (body, response) {

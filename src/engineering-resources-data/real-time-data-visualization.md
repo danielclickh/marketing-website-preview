@@ -3,6 +3,7 @@ title: 'Real-time data visualization'
 slug: 'real-time-data-visualization'
 excerpt: "This guide is all about real-time data visualization. We'll explore how it differs from normal visualization, see some examples, and learn about the tools we can use."
 index: 4
+lastUpdated: '2025-04-11'
 ---
 
 > They say a picture is worth a thousand words, so does that mean one data visualization is worth a thousand rows?

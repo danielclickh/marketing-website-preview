@@ -6,17 +6,18 @@ export const BASE_PROTOCOL = process?.env?.NEXT_PUBLIC_PROTOCOL || 'https://'
 
 // The app url WITHOUT protocol
 export const BASE_URL = (() => {
-  let base = process?.env?.NEXT_PUBLIC_WEBSITE_URL || process?.env?.VERCEL_URL
+  let base = process?.env?.VERCEL_URL || process?.env?.NEXT_PUBLIC_WEBSITE_URL
   if (!base || !isValidUrl(base)) {
     base = 'clickhouse.com'
   }
 
+  // Apply default protocol
   if (!base.startsWith('http') && !base.startsWith('//')) {
     base = `${BASE_PROTOCOL}${base}`
   }
 
   const obj = new URL(base)
-  return obj.hostname + ':' + obj.port
+  return obj.hostname + (obj.port.length ? ':' + obj.port : '')
 })()
 
 export const BASE_URL_AND_PROTOCOL = `${BASE_PROTOCOL}${BASE_URL}`
@@ -41,6 +42,11 @@ export function absoluteUrl(relative: string) {
 }
 
 export function isLocalUrl(url: string) {
-  if (!isValidUrl(url)) return absoluteUrl(url)
-  return url.startsWith(relativeUrl('/'))
+  try {
+    const urlObj = new URL(url)
+    const localObj = new URL(BASE_URL_AND_PROTOCOL)
+    return urlObj.origin === localObj.origin
+  } catch {
+    return false
+  }
 }

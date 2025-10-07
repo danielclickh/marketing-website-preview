@@ -3,11 +3,12 @@ title: 'What is a JSON database?'
 slug: 'json-database'
 excerpt: "In this guide, we'll learn about JSON, the types of databases that can store JSON, and how to work with JSON data in ClickHouse."
 index: 5
+lastUpdated: '2025-04-11'
 ---
 
 There isn’t really such a thing as a JSON (JavaScript Object Notation) database, but there are databases that are designed to work well with JSON data or have strong JSON support.
 
-JSON is a text-based data interchange format that [has become the lingua franca of data exhaust](https://x.com/medriscoll/status/1831900730254582115) over the last decade \- APIs return JSON, it is used to represent the state in [single-page applications](https://clickhouse.com/blog/building-single-page-applications-with-clickhouse-and-http), and metrics or logs are often generated in this format.
+JSON is a text-based data interchange format that [has become the lingua franca of data exhaust](https://x.com/medriscoll/status/1831900730254582115) over the last decade - APIs return JSON, it is used to represent the state in [single-page applications](https://clickhouse.com/blog/building-single-page-applications-with-clickhouse-and-http), and metrics or logs are often generated in this format.
 
 ## What is JSON?
 
@@ -63,7 +64,7 @@ Although MongoDB and CouchDB were the early contenders in this category, others 
 
 The two most popular open-source relational databases, PostgreSQL and MySQL, initially didn’t have JSON support, and it took them a while to catch up.
 
-PostgreSQL added native support for JSON in [version 9.2](https://www.cloudbees.com/blog/unleash-the-power-of-storing-json-in-postgres), released in September 2012\. They went on to add support for indexes in a subsequent release. MySQL followed suit, adding its own JSON data type in [version 5.7.8](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-8.html#mysqld-5-7-8-json), released in August 2015\.
+PostgreSQL added native support for JSON in [version 9.2](https://www.cloudbees.com/blog/unleash-the-power-of-storing-json-in-postgres), released in September 2012. They went on to add support for indexes in a subsequent release. MySQL followed suit, adding its own JSON data type in [version 5.7.8](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-8.html#mysqld-5-7-8-json), released in August 2015.
 
 These databases are still predominantly used for storing data in rows and columns and retrieving a single or small number of rows. The JSON type allows them to store semi-structured data, but they don’t have as many features for working with JSON as the document databases.
 
@@ -79,14 +80,14 @@ When storing the data, they need to ensure that it’s stored in a way that allo
 
 ## JSON in ClickHouse
 
-ClickHouse added a JSON data type in version 22.6 in June 2022, but this [implementation had some limitations](https://github.com/ClickHouse/ClickHouse/issues/54864) and was replaced by [a new JSON data type](https://clickhouse.com/docs/en/sql-reference/data-types/newjson) in [version 24.8](https://clickhouse.com/blog/clickhouse-release-24-08) in August 2024\.
+ClickHouse added a JSON data type in version 22.6 in June 2022, but this [implementation had some limitations](https://github.com/ClickHouse/ClickHouse/issues/54864) and was replaced by [a new JSON data type](https://clickhouse.com/docs/en/sql-reference/data-types/newjson) in [version 24.8](https://clickhouse.com/blog/clickhouse-release-24-08) in August 2024.
 
 The new data type [addresses the following challenges](https://clickhouse.com/blog/a-new-powerful-json-data-type-for-clickhouse):
 
-1. True column-oriented storage \- Implement a column-oriented storage system for JSON data to enable efficient compression and fast, vectorized operations.
-2. Dynamically changing data without type unification \- Handle JSON paths with different data types without unifying them into a common type.
-3. Prevention of an avalanche of column data files on disk \- Avoid creating excessive column files on disk for unique JSON paths.
-4. Dense storage \- Store values of unique JSON paths in a dense, non-redundant way.
+1. True column-oriented storage - Implement a column-oriented storage system for JSON data to enable efficient compression and fast, vectorized operations.
+2. Dynamically changing data without type unification - Handle JSON paths with different data types without unifying them into a common type.
+3. Prevention of an avalanche of column data files on disk - Avoid creating excessive column files on disk for unique JSON paths.
+4. Dense storage - Store values of unique JSON paths in a dense, non-redundant way.
 
 It’s an experimental feature at the moment, so you’ll need to enable the following flag to use it:
 
@@ -154,7 +155,7 @@ Let’s review some commonly asked questions about storing JSON in databases.
 
 ### What is the best database for JSON?
 
-That depends on what you do with the JSON data once it’s in the database\! If you’re retrieving single documents, a database like MongoDB or Couchbase might be the best choice. If you’re running analytical queries over many JSON documents, ClickHouse might be a better choice.
+That depends on what you do with the JSON data once it’s in the database! If you’re retrieving single documents, a database like MongoDB or Couchbase might be the best choice. If you’re running analytical queries over many JSON documents, ClickHouse might be a better choice.
 
 ### Is JSON SQL or NoSQL?
 

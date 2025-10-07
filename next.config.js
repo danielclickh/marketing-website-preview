@@ -30,17 +30,22 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '3005',
-        pathname: '/uploads/**'
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'clickhouse.com',
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: '**.clickhouse.com',
-        pathname: '/uploads/**'
+        pathname: '/**'
       },
       {
         protocol: 'https',
         hostname: '*.vercel.app',
-        pathname: '/uploads/**'
+        pathname: '/**'
       }
     ]
   },
@@ -529,6 +534,38 @@ const nextConfig = {
       {
         source: '/olly',
         destination: '/use-cases/observability?loc=olly',
+        permanent: true
+      },
+      {
+        source:
+          '/blog/why-openai-chose-clickhouse-for-petabyte-scale-observability',
+        destination:
+          '/blog/why-openai-uses-clickhouse-for-petabyte-scale-observability',
+        permanent: true
+      },
+      {
+        source: '/company/events/202508-APJ-Manila-Data&AIConference',
+        destination: '/company/events/202508-APJ-Manila-DataAIConference',
+        permanent: true
+      },
+      {
+        source: '/cloud/hyperdx-waitlist',
+        destination: '/cloud/clickstack-private-preview',
+        permanent: true
+      },
+      {
+        source: '/houseparty/vegas-2024',
+        destination: '/houseparty/the-sql',
+        permanent: true
+      },
+      {
+        source: '/cloud/manage/cloud-tiers',
+        destination: '/docs/cloud/manage/cloud-tiers',
+        permanent: true
+      },
+      {
+        source: '/blog/clickhouse-group-by-parallel-replicas-8900-cores',
+        destination: '/blog/clickhouse-parallel-replicas',
         permanent: true
       }
     ]

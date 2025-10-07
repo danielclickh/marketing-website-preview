@@ -8,15 +8,14 @@ import heroCenter from './assets/hero-center.png'
 import heroLeft from './assets/hero-left.png'
 import heroRightBig from './assets/hero-right-big.png'
 import heroRightSmall from './assets/hero-right-small.png'
+import TickItem from '@/components-cleaned/TickItem'
 import AnimatedFlare from '@/components/AnimatedFlare'
-import CdcWaitlistForm from '@/components/CdcWaitlistForm'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import DotsContainer from '@/components/DotsContainer'
+import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinedIconCard, { LinedIconCardProps } from '@/components/LinedIconCard'
 import Parallax from '@/components/Parallax'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -38,7 +37,7 @@ const featues: Array<Feature> = [
       <>
         &bull; Chat like a teammate
         <br />
-        &bull; Ask data question in plane English
+        &bull; Ask data question in plain English
         <br />
         &bull; Generate SQL queries, visualisations or summaries
       </>
@@ -148,6 +147,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function Page({ seo, headerData, footerData }: CommonProps) {
+  useGalaxyOnPage('aiPage')
+
   const [activeTab, setActiveTab] = useState<Tabs>('assistant')
 
   const router = useRouter()
@@ -190,18 +191,16 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               via the native remote MCP server
             </SuiText>
             <CUIButton
-              href='/ai#waitlist'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=aiPageHeroCta'
+              onClick={useGalaxyOnClick(
+                'aiPage.heroCta.createFreeAccountSelect'
+              )}
               type='primary'
+              size='lg'
               className='inline-block'
-              linkClass='inline-block'
-              onClick={(event) => {
-                const target = document.querySelector('#waitlist')
-                if (target) {
-                  event.preventDefault()
-                  target.scrollIntoView()
-                }
-              }}>
-              Join waitlist
+              linkClass='inline-block'>
+              Start free trial
             </CUIButton>
           </div>
           <div className='2xl:-mx-16'>
@@ -496,20 +495,6 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
         </div>
       </section>
 
-      {/* Footer form */}
-      <DotsContainer className='my-20' id='waitlist'>
-        <div className='mx-auto w-full lg:max-w-xl'>
-          <CUICard className='bg-neutral-900/80'>
-            <div className='my-4 space-y-2 text-center lg:mb-4 lg:mt-6'>
-              <SuiTitle type='h2'>Get early access</SuiTitle>
-            </div>
-            <CUICard.Body className='p-4 lg:p-6'>
-              <CdcWaitlistForm formId='1401' />
-            </CUICard.Body>
-          </CUICard>
-        </div>
-      </DotsContainer>
-
       {/* Get started */}
       <section className='section-container my-20 md:px-8 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
@@ -529,9 +514,9 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             size='lg'
             className='group mx-auto mt-8'
             target='_blank'
-            href='https://console.clickhouse.cloud/signUp?loc=mysqlCdcPageFooterCta'
+            href='https://console.clickhouse.cloud/signUp?loc=aiPageFooterCta'
             onClick={useGalaxyOnClick(
-              'mysqlCdcPage.footerCta.createFreeAccountSelect'
+              'aiPage.footerCta.createFreeAccountSelect'
             )}>
             Create a free account
           </CUIButton>
@@ -568,36 +553,6 @@ function FeatureSection({
       <div className='relative z-10 flex items-center justify-center md:w-1/2'>
         <Image {...image} alt={image.alt || ''} />
       </div>
-    </div>
-  )
-}
-
-function TickItem({
-  children,
-  className = ''
-}: {
-  children: React.ReactNode
-  className?: React.HTMLProps<HTMLDivElement>['className']
-}) {
-  return (
-    <div className={`flex items-center gap-4 ${className}`}>
-      <div className='flex-shrink-0 flex-grow-0'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='25'
-          height='18'
-          fill='none'
-          viewBox='0 0 25 18'>
-          <path
-            stroke='#FCFF74'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='2'
-            d='M23.32 1.67 8.65 16.33 2 9.67'
-          />
-        </svg>
-      </div>
-      <div className='flex-1'>{children}</div>
     </div>
   )
 }
