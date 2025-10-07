@@ -13,7 +13,7 @@ import iconTeamRecognition from './assets/icon-team-recognition.svg'
 import videoThumbnail from './assets/video-thumbnail.png'
 import AngledSection from '@/components-cleaned/AngledSection'
 import LearningPathCard from '@/components-cleaned/LearningPathCard'
-import YouTubeVideo from '@/components-cleaned/YouTubeVideo'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
@@ -25,6 +25,7 @@ import {
   SuiText,
   SuiTitle
 } from '@/components/sui'
+import { pages } from '@/data/learn'
 import {
   findAll,
   findOne,
@@ -40,7 +41,6 @@ import {
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
 import { extractEventTime, limitStringByWord } from '@/lib/utils/strings'
-import { PAGES } from '@/pages/learn/[slug]'
 import { LearnProps, TrainingSimpleEvent } from '@/types/learn'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
@@ -192,7 +192,8 @@ export default function LearnPage({
             </LinkWithArrow>
           </div>
           <div className='w-full max-w-xl'>
-            <YouTubeVideo
+            <PlayOnClickVideo
+              provider='youtube'
               id='6mmQUOmA-T0'
               thumbnail={videoThumbnail}
               playButtonEyebrow='New to ClickHouse?'
@@ -290,7 +291,7 @@ export default function LearnPage({
             </SuiText>
           </div>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-4 xl:gap-8'>
-            {PAGES.map((path, pathIndex) => {
+            {pages.map((path, pathIndex) => {
               return (
                 <LearningPathCard
                   key={pathIndex}

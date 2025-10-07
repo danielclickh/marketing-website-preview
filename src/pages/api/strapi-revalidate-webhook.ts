@@ -1,6 +1,6 @@
+import { pages as learnPages } from '@/data/learn'
 import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
-import { PAGES } from '@/pages/learn/[slug]'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const revalidate = async (
@@ -260,7 +260,7 @@ const CONTENT_TYPE_HANDLERS: Record<
       `/`,
       `/learn`,
       `/learn/certification`,
-      ...PAGES.map((page) => `/learn/${page.slug}`),
+      ...learnPages.map((page) => `/learn/${page.slug}`),
       `/monitorama-2023`,
       `/launch-week/may-2024`,
       `/industries/gaming`,
