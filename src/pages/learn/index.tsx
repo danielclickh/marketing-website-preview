@@ -162,14 +162,14 @@ export default function LearnPage({
       {/* Hero */}
       <section className='bg-grid py-16 lg:py-24'>
         <div className='section-container flex flex-col items-center gap-16 lg:flex-row'>
-          <div className='space-y-4 text-center lg:text-left'>
+          <div className='space-y-4 text-center lg:mx-auto lg:w-1/2 lg:text-center'>
             <SuiTitle type='h1'>ClickHouse training</SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               Master ClickHouse with expert-led training designed for every
               skill level and delivered through self-paced paths, live sessions,
               or certification.
             </SuiText>
-            <div className='!my-8 flex flex-wrap justify-center gap-4 lg:justify-start'>
+            <div className='!my-8 flex flex-wrap justify-center gap-4'>
               <CUIButton
                 href='/learn#on-demand'
                 type='primary'
@@ -191,7 +191,7 @@ export default function LearnPage({
               Get ClickHouse Certified
             </LinkWithArrow>
           </div>
-          <div className='w-full max-w-xl'>
+          {/*<div className='w-full max-w-xl'>
             <PlayOnClickVideo
               provider='youtube'
               id='6mmQUOmA-T0'
@@ -199,7 +199,7 @@ export default function LearnPage({
               playButtonEyebrow='New to ClickHouse?'
               playButtonLabel='Watch the introduction'
             />
-          </div>
+          </div>*/}
         </div>
       </section>
 
