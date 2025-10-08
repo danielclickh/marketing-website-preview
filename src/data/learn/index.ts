@@ -29,8 +29,9 @@ export interface PageItem {
   slug: string
   icon: ImageProps['src']
   h1: string
-  lmsUrl?: string
   intro: string
+  lmsUrl?: string
+  comingSoon?: boolean
   level: string
   modules: string
   quizzes: string
@@ -40,7 +41,7 @@ export interface PageItem {
 
 export const pages: Array<PageItem> = [
   realTimeAnalytics,
+  observability,
   mlAndGenai,
-  dataWarehousing,
-  observability
+  dataWarehousing
 ]

@@ -39,11 +39,15 @@ const itemIcons: Record<ItemTypes, ImageProps['src']> = {
 
 export async function getStaticPaths() {
   return {
-    paths: pages.map((item) => ({
-      params: {
-        slug: item.slug
-      }
-    })),
+    paths: pages
+      .filter((item) => {
+        return !item.comingSoon
+      })
+      .map((item) => ({
+        params: {
+          slug: item.slug
+        }
+      })),
     fallback: 'blocking'
   }
 }
@@ -57,6 +61,15 @@ export const getStaticProps: GetStaticProps<PageProps> =
     if (!page) {
       return {
         notFound: true
+      }
+    }
+
+    if (page.comingSoon && page.lmsUrl) {
+      return {
+        redirect: {
+          destination: page.lmsUrl,
+          permanent: false
+        }
       }
     }
 

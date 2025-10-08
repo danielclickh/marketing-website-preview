@@ -7,8 +7,9 @@ export default {
   icon: iconDataWarehousing,
   h1: 'Master data warehousing with ClickHouse',
   intro: 'Design, build, and optimize modern data warehouses using ClickHouse.',
-  level: 'Beginner',
-  modules: '6 modules',
-  quizzes: '3',
-  duration: '4.5 hours'
+  level: 'Unknown',
+  modules: 'N/A',
+  quizzes: 'N/A',
+  duration: 'N/A',
+  comingSoon: true
 } satisfies PageItem

@@ -292,17 +292,7 @@ export default function LearnPage({
           </div>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-4 xl:gap-8'>
             {pages.map((path, pathIndex) => {
-              return (
-                <LearningPathCard
-                  key={pathIndex}
-                  icon={path.icon}
-                  title={path.title}
-                  description={path.intro}
-                  href={`/learn/${path.slug}`}
-                  duration={path.duration}
-                  modules={path.modules}
-                />
-              )
+              return <LearningPathCard key={pathIndex} path={path} />
             })}
           </div>
         </div>
