@@ -67,22 +67,7 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>{' '}
-            <LogoAnnouncementLink
-              className='mt-6'
-              href='/openhouse?loc=homepage-hero'
-              logo={{
-                src: '/images/open-house-black.svg',
-                alt: 'MongoDB',
-                width: 50,
-                height: 50,
-                className: 'saturate-0 brightness-0 mx-3'
-              }}>
-             We're taking Open House on the road! Join us for free events in Sydney, NYC, Bangalore & Amsterdam.{" "}
-              <span className='underline group-hover:decoration-2'>
-              Register now
-              </span>
-              !
-            </LogoAnnouncementLink>
+
           </div>
         </div>
 
