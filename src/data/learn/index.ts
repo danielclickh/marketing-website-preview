@@ -4,17 +4,15 @@ import observability from './observability'
 import realTimeAnalytics from './real-time-analytics'
 import { ImageProps } from 'next/image'
 
-export type ItemTypes = 'module' | 'quiz' | 'hands-on' | 'certificate'
-
 export type Item = {
-  type: ItemTypes
+  icon: { src: ImageProps['src'] } & Partial<Omit<ImageProps, 'src'>>
   title: string
   description?: string
   link?: string
   panel?: {
-    image: { src: ImageProps['src'] } & Partial<Omit<ImageProps, 'src'>>
-    title: string
-    description: string
+    image?: { src: ImageProps['src'] } & Partial<Omit<ImageProps, 'src'>>
+    title?: string
+    description?: string
   }
 }
 

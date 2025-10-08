@@ -8,8 +8,8 @@ export default {
   h1: 'Master observability with ClickHouse',
   intro:
     'Ingest logs, metrics, and traces to monitor systems and power observability dashboards.',
-  level: 'Beginner',
+  level: '3 levels',
   modules: '4 modules',
   quizzes: '1',
-  duration: '2.5 hours'
+  duration: '10 hours'
 } satisfies PageItem

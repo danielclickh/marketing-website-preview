@@ -1,8 +1,6 @@
 import iconDuration from '../assets/icon-duration.svg'
 import iconLevel from '../assets/icon-level.svg'
-import iconModule from '../assets/icon-module.svg'
 import iconModules from '../assets/icon-modules.svg'
-import iconQuiz from '../assets/icon-quiz.svg'
 import iconQuizzes from '../assets/icon-quizzes.svg'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import { CUIButton } from '@/components/ClickUI'
@@ -14,7 +12,7 @@ import SocialButton from '@/components/SocialButton'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { pages, PageItem, ItemTypes, Section } from '@/data/learn'
+import { pages, PageItem, Section } from '@/data/learn'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -31,11 +29,6 @@ import React, { useEffect, useRef, useState } from 'react'
 
 type PageProps = CommonProps &
   PageItem & { customerStories: HomepageCustomerStories }
-
-const itemIcons: Record<ItemTypes, ImageProps['src']> = {
-  module: iconModule,
-  quiz: iconQuiz
-}
 
 export async function getStaticPaths() {
   return {
@@ -338,18 +331,20 @@ function LearnSection({ section }: { section: Section }) {
           <ol className='relative z-10 space-y-14'>
             {section.items.map((item, itemIndex) => {
               return (
-                <li key={itemIndex} className='flex items-start gap-4 md:gap-8'>
+                <li
+                  key={itemIndex}
+                  className='group flex items-start gap-4 md:gap-8'>
                   <div
                     ref={(el: HTMLDivElement) =>
                       (timelineDotRefs.current[itemIndex] = el)
                     }
                     className='flex aspect-square w-10 flex-shrink-0 flex-grow-0 rounded-full border border-neutral-700/80 bg-neutral-900 shadow md:w-14'>
                     <Image
-                      src={itemIcons[item.type]}
-                      alt={item.type}
+                      alt={item.icon.alt || item.title}
                       width={24}
                       height={24}
-                      className='m-auto h-auto w-5 md:w-6'
+                      {...item.icon}
+                      className={`m-auto h-auto w-5 md:w-6 ${item.icon?.className || ''}`}
                     />
                   </div>
                   <div className='relative mt-2 flex-1 md:mt-3'>
@@ -360,27 +355,39 @@ function LearnSection({ section }: { section: Section }) {
                         <span className='sr-only'>{item.title}</span>
                       </Link>
                     )}
-                    <SuiTitle type='h3'>{item.title}</SuiTitle>
-                    {item.description && (
-                      <Markdown className='rich-text-content text-neutral-200'>
-                        {item.description}
-                      </Markdown>
-                    )}
-                    {item.panel && (
-                      <div className='mt-8 flex flex-col items-center overflow-hidden rounded bg-neutral-900 md:flex-row'>
-                        <Image
-                          alt={item.panel.title}
-                          width={640}
-                          height={480}
-                          {...item.panel.image}
-                          className={`aspect-video w-full flex-shrink-0 object-cover object-center md:w-56 ${item.panel.image?.className || ''}`}
-                        />
-                        <div className='px-6 py-4'>
-                          <SuiTitle type='h4'>{item.panel.title}</SuiTitle>
-                          <SuiText size='sm'>{item.panel.description}</SuiText>
+                    <div className='space-y-6'>
+                      {item.title && (
+                        <SuiTitle type='h3'>{item.title}</SuiTitle>
+                      )}
+                      {item.description && (
+                        <Markdown className='rich-text-content text-neutral-200'>
+                          {item.description}
+                        </Markdown>
+                      )}
+                      {item.panel && (
+                        <div className='flex flex-col items-center overflow-hidden rounded bg-neutral-900 md:flex-row'>
+                          {item.panel.image && (
+                            <Image
+                              alt={item.panel.title || item.title}
+                              width={640}
+                              height={480}
+                              {...item.panel.image}
+                              className={`aspect-video w-full flex-shrink-0 object-cover object-center md:w-56 ${item.panel.image?.className || ''}`}
+                            />
+                          )}
+                          <div className='px-6 py-4'>
+                            {item.panel.title && (
+                              <SuiTitle type='h4'>{item.panel.title}</SuiTitle>
+                            )}
+                            {item.panel.description && (
+                              <SuiText size='sm'>
+                                {item.panel.description}
+                              </SuiText>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </li>
               )
