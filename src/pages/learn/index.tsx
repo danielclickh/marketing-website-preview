@@ -299,8 +299,7 @@ export default function LearnPage({
           <SuiText
             size='sm'
             className='relative z-10 text-center text-neutral-200'>
-            Looking for more? Check out our full catalog of on-demand workshops
-            and tutorials{' '}
+            Check out our full catalog of on-demand workshops and tutorials{' '}
             <Link
               href='https://learn.clickhouse.com/class_catalog/category/116050'
               className='text-primary-300 hover:underline'>
