@@ -14,10 +14,7 @@ export const config = {
     // - favicon.ico (excludes favicon file)
     {
       source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
-      missing: [
-        { type: 'header', key: 'x-middleware-prefetch', value: '1' },
-        { type: 'header', key: 'x-nextjs-data', value: '1' }
-      ]
+      missing: [{ type: 'header', key: 'x-middleware-prefetch', value: '1' }]
     }
   ]
 }
