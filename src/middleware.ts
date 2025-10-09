@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
+const COUNTRY_COOKIE_KEY = `ch-user-country`
+
 export const config = {
   matcher: [
     // Matches all request paths except for the following:
@@ -8,8 +10,35 @@ export const config = {
     // - _next/static (excludes static files)
     // - _next/image (excludes image optimization files)
     // - favicon.ico (excludes favicon file)
-    //'/((?!api|_next/static|_next/image|favicon.ico).*)'
+    '/((?!api|_next/static|_next/image|favicon.ico).*)'
   ]
+}
+
+export function middleware(request: NextRequest) {
+  const countryCode = getCountryCode(request)
+
+  let response: null | NextResponse<any> = NextResponse.next()
+
+  if (countryCode) {
+    //response = handlei18redirect(countryCode, request, response)
+
+    // Store user country cookie
+    response.cookies.set(COUNTRY_COOKIE_KEY, countryCode)
+  }
+
+  return response
+}
+
+function getCountryCode(request: NextRequest): null | string {
+  // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
+  // Note: geo data is only available on Vercel deployment
+  const cookieCountryCode = request.cookies.get(COUNTRY_COOKIE_KEY)?.value
+  return (
+    request.nextUrl.searchParams.get('country')?.toUpperCase() ||
+    cookieCountryCode ||
+    request.geo?.country ||
+    null
+  )
 }
 
 // This i18nRedirectionMap defines path-based redirections based on the user's country code.
@@ -44,20 +73,11 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
   }
 }
 
-export function middleware(request: NextRequest) {
-  const cookieKey = `user-country-code-v4`
-
-  // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
-  // Note: geo data is only available on Vercel deployment; defaults to 'unknown' otherwise
-  const cookieCountryCode = request.cookies.get(cookieKey)?.value
-  const countryCode =
-    request.nextUrl.searchParams.get('country')?.toUpperCase() ||
-    cookieCountryCode ||
-    request.geo?.country ||
-    'unknown'
-
-  let response: null | NextResponse<any> = NextResponse.next()
-
+function handlei18redirect(
+  countryCode: string,
+  request: NextRequest,
+  response: NextResponse
+) {
   // Check if there are redirections set up for the user’s country
   if (i18nRedirectionMap.hasOwnProperty(countryCode)) {
     // Retrieve the redirection map for the specific country code
@@ -84,6 +104,5 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  response.cookies.set(cookieKey, countryCode)
   return response
 }

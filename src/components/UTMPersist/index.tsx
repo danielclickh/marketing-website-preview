@@ -1,4 +1,5 @@
 import { Galaxy } from '@/lib/galaxy/web/browser'
+import { getBrowserCookie } from '@/lib/utils/cookies'
 import { Experiment, Result } from '@growthbook/growthbook'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
@@ -103,22 +104,8 @@ const UTMPersist = () => {
 
 export default React.memo(UTMPersist)
 
-export function getGoogleAnalyticsCookie(): null | string {
-  // Get all cookies in the format "cookieName=cookieValue; ..."
-  const cookies = document.cookie.split(';')
-
-  // Loop through each cookie
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim()
-
-    // Check if the cookie starts with "_ga="
-    if (cookie.startsWith('_ga=')) {
-      // Return the value part, which is everything after "_ga="
-      return cookie.substring(4)
-    }
-  }
-
-  return null
+export function getGoogleAnalyticsCookie() {
+  return getBrowserCookie('_ga')
 }
 
 export function continuouslyCheckGoogleAnalyticsCookie({

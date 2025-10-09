@@ -8,6 +8,7 @@ import { HeaderProps } from './types'
 import { useGlobalSearch } from '@/components-cleaned/GlobalSearchProvider'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { getBrowserCookie, setBrowserCookie } from '@/lib/utils/cookies'
 import { SearchIcon } from '@heroicons/react/outline'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
@@ -51,8 +52,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
 
     //=== Country specific eyebrow ===//
     ;(async () => {
-      let countryCode: null | string =
-        window.sessionStorage.getItem('ch-user-country') || null
+      let countryCode = getBrowserCookie('ch-user-country')
       const langCode = window.navigator.language.split('-')[0]
 
       if (!countryCode) {
@@ -60,11 +60,11 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           const request = await fetch('https://ipinfo.io?token=33cfa2cb7f422c')
           const response = await request.json()
           if (request.ok && !response.error) {
-            countryCode = response.country
+            countryCode = response.country // (ISO 3166-1 alpha-2 format)
 
             // Remember users country
             if (countryCode) {
-              window.sessionStorage.setItem('ch-user-country', countryCode)
+              setBrowserCookie('ch-user-country', countryCode)
             }
           }
         } catch {}
