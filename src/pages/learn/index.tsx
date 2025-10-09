@@ -206,7 +206,7 @@ export default function LearnPage({
       {/* Stats bar */}
       <section className='bg-white/10 py-4 lg:py-7'>
         <div className='section-container'>
-          <ul className='flex flex-wrap items-center justify-center gap-6 gap-y-4 font-bold lg:justify-between lg:text-xl'>
+          <ul className='flex flex-col flex-wrap items-center justify-center gap-6 gap-y-4 font-bold sm:flex-row sm:gap-y-2 lg:justify-between lg:text-xl'>
             <li className='flex items-center gap-2 lg:gap-4'>
               <Image
                 src={iconDevelopers}
@@ -227,6 +227,7 @@ export default function LearnPage({
               />
               {formatStat(headerData.github.stars)}+ GitHub stars
             </li>
+            <li className='hidden w-full sm:block lg:hidden' />
             <li className='flex items-center gap-2 lg:gap-4'>
               <Image
                 src={iconContributors}
@@ -302,7 +303,8 @@ export default function LearnPage({
       <AngledSection topDirection='down' className='text-primary-300'>
         <section
           id='live-training'
-          className='bg-primary-300 py-16 text-neutral-950 lg:py-24'>
+          className='bg-primary-300 pb-20 pt-16 text-neutral-950 lg:py-24 lg:pt-16'>
+          {/* Intro */}
           <div className='section-container space-y-12'>
             <div className='mx-auto max-w-xl space-y-4 text-center'>
               <Image
@@ -320,6 +322,8 @@ export default function LearnPage({
                 you need.
               </SuiText>
             </div>
+
+            {/* Interactive table */}
             <div className='rounded-xl border border-neutral-600 bg-neutral-900/80 p-4 text-white'>
               <div className='mb-4 flex flex-col items-center gap-y-4 md:flex-row'>
                 <SuiTitle type='h3'>Upcoming live training</SuiTitle>
@@ -413,7 +417,16 @@ export default function LearnPage({
       <AngledSection
         topDirection='down'
         className='bg-primary-300 text-neutral-600'>
-        <section id='certification' className='bg-neutral-600 py-24 text-white'>
+        <section
+          id='certification'
+          className='relative bg-neutral-600 pb-6 pt-24 text-white lg:pt-32'>
+          <Image
+            src='/images/learn/certified-developer-badge.png'
+            alt='ClickHouse Certified Developer'
+            width={417}
+            height={363}
+            className='absolute left-1/2 top-0 w-40 -translate-x-1/2 -translate-y-1/2 lg:w-52'
+          />
           <div className='section-container space-y-12'>
             <div className='mx-auto max-w-xl space-y-4 text-center'>
               <SuiTitle type='h2'>Get ClickHouse Certified</SuiTitle>
@@ -485,9 +498,29 @@ export default function LearnPage({
         </section>
       </AngledSection>
 
+      <AngledSection
+        topDirection='down'
+        className='bg-neutral-600 text-neutral-800'>
+        <section id='catalog' className='bg-neutral-800 py-16 text-white'>
+          <div className='section-container space-y-6 text-center'>
+            <SuiTitle type='h2'>Looking for more?</SuiTitle>
+            <SuiText className='opacity-70'>
+              Check out our full catalog of on-demand workshops and tutorials.
+            </SuiText>
+            <div>
+              <LinkWithArrow
+                href='https://learn.clickhouse.com/class_catalog/category/116050'
+                className='font-bold text-primary-300 hover:underline'>
+                View the full catalog
+              </LinkWithArrow>
+            </div>
+          </div>
+        </section>
+      </AngledSection>
+
       {/* Get started */}
       <section
-        className='bg-shadow-element yellow-shadow overflow-hidden bg-grid py-32'
+        className='bg-shadow-element yellow-shadow overflow-hidden bg-grid py-20 lg:py-32'
         style={
           {
             '--top-side': '0',
@@ -520,7 +553,7 @@ export default function LearnPage({
       </section>
 
       {/* Trusted by */}
-      <section className='bg-primary-300 py-20 text-neutral-950'>
+      <section className='bg-primary-300 py-16 text-neutral-950 lg:py-20'>
         <div className='section-container'>
           <SuiTitle type='h3' className='mb-10 text-center'>
             Trusted by the best developers that work with data{' '}

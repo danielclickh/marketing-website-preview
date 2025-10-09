@@ -7,6 +7,7 @@ import { ImageProps } from 'next/image'
 export type Item = {
   icon: { src: ImageProps['src'] } & Partial<Omit<ImageProps, 'src'>>
   title: string
+  badge?: string
   description?: string
   link?: string
   panel?: {

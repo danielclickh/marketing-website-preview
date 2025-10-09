@@ -111,7 +111,7 @@ export default function Page({
                 <Breadcrumbs.Link href='/learn'>Training</Breadcrumbs.Link>
                 <Breadcrumbs.Item>{props.title}</Breadcrumbs.Item>
               </Breadcrumbs>
-              <SuiTitle type='h1' className='max-w-4xl'>
+              <SuiTitle type='h1' className='max-w-5xl'>
                 {props.h1}
               </SuiTitle>
               <SuiText size='lg' className='max-w-lg'>
@@ -361,8 +361,19 @@ function LearnSection({ section }: { section: Section }) {
                     )}
                     <div className='space-y-6'>
                       {item.title && (
-                        <SuiTitle type='h3'>{item.title}</SuiTitle>
+                        <SuiTitle type='h3'>
+                          {item.title}
+                          {item.badge && (
+                            <>
+                              {' '}
+                              <small className='inline-block rounded bg-white/10 px-2 text-sm'>
+                                {item.badge}
+                              </small>
+                            </>
+                          )}
+                        </SuiTitle>
                       )}
+
                       {item.description && (
                         <Markdown className='rich-text-content text-neutral-200'>
                           {item.description}

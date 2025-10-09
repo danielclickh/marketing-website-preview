@@ -39,7 +39,7 @@ export default {
             image: {
               src: badgeDatabaseAssociate,
               alt: 'ClickHouse Database Associate',
-              className: 'self-stretch object-contain bg-white md:!w-48'
+              className: 'self-stretch object-contain bg-white md:!w-40'
             }
           }
         },
@@ -63,7 +63,7 @@ export default {
             image: {
               src: badgeDatabaseProfessional,
               alt: 'ClickHouse Database Professional',
-              className: 'self-stretch object-contain bg-white md:!w-48'
+              className: 'self-stretch object-contain bg-white md:!w-40'
             }
           }
         },

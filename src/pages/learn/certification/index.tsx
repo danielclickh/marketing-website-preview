@@ -204,8 +204,8 @@ export default function CertificationPage({
           <div className='w-full lg:max-w-[600px]'>
             <p className='mb-4'>
               There is no required prerequisite for attempting this exam, but we
-              highly recommend taking the ClickHouse Developer training course -
-              available either{' '}
+              highly recommend taking the Real-time Analytics with ClickHouse
+              training course - available either{' '}
               <a href='/learn#on-demand' className='text-primary-300'>
                 On-demand
               </a>{' '}
@@ -218,8 +218,8 @@ export default function CertificationPage({
               <Link href='/learn#live-training' className='text-primary-300'>
                 Live Events
               </Link>{' '}
-              to register for the next Instructor-led ClickHouse Developer
-              training.
+              to register for the next Instructor-led Real-time Analytics with
+              ClickHouse training.
             </p>
 
             <div className='flex flex-col gap-2'>
@@ -421,10 +421,10 @@ export default function CertificationPage({
           <div className='mx-auto mt-16 max-w-3xl text-center'>
             <Image
               src='/images/learn/certified-developer-badge.png'
-              alt={'ClickHouse Certified Developer'}
+              alt='ClickHouse Certified Developer'
               width={417}
               height={363}
-              className='mb-16 inline-block max-w-[208px]'
+              className='mb-16 inline-block max-w-52'
             />
 
             <p className='mb-6'>
@@ -565,9 +565,10 @@ export default function CertificationPage({
               content: (
                 <p>
                   No - anyone can purchase and take an exam attempt. However, it
-                  is highly recommended that you take our free ClickHouse
-                  Developer training course, which covers all of the exam
-                  objectives and is offered both virtually and on-demand.
+                  is highly recommended that you take our free Real-time
+                  Analytics with ClickHouse training course, which covers all of
+                  the exam objectives and is offered both virtually and
+                  on-demand.
                 </p>
               )
             },
