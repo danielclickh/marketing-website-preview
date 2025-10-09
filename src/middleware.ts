@@ -12,10 +12,7 @@ export const config = {
     // - _next/static (excludes static files)
     // - _next/image (excludes image optimization files)
     // - favicon.ico (excludes favicon file)
-    {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
-      missing: [{ type: 'header', key: 'x-middleware-prefetch', value: '1' }]
-    }
+    '/((?!api|_next/static|_next/image|favicon.ico).*)'
   ]
 }
 
