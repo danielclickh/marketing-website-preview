@@ -1840,6 +1840,18 @@
     "@typescript-eslint/types" "8.29.1"
     eslint-visitor-keys "^4.2.0"
 
+"@vercel/functions@^3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@vercel/functions/-/functions-3.1.3.tgz#a6aef6c5ea1310eec4c76bcba5fdcbfb40cc2226"
+  integrity sha512-dGYDSOfzjr5ZLfQ2bb4f+2NySsTLX4d6xnUr2Ckc5q/TrPTSJPLjzRzYLQAYO3/aeOv7evSYvPhijURmocu0UQ==
+  dependencies:
+    "@vercel/oidc" "3.0.2"
+
+"@vercel/oidc@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@vercel/oidc/-/oidc-3.0.2.tgz#3bcf6d52ddddc9099855d2127d06702fc3ff7f92"
+  integrity sha512-JekxQ0RApo4gS4un/iMGsIL1/k4KUBe3HmnGcDvzHuFBdQdudEJgTqcsJC7y6Ul4Yw5CeykgvQbX2XeEJd0+DA==
+
 "@vimeo/player@^2.29.3":
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.29.3.tgz#d060be544fbb385c1dffd53885e827f6cf89c2c0"
