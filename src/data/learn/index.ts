@@ -32,7 +32,7 @@ export interface PageItem {
   comingSoon?: boolean
   level: string
   modules: string
-  quizzes: string
+  credentials: string
   duration: string
   sections?: Array<Section>
 }

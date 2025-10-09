@@ -334,13 +334,13 @@ export default function LearnPage({
               </div>
               <div>
                 {filteredEvents.length > 0 ? (
-                  <ul className='grid grid-cols-1 space-y-2 sm:grid-cols-2 lg:grid-cols-10'>
+                  <ul className='grid grid-cols-1 space-y-2 sm:grid-cols-2 lg:grid-cols-12'>
                     {filteredEvents.map((event, eventIndex) => {
                       return (
                         <li
                           key={eventIndex}
                           className='relative col-span-full grid grid-cols-subgrid gap-y-2 rounded bg-neutral-900/30 px-4 py-2 transition-colors hover:bg-neutral-900/60'>
-                          <div className='col-span-full flex lg:col-span-6'>
+                          <div className='order-1 col-span-full flex lg:col-span-6'>
                             <Link
                               href={`/company/events/${event.slug}`}
                               className='my-auto font-bold text-primary-300 transition-colors hover:text-white'>
@@ -348,7 +348,7 @@ export default function LearnPage({
                               {event.title}
                             </Link>
                           </div>
-                          <span className='flex items-center gap-2 text-sm text-neutral-200 lg:col-span-2'>
+                          <span className='order-3 flex items-center gap-2 text-sm text-neutral-200 lg:order-2 lg:col-span-3'>
                             <Image
                               src={iconCalendar}
                               width={20}
@@ -364,7 +364,7 @@ export default function LearnPage({
                               </small>
                             </span>
                           </span>
-                          <span className='flex items-center gap-2 text-sm text-neutral-200 lg:col-span-2'>
+                          <span className='order-2 flex items-center gap-2 text-sm text-neutral-200 lg:order-3 lg:col-span-3'>
                             <Image
                               src={iconMapPin}
                               width={20}

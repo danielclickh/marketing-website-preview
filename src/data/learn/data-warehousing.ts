@@ -9,7 +9,7 @@ export default {
   intro: 'Design, build, and optimize modern data warehouses using ClickHouse.',
   level: 'Unknown',
   modules: 'N/A',
-  quizzes: 'N/A',
+  credentials: 'N/A',
   duration: 'N/A',
   comingSoon: true
 } satisfies PageItem

@@ -15,13 +15,14 @@ export default {
   lmsUrl: 'https://learn.clickhouse.com/visitor_catalog_class/show/1872073',
   level: '3 levels',
   modules: '10 modules',
-  quizzes: '3',
+  credentials: '3',
   duration: '10 hours',
   sections: [
     {
       items: [
         {
           icon: { src: iconBook },
+          link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1872073',
           title: 'Level 1: Real-time analytics with ClickHouse',
           description: `In level 1 of this three-part learning path, you’ll learn how ClickHouse is blazing fast for analyzing massive datasets in real time, and tips and tricks for getting data in and starting a POC.
           
@@ -44,6 +45,7 @@ export default {
         },
         {
           icon: { src: iconBook },
+          link: 'https://learn.clickhouse.com/user_catalog_class/show/1896608',
           title: 'Level 2: Real-time analytics with ClickHouse',
           description: `In level 2 of this three-part learning path, you’ll gain the skills needed to solve real problems and build useful workflows with ClickHouse.
           
@@ -67,6 +69,7 @@ export default {
         },
         {
           icon: { src: iconBook },
+          link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1914307',
           title: 'Level 3: Real-time analytics with ClickHouse',
           description: `In level 3 of this three-part learning path, you’ll gain the skills and expertise to design, optimize, and run ClickHouse at scale.
           

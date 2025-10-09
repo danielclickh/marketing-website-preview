@@ -11,7 +11,7 @@ export default {
   lmsUrl: 'https://learn.clickhouse.com/',
   level: 'Unknown',
   modules: 'N/A',
-  quizzes: 'N/A',
+  credentials: 'N/A',
   duration: 'N/A',
   comingSoon: true
 } satisfies PageItem

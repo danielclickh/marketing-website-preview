@@ -10,6 +10,6 @@ export default {
     'Ingest logs, metrics, and traces to monitor systems and power observability dashboards.',
   level: '3 levels',
   modules: '4 modules',
-  quizzes: '1',
+  credentials: '1',
   duration: '10 hours'
 } satisfies PageItem

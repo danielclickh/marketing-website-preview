@@ -1,7 +1,7 @@
 import iconDuration from '../assets/icon-duration.svg'
 import iconLevel from '../assets/icon-level.svg'
 import iconModules from '../assets/icon-modules.svg'
-import iconQuizzes from '../assets/icon-quizzes.svg'
+import iconTrophy from '../assets/icon-trophy.svg'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import { CUIButton } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
@@ -161,19 +161,6 @@ export default function Page({
                 </li>
                 <li className='flex items-center gap-4'>
                   <Image
-                    src={iconQuizzes}
-                    alt='Icon'
-                    width={36}
-                    height={36}
-                    className='aspect-square w-9 object-contain object-center'
-                  />
-                  <div className='flex flex-col'>
-                    <span className='text-sm text-neutral-200'>Quizzes</span>
-                    <span className='text-xl font-bold'>{props.quizzes}</span>
-                  </div>
-                </li>
-                <li className='flex items-center gap-4'>
-                  <Image
                     src={iconDuration}
                     alt='Icon'
                     width={36}
@@ -183,6 +170,23 @@ export default function Page({
                   <div className='flex flex-col'>
                     <span className='text-sm text-neutral-200'>Duration</span>
                     <span className='text-xl font-bold'>{props.duration}</span>
+                  </div>
+                </li>
+                <li className='flex items-center gap-4'>
+                  <Image
+                    src={iconTrophy}
+                    alt='Icon'
+                    width={36}
+                    height={36}
+                    className='aspect-square w-9 object-contain object-center'
+                  />
+                  <div className='flex flex-col'>
+                    <span className='text-sm text-neutral-200'>
+                      Credentials
+                    </span>
+                    <span className='text-xl font-bold'>
+                      {props.credentials}
+                    </span>
                   </div>
                 </li>
               </ul>
