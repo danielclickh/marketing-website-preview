@@ -21,7 +21,7 @@ export default function LearningPathCard({
     comingSoon,
     level,
     modules,
-    quizzes,
+    credentials,
     duration,
     sections
   }
