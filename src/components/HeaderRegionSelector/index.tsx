@@ -1,5 +1,5 @@
 import { useClickOutside } from '../../hooks'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import React, { useRef, useState } from 'react'
 
 export interface HeaderRegionSelectorProps {
@@ -15,6 +15,14 @@ export default function HeaderRegionSelector({
   useClickOutside(selectorRef, () => {
     setIsOpen(false)
   })
+
+  const disablePrefetch: Partial<LinkProps> = {
+    prefetch: false,
+    onMouseEnter(e) {
+      e.stopPropagation()
+      e.preventDefault()
+    }
+  }
 
   return (
     <div
@@ -69,16 +77,16 @@ export default function HeaderRegionSelector({
         <ul className='relative min-w-44 rounded-lg bg-neutral-750 p-4 text-sm text-white shadow transition-all'>
           <li>
             <Link
+              {...disablePrefetch}
               href='/?country=en'
-              prefetch={false}
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               English
             </Link>
           </li>
           <li>
             <Link
+              {...disablePrefetch}
               href='/jp?country=jp'
-              prefetch={false}
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               Japanese
             </Link>
