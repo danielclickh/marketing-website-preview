@@ -1,5 +1,4 @@
 import { useClickOutside } from '../../hooks'
-import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 
 export interface HeaderRegionSelectorProps {
@@ -68,18 +67,18 @@ export default function HeaderRegionSelector({
         }`}>
         <ul className='relative min-w-44 rounded-lg bg-neutral-750 p-4 text-sm text-white shadow transition-all'>
           <li>
-            <Link
+            <a
               href='/?country=en'
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               English
-            </Link>
+            </a>
           </li>
           <li>
-            <Link
+            <a
               href='/jp?country=jp'
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               Japanese
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

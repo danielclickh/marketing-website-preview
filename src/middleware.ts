@@ -1,7 +1,9 @@
+import { geolocation } from '@vercel/functions'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 const COUNTRY_COOKIE_KEY = `ch-user-country`
+const COUNTRY_OVERRIDE_COOKIE_KEY = `${COUNTRY_COOKIE_KEY}-override`
 
 export const config = {
   matcher: [
@@ -15,30 +17,61 @@ export const config = {
 }
 
 export function middleware(request: NextRequest) {
-  const countryCode = getCountryCode(request)
+  const userOverride = userOverrideCountryCode(request)
+  const countryCode = userOverride || getCountryCode(request)
+
+  const isSecure =
+    (process?.env?.VERCEL_ENV || process?.env?.NODE_ENV) === 'production' ||
+    request.nextUrl.protocol === 'https:'
 
   let response: null | NextResponse<any> = NextResponse.next()
 
-  if (countryCode) {
-    //response = handlei18redirect(countryCode, request, response)
+  // Handle internationalization redirects
+  /*if (countryCode) {
+    response = handlei18redirect(countryCode, request, response)
+  }*/
 
-    // Store user country cookie
-    response.cookies.set(COUNTRY_COOKIE_KEY, countryCode)
+  // Store user override, for use on request
+  if (userOverride) {
+    response.cookies.set(COUNTRY_OVERRIDE_COOKIE_KEY, userOverride, {
+      secure: isSecure
+    })
+  }
+
+  // Store country code, for use on frontend
+  if (countryCode) {
+    response.cookies.set(COUNTRY_COOKIE_KEY, countryCode, {
+      secure: isSecure
+    })
   }
 
   return response
 }
 
-function getCountryCode(request: NextRequest): null | string {
-  // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
-  // Note: geo data is only available on Vercel deployment
+function userOverrideCountryCode(request: NextRequest) {
+  const urlCountryCode = request.nextUrl.searchParams
+    .get('country')
+    ?.toUpperCase()
+  const userOverrideCountryCode = request.cookies.get(
+    COUNTRY_OVERRIDE_COOKIE_KEY
+  )?.value
+  return urlCountryCode || userOverrideCountryCode
+}
+
+function getCountryCode(request: NextRequest) {
   const cookieCountryCode = request.cookies.get(COUNTRY_COOKIE_KEY)?.value
-  return (
-    request.nextUrl.searchParams.get('country')?.toUpperCase() ||
-    cookieCountryCode ||
-    request.geo?.country ||
-    null
-  )
+
+  // Get the country code from the request's geo data (ISO 3166-1 alpha-2 format)
+  // Geo data is only available on Vercel deployment
+  const vercelCountryCode = geolocation(request)?.country
+  const nextjsCountryCode = request.geo?.country
+
+  // Return in order of priority
+  if (vercelCountryCode) return vercelCountryCode
+  if (nextjsCountryCode) return nextjsCountryCode
+  if (cookieCountryCode) return cookieCountryCode
+
+  return null
 }
 
 // This i18nRedirectionMap defines path-based redirections based on the user's country code.
