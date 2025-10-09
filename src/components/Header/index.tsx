@@ -27,7 +27,9 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
   >('ClickHouse announces Series C extension and key leadership hires')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState('/blog/clickhouse-extends-series-c-financing-expands-leadership-team')
+  const [headerBannerUrl, setHeaderBannerUrl] = useState(
+    '/blog/clickhouse-extends-series-c-financing-expands-leadership-team'
+  )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
   >(undefined)
@@ -51,6 +53,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     ;(async () => {
       let countryCode: null | string =
         window.sessionStorage.getItem('ch-user-country') || null
+      const langCode = window.navigator.language.split('-')[0]
 
       if (!countryCode) {
         try {
@@ -58,19 +61,19 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           const response = await request.json()
           if (request.ok && !response.error) {
             countryCode = response.country
+
+            // Remember users country
+            if (countryCode) {
+              window.sessionStorage.setItem('ch-user-country', countryCode)
+            }
           }
         } catch {}
       }
 
-      // If country code not give, use the language country code
-      if (!countryCode) {
-        countryCode = window.navigator.language.split('-')[0]
-      }
-
-      // Remember users country
-      window.sessionStorage.setItem('ch-user-country', countryCode)
-
-      if (countryCode?.toUpperCase() === 'NL') {
+      if (
+        countryCode?.toUpperCase() === 'NL' ||
+        langCode?.toUpperCase() === 'NL'
+      ) {
         setHeaderBannerEnabled(true)
         setHeaderBannerText(
           <span className='inline-flex items-center gap-2'>
