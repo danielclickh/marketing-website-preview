@@ -93,22 +93,23 @@ export default function PartnersPage({
             <CUICard.Body className='mb-6'>
               <SuiText className='space-y-6 text-neutral-200'>
                 <p>
-                  Commit to a specific spend amount over 12 months for
-                  streamlined AWS Marketplace billing.
+                  Commit to a specific spend amount through your AWS Marketplace
+                  billing.
                 </p>
                 <p>
-                  Choose from preset amounts or customize your commitment to
-                  match your expected usage.
+                  Choose from preset amounts or reach out to us to learn about
+                  other options.
                 </p>
               </SuiText>
             </CUICard.Body>
             <CUICard.Footer className='mt-auto'>
-              <Link
-                href='#'
-                className='inline-flex h-10 items-center whitespace-nowrap text-sm text-primary-300 hover:underline'>
-                Committed plans on AWS Marketplace
+              <CUIButton
+                href='https://aws.amazon.com/marketplace/pp/prodview-4qyeihstyym2s'
+                type='secondary'
+                className='mx-auto'>
+                Start free trial on AWS Marketplace
                 <ExternalLink width={14} height={14} className='ml-2 inline' />
-              </Link>
+              </CUIButton>
             </CUICard.Footer>
           </CUICard>
         </div>
