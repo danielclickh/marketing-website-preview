@@ -9,6 +9,7 @@ import { ExternalLink } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -32,7 +33,16 @@ export default function PartnersPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section className='section-container my-16 lg:my-24'>
+      <section
+        className='section-container bg-shadow-element yellow-shadow my-16 lg:my-24'
+        style={
+          {
+            '--top-side': '50%',
+            '--left-side': '50%',
+            '--scale': '0.9',
+            '--opacity': '0.04'
+          } as React.CSSProperties
+        }>
         <div className='mx-auto max-w-4xl space-y-6 text-center'>
           <Image
             src={logo}
@@ -51,7 +61,7 @@ export default function PartnersPage({
             infrastructure management.{' '}
           </SuiText>
         </div>
-        <div className='mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2 lg:mt-24'>
+        <div className='mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2'>
           <CUICard className='!justify-start p-8 text-center'>
             <CUICard.Header className='mb-6'>
               <SuiTitle type='h3'>Pay as you go</SuiTitle>
@@ -123,7 +133,7 @@ export default function PartnersPage({
             </CUICard.Body>
             <CUICard.Footer className='mt-auto'>
               <LinkWithArrow
-                href='#'
+                href='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'
                 className='text-primary-300 hover:underline'>
                 Start a free trial
               </LinkWithArrow>
@@ -146,7 +156,7 @@ export default function PartnersPage({
             </CUICard.Body>
             <CUICard.Footer className='mt-auto'>
               <LinkWithArrow
-                href='#'
+                href='https://trust.clickhouse.com/'
                 className='text-primary-300 hover:underline'>
                 Visit our trust center
               </LinkWithArrow>
@@ -168,7 +178,7 @@ export default function PartnersPage({
             </CUICard.Body>
             <CUICard.Footer className='mt-auto'>
               <LinkWithArrow
-                href='#'
+                href='/learn'
                 className='text-primary-300 hover:underline'>
                 ClickHouse training
               </LinkWithArrow>
