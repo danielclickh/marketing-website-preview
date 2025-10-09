@@ -11,9 +11,14 @@ export const config = {
     // - api (excludes API routes)
     // - _next/static (excludes static files)
     // - _next/image (excludes image optimization files)
-    // - _next/data (excludes prefetching page data)
     // - favicon.ico (excludes favicon file)
-    '/((?!api|_next/static|_next/image|_next/data|favicon.ico).*)'
+    {
+      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      missing: [
+        { type: 'header', key: 'x-middleware-prefetch', value: '1' },
+        { type: 'header', key: 'x-nextjs-data', value: '1' }
+      ]
+    }
   ]
 }
 
