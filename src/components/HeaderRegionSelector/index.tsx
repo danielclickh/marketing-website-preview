@@ -16,14 +16,6 @@ export default function HeaderRegionSelector({
     setIsOpen(false)
   })
 
-  const disablePrefetch: Partial<LinkProps> = {
-    prefetch: false,
-    onMouseEnter(e) {
-      e.stopPropagation()
-      e.preventDefault()
-    }
-  }
-
   return (
     <div
       ref={selectorRef}
@@ -77,7 +69,7 @@ export default function HeaderRegionSelector({
         <ul className='relative min-w-44 rounded-lg bg-neutral-750 p-4 text-sm text-white shadow transition-all'>
           <li>
             <Link
-              {...disablePrefetch}
+              prefetch={false}
               href='/?country=en'
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               English
@@ -85,7 +77,7 @@ export default function HeaderRegionSelector({
           </li>
           <li>
             <Link
-              {...disablePrefetch}
+              prefetch={false}
               href='/jp?country=jp'
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               Japanese
