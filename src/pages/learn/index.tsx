@@ -255,7 +255,7 @@ export default function LearnPage({
       {/* On-demand */}
       <section
         id='on-demand'
-        className='relative overflow-hidden py-16 lg:py-24'>
+        className='relative overflow-hidden pb-10 pt-16 lg:pb-10 lg:pt-24'>
         <div
           className='bg-shadow-element yellow-shadow absolute inset-0 from-90% gradient-mask-to-b'
           style={
@@ -286,7 +286,7 @@ export default function LearnPage({
               className='inline-block'
             />
             <SuiTitle type='h2'>Choose a learning path</SuiTitle>
-            <SuiText className='opacity-70'>
+            <SuiText className='text-neutral-200'>
               Build real-world skills with curated learning paths aligned to
               your goals. Self-paced and beginner-friendly.
             </SuiText>
@@ -296,6 +296,18 @@ export default function LearnPage({
               return <LearningPathCard key={pathIndex} path={path} />
             })}
           </div>
+          <SuiText
+            size='sm'
+            className='relative z-10 text-center text-neutral-200'>
+            Looking for more? Check out our full catalog of on-demand workshops
+            and tutorials{' '}
+            <Link
+              href='https://learn.clickhouse.com/class_catalog/category/116050'
+              className='text-primary-300 hover:underline'>
+              here
+            </Link>
+            .
+          </SuiText>
         </div>
       </section>
 
@@ -419,7 +431,7 @@ export default function LearnPage({
         className='bg-primary-300 text-neutral-600'>
         <section
           id='certification'
-          className='relative bg-neutral-600 pb-6 pt-24 text-white lg:pt-32'>
+          className='relative bg-neutral-600 pb-16 pt-24 text-white lg:pb-24 lg:pt-36'>
           <Image
             src='/images/learn/certified-developer-badge.png'
             alt='ClickHouse Certified Developer'
@@ -493,26 +505,6 @@ export default function LearnPage({
                 href='/learn/certification'>
                 View certification guide
               </CUIButton>
-            </div>
-          </div>
-        </section>
-      </AngledSection>
-
-      <AngledSection
-        topDirection='down'
-        className='bg-neutral-600 text-neutral-800'>
-        <section id='catalog' className='bg-neutral-800 py-16 text-white'>
-          <div className='section-container space-y-6 text-center'>
-            <SuiTitle type='h2'>Looking for more?</SuiTitle>
-            <SuiText className='opacity-70'>
-              Check out our full catalog of on-demand workshops and tutorials.
-            </SuiText>
-            <div>
-              <LinkWithArrow
-                href='https://learn.clickhouse.com/class_catalog/category/116050'
-                className='font-bold text-primary-300 hover:underline'>
-                View the full catalog
-              </LinkWithArrow>
             </div>
           </div>
         </section>
