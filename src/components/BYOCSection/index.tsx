@@ -1,5 +1,6 @@
 import { CUIButton } from '../ClickUI'
 import { SuiText, SuiTitle } from '../sui'
+import byocImage from './assets/image.svg'
 import { ChevronRightIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 
@@ -13,10 +14,10 @@ export function BYOCSection({ loc }: BYOCSectionProps) {
       <div className='mt-24 flex flex-wrap items-center gap-16 rounded-lg bg-primary-300 p-8 text-neutral-900 lg:flex-nowrap lg:px-16 lg:py-16'>
         <div className='w-full lg:w-1/3'>
           <Image
-            width={394}
-            height={168}
-            src='/images/cloud/byoc-aws.svg'
-            alt='Bring your own cloud AWS'
+            width={487}
+            height={220}
+            src={byocImage}
+            alt='Bring Your Own Cloud'
           />
         </div>
         <div className='w-full lg:w-2/3'>
@@ -43,7 +44,7 @@ export function BYOCSection({ loc }: BYOCSectionProps) {
                 className='pt-0.5 transition group-hover:translate-x-1/2'
               />
             }>
-            Request access
+            Join waitlist
           </CUIButton>
         </div>
       </div>

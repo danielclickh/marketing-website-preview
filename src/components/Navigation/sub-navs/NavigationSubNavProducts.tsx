@@ -44,8 +44,8 @@ export default function NavigationSubNavProducts() {
             <span>
               Bring Your Own Cloud
               <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                A fully managed ClickHouse Cloud service,
-                <br /> deployed in your own AWS account.
+                A fully managed ClickHouse service,
+                <br /> deployed in your own AWS and GCP account.
               </div>
             </span>
           </NavigationLink>
