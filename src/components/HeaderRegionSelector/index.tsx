@@ -70,6 +70,7 @@ export default function HeaderRegionSelector({
           <li>
             <Link
               href='/?country=en'
+              prefetch={false}
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               English
             </Link>
@@ -77,6 +78,7 @@ export default function HeaderRegionSelector({
           <li>
             <Link
               href='/jp?country=jp'
+              prefetch={false}
               className='block w-full rounded-lg px-2 py-2.5 transition-colors hover:bg-neutral-700/25 hover:text-primary-300'>
               Japanese
             </Link>
