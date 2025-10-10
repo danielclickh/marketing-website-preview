@@ -8,6 +8,7 @@ export default {
   h1: 'Master machine learning and GenAI with ClickHouse',
   intro:
     'Use ClickHouse to prepare data, feed models, and support GenAI workflows at scale.',
+  lmsUrl: '#tbc',
   level: 'Unknown',
   modules: 'N/A',
   credentials: 'N/A',
