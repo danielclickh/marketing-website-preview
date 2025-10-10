@@ -293,14 +293,14 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
               <CUICard.Body>
                 <SuiTitle type='h2'>What do you get?</SuiTitle>
                 <p className='mt-4 text-neutral-200'>
-                  Get $10,000 in ClickHouse Cloud credits for 12 months, with
+                  Get $10,000 in ClickHouse Cloud credits for 24 months, with
                   support, expert training, and opportunities for promotion and
                   speaking.
                 </p>
                 <ul className='mt-6 space-y-6 text-left lg:mt-12'>
                   <li>
                     <TickItem>
-                      $10,000 in ClickHouse Cloud credits, valid for 12 months
+                      $10,000 in ClickHouse Cloud credits, valid for 24 months
                     </TickItem>
                   </li>
                   <li>
