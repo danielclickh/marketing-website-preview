@@ -8,6 +8,7 @@ import CopyUrlButton from '@/components/CopyUrlButton'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
+import Nbsp from '@/components/Nbsp'
 import SocialButton from '@/components/SocialButton'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
@@ -366,7 +367,8 @@ function LearnSection({ section }: { section: Section }) {
                           {item.badge && (
                             <>
                               {' '}
-                              <small className='inline-block rounded bg-white/10 px-2 text-sm'>
+                              <Nbsp />{' '}
+                              <small className='inline-block rounded border border-white/20 bg-white/10 px-2 py-0.5 text-sm font-medium leading-tight text-primary-300'>
                                 {item.badge}
                               </small>
                             </>
