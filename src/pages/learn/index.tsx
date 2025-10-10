@@ -327,10 +327,9 @@ export default function LearnPage({
               />
               <SuiTitle type='h2'>Instructor-led training</SuiTitle>
               <SuiText className='opacity-70'>
-                Join live, instructor-led sessions led by our head of training,
-                Rich Raposa, and supported by ClickHouse engineers. Get hands-on
-                with real labs, ask questions in real time, and build the skills
-                you need.
+                Join live, instructor-led sessions led by our global training
+                team of ClickHouse experts. Get hands-on with real labs, ask
+                questions in real time, and build the skills you need.
               </SuiText>
             </div>
 
