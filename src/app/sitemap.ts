@@ -1,3 +1,5 @@
+import buildItems from '@/../public/indexedStaticPages.json'
+import { pages as learnPages } from '@/data/learn'
 import {
   fetchAll,
   getStagingOnlyFilters,
@@ -231,36 +233,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           ja: `${siteURL}/jp/videos`
         }
       }
-    },
-    { url: `${siteURL}/clickhouse/keeper` },
-    { url: `${siteURL}/chdb` },
-    { url: `${siteURL}/government` },
-    { url: `${siteURL}/cloud/azure-waitlist` },
-    { url: `${siteURL}/cloud/clickpipes/azure-blob-storage-connector` },
-    { url: `${siteURL}/cloud/clickpipes/mysql-cdc-connector` },
-    { url: `${siteURL}/cloud/clickpipes/postgres-cdc-connector` },
-    { url: `${siteURL}/cloud/bring-your-own-cloud` },
-    { url: `${siteURL}/company/careers` },
-    { url: `${siteURL}/company/request-demo` },
-    { url: `${siteURL}/company/events` },
-    { url: `${siteURL}/company/news` },
-    { url: `${siteURL}/learn` },
-    { url: `${siteURL}/learn/certification` },
-    { url: `${siteURL}/media` },
-    { url: `${siteURL}/monitorama-2023` },
-    { url: `${siteURL}/partners/aws` },
-    { url: `${siteURL}/sitemap` },
-    { url: `${siteURL}/use-cases` },
-    { url: `${siteURL}/user-stories` },
-    { url: `${siteURL}/real-time-data-warehouse` },
-    { url: `${siteURL}/comparison/rockset` },
-    { url: `${siteURL}/comparison/doublecloud` },
-    { url: `${siteURL}/industries/gaming` },
-    { url: `${siteURL}/industries/cybersecurity` }
+    }
   ]
 
-  return [
-    ...staticUrls,
+  const cmsUrls: MetadataRoute.Sitemap = [
     ...blogPosts.map((post) => {
       const prefix = post.category === 'Japanese' ? '/jp' : ''
       return {
@@ -317,6 +293,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           }
         }
       }
-    })
+    }),
+    ...learnPages
+      .filter((item) => {
+        return !item.comingSoon
+      })
+      .map((item) => {
+        return {
+          url: `${siteURL}/learn/${item.slug}`
+        }
+      })
   ]
+
+  let combined: MetadataRoute.Sitemap = [...staticUrls, ...cmsUrls]
+
+  // Add items from our build step
+  try {
+    if (buildItems && Array.isArray(buildItems)) {
+      buildItems.forEach((item) => {
+        if (item?.attributes?.path) {
+          const url = `${siteURL}${item.attributes.path}`
+          const found = combined.find((el) => el.url === url)
+          if (!found) {
+            combined.push({
+              url
+            })
+          }
+        }
+      })
+    }
+  } catch (e) {
+    console.error(e)
+  }
+
+  return combined
 }

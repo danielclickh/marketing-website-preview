@@ -11,6 +11,9 @@ const revalidate = async (
     uris = [uris]
   }
 
+  // Always revalidate html sitemap page
+  uris.push('/sitemap')
+
   const promises: Array<Promise<void>> = []
 
   uris.forEach((uri) => {
