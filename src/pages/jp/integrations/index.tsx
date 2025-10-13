@@ -106,7 +106,8 @@ export async function getStaticProps() {
       description:
         'ClickHouse は、言語クライアント、データ取り込み、SQL クライアント、データ視覚化などのカテゴリにわたって 100 を超える統合を提供します。データ ワークフローを簡単に強化できます。',
       path: '/jp/integrations',
-      image: [{ url: '/images/integrations_social_share.png' }]
+      image: [{ url: '/images/integrations_social_share.png' }],
+      languages: ['en', 'ja']
     },
     integrationGroups,
     ...(await getCommonProps())

@@ -105,6 +105,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
 
       seo.locale = 'ja_JP'
       seo.path = '/jp/pricing'
+      seo.languages = ['en', 'ja']
 
       return {
         props: {

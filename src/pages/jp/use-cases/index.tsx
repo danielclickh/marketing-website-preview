@@ -78,7 +78,8 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
           locale: 'ja_JP',
           title: 'すべてのユースケース | ClickHouse',
           description: useCasesPageData.Description,
-          path: '/jp/use-cases'
+          path: '/jp/use-cases',
+          languages: ['en', 'ja']
         },
         ...commonProps
       }

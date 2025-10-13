@@ -19,20 +19,17 @@ import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<ClickPipesData> =
   async function getStaticProps() {
-    const data = {
-      seo: {
-        path: '/cloud/clickpipes',
-        title: 'ClickPipes - Continuous Data Ingestion for ClickHouse Cloud',
-        description:
-          'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons. Our robust and scalable architecture empowers you to handle the most demanding workloads, with guaranteed high throughput and low latency at scale.',
-        image: [{ url: '/images/cloud/clickpipes/clickpipes-og.png' }]
-      }
-    }
-
     const commonProps = await getCommonProps()
     return {
       props: {
-        ...data,
+        seo: {
+          path: '/cloud/clickpipes',
+          title: 'ClickPipes - Continuous Data Ingestion for ClickHouse Cloud',
+          description:
+            'ClickPipes is an integration engine that makes ingesting massive volumes of data from a diverse set of sources as simple as clicking a few buttons. Our robust and scalable architecture empowers you to handle the most demanding workloads, with guaranteed high throughput and low latency at scale.',
+          image: [{ url: '/images/cloud/clickpipes/clickpipes-og.png' }],
+          languages: ['en', 'ja']
+        },
         ...commonProps
       }
     }

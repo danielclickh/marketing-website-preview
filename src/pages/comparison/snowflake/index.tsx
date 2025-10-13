@@ -44,7 +44,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         seo: {
           title: 'Snowflake vs ClickHouse',
           path: '/comparison/snowflake',
-          image: [{ url: '/images/clickhouse-vs-snowflake-og.png' }]
+          image: [{ url: '/images/clickhouse-vs-snowflake-og.png' }],
+          languages: ['en', 'ja']
         }
       }
     }

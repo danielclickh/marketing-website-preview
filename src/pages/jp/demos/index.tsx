@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps<DemosPageProps> =
     seo.locale = 'ja_JP'
     seo.path = '/jp/demos'
     seo.title = 'ClickHouse デモ'
+    seo.languages = ['en', 'ja']
 
     return {
       props: {

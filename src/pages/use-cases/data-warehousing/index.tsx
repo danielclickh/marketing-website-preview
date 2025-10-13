@@ -42,6 +42,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
     data.seo.title = 'Data warehousing with ClickHouse'
     data.seo.description =
       'Say goodbye to loading spinners and lengthy report wait times. For Business Intelligence, ClickHouse unlocks faster queries at a fraction of the cost.'
+    data.seo.languages = ['en', 'ja']
 
     const commonProps = await getCommonProps()
     return {

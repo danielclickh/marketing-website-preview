@@ -132,6 +132,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
     ] = await Promise.all([pagePromise, commonPropsPromise, pricingDataPromise])
 
     seo.path = '/pricing'
+    seo.languages = ['en', 'ja']
 
     return {
       props: {

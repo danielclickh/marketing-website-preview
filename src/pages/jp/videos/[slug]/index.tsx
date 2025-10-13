@@ -123,7 +123,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let seo: SeoMetadata = {
     locale: 'ja_JP',
     path: `/jp/videos/${video.Slug}`,
-    title: video.Title || video.VideoID
+    title: video.Title || video.VideoID,
+    languages: ['en', 'ja']
   }
 
   if (video.seo?.title) seo.title = video.seo.title

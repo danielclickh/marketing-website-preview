@@ -6,6 +6,12 @@ import {
   getUnlistedFilters
 } from '@/lib/api/strapi'
 import { getEngineeringResources } from '@/lib/engineering-resources'
+import {
+  applyLangPath,
+  defaultLanguage,
+  getPathLang,
+  removeLangPath
+} from '@/lib/utils/internationalisation'
 import { getVideos } from '@/lib/videos'
 import { MetadataRoute } from 'next'
 
@@ -311,11 +317,51 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Add items from our build step
   try {
     if (buildItems && Array.isArray(buildItems)) {
+      const i18nItems: typeof buildItems = []
+
       buildItems.forEach((item) => {
         if (item && item?.attributes?.path) {
-          const url = `${siteURL}${item.attributes.path}`
-          const found = combined.find((el) => el.url === url)
-          if (!found) {
+          const path = item.attributes.path
+          const lang = getPathLang(path)
+          // Skip internationalised items, these get merged further down
+          if (lang && lang !== defaultLanguage) {
+            i18nItems.push(item)
+          } else {
+            const url = `${siteURL}${path}`
+            const found = combined.find((el) => el.url === url)
+            if (!found) {
+              combined.push({
+                url
+              })
+            }
+          }
+        }
+      })
+
+      // Merge internationalised urls with hreflang
+      i18nItems.forEach((item) => {
+        const path = item.attributes.path
+        const lang = getPathLang(item.attributes.path)
+        if (lang) {
+          const url = `${siteURL}${path}`
+          const defaultLangPath = `${siteURL}${applyLangPath(removeLangPath(path, lang), defaultLanguage)}`
+          const defaultLangEntry = combined.find(
+            (el) => el.url === defaultLangPath
+          )
+          // Merge with default language entry
+          if (defaultLangEntry) {
+            if (!defaultLangEntry?.alternates) {
+              defaultLangEntry.alternates = {}
+            }
+            if (!defaultLangEntry.alternates?.languages) {
+              defaultLangEntry.alternates.languages = {}
+            }
+
+            defaultLangEntry.alternates.languages[lang] = url
+          }
+
+          // Unable to merge, create it's own entry
+          else {
             combined.push({
               url
             })

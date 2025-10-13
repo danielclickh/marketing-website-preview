@@ -48,6 +48,7 @@ export const getStaticProps: GetStaticProps<OurStoryData> =
     }
     const data = await findOne('our-story', params)
     data.seo.path = '/company/our-story'
+    data.seo.languages = ['en', 'ja']
     const commonProps = await getCommonProps()
     return {
       props: {

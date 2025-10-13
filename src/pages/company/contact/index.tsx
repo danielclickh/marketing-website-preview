@@ -17,6 +17,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
 
     const commonProps = await getCommonProps()
     data.seo.path = '/company/contact'
+    data.seo.languages = ['en', 'ja']
     return {
       props: {
         ...data.hero,
