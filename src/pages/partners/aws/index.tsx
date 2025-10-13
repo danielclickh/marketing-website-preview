@@ -119,7 +119,7 @@ export default function PartnersPage({
                 onClick={useGalaxyOnClick(
                   'awsPartnersPage.marketPlaceLink.commitedContract'
                 )}>
-                Try free with AWS
+                Try on AWS
                 <ExternalLink width={14} height={14} className='ml-2 inline' />
               </CUIButton>
             </CUICard.Footer>
