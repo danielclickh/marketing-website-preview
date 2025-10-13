@@ -3,6 +3,7 @@ import styles from './styles.module.scss'
 import { getUTMsFromStorage } from '@/components/UTMPersist'
 import { slugify } from '@/lib/utils/strings'
 import { MarketoFormObject, MarketoFormsApi } from '@/types/marketo-form'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
@@ -367,6 +368,9 @@ export default function Page() {
 
   return (
     <>
+      <Head>
+        <meta name='robots' content='noindex' />
+      </Head>
       <div ref={resizeRef} className={styles.marketoFormContainerV2}>
         <form
           className={`mktoForm theme-${theme} ${refererClass}`}
