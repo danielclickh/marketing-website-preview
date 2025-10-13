@@ -7,18 +7,99 @@ import { getEngineeringResources } from '@/lib/engineering-resources'
 import { getVideos } from '@/lib/videos'
 import { Video } from '@/lib/videos/types'
 import { Integration } from '@/types/integrations'
-import dotenv from 'dotenv'
-import fs from 'fs'
-import path from 'path'
 
-dotenv.config({
-  path: [
-    path.join(__dirname, '..', '.env.local'),
-    path.join(__dirname, '..', '.env')
-  ]
-})
+export async function GET() {
+  const stagingOnlyFilters = getStagingOnlyFilters()
 
-const stagingOnlyFilters = getStagingOnlyFilters()
+  const blogPostsRequest = await fetchAll('blog-posts', {
+    sort: ['date:DESC', 'publishedAt:DESC'],
+    fields: [
+      'createdAt',
+      'updatedAt',
+      'publishedAt',
+      'slug',
+      'date',
+      'category'
+    ],
+    filters: { $or: stagingOnlyFilters }
+  })
+
+  const eventsRequest = fetchAll('events', {
+    sort: ['localDatetime:DESC'],
+    filters: {
+      $and: [
+        {
+          $or: stagingOnlyFilters
+        },
+        {
+          $or: getUnlistedFilters()
+        }
+      ]
+    }
+  })
+
+  const comparisonsRequest = fetchAll('comparisons', {
+    sort: ['publishedAt:DESC'],
+    fields: ['Title', 'slug', 'updatedAt']
+  })
+
+  const richTextPagesRequest = fetchAll('rich-content-pages', {
+    sort: ['publishedAt:DESC'],
+    fields: ['url', 'updatedAt', 'publishedAt']
+  })
+
+  const integrationsRequest = fetchAll('integrations', {
+    filters: {
+      // Integrations with `openInNewWindow` set to true are excluded from the query.
+      // This is because they link off externally. See the IntegrationTile component.
+      $or: [
+        {
+          openInNewWindow: {
+            $eq: false
+          }
+        },
+        {
+          openInNewWindow: {
+            $null: true
+          }
+        }
+      ]
+    }
+  })
+
+  const [
+    videos,
+    engineeringResources,
+    blogPosts,
+    events,
+    comparisons,
+    richTextPages,
+    integrations
+  ] = await Promise.all([
+    getVideos(),
+    getEngineeringResources(),
+    blogPostsRequest,
+    eventsRequest,
+    comparisonsRequest,
+    richTextPagesRequest,
+    integrationsRequest
+  ])
+
+  // We generate the XML sitemap with the posts data
+  const sitemap = generateSiteMap(
+    blogPosts,
+    events,
+    comparisons,
+    richTextPages,
+    videos,
+    engineeringResources,
+    integrations
+  )
+
+  return new Response(sitemap, {
+    headers: { 'Content-Type': 'text/xml' }
+  })
+}
 
 interface Items {
   id?: string
@@ -34,14 +115,6 @@ interface BlogItems extends Items {
   category: string
 }
 
-function log(message: string) {
-  console.log(`[${new Date().toTimeString()}] ${message}`)
-}
-
-function warn(message: string) {
-  console.warn(`[${new Date().toTimeString()}] ${message}`)
-}
-
 function generateSiteMap(
   blogPosts: BlogItems[],
   events: Items[],
@@ -53,7 +126,7 @@ function generateSiteMap(
 ) {
   const siteURL = 'https://clickhouse.com'
 
-  const sitemapXML = `<?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>${siteURL}</loc>
@@ -250,89 +323,4 @@ function generateSiteMap(
        })
        .join('')}
 </urlset>`
-  try {
-    const outputPath = path.join(__dirname, '..', 'public', 'sitemap.xml')
-    fs.writeFileSync(outputPath, sitemapXML)
-    log('Sitemap successfully written to file.')
-  } catch (error) {
-    warn(`Error writing sitemap to file:  ${JSON.stringify(error)}`)
-  }
 }
-
-async function triggerSitemap() {
-  log('Starting to build sitemap')
-
-  log('Fetching blogs')
-  const blogPosts = await fetchAll('blog-posts', {
-    sort: ['date:DESC', 'publishedAt:DESC'],
-    fields: [
-      'createdAt',
-      'updatedAt',
-      'publishedAt',
-      'slug',
-      'date',
-      'category'
-    ],
-    filters: { $or: stagingOnlyFilters }
-  })
-
-  log('Fetching events')
-  const events = await fetchAll('events', {
-    sort: ['localDatetime:DESC'],
-    populate: ['category'],
-    filters: {
-      $or: getUnlistedFilters()
-    }
-  })
-
-  log('Fetching comparisons')
-  const comparisons = await fetchAll('comparisons', {
-    sort: ['publishedAt:DESC'],
-    fields: ['Title', 'slug', 'updatedAt']
-  })
-
-  log('Fetching rich content pages')
-  const richTextPages = await fetchAll('rich-content-pages', {
-    sort: ['publishedAt:DESC'],
-    fields: ['url', 'updatedAt', 'publishedAt']
-  })
-
-  log('Fetching integrations')
-  const integrations = await fetchAll('integrations', {
-    filters: {
-      // Integrations with `openInNewWindow` set to true are excluded from the query.
-      // This is because they link off externally. See the IntegrationTile component.
-      $or: [
-        {
-          openInNewWindow: {
-            $eq: false
-          }
-        },
-        {
-          openInNewWindow: {
-            $null: true
-          }
-        }
-      ]
-    }
-  })
-
-  log('Fetching videos')
-  const videos = await getVideos()
-
-  log('Fetching engineering resources')
-  const engineeringResources = getEngineeringResources()
-
-  // We generate the XML sitemap with the posts data
-  generateSiteMap(
-    blogPosts,
-    events,
-    comparisons,
-    richTextPages,
-    videos,
-    engineeringResources,
-    integrations
-  )
-}
-
-triggerSitemap()
