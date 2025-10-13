@@ -3,6 +3,7 @@ import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import { SuiText, SuiTitle } from '@/components/sui'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { ExternalLink } from 'lucide-react'
@@ -30,6 +31,7 @@ export default function PartnersPage({
   headerData,
   footerData
 }: CommonProps) {
+  useGalaxyOnPage('awsPartnersPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -64,7 +66,9 @@ export default function PartnersPage({
         <div className='mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2'>
           <CUICard className='!justify-start p-8 text-center'>
             <CUICard.Header className='mb-6'>
-              <SuiTitle type='h3'>Pay as you go</SuiTitle>
+              <SuiTitle type='h2' className='!text-2xl'>
+                Pay as you go
+              </SuiTitle>
             </CUICard.Header>
             <CUICard.Body className='mb-6'>
               <SuiText className='space-y-6 text-neutral-200'>
@@ -78,17 +82,22 @@ export default function PartnersPage({
             </CUICard.Body>
             <CUICard.Footer className='mt-auto'>
               <CUIButton
-                href='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'
+                href='https://aws.amazon.com/marketplace/pp/prodview-p4gwofrqpkltu?trk=176b570f-20dd-4b84-aa7e-cae53990fe91&sc_channel=el&source=clickhouse'
                 type='primary'
-                className='mx-auto'>
-                Start free trial on AWS Marketplace
+                className='mx-auto'
+                onClick={useGalaxyOnClick(
+                  'awsPartnersPage.marketPlaceLink.payAsYouGo'
+                )}>
+                Try free with AWS
                 <ExternalLink width={14} height={14} className='ml-2 inline' />
               </CUIButton>
             </CUICard.Footer>
           </CUICard>
           <CUICard className='!justify-start p-8 text-center'>
             <CUICard.Header className='mb-6'>
-              <SuiTitle type='h3'>Commited contract</SuiTitle>
+              <SuiTitle type='h2' className='!text-2xl'>
+                Commited contract
+              </SuiTitle>
             </CUICard.Header>
             <CUICard.Body className='mb-6'>
               <SuiText className='space-y-6 text-neutral-200'>
@@ -104,10 +113,13 @@ export default function PartnersPage({
             </CUICard.Body>
             <CUICard.Footer className='mt-auto'>
               <CUIButton
-                href='https://aws.amazon.com/marketplace/pp/prodview-4qyeihstyym2s'
+                href='https://aws.amazon.com/marketplace/pp/prodview-4qyeihstyym2s?trk=176b570f-20dd-4b84-aa7e-cae53990fe91&sc_channel=el&source=clickhouse'
                 type='secondary'
-                className='mx-auto'>
-                Start free trial on AWS Marketplace
+                className='mx-auto'
+                onClick={useGalaxyOnClick(
+                  'awsPartnersPage.marketPlaceLink.commitedContract'
+                )}>
+                Try free with AWS
                 <ExternalLink width={14} height={14} className='ml-2 inline' />
               </CUIButton>
             </CUICard.Footer>
@@ -134,9 +146,12 @@ export default function PartnersPage({
             </CUICard.Body>
             <CUICard.Footer className='mt-auto'>
               <LinkWithArrow
-                href='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'
-                className='text-primary-300 hover:underline'>
-                Start a free trial
+                href='https://aws.amazon.com/marketplace/pp/prodview-p4gwofrqpkltu?trk=176b570f-20dd-4b84-aa7e-cae53990fe91&sc_channel=el&source=clickhouse'
+                className='text-primary-300 hover:underline'
+                onClick={useGalaxyOnClick(
+                  'awsPartnersPage.marketPlaceLink.payAsYouGoAlt'
+                )}>
+                Try free with AWS
               </LinkWithArrow>
             </CUICard.Footer>
           </CUICard>
