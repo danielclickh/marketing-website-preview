@@ -206,7 +206,7 @@ export default function CertificationPage({
               There is no required prerequisite for attempting this exam, but we
               highly recommend taking the Real-time Analytics with ClickHouse
               training course - available either{' '}
-              <a href='/learn#on-demand' className='text-primary-300'>
+              <a href='/learn/real-time-analytics' className='text-primary-300'>
                 On-demand
               </a>{' '}
               or Instructor-led, which covers all the exam objectives listed
