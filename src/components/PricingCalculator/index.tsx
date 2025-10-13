@@ -1,3 +1,5 @@
+'use client'
+
 import pricingPlansFromFile from '../../../public/pricingFile.json'
 import HRSeparator from '../HRSeparator'
 import PricingOptions from '../PricingOptions'
@@ -83,9 +85,9 @@ const PricingCalculator: React.FC<{
   const router = useRouter()
   const isMounted = useRef(false)
 
-  const tier = searchParams.get('tier') || 'Production'
-  const provider = searchParams.get('provider') || 'aws'
-  const region = searchParams.get('region') || 'us-east-1'
+  const tier = searchParams?.get('tier') || 'Production'
+  const provider = searchParams?.get('provider') || 'aws'
+  const region = searchParams?.get('region') || 'us-east-1'
 
   const tierOptions = useMemo(() => {
     if (region === 'ap-northeast-1' || provider === 'azure') {
@@ -101,15 +103,17 @@ const PricingCalculator: React.FC<{
   }, [region])
 
   let hours = 8
-  const hoursParam = searchParams.get('hours')
+  const hoursParam = searchParams?.get('hours') || null
   if (hoursParam !== null) {
     hours = Number(hoursParam)
   }
-  const computeMinSize = Number(searchParams.get('computeMinSize')) || 24
-  const computeMaxSize = Number(searchParams.get('computeMaxSize')) || 48
+  const computeMinSize =
+    Number(searchParams?.get('computeMinSize') || '24') || 24
+  const computeMaxSize =
+    Number(searchParams?.get('computeMaxSize') || '48') || 48
 
-  const storageSizeParam = searchParams.get('storageSize')
-  const storageCompressed = searchParams.get('storageCompressed') || 'no'
+  const storageSizeParam = searchParams?.get('storageSize') || null
+  const storageCompressed = searchParams?.get('storageCompressed') || 'no'
 
   let storageSize: number
 
@@ -125,7 +129,7 @@ const PricingCalculator: React.FC<{
     }
   }
 
-  const storageUnit = searchParams.get('storageUnit')?.toLowerCase() || 'gb'
+  const storageUnit = searchParams?.get('storageUnit')?.toLowerCase() || 'gb'
 
   //for passing to the tables
   const [storagePricingDev, setStoragePricingDev] = useState<

@@ -1,3 +1,5 @@
+'use client'
+
 import CategorySelector from '@/components/CategorySelector'
 import GetStartedFree from '@/components/GetStartedFree'
 import IntegrationTile from '@/components/IntegrationTile'
@@ -166,8 +168,8 @@ export default function IntegrationsPage({
   // Load values from query string
   useEffect(() => {
     if (router.isReady) {
-      const urlCategory = searchParams.get('category')
-      const urlSearch = searchParams.get('search')
+      const urlCategory = searchParams?.get('category')
+      const urlSearch = searchParams?.get('search')
 
       if (urlCategory && getCategory(urlCategory)) setCategory(urlCategory)
       if (urlSearch) setSearch(urlSearch)
@@ -179,11 +181,11 @@ export default function IntegrationsPage({
     if (router.isReady) {
       let hasChanged = false
       const newSearchParams = new URLSearchParams(
-        Array.from(searchParams.entries())
+        Array.from(searchParams?.entries() || [])
       )
 
       if (category && getCategory(category)) {
-        if (category !== searchParams.get('category')) {
+        if (category !== searchParams?.get('category')) {
           newSearchParams.set('category', category)
           hasChanged = true
         }
@@ -193,7 +195,7 @@ export default function IntegrationsPage({
       }
 
       if (search) {
-        if (search !== searchParams.get('search')) {
+        if (search !== searchParams?.get('search')) {
           newSearchParams.set('search', search)
           hasChanged = true
         }

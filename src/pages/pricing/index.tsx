@@ -390,9 +390,11 @@ export default function PricingPage({
 }
 
 function RegionRequest() {
+  'use client'
+
   //modal and form
   const searchParams = useSearchParams()
-  const modalSearchParam = searchParams.get('modal')
+  const modalSearchParam = searchParams?.get('modal')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
   const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)

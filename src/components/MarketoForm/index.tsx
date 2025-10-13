@@ -1,3 +1,5 @@
+'use client'
+
 import LazyLoad from '../LazyLoad'
 import Markdown from '../Markdown'
 import { resolveHref } from 'next/dist/client/resolve-href'
@@ -241,7 +243,7 @@ export default function MarketoForm({
   useEffect(() => {
     if (router.isReady) {
       // Build a query string to send to the iframe
-      const params = new URLSearchParams(queryParams.toString())
+      const params = new URLSearchParams(queryParams?.toString() || '')
       params.set('iid', instanceId) // Add our component instance id
       if (clearbitTracking) params.set('clearbitTracking', '1') // Add optional tracking param
       if (submitButtonLabel) params.set('submitButtonLabel', submitButtonLabel)

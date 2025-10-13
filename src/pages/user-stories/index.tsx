@@ -1,3 +1,5 @@
+'use client'
+
 import CustomerStoryCard from '@/components/CustomerStoryCard'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
@@ -194,34 +196,28 @@ export default function CustomerStoriesPage({
 
   // Read values from the URL
   useEffect(() => {
-    const urlUseCases = searchParams
-      .get('useCase')
-      ?.split(',')
+    const urlUseCases = (searchParams?.get('useCase')?.split(',') || [])
       .map((value) => Number(value.trim()))
       .filter((value) => useCaseOptions.find((item) => item.value === value))
 
-    const urlMigrations = searchParams
-      .get('migration')
-      ?.split(',')
+    const urlMigrations = (searchParams?.get('migration')?.split(',') || [])
       .map((value) => Number(value.trim()))
       .filter((value) => migrationOptions.find((item) => item.value === value))
 
-    const urlVerticals = searchParams
-      .get('vertical')
-      ?.split(',')
+    const urlVerticals = (searchParams?.get('vertical')?.split(',') || [])
       .map((value) => Number(value.trim()))
       .filter((value) => verticalOptions.find((item) => item.value === value))
 
-    const urlCloudProviders = searchParams
-      .get('cloudProvider')
-      ?.split(',')
+    const urlCloudProviders = (
+      searchParams?.get('cloudProvider')?.split(',') || []
+    )
       .map((value) => value.trim())
       .filter((value) =>
         cloudProvidersOptions.find((item) => item.value === value)
       )
 
-    setOrderByLatest(searchParams.get('latest') === 'true')
-    setSearch(searchParams.get('search')?.trim() || '')
+    setOrderByLatest(searchParams?.get('latest') === 'true')
+    setSearch(searchParams?.get('search')?.trim() || '')
     setFilterByUseCases(urlUseCases || [])
     setFilterByMigrations(urlMigrations || [])
     setFilterByVerticals(urlVerticals || [])
