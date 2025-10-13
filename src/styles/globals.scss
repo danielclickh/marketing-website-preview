@@ -270,9 +270,6 @@ body {
 
   p {
     @apply break-words;
-    &:not(:last-child) {
-      @apply mb-9;
-    }
   }
 
   &:not(.ignore-anchor) {

@@ -3,9 +3,10 @@ import Accordion from '@/components-cleaned/Accordion'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LogoAnnouncementLink from '@/components/LogoAnnouncementLink'
-import LogoCarousel from '@/components/LogoCarousel'
 import Modal from '@/components/Modal'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
+import { StrapiImageUrl } from '@/components/StrapiElements'
+import TiltedText from '@/components/TiltedText'
 import Bullseye from '@/components/icons/Bullseye'
 import Clock from '@/components/icons/Clock'
 import Coins from '@/components/icons/Coins'
@@ -119,9 +120,15 @@ export default function CertificationPage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='bg-grid'>
-        <div className='section-container flex flex-row flex-wrap items-start justify-between gap-6 py-16 md:py-20 lg:flex-nowrap'>
+        <div className='section-container flex flex-row flex-wrap items-start justify-between gap-x-6 gap-y-16 py-16 md:py-20 lg:flex-nowrap'>
           {/* Content column */}
           <div className='w-full space-y-6 text-center lg:max-w-[600px] lg:text-left'>
+            <p className='text-base font-bold text-primary-300'>
+              <Link href='/learn' className='hover:underline'>
+                Training
+              </Link>{' '}
+              / <span>Certification</span>
+            </p>
             <SuiTitle type='h1' color='white' className='md:!text-6xl'>
               ClickHouse&nbsp;Certified Developer&nbsp;Exam
             </SuiTitle>
@@ -197,12 +204,9 @@ export default function CertificationPage({
           <div className='w-full lg:max-w-[600px]'>
             <p className='mb-4'>
               There is no required prerequisite for attempting this exam, but we
-              highly recommend taking the ClickHouse Developer training course -
-              available either{' '}
-              <a
-                href='https://learn.clickhouse.com/visitor_catalog_class/show/1328973'
-                target='_blank'
-                className='text-primary-300'>
+              highly recommend taking the Real-time Analytics with ClickHouse
+              training course - available either{' '}
+              <a href='/learn#on-demand' className='text-primary-300'>
                 On-demand
               </a>{' '}
               or Instructor-led, which covers all the exam objectives listed
@@ -211,13 +215,11 @@ export default function CertificationPage({
 
             <p className='mb-4'>
               Check out our{' '}
-              <Link
-                className='text-primary-300'
-                href='/company/events?category=Live+Training#upcoming-events'>
-                Live Events page
+              <Link href='/learn#live-training' className='text-primary-300'>
+                Live Events
               </Link>{' '}
-              to register for the next Instructor-led ClickHouse Developer
-              training.
+              to register for the next Instructor-led Real-time Analytics with
+              ClickHouse training.
             </p>
 
             <div className='flex flex-col gap-2'>
@@ -276,9 +278,9 @@ export default function CertificationPage({
 
           {/* Objectives */}
           <div className='mx-auto my-8 max-w-3xl'>
-            <div className='flex flex-col gap-6 rounded bg-primary-800/95 p-6 text-white'>
+            <div className='flex flex-col gap-2 rounded bg-primary-800/95 p-2 text-white sm:gap-6 sm:p-6'>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>Modeling data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -303,7 +305,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>Inserting data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -325,7 +327,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>Analyzing data</p>
                   <ul className='flex flex-col gap-2'>
                     <li>
@@ -353,7 +355,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>
                     Optimizing query performance
                   </p>
@@ -377,7 +379,7 @@ export default function CertificationPage({
                 </CUICard.Body>
               </CUICard>
               <CUICard>
-                <CUICard.Body className='p-6'>
+                <CUICard.Body className='p-4 sm:p-6'>
                   <p className='mb-4 font-basier text-[20px]'>
                     Deduplication and mutations
                   </p>
@@ -397,18 +399,18 @@ export default function CertificationPage({
                   </ul>
                 </CUICard.Body>
               </CUICard>
-              <div className='mx-auto w-full'>
+              <div>
                 <CUIButton
                   type='primary'
                   size='lg'
                   weight='semibold'
                   href='https://buy.stripe.com/14keYf7q55tn2Jy001'
-                  linkClass='w-full max-w-[14rem]'
+                  linkClass='w-full'
                   onClick={useGalaxyOnClick(
                     'certificationPage.objectives.purchaseCertification'
                   )}
                   target='_blank'
-                  className='mx-auto w-full max-w-[150px]'>
+                  className='w-full sm:mx-auto sm:w-auto'>
                   Purchase now
                 </CUIButton>
               </div>
@@ -419,10 +421,10 @@ export default function CertificationPage({
           <div className='mx-auto mt-16 max-w-3xl text-center'>
             <Image
               src='/images/learn/certified-developer-badge.png'
-              alt={'ClickHouse Certified Developer'}
+              alt='ClickHouse Certified Developer'
               width={417}
               height={363}
-              className='mb-16 inline-block max-w-[208px]'
+              className='mb-16 inline-block max-w-52'
             />
 
             <p className='mb-6'>
@@ -451,21 +453,35 @@ export default function CertificationPage({
           {/* Logo carousel */}
           <SuiTitle type='h3' className='mb-6 mt-28 text-center'>
             Trusted by the best developers that work with data{' '}
-            <span className='tilted tilted-black'>
-              <span className='tilted-content text-white'>at scale</span>
-            </span>
+            <TiltedText type='white-on-black' className='px-1 py-0.5'>
+              at scale
+            </TiltedText>
           </SuiTitle>
-          <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center md:gap-x-14'>
-            <div className='absolute left-0 z-10 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-            <div className='absolute right-0 z-10 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-            <LogoCarousel
-              logos={customerStories.logos.slice(
-                0,
-                Math.ceil(customerStories.logos.length / 2)
-              )}
-              speedClass1='animate-marqueeLeft'
-              speedClass2='animate-marqueeLeft2'
-            />
+          <div className='mask-logos-carousel mx-auto max-w-5xl opacity-90 brightness-50 grayscale'>
+            <div className='pause-hover hide-scrollbar relative flex overflow-hidden'>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
+                {customerStories.logos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                      <StrapiImageUrl {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+              <div className='flex animate-marqueeLeft5 items-center whitespace-nowrap'>
+                {customerStories.logos.map((logo, logoIndex) => {
+                  return (
+                    <div
+                      key={logoIndex}
+                      className='w-max flex-shrink-0 flex-grow-0 px-6'>
+                      <StrapiImageUrl {...logo.darkLogoPng} />
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -549,9 +565,10 @@ export default function CertificationPage({
               content: (
                 <p>
                   No - anyone can purchase and take an exam attempt. However, it
-                  is highly recommended that you take our free ClickHouse
-                  Developer training course, which covers all of the exam
-                  objectives and is offered both virtually and on-demand.
+                  is highly recommended that you take our free Real-time
+                  Analytics with ClickHouse training course, which covers all of
+                  the exam objectives and is offered both virtually and
+                  on-demand.
                 </p>
               )
             },
