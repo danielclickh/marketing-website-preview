@@ -33,6 +33,7 @@ export const getStaticProps: GetStaticProps<ClickhouseData> =
     }
     const data = await findOne('click-house', params)
     data.seo.path = '/clickhouse'
+    data.seo.languages = ['en', 'ja']
     const commonProps = await getCommonProps()
     return {
       props: {

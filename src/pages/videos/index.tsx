@@ -30,7 +30,8 @@ export const getServerSideProps: GetServerSideProps<VideosPageProps> =
           description:
             'Discover a rich collection of customer testimonials, informative how-to tutorials, and engaging Meetup recordings. Elevate your data analytics game with our diverse video library.\n',
           path: '/videos',
-          schema: generateVideosArchiveSchema({ path: '/videos' })
+          schema: generateVideosArchiveSchema({ path: '/videos' }),
+          languages: ['en', 'ja']
         },
         ...commonProps
       }

@@ -1,3 +1,5 @@
+'use client'
+
 import CategorySelector from '@/components/CategorySelector'
 import IntegrationTile from '@/components/IntegrationTile'
 import GetStartedFree from '@/components/jp/GetStartedFree'
@@ -104,7 +106,8 @@ export async function getStaticProps() {
       description:
         'ClickHouse は、言語クライアント、データ取り込み、SQL クライアント、データ視覚化などのカテゴリにわたって 100 を超える統合を提供します。データ ワークフローを簡単に強化できます。',
       path: '/jp/integrations',
-      image: [{ url: '/images/integrations_social_share.png' }]
+      image: [{ url: '/images/integrations_social_share.png' }],
+      languages: ['en', 'ja']
     },
     integrationGroups,
     ...(await getCommonProps())
@@ -185,8 +188,8 @@ export default function IntegrationsPage({
   // Load values from query string
   useEffect(() => {
     if (router.isReady) {
-      const urlCategory = searchParams.get('category')
-      const urlSearch = searchParams.get('search')
+      const urlCategory = searchParams?.get('category')
+      const urlSearch = searchParams?.get('search')
 
       if (urlCategory && getCategory(urlCategory)) setCategory(urlCategory)
       if (urlSearch) setSearch(urlSearch)
@@ -198,11 +201,11 @@ export default function IntegrationsPage({
     if (router.isReady) {
       let hasChanged = false
       const newSearchParams = new URLSearchParams(
-        Array.from(searchParams.entries())
+        Array.from(searchParams?.entries() || [])
       )
 
       if (category && getCategory(category)) {
-        if (category !== searchParams.get('category')) {
+        if (category !== searchParams?.get('category')) {
           newSearchParams.set('category', category)
           hasChanged = true
         }
@@ -212,7 +215,7 @@ export default function IntegrationsPage({
       }
 
       if (search) {
-        if (search !== searchParams.get('search')) {
+        if (search !== searchParams?.get('search')) {
           newSearchParams.set('search', search)
           hasChanged = true
         }

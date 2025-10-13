@@ -50,6 +50,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 
     data.seo.path = ''
     data.seo.schema = generateHomepageSchema()
+    data.seo.languages = ['en', 'ja']
     return {
       props: {
         ...data,

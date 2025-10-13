@@ -33,6 +33,7 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
 
     seo.path = '/blog'
     seo.schema = generateBlogArchiveSchema({ path: '/blog' })
+    seo.languages = ['en', 'ja']
 
     return {
       props: {

@@ -77,7 +77,8 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
         seo: {
           title: `${useCasesPageData.Title} | ClickHouse`,
           description: useCasesPageData.Description,
-          path: '/use-cases'
+          path: '/use-cases',
+          languages: ['en', 'ja']
         },
         ...commonProps
       }

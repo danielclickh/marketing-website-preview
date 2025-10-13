@@ -23,7 +23,8 @@ export const getStaticProps: GetStaticProps<ContactProps> =
           title: 'Dedicated Services - ClickHouse',
           description:
             'Thank you for your interest in our Dedicated Service; please submit the below information to the best of your ability so we can help.',
-          path: '/pricing/contact'
+          path: '/jp/pricing/contact',
+          languages: ['en', 'ja']
         },
         ...commonProps
       }

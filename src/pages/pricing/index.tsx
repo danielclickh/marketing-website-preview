@@ -132,6 +132,7 @@ export const getServerSideProps: GetServerSideProps<PricingPageProps> =
     ] = await Promise.all([pagePromise, commonPropsPromise, pricingDataPromise])
 
     seo.path = '/pricing'
+    seo.languages = ['en', 'ja']
 
     return {
       props: {
@@ -390,9 +391,11 @@ export default function PricingPage({
 }
 
 function RegionRequest() {
+  'use client'
+
   //modal and form
   const searchParams = useSearchParams()
-  const modalSearchParam = searchParams.get('modal')
+  const modalSearchParam = searchParams?.get('modal')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
   const modalFormSuccessRef = useRef<HTMLDivElement | null>(null)

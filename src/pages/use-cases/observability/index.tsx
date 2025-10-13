@@ -62,7 +62,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           description:
             'ClickStack is a high-performance, open-source observability stack powered by ClickHouse. Unify logs, metrics, traces, and session replays with lightning-fast queries and 10-100x cost savings on even your highest-cardinality data.',
           path: '/use-cases/observability',
-          image: [{ url: shareImage.src }]
+          image: [{ url: shareImage.src }],
+          languages: ['en', 'ja']
         },
         ...commonProps
       }

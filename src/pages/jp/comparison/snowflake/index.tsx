@@ -80,8 +80,9 @@ export const getStaticProps: GetStaticProps<SnowflakePageProps> =
 
     data.seo.locale = 'ja_JP'
     data.seo = comparison.data[0].seo
-    data.seo.path = '/comparison/snowflake'
+    data.seo.path = '/jp/comparison/snowflake'
     data.seo.image = [{ url: '/images/clickhouse-vs-snowflake-og.png' }]
+    data.seo.languages = ['en', 'ja']
 
     return {
       props: {

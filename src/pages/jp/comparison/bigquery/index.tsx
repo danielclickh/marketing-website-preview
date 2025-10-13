@@ -83,7 +83,8 @@ export async function getStaticProps() {
 
   const seo: any = comparison.seo || {}
   seo.locale = 'ja_JP'
-  seo.path = `/comparison/${comparison.slug}`
+  seo.path = `/jp/comparison/${comparison.slug}`
+  seo.languages = ['en', 'ja']
 
   const props: BigQueryPageProps = {
     comparison,

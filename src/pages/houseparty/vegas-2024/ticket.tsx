@@ -1,3 +1,5 @@
+'use client'
+
 import imageHeroImage from './hero-image.jpg'
 import imageHeroTexture from './hero-texture.png'
 import styles from './styles.module.scss'
@@ -74,7 +76,7 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
   useEffect(() => {
     ;(async function () {
       if (router.isReady) {
-        const authedUrl = searchParams.has('granted')
+        const authedUrl = searchParams?.has('granted') || null
         const authedStorage = localStorage.getItem('houseparty-vegas-2024')
         if (authedUrl || authedStorage) {
           // Save auth for accessing without query string

@@ -1,4 +1,4 @@
-import RealTimeDiagram from '@/pages/use-cases/real-time-analytics/RealTimeDiagram'
+import RealTimeDiagram from '@/components/RealTimeDiagram/RealTimeDiagram'
 
 interface DiagramProps {
   className?: string

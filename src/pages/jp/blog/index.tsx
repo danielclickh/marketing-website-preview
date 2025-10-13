@@ -31,6 +31,7 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
     seo.locale = 'ja_JP'
     seo.path = '/jp/blog'
     seo.title = 'ClickHouse ブログ'
+    seo.languages = ['en', 'ja']
 
     return {
       props: {

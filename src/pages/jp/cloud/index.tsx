@@ -48,6 +48,7 @@ export const getStaticProps: GetStaticProps<CloudData> =
     data.seo.locale = 'ja_JP'
     data.seo.path = '/jp/cloud'
     data.seo.title = 'ClickHouse Cloud が日本で登場'
+    data.seo.languages = ['en', 'ja']
     const commonProps = await getCommonProps()
     return {
       props: {

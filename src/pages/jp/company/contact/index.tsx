@@ -19,6 +19,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
     data.seo.locale = 'ja_JP'
     data.seo.path = '/company/contact'
     data.seo.title = 'ClickHouse お問合せ'
+    data.seo.languages = ['en', 'ja']
     return {
       props: {
         ...data.hero,
