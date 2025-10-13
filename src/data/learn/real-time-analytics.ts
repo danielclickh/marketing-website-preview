@@ -12,7 +12,7 @@ export default {
   h1: 'Real-time analytics with ClickHouse',
   intro:
     'Learn how to power real-time dashboards, alerts, and event-driven apps with ClickHouse.',
-  lmsUrl: 'https://learn.clickhouse.com/visitor_catalog_class/show/1872073',
+  lmsUrl: 'https://learn.clickhouse.com/visitor_class_catalog/category/115904',
   level: '3 levels',
   modules: '10 modules',
   credentials: '3',
@@ -45,7 +45,7 @@ export default {
         },
         {
           icon: { src: iconBook },
-          link: 'https://learn.clickhouse.com/user_catalog_class/show/1896608',
+          link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1896608/Real-time-Analytics-with-ClickHouse-Level-2',
           title: 'Level 2: Real-time analytics with ClickHouse',
           description: `In level 2 of this three-part learning path, you’ll gain the skills needed to solve real problems and build useful workflows with ClickHouse.
           

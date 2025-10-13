@@ -54,8 +54,7 @@ export default function LearningPathCard({
             href={`/learn/${slug}`}
             className='mt-auto inline-block font-bold text-primary-300 hover:underline'>
             <span className='absolute inset-0' />
-            {comingSoon && lmsUrl && 'Find out more'}
-            {!comingSoon && (
+            {(!comingSoon || (comingSoon && lmsUrl)) && (
               <>
                 Explore <span className='sr-only'>{title}</span> learning path
               </>

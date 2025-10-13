@@ -301,7 +301,7 @@ export default function LearnPage({
             className='relative z-10 text-center text-neutral-200'>
             Check out our full catalog of on-demand workshops and tutorials{' '}
             <Link
-              href='https://learn.clickhouse.com/class_catalog/category/116050'
+              href='https://learn.clickhouse.com/visitor_class_catalog/category/116050'
               className='text-primary-300 hover:underline'>
               here
             </Link>
