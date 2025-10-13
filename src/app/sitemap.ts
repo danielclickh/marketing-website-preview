@@ -262,8 +262,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }),
     ...richTextPages.map((post) => {
+      const uri = post.url.replace(/^\/+/, '').replace(/\/+$/, '')
       return {
-        url: `${siteURL}${post.slug}`,
+        url: `${siteURL}/${uri}`,
         lastModifiedAt: new Date(post.updatedAt)
       }
     }),
@@ -311,7 +312,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     if (buildItems && Array.isArray(buildItems)) {
       buildItems.forEach((item) => {
-        if (item?.attributes?.path) {
+        if (item && item?.attributes?.path) {
           const url = `${siteURL}${item.attributes.path}`
           const found = combined.find((el) => el.url === url)
           if (!found) {
