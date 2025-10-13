@@ -9,7 +9,7 @@
   },
   {
     "id": 3,
-    "content": "<span class='font-bold text-white'>High query concurrency, zero slowdown. </span> <span class='text-[#8D8D8D]'>ClickHouse powers real-time leaderboards, player dashboards, in-game ads, and live telemetry—handling massive user loads with instant responsiveness, unlike traditional data warehouses.</span>"
+    "content": "<span class='font-bold text-white'>High query concurrency, zero slowdown. </span> <span class='text-[#8D8D8D]'>ClickHouse powers real-time gaming leaderboards, player dashboards, in-game ads, betting interfaces, and live telemetry for both gameplay and wagering activities—handling massive user loads with instant responsiveness, unlike traditional data warehouses.</span>"
   },
   {
     "id": 4,

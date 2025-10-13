@@ -1,3 +1,7 @@
+import hero from './assets/hero.png'
+import logoAzur from './assets/logo-azur.svg'
+import logoExitlag from './assets/logo-exitlag.svg'
+import logoRoblox from './assets/logo-roblox.svg'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import GamingDiagramAndAccordion from '@/components/GamingDiagramAndAccordion'
@@ -130,10 +134,10 @@ export default function GamingIndustryPage({
                 </div>
                 <div className='relative z-30 mx-auto hidden items-center justify-center align-middle lg:flex'>
                   <Image
-                    src='/images/industries/gaming/gaming-controller_fnl.png'
+                    src={hero}
                     alt='ClickHouse Gaming'
-                    width={738}
-                    height={528}
+                    width={1478 / 2}
+                    height={1057 / 2}
                     className='h-auto w-full'
                     loading='eager'
                     priority
@@ -202,7 +206,7 @@ export default function GamingIndustryPage({
                         '"The main benefit is saving employee time, which can now be spent on more exciting and strategic tasks. One of our administrators has about 60% of their time freed up, and our ETL engineer now saves 40% of their time."'
                       }
                       logo={{
-                        src: '/images/industries/gaming/logo-azur.svg',
+                        src: logoAzur,
                         width: 123,
                         height: 40,
                         alt: 'Azur Games'
@@ -216,7 +220,7 @@ export default function GamingIndustryPage({
                         'https://clickhouse.com/blog/boosting-game-performance-exitlag-quest-for-a-better-data-management-system'
                       }
                       logo={{
-                        src: '/images/industries/gaming/logo-exitlag.svg',
+                        src: logoExitlag,
                         width: 175,
                         height: 40,
                         alt: 'ExitLag'
@@ -228,7 +232,7 @@ export default function GamingIndustryPage({
                       }
                       link={'/videos/clickhouse-at-roblox-safety'}
                       logo={{
-                        src: '/images/industries/gaming/logo-roblox.svg',
+                        src: logoRoblox,
                         width: 231,
                         height: 40,
                         alt: 'Roblox'
@@ -280,9 +284,11 @@ export default function GamingIndustryPage({
                   Gaming analytics applications
                 </SuiTitle>
                 <p className='mx-auto mb-12 max-w-3xl px-9 pt-6 text-center text-sm'>
-                  ClickHouse powers real-time analytics for the world’s largest
-                  gaming platforms, delivering low-latency insights for trust &
-                  safety, player behavior, and revenue optimization.
+                  ClickHouse powers real-time analytics for the world's largest
+                  gaming and betting platforms, delivering low-latency insights
+                  for trust & safety, player behavior, gambling compliance, and
+                  revenue optimization across both gaming and wagering
+                  activities.
                 </p>
                 <div className='mb-12 flex w-full flex-col gap-6 px-8 lg:flex-row lg:px-6 xl:px-0'>
                   <div className='items-center space-y-4 rounded-md border border-neutral-0/30 bg-[rgba(62,62,62,1)] px-6 py-4 text-left lg:w-1/3'>
