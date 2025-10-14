@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         ...commonProps,
         seo: {
           title: 'Elastic vs ClickHouse',
-          path: '/comparison/elastic',
+          path: '/comparison/elastic-for-observability',
           image: [{ url: '/images/clickhouse-vs-elastic-og.png' }]
         }
       }
