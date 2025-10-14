@@ -96,7 +96,7 @@ export const Tailwind = {
         'cursor-pointer font-normal overflow-hidden relative whitespace-nowrap text-white flex items-center',
         'm-0 px-4 py-1.5 border-0 rounded-none text-[14px]',
         {
-          'text-white hover:bg-neutral-725 hover:text-primary-900':
+          'text-white hover:bg-neutral-725 hover:text-white':
             !context || context.selected
         }
       )
