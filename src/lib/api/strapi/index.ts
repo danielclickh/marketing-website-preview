@@ -134,23 +134,6 @@ export async function fetchAll(
   return list
 }
 
-async function convertSvg(convertedObj: Record<string, any>) {
-  if (convertedObj?.mime && convertedObj.mime.includes('svg')) {
-    const response = await fetch(`${strapiApiUrl}${convertedObj.url}`)
-    const svgText = await response.text()
-    convertedObj.svgText = svgText
-  }
-  return convertedObj
-}
-
-async function convertStrapiObjectArray(
-  item: Record<string, any>
-): Promise<Record<string, any>> {
-  let convertedObj = await convertStrapiObject(item)
-  convertedObj = await convertSvg(convertedObj)
-  return convertedObj
-}
-
 async function convertStrapiObject(element: any) {
   const newElement =
     'attributes' in element && 'id' in element
@@ -162,16 +145,14 @@ async function convertStrapiObject(element: any) {
     const fieldValue: any = entry[1]
 
     if (Array.isArray(fieldValue)) {
-      result[field] = await Promise.all(
-        fieldValue.map(convertStrapiObjectArray)
-      )
+      result[field] = await Promise.all(fieldValue.map(convertStrapiObject))
       continue
     }
 
     if (typeof fieldValue === 'object' && fieldValue) {
       if ('data' in fieldValue && Array.isArray(fieldValue.data)) {
         result[field] = await Promise.all(
-          fieldValue.data.map(convertStrapiObjectArray)
+          fieldValue.data.map(convertStrapiObject)
         )
         continue
       }
@@ -180,7 +161,7 @@ async function convertStrapiObject(element: any) {
         convertedObj = convertedObj.data
       }
 
-      result[field] = await convertSvg(convertedObj)
+      result[field] = convertedObj
       continue
     }
 
