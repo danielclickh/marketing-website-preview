@@ -69,7 +69,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       seo: {
         title: `${engResource.title} | ClickHouse Engineering Resources`,
         description: engResource.excerpt,
-        path: `/engineering-resources/${engResource.slug}`
+        path: `/engineering-resources/${engResource.slug}`,
+        lastModified: engResource.lastUpdated
       },
       newsLetterData,
       ...(await getCommonProps())

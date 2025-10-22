@@ -72,6 +72,7 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
 
     seo.path = `/comparison/${slug}`
     seo.languages = ['en', 'ja']
+    seo.lastModified = comparison.updatedAt
     const commonData = await getCommonProps()
     const newsLetterData = await getNewsLetterData()
     return {
