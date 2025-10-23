@@ -1,4 +1,5 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
+import ScrollToTop from '@/components-cleaned/ScrollToTop'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
 import Avatars from '@/components/Avatars'
@@ -242,6 +243,7 @@ export default function BlogPage({
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <ScrollToTop />
       <div className='relative'>
         <ReadingProgress target={contentRef} />
 
