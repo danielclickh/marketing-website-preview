@@ -1,6 +1,8 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
+import StrapiContentModules from '@/components-cleaned/StrapiContentModules'
+import StrapiDynamicComponent from '@/components-cleaned/StrapiDynamicComponent'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -32,9 +34,7 @@ import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 import React, { useRef } from 'react'
-import ReactMarkdown from 'react-markdown'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -52,7 +52,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         'author.avatarPng',
         'thumbnailPng',
         'promotion',
-        'promotion.image'
+        'promotion.image',
+        'sections'
       ],
       pagination: { limit: 1 }
     })
@@ -72,7 +73,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       }
     }
 
-    const cloudCtaContent = await findOne('blog', {
+    const cloudCtaContentRequest = findOne('blog', {
       populate: [
         'CloudCTAHeader',
         'CloudCTAFooter',
@@ -81,7 +82,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       ]
     })
 
-    const blogsParams = {
+    const otherBlogsRequest = findAll('blog-posts', {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
       fields: [
@@ -103,19 +104,22 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         category: { $ne: 'Japanese' },
         $or: stagingOnlyFilters
       }
-    }
-    const { data: otherBlogs } = await findAll('blog-posts', blogsParams)
-    const commonData = await getCommonProps()
-    const newsLetterData = await getNewsLetterData()
+    })
 
-    const canonical = blog.canonical_url ? blog.canonical_url : `/blog/${slug}`
+    const commonDataRequest = await getCommonProps()
+    const newsLetterDataRequest = await getNewsLetterData()
 
-    //super hacky thing that we will change for CMS override
-    if (
-      slug === 'clickhouse-cloud-is-now-generally-available-on-microsoft-azure'
-    ) {
-      blog.thumbnailPng.url = '/images/clickhouse-msft-dark.png'
-    }
+    const [cloudCtaContent, { data: otherBlogs }, commonData, newsLetterData] =
+      await Promise.all([
+        cloudCtaContentRequest,
+        otherBlogsRequest,
+        commonDataRequest,
+        newsLetterDataRequest
+      ])
+
+    const canonical = blog.canonical_url?.trim()?.length
+      ? blog.canonical_url
+      : `/blog/${slug}`
 
     return {
       props: {
@@ -192,7 +196,8 @@ export default function BlogPage({
   table_contents_headers,
   promotion,
   enableSidebarGlobalCta,
-  globalCta
+  globalCta,
+  sections
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
   const contentRef = useRef<null | HTMLDivElement>(null)
@@ -220,6 +225,7 @@ export default function BlogPage({
     )
   }
 
+  // :::content-module-1:::
   const markdownDirectives: Record<
     string,
     (props: Record<string, any>) => React.ReactNode
@@ -295,8 +301,8 @@ export default function BlogPage({
                 </Markdown>
               )}
 
-              {content && (
-                <div className='flex flex-col lg:flex-row' ref={contentRef}>
+              <div className='space-y-6' ref={contentRef}>
+                {content && (
                   <Markdown
                     allowDirectives={true}
                     className='rich-text-content leading-6'
@@ -304,8 +310,16 @@ export default function BlogPage({
                     components={markdownDirectives}>
                     {content}
                   </Markdown>
-                </div>
-              )}
+                )}
+
+                {sections &&
+                  sections.length > 0 &&
+                  sections.map((section, sectionIndex) => {
+                    return (
+                      <StrapiDynamicComponent key={sectionIndex} {...section} />
+                    )
+                  })}
+              </div>
 
               {promotion && (
                 <div className='mt-8'>

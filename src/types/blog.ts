@@ -1,6 +1,7 @@
 import { BlogPost } from './blogs'
 import { CommonProps, NewsLetterData } from './homepage'
 import { StrapiImageType } from '@/lib/api/strapi/types'
+import { BlogModules } from '@/types/strapi'
 
 export interface BlogProps extends BlogPost, CommonProps {
   content: string
@@ -27,4 +28,5 @@ export interface BlogProps extends BlogPost, CommonProps {
       target: '_self' | '_blank'
     }
   }
+  sections: Array<BlogModules>
 }
