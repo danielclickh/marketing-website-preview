@@ -20,7 +20,8 @@ function SeoContainer({
   locale,
   keywords,
   schema,
-  languages
+  languages,
+  lastModified
 }: SeoMetadata) {
   // Ensure the default language is always added for pages with alternate languages
   if (languages && !languages.includes(defaultLanguage)) {
@@ -87,6 +88,16 @@ function SeoContainer({
       <meta name='description' content={description} />
       <meta name='author' content={siteName} />
       <meta name='keywords' content={keywords} />
+      {lastModified && (
+        <meta
+          name='last-modified'
+          content={
+            typeof lastModified === 'string'
+              ? lastModified
+              : lastModified.toISOString()
+          }
+        />
+      )}
 
       <link rel='canonical' href={canonicalUrl} key='canonical' />
       {languages && languages.length > 0 && (

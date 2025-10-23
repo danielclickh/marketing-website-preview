@@ -66,6 +66,7 @@ export interface SeoMetadata {
   locale?: string
   schema?: WithContext<Thing>
   languages?: Array<keyof Languages<string>>
+  lastModified?: Date | string
 }
 
 // ------

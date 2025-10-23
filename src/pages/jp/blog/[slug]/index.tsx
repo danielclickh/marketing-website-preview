@@ -118,7 +118,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           type: 'article',
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
-          path: canonical
+          path: canonical,
+          lastModified: blog.updatedAt
         },
         newsLetterData,
         ...commonData

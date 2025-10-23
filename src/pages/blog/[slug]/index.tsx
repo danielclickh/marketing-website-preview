@@ -130,6 +130,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           image: [blog.thumbnailPng],
           path: canonical,
           keywords: blog?.keywords || '',
+          lastModified: blog.updatedAt,
           schema: generateBlogArticleSchema({
             title: blog.title,
             description: blog.shortDescription,
