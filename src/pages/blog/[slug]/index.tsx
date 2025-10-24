@@ -296,7 +296,7 @@ export default function BlogPage({
               )}
 
               {content && (
-                <div className='flex flex-col lg:flex-row' ref={contentRef}>
+                <div className='w-full' ref={contentRef}>
                   <Markdown
                     allowDirectives={true}
                     className='rich-text-content leading-6'
