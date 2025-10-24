@@ -84,3 +84,18 @@ export interface BlogModuleMarkdown extends DynamicComponent {
   __component: 'blog-modules.markdown'
   body: string
 }
+
+export interface BlogModuleVideo extends DynamicComponent {
+  __component: 'blog-modules.video'
+  sources: Array<EntryMedia>
+  thumbnail: EntryImage
+  autoplay: boolean
+  muted: boolean
+  loop: boolean
+  controls: boolean
+}
+
+export interface BlogModuleFaqs extends DynamicComponent {
+  __component: 'blog-modules.faqs'
+  items: Array<{ question: string; answer: string }>
+}

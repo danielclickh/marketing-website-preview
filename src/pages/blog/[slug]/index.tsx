@@ -1,7 +1,6 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
-import StrapiContentModules from '@/components-cleaned/StrapiContentModules'
 import StrapiDynamicComponent from '@/components-cleaned/StrapiDynamicComponent'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
