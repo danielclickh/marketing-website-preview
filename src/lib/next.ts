@@ -41,6 +41,28 @@ export function absoluteUrl(relative: string) {
   return new URL(relativeUrl(relative), BASE_URL_AND_PROTOCOL).toString()
 }
 
+export function absoluteOptimizedImageUrl(
+  imageUrl: string,
+  width: number,
+  height: number,
+  quality?: number
+) {
+  return absoluteUrl(
+    `/_next/image?url=${encodeURIComponent(imageUrl)}&w=${width}&h=${height}&q=${quality ?? 80}`
+  )
+}
+
+export function relativeOptimizedImageUrl(
+  imageUrl: string,
+  width: number,
+  height: number,
+  quality?: number
+) {
+  return relativeUrl(
+    absoluteOptimizedImageUrl(imageUrl, width, height, quality)
+  )
+}
+
 export function isLocalUrl(url: string) {
   try {
     const urlObj = new URL(url)

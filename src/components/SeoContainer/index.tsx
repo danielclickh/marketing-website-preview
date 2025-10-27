@@ -1,5 +1,5 @@
 import { SeoMetadata } from '@/lib/api/strapi/types'
-import { absoluteUrl } from '@/lib/next'
+import { absoluteOptimizedImageUrl, absoluteUrl } from '@/lib/next'
 import {
   applyLangPath,
   defaultLanguage,
@@ -42,9 +42,7 @@ function SeoContainer({
   }
 
   // Automatically resize the image
-  socialImageUrl = absoluteUrl(
-    `/_next/image?url=${encodeURIComponent(socialImageUrl)}&w=1200&h=630&q=80`
-  )
+  socialImageUrl = absoluteOptimizedImageUrl(socialImageUrl, 1200, 630, 80)
 
   const canonicalUrl = (() => {
     let canonicalPath = path
