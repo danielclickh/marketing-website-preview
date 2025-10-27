@@ -88,6 +88,12 @@ function SeoContainer({
       <meta name='description' content={description} />
       <meta name='author' content={siteName} />
       <meta name='keywords' content={keywords} />
+      <link
+        rel='alternate'
+        type='application/rss+xml'
+        title='ClickHouse Blog'
+        href='https://clickhouse.com/rss.xml'
+      />
       {lastModified && (
         <meta
           name='last-modified'

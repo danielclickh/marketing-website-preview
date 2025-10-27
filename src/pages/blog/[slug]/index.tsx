@@ -231,7 +231,6 @@ export default function BlogPage({
     )
   }
 
-  // :::content-module-1:::
   const markdownDirectives: Record<
     string,
     (props: Record<string, any>) => React.ReactNode
@@ -265,7 +264,7 @@ export default function BlogPage({
             <ArrowLeftIcon className='mr-2 w-4 transition-transform group-hover/backButton:-translate-x-1' />
             Back
           </SmartBackButton>
-          <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
+          <div className='flex w-full flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
             {/* Blog meta */}
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
               <Breadcrumbs>
@@ -307,7 +306,7 @@ export default function BlogPage({
                 </Markdown>
               )}
 
-              <div className='space-y-6' ref={contentRef}>
+              <div className='space-y-6 w-full' ref={contentRef}>
                 {sections &&
                   sections.length > 0 &&
                   sections.map((section, sectionIndex) => {

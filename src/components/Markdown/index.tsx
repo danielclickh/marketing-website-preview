@@ -119,6 +119,13 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
       <Header type='h6' allowHeaderLink={allowHeaderLink} {...props} />
     ),
     code: CodeViewer,
+    table({ node, children, ...props }: any) {
+      return (
+        <div className='w-full overflow-x-auto'>
+          <table {...props}>{children}</table>
+        </div>
+      )
+    },
     p({ children }: any) {
       const child = children?.[0]
       if (typeof child === 'object' && child?.type === BlogImage) {
