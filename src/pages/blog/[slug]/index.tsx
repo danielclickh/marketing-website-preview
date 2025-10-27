@@ -246,7 +246,7 @@ export default function BlogPage({
 
   // Ensure correct directive syntax is used
   Object.keys(markdownDirectives).forEach((directiveKey) => {
-    content = content.replaceAll(
+    content = (content || '').replaceAll(
       `:::${directiveKey}:::`,
       `:::${directiveKey}\n:::`
     )
@@ -306,7 +306,7 @@ export default function BlogPage({
                 </Markdown>
               )}
 
-              <div className='space-y-6 w-full' ref={contentRef}>
+              <div className='w-full space-y-6' ref={contentRef}>
                 {sections &&
                   sections.length > 0 &&
                   sections.map((section, sectionIndex) => {

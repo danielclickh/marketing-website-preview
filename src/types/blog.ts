@@ -4,7 +4,7 @@ import { StrapiImageType } from '@/lib/api/strapi/types'
 import { BlogModules } from '@/types/strapi'
 
 export interface BlogProps extends BlogPost, CommonProps {
-  content: string
+  content: string | null
   otherBlogs: BlogPost[]
   newsLetterData: NewsLetterData
   ShowCloudCTAHeader: boolean | null
