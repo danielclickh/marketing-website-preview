@@ -31,9 +31,11 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { camel, slugify } from '@/lib/utils/strings'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
+import { BlogModules } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import React, { useRef } from 'react'
+import removeMarkdown from 'remove-markdown'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -113,6 +115,17 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       ? blog.canonical_url
       : `/blog/${slug}`
 
+    const combinedFaqs = ((blog.sections as Array<BlogModules>) || [])
+      .filter((module) => module.__component === 'blog-modules.faqs')
+      .flatMap((module) => {
+        return module.items.map((item) => {
+          return {
+            question: item.question,
+            answer: removeMarkdown(item.answer)
+          }
+        })
+      })
+
     return {
       props: {
         ...blog,
@@ -135,7 +148,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
               ? blog.author.name
               : 'ClickHouse Team',
             publishedDate: blog.publishedAt,
-            modifiedDate: blog.updatedAt
+            modifiedDate: blog.updatedAt,
+            faqs: combinedFaqs
           })
         },
         newsLetterData,
@@ -242,7 +256,6 @@ export default function BlogPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
-        <pre>{JSON.stringify(sections, null, 2)}</pre>
         <ReadingProgress target={contentRef} />
 
         <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
@@ -295,6 +308,14 @@ export default function BlogPage({
               )}
 
               <div className='space-y-6' ref={contentRef}>
+                {sections &&
+                  sections.length > 0 &&
+                  sections.map((section, sectionIndex) => {
+                    return (
+                      <StrapiDynamicComponent key={sectionIndex} {...section} />
+                    )
+                  })}
+
                 {content && (
                   <Markdown
                     allowDirectives={true}
@@ -304,14 +325,6 @@ export default function BlogPage({
                     {content}
                   </Markdown>
                 )}
-
-                {sections &&
-                  sections.length > 0 &&
-                  sections.map((section, sectionIndex) => {
-                    return (
-                      <StrapiDynamicComponent key={sectionIndex} {...section} />
-                    )
-                  })}
               </div>
 
               {promotion && (

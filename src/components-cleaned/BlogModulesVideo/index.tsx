@@ -1,17 +1,31 @@
+import { getRelativeMediaUrl } from '@/lib/api/strapi'
 import { BlogModuleVideo } from '@/types/strapi'
 import React from 'react'
 
 export default function BlogModulesVideo({
   sources,
-  thumbnail,
+  placeholder,
   autoplay,
   muted,
   loop,
   controls
 }: BlogModuleVideo) {
   return (
-    <div className='rounded bg-red-400 p-10 text-xl text-red-950'>
-      VIDEO COMPONENT TODO!!!
-    </div>
+    <video
+      autoPlay={autoplay}
+      muted={muted}
+      loop={loop}
+      controls={controls}
+      className='h-auto w-full'>
+      {sources.map((source, sourceIndex) => {
+        return (
+          <source
+            key={sourceIndex}
+            src={getRelativeMediaUrl(source.url)}
+            type={source.mime}
+          />
+        )
+      })}
+    </video>
   )
 }

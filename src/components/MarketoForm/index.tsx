@@ -283,7 +283,7 @@ export default function MarketoForm({
           {typeof disclaimer !== 'string' && disclaimer}
           {typeof disclaimer === 'string' && (
             <Markdown
-              className={`text-sm ${theme === 'light' ? '!text-primary-900' : '!text-neutral-200'}`}>
+              className={`text-xs ${theme === 'light' ? '!text-primary-900' : '!text-neutral-200'}`}>
               {disclaimer}
             </Markdown>
           )}

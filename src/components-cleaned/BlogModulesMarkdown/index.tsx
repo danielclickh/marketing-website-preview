@@ -5,7 +5,7 @@ import React from 'react'
 export default function BlogModulesMarkdown({ body }: BlogModuleMarkdown) {
   return (
     <Markdown
-      allowDirectives={true}
+      allowDirectives={false}
       className='rich-text-content leading-6'
       allowHeaderLink={true}>
       {body}

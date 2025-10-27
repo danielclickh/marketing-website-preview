@@ -7,12 +7,18 @@ import React from 'react'
 export default function BlogModulesFaqs({ title, items }: BlogModuleFaqs) {
   return (
     <>
-      {title && <SuiTitle type='h3'>{title}</SuiTitle>}
+      {title && (
+        <SuiTitle type='h2' className='!text-2xl'>
+          {title}
+        </SuiTitle>
+      )}
       <Accordion
         items={items.map((item) => ({
           handle: item.question,
           content: (
-            <Markdown className='rich-text-content'>{item.answer}</Markdown>
+            <Markdown className='rich-text-content toc-ignore'>
+              {item.answer}
+            </Markdown>
           )
         }))}
       />
