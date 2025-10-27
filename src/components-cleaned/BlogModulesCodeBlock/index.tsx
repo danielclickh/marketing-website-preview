@@ -2,7 +2,7 @@ import CodeViewer from '@/components/CodeViewer'
 import { BlogModuleCodeBlock } from '@/types/strapi'
 import React from 'react'
 
-export default function BlogModulesVideo({
+export default function BlogModulesCodeBlock({
   language,
   runnable,
   playLink,

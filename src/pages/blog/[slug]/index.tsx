@@ -1,7 +1,7 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
-import StrapiDynamicComponent from '@/components-cleaned/StrapiDynamicComponent'
+import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -311,7 +311,10 @@ export default function BlogPage({
                   sections.length > 0 &&
                   sections.map((section, sectionIndex) => {
                     return (
-                      <StrapiDynamicComponent key={sectionIndex} {...section} />
+                      <StrapiDynamicBlogModules
+                        key={sectionIndex}
+                        {...section}
+                      />
                     )
                   })}
 
