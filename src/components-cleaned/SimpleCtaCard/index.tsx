@@ -4,6 +4,7 @@ import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 export type SimpleCtaCardProps = {
   children: React.ReactNode
   galaxyEventName?: `${string}.${string}.${string}`
+  className?: string
   link: {
     text: string
     href: string
@@ -14,10 +15,11 @@ export type SimpleCtaCardProps = {
 export default function SimpleCtaCard({
   children,
   galaxyEventName,
-  link
+  link,
+  className = ''
 }: SimpleCtaCardProps) {
   return (
-    <div className='rounded-lg bg-white/10 p-4'>
+    <div className={`rounded-lg bg-white/10 p-4 ${className}`}>
       {children}
       <CUIButton
         type='primary'

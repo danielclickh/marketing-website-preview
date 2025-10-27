@@ -1,6 +1,7 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
+import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -30,11 +31,11 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { camel, slugify } from '@/lib/utils/strings'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
+import { BlogModules } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 import React, { useRef } from 'react'
-import ReactMarkdown from 'react-markdown'
+import removeMarkdown from 'remove-markdown'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -47,13 +48,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         },
         $or: stagingOnlyFilters
       },
-      populate: [
-        'author',
-        'author.avatarPng',
-        'thumbnailPng',
-        'promotion',
-        'promotion.image'
-      ],
+      populate: 'deep',
       pagination: { limit: 1 }
     })
 
@@ -72,7 +67,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       }
     }
 
-    const cloudCtaContent = await findOne('blog', {
+    const cloudCtaContentRequest = findOne('blog', {
       populate: [
         'CloudCTAHeader',
         'CloudCTAFooter',
@@ -81,7 +76,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       ]
     })
 
-    const blogsParams = {
+    const otherBlogsRequest = findAll('blog-posts', {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
       fields: [
@@ -103,19 +98,33 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         category: { $ne: 'Japanese' },
         $or: stagingOnlyFilters
       }
-    }
-    const { data: otherBlogs } = await findAll('blog-posts', blogsParams)
-    const commonData = await getCommonProps()
-    const newsLetterData = await getNewsLetterData()
+    })
 
-    const canonical = blog.canonical_url ? blog.canonical_url : `/blog/${slug}`
+    const commonDataRequest = await getCommonProps()
+    const newsLetterDataRequest = await getNewsLetterData()
 
-    //super hacky thing that we will change for CMS override
-    if (
-      slug === 'clickhouse-cloud-is-now-generally-available-on-microsoft-azure'
-    ) {
-      blog.thumbnailPng.url = '/images/clickhouse-msft-dark.png'
-    }
+    const [cloudCtaContent, { data: otherBlogs }, commonData, newsLetterData] =
+      await Promise.all([
+        cloudCtaContentRequest,
+        otherBlogsRequest,
+        commonDataRequest,
+        newsLetterDataRequest
+      ])
+
+    const canonical = blog.canonical_url?.trim()?.length
+      ? blog.canonical_url
+      : `/blog/${slug}`
+
+    const combinedFaqs = ((blog.sections as Array<BlogModules>) || [])
+      .filter((module) => module.__component === 'blog-modules.faqs')
+      .flatMap((module) => {
+        return module.items.map((item) => {
+          return {
+            question: item.question,
+            answer: removeMarkdown(item.answer)
+          }
+        })
+      })
 
     return {
       props: {
@@ -139,7 +148,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
               ? blog.author.name
               : 'ClickHouse Team',
             publishedDate: blog.publishedAt,
-            modifiedDate: blog.updatedAt
+            modifiedDate: blog.updatedAt,
+            faqs: combinedFaqs
           })
         },
         newsLetterData,
@@ -192,7 +202,8 @@ export default function BlogPage({
   table_contents_headers,
   promotion,
   enableSidebarGlobalCta,
-  globalCta
+  globalCta,
+  sections
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
   const contentRef = useRef<null | HTMLDivElement>(null)
@@ -235,7 +246,7 @@ export default function BlogPage({
 
   // Ensure correct directive syntax is used
   Object.keys(markdownDirectives).forEach((directiveKey) => {
-    content = content.replaceAll(
+    content = (content || '').replaceAll(
       `:::${directiveKey}:::`,
       `:::${directiveKey}\n:::`
     )
@@ -295,8 +306,19 @@ export default function BlogPage({
                 </Markdown>
               )}
 
-              {content && (
-                <div className='w-full' ref={contentRef}>
+              <div className='w-full space-y-6' ref={contentRef}>
+                {sections &&
+                  sections.length > 0 &&
+                  sections.map((section, sectionIndex) => {
+                    return (
+                      <StrapiDynamicBlogModules
+                        key={sectionIndex}
+                        {...section}
+                      />
+                    )
+                  })}
+
+                {content && (
                   <Markdown
                     allowDirectives={true}
                     className='rich-text-content leading-6'
@@ -304,8 +326,8 @@ export default function BlogPage({
                     components={markdownDirectives}>
                     {content}
                   </Markdown>
-                </div>
-              )}
+                )}
+              </div>
 
               {promotion && (
                 <div className='mt-8'>
