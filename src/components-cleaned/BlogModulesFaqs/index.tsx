@@ -1,10 +1,21 @@
+import Accordion from '@/components-cleaned/Accordion'
+import Markdown from '@/components/Markdown'
+import { SuiTitle } from '@/components/sui'
 import { BlogModuleFaqs } from '@/types/strapi'
 import React from 'react'
 
-export default function BlogModulesFaqs({ items }: BlogModuleFaqs) {
+export default function BlogModulesFaqs({ title, items }: BlogModuleFaqs) {
   return (
-    <div className='rounded bg-red-400 p-10 text-xl text-red-950'>
-      FAQs COMPONENT TODO!!!
-    </div>
+    <>
+      {title && <SuiTitle type='h3'>{title}</SuiTitle>}
+      <Accordion
+        items={items.map((item) => ({
+          handle: item.question,
+          content: (
+            <Markdown className='rich-text-content'>{item.answer}</Markdown>
+          )
+        }))}
+      />
+    </>
   )
 }

@@ -88,7 +88,7 @@ export interface BlogModuleMarkdown extends DynamicComponent {
 export interface BlogModuleVideo extends DynamicComponent {
   __component: 'blog-modules.video'
   sources: Array<EntryMedia>
-  thumbnail: EntryImage
+  placeholder: EntryImage
   autoplay: boolean
   muted: boolean
   loop: boolean
@@ -97,5 +97,6 @@ export interface BlogModuleVideo extends DynamicComponent {
 
 export interface BlogModuleFaqs extends DynamicComponent {
   __component: 'blog-modules.faqs'
+  title: string | null
   items: Array<{ question: string; answer: string }>
 }

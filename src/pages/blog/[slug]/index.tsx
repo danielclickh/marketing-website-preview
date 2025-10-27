@@ -46,14 +46,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         },
         $or: stagingOnlyFilters
       },
-      populate: [
-        'author',
-        'author.avatarPng',
-        'thumbnailPng',
-        'promotion',
-        'promotion.image',
-        'sections'
-      ],
+      populate: 'deep',
       pagination: { limit: 1 }
     })
 
@@ -249,6 +242,7 @@ export default function BlogPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <div className='relative'>
+        <pre>{JSON.stringify(sections, null, 2)}</pre>
         <ReadingProgress target={contentRef} />
 
         <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
