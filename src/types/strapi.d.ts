@@ -95,7 +95,7 @@ export interface BlogModuleMarkdown extends DynamicComponent {
 export interface BlogModuleVideo extends DynamicComponent {
   __component: 'blog-modules.video'
   sources: Array<EntryMedia>
-  placeholder: EntryImage
+  placeholder: EntryImage | null
   autoplay: boolean
   muted: boolean
   loop: boolean
