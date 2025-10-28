@@ -1,11 +1,23 @@
-import BlogModulesCodeBlock from '@/components-cleaned/BlogModulesCodeBlock'
-import BlogModulesCta from '@/components-cleaned/BlogModulesCta'
-import BlogModulesFaqs from '@/components-cleaned/BlogModulesFaqs'
-import BlogModulesMarkdown from '@/components-cleaned/BlogModulesMarkdown'
+import BlogModulesCodeBlock, {
+  blogModulesCodeBlockMarkdown
+} from '@/components-cleaned/BlogModulesCodeBlock'
+import BlogModulesCta, {
+  blogModulesCtaMarkdown
+} from '@/components-cleaned/BlogModulesCta'
+import BlogModulesFaqs, {
+  blogModulesFaqsMarkdown
+} from '@/components-cleaned/BlogModulesFaqs'
+import BlogModulesMarkdown, {
+  blogModulesMarkdownMarkdown
+} from '@/components-cleaned/BlogModulesMarkdown'
 import BlogModulesMarketoForm from '@/components-cleaned/BlogModulesMarketoForm'
-import BlogModulesSummary from '@/components-cleaned/BlogModulesSummary'
-import BlogModulesVideo from '@/components-cleaned/BlogModulesVideo'
-import { pascal } from '@/lib/utils/strings'
+import BlogModulesSummary, {
+  blogModulesSummaryMarkdown
+} from '@/components-cleaned/BlogModulesSummary'
+import BlogModulesVideo, {
+  blogModulesVideoMarkdown
+} from '@/components-cleaned/BlogModulesVideo'
+import { camel, pascal } from '@/lib/utils/strings'
 import { DynamicComponent } from '@/types/strapi'
 import { Attributes } from 'react'
 
@@ -22,6 +34,15 @@ const REGISTRY: Record<string, React.ComponentType<any>> = {
   BlogModulesVideo
 }
 
+const MARKDOWN_REGISTRY: Record<string, (props: any) => string> = {
+  blogModulesCodeBlockMarkdown,
+  blogModulesCtaMarkdown,
+  blogModulesFaqsMarkdown,
+  blogModulesMarkdownMarkdown,
+  blogModulesSummaryMarkdown,
+  blogModulesVideoMarkdown
+}
+
 export type StrapiDynamicBlogModulesProps = DynamicComponent & {
   [prop: string]: any
 }
@@ -34,6 +55,17 @@ export default function StrapiDynamicBlogModules({
   if (componentName in REGISTRY) {
     const Component = REGISTRY[componentName]
     return <Component {...(data as Attributes)} />
+  }
+  return null
+}
+
+export function strapiDynamicBlogModulesMarkdown({
+  __component,
+  ...data
+}: StrapiDynamicBlogModulesProps) {
+  const componentName = `${camel(__component)}Markdown`
+  if (componentName in MARKDOWN_REGISTRY) {
+    return MARKDOWN_REGISTRY[componentName](data)
   }
   return null
 }

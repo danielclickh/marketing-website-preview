@@ -12,3 +12,7 @@ export default function BlogModulesMarkdown({ body }: BlogModuleMarkdown) {
     </Markdown>
   )
 }
+
+export function blogModulesMarkdownMarkdown({ body }: BlogModuleMarkdown) {
+  return body
+}

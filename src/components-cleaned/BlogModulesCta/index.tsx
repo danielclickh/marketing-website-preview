@@ -12,8 +12,46 @@ export default function BlogModulesCta({
   label
 }: BlogModuleCta) {
   const domId = slugify(`blog cta ${id} ${title} ${label}`)
+  return (
+    <SimpleCtaCard
+      id={domId}
+      className='toc-ignore'
+      galaxyEventName={`blogCta.${camel(title)}.${camel(label)}`}
+      link={{
+        href: trackingUrl(url, id, domId),
+        text: label
+      }}>
+      <SuiTitle type='h3' className='mb-2.5'>
+        {title}
+      </SuiTitle>
+      <SuiText size='sm' weight='medium' color='secondary'>
+        {description}
+      </SuiText>
+    </SimpleCtaCard>
+  )
+}
 
-  // Automatically apply `?loc=` param
+export function blogModulesCtaMarkdown({
+  id,
+  title,
+  description,
+  url,
+  label
+}: BlogModuleCta) {
+  const domId = slugify(`blog cta ${id} ${title} ${label}`)
+  return `---
+
+## ${title}
+
+${description}
+
+[${label}](${trackingUrl(url, id, domId)})
+
+---`
+}
+
+function trackingUrl(url: string, id: number, domId: string) {
+  // Automatically apply `?loc=` and `?utm_blogctaid=` params
   try {
     const urlObj = new URL(url)
     let changed = false
@@ -31,21 +69,6 @@ export default function BlogModulesCta({
   } catch (e) {
     // Silence...
   }
-  return (
-    <SimpleCtaCard
-      id={domId}
-      className='toc-ignore'
-      galaxyEventName={`blogCta.${camel(title)}.${camel(label)}`}
-      link={{
-        href: url,
-        text: label
-      }}>
-      <SuiTitle type='h3' className='mb-2.5'>
-        {title}
-      </SuiTitle>
-      <SuiText size='sm' weight='medium' color='secondary'>
-        {description}
-      </SuiText>
-    </SimpleCtaCard>
-  )
+
+  return url
 }

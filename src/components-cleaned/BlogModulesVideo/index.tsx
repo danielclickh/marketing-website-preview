@@ -1,7 +1,11 @@
 'use client'
 
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
-import { getRelativeMediaUrl } from '@/lib/api/strapi'
+import {
+  getAbsoluteMediaUrl,
+  getProxiedMediaUrl,
+  getRelativeMediaUrl
+} from '@/lib/api/strapi'
 import { relativeOptimizedImageUrl } from '@/lib/next'
 import { BlogModuleVideo } from '@/types/strapi'
 import React, { useEffect, useRef, useState } from 'react'
@@ -88,4 +92,23 @@ export default function BlogModulesVideo({
       </video>
     </div>
   )
+}
+
+export function blogModulesVideoMarkdown({
+  sources,
+  placeholder,
+  autoplay,
+  muted,
+  loop,
+  controls
+}: BlogModuleVideo) {
+  let md = `<video autoplay="${autoplay ? '1' : '0'}" muted="${muted ? '1' : '0'}" loop="${loop ? '1' : '0'}" controls="${controls ? '1' : '0'}">\n`
+
+  sources.forEach((source) => {
+    md += `  <source src="${getProxiedMediaUrl(source.url)}" type="${source.mime}" />\n`
+  })
+
+  md += `</video>`
+
+  return md
 }

@@ -101,8 +101,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       }
     })
 
-    const commonDataRequest = await getCommonProps()
-    const newsLetterDataRequest = await getNewsLetterData()
+    const commonDataRequest = getCommonProps()
+    const newsLetterDataRequest = getNewsLetterData()
 
     const [cloudCtaContent, { data: otherBlogs }, commonData, newsLetterData] =
       await Promise.all([
