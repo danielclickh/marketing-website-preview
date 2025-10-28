@@ -41,7 +41,7 @@ import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
-import NewsLetterForm from '@/components/NewsLetter/NewsLetterForm'
+import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -50,7 +50,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
-import React, { CSSProperties, useState } from 'react'
+import React, { CSSProperties, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -82,6 +82,10 @@ export default function ClickHouseServerPage({
   const [opentelemetryActive, setOpentelemetryActive] = useState(false)
   const allAreInactive =
     !hyperdxActive && !clickhouseActive && !opentelemetryActive
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -661,7 +665,32 @@ export default function ClickHouseServerPage({
             </SuiText>
           </div>
           <div className='flex-1'>
-            <NewsLetterForm />
+            {!formSuccess && (
+              <MarketoForm
+                formId='1498'
+                disclaimer={false}
+                clearbitTracking={true}
+                onLoad={() => setFormLoaded(true)}
+                onSuccess={() => {
+                  setFormSuccess(true)
+
+                  // Delay needed to allow the ref to update before scrolling
+                  window.setTimeout(() => {
+                    formSuccessRef.current?.scrollIntoView()
+                  }, 10)
+
+                  return false // Stops page from reloading
+                }}
+              />
+            )}
+
+            {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+            {formSuccess && (
+              <div ref={formSuccessRef}>
+                <p>Thanks for registering to our newsletter!</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
