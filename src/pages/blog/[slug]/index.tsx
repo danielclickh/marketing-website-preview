@@ -2,6 +2,7 @@ import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ScrollToTop from '@/components-cleaned/ScrollToTop'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
+import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -31,9 +32,11 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { camel, slugify } from '@/lib/utils/strings'
 import { BlogProps } from '@/types/blog'
 import { ParamsType } from '@/types/homepage'
+import { BlogModules } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import React, { useEffect, useRef, useState } from 'react'
+import removeMarkdown from 'remove-markdown'
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
@@ -46,13 +49,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         },
         $or: stagingOnlyFilters
       },
-      populate: [
-        'author',
-        'author.avatarPng',
-        'thumbnailPng',
-        'promotion',
-        'promotion.image'
-      ],
+      populate: 'deep',
       pagination: { limit: 1 }
     })
 
@@ -71,7 +68,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       }
     }
 
-    const cloudCtaContent = await findOne('blog', {
+    const cloudCtaContentRequest = findOne('blog', {
       populate: [
         'CloudCTAHeader',
         'CloudCTAFooter',
@@ -80,7 +77,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       ]
     })
 
-    const blogsParams = {
+    const otherBlogsRequest = findAll('blog-posts', {
       sort: ['date:DESC', 'publishedAt:DESC'],
       populate: ['author', 'author.avatarPng', 'thumbnailPng'],
       fields: [
@@ -102,19 +99,33 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         category: { $ne: 'Japanese' },
         $or: stagingOnlyFilters
       }
-    }
-    const { data: otherBlogs } = await findAll('blog-posts', blogsParams)
-    const commonData = await getCommonProps()
-    const newsLetterData = await getNewsLetterData()
+    })
 
-    const canonical = blog.canonical_url ? blog.canonical_url : `/blog/${slug}`
+    const commonDataRequest = await getCommonProps()
+    const newsLetterDataRequest = await getNewsLetterData()
 
-    //super hacky thing that we will change for CMS override
-    if (
-      slug === 'clickhouse-cloud-is-now-generally-available-on-microsoft-azure'
-    ) {
-      blog.thumbnailPng.url = '/images/clickhouse-msft-dark.png'
-    }
+    const [cloudCtaContent, { data: otherBlogs }, commonData, newsLetterData] =
+      await Promise.all([
+        cloudCtaContentRequest,
+        otherBlogsRequest,
+        commonDataRequest,
+        newsLetterDataRequest
+      ])
+
+    const canonical = blog.canonical_url?.trim()?.length
+      ? blog.canonical_url
+      : `/blog/${slug}`
+
+    const combinedFaqs = ((blog.sections as Array<BlogModules>) || [])
+      .filter((module) => module.__component === 'blog-modules.faqs')
+      .flatMap((module) => {
+        return module.items.map((item) => {
+          return {
+            question: item.question,
+            answer: removeMarkdown(item.answer)
+          }
+        })
+      })
 
     return {
       props: {
@@ -129,6 +140,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           image: [blog.thumbnailPng],
           path: canonical,
           keywords: blog?.keywords || '',
+          lastModified: blog.updatedAt,
           schema: generateBlogArticleSchema({
             title: blog.title,
             description: blog.shortDescription,
@@ -137,7 +149,8 @@ export const getStaticProps: GetStaticProps<BlogProps> =
               ? blog.author.name
               : 'ClickHouse Team',
             publishedDate: blog.publishedAt,
-            modifiedDate: blog.updatedAt
+            modifiedDate: blog.updatedAt,
+            faqs: combinedFaqs
           })
         },
         newsLetterData,
@@ -190,7 +203,8 @@ export default function BlogPage({
   table_contents_headers,
   promotion,
   enableSidebarGlobalCta,
-  globalCta
+  globalCta,
+  sections
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
   const contentRef = useRef<null | HTMLDivElement>(null)
@@ -236,7 +250,7 @@ export default function BlogPage({
 
   // Ensure correct directive syntax is used
   Object.keys(markdownDirectives).forEach((directiveKey) => {
-    content = content.replaceAll(
+    content = (content || '').replaceAll(
       `:::${directiveKey}:::`,
       `:::${directiveKey}\n:::`
     )
@@ -272,7 +286,7 @@ export default function BlogPage({
             <ArrowLeftIcon className='mr-2 w-4 transition-transform group-hover/backButton:-translate-x-1' />
             Back
           </SmartBackButton>
-          <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
+          <div className='flex w-full flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
             {/* Blog meta */}
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
               <Breadcrumbs>
@@ -314,8 +328,19 @@ export default function BlogPage({
                 </Markdown>
               )}
 
-              {content && (
-                <div className='flex flex-col lg:flex-row' ref={contentRef}>
+              <div className='w-full space-y-6' ref={contentRef}>
+                {sections &&
+                  sections.length > 0 &&
+                  sections.map((section, sectionIndex) => {
+                    return (
+                      <StrapiDynamicBlogModules
+                        key={sectionIndex}
+                        {...section}
+                      />
+                    )
+                  })}
+
+                {content && (
                   <Markdown
                     allowDirectives={true}
                     className='rich-text-content leading-6'
@@ -323,8 +348,8 @@ export default function BlogPage({
                     components={markdownDirectives}>
                     {content}
                   </Markdown>
-                </div>
-              )}
+                )}
+              </div>
 
               {promotion && (
                 <div className='mt-8'>

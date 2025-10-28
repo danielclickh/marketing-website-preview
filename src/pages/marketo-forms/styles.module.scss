@@ -414,9 +414,10 @@
         }
       }
 
-      // Newsletter specific styles (Marketo ID 1122)
+      // Newsletter specific styles (Marketo IDs: 1122, 1498)
       //
-      &#mktoForm_1122 {
+      &#mktoForm_1122,
+      &#mktoForm_1498 {
         @apply flex flex-row flex-nowrap items-stretch;
         @apply rounded border border-neutral-725 bg-neutral-750 p-1;
 

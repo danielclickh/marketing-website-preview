@@ -1,5 +1,5 @@
 import { SeoMetadata } from '@/lib/api/strapi/types'
-import { absoluteUrl } from '@/lib/next'
+import { absoluteOptimizedImageUrl, absoluteUrl } from '@/lib/next'
 import {
   applyLangPath,
   defaultLanguage,
@@ -20,7 +20,8 @@ function SeoContainer({
   locale,
   keywords,
   schema,
-  languages
+  languages,
+  lastModified
 }: SeoMetadata) {
   // Ensure the default language is always added for pages with alternate languages
   if (languages && !languages.includes(defaultLanguage)) {
@@ -41,9 +42,7 @@ function SeoContainer({
   }
 
   // Automatically resize the image
-  socialImageUrl = absoluteUrl(
-    `/_next/image?url=${encodeURIComponent(socialImageUrl)}&w=1200&h=630&q=80`
-  )
+  socialImageUrl = absoluteOptimizedImageUrl(socialImageUrl, 1200, 630, 80)
 
   const canonicalUrl = (() => {
     let canonicalPath = path
@@ -87,6 +86,22 @@ function SeoContainer({
       <meta name='description' content={description} />
       <meta name='author' content={siteName} />
       <meta name='keywords' content={keywords} />
+      <link
+        rel='alternate'
+        type='application/rss+xml'
+        title='ClickHouse Blog'
+        href='https://clickhouse.com/rss.xml'
+      />
+      {lastModified && (
+        <meta
+          name='last-modified'
+          content={
+            typeof lastModified === 'string'
+              ? lastModified
+              : lastModified.toISOString()
+          }
+        />
+      )}
 
       <link rel='canonical' href={canonicalUrl} key='canonical' />
       {languages && languages.length > 0 && (

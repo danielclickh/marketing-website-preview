@@ -24,9 +24,11 @@ function CodeViewer({
   children,
   ...props
 }: any) {
-  const showLineNumbers = show_line_numbers === 'true'
-  const runBoolean = run === 'true'
-  const runnableBoolean = runnable === 'true'
+  const isTrue = (value: any) =>
+    ['true', '1'].includes(String(value).toLowerCase())
+  const showLineNumbers = isTrue(show_line_numbers)
+  const runBoolean = isTrue(run)
+  const runnableBoolean = isTrue(runnable)
   if (type === 'click-ui') {
     let codeContent = ''
     if (raw_code !== '') {
@@ -83,7 +85,6 @@ function CodeViewer({
     )
   }
   return (
-
     <code
       className={`${className} mb-9 border border-solid border-c3`}
       style={{ wordBreak: 'break-word' }}

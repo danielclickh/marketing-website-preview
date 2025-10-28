@@ -1,9 +1,12 @@
+'use client'
+
 import BlogImage from '../BlogImage'
 import { CUILink } from '../ClickUI'
 import CodeViewer from '../CodeViewer'
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
 import * as Tooltip from '@radix-ui/react-tooltip'
+import { useRouter } from 'next/router'
 import { memo, MouseEventHandler, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
@@ -27,21 +30,31 @@ const commonPlugIns: PluggableList = [
   ]
 ]
 
-function Header(props: any) {
-  let { id, allowHeaderLink, className = '', children, ...otherProps } = props
+function Header({
+  id,
+  allowHeaderLink,
+  className = '',
+  children,
+  ...otherProps
+}: any) {
+  const router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
+
   if (!allowHeaderLink) {
     id = id.replaceAll('-', '')
   }
-  const [isOpen, setIsOpen] = useState(false)
+
   const onClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     const href = e.currentTarget.href
-    history.pushState({}, '', href)
-    navigator.clipboard.writeText(href)
     setIsOpen(true)
-    setTimeout(() => {
-      setIsOpen(false)
-    }, 2000)
+    window.history.replaceState({}, '', href)
+    window.navigator.clipboard.writeText(href).finally(() => {
+      window.setTimeout(() => {
+        setIsOpen(false)
+      }, 2000)
+    })
   }
   return (
     <SuiTitle {...otherProps} className={`group/mdHeader ${className}`} id={id}>
@@ -52,7 +65,8 @@ function Header(props: any) {
           <Tooltip.Provider delayDuration={200}>
             <Tooltip.Root open={isOpen}>
               <Tooltip.Trigger asChild>
-                <span className='transition-opacity group-hover/mdHeader:opacity-100 has-hover:opacity-0'>
+                <span
+                  className={`transition-opacity ${isOpen ? '' : 'group-hover/mdHeader:opacity-100 has-hover:opacity-0'}`}>
                   <CUILink
                     href={{
                       hash: id
@@ -105,6 +119,13 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
       <Header type='h6' allowHeaderLink={allowHeaderLink} {...props} />
     ),
     code: CodeViewer,
+    table({ node, children, ...props }: any) {
+      return (
+        <div className='w-full overflow-x-auto'>
+          <table {...props}>{children}</table>
+        </div>
+      )
+    },
     p({ children }: any) {
       const child = children?.[0]
       if (typeof child === 'object' && child?.type === BlogImage) {

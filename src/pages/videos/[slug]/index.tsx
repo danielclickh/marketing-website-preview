@@ -131,7 +131,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   let seo: SeoMetadata = {
     path: `/videos/${video.Slug}`,
     title: video.Title || video.VideoID,
-    languages: ['en', 'ja']
+    languages: ['en', 'ja'],
+    lastModified: video.updatedAt
   }
 
   if (video.seo?.title) seo.title = video.seo.title
