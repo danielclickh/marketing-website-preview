@@ -41,6 +41,7 @@ import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
+import NewsLetterForm from '@/components/NewsLetter/NewsLetterForm'
 import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -540,6 +541,17 @@ export default function ClickHouseServerPage({
               flexible dashboarding, use the Grafana plugin to correlate
               ClickHouse data with other sources.
             </SuiText>
+
+            <CUIButton
+              type='primary'
+              size='lg'
+              weight='semibold'
+              href='/company/contact?loc=use-case-observability'
+              target='_blank'
+              className='!px-10'
+              linkClass='inline-block'>
+              Get in touch
+            </CUIButton>
           </div>
         </div>
       </section>
@@ -636,8 +648,26 @@ export default function ClickHouseServerPage({
         </div>
       </section>
 
+      {/* Newsletter */}
+      <section className='section-container my-16 max-w-4xl lg:my-24'>
+        <div className='flex flex-col justify-between gap-6 rounded bg-white/5 p-4 md:flex-row md:items-center md:p-6'>
+          <div className='w-full md:w-1/2'>
+            <SuiTitle type='h3' className='mb-2.5'>
+              Subscribe to our observability newsletter
+            </SuiTitle>
+            <SuiText size='sm' weight='medium' color='secondary'>
+              Stay informed on ClickStack feature releases, product roadmap,
+              support, and cloud offerings!
+            </SuiText>
+          </div>
+          <div className='flex-1'>
+            <NewsLetterForm />
+          </div>
+        </div>
+      </section>
+
       {/* Integrations */}
-      <section className='section-container my-24 lg:my-36'>
+      <section className='section-container mb-24 lg:mb-36'>
         <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16 lg:px-12'>
           <SuiTitle type='h2'>Instrument your applications</SuiTitle>
           <SuiText size='lg' className='text-neutral-200'>
