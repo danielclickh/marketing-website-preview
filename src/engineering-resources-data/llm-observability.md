@@ -3,7 +3,7 @@ title: 'Understanding LLM Observability'
 slug: 'llm-observability'
 excerpt: "In this guide, we'll explore how teams monitor and debug their LLM applications, helping them understand everything from response accuracy and token usage to the complex reasoning chains of AI agents."
 index: 16
-lastUpdated: '2025-04-11'
+lastUpdated: '2025-10-28'
 ---
 
 If you're building applications with Large Language Models (LLMs), you must know what's happening inside them. Are they giving accurate responses? Are they using the correct context? How much are they costing you? LLM observability helps answer these questions by adapting traditional monitoring approaches to handle the unique challenges of language models.
@@ -22,8 +22,7 @@ With the right observability tools, teams can monitor LLM behavior in real-time,
 
 ## How does LLM observability differ from observability?
 
-While [traditional observability](https://clickhouse.com/engineering-resources/observability) focuses on [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data) like metrics, logs, and traces, LLM observability must adapt to the unique characteristics of language model applications. The fundamental difference lies in LLMs' non-deterministic nature—where traditional applications produce consistent outputs for given inputs, LLMs may generate varying responses even with identical prompts.  
-This unpredictability requires a different approach to monitoring and debugging.
+While [traditional observability](https://clickhouse.com/engineering-resources/observability) focuses on [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data) like metrics, logs, and traces, LLM observability must adapt to the unique characteristics of language model applications. The fundamental difference lies in LLMs' non-deterministic nature—where traditional applications produce consistent outputs for given inputs, LLMs may generate varying responses even with identical prompts. This unpredictability requires a different approach to monitoring and debugging.
 
 Success criteria also differ significantly. Traditional applications typically have binary success/failure states based on exceptions or error codes, but LLM applications often deal with subjective quality measures. A technically successful API call might still produce an inappropriate or low-quality response, necessitating more sophisticated evaluation methods that can assess semantic correctness and contextual appropriateness.
 
@@ -40,6 +39,8 @@ Quality assessment becomes more sophisticated in LLM observability, combining us
 Beyond hallucination detection, quality assessment might include LLM-based scoring systems, output validation, and continuous monitoring of response quality. These tools help teams understand whether their LLM applications provide accurate, relevant, and helpful responses to users. Session management adds another layer, tracking conversations and preserving user context across multiple interactions to ensure consistent and contextually appropriate responses over time.
 
 Performance and cost metrics tie everything together, providing insights into latency, token usage, and resource utilization. These metrics help teams optimize their applications while maintaining cost efficiency. Debug tooling completes the picture, offering capabilities for prompt inspection, intermediate step analysis, and version control for prompts and models.
+
+For a practical example of tracing OpenAI Agents and visualizing their workflows in ClickHouse, see [Tracing OpenAI agents with ClickStack](https://clickhouse.com/blog/tracing-openai-agents-clickstack).
 
 ## Benefits of LLM observability
 
@@ -63,7 +64,7 @@ Their transition from Postgres to ClickHouse highlights how traditional database
 
 The need for real-time insights adds another layer of complexity. Traditional approaches like materializing statistics ahead of time often prove insufficient, as they limit the ability to perform flexible, ad-hoc analysis of observability data. Teams need solutions that can provide real-time insights while maintaining performance and reliability.
 
-## ClickHouse for LLM observability
+## Can I use ClickHouse for LLM observability?
 
 Choosing the right database becomes crucial as organizations scale their LLM applications and their observability needs grow. The unique characteristics of LLM observability data - from high-volume trace ingestion to complex analytical queries - create specific requirements for the underlying storage system.
 
@@ -121,3 +122,17 @@ When implementing LLM observability, teams need to make several key decisions. F
 Additionally, teams must carefully consider what metrics and traces are most important for their use case, how to handle sensitive data in traces and determine appropriate sampling rates for production traffic. These decisions will shape the effectiveness and efficiency of their observability implementation.
 
 The growing ecosystem of tools and standards makes it increasingly straightforward to implement robust LLM observability, allowing teams to focus on using the insights rather than building the infrastructure.
+
+To experiment locally and see a full setup in action, see [LLM observability with ClickStack, OpenTelemetry, and MCP](https://clickhouse.com/blog/llm-observability-clickstack-mcp).
+
+### How can I visualize LLM traces and metrics in real time?
+
+You can visualize traces, logs, and metrics from your LLM applications in real time using [ClickStack](https://clickhouse.com/docs/use-cases/observability/clickstack/overview), our all-in-one observability stack built on ClickHouse and HyperDX.
+
+ClickStack includes an OpenTelemetry (OTel) collector, a ClickHouse database for fast analytics, and the HyperDX UI for dashboards and trace inspection. ClickStack supports the following types of [telemetry data](https://clickhouse.com/engineering-resources/telemetry-data):
+
+- **Traces** for model calls, agent tool executions, and request spans  
+- **Metrics** such as latency, token usage, and error rates  
+- **Logs** correlated with specific traces for debugging or prompt analysis  
+
+You can use the HyperDX interface to filter traces by latency or model type, or query data directly in ClickHouse for deeper analysis and visualization.
