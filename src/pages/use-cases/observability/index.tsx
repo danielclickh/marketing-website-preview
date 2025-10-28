@@ -41,6 +41,7 @@ import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
+import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -49,7 +50,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
-import React, { CSSProperties, useState } from 'react'
+import React, { CSSProperties, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -81,6 +82,10 @@ export default function ClickHouseServerPage({
   const [opentelemetryActive, setOpentelemetryActive] = useState(false)
   const allAreInactive =
     !hyperdxActive && !clickhouseActive && !opentelemetryActive
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -492,16 +497,6 @@ export default function ClickHouseServerPage({
                 </SuiText>
               </div>
             </AccordionItem>
-            <CUIButton
-              type='primary'
-              size='lg'
-              weight='semibold'
-              href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
-              target='_blank'
-              className='px-10'
-              linkClass='inline-block'>
-              Get started with ClickStack
-            </CUIButton>
           </div>
         </div>
       </section>
@@ -636,8 +631,51 @@ export default function ClickHouseServerPage({
         </div>
       </section>
 
+      {/* Newsletter */}
+      <section className='section-container my-16 max-w-4xl lg:my-24'>
+        <div className='flex flex-col justify-between gap-6 rounded bg-white/5 p-4 md:flex-row md:items-center md:p-6'>
+          <div className='w-full md:w-1/2'>
+            <SuiTitle type='h3' className='mb-2.5'>
+              Subscribe to our observability newsletter
+            </SuiTitle>
+            <SuiText size='sm' weight='medium' color='secondary'>
+              Stay informed on ClickStack feature releases, product roadmap,
+              support, and cloud offerings!
+            </SuiText>
+          </div>
+          <div className='flex-1'>
+            {!formSuccess && (
+              <MarketoForm
+                formId='1498'
+                disclaimer={false}
+                clearbitTracking={true}
+                onLoad={() => setFormLoaded(true)}
+                onSuccess={() => {
+                  setFormSuccess(true)
+
+                  // Delay needed to allow the ref to update before scrolling
+                  window.setTimeout(() => {
+                    formSuccessRef.current?.scrollIntoView()
+                  }, 10)
+
+                  return false // Stops page from reloading
+                }}
+              />
+            )}
+
+            {!formLoaded && <div className='text-center'>Loading form...</div>}
+
+            {formSuccess && (
+              <div ref={formSuccessRef}>
+                <p>Thanks for registering to our newsletter!</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* Integrations */}
-      <section className='section-container my-24 lg:my-36'>
+      <section className='section-container mb-24 lg:mb-36'>
         <div className='mx-auto mb-10 max-w-4xl space-y-6 text-center lg:mb-16 lg:px-12'>
           <SuiTitle type='h2'>Instrument your applications</SuiTitle>
           <SuiText size='lg' className='text-neutral-200'>
