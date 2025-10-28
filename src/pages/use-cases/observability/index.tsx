@@ -497,16 +497,6 @@ export default function ClickHouseServerPage({
                 </SuiText>
               </div>
             </AccordionItem>
-            <CUIButton
-              type='primary'
-              size='lg'
-              weight='semibold'
-              href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
-              target='_blank'
-              className='px-10'
-              linkClass='inline-block'>
-              Get started with ClickStack
-            </CUIButton>
           </div>
         </div>
       </section>
@@ -545,17 +535,6 @@ export default function ClickHouseServerPage({
               flexible dashboarding, use the Grafana plugin to correlate
               ClickHouse data with other sources.
             </SuiText>
-
-            <CUIButton
-              type='primary'
-              size='lg'
-              weight='semibold'
-              href='/company/contact?loc=use-case-observability'
-              target='_blank'
-              className='!px-10'
-              linkClass='inline-block'>
-              Get in touch
-            </CUIButton>
           </div>
         </div>
       </section>
