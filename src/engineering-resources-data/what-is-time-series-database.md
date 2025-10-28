@@ -77,7 +77,7 @@ In this example, several **metrics,** such as `temperature`, `humidity`, and `pr
 
 Finally, each data point is associated with a **timestamp**, representing when the observation was taken. This timestamp is crucial for understanding how the metrics evolve, allowing us to detect patterns or trends.
 
-## Use cases for time-series data
+## What are good use cases for time-series data?
 
 Time-series databases can support a wide range of applications, each benefiting from the ability to store and analyze data as it changes over time. Let's explore some common use cases and the types of questions they help organizations answer.
 
@@ -122,7 +122,7 @@ Such a database will need to have the following characteristics:
 
 Many of these characteristics are the same as those required for [real-time analytics databases](/engineering-resources/what-is-real-time-analytics#characteristics-of-a-real-time-analytics-system).
 
-## Examples of time-series databases
+## What are the most popular time-series databases?
 
 Time-series databases can be categorized into three main types: purpose-built time-series databases, extensions of other databases, and real-time analytics/column-based databases. Here are some popular examples:
 
