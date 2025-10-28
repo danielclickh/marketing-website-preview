@@ -5,16 +5,27 @@ import { BlogModuleCta } from '@/types/strapi'
 import React from 'react'
 
 export default function BlogModulesCta({
+  id,
   title,
   description,
   url,
   label
 }: BlogModuleCta) {
+  const domId = slugify(`blog cta ${id} ${title} ${label}`)
+
   // Automatically apply `?loc=` param
   try {
     const urlObj = new URL(url)
+    let changed = false
     if (!urlObj.searchParams.has('loc')) {
-      urlObj.searchParams.set('loc', slugify(`blog cta ${title} ${label}`))
+      urlObj.searchParams.set('loc', domId)
+      changed = true
+    }
+    if (!urlObj.searchParams.has('utm_blogctaid')) {
+      urlObj.searchParams.set('utm_blogctaid', String(id))
+      changed = true
+    }
+    if (changed) {
       url = urlObj.toString()
     }
   } catch (e) {
@@ -22,6 +33,7 @@ export default function BlogModulesCta({
   }
   return (
     <SimpleCtaCard
+      id={domId}
       className='toc-ignore'
       galaxyEventName={`blogCta.${camel(title)}.${camel(label)}`}
       link={{
