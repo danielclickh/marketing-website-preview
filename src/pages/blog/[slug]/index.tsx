@@ -1,3 +1,4 @@
+import AiActions from '@/components-cleaned/AiActions'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ScrollToTop from '@/components-cleaned/ScrollToTop'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
@@ -183,6 +184,7 @@ export async function getStaticPaths() {
 }
 
 export default function BlogPage({
+  slug,
   title,
   author,
   content,
@@ -289,15 +291,25 @@ export default function BlogPage({
           <div className='flex w-full flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
             {/* Blog meta */}
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
-              <Breadcrumbs>
-                <Breadcrumbs.Link href='/blog'>Blog</Breadcrumbs.Link>
-                <Breadcrumbs.Link href={`/blog?category=${slugify(category)}`}>
-                  {category}
-                </Breadcrumbs.Link>
-              </Breadcrumbs>
+              <div className='flex flex-col gap-6 sm:-mt-0.5 sm:flex-row sm:items-center'>
+                <Breadcrumbs>
+                  <Breadcrumbs.Link href='/blog'>Blog</Breadcrumbs.Link>
+                  <Breadcrumbs.Link
+                    href={`/blog?category=${slugify(category)}`}>
+                    {category}
+                  </Breadcrumbs.Link>
+                </Breadcrumbs>
+                {/* AI Actions */}
+                <div>
+                  <AiActions />
+                </div>
+              </div>
+
               <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
                 <span className='leading-snug'>{title}</span>
               </h1>
+
+              {/* Authors */}
               <div className='flex flex-row items-center space-x-4 pt-2'>
                 <Avatars
                   avatars={
