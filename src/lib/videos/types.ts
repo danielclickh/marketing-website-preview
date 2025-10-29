@@ -18,4 +18,5 @@ export interface Video {
   related: Array<Video['id']>
   seo: Omit<SeoMetadata, 'path'>
   updatedAt: string
+  publishedAt: string
 }
