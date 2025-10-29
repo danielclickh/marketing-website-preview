@@ -61,7 +61,8 @@ export async function getVideos(): Promise<Video[]> {
       categories: item.categories?.map((cat) => cat.CategoryName) || [],
       related: item.RelatedVideos?.map((cat) => cat.id) || [],
       seo: seo,
-      updatedAt: item.updatedAt
+      updatedAt: item.updatedAt,
+      publishedAt: item.publishedAt
     } satisfies Video
   })
 }
