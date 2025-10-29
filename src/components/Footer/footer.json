@@ -126,6 +126,12 @@
         "href": "/videos?category=open-house",
         "target": "_self",
         "galaxyEvent": "footerNav.resourcesMenu.openHouseVideosSelect"
+      },
+      {
+        "name": "Engineering resources",
+        "href": "/engineering-resources",
+        "target": "_self",
+        "galaxyEvent": "footerNav.resourcesMenu.engineeringResources"
       }
     ]
   },
