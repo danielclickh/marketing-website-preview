@@ -15,7 +15,7 @@ export default function Footer({
 }: FooterData) {
   const year = new Date()
   return (
-    <div className='flex flex-col bg-neutral-900 pb-8 pt-16'>
+    <footer className='flex flex-col bg-neutral-900 pb-8 pt-16'>
       <div className='section-container mx-auto w-full justify-between gap-8 pb-11 md:flex lg:gap-10'>
         <div className='flex w-full flex-col'>
           <div className='sitemap flex flex-col gap-y-8 lg:flex-row lg:gap-x-3'>
@@ -126,6 +126,6 @@ export default function Footer({
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
