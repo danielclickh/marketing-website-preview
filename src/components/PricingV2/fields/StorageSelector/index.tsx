@@ -37,6 +37,8 @@ export default function StorageSelector({ cameFrom }: StorageSelectorProps) {
     [setValues, cameFrom]
   )
 
+  const hasStorageValue = storage && humanReadableToBytes(storage) > 0
+
   return (
     <div>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2'>
@@ -64,7 +66,7 @@ export default function StorageSelector({ cameFrom }: StorageSelectorProps) {
       </div>
       {!storageCompressed && (
         <>
-          {storage && (
+          {hasStorageValue && (
             <p className='mt-3 flex items-center gap-x-2 text-xs text-[#CCFFD0]'>
               <CheckIcon className='h-4 w-4' />
               {bytesToHumanReadable(humanReadableToBytes(storage) / 10)} after

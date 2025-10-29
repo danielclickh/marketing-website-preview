@@ -98,6 +98,15 @@ export function bytesToHumanReadable(
       ? BIBYTE_UNITS
       : BYTE_UNITS
 
+  // Handle zero values
+  if (number === 0) {
+    return (
+      number.toLocaleString(locale, localeOptions) +
+      (seperator || '') +
+      UNITS[0]
+    )
+  }
+
   const exponent = Math.min(
     Math.floor(
       binary ? Math.log(number) / Math.log(1024) : Math.log10(number) / 3
