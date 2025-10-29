@@ -5,13 +5,18 @@ import iconClaude from './assets/icon-claude.svg'
 import iconMarkdown from './assets/icon-markdown.svg'
 import iconV0 from './assets/icon-v0.svg'
 import { useClickOutside } from '@/hooks'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { ChevronDown, Copy, ExternalLink } from 'lucide-react'
 import Image, { ImageProps } from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 
-export interface AiActionsProps {}
+export interface AiActionsProps {
+  galaxyNamespace?: string
+}
 
-export default function AiActions({}: AiActionsProps) {
+export default function AiActions({
+  galaxyNamespace = 'aiActions'
+}: AiActionsProps) {
   const menuRef = useRef<null | HTMLUListElement>(null)
   const openRef = useRef<null | HTMLButtonElement>(null)
   const [isOpen, setIsOpen] = useState(false)
@@ -41,6 +46,7 @@ export default function AiActions({}: AiActionsProps) {
   ) => {
     event.preventDefault()
     const markdownUrl = markdownUrlRef.current
+    useGalaxyOnClick(`${galaxyNamespace}.action.copyMarkdown`)()
     if (markdownUrl) {
       setFetching(true)
       ;(async () => {
@@ -73,6 +79,7 @@ export default function AiActions({}: AiActionsProps) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+    useGalaxyOnClick(`${galaxyNamespace}.action.openMarkdown`)()
     if (markdownUrlRef.current) {
       window.open(markdownUrlRef.current, '_blank')
     }
@@ -82,6 +89,7 @@ export default function AiActions({}: AiActionsProps) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+    useGalaxyOnClick(`${galaxyNamespace}.action.openChatgpt`)()
     if (cleanedUrlRef.current) {
       window.open(
         `https://chatgpt.com/?q=${encodeURIComponent(`Read from ${cleanedUrlRef.current} so I can ask questions about it.`)}`,
@@ -95,6 +103,7 @@ export default function AiActions({}: AiActionsProps) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+    useGalaxyOnClick(`${galaxyNamespace}.action.openClaude`)()
     if (cleanedUrlRef.current) {
       window.open(
         `https://claude.ai/new?q=${encodeURIComponent(`Read from ${cleanedUrlRef.current} so I can ask questions about it.`)}`,
@@ -107,6 +116,7 @@ export default function AiActions({}: AiActionsProps) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+    useGalaxyOnClick(`${galaxyNamespace}.action.openV0`)()
     if (cleanedUrlRef.current) {
       window.open(
         `https://v0.app/chat?q=${encodeURIComponent(`Read from ${cleanedUrlRef.current} so I can ask questions about it.`)}`,

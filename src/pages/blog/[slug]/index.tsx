@@ -301,7 +301,7 @@ export default function BlogPage({
                 </Breadcrumbs>
                 {/* AI Actions */}
                 <div>
-                  <AiActions />
+                  <AiActions galaxyNamespace='blogPage' />
                 </div>
               </div>
 
