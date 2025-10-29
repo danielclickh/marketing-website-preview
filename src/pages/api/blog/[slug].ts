@@ -38,12 +38,17 @@ export default async function handler(
 
   // 1) Force path: bypass CDN and do NOT store this response.
   if (forceRevalidate) {
+    response.setHeader('Vercel-CDN-Cache-Control', 'no-store')
     response.setHeader('CDN-Cache-Control', 'no-store')
     response.setHeader('Cache-Control', 'no-store, max-age=0') // for any intermediaries/browsers
   }
 
   // 2) Normal path: cache at the CDN "forever" (or long) until you manually update it
   else {
+    response.setHeader(
+      'Vercel-CDN-Cache-Control',
+      'public, s-maxage=31536000, stale-while-revalidate'
+    )
     response.setHeader(
       'CDN-Cache-Control',
       'public, s-maxage=31536000, stale-while-revalidate'
