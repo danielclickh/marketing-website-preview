@@ -9,6 +9,7 @@ import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
 import iconLightning from './assets/icon-lightning.svg'
 import iconUnlock from './assets/icon-unlock.svg'
+import logoAnthropic from './assets/logo-anthropic.svg'
 import logoDidi from './assets/logo-didi.svg'
 import logoSplunksearch from './assets/logo-elasticsearch.svg'
 import logoKibana from './assets/logo-kibana.svg'
@@ -198,28 +199,30 @@ export default function SplunkPage({
                 content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
                 link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
                 logo={{
-                  src: logoNetflix,
-                  width: 111,
-                  height: 30,
-                  alt: 'Netflix'
+                  src: logoAnthropic,
+                  width: 200 * 0.9,
+                  height: 41 * 0.9,
+                  alt: 'Anthropic'
                 }}
               />
               <QuoteCard
                 content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut turpis nibh, accumsan in tellus dictum, tincidunt feugiat dolor. Cras feugiat scelerisque ex ac mattis. '
                 logo={{
-                  src: logoShopee,
-                  width: 127,
-                  height: 40,
-                  alt: 'Shopee'
+                  src: logoAnthropic,
+                  width: 200 * 0.9,
+                  height: 41 * 0.9,
+                  alt: 'Placeholder',
+                  className: 'bg-white rounded-full'
                 }}
               />
               <QuoteCard
                 content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut turpis nibh, accumsan in tellus dictum, tincidunt feugiat dolor. Cras feugiat scelerisque ex ac mattis. '
                 logo={{
-                  src: logoDidi,
-                  width: 80 * 1.2,
-                  height: 25 * 1.2,
-                  alt: 'Didi'
+                  src: logoAnthropic,
+                  width: 200 * 0.9,
+                  height: 41 * 0.9,
+                  alt: 'Placeholder',
+                  className: 'bg-white rounded-full'
                 }}
               />
             </div>
@@ -229,45 +232,34 @@ export default function SplunkPage({
             {/* Pillar 1 */}
             <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
               <div className='flex items-center gap-4 lg:gap-6'>
-                <Image src={iconGuage} alt='Icon' width={36} height={36} />
+                <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
-                  Performance at Scale
+                  Predictable, resource-based pricing
                 </SuiTitle>
               </div>
               <SuiText>
-                Splunk slows under heavy ingest and high-cardinality queries,
-                while ClickHouse powers sub-second analytics even at petabyte
-                scale.
+                Splunk’s complex mix of ingest, workload, and host-based pricing
+                makes cost forecasting difficult. ClickStack uses simple
+                resource-based pricing, so you pay for compute and storage only.
+                With separation of storage and compute and at least 10x
+                compression, users can enjoy long term cost-efficient retention.
               </SuiText>
-              <Image
-                src={chartQueries}
-                alt='Full data set aggregation for 1 billion JSON documents'
-                width={336}
-                height={273}
-                className='mx-auto mt-auto'
-              />
             </div>
 
             {/* Pillar 2 */}
             <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
               <div className='flex items-center gap-4 lg:gap-6'>
-                <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
+                <Image src={iconGuage} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
-                  Lower Cost, Higher Efficiency
+                  Real-time performance, not long-running searches
                 </SuiTitle>
               </div>
               <SuiText>
-                ClickHouse’s columnar storage and advanced compression cut
-                storage needs by &gt; 50%, reducing infrastructure costs
-                dramatically and allowing for long term retention.
+                Splunk queries often slow under scale or require
+                pre-aggregations like tstats. ClickStack delivers sub-second
+                queries on full-fidelity data, even across trillions of rows. No
+                sampling. No penalty for high cardinality.
               </SuiText>
-              <Image
-                src={chartStorage}
-                alt='Storage required for 1 billion JSON documents'
-                width={336}
-                height={273}
-                className='mx-auto mt-auto'
-              />
             </div>
 
             {/* Pillar 3 */}
@@ -275,14 +267,14 @@ export default function SplunkPage({
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconLightning} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
-                  Unified Observability
+                  Unified observability without product sprawl
                 </SuiTitle>
               </div>
               <SuiText>
-                ClickStack runs logs, metrics, and traces in one engine
-                alongside business and application data for unrivalled
-                correlation. Splunk was never designed for analytical workloads
-                leaving data fragmented.
+                Unlike Splunk’s separate Enterprise, Cloud, and Observability
+                platforms, ClickStack unifies logs, metrics, traces, and replays
+                in one system - no multiple SKUs or disconnected data stores and
+                disjointed user experiences.
               </SuiText>
             </div>
 
@@ -295,9 +287,10 @@ export default function SplunkPage({
                 </SuiTitle>
               </div>
               <SuiText>
-                ClickStack is fully open source (MIT + Apache 2.0) and
-                OpenTelemetry-native, ensuring interoperability and freedom from
-                lock-in.
+                Splunk’s proprietary SPL and closed data formats limit
+                portability. ClickStack is fully open-source and embraces open
+                standards like SQL and OpenTelemetry, ensuring flexibility and
+                avoiding lock-in.
               </SuiText>
             </div>
           </div>
@@ -308,15 +301,11 @@ export default function SplunkPage({
       <section className='my-16 lg:my-24'>
         <div className='section-container mb-16'>
           <div className='mx-auto mb-16 max-w-5xl space-y-6 text-center'>
-            <SuiTitle type='h2'>
-              ClickStack compared to Splunk Observability
-            </SuiTitle>
+            <SuiTitle type='h2'>ClickStack compared to Splunk</SuiTitle>
             <SuiText className='mx-auto max-w-3xl text-neutral-200'>
-              At a high level, Splunk and ClickStack share a familiar shape:
-              both have a data collection layer (Beats and Logstash vs.
-              OpenTelemetry), a storage engine (Splunksearch vs. ClickHouse),
-              and a UI (Kibana vs. HyperDX). But beneath these parallels, the
-              architectures diverge.
+              Break free from thousands of products and SKUs.
+              <br />
+              One high-performance engine, one unified experience.
             </SuiText>
           </div>
           <ClickStackVersusElkStack />
