@@ -1,6 +1,7 @@
 import { strapiDynamicBlogModulesMarkdown } from '@/components-cleaned/StrapiDynamicBlogModules'
 import {
   findAll,
+  getProxiedMediaUrl,
   getStagingOnlyFilters,
   isAuthorisedRevalidationRequest
 } from '@/lib/api/strapi'
@@ -97,5 +98,16 @@ ${frontMatter.join('\n')}
     lines.push(blog.content)
   }
 
-  return response.status(200).send(lines.join('\n\n'))
+  let md = lines.join('\n\n')
+
+  // Make relative upload urls absolute
+  // e.g. /uploads/image.png -> https://clickhouse.com/uploads/image.png
+  md = md.replaceAll(
+    /\!\[([^\]]*)\]\((\/uploads\/[^\)]*)\)/g,
+    (substring, alt, src) => {
+      return substring.replace(src, getProxiedMediaUrl(src))
+    }
+  )
+
+  return response.status(200).send(md)
 }
