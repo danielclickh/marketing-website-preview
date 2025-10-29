@@ -56,6 +56,7 @@ const CONTENT_TYPE_HANDLERS: Record<
         const token = Array.isArray(request?.headers?.['isr-auth-token'])
           ? request?.headers?.['isr-auth-token'][0]
           : request?.headers?.['isr-auth-token']
+
         await fetch(absoluteUrl(`/blog/${body.entry.slug}.md?force=true`), {
           method: 'GET',
           headers: token
@@ -66,7 +67,9 @@ const CONTENT_TYPE_HANDLERS: Record<
         })
 
         // 2. Reseed CDN cache immediately with the new data
-        fetch(absoluteUrl(`/blog/${body.entry.slug}.md`)).catch(() => {})
+        fetch(absoluteUrl(`/blog/${body.entry.slug}.md`), {
+          headers: { 'Cache-Control': 'no-cache' }
+        }).catch(() => {})
       } catch (error) {
         console.error(error)
       }
@@ -373,13 +376,11 @@ export default async function handler(
   const body = req.body
   console.log('Revalidation request', body)
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
-    try {
-      await CONTENT_TYPE_HANDLERS[body.uid](body, res, req)
-      return res.json({ revalidated: true })
-    } catch (error) {
-      console.log('Revalidate error', error)
-      return res.status(500).send('Error revalidating')
-    }
+    // Send and forget revalidation requests, no need to wait
+    CONTENT_TYPE_HANDLERS[body.uid](body, res, req).catch(() => {})
+
+    // Return success response to webhook sender
+    return res.json({ revalidated: true })
   }
 
   return res.json({ revalidated: false })
