@@ -186,7 +186,7 @@ export default function AiActions({}: AiActionsProps) {
         <li>
           <Item
             icon={iconClaude}
-            name='Open in Claud'
+            name='Open in Claude'
             description='Ask questions about this page'
             onClick={handleOpenClaude}
             external={true}
