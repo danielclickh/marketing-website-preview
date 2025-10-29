@@ -51,6 +51,7 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/jp/blog/${body.entry.slug}`)
 
       try {
+        console.log(`Revalidating: /blog/${body.entry.slug}.md`)
         // 1. Fetch a fresh markdown version, bypassing CDN cache
         const token = Array.isArray(request?.headers?.['isr-auth-token'])
           ? request?.headers?.['isr-auth-token'][0]
