@@ -46,12 +46,23 @@ const CONTENT_TYPE_HANDLERS: Record<
   'api::blog-post.blog-post': async function (body, response, request) {
     const paths = [`/sitemap` /*`/blog`*/]
 
-    if (body?.entry?.slug) {
-      paths.push(`/blog/${body.entry.slug}`)
-      paths.push(`/jp/blog/${body.entry.slug}`)
+    const slug = body?.entry?.slug
 
+    if (slug) {
+      paths.push(`/blog/${slug}`)
+      paths.push(`/jp/blog/${slug}`)
+    }
+
+    // Revalidate open house page because it uses tagged content
+    paths.push('/openhouse')
+
+    // Standard ISR revalidation
+    await revalidate(response, paths)
+
+    // Markdown api route revalidation workaround
+    if (slug) {
       try {
-        const markdownUrl = absoluteUrl(`/blog/${body.entry.slug}.md`)
+        const markdownUrl = absoluteUrl(`/blog/${slug}.md`)
         console.log(`Revalidating: ${markdownUrl}`)
 
         // 1. Fetch a fresh markdown version, bypassing CDN cache
@@ -69,18 +80,13 @@ const CONTENT_TYPE_HANDLERS: Record<
         })
 
         // 2. Reseed CDN cache immediately with the new data
-        fetch(absoluteUrl(`/blog/${body.entry.slug}.md`), {
+        await fetch(absoluteUrl(`/blog/${body.entry.slug}.md`), {
           headers: { 'Cache-Control': 'no-cache' }
-        }).catch(() => {})
+        })
       } catch (error) {
         console.log('Error revalidating markdown', error)
       }
     }
-
-    // Revalidate open house page because it uses tagged content
-    paths.push('/openhouse')
-
-    await revalidate(response, paths)
   },
   'api::comparison.comparison': async function (body, response) {
     const paths = [`/sitemap`]
