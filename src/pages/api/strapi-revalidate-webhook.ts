@@ -51,13 +51,15 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/jp/blog/${body.entry.slug}`)
 
       try {
-        console.log(`Revalidating: /blog/${body.entry.slug}.md`)
+        const markdownUrl = absoluteUrl(`/blog/${body.entry.slug}.md`)
+        console.log(`Revalidating: ${markdownUrl}`)
+
         // 1. Fetch a fresh markdown version, bypassing CDN cache
         const token = Array.isArray(request?.headers?.['isr-auth-token'])
           ? request?.headers?.['isr-auth-token'][0]
           : request?.headers?.['isr-auth-token']
 
-        await fetch(absoluteUrl(`/blog/${body.entry.slug}.md?force=true`), {
+        await fetch(`${markdownUrl}?force=true`, {
           method: 'GET',
           headers: token
             ? {
@@ -71,7 +73,7 @@ const CONTENT_TYPE_HANDLERS: Record<
           headers: { 'Cache-Control': 'no-cache' }
         }).catch(() => {})
       } catch (error) {
-        console.error(error)
+        console.log('Error revalidating markdown', error)
       }
     }
 
