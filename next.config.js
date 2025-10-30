@@ -87,6 +87,10 @@ const nextConfig = {
         {
           source: '/uploads/:path*',
           destination: `${strapiApiUrl}/uploads/:path*`
+        },
+        {
+          source: '/blog/:slug.md',
+          destination: '/api/blog/:slug'
         }
       ],
 

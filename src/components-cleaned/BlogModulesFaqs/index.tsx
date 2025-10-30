@@ -25,3 +25,14 @@ export default function BlogModulesFaqs({ title, items }: BlogModuleFaqs) {
     </>
   )
 }
+
+export function blogModulesFaqsMarkdown({ title, items }: BlogModuleFaqs) {
+  let md = `## ${title}\n\n`
+
+  items.forEach((item, itemIndex) => {
+    md += `### Question ${itemIndex + 1}: ${item.question}\n\n`
+    md += item.answer
+  })
+
+  return md
+}

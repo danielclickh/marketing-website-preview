@@ -18,3 +18,16 @@ export default function BlogModulesCodeBlock({
     />
   )
 }
+
+export function blogModulesCodeBlockMarkdown({
+  language,
+  runnable,
+  playLink,
+  code
+}: BlogModuleCodeBlock) {
+  return `\`\`\`${language}
+${code}
+\`\`\`
+
+[Run code block](${playLink})`
+}

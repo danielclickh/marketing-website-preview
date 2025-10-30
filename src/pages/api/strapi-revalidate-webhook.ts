@@ -1,5 +1,10 @@
 import { pages as learnPages } from '@/data/learn'
-import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import {
+  fetchAll,
+  getStagingOnlyFilters,
+  isAuthorisedRevalidationRequest
+} from '@/lib/api/strapi'
+import { absoluteUrl } from '@/lib/next'
 import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -27,19 +32,47 @@ const revalidate = async (
 // strapi UID => revalidation callback
 const CONTENT_TYPE_HANDLERS: Record<
   string,
-  (body: any, response: NextApiResponse) => Promise<void>
+  (
+    body: any,
+    response: NextApiResponse,
+    request: NextApiRequest
+  ) => Promise<void>
 > = {
   /**
    * -----
    * Collection types
    * -----
    */
-  'api::blog-post.blog-post': async function (body, response) {
+  'api::blog-post.blog-post': async function (body, response, request) {
     const paths = [`/sitemap` /*`/blog`*/]
 
     if (body?.entry?.slug) {
       paths.push(`/blog/${body.entry.slug}`)
       paths.push(`/jp/blog/${body.entry.slug}`)
+
+      try {
+        console.log(`Revalidating: /blog/${body.entry.slug}.md`)
+        // 1. Fetch a fresh markdown version, bypassing CDN cache
+        const token = Array.isArray(request?.headers?.['isr-auth-token'])
+          ? request?.headers?.['isr-auth-token'][0]
+          : request?.headers?.['isr-auth-token']
+
+        await fetch(absoluteUrl(`/blog/${body.entry.slug}.md?force=true`), {
+          method: 'GET',
+          headers: token
+            ? {
+                'isr-auth-token': token
+              }
+            : {}
+        })
+
+        // 2. Reseed CDN cache immediately with the new data
+        fetch(absoluteUrl(`/blog/${body.entry.slug}.md`), {
+          headers: { 'Cache-Control': 'no-cache' }
+        }).catch(() => {})
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     // Revalidate open house page because it uses tagged content
@@ -330,12 +363,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Authorize request
-  const webhookToken = process.env.STRAPI_WEBHOOK_TOKEN
-  if (
-    !webhookToken ||
-    !req.headers?.['isr-auth-token'] ||
-    req.headers['isr-auth-token'] !== webhookToken
-  ) {
+  if (!isAuthorisedRevalidationRequest(req)) {
     return res.status(403).send('Unauthorized')
   }
 
@@ -348,13 +376,11 @@ export default async function handler(
   const body = req.body
   console.log('Revalidation request', body)
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
-    try {
-      await CONTENT_TYPE_HANDLERS[body.uid](body, res)
-      return res.json({ revalidated: true })
-    } catch (error) {
-      console.log('Revalidate error', error)
-      return res.status(500).send('Error revalidating')
-    }
+    // Send and forget revalidation requests, no need to wait
+    CONTENT_TYPE_HANDLERS[body.uid](body, res, req).catch(() => {})
+
+    // Return success response to webhook sender
+    return res.json({ revalidated: true })
   }
 
   return res.json({ revalidated: false })
