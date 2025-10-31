@@ -1,3 +1,7 @@
+import logoTesla from './automotive/assets/logo-tesla.svg'
+import logoSeemplicity from './cybersecurity/assets/logo-seemplicity.svg'
+import logoNovo from './energy/assets/logo-novo.png'
+import logoWalmart from './retail/assets/logo-walmart.svg'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
@@ -94,38 +98,74 @@ export default function IndustriesPage({
               <CUICard.Body className='grid grid-cols-1 rounded-lg lg:grid-cols-2'>
                 <IndustryCell
                   position='top-left'
+                  icon='/images/real-time-data-warehouse/icon-cybersecurity.svg'
                   link='/industries/cybersecurity'
                   title='Cybersecurity'
                   description='Learn how ClickHouse empowers real-time threat detection and security analytics'
                   quote='I knew a managed product built by engineers, whose goal in life is to transform bits from Postgres into ClickHouse, would be better than anything we could do ourselves.'
+                  quoteLogo={{
+                    src: logoSeemplicity,
+                    width: 183,
+                    height: 30,
+                    alt: 'Seemplicity'
+                  }}
                 />
                 <IndustryCell
                   position='top-right'
+                  icon='/images/real-time-data-warehouse/icon-energy.svg'
                   link='/industries/energy'
                   title='Energy'
                   description='Discover how ClickHouse optimizes energy management and smart grid operations'
                   quote='Our primary business requirement for any database/store was that we own and control the data we store -- no vendor lock-in and no walled gardens. Going with ClickHouse Cloud on AWS was an easy decision because it allows us to focus on our primary work without having to worry about maintenance, upgrades, backups, and so on.'
+                  quoteLogo={{
+                    src: logoNovo,
+                    width: 1500 / 14,
+                    height: 395 / 14,
+                    alt: 'Novo Energy',
+                    className: 'saturate-0 invert'
+                  }}
                 />
                 <IndustryCell
                   position='middle-left'
+                  icon='/images/real-time-data-warehouse/icon-gaming.svg'
                   link='/industries/gaming'
                   title='Gaming and entertainment'
                   description='Explore how ClickHouse enhances player experiences and game analytics'
                   quote='The main benefit is saving employee time, which can now be spent on more exciting and strategic tasks. One of our administrators has about 60% of their time freed up, and our ETL engineer now saves 40% of their time.'
+                  quoteLogo={{
+                    src: '/images/industries/gaming/logo-azur.svg',
+                    width: 123,
+                    height: 40,
+                    alt: 'Azur Games'
+                  }}
                 />
                 <IndustryCell
                   position='middle-right'
+                  icon='/images/real-time-data-warehouse/icon-retail.svg'
                   link='/industries/retail'
                   title='E-commerce and retail'
                   description='See how ClickHouse drives real-time inventory, sales, and customer insights'
                   quote='ClickHouse enables the business users to make smart business decisions based on huge volume of data in a matter of seconds'
+                  quoteLogo={{
+                    src: logoWalmart,
+                    width: 233.58 * 0.7,
+                    height: 56.01 * 0.7,
+                    alt: 'Walmart'
+                  }}
                 />
                 <IndustryCell
                   position='bottom-left'
+                  icon='/images/real-time-data-warehouse/icon-automotive.svg'
                   link='/industries/automotive'
                   title='Automotive'
                   description='Learn how ClickHouse powers connected car data and autonomous driving insights'
                   quote='Data in ClickHouse is better than data anywhere else. No other system lets you slice and dice your data, ask interesting questions, and get answers in an acceptable amount of time.'
+                  quoteLogo={{
+                    src: logoTesla,
+                    width: 100,
+                    height: 24,
+                    alt: 'Tesla'
+                  }}
                 />
                 <Cell position='bottom-right'>
                   <SuiTitle type='h3'>And more!</SuiTitle>
@@ -319,7 +359,7 @@ function Cell({
   }
   return (
     <div
-      className={`border-b border-r border-neutral-700/80 p-6 ${borderClasses[position]} ${className}`}>
+      className={`border-neutral-700/80 p-4 lg:p-6 ${borderClasses[position]} ${className}`}>
       {children}
     </div>
   )
@@ -334,27 +374,36 @@ function IndustryCell({
   link,
   position
 }: {
-  icon?: ImageProps['src']
+  icon: ImageProps['src']
   title: string
   description: string
   quote: string
-  quoteLogo?: ImageProps['src']
+  quoteLogo?: ImageProps
   link: LinkProps['href']
   position: CellPositions
 }) {
   return (
-    <Cell position={position} className='relative flex flex-col gap-4'>
-      <div className='flex items-center'>
+    <Cell
+      position={position}
+      className='group/industryCell relative flex flex-col gap-4'>
+      <div className='flex items-center gap-4'>
+        <Image
+          className='size-8 object-scale-down'
+          src={icon}
+          alt={`${title} icon`}
+          width={32}
+          height={32}
+        />
         <SuiTitle type='h3'>{title}</SuiTitle>
         <CUIButton type='secondary' size='sm' linkClass='ml-auto' href={link}>
-          <span className='absolute inset-0' />
+          <span className='absolute inset-0 z-10' />
           Learn more -&gt;
         </CUIButton>
       </div>
       <SuiText size='sm' className='text-neutral-200'>
         <p>{description}</p>
       </SuiText>
-      <blockquote className='flex-1 rounded bg-neutral-750 p-4'>
+      <blockquote className='flex flex-1 flex-col rounded bg-neutral-750 p-4'>
         <Image
           src='/images/Quote.svg'
           width={37}
@@ -362,9 +411,14 @@ function IndustryCell({
           alt='Quote'
           className='mb-4'
         />
-        <SuiText size='sm' className='text-neutral-200'>
+        <SuiText size='sm' className='w-full text-neutral-200'>
           <p className='italic'>{quote}</p>
         </SuiText>
+        {quoteLogo && (
+          <div className='mt-auto self-end pt-4 opacity-40 transition-opacity group-hover/industryCell:opacity-50'>
+            <Image {...quoteLogo} />
+          </div>
+        )}
       </blockquote>
     </Cell>
   )
