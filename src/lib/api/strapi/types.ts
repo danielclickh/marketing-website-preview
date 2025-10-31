@@ -1,3 +1,4 @@
+import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types'
 import { WithContext, Thing } from 'schema-dts'
 
 export type LinkTarget = '_self' | '_blank'
@@ -63,7 +64,9 @@ export interface SeoMetadata {
   path: string
   robots?: string
   locale?: string
-  schema?: WithContext<Thing>
+  schema?: WithContext<Thing> | Array<WithContext<Thing>>
+  languages?: Array<keyof Languages<string>>
+  lastModified?: Date | string
 }
 
 // ------

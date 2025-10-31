@@ -1076,7 +1076,7 @@ export default function Page({
                             <p className='mb-3 hidden lg:block'>
                               {limitStringByWord(
                                 stripHtmlTags(
-                                  blog.shortDescription || blog.content
+                                  blog.shortDescription || blog.content || ''
                                 ),
                                 140,
                                 '...'

@@ -18,7 +18,7 @@ export interface Integration {
   shortDescription: string
   supportLevel: string
   website: string | null
-  summary: string
+  summary: string | null
   summaryv2: string | null
   about: string | null
   aboutv2: string | null

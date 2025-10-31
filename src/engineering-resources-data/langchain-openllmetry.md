@@ -4,6 +4,8 @@ slug: 'tracing-langchain-openllmetry'
 excerpt: "In this guide, we'll learn about OpenLLMetry - the open-source observability framework for large language models."
 index: 30
 lastUpdated: '2025-08-29'
+author: 'Mark Needham'
+authorAvatar: 'https://clickhouse.com/uploads/mark_needham_a17c08008e.png'
 ---
 
 [LangChain](https://www.langchain.com/) has emerged as one of the leading frameworks for building AI applications, making it easier than ever to create complex workflows with large language models. 

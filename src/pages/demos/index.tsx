@@ -40,6 +40,7 @@ export const getServerSideProps: GetServerSideProps<DemosPageProps> =
 
     if (!seo?.title) seo.title = title
     seo.path = '/demos'
+    seo.languages = ['en', 'ja']
 
     return {
       props: {

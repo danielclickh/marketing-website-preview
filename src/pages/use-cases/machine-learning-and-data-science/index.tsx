@@ -47,6 +47,7 @@ export const getStaticProps: GetStaticProps<MLProps> =
     data.seo.description =
       "The ultimate real-time database to power Machine Learning workloads. With ClickHouse, it's easier than ever to unleash GenAI on your analytics data."
     data.seo.image = [{ url: '/images/og-ml-ds.png' }]
+    data.seo.languages = ['en', 'ja']
 
     const commonProps = await getCommonProps()
     return {

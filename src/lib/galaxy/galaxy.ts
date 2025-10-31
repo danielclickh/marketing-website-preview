@@ -1,3 +1,5 @@
+'use client'
+
 import { FullyQualifiedEvent, GalaxyClient } from './client'
 import { Galaxy } from './web/browser'
 import { useSearchParams } from 'next/navigation'
@@ -125,7 +127,7 @@ export const useGalaxyOnLoad = (event: FullyQualifiedEvent): void => {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const searchParamsStr = searchParams.toString()
+  const searchParamsStr = searchParams?.toString() || ''
 
   const loadListener = (): void => {
     if (window.galaxy) {

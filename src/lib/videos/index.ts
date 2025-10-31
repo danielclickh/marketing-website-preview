@@ -19,6 +19,7 @@ type StrapiItem = {
     image?: null | StrapiImageProps
   }
   publishedAt: string
+  updatedAt: string
 }
 
 export async function getVideos(): Promise<Video[]> {
@@ -51,16 +52,18 @@ export async function getVideos(): Promise<Video[]> {
     return {
       id: item.id,
       slug: item.Slug,
-      title: item.Title,
+      title: item.Title || '',
       subTitle: item?.IntroText || null,
-      description: item.Description,
+      description: item.Description || null,
       date,
       thumbnail,
       embed: `<iframe src="https://www.youtube-nocookie.com/embed/${item.VideoID}?rel=0&autoplay=1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>`,
       categories: item.categories?.map((cat) => cat.CategoryName) || [],
       related: item.RelatedVideos?.map((cat) => cat.id) || [],
-      seo: seo
-    } as Video
+      seo: seo,
+      updatedAt: item.updatedAt,
+      publishedAt: item.publishedAt
+    } satisfies Video
   })
 }
 

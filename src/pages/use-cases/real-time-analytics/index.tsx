@@ -44,6 +44,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
     data.seo.title = 'Real-time Analytics with ClickHouse'
     data.seo.description =
       'Learn about Real-time Analytics and how companies are using ClickHouse for their real-time analytics applications.'
+    data.seo.languages = ['en', 'ja']
 
     const commonProps = await getCommonProps()
     return {

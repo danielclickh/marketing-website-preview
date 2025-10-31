@@ -1,5 +1,11 @@
 import { SeoMetadata } from '@/lib/api/strapi/types'
-import { absoluteUrl } from '@/lib/next'
+import { absoluteOptimizedImageUrl, absoluteUrl } from '@/lib/next'
+import {
+  applyLangPath,
+  defaultLanguage,
+  removeLangPath
+} from '@/lib/utils/internationalisation'
+import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types'
 import Head from 'next/head'
 
 function SeoContainer({
@@ -13,8 +19,15 @@ function SeoContainer({
   robots,
   locale,
   keywords,
-  schema
+  schema,
+  languages,
+  lastModified
 }: SeoMetadata) {
+  // Ensure the default language is always added for pages with alternate languages
+  if (languages && !languages.includes(defaultLanguage)) {
+    languages.push(defaultLanguage)
+  }
+
   // Default social image
   let socialImageUrl = '/images/social_share.png'
 
@@ -29,32 +42,34 @@ function SeoContainer({
   }
 
   // Automatically resize the image
-  socialImageUrl = absoluteUrl(
-    `/_next/image?url=${encodeURIComponent(socialImageUrl)}&w=1200&h=630&q=80`
-  )
+  socialImageUrl = absoluteOptimizedImageUrl(socialImageUrl, 1200, 630, 80)
 
   const canonicalUrl = (() => {
-    const predefinedUrls: { [key: string]: string } = {
-      '/blog/forecasting-using-clickhouse':
-        'https://benjaminwootton.com/insights/forecasting-using-clickhouse',
-      '/blog/clickhouse-linear-regression-machine-learning-functions':
-        'https://benjaminwootton.com/insights/linear-regression-using-clickhouse'
+    let canonicalPath = path
+    if (canonicalPath.startsWith('http')) {
+      return canonicalPath
     }
-
-    if (path.startsWith('http')) {
-      return path
-    }
-
-    return predefinedUrls[path] || absoluteUrl(path)
+    return absoluteUrl(canonicalPath)
   })()
 
-  const canonicalUrlJP = (() => {
-    if (path.startsWith('http')) {
-      return path
+  const languageCanonicalUrl = (lang: keyof Languages<string>) => {
+    let canonicalPath = path
+    if (canonicalPath.startsWith('http')) {
+      return canonicalPath
     }
 
-    return absoluteUrl(`/jp${path}`)
-  })()
+    if (languages) {
+      languages.forEach((language) => {
+        if (language !== lang) {
+          canonicalPath = removeLangPath(canonicalPath, language)
+        }
+      })
+    }
+
+    canonicalPath = applyLangPath(canonicalPath, lang)
+
+    return absoluteUrl(canonicalPath)
+  }
 
   title = title && title.length > 0 ? title : ''
   description = description && description.length > 0 ? description : ''
@@ -71,10 +86,42 @@ function SeoContainer({
       <meta name='description' content={description} />
       <meta name='author' content={siteName} />
       <meta name='keywords' content={keywords} />
+      <link
+        rel='alternate'
+        type='application/rss+xml'
+        title='ClickHouse Blog'
+        href='https://clickhouse.com/rss.xml'
+      />
+      {lastModified && (
+        <meta
+          name='last-modified'
+          content={
+            typeof lastModified === 'string'
+              ? lastModified
+              : lastModified.toISOString()
+          }
+        />
+      )}
 
       <link rel='canonical' href={canonicalUrl} key='canonical' />
-      <link rel='alternate' hrefLang='en' href={canonicalUrl} />
-      <link rel='alternate' hrefLang='ja' href={canonicalUrlJP} />
+      {languages && languages.length > 0 && (
+        <>
+          {languages.map((language) => {
+            return (
+              <link
+                rel='alternate'
+                hrefLang={language}
+                href={languageCanonicalUrl(language)}
+              />
+            )
+          })}
+          <link
+            rel='alternate'
+            hrefLang='x-default'
+            href={languageCanonicalUrl(defaultLanguage)}
+          />
+        </>
+      )}
 
       {/* Open Graph */}
       <meta property='og:title' content={title} />

@@ -45,7 +45,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         seo: {
           title: 'BigQuery vs ClickHouse',
           path: '/comparison/bigquery',
-          image: [{ url: '/images/clickhouse-vs-bigquery-og.png' }]
+          image: [{ url: '/images/clickhouse-vs-bigquery-og.png' }],
+          languages: ['en', 'ja']
         }
       }
     }

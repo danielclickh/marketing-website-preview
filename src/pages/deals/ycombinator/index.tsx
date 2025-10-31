@@ -76,8 +76,8 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                 className='hover:underline'>
                 Y Combinator
               </Link>{' '}
-              2025 batch, you can claim $10,000 in ClickHouse Cloud credits to
-              supercharge your analytics and ship faster.
+              Fall 2025 batch, you can claim $10,000 in ClickHouse Cloud credits
+              to supercharge your analytics and ship faster.
             </p>
             <div className='!mt-12 flex justify-center'>
               <CUIButton
@@ -248,8 +248,8 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                     className='hover:underline'>
                     Y Combinator
                   </Link>{' '}
-                  2025 batch, less than three years old, pre-Series B, and new
-                  to ClickHouse Cloud.
+                  Fall 2025 batch, less than three years old, pre-Series B, and
+                  new to ClickHouse Cloud.
                 </p>
                 <ul className='mt-6 space-y-6 text-left lg:mt-12'>
                   <li>
@@ -261,7 +261,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                         className='hover:underline'>
                         Y Combinator
                       </Link>{' '}
-                      2025 batch
+                      Fall 2025 batch
                     </TickItem>
                   </li>
                   <li>

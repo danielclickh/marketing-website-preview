@@ -4,9 +4,11 @@ import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
+import Avatars from '@/components/Avatars'
 import NewsLetterForm from '@/components/NewsLetter/NewsLetterForm'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import SocialButton from '@/components/SocialButton'
+import TableOfContents from '@/components/TableOfContents'
 import { SuiButton, SuiPanel, SuiText, SuiTitle } from '@/components/sui'
 import {
   getEngineeringResource,
@@ -19,6 +21,7 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ParsedUrlQuery } from 'querystring'
+import { useRef } from 'react'
 
 type MoreLikeThisItem = {
   link: string
@@ -69,7 +72,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
       seo: {
         title: `${engResource.title} | ClickHouse Engineering Resources`,
         description: engResource.excerpt,
-        path: `/engineering-resources/${engResource.slug}`
+        path: `/engineering-resources/${engResource.slug}`,
+        lastModified: engResource.lastUpdated
       },
       newsLetterData,
       ...(await getCommonProps())
@@ -93,14 +97,32 @@ export default function Page({
   footerData,
   newsLetterData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const contentRef = useRef<HTMLDivElement>(null)
   const date = new Date(engResource.lastUpdated)
+
+  const authorName = engResource.author || "The ClickHouse Team"
+  const authorAvatarUrl = engResource.authorAvatar || "https://clickhouse.com/uploads/neutral_avatar_400804ae96_5c370e757b.png"
+
+  const authorAvatar = {
+    id: 1,
+    name: "author.png",
+    alternativeText: authorName,
+    caption: "",
+    hash: "author",
+    ext: ".png",
+    mime: "image/png",
+    size: 0,
+    url: authorAvatarUrl,
+    provider: "local",
+    provider_metadata: null
+  }
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <main className='bg-grid'>
         <div className='container mx-auto max-w-7xl px-6 pt-20 2xl:px-0'>
-          <div className='flex-row items-start gap-16 lg:flex'>
-            <div className='flex-shrink flex-grow'>
+          <div className='flex flex-col items-start gap-8 lg:flex-row lg:gap-16'>
+            <div className='w-full flex-shrink flex-grow lg:w-auto'>
               <Breadcrumbs className='mb-6'>
                 <Breadcrumbs.Link href='/engineering-resources'>
                   Engineering Resources
@@ -109,14 +131,23 @@ export default function Page({
               <SuiTitle type='h1' className='my-6 text-balance md:!text-5xl'>
                 {engResource.title}
               </SuiTitle>
-              <p className='-mt-5 pb-5 italic'>
-                Last updated:{' '}
-                {date.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </p>
+
+              <div className='flex flex-row items-center space-x-4 pb-5'>
+                <Avatars avatars={[authorAvatar]} />
+                <div>
+                  <div className='text-base'>{authorName}</div>
+                  <div className='text-sm text-neutral-300'>
+                    Last updated:{' '}
+                    {date.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              <div ref={contentRef}>
               {engResource.image !== '' && (
                 <Image
                   src={engResource.image}
@@ -129,6 +160,7 @@ export default function Page({
               <Markdown className='rich-text-content leading-6' allowHeaderLink>
                 {engResource.body}
               </Markdown>
+              </div>
               <HRSeparator className='my-8' />
               <div className='mb-10 flex flex-col items-center justify-between gap-4 md:flex-row'>
                 <div className='flex'>
@@ -145,7 +177,13 @@ export default function Page({
                 </div>
               </div>
             </div>
-            <aside className='w-full flex-shrink-0 flex-grow-0 align-top lg:sticky lg:top-32 lg:max-w-sm'>
+            <aside className='hidden w-full flex-shrink-0 flex-grow-0 align-top lg:block lg:sticky lg:top-32 lg:max-w-sm'>
+              <div className='mb-8'>
+                <TableOfContents
+                  contentRef={contentRef}
+                  headersSelector={engResource.headersSelector || 'h2'}
+                />
+              </div>
               {moreLikeThis.length > 0 && (
                 <div className='mb-8'>
                   <h3 className='mb-6 text-lg font-bold'>More like this</h3>

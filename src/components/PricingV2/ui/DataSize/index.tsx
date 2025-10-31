@@ -126,11 +126,13 @@ export default function DataSize({
 
   // Send value up to parent
   const handleOnChange = useCallback(
-    (bytes: number | null) => {
+    (bytes: number | null, userFormatted: null | string = null) => {
       if (onChange) {
         onChange({
           bytes: bytes,
-          formatted: bytes ? bytesToHumanReadable(bytes) : null
+          formatted:
+            userFormatted ??
+            (bytes !== null ? bytesToHumanReadable(bytes) : null)
         })
       }
     },
@@ -146,7 +148,11 @@ export default function DataSize({
         const userValue = Math.round(Number(event.target.value || '0'))
         const bytesValue = humanReadableToBytes(`${userValue}${unitValue}`)
         const validatedValue = validateBytesValue(bytesValue)
-        handleOnChange(validatedValue)
+        const isValid = bytesValue === validatedValue
+        handleOnChange(
+          validatedValue,
+          isValid ? `${userValue}${unitValue}` : undefined
+        )
       }
     },
     [unitValue, validateBytesValue, handleOnChange]
@@ -157,7 +163,11 @@ export default function DataSize({
     (userValue: string) => {
       const bytesValue = humanReadableToBytes(`${inputValue}${userValue}`)
       const validatedValue = validateBytesValue(bytesValue)
-      handleOnChange(validatedValue)
+      const isValid = bytesValue === validatedValue
+      handleOnChange(
+        validatedValue,
+        isValid ? `${inputValue}${userValue}` : undefined
+      )
     },
     [inputValue, validateBytesValue, handleOnChange]
   )

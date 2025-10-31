@@ -122,7 +122,8 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
     }
 
     seo.locale = 'ja_JP'
-    seo.path = `/integrations/${slug}`
+    seo.path = `/jp/integrations/${slug}`
+    seo.languages = ['en', 'ja']
 
     const commonData = await getCommonProps()
     const newsLetterData = await getNewsLetterData()
@@ -214,7 +215,7 @@ export default function IntegrationPage({
               }
             } as any
           }>
-          {integration.summaryv2 || integration.summary}
+          {integration.summaryv2 || integration.summary || ''}
         </Markdown>
 
         {similar.length && (

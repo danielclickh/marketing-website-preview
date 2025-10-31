@@ -1,5 +1,6 @@
 import chartQueries from './assets/chart-queries.svg'
 import chartStorage from './assets/chart-storage.svg'
+import clickstackLogo from './assets/clickstack-logo.svg'
 import elasticAnimationLogo from './assets/elastic-animation-logo.svg'
 import elasticTableLogo from './assets/elastic-table-logo.svg'
 import heroLogos from './assets/hero-logos.png'
@@ -19,7 +20,6 @@ import logoShopee from './assets/logo-shopee.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import logoZomato from './assets/logo-zomato.svg'
 import styles from './styles.module.scss'
-import logoClickhouse from '@/../public/logo-full.svg'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         ...commonProps,
         seo: {
           title: 'Elastic vs ClickHouse',
-          path: '/comparison/elastic',
+          path: '/comparison/elastic-for-observability',
           image: [{ url: '/images/clickhouse-vs-elastic-og.png' }]
         }
       }
@@ -505,9 +505,9 @@ function TabbedTable() {
     {
       heading: (
         <Image
-          src={logoClickhouse}
-          alt='ClickHouse'
-          width={149}
+          src={clickstackLogo}
+          alt='ClickStack'
+          width={131}
           height={44}
           className='mx-auto -mb-2 -mt-1'
         />

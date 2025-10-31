@@ -36,6 +36,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
     data.seo.locale = 'ja_JP'
     data.seo.path = ''
     data.seo.title = '高速オープンソース OLAP DBMS - ClickHouse'
+    data.seo.languages = ['en', 'ja']
     return {
       props: {
         ...data,

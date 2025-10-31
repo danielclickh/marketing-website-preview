@@ -69,7 +69,8 @@ export const getStaticProps: GetStaticProps<ComparisonProps> =
     const seo = comparison.seo
 
     seo.locale = 'ja_JP'
-    seo.path = '/comparison/redshift'
+    seo.path = '/jp/comparison/redshift'
+    seo.languages = ['en', 'ja']
 
     const commonData = await getCommonProps()
     const newsLetterData = await getNewsLetterData()

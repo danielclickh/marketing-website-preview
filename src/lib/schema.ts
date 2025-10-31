@@ -12,7 +12,8 @@ import {
   Article,
   ContactPage,
   WebPage,
-  Product
+  Product,
+  FAQPage
 } from 'schema-dts'
 
 const defaultOrganization: Organization = {
@@ -53,7 +54,8 @@ export const generateBlogArticleSchema = ({
   imageUrl,
   authorName,
   publishedDate,
-  modifiedDate
+  modifiedDate,
+  faqs
 }: {
   title: string
   description: string
@@ -61,20 +63,46 @@ export const generateBlogArticleSchema = ({
   authorName: string
   publishedDate: string
   modifiedDate: string
-}): WithContext<BlogPosting> => ({
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: title,
-  description,
-  image: imageUrl,
-  author: {
-    '@type': 'Person',
-    name: authorName
-  },
-  publisher: defaultOrganization,
-  datePublished: publishedDate,
-  dateModified: modifiedDate
-})
+  faqs?: Array<{
+    question: string
+    answer: string
+  }>
+}): Array<WithContext<BlogPosting | FAQPage>> => {
+  const blogSchema: WithContext<BlogPosting> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: imageUrl,
+    author: {
+      '@type': 'Person',
+      name: authorName
+    },
+    publisher: defaultOrganization,
+    datePublished: publishedDate,
+    dateModified: modifiedDate
+  }
+
+  const schemas: Array<WithContext<BlogPosting | FAQPage>> = [blogSchema]
+
+  if (faqs?.length) {
+    const faqSchema: WithContext<FAQPage> = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer
+        }
+      }))
+    }
+    schemas.push(faqSchema)
+  }
+
+  return schemas
+}
 
 export const generateEventsArchiveSchema = ({
   path
