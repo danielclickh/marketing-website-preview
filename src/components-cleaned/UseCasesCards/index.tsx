@@ -93,7 +93,7 @@ function Card({
       className={`relative transition duration-300 ${className}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
-      <CUICard.Header>
+      <CUICard.Header className='hidden sm:block'>
         <Image
           src={image}
           width={288}
