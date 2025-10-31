@@ -1,25 +1,48 @@
+import ContentTicker from '@/components-cleaned/ContentTicker'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
+import { StrapiImageUrl } from '@/components/StrapiElements'
+import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
+import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { CommonProps } from '@/types/homepage'
+import { CommonProps, HomepageCustomerStories } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import { LinkProps } from 'next/link'
 import React from 'react'
 
-export const getStaticProps: GetStaticProps<CommonProps> =
+interface PageProps extends CommonProps {
+  logos: HomepageCustomerStories['logos']
+}
+
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
-    const commonProps = await getCommonProps()
+    const commonPropsRequest = getCommonProps()
+
+    const dataRequest = findOne('homepage', {
+      populate: [
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng'
+      ]
+    })
+
+    const [commonProps, data] = await Promise.all([
+      commonPropsRequest,
+      dataRequest
+    ])
 
     return {
       props: {
+        logos: data.customerStories.logos,
         seo: {
           path: '/industries',
-          title: '',
-          description: '',
-          keywords: ''
+          title: 'Real-time analytics across industries | ClickHouse',
+          description:
+            'ClickHouse powers real-time analytics for gaming, retail, energy, cybersecurity, and more. Ingest millions of rows per second and deliver instant insights at any scale.'
         },
         ...commonProps
       }
@@ -29,8 +52,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
 export default function IndustriesPage({
   seo,
   headerData,
-  footerData
-}: CommonProps) {
+  footerData,
+  logos
+}: PageProps) {
   useGalaxyOnPage('industriesPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -64,7 +88,7 @@ export default function IndustriesPage({
       <section className='relative bg-grid'>
         <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-20 bg-primary-300' />
         <div className='relative z-10'>
-          <div className='section-container pb-16 lg:pb-24'>
+          <div className='section-container pb-8 lg:pb-16'>
             <CUICard className='!bg-neutral-900'>
               <CUICard.Body className='grid grid-cols-1 rounded-lg lg:grid-cols-2'>
                 <IndustryCell
@@ -113,6 +137,32 @@ export default function IndustriesPage({
                 </Cell>
               </CUICard.Body>
             </CUICard>
+
+            <div className='mx-auto mt-8 max-w-5xl lg:mt-16'>
+              {/* Trusted by */}
+              <div className='flip-selection mx-auto mb-8 w-fit max-w-2xl px-4 pb-4 text-center text-xl font-semibold leading-normal text-primary-800 md:px-0'>
+                Trusted by industry leaders that work with data{' '}
+                <TiltedText type='white-on-black' className='px-2'>
+                  at scale
+                </TiltedText>
+              </div>
+
+              <ContentTicker
+                gap='3rem'
+                gradientMask={true}
+                pause={false}
+                sizingMethod='max'>
+                {logos.map((story, logoIndex) => {
+                  return (
+                    <StrapiImageUrl
+                      key={logoIndex}
+                      className='my-auto flex-shrink-0 flex-grow-0'
+                      {...story.darkLogoPng}
+                    />
+                  )
+                })}
+              </ContentTicker>
+            </div>
           </div>
         </div>
       </section>
