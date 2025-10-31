@@ -1,11 +1,8 @@
 import { pages as learnPages } from '@/data/learn'
-import {
-  fetchAll,
-  getStagingOnlyFilters,
-  isAuthorisedRevalidationRequest
-} from '@/lib/api/strapi'
+import { fetchAll, isAuthorisedRevalidationRequest } from '@/lib/api/strapi'
 import { absoluteUrl } from '@/lib/next'
 import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
+import { waitUntil } from '@vercel/functions'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const revalidate = async (
@@ -385,7 +382,7 @@ export default async function handler(
   console.log('Revalidation request', body)
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
     // Send and forget revalidation requests, no need to wait
-    CONTENT_TYPE_HANDLERS[body.uid](body, res, req).catch(() => {})
+    waitUntil(CONTENT_TYPE_HANDLERS[body.uid](body, res, req))
 
     // Return success response to webhook sender
     return res.json({ revalidated: true })
