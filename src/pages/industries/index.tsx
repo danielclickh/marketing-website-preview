@@ -1,5 +1,6 @@
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import { CUIButton, CUICard } from '@/components/ClickUI'
+import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
@@ -165,6 +166,127 @@ export default function IndustriesPage({
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Why ClickHouse */}
+      <section className='bg-neutral-700 py-16 lg:py-24'>
+        <div className='section-container'>
+          <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
+            {/* Gradient */}
+            <div className='absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent'></div>
+
+            {/* Intro text */}
+            <div className='flex justify-center'>
+              <div className='max-w-[600px] text-center'>
+                <SuiTitle type='h2' color='inherit' className='mb-4'>
+                  Why ClickHouse?
+                </SuiTitle>
+                <SuiText size='lg' className='opacity-70'>
+                  ClickHouse is the fastest and most resource efficient
+                  real-time data warehouse and open-source database, built for
+                  speed, efficiency, and massive scalability
+                </SuiText>
+              </div>
+            </div>
+
+            {/* Columns */}
+            <div className='grid grid-cols-1 gap-12 lg:grid-cols-3'>
+              <div className='flex flex-col items-center gap-4 text-center'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='49'
+                  height='48'
+                  fill='none'
+                  viewBox='0 0 49 48'>
+                  <path
+                    stroke='#FAFF69'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='1.75'
+                    d='M25.014 20.625A3.38 3.38 0 0 1 28.377 24v.016a3.378 3.378 0 1 1-3.363-3.391m-2.401 5.762-2.5 2.501m13.29-13.291-6.002 6.002'
+                  />
+                  <path
+                    stroke='#FAFF69'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='1.75'
+                    d='M37.733 11.267A18.008 18.008 0 1 1 25 5.992v6.003'
+                  />
+                </svg>
+                <SuiTitle type='h3' color='inherit'>
+                  Blazing fast
+                </SuiTitle>
+                <SuiText>
+                  Ultimate query performance that your mission-critical and
+                  time-sensitive applications can depend on.
+                </SuiText>
+              </div>
+              <div className='flex flex-col items-center gap-4 text-center'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='48'
+                  height='48'
+                  fill='none'
+                  viewBox='0 0 48 48'>
+                  <g
+                    stroke='#FAFF69'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='1.75'>
+                    <path d='M41.25 39H36V28.5M9 21V7.5A1.5 1.5 0 0 1 10.5 6h18L39 16.5V21' />
+                    <path d='M28.5 6v10.5H39M14.981 28.8s-5.518-1.459-5.962 2.063c-.445 3.52 7.205 1.897 6.708 5.76-.463 3.592-5.958 2.062-5.958 2.062M25.5 39c2.485 0 4.5-2.35 4.5-5.25s-2.015-5.25-4.5-5.25-4.5 2.35-4.5 5.25S23.015 39 25.5 39Zm1.5-3 3 3' />
+                  </g>
+                </svg>
+                <SuiTitle type='h3' color='inherit'>
+                  Developer friendly
+                </SuiTitle>
+                <SuiText>
+                  Built to ensure that even the most sophisticated data analysis
+                  can be done intuitively, using simple SQL.
+                </SuiText>
+              </div>
+              <div className='flex flex-col items-center gap-4 text-center'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='48'
+                  height='48'
+                  fill='none'
+                  viewBox='0 0 48 48'>
+                  <g
+                    stroke='#FAFF69'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='1.75'>
+                    <path d='M18 22.5c8.284 0 15-3.022 15-6.75S26.284 9 18 9C9.716 9 3 12.022 3 15.75s6.716 6.75 15 6.75Z' />
+                    <path d='M3 15.75v7.5C3 26.977 9.716 30 18 30c8.284 0 15-3.023 15-6.75v-7.5m-21 6.188v7.5' />
+                    <path d='M33 18.135c6.848.626 12 3.349 12 6.615 0 3.727-6.716 6.75-15 6.75-3.675 0-7.042-.594-9.65-1.582' />
+                    <path d='M15 29.865v2.385C15 35.977 21.716 39 30 39c8.284 0 15-3.023 15-6.75v-7.5m-9 6.188v7.5m-12-16.5v16.5' />
+                  </g>
+                </svg>
+                <SuiTitle type='h3' color='inherit'>
+                  Cost effective
+                </SuiTitle>
+                <SuiText>
+                  Best-in-class compression ratios{' '}
+                  <br className='hidden lg:block' />
+                  that reduce storage and accelerate{' '}
+                  <br className='hidden lg:block' />
+                  performance.
+                </SuiText>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Get started */}
+      <section className='section-container my-16 lg:my-24'>
+        <GetStartedFree
+          href='https://console.clickhouse.cloud/signUp?loc=industries-getstarted-footer'
+          textBefore='Get started with ClickHouse'
+          textSlanted='Cloud'
+          textAfter='for free'
+        />
       </section>
     </Layout>
   )
