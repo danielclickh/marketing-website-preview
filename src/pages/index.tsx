@@ -1,3 +1,4 @@
+import UseCasesCards from '@/components-cleaned/UseCasesCards'
 import FAQ from '@/components/FAQ'
 import GetStarted from '@/components/GetStarted'
 import HRSeparator from '@/components/HRSeparator'
@@ -72,7 +73,9 @@ export default function HomePage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <HomepageHeroAlt />
       <HomepageSectionTrustedByAlt customerStories={customerStories} />
-      <HRSeparator />
+      <section className='section-container my-16 lg:my-28'>
+        <UseCasesCards galaxyNamespace='homePage' />
+      </section>
       <HomepageSectionContentFeed />
       <HomepageSectionWhyClickhouse />
       <HomepageSectionStackIntegration />
