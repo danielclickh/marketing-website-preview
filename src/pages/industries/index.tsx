@@ -6,6 +6,7 @@ import ContentTicker from '@/components-cleaned/ContentTicker'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -15,7 +16,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps, HomepageCustomerStories } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
-import { LinkProps } from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import React from 'react'
 
 interface PageProps extends CommonProps {
@@ -76,7 +77,7 @@ export default function IndustriesPage({
               out how companies use ClickHouse to deliver instant insights,
               reduce costs, and move faster than ever.
             </SuiText>
-            <div className='!my-8 flex flex-wrap justify-center gap-4'>
+            <div className='!mt-8 flex flex-wrap justify-center gap-4'>
               <CUIButton
                 href='https://console.clickhouse.cloud/signUp?loc=industries-hero'
                 type='primary'
@@ -168,13 +169,92 @@ export default function IndustriesPage({
                   }}
                 />
                 <Cell position='bottom-right'>
-                  <SuiTitle type='h3'>And more!</SuiTitle>
+                  <SuiTitle type='h3' className='lg:!leading-8'>
+                    And more!
+                  </SuiTitle>
                   <SuiText size='sm' className='text-neutral-200'>
                     <p>
                       Powering analytics, ML, GenAI, warehousing, and
                       observability.
                     </p>
                   </SuiText>
+                  <div className='grid flex-1 grid-cols-1 gap-4 lg:-mb-2 lg:grid-cols-2 lg:grid-rows-3'>
+                    <Link
+                      href='/use-cases/real-time-analytics'
+                      className='flex items-center gap-4 rounded bg-neutral-750 px-3 py-3 text-sm transition-colors hover:bg-neutral-725 lg:px-4 lg:py-0'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='26'
+                        height='26'
+                        viewBox='0 0 26 26'
+                        fill='none'
+                        className='size-5'>
+                        <path
+                          fill='#FAFF69'
+                          d='M1 26a1 1 0 0 1 0-2h1.67V6.33A2.32 2.32 0 0 1 5 4h3.9V2.33c0-1.22.93-2.22 2.13-2.32l.21-.01h3.55a2.33 2.33 0 0 1 2.33 2.33V8h3.9a2.3 2.3 0 0 1 2.31 2.13l.02.2V24H25a1 1 0 1 1 0 2H1Zm20-16h-3.9v14h4.23V10.33a.33.33 0 0 0-.26-.32L21 10Zm-6.23-8h-3.54a.33.33 0 0 0-.34.33V24h4.22V2.33a.33.33 0 0 0-.34-.33ZM8.9 6H5a.33.33 0 0 0-.33.33V24h4.22V6Z'
+                        />
+                      </svg>
+                      Real-time analytics
+                    </Link>
+                    <Link
+                      href='/use-cases/machine-learning-and-data-science'
+                      className='flex items-center gap-4 rounded bg-neutral-750 px-3 py-3 text-sm transition-colors hover:bg-neutral-725 lg:px-4 lg:py-0'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='23'
+                        height='26'
+                        viewBox='0 0 23 26'
+                        fill='none'
+                        className='size-5'>
+                        <path
+                          fill='#FAFF69'
+                          d='m10.56 0 .4.03.11.02h.11l.18.03a9.8 9.8 0 0 1 3.72 1.24l.34.2a10.16 10.16 0 0 1 4.79 8.28v.17l2.64 5.13c.16.35.18.76.1 1.13l-.06.19c-.17.43-.49.8-.9 1l-2.7 1.24v3.67c0 .42-.14.82-.4 1.14l-.12.13c-.34.34-.8.53-1.25.53h-5.56a.87.87 0 0 1 0-1.72h5.56a.07.07 0 0 0 .05-.03.07.07 0 0 0 .02-.05v-4.22c0-.35.2-.65.5-.78l3.16-1.46c.02 0 .03-.03.03-.05 0 0 0-.02.02 0l-2.7-5.23a.87.87 0 0 1-.09-.39 8.4 8.4 0 0 0-6.6-8.28l-.02 1.95a2.72 2.72 0 0 1 1.83 3.03 2.74 2.74 0 0 1-2.68 2.3 2.7 2.7 0 0 1-2.68-2.3 2.75 2.75 0 0 1 1.82-3.03V1.72h-.05a8.5 8.5 0 0 0-3.45.74l-.32.16a8.45 8.45 0 0 0-4.2 4.85h2.4c.26 0 .5.11.67.3L8.2 11.4a2.68 2.68 0 0 1 3.39 1.27 2.74 2.74 0 0 1 0 2.48 2.72 2.72 0 0 1-3.14 1.37 2.7 2.7 0 0 1-1.77-1.62 2.74 2.74 0 0 1 .2-2.4L4.15 9.2H1.78a8.55 8.55 0 0 0 3.3 7.8c.25.17.38.47.34.78l-.93 7.47a.85.85 0 0 1-1.53.42.87.87 0 0 1-.17-.64l.87-6.98-.22-.19c-1-.88-1.8-1.95-2.4-3.14l-.15-.37A10.27 10.27 0 0 1 .2 8.2v.12-.16a10.22 10.22 0 0 1 3.68-6.02A10.2 10.2 0 0 1 10.57 0h-.01ZM9.19 12.93a1 1 0 0 0 0 2.01 1 1 0 0 0 0-2.01Zm1.85-7.47a1 1 0 0 0-1 1c0 .27.1.52.3.71a1 1 0 0 0 1.7-.7 1.01 1.01 0 0 0-1-1.01Z'
+                        />
+                      </svg>
+                      Machine learning and GenAI
+                    </Link>
+                    <Link
+                      href='/use-cases/data-warehousing'
+                      className='flex items-center gap-4 rounded bg-neutral-750 px-3 py-3 text-sm transition-colors hover:bg-neutral-725 lg:px-4 lg:py-0'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='24'
+                        height='26'
+                        viewBox='0 0 24 26'
+                        fill='none'
+                        className='size-5'>
+                        <path
+                          fill='#FCFF74'
+                          d='M12 .25C5.41.25.25 3.21.25 7v12c0 3.79 5.16 6.75 11.75 6.75S23.75 22.79 23.75 19V7C23.75 3.21 18.59.25 12 .25Zm0 1.5c5.56 0 10.25 2.4 10.25 5.25s-4.7 5.25-10.25 5.25C6.44 12.25 1.75 9.85 1.75 7S6.45 1.75 12 1.75ZM22.25 19c0 2.85-4.7 5.25-10.25 5.25-5.56 0-10.25-2.4-10.25-5.25v-2.65c2 2.04 5.8 3.4 10.25 3.4s8.25-1.36 10.25-3.4V19Zm0-6c0 2.85-4.7 5.25-10.25 5.25-5.56 0-10.25-2.4-10.25-5.25v-2.65c2 2.04 5.8 3.4 10.25 3.4s8.25-1.36 10.25-3.4V13Z'
+                        />
+                      </svg>
+                      Data warehousing
+                    </Link>
+                    <Link
+                      href='/use-cases/observability'
+                      className='flex items-center gap-4 rounded bg-neutral-750 px-3 py-3 text-sm transition-colors hover:bg-neutral-725 lg:px-4 lg:py-0'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='26'
+                        height='26'
+                        viewBox='0 0 26 26'
+                        fill='none'
+                        className='size-5'>
+                        <path
+                          fill='#FAFF69'
+                          d='M19.98 0A6.02 6.02 0 0 1 26 6.02v13.96A6.02 6.02 0 0 1 19.98 26H6.02A6.02 6.02 0 0 1 0 19.98V6.02A6.02 6.02 0 0 1 6.02 0h13.96Zm0 1.9H6.02A4.12 4.12 0 0 0 1.9 6.02v13.96a4.12 4.12 0 0 0 4.12 4.12h13.96a4.12 4.12 0 0 0 4.12-4.12V6.02a4.12 4.12 0 0 0-4.12-4.12Zm-3.6 4.38 2.5 5.77h1.73c.48 0 .89.35.94.82l.01.13c0 .52-.43.95-.95.95h-2.35a.95.95 0 0 1-.87-.57l-1.84-4.25-4.19 10.55a.95.95 0 0 1-1.68.16l-.07-.13-2.5-5.76H5.4a.95.95 0 0 1-.94-.82L4.44 13c0-.52.43-.95.95-.95h2.35c.38 0 .72.23.87.57l1.84 4.24L14.64 6.3a.95.95 0 0 1 1.75-.02Z'
+                        />
+                      </svg>
+                      Observability
+                    </Link>
+                    <div className='col-span-full flex items-center justify-center'>
+                      <LinkWithArrow
+                        href='/use-cases'
+                        className='text-sm text-primary'>
+                        View all use cases
+                      </LinkWithArrow>
+                    </div>
+                  </div>
                 </Cell>
               </CUICard.Body>
             </CUICard>
@@ -359,7 +439,7 @@ function Cell({
   }
   return (
     <div
-      className={`border-neutral-700/80 p-4 lg:p-6 ${borderClasses[position]} ${className}`}>
+      className={`flex flex-col gap-4 border-neutral-700/80 p-4 lg:p-6 ${borderClasses[position]} ${className}`}>
       {children}
     </div>
   )
@@ -383,43 +463,50 @@ function IndustryCell({
   position: CellPositions
 }) {
   return (
-    <Cell
-      position={position}
-      className='group/industryCell relative flex flex-col gap-4'>
-      <div className='flex items-center gap-4'>
-        <Image
-          className='size-8 object-scale-down'
-          src={icon}
-          alt={`${title} icon`}
-          width={32}
-          height={32}
-        />
-        <SuiTitle type='h3'>{title}</SuiTitle>
-        <CUIButton type='secondary' size='sm' linkClass='ml-auto' href={link}>
-          <span className='absolute inset-0 z-10' />
-          Learn more -&gt;
-        </CUIButton>
-      </div>
-      <SuiText size='sm' className='text-neutral-200'>
-        <p>{description}</p>
-      </SuiText>
-      <blockquote className='flex flex-1 flex-col rounded bg-neutral-750 p-4'>
-        <Image
-          src='/images/Quote.svg'
-          width={37}
-          height={28}
-          alt='Quote'
-          className='mb-4'
-        />
-        <SuiText size='sm' className='w-full text-neutral-200'>
-          <p className='italic'>{quote}</p>
+    <Link href={link} className='flex'>
+      <Cell position={position} className='group/industryCell relative'>
+        <div className='flex flex-col gap-x-4 gap-y-2 lg:flex-row lg:items-center'>
+          <Image
+            className='size-8 object-scale-down'
+            src={icon}
+            alt={`${title} icon`}
+            width={32}
+            height={32}
+          />
+          <SuiTitle type='h3'>{title}</SuiTitle>
+          <CUIButton
+            type='secondary'
+            size='sm'
+            linkClass=''
+            className='!hidden lg:ml-auto lg:!block'>
+            <span className='absolute inset-0' />
+            Learn more -&gt;
+          </CUIButton>
+        </div>
+        <SuiText size='sm' className='space-y-4 text-neutral-200'>
+          <p>{description}</p>
+          <p className='font-bold text-primary-300 lg:hidden'>
+            Learn more -&gt;
+          </p>
         </SuiText>
-        {quoteLogo && (
-          <div className='mt-auto self-end pt-4 opacity-40 transition-opacity group-hover/industryCell:opacity-50'>
-            <Image {...quoteLogo} />
-          </div>
-        )}
-      </blockquote>
-    </Cell>
+        <blockquote className='hidden flex-1 flex-col rounded bg-neutral-750 p-4 lg:flex'>
+          <Image
+            src='/images/Quote.svg'
+            width={37}
+            height={28}
+            alt='Quote'
+            className='mb-4'
+          />
+          <SuiText size='sm' className='w-full text-neutral-200'>
+            <p className='italic'>{quote}</p>
+          </SuiText>
+          {quoteLogo && (
+            <div className='mt-auto self-end pt-4 opacity-40 transition-opacity group-hover/industryCell:opacity-50'>
+              <Image {...quoteLogo} />
+            </div>
+          )}
+        </blockquote>
+      </Cell>
+    </Link>
   )
 }
