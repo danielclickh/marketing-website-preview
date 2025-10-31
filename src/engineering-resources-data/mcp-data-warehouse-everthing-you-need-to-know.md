@@ -6,6 +6,87 @@ index: 4
 lastUpdated: '2025-09-29'
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Model Context Protocol (MCP)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MCP is an open-source protocol developed to provide a standard interface for connecting AI assistants to external data sources and tools, using JSON-RPC 2.0 over transports like stdio, SSE or WebSocket."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do Snowflake and ClickHouse differ in their concurrency design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Snowflake enforces a default maximum of 8 concurrent queries per warehouse, which quickly becomes a bottleneck for chat-driven analytics. Multi-cluster warehouses can scale to 10 clusters—supporting up to 80 concurrent queries—but each cluster adds cost linearly, offering no volume discounts. When concurrency limits are reached, queries queue without visibility into position, and queued queries may wait indefinitely unless timeouts are configured. In contrast, ClickHouse handles up to 1,000 concurrent queries per node without performance degradation. Its vectorized query pipeline executes multiple queries simultaneously across all CPU cores, with no artificial concurrency limits beyond hardware capacity. Concurrency scales linearly through instant horizontal scaling, making ClickHouse ideal for unpredictable, bursty workloads such as AI or chat interfaces."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is ClickHouse an ideal database for agentic AI data workflows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ClickHouse is built to be the world’s fastest analytical database, where no bits, bytes, or milliseconds are wasted. This efficiency makes it an ideal backend for agentic AI data workflows using MCP."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does ClickHouse handle suboptimal queries better than traditional cloud warehouses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In traditional cloud warehouses like Snowflake, Databricks, or BigQuery, inefficient queries can be extremely costly because their raw scan performance is limited—typically 1–10 GB per second per node. This makes full table scans prohibitively slow and expensive. ClickHouse is engineered for much higher throughput, capable of scanning over 100 GB per second per node. As a result, even suboptimal queries that would stall other systems complete quickly in ClickHouse. While proper primary key design and table engine selection still improve efficiency, the penalty for non-optimized queries in ClickHouse is measured in milliseconds rather than minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kinds of questions do data-warehouse-connected MCP systems need to support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They must support natural business-language queries (e.g., “Show me last quarter’s revenue by region”), multi-step analytical questions, drill-downs, follow-ups like “compare to last year”, and context carry-forward across interactions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are user expectations around performance and freshness in a data-warehouse chat experience?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Users expect very fast response times (e.g., under 1 second for executives) and data freshness that matches the use case (from under 1 second for real-time to daily for strategic reporting)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What trust and UX concerns arise when using MCP with data warehouses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Users must trust that answers match official reports, expect source attribution, clear error messaging, and consistent behavior. They do not tolerate seeing table names or SQL errors exposed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What extra requirements apply when exposing data-warehouse analytics to external customers or partners?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You need abstraction of complexity (no exposure of internal schema), intuitive query interpretation, strict privacy and row-level security, sub-second response times, and graceful degradation when data isn’t available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes a good chat experience for querying a data warehouse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Conversational continuity (context carried through), intelligent mapping of natural language to SQL, maintenance of session state, and tools for users to refine results without starting from scratch."
+      }
+    }
+  ]
+}
+</script>
+
 ## What is MCP?
 
 The Model Context Protocol (MCP) is an open-source protocol developed by Anthropic and released in November 2024. MCP provides a standardized interface for connecting AI assistants to external data sources and tools. The protocol uses JSON-RPC 2.0 over stdio, SSE, or WebSocket transports and defines three core primitives: Resources (data sources), Tools (executable functions), and Prompts (reusable templates).
