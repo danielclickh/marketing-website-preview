@@ -12,7 +12,7 @@ import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps, HomepageCustomerStories } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -73,17 +73,27 @@ export default function IndustriesPage({
             </SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               ClickHouse powers real-time analytics and applications where speed
-              matters most, from gaming to energy, cybersecurity to retail. Find
-              out how companies use ClickHouse to deliver instant insights,
-              reduce costs, and move faster than ever.
+              matters most. Find out how companies use ClickHouse to deliver
+              instant insights, reduce costs, and move faster than ever.
             </SuiText>
             <div className='!mt-8 flex flex-wrap justify-center gap-4'>
               <CUIButton
                 href='https://console.clickhouse.cloud/signUp?loc=industries-hero'
                 type='primary'
                 size='lg'
-                className='!px-8'>
+                linkClass='w-full md:w-auto'
+                className='w-full !px-8 md:w-auto'>
                 Start your free Cloud trial
+              </CUIButton>
+              <CUIButton
+                type='secondary'
+                size='lg'
+                weight='semibold'
+                href='/company/contact?loc=industries-hero'
+                target='_self'
+                linkClass='w-full md:w-auto'
+                className='w-full !px-10 md:w-auto'>
+                Get in touch
               </CUIButton>
             </div>
           </div>
@@ -146,7 +156,7 @@ export default function IndustriesPage({
                   link='/industries/retail'
                   title='E-commerce and retail'
                   description='See how ClickHouse drives real-time inventory, sales, and customer insights.'
-                  quote='ClickHouse enables the business users to make smart business decisions based on huge volume of data in a matter of seconds'
+                  quote='ClickHouse enables the business users to make smart business decisions based on huge volume of data in a matter of seconds.'
                   quoteLogo={{
                     src: logoWalmart,
                     width: 233.58 * 0.7,
@@ -159,7 +169,7 @@ export default function IndustriesPage({
                   icon='/images/real-time-data-warehouse/icon-automotive.svg'
                   link='/industries/automotive'
                   title='Automotive'
-                  description='Learn how ClickHouse powers connected car data and autonomous driving insights'
+                  description='Learn how ClickHouse powers connected car data and autonomous driving insights.'
                   quote='Data in ClickHouse is better than data anywhere else. No other system lets you slice and dice your data, ask interesting questions, and get answers in an acceptable amount of time.'
                   quoteLogo={{
                     src: logoTesla,
@@ -403,14 +413,45 @@ export default function IndustriesPage({
         </div>
       </section>
 
-      {/* Get started */}
-      <section className='section-container my-16 lg:my-24'>
-        <GetStartedFree
-          href='https://console.clickhouse.cloud/signUp?loc=industries-getstarted-footer'
-          textBefore='Get started with ClickHouse'
-          textSlanted='Cloud'
-          textAfter='for free'
-        />
+      {/* Try ClickHouse */}
+      <section className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
+        <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
+          <SuiTitle type='h2' color='text-default'>
+            Get started with ClickHouse{' '}
+            <TiltedText type='white-on-black' className='px-2 py-1'>
+              Cloud
+            </TiltedText>{' '}
+            for free
+          </SuiTitle>
+          <SuiText size='base' color='text-default' weight='normal'>
+            We'll get you started on a 30 day trial and $300 credits to spend at
+            your own pace.
+          </SuiText>
+          <p className='mt-8 flex flex-col justify-center gap-2 sm:flex-row sm:gap-4'>
+            <CUIButton
+              type='primary-dark'
+              size='lg'
+              className='group mx-auto w-full !px-10 md:w-auto'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=industries-getstarted-footer'
+              onClick={useGalaxyOnClick(
+                'industriesPage.footerCta.getStartedSelect'
+              )}>
+              Get started
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              className='group mx-auto w-full !border-neutral-800 !px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
+              target='_blank'
+              href='/company/request-demo?loc=industries-getstarted-footer'
+              onClick={useGalaxyOnClick(
+                'industriesPage.footerCta.requestDemoSelect'
+              )}>
+              Get a demo
+            </CUIButton>
+          </p>
+        </div>
       </section>
     </Layout>
   )
