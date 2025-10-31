@@ -4,6 +4,7 @@ import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
+import Avatars from '@/components/Avatars'
 import NewsLetterForm from '@/components/NewsLetter/NewsLetterForm'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import SocialButton from '@/components/SocialButton'
@@ -96,6 +97,23 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const date = new Date(engResource.lastUpdated)
 
+  const authorName = engResource.author || "The ClickHouse Team"
+  const authorAvatarUrl = engResource.authorAvatar || "https://clickhouse.com/uploads/neutral_avatar_400804ae96_5c370e757b.png"
+
+  const authorAvatar = {
+    id: 1,
+    name: "author.png",
+    alternativeText: authorName,
+    caption: "",
+    hash: "author",
+    ext: ".png",
+    mime: "image/png",
+    size: 0,
+    url: authorAvatarUrl,
+    provider: "local",
+    provider_metadata: null
+  }
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <main className='bg-grid'>
@@ -110,14 +128,21 @@ export default function Page({
               <SuiTitle type='h1' className='my-6 text-balance md:!text-5xl'>
                 {engResource.title}
               </SuiTitle>
-              <p className='-mt-5 pb-5 italic'>
-                Last updated:{' '}
-                {date.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </p>
+
+              <div className='flex flex-row items-center space-x-4 pb-5'>
+                <Avatars avatars={[authorAvatar]} />
+                <div>
+                  <div className='text-base'>{authorName}</div>
+                  <div className='text-sm text-neutral-300'>
+                    Last updated:{' '}
+                    {date.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </div>
+                </div>
+              </div>
               {engResource.image !== '' && (
                 <Image
                   src={engResource.image}

@@ -38,7 +38,9 @@ export function getEngineeringResources(): EngineeringResource[] {
             image: data.image ? data.image : '',
             lastUpdated: data.lastUpdated || '',
             index: data.index ?? 9999, // Add index property with default value -1
-            body: content
+            body: content,
+            author: data.author || null,
+            authorAvatar: data.authorAvatar || null
           } as EngineeringResource
         } catch (error) {
           console.error(`Error reading file ${fileName}:`, error)

@@ -6,4 +6,6 @@ export interface EngineeringResource {
   body: string
   index: number
   lastUpdated?: string
+  author?: string
+  authorAvatar?: string
 }
