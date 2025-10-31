@@ -8,4 +8,5 @@ export interface EngineeringResource {
   lastUpdated?: string
   author?: string
   authorAvatar?: string
+  headersSelector?: string
 }

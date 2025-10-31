@@ -40,7 +40,8 @@ export function getEngineeringResources(): EngineeringResource[] {
             index: data.index ?? 9999, // Add index property with default value -1
             body: content,
             author: data.author || null,
-            authorAvatar: data.authorAvatar || null
+            authorAvatar: data.authorAvatar || null,
+            headersSelector: data.headersSelector || null
           } as EngineeringResource
         } catch (error) {
           console.error(`Error reading file ${fileName}:`, error)
