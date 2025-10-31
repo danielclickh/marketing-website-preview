@@ -176,6 +176,10 @@ export default function IndustriesPage({
                     <p>
                       Powering analytics, ML, GenAI, warehousing, and
                       observability.
+                      <span className='hidden lg:inline xl:hidden'>
+                        <br />
+                        <br />
+                      </span>
                     </p>
                   </SuiText>
                   <div className='grid flex-1 grid-cols-1 gap-4 lg:-mb-2 lg:grid-cols-2 lg:grid-rows-3'>
@@ -464,7 +468,7 @@ function IndustryCell({
 }) {
   return (
     <Link href={link} className='flex'>
-      <Cell position={position} className='group/industryCell relative'>
+      <Cell position={position} className='group/industryCell relative w-full'>
         <div className='flex flex-col gap-x-4 gap-y-2 lg:flex-row lg:items-center'>
           <Image
             className='size-8 object-scale-down'
