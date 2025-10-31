@@ -1,6 +1,6 @@
 ---
 title: 'Best Open Source Observability Solutions (2025 Guide)'
-slug: 'avro-vs-parquet'
+slug: 'best-open-source-observability-solutions'
 excerpt: "Explore the top open source observability stacks for 2025. Compare ELK, LGTM, and unified observability solutions like ClickStack for cost, scale, and high-cardinality data."
 index: 1
 lastUpdated: '2025-11-03'
