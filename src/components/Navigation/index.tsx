@@ -1,7 +1,7 @@
 import { NavigationItem, NavigationItemProps } from './parts'
 import NavigationSubNavProducts from './sub-navs/NavigationSubNavProducts'
 import NavigationSubNavResources from './sub-navs/NavigationSubNavResources'
-import NavigationSubNavUseCases from './sub-navs/NavigationSubNavUseCases'
+import NavigationSubNavSolutions from './sub-navs/NavigationSubNavSolutions'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import React from 'react'
 
@@ -47,8 +47,8 @@ export default function Navigation({
             </NavigationItem>
           </li>
           <li>
-            <NavigationItem {...topLevelEvents} label='Use cases'>
-              <NavigationSubNavUseCases />
+            <NavigationItem {...topLevelEvents} label='Solutions'>
+              <NavigationSubNavSolutions />
             </NavigationItem>
           </li>
           <li>
