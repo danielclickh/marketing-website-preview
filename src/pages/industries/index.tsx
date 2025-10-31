@@ -1,6 +1,7 @@
 import logoTesla from './automotive/assets/logo-tesla.svg'
 import logoSeemplicity from './cybersecurity/assets/logo-seemplicity.svg'
 import logoNovo from './energy/assets/logo-novo.png'
+import logoAzur from './gaming/assets/logo-azur.svg'
 import logoWalmart from './retail/assets/logo-walmart.svg'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -26,7 +27,6 @@ interface PageProps extends CommonProps {
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
     const commonPropsRequest = getCommonProps()
-
     const dataRequest = findOne('homepage', {
       populate: [
         'customerStories',
@@ -102,7 +102,7 @@ export default function IndustriesPage({
                   icon='/images/real-time-data-warehouse/icon-cybersecurity.svg'
                   link='/industries/cybersecurity'
                   title='Cybersecurity'
-                  description='Learn how ClickHouse empowers real-time threat detection and security analytics'
+                  description='Learn how ClickHouse empowers real-time threat detection and security analytics.'
                   quote='I knew a managed product built by engineers, whose goal in life is to transform bits from Postgres into ClickHouse, would be better than anything we could do ourselves.'
                   quoteLogo={{
                     src: logoSeemplicity,
@@ -116,7 +116,7 @@ export default function IndustriesPage({
                   icon='/images/real-time-data-warehouse/icon-energy.svg'
                   link='/industries/energy'
                   title='Energy'
-                  description='Discover how ClickHouse optimizes energy management and smart grid operations'
+                  description='Discover how ClickHouse optimizes energy management and smart grid operations.'
                   quote='Our primary business requirement for any database/store was that we own and control the data we store -- no vendor lock-in and no walled gardens. Going with ClickHouse Cloud on AWS was an easy decision because it allows us to focus on our primary work without having to worry about maintenance, upgrades, backups, and so on.'
                   quoteLogo={{
                     src: logoNovo,
@@ -131,10 +131,10 @@ export default function IndustriesPage({
                   icon='/images/real-time-data-warehouse/icon-gaming.svg'
                   link='/industries/gaming'
                   title='Gaming and entertainment'
-                  description='Explore how ClickHouse enhances player experiences and game analytics'
+                  description='Explore how ClickHouse enhances player experiences and game analytics.'
                   quote='The main benefit is saving employee time, which can now be spent on more exciting and strategic tasks. One of our administrators has about 60% of their time freed up, and our ETL engineer now saves 40% of their time.'
                   quoteLogo={{
-                    src: '/images/industries/gaming/logo-azur.svg',
+                    src: logoAzur,
                     width: 123,
                     height: 40,
                     alt: 'Azur Games'
@@ -145,7 +145,7 @@ export default function IndustriesPage({
                   icon='/images/real-time-data-warehouse/icon-retail.svg'
                   link='/industries/retail'
                   title='E-commerce and retail'
-                  description='See how ClickHouse drives real-time inventory, sales, and customer insights'
+                  description='See how ClickHouse drives real-time inventory, sales, and customer insights.'
                   quote='ClickHouse enables the business users to make smart business decisions based on huge volume of data in a matter of seconds'
                   quoteLogo={{
                     src: logoWalmart,
@@ -308,7 +308,7 @@ export default function IndustriesPage({
                 <SuiText size='lg' className='opacity-70'>
                   ClickHouse is the fastest and most resource efficient
                   real-time data warehouse and open-source database, built for
-                  speed, efficiency, and massive scalability
+                  speed, efficiency, and massive scalability.
                 </SuiText>
               </div>
             </div>
