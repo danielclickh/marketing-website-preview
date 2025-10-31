@@ -136,7 +136,19 @@ export default function Page({
               <div className='flex flex-row items-center space-x-4 pb-5'>
                 <Avatars avatars={[authorAvatar]} />
                 <div>
-                  <div className='text-base'>{authorName}</div>
+                  <div className='text-base'>
+                    {engResource.authorLink ? (
+                      <a
+                        href={engResource.authorLink}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='hover:underline'>
+                        {authorName}
+                      </a>
+                    ) : (
+                      authorName
+                    )}
+                  </div>
                   <div className='text-sm text-neutral-300'>
                     Last updated:{' '}
                     {date.toLocaleDateString('en-US', {

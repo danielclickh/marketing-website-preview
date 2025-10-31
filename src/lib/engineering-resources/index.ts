@@ -55,6 +55,7 @@ export function getEngineeringResources(): EngineeringResource[] {
             body: content,
             author: data.author || null,
             authorAvatar: data.authorAvatar || null,
+            authorLink: data.authorLink || null,
             headersSelector: data.headersSelector || null,
             schema: schema
           } as EngineeringResource
