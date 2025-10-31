@@ -9,4 +9,5 @@ export interface EngineeringResource {
   author?: string
   authorAvatar?: string
   headersSelector?: string
+  schema?: any
 }

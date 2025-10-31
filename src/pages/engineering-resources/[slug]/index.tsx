@@ -73,7 +73,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
         title: `${engResource.title} | ClickHouse Engineering Resources`,
         description: engResource.excerpt,
         path: `/engineering-resources/${engResource.slug}`,
-        lastModified: engResource.lastUpdated
+        lastModified: engResource.lastUpdated,
+        schema: engResource.schema
       },
       newsLetterData,
       ...(await getCommonProps())
