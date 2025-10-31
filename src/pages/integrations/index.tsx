@@ -236,7 +236,7 @@ export default function IntegrationsPage({
         </div>
       </div>
 
-      <div className='container mx-auto mb-20 max-w-7xl space-y-20 px-8 2xl:px-0'>
+      <div className='container mx-auto mb-20 max-w-7xl space-y-8 px-8 lg:space-y-20 2xl:px-0'>
         <div className='flex-col items-center'>
           <SuiSearchField
             placeholder='Search by integration...'
@@ -288,6 +288,14 @@ export default function IntegrationsPage({
               : ''}
           </p>
         )}
+
+        <div className='rounded-lg bg-neutral-725 p-4 text-center text-sm text-neutral-200'>
+          <p>
+            <strong className='text-white'>Notice:</strong> Third-party logos
+            and trademarks belong to their respective owners and are shown only
+            to indicate available integrations. No endorsement is implied.
+          </p>
+        </div>
 
         <GetStartedFree
           href='https://console.clickhouse.cloud/signUp?loc=integrations'
