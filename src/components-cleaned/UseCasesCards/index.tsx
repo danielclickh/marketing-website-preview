@@ -10,11 +10,17 @@ import imageObservability from './assets/image-observability.svg'
 import imageRealTimeAnalytics from './assets/image-real-time-analytics.svg'
 import { CUICard } from '@/components/ClickUI'
 import LinkWithArrow from '@/components/LinkWithArrow'
+import { FullyQualifiedEvent } from '@/lib/galaxy/client'
+import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { EventPropsOf } from '@/types/global'
 import Image, { ImageProps } from 'next/image'
 import { useState } from 'react'
 
-export default function UseCasesCards() {
+export interface UseCasesCardsProps {
+  galaxyNamespace?: string
+}
+
+export default function UseCasesCards({ galaxyNamespace }: UseCasesCardsProps) {
   const [hovering, setHovering] = useState<null | number>(null)
   const disable = (id: number) => hovering !== null && hovering !== id
   return (
@@ -27,6 +33,11 @@ export default function UseCasesCards() {
         link='/use-cases/real-time-analytics'
         linkText='Explore real-time analytics'
         className={disable(1) ? 'saturate-0' : ''}
+        galaxyEventName={
+          galaxyNamespace
+            ? `${galaxyNamespace}.useCases.realTimeAnalytics`
+            : undefined
+        }
         onMouseEnter={() => setHovering(1)}
         onMouseLeave={() => setHovering(null)}
       />
@@ -38,6 +49,9 @@ export default function UseCasesCards() {
         link='/use-cases/machine-learning-and-data-science'
         linkText='Explore ML & GenAI'
         className={disable(2) ? 'saturate-0' : ''}
+        galaxyEventName={
+          galaxyNamespace ? `${galaxyNamespace}.useCases.mlAndGenAi` : undefined
+        }
         onMouseEnter={() => setHovering(2)}
         onMouseLeave={() => setHovering(null)}
       />
@@ -49,6 +63,11 @@ export default function UseCasesCards() {
         link='/use-cases/data-warehousing'
         linkText='Explore data warehousing'
         className={disable(3) ? 'saturate-0' : ''}
+        galaxyEventName={
+          galaxyNamespace
+            ? `${galaxyNamespace}.useCases.dataWarehousing`
+            : undefined
+        }
         onMouseEnter={() => setHovering(3)}
         onMouseLeave={() => setHovering(null)}
       />
@@ -60,6 +79,11 @@ export default function UseCasesCards() {
         link='/use-cases/observability'
         linkText='Explore observability'
         className={disable(4) ? 'saturate-0' : ''}
+        galaxyEventName={
+          galaxyNamespace
+            ? `${galaxyNamespace}.useCases.observability`
+            : undefined
+        }
         onMouseEnter={() => setHovering(4)}
         onMouseLeave={() => setHovering(null)}
       />
@@ -75,6 +99,7 @@ interface CardProps extends EventPropsOf<'div'> {
   link: string
   linkText: string
   className?: string
+  galaxyEventName?: FullyQualifiedEvent
 }
 
 function Card({
@@ -86,7 +111,8 @@ function Card({
   linkText,
   onMouseEnter,
   onMouseLeave,
-  className = ''
+  className = '',
+  galaxyEventName
 }: CardProps) {
   return (
     <CUICard
@@ -118,6 +144,9 @@ function Card({
       <CUICard.Footer className='px-4 pb-3'>
         <LinkWithArrow
           href={link}
+          onClick={
+            galaxyEventName ? useGalaxyOnClick(galaxyEventName) : undefined
+          }
           className='text-sm font-bold text-primary-300'>
           <span className='absolute inset-0' />
           {linkText}

@@ -74,7 +74,7 @@ export default function HomePage({
       <HomepageHeroAlt />
       <HomepageSectionTrustedByAlt customerStories={customerStories} />
       <section className='section-container my-16 lg:my-28'>
-        <UseCasesCards />
+        <UseCasesCards galaxyNamespace='homePage' />
       </section>
       <HomepageSectionContentFeed />
       <HomepageSectionWhyClickhouse />
