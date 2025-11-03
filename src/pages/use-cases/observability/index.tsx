@@ -44,19 +44,18 @@ import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
+import ScaleToContainer from '@/components/ScaleToContainer'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateFaqPageSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { handle } from 'mdast-util-to-markdown/lib/handle'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
-import Link from 'next/link'
 import React, { CSSProperties, useRef, useState } from 'react'
 
-const FAQs = [
+const FAQs: Array<{ question: string; answer: string }> = [
   {
     question: 'What is ClickStack?',
     answer: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
@@ -602,6 +601,36 @@ export default function ClickHouseServerPage({
         </div>
       </section>
 
+      <section className='bg-neutral-750 py-16 lg:py-24'>
+        <div className='section-container flex items-center justify-between'>
+          <div className='max-w-xl'>
+            <SuiTitle type='h2' className='mb-6'>
+              Build for OTel at scale, get started in minutes
+            </SuiTitle>
+            <SuiText className='space-y-6'>
+              <p>
+                Whether you’re handling gigabytes or petabytes of OpenTelemetry
+                data, ClickStack delivers unmatched efficiency with high
+                compression, parallel query execution, and native SQL support.
+              </p>
+              <p>
+                The HyperDX UI provides a seamless experience with Lucene-style
+                log search, full SQL access, and automatic correlation of logs,
+                traces, and metrics at the database layer - no extra services,
+                pipelines required, restricted workflows or correlation at the
+                application layer.
+              </p>
+              <p>
+                If you’re wondering where to send your OpenTelemetry data, the
+                answer is simple: ClickStack. Open source.{' '}
+                <strong>Built for OTel at scale.</strong>
+              </p>
+            </SuiText>
+          </div>
+          <OtelGraphic />
+        </div>
+      </section>
+
       {/* Introdcuction video */}
       <section className='section-container my-20 lg:my-24'>
         <div className='mx-auto max-w-4xl text-center'>
@@ -967,5 +996,39 @@ export default function ClickHouseServerPage({
         />
       </section>
     </Layout>
+  )
+}
+
+function OtelGraphic() {
+  return (
+    <ScaleToContainer>
+      <div className='grid size-[537px] grid-cols-3 grid-rows-3'>
+        <div className='bg-red-300/10' />
+        <div className='bg-green-300/10' />
+        <div className='bg-blue-300/10' />
+        <div className='bg-blue-300/10' />
+        <div className='relative'>
+          <div className='absolute inset-0 z-0 animate-fadeInOut bg-primary-300/60 blur-xl' />
+          <div className='absolute inset-0 z-10 flex rounded-lg border-2 border-primary-300 bg-neutral-750 bg-gradient-to-br from-primary-300/20 to-primary-300/40'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='179'
+              height='179'
+              fill='none'
+              viewBox='0 0 179 179'
+              className='m-auto'>
+              <path
+                fill='#fff'
+                d='M55 41.8c0-.43.37-.8.8-.8h6.16c.44 0 .81.37.81.8v68.4c0 .43-.37.8-.8.8H55.8a.8.8 0 0 1-.81-.8zm15.54 0c0-.43.37-.8.8-.8h6.16c.44 0 .8.37.8.8v68.4a.8.8 0 0 1-.8.8h-6.15a.8.8 0 0 1-.81-.8zm15.54 0c0-.43.36-.8.8-.8h6.16c.44 0 .8.37.8.8v68.4a.8.8 0 0 1-.8.8h-6.16a.8.8 0 0 1-.8-.8zm15.61 0c0-.43.37-.8.8-.8h6.16c.44 0 .81.37.81.8v68.4c0 .43-.37.8-.8.8h-6.16a.8.8 0 0 1-.8-.8zm15.54 27.27c0-.44.37-.8.8-.8h6.16c.44 0 .81.36.81.8V83a.8.8 0 0 1-.8.8h-6.16a.8.8 0 0 1-.81-.8zm-67.55 71.31q-1.06 0-1.9.38a4 4 0 0 0-1.44 1.08 5 5 0 0 0-.9 1.74q-.3 1.02-.3 2.3 0 1.69.5 2.92a4 4 0 0 0 1.5 1.88q.99.66 2.52.66.92 0 1.76-.16a18 18 0 0 0 1.74-.46v1.86q-.85.32-1.72.46-.89.16-2.04.16-2.19 0-3.64-.9a5.5 5.5 0 0 1-2.16-2.56 10 10 0 0 1-.72-3.88q0-1.62.44-2.96.45-1.36 1.32-2.34a6 6 0 0 1 2.12-1.5 8 8 0 0 1 2.94-.54 9.4 9.4 0 0 1 4 .88l-.8 1.8q-.7-.32-1.52-.56a6 6 0 0 0-1.7-.26M58.1 153H56v-15.2h2.12zm5.45-10.78V153h-2.12v-10.78zm-1.04-4.1q.48 0 .84.28t.36.94q0 .64-.36.94-.36.28-.84.28-.52 0-.88-.28-.34-.3-.34-.94 0-.66.34-.94.37-.28.88-.28m8.71 15.08q-1.47 0-2.6-.58a4 4 0 0 1-1.74-1.8 7 7 0 0 1-.62-3.14q0-2 .66-3.24a4.3 4.3 0 0 1 1.82-1.82q1.17-.6 2.64-.6.9 0 1.68.2.81.18 1.32.42l-.64 1.72a10 10 0 0 0-1.2-.38 5 5 0 0 0-1.18-.16q-1 0-1.66.44-.63.41-.96 1.28-.3.84-.3 2.12 0 1.22.32 2.06.33.84.94 1.28.65.42 1.58.42a5.6 5.6 0 0 0 2.86-.72v1.84q-.57.35-1.26.5-.67.16-1.66.16m7.57-7.8q0 .42-.04.96l-.06 1h.06l.38-.48.48-.6.44-.52 3.3-3.54h2.46l-4.34 4.62L86.1 153h-2.5l-3.56-4.82-1.24 1.04V153h-2.1v-15.2h2.1zm17.5 3.74q0 1.28-.61 2.18t-1.78 1.4a7 7 0 0 1-2.76.48q-.78 0-1.5-.1a10 10 0 0 1-1.34-.24 6 6 0 0 1-1.1-.4v-2.04q.8.36 1.88.66 1.08.28 2.2.28.96 0 1.6-.26.64-.25.96-.72t.32-1.08q0-.66-.34-1.1-.32-.46-1.02-.84-.68-.4-1.84-.84-.8-.3-1.46-.66-.64-.38-1.14-.88a4 4 0 0 1-.74-1.16 4 4 0 0 1-.26-1.54q0-1.18.58-2.02.6-.84 1.64-1.28 1.05-.46 2.42-.46 1.16 0 2.14.24 1 .22 1.9.62l-.68 1.78a13 13 0 0 0-1.66-.56 7 7 0 0 0-1.76-.22q-.8 0-1.34.24t-.82.66q-.26.41-.26.98 0 .66.3 1.1t.96.82q.66.36 1.74.8 1.2.45 2.04 1t1.3 1.3.44 1.86m6.45 2.34a5 5 0 0 0 1.61-.26v1.6q-.33.16-.92.26-.57.12-1.16.12-.87 0-1.61-.3-.72-.3-1.16-1.04-.45-.75-.44-2.06v-5.96h-1.5v-.96l1.58-.8.74-2.28h1.3v2.42h3.08v1.62h-3.08v5.92q0 .88.42 1.3.44.42 1.14.42m7.95-9.46q2.04 0 3.04.9 1 .88 1 2.78v7.3h-1.5l-.42-1.5h-.08q-.45.58-.96.96-.48.38-1.12.56a5.5 5.5 0 0 1-3.26-.16q-.75-.36-1.2-1.08-.44-.74-.44-1.84 0-1.65 1.24-2.5 1.26-.86 3.82-.94l1.84-.06v-.6q0-1.2-.54-1.68a2.2 2.2 0 0 0-1.52-.48q-.84 0-1.6.24-.75.24-1.44.58l-.68-1.54a8 8 0 0 1 3.82-.94m.5 5.84q-1.84.08-2.56.62-.7.52-.7 1.48 0 .84.5 1.22.52.38 1.3.38 1.27 0 2.08-.7t.82-2.1v-.94zm11.15 5.34q-1.5 0-2.6-.58a4 4 0 0 1-1.74-1.8 7 7 0 0 1-.62-3.14q0-2 .66-3.24a4.3 4.3 0 0 1 1.82-1.82q1.16-.6 2.64-.6.9 0 1.68.2.8.18 1.32.42l-.64 1.72a10 10 0 0 0-1.2-.38q-.63-.16-1.18-.16-1 0-1.66.44-.65.41-.96 1.28-.3.84-.3 2.12 0 1.22.32 2.06.3.84.94 1.28.63.42 1.58.42a5.6 5.6 0 0 0 2.86-.72v1.84q-.6.35-1.26.5-.69.16-1.66.16m7.56-7.8q0 .42-.04.96-.01.55-.06 1h.06l.38-.48.48-.6.44-.52 3.3-3.54h2.46l-4.34 4.62 4.62 6.16h-2.5l-3.56-4.82-1.24 1.04V153h-2.1v-15.2h2.1z'
+              />
+            </svg>
+          </div>
+        </div>
+        <div className='bg-green-300/10' />
+        <div className='bg-green-300/10' />
+        <div className='bg-blue-300/10' />
+        <div className='bg-red-300/10' />
+      </div>
+    </ScaleToContainer>
   )
 }
