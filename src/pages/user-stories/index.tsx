@@ -130,7 +130,7 @@ export default function CustomerStoriesPage({
         }
       })
       .sort((a, b) => {
-        return a.label.localeCompare(b.label)
+        return a.value - b.value
       })
   }, [categories])
 

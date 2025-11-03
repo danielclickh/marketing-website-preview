@@ -17,14 +17,19 @@ import Image, { ImageProps } from 'next/image'
 import { useState } from 'react'
 
 export interface UseCasesCardsProps {
+  className?: string
   galaxyNamespace?: string
 }
 
-export default function UseCasesCards({ galaxyNamespace }: UseCasesCardsProps) {
+export default function UseCasesCards({
+  className = '',
+  galaxyNamespace
+}: UseCasesCardsProps) {
   const [hovering, setHovering] = useState<null | number>(null)
   const disable = (id: number) => hovering !== null && hovering !== id
   return (
-    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4'>
+    <div
+      className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ${className}`}>
       <Card
         image={imageRealTimeAnalytics}
         icon={iconRealTimeAnalytics}
@@ -42,17 +47,19 @@ export default function UseCasesCards({ galaxyNamespace }: UseCasesCardsProps) {
         onMouseLeave={() => setHovering(null)}
       />
       <Card
-        image={imageMlAndGenai}
-        icon={iconMlAndGenai}
-        title='ML & GenAI'
-        description='Power machine learning and GenAI with blazing-fast vector search, instant aggregations, and scalable training.'
-        link='/use-cases/machine-learning-and-data-science'
-        linkText='Explore ML & GenAI'
-        className={disable(2) ? 'saturate-0' : ''}
+        image={imageObservability}
+        icon={iconObservability}
+        title='Observability'
+        description='Store and query logs, metrics and traces at scale using ClickStack, the open source observability stack powered by ClickHouse.'
+        link='/use-cases/observability'
+        linkText='Explore observability'
+        className={disable(4) ? 'saturate-0' : ''}
         galaxyEventName={
-          galaxyNamespace ? `${galaxyNamespace}.useCases.mlAndGenAi` : undefined
+          galaxyNamespace
+            ? `${galaxyNamespace}.useCases.observability`
+            : undefined
         }
-        onMouseEnter={() => setHovering(2)}
+        onMouseEnter={() => setHovering(4)}
         onMouseLeave={() => setHovering(null)}
       />
       <Card
@@ -72,19 +79,17 @@ export default function UseCasesCards({ galaxyNamespace }: UseCasesCardsProps) {
         onMouseLeave={() => setHovering(null)}
       />
       <Card
-        image={imageObservability}
-        icon={iconObservability}
-        title='Observability'
-        description='Store and query logs, metrics and traces at scale using ClickStack, the open source observability stack powered by ClickHouse.'
-        link='/use-cases/observability'
-        linkText='Explore observability'
-        className={disable(4) ? 'saturate-0' : ''}
+        image={imageMlAndGenai}
+        icon={iconMlAndGenai}
+        title='ML & GenAI'
+        description='Power machine learning and GenAI with blazing-fast vector search, instant aggregations, and scalable training.'
+        link='/use-cases/machine-learning-and-data-science'
+        linkText='Explore ML & GenAI'
+        className={disable(2) ? 'saturate-0' : ''}
         galaxyEventName={
-          galaxyNamespace
-            ? `${galaxyNamespace}.useCases.observability`
-            : undefined
+          galaxyNamespace ? `${galaxyNamespace}.useCases.mlAndGenAi` : undefined
         }
-        onMouseEnter={() => setHovering(4)}
+        onMouseEnter={() => setHovering(2)}
         onMouseLeave={() => setHovering(null)}
       />
     </div>
