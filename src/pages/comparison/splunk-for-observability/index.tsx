@@ -194,7 +194,7 @@ export default function SplunkPage({
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
               Join others migrating to ClickStack from Splunk
             </h2>
-            <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
+            <div className='space-y-6 lg:grid lg:grid-cols-1 lg:gap-6 lg:space-y-0'>
               <QuoteCard
                 content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
                 link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
@@ -203,26 +203,6 @@ export default function SplunkPage({
                   width: 200 * 0.9,
                   height: 41 * 0.9,
                   alt: 'Anthropic'
-                }}
-              />
-              <QuoteCard
-                content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut turpis nibh, accumsan in tellus dictum, tincidunt feugiat dolor. Cras feugiat scelerisque ex ac mattis. '
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Placeholder',
-                  className: 'bg-white rounded-full'
-                }}
-              />
-              <QuoteCard
-                content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut turpis nibh, accumsan in tellus dictum, tincidunt feugiat dolor. Cras feugiat scelerisque ex ac mattis. '
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Placeholder',
-                  className: 'bg-white rounded-full'
                 }}
               />
             </div>
