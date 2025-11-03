@@ -34,6 +34,8 @@ import logoVimeo from './assets/logo-vimeo.svg'
 import shareImage from './assets/share-image.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
+import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
+import AnimatedDataPath from '@/components-cleaned/AnimatedDataPath'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
@@ -601,9 +603,9 @@ export default function ClickHouseServerPage({
         </div>
       </section>
 
-      <section className='bg-neutral-750 py-16 lg:py-24'>
-        <div className='section-container flex items-center justify-between'>
-          <div className='max-w-xl'>
+      <section className='bg-neutral-750 py-16'>
+        <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
+          <div className='lg:max-w-xl'>
             <SuiTitle type='h2' className='mb-6'>
               Build for OTel at scale, get started in minutes
             </SuiTitle>
@@ -627,7 +629,9 @@ export default function ClickHouseServerPage({
               </p>
             </SuiText>
           </div>
-          <OtelGraphic />
+          <div className='order-first mx-auto w-full max-w-max lg:order-last'>
+            <OtelGraphic />
+          </div>
         </div>
       </section>
 
@@ -1000,13 +1004,105 @@ export default function ClickHouseServerPage({
 }
 
 function OtelGraphic() {
+  function Tile({ children }: { children?: React.ReactNode }) {
+    return (
+      <div className='flex size-16 items-center justify-center rounded-md border border-neutral-700/80 bg-neutral-900 p-4'>
+        {children}
+      </div>
+    )
+  }
+
+  function CornerLine({
+    angle,
+    className
+  }: {
+    angle: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+    className?: string
+  }) {
+    const path = {
+      'top-left': 'M1 0V75A25 25 0 0 0 25 99H100',
+      'top-right': 'M99 0V75A25 25 0 0 1 75 99H0',
+      'bottom-left': 'M1 100V25A25 25 0 0 1 25 1H100',
+      'bottom-right': 'M99 100V25A25 25 0 0 0 75 1H0'
+    }[angle]
+    return (
+      <AnimatedDataPath
+        width='100'
+        height='100'
+        d={path}
+        className={className}
+      />
+    )
+  }
+
+  function Otel() {
+    return (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='40'
+        height='40'
+        fill='none'
+        viewBox='0 0 40 40'>
+        <path
+          fill='#f5a800'
+          d='M21.05 21.77a4.35 4.35 0 1 0 6.03 6.27 4.35 4.35 0 0 0-6.03-6.27m4.6 4.6a2.16 2.16 0 0 1-3.67-1.52 2.16 2.16 0 0 1 4.3 0c0 .57-.23 1.12-.63 1.52M27.12.4l-2.65 2.67a1.34 1.34 0 0 0 0 1.9l10.4 10.4c.52.52 1.36.52 1.89 0l2.66-2.67c.52-.52.52-1.37 0-1.9L29.02.4a1.34 1.34 0 0 0-1.9 0M8.47 34.42a1.2 1.2 0 0 0 0-1.72l-1.35-1.36a1.2 1.2 0 0 0-1.72 0l-2.8 2.79-.75-.77a1.1 1.1 0 0 0-1.54 0 1.1 1.1 0 0 0 0 1.54l4.61 4.6a1.1 1.1 0 0 0 1.54 0 1.1 1.1 0 0 0 0-1.53l-.77-.76 2.8-2.8z'
+        />
+        <path
+          fill='#425cc7'
+          d='m22.56 8.03-5.92 5.92a1.37 1.37 0 0 0 0 1.91l3.65 3.65a6.6 6.6 0 0 1 8.53.7l2.95-2.95a1.37 1.37 0 0 0 0-1.92l-7.3-7.3a1.36 1.36 0 0 0-1.91 0m-3.8 13.03L16.6 18.9a1.3 1.3 0 0 0-1.84 0l-7.6 7.6a1.3 1.3 0 0 0 0 1.85l4.3 4.31a1.3 1.3 0 0 0 1.84 0l4.89-4.9a6.7 6.7 0 0 1 .57-6.7'
+        />
+      </svg>
+    )
+  }
+
   return (
     <ScaleToContainer>
       <div className='grid size-[537px] grid-cols-3 grid-rows-3'>
-        <div className='bg-red-300/10' />
-        <div className='bg-green-300/10' />
-        <div className='bg-blue-300/10' />
-        <div className='bg-blue-300/10' />
+        <div className='relative flex items-center justify-center'>
+          <Tile>
+            <Otel />
+          </Tile>
+          <CornerLine
+            angle='top-left'
+            className='absolute left-1/2 top-1/2 translate-y-8'
+          />
+        </div>
+        <div className='flex flex-col items-center'>
+          <Tile>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='44'
+              height='44'
+              fill='none'
+              viewBox='0 0 44 44'>
+              <path
+                stroke='#dfdfdf'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M36.67 3.67H7.33a3.67 3.67 0 0 0-3.66 3.66v7.34a3.67 3.67 0 0 0 3.66 3.66h29.34a3.67 3.67 0 0 0 3.66-3.66V7.33a3.67 3.67 0 0 0-3.66-3.66m0 22H7.33a3.67 3.67 0 0 0-3.66 3.66v7.34a3.67 3.67 0 0 0 3.66 3.66h29.34a3.67 3.67 0 0 0 3.66-3.66v-7.34a3.67 3.67 0 0 0-3.66-3.66'
+              />
+              <path
+                stroke='#dfdfdf'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='3.5'
+                d='M11 11h.02M11 33h.02'
+              />
+            </svg>
+          </Tile>
+          <AnimatedDataLine size={115} direction='down' />
+        </div>
+        <div className='relative flex items-center justify-center'>
+          <Tile>
+            <Otel />
+          </Tile>
+          <CornerLine
+            angle='top-right'
+            className='absolute right-1/2 top-1/2 translate-y-8'
+          />
+        </div>
+        <div />
         <div className='relative'>
           <div className='absolute inset-0 z-0 animate-fadeInOut bg-primary-300/60 blur-xl' />
           <div className='absolute inset-0 z-10 flex rounded-lg border-2 border-primary-300 bg-neutral-750 bg-gradient-to-br from-primary-300/20 to-primary-300/40'>
@@ -1024,10 +1120,57 @@ function OtelGraphic() {
             </svg>
           </div>
         </div>
-        <div className='bg-green-300/10' />
-        <div className='bg-green-300/10' />
-        <div className='bg-blue-300/10' />
-        <div className='bg-red-300/10' />
+        <div />
+        <div className='relative flex items-center justify-center'>
+          <Tile>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='44'
+              height='44'
+              fill='none'
+              viewBox='0 0 44 44'>
+              <path
+                stroke='#dfdfdf'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M33 9.17a3.67 3.67 0 0 1 3.67 3.66v15.63q0 .88.39 1.65L39 34a1.83 1.83 0 0 1-1.65 2.66H6.64A1.83 1.83 0 0 1 4.99 34l1.95-3.9q.4-.77.4-1.65V12.83A3.67 3.67 0 0 1 11 9.17zm3.77 20.14H7.23'
+              />
+            </svg>
+          </Tile>
+          <CornerLine
+            angle='bottom-left'
+            className='absolute bottom-1/2 left-1/2 -translate-y-8'
+          />
+        </div>
+        <div className='flex flex-col items-center'>
+          <AnimatedDataLine size={115} direction='up' />
+          <Tile>
+            <Otel />
+          </Tile>
+        </div>
+        <div className='relative flex items-center justify-center'>
+          <Tile>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='44'
+              height='44'
+              fill='none'
+              viewBox='0 0 44 44'>
+              <path
+                stroke='#dfdfdf'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M11 20.17h7.33m-3.66-3.67v7.33M27.5 22h.02M33 18.33h.02m-1.27-9.16h-19.5a7.33 7.33 0 0 0-7.3 6.58q0 .14-.03.28c-.15 1.23-1.25 10.47-1.25 13.3a5.5 5.5 0 0 0 5.5 5.5c1.83 0 2.75-.91 3.66-1.83l2.6-2.6a3.7 3.7 0 0 1 2.59-1.07h7.96c.97 0 1.9.39 2.6 1.08L31.16 33c.91.92 1.83 1.83 3.66 1.83a5.5 5.5 0 0 0 5.5-5.5c0-2.83-1.1-12.07-1.25-13.3l-.03-.28a7.33 7.33 0 0 0-7.3-6.58'
+              />
+            </svg>
+          </Tile>
+          <CornerLine
+            angle='bottom-right'
+            className='absolute bottom-1/2 right-1/2 -translate-y-8'
+          />
+        </div>
       </div>
     </ScaleToContainer>
   )
