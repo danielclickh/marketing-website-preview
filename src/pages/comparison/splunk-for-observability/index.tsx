@@ -2,7 +2,6 @@ import chartQueries from './assets/chart-queries.svg'
 import chartStorage from './assets/chart-storage.svg'
 import clickstackLogo from './assets/clickstack-logo.svg'
 import splunkAnimationLogo from './assets/elastic-animation-logo.svg'
-import splunkTableLogo from './assets/elastic-table-logo.svg'
 import heroLogos from './assets/hero-logos.png'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
@@ -11,15 +10,16 @@ import iconLightning from './assets/icon-lightning.svg'
 import iconUnlock from './assets/icon-unlock.svg'
 import logoAnthropic from './assets/logo-anthropic.svg'
 import logoDidi from './assets/logo-didi.svg'
+import logoElastic from './assets/logo-elastic.svg'
 import logoSplunksearch from './assets/logo-elasticsearch.svg'
 import logoKibana from './assets/logo-kibana.svg'
 import logoLogstash from './assets/logo-logstash.svg'
 import logoNetflix from './assets/logo-netflix.svg'
 import logoPostgress from './assets/logo-postgress.svg'
-import logoRedshift from './assets/logo-redshift.svg'
 import logoShopee from './assets/logo-shopee.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import logoZomato from './assets/logo-zomato.svg'
+import splunkTableLogo from './assets/splunk-table-logo.svg'
 import styles from './styles.module.scss'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
@@ -39,7 +39,7 @@ import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
-import tables from '@/data/elastic-comparison'
+import tables from '@/data/splunk-comparison'
 import { useDebounce } from '@/hooks'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -320,32 +320,32 @@ export default function SplunkPage({
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='hand-coins'
-                title='Lower costs'
-                text='10x cost savings thanks to high compression and resource efficiency'
+                title='Long-term retention without compromise'
+                text='Separation of storage and compute and 10–30x compression, enables cost-efficient, near-infinite data retention. Keep full-fidelity data for months or years without sampling or pre-aggregation'
                 className='bg-neutral-900/80'
               />
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='squares-four'
-                title='Simpler at scale'
-                text='Homogenous architecture and vertical scaling simplifies and reduces nodes'
+                title='Schema on read and write'
+                text='Splunk pioneered schema-on-read, and ClickStack matches it with powerful parsing and string extraction functions. It also adds dynamic schema-on-write, allowing users to index data efficiently for compression and performance'
                 className='bg-neutral-900/80'
               />
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='chart-line'
-                title='Built for high cardinality analytics'
-                text='Column orientation designed for high cardinality queries'
+                title='Consistently low latency at high concurrency'
+                text='ClickHouse was designed for real-time analytics, sustaining thousands of concurrent queries while maintaining sub-second latency'
                 className='bg-neutral-900/80'
               />
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
                 icon='list-search'
-                title='Open and interoperable'
-                text='Supports open standards like OpenTelemetry and integrates directly with systems and formats such as Postgres, Kafka, Parquet, and Iceberg.'
+                title='Unified architecture with simple pricing'
+                text='ClickStack streamlines observability in a unified engine. Eliminate the operational complexity of multiple products, components and SKUs.'
                 className='bg-neutral-900/80'
               />
             </div>
@@ -396,9 +396,9 @@ export default function SplunkPage({
             logo: logoPostgress
           },
           {
-            name: 'Redshift',
-            link: `/comparison/redshift?loc=splunk-comparison-page`,
-            logo: logoRedshift
+            name: 'Elastic',
+            link: `/comparison/elastic-for-observability?loc=splunk-comparison-page`,
+            logo: logoElastic
           },
           {
             name: 'Snowflake',
@@ -457,8 +457,8 @@ function TabbedTable() {
         <Image
           src={splunkTableLogo}
           alt='Splunk'
-          width={108}
-          height={32}
+          width={103}
+          height={30}
           className='mx-auto -mb-2 -mt-1'
         />
       ),
@@ -555,7 +555,7 @@ function TabbedTable() {
                       )}
                     </>
                   ),
-                  values: [row.clickhouse, row.elastic]
+                  values: [row.clickhouse, row.splunk]
                 }
               })
             })
