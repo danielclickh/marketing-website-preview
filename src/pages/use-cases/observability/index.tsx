@@ -47,12 +47,73 @@ import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateFaqPageSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { handle } from 'mdast-util-to-markdown/lib/handle'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { CSSProperties, useRef, useState } from 'react'
+
+const FAQs = [
+  {
+    question: 'What is ClickStack?',
+    answer: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
+  },
+  {
+    question: 'How does ClickStack compare to the ELK stack?',
+    answer: `At a high level, Elastic (ELK) and ClickStack share a familiar shape: both have a data collection layer (Beats and Logstash vs. OpenTelemetry), a storage engine (Elasticsearch vs. ClickHouse), and a UI (Kibana vs. HyperDX). But beneath these parallels, the architectures diverge.
+
+Elastic is a distributed search engine built around inverted indices and a shard-based architecture. While effective for full-text search, this design introduces high storage overhead, limited query parallelization, and contention between ingest and query workloads.
+
+ClickStack, powered by ClickHouse, takes a different approach. Its columnar, shared-nothing architecture is optimized for analytics, minimizing storage with advanced compression, parallelizing queries across all available cores, and separating storage from compute in the cloud for consistent, efficient performance. With full SQL support, ClickStack enables deep, real-time analysis across all your observability data while still providing support for Lucene-style queries for fast searching. 
+
+For more details on how ClickStack compares with the ELK Stack [see our comparison guide](/comparison/elastic-for-observability).`
+  },
+  {
+    question: 'What are the core components of ClickStack?',
+    answer: `The ClickStack consists of three core components:
+
+- **ClickHouse** - The columnar database powering fast, cost-efficient queries and compression.
+- **HyperDX** - The unified UI for search, dashboards, alerts, and session replays.
+- **OpenTelemetry** - Standardized data collection for logs, metrics, and traces.
+
+Together, they form a single, integrated observability stack optimized for speed, scalability, and simplicity.`
+  },
+  {
+    question: 'Is ClickStack compatible with OpenTelemetry?',
+    answer: `Yes. ClickStack is built for OpenTelemetry at any scale. It includes a bundled OpenTelemetry Collector and natively ingests OTel events - combining logs, metrics, and traces into a unified model. Powered by ClickHouse’s parallel processing and columnar storage, ClickStack scales seamlessly from small deployments to petabytes of telemetry data while maintaining real-time performance.
+
+Although ClickStack is OpenTelemetry-native, it also supports any wide event format. While OpenTelemetry schemas are provided out of the box, users can bring their own - just include a timestamp, and the HyperDX UI with ClickHouse delivers the same powerful querying, correlation, and visualization capabilities.`
+  },
+  {
+    question: 'Is ClickStack only compatible with OpenTelemetry?',
+    answer: `No. While ClickStack is optimized for the OpenTelemetry schema, making it the fastest way to get started and scale easily, it’s not limited to it. ClickHouse, the database powering ClickStack, can store and query any event schema.
+
+The HyperDX UI requires only a timestamp field to render and visualize events, so you can use your own data formats or custom pipelines. By following a wide events pattern and including a timestamp, your data becomes immediately usable within ClickStack.`
+  },
+  {
+    question: 'Can I store logs, traces, and metrics in ClickStack?',
+    answer: `Yes. ClickStack is a full observability platform designed to handle logs, traces and metrics in one place.  Built on ClickHouse, it efficiently ingests and stores high-cardinality OpenTelemetry data, automatically correlating events at the database layer for deep, real-time insights.`
+  },
+  {
+    question: 'Does ClickStack support fast search using inverted indices?',
+    answer: `Yes. ClickStack uses ClickHouse, which is columnar by default, and supports optional inverted indices at the column level. You can enable inverted indices and bloom filters to accelerate log and text search, which is common for log data exploration. The HyperDX UI accepts Lucene-style syntax, transpiles it to SQL, and can leverage these indices for speed. If you want to minimize storage, you can disable indices and rely on ClickHouse’s fast, multi-parallel string search, which is sufficient for many use cases.`
+  },
+  {
+    question: 'Is ClickStack open source?',
+    answer: `Yes. ClickStack and its components are fully open source and built on open standards. ClickHouse and the  OpenTelemetry collector are licensed under Apache 2.0, with the HyperDX UI using the MIT license. You can deploy ClickStack anywhere - self-hosted, hybrid, or in the cloud, without restrictions.`
+  },
+  {
+    question: 'Is there a hosted version of ClickStack?',
+    answer: `Yes. ClickStack is available as a managed service in ClickHouse Cloud. It delivers the same open architecture with elastic scaling and full separation of storage and compute, allowing users to scale resources independently and isolate read and write workloads for consistent performance.
+
+With advanced compression and cost-efficient object storage, data can be retained indefinitely at low cost. ClickHouse Cloud also includes automatic backups and zero operational overhead. The HyperDX UI is fully integrated - available at no additional cost, secured through ClickHouse Cloud authentication, and can be launched on any service. 
+
+A fully managed ClickStack offering is also planned for the future.`
+  }
+]
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -67,40 +128,43 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           path: '/use-cases/observability',
           image: [{ url: shareImage.src }],
           languages: ['en', 'ja'],
-          schema: {
-            '@context': 'https://schema.org',
-            '@type': 'Service',
-            name: 'ClickStack Observability',
-            serviceType:
-              'Observability (logs, metrics, traces, session replays, errors)',
-            url: 'https://clickhouse.com/use-cases/observability',
-            description:
-              'High-performance, open-source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
-            provider: {
-              '@type': 'Organization',
-              name: 'ClickHouse, Inc.',
-              url: 'https://clickhouse.com'
-            },
-            areaServed: 'Worldwide',
-            audience: {
-              '@type': 'BusinessAudience',
-              audienceType: 'Engineering, SRE, DevOps, Data teams'
-            },
-            offers: {
-              '@type': 'Offer',
-              name: 'ClickStack on ClickHouse Cloud — Free trial',
+          schema: [
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Service',
+              name: 'ClickStack Observability',
+              serviceType:
+                'Observability (logs, metrics, traces, session replays, errors)',
+              url: 'https://clickhouse.com/use-cases/observability',
               description:
-                'Experience HyperDX + ClickHouse with a 30-day trial and $300 in credits.',
-              price: '0.00',
-              priceCurrency: 'USD',
-              availability: 'https://schema.org/InStock',
-              url: 'https://console.clickhouse.cloud/'
+                'High-performance, open-source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
+              provider: {
+                '@type': 'Organization',
+                name: 'ClickHouse, Inc.',
+                url: 'https://clickhouse.com'
+              },
+              areaServed: 'Worldwide',
+              audience: {
+                '@type': 'BusinessAudience',
+                audienceType: 'Engineering, SRE, DevOps, Data teams'
+              },
+              offers: {
+                '@type': 'Offer',
+                name: 'ClickStack on ClickHouse Cloud — Free trial',
+                description:
+                  'Experience HyperDX + ClickHouse with a 30-day trial and $300 in credits.',
+                price: '0.00',
+                priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
+                url: 'https://console.clickhouse.cloud/'
+              },
+              brand: {
+                '@type': 'Brand',
+                name: 'ClickStack'
+              }
             },
-            brand: {
-              '@type': 'Brand',
-              name: 'ClickStack'
-            }
-          }
+            generateFaqPageSchema({ faqs: FAQs })
+          ]
         },
         ...commonProps
       }
@@ -896,65 +960,10 @@ export default function ClickHouseServerPage({
         </div>
         <Accordion
           className='mx-auto w-full max-w-2xl lg:mr-0'
-          items={[
-            {
-              handle: 'What is ClickStack?',
-              content: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
-            },
-            {
-              handle: 'How does ClickStack compare to the ELK stack?',
-              content: `At a high level, Elastic (ELK) and ClickStack share a familiar shape: both have a data collection layer (Beats and Logstash vs. OpenTelemetry), a storage engine (Elasticsearch vs. ClickHouse), and a UI (Kibana vs. HyperDX). But beneath these parallels, the architectures diverge.
-
-Elastic is a distributed search engine built around inverted indices and a shard-based architecture. While effective for full-text search, this design introduces high storage overhead, limited query parallelization, and contention between ingest and query workloads.
-
-ClickStack, powered by ClickHouse, takes a different approach. Its columnar, shared-nothing architecture is optimized for analytics, minimizing storage with advanced compression, parallelizing queries across all available cores, and separating storage from compute in the cloud for consistent, efficient performance. With full SQL support, ClickStack enables deep, real-time analysis across all your observability data while still providing support for Lucene-style queries for fast searching. 
-
-For more details on how ClickStack compares with the ELK Stack [see our comparison guide](/comparison/elastic-for-observability).`
-            },
-            {
-              handle: 'What are the core components of ClickStack?',
-              content: `The ClickStack consists of three core components:
-
-- **ClickHouse** - The columnar database powering fast, cost-efficient queries and compression.
-- **HyperDX** - The unified UI for search, dashboards, alerts, and session replays.
-- **OpenTelemetry** - Standardized data collection for logs, metrics, and traces.
-
-Together, they form a single, integrated observability stack optimized for speed, scalability, and simplicity.`
-            },
-            {
-              handle: 'Is ClickStack compatible with OpenTelemetry?',
-              content: `Yes. ClickStack is built for OpenTelemetry at any scale. It includes a bundled OpenTelemetry Collector and natively ingests OTel events - combining logs, metrics, and traces into a unified model. Powered by ClickHouse’s parallel processing and columnar storage, ClickStack scales seamlessly from small deployments to petabytes of telemetry data while maintaining real-time performance.
-
-Although ClickStack is OpenTelemetry-native, it also supports any wide event format. While OpenTelemetry schemas are provided out of the box, users can bring their own - just include a timestamp, and the HyperDX UI with ClickHouse delivers the same powerful querying, correlation, and visualization capabilities.`
-            },
-            {
-              handle: 'Is ClickStack only compatible with OpenTelemetry?',
-              content: `No. While ClickStack is optimized for the OpenTelemetry schema, making it the fastest way to get started and scale easily, it’s not limited to it. ClickHouse, the database powering ClickStack, can store and query any event schema.
-
-The HyperDX UI requires only a timestamp field to render and visualize events, so you can use your own data formats or custom pipelines. By following a wide events pattern and including a timestamp, your data becomes immediately usable within ClickStack.`
-            },
-            {
-              handle: 'Can I store logs, traces, and metrics in ClickStack?',
-              content: `Yes. ClickStack is a full observability platform designed to handle logs, traces and metrics in one place.  Built on ClickHouse, it efficiently ingests and stores high-cardinality OpenTelemetry data, automatically correlating events at the database layer for deep, real-time insights.`
-            },
-            {
-              handle:
-                'Does ClickStack support fast search using inverted indices?',
-              content: `Yes. ClickStack uses ClickHouse, which is columnar by default, and supports optional inverted indices at the column level. You can enable inverted indices and bloom filters to accelerate log and text search, which is common for log data exploration. The HyperDX UI accepts Lucene-style syntax, transpiles it to SQL, and can leverage these indices for speed. If you want to minimize storage, you can disable indices and rely on ClickHouse’s fast, multi-parallel string search, which is sufficient for many use cases.`
-            },
-            {
-              handle: 'Is ClickStack open source?',
-              content: `Yes. ClickStack and its components are fully open source and built on open standards. ClickHouse and the  OpenTelemetry collector are licensed under Apache 2.0, with the HyperDX UI using the MIT license. You can deploy ClickStack anywhere - self-hosted, hybrid, or in the cloud, without restrictions.`
-            },
-            {
-              handle: 'Is there a hosted version of ClickStack?',
-              content: `Yes. ClickStack is available as a managed service in ClickHouse Cloud. It delivers the same open architecture with elastic scaling and full separation of storage and compute, allowing users to scale resources independently and isolate read and write workloads for consistent performance.
-
-With advanced compression and cost-efficient object storage, data can be retained indefinitely at low cost. ClickHouse Cloud also includes automatic backups and zero operational overhead. The HyperDX UI is fully integrated - available at no additional cost, secured through ClickHouse Cloud authentication, and can be launched on any service. 
-
-A fully managed ClickStack offering is also planned for the future.`
-            }
-          ]}
+          items={FAQs.map(({ question, answer }) => ({
+            handle: question,
+            content: answer
+          }))}
         />
       </section>
     </Layout>
