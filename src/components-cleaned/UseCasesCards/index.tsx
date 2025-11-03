@@ -133,14 +133,14 @@ function Card({
           className='-mb-2 aspect-[57/44] h-auto w-full from-90% object-cover object-top gradient-mask-to-b'
         />
       </CUICard.Header>
-      <CUICard.Body className='space-y-4 p-4'>
+      <CUICard.Body className='mb-auto space-y-4 p-4'>
         <div className='flex items-center gap-4'>
           <Image
             src={icon}
-            width={288}
-            height={233}
+            width={20}
+            height={20}
             alt={`Icon for ${title}`}
-            className='size-4'
+            className='size-5'
           />
           <h3 className='font-bold xl:text-xl'>{title}</h3>
           <span className='ml-auto flex-shrink-0 flex-grow-0 font-bold text-primary-300 sm:hidden'>
