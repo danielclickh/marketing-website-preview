@@ -23,14 +23,12 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   // Eyebrow default settings
-  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(true)
+  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
-  >('ClickHouse announces Series C extension and key leadership hires')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/clickhouse-extends-series-c-financing-expands-leadership-team'
-  )
+  >('')
+  const [headerBannerUrl, setHeaderBannerUrl] = useState('')
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
   >(undefined)
