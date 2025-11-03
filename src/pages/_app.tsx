@@ -143,13 +143,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GrowthBookProvider growthbook={gb}>
           <GlobalSearchProvider enabled={!isMarketoIframe}>
             <SmartBackProvider>
-              <main
+              <div
                 id='main-site-container'
                 className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
                 <div className='flex min-h-screen flex-col'>
                   <Component {...pageProps} />
                 </div>
-              </main>
+              </div>
               <UTMPersist />
             </SmartBackProvider>
           </GlobalSearchProvider>
