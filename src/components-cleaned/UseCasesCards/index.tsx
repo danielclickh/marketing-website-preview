@@ -142,19 +142,25 @@ function Card({
             alt={`Icon for ${title}`}
             className='size-4'
           />
-          <h3 className='text-base font-bold'>{title}</h3>
+          <h3 className='font-bold xl:text-xl'>{title}</h3>
+          <span className='ml-auto flex-shrink-0 flex-grow-0 font-bold text-primary-300 sm:hidden'>
+            -&gt;
+          </span>
         </div>
-        <p className='text-xs text-neutral-200'>{description}</p>
+        <p className='hidden text-sm text-neutral-200 sm:block xl:text-base'>
+          {description}
+        </p>
       </CUICard.Body>
-      <CUICard.Footer className='px-4 pb-3'>
+      <CUICard.Footer className='px-4 sm:pb-3'>
         <LinkWithArrow
           href={link}
           onClick={
             galaxyEventName ? useGalaxyOnClick(galaxyEventName) : undefined
           }
-          className='text-sm font-bold text-primary-300'>
+          className='block !h-0 text-sm font-bold text-primary-300 sm:inline sm:h-auto xl:text-base'
+          arrowClassName='hidden sm:block'>
           <span className='absolute inset-0' />
-          {linkText}
+          <span className='hidden sm:inline'>{linkText}</span>
         </LinkWithArrow>
       </CUICard.Footer>
     </CUICard>
