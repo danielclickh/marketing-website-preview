@@ -110,20 +110,26 @@ function Sitemap({
           <hr className='my-6 h-[1px] border-0 bg-white bg-opacity-40' />
 
           {items.map((item) => {
+            const authorName = item.author || "The ClickHouse Team"
+            const lastUpdated = item.lastUpdated ? new Date(item.lastUpdated).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }) : null
+
             return (
-              <div
-                className='my-10 flex flex-wrap items-center justify-between md:flex-nowrap'
-                key={item.slug}>
-                <div className='mb-4 w-full md:mb-0 md:w-1/3'>
-                  <SuiTitle type='h2' className='!text-xl'>
-                    <Link
-                      href={`/engineering-resources/${item.slug}`}
-                      className='text-primary-300 hover:underline'>
-                      {item.title}
-                    </Link>
-                  </SuiTitle>
+              <div className='my-10' key={item.slug}>
+                <SuiTitle type='h2' className='!text-xl'>
+                  <Link
+                    href={`/engineering-resources/${item.slug}`}
+                    className='text-primary-300 hover:underline'>
+                    {item.title}
+                  </Link>
+                </SuiTitle>
+                <div className='mt-2 text-neutral-200'>{item.excerpt}</div>
+                <div className='mt-2 text-sm text-neutral-300'>
+                  {authorName}{lastUpdated && ` • ${lastUpdated}`}
                 </div>
-                <div className='w-full md:w-2/3'>{item.excerpt}</div>
               </div>
             )
           })}

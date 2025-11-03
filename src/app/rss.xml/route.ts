@@ -20,12 +20,14 @@ export async function GET() {
   })
 
   indexedItems.forEach((item) => {
+    const link = `${siteURL}/${item.path.replace(/^\//, '')}`
+    const cmsDate = item.publishedAt || item.lastModified
     feed.addItem({
       title: item.title || item.path,
-      id: `${siteURL}/${item.path}`,
-      link: `${siteURL}/${item.path}`,
+      id: link,
+      link,
       description: item.description || '',
-      date: item.lastModified ? new Date(item.lastModified) : new Date()
+      date: cmsDate ? new Date(cmsDate) : new Date()
     })
   })
 

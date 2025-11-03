@@ -10,7 +10,8 @@ import { getVideos } from '@/lib/videos'
 interface IndexedItem extends Partial<Omit<BuildRecord, 'title'>> {
   title: string | null
   path: string
-  lastModified: string | null
+  lastModified?: string | null
+  publishedAt?: string | null
 }
 
 export async function all(): Promise<Array<IndexedItem>> {
@@ -62,6 +63,7 @@ export async function cmsBlogs(): Promise<Array<IndexedItem>> {
       title: post.title,
       path: `${prefix}/blog/${post.slug}`,
       description: post.shortDescription,
+      publishedAt: post.publishedAt,
       lastModified: post.updatedAt
     }
   })
@@ -87,6 +89,7 @@ export async function cmsEvents(): Promise<Array<IndexedItem>> {
     return {
       title: post.title,
       path: `/company/events/${post.slug}`,
+      publishedAt: post.publishedAt,
       lastModified: post.updatedAt
     }
   })
@@ -101,12 +104,14 @@ export async function cmsVideos(): Promise<Array<IndexedItem>> {
         {
           title: post.title,
           path: `/videos/${post.slug}`,
-          lastModified: post.updatedAt
+          lastModified: post.updatedAt,
+          publishedAt: post.publishedAt
         },
         {
           title: post.title,
           path: `/jp/videos/${post.slug}`,
-          lastModified: post.updatedAt
+          lastModified: post.updatedAt,
+          publishedAt: post.publishedAt
         }
       ]
     })
@@ -125,12 +130,14 @@ export async function cmsComparisons(): Promise<Array<IndexedItem>> {
         {
           title: post.Title,
           path: `/comparison/${post.slug}`,
-          lastModified: post.updatedAt
+          lastModified: post.updatedAt,
+          publishedAt: post.publishedAt
         },
         {
           title: post.Title,
           path: `/jp/comparison/${post.slug}`,
-          lastModified: post.updatedAt
+          lastModified: post.updatedAt,
+          publishedAt: post.publishedAt
         }
       ]
     })
@@ -147,7 +154,8 @@ export async function cmsPages(): Promise<Array<IndexedItem>> {
     return {
       title: post.title,
       path: `/${uri}`,
-      lastModified: post.updatedAt
+      lastModified: post.updatedAt,
+      publishedAt: post.publishedAt
     }
   })
 }
@@ -179,12 +187,14 @@ export async function cmsIntegrations(): Promise<Array<IndexedItem>> {
         {
           title: post.name,
           path: `/integrations/${post.slug}`,
-          lastModified: post.updatedAt
+          lastModified: post.updatedAt,
+          publishedAt: post.publishedAt
         },
         {
           title: post.name,
           path: `/jp/integrations/${post.slug}`,
-          lastModified: post.updatedAt
+          lastModified: post.updatedAt,
+          publishedAt: post.publishedAt
         }
       ]
     })

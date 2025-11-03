@@ -24,3 +24,12 @@ export default function BlogModulesSummary({
     </div>
   )
 }
+
+export function blogModulesSummaryMarkdown({
+  title,
+  summary
+}: BlogModuleSummary) {
+  return `## ${title}
+
+${summary}`
+}

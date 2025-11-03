@@ -4,6 +4,7 @@ import { StrapiImageType } from '@/lib/api/strapi/types'
 import { BlogModules } from '@/types/strapi'
 
 export interface BlogProps extends BlogPost, CommonProps {
+  returnType: 'html' | 'markdown'
   content: string | null
   otherBlogs: BlogPost[]
   newsLetterData: NewsLetterData

@@ -2,6 +2,7 @@ import { PricingV2 } from './types'
 import { absoluteUrl, relativeUrl } from '@/lib/next'
 import _fetch from 'cross-fetch'
 import { relative } from 'knip/dist/util/path'
+import type { NextApiRequest } from 'next'
 import { stringify } from 'qs'
 
 export function fetch(uri: string, init: any = {}) {
@@ -27,6 +28,11 @@ export function getStagingOnlyFilters(): Array<Record<'StagingOnly', any>> {
     { StagingOnly: stagingOnlyFilter },
     { StagingOnly: { $eq: false } }
   ]
+}
+
+export function isAuthorisedRevalidationRequest(request: NextApiRequest) {
+  const webhookToken = process.env.STRAPI_WEBHOOK_TOKEN
+  return webhookToken && request?.headers?.['isr-auth-token'] === webhookToken
 }
 
 export function getUnlistedFilters() {

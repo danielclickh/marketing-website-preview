@@ -31,6 +31,20 @@ export function getEngineeringResources(): EngineeringResource[] {
           // Create slug from filename if not provided in frontmatter
           const slug = data.slug || fileName.replace('.md', '')
 
+          // Check for corresponding JSON-LD schema file
+          let schema = null
+          const schemaFileName = fileName.replace('.md', '.json')
+          const schemaFilePath = path.join(engResourcesDirectory, schemaFileName)
+          
+          if (fs.existsSync(schemaFilePath)) {
+            try {
+              const schemaContents = fs.readFileSync(schemaFilePath, 'utf8')
+              schema = JSON.parse(schemaContents)
+            } catch (error) {
+              console.error(`Error parsing JSON-LD file ${schemaFileName}:`, error)
+            }
+          }
+
           return {
             title: data.title,
             slug,
@@ -38,7 +52,12 @@ export function getEngineeringResources(): EngineeringResource[] {
             image: data.image ? data.image : '',
             lastUpdated: data.lastUpdated || '',
             index: data.index ?? 9999, // Add index property with default value -1
-            body: content
+            body: content,
+            author: data.author || null,
+            authorAvatar: data.authorAvatar || null,
+            authorLink: data.authorLink || null,
+            headersSelector: data.headersSelector || null,
+            schema: schema
           } as EngineeringResource
         } catch (error) {
           console.error(`Error reading file ${fileName}:`, error)

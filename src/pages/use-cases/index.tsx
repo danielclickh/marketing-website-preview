@@ -407,7 +407,7 @@ function UseCasesPage({
                 '--top-side': '224px'
               } as CSSProperties
             }>
-            <div className='pb-10 text-center'>
+            <div className='space-y-4 pb-10 text-center lg:text-left'>
               <Image
                 src='/images/industries-icon.svg'
                 alt='Industries Icon'
@@ -415,14 +415,19 @@ function UseCasesPage({
                 height={72}
                 className='mx-auto lg:mx-0'
               />
-              <SuiTitle type='h2' className='my-6 lg:text-left'>
-                Industries
-              </SuiTitle>
-              <div className='mx-auto max-w-md text-neutral-200 lg:text-left'>
-                Wherever you need us, we’re there. We love to engage in
-                thoughtful conversation with the ClickHouse community and are
-                always on-hand to answer your questions.
-              </div>
+              <SuiTitle type='h2'>Industries</SuiTitle>
+              <p className='mx-auto max-w-md text-neutral-200'>
+                Learn how leading companies use ClickHouse for real-time
+                analytics, machine learning, data warehousing, and observability
+                across key industries.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/industries'
+                  className='font-bold text-primary-300'>
+                  Explore industries
+                </LinkWithArrow>
+              </p>
             </div>
             <Accordion
               className='mx-auto w-full max-w-2xl lg:mr-0'

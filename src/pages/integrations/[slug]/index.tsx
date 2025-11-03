@@ -215,7 +215,7 @@ export default function IntegrationPage({
               }
             } as any
           }>
-          {integration.summaryv2 || integration.summary}
+          {integration.summaryv2 || integration.summary || ''}
         </Markdown>
 
         {similar.length && (

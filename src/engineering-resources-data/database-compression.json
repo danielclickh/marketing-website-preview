@@ -1,0 +1,86 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do databases compress data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Compression reduces bytes on disk and in memory, which lowers storage costs, cuts I/O, and speeds up analytical queries—even when decompression uses some CPU."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kinds of database compression exist?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two broad approaches are common: row-based (pages of mixed row data compressed as blocks) and column-based (each column stored and encoded separately)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does column-based compression work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By storing similar values together, column stores can apply encodings like dictionary, run-length, bit-packing, and delta; general codecs such as LZ4 or ZSTD can be layered on top."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does compression affect data accuracy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Database compression is typically lossless—the original values are recovered exactly. Some systems also support lossy strategies like sampling or reduced precision when exactness isn’t required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are best practices to maximize compression?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Choose tighter data types, model low-cardinality strings as enums, avoid unnecessary precision, match codecs to data patterns (e.g., delta for time), and measure results per column."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What trade-offs exist between CPU and I/O?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Decompression costs CPU, but in analytical workloads the I/O saved by reading fewer bytes usually outweighs the CPU overhead, resulting in faster queries overall."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which databases achieve the best compression?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Benchmarks show columnar systems can be far smaller on disk than row-based ones for the same dataset; ClickHouse, for example, stores some benchmark datasets over 10× smaller than PostgreSQL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do columnar databases often query faster?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They scan less data and exploit cache locality; compressed column chunks reduce I/O and allow engines to apply vectorized operations efficiently."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I avoid storing unnecessary precision?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If your use case doesn’t need microsecond timestamps or 64-bit floats, truncating precision shrinks data and can improve compression and performance without harming results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What encodings help most with time-series data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delta and double-delta encodings are effective for monotonic sequences like timestamps; run-length can help when values repeat, and bit-packing compresses bounded integer ranges."
+      }
+    }
+  ]
+}
