@@ -32,6 +32,7 @@ import logoSolarwinds from './assets/logo-solarwinds.svg'
 import logoSony from './assets/logo-sony.svg'
 import logoVimeo from './assets/logo-vimeo.svg'
 import shareImage from './assets/share-image.png'
+import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
@@ -50,6 +51,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
+import Link from 'next/link'
 import React, { CSSProperties, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -61,10 +63,44 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           title:
             'ClickStack: High-Performance Open-Source Observability | Logs, Metrics, Traces with ClickHouse',
           description:
-            'ClickStack is a high-performance, open-source observability stack powered by ClickHouse. Unify logs, metrics, traces, and session replays with lightning-fast queries and 10-100x cost savings on even your highest-cardinality data.',
+            'ClickStack is a high-performance observability stack powered by ClickHouse. Unify logs, metrics, and traces with 10-100x cost savings. Get started today!',
           path: '/use-cases/observability',
           image: [{ url: shareImage.src }],
-          languages: ['en', 'ja']
+          languages: ['en', 'ja'],
+          schema: {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'ClickStack Observability',
+            serviceType:
+              'Observability (logs, metrics, traces, session replays, errors)',
+            url: 'https://clickhouse.com/use-cases/observability',
+            description:
+              'High-performance, open-source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
+            provider: {
+              '@type': 'Organization',
+              name: 'ClickHouse, Inc.',
+              url: 'https://clickhouse.com'
+            },
+            areaServed: 'Worldwide',
+            audience: {
+              '@type': 'BusinessAudience',
+              audienceType: 'Engineering, SRE, DevOps, Data teams'
+            },
+            offers: {
+              '@type': 'Offer',
+              name: 'ClickStack on ClickHouse Cloud — Free trial',
+              description:
+                'Experience HyperDX + ClickHouse with a 30-day trial and $300 in credits.',
+              price: '0.00',
+              priceCurrency: 'USD',
+              availability: 'https://schema.org/InStock',
+              url: 'https://console.clickhouse.cloud/'
+            },
+            brand: {
+              '@type': 'Brand',
+              name: 'ClickStack'
+            }
+          }
         },
         ...commonProps
       }
@@ -101,16 +137,16 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h1'
               className='font-basier text-[1.75rem] font-semibold md:text-4xl'>
-              The high performance <br className='hidden md:block' />
-              open-source observability stack
+              Open-source observability for OpenTelemetry at scale
             </SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               Lightning-fast queries and powerful aggregations on logs, metrics,
               traces, session replays and errors with unmatched resource
-              efficiency for even your highest-cardinality data.
+              efficiency for even your highest-cardinality OTel data.
             </SuiText>
             <SuiText size='lg' className='text-neutral-200'>
-              All in one stack - powered by ClickHouse.
+              All in one stack and built for OTel at scale - powered by
+              ClickHouse.
             </SuiText>
             <div className='flex w-full flex-col justify-center gap-6 md:flex-row lg:justify-start'>
               <CUIButton
@@ -166,90 +202,90 @@ export default function ClickHouseServerPage({
             [
               {
                 src: logoNetflix,
-                alt: 'Netflix',
+                alt: 'Netflix logo',
                 width: 95,
                 height: 27
               },
               {
                 src: logoCloudflare,
-                alt: 'Cloudflare',
+                alt: 'Cloudflare logo',
                 width: 106,
                 height: 36
               },
               {
                 src: logoSony,
-                alt: 'Sony',
+                alt: 'Sony logo',
                 width: 100,
                 height: 19
               },
               {
                 src: logoComcast,
-                alt: 'Comcast',
+                alt: 'Comcast logo',
                 width: 108,
                 height: 44
               },
               {
                 src: logoAnthropic,
-                alt: 'Anthropic',
+                alt: 'Anthropic logo',
                 width: 143,
                 height: 16,
                 className: 'opacity-70'
               },
               {
                 src: logoCharacterai,
-                alt: 'Character.ai',
+                alt: 'Character.ai logo',
                 width: 102 * 1.5,
                 height: 14 * 1.5,
                 className: 'opacity-70'
               },
               {
                 src: logoSierra,
-                alt: 'Sierra',
+                alt: 'Sierra logo',
                 width: 118,
                 height: 39,
                 className: 'opacity-70'
               },
               {
                 src: logoEbay,
-                alt: 'Ebay',
+                alt: 'Ebay logo',
                 width: 84,
                 height: 34
               },
               {
                 src: logoCisco,
-                alt: 'Cisco',
+                alt: 'Cisco logo',
                 width: 71,
                 height: 38
               },
               {
                 src: logoDoorDash,
-                alt: 'DoorDash',
+                alt: 'DoorDash logo',
                 width: 187,
                 height: 23
               },
               {
                 src: logoGitLab,
-                alt: 'GitLab',
+                alt: 'GitLab logo',
                 width: 122,
                 height: 38
               },
               {
                 src: logoIbm,
-                alt: 'IBM',
+                alt: 'IBM logo',
                 width: 70,
                 height: 29,
                 className: 'opacity-70'
               },
               {
                 src: logoSolarwinds,
-                alt: 'SolarWinds',
+                alt: 'SolarWinds logo',
                 width: 200,
                 height: 40,
                 className: 'opacity-70'
               },
               {
                 src: logoVimeo,
-                alt: 'Vimeo',
+                alt: 'Vimeo logo',
                 width: 90,
                 height: 26,
                 className: 'opacity-70'
@@ -260,7 +296,7 @@ export default function ClickHouseServerPage({
               <Image
                 key={logoIndex}
                 {...logo}
-                loading='eager'
+                loading='lazy'
                 className={`my-auto flex-shrink-0 flex-grow-0 ${className}`}
               />
             )
@@ -357,7 +393,7 @@ export default function ClickHouseServerPage({
             </SuiTitle>
             <SuiText className='text-balance'>
               Even on petabytes of high <br className='hidden lg:block' />
-              cardinality data
+              cardinality OTel data
             </SuiText>
           </div>
           <div className='flex flex-1 flex-col items-center gap-4 text-center'>
@@ -365,11 +401,12 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h3'
               className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
-              10-100x cost savings
+              10-100x in cost savings
             </SuiTitle>
             <SuiText className='text-balance'>
-              Best in class ingestion and <br className='hidden lg:block' />
-              compression rates (30x)
+              With best in class ingestion and compression{' '}
+              <br className='hidden lg:block' />
+              rates (10x - 30x) for OTel data
             </SuiText>
           </div>
           <div className='flex flex-1 flex-col items-center gap-4 text-center'>
@@ -377,11 +414,11 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h3'
               className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
-              Full stack observability
+              Full stack OTel observability
             </SuiTitle>
             <SuiText className='text-balance'>
-              Unify Session Replays, Logs, <br className='hidden lg:block' />
-              Traces, Metrics and Errors
+              Unify Session Replays with <br className='hidden lg:block' />
+              OTel Logs, Traces and Metrics
             </SuiText>
           </div>
         </div>
@@ -456,10 +493,10 @@ export default function ClickHouseServerPage({
               className='w-full !bg-neutral-750'>
               <div className='space-y-4'>
                 <SuiText>
-                  Powered by ClickHouse, HyperDX searches terabytes in seconds
-                  and ingests billions of high-cardinality events daily.
-                  ClickStack ships with optimized schemas, removing the need for
-                  manual tuning and letting you focus on insights.
+                  Powered by ClickHouse, HyperDX searches terabytes of OTel data
+                  in seconds and ingests billions of high-cardinality events
+                  daily. ClickStack ships with optimized OTel schemas, removing
+                  the need for manual tuning and letting you focus on insights.
                 </SuiText>
                 <SuiText>
                   On ClickHouse Cloud, ClickStack gains elastic scaling and cost
@@ -486,7 +523,7 @@ export default function ClickHouseServerPage({
                   ClickStack natively supports the OpenTelemetry standard,
                   capturing logs, metrics, and traces as wide events -
                   context-rich records that unify observability data in
-                  ClickHouse.
+                  ClickHouse. Designed for OTel data at Petabyte scale.
                 </SuiText>
                 <SuiText>
                   With native JSON support, ClickHouse efficiently handles
@@ -510,7 +547,12 @@ export default function ClickHouseServerPage({
           <PlayOnClickVideo
             provider='youtube'
             id='3waDYancX_c'
-            thumbnail={<YouTubeThumbnail videoId='3waDYancX_c' />}
+            thumbnail={
+              <YouTubeThumbnail
+                videoId='3waDYancX_c'
+                alt='ClickStack introduction video'
+              />
+            }
           />
         </div>
       </section>
@@ -523,10 +565,10 @@ export default function ClickHouseServerPage({
           <div className='mx-auto max-w-4xl space-y-8 text-center lg:px-2'>
             <SuiTitle type='h2'>Want to compose your own stack?</SuiTitle>
             <SuiText>
-              Need a custom pipeline or schema? The HyperDX UI is
-              schema-agnostic and works with any telemetry pipeline, connecting
-              to any ClickHouse instance for full control over your
-              observability data.
+              Need a custom pipeline or schema that isn’t OpenTelemetry? The
+              HyperDX UI is schema-agnostic and works with any telemetry
+              pipeline, connecting to any ClickHouse instance for full control
+              over your observability data.
             </SuiText>
             <SuiText>
               Building your own stack? ClickHouse provides the tools: a
@@ -542,20 +584,20 @@ export default function ClickHouseServerPage({
       {/* Get started */}
       <section className='section-container my-20 grid grid-cols-1 gap-8 lg:my-24 lg:grid-cols-2 lg:gap-16'>
         <SuiTitle type='h2' className='col-span-full text-center'>
-          Get started with ClickStack
+          Why build your observability on ClickStack?
         </SuiTitle>
         <div className='space-y-6'>
           <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
           <SuiTitle
             type='h3'
             className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
-            Reduce your observability costs
+            How does ClickStack reduce observability costs?
           </SuiTitle>
           <SuiText className='text-neutral-200'>
             ClickHouse delivers exceptional cost efficiency, avoiding the
             overhead of JVM-based systems, with a hardware-optimized
-            column-oriented design that reduces storage by up to 90% without
-            sacrificing speed.
+            column-oriented design that reduces storage for OTel data by up to
+            90% without sacrificing speed.
           </SuiText>
           <SuiText className='text-neutral-200'>
             Scaling seamlessly from a single machine to hundreds of cores, with
@@ -573,7 +615,7 @@ export default function ClickHouseServerPage({
           <SuiTitle
             type='h3'
             className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
-            Simple deployment and maintenance
+            How simple is ClickStack to deploy and maintain?
           </SuiTitle>
           <SuiText className='text-neutral-200'>
             Experience operational simplicity with ClickHouse's homogenous
@@ -592,7 +634,7 @@ export default function ClickHouseServerPage({
           <SuiTitle
             type='h3'
             className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
-            Unlock real-time observability
+            How does ClickStack deliver real-time observability?
           </SuiTitle>
           <SuiText className='text-neutral-200'>
             ClickHouse is designed to handle huge volumes of continuous streams
@@ -616,7 +658,7 @@ export default function ClickHouseServerPage({
           <SuiTitle
             type='h3'
             className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
-            Not just observability
+            Is ClickStack only for observability data?
           </SuiTitle>
           <SuiText className='text-neutral-200'>
             ClickHouse isn’t just an observability store - it’s a
@@ -773,7 +815,7 @@ export default function ClickHouseServerPage({
       </section>
 
       {/* Try ClickHouse */}
-      <div className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
+      <section className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
             Try{' '}
@@ -813,7 +855,108 @@ export default function ClickHouseServerPage({
             </CUIButton>
           </p>
         </div>
-      </div>
+      </section>
+
+      {/* FAQs */}
+      <section
+        id='faqs'
+        className='bg-shadow-element relative mx-auto my-24 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+        style={
+          {
+            '--top-side': '224px'
+          } as React.CSSProperties
+        }>
+        <div className='pb-10 text-center lg:text-left'>
+          <div className='lg:sticky lg:top-32'>
+            <Image
+              src='/faq-icon.svg'
+              alt='FAQ Icon'
+              width={72}
+              height={72}
+              className='mx-auto lg:mx-0'
+            />
+            <SuiTitle type='h2' className='my-6 lg:text-left'>
+              FAQs
+            </SuiTitle>
+            <div className='mx-auto max-w-md space-y-4 text-neutral-200 lg:text-left'>
+              <p>
+                We're here to make observability simple, fast, and open. Explore
+                our FAQs to learn more about ClickStack, and if you don’t see
+                what you need, we’re always happy to chat.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/company/contact'
+                  className='font-bold text-primary-300'>
+                  Ask us anything
+                </LinkWithArrow>
+              </p>
+            </div>
+          </div>
+        </div>
+        <Accordion
+          className='mx-auto w-full max-w-2xl lg:mr-0'
+          items={[
+            {
+              handle: 'What is ClickStack?',
+              content: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
+            },
+            {
+              handle: 'How does ClickStack compare to the ELK stack?',
+              content: `At a high level, Elastic (ELK) and ClickStack share a familiar shape: both have a data collection layer (Beats and Logstash vs. OpenTelemetry), a storage engine (Elasticsearch vs. ClickHouse), and a UI (Kibana vs. HyperDX). But beneath these parallels, the architectures diverge.
+
+Elastic is a distributed search engine built around inverted indices and a shard-based architecture. While effective for full-text search, this design introduces high storage overhead, limited query parallelization, and contention between ingest and query workloads.
+
+ClickStack, powered by ClickHouse, takes a different approach. Its columnar, shared-nothing architecture is optimized for analytics, minimizing storage with advanced compression, parallelizing queries across all available cores, and separating storage from compute in the cloud for consistent, efficient performance. With full SQL support, ClickStack enables deep, real-time analysis across all your observability data while still providing support for Lucene-style queries for fast searching. 
+
+For more details on how ClickStack compares with the ELK Stack [see our comparison guide](/comparison/elastic-for-observability).`
+            },
+            {
+              handle: 'What are the core components of ClickStack?',
+              content: `The ClickStack consists of three core components:
+
+- **ClickHouse** - The columnar database powering fast, cost-efficient queries and compression.
+- **HyperDX** - The unified UI for search, dashboards, alerts, and session replays.
+- **OpenTelemetry** - Standardized data collection for logs, metrics, and traces.
+
+Together, they form a single, integrated observability stack optimized for speed, scalability, and simplicity.`
+            },
+            {
+              handle: 'Is ClickStack compatible with OpenTelemetry?',
+              content: `Yes. ClickStack is built for OpenTelemetry at any scale. It includes a bundled OpenTelemetry Collector and natively ingests OTel events - combining logs, metrics, and traces into a unified model. Powered by ClickHouse’s parallel processing and columnar storage, ClickStack scales seamlessly from small deployments to petabytes of telemetry data while maintaining real-time performance.
+
+Although ClickStack is OpenTelemetry-native, it also supports any wide event format. While OpenTelemetry schemas are provided out of the box, users can bring their own - just include a timestamp, and the HyperDX UI with ClickHouse delivers the same powerful querying, correlation, and visualization capabilities.`
+            },
+            {
+              handle: 'Is ClickStack only compatible with OpenTelemetry?',
+              content: `No. While ClickStack is optimized for the OpenTelemetry schema, making it the fastest way to get started and scale easily, it’s not limited to it. ClickHouse, the database powering ClickStack, can store and query any event schema.
+
+The HyperDX UI requires only a timestamp field to render and visualize events, so you can use your own data formats or custom pipelines. By following a wide events pattern and including a timestamp, your data becomes immediately usable within ClickStack.`
+            },
+            {
+              handle: 'Can I store logs, traces, and metrics in ClickStack?',
+              content: `Yes. ClickStack is a full observability platform designed to handle logs, traces and metrics in one place.  Built on ClickHouse, it efficiently ingests and stores high-cardinality OpenTelemetry data, automatically correlating events at the database layer for deep, real-time insights.`
+            },
+            {
+              handle:
+                'Does ClickStack support fast search using inverted indices?',
+              content: `Yes. ClickStack uses ClickHouse, which is columnar by default, and supports optional inverted indices at the column level. You can enable inverted indices and bloom filters to accelerate log and text search, which is common for log data exploration. The HyperDX UI accepts Lucene-style syntax, transpiles it to SQL, and can leverage these indices for speed. If you want to minimize storage, you can disable indices and rely on ClickHouse’s fast, multi-parallel string search, which is sufficient for many use cases.`
+            },
+            {
+              handle: 'Is ClickStack open source?',
+              content: `Yes. ClickStack and its components are fully open source and built on open standards. ClickHouse and the  OpenTelemetry collector are licensed under Apache 2.0, with the HyperDX UI using the MIT license. You can deploy ClickStack anywhere - self-hosted, hybrid, or in the cloud, without restrictions.`
+            },
+            {
+              handle: 'Is there a hosted version of ClickStack?',
+              content: `Yes. ClickStack is available as a managed service in ClickHouse Cloud. It delivers the same open architecture with elastic scaling and full separation of storage and compute, allowing users to scale resources independently and isolate read and write workloads for consistent performance.
+
+With advanced compression and cost-efficient object storage, data can be retained indefinitely at low cost. ClickHouse Cloud also includes automatic backups and zero operational overhead. The HyperDX UI is fully integrated - available at no additional cost, secured through ClickHouse Cloud authentication, and can be launched on any service. 
+
+A fully managed ClickStack offering is also planned for the future.`
+            }
+          ]}
+        />
+      </section>
     </Layout>
   )
 }
