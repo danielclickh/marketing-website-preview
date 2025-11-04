@@ -1,5 +1,6 @@
 import { PricingV2 } from './types'
 import { absoluteUrl, relativeUrl } from '@/lib/next'
+import { ApiRequestParams, ApiResponse, EntryResource } from '@/types/strapi'
 import _fetch from 'cross-fetch'
 import { relative } from 'knip/dist/util/path'
 import type { NextApiRequest } from 'next'
@@ -72,6 +73,70 @@ export function getProxiedMediaUrl(path: string) {
 
 export function getProxiedMediaPath(path: string) {
   return relativeUrl(getProxiedMediaUrl(path))
+}
+
+export async function request(
+  path: string,
+  params: Record<any, any> = {},
+  options?: RequestInit
+): Promise<ApiResponse> {
+  const queryString = stringify(params)
+  let uri = `${url.replace(/\/$/, '')}/${path.replace(/^\//, '')}`
+  if (queryString.length) uri += `?${queryString}`
+
+  const response = await fetch(uri, {
+    // Default options
+    next: {
+      revalidate: 5
+    },
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
+    },
+
+    // Merge options
+    ...(options || {})
+  })
+
+  if (!response.ok) {
+    throw new Error(
+      `STRAPI HTTP Error: ${response.status} (${response.statusText}) ${uri}`
+    )
+  }
+
+  return await response.json()
+}
+
+export function cleanStrapiObject(element: any): any {
+  const newElement =
+    typeof element === 'object' && 'attributes' in element && 'id' in element
+      ? { id: element.id, ...element.attributes }
+      : element
+
+  if (typeof newElement !== 'object') return element
+
+  const cleaned = Object.entries(newElement).map(([field, value]) => {
+    if (Array.isArray(value)) {
+      return [field, value.map((item) => cleanStrapiObject(item))]
+    }
+
+    if (value && typeof value === 'object') {
+      if ('data' in value && Array.isArray(value.data)) {
+        return [field, value.data.map((item) => cleanStrapiObject(item))]
+      }
+
+      let convertedObj: any = cleanStrapiObject(value)
+
+      if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
+        convertedObj = convertedObj.data
+      }
+
+      return [field, convertedObj]
+    }
+
+    return [field, value]
+  })
+
+  return Object.fromEntries(cleaned)
 }
 
 export async function getPathsValues(
@@ -275,3 +340,112 @@ export async function findImageDetails(imageUrl: string) {
   const imageDetails = data.length > 0 ? data[0] : null
   return imageDetails
 }
+
+class StrapiEntryController<EntryType> {
+  constructor(
+    private apiUri: string,
+    private stagingFilters: boolean = false
+  ) {
+    this.apiUri = apiUri
+    this.stagingFilters = stagingFilters
+  }
+
+  private mergeStagingFilters(params: Record<string, unknown>) {
+    if (this.stagingFilters) {
+      return {
+        ...params,
+        filters: {
+          $and: [getStagingOnlyFilters(), params]
+        }
+      }
+    }
+
+    return params
+  }
+
+  async findSome<T extends boolean = false>(
+    params: ApiRequestParams = {},
+    withPagination: T = false as T
+  ): Promise<
+    T extends true
+      ? {
+          pagination: ApiResponse['meta']['pagination']
+          data: Array<EntryType>
+        }
+      : Array<EntryType>
+  > {
+    const response = await request(
+      this.apiUri,
+      this.mergeStagingFilters(params)
+    )
+
+    const data = response.data.map(cleanStrapiObject) as Array<EntryType>
+
+    if (withPagination) {
+      return {
+        data,
+        pagination: response.meta.pagination
+      } as T extends true
+        ? {
+            pagination: ApiResponse['meta']['pagination']
+            data: Array<EntryType>
+          }
+        : never
+    }
+
+    return data as T extends true ? never : Array<EntryType>
+  }
+
+  async findAll(params: ApiRequestParams = {}) {
+    let combined: Array<EntryType> = []
+
+    let currentPage = 0
+    let totalPages = 1
+
+    while (currentPage < totalPages) {
+      params.pagination = {
+        pageSize: 100,
+        page: currentPage + 1
+      }
+      const { data, pagination } = await this.findSome(params, true)
+
+      combined = combined.concat(data)
+
+      totalPages = pagination?.pageCount || totalPages
+      currentPage = pagination?.page || currentPage + 1
+    }
+
+    return combined
+  }
+
+  async find(id: number, params: ApiRequestParams = {}) {
+    const response = await request(
+      `${this.apiUri}/${id}`,
+      this.mergeStagingFilters(params)
+    )
+    return cleanStrapiObject(response.data) as EntryType
+  }
+
+  async findBySlug(slug: string) {
+    return (
+      await this.findSome({
+        populate: 'deep',
+        filters: {
+          slug: {
+            $eq: slug
+          }
+        },
+        pagination: {
+          page: 1,
+          pageSize: 1,
+          withCount: false
+        }
+      })
+    ).pop()
+  }
+}
+
+export const resourcesController = new StrapiEntryController<EntryResource>(
+  'resources',
+  true
+)
