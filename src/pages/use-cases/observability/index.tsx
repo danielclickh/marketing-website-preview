@@ -606,7 +606,7 @@ export default function ClickHouseServerPage({
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
           <div className='lg:max-w-xl'>
             <SuiTitle type='h2' className='mb-6'>
-              Build for OTel at scale, get started in minutes
+              Built for OTel at scale, get started in minutes
             </SuiTitle>
             <SuiText className='space-y-6'>
               <p>
