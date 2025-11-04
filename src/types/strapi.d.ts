@@ -148,7 +148,7 @@ export interface ComponentAuthor {
 // -----
 
 export interface EntryResourceCategory extends Entry {
-  title: string
+  name: string
   slug: string
   order: null | number
 }

@@ -1,6 +1,11 @@
 import { PricingV2 } from './types'
 import { absoluteUrl, relativeUrl } from '@/lib/next'
-import { ApiRequestParams, ApiResponse, EntryResource } from '@/types/strapi'
+import {
+  ApiRequestParams,
+  ApiResponse,
+  EntryResource,
+  EntryResourceCategory
+} from '@/types/strapi'
 import _fetch from 'cross-fetch'
 import { relative } from 'knip/dist/util/path'
 import type { NextApiRequest } from 'next'
@@ -23,11 +28,13 @@ const url = `${strapiApiUrl}/api/`
 
 const stagingOnlyFilter =
   process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
-export function getStagingOnlyFilters(): Array<Record<'StagingOnly', any>> {
+export function getStagingOnlyFilters(
+  fieldName: string = 'StagingOnly'
+): Array<Record<string, any>> {
   return [
-    { StagingOnly: { $null: true } },
-    { StagingOnly: stagingOnlyFilter },
-    { StagingOnly: { $eq: false } }
+    { [fieldName]: { $null: true } },
+    { [fieldName]: stagingOnlyFilter },
+    { [fieldName]: { $eq: false } }
   ]
 }
 
@@ -344,18 +351,37 @@ export async function findImageDetails(imageUrl: string) {
 class StrapiEntryController<EntryType> {
   constructor(
     private apiUri: string,
-    private stagingFilters: boolean = false
+    private stagingFilters: boolean | string = false
   ) {
     this.apiUri = apiUri
     this.stagingFilters = stagingFilters
   }
 
-  private mergeStagingFilters(params: Record<string, unknown>) {
+  private mergeStagingFilters(params: ApiRequestParams['filters']) {
     if (this.stagingFilters) {
+      const fieldName =
+        typeof this.stagingFilters === 'string'
+          ? this.stagingFilters
+          : 'stagingOnly'
+
+      if (params.filters) {
+        return {
+          ...params,
+          filters: {
+            $and: [
+              params.filters,
+              {
+                $or: getStagingOnlyFilters(fieldName)
+              }
+            ]
+          }
+        }
+      }
+
       return {
         ...params,
         filters: {
-          $and: [getStagingOnlyFilters(), params]
+          $or: getStagingOnlyFilters(fieldName)
         }
       }
     }
@@ -396,7 +422,7 @@ class StrapiEntryController<EntryType> {
     return data as T extends true ? never : Array<EntryType>
   }
 
-  async findAll(params: ApiRequestParams = {}) {
+  async findAll(params: Omit<ApiRequestParams, 'pagination'> = {}) {
     let combined: Array<EntryType> = []
 
     let currentPage = 0
@@ -426,10 +452,13 @@ class StrapiEntryController<EntryType> {
     return cleanStrapiObject(response.data) as EntryType
   }
 
-  async findBySlug(slug: string) {
+  async findBySlug(
+    slug: string,
+    params: Omit<ApiRequestParams, 'pagination' | 'filters'> = {}
+  ) {
     return (
       await this.findSome({
-        populate: 'deep',
+        ...params,
         filters: {
           slug: {
             $eq: slug
@@ -444,6 +473,9 @@ class StrapiEntryController<EntryType> {
     ).pop()
   }
 }
+
+export const resourceCategoriesController =
+  new StrapiEntryController<EntryResourceCategory>('resource-categories', false)
 
 export const resourcesController = new StrapiEntryController<EntryResource>(
   'resources',
