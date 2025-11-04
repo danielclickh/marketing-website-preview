@@ -201,7 +201,7 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h1'
               className='font-basier font-semibold md:!text-6xl'>
-              The open-source observability stack for OpenTelemetry at scale.
+              The open-source observability stack for OpenTelemetry at scale
             </SuiTitle>
             <SuiText size='lg' className='space-y-6 text-neutral-200'>
               <p>
