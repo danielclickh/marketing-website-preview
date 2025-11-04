@@ -23,12 +23,19 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   // Eyebrow default settings
-  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
+  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(true)
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
-  >('')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState('')
+  >(
+    <>
+      <span className='mr-2 inline-block scale-125'>🎉</span> ClickHouse
+      welcomes LibreChat: Introducing the open-source Agentic Data Stack
+    </>
+  )
+  const [headerBannerUrl, setHeaderBannerUrl] = useState(
+    '/blog/librechat-open-source-agentic-data-stack'
+  )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
   >(undefined)
@@ -49,7 +56,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     scrollHandler()
 
     //=== Country specific eyebrow ===//
-    ;(async () => {
+    /*;(async () => {
       let countryCode = getBrowserCookie('ch-user-country')
       const langCode = window.navigator.language.split('-')[0]
 
@@ -84,7 +91,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         setHeaderBannerExpires(new Date('2025-10-28T00:00:00+00:00'))
         setHeaderBannerArrow(false)
       }
-    })()
+    })()*/
 
     return () => {
       window.removeEventListener('scroll', scrollHandler)
