@@ -6,7 +6,6 @@ index: 1
 lastUpdated: '2025-11-03'
 author: 'Manveer Chawla'
 authorAvatar: 'https://clickhouse.com/uploads/Manveer_Chawla_Profile_7609ca5c6c.jpeg'
-authorLink: 'https://www.tryzenith.ai/about/manveer-chawla'
 ---
 
 You've been told the three pillars of observability, logs, metrics, and traces, are the answer. But stitching together separate, best-of-breed tools has likely left you with data silos, slow queries, and a constant battle against rising infrastructure costs. During an incident, you're not debugging. Instead, you're manually correlating timestamps across three different UIs. This isn't a sustainable strategy.
