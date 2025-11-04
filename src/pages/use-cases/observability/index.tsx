@@ -201,16 +201,18 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h1'
               className='font-basier text-[1.75rem] font-semibold md:text-4xl'>
-              Open-source observability for OpenTelemetry at scale
+              Open-source observability stack
             </SuiTitle>
-            <SuiText size='lg' className='text-neutral-200'>
-              Lightning-fast queries and powerful aggregations on logs, metrics,
-              traces, session replays and errors with unmatched resource
-              efficiency for even your highest-cardinality OTel data.
-            </SuiText>
-            <SuiText size='lg' className='text-neutral-200'>
-              All in one stack and built for OTel at scale - powered by
-              ClickHouse.
+            <SuiText size='lg' className='space-y-6 text-neutral-200'>
+              <p>
+                <strong>OpenTelemetry at scale.</strong>
+              </p>
+              <p>
+                Lightning-fast queries and powerful aggregations on logs,
+                metrics, traces, session replays and errors with unmatched
+                resource efficiency for even your highest-cardinality OTel data.
+              </p>
+              <p>All in one stack - powered by ClickHouse.</p>
             </SuiText>
             <div className='flex w-full flex-col justify-center gap-6 md:flex-row lg:justify-start'>
               <CUIButton
@@ -606,7 +608,9 @@ export default function ClickHouseServerPage({
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
           <div className='lg:max-w-xl'>
             <SuiTitle type='h2' className='mb-6'>
-              Built for OTel at scale, get started in minutes
+              Built for OTel at scale.
+              <br />
+              Get started in minutes.
             </SuiTitle>
             <SuiText className='space-y-6'>
               <p>
@@ -627,6 +631,16 @@ export default function ClickHouseServerPage({
                 <strong>Built for OTel at scale.</strong>
               </p>
             </SuiText>
+            <CUIButton
+              type='primary'
+              size='lg'
+              weight='semibold'
+              href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+              target='_blank'
+              linkClass='w-full md:w-auto'
+              className='mt-6 w-full !px-10 md:w-auto'>
+              Get started
+            </CUIButton>
           </div>
           <div className='order-first mx-auto w-full max-w-max lg:order-last'>
             <OtelGraphic />
