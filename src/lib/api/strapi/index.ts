@@ -454,12 +454,13 @@ class StrapiEntryController<EntryType> {
 
   async findBySlug(
     slug: string,
-    params: Omit<ApiRequestParams, 'pagination' | 'filters'> = {}
+    params: Omit<ApiRequestParams, 'pagination'> = {}
   ) {
     return (
       await this.findSome({
         ...params,
         filters: {
+          ...(params.filters || {}),
           slug: {
             $eq: slug
           }

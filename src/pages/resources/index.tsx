@@ -1,24 +1,30 @@
 import Layout from '@/components/Layout'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
-import { resourcesController } from '@/lib/api/strapi'
+import {
+  resourceCategoriesController,
+  resourcesController
+} from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { EntryResource } from '@/types/strapi'
+import { EntryResource, EntryResourceCategory } from '@/types/strapi'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 
 export interface Props extends CommonProps {
+  categories: Array<EntryResourceCategory>
   resources: Array<EntryResource>
 }
 
 export const getServerSideProps = (async ({ req, params }) => {
   const commonProps = await getCommonProps()
+  const categories = await resourceCategoriesController.findAll()
   const resources = await resourcesController.findAll({
     populate: 'deep'
   })
   return {
     props: {
       ...commonProps,
+      categories,
       resources
     }
   }
@@ -26,6 +32,7 @@ export const getServerSideProps = (async ({ req, params }) => {
 
 export default function RsourcesPage({
   resources,
+  categories,
   ...commonProps
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
@@ -36,13 +43,28 @@ export default function RsourcesPage({
             ClickHouse Resources
           </SuiTitle>
 
-          <SuiSearchField
-            placeholder='Search by title or keyword...'
-            htmlFor='search'
-            className='max-w-[300px]'
-            value={''}
-            onChange={console.log}
-          />
+          <div className='flex items-center gap-6'>
+            <SuiSearchField
+              placeholder='Search by title or keyword...'
+              htmlFor='search'
+              className='max-w-[300px]'
+              value={''}
+              onChange={console.log}
+            />
+            <ul className='flex gap-2'>
+              {categories.map((category, categoryIndex) => {
+                return (
+                  <li key={categoryIndex}>
+                    <Link
+                      href={`/resources/${category.slug}`}
+                      className='inline-block rounded-full border border-neutral-600 px-3 py-1 hover:border-primary-300'>
+                      {category.name}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
 
           <hr className='my-6 h-px border-0 bg-white/20' />
 
