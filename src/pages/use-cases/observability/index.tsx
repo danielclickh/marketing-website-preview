@@ -367,7 +367,8 @@ export default function ClickHouseServerPage({
         </ContentTicker>
       </section>
 
-      <section className='overflow-hidden bg-neutral-800 py-6 md:py-10 lg:py-16'>
+      {/* Fast, simple, fair */}
+      {/*<section className='overflow-hidden bg-neutral-800 py-6 md:py-10 lg:py-16'>
         <div className='section-container'>
           <div
             className='md:bg-shadow-element yellow-shadow shadow-circle relative overflow-hidden rounded-lg bg-neutral-900 px-6 py-8 md:py-10 lg:py-16'
@@ -390,7 +391,7 @@ export default function ClickHouseServerPage({
             </div>
           </div>
         </div>
-      </section>
+      </section>*/}
 
       {/* Customer quotes */}
       <section className='relative z-10 bg-neutral-950/60 pb-12 pt-20 lg:pb-16 lg:pt-24'>
