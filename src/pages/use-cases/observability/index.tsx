@@ -35,7 +35,6 @@ import shareImage from './assets/share-image.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
-import AnimatedDataPath from '@/components-cleaned/AnimatedDataPath'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
@@ -1014,10 +1013,12 @@ function OtelGraphic() {
 
   function CornerLine({
     angle,
-    className
+    className,
+    duration = 5.75
   }: {
     angle: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
     className?: string
+    duration?: number
   }) {
     const path = {
       'top-left': 'M1 0V75A25 25 0 0 0 25 99H100',
@@ -1026,12 +1027,43 @@ function OtelGraphic() {
       'bottom-right': 'M99 100V25A25 25 0 0 0 75 1H0'
     }[angle]
     return (
-      <AnimatedDataPath
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
         width='100'
         height='100'
-        d={path}
-        className={className}
-      />
+        viewBox='0 0 100 100'
+        className={className}>
+        <path
+          fill='none'
+          stroke='#414141'
+          stroke-width='3'
+          d={path}
+          pathLength='1000'
+        />
+        <path
+          fill='none'
+          stroke='#faff69'
+          stroke-linecap='round'
+          stroke-width='3'
+          d={path}
+          pathLength='1000'>
+          <animate
+            attributeName='stroke-dasharray'
+            dur={`${duration}s`}
+            keyTimes='0;0.5;1'
+            repeatCount='indefinite'
+            values='100 900;500 500;100 900'
+          />
+          <animate
+            attributeName='stroke-dashoffset'
+            calcMode='linear'
+            dur={`${duration}s`}
+            keyTimes='0;0.5;1'
+            repeatCount='indefinite'
+            values='0;-1000;-2000'
+          />
+        </path>
+      </svg>
     )
   }
 
@@ -1064,6 +1096,7 @@ function OtelGraphic() {
           </Tile>
           <CornerLine
             angle='top-left'
+            duration={3}
             className='absolute left-1/2 top-1/2 translate-y-8'
           />
         </div>
@@ -1099,6 +1132,7 @@ function OtelGraphic() {
           </Tile>
           <CornerLine
             angle='top-right'
+            duration={4}
             className='absolute right-1/2 top-1/2 translate-y-8'
           />
         </div>
@@ -1140,11 +1174,12 @@ function OtelGraphic() {
           </Tile>
           <CornerLine
             angle='bottom-left'
+            duration={2.5}
             className='absolute bottom-1/2 left-1/2 -translate-y-8'
           />
         </div>
         <div className='flex flex-col items-center'>
-          <AnimatedDataLine size={115} direction='up' />
+          <AnimatedDataLine size={115} direction='up' delay={1} />
           <Tile>
             <Otel />
           </Tile>
@@ -1168,6 +1203,7 @@ function OtelGraphic() {
           </Tile>
           <CornerLine
             angle='bottom-right'
+            duration={3.5}
             className='absolute bottom-1/2 right-1/2 -translate-y-8'
           />
         </div>
