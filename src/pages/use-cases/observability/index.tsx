@@ -37,9 +37,10 @@ import AccordionItem from '@/components-cleaned/AccordionItem'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import imageObservability from '@/components-cleaned/UseCasesCards/assets/image-observability.svg'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import ClickStack from '@/components/ClickStack'
-import { CUIButton } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
@@ -200,13 +201,10 @@ export default function ClickHouseServerPage({
             </SuiText>
             <SuiTitle
               type='h1'
-              className='font-basier text-[1.75rem] font-semibold md:text-4xl'>
-              Open-source observability stack
+              className='font-basier font-semibold md:!text-6xl'>
+              The open-source observability stack for OpenTelemetry at scale.
             </SuiTitle>
             <SuiText size='lg' className='space-y-6 text-neutral-200'>
-              <p>
-                <strong>OpenTelemetry at scale.</strong>
-              </p>
               <p>
                 Lightning-fast queries and powerful aggregations on logs,
                 metrics, traces, session replays and errors with unmatched
@@ -368,6 +366,31 @@ export default function ClickHouseServerPage({
             )
           })}
         </ContentTicker>
+      </section>
+
+      <section className='overflow-hidden bg-neutral-800 py-6 md:py-10 lg:py-16'>
+        <div className='section-container'>
+          <div
+            className='md:bg-shadow-element yellow-shadow shadow-circle relative overflow-hidden rounded-lg bg-neutral-900 px-6 py-8 md:py-10 lg:py-16'
+            style={
+              {
+                '--top-side': '0',
+                '--left-side': '50%'
+              } as CSSProperties
+            }>
+            <div className='absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent' />
+            <div className='mx-auto ml-auto max-w-3xl flex-1 space-y-6 text-center'>
+              <SuiTitle type='h3' className='text-primary-300'>
+                Fast, simple, and fair observability at any scale
+              </SuiTitle>
+              <SuiText className='text-neutral-200 md:text-lg'>
+                Store and query petabytes of OpenTelemetry data with
+                transparent, simple pricing, with fast queries so your engineers
+                can investigate instantly, not wait for results.
+              </SuiText>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Customer quotes */}
