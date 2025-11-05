@@ -10,8 +10,22 @@ import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { EntryResource, EntryResourceCategory } from '@/types/strapi'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
+
+export async function getStaticPaths() {
+  const categories = await resourceCategoriesController.findAll({
+    fields: ['slug'],
+    populate: []
+  })
+
+  return {
+    paths: categories.map((post) => ({
+      params: { category: post.slug }
+    })),
+    fallback: 'blocking'
+  }
+}
 
 export interface Props extends CommonProps {
   categories: Array<EntryResourceCategory>
@@ -19,7 +33,7 @@ export interface Props extends CommonProps {
   resources: Array<EntryResource>
 }
 
-export const getServerSideProps = (async ({ req, params }) => {
+export const getStaticProps = (async ({ params }) => {
   const categorySlug =
     typeof params?.category === 'string' ? params.category : null
 
@@ -38,14 +52,17 @@ export const getServerSideProps = (async ({ req, params }) => {
     }
   }
 
-  const commonProps = await getCommonProps()
-  const resources = await resourcesController.findAll({
-    filters: {
-      category: {
-        slug: category.slug
+  const [commonProps, resources] = await Promise.all([
+    getCommonProps(),
+    resourcesController.findAll({
+      filters: {
+        category: {
+          slug: category.slug
+        }
       }
-    }
-  })
+    })
+  ])
+
   return {
     props: {
       ...commonProps,
@@ -54,14 +71,14 @@ export const getServerSideProps = (async ({ req, params }) => {
       resources
     }
   }
-}) satisfies GetServerSideProps<Props>
+}) satisfies GetStaticProps<Props>
 
 export default function ResourcesCategoryPage({
   categories,
   category,
   resources,
   ...commonProps
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout {...commonProps}>
       <div className='bg-grid'>

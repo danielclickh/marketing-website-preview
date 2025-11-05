@@ -18,14 +18,28 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { EntryResource } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import React, { useEffect, useRef, useState } from 'react'
+
+export async function getStaticPaths() {
+  const posts = await resourcesController.findAll({
+    fields: ['slug'],
+    populate: ['category']
+  })
+
+  return {
+    paths: posts.map((post) => ({
+      params: { category: post.category.slug, slug: post.slug }
+    })),
+    fallback: 'blocking'
+  }
+}
 
 export interface Props extends CommonProps {
   resource: EntryResource
 }
 
-export const getServerSideProps = (async ({ req, params }) => {
+export const getStaticProps = (async ({ params }) => {
   const categorySlug =
     typeof params?.category === 'string' ? params.category : null
 
@@ -37,8 +51,10 @@ export const getServerSideProps = (async ({ req, params }) => {
     }
   }
 
-  const commonProps = await getCommonProps()
-  const resource = await resourcesController.findBySlug(resourceSlug)
+  const [commonProps, resource] = await Promise.all([
+    getCommonProps(),
+    resourcesController.findBySlug(resourceSlug)
+  ])
 
   if (!resource || resource.category.slug !== categorySlug) {
     return {
@@ -52,12 +68,12 @@ export const getServerSideProps = (async ({ req, params }) => {
       resource
     }
   }
-}) satisfies GetServerSideProps<Props>
+}) satisfies GetStaticProps<Props>
 
 export default function ResourcePage({
   resource,
   ...commonProps
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const contentRef = useRef<null | HTMLDivElement>(null)
   const [hideScrollTopAt, setHideScrollTopAt] = useState<undefined | number>(
     undefined

@@ -351,18 +351,20 @@ export async function findImageDetails(imageUrl: string) {
 class StrapiEntryController<EntryType> {
   constructor(
     private apiUri: string,
-    private stagingFilters: boolean | string = false
+    private stagingFilters: boolean | string = false,
+    private deepPopluate: boolean = false
   ) {
     this.apiUri = apiUri
     this.stagingFilters = stagingFilters
+    this.deepPopluate = deepPopluate
   }
 
-  private mergeStagingFilters(params: ApiRequestParams['filters']) {
+  private mergeStagingFilters(params: ApiRequestParams) {
     if (this.stagingFilters) {
       const fieldName =
         typeof this.stagingFilters === 'string'
           ? this.stagingFilters
-          : 'stagingOnly'
+          : undefined
 
       if (params.filters) {
         return {
@@ -389,6 +391,19 @@ class StrapiEntryController<EntryType> {
     return params
   }
 
+  private setDeepPopluate(params: ApiRequestParams) {
+    if (!params.populate && this.deepPopluate) {
+      params.populate = 'deep'
+    }
+    return params
+  }
+
+  private modifyParams(params: ApiRequestParams) {
+    params = this.mergeStagingFilters(params)
+    params = this.setDeepPopluate(params)
+    return params
+  }
+
   async findSome<T extends boolean = false>(
     params: ApiRequestParams = {},
     withPagination: T = false as T
@@ -400,14 +415,7 @@ class StrapiEntryController<EntryType> {
         }
       : Array<EntryType>
   > {
-    if (!params.populate) {
-      params.populate = 'deep'
-    }
-
-    const response = await request(
-      this.apiUri,
-      this.mergeStagingFilters(params)
-    )
+    const response = await request(this.apiUri, this.modifyParams(params))
 
     const data = response.data.map(cleanStrapiObject) as Array<EntryType>
 
@@ -449,13 +457,9 @@ class StrapiEntryController<EntryType> {
   }
 
   async find(id: number, params: ApiRequestParams = {}) {
-    if (!params.populate) {
-      params.populate = 'deep'
-    }
-
     const response = await request(
       `${this.apiUri}/${id}`,
-      this.mergeStagingFilters(params)
+      this.modifyParams(params)
     )
     return cleanStrapiObject(response.data) as EntryType
   }
@@ -484,9 +488,14 @@ class StrapiEntryController<EntryType> {
 }
 
 export const resourceCategoriesController =
-  new StrapiEntryController<EntryResourceCategory>('resource-categories', false)
+  new StrapiEntryController<EntryResourceCategory>(
+    'resource-categories',
+    false,
+    true
+  )
 
 export const resourcesController = new StrapiEntryController<EntryResource>(
   'resources',
+  'stagingOnly',
   true
 )
