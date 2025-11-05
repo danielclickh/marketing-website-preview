@@ -1,4 +1,4 @@
-import CategorySelector from '@/components/CategorySelector'
+import PillFilters from '@/components-cleaned/PillFilters'
 import { CUILink } from '@/components/ClickUI'
 import EventPost from '@/components/EventPostList/EventPost'
 import Layout from '@/components/Layout'
@@ -308,15 +308,19 @@ export default function News({
           <h2 className='mb-10 font-basier text-4xl font-semibold text-neutral-100'>
             Upcoming
           </h2>
-          <CategorySelector
+          <PillFilters
             className='mb-6 lg:mb-0'
             options={CATEGORIES.map((category) => {
               return {
-                text: category.label,
-                selected: [category.value, ...category.aliases].includes(
+                kind: 'button',
+                label: category.label,
+                active: [category.value, ...category.aliases].includes(
                   selectedCategory
                 ),
-                onClick: () => handleCategoryClick(category.value)
+                onClick(event) {
+                  event.preventDefault()
+                  handleCategoryClick(category.value)
+                }
               }
             })}
           />

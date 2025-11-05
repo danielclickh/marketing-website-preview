@@ -1,6 +1,6 @@
 import { useDebounce } from '../../hooks'
 import { fetchVideos } from '../api/videos'
-import CategorySelector from '@/components/CategorySelector'
+import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import Pagination from '@/components/Pagination'
@@ -74,17 +74,23 @@ export default function VideosPage({
   const categories = response?.data?.categories || {}
 
   const categoryList = Object.entries(categories).map(([slug, label]) => ({
-    text: label,
-    onClick: () => {
+    kind: 'link',
+    label,
+    href: `/videos?category=${slug}`,
+    onClick(event) {
+      event.preventDefault()
       setPage(1)
       setCategory(slug)
     },
-    selected: category === slug
-  }))
+    active: category === slug
+  })) satisfies Array<Filter>
 
   categoryList.unshift({
-    text: 'View All',
-    onClick: () => {
+    kind: 'link',
+    label: 'View All',
+    href: '/videos',
+    onClick(event) {
+      event.preventDefault()
       setPage(1)
       setSearch(null)
       setCategory(null)
@@ -92,7 +98,7 @@ export default function VideosPage({
         inputRef.current.value = ''
       }
     },
-    selected: !category
+    active: !category
   })
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -164,7 +170,7 @@ export default function VideosPage({
             onChange={useDebounce(onSearchChange, 500)}
             inputRef={inputRef}
           />
-          <CategorySelector options={categoryList} />
+          <PillFilters className='justify-center' options={categoryList} />
         </div>
 
         {loading && <p className='mt-12 w-full text-center'>Loading...</p>}
