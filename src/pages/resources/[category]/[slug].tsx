@@ -9,6 +9,7 @@ import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
+import NewsLetter from '@/components/NewsLetter'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
@@ -225,7 +226,7 @@ export default function ResourcePage({
               <HRSeparator className='mb-8 !max-w-none' />
 
               {/* Sharer */}
-              <div className='flex flex-col items-center justify-between gap-4 md:flex-row'>
+              <div className='mb-8 flex flex-col items-center justify-between gap-4 md:flex-row'>
                 <SuiText size='sm' weight='medium' color='primary'>
                   Share this resource
                 </SuiText>
@@ -238,6 +239,8 @@ export default function ResourcePage({
                   <SocialButton type='linkedin' title={resource.title} />
                 </div>
               </div>
+
+              <NewsLetter />
             </div>
           </div>
         </div>
