@@ -126,7 +126,7 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Engineering resources',
-    href: '/engineering-resources',
+    href: '/resources/engineering',
     galaxyEvent: 'footerNav.resourcesMenu.engineeringResources'
   },
   {
