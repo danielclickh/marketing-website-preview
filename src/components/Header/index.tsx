@@ -56,7 +56,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     scrollHandler()
 
     //=== Country specific eyebrow ===//
-    /*;(async () => {
+    ;(async () => {
       let countryCode = getBrowserCookie('ch-user-country')
       const langCode = window.navigator.language.split('-')[0]
 
@@ -76,22 +76,18 @@ export default function Header({ github, eyebrow }: HeaderProps) {
       }
 
       if (
-        countryCode?.toUpperCase() === 'NL' ||
-        langCode?.toUpperCase() === 'NL'
+        countryCode?.toUpperCase() === 'JP' ||
+        langCode?.toUpperCase() === 'JA'
       ) {
         setHeaderBannerEnabled(true)
         setHeaderBannerText(
-          <span className='inline-flex items-center gap-2'>
-            <span className='hidden text-xl md:inline'>🇳🇱</span> Join our free
-            database and AI conference in Amsterdam, October 28th{' '}
-            <span className='hidden text-xl md:inline'>🇳🇱</span>
-          </span>
+          'ClickHouse announces establishment of Japanese subsidiary in partnership with Japan Cloud'
         )
-        setHeaderBannerUrl('/openhouse/amsterdam?loc=eyebrow')
-        setHeaderBannerExpires(new Date('2025-10-28T00:00:00+00:00'))
-        setHeaderBannerArrow(false)
+        setHeaderBannerUrl('/blog/japan-cloud?loc=eyebrow')
+        setHeaderBannerExpires(undefined)
+        setHeaderBannerArrow(true)
       }
-    })()*/
+    })()
 
     return () => {
       window.removeEventListener('scroll', scrollHandler)
