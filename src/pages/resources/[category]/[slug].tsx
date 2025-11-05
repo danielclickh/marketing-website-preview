@@ -12,20 +12,16 @@ import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
 import { SuiText } from '@/components/sui'
-import {
-  resourceCategoriesController,
-  resourcesController
-} from '@/lib/api/strapi'
+import { resourcesController } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { EntryResource, EntryResourceCategory } from '@/types/strapi'
+import { EntryResource } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import React, { useEffect, useRef, useState } from 'react'
 
 export interface Props extends CommonProps {
-  category: EntryResourceCategory
   resource: EntryResource
 }
 
@@ -41,24 +37,10 @@ export const getServerSideProps = (async ({ req, params }) => {
     }
   }
 
-  const category = await resourceCategoriesController.findBySlug(categorySlug)
-
-  if (!category) {
-    return {
-      notFound: true
-    }
-  }
-
   const commonProps = await getCommonProps()
-  const resource = await resourcesController.findBySlug(resourceSlug, {
-    filters: {
-      categories: {
-        slug: category.slug
-      }
-    }
-  })
+  const resource = await resourcesController.findBySlug(resourceSlug)
 
-  if (!resource) {
+  if (!resource || resource.category.slug !== categorySlug) {
     return {
       notFound: true
     }
@@ -67,14 +49,12 @@ export const getServerSideProps = (async ({ req, params }) => {
   return {
     props: {
       ...commonProps,
-      category,
       resource
     }
   }
 }) satisfies GetServerSideProps<Props>
 
 export default function ResourcePage({
-  category,
   resource,
   ...commonProps
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -118,8 +98,8 @@ export default function ResourcePage({
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
               <Breadcrumbs>
                 <Breadcrumbs.Link href='/resources'>Resources</Breadcrumbs.Link>
-                <Breadcrumbs.Link href={`/resources/${category.slug}`}>
-                  {category.name}
+                <Breadcrumbs.Link href={`/resources/${resource.category.slug}`}>
+                  {resource.category.name}
                 </Breadcrumbs.Link>
               </Breadcrumbs>
 
@@ -128,13 +108,17 @@ export default function ResourcePage({
               </h1>
 
               {/* Authors */}
-              {resource.author && (
+              {(resource.author || resource.date) && (
                 <div className='flex flex-row items-center space-x-4 pt-2'>
-                  <Avatars avatars={resource.author.avatarPng} />
+                  {resource.author && (
+                    <Avatars avatars={resource.author.avatarPng} />
+                  )}
                   <div className='flex flex-col items-start'>
-                    <SuiText size='base' weight='normal'>
-                      {resource.author.name}
-                    </SuiText>
+                    {resource.author && (
+                      <SuiText size='base' weight='normal'>
+                        {resource.author.name}
+                      </SuiText>
+                    )}
                     {resource.date && (
                       <SuiText size='sm' weight='normal' color='secondary'>
                         {resource.dateLabel ? `${resource.dateLabel}: ` : ''}

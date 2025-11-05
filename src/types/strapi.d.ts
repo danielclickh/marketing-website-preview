@@ -168,5 +168,5 @@ export interface EntryResource extends Entry {
   tocSelectors: string
   sections: Array<BlogModules>
   seo: ComponentSeo
-  categories: Array<EntryResourceCategory>
+  category: EntryResourceCategory
 }
