@@ -1,42 +1,47 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import PillFilters from '@/components-cleaned/PillFilters'
 import ResourcesArchive from '@/components-cleaned/ResourcesArchive'
 import Layout from '@/components/Layout'
-import { SuiSearchField, SuiTitle } from '@/components/sui'
+import { SuiTitle } from '@/components/sui'
 import {
   resourceCategoriesController,
   resourcesController
 } from '@/lib/api/strapi'
-import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { EntryResource, EntryResourceCategory } from '@/types/strapi'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import Link from 'next/link'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
 export interface Props extends CommonProps {
   categories: Array<EntryResourceCategory>
   resources: Array<EntryResource>
 }
 
-export const getServerSideProps = (async ({ req, params }) => {
+export const getStaticProps = (async ({ params }) => {
   const commonProps = await getCommonProps()
-  const categories = await resourceCategoriesController.findAll()
-  const resources = await resourcesController.findAll()
+  const categories = await resourceCategoriesController.findAll({
+    sort: ['name:ASC']
+  })
+  const resources = await resourcesController.findAll({
+    sort: ['publishedAt:DESC']
+  })
   return {
     props: {
       ...commonProps,
       categories,
-      resources
+      resources,
+      seo: {
+        title: 'ClickHouse Resource Hub',
+        path: '/resources'
+      }
     }
   }
-}) satisfies GetServerSideProps<Props>
+}) satisfies GetStaticProps<Props>
 
 export default function RsourcesPage({
   resources,
   categories,
   ...commonProps
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout {...commonProps}>
       <div className='bg-grid'>

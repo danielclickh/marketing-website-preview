@@ -1,13 +1,14 @@
 import { PricingV2 } from './types'
+import { SeoContainerProps } from '@/components/SeoContainer'
 import { absoluteUrl, relativeUrl } from '@/lib/next'
 import {
   ApiRequestParams,
   ApiResponse,
+  ComponentSeo,
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
 import _fetch from 'cross-fetch'
-import { relative } from 'knip/dist/util/path'
 import type { NextApiRequest } from 'next'
 import { stringify } from 'qs'
 
@@ -485,6 +486,32 @@ class StrapiEntryController<EntryType> {
       })
     ).pop()
   }
+}
+
+export function seoFieldToNextComponentProps(
+  seo: undefined | null | ComponentSeo,
+  defaults: SeoContainerProps
+): SeoContainerProps {
+  const merged = { ...defaults }
+
+  if (seo?.title) merged.title = seo.title
+  if (seo?.description) merged.description = seo.description
+  if (seo?.image) merged.image = [seo.image]
+  if (seo?.schema) merged.schema = seo.schema
+  if (seo?.canonicalUrl) merged.path = seo.canonicalUrl
+
+  if (seo?.nofollow || seo?.noindex || seo?.robots) {
+    merged.robots = [
+      merged.robots,
+      seo.robots,
+      seo?.nofollow ? 'nofollow' : null,
+      seo?.noindex ? 'noindex' : null
+    ]
+      .filter(Boolean)
+      .join(', ')
+  }
+
+  return merged
 }
 
 export const resourceCategoriesController =

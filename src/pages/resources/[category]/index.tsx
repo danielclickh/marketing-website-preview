@@ -5,7 +5,8 @@ import Layout from '@/components/Layout'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import {
   resourceCategoriesController,
-  resourcesController
+  resourcesController,
+  seoFieldToNextComponentProps
 } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -44,7 +45,9 @@ export const getStaticProps = (async ({ params }) => {
     }
   }
 
-  const categories = await resourceCategoriesController.findAll()
+  const categories = await resourceCategoriesController.findAll({
+    sort: ['name:ASC']
+  })
   const category = categories.find((cat) => cat.slug === categorySlug)
 
   if (!category) {
@@ -56,6 +59,7 @@ export const getStaticProps = (async ({ params }) => {
   const [commonProps, resources] = await Promise.all([
     getCommonProps(),
     resourcesController.findAll({
+      sort: ['publishedAt:DESC'],
       filters: {
         category: {
           slug: category.slug
@@ -69,7 +73,11 @@ export const getStaticProps = (async ({ params }) => {
       ...commonProps,
       categories,
       category,
-      resources
+      resources,
+      seo: seoFieldToNextComponentProps(category.seo, {
+        title: `${category.heading || category.name} | ClickHouse Resource Hub`,
+        path: '/resources'
+      })
     }
   }
 }) satisfies GetStaticProps<Props>

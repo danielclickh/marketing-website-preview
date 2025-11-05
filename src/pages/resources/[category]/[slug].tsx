@@ -14,7 +14,10 @@ import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
 import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
-import { resourcesController } from '@/lib/api/strapi'
+import {
+  resourcesController,
+  seoFieldToNextComponentProps
+} from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
@@ -59,6 +62,7 @@ export const getStaticProps = (async ({ params }) => {
     getCommonProps(),
     resourcesController.findBySlug(resourceSlug),
     resourcesController.findSome({
+      sort: ['publishedAt:DESC'],
       filters: {
         slug: {
           $ne: resourceSlug
@@ -83,7 +87,14 @@ export const getStaticProps = (async ({ params }) => {
     props: {
       ...commonProps,
       resource,
-      related
+      related,
+      seo: seoFieldToNextComponentProps(resource.seo, {
+        title: resource.category?.seo?.title
+          ? `${resource.title} | ${resource.category.seo.title}`
+          : `${resource.title} | ${resource.category.name} | ClickHouse Resource Hub`,
+        path: `/resources/${resource.category.slug}/${resource.slug}`,
+        lastModified: resource.updatedAt
+      })
     }
   }
 }) satisfies GetStaticProps<Props>

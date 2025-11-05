@@ -152,7 +152,6 @@ export interface ComponentAuthor {
 export interface EntryResourceCategory extends Entry {
   name: string
   slug: string
-  order: null | number
   heading: null | string
   seo: ComponentSeo
 }
