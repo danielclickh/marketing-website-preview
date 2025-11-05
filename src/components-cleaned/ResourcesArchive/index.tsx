@@ -31,16 +31,16 @@ export default function ResourcesArchive({
   }, [search, resources])
   return (
     <>
-      <div className='flex items-center gap-6'>
+      <div className='flex-col items-center lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
         <SuiSearchField
           placeholder='Search by title or keyword...'
           htmlFor='search'
-          className='w-full max-w-[300px]'
+          className='mb-6 max-w-sm lg:mb-0 lg:flex-1'
           value={search}
           onChange={(event) => setSearch(event.currentTarget.value)}
         />
         {categories.length > 1 && (
-          <nav>
+          <nav className='ml-auto'>
             <PillFilters
               options={[
                 {

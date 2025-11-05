@@ -19,11 +19,13 @@ export interface ApiRequestParams {
   populate?: Array<string> | any
   fields?: Array<string> | any
   sort?: Array<string> | any
-  pagination?: {
-    page: number
-    pageSize: number
-    withCount?: boolean
-  }
+  pagination?:
+    | {
+        page?: number
+        pageSize?: number
+        withCount?: boolean
+      }
+    | { start?: number; limit?: number; withCount?: boolean }
   publicationState?: string
   [key: string]: any
 }

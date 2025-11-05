@@ -7,11 +7,12 @@ import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
-import { SuiText } from '@/components/sui'
+import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
 import { resourcesController } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -19,6 +20,7 @@ import { CommonProps } from '@/types/homepage'
 import { EntryResource } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 
 export async function getStaticPaths() {
@@ -37,6 +39,7 @@ export async function getStaticPaths() {
 
 export interface Props extends CommonProps {
   resource: EntryResource
+  related: Array<EntryResource>
 }
 
 export const getStaticProps = (async ({ params }) => {
@@ -51,9 +54,22 @@ export const getStaticProps = (async ({ params }) => {
     }
   }
 
-  const [commonProps, resource] = await Promise.all([
+  const [commonProps, resource, related] = await Promise.all([
     getCommonProps(),
-    resourcesController.findBySlug(resourceSlug)
+    resourcesController.findBySlug(resourceSlug),
+    resourcesController.findSome({
+      filters: {
+        slug: {
+          $ne: resourceSlug
+        },
+        category: {
+          slug: {
+            $eq: categorySlug
+          }
+        }
+      },
+      pagination: { limit: 3 }
+    })
   ])
 
   if (!resource || resource.category.slug !== categorySlug) {
@@ -65,13 +81,15 @@ export const getStaticProps = (async ({ params }) => {
   return {
     props: {
       ...commonProps,
-      resource
+      resource,
+      related
     }
   }
 }) satisfies GetStaticProps<Props>
 
 export default function ResourcePage({
   resource,
+  related,
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const contentRef = useRef<null | HTMLDivElement>(null)
@@ -102,7 +120,7 @@ export default function ResourcePage({
       <div className='relative'>
         <ReadingProgress target={contentRef} />
 
-        <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
+        <div className='section-container flex flex-col items-start gap-8 pt-12 lg:flex-row lg:pt-20'>
           <SmartBackButton
             fallbackPath='/resources'
             className='group/backButton -mx-3 -my-1.5 mr-8 inline-flex items-center whitespace-nowrap rounded px-3 py-1.5 text-base font-semibold transition-colors hover:bg-white/5'>
@@ -179,6 +197,26 @@ export default function ResourcePage({
                     headersSelector={resource.tocSelectors}
                   />
                 )}
+                {related.length > 0 && (
+                  <div>
+                    <SuiTitle type='h2' className='mb-2 !text-lg'>
+                      More like this
+                    </SuiTitle>
+                    <ul>
+                      {related.map((item, itemIndex) => {
+                        return (
+                          <li key={itemIndex}>
+                            <LinkWithArrow
+                              href={`/resources/${item.category.slug}/${item.slug}`}
+                              className='flex w-full justify-between rounded border border-neutral-700 px-4 py-2 transition hover:border-primary-400/40'>
+                              {item.title}
+                            </LinkWithArrow>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                )}
               </div>
             </aside>
 
@@ -187,7 +225,7 @@ export default function ResourcePage({
               <HRSeparator className='mb-8 !max-w-none' />
 
               {/* Sharer */}
-              <div className='mb-8 flex flex-col items-center justify-between gap-4 md:flex-row'>
+              <div className='flex flex-col items-center justify-between gap-4 md:flex-row'>
                 <SuiText size='sm' weight='medium' color='primary'>
                   Share this resource
                 </SuiText>
