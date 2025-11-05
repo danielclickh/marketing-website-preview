@@ -400,6 +400,10 @@ class StrapiEntryController<EntryType> {
         }
       : Array<EntryType>
   > {
+    if (!params.populate) {
+      params.populate = 'deep'
+    }
+
     const response = await request(
       this.apiUri,
       this.mergeStagingFilters(params)
@@ -445,6 +449,10 @@ class StrapiEntryController<EntryType> {
   }
 
   async find(id: number, params: ApiRequestParams = {}) {
+    if (!params.populate) {
+      params.populate = 'deep'
+    }
+
     const response = await request(
       `${this.apiUri}/${id}`,
       this.mergeStagingFilters(params)

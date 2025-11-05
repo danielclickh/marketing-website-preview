@@ -51,7 +51,6 @@ export const getServerSideProps = (async ({ req, params }) => {
 
   const commonProps = await getCommonProps()
   const resource = await resourcesController.findBySlug(resourceSlug, {
-    populate: 'deep',
     filters: {
       categories: {
         slug: category.slug

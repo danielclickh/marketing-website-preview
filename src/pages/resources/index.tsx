@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import Layout from '@/components/Layout'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import {
@@ -18,9 +19,7 @@ export interface Props extends CommonProps {
 export const getServerSideProps = (async ({ req, params }) => {
   const commonProps = await getCommonProps()
   const categories = await resourceCategoriesController.findAll()
-  const resources = await resourcesController.findAll({
-    populate: 'deep'
-  })
+  const resources = await resourcesController.findAll()
   return {
     props: {
       ...commonProps,
@@ -39,8 +38,11 @@ export default function RsourcesPage({
     <Layout {...commonProps}>
       <div className='bg-grid'>
         <div className='section-container py-16 md:py-20'>
+          <Breadcrumbs>
+            <Breadcrumbs.Item>Resources</Breadcrumbs.Item>
+          </Breadcrumbs>
           <SuiTitle type='h1' className='mb-12'>
-            ClickHouse Resources
+            Resource Hub
           </SuiTitle>
 
           <div className='flex items-center gap-6'>
@@ -51,19 +53,21 @@ export default function RsourcesPage({
               value={''}
               onChange={console.log}
             />
-            <ul className='flex gap-2'>
-              {categories.map((category, categoryIndex) => {
-                return (
-                  <li key={categoryIndex}>
-                    <Link
-                      href={`/resources/${category.slug}`}
-                      className='inline-block rounded-full border border-neutral-600 px-3 py-1 hover:border-primary-300'>
-                      {category.name}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
+            <nav>
+              <ul className='flex gap-2'>
+                {categories.map((category, categoryIndex) => {
+                  return (
+                    <li key={categoryIndex}>
+                      <Link
+                        href={`/resources/${category.slug}`}
+                        className='inline-block rounded-full border border-neutral-600 px-3 py-1 hover:border-primary-300'>
+                        {category.name}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </nav>
           </div>
 
           <hr className='my-6 h-px border-0 bg-white/20' />

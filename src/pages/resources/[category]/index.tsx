@@ -36,7 +36,6 @@ export const getServerSideProps = (async ({ req, params }) => {
 
   const commonProps = await getCommonProps()
   const resources = await resourcesController.findAll({
-    populate: 'deep',
     filters: {
       categories: {
         slug: category.slug
@@ -66,7 +65,7 @@ export default function ResourcesCategoryPage({
             <Breadcrumbs.Item>{category.name}</Breadcrumbs.Item>
           </Breadcrumbs>
           <SuiTitle type='h1' className='mb-12'>
-            ClickHouse Resources
+            {category.heading || category.name}
           </SuiTitle>
 
           <SuiSearchField

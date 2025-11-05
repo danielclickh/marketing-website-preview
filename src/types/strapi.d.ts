@@ -151,6 +151,8 @@ export interface EntryResourceCategory extends Entry {
   name: string
   slug: string
   order: null | number
+  heading: null | string
+  seo: ComponentSeo
 }
 
 export interface EntryResource extends Entry {
