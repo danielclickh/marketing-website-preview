@@ -256,7 +256,7 @@ function CompetitorAnimation({
           size={lineHeight}
           direction='down'
           lineColor={lineColor}
-          strokeWidth={16}
+          strokeWidth={8}
           trackColor='rgba(255,255,255,0.2)'
           trackProps={{
             className: 'backdrop-saturate-150'

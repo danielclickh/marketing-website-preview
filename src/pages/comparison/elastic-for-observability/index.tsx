@@ -995,7 +995,7 @@ function ClickHouseVersusElastic() {
                   key={lineIndex}
                   size={210}
                   direction='down'
-                  strokeWidth={16}
+                  strokeWidth={8}
                   trackColor='rgba(255,255,255,0.2)'
                   lineColor='#22BCB3'
                   lineProps={{
