@@ -288,7 +288,7 @@ export default function SplunkPage({
               One high-performance engine, one unified experience.
             </SuiText>
           </div>
-          <ClickStackVersusElkStack />
+          <ClickStackVersusSplunkStack />
         </div>
         <TabbedTable />
       </section>
@@ -299,7 +299,7 @@ export default function SplunkPage({
           <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='hand-coins'
+                icon='database'
                 title='Long-term retention without compromise'
                 text='Separation of storage and compute and 10–30x compression, enables cost-efficient, near-infinite data retention. Keep full-fidelity data for months or years without sampling or pre-aggregation'
                 className='bg-neutral-900/80'
@@ -307,7 +307,7 @@ export default function SplunkPage({
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='squares-four'
+                icon='gear'
                 title='Schema on read and write'
                 text='Splunk pioneered schema-on-read, and ClickStack matches it with powerful parsing and string extraction functions. It also adds dynamic schema-on-write, allowing users to index data efficiently for compression and performance'
                 className='bg-neutral-900/80'
@@ -315,7 +315,7 @@ export default function SplunkPage({
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='chart-line'
+                icon='guage'
                 title='Consistently low latency at high concurrency'
                 text='ClickHouse was designed for real-time analytics, sustaining thousands of concurrent queries while maintaining sub-second latency'
                 className='bg-neutral-900/80'
@@ -323,7 +323,7 @@ export default function SplunkPage({
             </div>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='list-search'
+                icon='hand-coins'
                 title='Unified architecture with simple pricing'
                 text='ClickStack streamlines observability in a unified engine. Eliminate the operational complexity of multiple products, components and SKUs.'
                 className='bg-neutral-900/80'
@@ -546,59 +546,12 @@ function TabbedTable() {
   )
 }
 
-function ClickStackVersusElkStack() {
+function ClickStackVersusSplunkStack() {
   const layerGap = 72
-  const autoplay = false
-  const [userInteracting, setUserInteracting] = useState(false)
-  const [activeLayer, setActiveLayer] = useState<null | number>(null)
-
-  const activateLayer = useDebounce((layer: number | null) => {
-    setUserInteracting(typeof layer === 'number')
-    setActiveLayer(layer)
-  }, 50)
-  const resetActiveLayer = () => activateLayer(null)
-
-  useEffect(() => {
-    if (!userInteracting && autoplay) {
-      const interval = window.setInterval(() => {
-        setActiveLayer((old) => {
-          if (old === null) return 1
-          const newValue = old + 1
-          return newValue > 3 ? null : newValue
-        })
-      }, 1500)
-
-      return () => window.clearInterval(interval)
-    }
-  }, [autoplay, userInteracting])
-
-  const noActiveLayer = activeLayer === null
-  const layer1Active = noActiveLayer || activeLayer === 1
-  const layer2Active = noActiveLayer || activeLayer === 2
-  const layer3Active = noActiveLayer || activeLayer === 3
   return (
     <ScaleToContainer className='mx-auto'>
       <div className='flex w-max flex-row items-center justify-center gap-x-16 gap-y-8'>
-        <ClickStack
-          gap={layerGap}
-          hyperdx={layer1Active}
-          clickhouse={layer2Active}
-          opentelemetry={layer3Active}
-          onMouseEnter={(stack) => {
-            switch (stack) {
-              case 'hyperdx':
-                activateLayer(1)
-                break
-              case 'clickhouse':
-                activateLayer(2)
-                break
-              case 'opentelemetry':
-                activateLayer(3)
-                break
-            }
-          }}
-          onMouseLeave={resetActiveLayer}
-        />
+        <ClickStack gap={layerGap} />
         <Image
           src={iconVs}
           width={60}
@@ -610,22 +563,13 @@ function ClickStackVersusElkStack() {
           gap={layerGap}
           layers={[
             {
-              logo: { src: logoKibana },
-              onMouseEnter: () => activateLayer(1),
-              onMouseLeave: resetActiveLayer,
-              active: layer1Active
+              logo: { src: logoKibana }
             },
             {
-              logo: { src: logoSplunksearch },
-              onMouseEnter: () => activateLayer(2),
-              onMouseLeave: resetActiveLayer,
-              active: layer2Active
+              logo: { src: logoSplunksearch }
             },
             {
-              logo: { src: logoLogstash },
-              onMouseEnter: () => activateLayer(3),
-              onMouseLeave: resetActiveLayer,
-              active: layer3Active
+              logo: { src: logoLogstash }
             }
           ]}
         />
