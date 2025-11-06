@@ -81,7 +81,9 @@ export default function ResourcesArchive({
                   <p className='text-sm text-neutral-200'>
                     {[
                       resource.author?.name,
-                      resource?.date ? convertDateToString(resource.date) : null
+                      resource?.date
+                        ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`
+                        : null
                     ]
                       .filter(Boolean)
                       .join(' • ')}
