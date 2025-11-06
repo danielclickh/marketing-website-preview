@@ -143,6 +143,7 @@ export interface ComponentSeo {
 export interface ComponentAuthor {
   name: string
   avatarPng: Array<EntryImage>
+  profileLink: null | string
 }
 
 // -----
@@ -159,7 +160,6 @@ export interface EntryResourceCategory extends Entry {
 export interface EntryResource extends Entry {
   title: string
   slug: string
-  thumbnail: EntryImage
   date: null | string
   dateLabel: null | string
   excerpt: string

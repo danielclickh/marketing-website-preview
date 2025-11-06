@@ -162,7 +162,17 @@ export default function ResourcePage({
                   <div className='flex flex-col items-start'>
                     {resource.author && (
                       <SuiText size='base' weight='normal'>
-                        {resource.author.name}
+                        {resource.author.profileLink ? (
+                          <Link
+                            href={resource.author.profileLink}
+                            target='_blank'
+                            rel='noreferrer noopener'
+                            className='hover:underline'>
+                            {resource.author.name}
+                          </Link>
+                        ) : (
+                          resource.author.name
+                        )}
                       </SuiText>
                     )}
                     {resource.date && (
@@ -214,7 +224,7 @@ export default function ResourcePage({
                     <SuiTitle type='h2' className='mb-2 !text-lg'>
                       More like this
                     </SuiTitle>
-                    <ul>
+                    <ul className='space-y-4'>
                       {related.map((item, itemIndex) => {
                         return (
                           <li key={itemIndex}>
