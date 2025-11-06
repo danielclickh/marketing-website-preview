@@ -210,7 +210,7 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     await revalidate(response, paths)
   },
-  'api::resources.resources': async function (body, response) {
+  'api::resource.resource': async function (body, response) {
     const paths: Array<string> = ['/resources']
 
     if (body?.entry?.category?.slug && body?.entry?.slug) {
@@ -219,10 +219,7 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     await revalidate(response, paths)
   },
-  'api::resource-categories.resource-categories': async function (
-    body,
-    response
-  ) {
+  'api::resource-category.resource-category': async function (body, response) {
     const paths: Array<string> = ['/resources']
 
     if (body?.entry?.slug) {
