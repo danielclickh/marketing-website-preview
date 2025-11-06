@@ -80,6 +80,7 @@ export default function ResourcesArchive({
                 {(resource.author || resource.date) && (
                   <p className='text-sm text-neutral-200'>
                     {[
+                      resource.category.name,
                       resource.author?.name,
                       resource?.date
                         ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`

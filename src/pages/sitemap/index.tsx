@@ -5,15 +5,16 @@ import {
   fetchAll,
   findOne,
   getStagingOnlyFilters,
-  getUnlistedFilters
+  getUnlistedFilters,
+  resourcesController
 } from '@/lib/api/strapi'
-import { getEngineeringResources } from '@/lib/engineering-resources'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getVideos } from '@/lib/videos'
 import { Video } from '@/lib/videos/types'
 import { CommonProps } from '@/types/homepage'
+import { EntryResource } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 
@@ -26,7 +27,7 @@ interface SitemapProps extends CommonProps {
   newsEvents: any[]
   pressReleases: any[]
   comparisons: any[]
-  engResources: any[]
+  resources: EntryResource[]
   demos: any[]
 }
 
@@ -100,7 +101,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     const newsEvents = newsItems.newsItems
     const pressReleases = newsItems.pressReleases
 
-    const engResources = getEngineeringResources()
+    const resources = await resourcesController.findAll()
 
     const allVideos = await getVideos()
 
@@ -114,7 +115,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         newsEvents,
         pressReleases,
         comparisons,
-        engResources,
+        resources,
         demos,
         seo: {
           title: 'Site map - ClickHouse',
@@ -137,7 +138,7 @@ function Sitemap({
   newsEvents,
   pressReleases,
   comparisons,
-  engResources,
+  resources,
   demos
 }: SitemapProps) {
   useGalaxyOnPage('siteMapPage')
@@ -510,15 +511,33 @@ function Sitemap({
               </ul>
 
               <ul className='space-y-2'>
-                <li className='font-semibold'>Engineering Resources</li>
-                {engResources.map((engResource, index) => {
+                <li className='font-semibold'>
+                  <Link
+                    href='/resources'
+                    className='font-semibold hover:underline'>
+                    Resources
+                  </Link>
+                </li>
+                {resources.map((resource, resourceIndex) => {
                   return (
-                    <li key={index}>
+                    <li key={resourceIndex}>
                       <Link
-                        href={`/engineering-resources/${engResource.slug}`}
+                        href={`/resources/${resource.category.slug}/${resource.slug}`}
                         className='font text-primary-300 hover:underline'>
-                        {engResource.title}{' '}
+                        {resource.title}{' '}
                       </Link>
+                      {resource.date && (
+                        <p className='text-sm text-neutral-200'>
+                          {[
+                            resource.category.name,
+                            resource?.date
+                              ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`
+                              : null
+                          ]
+                            .filter(Boolean)
+                            .join(' • ')}
+                        </p>
+                      )}
                     </li>
                   )
                 })}

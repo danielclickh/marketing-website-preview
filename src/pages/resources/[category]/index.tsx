@@ -1,19 +1,16 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import PillFilters from '@/components-cleaned/PillFilters'
 import ResourcesArchive from '@/components-cleaned/ResourcesArchive'
 import Layout from '@/components/Layout'
-import { SuiSearchField, SuiTitle } from '@/components/sui'
+import { SuiTitle } from '@/components/sui'
 import {
   resourceCategoriesController,
   resourcesController,
   seoFieldToNextComponentProps
 } from '@/lib/api/strapi'
-import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { EntryResource, EntryResourceCategory } from '@/types/strapi'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
 
 export async function getStaticPaths() {
   const categories = await resourceCategoriesController.findAll({
