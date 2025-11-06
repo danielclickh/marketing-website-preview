@@ -1,11 +1,11 @@
 ---
-title: 'The definitive guide to ClickHouse query optimization'
-slug: 'clickhouse-query-optimisation-ultimate-guide'
+title: "The definitive guide to ClickHouse query optimization"
+slug: "clickhouse-query-optimisation-ultimate-guide"
 excerpt: ""
 index: 1
-lastUpdated: '2025-11-07'
-author: 'Alasdair Brown'
-authorAvatar: 'https://clickhouse.com/uploads/al_brown_headshot_09ae0cbce6.jpg'
+lastUpdated: "2025-11-07"
+author: "Alasdair Brown"
+authorAvatar: "https://clickhouse.com/uploads/al_brown_headshot_09ae0cbce6.jpg"
 ---
 
 ClickHouse achieves extraordinary performance, querying trillions of rows in milliseconds, through an obsessive attention to detail and a fundamentally different architecture than traditional databases. This guide teaches not just what to optimize, but *why* each technique works at the architectural level, enabling you to build intuition for optimizing any ClickHouse workload.
