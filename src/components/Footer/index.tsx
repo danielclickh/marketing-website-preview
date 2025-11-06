@@ -239,6 +239,11 @@ const NAV_ITEMS: Array<NavItem> = [
     galaxyEvent: 'footerNav.comparisonsMenu.elasticSelect'
   },
   {
+    label: 'Splunk',
+    href: '/comparison/splunk-for-observability',
+    galaxyEvent: 'footerNav.comparisonsMenu.splunkSelect'
+  },
+  {
     heading: 'Partners',
     label: 'AWS',
     href: '/partners/aws',
