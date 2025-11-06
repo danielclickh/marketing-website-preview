@@ -26,6 +26,8 @@ This field has evolved significantly and can be understood through two distinct 
 
 The first generation, often called Observability 1.0, was built around the traditional "three pillars" approach of metrics, logs, and traces. This approach required multiple tools and data stores for different types of telemetry. It often forced engineers to pre-define what they wanted to measure, making it costly and complex to maintain multiple systems.
 
+This approach required multiple tools and data stores for different types of telemetry. The resulting data silos and operational complexity have led to the development of unified, [open-source observability solutions](https://clickhouse.com/engineering-resources/best-open-source-observability-solutions) built on a single data store.
+
 Modern observability, or Observability 2.0, takes a fundamentally different approach. It's based on collecting [wide, structured events](https://jeremymorrell.dev/blog/a-practitioners-guide-to-wide-events/) for each unit of work (e.g., an HTTP request and response) in our system. This approach captures high-cardinality data, such as user IDs, request IDs, Git commit hashes, instance IDs, Kubernetes pod names, specific route parameters, and vendor transaction IDs. A rule of thumb is adding a piece of metadata if it could help us understand how the system behaves.
 
 This rich data collection enables dynamic slicing and dicing of data without pre-defining metrics. Teams can derive metrics, traces, and other visualizations from this base data, allowing them to answer complex questions about system behavior that weren't anticipated when the instrumentation was first added.

@@ -1,5 +1,6 @@
 import logo from '@/../public/favicons/web-app-manifest-192x192.png'
 import { absoluteUrl } from '@/lib/next'
+import removeMarkdown from 'remove-markdown'
 import {
   WithContext,
   WebSite,
@@ -23,6 +24,28 @@ const defaultOrganization: Organization = {
   logo: {
     '@type': 'ImageObject',
     url: absoluteUrl(logo.src)
+  }
+}
+
+export const generateFaqPageSchema = ({
+  faqs
+}: {
+  faqs: Array<{
+    question: string
+    answer: string
+  }>
+}): WithContext<FAQPage> => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: removeMarkdown(faq.answer)
+      }
+    }))
   }
 }
 
@@ -86,19 +109,7 @@ export const generateBlogArticleSchema = ({
   const schemas: Array<WithContext<BlogPosting | FAQPage>> = [blogSchema]
 
   if (faqs?.length) {
-    const faqSchema: WithContext<FAQPage> = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: faq.answer
-        }
-      }))
-    }
-    schemas.push(faqSchema)
+    schemas.push(generateFaqPageSchema({ faqs }))
   }
 
   return schemas

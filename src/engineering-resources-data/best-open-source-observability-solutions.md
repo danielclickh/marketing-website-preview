@@ -6,7 +6,6 @@ index: 1
 lastUpdated: '2025-11-03'
 author: 'Manveer Chawla'
 authorAvatar: 'https://clickhouse.com/uploads/Manveer_Chawla_Profile_7609ca5c6c.jpeg'
-authorLink: 'https://www.tryzenith.ai/about/manveer-chawla'
 ---
 
 You've been told the three pillars of observability, logs, metrics, and traces, are the answer. But stitching together separate, best-of-breed tools has likely left you with data silos, slow queries, and a constant battle against rising infrastructure costs. During an incident, you're not debugging. Instead, you're manually correlating timestamps across three different UIs. This isn't a sustainable strategy.
@@ -110,11 +109,17 @@ This approach provides tangible, immediate benefits over a fragmented DIY approa
 
 The power of this unified approach is proven by its use in some of the most demanding engineering organizations in the world.
 
-"A lot of our peer companies are using ClickHouse for this exact use case. It’s battle-tested and just the right tool for the job." — [**Tesla**](https://clickhouse.com/blog/how-tesla-built-quadrillion-scale-observability-plataform-on-clickhouse), on building their quadrillion-row scale observability platform on ClickHouse.
+> "A lot of our peer companies are using ClickHouse for this exact use case. It’s battle-tested and just the right tool for the job." \
+> \
+> [**Tesla**](https://clickhouse.com/blog/how-tesla-built-quadrillion-scale-observability-plataform-on-clickhouse), on building their quadrillion-row scale observability platform on ClickHouse.
 
-"Previously, querying the last 10 minutes would take 1–2 minutes. With ClickStack, it was just a case of how fast I could blink. The performance is real." — [**Character.ai**](https://clickhouse.com/blog/scaling-observabilty-for-thousands-of-gpus-at-character-ai), after reducing log search times from minutes to milliseconds and cutting costs by 50% despite a 10x increase in log volume.
+> "Previously, querying the last 10 minutes would take 1–2 minutes. With ClickStack, it was just a case of how fast I could blink. The performance is real." \
+> \
+> [**Character.ai**](https://clickhouse.com/blog/scaling-observabilty-for-thousands-of-gpus-at-character-ai), after reducing log search times from minutes to milliseconds and cutting costs by 50% despite a 10x increase in log volume.
 
-"With ClickHouse, the database is green, queries are lightning-fast, and money is not on fire." — [**Anthropic**](https://clickhouse.com/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era), on using ClickHouse to handle the "deluge of telemetry" from developing AI models like Claude 4.
+> "With ClickHouse, the database is green, queries are lightning-fast, and money is not on fire." \
+> \
+> [**Anthropic**](https://clickhouse.com/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era), on using ClickHouse to handle the "deluge of telemetry" from developing AI models like Claude 4.
 
 ### Why a unified UI? HyperDX vs. Grafana
 

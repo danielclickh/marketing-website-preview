@@ -25,12 +25,12 @@ export default function NavigationSubNavSolutions() {
               </li>
               <li className='col-span-2'>
                 <NavigationLink
-                  href='/use-cases/machine-learning-and-data-science'
+                  href='/use-cases/observability'
                   onClick={useGalaxyOnClick(
-                    'topNav.useCasesMenu.machineLearningSelect'
+                    'topNav.useCasesMenu.observabilitySelect'
                   )}
                   className='block w-full'>
-                  Machine learning and GenAI
+                  Observability
                 </NavigationLink>
               </li>
 
@@ -46,12 +46,12 @@ export default function NavigationSubNavSolutions() {
               </li>
               <li className='col-span-2'>
                 <NavigationLink
-                  href='/use-cases/observability'
+                  href='/use-cases/machine-learning-and-data-science'
                   onClick={useGalaxyOnClick(
-                    'topNav.useCasesMenu.observabilitySelect'
+                    'topNav.useCasesMenu.machineLearningSelect'
                   )}
                   className='block w-full'>
-                  Observability
+                  Machine learning and GenAI
                 </NavigationLink>
               </li>
               <li className='col-span-2 md-mid:hidden'>

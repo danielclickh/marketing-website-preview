@@ -95,7 +95,7 @@ function UseCasesPage({
 }: useCasesPageDataProps) {
   useGalaxyOnPage('useCasesPage')
 
-  const useCaseOrder = [2, 9, 7, 5]
+  const useCaseOrder = [2, 5, 7, 9]
   const sortedUseCases = useCaseOrder
     .map((id) => individualUseCases.find((useCase) => useCase.id === id))
     .filter((useCase) => useCase)

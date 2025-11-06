@@ -3,6 +3,7 @@
 import AccordionItem, {
   AccordionItemProps
 } from '@/components-cleaned/AccordionItem'
+import Markdown from '@/components/Markdown'
 import { useState, Fragment } from 'react'
 
 interface AccordionsItem extends Omit<AccordionItemProps, 'children'> {
@@ -44,7 +45,11 @@ export default function Accordion({
                 (numbered ? <NumberPrefix value={paddedNumber} /> : undefined)
               }
               {...item}>
-              {content}
+              {typeof content === 'string' ? (
+                <Markdown className='rich-text-content'>{content}</Markdown>
+              ) : (
+                content
+              )}
             </AccordionItem>
           </div>
         )

@@ -17,14 +17,19 @@ import Image, { ImageProps } from 'next/image'
 import { useState } from 'react'
 
 export interface UseCasesCardsProps {
+  className?: string
   galaxyNamespace?: string
 }
 
-export default function UseCasesCards({ galaxyNamespace }: UseCasesCardsProps) {
+export default function UseCasesCards({
+  className = '',
+  galaxyNamespace
+}: UseCasesCardsProps) {
   const [hovering, setHovering] = useState<null | number>(null)
   const disable = (id: number) => hovering !== null && hovering !== id
   return (
-    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4'>
+    <div
+      className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ${className}`}>
       <Card
         image={imageRealTimeAnalytics}
         icon={iconRealTimeAnalytics}
@@ -42,17 +47,19 @@ export default function UseCasesCards({ galaxyNamespace }: UseCasesCardsProps) {
         onMouseLeave={() => setHovering(null)}
       />
       <Card
-        image={imageMlAndGenai}
-        icon={iconMlAndGenai}
-        title='ML & GenAI'
-        description='Power machine learning and GenAI with blazing-fast vector search, instant aggregations, and scalable training.'
-        link='/use-cases/machine-learning-and-data-science'
-        linkText='Explore ML & GenAI'
-        className={disable(2) ? 'saturate-0' : ''}
+        image={imageObservability}
+        icon={iconObservability}
+        title='Observability'
+        description='Store and query logs, metrics and traces at scale using ClickStack, the open source observability stack powered by ClickHouse.'
+        link='/use-cases/observability'
+        linkText='Explore observability'
+        className={disable(4) ? 'saturate-0' : ''}
         galaxyEventName={
-          galaxyNamespace ? `${galaxyNamespace}.useCases.mlAndGenAi` : undefined
+          galaxyNamespace
+            ? `${galaxyNamespace}.useCases.observability`
+            : undefined
         }
-        onMouseEnter={() => setHovering(2)}
+        onMouseEnter={() => setHovering(4)}
         onMouseLeave={() => setHovering(null)}
       />
       <Card
@@ -72,19 +79,17 @@ export default function UseCasesCards({ galaxyNamespace }: UseCasesCardsProps) {
         onMouseLeave={() => setHovering(null)}
       />
       <Card
-        image={imageObservability}
-        icon={iconObservability}
-        title='Observability'
-        description='Store and query logs, metrics and traces at scale using ClickStack, the open source observability stack powered by ClickHouse.'
-        link='/use-cases/observability'
-        linkText='Explore observability'
-        className={disable(4) ? 'saturate-0' : ''}
+        image={imageMlAndGenai}
+        icon={iconMlAndGenai}
+        title='ML & GenAI'
+        description='Power machine learning and GenAI with blazing-fast vector search, instant aggregations, and scalable training.'
+        link='/use-cases/machine-learning-and-data-science'
+        linkText='Explore ML & GenAI'
+        className={disable(2) ? 'saturate-0' : ''}
         galaxyEventName={
-          galaxyNamespace
-            ? `${galaxyNamespace}.useCases.observability`
-            : undefined
+          galaxyNamespace ? `${galaxyNamespace}.useCases.mlAndGenAi` : undefined
         }
-        onMouseEnter={() => setHovering(4)}
+        onMouseEnter={() => setHovering(2)}
         onMouseLeave={() => setHovering(null)}
       />
     </div>
@@ -128,28 +133,34 @@ function Card({
           className='-mb-2 aspect-[57/44] h-auto w-full from-90% object-cover object-top gradient-mask-to-b'
         />
       </CUICard.Header>
-      <CUICard.Body className='space-y-4 p-4'>
+      <CUICard.Body className='mb-auto space-y-4 p-4'>
         <div className='flex items-center gap-4'>
           <Image
             src={icon}
-            width={288}
-            height={233}
+            width={20}
+            height={20}
             alt={`Icon for ${title}`}
-            className='size-4'
+            className='size-5'
           />
-          <h3 className='text-base font-bold'>{title}</h3>
+          <h3 className='font-bold xl:text-xl'>{title}</h3>
+          <span className='ml-auto flex-shrink-0 flex-grow-0 font-bold text-primary-300 sm:hidden'>
+            -&gt;
+          </span>
         </div>
-        <p className='text-xs text-neutral-200'>{description}</p>
+        <p className='hidden text-sm text-neutral-200 sm:block xl:text-base'>
+          {description}
+        </p>
       </CUICard.Body>
-      <CUICard.Footer className='px-4 pb-3'>
+      <CUICard.Footer className='px-4 sm:pb-3'>
         <LinkWithArrow
           href={link}
           onClick={
             galaxyEventName ? useGalaxyOnClick(galaxyEventName) : undefined
           }
-          className='text-sm font-bold text-primary-300'>
+          className='block !h-0 text-sm font-bold text-primary-300 sm:inline sm:h-auto xl:text-base'
+          arrowClassName='hidden sm:block'>
           <span className='absolute inset-0' />
-          {linkText}
+          <span className='hidden sm:inline'>{linkText}</span>
         </LinkWithArrow>
       </CUICard.Footer>
     </CUICard>
