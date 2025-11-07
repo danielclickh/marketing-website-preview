@@ -214,6 +214,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     const paths: Array<string> = ['/resources']
 
     if (body?.entry?.category?.slug && body?.entry?.slug) {
+      paths.push(`/resources/${body.entry.category.slug}`)
       paths.push(`/resources/${body.entry.category.slug}/${body.entry.slug}`)
     }
 
