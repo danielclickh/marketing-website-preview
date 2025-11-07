@@ -1,16 +1,19 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import ResourcesArchive from '@/components-cleaned/ResourcesArchive'
+import PillFilters from '@/components-cleaned/PillFilters'
 import Layout from '@/components/Layout'
-import { SuiTitle } from '@/components/sui'
+import { SuiSearchField, SuiTitle } from '@/components/sui'
 import {
   resourceCategoriesController,
   resourcesController,
   seoFieldToNextComponentProps
 } from '@/lib/api/strapi'
+import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { EntryResource, EntryResourceCategory } from '@/types/strapi'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
+import { useMemo, useState } from 'react'
 
 export async function getStaticPaths() {
   const categories = await resourceCategoriesController.findAll({
@@ -85,6 +88,18 @@ export default function ResourcesCategoryPage({
   resources,
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [search, setSearch] = useState('')
+
+  const filteredResources = useMemo(() => {
+    const searchTerm = search.trim().toLowerCase()
+
+    return resources.filter((resource) => {
+      const inTitle = resource.title.toLowerCase().includes(searchTerm)
+      const inExcerpt = resource.excerpt.toLowerCase().includes(searchTerm)
+      return inTitle || inExcerpt
+    })
+  }, [search, resources])
+
   return (
     <Layout {...commonProps}>
       <div className='bg-grid'>
@@ -97,11 +112,74 @@ export default function ResourcesCategoryPage({
             {category.heading || category.name}
           </SuiTitle>
 
-          <ResourcesArchive
-            resources={resources}
-            categories={categories}
-            activeCategory={category}
-          />
+          <div className='flex-col items-center lg:flex lg:flex-row lg:justify-between lg:space-x-24'>
+            <SuiSearchField
+              placeholder='Search by title or keyword...'
+              htmlFor='search'
+              className='mb-6 max-w-sm lg:mb-0 lg:flex-1'
+              value={search}
+              onChange={(event) => setSearch(event.currentTarget.value)}
+            />
+            {categories.length > 1 && (
+              <nav className='ml-auto'>
+                <PillFilters
+                  options={[
+                    {
+                      kind: 'link',
+                      label: 'View all',
+                      href: '/resources'
+                    },
+                    ...categories.map((item) => ({
+                      kind: 'link' as const,
+                      label: item.name,
+                      href: `/resources/${item.slug}`,
+                      active: item.id === category.id
+                    }))
+                  ]}
+                />
+              </nav>
+            )}
+          </div>
+
+          <hr className='my-6 h-px border-0 bg-white/20' />
+
+          {filteredResources.length > 0 ? (
+            <ul className='space-y-10'>
+              {filteredResources.map((resource, resourceIndex) => {
+                return (
+                  <li className='relative space-y-4' key={resourceIndex}>
+                    <SuiTitle type='h2' className='!text-xl'>
+                      <Link
+                        href={`/resources/${resource.category.slug}/${resource.slug}`}
+                        className='text-primary-300 hover:underline'>
+                        <span className='absolute inset-0' />
+                        {resource.title}
+                      </Link>
+                    </SuiTitle>
+                    <p className='mt-2 text-neutral-200'>{resource.excerpt}</p>
+                    {(resource.author || resource.date) && (
+                      <p className='text-sm text-neutral-200'>
+                        {[
+                          resource.author?.name,
+                          resource?.date
+                            ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`
+                            : null
+                        ]
+                          .filter(Boolean)
+                          .join(' • ')}
+                      </p>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
+            <p className='mt-16 text-center'>
+              {search && resources.length
+                ? `No results found. Try a broader or different search term.`
+                : 'No resources available at the moment. Please check back soon.'}
+            </p>
+          )}
         </div>
       </div>
     </Layout>
