@@ -1,43 +1,16 @@
+import logo from './assets/logo.svg'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
-import { SuiButton, SuiCard, SuiText, SuiTitle } from '@/components/sui'
+import LinkWithArrow from '@/components/LinkWithArrow'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { ExternalLinkIcon } from '@heroicons/react/solid'
+import { ExternalLink } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-
-const highlights = [
-  {
-    title: 'Available on AWS Marketplace',
-    description:
-      'Add a ClickHouse Cloud subscription to your AWS account for simple billing and vendor management. Both development and Production services are available, with transparent pricing that is simply added to your monthly AWS bill.',
-    href: 'https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc',
-    target: '_blank',
-    buttonText: 'Start a trial'
-  },
-  {
-    title: 'Secure. Verified. Compliant',
-    description:
-      'ClickHouse has been independently audited and awarded SOC 2 Type II compliance and is recognised by AWS as Qualified Software. ClickHouse cloud is serverless, simple and secure. To learn more, visit our trust centre.',
-    href: 'https://trust.clickhouse.com/',
-    target: '_blank',
-    buttonText: 'Learn more'
-  },
-  {
-    title: 'Learn ClickHouse on AWS',
-    description:
-      'Visit the ClickHouse Academy to find self-paced and live training that will help you to get the best from ClickHouse Cloud. All types are available exclusively on AWS.',
-    href: '/learn',
-    target: '_blank',
-    buttonText: 'Learn more'
-  }
-]
-
-const btnText = 'ClickHouse on AWS Marketplace'
-const description = `The fastest and most resource-efficient analytical database, ClickHouse, is now available as a service on AWS. ClickHouse Cloud on AWS allows you to experience the speed and scalability of the fastest OLAP database on earth without any need to manage the infrastructure.
-
-ClickHouse has been reviewed by AWS and is an official AWS Partner, and ClickHouse Cloud is Qualified Software on AWS.
-`
+import Link from 'next/link'
+import React from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -45,7 +18,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'AWS | ClickHouse',
+          title: 'ClickHouse Cloud on AWS | ClickHouse',
           path: '/partners/aws'
         },
         ...commonProps
@@ -53,62 +26,182 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-function PartnersPage({ seo, headerData, footerData }: CommonProps) {
+export default function PartnersPage({
+  seo,
+  headerData,
+  footerData
+}: CommonProps) {
+  useGalaxyOnPage('awsPartnersPage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='pt-20 md:pt-30'>
-        <div className='mx-10 min-h-screen pb-10 md:pb-20'>
-          <div className='mx-auto mb-20 flex w-full flex-col items-center justify-center gap-20 md:mb-36 md:flex-row-reverse'>
-            <Image
-              src='/images/aws-partner.svg'
-              width='240'
-              height='240'
-              alt='aws partner'
-              loading='eager'
-              priority
-            />
-            <div className='flex max-w-screen-md flex-col items-center md:items-start'>
-              <SuiTitle
-                type='h1'
-                color='primary'
-                weight='bold'
-                className='pb-6 md:!text-6xl'>
-                ClickHouse Cloud on AWS
-              </SuiTitle>
-              <SuiText
-                size='base'
-                weight='medium'
-                color='secondary'
-                className='max-w-3xl whitespace-pre-wrap pb-10'>
-                {description}
-              </SuiText>
-              <SuiButton
-                type='primary'
-                size='lg'
-                path='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'>
-                {btnText}
-                <ExternalLinkIcon width='24' height='24' />
-              </SuiButton>
-            </div>
-          </div>
-
-          <div className='container mx-auto mb-16 flex max-w-7xl flex-col justify-evenly gap-4 px-8 md:flex-row 2xl:px-0'>
-            {highlights.map((highlight) => (
-              <SuiCard
-                key={highlight.title}
-                title={highlight.title}
-                description={highlight.description}
-                buttonTitle={highlight.buttonText}
-                buttonPath={highlight.href}
-                className='h-auto md:w-1/3'
-                color='empty'
-              />
-            ))}
-          </div>
+      {/* Hero */}
+      <section
+        className='section-container bg-shadow-element yellow-shadow my-16 lg:my-24'
+        style={
+          {
+            '--top-side': '50%',
+            '--left-side': '50%',
+            '--scale': '0.9',
+            '--opacity': '0.04'
+          } as React.CSSProperties
+        }>
+        <div className='mx-auto max-w-4xl space-y-6 text-center'>
+          <Image
+            src={logo}
+            width={220}
+            height={96}
+            alt='ClickHouse + AWS'
+            className='mx-auto block'
+          />
+          <span className='inline-block rounded-full border border-primary-500 bg-primary-700 px-4 py-1 text-xs text-primary-300'>
+            Official AWS Partners
+          </span>
+          <SuiTitle type='h1'>ClickHouse Cloud on AWS</SuiTitle>
+          <SuiText size='lg' className='text-neutral-200'>
+            Experience ClickHouse, the fastest analytical database, as a fully
+            managed service on AWS. Get unmatched speed and scalability without
+            infrastructure management.{' '}
+          </SuiText>
         </div>
-      </div>
+        <div className='mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2'>
+          <CUICard className='!justify-start p-8 text-center'>
+            <CUICard.Header className='mb-6'>
+              <SuiTitle type='h2' className='!text-2xl'>
+                Pay as you go
+              </SuiTitle>
+            </CUICard.Header>
+            <CUICard.Body className='mb-6'>
+              <SuiText className='space-y-6 text-neutral-200'>
+                <p>
+                  Pay only for what you use with flexible, on-demand billing
+                  through AWS Marketplace. Scale up or down as needed with no
+                  upfront commitment or minimum spend requirements.
+                </p>
+                <p>Includes a free trial with $300 in credits.</p>
+              </SuiText>
+            </CUICard.Body>
+            <CUICard.Footer className='mt-auto'>
+              <CUIButton
+                href='https://aws.amazon.com/marketplace/pp/prodview-p4gwofrqpkltu?trk=176b570f-20dd-4b84-aa7e-cae53990fe91&sc_channel=el&source=clickhouse'
+                type='primary'
+                className='mx-auto'
+                onClick={useGalaxyOnClick(
+                  'awsPartnersPage.marketPlaceLink.payAsYouGo'
+                )}>
+                Try free with AWS
+                <ExternalLink width={14} height={14} className='ml-2 inline' />
+              </CUIButton>
+            </CUICard.Footer>
+          </CUICard>
+          <CUICard className='!justify-start p-8 text-center'>
+            <CUICard.Header className='mb-6'>
+              <SuiTitle type='h2' className='!text-2xl'>
+                Commited contract
+              </SuiTitle>
+            </CUICard.Header>
+            <CUICard.Body className='mb-6'>
+              <SuiText className='space-y-6 text-neutral-200'>
+                <p>
+                  Commit to a specific spend amount through your AWS Marketplace
+                  billing.
+                </p>
+                <p>
+                  Choose from preset amounts or reach out to us to learn about
+                  other options.
+                </p>
+              </SuiText>
+            </CUICard.Body>
+            <CUICard.Footer className='mt-auto'>
+              <CUIButton
+                href='https://aws.amazon.com/marketplace/pp/prodview-4qyeihstyym2s?trk=176b570f-20dd-4b84-aa7e-cae53990fe91&sc_channel=el&source=clickhouse'
+                type='secondary'
+                className='mx-auto'
+                onClick={useGalaxyOnClick(
+                  'awsPartnersPage.marketPlaceLink.commitedContract'
+                )}>
+                Buy with AWS
+                <ExternalLink width={14} height={14} className='ml-2 inline' />
+              </CUIButton>
+            </CUICard.Footer>
+          </CUICard>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className='bg-neutral-700 py-16 lg:py-24'>
+        <div className='section-container grid grid-cols-1 gap-x-8 gap-y-6 lg:grid-cols-3'>
+          <CUICard className='relative !justify-start overflow-hidden !bg-neutral-900/80 p-8 text-center'>
+            <div className='absolute inset-x-0 top-0 h-1 bg-primary-300' />
+            <CUICard.Header className='mb-6'>
+              <SuiTitle type='h3'>Available on AWS Marketplace</SuiTitle>
+            </CUICard.Header>
+            <CUICard.Body className='mb-6'>
+              <SuiText className='space-y-6 text-neutral-200'>
+                <p>
+                  Streamline billing and vendor management by adding ClickHouse
+                  Cloud to your AWS account. Transparent pricing consolidated
+                  directly into your monthly AWS bill.
+                </p>
+              </SuiText>
+            </CUICard.Body>
+            <CUICard.Footer className='mt-auto'>
+              <LinkWithArrow
+                href='https://aws.amazon.com/marketplace/pp/prodview-p4gwofrqpkltu?trk=176b570f-20dd-4b84-aa7e-cae53990fe91&sc_channel=el&source=clickhouse'
+                className='text-primary-300 hover:underline'
+                onClick={useGalaxyOnClick(
+                  'awsPartnersPage.marketPlaceLink.payAsYouGoAlt'
+                )}>
+                Try free with AWS
+              </LinkWithArrow>
+            </CUICard.Footer>
+          </CUICard>
+          <CUICard className='relative !justify-start overflow-hidden !bg-neutral-900/80 p-8 text-center'>
+            <div className='absolute inset-x-0 top-0 h-1 bg-primary-300' />
+            <CUICard.Header className='mb-6'>
+              <SuiTitle type='h3'>Secure. Verified. Compliant</SuiTitle>
+            </CUICard.Header>
+            <CUICard.Body className='mb-6'>
+              <SuiText className='space-y-6 text-neutral-200'>
+                <p>
+                  ClickHouse has been independently audited and awarded SOC 2
+                  Type II compliance and ISO 27001 certification, and is
+                  recognized by AWS as Qualified Software. ClickHouse Cloud is
+                  serverless, simple, and secure.
+                </p>
+              </SuiText>
+            </CUICard.Body>
+            <CUICard.Footer className='mt-auto'>
+              <LinkWithArrow
+                href='https://trust.clickhouse.com/'
+                className='text-primary-300 hover:underline'>
+                Visit our trust center
+              </LinkWithArrow>
+            </CUICard.Footer>
+          </CUICard>
+          <CUICard className='relative !justify-start overflow-hidden !bg-neutral-900/80 p-8 text-center'>
+            <div className='absolute inset-x-0 top-0 h-1 bg-primary-300' />
+            <CUICard.Header className='mb-6'>
+              <SuiTitle type='h3'>Learn ClickHouse on AWS</SuiTitle>
+            </CUICard.Header>
+            <CUICard.Body className='mb-6'>
+              <SuiText className='space-y-6 text-neutral-200'>
+                <p>
+                  Visit the ClickHouse Academy to find self-paced and live
+                  training that will help you to get the best from ClickHouse
+                  Cloud. All types are available exclusively on AWS.
+                </p>
+              </SuiText>
+            </CUICard.Body>
+            <CUICard.Footer className='mt-auto'>
+              <LinkWithArrow
+                href='/learn'
+                className='text-primary-300 hover:underline'>
+                ClickHouse training
+              </LinkWithArrow>
+            </CUICard.Footer>
+          </CUICard>
+        </div>
+      </section>
     </Layout>
   )
 }
-
-export default PartnersPage

@@ -2,9 +2,10 @@ import logoFull from '../../../../public/logo-full.svg'
 import { CUIButton, CUILink } from '../../ClickUI'
 import { HeaderProps } from '../../Header/types'
 import HeaderRegionSelector from '../../HeaderRegionSelector'
-import LinkWithArrow from '../../LinkWithArrow'
 import GitHub from '../../icons/GitHub'
 import Navigation from '../Navigation'
+import AnnouncementBar from '@/components/AnnouncementBar'
+import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
@@ -14,92 +15,37 @@ import { useEffect, useRef, useState } from 'react'
 export default function Header({ github, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
-  const [headerHeight, setHeaderHeight] = useState<number>(72)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
-  const [headerBannerText, setHeaderBannerText] = useState(
-    'DoubleCloud is winding down. Migrate to ClickHouse with limited-time free migration services. Contact us today'
-  )
+  // Eyebrow default settings
+  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(true)
+  const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
+  const [headerBannerText, setHeaderBannerText] = useState<
+    string | React.ReactNode
+  >('ClickHouse、Japan Cloudと提携し日本法人設立を発表')
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/comparison/doublecloud?loc=eyebrow'
+    '/jp/blog/japan-cloud-jp?loc=eyebrow'
   )
+  const [headerBannerExpires, setHeaderBannerExpires] = useState<
+    undefined | Date
+  >(undefined)
+
+  const scrollHandler = () => {
+    setIsScrolled(window.scrollY > 0)
+  }
+
+  useResizeObserverSsr(headerRef, (el) => {
+    document.documentElement.style.setProperty(
+      '--header-height',
+      `${el.target.clientHeight}px`
+    )
+  })
 
   useEffect(() => {
-    const resizeHandler = () => {
-      if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight)
-    }
-
-    const scrollHandler = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-
-    window.addEventListener('resize', resizeHandler)
     window.addEventListener('scroll', scrollHandler)
-    resizeHandler()
     scrollHandler()
 
-    //=== Country specific eyebrow ===//
-    // const hasCountryCode = document.cookie.includes('countryCode=')
-    // const expirationDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) // 30 days
-
-    // if (!hasCountryCode) {
-    //   // List of languages we want to exclude (e.g. China, Russia, etc.)
-    //   const excludedLanguages = ['ru-RU', 'zh-CN', 'zh-TW', 'zh-HK']
-
-    //   // List of languages that correspond to Australia, New Zealand, and Singapore
-    //   const targetLanguages = ['en-AU', 'en-NZ', 'en-SG', 'zh-SG', 'ms-SG']
-
-    //   if (excludedLanguages.includes(navigator.language)) {
-    //     return
-    //   } else if (targetLanguages.includes(navigator.language)) {
-    //     // If navigator.language matches target regions (AU, NZ, SG), set the country code
-    //     let countryCode
-    //     if (navigator.language === 'en-AU') {
-    //       countryCode = 'AU'
-    //     } else if (navigator.language === 'en-NZ') {
-    //       countryCode = 'NZ'
-    //     } else if (['en-SG', 'zh-SG', 'ms-SG'].includes(navigator.language)) {
-    //       countryCode = 'SG'
-    //     }
-
-    //     document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-    //     setHeaderBannerText(
-    //       'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //     )
-    //     setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    //   } else {
-    //     fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-    //       .then((response) => response.json())
-    //       .then((data) => {
-    //         if (!data.error) {
-    //           const countryCode = data.country
-    //           document.cookie = `countryCode=${countryCode}; expires=${expirationDate.toUTCString()}; path=/`
-
-    //           if (['AU', 'NZ', 'SG'].includes(countryCode)) {
-    //             setHeaderBannerText(
-    //               'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //             )
-    //             setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    //           }
-    //         } else {
-    //           document.cookie = `countryCode=Error; expires=${expirationDate.toUTCString()}; path=/`
-    //         }
-    //       })
-    //   }
-    // } else if (
-    //   document.cookie.includes('countryCode=AU') ||
-    //   document.cookie.includes('countryCode=NZ') ||
-    //   document.cookie.includes('countryCode=SG')
-    // ) {
-    //   setHeaderBannerText(
-    //     'Tanya & Tyler go on tour Down Under. Join us at DataEngBytes and Big Data & AI World'
-    //   )
-    //   setHeaderBannerUrl('/tanya-and-tyler-tour?loc=eyebrow')
-    // }
-    //=== Country specific eyebrow ===//
-
     return () => {
-      window.removeEventListener('resize', resizeHandler)
       window.removeEventListener('scroll', scrollHandler)
     }
   }, [headerRef])
@@ -107,7 +53,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   return (
     <>
       {/* Add empty space for fixed header */}
-      <div style={{ height: headerHeight + 1 }} />
+      <div style={{ height: 'calc(var(--header-height, 72px) + 1px)' }} />
 
       <header
         ref={headerRef}
@@ -121,16 +67,15 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
         {/* Announcement banner */}
-        {false && (
-          <LinkWithArrow
-            prefetch={false}
-            href={headerBannerUrl}
-            className={`relative z-50 block w-full bg-primary-300 px-4 py-1 text-center text-sm font-medium text-primary-900 ${
-              eyebrow?.className || ''
-            }`}>
-            {headerBannerText}
-          </LinkWithArrow>
-        )}
+        <AnnouncementBar
+          enabled={headerBannerEnabled}
+          link={headerBannerUrl}
+          text={headerBannerText}
+          expires={headerBannerExpires}
+          dismissible={true}
+          className={eyebrow?.className || ''}
+          arrow={headerBannerArrow}
+        />
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
@@ -171,8 +116,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           {/* Nav container */}
           <div
             style={{
-              top: headerHeight,
-              height: `calc(100dvh - ${headerHeight}px)`
+              top: 'var(--header-height, 72px)',
+              height: 'calc(100dvh - var(--header-height, 72px))'
             }}
             className={`${
               burgerMenuIsOpen
