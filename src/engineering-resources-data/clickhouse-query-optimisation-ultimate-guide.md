@@ -1,7 +1,7 @@
 ---
 title: "The definitive guide to ClickHouse query optimization"
-slug: "clickhouse-query-optimisation-ultimate-guide"
-excerpt: ""
+slug: "clickhouse-query-optimisation-definitive-guide"
+excerpt: "Master ClickHouse query optimization through architectural understanding. Learn why ORDER BY design can improve performance 100×, plus proven techniques for trillion-row millisecond queries."
 index: 1
 lastUpdated: "2025-11-07"
 author: "Alasdair Brown"
