@@ -4,7 +4,7 @@ import {
   fetchAll,
   getStagingOnlyFilters,
   getUnlistedFilters,
-  resourcesController
+  resourcesService
 } from '@/lib/api/strapi'
 import { getVideos } from '@/lib/videos'
 
@@ -205,7 +205,7 @@ export async function cmsIntegrations(): Promise<Array<IndexedItem>> {
 }
 
 export async function cmsResources(): Promise<Array<IndexedItem>> {
-  const resources = await resourcesController.findAll()
+  const resources = await resourcesService.findAll()
   return resources.map((resource) => {
     return {
       title: resource.title,

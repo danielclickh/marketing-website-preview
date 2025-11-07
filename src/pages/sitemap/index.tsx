@@ -6,7 +6,7 @@ import {
   findOne,
   getStagingOnlyFilters,
   getUnlistedFilters,
-  resourcesController
+  resourcesService
 } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
@@ -101,7 +101,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     const newsEvents = newsItems.newsItems
     const pressReleases = newsItems.pressReleases
 
-    const resources = await resourcesController.findAll()
+    const resources = await resourcesService.findAll()
 
     const allVideos = await getVideos()
 

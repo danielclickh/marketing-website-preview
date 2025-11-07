@@ -1,10 +1,9 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import PillFilters from '@/components-cleaned/PillFilters'
 import Layout from '@/components/Layout'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import {
-  resourceCategoriesController,
-  resourcesController,
+  resourceCategoriesService,
+  resourcesService,
   seoFieldToNextComponentProps
 } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
@@ -16,7 +15,7 @@ import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
 export async function getStaticPaths() {
-  const categories = await resourceCategoriesController.findAll({
+  const categories = await resourceCategoriesService.findAll({
     fields: ['slug'],
     populate: []
   })
@@ -30,7 +29,6 @@ export async function getStaticPaths() {
 }
 
 export interface Props extends CommonProps {
-  categories: Array<EntryResourceCategory>
   category: EntryResourceCategory
   resources: Array<EntryResource>
 }
@@ -45,10 +43,7 @@ export const getStaticProps = (async ({ params }) => {
     }
   }
 
-  const categories = await resourceCategoriesController.findAll({
-    sort: ['name:ASC']
-  })
-  const category = categories.find((cat) => cat.slug === categorySlug)
+  const category = await resourceCategoriesService.findBySlug(categorySlug)
 
   if (!category) {
     return {
@@ -58,7 +53,7 @@ export const getStaticProps = (async ({ params }) => {
 
   const [commonProps, resources] = await Promise.all([
     getCommonProps(),
-    resourcesController.findAll({
+    resourcesService.findAll({
       sort: ['publishedAt:DESC'],
       filters: {
         category: {
@@ -71,7 +66,6 @@ export const getStaticProps = (async ({ params }) => {
   return {
     props: {
       ...commonProps,
-      categories,
       category,
       resources,
       seo: seoFieldToNextComponentProps(category.seo, {
@@ -83,7 +77,6 @@ export const getStaticProps = (async ({ params }) => {
 }) satisfies GetStaticProps<Props>
 
 export default function ResourcesCategoryPage({
-  categories,
   category,
   resources,
   ...commonProps
@@ -120,25 +113,6 @@ export default function ResourcesCategoryPage({
               value={search}
               onChange={(event) => setSearch(event.currentTarget.value)}
             />
-            {categories.length > 1 && (
-              <nav className='ml-auto'>
-                <PillFilters
-                  options={[
-                    {
-                      kind: 'link',
-                      label: 'View all',
-                      href: '/resources'
-                    },
-                    ...categories.map((item) => ({
-                      kind: 'link' as const,
-                      label: item.name,
-                      href: `/resources/${item.slug}`,
-                      active: item.id === category.id
-                    }))
-                  ]}
-                />
-              </nav>
-            )}
           </div>
 
           <hr className='my-6 h-px border-0 bg-white/20' />

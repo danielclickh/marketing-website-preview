@@ -2,10 +2,7 @@ import { CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import { SuiTitle } from '@/components/sui'
-import {
-  resourceCategoriesController,
-  resourcesController
-} from '@/lib/api/strapi'
+import { resourceCategoriesService, resourcesService } from '@/lib/api/strapi'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
@@ -20,14 +17,14 @@ export interface Props extends CommonProps {
 
 export const getStaticProps = (async ({ params }) => {
   const commonProps = await getCommonProps()
-  const categories = await resourceCategoriesController.findAll({
+  const categories = await resourceCategoriesService.findAll({
     sort: ['name:ASC']
   })
 
   const resources: Props['resources'] = {}
 
   for (const category of categories) {
-    resources[category.id] = await resourcesController.findSome({
+    resources[category.id] = await resourcesService.findMany({
       sort: ['publishedAt:DESC'],
       filters: {
         category: {
@@ -89,7 +86,7 @@ export default function RsourcesPage({
                 {catResources.map((resource) => {
                   return (
                     <li key={resource.id}>
-                      <CUICard className='relative p-6'>
+                      <CUICard className='group/resource relative p-6'>
                         <CUICard.Header className='mb-4'>
                           <SuiTitle type='h3'>
                             <Link
@@ -115,6 +112,14 @@ export default function RsourcesPage({
                         <CUICard.Body className='mb-auto'>
                           <p className='text-neutral-200'>{resource.excerpt}</p>
                         </CUICard.Body>
+                        <CUICard.Footer className='mt-4'>
+                          <strong>
+                            Continue reading{' '}
+                            <span className='inline-block transition-transform group-hover/resource:translate-x-1'>
+                              -&gt;
+                            </span>
+                          </strong>
+                        </CUICard.Footer>
                       </CUICard>
                     </li>
                   )

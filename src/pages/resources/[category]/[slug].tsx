@@ -15,20 +15,22 @@ import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
 import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
 import {
-  resourcesController,
+  resourcesService,
   seoFieldToNextComponentProps
 } from '@/lib/api/strapi'
+import { generateFaqPageSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { EntryResource } from '@/types/strapi'
+import { BlogModules, EntryResource } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
+import removeMarkdown from 'remove-markdown'
 
 export async function getStaticPaths() {
-  const posts = await resourcesController.findAll({
+  const posts = await resourcesService.findAll({
     fields: ['slug'],
     populate: ['category']
   })
@@ -60,8 +62,8 @@ export const getStaticProps = (async ({ params }) => {
 
   const [commonProps, resource, related] = await Promise.all([
     getCommonProps(),
-    resourcesController.findBySlug(resourceSlug),
-    resourcesController.findSome({
+    resourcesService.findBySlug(resourceSlug),
+    resourcesService.findMany({
       sort: ['publishedAt:DESC'],
       filters: {
         slug: {
@@ -77,11 +79,22 @@ export const getStaticProps = (async ({ params }) => {
     })
   ])
 
-  if (!resource || resource.category.slug !== categorySlug) {
+  if (!resource) {
     return {
       notFound: true
     }
   }
+
+  const combinedFaqs = resource.sections
+    .filter((module) => module.__component === 'blog-modules.faqs')
+    .flatMap((module) => {
+      return module.items.map((item) => {
+        return {
+          question: item.question,
+          answer: removeMarkdown(item.answer)
+        }
+      })
+    })
 
   return {
     props: {
@@ -92,8 +105,12 @@ export const getStaticProps = (async ({ params }) => {
         title: resource.category?.seo?.title
           ? `${resource.title} | ${resource.category.seo.title}`
           : `${resource.title} | ${resource.category.name} | ClickHouse Resource Hub`,
+        description: resource.excerpt,
         path: `/resources/${resource.category.slug}/${resource.slug}`,
-        lastModified: resource.updatedAt
+        lastModified: resource.updatedAt,
+        schema: combinedFaqs.length
+          ? generateFaqPageSchema({ faqs: combinedFaqs })
+          : undefined
       })
     }
   }

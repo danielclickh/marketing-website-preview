@@ -349,63 +349,38 @@ export async function findImageDetails(imageUrl: string) {
   return imageDetails
 }
 
-class StrapiEntryController<EntryType> {
+class StrapiEntryService<EntryType> {
   constructor(
     private apiUri: string,
     private stagingFilters: boolean | string = false,
-    private deepPopluate: boolean = false
-  ) {
-    this.apiUri = apiUri
-    this.stagingFilters = stagingFilters
-    this.deepPopluate = deepPopluate
-  }
+    private deepPopulate: boolean = false
+  ) {}
 
   private mergeStagingFilters(params: ApiRequestParams) {
-    if (this.stagingFilters) {
-      const fieldName =
-        typeof this.stagingFilters === 'string'
-          ? this.stagingFilters
-          : undefined
+    if (!this.stagingFilters) return params
 
-      if (params.filters) {
-        return {
-          ...params,
-          filters: {
-            $and: [
-              params.filters,
-              {
-                $or: getStagingOnlyFilters(fieldName)
-              }
-            ]
-          }
-        }
-      }
+    const fieldName =
+      typeof this.stagingFilters === 'string' ? this.stagingFilters : undefined
 
-      return {
-        ...params,
-        filters: {
-          $or: getStagingOnlyFilters(fieldName)
-        }
-      }
+    const extra = { $or: getStagingOnlyFilters(fieldName) }
+    return {
+      ...params,
+      filters: params.filters ? { $and: [params.filters, extra] } : extra
     }
-
-    return params
   }
 
-  private setDeepPopluate(params: ApiRequestParams) {
-    if (!params.populate && this.deepPopluate) {
+  private applyDeepPopulate(params: ApiRequestParams) {
+    if (!params.populate && this.deepPopulate) {
       params.populate = 'deep'
     }
     return params
   }
 
   private modifyParams(params: ApiRequestParams) {
-    params = this.mergeStagingFilters(params)
-    params = this.setDeepPopluate(params)
-    return params
+    return this.mergeStagingFilters(this.applyDeepPopulate(params))
   }
 
-  async findSome<T extends boolean = false>(
+  async findMany<T extends boolean = false>(
     params: ApiRequestParams = {},
     withPagination: T = false as T
   ): Promise<
@@ -446,7 +421,7 @@ class StrapiEntryController<EntryType> {
         pageSize: 100,
         page: currentPage + 1
       }
-      const { data, pagination } = await this.findSome(params, true)
+      const { data, pagination } = await this.findMany(params, true)
 
       combined = combined.concat(data)
 
@@ -470,7 +445,7 @@ class StrapiEntryController<EntryType> {
     params: Omit<ApiRequestParams, 'pagination'> = {}
   ) {
     return (
-      await this.findSome({
+      await this.findMany({
         ...params,
         filters: {
           ...(params.filters || {}),
@@ -514,14 +489,14 @@ export function seoFieldToNextComponentProps(
   return merged
 }
 
-export const resourceCategoriesController =
-  new StrapiEntryController<EntryResourceCategory>(
+export const resourceCategoriesService =
+  new StrapiEntryService<EntryResourceCategory>(
     'resource-categories',
     false,
     true
   )
 
-export const resourcesController = new StrapiEntryController<EntryResource>(
+export const resourcesService = new StrapiEntryService<EntryResource>(
   'resources',
   'stagingOnly',
   true

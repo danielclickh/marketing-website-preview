@@ -2,8 +2,8 @@ import { pages as learnPages } from '@/data/learn'
 import {
   fetchAll,
   isAuthorisedRevalidationRequest,
-  resourceCategoriesController,
-  resourcesController
+  resourceCategoriesService,
+  resourcesService
 } from '@/lib/api/strapi'
 import { absoluteUrl } from '@/lib/next'
 import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
@@ -226,20 +226,8 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     if (body?.entry?.slug) {
       paths.push(`/resources/${body.entry.slug}`)
-      const categories = await resourceCategoriesController.findAll({
-        fields: ['slug'],
-        populate: [], // Disables relationship populating which isn't needed here
-        filters: {
-          slug: {
-            $ne: body.entry.slug
-          }
-        }
-      })
-      categories.forEach((category) => {
-        paths.push(`/resources/${category.slug}`)
-      })
 
-      const categoryResources = await resourcesController.findAll({
+      const categoryResources = await resourcesService.findAll({
         fields: ['slug'],
         populate: [], // Disables relationship populating which isn't needed here
         filters: {
