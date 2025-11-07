@@ -73,9 +73,7 @@ export default function RsourcesPage({
           return (
             <section key={category.id} className='section-container'>
               <div className='mb-6 flex flex-col gap-x-6 gap-y-2 lg:flex-row lg:items-end lg:justify-between'>
-                <SuiTitle type='h2'>
-                  {category.heading || category.name}
-                </SuiTitle>
+                <SuiTitle type='h2'>{category.name}</SuiTitle>
                 <LinkWithArrow
                   href={`/resources/${category.slug}`}
                   className='font-bold text-primary-300'>
