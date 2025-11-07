@@ -110,7 +110,7 @@ export const getStaticProps = (async ({ params }) => {
         lastModified: resource.updatedAt,
         schema: combinedFaqs.length
           ? generateFaqPageSchema({ faqs: combinedFaqs })
-          : undefined
+          : null
       })
     }
   }
