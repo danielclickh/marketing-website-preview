@@ -3,7 +3,8 @@ import buildIndex from '@/../public/buildIndex.json'
 import {
   fetchAll,
   getStagingOnlyFilters,
-  getUnlistedFilters
+  getUnlistedFilters,
+  resourcesService
 } from '@/lib/api/strapi'
 import { getVideos } from '@/lib/videos'
 
@@ -17,14 +18,15 @@ interface IndexedItem extends Partial<Omit<BuildRecord, 'title'>> {
 export async function all(): Promise<Array<IndexedItem>> {
   const staticItems = buildIndex.filter((item) => item.indexable)
 
-  const [blogs, events, comparisons, pages, videos, integrations] =
+  const [blogs, events, comparisons, pages, videos, integrations, resources] =
     await Promise.all([
       cmsBlogs(),
       cmsEvents(),
       cmsComparisons(),
       cmsPages(),
       cmsVideos(),
-      cmsIntegrations()
+      cmsIntegrations(),
+      cmsResources()
     ])
 
   // Deduplicate by path (later entries override earlier ones)
@@ -37,7 +39,8 @@ export async function all(): Promise<Array<IndexedItem>> {
         ...comparisons,
         ...pages,
         ...videos,
-        ...integrations
+        ...integrations,
+        ...resources
       ].map((item) => [item.path, item])
     ).values()
   ]
@@ -199,4 +202,16 @@ export async function cmsIntegrations(): Promise<Array<IndexedItem>> {
       ]
     })
     .flat()
+}
+
+export async function cmsResources(): Promise<Array<IndexedItem>> {
+  const resources = await resourcesService.findAll()
+  return resources.map((resource) => {
+    return {
+      title: resource.title,
+      path: `/resources/${resource.category.slug}/${resource.slug}`,
+      lastModified: resource.updatedAt,
+      publishedAt: resource.publishedAt
+    }
+  })
 }

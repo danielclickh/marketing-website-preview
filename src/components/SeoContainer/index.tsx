@@ -1,4 +1,3 @@
-import { SeoMetadata } from '@/lib/api/strapi/types'
 import { absoluteOptimizedImageUrl, absoluteUrl } from '@/lib/next'
 import {
   applyLangPath,
@@ -7,6 +6,23 @@ import {
 } from '@/lib/utils/internationalisation'
 import { Languages } from 'next/dist/lib/metadata/types/alternative-urls-types'
 import Head from 'next/head'
+import { Thing, WithContext } from 'schema-dts'
+
+export interface SeoContainerProps {
+  title?: string
+  keywords?: string
+  description?: string
+  image?: Array<{ url: string }>
+  imageUrl?: string
+  type?: string
+  siteName?: string
+  path: string
+  robots?: string
+  locale?: string
+  schema?: WithContext<Thing> | Array<WithContext<Thing>> | any
+  languages?: Array<keyof Languages<string>>
+  lastModified?: Date | string
+}
 
 function SeoContainer({
   image,
@@ -22,7 +38,7 @@ function SeoContainer({
   schema,
   languages,
   lastModified
-}: SeoMetadata) {
+}: SeoContainerProps) {
   // Ensure the default language is always added for pages with alternate languages
   if (languages && !languages.includes(defaultLanguage)) {
     languages.push(defaultLanguage)

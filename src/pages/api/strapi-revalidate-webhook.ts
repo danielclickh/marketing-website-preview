@@ -1,5 +1,10 @@
 import { pages as learnPages } from '@/data/learn'
-import { fetchAll, isAuthorisedRevalidationRequest } from '@/lib/api/strapi'
+import {
+  fetchAll,
+  isAuthorisedRevalidationRequest,
+  resourceCategoriesService,
+  resourcesService
+} from '@/lib/api/strapi'
 import { absoluteUrl } from '@/lib/next'
 import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import { waitUntil } from '@vercel/functions'
@@ -201,6 +206,40 @@ const CONTENT_TYPE_HANDLERS: Record<
     if (data) {
       data.forEach((page) => {
         paths.push(`/openhouse/${page.slug}`)
+      })
+    }
+
+    await revalidate(response, paths)
+  },
+  'api::resource.resource': async function (body, response) {
+    const paths: Array<string> = ['/resources']
+
+    if (body?.entry?.category?.slug && body?.entry?.slug) {
+      paths.push(`/resources/${body.entry.category.slug}`)
+      paths.push(`/resources/${body.entry.category.slug}/${body.entry.slug}`)
+    }
+
+    await revalidate(response, paths)
+  },
+  'api::resource-category.resource-category': async function (body, response) {
+    const paths: Array<string> = ['/resources']
+
+    if (body?.entry?.slug) {
+      paths.push(`/resources/${body.entry.slug}`)
+
+      const categoryResources = await resourcesService.findAll({
+        fields: ['slug'],
+        populate: [], // Disables relationship populating which isn't needed here
+        filters: {
+          category: {
+            slug: {
+              $eq: body.entry.slug
+            }
+          }
+        }
+      })
+      categoryResources.forEach((resource) => {
+        paths.push(`/resources/${body.entry.slug}/${resource.slug}`)
       })
     }
 

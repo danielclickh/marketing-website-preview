@@ -1,8 +1,9 @@
-import { StrapiImage } from '../StrapiElements'
 import { StrapiImageType } from '@/lib/api/strapi/types'
+import { EntryImage } from '@/types/strapi'
+import Image from 'next/image'
 
 export interface AvatarsProps {
-  avatars: Array<StrapiImageType>
+  avatars: Array<StrapiImageType | EntryImage>
 }
 
 export default function Avatars({ avatars }: AvatarsProps) {
@@ -20,11 +21,12 @@ export default function Avatars({ avatars }: AvatarsProps) {
                 key={avatarIndex}
                 className='relative'
                 style={{ zIndex: avatars.length - avatarIndex }}>
-                <StrapiImage
-                  {...avatar}
+                <Image
+                  src={avatar.url}
+                  alt={avatar.alternativeText || ''}
+                  className='aspect-square !h-auto !w-14 rounded-full border-4 border-neutral-900'
                   width={44}
                   height={44}
-                  className='aspect-square !h-auto !w-14 rounded-full border-4 border-neutral-900'
                 />
               </span>
             )

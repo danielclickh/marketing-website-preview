@@ -1,8 +1,8 @@
 import { useDebounce } from '../../hooks'
 import { fetchBlogs } from '../api/blog'
+import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
-import CategorySelector from '@/components/CategorySelector'
 import { CUILink } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
@@ -80,18 +80,26 @@ export default function BlogsPage({
   const blogs = response?.data?.blogs || []
   const categories = response?.data?.categories || {}
 
-  const categoryList = Object.entries(categories).map(([slug, label]) => ({
-    text: label,
-    onClick: () => {
-      setPage(1)
-      setCategory(slug)
-    },
-    selected: category === slug
-  }))
+  const categoryList = Object.entries(categories).map(([slug, label]) => {
+    return {
+      kind: 'link',
+      href: `/blog?category=${slug}`,
+      label,
+      onClick(event) {
+        event.preventDefault()
+        setPage(1)
+        setCategory(slug)
+      },
+      active: category === slug
+    } satisfies Filter
+  })
 
   categoryList.unshift({
-    text: 'View All',
-    onClick: () => {
+    kind: 'link' as const,
+    href: `/blog`,
+    label: 'View All',
+    onClick: (event) => {
+      event.preventDefault()
       setPage(1)
       setSearch(null)
       setCategory(null)
@@ -99,7 +107,7 @@ export default function BlogsPage({
         inputRef.current.value = ''
       }
     },
-    selected: !category
+    active: !category
   })
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -229,7 +237,7 @@ export default function BlogsPage({
             onChange={useDebounce(onSearchChange, 500)}
             inputRef={inputRef}
           />
-          <CategorySelector options={categoryList} />
+          <PillFilters options={categoryList} />
         </div>
 
         {loading && <p className='mt-12 w-full text-center'>Loading...</p>}

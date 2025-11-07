@@ -186,11 +186,6 @@ const nextConfig = {
         permanent: true
       },
       {
-        source: '/lexicon/:path*',
-        destination: '/engineering-resources/:path*',
-        permanent: true
-      },
-      {
         source: '/company/events/v23-2-release-webinar',
         destination: 'https://www.youtube.com/watch?v=2o0vRMMIrkY',
         permanent: true
@@ -570,6 +565,16 @@ const nextConfig = {
       {
         source: '/blog/clickhouse-group-by-parallel-replicas-8900-cores',
         destination: '/blog/clickhouse-parallel-replicas',
+        permanent: true
+      },
+      {
+        source: '/lexicon/:path*',
+        destination: '/resources/engineering/:path*',
+        permanent: true
+      },
+      {
+        source: '/engineering-resources/:path*',
+        destination: '/resources/engineering/:path*',
         permanent: true
       }
     ]

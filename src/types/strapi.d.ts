@@ -19,11 +19,13 @@ export interface ApiRequestParams {
   populate?: Array<string> | any
   fields?: Array<string> | any
   sort?: Array<string> | any
-  pagination?: {
-    page: number
-    pageSize: number
-    withCount?: boolean
-  }
+  pagination?:
+    | {
+        page?: number
+        pageSize?: number
+        withCount?: boolean
+      }
+    | { start?: number; limit?: number; withCount?: boolean }
   publicationState?: string
   [key: string]: any
 }
@@ -120,4 +122,52 @@ export interface BlogModuleCodeBlock extends DynamicComponent {
   runnable: boolean
   playLink: string
   code: string
+}
+
+// -----
+// Components
+// -----
+
+export interface ComponentSeo {
+  title: null | string
+  keywords: null | string
+  description: null | string
+  image: null | EntryImage
+  schema: null | Record<any, unknown>
+  canonicalUrl: null | string
+  noindex: boolean
+  nofollow: boolean
+  robots: null | string
+}
+
+export interface ComponentAuthor {
+  name: string
+  avatarPng: Array<EntryImage>
+  profileLink: null | string
+}
+
+// -----
+// Content types
+// -----
+
+export interface EntryResourceCategory extends Entry {
+  name: string
+  slug: string
+  heading: null | string
+  seo: ComponentSeo
+}
+
+export interface EntryResource extends Entry {
+  title: string
+  slug: string
+  date: null | string
+  dateLabel: null | string
+  excerpt: string
+  content: null | string
+  stagingOnly: boolean
+  author: null | ComponentAuthor
+  tocSelectors: string
+  sections: Array<BlogModules>
+  seo: ComponentSeo
+  category: EntryResourceCategory
 }

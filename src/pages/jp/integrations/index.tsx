@@ -1,6 +1,6 @@
 'use client'
 
-import CategorySelector from '@/components/CategorySelector'
+import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import IntegrationTile from '@/components/IntegrationTile'
 import GetStartedFree from '@/components/jp/GetStartedFree'
 import IntegrationsClickPipesPromo from '@/components/jp/IntegrationsClickPipesPromo'
@@ -169,16 +169,19 @@ export default function IntegrationsPage({
   const categoryList = integrationGroups
     .map((group) => {
       return {
-        text: group.label,
-        selected: group.slug === category,
-        onClick() {
+        kind: 'link',
+        label: group.label,
+        href: `/jp/integrations?category=${group.slug}`,
+        active: group.slug === category,
+        onClick(event) {
+          event.preventDefault()
           setSearch(null)
           setCategory(group.slug)
         }
-      }
+      } satisfies Filter
     })
     .sort((a, b) => {
-      return a.text.localeCompare(b.text)
+      return a.label.localeCompare(b.label)
     })
 
   const getCategory = (categorySlug: string): IntegrationGroup | undefined => {
@@ -265,12 +268,16 @@ export default function IntegrationsPage({
             onChange={searchChange}
           />
           <div className='mx-auto max-w-3xl'>
-            <CategorySelector
+            <PillFilters
+              className='justify-center'
               options={[
                 {
-                  text: 'すべて',
-                  selected: !category,
-                  onClick() {
+                  kind: 'link',
+                  label: 'すべて',
+                  href: '/jp/integrations',
+                  active: !category,
+                  onClick(event) {
+                    event.preventDefault()
                     setCategory(null)
                     setSearch(null)
                   }
