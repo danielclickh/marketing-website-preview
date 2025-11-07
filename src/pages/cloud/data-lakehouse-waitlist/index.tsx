@@ -40,12 +40,12 @@ export default function ContactPage({
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <DotsContainer>
+        <div className='mx-auto mb-16 max-w-5xl text-center'>
+          <SuiTitle type='h1' className='text-[28px] md:text-4xl'>
+            ClickHouse as the query engine for your data lakehouse
+          </SuiTitle>
+        </div>
         <div className='mx-auto w-full lg:max-w-xl'>
-          <div className='mb-16 text-center'>
-            <SuiTitle type='h1' className='text-[28px] md:text-4xl'>
-              ClickHouse as the query engine for your data lakehouse
-            </SuiTitle>
-          </div>
           <CUICard className='bg-neutral-900/80'>
             <CUICard.Body className='p-4 lg:p-6'>
               {!formSuccess && (
