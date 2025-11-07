@@ -56,7 +56,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
           {!meetingModalSuccess && (
             <>
               <SuiTitle type='h3' className='mb-4'>
-                Book a 1-on-1 slot
+                Request a meeting
               </SuiTitle>
               <MarketoForm
                 formId={'1506'}
@@ -210,7 +210,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                 />
                 <div className='mx-auto space-y-4 lg:max-w-lg'>
                   <SuiTitle type='h2'>
-                    Find us at booth{' '}
+                    Coming to re:Invent? Find us at booth{' '}
                     <TiltedText type='black-on-yellow' className='px-1'>
                       #1125
                     </TiltedText>
@@ -221,13 +221,13 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                     toughest analytics challenges.
                   </p>
                   <p className='text-neutral-200'>
-                    Ready to skip the line? Book a 1-on-1 slot now and we'll
+                    Ready to skip the line? Request a 1-on-1 slot now and we'll
                     reserve dedicated time to meet.
                   </p>
                   <CUIButton
                     type='primary'
                     onClick={() => setIsMeetingModalOpen(true)}>
-                    Book a meeting
+                    Request a meeting
                   </CUIButton>
                 </div>
               </div>
