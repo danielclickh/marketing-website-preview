@@ -38,15 +38,14 @@ const algoliaIndexName = 'marketing_site'
       '!/index',
       '!/500',
       '!/404',
-      '!/engineering-resources/**',
+      '!/resources/**',
       '!/blog/**',
       '!/company/events/**',
       '!/videos/**',
       '!/integrations/**',
       '!/demos/**',
       '!/jp/**'
-    ],
-    'engineering-resources': ['/engineering-resources/**']
+    ]
   }
 
   log('Opening index build file')
