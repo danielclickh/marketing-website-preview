@@ -338,13 +338,18 @@ function StaticResult({ hit }: { hit: Hit<BaseHit> }) {
       label = hit.title
       icon = iconVideos
       break
-    case 'resources':
+    case 'resource':
       badge = 'Resource'
       link = joinPaths(
         '/resources',
         hit.attributes.category,
         hit.attributes.slug
       )
+      label = hit.title
+      icon = iconResources
+      break
+    case 'resource-category':
+      link = joinPaths('/resources', hit.attributes.slug)
       label = hit.title
       icon = iconResources
       break
