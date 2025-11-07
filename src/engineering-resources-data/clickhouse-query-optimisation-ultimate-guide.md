@@ -99,7 +99,7 @@ LIMIT 3
 -- Data read: 44.21 MB
 ```
 
-The primary key cannot help because `town` is not in the ORDER BY clause. ClickHouse must scan every granule to find matching rows.
+In the example above, the table has been created with a primary key of `(postcode, address)`, while the query is filtering on `town = 'LONDON'`. The primary key cannot help because `town` was not used to order the table data. ClickHouse must scan every granule to find matching rows.
 
 **With an appropriate primary key:**
 
