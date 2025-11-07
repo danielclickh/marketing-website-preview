@@ -7,10 +7,8 @@ import socialImage from './assets/social.png'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventType } from '@/types/events'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -18,33 +16,9 @@ import Link from 'next/link'
 import Script from 'next/script'
 import React, { useRef, useState } from 'react'
 
-interface PageProps extends CommonProps {
-  recentEvents: Array<EventType>
-}
-
-export const getStaticProps: GetStaticProps<PageProps> =
+export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
-    const { data: recentEvents }: { data: PageProps['recentEvents'] } =
-      await findAll('events', {
-        filters: {
-          $and: [
-            {
-              localDatetime: {
-                $gte: new Date().toISOString()
-              }
-            },
-            {
-              $or: getUnlistedFilters()
-            }
-          ]
-        },
-        sort: ['localDatetime:ASC'],
-        populate: ['thumbnailPng', 'location'],
-        pagination: { limit: 3 }
-      })
-
     const commonProps = await getCommonProps()
-
     return {
       props: {
         seo: {
@@ -54,23 +28,13 @@ export const getStaticProps: GetStaticProps<PageProps> =
           path: '/houseparty/the-sql',
           image: [{ url: socialImage.src }]
         },
-        recentEvents,
         ...commonProps
       }
     }
   }
 
-export default function Page({
-  footerData,
-  headerData,
-  seo,
-  recentEvents
-}: PageProps) {
+export default function Page({ footerData, headerData, seo }: CommonProps) {
   useGalaxyOnPage('reinvent2025AncillaryPage')
-
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
 
   return (
     <>
@@ -184,6 +148,11 @@ export default function Page({
                   />
                 </div>
               </div>
+            </section>
+
+            {/* Book a meeting */}
+            <section className='bg-neutral-800 py-16 lg:py-24'>
+              <div className='section-container'></div>
             </section>
 
             {/* FAQs */}
