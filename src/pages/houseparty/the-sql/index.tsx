@@ -208,7 +208,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
                   alt='ClickHouse booth location on AWS expo map'
                   className='mx-auto w-full max-w-lg'
                 />
-                <div className='mx-auto space-y-4 lg:max-w-lg'>
+                <div className='relative z-10 mx-auto space-y-4 lg:max-w-lg'>
                   <SuiTitle type='h2'>
                     Coming to re:Invent? Find us at booth{' '}
                     <TiltedText type='black-on-yellow' className='px-1'>
