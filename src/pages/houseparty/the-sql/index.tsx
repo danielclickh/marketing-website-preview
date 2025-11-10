@@ -3,14 +3,18 @@ import heroText from './assets/hero-text.svg'
 import image1 from './assets/image-1.png'
 import image2 from './assets/image-2.png'
 import image3 from './assets/image-3.png'
+import map from './assets/map.svg'
 import socialImage from './assets/social.png'
+import Accordion from '@/components-cleaned/Accordion'
+import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
+import MarketoForm from '@/components/MarketoForm'
+import Modal from '@/components/Modal'
+import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventType } from '@/types/events'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -18,33 +22,9 @@ import Link from 'next/link'
 import Script from 'next/script'
 import React, { useRef, useState } from 'react'
 
-interface PageProps extends CommonProps {
-  recentEvents: Array<EventType>
-}
-
-export const getStaticProps: GetStaticProps<PageProps> =
+export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
-    const { data: recentEvents }: { data: PageProps['recentEvents'] } =
-      await findAll('events', {
-        filters: {
-          $and: [
-            {
-              localDatetime: {
-                $gte: new Date().toISOString()
-              }
-            },
-            {
-              $or: getUnlistedFilters()
-            }
-          ]
-        },
-        sort: ['localDatetime:ASC'],
-        populate: ['thumbnailPng', 'location'],
-        pagination: { limit: 3 }
-      })
-
     const commonProps = await getCommonProps()
-
     return {
       props: {
         seo: {
@@ -54,27 +34,59 @@ export const getStaticProps: GetStaticProps<PageProps> =
           path: '/houseparty/the-sql',
           image: [{ url: socialImage.src }]
         },
-        recentEvents,
         ...commonProps
       }
     }
   }
 
-export default function Page({
-  footerData,
-  headerData,
-  seo,
-  recentEvents
-}: PageProps) {
+export default function Page({ footerData, headerData, seo }: CommonProps) {
   useGalaxyOnPage('reinvent2025AncillaryPage')
 
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
+  const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false)
+  const [meetingModalLoaded, setMeetingModalLoaded] = useState(false)
+  const [meetingModalSuccess, setMeetingModalSuccess] = useState(false)
 
   return (
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
+        <Modal
+          className='z-[999]'
+          isOpen={isMeetingModalOpen}
+          onClose={() => setIsMeetingModalOpen(false)}>
+          {!meetingModalSuccess && (
+            <>
+              <SuiTitle type='h3' className='mb-4'>
+                Request a meeting
+              </SuiTitle>
+              <MarketoForm
+                formId={'1506'}
+                clearbitTracking={true}
+                onLoad={() => {
+                  setMeetingModalLoaded(true)
+                }}
+                onSuccess={() => {
+                  setMeetingModalSuccess(true)
+                  return false // Stops page from reloading
+                }}
+              />
+            </>
+          )}
+
+          {!meetingModalLoaded && (
+            <p className='py-16 text-center'>Loading form...</p>
+          )}
+
+          {meetingModalSuccess && (
+            <div className='py-16'>
+              <SuiTitle type='h3' className='text-center'>
+                See you soon!
+              </SuiTitle>
+              <p className='mt-2 text-center text-neutral-200'>
+                Thanks for requesting a meeting. We will be in touch soon.
+              </p>
+            </div>
+          )}
+        </Modal>
         <div className='relative bg-[#010203]'>
           {/* Background texture */}
           <Image
@@ -186,6 +198,41 @@ export default function Page({
               </div>
             </section>
 
+            {/* Book a meeting */}
+            <section className='bg-neutral-800 py-16 lg:py-24'>
+              <div className='section-container flex flex-col items-center gap-10 lg:flex-row'>
+                <Image
+                  src={map}
+                  width={723}
+                  height={642}
+                  alt='ClickHouse booth location on AWS expo map'
+                  className='mx-auto w-full max-w-lg'
+                />
+                <div className='mx-auto space-y-4 lg:max-w-lg'>
+                  <SuiTitle type='h2'>
+                    Coming to re:Invent? Find us at booth{' '}
+                    <TiltedText type='black-on-yellow' className='px-1'>
+                      #1125
+                    </TiltedText>
+                  </SuiTitle>
+                  <p className='text-neutral-200'>
+                    Stop by and chat with the team. We're on the expo floor at
+                    booth #1125. Let's explore how we can help you tackle your
+                    toughest analytics challenges.
+                  </p>
+                  <p className='text-neutral-200'>
+                    Ready to skip the line? Request a 1-on-1 slot now and we'll
+                    reserve dedicated time to meet.
+                  </p>
+                  <CUIButton
+                    type='primary'
+                    onClick={() => setIsMeetingModalOpen(true)}>
+                    Request a meeting
+                  </CUIButton>
+                </div>
+              </div>
+            </section>
+
             {/* FAQs */}
             <div className='relative py-10 lg:py-20' id='faqs'>
               <div className='bg-shadow-element yellow-shadow align-shadow-right absolute right-0 h-full w-1/2 -translate-y-1/4' />
@@ -195,47 +242,50 @@ export default function Page({
                 </SuiTitle>
 
                 <div className='mt-10 space-y-2.5'>
-                  {[
-                    {
-                      title: 'What if I don’t know ClickHouse?',
-                      content:
-                        'No worries at all! We\'d still love to have you join the party. Since you\'re curious, ClickHouse is an open-source analytics database that’s super fast — like, "query billions of rows in milliseconds" fast. It is the real-time data warehouse for analytics. If you want to learn more, [join a training](/company/events?loc=houseparty&category=Live+Training#upcoming-events), peruse our [videos online](/videos?loc=houseparty), check out some [use cases](/use-cases?loc=houseparty) and [user stories](/user-stories?loc=houseparty), and get started with a [free trial](https://console.clickhouse.cloud/signUp?loc=houseparty-faq) of ClickHouse Cloud (it’s ClickHouse, we just run it for you).'
-                    },
-                    {
-                      title: 'What should I wear?',
-                      content:
-                        'We’re all about keeping it chill. Think casual, cool, and comfortable—something you can dance in. But hey, if you’ve got a sparkly outfit you’ve been dying to wear, this is Vegas after all. Go ahead and shine!'
-                    },
-                    {
-                      title: 'Will there be food and drinks?',
-                      content:
-                        'We’ve got you covered with a selection of drinks from an open bar throughout the evening. There is no food at the venue.'
-                    },
-                    {
-                      title: 'Can I bring a friend (or two, or three)?',
-                      content:
-                        'Yes, please invite your friends but note that [everyone must register](https://luma.com/clickhouse-house-party-2025) to receive a QR code. Each person will need to present their QR code to enter the event.'
-                    },
-                    {
-                      title: 'What if I don’t know anyone?',
-                      content:
-                        'Perfect! This is the best place to meet some awesome new people. Besides, you know ClickHouse and that’s an amazing way to make new friends.'
-                    },
-                    {
-                      title:
-                        'Is a party at a club in Vegas during a tech conference safe?',
-                      content:
-                        'We are working with venue staff and security to create a safe event for everyone. We will be enforcing a [Code of Conduct](/events-code-of-conduct) at the event with a monitored email where attendees can report any issues should they arise.'
-                    }
-                  ].map((faq, index) => {
-                    return (
-                      <FaqAccordion key={index} question={faq.title}>
+                  <Accordion
+                    className='!space-y-3'
+                    items={[
+                      {
+                        handle: 'What if I don’t know ClickHouse?',
+                        content:
+                          'No worries at all! We\'d still love to have you join the party. Since you\'re curious, ClickHouse is an open-source analytics database that’s super fast — like, "query billions of rows in milliseconds" fast. It is the real-time data warehouse for analytics. If you want to learn more, [join a training](/company/events?loc=houseparty&category=Live+Training#upcoming-events), peruse our [videos online](/videos?loc=houseparty), check out some [use cases](/use-cases?loc=houseparty) and [user stories](/user-stories?loc=houseparty), and get started with a [free trial](https://console.clickhouse.cloud/signUp?loc=houseparty-faq) of ClickHouse Cloud (it’s ClickHouse, we just run it for you).'
+                      },
+                      {
+                        handle: 'What should I wear?',
+                        content:
+                          'We’re all about keeping it chill. Think casual, cool, and comfortable—something you can dance in. But hey, if you’ve got a sparkly outfit you’ve been dying to wear, this is Vegas after all. Go ahead and shine!'
+                      },
+                      {
+                        handle: 'Will there be food and drinks?',
+                        content:
+                          'We’ve got you covered with a selection of drinks from an open bar throughout the evening. There is no food at the venue.'
+                      },
+                      {
+                        handle: 'Can I bring a friend (or two, or three)?',
+                        content:
+                          'Yes, please invite your friends but note that [everyone must register](https://luma.com/clickhouse-house-party-2025) to receive a QR code. Each person will need to present their QR code to enter the event.'
+                      },
+                      {
+                        handle: 'What if I don’t know anyone?',
+                        content:
+                          'Perfect! This is the best place to meet some awesome new people. Besides, you know ClickHouse and that’s an amazing way to make new friends.'
+                      },
+                      {
+                        handle:
+                          'Is a party at a club in Vegas during a tech conference safe?',
+                        content:
+                          'We are working with venue staff and security to create a safe event for everyone. We will be enforcing a [Code of Conduct](/events-code-of-conduct) at the event with a monitored email where attendees can report any issues should they arise.'
+                      }
+                    ].map(({ handle, content }) => ({
+                      handle,
+                      content: (
                         <SuiText className='max-w-3xl'>
-                          <Markdown>{faq.content}</Markdown>
+                          <Markdown>{content}</Markdown>
                         </SuiText>
-                      </FaqAccordion>
-                    )
-                  })}
+                      ),
+                      className: '!bg-neutral-725 !border-neutral-725'
+                    }))}
+                  />
                 </div>
               </div>
             </div>
@@ -243,41 +293,5 @@ export default function Page({
         </div>
       </Layout>
     </>
-  )
-}
-
-function FaqAccordion({
-  question,
-  children,
-  open = false
-}: {
-  question: string | React.ReactNode
-  children: React.ReactNode
-  open?: boolean
-}) {
-  const [isOpen, setIsOpen] = useState(open)
-  return (
-    <div className='rounded bg-neutral-725 text-white'>
-      <button
-        className={`flex w-full items-center justify-between px-8 py-6 text-left transition-colors lg:px-14 lg:text-xl ${
-          isOpen ? 'text-primary-300' : 'text-white/80 hover:text-white'
-        }`}
-        onClick={() => setIsOpen((old) => !old)}>
-        <span className='flex-1'>{question}</span>
-        <span className='relative block h-4 w-4 flex-shrink-0 flex-grow-0'>
-          <span
-            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-primary-300 transition-all duration-300 ${
-              isOpen ? '-rotate-90 opacity-0' : ''
-            }`}></span>
-          <span
-            className={`absolute left-0 top-1/2 block h-0.5 w-full -translate-y-1/2 rounded bg-primary-300 transition-all duration-300 ${
-              isOpen ? '' : 'rotate-90'
-            }`}></span>
-        </span>
-      </button>
-      <div className={`px-8 pb-8 lg:px-14 ${isOpen ? 'block' : 'hidden'}`}>
-        {children}
-      </div>
-    </div>
   )
 }
