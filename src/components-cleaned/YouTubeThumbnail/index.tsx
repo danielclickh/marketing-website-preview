@@ -54,6 +54,7 @@ export default function YouTubeThumbnail({
       height={height}
       alt={alt || `YouTube Video: ${videoId}`}
       onError={handleError}
+      unoptimized={true}
       {...props}
     />
   )
