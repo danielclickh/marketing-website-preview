@@ -98,7 +98,7 @@ export default function SplunkPage({
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/overview'
+              href='/docs/use-cases/observability/clickstack/overview?loc=splunk-comparison-page'
               type='primary'
               size='lg'
               weight='semibold'
@@ -155,7 +155,7 @@ export default function SplunkPage({
           }
         />
         {/* Yellow triangle */}
-        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[44rem] bg-primary-300 lg:top-[50rem]' />
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-[44rem] bg-primary-300 lg:top-[56rem]' />
         <div className='section-container relative z-10 space-y-6'>
           <div className='mb-16 text-center lg:mb-24'>
             <SuiTitle
@@ -174,7 +174,7 @@ export default function SplunkPage({
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
               Join Anthropic in migrating to ClickStack from Splunk
             </h2>
-            <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
+            <div className='grid grid-cols-1 gap-6 lg:grid-cols-2 lg:space-y-0'>
               <QuoteCard
                 content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
                 link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
@@ -185,13 +185,15 @@ export default function SplunkPage({
                   alt: 'Anthropic'
                 }}
               />
-              <PlayOnClickVideo
-                provider='youtube'
-                id='SrLKbzdFEWA'
-                thumbnail={<YouTubeThumbnail videoId='SrLKbzdFEWA' />}
-                playButtonEyebrow='Customer story'
-                playButtonLabel='Hear from Anthropic'
-              />
+              <div className='order-first lg:order-last'>
+                <PlayOnClickVideo
+                  provider='youtube'
+                  id='SrLKbzdFEWA'
+                  thumbnail={<YouTubeThumbnail videoId='SrLKbzdFEWA' />}
+                  playButtonEyebrow='Customer story'
+                  playButtonLabel='Hear from Anthropic'
+                />
+              </div>
             </div>
           </div>
 
@@ -364,9 +366,6 @@ export default function SplunkPage({
           <SuiText size='base' color='text-default' weight='normal'>
             Cut costs, boost performance, and unlock observability at scale with
             ClickHouse.
-            <br />
-            We’ll get you started on a 30 day trial and $300 credits to spend at
-            your own pace.
           </SuiText>
           <p className='mt-8 flex flex-col justify-center gap-2 sm:flex-row sm:gap-4'>
             <CUIButton
@@ -374,8 +373,8 @@ export default function SplunkPage({
               size='lg'
               className='mx-auto w-full sm:!px-10 md:w-auto'
               target='_blank'
-              href='https://console.clickhouse.cloud/signUp?loc=splunk-comparison-page-get-started'>
-              Create a free account
+              href='/docs/use-cases/observability/clickstack/overview?loc=splunk-comparison-page-get-started'>
+              Get started with open-source
             </CUIButton>
             <CUIButton
               type='secondary'
