@@ -270,29 +270,24 @@ export default function SplunkPage({
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
           <div className='lg:max-w-xl'>
             <SuiTitle type='h2' className='mb-6'>
-              Built for OTel at scale
+              Built for OTel at scale by design
             </SuiTitle>
-            <SuiText className='space-y-6'>
+            <SuiText className='space-y-6 text-neutral-200'>
               <p>
                 <strong>
-                  OTel-first. Real-time querying. Long term retention.
+                  OTel-first by design. Real-time querying.
+                  <br />
+                  Long term retention. No sampling.
                 </strong>
               </p>
               <p>
-                ClickStack, built on ClickHouse, is OpenTelemetry-native from
-                the ground up- built to handle logs, traces, metrics, and
-                replays at petabyte scale with full SQL, real-time aggregations,
-                and cost-efficient long-term retention.
+                ClickStack, built on ClickHouse, is OpenTelemetry-native by
+                design, supporting unified logs, traces, metrics, and replays at
+                petabyte scale.
               </p>
               <p>
-                Splunk added OTel as an afterthought, requiring ingestion and
-                indexing before querying, limiting flexibility and driving up
-                costs. It was never designed for fast, full-fidelity OTel
-                workloads.
-              </p>
-              <p>
-                With ClickStack, OTel data stays live and queryable instantly -
-                no sampling, no pre-aggregation, no lock-in.
+                Splunk's earlier architecture was never optimized for OTel's
+                high-cardinality, high-throughput demands.
               </p>
             </SuiText>
           </div>
@@ -664,7 +659,7 @@ function ClickHouseVersusSplunk() {
         <div className='w-max'>
           <Image src={animationSplunk} alt='Splunk' width={283} height={360} />
           <span className='relative z-10 inline-block rounded-full border border-neutral-600 bg-neutral-700 px-4 py-2 font-mono text-xs font-bold leading-none text-neutral-200'>
-            Search head
+            Search heads
           </span>
           <div className='mx-auto flex w-max gap-3.5'>
             {splunkLines.map((keyframes, lineIndex) => {
