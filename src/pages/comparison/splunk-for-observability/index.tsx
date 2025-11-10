@@ -617,8 +617,8 @@ function ClickHouseVersusSplunk() {
           <Image
             src={animationClickhouse}
             alt='ClickHouse'
-            width={297}
-            height={311}
+            width={283}
+            height={360}
           />
           <span className='relative'>
             <span className='absolute inset-0 block animate-fadeInOut bg-primary-400 blur-lg' />
@@ -663,7 +663,7 @@ function ClickHouseVersusSplunk() {
 
         {/* Splunk */}
         <div className='w-max'>
-          <Image src={animationSplunk} alt='Splunk' width={297} height={311} />
+          <Image src={animationSplunk} alt='Splunk' width={283} height={360} />
           <span className='relative z-10 inline-block rounded-full border border-neutral-600 bg-neutral-700 px-4 py-2 font-mono text-xs font-bold leading-none text-neutral-200'>
             Search head
           </span>
