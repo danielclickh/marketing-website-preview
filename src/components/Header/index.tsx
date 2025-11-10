@@ -29,12 +29,11 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     string | React.ReactNode
   >(
     <>
-      <span className='mr-2 inline-block scale-125'>🎉</span> ClickHouse
-      welcomes LibreChat: Introducing the open-source Agentic Data Stack
+      <span className='mr-2 inline-block scale-125'>🎉</span> Join us for House Party, the SQL with the Chainsmokers
     </>
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/librechat-open-source-agentic-data-stack'
+    '/houseparty/the-sql'
   )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
