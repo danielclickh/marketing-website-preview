@@ -25,8 +25,6 @@ export default function UseCasesCards({
   className = '',
   galaxyNamespace
 }: UseCasesCardsProps) {
-  const [hovering, setHovering] = useState<null | number>(null)
-  const disable = (id: number) => hovering !== null && hovering !== id
   return (
     <div
       className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ${className}`}>
@@ -37,14 +35,11 @@ export default function UseCasesCards({
         description='Deliver instant insights and dashboards at scale. Analyze billions of rows in real time with millisecond results.'
         link='/use-cases/real-time-analytics'
         linkText='Explore real-time analytics'
-        className={disable(1) ? 'saturate-0' : ''}
         galaxyEventName={
           galaxyNamespace
             ? `${galaxyNamespace}.useCases.realTimeAnalytics`
             : undefined
         }
-        onMouseEnter={() => setHovering(1)}
-        onMouseLeave={() => setHovering(null)}
       />
       <Card
         image={imageObservability}
@@ -53,14 +48,11 @@ export default function UseCasesCards({
         description='Store and query logs, metrics and traces at scale using ClickStack, the open source observability stack powered by ClickHouse.'
         link='/use-cases/observability'
         linkText='Explore observability'
-        className={disable(4) ? 'saturate-0' : ''}
         galaxyEventName={
           galaxyNamespace
             ? `${galaxyNamespace}.useCases.observability`
             : undefined
         }
-        onMouseEnter={() => setHovering(4)}
-        onMouseLeave={() => setHovering(null)}
       />
       <Card
         image={imageDataWarehousing}
@@ -69,14 +61,11 @@ export default function UseCasesCards({
         description='Analyze and explore data instantly for insights and apps. Scale faster by offloading heavy workloads.'
         link='/use-cases/data-warehousing'
         linkText='Explore data warehousing'
-        className={disable(3) ? 'saturate-0' : ''}
         galaxyEventName={
           galaxyNamespace
             ? `${galaxyNamespace}.useCases.dataWarehousing`
             : undefined
         }
-        onMouseEnter={() => setHovering(3)}
-        onMouseLeave={() => setHovering(null)}
       />
       <Card
         image={imageMlAndGenai}
@@ -85,12 +74,9 @@ export default function UseCasesCards({
         description='Power machine learning and GenAI with blazing-fast vector search, instant aggregations, and scalable training.'
         link='/use-cases/machine-learning-and-data-science'
         linkText='Explore ML & GenAI'
-        className={disable(2) ? 'saturate-0' : ''}
         galaxyEventName={
           galaxyNamespace ? `${galaxyNamespace}.useCases.mlAndGenAi` : undefined
         }
-        onMouseEnter={() => setHovering(2)}
-        onMouseLeave={() => setHovering(null)}
       />
     </div>
   )
@@ -124,23 +110,21 @@ function Card({
       className={`relative transition duration-300 ${className}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
-      <CUICard.Header className='hidden sm:block'>
+      <CUICard.Body className='mb-auto p-4 sm:p-6'>
         <Image
           src={image}
-          width={288}
-          height={233}
-          alt={`Diagram of ${title}`}
-          className='-mb-2 aspect-[57/44] h-auto w-full from-90% object-cover object-top gradient-mask-to-b'
+          width={88}
+          height={88}
+          alt={title}
+          className='mb-6 hidden aspect-square sm:block'
         />
-      </CUICard.Header>
-      <CUICard.Body className='mb-auto space-y-4 p-4'>
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-4 sm:mb-4'>
           <Image
             src={icon}
             width={20}
             height={20}
             alt={`Icon for ${title}`}
-            className='size-5'
+            className='size-5 sm:hidden'
           />
           <h3 className='font-bold xl:text-xl'>{title}</h3>
           <span className='ml-auto flex-shrink-0 flex-grow-0 font-bold text-primary-300 sm:hidden'>
