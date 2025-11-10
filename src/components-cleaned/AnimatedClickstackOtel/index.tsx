@@ -110,16 +110,16 @@ export default function AnimatedClickstackOtel() {
               viewBox='0 0 44 44'>
               <path
                 stroke='#dfdfdf'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
                 d='M36.67 3.67H7.33a3.67 3.67 0 0 0-3.66 3.66v7.34a3.67 3.67 0 0 0 3.66 3.66h29.34a3.67 3.67 0 0 0 3.66-3.66V7.33a3.67 3.67 0 0 0-3.66-3.66m0 22H7.33a3.67 3.67 0 0 0-3.66 3.66v7.34a3.67 3.67 0 0 0 3.66 3.66h29.34a3.67 3.67 0 0 0 3.66-3.66v-7.34a3.67 3.67 0 0 0-3.66-3.66'
               />
               <path
                 stroke='#dfdfdf'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='3.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='3.5'
                 d='M11 11h.02M11 33h.02'
               />
             </svg>
@@ -194,9 +194,9 @@ export default function AnimatedClickstackOtel() {
               viewBox='0 0 44 44'>
               <path
                 stroke='#dfdfdf'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
                 d='M11 20.17h7.33m-3.66-3.67v7.33M27.5 22h.02M33 18.33h.02m-1.27-9.16h-19.5a7.33 7.33 0 0 0-7.3 6.58q0 .14-.03.28c-.15 1.23-1.25 10.47-1.25 13.3a5.5 5.5 0 0 0 5.5 5.5c1.83 0 2.75-.91 3.66-1.83l2.6-2.6a3.7 3.7 0 0 1 2.59-1.07h7.96c.97 0 1.9.39 2.6 1.08L31.16 33c.91.92 1.83 1.83 3.66 1.83a5.5 5.5 0 0 0 5.5-5.5c0-2.83-1.1-12.07-1.25-13.3l-.03-.28a7.33 7.33 0 0 0-7.3-6.58'
               />
             </svg>
