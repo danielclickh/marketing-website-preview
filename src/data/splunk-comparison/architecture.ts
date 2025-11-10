@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Architecture',
-  description: `Splunk began as one of the first log aggregation tools, built on a universal forwarder, indexer, and search head architecture from an era when gigabytes were the norm. It has since grown into multiple products with distinct backends and SKUs, with a design that was never intended for fast aggregations or high-cardinality data in the petabyte era.
+  description: `Splunk started as an early log aggregator using a forwarder–indexer–search head model built for gigabyte-scale data. It’s since expanded into multiple products with separate backends, but its architecture wasn’t designed for fast aggregations or high-cardinality workloads at petabyte scale.
 
-ClickHouse takes a different approach with a high-performance columnar engine that delivers superior compression and seamless real-time aggregation at any scale. Built on this foundation, ClickStack offers a simpler, faster observability platform powered by OpenTelemetry and HyperDX. ClickHouse Cloud’s separation of compute and storage offers the same sub-second latency with cost-efficient long-term retention.`,
+ClickStack, built on ClickHouse’s high-performance columnar engine, delivers superior compression and seamless real-time aggregation at any scale. It provides a simpler, faster observability platform powered by OpenTelemetry and HyperDX. In ClickHouse Cloud, separated compute and storage maintain sub-second latency with cost-efficient long-term retention.`,
   rows: [
     {
       heading: 'Unified architecture with single engine for all workloads',
@@ -36,7 +36,7 @@ ClickHouse takes a different approach with a high-performance columnar engine th
       splunk: {
         icon: 'no',
         label:
-          'Shared resources on indexers; ingest and search contend for CPU/I/O'
+          'Shared resources on indexers; ingest and search contend for CPU & I/O'
       }
     },
     {

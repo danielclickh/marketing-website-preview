@@ -32,7 +32,7 @@ ClickStack with ClickHouse delivers consistent sub-second performance through a 
       clickhouse: {
         icon: 'yes',
         label:
-          'Extremely high insert rates — typically tens of MB/sec per core (≈1 TB/day per core uncompressed)'
+          'Extremely high insert rates - typically tens of MB/sec per core (≈1 TB/day per core uncompressed)'
       },
       splunk: {
         icon: 'intermediate',
@@ -78,7 +78,7 @@ ClickStack with ClickHouse delivers consistent sub-second performance through a 
       }
     },
     {
-      heading: 'Compression efficiency',
+      heading: 'Compression efficiency for OpenTelemetry data',
       clickhouse: { icon: 'yes', label: '10x–30x' },
       splunk: { icon: 'intermediate', label: '2x - 4x' }
     },

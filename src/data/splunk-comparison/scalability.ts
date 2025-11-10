@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Scalability',
-  description: `Splunk’s scalability is limited by an architecture that couples indexing and search on the same nodes. Each indexer must balance ingest and query workloads, reducing throughput under heavy load. Scaling requires manually adding indexers, with no native elasticity or automation. Pre-aggregations like Data Model Acceleration use scheduled jobs, delaying data availability. SmartStore adds storage flexibility, but compute scaling remains static and performance tuning depends heavily on I/O and pipeline configuration.
+  description: `Splunk’s coupled indexing and search architecture limits scalability, forcing nodes to handle both ingest and queries. Scaling is manual with no elasticity, and Data Model Acceleration delays data availability through scheduled jobs. Even with SmartStore, compute remains static and performance hinges on I/O tuning.
 
-With ClickHouse, ClickStack scales efficiently in every direction - vertically through vectorized execution that fully exploits modern CPUs, and horizontally across distributed shards. Compute and storage are decoupled, enabling independent scaling of ingest and query workloads for predictable performance. Materialized views update incrementally, preserving real-time accuracy and fidelity. In ClickHouse Cloud, compute scales dynamically to absorb bursts, maintaining consistent sub-second performance at petabyte scale.`,
+ClickStack scales efficiently with ClickHouse - vertically through vectorized execution that maximizes CPU use, and horizontally across shards. Decoupled compute and storage enable independent scaling for ingest and queries, while incremental materialized views are updated in real-time.`,
   rows: [
     {
       heading: 'Read and write isolation',

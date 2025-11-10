@@ -11,11 +11,14 @@ import logoElastic from './assets/logo-elastic.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import splunkTableLogo from './assets/splunk-table-logo.svg'
+import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
 import CounterAnimation from '@/components-cleaned/CounterAnimation'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import Sticky from '@/components-cleaned/Sticky'
+import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
@@ -81,17 +84,16 @@ export default function SplunkPage({
           <SuiText className='space-y-6 text-neutral-200'>
             <p>
               ClickStack is a high-performance, open-source observability stack
-              built on ClickHouse. It delivers high compression, lightning-fast
-              queries and powerful aggregations across high cardinality logs,
-              metrics, traces, session replays at petabyte scale.
+              built on ClickHouse for OpenTelemetry at scale. It delivers high
+              compression and lightning-fast queries across high cardinality
+              OTel data at petabyte scale.
             </p>
             <p>
               Splunk, in contrast, is a legacy log analytics and monitoring
-              platform built on an index-based search architecture and
-              proprietary Search Processing Language (SPL). Designed primarily
-              for IT operations and security analytics, it faces limitations in
-              cost efficiency, scalability, and performance for modern
-              observability workloads at large scale.
+              platform built on an index-based search architecture and a
+              proprietary query language. Designed for IT operations and
+              security analytics, it faces limitations in cost efficiency and
+              performance for modern observability workloads at large scale.
             </p>
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
@@ -101,7 +103,7 @@ export default function SplunkPage({
               size='lg'
               weight='semibold'
               className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
-              Get started
+              Get started with open-source
             </CUIButton>
             <CUIButton
               href='/company/contact?loc=splunk-comparison-page-hero'
@@ -170,9 +172,9 @@ export default function SplunkPage({
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
-              Join others migrating to ClickStack from Splunk
+              Join Anthropic in migrating to ClickStack from Splunk
             </h2>
-            <div className='space-y-6 lg:grid lg:grid-cols-1 lg:gap-6 lg:space-y-0'>
+            <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
               <QuoteCard
                 content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
                 link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
@@ -182,6 +184,13 @@ export default function SplunkPage({
                   height: 41 * 0.9,
                   alt: 'Anthropic'
                 }}
+              />
+              <PlayOnClickVideo
+                provider='youtube'
+                id='SrLKbzdFEWA'
+                thumbnail={<YouTubeThumbnail videoId='SrLKbzdFEWA' />}
+                playButtonEyebrow='Customer story'
+                playButtonLabel='Hear from Anthropic'
               />
             </div>
           </div>
@@ -198,9 +207,9 @@ export default function SplunkPage({
               <SuiText>
                 Splunk’s complex mix of ingest, workload, and host-based pricing
                 makes cost forecasting difficult. ClickStack uses simple
-                resource-based pricing, so you pay for compute and storage only.
-                With separation of storage and compute and at least 10x
-                compression, users can enjoy long term cost-efficient retention.
+                resource-based pricing -pay only for compute and storage. With
+                separation of storage and compute and high compression, users
+                can enjoy long term cost-efficient retention.
               </SuiText>
             </div>
 
@@ -230,8 +239,8 @@ export default function SplunkPage({
               </div>
               <SuiText>
                 Unlike Splunk’s separate Enterprise, Cloud, and Observability
-                platforms, ClickStack unifies logs, metrics, traces, and replays
-                in one system - no multiple SKUs or disconnected data stores and
+                platforms, ClickStack unifies logs, metrics andtraces, in one
+                system - no multiple SKUs or disconnected data stores and
                 disjointed user experiences.
               </SuiText>
             </div>
@@ -251,6 +260,42 @@ export default function SplunkPage({
                 avoiding lock-in.
               </SuiText>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='bg-neutral-750 py-16'>
+        <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
+          <div className='lg:max-w-xl'>
+            <SuiTitle type='h2' className='mb-6'>
+              Built for OTel at scale
+            </SuiTitle>
+            <SuiText className='space-y-6'>
+              <p>
+                <strong>
+                  OTel-first. Real-time querying. Long term retention.
+                </strong>
+              </p>
+              <p>
+                ClickStack, built on ClickHouse, is OpenTelemetry-native from
+                the ground up- built to handle logs, traces, metrics, and
+                replays at petabyte scale with full SQL, real-time aggregations,
+                and cost-efficient long-term retention.
+              </p>
+              <p>
+                Splunk added OTel as an afterthought, requiring ingestion and
+                indexing before querying, limiting flexibility and driving up
+                costs. It was never designed for fast, full-fidelity OTel
+                workloads.
+              </p>
+              <p>
+                With ClickStack, OTel data stays live and queryable instantly -
+                no sampling, no pre-aggregation, no lock-in.
+              </p>
+            </SuiText>
+          </div>
+          <div className='order-first mx-auto w-full max-w-max lg:order-last'>
+            <AnimatedClickstackOtel />
           </div>
         </div>
       </section>
@@ -613,7 +658,7 @@ function ClickHouseVersusSplunk() {
           width={60}
           height={60}
           alt='VS'
-          className='-mt-28 self-center rounded-full shadow-xl'
+          className='self-center rounded-full shadow-xl'
         />
 
         {/* Splunk */}

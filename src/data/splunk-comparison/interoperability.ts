@@ -2,9 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Interoperability',
-  description: `Splunk’s interoperability is constrained by its closed architecture and reliance on proprietary SPL. While it offers good OpenTelemetry and Kafka integration, it requires data to be ingested and indexed before querying. This limits flexibility for external or historical datasets. It lacks support for open table and file formats such as Parquet or Iceberg, has no catalog integration, and provides only limited SQL connectivity through SDKs or REST APIs.
+  description: `Splunk’s closed architecture and proprietary SPL limit interoperability. Though it integrates with OpenTelemetry and Kafka, all data must be ingested and indexed before querying, restricting flexibility with external or historical data. It lacks support for open formats like Parquet or Iceberg, catalog integration, and offers only limited SQL access via SDKs or APIs.
 
-ClickStack embraces open standards across ingestion, query, and storage. It supports both streaming and batch ingestion via OpenTelemetry, Kafka, HTTP, and S3, while offering full SQL for analytics alongside native engines for MySQL, PostgreSQL, MongoDB, and Iceberg. With native Parquet and Iceberg support, external table querying, and standard JDBC/ODBC access, ClickStack integrates seamlessly into modern data ecosystems without vendor lock-in.`,
+ClickStack embraces open standards across ingestion, query, and storage. It supports streaming and batch ingestion via OpenTelemetry, Kafka, HTTP, and S3, with full SQL and native engines for MySQL, PostgreSQL, MongoDB, and Iceberg. Native Parquet and Iceberg support, external table querying, and standard JDBC/ODBC access enable seamless integration into modern data stacks without lock-in.`,
   rows: [
     {
       heading: 'Standard query language',
