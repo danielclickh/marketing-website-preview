@@ -3,14 +3,6 @@ import path from 'path'
 
 const REPO = 'ClickHouse/ClickHouse'
 
-function log(message: string) {
-  console.log(`[${new Date().toTimeString()}] ${message}`)
-}
-
-function warn(message: string) {
-  console.warn(`[${new Date().toTimeString()}] ${message}`)
-}
-
 function generateFile(data: Record<string, number>) {
   try {
     const outputPath = path.join(
@@ -20,9 +12,9 @@ function generateFile(data: Record<string, number>) {
       'githubApiData.json'
     )
     fs.writeFileSync(outputPath, JSON.stringify(data))
-    log('GitHub data successfully written to file.')
+    console.log('GitHub data successfully written to file.')
   } catch (error) {
-    warn(`Error writing GitHub data to file:  ${JSON.stringify(error)}`)
+    console.warn(`Error writing GitHub data to file:  ${JSON.stringify(error)}`)
   }
 }
 
@@ -37,10 +29,12 @@ async function getStars(defaultValue: number) {
     if (res && typeof res.watchers_count === 'number') {
       stars = res.watchers_count
     } else {
-      warn('Invalid response from GitHub API, using fallback stars value')
+      console.warn(
+        'Invalid response from GitHub API, using fallback stars value'
+      )
     }
   } catch (error) {
-    warn(`Error fetching GitHub stars: ${error}`)
+    console.warn(`Error fetching GitHub stars: ${error}`)
   }
 
   return stars
@@ -59,10 +53,10 @@ async function getPullRequests(defaultValue: number) {
     if (res && typeof res.total_count === 'number') {
       prs = res.total_count
     } else {
-      warn('Invalid response from GitHub API, using fallback PR value')
+      console.warn('Invalid response from GitHub API, using fallback PR value')
     }
   } catch (error) {
-    warn(`Error fetching GitHub PRs: ${error}`)
+    console.warn(`Error fetching GitHub PRs: ${error}`)
   }
 
   return prs
@@ -94,7 +88,7 @@ async function getContributorCount(defaultValue: number) {
         contributors = data.length
       }
     } else {
-      warn(
+      console.warn(
         'Invalid response from GitHub API, using fallback contributors value'
       )
     }
@@ -105,16 +99,54 @@ async function getContributorCount(defaultValue: number) {
   return contributors
 }
 
-async function triggerGitHubFile() {
-  log('Starting to build GitHub file')
+async function getReleasesCount(defaultValue: number) {
+  let releases = defaultValue
 
-  const [stars, prs, contributors] = await Promise.all([
+  try {
+    // Limited to 1 per page since we get the count from the number of pages.
+    const response = await fetch(
+      `https://api.github.com/repos/${REPO}/releases?per_page=1`
+    )
+
+    if (response.ok) {
+      const linkHeader = response.headers.get('Link')
+
+      // Get the count from the link header
+      if (linkHeader) {
+        const match = linkHeader.match(/[?&]page=(\d+)>; rel="last"/)
+        if (match) {
+          releases = parseInt(match[1], 10)
+        }
+      }
+
+      // If there's no Link header, there may be only one release
+      else {
+        const data = await response.json()
+        releases = Array.isArray(data) ? data.length : releases
+      }
+    } else {
+      console.warn(
+        'Invalid response from GitHub API, using fallback releases value'
+      )
+    }
+  } catch (error) {
+    console.error('Failed to get release count:', error)
+  }
+
+  return releases
+}
+
+async function triggerGitHubFile() {
+  console.log('Starting to build GitHub file')
+
+  const [stars, prs, contributors, releases] = await Promise.all([
     getStars(41243),
     getPullRequests(56995),
-    getContributorCount(2440)
+    getContributorCount(2440),
+    getReleasesCount(600)
   ])
 
-  generateFile({ stars, prs, contributors })
+  generateFile({ stars, prs, contributors, releases })
 }
 
 triggerGitHubFile()
