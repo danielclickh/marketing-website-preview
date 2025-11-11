@@ -1,11 +1,13 @@
 import atScaleBottom from './assets/at-scale-bottom.svg'
 import atScaleTop from './assets/at-scale-top.svg'
 import heroTerminal from './assets/hero-terminal.svg'
+import imageClickbench from './assets/image-clickbench.png'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import Accordion from '@/components-cleaned/Accordion'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
-import { CUICard } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
+import GetStarted from '@/components/GetStarted'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
@@ -68,6 +70,7 @@ export default function ClickHouseServerPage({
   seo,
   headerData,
   footerData,
+  platforms,
   releaseVideos
 }: PageProps) {
   useGalaxyOnPage('productOpenSourcePage')
@@ -475,7 +478,17 @@ export default function ClickHouseServerPage({
 
       {/* Community */}
       <section className='bg-white/5 py-16 lg:py-24'>
-        <div className='section-container flex w-full flex-col-reverse items-center justify-between gap-x-8 gap-y-16 lg:flex-row'>
+        <div
+          className='section-container bg-shadow-element yellow-shadow flex w-full flex-col-reverse items-center justify-between gap-x-8 gap-y-16 lg:flex-row'
+          style={
+            {
+              '--top-side': '25%',
+              '--left-side': 'auto',
+              '--right-side': '25%',
+              '--scale': 0.7,
+              '--opacity': 0.025
+            } as React.CSSProperties
+          }>
           <div className='w-full max-w-xl space-y-6 text-center lg:text-left'>
             <SuiTitle type='h2'>
               Join the <TiltedText type='black-on-yellow'>100k+</TiltedText>{' '}
@@ -559,6 +572,51 @@ export default function ClickHouseServerPage({
           </div>
         </div>
       </section>
+
+      {/* ClickBench */}
+      <section className='section-container my-16 lg:my-24'>
+        <div className='rounded-lg bg-primary-300 p-4 text-neutral-900 md:p-8 lg:p-16'>
+          <div className='mx-auto max-w-3xl space-y-6 text-center'>
+            <SuiTitle type='h2'>
+              All proven by benchmarks that can be reproduced by{' '}
+              <TiltedText type='white-on-black' className='px-2'>
+                anyone
+              </TiltedText>
+              .
+            </SuiTitle>
+            <p className='text-neutral-700'>
+              At ClickHouse, we measure performance relentlessly - believing
+              every millisecond matters. We continually push to make queries
+              faster.
+            </p>
+          </div>
+          <Image
+            src={imageClickbench}
+            width={2282 / 3}
+            height={1515 / 3}
+            alt='Screenshot of benchmarks'
+            className='mx-auto my-8 block lg:my-12'
+          />
+          <div className='mx-auto max-w-3xl space-y-6 text-center'>
+            <p className='text-neutral-700'>
+              We back up our claims with public, reproducible benchmarks like
+              ClickBench and JSONBench. You can explore our results directly and
+              compare ClickHouse against other technologies before deciding how
+              to power your analytics.
+            </p>
+            <CUIButton
+              href='https://benchmark.clickhouse.com/'
+              type='secondary'
+              size='lg'
+              linkClass='block md:inline-block'
+              className='group w-full !border-neutral-800 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:mx-auto md:w-auto md:!px-10'>
+              View our benchmarks
+            </CUIButton>
+          </div>
+        </div>
+      </section>
+
+      <GetStarted platforms={platforms} />
     </Layout>
   )
 }
