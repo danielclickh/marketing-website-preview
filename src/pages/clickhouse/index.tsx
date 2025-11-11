@@ -1,21 +1,46 @@
 import heroTerminal from './assets/hero-terminal.svg'
 import logoAdevinta from './assets/logo-adevinta.svg'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { CUICard } from '@/components/ClickUI'
+import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiCodeblock, SuiText, SuiTitle } from '@/components/sui'
+import { marketingVideosService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { EntryMarketingVideo } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export const getStaticProps: GetStaticProps<CommonProps> =
+interface PageProps extends CommonProps {
+  releaseVideos: Array<EntryMarketingVideo>
+}
+
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
-    const commonProps = await getCommonProps()
+    const [commonProps, releaseVideos] = await Promise.all([
+      getCommonProps(),
+      marketingVideosService.findMany({
+        populate: false,
+        filters: {
+          categories: {
+            id: {
+              $eq: 11 // Releases
+            }
+          }
+        },
+        pagination: {
+          limit: 3
+        }
+      })
+    ])
     return {
       props: {
         seo: {
@@ -25,7 +50,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           path: '/clickhouse',
           languages: ['en', 'ja']
         },
-        ...commonProps
+        ...commonProps,
+        releaseVideos
       }
     }
   }
@@ -34,8 +60,8 @@ export default function ClickHouseServerPage({
   seo,
   headerData,
   footerData,
-  platforms
-}: CommonProps) {
+  releaseVideos
+}: PageProps) {
   useGalaxyOnPage('productOpenSourcePage')
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -274,6 +300,45 @@ export default function ClickHouseServerPage({
           </div>
         </div>
       </section>
+
+      {/* Release calls */}
+      {releaseVideos.length > 0 && (
+        <>
+          <section className='section-container my-16 flex flex-col items-center gap-x-20 gap-y-8 lg:my-24 lg:flex-row'>
+            <div className='space-y-6'>
+              <SuiTitle type='h2'>
+                <TiltedText type='black-on-yellow' className='px-2'>
+                  Lightning fast
+                </TiltedText>{' '}
+                releases for everyone
+              </SuiTitle>
+              <p className='text-neutral-200'>
+                ClickHouse feature development moves as fast as it queries. We
+                ship monthly releases packed with new features, performance
+                improvements, and bug fixes - shared openly in our community
+                calls.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/videos?category=releases'
+                  className='font-bold text-primary-300'>
+                  View all release calls
+                </LinkWithArrow>
+              </p>
+            </div>
+            <div className='w-full lg:max-w-lg'>
+              <PlayOnClickVideo
+                provider='youtube'
+                id={releaseVideos[0].VideoID}
+                thumbnail={
+                  <YouTubeThumbnail videoId={releaseVideos[0].VideoID} />
+                }
+              />
+            </div>
+          </section>
+          <HRSeparator />
+        </>
+      )}
     </Layout>
   )
 }
