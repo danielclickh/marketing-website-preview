@@ -270,7 +270,7 @@ export default function SplunkPage({
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
           <div className='lg:max-w-xl'>
             <SuiTitle type='h2' className='mb-6'>
-              Built for OTel at scale by design
+              Designed &amp; built for OTel at scale
             </SuiTitle>
             <SuiText className='space-y-6 text-neutral-200'>
               <p>
@@ -286,7 +286,7 @@ export default function SplunkPage({
                 petabyte scale.
               </p>
               <p>
-                Splunk's earlier architecture was never optimized for OTel's
+                Splunk’s legacy architecture is not optimized for OTel’s
                 high-cardinality, high-throughput demands.
               </p>
             </SuiText>
@@ -367,7 +367,6 @@ export default function SplunkPage({
               type='primary-dark'
               size='lg'
               className='mx-auto w-full sm:!px-10 md:w-auto'
-              target='_blank'
               href='/docs/use-cases/observability/clickstack/overview?loc=splunk-comparison-page-get-started'>
               Get started with open-source
             </CUIButton>
@@ -375,7 +374,6 @@ export default function SplunkPage({
               type='secondary'
               size='lg'
               className='mx-auto w-full !border-neutral-800 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white sm:!px-10 md:w-auto'
-              target='_blank'
               href='/company/contact?loc=splunk-comparison-page-get-started'>
               Contact sales
             </CUIButton>
