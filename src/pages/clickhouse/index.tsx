@@ -2,6 +2,7 @@ import atScaleBottom from './assets/at-scale-bottom.svg'
 import atScaleTop from './assets/at-scale-top.svg'
 import heroTerminal from './assets/hero-terminal.svg'
 import logoAdevinta from './assets/logo-adevinta.svg'
+import Accordion from '@/components-cleaned/Accordion'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { CUICard } from '@/components/ClickUI'
@@ -393,6 +394,79 @@ export default function ClickHouseServerPage({
             <div className='aspect-video rounded bg-neutral'></div>
             <div className='aspect-video rounded bg-neutral'></div>
           </div>
+        </div>
+      </section>
+
+      {/* What makes CH different? */}
+      <section
+        className='bg-shadow-element relative my-16 lg:my-24'
+        style={
+          {
+            '--top-side': '224px'
+          } as React.CSSProperties
+        }>
+        <div className='section-container lg:flex lg:justify-between lg:gap-x-12'>
+          {/* Content */}
+          <div className='pb-10 text-center lg:text-left'>
+            <div className='w-full space-y-6 lg:sticky lg:top-32 lg:max-w-md'>
+              <Image
+                src='/faq-icon.svg'
+                alt='FAQ Icon'
+                width={72}
+                height={72}
+                className='inline-block'
+              />
+              <SuiTitle type='h2'>What's different about ClickHouse?</SuiTitle>
+              <p className='text-neutral-200'>
+                Open-source. Column-orientated. Built for blazingly fast
+                analytics with SQL.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/company/contact'
+                  className='font-bold text-primary-300'>
+                  Ask us anything
+                </LinkWithArrow>
+              </p>
+            </div>
+          </div>
+
+          {/* Accordions */}
+          <Accordion
+            className='mx-auto w-full max-w-3xl lg:mr-0'
+            items={[
+              {
+                handle: 'Flexible architecture & columnar storage',
+                content:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+              },
+              {
+                handle: 'Blazing fast queries and inserts',
+                content:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+              },
+              {
+                handle: 'Infinitely scalable for Petabyte workloads',
+                content:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+              },
+              {
+                handle: 'Highly reliable',
+                content:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+              },
+              {
+                handle: 'Powerful data operations',
+                content:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+              },
+              {
+                handle: 'Ease of use and interoperability',
+                content:
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+              }
+            ]}
+          />
         </div>
       </section>
     </Layout>
