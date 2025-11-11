@@ -10,11 +10,14 @@ import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import QuoteCard from '@/components/QuoteCard'
+import ScaleToContainer from '@/components/ScaleToContainer'
+import SocialIcon from '@/components/SocialIcon'
 import TiltedText from '@/components/TiltedText'
 import { SuiCodeblock, SuiText, SuiTitle } from '@/components/sui'
 import { marketingVideosService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import formatStat from '@/lib/utils/numbers'
 import { CommonProps } from '@/types/homepage'
 import { EntryMarketingVideo } from '@/types/strapi'
 import { GetStaticProps } from 'next'
@@ -467,6 +470,93 @@ export default function ClickHouseServerPage({
               }
             ]}
           />
+        </div>
+      </section>
+
+      {/* Community */}
+      <section className='bg-white/5 py-16 lg:py-24'>
+        <div className='section-container flex w-full flex-col-reverse items-center justify-between gap-x-8 gap-y-16 lg:flex-row'>
+          <div className='w-full max-w-xl space-y-6 text-center lg:text-left'>
+            <SuiTitle type='h2'>
+              Join the <TiltedText type='black-on-yellow'>100k+</TiltedText>{' '}
+              developers using ClickHouse today
+            </SuiTitle>
+            <p className='text-neutral-200'>
+              Backed by{' '}
+              <strong>
+                {Intl.NumberFormat('en', {
+                  notation: 'standard'
+                })
+                  .format(headerData.github.contributors)
+                  .toLowerCase()}
+                + contributors
+              </strong>{' '}
+              and thousands of commits, ClickHouse thrives on a vibrant
+              open-source community that pushes the project forward at speed.
+            </p>
+            <ul className='mx-auto grid max-w-40 grid-cols-2 gap-6 sm:max-w-max sm:grid-cols-4 lg:mx-0'>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='X'
+                  href='https://x.com/ClickhouseDB'
+                  imgSrc='/socials/x.svg'
+                />
+              </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='Slack'
+                  href='/slack'
+                  prefetch={false}
+                  imgSrc='/socials/slack.svg'
+                />
+              </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='Telegram'
+                  href='https://telegram.me/clickhouse_en'
+                  imgSrc='/socials/telegram.svg'
+                />
+              </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='Meetup'
+                  href='https://www.meetup.com/pro/clickhouse'
+                  imgSrc='/socials/meetup.svg'
+                />
+              </li>
+            </ul>
+          </div>
+          <div className='w-full max-w-max'>
+            <ScaleToContainer scaleUp={false}>
+              <div className='grid h-[290px] w-[564px] -translate-y-5 grid-cols-4 grid-rows-4 gap-x-16 gap-y-20'>
+                {Object.entries({
+                  Contributors: headerData.github.contributors,
+                  PRs: headerData.github.prs,
+                  Releases: headerData.github.releases,
+                  Stars: headerData.github.stars
+                }).map(([label, value], statIndex) => {
+                  const className = [
+                    'translate-y-10 -translate-x-5',
+                    '',
+                    'translate-y-10 translate-x-2',
+                    '-translate-x-2'
+                  ][statIndex % 4]
+                  return (
+                    <div
+                      key={statIndex}
+                      className={`relative col-span-2 row-span-2 flex items-center justify-center text-7xl font-bold ${className}`}>
+                      <span className='flex flex-col'>
+                        {formatStat(value)}+
+                        <span className='text-2xl leading-snug text-primary-300'>
+                          {label}
+                        </span>
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
+            </ScaleToContainer>
+          </div>
         </div>
       </section>
     </Layout>

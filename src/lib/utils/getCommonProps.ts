@@ -16,40 +16,29 @@ export async function getCommonProps(): Promise<Props> {
   const getStartedData = await getGetStartedData()
 
   // Set default fallback
-  let stars = 36719
-  let contributors = 1300
-  let prs = 36000
+  const github: HeaderProps['github'] = {
+    stars: 36719,
+    contributors: 1300,
+    prs: 36000,
+    releases: 700
+  }
 
   if (typeof githubApiData === 'object') {
-    if (
-      githubApiData.hasOwnProperty('stars') &&
-      typeof githubApiData.stars === 'number'
-    ) {
-      stars = githubApiData.stars
-    }
-    if (
-      githubApiData.hasOwnProperty('contributors') &&
-      typeof githubApiData.contributors === 'number'
-    ) {
-      contributors = githubApiData.contributors
-    }
-    if (
-      githubApiData.hasOwnProperty('prs') &&
-      typeof githubApiData.prs === 'number'
-    ) {
-      prs = githubApiData.prs
-    }
+    ;(Object.keys(github) as Array<keyof typeof github>).forEach((key) => {
+      if (
+        githubApiData.hasOwnProperty(key) &&
+        typeof githubApiData[key] === 'number'
+      ) {
+        github[key] = githubApiData[key]
+      }
+    })
   }
 
   return {
     footerData,
     platforms: getStartedData.platforms,
     headerData: {
-      github: {
-        stars,
-        contributors,
-        prs
-      }
+      github
     }
   }
 }
