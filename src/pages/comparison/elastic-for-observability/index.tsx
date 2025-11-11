@@ -117,12 +117,12 @@ export default function ElasticPage({
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/overview'
+              href='/docs/use-cases/observability/clickstack/overview?loc=elastic-comparison-page'
               type='primary'
               size='lg'
               weight='semibold'
               className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
-              Get started
+              Get started with open-source
             </CUIButton>
             <CUIButton
               href='/company/contact?loc=elastic-comparison-page-hero'
@@ -425,24 +425,19 @@ export default function ElasticPage({
           <SuiText size='base' color='text-default' weight='normal'>
             Cut costs, boost performance, and unlock observability at scale with
             ClickHouse.
-            <br />
-            We’ll get you started on a 30 day trial and $300 credits to spend at
-            your own pace.
           </SuiText>
           <p className='mt-8 flex flex-col justify-center gap-2 sm:flex-row sm:gap-4'>
             <CUIButton
               type='primary-dark'
               size='lg'
               className='mx-auto w-full sm:!px-10 md:w-auto'
-              target='_blank'
-              href='https://console.clickhouse.cloud/signUp?loc=elastic-comparison-page-get-started'>
-              Create a free account
+              href='/docs/use-cases/observability/clickstack/overview?loc=elastic-comparison-page-get-started'>
+              Get started with open-source
             </CUIButton>
             <CUIButton
               type='secondary'
               size='lg'
               className='mx-auto w-full !border-neutral-800 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white sm:!px-10 md:w-auto'
-              target='_blank'
               href='/company/contact?loc=elastic-comparison-page-get-started'>
               Contact sales
             </CUIButton>
