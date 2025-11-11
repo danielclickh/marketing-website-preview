@@ -2,9 +2,13 @@ import Accordion from '@/components-cleaned/Accordion'
 import Markdown from '@/components/Markdown'
 import { SuiTitle } from '@/components/sui'
 import { BlogModuleFaqs } from '@/types/strapi'
-import React from 'react'
+import React, { Fragment } from 'react'
 
-export default function BlogModulesFaqs({ title, items }: BlogModuleFaqs) {
+export default function BlogModulesFaqs({
+  title,
+  items,
+  displayType = 'Accordion'
+}: BlogModuleFaqs) {
   return (
     <>
       {title && (
@@ -12,16 +16,29 @@ export default function BlogModulesFaqs({ title, items }: BlogModuleFaqs) {
           {title}
         </SuiTitle>
       )}
-      <Accordion
-        items={items.map((item) => ({
-          handle: item.question,
-          content: (
-            <Markdown className='rich-text-content toc-ignore'>
-              {item.answer}
-            </Markdown>
+      {displayType === 'Accordion' && (
+        <Accordion
+          items={items.map((item) => ({
+            handle: item.question,
+            content: (
+              <Markdown className='rich-text-content toc-ignore'>
+                {item.answer}
+              </Markdown>
+            )
+          }))}
+        />
+      )}
+      {displayType === 'Simple' &&
+        items.map((item, itemIndex) => {
+          return (
+            <Fragment key={itemIndex}>
+              <SuiTitle type='h3'>{item.question}</SuiTitle>
+              <Markdown className='rich-text-content toc-ignore'>
+                {item.answer}
+              </Markdown>
+            </Fragment>
           )
-        }))}
-      />
+        })}
     </>
   )
 }

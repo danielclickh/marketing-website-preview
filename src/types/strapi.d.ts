@@ -70,6 +70,7 @@ export type BlogModules =
   | BlogModuleFaqs
   | BlogModuleSummary
   | BlogModuleCodeBlock
+  | BlogModulesYoutubeVideo
 
 export interface BlogModuleMarketoForm extends DynamicComponent {
   __component: 'blog-modules.marketo-form'
@@ -107,6 +108,7 @@ export interface BlogModuleVideo extends DynamicComponent {
 export interface BlogModuleFaqs extends DynamicComponent {
   __component: 'blog-modules.faqs'
   title: string | null
+  displayType: 'Simple' | 'Accordion'
   items: Array<{ question: string; answer: string }>
 }
 
@@ -122,6 +124,11 @@ export interface BlogModuleCodeBlock extends DynamicComponent {
   runnable: boolean
   playLink: string
   code: string
+}
+
+export interface BlogModuleYoutubeVideo extends DynamicComponent {
+  __component: 'blog-modules.youtube-video'
+  videoId: string
 }
 
 // -----
