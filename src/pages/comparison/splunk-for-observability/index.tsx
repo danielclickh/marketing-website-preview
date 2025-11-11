@@ -270,7 +270,7 @@ export default function SplunkPage({
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
           <div className='lg:max-w-xl'>
             <SuiTitle type='h2' className='mb-6'>
-              Designed &amp; built for OTel at scale
+              Designed for OTel at scale
             </SuiTitle>
             <SuiText className='space-y-6 text-neutral-200'>
               <p>
