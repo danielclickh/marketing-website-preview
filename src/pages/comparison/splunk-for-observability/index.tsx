@@ -286,7 +286,7 @@ export default function SplunkPage({
                 petabyte scale.
               </p>
               <p>
-                Splunk’s legacy architecture is not optimized for OTel’s
+                Splunk’s architecture is not optimized for OTel’s
                 high-cardinality, high-throughput demands.
               </p>
             </SuiText>

@@ -216,10 +216,9 @@ export default function ClickHouseServerPage({
                 size='lg'
                 weight='semibold'
                 href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
-                target='_blank'
                 linkClass='w-full md:w-auto'
                 className='w-full !px-10 md:w-auto'>
-                Get started
+                Get started with open-source
               </CUIButton>
               <CUIButton
                 type='secondary'
