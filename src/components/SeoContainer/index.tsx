@@ -122,9 +122,10 @@ function SeoContainer({
       <link rel='canonical' href={canonicalUrl} key='canonical' />
       {languages && languages.length > 0 && (
         <>
-          {languages.map((language) => {
+          {languages.map((language, languageIndex) => () => {
             return (
               <link
+                key={`lang-${language}-${languageIndex}`}
                 rel='alternate'
                 hrefLang={language}
                 href={languageCanonicalUrl(language)}

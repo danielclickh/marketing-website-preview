@@ -34,7 +34,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
     <div
       ref={ref}
       className={`fixed left-0 right-0 top-0 flex h-dvh overflow-auto bg-[#323232] bg-opacity-50 transition-opacity ${
-        isOpen ? 'z-50' : 'pointer-events-none -z-50 opacity-0'
+        isOpen ? 'z-[999]' : 'pointer-events-none -z-50 opacity-0'
       } ${className}`}>
       <div className='m-auto flex-1 p-4'>
         <div
@@ -58,8 +58,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(function Modal(
               <path d='m6 6 12 12' />
             </svg>
           </button>
-
-          {children}
+          {isOpen && children}
         </div>
       </div>
     </div>
