@@ -5,6 +5,7 @@ import {
   ApiRequestParams,
   ApiResponse,
   ComponentSeo,
+  EntryMarketingVideo,
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
@@ -351,10 +352,19 @@ export async function findImageDetails(imageUrl: string) {
 
 class StrapiEntryService<EntryType> {
   constructor(
-    private apiUri: string,
-    private stagingFilters: boolean | string = false,
-    private deepPopulate: boolean = false
+    private readonly apiUri: string,
+    private readonly defaultParams: Partial<ApiRequestParams> = {},
+    private readonly stagingFilters: boolean | string = false
   ) {}
+
+  private mergeDefaultParams(params: ApiRequestParams) {
+    if (!this.defaultParams) return params
+
+    return {
+      ...this.defaultParams,
+      ...params
+    }
+  }
 
   private mergeStagingFilters(params: ApiRequestParams) {
     if (!this.stagingFilters) return params
@@ -369,15 +379,10 @@ class StrapiEntryService<EntryType> {
     }
   }
 
-  private applyDeepPopulate(params: ApiRequestParams) {
-    if (!params.populate && this.deepPopulate) {
-      params.populate = 'deep'
-    }
-    return params
-  }
-
   private modifyParams(params: ApiRequestParams) {
-    return this.mergeStagingFilters(this.applyDeepPopulate(params))
+    params = this.mergeDefaultParams(params)
+    params = this.mergeStagingFilters(params)
+    return params
   }
 
   async findMany<T extends boolean = false>(
@@ -490,14 +495,18 @@ export function seoFieldToNextComponentProps(
 }
 
 export const resourceCategoriesService =
-  new StrapiEntryService<EntryResourceCategory>(
-    'resource-categories',
-    false,
-    true
-  )
+  new StrapiEntryService<EntryResourceCategory>('resource-categories', {
+    populate: 'deep'
+  })
 
 export const resourcesService = new StrapiEntryService<EntryResource>(
   'resources',
-  'stagingOnly',
-  true
+  { populate: 'deep', sort: ['publishedAt:DESC'] },
+  'stagingOnly'
 )
+
+export const marketingVideosService =
+  new StrapiEntryService<EntryMarketingVideo>('marketing-videos', {
+    populate: 'deep',
+    sort: ['VideoDate:DESC']
+  })

@@ -146,9 +146,20 @@ export interface ComponentAuthor {
   profileLink: null | string
 }
 
+export interface ComponentPromotion {
+  title: string
+  description: string
+  image: EntryImage
+}
+
 // -----
 // Content types
 // -----
+
+export interface EntryTag extends Entry {
+  name: string
+  slug: string
+}
 
 export interface EntryResourceCategory extends Entry {
   name: string
@@ -170,4 +181,26 @@ export interface EntryResource extends Entry {
   sections: Array<BlogModules>
   seo: ComponentSeo
   category: EntryResourceCategory
+}
+
+export interface EntryMarketingVideoCategory extends Entry {
+  CategoryName: string
+}
+
+export interface EntryMarketingVideo extends Entry {
+  Title: string
+  Slug: string
+  VideoDate: string
+  VideoID: string
+  Description: string | null
+  RelatedVideos: Array<EntryMarketingVideo>
+  categories: Array<EntryMarketingVideoCategory>
+  IntroText: null | string
+  seo: null | {
+    title: null | string
+    description: null | string
+    image: null | EntryImage
+  }
+  tags: Array<EntryTag>
+  promotion: null | ComponentPromotion
 }
