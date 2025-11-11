@@ -1,3 +1,5 @@
+import atScaleBottom from './assets/at-scale-bottom.svg'
+import atScaleTop from './assets/at-scale-top.svg'
 import heroTerminal from './assets/hero-terminal.svg'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
@@ -341,6 +343,38 @@ export default function ClickHouseServerPage({
           <HRSeparator />
         </>
       )}
+
+      {/* At scale */}
+      <section className='section-container mt-16 lg:mt-24'>
+        <Image
+          src={atScaleTop}
+          width={317}
+          height={240}
+          alt=''
+          className='mx-auto'
+        />
+        <div className='mx-auto max-w-4xl space-y-6 text-center'>
+          <SuiTitle type='h2'>
+            From your laptop to quadrillion scale and beyond
+          </SuiTitle>
+          <p className='text-neutral-200'>
+            Start in-process with Python on your laptop (CHDB), exploring
+            millions of rows.
+          </p>
+          <p className='text-neutral-200'>
+            Scale the same single-binary engine on your laptop to billions,
+            expand to trillions on a server, and then out to hundreds of nodes
+            for quadrillions.
+          </p>
+        </div>
+        <Image
+          src={atScaleBottom}
+          width={974}
+          height={487}
+          alt=''
+          className='mx-auto'
+        />
+      </section>
     </Layout>
   )
 }
