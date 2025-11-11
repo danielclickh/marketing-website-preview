@@ -98,7 +98,7 @@ export default function SplunkPage({
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
-              href='/docs/use-cases/observability/clickstack/overview?loc=splunk-comparison-page'
+              href='/docs/use-cases/observability/clickstack/getting-started?loc=splunk-comparison-page'
               type='primary'
               size='lg'
               weight='semibold'
@@ -367,7 +367,7 @@ export default function SplunkPage({
               type='primary-dark'
               size='lg'
               className='mx-auto w-full sm:!px-10 md:w-auto'
-              href='/docs/use-cases/observability/clickstack/overview?loc=splunk-comparison-page-get-started'>
+              href='/docs/use-cases/observability/clickstack/getting-started?loc=splunk-comparison-page-get-started'>
               Get started with open-source
             </CUIButton>
             <CUIButton
