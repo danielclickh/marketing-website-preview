@@ -70,7 +70,7 @@ export type BlogModules =
   | BlogModuleFaqs
   | BlogModuleSummary
   | BlogModuleCodeBlock
-  | BlogModulesYoutubeVideo
+  | BlogModuleYoutubeVideo
 
 export interface BlogModuleMarketoForm extends DynamicComponent {
   __component: 'blog-modules.marketo-form'
