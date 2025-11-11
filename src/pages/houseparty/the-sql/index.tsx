@@ -50,7 +50,6 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <Modal
-          className='z-[999]'
           isOpen={isMeetingModalOpen}
           onClose={() => setIsMeetingModalOpen(false)}>
           {!meetingModalSuccess && (
