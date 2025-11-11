@@ -20,7 +20,9 @@ import Link from 'next/link'
 import React from 'react'
 
 interface PageProps extends CommonProps {
-  releaseVideos: Array<EntryMarketingVideo>
+  releaseVideos: Array<
+    Omit<EntryMarketingVideo, 'seo' | 'categories' | 'RelatedVideos' | 'tags'>
+  >
 }
 
 export const getStaticProps: GetStaticProps<PageProps> =
