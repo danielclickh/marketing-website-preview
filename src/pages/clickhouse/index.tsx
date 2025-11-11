@@ -375,6 +375,26 @@ export default function ClickHouseServerPage({
           className='mx-auto'
         />
       </section>
+
+      {/* Videos */}
+      <section className='bg-primary-300 py-16 text-neutral-900 lg:py-24'>
+        <div className='section-container'>
+          <div className='mx-auto mb-8 max-w-3xl space-y-6 text-center lg:mb-12'>
+            <SuiTitle type='h2'>So what makes ClickHouse soo fast?</SuiTitle>
+            <p className='text-neutral-700'>
+              Learn what makes ClickHouse soo fast from isolated inserts and
+              queries, efficient data pruning, and high compression to a
+              state-of-the-art query engine and, above all, meticulous attention
+              to detail.
+            </p>
+          </div>
+          <div className='grid grid-cols-3 gap-4'>
+            <div className='aspect-video rounded bg-neutral'></div>
+            <div className='aspect-video rounded bg-neutral'></div>
+            <div className='aspect-video rounded bg-neutral'></div>
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }
