@@ -4,6 +4,7 @@ import heroTerminal from './assets/hero-terminal.svg'
 import imageClickbench from './assets/image-clickbench.png'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import Accordion from '@/components-cleaned/Accordion'
+import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -221,7 +222,20 @@ export default function ClickHouseServerPage({
                 Join others migrating from legacy and proprietary data stores
                 for their analytics
               </h2>
-              <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
+              <CarouselPaginated
+                simulateTouch={false}
+                slidesPerView={1}
+                spaceBetween={16}
+                breakpoints={{
+                  768: {
+                    slidesPerView: 2
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 24
+                  }
+                }}
+                className='!-mx-6 !px-6 lg:!-mx-10 lg:!-mb-5 lg:!px-10'>
                 {(
                   [
                     {
@@ -264,6 +278,50 @@ export default function ClickHouseServerPage({
                         height: 29,
                         alt: 'Adevinta'
                       }
+                    },
+                    {
+                      link: '/comparison/elastic-for-observability',
+                      title: 'Migrating from Elastic',
+                      description:
+                        'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically',
+                      quote:
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                      logo: {
+                        src: logoAdevinta,
+                        width: 126,
+                        height: 29,
+                        alt: 'Adevinta',
+                        className: 'bg-white'
+                      }
+                    },
+                    {
+                      link: '/comparison/redshift',
+                      title: 'Migrating from Redshift',
+                      description:
+                        'Run faster cold queries, tap into broader integrations, and avoid CSP lock-in',
+                      quote:
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                      logo: {
+                        src: logoAdevinta,
+                        width: 126,
+                        height: 29,
+                        alt: 'Adevinta',
+                        className: 'bg-white'
+                      }
+                    },
+                    {
+                      title: 'Migrating from Apache Pinot',
+                      description:
+                        'Simplify your open-source stack and enjoy faster queries, richer aggregation functions, and full SQL compliance.',
+                      quote:
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                      logo: {
+                        src: logoAdevinta,
+                        width: 126,
+                        height: 29,
+                        alt: 'Adevinta',
+                        className: 'bg-white'
+                      }
                     }
                   ] satisfies Array<{
                     link?: string
@@ -299,14 +357,14 @@ export default function ClickHouseServerPage({
                           }
                           logo={{
                             ...migration.logo,
-                            className: 'ml-auto opacity-40'
+                            className: `ml-auto opacity-40 ${migration.logo?.className || ''}`
                           }}
                         />
                       </CUICard.Body>
                     </CUICard>
                   )
                 })}
-              </div>
+              </CarouselPaginated>
             </div>
           </div>
         </div>
@@ -338,13 +396,20 @@ export default function ClickHouseServerPage({
               </p>
             </div>
             <div className='w-full lg:max-w-lg'>
-              <PlayOnClickVideo
-                provider='youtube'
-                id={releaseVideos[0].VideoID}
-                thumbnail={
-                  <YouTubeThumbnail videoId={releaseVideos[0].VideoID} />
-                }
-              />
+              <CarouselPaginated simulateTouch={false}>
+                {releaseVideos.map((releaseVideo, releaseVideoIndex) => {
+                  return (
+                    <PlayOnClickVideo
+                      key={releaseVideoIndex}
+                      provider='youtube'
+                      id={releaseVideo.VideoID}
+                      thumbnail={
+                        <YouTubeThumbnail videoId={releaseVideo.VideoID} />
+                      }
+                    />
+                  )
+                })}
+              </CarouselPaginated>
             </div>
           </section>
           <HRSeparator />
