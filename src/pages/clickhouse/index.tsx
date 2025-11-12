@@ -503,12 +503,25 @@ export default function ClickHouseServerPage({
             slideToClickedSlide={true}
             slidesPerView={3}
             effect='coverflow'>
-            <div className='aspect-video rounded bg-neutral' />
-            <div className='aspect-video rounded bg-neutral' />
-            <div className='aspect-video rounded bg-neutral' />
-            <div className='aspect-video rounded bg-neutral' />
-            <div className='aspect-video rounded bg-neutral' />
-            <div className='aspect-video rounded bg-neutral' />
+            {[
+              'vsykFYns0Ws',
+              'dvGlPh2bJFo',
+              '_w3zQg695c0',
+              'UJpVAx7o1aY',
+              'MH10E3rVvnM',
+              'O5qecdQ7Y18',
+              'dccGLSuYWy0'
+              //'7QXKBKDOkJE'
+            ].map((videoId, videoIndex) => {
+              return (
+                <PlayOnClickVideo
+                  key={videoIndex}
+                  provider='youtube'
+                  id={videoId}
+                  thumbnail={<YouTubeThumbnail videoId={videoId} />}
+                />
+              )
+            })}
           </CarouselPaginated>
         </div>
       </section>
