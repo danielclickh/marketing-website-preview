@@ -27,8 +27,9 @@ import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
-import { Mousewheel, EffectCreative } from 'swiper/modules'
+import { Mousewheel, EffectCreative, EffectCoverflow } from 'swiper/modules'
 
 interface PageProps extends CommonProps {
   releaseVideos: Array<
@@ -490,11 +491,25 @@ export default function ClickHouseServerPage({
               to detail.
             </p>
           </div>
-          <div className='grid grid-cols-3 gap-4'>
-            <div className='aspect-video rounded bg-neutral'></div>
-            <div className='aspect-video rounded bg-neutral'></div>
-            <div className='aspect-video rounded bg-neutral'></div>
-          </div>
+          <CarouselPaginated
+            theme='dark'
+            modules={[EffectCoverflow]}
+            coverflowEffect={{
+              modifier: 4,
+              rotate: 0,
+              stretch: 0
+            }}
+            simulateTouch={false}
+            slideToClickedSlide={true}
+            slidesPerView={3}
+            effect='coverflow'>
+            <div className='aspect-video rounded bg-neutral' />
+            <div className='aspect-video rounded bg-neutral' />
+            <div className='aspect-video rounded bg-neutral' />
+            <div className='aspect-video rounded bg-neutral' />
+            <div className='aspect-video rounded bg-neutral' />
+            <div className='aspect-video rounded bg-neutral' />
+          </CarouselPaginated>
         </div>
       </section>
 
