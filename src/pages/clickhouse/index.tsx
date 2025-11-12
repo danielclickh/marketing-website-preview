@@ -502,6 +502,7 @@ export default function ClickHouseServerPage({
             simulateTouch={false}
             slideToClickedSlide={true}
             slidesPerView={3}
+            centeredSlides={true}
             effect='coverflow'>
             {[
               'vsykFYns0Ws',
@@ -563,11 +564,13 @@ export default function ClickHouseServerPage({
           {/* Accordions */}
           <Accordion
             className='mx-auto w-full max-w-3xl lg:mr-0'
+            allowMultiple={false}
             items={[
               {
                 handle: 'Flexible architecture & columnar storage',
                 content:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. ',
+                defaultOpen: true
               },
               {
                 handle: 'Blazing fast queries and inserts',

@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './styles.module.scss'
 import { Children, useRef } from 'react'
 import 'swiper/css'

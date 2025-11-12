@@ -7,6 +7,7 @@ export interface AccordionItemProps {
   prefix?: string | number | React.ReactNode
   handle: React.ReactNode | string
   children: React.ReactNode
+  defaultOpen?: boolean
   open?: boolean
   className?: React.HTMLProps<HTMLDivElement>['className']
   onOpen?: () => void
@@ -18,6 +19,7 @@ export default function AccordionItem({
   prefix,
   handle,
   children,
+  defaultOpen = false,
   open,
   className = '',
   onOpen,
@@ -25,7 +27,7 @@ export default function AccordionItem({
   onToggle
 }: AccordionItemProps) {
   const elRef = useRef<HTMLDivElement | null>(null)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen)
   const hasPrefix = !!prefix
 
   // Use parent state if provided, else local
