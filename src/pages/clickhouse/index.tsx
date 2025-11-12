@@ -27,6 +27,8 @@ import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import 'swiper/css/effect-creative'
+import { Mousewheel, EffectCreative } from 'swiper/modules'
 
 interface PageProps extends CommonProps {
   releaseVideos: Array<
@@ -223,6 +225,13 @@ export default function ClickHouseServerPage({
                 for their analytics
               </h2>
               <CarouselPaginated
+                modules={[Mousewheel]}
+                mousewheel={{
+                  enabled: true,
+                  forceToAxis: true,
+                  releaseOnEdges: true,
+                  sensitivity: 0.5
+                }}
                 simulateTouch={false}
                 slidesPerView={1}
                 spaceBetween={16}
@@ -235,7 +244,8 @@ export default function ClickHouseServerPage({
                     spaceBetween: 24
                   }
                 }}
-                className='!-mx-6 !px-6 lg:!-mx-10 lg:!-mb-5 lg:!px-10'>
+                carouselClass='!-mx-6 !px-6 lg:!-mx-10 lg:!px-10'
+                className='lg:!-mb-5'>
                 {(
                   [
                     {
@@ -396,7 +406,27 @@ export default function ClickHouseServerPage({
               </p>
             </div>
             <div className='w-full lg:max-w-lg'>
-              <CarouselPaginated simulateTouch={false}>
+              <CarouselPaginated
+                modules={[Mousewheel, EffectCreative]}
+                mousewheel={{
+                  enabled: true,
+                  forceToAxis: true,
+                  releaseOnEdges: true,
+                  sensitivity: 0.5
+                }}
+                effect='creative'
+                creativeEffect={{
+                  prev: {
+                    shadow: true,
+                    translate: ['-20%', 0, -1]
+                  },
+                  next: {
+                    shadow: true,
+                    translate: ['100%', 0, 0]
+                  }
+                }}
+                simulateTouch={false}
+                carouselClass='rounded'>
                 {releaseVideos.map((releaseVideo, releaseVideoIndex) => {
                   return (
                     <PlayOnClickVideo

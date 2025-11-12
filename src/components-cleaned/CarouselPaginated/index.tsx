@@ -1,5 +1,5 @@
 import styles from './styles.module.scss'
-import { Children } from 'react'
+import { Children, useRef } from 'react'
 import 'swiper/css'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
@@ -7,12 +7,19 @@ import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 export interface CarouselPaginatedProps
   extends Omit<SwiperProps, 'navigation' | 'pagination'> {
   children: React.ReactNode
+  carouselClass?: string
 }
 
 export default function CarouselPaginated({
   children,
+  className = '',
+  carouselClass,
   ...swiperOptions
 }: CarouselPaginatedProps) {
+  const prevRef = useRef<null | HTMLButtonElement>(null)
+  const nextRef = useRef<null | HTMLButtonElement>(null)
+  const paginationRef = useRef<null | HTMLDivElement>(null)
+
   const mergedOptions: SwiperProps = {
     // User options
     ...swiperOptions,
@@ -23,23 +30,25 @@ export default function CarouselPaginated({
       enabled: true,
       clickable: true,
       dynamicBullets: true,
-      el: '.swiper-pagination'
+      el: paginationRef.current
     },
     navigation: {
       enabled: true,
-      prevEl: '.swiper-button-prev',
-      nextEl: '.swiper-button-next'
+      prevEl: prevRef.current,
+      nextEl: nextRef.current
     },
-    className: `${styles.carousel} ${swiperOptions?.className || ''}`
+    className: carouselClass
   }
 
   return (
-    <Swiper {...mergedOptions}>
-      {Children.map(children, (child) => {
-        return <SwiperSlide>{child}</SwiperSlide>
-      })}
+    <div className={`${styles.carousel} ${className}`}>
+      <Swiper {...mergedOptions}>
+        {Children.map(children, (child) => {
+          return <SwiperSlide>{child}</SwiperSlide>
+        })}
+      </Swiper>
       <div className='swiper-controls'>
-        <button className='swiper-button-prev'>
+        <button ref={prevRef} type='button' className='swiper-button-prev'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='7'
@@ -55,8 +64,8 @@ export default function CarouselPaginated({
             />
           </svg>
         </button>
-        <div className='swiper-pagination' />
-        <button className='swiper-button-next'>
+        <div ref={paginationRef} className='swiper-pagination' />
+        <button ref={nextRef} type='button' className='swiper-button-next'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='7'
@@ -73,6 +82,6 @@ export default function CarouselPaginated({
           </svg>
         </button>
       </div>
-    </Swiper>
+    </div>
   )
 }
