@@ -8,12 +8,14 @@ export interface CarouselPaginatedProps
   extends Omit<SwiperProps, 'navigation' | 'pagination'> {
   children: React.ReactNode
   carouselClass?: string
+  theme?: 'light' | 'dark'
 }
 
 export default function CarouselPaginated({
   children,
   className = '',
   carouselClass,
+  theme = 'light',
   ...swiperOptions
 }: CarouselPaginatedProps) {
   const prevRef = useRef<null | HTMLButtonElement>(null)
@@ -41,7 +43,7 @@ export default function CarouselPaginated({
   }
 
   return (
-    <div className={`${styles.carousel} ${className}`}>
+    <div className={`${styles.base} ${styles[theme]} ${className}`}>
       <Swiper {...mergedOptions}>
         {Children.map(children, (child) => {
           return <SwiperSlide>{child}</SwiperSlide>

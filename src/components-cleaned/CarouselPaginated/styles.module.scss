@@ -1,4 +1,4 @@
-.carousel {
+.base {
   :global {
     .swiper-slide {
       @apply h-auto self-stretch;
@@ -16,15 +16,7 @@
     //
     .swiper-button-prev,
     .swiper-button-next {
-      @apply text-white transition-colors duration-300 size-5 flex items-center justify-center rounded;
-
-      &:not(.swiper-button-disabled) {
-        @apply hover:bg-white/10;
-      }
-    }
-
-    .swiper-button-disabled {
-      @apply text-white/50;
+      @apply transition-colors duration-300 size-5 flex items-center justify-center rounded;
     }
 
     // Pagination
@@ -36,18 +28,18 @@
 
     .swiper-pagination-clickable {
       .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
-        @apply cursor-pointer hover:bg-opacity-75;
+        @apply cursor-pointer;
       }
     }
 
     .swiper-pagination-bullet {
-      @apply transition-all duration-300 bg-white bg-opacity-50 rounded-full shrink-0 grow-0 mr-2;
+      @apply transition-all duration-300 rounded-full shrink-0 grow-0 mr-2;
       width: 5px;
       height: 5px;
     }
 
     .swiper-pagination-bullet-active {
-      @apply bg-opacity-100 cursor-default;
+      @apply cursor-default;
       width: 20px;
     }
 
@@ -80,5 +72,55 @@
       }
     }
 
+  }
+}
+
+.light {
+  :global {
+    .swiper-button-prev,
+    .swiper-button-next {
+      @apply text-white;
+
+      &:not(.swiper-button-disabled) {
+        @apply hover:bg-white/10;
+      }
+    }
+
+    .swiper-button-disabled {
+      @apply text-white/50;
+    }
+
+    .swiper-pagination-bullet {
+      @apply bg-white bg-opacity-50;
+    }
+
+    .swiper-pagination-bullet-active {
+      @apply bg-opacity-100;
+    }
+  }
+}
+
+.dark {
+  :global {
+    .swiper-button-prev,
+    .swiper-button-next {
+      @apply text-neutral-900;
+
+      &:not(.swiper-button-disabled) {
+        @apply hover:bg-neutral-900/10;
+      }
+    }
+
+    .swiper-button-disabled {
+      @apply text-neutral-900/50;
+    }
+
+    .swiper-pagination-bullet {
+      @apply bg-neutral-900 bg-opacity-50;
+    }
+
+    .swiper-pagination-bullet-active {
+      @apply bg-opacity-100;
+    }
   }
 }
