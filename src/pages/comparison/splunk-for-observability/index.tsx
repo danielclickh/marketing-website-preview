@@ -172,7 +172,7 @@ export default function SplunkPage({
           <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
-              Join Anthropic in migrating to ClickStack from Splunk
+              Join Anthropic in migrating from Splunk
             </h2>
             <div className='grid grid-cols-1 gap-6 lg:grid-cols-2 lg:space-y-0'>
               <QuoteCard

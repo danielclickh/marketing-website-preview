@@ -135,11 +135,6 @@ ClickStack, built on ClickHouse’s high-performance columnar engine, delivers s
       heading: 'Deployment model',
       clickhouse: { icon: 'yes', label: 'Self-hosted or ClickHouse Cloud' },
       splunk: { icon: 'yes', label: 'On-prem or cloud offerings' }
-    },
-    {
-      heading: 'Proprietary query language ',
-      clickhouse: { icon: 'no', label: 'Uses standard SQL or Lucene queries' },
-      splunk: { icon: 'yes', label: 'SPL (Search Processing Language)' }
     }
   ]
 } satisfies Table
