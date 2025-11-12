@@ -132,6 +132,17 @@ export default function NavigationSubNavResources() {
               </small>
             </NavigationLink>
           </li>
+          <li>
+            <NavigationLink
+              href='/comparison/splunk-for-observability'
+              onClick={useGalaxyOnClick('topNav.comparisonsMenu.splunkSelect')}
+              className='block w-full'>
+              Splunk{' '}
+              <small className='ml-2 inline-block rounded-sm bg-white/10 px-2 text-white'>
+                For observability
+              </small>
+            </NavigationLink>
+          </li>
         </NavigationSubNav>
       </li>
       <li>

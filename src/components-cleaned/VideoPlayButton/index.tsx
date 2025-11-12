@@ -39,8 +39,12 @@ export default function VideoPlayButton({
         </span>
         {label && (
           <span className='flex flex-shrink-0 flex-grow-0 flex-col items-start pr-8'>
-            {eyebrow && <span className='text-neutral-200'>{eyebrow}</span>}
-            <span className='text-lg font-bold text-white'>{label}</span>
+            {eyebrow && (
+              <span className='text-sm text-neutral-200 md:text-base'>
+                {eyebrow}
+              </span>
+            )}
+            <span className='font-bold text-white md:text-lg'>{label}</span>
           </span>
         )}
       </span>
