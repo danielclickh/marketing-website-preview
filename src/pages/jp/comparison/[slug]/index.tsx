@@ -6,7 +6,7 @@ import LogoCarousel from '@/components/LogoCarousel'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { findAll, getPathsValues } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -113,7 +113,7 @@ export default function ComparisonPage({
                   </div>
                   <div>
                     {comparison.image && (
-                      <StrapiImage
+                      <StrapiImageUrl
                         {...comparison.image}
                         className='mx-auto lg:mx-0'
                       />
@@ -201,7 +201,7 @@ export default function ComparisonPage({
         <div className='mx-auto mt-6 max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto flex flex-col items-center'>
             {comparison.painpointsIcon && (
-              <StrapiImage
+              <StrapiImageUrl
                 {...comparison.painpointsIcon}
                 className='mb-4 fill-none'
               />
@@ -240,7 +240,7 @@ export default function ComparisonPage({
                                       {painpoint.customer.description as string}
                                     </ReactMarkdown>
                                     {painpoint.customer.logo && (
-                                      <StrapiImage
+                                      <StrapiImageUrl
                                         {...painpoint.customer.logo}
                                       />
                                     )}
@@ -265,7 +265,7 @@ export default function ComparisonPage({
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
             <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
               {comparison.testimonialsIcon && (
-                <StrapiImage
+                <StrapiImageUrl
                   {...comparison.testimonialsIcon}
                   className='mb-4 fill-none'
                 />
@@ -283,7 +283,7 @@ export default function ComparisonPage({
                     <div className='flex h-full w-full flex-col justify-between space-y-12'>
                       <div className='text-left'>
                         {testimonial.logo && (
-                          <StrapiImage
+                          <StrapiImageUrl
                             {...testimonial.logo}
                             className='color-swap-no-hover mb-4 h-16 fill-none'
                           />
@@ -352,7 +352,7 @@ export default function ComparisonPage({
                           <CUICard className='h-full'>
                             <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                               {custom.Image && (
-                                <StrapiImage
+                                <StrapiImageUrl
                                   {...custom.Image}
                                   sizes='medium'
                                   alt={custom.Image.alternativeText}

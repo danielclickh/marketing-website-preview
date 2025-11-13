@@ -3,7 +3,7 @@ import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
-import { StrapiImage, StrapiImageUrl } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import UseCasesComparisons from '@/components/UseCasesComparisons'
 import { SuiTitle } from '@/components/sui'
 import { findAll, findOne } from '@/lib/api/strapi'
@@ -193,7 +193,7 @@ function UseCasesPage({
                           <div className='flex flex-col items-start justify-center gap-4'>
                             <div className='mb-1 flex flex-col gap-y-2 font-inconsolata text-base font-medium text-primary-300'>
                               {useCase?.icon && (
-                                <StrapiImage {...useCase.icon} />
+                                <StrapiImageUrl {...useCase.icon} />
                               )}
                             </div>
                             <div className='font-basier text-xl font-medium leading-tight text-neutral-100'>
@@ -301,7 +301,7 @@ function UseCasesPage({
                                 <Link
                                   href={client.href}
                                   className='mx-auto flex min-h-full w-full brightness-0 invert hover:brightness-100 hover:invert-0'>
-                                  <StrapiImage
+                                  <StrapiImageUrl
                                     {...client.logo}
                                     className={`${
                                       client.clientName === 'Lyft'
@@ -370,7 +370,7 @@ function UseCasesPage({
                       {quote.quotes.quote}
                     </p>
                     <div>
-                      <StrapiImage
+                      <StrapiImageUrl
                         {...quote.quotes.logo}
                         className='color-swap h-16'
                       />
@@ -382,7 +382,7 @@ function UseCasesPage({
                   key={index}
                   className='logos-color-swap animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover shadow-card hover:bg-neutral-750'>
                   <div>
-                    <StrapiImage
+                    <StrapiImageUrl
                       {...quote.quotes.logo}
                       className='color-swap h-16'
                     />

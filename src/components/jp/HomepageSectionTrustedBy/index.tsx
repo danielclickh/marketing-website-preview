@@ -1,4 +1,4 @@
-import { StrapiImage } from '../../StrapiElements'
+import { StrapiImageUrl } from '../../StrapiElements'
 import { SuiText } from '../../sui'
 import styles from './styles.module.scss'
 import {
@@ -199,7 +199,10 @@ function CarouselRow({
                   ? `calc(${customer.darkLogoPng.width}px * var(--logo-scale, 1))`
                   : 'auto'
               }}>
-              <StrapiImage {...customer.darkLogoPng} className='max-w-full' />
+              <StrapiImageUrl
+                {...customer.darkLogoPng}
+                className='max-w-full'
+              />
             </div>
           </SwiperSlide>
         )

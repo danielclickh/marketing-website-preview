@@ -1,6 +1,6 @@
 import { CUIButton } from '../ClickUI'
 import Markdown from '../Markdown'
-import { StrapiImage } from '../StrapiElements'
+import { StrapiImageUrl } from '../StrapiElements'
 import PlanPricing from './PlanPricing'
 import PricingButton from './PricingButton'
 import { PricingContextProvider } from './PricingContext'
@@ -53,7 +53,7 @@ function PricingOptions({
         return {
           ...item,
           regionFlagPNG: (
-            <StrapiImage {...item.regionFlagPNG} alt={item.region} />
+            <StrapiImageUrl {...item.regionFlagPNG} alt={item.region} />
           ),
           regionSlug: slugify(regionSlug)
         }
@@ -170,7 +170,7 @@ function PricingOptions({
                               }}
                               className={styles.cloudProvidersButton}
                               data-selected={provider === 'aws'}>
-                              <StrapiImage
+                              <StrapiImageUrl
                                 key={`${cloudProvider.title}-${index}`}
                                 {...darkIconPng}
                                 className={`h-8 w-auto ${
@@ -203,7 +203,7 @@ function PricingOptions({
                               type='secondary'
                               className={styles.cloudProvidersButton}
                               data-selected={provider === 'gcp'}>
-                              <StrapiImage
+                              <StrapiImageUrl
                                 key={`${cloudProvider.title}-${index}`}
                                 {...darkIconPng}
                                 className={`h-8 w-auto ${
@@ -235,7 +235,7 @@ function PricingOptions({
                             type='secondary'
                             className={styles.cloudProvidersButton}
                             data-selected={provider === 'azure'}>
-                            <StrapiImage
+                            <StrapiImageUrl
                               key={`${cloudProvider.title}-${index}`}
                               {...darkIconPng}
                               className={`h-8 w-auto ${

@@ -2,7 +2,7 @@ import founders from './founders.json'
 import investors from './investors.json'
 import styles from './styles.module.scss'
 import { CUIButton } from '@/components/ClickUI'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import Layout from '@/components/jp/Layout'
 import { Person } from '@/components/person_area'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -275,7 +275,7 @@ export default function OurStoryPage({
 
             <div className='flex flex-wrap justify-evenly gap-x-20 gap-y-16 pt-12'>
               {team.darkInvestorLogosPng.map((image, index) => (
-                <StrapiImage
+                <StrapiImageUrl
                   key={`investors-${index}`}
                   {...image}
                   sizes='small'

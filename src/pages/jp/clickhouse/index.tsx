@@ -2,7 +2,7 @@ import features from './features.json'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
-import { StrapiPicture } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import GetStarted from '@/components/jp/GetStarted'
 import Layout from '@/components/jp/Layout'
 import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
@@ -107,9 +107,8 @@ export default function ClickHouseServerPage({
                         className='w-48'
                         path={gitButton.href}
                         target={gitButton.target}>
-                        <StrapiPicture
-                          light={gitButton.lightIconPng}
-                          dark={gitButton.darkIconPng}
+                        <StrapiImageUrl
+                          {...(gitButton.darkIconPng || gitButton.lightIconPng)}
                           width={20}
                           height={20}
                         />

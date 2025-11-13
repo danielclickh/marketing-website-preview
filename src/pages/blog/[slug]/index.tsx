@@ -16,7 +16,7 @@ import NewsLetter from '@/components/NewsLetter'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import TableOfContents from '@/components/TableOfContents'
 import { SuiText, SuiTitle } from '@/components/sui'
 import {
@@ -372,7 +372,7 @@ export default function BlogPage({
                       </p>
                       <div className='flex flex-col gap-6 md:flex-row md:items-start'>
                         <p>{promotion.description}</p>
-                        <StrapiImage
+                        <StrapiImageUrl
                           {...promotion.image}
                           className='mx-auto !h-auto !w-36 flex-shrink-0 flex-grow-0 md:mr-0'
                         />

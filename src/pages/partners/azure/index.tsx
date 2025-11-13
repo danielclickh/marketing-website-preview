@@ -8,21 +8,18 @@ import Accordion from '@/components-cleaned/Accordion'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import ClickHousePartnerLogo from '@/components/ClickHousePartnerLogo'
 import { CUIButton, CUILink } from '@/components/ClickUI'
-import styles from '@/components/FAQ/styles.module.scss'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
-import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { BlogApiResponse } from '@/types/blogs'
 import { CommonProps, HomepageCustomerStories } from '@/types/homepage'
-import { Disclosure, Transition } from '@headlessui/react'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -324,7 +321,7 @@ export default function Page({
                     <div
                       key={logoIndex}
                       className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                      <StrapiImage {...logo.darkLogoPng} />
+                      <StrapiImageUrl {...logo.darkLogoPng} />
                     </div>
                   )
                 })}
@@ -335,7 +332,7 @@ export default function Page({
                     <div
                       key={logoIndex}
                       className='w-max flex-shrink-0 flex-grow-0 px-6'>
-                      <StrapiImage {...logo.darkLogoPng} />
+                      <StrapiImageUrl {...logo.darkLogoPng} />
                     </div>
                   )
                 })}

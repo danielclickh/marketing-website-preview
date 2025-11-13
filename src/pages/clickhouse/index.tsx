@@ -4,7 +4,7 @@ import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStarted from '@/components/GetStarted'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
-import { StrapiPicture } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -106,9 +106,8 @@ export default function ClickHouseServerPage({
                         className='w-48'
                         path={gitButton.href}
                         target={gitButton.target}>
-                        <StrapiPicture
-                          light={gitButton.lightIconPng}
-                          dark={gitButton.darkIconPng}
+                        <StrapiImageUrl
+                          {...(gitButton.darkIconPng || gitButton.lightIconPng)}
                           width={20}
                           height={20}
                         />

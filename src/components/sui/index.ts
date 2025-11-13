@@ -1,4 +1,3 @@
-export { SuiRecentCard } from './cards'
 export { SuiAlternateCard } from './cards/alternate'
 export { SuiCard } from './cards/basic'
 export { SuiCodeblock } from './codeblock'
