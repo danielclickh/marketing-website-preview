@@ -317,12 +317,7 @@ export default function ComparisonPage({
           </div>
         </div>
         <div className='opacity-60 grayscale invert'>
-          <LogoCarousel
-            logos={comparison.customerStories.logos}
-            logoColor='white'
-            speedClass1='animate-marqueeLeft'
-            speedClass2='animate-marqueeLeft2'
-          />
+          <LogoCarousel logos={comparison.customerStories.logos} />
         </div>
       </div>
       <HRSeparator className='my-16 lg:mb-24 lg:mt-12' />

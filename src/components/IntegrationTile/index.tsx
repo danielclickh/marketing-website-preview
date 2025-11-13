@@ -1,6 +1,6 @@
 import { CUICard } from '../ClickUI'
 import IntegrationSupportPill from '../IntegrationPill'
-import { StrapiImage } from '../StrapiElements'
+import { StrapiImageUrl } from '../StrapiElements'
 import { ExternalLink } from '../icons/ExternalLink'
 import { SuiTitle } from '../sui'
 import { Integration } from '@/types/integrations'
@@ -42,14 +42,14 @@ export default function IntegrationTile({
           )}
           <div className='flex aspect-square flex-col items-center justify-center gap-3 rounded-lg text-center'>
             {!!tileLogo && (
-              <StrapiImage
+              <StrapiImageUrl
                 {...tileLogo}
                 width={64}
                 height={64}
                 sizes='medium'
                 loading='eager'
                 alt={name}
-                className='h-[64px] w-[64px] object-contain'
+                className='size-16 object-contain object-center'
               />
             )}
             <SuiTitle type='h4' className='w-full px-2'>
