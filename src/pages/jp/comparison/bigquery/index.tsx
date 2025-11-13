@@ -18,13 +18,12 @@ import { CUIButton, CUICard } from '@/components/ClickUI'
 import ComparisonTable from '@/components/ComparisonTable'
 import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
 import MarketoForm from '@/components/MarketoForm'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { StrapiImageProps } from '@/components/StrapiElements/types'
 import Layout from '@/components/jp/Layout'
 import MoreComparisons from '@/components/jp/MoreComparisons'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findAll, findOne } from '@/lib/api/strapi'
-import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import {
@@ -699,7 +698,7 @@ function CustomContentCard({
       <CUICard className='h-full'>
         <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
           {image && (
-            <StrapiImage
+            <StrapiImageUrl
               {...image}
               sizes='medium'
               alt={image.alternativeText}

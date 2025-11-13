@@ -1,5 +1,5 @@
 import { CUICard } from '../ClickUI'
-import { StrapiImage } from '../StrapiElements'
+import { StrapiImageUrl } from '../StrapiElements'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { EventType } from '@/types/events'
 import { CalendarIcon } from '@heroicons/react/outline'
@@ -23,7 +23,7 @@ export default function EventPost({
       <CUICard className='h-full backdrop-blur-sm'>
         <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
           {thumbnailPng && (
-            <StrapiImage
+            <StrapiImageUrl
               {...thumbnailPng}
               sizes='medium'
               alt={title}

@@ -17,11 +17,3 @@ export interface NormalImageProps extends ImageProps {
 }
 
 export type Props = StrapiImageProps | NormalImageProps
-
-type StrapiPic = Partial<StrapiImageProps> & HTMLAttributes<HTMLElement>
-export interface StrapiPicProps extends StrapiPic {
-  dark: StrapiImageProps
-  light: StrapiImageProps
-  sizes?: SizeType
-  alt?: string
-}

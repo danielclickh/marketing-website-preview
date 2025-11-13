@@ -1,1 +1,0 @@
-export { SuiPanel } from './panel'

@@ -1,7 +1,8 @@
+import { CUICard } from '@/components/ClickUI'
 import GetStarted from '@/components/GetStarted'
 import Layout from '@/components/Layout'
 import MarketoForm from '@/components/MarketoForm'
-import { SuiPanel, SuiText, SuiTitle } from '@/components/sui'
+import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ServiceProps } from '@/types/serviceUnavailablePage'
@@ -48,24 +49,20 @@ function ServiceUnavailableCountryPage({
   const [formLoaded, setFormLoaded] = useState(false)
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='service_unavailable_country px-3'>
-        <SuiPanel
-          color='bg-neutral-950'
-          shadow
-          isRounded
-          className='mx-auto mb-44 mt-16 max-w-screen-sm px-6 py-10 text-center'>
-          <div className='flex flex-col'>
-            <SuiTitle type='h1' className='mb-3'>
-              {title}
-            </SuiTitle>
-            <SuiText
-              size='lg'
-              weight='normal'
-              color='secondary'
-              className='mb-9'>
-              {description}
-            </SuiText>
-            <>
+      <div className='section-container my-16 text-center lg:my-24'>
+        <SuiTitle type='h1' className='mb-3'>
+          {title}
+        </SuiTitle>
+        <div className='mx-auto mt-16 max-w-screen-sm'>
+          <CUICard className='w-full p-6'>
+            <CUICard.Body>
+              <SuiText
+                size='lg'
+                weight='normal'
+                color='secondary'
+                className='mb-6'>
+                {description}
+              </SuiText>
               {!formSuccess && (
                 <MarketoForm
                   formId={'1034'}
@@ -94,9 +91,9 @@ function ServiceUnavailableCountryPage({
                   </ReactMarkdown>
                 </div>
               )}
-            </>
-          </div>
-        </SuiPanel>
+            </CUICard.Body>
+          </CUICard>
+        </div>
       </div>
       <GetStarted platforms={platforms} />
     </Layout>

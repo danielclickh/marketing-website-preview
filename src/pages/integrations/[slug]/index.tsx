@@ -4,7 +4,7 @@ import IntegrationTile from '@/components/IntegrationTile'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiTitle } from '@/components/sui'
 import { findAll, getPathsValues } from '@/lib/api/strapi'
 import { SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
@@ -170,7 +170,7 @@ export default function IntegrationPage({
           <div className='my-5 flex items-center gap-6'>
             {!!integrationLogo && (
               <div className='flex h-20 w-20 flex-shrink-0 items-center justify-center'>
-                <StrapiImage
+                <StrapiImageUrl
                   {...integrationLogo}
                   sizes='medium'
                   alt={integration.name}

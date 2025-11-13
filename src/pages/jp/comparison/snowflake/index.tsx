@@ -3,7 +3,7 @@ import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import LogoCarousel from '@/components/LogoCarousel'
 import MarketoForm from '@/components/MarketoForm'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import GetStarted from '@/components/jp/GetStarted'
 import Layout from '@/components/jp/Layout'
 import { findAll, findOne } from '@/lib/api/strapi'
@@ -142,7 +142,7 @@ export default function SnowflakePage({
               <div className='mb-6 hidden lg:mb-0 lg:block lg:max-w-[400px] xl:max-w-[575px]'>
                 <div className=''>
                   {comparison.data[0].image && (
-                    <StrapiImage
+                    <StrapiImageUrl
                       {...comparison.data[0].image}
                       className='mx-auto lg:mx-0'
                     />
@@ -412,14 +412,8 @@ export default function SnowflakePage({
                   </div>
                 </div>
               </div>
-              <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-16 md:gap-x-14'>
-                <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-                <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-                <LogoCarousel
-                  logos={customerStories.logos}
-                  speedClass1='animate-marqueeLeft3'
-                  speedClass2='animate-marqueeLeft4'
-                />
+              <div className='section-container relative max-w-5xl pb-16'>
+                <LogoCarousel logos={customerStories.logos} />
               </div>
             </div>
           </div>
@@ -456,7 +450,7 @@ export default function SnowflakePage({
                               <CUICard className='h-full'>
                                 <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
                                   {custom.Image && (
-                                    <StrapiImage
+                                    <StrapiImageUrl
                                       {...custom.Image}
                                       sizes='medium'
                                       alt={custom.Image.alternativeText}

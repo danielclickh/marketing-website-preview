@@ -1,1 +1,0 @@
-export { SuiImage } from './image'

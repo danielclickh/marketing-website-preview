@@ -3,7 +3,7 @@ import Avatars from '@/components/Avatars'
 import { CUILink } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Pagination from '@/components/Pagination'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import BlogPost from '@/components/jp/BlogPostList/BlogPost'
 import Layout from '@/components/jp/Layout'
 import { SuiTitle } from '@/components/sui'
@@ -159,7 +159,7 @@ export default function BlogsPage({
             className='mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
             {featuredBlog.thumbnailPng && (
               <div className='lg:w-1/2'>
-                <StrapiImage
+                <StrapiImageUrl
                   {...featuredBlog.thumbnailPng}
                   className='overflow-hidden rounded-lg'
                 />

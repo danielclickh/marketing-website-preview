@@ -1,26 +1,21 @@
-import CarouselItem from './CarouselItem'
-
-interface Customer {
-  darkLogoPng?: any // Replace 'any' with the type of your darkLogoPng prop
-  href?: string
-  Logo?: any
-}
+import ContentTicker from '@/components-cleaned/ContentTicker'
+import { StrapiImageUrl } from '@/components/StrapiElements'
+import { StrapiImageType } from '@/lib/api/strapi/types'
+import Link from 'next/link'
+import React, { Fragment, useState } from 'react'
 
 interface Props {
-  logos: Customer[]
-  speedClass1: string
-  speedClass2: string
+  logos: Array<{
+    darkLogoPng?: StrapiImageType
+    href?: string
+    Logo?: StrapiImageType
+  }>
   fixShape?: boolean
-  logoColor?: string | ''
 }
 
-const PauseHoverComponent: React.FC<Props> = ({
-  logos,
-  speedClass1,
-  speedClass2,
-  fixShape,
-  logoColor = 'current'
-}) => {
+export default function LogoCarousel({ logos, fixShape }: Props) {
+  const [paused, setPaused] = useState(false)
+
   // Update the Logo key to darkLogoPng
   let updatedData = logos
   if (fixShape) {
@@ -34,31 +29,33 @@ const PauseHoverComponent: React.FC<Props> = ({
   }
 
   return (
-    <div className='pause-hover hide-scrollbar relative flex overflow-x-scroll text-black md:overflow-x-hidden'>
-      <div
-        className={`flex content-center items-center gap-12 whitespace-nowrap py-3 ${speedClass1}`}>
-        {updatedData.map((customer, index) => (
-          <CarouselItem
-            key={index}
-            index={index}
-            customer={customer}
-            logoColor={logoColor}
-          />
-        ))}
-      </div>
-      <div
-        className={`absolute top-0 flex items-center gap-12 whitespace-nowrap py-3 ${speedClass2}`}>
-        {updatedData.map((customer, index) => (
-          <CarouselItem
-            key={index}
-            index={index}
-            customer={customer}
-            logoColor={logoColor}
-          />
-        ))}
-      </div>
-    </div>
+    <ContentTicker
+      gap='3rem'
+      gradientMask={true}
+      pause={paused}
+      sizingMethod='max'
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}>
+      {updatedData.map((customer, logoIndex) => {
+        if (!customer.darkLogoPng) return
+
+        return (
+          <Fragment key={logoIndex}>
+            {customer.href ? (
+              <Link
+                href={customer.href}
+                className='my-auto inline-block flex-shrink-0 flex-grow-0'>
+                <StrapiImageUrl {...customer.darkLogoPng} />
+              </Link>
+            ) : (
+              <StrapiImageUrl
+                {...customer.darkLogoPng}
+                className='my-auto flex-shrink-0 flex-grow-0'
+              />
+            )}
+          </Fragment>
+        )
+      })}
+    </ContentTicker>
   )
 }
-
-export default PauseHoverComponent

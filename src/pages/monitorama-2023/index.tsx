@@ -179,18 +179,8 @@ export default function MonitoramaPage({
                 </div>
               </div>
               <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-10 md:gap-x-14'>
-                <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-                <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-                <LogoCarousel
-                  logos={logos1}
-                  speedClass1='animate-marqueeLeft'
-                  speedClass2='animate-marqueeLeft2'
-                />
-                <LogoCarousel
-                  logos={logos2}
-                  speedClass1='animate-marqueeLeft3'
-                  speedClass2='animate-marqueeLeft4'
-                />
+                <LogoCarousel logos={logos1} />
+                <LogoCarousel logos={logos2} />
               </div>
               <div className='mx-auto w-fit max-w-4xl px-4 py-6 pb-12 pt-10 text-center text-base leading-normal text-primary-800 md:px-0'>
                 Don't take our word for it.{' '}

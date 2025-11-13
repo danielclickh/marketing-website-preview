@@ -8,7 +8,7 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import SocialButton from '@/components/SocialButton'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import StripeBuyButton from '@/components/StripeBuyButton'
 import { SuiTitle } from '@/components/sui'
 import {
@@ -249,7 +249,7 @@ export default function Page({
                 {hostedBy.hosts.map((host, hostIndex) => (
                   <div className='flex items-center gap-5' key={hostIndex}>
                     {host.avatarPng && (
-                      <StrapiImage
+                      <StrapiImageUrl
                         {...host.avatarPng}
                         alt={host.avatarPng.caption ?? host.name}
                         width={64}

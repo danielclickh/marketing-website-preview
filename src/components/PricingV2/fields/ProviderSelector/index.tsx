@@ -1,6 +1,6 @@
 import Label from '../../ui/Label'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
-import { StrapiImage } from '@/components/StrapiElements'
+import { StrapiImageUrl } from '@/components/StrapiElements'
 import { PricingV2ComponentProvider } from '@/lib/api/strapi/types'
 import { memo } from 'react'
 
@@ -14,7 +14,7 @@ const ProviderLogo = memo(function ProviderLogo({
 }: {
   logo: PricingV2ComponentProvider['logo']
 }) {
-  return <StrapiImage {...logo} />
+  return <StrapiImageUrl {...logo} />
 })
 
 export default function ProviderSelector({
