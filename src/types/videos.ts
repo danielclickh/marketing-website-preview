@@ -23,6 +23,7 @@ export interface Video {
   }
   seo?: CommonProps['seo']
   publishedAt: string
+  updatedAt: string
 }
 
 export interface VideosPageProps extends CommonProps {

@@ -1,3 +1,5 @@
+import { slugify } from '@/lib/utils/strings'
+import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 interface TableOfContentsProps {
@@ -20,7 +22,11 @@ export default function TableOfContents({
     const findHeadings = () => {
       return Array.from(contentEl.querySelectorAll(headersSelector || 'h1, h2'))
         .filter((el): el is HTMLElement => el instanceof HTMLElement)
-        .filter((el) => !el.classList.contains('toc-ignore'))
+        .filter((el) => {
+          const ignoreEl = el.classList.contains('toc-ignore')
+          const ignoreParent = el.closest('.toc-ignore')
+          return !ignoreEl && !ignoreParent
+        })
     }
 
     const observer = new MutationObserver(() => {
@@ -88,16 +94,6 @@ export default function TableOfContents({
     }
   }, [contentRef.current, scrollHanlder])
 
-  const getOwnText = (el: HTMLElement) => {
-    let text = ''
-    for (let node of el.childNodes) {
-      if (node.nodeType === Node.TEXT_NODE) {
-        text += node.textContent
-      }
-    }
-    return text.trim()
-  }
-
   return (
     <>
       {headingElements.length > 0 && (
@@ -107,28 +103,27 @@ export default function TableOfContents({
           <ul className='space-y-2'>
             {headingElements.map((heading, headingIndex) => {
               const innerText = heading.textContent?.replace(/\s+#$/, '')
-              const url = new URL(window.location.toString())
-              url.hash = heading.id
+              if (!heading.id && innerText) {
+                heading.id = slugify(innerText)
+              }
+
+              if (!heading.id.length) return
+
               return (
                 <li
                   key={`${headingIndex}-${heading.id}`}
                   style={{
                     paddingLeft: `${(Number(heading.tagName.charAt(1)) || 1) - 1}rem`
                   }}>
-                  <a
-                    href={url.toString()}
+                  <Link
+                    href={{ hash: heading.id }}
                     className={`block break-words py-1 transition-colors hover:text-primary-300 ${
                       activeId === heading.id
                         ? 'font-medium text-primary-300'
                         : 'text-neutral-400'
-                    }`}
-                    title={innerText}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      document.getElementById(heading.id)?.scrollIntoView()
-                    }}>
+                    }`}>
                     {innerText}
-                  </a>
+                  </Link>
                 </li>
               )
             })}

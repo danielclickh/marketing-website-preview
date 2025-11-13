@@ -284,10 +284,11 @@ function SearchInput({ className = '' }: { className?: string }) {
   )
 }
 
-function joinPaths(first: string, last: string | undefined) {
-  const firstTrimmed = first.replace(/\/$/, '')
-  const lastTrimmed = (last || '').replace(/^\//, '')
-  return `${firstTrimmed}/${lastTrimmed}`
+function joinPaths(...parts: Array<string>) {
+  const first = (parts.shift() || '').replace(/\/$/, '')
+  const last = (parts.pop() || '').replace(/^\//, '')
+  const middle = parts.map((part) => part.replaceAll(/^\/|\/$/g, ''))
+  return [first, ...middle, last].filter(Boolean).join('/')
 }
 
 function StaticResult({ hit }: { hit: Hit<BaseHit> }) {
@@ -337,9 +338,18 @@ function StaticResult({ hit }: { hit: Hit<BaseHit> }) {
       label = hit.title
       icon = iconVideos
       break
-    case 'engineering-resources':
-      badge = 'Engineering Resource'
-      link = hit.attributes?.path
+    case 'resource':
+      badge = 'Resource'
+      link = joinPaths(
+        '/resources',
+        hit.attributes.category,
+        hit.attributes.slug
+      )
+      label = hit.title
+      icon = iconResources
+      break
+    case 'resource-category':
+      link = joinPaths('/resources', hit.attributes.slug)
       label = hit.title
       icon = iconResources
       break

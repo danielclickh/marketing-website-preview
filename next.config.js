@@ -87,6 +87,10 @@ const nextConfig = {
         {
           source: '/uploads/:path*',
           destination: `${strapiApiUrl}/uploads/:path*`
+        },
+        {
+          source: '/blog/:slug.md',
+          destination: '/api/blog/:slug'
         }
       ],
 
@@ -179,11 +183,6 @@ const nextConfig = {
       {
         source: '/lexicon',
         destination: '/engineering-resources',
-        permanent: true
-      },
-      {
-        source: '/lexicon/:path*',
-        destination: '/engineering-resources/:path*',
         permanent: true
       },
       {
@@ -566,6 +565,16 @@ const nextConfig = {
       {
         source: '/blog/clickhouse-group-by-parallel-replicas-8900-cores',
         destination: '/blog/clickhouse-parallel-replicas',
+        permanent: true
+      },
+      {
+        source: '/lexicon/:path*',
+        destination: '/resources/engineering/:path*',
+        permanent: true
+      },
+      {
+        source: '/engineering-resources/:path*',
+        destination: '/resources/engineering/:path*',
         permanent: true
       }
     ]

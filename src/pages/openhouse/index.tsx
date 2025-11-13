@@ -41,9 +41,9 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
-import CategorySelector from '@/components/CategorySelector'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
@@ -857,20 +857,24 @@ export default function Page({
   const videoCategoryList = useMemo(() => {
     const unique = [...new Set(VIDEOS.map((video) => video.category))]
 
-    const list = unique.map((category) => ({
-      text: category,
-      onClick: () => {
+    const list: Array<Filter> = unique.map((category) => ({
+      kind: 'button',
+      label: category,
+      onClick(event) {
+        event.preventDefault()
         setVideoFilter(category)
       },
-      selected: videoFilter === category
+      active: videoFilter === category
     }))
 
     list.unshift({
-      text: 'View all',
-      onClick: () => {
+      kind: 'button',
+      label: 'View all',
+      onClick(event) {
+        event.preventDefault()
         setVideoFilter(null)
       },
-      selected: !videoFilter
+      active: !videoFilter
     })
 
     return list
@@ -1076,7 +1080,7 @@ export default function Page({
                             <p className='mb-3 hidden lg:block'>
                               {limitStringByWord(
                                 stripHtmlTags(
-                                  blog.shortDescription || blog.content
+                                  blog.shortDescription || blog.content || ''
                                 ),
                                 140,
                                 '...'
@@ -1128,11 +1132,11 @@ export default function Page({
                     <h2 className='mb-10 text-center text-4xl'>
                       Open House videos
                     </h2>
-                    <CategorySelector
-                      className='mb-10 md:mb-14 lg:mb-20'
+                    <PillFilters
+                      className='mb-10 justify-center md:mb-14 lg:mb-20'
                       options={videoCategoryList}
-                      activeClassName='bg-ch-yellow text-neutral-800 border-ch-yellow'
-                      inactiveClassName='text-neutral-0 border-ch-yellow/30 hover:border-ch-yellow'
+                      activePillClassName='bg-ch-yellow text-neutral-800 border-ch-yellow'
+                      inactivePillClassName='text-neutral-0 border-ch-yellow/30 hover:border-ch-yellow'
                     />
                     <ContentCarousel mode='dark'>
                       {filteredVideos.map((video, videoIndex) => {

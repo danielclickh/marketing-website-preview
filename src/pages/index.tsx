@@ -1,3 +1,4 @@
+import UseCasesCards from '@/components-cleaned/UseCasesCards'
 import FAQ from '@/components/FAQ'
 import GetStarted from '@/components/GetStarted'
 import HRSeparator from '@/components/HRSeparator'
@@ -10,6 +11,8 @@ import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAl
 import HomepageSectionWhyClickhouse from '@/components/HomepageSectionWhyClickhouse'
 import JoinCommunity from '@/components/JoinCommunity'
 import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
+import { SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateHomepageSchema } from '@/lib/schema'
@@ -72,7 +75,20 @@ export default function HomePage({
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       <HomepageHeroAlt />
       <HomepageSectionTrustedByAlt customerStories={customerStories} />
-      <HRSeparator />
+      <section className='mb-16 bg-gradient-to-br from-white/5 to-transparent to-50% pt-10 lg:mb-28 lg:pt-16'>
+        <div className='section-container'>
+          <div className='space-y-4 text-center'>
+            <p className='text-sm font-semibold uppercase tracking-[0.0875rem] text-inherit text-primary-300'>
+              Use cases
+            </p>
+            <SuiTitle type='h2'>Built for every modern data challenge</SuiTitle>
+          </div>
+          <UseCasesCards
+            className='mt-10 lg:mt-16'
+            galaxyNamespace='homePage'
+          />
+        </div>
+      </section>
       <HomepageSectionContentFeed />
       <HomepageSectionWhyClickhouse />
       <HomepageSectionStackIntegration />

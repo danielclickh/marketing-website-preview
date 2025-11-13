@@ -8,8 +8,8 @@ export interface Video {
   id: number
   slug: string
   title: string
-  subTitle?: string
-  description: string
+  subTitle?: string | null
+  description: string | null
   date: null | string
   thumbnail: string
   socialImage?: string
@@ -17,4 +17,6 @@ export interface Video {
   categories: VideoCategory[]
   related: Array<Video['id']>
   seo: Omit<SeoMetadata, 'path'>
+  updatedAt: string
+  publishedAt: string
 }

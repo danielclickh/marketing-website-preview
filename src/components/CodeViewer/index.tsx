@@ -24,9 +24,11 @@ function CodeViewer({
   children,
   ...props
 }: any) {
-  const showLineNumbers = show_line_numbers === 'true'
-  const runBoolean = run === 'true'
-  const runnableBoolean = runnable === 'true'
+  const isTrue = (value: any) =>
+    ['true', '1'].includes(String(value).toLowerCase())
+  const showLineNumbers = isTrue(show_line_numbers)
+  const runBoolean = isTrue(run)
+  const runnableBoolean = isTrue(runnable)
   if (type === 'click-ui') {
     let codeContent = ''
     if (raw_code !== '') {
@@ -44,16 +46,19 @@ function CodeViewer({
     }
 
     let chart: { type: ChartType; config?: ChartConfig } | undefined
-    try {
-      const parsedChart = JSON.parse(base64Decode(chart_config))
-      if (parsedChart && parsedChart.type && parsedChart.config) {
-        chart = {
-          type: parsedChart.type as ChartType,
-          config: parsedChart.config
+
+    if (chart_config) {
+      try {
+        const parsedChart = JSON.parse(base64Decode(chart_config))
+        if (parsedChart && parsedChart.type && parsedChart.config) {
+          chart = {
+            type: parsedChart.type as ChartType,
+            config: parsedChart.config
+          }
         }
+      } catch {
+        //
       }
-    } catch {
-      console.log('chart config is not valid')
     }
 
     return (
@@ -83,7 +88,6 @@ function CodeViewer({
     )
   }
   return (
-
     <code
       className={`${className} mb-9 border border-solid border-c3`}
       style={{ wordBreak: 'break-word' }}

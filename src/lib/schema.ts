@@ -1,5 +1,6 @@
 import logo from '@/../public/favicons/web-app-manifest-192x192.png'
 import { absoluteUrl } from '@/lib/next'
+import removeMarkdown from 'remove-markdown'
 import {
   WithContext,
   WebSite,
@@ -12,7 +13,8 @@ import {
   Article,
   ContactPage,
   WebPage,
-  Product
+  Product,
+  FAQPage
 } from 'schema-dts'
 
 const defaultOrganization: Organization = {
@@ -22,6 +24,28 @@ const defaultOrganization: Organization = {
   logo: {
     '@type': 'ImageObject',
     url: absoluteUrl(logo.src)
+  }
+}
+
+export const generateFaqPageSchema = ({
+  faqs
+}: {
+  faqs: Array<{
+    question: string
+    answer: string
+  }>
+}): WithContext<FAQPage> => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: removeMarkdown(faq.answer)
+      }
+    }))
   }
 }
 
@@ -53,7 +77,8 @@ export const generateBlogArticleSchema = ({
   imageUrl,
   authorName,
   publishedDate,
-  modifiedDate
+  modifiedDate,
+  faqs
 }: {
   title: string
   description: string
@@ -61,20 +86,34 @@ export const generateBlogArticleSchema = ({
   authorName: string
   publishedDate: string
   modifiedDate: string
-}): WithContext<BlogPosting> => ({
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: title,
-  description,
-  image: imageUrl,
-  author: {
-    '@type': 'Person',
-    name: authorName
-  },
-  publisher: defaultOrganization,
-  datePublished: publishedDate,
-  dateModified: modifiedDate
-})
+  faqs?: Array<{
+    question: string
+    answer: string
+  }>
+}): Array<WithContext<BlogPosting | FAQPage>> => {
+  const blogSchema: WithContext<BlogPosting> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: imageUrl,
+    author: {
+      '@type': 'Person',
+      name: authorName
+    },
+    publisher: defaultOrganization,
+    datePublished: publishedDate,
+    dateModified: modifiedDate
+  }
+
+  const schemas: Array<WithContext<BlogPosting | FAQPage>> = [blogSchema]
+
+  if (faqs?.length) {
+    schemas.push(generateFaqPageSchema({ faqs }))
+  }
+
+  return schemas
+}
 
 export const generateEventsArchiveSchema = ({
   path

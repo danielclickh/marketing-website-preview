@@ -41,6 +41,6 @@ export interface PageItem {
 export const pages: Array<PageItem> = [
   realTimeAnalytics,
   observability,
-  mlAndGenai,
-  dataWarehousing
+  dataWarehousing,
+  mlAndGenai
 ]

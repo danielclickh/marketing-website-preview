@@ -8,7 +8,7 @@ export interface BlogPost {
   title: string
   shortDescription?: string
   shortDescriptionElement: ReactNode
-  content: string
+  content: string | null
   author: {
     name: string
     avatarPng: StrapiImageType

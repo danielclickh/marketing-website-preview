@@ -1,7 +1,7 @@
-import CategorySelector from '../CategorySelector'
 import { CUIButton } from '../ClickUI'
 import { SuiLink, SuiSearchField, SuiText } from '../sui/client'
 import { JobType, PositionType } from './types'
+import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
@@ -121,14 +121,22 @@ function CareersFilter() {
   })
 
   const departments = data.departments.map(([name, _]) => ({
-    text: name,
-    onClick: () => setSelectedDepartment(name),
-    selected: selectedDepartment === name
-  }))
+    kind: 'button',
+    label: name,
+    onClick(event) {
+      event.preventDefault()
+      setSelectedDepartment(name)
+    },
+    active: selectedDepartment === name
+  })) satisfies Array<Filter>
   departments.unshift({
-    text: 'All',
-    onClick: () => setSelectedDepartment(null),
-    selected: selectedDepartment === null
+    kind: 'button',
+    label: 'All',
+    onClick(event) {
+      event.preventDefault()
+      setSelectedDepartment(null)
+    },
+    active: selectedDepartment === null
   })
 
   return (
@@ -142,7 +150,7 @@ function CareersFilter() {
             setSearch(e.target.value)
           }
         />
-        <CategorySelector options={departments} />
+        <PillFilters options={departments} />
       </div>
       <div>
         <div className='mt-4'>

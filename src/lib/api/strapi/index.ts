@@ -1,7 +1,15 @@
 import { PricingV2 } from './types'
+import { SeoContainerProps } from '@/components/SeoContainer'
 import { absoluteUrl, relativeUrl } from '@/lib/next'
+import {
+  ApiRequestParams,
+  ApiResponse,
+  ComponentSeo,
+  EntryResource,
+  EntryResourceCategory
+} from '@/types/strapi'
 import _fetch from 'cross-fetch'
-import { relative } from 'knip/dist/util/path'
+import type { NextApiRequest } from 'next'
 import { stringify } from 'qs'
 
 export function fetch(uri: string, init: any = {}) {
@@ -21,12 +29,19 @@ const url = `${strapiApiUrl}/api/`
 
 const stagingOnlyFilter =
   process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
-export function getStagingOnlyFilters(): Array<Record<'StagingOnly', any>> {
+export function getStagingOnlyFilters(
+  fieldName: string = 'StagingOnly'
+): Array<Record<string, any>> {
   return [
-    { StagingOnly: { $null: true } },
-    { StagingOnly: stagingOnlyFilter },
-    { StagingOnly: { $eq: false } }
+    { [fieldName]: { $null: true } },
+    { [fieldName]: stagingOnlyFilter },
+    { [fieldName]: { $eq: false } }
   ]
+}
+
+export function isAuthorisedRevalidationRequest(request: NextApiRequest) {
+  const webhookToken = process.env.STRAPI_WEBHOOK_TOKEN
+  return webhookToken && request?.headers?.['isr-auth-token'] === webhookToken
 }
 
 export function getUnlistedFilters() {
@@ -66,6 +81,70 @@ export function getProxiedMediaUrl(path: string) {
 
 export function getProxiedMediaPath(path: string) {
   return relativeUrl(getProxiedMediaUrl(path))
+}
+
+export async function request(
+  path: string,
+  params: Record<any, any> = {},
+  options?: RequestInit
+): Promise<ApiResponse> {
+  const queryString = stringify(params)
+  let uri = `${url.replace(/\/$/, '')}/${path.replace(/^\//, '')}`
+  if (queryString.length) uri += `?${queryString}`
+
+  const response = await fetch(uri, {
+    // Default options
+    next: {
+      revalidate: 5
+    },
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
+    },
+
+    // Merge options
+    ...(options || {})
+  })
+
+  if (!response.ok) {
+    throw new Error(
+      `STRAPI HTTP Error: ${response.status} (${response.statusText}) ${uri}`
+    )
+  }
+
+  return await response.json()
+}
+
+export function cleanStrapiObject(element: any): any {
+  const newElement =
+    typeof element === 'object' && 'attributes' in element && 'id' in element
+      ? { id: element.id, ...element.attributes }
+      : element
+
+  if (typeof newElement !== 'object') return element
+
+  const cleaned = Object.entries(newElement).map(([field, value]) => {
+    if (Array.isArray(value)) {
+      return [field, value.map((item) => cleanStrapiObject(item))]
+    }
+
+    if (value && typeof value === 'object') {
+      if ('data' in value && Array.isArray(value.data)) {
+        return [field, value.data.map((item) => cleanStrapiObject(item))]
+      }
+
+      let convertedObj: any = cleanStrapiObject(value)
+
+      if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
+        convertedObj = convertedObj.data
+      }
+
+      return [field, convertedObj]
+    }
+
+    return [field, value]
+  })
+
+  return Object.fromEntries(cleaned)
 }
 
 export async function getPathsValues(
@@ -250,3 +329,156 @@ export async function findImageDetails(imageUrl: string) {
   const imageDetails = data.length > 0 ? data[0] : null
   return imageDetails
 }
+
+class StrapiEntryService<EntryType> {
+  constructor(
+    private apiUri: string,
+    private stagingFilters: boolean | string = false,
+    private deepPopulate: boolean = false
+  ) {}
+
+  private mergeStagingFilters(params: ApiRequestParams) {
+    if (!this.stagingFilters) return params
+
+    const fieldName =
+      typeof this.stagingFilters === 'string' ? this.stagingFilters : undefined
+
+    const extra = { $or: getStagingOnlyFilters(fieldName) }
+    return {
+      ...params,
+      filters: params.filters ? { $and: [params.filters, extra] } : extra
+    }
+  }
+
+  private applyDeepPopulate(params: ApiRequestParams) {
+    if (!params.populate && this.deepPopulate) {
+      params.populate = 'deep'
+    }
+    return params
+  }
+
+  private modifyParams(params: ApiRequestParams) {
+    return this.mergeStagingFilters(this.applyDeepPopulate(params))
+  }
+
+  async findMany<T extends boolean = false>(
+    params: ApiRequestParams = {},
+    withPagination: T = false as T
+  ): Promise<
+    T extends true
+      ? {
+          pagination: ApiResponse['meta']['pagination']
+          data: Array<EntryType>
+        }
+      : Array<EntryType>
+  > {
+    const response = await request(this.apiUri, this.modifyParams(params))
+
+    const data = response.data.map(cleanStrapiObject) as Array<EntryType>
+
+    if (withPagination) {
+      return {
+        data,
+        pagination: response.meta.pagination
+      } as T extends true
+        ? {
+            pagination: ApiResponse['meta']['pagination']
+            data: Array<EntryType>
+          }
+        : never
+    }
+
+    return data as T extends true ? never : Array<EntryType>
+  }
+
+  async findAll(params: Omit<ApiRequestParams, 'pagination'> = {}) {
+    let combined: Array<EntryType> = []
+
+    let currentPage = 0
+    let totalPages = 1
+
+    while (currentPage < totalPages) {
+      params.pagination = {
+        pageSize: 100,
+        page: currentPage + 1
+      }
+      const { data, pagination } = await this.findMany(params, true)
+
+      combined = combined.concat(data)
+
+      totalPages = pagination?.pageCount || totalPages
+      currentPage = pagination?.page || currentPage + 1
+    }
+
+    return combined
+  }
+
+  async find(id: number, params: ApiRequestParams = {}) {
+    const response = await request(
+      `${this.apiUri}/${id}`,
+      this.modifyParams(params)
+    )
+    return cleanStrapiObject(response.data) as EntryType
+  }
+
+  async findBySlug(
+    slug: string,
+    params: Omit<ApiRequestParams, 'pagination'> = {}
+  ) {
+    return (
+      await this.findMany({
+        ...params,
+        filters: {
+          ...(params.filters || {}),
+          slug: {
+            $eq: slug
+          }
+        },
+        pagination: {
+          page: 1,
+          pageSize: 1,
+          withCount: false
+        }
+      })
+    ).pop()
+  }
+}
+
+export function seoFieldToNextComponentProps(
+  seo: undefined | null | ComponentSeo,
+  defaults: SeoContainerProps
+): SeoContainerProps {
+  const merged = { ...defaults }
+
+  if (seo?.title) merged.title = seo.title
+  if (seo?.description) merged.description = seo.description
+  if (seo?.image) merged.image = [seo.image]
+  if (seo?.schema) merged.schema = seo.schema
+  if (seo?.canonicalUrl) merged.path = seo.canonicalUrl
+
+  if (seo?.nofollow || seo?.noindex || seo?.robots) {
+    merged.robots = [
+      merged.robots,
+      seo.robots,
+      seo?.nofollow ? 'nofollow' : null,
+      seo?.noindex ? 'noindex' : null
+    ]
+      .filter(Boolean)
+      .join(', ')
+  }
+
+  return merged
+}
+
+export const resourceCategoriesService =
+  new StrapiEntryService<EntryResourceCategory>(
+    'resource-categories',
+    false,
+    true
+  )
+
+export const resourcesService = new StrapiEntryService<EntryResource>(
+  'resources',
+  'stagingOnly',
+  true
+)

@@ -1,6 +1,6 @@
 'use client'
 
-import CategorySelector from '@/components/CategorySelector'
+import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import GetStartedFree from '@/components/GetStartedFree'
 import IntegrationTile from '@/components/IntegrationTile'
 import IntegrationsClickPipesPromo from '@/components/IntegrationsClickPipesPromo'
@@ -150,16 +150,19 @@ export default function IntegrationsPage({
   const categoryList = integrationGroups
     .map((group) => {
       return {
-        text: group.label,
-        selected: group.slug === category,
-        onClick() {
+        kind: 'link',
+        href: `/integrations?category=${group.slug}`,
+        label: group.label,
+        active: group.slug === category,
+        onClick(event) {
+          event.preventDefault()
           setSearch(null)
           setCategory(group.slug)
         }
-      }
+      } satisfies Filter
     })
     .sort((a, b) => {
-      return a.text.localeCompare(b.text)
+      return a.label.localeCompare(b.label)
     })
 
   const getCategory = (categorySlug: string): IntegrationGroup | undefined => {
@@ -236,7 +239,7 @@ export default function IntegrationsPage({
         </div>
       </div>
 
-      <div className='container mx-auto mb-20 max-w-7xl space-y-20 px-8 2xl:px-0'>
+      <div className='container mx-auto mb-20 max-w-7xl space-y-8 px-8 lg:space-y-20 2xl:px-0'>
         <div className='flex-col items-center'>
           <SuiSearchField
             placeholder='Search by integration...'
@@ -246,12 +249,16 @@ export default function IntegrationsPage({
             onChange={searchChange}
           />
           <div className='mx-auto max-w-3xl'>
-            <CategorySelector
+            <PillFilters
+              className='justify-center'
               options={[
                 {
-                  text: 'All',
-                  selected: !category,
-                  onClick() {
+                  kind: 'link',
+                  href: '/integrations',
+                  label: 'All',
+                  active: !category,
+                  onClick(event) {
+                    event.preventDefault()
                     setCategory(null)
                     setSearch(null)
                   }
@@ -288,6 +295,14 @@ export default function IntegrationsPage({
               : ''}
           </p>
         )}
+
+        <div className='rounded-lg bg-neutral-725 p-4 text-center text-sm text-neutral-200'>
+          <p>
+            <strong className='text-white'>Notice:</strong> Third-party logos
+            and trademarks belong to their respective owners and are shown only
+            to indicate available integrations. No endorsement is implied.
+          </p>
+        </div>
 
         <GetStartedFree
           href='https://console.clickhouse.cloud/signUp?loc=integrations'

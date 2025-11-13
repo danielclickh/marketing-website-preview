@@ -61,7 +61,7 @@ export default function BlogImage({
   }, [isZoom])
 
   return (
-    <div className='relative mb-9 flex w-full justify-center'>
+    <span className='relative mb-9 flex w-full justify-center'>
       <img
         ref={imgRef}
         src={imageUrl}
@@ -125,7 +125,7 @@ export default function BlogImage({
           )}
         </>
       )}
-    </div>
+    </span>
   )
 }
 

@@ -27,9 +27,13 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
-  >('ClickHouse announces Series C extension and key leadership hires')
+  >(
+    <>
+      <span className='mr-2 inline-block scale-125'>🎉</span> Join us for House Party, the SQL with the Chainsmokers
+    </>
+  )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/clickhouse-extends-series-c-financing-expands-leadership-team'
+    '/houseparty/the-sql'
   )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
@@ -71,20 +75,16 @@ export default function Header({ github, eyebrow }: HeaderProps) {
       }
 
       if (
-        countryCode?.toUpperCase() === 'NL' ||
-        langCode?.toUpperCase() === 'NL'
+        countryCode?.toUpperCase() === 'JP' ||
+        langCode?.toUpperCase() === 'JA'
       ) {
         setHeaderBannerEnabled(true)
         setHeaderBannerText(
-          <span className='inline-flex items-center gap-2'>
-            <span className='hidden text-xl md:inline'>🇳🇱</span> Join our free
-            database and AI conference in Amsterdam, October 28th{' '}
-            <span className='hidden text-xl md:inline'>🇳🇱</span>
-          </span>
+          'ClickHouse announces establishment of Japanese subsidiary in partnership with Japan Cloud'
         )
-        setHeaderBannerUrl('/openhouse/amsterdam?loc=eyebrow')
-        setHeaderBannerExpires(new Date('2025-10-28T00:00:00+00:00'))
-        setHeaderBannerArrow(false)
+        setHeaderBannerUrl('/blog/japan-cloud?loc=eyebrow')
+        setHeaderBannerExpires(undefined)
+        setHeaderBannerArrow(true)
       }
     })()
 

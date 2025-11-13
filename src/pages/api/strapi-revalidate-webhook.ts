@@ -1,6 +1,13 @@
 import { pages as learnPages } from '@/data/learn'
-import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import {
+  fetchAll,
+  isAuthorisedRevalidationRequest,
+  resourceCategoriesService,
+  resourcesService
+} from '@/lib/api/strapi'
+import { absoluteUrl } from '@/lib/next'
 import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
+import { waitUntil } from '@vercel/functions'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const revalidate = async (
@@ -27,25 +34,61 @@ const revalidate = async (
 // strapi UID => revalidation callback
 const CONTENT_TYPE_HANDLERS: Record<
   string,
-  (body: any, response: NextApiResponse) => Promise<void>
+  (
+    body: any,
+    response: NextApiResponse,
+    request: NextApiRequest
+  ) => Promise<void>
 > = {
   /**
    * -----
    * Collection types
    * -----
    */
-  'api::blog-post.blog-post': async function (body, response) {
+  'api::blog-post.blog-post': async function (body, response, request) {
     const paths = [`/sitemap` /*`/blog`*/]
 
-    if (body?.entry?.slug) {
-      paths.push(`/blog/${body.entry.slug}`)
-      paths.push(`/jp/blog/${body.entry.slug}`)
+    const slug = body?.entry?.slug
+
+    if (slug) {
+      paths.push(`/blog/${slug}`)
+      paths.push(`/jp/blog/${slug}`)
     }
 
     // Revalidate open house page because it uses tagged content
     paths.push('/openhouse')
 
+    // Standard ISR revalidation
     await revalidate(response, paths)
+
+    // Markdown api route revalidation workaround
+    if (slug) {
+      try {
+        const markdownUrl = absoluteUrl(`/blog/${slug}.md`)
+        console.log(`Revalidating: ${markdownUrl}`)
+
+        // 1. Fetch a fresh markdown version, bypassing CDN cache
+        const token = Array.isArray(request?.headers?.['isr-auth-token'])
+          ? request?.headers?.['isr-auth-token'][0]
+          : request?.headers?.['isr-auth-token']
+
+        await fetch(`${markdownUrl}?force=true`, {
+          method: 'GET',
+          headers: token
+            ? {
+                'isr-auth-token': token
+              }
+            : {}
+        })
+
+        // 2. Reseed CDN cache immediately with the new data
+        await fetch(absoluteUrl(`/blog/${body.entry.slug}.md`), {
+          headers: { 'Cache-Control': 'no-cache' }
+        })
+      } catch (error) {
+        console.log('Error revalidating markdown', error)
+      }
+    }
   },
   'api::comparison.comparison': async function (body, response) {
     const paths = [`/sitemap`]
@@ -163,6 +206,40 @@ const CONTENT_TYPE_HANDLERS: Record<
     if (data) {
       data.forEach((page) => {
         paths.push(`/openhouse/${page.slug}`)
+      })
+    }
+
+    await revalidate(response, paths)
+  },
+  'api::resource.resource': async function (body, response) {
+    const paths: Array<string> = ['/resources']
+
+    if (body?.entry?.category?.slug && body?.entry?.slug) {
+      paths.push(`/resources/${body.entry.category.slug}`)
+      paths.push(`/resources/${body.entry.category.slug}/${body.entry.slug}`)
+    }
+
+    await revalidate(response, paths)
+  },
+  'api::resource-category.resource-category': async function (body, response) {
+    const paths: Array<string> = ['/resources']
+
+    if (body?.entry?.slug) {
+      paths.push(`/resources/${body.entry.slug}`)
+
+      const categoryResources = await resourcesService.findAll({
+        fields: ['slug'],
+        populate: [], // Disables relationship populating which isn't needed here
+        filters: {
+          category: {
+            slug: {
+              $eq: body.entry.slug
+            }
+          }
+        }
+      })
+      categoryResources.forEach((resource) => {
+        paths.push(`/resources/${body.entry.slug}/${resource.slug}`)
       })
     }
 
@@ -330,12 +407,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Authorize request
-  const webhookToken = process.env.STRAPI_WEBHOOK_TOKEN
-  if (
-    !webhookToken ||
-    !req.headers?.['isr-auth-token'] ||
-    req.headers['isr-auth-token'] !== webhookToken
-  ) {
+  if (!isAuthorisedRevalidationRequest(req)) {
     return res.status(403).send('Unauthorized')
   }
 
@@ -348,13 +420,11 @@ export default async function handler(
   const body = req.body
   console.log('Revalidation request', body)
   if (body?.uid && CONTENT_TYPE_HANDLERS.hasOwnProperty(body.uid)) {
-    try {
-      await CONTENT_TYPE_HANDLERS[body.uid](body, res)
-      return res.json({ revalidated: true })
-    } catch (error) {
-      console.log('Revalidate error', error)
-      return res.status(500).send('Error revalidating')
-    }
+    // Send and forget revalidation requests, no need to wait
+    waitUntil(CONTENT_TYPE_HANDLERS[body.uid](body, res, req))
+
+    // Return success response to webhook sender
+    return res.json({ revalidated: true })
   }
 
   return res.json({ revalidated: false })
