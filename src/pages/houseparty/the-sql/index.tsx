@@ -20,7 +20,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import Script from 'next/script'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -198,7 +198,9 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
             </section>
 
             {/* Book a meeting */}
-            <section className='bg-neutral-800 py-16 lg:py-24'>
+            <section
+              id='request-meeting'
+              className='bg-neutral-800 py-16 lg:py-24'>
               <div className='section-container flex flex-col items-center gap-10 lg:flex-row'>
                 <Image
                   src={map}
