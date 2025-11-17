@@ -17,7 +17,17 @@ import imageStorageAndCompute from './assets/image-storage-and-compute.png'
 import imageVectorizedEngine from './assets/image-vectorized-engine.png'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import logoBraze from './assets/logo-braze.svg'
+import logoConstantContact from './assets/logo-constant-contact.svg'
+import logoJerry from './assets/logo-jerry.svg'
 import logoLyft from './assets/logo-lyft.svg'
+import logoNetflix from './assets/logo-netflix.svg'
+import thumb01 from './assets/thumb-01.png'
+import thumb02 from './assets/thumb-02.png'
+import thumb03 from './assets/thumb-03.png'
+import thumb04 from './assets/thumb-04.png'
+import thumb05 from './assets/thumb-05.png'
+import thumb06 from './assets/thumb-06.png'
+import thumb07 from './assets/thumb-07.png'
 import Accordion from '@/components-cleaned/Accordion'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
@@ -324,6 +334,7 @@ export default function ClickHouseServerPage({
                         }
                       },
                       {
+                        link: '/videos/lyft-user-story',
                         title: 'Migrating from Apache Druid',
                         description:
                           'How Lyft optimized performance and cut infrastructure costs with ClickHouse',
@@ -342,13 +353,12 @@ export default function ClickHouseServerPage({
                         description:
                           'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically',
                         quote:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                          'Extensive testing and comparison showed that ClickHouse outperformed other solutions like Elasticsearch in three key areas: performance, compatibility, and cost-efficiency for large-scale operations.',
                         logo: {
-                          src: logoAdevinta,
-                          width: 126,
-                          height: 29,
-                          alt: 'Adevinta',
-                          className: 'bg-white'
+                          src: logoNetflix,
+                          width: 111,
+                          height: 30,
+                          alt: 'Netflix'
                         }
                       },
                       {
@@ -357,27 +367,26 @@ export default function ClickHouseServerPage({
                         description:
                           'Run faster cold queries, tap into broader integrations, and avoid CSP lock-in',
                         quote:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                          'As data size grew, we faced performance and cost challenges with AWS Redshift. Switching to ClickHouse improved our query performance by 20 times and greatly cut costs.',
                         logo: {
-                          src: logoAdevinta,
-                          width: 126,
-                          height: 29,
-                          alt: 'Adevinta',
-                          className: 'bg-white'
+                          src: logoJerry,
+                          width: 82 * 1.2,
+                          height: 20 * 1.2,
+                          alt: 'Jerry'
                         }
                       },
                       {
+                        link: '/blog/pinot-to-clickhouse-constant-contact',
                         title: 'Migrating from Apache Pinot',
                         description:
                           'Simplify your open-source stack and enjoy faster queries, richer aggregation functions, and full SQL compliance.',
                         quote:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                          'With ClickHouse, our performance is 10 times faster',
                         logo: {
-                          src: logoAdevinta,
-                          width: 126,
-                          height: 29,
-                          alt: 'Adevinta',
-                          className: 'bg-white'
+                          src: logoConstantContact,
+                          width: 139.88 * 0.9,
+                          height: 40 * 0.9,
+                          alt: 'Constant Contact'
                         }
                       }
                     ] satisfies Array<{
@@ -530,7 +539,7 @@ export default function ClickHouseServerPage({
 
       {/* Videos */}
       <section className='bg-primary-300 py-16 text-neutral-900 lg:py-24'>
-        <div className='section-container mb-8 max-w-3xl space-y-6 text-center lg:mb-12'>
+        <div className='section-container mb-8 max-w-3xl space-y-6 text-center lg:mb-16'>
           <SuiTitle type='h2'>So what makes ClickHouse soo fast?</SuiTitle>
           <p className='text-neutral-700'>
             Learn what makes ClickHouse soo fast from isolated inserts and
@@ -561,6 +570,7 @@ export default function ClickHouseServerPage({
             simulateTouch={false}
             slideToClickedSlide={true}
             centeredSlides={true}
+            loop={true}
             breakpoints={{
               1024: {
                 slidesPerView: 2
@@ -573,26 +583,53 @@ export default function ClickHouseServerPage({
               }
             }}>
             {[
-              'vsykFYns0Ws',
-              'dvGlPh2bJFo',
-              '_w3zQg695c0',
-              'UJpVAx7o1aY',
-              'MH10E3rVvnM',
-              'O5qecdQ7Y18',
-              'dccGLSuYWy0'
+              {
+                youtubeId: 'vsykFYns0Ws',
+                thumbnail: thumb01
+              },
+              {
+                youtubeId: 'dvGlPh2bJFo',
+                thumbnail: thumb02
+              },
+              {
+                youtubeId: '_w3zQg695c0',
+                thumbnail: thumb03
+              },
+              {
+                youtubeId: 'UJpVAx7o1aY',
+                thumbnail: thumb04
+              },
+              {
+                youtubeId: 'MH10E3rVvnM',
+                thumbnail: thumb05
+              },
+              {
+                youtubeId: 'O5qecdQ7Y18',
+                thumbnail: thumb06
+              },
+              {
+                youtubeId: 'dccGLSuYWy0',
+                thumbnail: thumb07
+              }
               //'7QXKBKDOkJE'
-            ].map((videoId, videoIndex) => {
+            ].map(({ youtubeId, thumbnail }, videoIndex) => {
               return (
                 <SwiperSlide key={videoIndex}>
                   {({ isActive, isVisible }) => (
                     <PlayOnClickVideo
                       provider='youtube'
-                      id={videoId}
+                      id={youtubeId}
                       className={`transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none'}`}
                       thumbnailClassName={`transition-opacity ${isActive ? '' : 'opacity-50'}`}
                       playButtonClassName={`!transition-all ${isActive ? '' : 'opacity-0'}`}
                       thumbnail={
-                        <YouTubeThumbnail videoId={videoId} loading='eager' />
+                        <Image
+                          src={thumbnail}
+                          width={1280 / 2}
+                          height={720 / 2}
+                          loading='eager'
+                          alt='Video thumbnail'
+                        />
                       }
                     />
                   )}
