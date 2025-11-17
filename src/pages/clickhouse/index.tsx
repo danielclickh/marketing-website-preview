@@ -46,6 +46,7 @@ import React, { useRef } from 'react'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
 import { Mousewheel, EffectCreative, EffectCoverflow } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 interface PageProps extends CommonProps {
   releaseVideos: Array<
@@ -529,18 +530,17 @@ export default function ClickHouseServerPage({
 
       {/* Videos */}
       <section className='bg-primary-300 py-16 text-neutral-900 lg:py-24'>
-        <div className='section-container'>
-          <div className='mx-auto mb-8 max-w-3xl space-y-6 text-center lg:mb-12'>
-            <SuiTitle type='h2'>So what makes ClickHouse soo fast?</SuiTitle>
-            <p className='text-neutral-700'>
-              Learn what makes ClickHouse soo fast from isolated inserts and
-              queries, efficient data pruning, and high compression to a
-              state-of-the-art query engine and, above all, meticulous attention
-              to detail.
-            </p>
-          </div>
-          <CarouselPaginated
-            theme='dark'
+        <div className='section-container mb-8 max-w-3xl space-y-6 text-center lg:mb-12'>
+          <SuiTitle type='h2'>So what makes ClickHouse soo fast?</SuiTitle>
+          <p className='text-neutral-700'>
+            Learn what makes ClickHouse soo fast from isolated inserts and
+            queries, efficient data pruning, and high compression to a
+            state-of-the-art query engine and, above all, meticulous attention
+            to detail.
+          </p>
+        </div>
+        <div className='mx-auto max-w-screen-2xl'>
+          <Swiper
             modules={[Mousewheel, EffectCoverflow]}
             mousewheel={{
               enabled: true,
@@ -548,16 +548,30 @@ export default function ClickHouseServerPage({
               releaseOnEdges: true,
               sensitivity: 0.5
             }}
+            effect='coverflow'
             coverflowEffect={{
-              modifier: 4,
-              rotate: 0,
-              stretch: 0
+              rotate: 0, // no tilt
+              depth: 0, // no 3D depth
+              stretch: 100, // negative to pull sides under center
+              scale: 0.8, // scale side slides down
+              modifier: 1,
+              slideShadows: false
             }}
+            slidesPerView={1.25}
             simulateTouch={false}
             slideToClickedSlide={true}
-            slidesPerView={3}
             centeredSlides={true}
-            effect='coverflow'>
+            breakpoints={{
+              1024: {
+                slidesPerView: 2
+              },
+              1280: {
+                slidesPerView: 3,
+                coverflowEffect: {
+                  stretch: 100 // negative to pull sides under center
+                }
+              }
+            }}>
             {[
               'vsykFYns0Ws',
               'dvGlPh2bJFo',
@@ -569,15 +583,23 @@ export default function ClickHouseServerPage({
               //'7QXKBKDOkJE'
             ].map((videoId, videoIndex) => {
               return (
-                <PlayOnClickVideo
-                  key={videoIndex}
-                  provider='youtube'
-                  id={videoId}
-                  thumbnail={<YouTubeThumbnail videoId={videoId} />}
-                />
+                <SwiperSlide key={videoIndex}>
+                  {({ isActive, isVisible }) => (
+                    <PlayOnClickVideo
+                      provider='youtube'
+                      id={videoId}
+                      className={`transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none'}`}
+                      thumbnailClassName={`transition-opacity ${isActive ? '' : 'opacity-50'}`}
+                      playButtonClassName={`!transition-all ${isActive ? '' : 'opacity-0'}`}
+                      thumbnail={
+                        <YouTubeThumbnail videoId={videoId} loading='eager' />
+                      }
+                    />
+                  )}
+                </SwiperSlide>
               )
             })}
-          </CarouselPaginated>
+          </Swiper>
         </div>
       </section>
 
