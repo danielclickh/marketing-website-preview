@@ -339,14 +339,8 @@ export default function Page({
                 </div>
               </div>
             </div>
-            <div className='section-container relative z-10 flex max-w-5xl flex-wrap place-items-center items-center justify-center gap-6 self-center pb-20 md:gap-x-14'>
-              <div className='absolute left-0 z-20 h-full bg-homepageFadeLeftLogos p-10 lg:pr-20'></div>
-              <div className='absolute right-0 z-20 h-full bg-homepageFadeRightLogos p-10 lg:pl-20'></div>
-              <LogoCarousel
-                logos={customerStories.logos}
-                speedClass1='animate-marqueeLeft5'
-                speedClass2='animate-marqueeLeft6'
-              />
+            <div className='section-container relative max-w-5xl pb-20'>
+              <LogoCarousel logos={customerStories.logos} />
             </div>
           </div>
         </div>

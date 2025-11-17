@@ -17,6 +17,9 @@ import BlogModulesSummary, {
 import BlogModulesVideo, {
   blogModulesVideoMarkdown
 } from '@/components-cleaned/BlogModulesVideo'
+import BlogModulesYoutubeVideo, {
+  blogModulesYoutubeVideoMarkdown
+} from '@/components-cleaned/BlogModulesYoutubeVideo'
 import { camel, pascal } from '@/lib/utils/strings'
 import { DynamicComponent } from '@/types/strapi'
 import { Attributes } from 'react'
@@ -31,7 +34,8 @@ const REGISTRY: Record<string, React.ComponentType<any>> = {
   BlogModulesMarkdown,
   BlogModulesMarketoForm,
   BlogModulesSummary,
-  BlogModulesVideo
+  BlogModulesVideo,
+  BlogModulesYoutubeVideo
 }
 
 const MARKDOWN_REGISTRY: Record<string, (props: any) => string> = {
@@ -40,7 +44,8 @@ const MARKDOWN_REGISTRY: Record<string, (props: any) => string> = {
   blogModulesFaqsMarkdown,
   blogModulesMarkdownMarkdown,
   blogModulesSummaryMarkdown,
-  blogModulesVideoMarkdown
+  blogModulesVideoMarkdown,
+  blogModulesYoutubeVideoMarkdown
 }
 
 export type StrapiDynamicBlogModulesProps = DynamicComponent & {

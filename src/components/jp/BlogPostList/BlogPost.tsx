@@ -1,5 +1,5 @@
 import { CUICard } from '../../ClickUI'
-import { StrapiImage } from '../../StrapiElements'
+import { StrapiImageUrl } from '../../StrapiElements'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { BlogPost as BlogPostType } from '@/types/blogs'
 import Link from 'next/link'
@@ -29,7 +29,7 @@ export default function BlogPost({
       <CUICard className='h-full'>
         <CUICard.Body className='flex flex-col items-start justify-center gap-2'>
           {thumbnailPng && (
-            <StrapiImage
+            <StrapiImageUrl
               {...thumbnailPng}
               sizes='medium'
               alt={title}

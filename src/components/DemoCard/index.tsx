@@ -1,6 +1,6 @@
 import { CUICard } from '../ClickUI'
 import Markdown from '../Markdown'
-import { StrapiImage } from '../StrapiElements'
+import { StrapiImageUrl } from '../StrapiElements'
 import { SuiTitle } from '../sui'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { Demo } from '@/types/demos'
@@ -34,7 +34,7 @@ export default function DemoCard(demo: Demo) {
               target={demo.LinkType}
               className='mb-6 md:mb-12'
               onClick={handleImageClick}>
-              <StrapiImage
+              <StrapiImageUrl
                 {...demo.Image}
                 sizes='medium'
                 alt={demo.Title}

@@ -46,16 +46,19 @@ function CodeViewer({
     }
 
     let chart: { type: ChartType; config?: ChartConfig } | undefined
-    try {
-      const parsedChart = JSON.parse(base64Decode(chart_config))
-      if (parsedChart && parsedChart.type && parsedChart.config) {
-        chart = {
-          type: parsedChart.type as ChartType,
-          config: parsedChart.config
+
+    if (chart_config) {
+      try {
+        const parsedChart = JSON.parse(base64Decode(chart_config))
+        if (parsedChart && parsedChart.type && parsedChart.config) {
+          chart = {
+            type: parsedChart.type as ChartType,
+            config: parsedChart.config
+          }
         }
+      } catch {
+        //
       }
-    } catch {
-      console.log('chart config is not valid')
     }
 
     return (

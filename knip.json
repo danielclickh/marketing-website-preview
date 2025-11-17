@@ -1,5 +1,5 @@
 {
-  "entry": ["src/pages/**/*.{js,jsx,ts,tsx}"],
+  "entry": ["src/pages/**/*.{js,jsx,ts,tsx}", "src/api/**/*.{js,jsx,ts,tsx}"],
   "project": ["src/**/*.{js,jsx,ts,tsx}"],
   "ignore": [
     "**/*.test.{js,jsx,ts,tsx}",

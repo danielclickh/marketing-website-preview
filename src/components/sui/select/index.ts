@@ -1,1 +1,0 @@
-export { SuiSelect } from './select'

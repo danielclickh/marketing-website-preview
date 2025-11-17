@@ -91,24 +91,32 @@ export default function AnimatedDataLine({
     case 'up':
       y1 = size
       y2 = 0
+      x1 = strokeWidth / 2
+      x2 = strokeWidth / 2
       framesAttr1 = 'y2'
       framesAttr2 = 'y1'
       break
     case 'down':
       y1 = 0
       y2 = size
+      x1 = strokeWidth / 2
+      x2 = strokeWidth / 2
       framesAttr1 = 'y1'
       framesAttr2 = 'y2'
       break
     case 'left':
       x1 = size
       x2 = 0
+      y1 = strokeWidth / 2
+      y2 = strokeWidth / 2
       framesAttr1 = 'x2'
       framesAttr2 = 'x1'
       break
     case 'right':
       x1 = 0
       x2 = size
+      y1 = strokeWidth / 2
+      y2 = strokeWidth / 2
       framesAttr1 = 'x1'
       framesAttr2 = 'x2'
       break
