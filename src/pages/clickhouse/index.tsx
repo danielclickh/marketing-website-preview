@@ -576,43 +576,48 @@ export default function ClickHouseServerPage({
                 slidesPerView: 2
               },
               1280: {
-                slidesPerView: 3,
-                coverflowEffect: {
-                  stretch: 100 // negative to pull sides under center
-                }
+                slidesPerView: 3
               }
             }}>
             {[
               {
+                title:
+                  'Concurrent inserts are isolated from each other (part 1)',
                 youtubeId: 'vsykFYns0Ws',
                 thumbnail: thumb01
               },
               {
+                title:
+                  'Concurrent inserts are isolated from each other (part 2)',
                 youtubeId: 'dvGlPh2bJFo',
                 thumbnail: thumb02
               },
               {
+                title: 'Merge-time computation',
                 youtubeId: '_w3zQg695c0',
                 thumbnail: thumb03
               },
               {
+                title: 'Data pruning',
                 youtubeId: 'UJpVAx7o1aY',
                 thumbnail: thumb04
               },
               {
+                title: 'Data compression',
                 youtubeId: 'MH10E3rVvnM',
                 thumbnail: thumb05
               },
               {
+                title: 'Query processing',
                 youtubeId: 'O5qecdQ7Y18',
                 thumbnail: thumb06
               },
               {
+                title: 'Attention to detail',
                 youtubeId: 'dccGLSuYWy0',
                 thumbnail: thumb07
               }
-              //'7QXKBKDOkJE'
-            ].map(({ youtubeId, thumbnail }, videoIndex) => {
+            ].map(({ title, youtubeId, thumbnail }, videoIndex) => {
               return (
                 <SwiperSlide key={videoIndex}>
                   {({ isActive, isVisible }) => (
@@ -628,7 +633,7 @@ export default function ClickHouseServerPage({
                           width={1280 / 2}
                           height={720 / 2}
                           loading='eager'
-                          alt='Video thumbnail'
+                          alt={`Why is clickhouse so fast. ${title}`}
                         />
                       }
                     />
