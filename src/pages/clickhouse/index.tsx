@@ -1,7 +1,20 @@
 import atScaleBottom from './assets/at-scale-bottom.svg'
 import atScaleTop from './assets/at-scale-top.svg'
 import heroTerminal from './assets/hero-terminal.svg'
+import imageArchitecture from './assets/image-architecture.png'
+import imageBackups from './assets/image-backups.png'
 import imageClickbench from './assets/image-clickbench.png'
+import imageColumnOriented from './assets/image-column-oriented.png'
+import imageDataTransformations from './assets/image-data-transformations.png'
+import imageInteroperability from './assets/image-interoperability.png'
+import imageJsonSupport from './assets/image-json-support.png'
+import imageLightweightUpdates from './assets/image-lightweight-updates.png'
+import imagePrimaryIndex from './assets/image-primary-index.png'
+import imageReplication from './assets/image-replication.png'
+import imagesharding from './assets/image-sharding.png'
+import imageSqlSupport from './assets/image-sql-support.png'
+import imageStorageAndCompute from './assets/image-storage-and-compute.png'
+import imageVectorizedEngine from './assets/image-vectorized-engine.png'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import Accordion from '@/components-cleaned/Accordion'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
@@ -17,6 +30,7 @@ import ScaleToContainer from '@/components/ScaleToContainer'
 import SocialIcon from '@/components/SocialIcon'
 import TiltedText from '@/components/TiltedText'
 import { SuiCodeblock, SuiText, SuiTitle } from '@/components/sui'
+import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { marketingVideosService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -26,7 +40,7 @@ import { EntryMarketingVideo } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef } from 'react'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
 import { Mousewheel, EffectCreative, EffectCoverflow } from 'swiper/modules'
@@ -78,6 +92,33 @@ export default function ClickHouseServerPage({
   releaseVideos
 }: PageProps) {
   useGalaxyOnPage('productOpenSourcePage')
+
+  // Apply Equal heights to quote card headers
+  const quoteCarouselRef = useRef<null | HTMLDivElement>(null)
+  useResizeObserverSsr(quoteCarouselRef, () => {
+    if (!quoteCarouselRef.current) return
+
+    const titles =
+      quoteCarouselRef.current.querySelectorAll<HTMLElement>('.cui-card-header')
+
+    // Remove previously set values
+    titles.forEach((el) => {
+      el.style.removeProperty('height')
+    })
+
+    // Calculate the max height
+    let maxHeight = 0
+    titles.forEach((el) => {
+      const h = el.offsetHeight
+      if (h > maxHeight) maxHeight = h
+    })
+
+    // Set the height values
+    titles.forEach((el) => {
+      el.style.setProperty('height', `${maxHeight}px`)
+    })
+  })
+
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -225,157 +266,162 @@ export default function ClickHouseServerPage({
                 Join others migrating from legacy and proprietary data stores
                 for their analytics
               </h2>
-              <CarouselPaginated
-                modules={[Mousewheel]}
-                mousewheel={{
-                  enabled: true,
-                  forceToAxis: true,
-                  releaseOnEdges: true,
-                  sensitivity: 0.5
-                }}
-                simulateTouch={false}
-                slidesPerView={1}
-                spaceBetween={16}
-                breakpoints={{
-                  768: {
-                    slidesPerView: 2
-                  },
-                  1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 24
-                  }
-                }}
-                carouselClass='!-mx-6 !px-6 lg:!-mx-10 lg:!px-10'
-                className='lg:!-mb-5'>
-                {(
-                  [
-                    {
-                      link: '/comparison/bigquery',
-                      title: 'Migrating from BigQuery',
-                      description:
-                        'Run highly-concurrency queries without second-long latency, CSP lock-in or run away costs due to per query pricing.',
-                      quote:
-                        'We needed a solution that could scale, but also provide end-user facing analytics capabilities with low latency and high throughput.',
-                      logo: {
-                        src: logoAdevinta,
-                        width: 126,
-                        height: 29,
-                        alt: 'Adevinta'
-                      }
+              <div className='grid grid-cols-1 grid-rows-2'>
+                <CarouselPaginated
+                  ref={quoteCarouselRef}
+                  modules={[Mousewheel]}
+                  mousewheel={{
+                    enabled: true,
+                    forceToAxis: true,
+                    releaseOnEdges: true,
+                    sensitivity: 0.5
+                  }}
+                  simulateTouch={false}
+                  slidesPerView={1}
+                  spaceBetween={16}
+                  breakpoints={{
+                    768: {
+                      slidesPerView: 2
                     },
-                    {
-                      link: '/comparison/snowflake',
-                      title: 'Migrating from Snowflake',
-                      description:
-                        'Cut costs and improve latency with true high concurrency - no tier gated features or pricing models that penalize interactivity.',
-                      quote:
-                        "It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that.",
-                      logo: {
-                        src: logoAdevinta,
-                        width: 126,
-                        height: 29,
-                        alt: 'Adevinta'
-                      }
-                    },
-                    {
-                      title: 'Migrating from Apache Druid',
-                      description:
-                        'How Lyft optimized performance and cut infrastructure costs with ClickHouse',
-                      quote:
-                        'We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.',
-                      logo: {
-                        src: logoAdevinta,
-                        width: 126,
-                        height: 29,
-                        alt: 'Adevinta'
-                      }
-                    },
-                    {
-                      link: '/comparison/elastic-for-observability',
-                      title: 'Migrating from Elastic',
-                      description:
-                        'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically',
-                      quote:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
-                      logo: {
-                        src: logoAdevinta,
-                        width: 126,
-                        height: 29,
-                        alt: 'Adevinta',
-                        className: 'bg-white'
-                      }
-                    },
-                    {
-                      link: '/comparison/redshift',
-                      title: 'Migrating from Redshift',
-                      description:
-                        'Run faster cold queries, tap into broader integrations, and avoid CSP lock-in',
-                      quote:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
-                      logo: {
-                        src: logoAdevinta,
-                        width: 126,
-                        height: 29,
-                        alt: 'Adevinta',
-                        className: 'bg-white'
-                      }
-                    },
-                    {
-                      title: 'Migrating from Apache Pinot',
-                      description:
-                        'Simplify your open-source stack and enjoy faster queries, richer aggregation functions, and full SQL compliance.',
-                      quote:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
-                      logo: {
-                        src: logoAdevinta,
-                        width: 126,
-                        height: 29,
-                        alt: 'Adevinta',
-                        className: 'bg-white'
-                      }
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 24
                     }
-                  ] satisfies Array<{
-                    link?: string
-                    title: string
-                    description: string
-                    quote: string
-                    logo: ImageProps
-                  }>
-                ).map((migration, migrationIndex) => {
-                  return (
-                    <CUICard key={migrationIndex} className='relative'>
-                      {migration.link && (
-                        <Link href={migration.link}>
-                          <span className='absolute inset-0 z-10' />
-                          <span className='sr-only'>
-                            {migration.title}: Find out more
-                          </span>
-                        </Link>
-                      )}
-                      <CUICard.Header className='p-4 text-center'>
-                        <SuiTitle type='h3' className='mb-4'>
-                          {migration.title}
-                        </SuiTitle>
-                        <p className='text-neutral-200'>
-                          {migration.description}
-                        </p>
-                      </CUICard.Header>
-                      <CUICard.Body className='flex-1 p-2'>
-                        <QuoteCard
-                          className='border-0 bg-white/5'
-                          content={
-                            <em className='text-sm'>{migration.quote}</em>
-                          }
-                          logo={{
-                            ...migration.logo,
-                            className: `ml-auto opacity-40 ${migration.logo?.className || ''}`
-                          }}
-                        />
-                      </CUICard.Body>
-                    </CUICard>
-                  )
-                })}
-              </CarouselPaginated>
+                  }}
+                  carouselClass='!-mx-6 !px-6 lg:!-mx-10 lg:!px-10'
+                  className='col-span-full row-span-full lg:!-mb-5'>
+                  {(
+                    [
+                      {
+                        link: '/comparison/bigquery',
+                        title: 'Migrating from BigQuery',
+                        description:
+                          'Run highly-concurrency queries without second-long latency, CSP lock-in or run away costs due to per query pricing.',
+                        quote:
+                          'We needed a solution that could scale, but also provide end-user facing analytics capabilities with low latency and high throughput.',
+                        logo: {
+                          src: logoAdevinta,
+                          width: 126,
+                          height: 29,
+                          alt: 'Adevinta'
+                        }
+                      },
+                      {
+                        link: '/comparison/snowflake',
+                        title: 'Migrating from Snowflake',
+                        description:
+                          'Cut costs and improve latency with true high concurrency - no tier gated features or pricing models that penalize interactivity.',
+                        quote:
+                          "It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that.",
+                        logo: {
+                          src: logoAdevinta,
+                          width: 126,
+                          height: 29,
+                          alt: 'Adevinta'
+                        }
+                      },
+                      {
+                        title: 'Migrating from Apache Druid',
+                        description:
+                          'How Lyft optimized performance and cut infrastructure costs with ClickHouse',
+                        quote:
+                          'We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.',
+                        logo: {
+                          src: logoAdevinta,
+                          width: 126,
+                          height: 29,
+                          alt: 'Adevinta'
+                        }
+                      },
+                      {
+                        link: '/comparison/elastic-for-observability',
+                        title: 'Migrating from Elastic',
+                        description:
+                          'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically',
+                        quote:
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                        logo: {
+                          src: logoAdevinta,
+                          width: 126,
+                          height: 29,
+                          alt: 'Adevinta',
+                          className: 'bg-white'
+                        }
+                      },
+                      {
+                        link: '/comparison/redshift',
+                        title: 'Migrating from Redshift',
+                        description:
+                          'Run faster cold queries, tap into broader integrations, and avoid CSP lock-in',
+                        quote:
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                        logo: {
+                          src: logoAdevinta,
+                          width: 126,
+                          height: 29,
+                          alt: 'Adevinta',
+                          className: 'bg-white'
+                        }
+                      },
+                      {
+                        title: 'Migrating from Apache Pinot',
+                        description:
+                          'Simplify your open-source stack and enjoy faster queries, richer aggregation functions, and full SQL compliance.',
+                        quote:
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius leo vitae lacus pulvinar, a ultricies elit malesuada. Donec eget lacus at leo varius facilisis. In semper faucibus consequat.',
+                        logo: {
+                          src: logoAdevinta,
+                          width: 126,
+                          height: 29,
+                          alt: 'Adevinta',
+                          className: 'bg-white'
+                        }
+                      }
+                    ] satisfies Array<{
+                      link?: string
+                      title: string
+                      description: string
+                      quote: string
+                      logo: ImageProps
+                    }>
+                  ).map((migration, migrationIndex) => {
+                    return (
+                      <CUICard
+                        key={migrationIndex}
+                        className='relative bg-neutral-700/20'>
+                        {migration.link && (
+                          <Link href={migration.link}>
+                            <span className='absolute inset-0 z-10' />
+                            <span className='sr-only'>
+                              {migration.title}: Find out more
+                            </span>
+                          </Link>
+                        )}
+                        <CUICard.Header className='p-4 text-center'>
+                          <SuiTitle type='h3' className='mb-4'>
+                            {migration.title}
+                          </SuiTitle>
+                          <p className='text-neutral-200'>
+                            {migration.description}
+                          </p>
+                        </CUICard.Header>
+                        <CUICard.Body className='flex-1 p-2'>
+                          <QuoteCard
+                            className='border-0 bg-white/5'
+                            content={
+                              <em className='text-sm'>{migration.quote}</em>
+                            }
+                            logo={{
+                              ...migration.logo,
+                              className: `ml-auto opacity-40 ${migration.logo?.className || ''}`
+                            }}
+                          />
+                        </CUICard.Body>
+                      </CUICard>
+                    )
+                  })}
+                </CarouselPaginated>
+              </div>
             </div>
           </div>
         </div>
@@ -493,7 +539,13 @@ export default function ClickHouseServerPage({
           </div>
           <CarouselPaginated
             theme='dark'
-            modules={[EffectCoverflow]}
+            modules={[Mousewheel, EffectCoverflow]}
+            mousewheel={{
+              enabled: true,
+              forceToAxis: true,
+              releaseOnEdges: true,
+              sensitivity: 0.5
+            }}
             coverflowEffect={{
               modifier: 4,
               rotate: 0,
@@ -564,38 +616,78 @@ export default function ClickHouseServerPage({
           {/* Accordions */}
           <Accordion
             className='mx-auto w-full max-w-3xl lg:mr-0'
-            allowMultiple={false}
             items={[
               {
                 handle: 'Flexible architecture & columnar storage',
-                content:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. ',
-                defaultOpen: true
+                content: `A column-oriented design delivers high compression, while the LSM-inspired engine and background merges keep parts compact and queries fast, no matter how large the dataset.
+
+![](${imageColumnOriented.src})
+
+ClickHouse is built on a unique architecture with a pluggable storage layer: data can live on SSDs, spinning disks, or object storage, and can naturally flow across tiers from hot to cold.
+
+![](${imageArchitecture.src})`
               },
               {
                 handle: 'Blazing fast queries and inserts',
-                content:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+                content: `![](${imagePrimaryIndex.src})
+
+ClickHouse uses a sparse primary index - just a few megabytes per terabyte - scaling effortlessly while pruning data quickly. Query caches, advanced skip indices accelerating performance further. Inserts are equally fast, streamed row by row or in batches, with writes optimized through part sorting and separation of reads and writes, delivering throughput without slowing queries.
+
+![](${imageVectorizedEngine.src})
+
+A parallelized, vectorized engine filters and aggregates data at speed across a single server or hundreds of nodes thanks to partial states, support for sharding and shared processing across replicas.`
               },
               {
                 handle: 'Infinitely scalable for Petabyte workloads',
-                content:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+                content: `ClickHouse scales vertically, fully using machine resources and parallelizing reads at a low level without requiring manual sharding to achieve speed. 
+
+A decentralized architecture with sharding and replication enables horizontal scaling to hundreds of nodes and quadrillions of rows.
+
+![](${imagesharding.src})
+
+ClickHouse Cloud builds on this foundation with separation of storage and compute: nodes read from a single authoritative copy in object storage, cache data locally, and scale compute dynamically both vertically and horizontally while all reads and writes stay consistent.
+
+![](${imageStorageAndCompute.src})`
               },
               {
                 handle: 'Highly reliable',
-                content:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+                content: `![](${imageReplication.src})
+
+ClickHouse ensures reliability with eventual consistency based replication. This lightweight design enables replication across availability zones or even regions with high latencies, delivering high durability without heavy overhead.
+
+![](${imageBackups.src})
+
+For long-term protection, backups can be written to object storage, giving teams confidence their data is safe and recoverable.
+
+Snapshots offer a lightweight means to create a point in time of your data.`
               },
               {
                 handle: 'Powerful data operations',
-                content:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+                content: `![](${imageDataTransformations.src})
+
+ClickHouse offers advanced features to manipulate, filter, and transform data efficiently. Materialized views can be refreshable or incremental, with incremental views shifting compute from query time to insert time and dramatically accelerating repeated queries. 
+
+Projections allow data to be sorted in multiple ways, optimizing for frequent access patterns.
+
+![](${imageJsonSupport.src})
+
+ClickHouse supports schema on write with JSON support, semi-structured data can be ingested safely without schema explosion, combining flexibility with the full power of a columnar database.
+
+![](${imageLightweightUpdates.src})
+
+ClickHouse breaks past traditional OLAP limitations with full support for lightweight updates and deletes through patched parts providing both flexibility and support for complex compliance requirements. `
               },
               {
                 handle: 'Ease of use and interoperability',
-                content:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi cursus viverra porta. Nullam euismod dignissim tortor, eu eleifend risus. Morbi orci purus, lobortis ut orci bibendum, euismod luctus nibh. Mauris auctor condimentum volutpat. Maecenas euismod suscipit iaculis. Suspendisse a finibus libero. Nulla ultrices pellentesque magna vitae condimentum. Donec non lacus orci. '
+                content: `![](${imageSqlSupport.src})
+
+ClickHouse is a full database engine with complete SQL support, including joins, and an optimizer that can reorder joins globally and leverage column statistics automatically. It extends standard SQL with 100s of analytical functions, making complex aggregations and filters simpler and more expressive.
+
+![](${imageInteroperability.src})
+
+With support for 70+ file formats for ingestion and output, ClickHouse delivers unmatched interoperability. 
+
+The ability to read and write open table and lake formats such as Parquet, Iceberg, and Delta, with catalog integrations like AWS Glue and Unity making them seamless to query - bringing the performance of ClickHouse’s query engine to your data lake.`
               }
             ]}
           />
