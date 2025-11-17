@@ -425,7 +425,7 @@ export default function ClickHouseServerPage({
                             }
                             logo={{
                               ...migration.logo,
-                              className: `ml-auto opacity-40 ${migration.logo?.className || ''}`
+                              className: 'ml-auto opacity-40'
                             }}
                           />
                         </CUICard.Body>
