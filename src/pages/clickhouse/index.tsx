@@ -16,6 +16,8 @@ import imageSqlSupport from './assets/image-sql-support.png'
 import imageStorageAndCompute from './assets/image-storage-and-compute.png'
 import imageVectorizedEngine from './assets/image-vectorized-engine.png'
 import logoAdevinta from './assets/logo-adevinta.svg'
+import logoBraze from './assets/logo-braze.svg'
+import logoLyft from './assets/logo-lyft.svg'
 import Accordion from '@/components-cleaned/Accordion'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
@@ -314,10 +316,10 @@ export default function ClickHouseServerPage({
                         quote:
                           "It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that.",
                         logo: {
-                          src: logoAdevinta,
-                          width: 126,
-                          height: 29,
-                          alt: 'Adevinta'
+                          src: logoBraze,
+                          width: 89,
+                          height: 41,
+                          alt: 'Braze'
                         }
                       },
                       {
@@ -327,10 +329,10 @@ export default function ClickHouseServerPage({
                         quote:
                           'We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.',
                         logo: {
-                          src: logoAdevinta,
-                          width: 126,
-                          height: 29,
-                          alt: 'Adevinta'
+                          src: logoLyft,
+                          width: 54,
+                          height: 38,
+                          alt: 'Lyft'
                         }
                       },
                       {
