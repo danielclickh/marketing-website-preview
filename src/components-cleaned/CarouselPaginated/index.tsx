@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './styles.module.scss'
-import { Children, useRef, forwardRef } from 'react'
+import { Children, useRef, forwardRef, useEffect, useState } from 'react'
 import 'swiper/css'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
@@ -20,6 +20,7 @@ const CarouselPaginated = forwardRef<HTMLDivElement, CarouselPaginatedProps>(
       className = '',
       carouselClass,
       theme = 'light',
+      modules = [],
       ...swiperOptions
     },
     ref
@@ -27,13 +28,14 @@ const CarouselPaginated = forwardRef<HTMLDivElement, CarouselPaginatedProps>(
     const prevRef = useRef<null | HTMLButtonElement>(null)
     const nextRef = useRef<null | HTMLButtonElement>(null)
     const paginationRef = useRef<null | HTMLDivElement>(null)
+    const [navReady, setNavReady] = useState<boolean>(false)
 
     const mergedOptions: SwiperProps = {
       // User options
       ...swiperOptions,
 
       // Our strict options override user defined
-      modules: [Pagination, Navigation, ...(swiperOptions.modules || [])],
+      modules: [Pagination, Navigation, ...modules],
       pagination: {
         enabled: true,
         clickable: true,
@@ -48,9 +50,15 @@ const CarouselPaginated = forwardRef<HTMLDivElement, CarouselPaginatedProps>(
       className: carouselClass
     }
 
+    useEffect(() => {
+      setNavReady(
+        !!nextRef.current && !!prevRef.current && !!paginationRef.current
+      )
+    }, [nextRef.current, prevRef.current, paginationRef.current])
+
     return (
       <div ref={ref} className={`${styles.base} ${styles[theme]} ${className}`}>
-        <Swiper {...mergedOptions}>
+        <Swiper key={navReady ? 'with-nav' : 'no-nav'} {...mergedOptions}>
           {Children.map(children, (child) => {
             return <SwiperSlide>{child}</SwiperSlide>
           })}
