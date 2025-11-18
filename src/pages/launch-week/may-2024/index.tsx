@@ -4,11 +4,12 @@ import EventPost from '@/components/EventPostList/EventPost'
 import GetStartedFree from '@/components/GetStartedFree'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
-import { SuiText } from '@/components/sui'
-import { findAll, findOne, getUnlistedFilters } from '@/lib/api/strapi'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { eventsService, findOne, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventProps, EventType } from '@/types/events'
+import { CommonProps } from '@/types/homepage'
+import { EntryEvent } from '@/types/strapi'
 import {
   ArrowCircleRightIcon,
   BookOpenIcon,
@@ -19,8 +20,12 @@ import {
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Tilt from 'react-parallax-tilt'
+
+interface PageProps extends CommonProps {
+  recentEvents: Array<EntryEvent>
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const params = {
@@ -38,35 +43,22 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const commonProps = await getCommonProps()
 
-  const { data: recentEvents }: { data: Array<EventType> } = await findAll(
-    'events',
-    {
-      filters: {
-        $and: [
-          {
-            localDatetime: {
-              $gte: new Date().toISOString()
-            }
-          },
-          {
-            $or: getUnlistedFilters()
+  const recentEvents = await eventsService.findMany({
+    filters: {
+      $and: [
+        {
+          localDatetime: {
+            $gte: new Date().toISOString()
           }
-        ]
-      },
-      sort: ['localDatetime:ASC'],
-      populate: [
-        'thumbnailPng',
-        'hostedBy',
-        'hostedBy.hosts',
-        'hostedBy.hosts.avatarPng',
-        'agenda',
-        'agenda.items',
-        'location',
-        'form'
-      ],
-      pagination: { limit: 3 }
-    }
-  )
+        },
+        {
+          $or: getUnlistedFilters()
+        }
+      ]
+    },
+    sort: ['localDatetime:ASC'],
+    pagination: { limit: 4 }
+  })
 
   return {
     props: {
@@ -82,7 +74,7 @@ export default function LaunchWeekPage({
   seo,
   headerData,
   footerData
-}: EventProps) {
+}: PageProps) {
   useGalaxyOnPage('launchWeekMayPage')
   useEffect(() => {
     const container = document.getElementById('regionsContainer')
@@ -259,18 +251,36 @@ export default function LaunchWeekPage({
 
         <HRSeparator className='my-24' />
 
-        <div className='bg-shadow-element yellow-shadow align-shadow-right mx-auto mb-40 max-w-7xl px-4 pb-10 sm:px-8 2xl:px-0'>
-          <div className='relative z-20'>
-            <h3 className='mb-10 font-basier text-4xl'>
-              Upcoming community events
-            </h3>
-            <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-              {recentEvents.map((event: EventType) => (
-                <EventPost key={event.id} {...event} />
-              ))}
+        {/* Recent posts */}
+        {recentEvents.length > 0 && (
+          <section className='section-container my-20 flex flex-col'>
+            <div className='flex justify-between pb-8'>
+              <SuiTitle
+                type='h2'
+                className='!text-3xl text-neutral-100'
+                weight='semibold'>
+                Upcoming community events
+              </SuiTitle>
+
+              <CUIButton href='/company/events' type='secondary'>
+                View all Events
+              </CUIButton>
             </div>
-          </div>
-        </div>
+            <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+              {recentEvents.map((recentEvent, recentEventIndex) => {
+                return (
+                  <div
+                    key={recentEventIndex}
+                    className={
+                      recentEventIndex > 2 ? 'hidden md:block lg:hidden' : ''
+                    }>
+                    <EventPost {...recentEvent} />
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+        )}
       </Layout>
     </>
   )

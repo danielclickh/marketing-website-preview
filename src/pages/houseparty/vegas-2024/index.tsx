@@ -10,10 +10,8 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventType } from '@/types/events'
 import { CommonProps } from '@/types/homepage'
 import { ChevronRightIcon } from 'lucide-react'
 import { GetStaticProps } from 'next'
@@ -21,31 +19,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 
-interface PageProps extends CommonProps {
-  recentEvents: Array<EventType>
-}
-
-export const getStaticProps: GetStaticProps<PageProps> =
+export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
-    const { data: recentEvents }: { data: PageProps['recentEvents'] } =
-      await findAll('events', {
-        filters: {
-          $and: [
-            {
-              localDatetime: {
-                $gte: new Date().toISOString()
-              }
-            },
-            {
-              $or: getUnlistedFilters()
-            }
-          ]
-        },
-        sort: ['localDatetime:ASC'],
-        populate: ['thumbnailPng', 'location'],
-        pagination: { limit: 3 }
-      })
-
     const commonProps = await getCommonProps()
 
     return {
@@ -57,18 +32,12 @@ export const getStaticProps: GetStaticProps<PageProps> =
           path: '/houseparty/vegas-2024',
           image: [{ url: '/images/houseparty-2024.png' }]
         },
-        recentEvents,
         ...commonProps
       }
     }
   }
 
-export default function Page({
-  footerData,
-  headerData,
-  seo,
-  recentEvents
-}: PageProps) {
+export default function Page({ footerData, headerData, seo }: CommonProps) {
   useGalaxyOnPage('reinvent2024AncillaryPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)

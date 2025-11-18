@@ -62,7 +62,11 @@ export const getStaticProps = (async ({ params }) => {
 
   const [commonProps, resource, related] = await Promise.all([
     getCommonProps(),
-    resourcesService.findBySlug(resourceSlug),
+    resourcesService.findOne({
+      filters: {
+        slug: resourceSlug
+      }
+    }),
     resourcesService.findMany({
       sort: ['publishedAt:DESC'],
       filters: {

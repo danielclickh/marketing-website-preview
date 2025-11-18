@@ -7,113 +7,73 @@ import Markdown from '@/components/Markdown'
 import SocialButton from '@/components/SocialButton'
 import StripeBuyButton from '@/components/StripeBuyButton'
 import { SuiTitle } from '@/components/sui'
-import {
-  fetchAll,
-  findAll,
-  getStagingOnlyFilters,
-  getUnlistedFilters
-} from '@/lib/api/strapi'
+import { eventsService, getUnlistedFilters } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { absoluteUrl } from '@/lib/next'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventProps, EventType } from '@/types/events'
-import { ParamsType } from '@/types/homepage'
+import { CommonProps, ParamsType } from '@/types/homepage'
+import { EntryEvent } from '@/types/strapi'
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import React from 'react'
 
-export const getStaticProps: GetStaticProps<EventProps> =
+export interface PageProps extends CommonProps {
+  event: EntryEvent
+  moreEvents: Array<EntryEvent>
+}
+
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps({ params }) {
     const { slug } = params as ParamsType
-    const { data } = await findAll('events', {
-      filters: {
-        $and: [
-          {
-            slug: {
-              $eq: slug
-            }
-          },
-          {
-            $or: getStagingOnlyFilters()
-          }
-        ]
-      },
-      sort: ['localDatetime:DESC'],
-      populate: [
-        'thumbnailPng',
-        'hostedBy',
-        'hostedBy.hosts',
-        'hostedBy.hosts.avatarPng',
-        'agenda',
-        'agenda.items',
-        'location',
-        'thumbnailPng',
-        'form'
-      ]
+
+    const event = await eventsService.findOne({
+      filters: { slug }
     })
 
-    const { data: recentEvents }: { data: Array<EventType> } = await findAll(
-      'events',
-      {
-        filters: {
-          $and: [
-            {
-              localDatetime: {
-                $gte: new Date().toISOString()
-              }
-            },
-            {
-              slug: {
-                $notContains: slug
-              }
-            },
-            {
-              $or: getStagingOnlyFilters()
-            },
-            {
-              $or: getUnlistedFilters()
-            }
-          ]
-        },
-        sort: ['localDatetime:ASC'],
-        populate: [
-          'thumbnailPng',
-          'hostedBy',
-          'hostedBy.hosts',
-          'hostedBy.hosts.avatarPng',
-          'agenda',
-          'agenda.items',
-          'location',
-          'thumbnailPng',
-          'form'
-        ],
-        pagination: { limit: 3 }
-      }
-    )
-
-    const commonProps = await getCommonProps()
-
-    const page = data[0]
-    if (!page) {
+    if (!event) {
       return {
         notFound: true
       }
-    }
-
-    if (page.eventVideoUrl) {
+    } else if (event.eventVideoUrl) {
       return {
+        props: {},
         redirect: {
-          destination: page.eventVideoUrl,
+          destination: event.eventVideoUrl,
           permanent: false
         }
       }
     }
 
+    const moreEventsRequest = await eventsService.findMany({
+      filters: {
+        $or: getUnlistedFilters(),
+        $and: [
+          {
+            localDatetime: {
+              $gte: new Date().toISOString()
+            }
+          },
+          {
+            slug: {
+              $ne: slug
+            }
+          }
+        ]
+      },
+      sort: ['localDatetime:ASC'],
+      pagination: { limit: 4 }
+    })
+
+    const [commonProps, moreEvents] = await Promise.all([
+      getCommonProps(),
+      moreEventsRequest
+    ])
+
     const seo: SeoMetadata = {
-      title: page.title,
-      description: page.shortDescription,
-      image: [page.thumbnailPng],
+      title: `${event.title} | Registered!`,
+      description: event.shortDescription || '',
+      image: [event.thumbnailPng],
       type: 'website',
       siteName: 'ClickHouse',
       path: `/company/events/${slug}`, // Set canonical to original event page
@@ -122,10 +82,10 @@ export const getStaticProps: GetStaticProps<EventProps> =
 
     return {
       props: {
-        ...page,
+        ...commonProps,
         seo,
-        recentEvents,
-        ...commonProps
+        event,
+        moreEvents
       }
     }
   }
@@ -134,14 +94,14 @@ export const getStaticProps: GetStaticProps<EventProps> =
 // It may be called again, on a serverless function, if
 // the path has not been generated.
 export async function getStaticPaths() {
-  const data = await fetchAll('events', {
+  const data: Array<Pick<EntryEvent, 'slug'>> = await eventsService.findAll({
+    fields: ['slug'],
+    populate: false,
     filters: {
       eventVideoUrl: {
         $null: true
-      },
-      $or: getStagingOnlyFilters()
-    },
-    fields: ['slug']
+      }
+    }
   })
 
   // Get the paths we want to pre-render based on posts
@@ -156,19 +116,15 @@ export async function getStaticPaths() {
 }
 
 export default function Page({
-  slug,
-  title,
-  form,
-  recordedVimeoUrl,
+  event,
   footerData,
   headerData,
-  recentEvents,
-  thumbnailPng,
+  moreEvents,
   seo
-}: EventProps) {
+}: PageProps) {
   useGalaxyOnPage('eventPageThankYou')
 
-  const eventUrl = absoluteUrl(`/company/events/${slug}`)
+  const eventUrl = absoluteUrl(`/company/events/${event.slug}`)
 
   const getVimeoId = (video: string) => {
     const regex = /\/video\/(\d+)/
@@ -184,8 +140,8 @@ export default function Page({
   }
 
   const vimeoId =
-    form?.type === 'recordedGatedContent' && !!recordedVimeoUrl
-      ? getVimeoId(recordedVimeoUrl)
+    event.form?.type === 'recordedGatedContent' && !!event.recordedVimeoUrl
+      ? getVimeoId(event.recordedVimeoUrl)
       : null
   const hasVimeo = !!vimeoId
 
@@ -196,20 +152,20 @@ export default function Page({
           <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
         )}
         <Markdown className='rich-text-content text-center'>
-          {form?.SuccessMessage ||
+          {event.form?.SuccessMessage ||
             (hasVimeo
               ? '## Thanks for registering. Watch below!'
               : "You've been successfully registered. See you there!")}
         </Markdown>
-        {form?.stripeBuyButtonId && (
+        {event.form?.stripeBuyButtonId && (
           <div className='mx-auto w-max overflow-hidden rounded-xl border-2 border-primary-300'>
-            <StripeBuyButton id={form.stripeBuyButtonId} />
+            <StripeBuyButton id={event.form.stripeBuyButtonId} />
           </div>
         )}
         {hasVimeo && (
           <div className='mx-auto max-w-2xl'>
             <PlayOnClickVideo
-              thumbnail={thumbnailPng?.url}
+              thumbnail={event.thumbnailPng?.url}
               provider='vimeo'
               id={vimeoId}
             />
@@ -222,16 +178,16 @@ export default function Page({
           </p>
           <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
             <CopyUrlButton url={eventUrl} />
-            <SocialButton type='twitter' title={title} url={eventUrl} />
-            <SocialButton type='facebook' title={title} url={eventUrl} />
-            <SocialButton type='linkedin' title={title} url={eventUrl} />
+            <SocialButton type='twitter' title={event.title} url={eventUrl} />
+            <SocialButton type='facebook' title={event.title} url={eventUrl} />
+            <SocialButton type='linkedin' title={event.title} url={eventUrl} />
           </div>
         </div>
       </section>
 
-      {/* Upcoming events */}
-      <section className='bg-shadow-element yellow-shadow my-16 lg:my-24'>
-        <div className='section-container flex flex-col'>
+      {/* Recent posts */}
+      {moreEvents.length > 0 && (
+        <section className='section-container my-20 flex flex-col'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
               type='h2'
@@ -245,12 +201,20 @@ export default function Page({
             </CUIButton>
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {recentEvents.map((event: EventType) => (
-              <EventPost key={event.id} {...event} />
-            ))}
+            {moreEvents.map((recentEvent, recentEventIndex) => {
+              return (
+                <div
+                  key={recentEventIndex}
+                  className={
+                    recentEventIndex > 2 ? 'hidden md:block lg:hidden' : ''
+                  }>
+                  <EventPost {...recentEvent} />
+                </div>
+              )
+            })}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </Layout>
   )
 }
