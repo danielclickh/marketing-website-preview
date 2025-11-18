@@ -21,7 +21,6 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { absoluteUrl } from '@/lib/next'
 import { generateInnerEventSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { slugify } from '@/lib/utils/strings'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { EntryEvent } from '@/types/strapi'
 import { CheckCircleIcon } from '@heroicons/react/outline'
@@ -184,7 +183,7 @@ export default function Page({
           <Breadcrumbs>
             <Breadcrumbs.Link href='/company/events'>Events</Breadcrumbs.Link>
             <Breadcrumbs.Link
-              href={`/company/events?category=${slugify(event.category)}`}>
+              href={`/company/events?category=${event.category}`}>
               {event.category}
             </Breadcrumbs.Link>
           </Breadcrumbs>
