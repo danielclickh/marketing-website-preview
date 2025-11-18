@@ -5,6 +5,7 @@ import {
   ApiRequestParams,
   ApiResponse,
   ComponentSeo,
+  EntryEvent,
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
@@ -337,7 +338,7 @@ class StrapiEntryService<EntryType> {
     private deepPopulate: boolean = false
   ) {}
 
-  private mergeStagingFilters(params: ApiRequestParams) {
+  private mergeStagingFilters(params: ApiRequestParams<EntryType>) {
     if (!this.stagingFilters) return params
 
     const fieldName =
@@ -350,19 +351,32 @@ class StrapiEntryService<EntryType> {
     }
   }
 
-  private applyDeepPopulate(params: ApiRequestParams) {
+  private applyDeepPopulate(params: ApiRequestParams<EntryType>) {
     if (!params.populate && this.deepPopulate) {
       params.populate = 'deep'
     }
     return params
   }
 
-  private modifyParams(params: ApiRequestParams) {
+  private modifyParams(params: ApiRequestParams<EntryType>) {
     return this.mergeStagingFilters(this.applyDeepPopulate(params))
   }
 
+  async findOne(params: Omit<ApiRequestParams<EntryType>, 'pagination'> = {}) {
+    const result = await this.findMany({
+      ...params,
+      pagination: {
+        page: 1,
+        pageSize: 1,
+        withCount: false
+      }
+    })
+
+    return result.pop()
+  }
+
   async findMany<T extends boolean = false>(
-    params: ApiRequestParams = {},
+    params: ApiRequestParams<EntryType> = {},
     withPagination: T = false as T
   ): Promise<
     T extends true
@@ -391,7 +405,7 @@ class StrapiEntryService<EntryType> {
     return data as T extends true ? never : Array<EntryType>
   }
 
-  async findAll(params: Omit<ApiRequestParams, 'pagination'> = {}) {
+  async findAll(params: Omit<ApiRequestParams<EntryType>, 'pagination'> = {}) {
     let combined: Array<EntryType> = []
 
     let currentPage = 0
@@ -413,34 +427,12 @@ class StrapiEntryService<EntryType> {
     return combined
   }
 
-  async find(id: number, params: ApiRequestParams = {}) {
+  async find(id: number, params: ApiRequestParams<EntryType> = {}) {
     const response = await request(
       `${this.apiUri}/${id}`,
       this.modifyParams(params)
     )
     return cleanStrapiObject(response.data) as EntryType
-  }
-
-  async findBySlug(
-    slug: string,
-    params: Omit<ApiRequestParams, 'pagination'> = {}
-  ) {
-    return (
-      await this.findMany({
-        ...params,
-        filters: {
-          ...(params.filters || {}),
-          slug: {
-            $eq: slug
-          }
-        },
-        pagination: {
-          page: 1,
-          pageSize: 1,
-          withCount: false
-        }
-      })
-    ).pop()
   }
 }
 
@@ -480,5 +472,11 @@ export const resourceCategoriesService =
 export const resourcesService = new StrapiEntryService<EntryResource>(
   'resources',
   'stagingOnly',
+  true
+)
+
+export const eventsService = new StrapiEntryService<EntryEvent>(
+  'events',
+  true,
   true
 )

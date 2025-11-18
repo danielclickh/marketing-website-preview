@@ -1,43 +1,41 @@
-import { CUICard } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import EventPost from '@/components/EventPostList/EventPost'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
-import { SuiButton, SuiText } from '@/components/sui'
-import { findAll, getUnlistedFilters } from '@/lib/api/strapi'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { eventsService, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventType } from '@/types/events'
 import { CommonProps } from '@/types/homepage'
+import { EntryEvent } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Link, { LinkProps } from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 
 interface PageProps extends CommonProps {
-  recentEvents: Array<EventType>
+  recentEvents: Array<EntryEvent>
 }
 
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
 
-    const { data: recentEvents }: { data: PageProps['recentEvents'] } =
-      await findAll('events', {
-        filters: {
-          $and: [
-            {
-              localDatetime: {
-                $gte: new Date().toISOString()
-              }
-            },
-            {
-              $or: getUnlistedFilters()
+    const recentEvents = await eventsService.findMany({
+      filters: {
+        $and: [
+          {
+            localDatetime: {
+              $gte: new Date().toISOString()
             }
-          ]
-        },
-        sort: ['localDatetime:ASC'],
-        populate: ['thumbnailPng', 'location'],
-        pagination: { limit: 3 }
-      })
+          },
+          {
+            $or: getUnlistedFilters()
+          }
+        ]
+      },
+      sort: ['localDatetime:ASC'],
+      pagination: { limit: 4 }
+    })
 
     return {
       props: {
@@ -257,37 +255,36 @@ export default function HomePage({
         />
       </div>
 
-      {/* Related content */}
-      <div className='bg-shadow-element yellow-shadow align-shadow-right mx-auto mb-40 max-w-7xl px-4 pb-10 sm:px-8 2xl:px-0'>
-        <div className='relative z-20'>
-          <div className='flex justify-between'>
-            <h3 className='mb-10 font-basier text-4xl'>
+      {/* Recent posts */}
+      {recentEvents.length > 0 && (
+        <section className='section-container my-20 flex flex-col'>
+          <div className='flex justify-between pb-8'>
+            <SuiTitle
+              type='h2'
+              className='!text-3xl text-neutral-100'
+              weight='semibold'>
               Upcoming community events
-            </h3>
-            <SuiButton
-              path='/company/news-event'
-              type='empty'
-              color='primary'
-              className='font-base hidden border border-primary-300/50 md:inline-block'>
-              View all events
-            </SuiButton>
+            </SuiTitle>
+
+            <CUIButton href='/company/events' type='secondary'>
+              View all Events
+            </CUIButton>
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {recentEvents.map((event: EventType) => (
-              <EventPost key={event.id} {...event} />
-            ))}
+            {recentEvents.map((recentEvent, recentEventIndex) => {
+              return (
+                <div
+                  key={recentEventIndex}
+                  className={
+                    recentEventIndex > 2 ? 'hidden md:block lg:hidden' : ''
+                  }>
+                  <EventPost {...recentEvent} />
+                </div>
+              )
+            })}
           </div>
-          <div className='mt-8 text-center md:hidden'>
-            <SuiButton
-              path='/company/news-event'
-              type='empty'
-              color='primary'
-              className='font-base border border-primary-300/50'>
-              View all events
-            </SuiButton>
-          </div>
-        </div>
-      </div>
+        </section>
+      )}
     </Layout>
   )
 }
