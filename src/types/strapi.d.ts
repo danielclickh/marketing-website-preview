@@ -207,6 +207,11 @@ export interface BlogModuleYoutubeVideo extends DynamicComponent {
   videoId: string
 }
 
+export interface BlogModuleImageGallery extends DynamicComponent {
+  __component: 'blog-modules.image-gallery'
+  images: Array<EntryImage>
+}
+
 // -----
 // Components
 // -----

@@ -7,6 +7,9 @@ import BlogModulesCta, {
 import BlogModulesFaqs, {
   blogModulesFaqsMarkdown
 } from '@/components-cleaned/BlogModulesFaqs'
+import BlogModulesImageGallery, {
+  blogModulesImageGalleryMarkdown
+} from '@/components-cleaned/BlogModulesImageGallery'
 import BlogModulesMarkdown, {
   blogModulesMarkdownMarkdown
 } from '@/components-cleaned/BlogModulesMarkdown'
@@ -35,7 +38,8 @@ const REGISTRY: Record<string, React.ComponentType<any>> = {
   BlogModulesMarketoForm,
   BlogModulesSummary,
   BlogModulesVideo,
-  BlogModulesYoutubeVideo
+  BlogModulesYoutubeVideo,
+  BlogModulesImageGallery
 }
 
 const MARKDOWN_REGISTRY: Record<string, (props: any) => string> = {
@@ -45,7 +49,8 @@ const MARKDOWN_REGISTRY: Record<string, (props: any) => string> = {
   blogModulesMarkdownMarkdown,
   blogModulesSummaryMarkdown,
   blogModulesVideoMarkdown,
-  blogModulesYoutubeVideoMarkdown
+  blogModulesYoutubeVideoMarkdown,
+  blogModulesImageGalleryMarkdown
 }
 
 export type StrapiDynamicBlogModulesProps = DynamicComponent & {

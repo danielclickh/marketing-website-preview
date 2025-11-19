@@ -165,3 +165,22 @@ export function extractEventTime(markdown: string) {
   if (extractedValue.includes('-')) return formattedSegments.join(' - ')
   return formattedSegments[0]
 }
+
+export function escapeMarkdownAlt(alt: string) {
+  return alt
+    .replace(/\\/g, '\\\\') // escape backslashes
+    .replace(/\]/g, '\\]') // escape closing brackets
+    .replace(/\[/g, '\\[') // escape opening brackets
+    .replace(/\*/g, '\\*') // escape asterisks
+    .replace(/_/g, '\\_')
+}
+
+export function escapeMarkdownBlockquote(input: string): string {
+  return input
+    .replace(/\\/g, '\\\\') // escape backslashes
+    .replace(/>/g, '\\>') // escape '>'
+    .replace(/\*/g, '\\*') // escape asterisks
+    .replace(/_/g, '\\_') // escape underscores
+    .replace(/\[/g, '\\[') // escape '['
+    .replace(/\]/g, '\\]') // escape ']'
+}
