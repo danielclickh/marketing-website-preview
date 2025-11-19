@@ -52,10 +52,15 @@ import { EntryMarketingVideo } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import React, { useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
-import { Mousewheel, EffectCreative, EffectCoverflow } from 'swiper/modules'
+import {
+  Mousewheel,
+  EffectCreative,
+  EffectCoverflow,
+  Navigation
+} from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 interface PageProps extends CommonProps {
@@ -549,37 +554,8 @@ export default function ClickHouseServerPage({
           </p>
         </div>
         <div className='mx-auto max-w-screen-2xl'>
-          <Swiper
-            modules={[Mousewheel, EffectCoverflow]}
-            mousewheel={{
-              enabled: true,
-              forceToAxis: true,
-              releaseOnEdges: true,
-              sensitivity: 0.5
-            }}
-            effect='coverflow'
-            coverflowEffect={{
-              rotate: 0, // no tilt
-              depth: 0, // no 3D depth
-              stretch: 100, // negative to pull sides under center
-              scale: 0.8, // scale side slides down
-              modifier: 1,
-              slideShadows: false
-            }}
-            slidesPerView={1.25}
-            simulateTouch={false}
-            slideToClickedSlide={true}
-            centeredSlides={true}
-            loop={true}
-            breakpoints={{
-              1024: {
-                slidesPerView: 2
-              },
-              1280: {
-                slidesPerView: 3
-              }
-            }}>
-            {[
+          <YoutubeCoverFlow
+            videos={[
               {
                 title:
                   'Concurrent inserts are isolated from each other (part 1)',
@@ -617,31 +593,8 @@ export default function ClickHouseServerPage({
                 youtubeId: 'dccGLSuYWy0',
                 thumbnail: thumb07
               }
-            ].map(({ title, youtubeId, thumbnail }, videoIndex) => {
-              return (
-                <SwiperSlide key={videoIndex}>
-                  {({ isActive, isVisible }) => (
-                    <PlayOnClickVideo
-                      provider='youtube'
-                      id={youtubeId}
-                      className={`transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none'}`}
-                      thumbnailClassName={`transition-opacity ${isActive ? '' : 'opacity-50'}`}
-                      playButtonClassName={`!transition-all ${isActive ? '' : 'opacity-0'}`}
-                      thumbnail={
-                        <Image
-                          src={thumbnail}
-                          width={1280 / 2}
-                          height={720 / 2}
-                          loading='eager'
-                          alt={`Why is clickhouse so fast. ${title}`}
-                        />
-                      }
-                    />
-                  )}
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
+            ]}
+          />
         </div>
       </section>
 
@@ -902,5 +855,120 @@ The ability to read and write open table and lake formats such as Parquet, Icebe
 
       <GetStarted platforms={platforms} />
     </Layout>
+  )
+}
+
+function YoutubeCoverFlow({
+  videos
+}: {
+  videos: Array<{
+    title: string
+    youtubeId: string
+    thumbnail: ImageProps['src']
+  }>
+}) {
+  const prevRef = useRef<null | HTMLButtonElement>(null)
+  const nextRef = useRef<null | HTMLButtonElement>(null)
+  const navigationMounted = useMemo(() => {
+    return !!prevRef.current && !!nextRef.current
+  }, [prevRef.current, nextRef.current])
+  return (
+    <div className='relative'>
+      <button
+        type='button'
+        ref={prevRef}
+        className='absolute left-0 top-1/2 z-10 hidden size-12 -translate-y-1/2 items-center justify-center rounded-lg backdrop-blur-lg transition-colors hover:bg-black/10 lg:left-12 lg:flex 2xl:left-0'>
+        <span className='sr-only'>Prev</span>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='23'
+          height='15'
+          fill='none'
+          viewBox='0 0 23 15'>
+          <path
+            fill='#111'
+            d='m7.15 14.32 1.65-1.65-4.32-4.31h17.85v-2.4H4.47L8.8 1.62 7.15 0 0 7.16z'
+          />
+        </svg>
+      </button>
+      <button
+        type='button'
+        ref={nextRef}
+        className='absolute right-0 top-1/2 z-10 hidden size-12 -translate-y-1/2 items-center justify-center rounded-lg backdrop-blur-lg transition-colors hover:bg-black/10 lg:right-12 lg:flex 2xl:right-0'>
+        <span className='sr-only'>Next</span>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='23'
+          height='15'
+          fill='none'
+          viewBox='0 0 23 15'>
+          <path
+            fill='#000'
+            d='m15.18 14.32-1.65-1.65 4.32-4.31H0v-2.4h17.86l-4.33-4.34L15.18 0l7.15 7.16z'
+          />
+        </svg>
+      </button>
+      <Swiper
+        key={navigationMounted ? 'has-nav' : 'no-nav'}
+        modules={[Mousewheel, EffectCoverflow, Navigation]}
+        navigation={{
+          enabled: true,
+          prevEl: prevRef.current,
+          nextEl: nextRef.current
+        }}
+        mousewheel={{
+          enabled: true,
+          forceToAxis: true,
+          releaseOnEdges: true,
+          sensitivity: 0.5
+        }}
+        effect='coverflow'
+        coverflowEffect={{
+          rotate: 0, // no tilt
+          depth: 0, // no 3D depth
+          stretch: 100, // negative to pull sides under center
+          scale: 0.8, // scale side slides down
+          modifier: 1,
+          slideShadows: false
+        }}
+        slidesPerView={1.25}
+        simulateTouch={false}
+        slideToClickedSlide={true}
+        centeredSlides={true}
+        loop={true}
+        breakpoints={{
+          1024: {
+            slidesPerView: 3
+          },
+          1280: {
+            slidesPerView: 3
+          }
+        }}>
+        {videos.map(({ title, youtubeId, thumbnail }, videoIndex) => {
+          return (
+            <SwiperSlide key={videoIndex}>
+              {({ isActive, isVisible }) => (
+                <PlayOnClickVideo
+                  provider='youtube'
+                  id={youtubeId}
+                  className={`transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none'}`}
+                  thumbnailClassName={`transition-opacity ${isActive ? '' : 'opacity-50'}`}
+                  playButtonClassName={`!transition-all ${isActive ? '' : 'opacity-0'}`}
+                  thumbnail={
+                    <Image
+                      src={thumbnail}
+                      width={1280 / 2}
+                      height={720 / 2}
+                      loading='eager'
+                      alt={`Why is clickhouse so fast. ${title}`}
+                    />
+                  }
+                />
+              )}
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
+    </div>
   )
 }
