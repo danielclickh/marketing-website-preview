@@ -1,5 +1,9 @@
 import atScaleBottom from './assets/at-scale-bottom.svg'
 import atScaleTop from './assets/at-scale-top.svg'
+import diagram1part1 from './assets/diagram-1-part-1.svg'
+import diagram1part2 from './assets/diagram-1-part-2.svg'
+import diagram1part3 from './assets/diagram-1-part-3.svg'
+import diagram1part4 from './assets/diagram-1-part-4.svg'
 import heroTerminal from './assets/hero-terminal.svg'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
@@ -52,7 +56,7 @@ import { EntryMarketingVideo } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import React, { useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
 import {
@@ -638,13 +642,28 @@ export default function ClickHouseServerPage({
             items={[
               {
                 handle: 'Flexible architecture & columnar storage',
-                content: `A column-oriented design delivers high compression, while the LSM-inspired engine and background merges keep parts compact and queries fast, no matter how large the dataset.
-
-![](${imageColumnOriented.src})
-
-ClickHouse is built on a unique architecture with a pluggable storage layer: data can live on SSDs, spinning disks, or object storage, and can naturally flow across tiers from hot to cold.
-
-![](${imageArchitecture.src})`
+                content: (
+                  <div className='w-full space-y-4'>
+                    <p>
+                      A column-oriented design delivers high compression, while
+                      the LSM-inspired engine and background merges keep parts
+                      compact and queries fast, no matter how large the dataset.
+                    </p>
+                    <DiagramOne />
+                    <p>
+                      ClickHouse is built on a unique architecture with a
+                      pluggable storage layer: data can live on SSDs, spinning
+                      disks, or object storage, and can naturally flow across
+                      tiers from hot to cold.
+                    </p>
+                    <Image
+                      src={imageArchitecture}
+                      width={1376 / 2}
+                      height={1002 / 2}
+                      alt=''
+                    />
+                  </div>
+                )
               },
               {
                 handle: 'Blazing fast queries and inserts',
@@ -970,5 +989,71 @@ function YoutubeCoverFlow({
         })}
       </Swiper>
     </div>
+  )
+}
+
+function DiagramOne() {
+  const [stepIndex, setStepIndex] = useState<number>(0)
+  const steps = [
+    [9, 11, 25, 27],
+    [0, 2, 3, 4, 6, 7, 20, 22, 23, 32, 34, 35],
+    [4, 5, 7, 24, 25, 27, 28, 29, 31],
+    [0, 1, 2, 16, 17, 18, 20, 21, 22]
+  ]
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setStepIndex((old) => {
+        const newIndex = old + 0.5
+        if (newIndex >= steps.length) return 0
+        return newIndex
+      })
+    }, 1000)
+
+    return () => window.clearInterval(timer)
+  }, [steps])
+
+  return (
+    <ScaleToContainer>
+      <div className='relative h-[440px] w-[688px] rounded-lg border border-neutral-700/80 bg-gradient-to-tr from-black/30 to-black/0'>
+        <div className='absolute left-9 top-9 grid w-80 grid-cols-4 gap-1'>
+          {Array(4 * 9)
+            .fill(null)
+            .map((_, i) => {
+              const isActive = steps[stepIndex]?.includes(i)
+              return (
+                <div
+                  key={i}
+                  className={`relative h-4 rounded-sm bg-primary-300 transition-opacity duration-300 before:absolute before:inset-0 before:block before:bg-primary-300/50 before:blur before:transition-opacity ${isActive ? '' : 'opacity-30 before:opacity-0'}`}
+                />
+              )
+            })}
+        </div>
+        <div className='absolute bottom-6 right-6 flex h-56 w-[420px] flex-col overflow-hidden rounded-lg border border-neutral-700 bg-neutral-750 shadow'>
+          <div className='h-10 w-full flex-shrink-0 flex-grow-0 bg-neutral-725' />
+          <div className='grid flex-1 grid-cols-1 grid-rows-1'>
+            {(
+              [
+                { src: diagram1part1, width: 171, height: 133 },
+                { src: diagram1part2, width: 176, height: 100 },
+                { src: diagram1part3, width: 142, height: 102 },
+                { src: diagram1part4, width: 176, height: 100 }
+              ] satisfies Array<Pick<ImageProps, 'src' | 'width' | 'height'>>
+            ).map((imageProps, i) => {
+              const isActive = stepIndex === i
+              return (
+                <div key={i} className='col-start-1 row-start-1 flex'>
+                  <Image
+                    {...imageProps}
+                    alt=''
+                    className={`m-auto transition duration-300 ${isActive ? '' : 'translate-y-4 opacity-0'}`}
+                  />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </ScaleToContainer>
   )
 }
