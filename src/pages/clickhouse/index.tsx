@@ -4,6 +4,7 @@ import diagram1part1 from './assets/diagram-1-part-1.svg'
 import diagram1part2 from './assets/diagram-1-part-2.svg'
 import diagram1part3 from './assets/diagram-1-part-3.svg'
 import diagram1part4 from './assets/diagram-1-part-4.svg'
+import diagram3base from './assets/diagram-3-base.svg'
 import heroTerminal from './assets/hero-terminal.svg'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
@@ -33,6 +34,7 @@ import thumb05 from './assets/thumb-05.png'
 import thumb06 from './assets/thumb-06.png'
 import thumb07 from './assets/thumb-07.png'
 import Accordion from '@/components-cleaned/Accordion'
+import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
@@ -677,27 +679,69 @@ A parallelized, vectorized engine filters and aggregates data at speed across a 
               },
               {
                 handle: 'Infinitely scalable for Petabyte workloads',
-                content: `ClickHouse scales vertically, fully using machine resources and parallelizing reads at a low level without requiring manual sharding to achieve speed. 
-
-A decentralized architecture with sharding and replication enables horizontal scaling to hundreds of nodes and quadrillions of rows.
-
-![](${imagesharding.src})
-
-ClickHouse Cloud builds on this foundation with separation of storage and compute: nodes read from a single authoritative copy in object storage, cache data locally, and scale compute dynamically both vertically and horizontally while all reads and writes stay consistent.
-
-![](${imageStorageAndCompute.src})`
+                content: (
+                  <div className='w-full space-y-4'>
+                    <p>
+                      ClickHouse scales vertically, fully using machine
+                      resources and parallelizing reads at a low level without
+                      requiring manual sharding to achieve speed.
+                    </p>
+                    <p>
+                      A decentralized architecture with sharding and replication
+                      enables horizontal scaling to hundreds of nodes and
+                      quadrillions of rows.
+                    </p>
+                    <Image
+                      src={imagesharding}
+                      width={1376 / 2}
+                      height={532 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse Cloud builds on this foundation with separation
+                      of storage and compute: nodes read from a single
+                      authoritative copy in object storage, cache data locally,
+                      and scale compute dynamically both vertically and
+                      horizontally while all reads and writes stay consistent.
+                    </p>
+                    <DiagramThree />
+                  </div>
+                )
               },
               {
                 handle: 'Highly reliable',
-                content: `![](${imageReplication.src})
-
-ClickHouse ensures reliability with eventual consistency based replication. This lightweight design enables replication across availability zones or even regions with high latencies, delivering high durability without heavy overhead.
-
-![](${imageBackups.src})
-
-For long-term protection, backups can be written to object storage, giving teams confidence their data is safe and recoverable.
-
-Snapshots offer a lightweight means to create a point in time of your data.`
+                content: (
+                  <div className='w-full space-y-4'>
+                    <Image
+                      src={imageReplication}
+                      width={1376 / 2}
+                      height={996 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse ensures reliability with eventual consistency
+                      based replication. This lightweight design enables
+                      replication across availability zones or even regions with
+                      high latencies, delivering high durability without heavy
+                      overhead.
+                    </p>
+                    <Image
+                      src={imageBackups}
+                      width={1376 / 2}
+                      height={672 / 2}
+                      alt=''
+                    />
+                    <p>
+                      For long-term protection, backups can be written to object
+                      storage, giving teams confidence their data is safe and
+                      recoverable.
+                    </p>
+                    <p>
+                      Snapshots offer a lightweight means to create a point in
+                      time of your data.
+                    </p>
+                  </div>
+                )
               },
               {
                 handle: 'Powerful data operations',
@@ -1053,6 +1097,58 @@ function DiagramOne() {
             })}
           </div>
         </div>
+      </div>
+    </ScaleToContainer>
+  )
+}
+
+function DiagramThree() {
+  return (
+    <ScaleToContainer>
+      <div className='relative flex h-[402px] w-[688px] flex-col rounded-lg border border-neutral-700/80 bg-gradient-to-tr from-black/30 to-black/0 p-6'>
+        <div className='flex flex-1 gap-2'>
+          <div className='flex basis-full flex-col items-center'>
+            <div className='w-full flex-1 rounded bg-primary-300' />
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='1'
+              height='48'
+              viewBox='0 0 1 48'>
+              <line
+                x1='0.5'
+                x2='0.5'
+                y1='0'
+                y2='48'
+                strokeWidth='1'
+                strokeDasharray='4 4'
+                stroke='#fff'>
+                <animate
+                  attributeName='stroke-dashoffset'
+                  from='0'
+                  to='-8'
+                  dur='1s'
+                  repeatCount='indefinite'
+                />
+              </line>
+            </svg>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='6'
+              viewBox='0 0 3.96 2.27'>
+              <path
+                fill='#fff'
+                d='M1.76 2.2c.1.1.28.1.38 0L3.84.5a.27.27 0 1 0-.37-.38L1.95 1.64.45.12a.27.27 0 0 0-.4.38z'
+              />
+            </svg>
+          </div>
+        </div>
+        <Image
+          src={diagram3base}
+          width={640}
+          height={150}
+          alt=''
+          className='mt-auto h-auto w-full max-w-none'
+        />
       </div>
     </ScaleToContainer>
   )
