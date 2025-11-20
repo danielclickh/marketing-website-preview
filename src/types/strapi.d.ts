@@ -77,6 +77,7 @@ type PopulateLeaf<T> =
 export type PopulateParam<T> =
   | '*'
   | 'deep'
+  | false
   | ApiKey<T>[]
   | {
       [K in ApiKey<T>]?: PopulateLeaf<any>
