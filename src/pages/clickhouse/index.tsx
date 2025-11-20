@@ -1188,9 +1188,10 @@ function DiagramThree() {
             .fill(null)
             .map((_, i) => {
               const active = steps[stepIndex].nodes > i
-              const width = 100 / steps[stepIndex].nodes
-              const lineSpeed = Math.max(0.1, 1 - 0.1 * stepIndex)
+              const width = `${100 / steps[stepIndex].nodes}%`
               const scale = steps[stepIndex].scale
+              const lineSpeed = Math.max(0.1, 1 - 0.08 * stepIndex)
+              const lineSize = Math.max(4, steps.length - stepIndex)
               return (
                 <motion.div
                   key={i}
@@ -1200,8 +1201,8 @@ function DiagramThree() {
                   variants={{
                     closed: scale
                       ? { opacity: 0, x: -16, width: 0 }
-                      : { opacity: 0, x: 0, width: `${width}%` },
-                    open: { opacity: 1, x: 0, width: `${width}%` }
+                      : { opacity: 0, x: 0, width },
+                    open: { opacity: 1, x: 0, width }
                   }}
                   transition={{ type: 'just', duration: 0.3 }}
                   className='flex flex-col items-center overflow-hidden'>
@@ -1223,12 +1224,12 @@ function DiagramThree() {
                       y1='0'
                       y2='48'
                       strokeWidth='1'
-                      strokeDasharray='4 4'
+                      strokeDasharray={`${lineSize} ${lineSize}`}
                       stroke='#fff'>
                       <animate
                         attributeName='stroke-dashoffset'
                         from='0'
-                        to='-8'
+                        to={`-${lineSize * 2}`}
                         dur={`${lineSpeed}s`}
                         repeatCount='indefinite'
                       />
