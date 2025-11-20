@@ -58,6 +58,7 @@ export const getStaticProps = (async ({ params }) => {
   const [commonProps, resources] = await Promise.all([
     getCommonProps(),
     resourcesService.findAll({
+      sort: ['publishedAt:DESC'],
       filters: {
         category: {
           slug: category.slug

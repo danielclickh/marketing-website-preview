@@ -25,6 +25,7 @@ export const getStaticProps = (async ({ params }) => {
 
   for (const category of categories) {
     resources[category.id] = await resourcesService.findMany({
+      sort: ['publishedAt:DESC'],
       filters: {
         category: {
           id: {
