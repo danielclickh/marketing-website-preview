@@ -2,6 +2,7 @@ import { fetchCategories } from '../api/blog'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import {
+  eventsService,
   fetchAll,
   findOne,
   getStagingOnlyFilters,
@@ -55,7 +56,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     }
 
     const blogPosts = await fetchAll('blog-posts', blogsParams)
-    const events = await fetchAll('events', {
+    const events = await eventsService.findAll({
       filters: {
         $and: [
           {
@@ -63,8 +64,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
           }
         ]
       },
-      sort: ['localDatetime:DESC'],
-      populate: ['category']
+      sort: ['localDatetime:DESC']
     })
 
     const blogCategories = await fetchCategories()

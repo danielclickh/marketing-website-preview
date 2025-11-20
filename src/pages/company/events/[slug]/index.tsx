@@ -1,5 +1,6 @@
 import fallbackSocialImage from '@/../public/images/social_share.png'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import EventPost from '@/components/EventPostList/EventPost'
@@ -8,14 +9,11 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import SocialButton from '@/components/SocialButton'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import StripeBuyButton from '@/components/StripeBuyButton'
 import { SuiTitle } from '@/components/sui'
 import {
-  fetchAll,
-  findAll,
+  eventsService,
   getProxiedMediaUrl,
-  getStagingOnlyFilters,
   getUnlistedFilters
 } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
@@ -23,131 +21,95 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { absoluteUrl } from '@/lib/next'
 import { generateInnerEventSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventProps, EventType } from '@/types/events'
-import { ParamsType } from '@/types/homepage'
+import { CommonProps, ParamsType } from '@/types/homepage'
+import { EntryEvent } from '@/types/strapi'
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useRef, useState } from 'react'
 
-export const getStaticProps: GetStaticProps<EventProps> =
+export interface PageProps extends CommonProps {
+  event: EntryEvent
+  moreEvents: Array<EntryEvent>
+}
+
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps({ params }) {
     const { slug } = params as ParamsType
-    const { data } = await findAll('events', {
-      filters: {
-        $and: [
-          {
-            slug: {
-              $eq: slug
-            }
-          },
-          {
-            $or: getStagingOnlyFilters()
-          }
-        ]
-      },
-      sort: ['localDatetime:DESC'],
-      populate: [
-        'thumbnailPng',
-        'hostedBy',
-        'hostedBy.hosts',
-        'hostedBy.hosts.avatarPng',
-        'agenda',
-        'agenda.items',
-        'location',
-        'thumbnailPng',
-        'form'
-      ]
+
+    const event = await eventsService.findOne({
+      filters: { slug }
     })
 
-    const { data: recentEvents }: { data: Array<EventType> } = await findAll(
-      'events',
-      {
-        filters: {
-          $and: [
-            {
-              localDatetime: {
-                $gte: new Date().toISOString()
-              }
-            },
-            {
-              slug: {
-                $notContains: slug
-              }
-            },
-            {
-              $or: getStagingOnlyFilters()
-            },
-            {
-              $or: getUnlistedFilters()
-            }
-          ]
-        },
-        sort: ['localDatetime:ASC'],
-        populate: [
-          'thumbnailPng',
-          'hostedBy',
-          'hostedBy.hosts',
-          'hostedBy.hosts.avatarPng',
-          'agenda',
-          'agenda.items',
-          'location',
-          'thumbnailPng',
-          'form'
-        ],
-        pagination: { limit: 3 }
-      }
-    )
-
-    const commonProps = await getCommonProps()
-    const page = data[0]
-    if (!page) {
+    if (!event) {
       return {
         notFound: true
       }
-    }
-
-    if (page.eventVideoUrl) {
+    } else if (event.eventVideoUrl) {
       return {
         props: {},
         redirect: {
-          destination: page.eventVideoUrl,
+          destination: event.eventVideoUrl,
           permanent: false
         }
       }
     }
 
+    const moreEventsRequest = await eventsService.findMany({
+      filters: {
+        $or: getUnlistedFilters(),
+        $and: [
+          {
+            localDatetime: {
+              $gte: new Date().toISOString()
+            }
+          },
+          {
+            slug: {
+              $ne: slug
+            }
+          }
+        ]
+      },
+      sort: ['localDatetime:ASC'],
+      pagination: { limit: 4 }
+    })
+
+    const [commonProps, moreEvents] = await Promise.all([
+      getCommonProps(),
+      moreEventsRequest
+    ])
+
     const seo: SeoMetadata = {
-      title: page.title,
-      description: page.shortDescription,
-      image: [page.thumbnailPng],
+      title: event.title,
+      description: event.shortDescription || '',
+      image: [event.thumbnailPng],
       type: 'website',
       siteName: 'ClickHouse',
       path: `/company/events/${slug}`,
       schema: generateInnerEventSchema({
-        name: page.title,
-        description: page.shortDescription || '',
-        startDate: page.localDatetime,
-        imageUrl: page?.thumbnailPng?.url
-          ? getProxiedMediaUrl(page.thumbnailPng.url)
+        name: event.title,
+        description: event.shortDescription || '',
+        startDate: event.localDatetime,
+        imageUrl: event?.thumbnailPng?.url
+          ? getProxiedMediaUrl(event.thumbnailPng.url)
           : absoluteUrl(fallbackSocialImage.src),
         path: `/company/events/${slug}`,
-        locationCity: page.location.city,
-        locationCountry: page.location.country
+        locationCity: event.location.city,
+        locationCountry: event.location.country
       })
     }
 
-    if (page.unlisted) {
+    if (event.unlisted) {
       seo.robots = 'noindex'
     }
 
     return {
       props: {
-        ...page,
+        ...commonProps,
         seo,
-        recentEvents,
-        ...commonProps
+        event,
+        moreEvents
       }
     }
   }
@@ -156,14 +118,14 @@ export const getStaticProps: GetStaticProps<EventProps> =
 // It may be called again, on a serverless function, if
 // the path has not been generated.
 export async function getStaticPaths() {
-  const data = await fetchAll('events', {
+  const data: Array<Pick<EntryEvent, 'slug'>> = await eventsService.findAll({
+    fields: ['slug'],
+    populate: false,
     filters: {
       eventVideoUrl: {
         $null: true
-      },
-      $or: getStagingOnlyFilters()
-    },
-    fields: ['slug']
+      }
+    }
   })
 
   // Get the paths we want to pre-render based on posts
@@ -178,21 +140,12 @@ export async function getStaticPaths() {
 }
 
 export default function Page({
-  slug,
-  agenda,
-  hostedBy,
-  category,
-  title,
-  richDescription,
-  form,
-  localDatetime,
-  recordedVimeoUrl,
   footerData,
   headerData,
-  recentEvents,
-  thumbnailPng,
+  event,
+  moreEvents,
   seo
-}: EventProps) {
+}: PageProps) {
   const router = useRouter()
   useGalaxyOnPage('eventPage')
 
@@ -201,15 +154,15 @@ export default function Page({
   const [formLoaded, setFormLoaded] = useState(false)
 
   const redirectOnSuccess =
-    form?.type === 'recordedGatedContent' && !!recordedVimeoUrl
-  const hasSidebar = !!thumbnailPng || !form?.disabled
-  const formId = form?.marketoFormId?.trim()?.length
-    ? form.marketoFormId
+    event.form?.type === 'recordedGatedContent' && !!event.recordedVimeoUrl
+  const hasSidebar = !!event.thumbnailPng || !event.form?.disabled
+  const formId = event.form?.marketoFormId?.trim()?.length
+    ? event.form.marketoFormId
     : '1127'
 
   const handleFormSuccess = () => {
     if (redirectOnSuccess) {
-      router.push(`/company/events/${slug}/thank-you`)
+      router.push(`/company/events/${event.slug}/thank-you`)
     } else {
       setFormSuccess(true)
 
@@ -229,28 +182,31 @@ export default function Page({
         <div className={`space-y-6 ${hasSidebar ? '' : 'mx-auto max-w-4xl'}`}>
           <Breadcrumbs>
             <Breadcrumbs.Link href='/company/events'>Events</Breadcrumbs.Link>
-            <Breadcrumbs.Link href={`/company/events?category=${category}`}>
-              {category}
+            <Breadcrumbs.Link
+              href={`/company/events?category=${event.category}`}>
+              {event.category}
             </Breadcrumbs.Link>
           </Breadcrumbs>
-          <SuiTitle type='h1'>{title}</SuiTitle>
+          <SuiTitle type='h1'>{event.title}</SuiTitle>
 
-          {richDescription && (
-            <Markdown className='rich-text-content'>{richDescription}</Markdown>
+          {event.richDescription && (
+            <Markdown className='rich-text-content'>
+              {event.richDescription}
+            </Markdown>
           )}
 
-          {hostedBy && (
+          {event.hostedBy && (
             <>
               <HRSeparator className='!max-w-none' />
               <SuiTitle type='h3' className='mb-7'>
-                {hostedBy.title}
+                {event.hostedBy.title}
               </SuiTitle>
               <div className='grid grid-cols-1 flex-wrap gap-3 sm:grid-cols-2'>
-                {hostedBy.hosts.map((host, hostIndex) => (
+                {event.hostedBy.hosts.map((host, hostIndex) => (
                   <div className='flex items-center gap-5' key={hostIndex}>
                     {host.avatarPng && (
-                      <StrapiImageUrl
-                        {...host.avatarPng}
+                      <StrapiImage
+                        entry={host.avatarPng}
                         alt={host.avatarPng.caption ?? host.name}
                         width={64}
                         height={64}
@@ -266,12 +222,12 @@ export default function Page({
               </div>
             </>
           )}
-          {agenda && (
+          {event.agenda && (
             <>
               <HRSeparator className='!max-w-none' />
-              <SuiTitle type='h3'>{agenda.title}</SuiTitle>
+              <SuiTitle type='h3'>{event.agenda.title}</SuiTitle>
               <div className='grid grid-cols-[auto_1fr] gap-1'>
-                {agenda.items.map((agendaItem, agendaIndex) => (
+                {event.agenda.items.map((agendaItem, agendaIndex) => (
                   <div
                     className='col-span-full grid grid-cols-subgrid gap-4'
                     key={agendaIndex}>
@@ -287,26 +243,26 @@ export default function Page({
         {/* Form column */}
         {hasSidebar && (
           <div className='w-full flex-shrink-0 flex-grow-0 space-y-6 lg:max-w-lg'>
-            {thumbnailPng && (
-              <Image
-                src={thumbnailPng.url}
+            {event.thumbnailPng && (
+              <StrapiImage
+                entry={event.thumbnailPng}
                 width={512}
                 height={293}
                 loading='eager'
-                priority
+                priority={true}
                 alt='Featured image'
                 className='hidden h-auto w-full rounded-lg border border-neutral-700/80 object-cover shadow-lg lg:block'
               />
             )}
             <CUICard>
               <CUICard.Body className='p-4 lg:p-6'>
-                {!form?.disabled && (
+                {!event.form?.disabled && (
                   <>
                     {!formSuccess && (
                       <MarketoForm
                         formId={formId}
                         onLoad={() => setFormLoaded(true)}
-                        submitButtonLabel={form?.submitButtonLabel}
+                        submitButtonLabel={event.form?.submitButtonLabel}
                         clearbitTracking={true}
                         onSuccess={handleFormSuccess}
                       />
@@ -321,12 +277,14 @@ export default function Page({
                         <div className='space-y-6 text-center'>
                           <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
                           <Markdown className='rich-text-content text-center'>
-                            {form?.SuccessMessage ||
+                            {event.form?.SuccessMessage ||
                               "You've been successfully registered. See you there!"}
                           </Markdown>
-                          {form?.stripeBuyButtonId && (
+                          {event.form?.stripeBuyButtonId && (
                             <div className='mx-auto w-max overflow-hidden rounded-xl border-2 border-primary-300'>
-                              <StripeBuyButton id={form.stripeBuyButtonId} />
+                              <StripeBuyButton
+                                id={event.form.stripeBuyButtonId}
+                              />
                             </div>
                           )}
                           <div>
@@ -335,9 +293,18 @@ export default function Page({
                             </p>
                             <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                               <CopyUrlButton />
-                              <SocialButton type='twitter' title={title} />
-                              <SocialButton type='facebook' title={title} />
-                              <SocialButton type='linkedin' title={title} />
+                              <SocialButton
+                                type='twitter'
+                                title={event.title}
+                              />
+                              <SocialButton
+                                type='facebook'
+                                title={event.title}
+                              />
+                              <SocialButton
+                                type='linkedin'
+                                title={event.title}
+                              />
                             </div>
                           </div>
                         </div>
@@ -351,9 +318,9 @@ export default function Page({
         )}
       </section>
 
-      {/* Upcoming events */}
-      <section className='bg-shadow-element yellow-shadow my-16 lg:my-24'>
-        <div className='section-container flex flex-col'>
+      {/* Recent posts */}
+      {moreEvents.length > 0 && (
+        <section className='section-container my-20 flex flex-col'>
           <div className='flex justify-between pb-8'>
             <SuiTitle
               type='h2'
@@ -367,12 +334,20 @@ export default function Page({
             </CUIButton>
           </div>
           <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {recentEvents.map((event: EventType) => (
-              <EventPost key={event.id} {...event} />
-            ))}
+            {moreEvents.map((recentEvent, recentEventIndex) => {
+              return (
+                <div
+                  key={recentEventIndex}
+                  className={
+                    recentEventIndex > 2 ? 'hidden md:block lg:hidden' : ''
+                  }>
+                  <EventPost {...recentEvent} />
+                </div>
+              )
+            })}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </Layout>
   )
 }

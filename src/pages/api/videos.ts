@@ -115,7 +115,12 @@ export async function fetchVideos({
       search,
       category
     },
-    pagination
+    pagination: pagination || {
+      page: 1,
+      pageSize: 1,
+      pageCount: 1,
+      total: 1
+    }
   }
 }
 

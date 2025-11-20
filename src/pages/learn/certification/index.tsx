@@ -16,13 +16,17 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { LearnProps } from '@/types/learn'
+import { CommonProps, HomepageCustomerStories } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
-export const getStaticProps: GetStaticProps<LearnProps> =
+interface PageProps extends CommonProps {
+  customerStories: HomepageCustomerStories
+}
+
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', {
@@ -111,7 +115,7 @@ export default function CertificationPage({
   headerData,
   customerStories,
   seo
-}: LearnProps) {
+}: PageProps) {
   useGalaxyOnPage('certificationPage')
 
   const [watchWebinar, setWatchWebinar] = useState(false)

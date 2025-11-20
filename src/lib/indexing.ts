@@ -1,6 +1,7 @@
 import { BuildRecord } from '../../scripts/buildIndex'
 import buildIndex from '@/../public/buildIndex.json'
 import {
+  eventsService,
   fetchAll,
   getStagingOnlyFilters,
   getUnlistedFilters,
@@ -73,9 +74,9 @@ export async function cmsBlogs(): Promise<Array<IndexedItem>> {
 }
 
 export async function cmsEvents(): Promise<Array<IndexedItem>> {
-  const events = await fetchAll('events', {
-    sort: ['localDatetime:DESC'],
+  const events = await eventsService.findAll({
     fields: ['title', 'slug', 'publishedAt', 'updatedAt'],
+    populate: false,
     filters: {
       $and: [
         {
@@ -85,7 +86,8 @@ export async function cmsEvents(): Promise<Array<IndexedItem>> {
           $or: getUnlistedFilters()
         }
       ]
-    }
+    },
+    sort: ['localDatetime:DESC']
   })
 
   return events.map((post) => {

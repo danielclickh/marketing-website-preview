@@ -5,37 +5,32 @@ import {
   ApiRequestParams,
   ApiResponse,
   ComponentSeo,
+  EntryEvent,
   EntryMarketingVideo,
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
-import _fetch from 'cross-fetch'
+import crypto from 'crypto'
 import type { NextApiRequest } from 'next'
+import pLimit from 'p-limit'
 import { stringify } from 'qs'
 
-export function fetch(uri: string, init: any = {}) {
-  if (process?.env?.STRAPI_API_KEY) {
-    init.headers = {
-      Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      ...(init.headers || {})
-    }
-  }
-  return _fetch(uri, init)
-}
+const limit = pLimit(5)
+
+const memoryCache = new Map()
 
 const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'https://cms.clickhouse-dev.com:1337'
-//process.env.STRAPI_API_URL ?? 'http://localhost:1337'
 const url = `${strapiApiUrl}/api/`
 
-const stagingOnlyFilter =
-  process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
 export function getStagingOnlyFilters(
   fieldName: string = 'StagingOnly'
 ): Array<Record<string, any>> {
+  const filter =
+    process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
   return [
     { [fieldName]: { $null: true } },
-    { [fieldName]: stagingOnlyFilter },
+    { [fieldName]: filter },
     { [fieldName]: { $eq: false } }
   ]
 }
@@ -93,7 +88,7 @@ export async function request(
   let uri = `${url.replace(/\/$/, '')}/${path.replace(/^\//, '')}`
   if (queryString.length) uri += `?${queryString}`
 
-  const response = await fetch(uri, {
+  const requestInit: RequestInit = {
     // Default options
     next: {
       revalidate: 5
@@ -104,7 +99,22 @@ export async function request(
 
     // Merge options
     ...(options || {})
-  })
+  }
+
+  const hash = crypto
+    .createHash('sha1')
+    .update(JSON.stringify({ uri, requestInit }))
+    .digest('hex')
+
+  // Only return cached responses in build process
+  if (
+    process.env.NEXT_PHASE === 'phase-production-build' &&
+    memoryCache.has(hash)
+  ) {
+    return memoryCache.get(hash)
+  }
+
+  const response = await limit(() => fetch(uri, requestInit))
 
   if (!response.ok) {
     throw new Error(
@@ -112,7 +122,11 @@ export async function request(
     )
   }
 
-  return await response.json()
+  const data = await response.json()
+
+  memoryCache.set(hash, data)
+
+  return data
 }
 
 export function cleanStrapiObject(element: any): any {
@@ -174,7 +188,7 @@ export async function getPathsValues(
       }
     }
   })
-  if (pagination.pageCount > pageNumber) {
+  if (pagination && pagination.pageCount > pageNumber) {
     const newPages = await getPathsValues(
       pathName,
       obj,
@@ -205,7 +219,7 @@ export async function fetchAll(
     }
   }
   const { data, pagination } = await findAll(pathName, newParam)
-  if (pageNumber < pagination.pageCount) {
+  if (pagination && pageNumber < pagination.pageCount) {
     const newData = await fetchAll(pathName, params, data, pageNumber + 1)
     list = list.concat(newData)
   } else {
@@ -214,60 +228,9 @@ export async function fetchAll(
   return list
 }
 
-async function convertStrapiObject(element: any) {
-  const newElement =
-    'attributes' in element && 'id' in element
-      ? { id: element.id, ...element.attributes }
-      : element
-  const result: any = {}
-  for (const entry of Object.entries(newElement)) {
-    const field: string = entry[0]
-    const fieldValue: any = entry[1]
-
-    if (Array.isArray(fieldValue)) {
-      result[field] = await Promise.all(fieldValue.map(convertStrapiObject))
-      continue
-    }
-
-    if (typeof fieldValue === 'object' && fieldValue) {
-      if ('data' in fieldValue && Array.isArray(fieldValue.data)) {
-        result[field] = await Promise.all(
-          fieldValue.data.map(convertStrapiObject)
-        )
-        continue
-      }
-      let convertedObj: any = await convertStrapiObject(fieldValue)
-      if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
-        convertedObj = convertedObj.data
-      }
-
-      result[field] = convertedObj
-      continue
-    }
-
-    result[field] = fieldValue
-  }
-  return result
-}
-
 export async function findAll(pathName: string, params: Record<string, any>) {
-  const newParamString = stringify(params, {
-    encodeValuesOnly: true // prettify URL
-  })
-
-  const response = await fetch(
-    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
-  )
-
-  const { data, meta } = await response.json()
-  const dataList = await Promise.all(
-    data.map(
-      async (item: Record<string, any>): Promise<Record<string, any>> => {
-        const converted = await convertStrapiObject(item)
-        return converted
-      }
-    )
-  )
+  const { data, meta } = await request(pathName, params)
+  const dataList = data.map(cleanStrapiObject)
   return {
     data: dataList,
     pagination: meta.pagination
@@ -275,15 +238,8 @@ export async function findAll(pathName: string, params: Record<string, any>) {
 }
 
 export async function findOne(pathName: string, params: Record<string, any>) {
-  const newParamString = stringify(params, {
-    encodeValuesOnly: true // prettify URL
-  })
-  const response = await fetch(
-    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
-  )
-
-  const { data } = await response.json()
-  return await convertStrapiObject(data)
+  const { data } = await request(pathName, params)
+  return await cleanStrapiObject(data)
 }
 
 export async function findHeader(requestString: string) {
@@ -314,40 +270,24 @@ export async function getPricingV2() {
 }
 
 export async function findImageDetails(imageUrl: string) {
-  const pathName = 'upload/files'
-  const newParamString = stringify(
-    {
-      'filters[url][$eq]': imageUrl
-    },
-    {
-      encodeValuesOnly: true
+  const { data } = await request('upload/files', {
+    filters: {
+      url: {
+        $eq: imageUrl
+      }
     }
-  )
-  const response = await fetch(
-    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
-  )
-  const data = await response.json()
-  const imageDetails = data.length > 0 ? data[0] : null
-  return imageDetails
+  })
+  return data.length > 0 ? data[0] : null
 }
 
 class StrapiEntryService<EntryType> {
   constructor(
-    private readonly apiUri: string,
-    private readonly defaultParams: Partial<ApiRequestParams> = {},
-    private readonly stagingFilters: boolean | string = false
+    private apiUri: string,
+    private stagingFilters: boolean | string = false,
+    private deepPopulate: boolean = false
   ) {}
 
-  private mergeDefaultParams(params: ApiRequestParams) {
-    if (!this.defaultParams) return params
-
-    return {
-      ...this.defaultParams,
-      ...params
-    }
-  }
-
-  private mergeStagingFilters(params: ApiRequestParams) {
+  private mergeStagingFilters(params: ApiRequestParams<EntryType>) {
     if (!this.stagingFilters) return params
 
     const fieldName =
@@ -360,14 +300,32 @@ class StrapiEntryService<EntryType> {
     }
   }
 
-  private modifyParams(params: ApiRequestParams) {
-    params = this.mergeDefaultParams(params)
-    params = this.mergeStagingFilters(params)
+  private applyDeepPopulate(params: ApiRequestParams<EntryType>) {
+    if (!params.populate && this.deepPopulate) {
+      params.populate = 'deep'
+    }
     return params
   }
 
+  private modifyParams(params: ApiRequestParams<EntryType>) {
+    return this.mergeStagingFilters(this.applyDeepPopulate(params))
+  }
+
+  async findOne(params: Omit<ApiRequestParams<EntryType>, 'pagination'> = {}) {
+    const result = await this.findMany({
+      ...params,
+      pagination: {
+        page: 1,
+        pageSize: 1,
+        withCount: false
+      }
+    })
+
+    return result.pop()
+  }
+
   async findMany<T extends boolean = false>(
-    params: ApiRequestParams = {},
+    params: ApiRequestParams<EntryType> = {},
     withPagination: T = false as T
   ): Promise<
     T extends true
@@ -396,7 +354,7 @@ class StrapiEntryService<EntryType> {
     return data as T extends true ? never : Array<EntryType>
   }
 
-  async findAll(params: Omit<ApiRequestParams, 'pagination'> = {}) {
+  async findAll(params: Omit<ApiRequestParams<EntryType>, 'pagination'> = {}) {
     let combined: Array<EntryType> = []
 
     let currentPage = 0
@@ -418,34 +376,12 @@ class StrapiEntryService<EntryType> {
     return combined
   }
 
-  async find(id: number, params: ApiRequestParams = {}) {
+  async find(id: number, params: ApiRequestParams<EntryType> = {}) {
     const response = await request(
       `${this.apiUri}/${id}`,
       this.modifyParams(params)
     )
     return cleanStrapiObject(response.data) as EntryType
-  }
-
-  async findBySlug(
-    slug: string,
-    params: Omit<ApiRequestParams, 'pagination'> = {}
-  ) {
-    return (
-      await this.findMany({
-        ...params,
-        filters: {
-          ...(params.filters || {}),
-          slug: {
-            $eq: slug
-          }
-        },
-        pagination: {
-          page: 1,
-          pageSize: 1,
-          withCount: false
-        }
-      })
-    ).pop()
   }
 }
 
@@ -476,18 +412,23 @@ export function seoFieldToNextComponentProps(
 }
 
 export const resourceCategoriesService =
-  new StrapiEntryService<EntryResourceCategory>('resource-categories', {
-    populate: 'deep'
-  })
+  new StrapiEntryService<EntryResourceCategory>(
+    'resource-categories',
+    false,
+    true
+  )
 
 export const resourcesService = new StrapiEntryService<EntryResource>(
   'resources',
-  { populate: 'deep', sort: ['publishedAt:DESC'] },
-  'stagingOnly'
+  'stagingOnly',
+  true
+)
+
+export const eventsService = new StrapiEntryService<EntryEvent>(
+  'events',
+  true,
+  true
 )
 
 export const marketingVideosService =
-  new StrapiEntryService<EntryMarketingVideo>('marketing-videos', {
-    populate: 'deep',
-    sort: ['VideoDate:DESC']
-  })
+  new StrapiEntryService<EntryMarketingVideo>('marketing-videos', false, true)

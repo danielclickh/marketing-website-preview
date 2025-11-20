@@ -26,12 +26,7 @@ import {
   SuiTitle
 } from '@/components/sui'
 import { pages } from '@/data/learn'
-import {
-  findAll,
-  findOne,
-  getStagingOnlyFilters,
-  getUnlistedFilters
-} from '@/lib/api/strapi'
+import { eventsService, findOne, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import {
   convertDateToString,
@@ -41,13 +36,23 @@ import {
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
 import { extractEventTime, limitStringByWord } from '@/lib/utils/strings'
-import { LearnProps, TrainingSimpleEvent } from '@/types/learn'
+import { CommonProps, HomepageCustomerStories } from '@/types/homepage'
+import { EntryEvent } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { ChangeEvent, CSSProperties, useMemo, useState } from 'react'
 
-export const getStaticProps: GetStaticProps<LearnProps> =
+interface TrainingSimpleEvent extends EntryEvent {
+  extractedTime?: null | string
+}
+
+interface PageProps extends CommonProps {
+  customerStories: HomepageCustomerStories
+  events: Array<TrainingSimpleEvent>
+}
+
+export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
     const data = await findOne('homepage', {
@@ -59,42 +64,39 @@ export const getStaticProps: GetStaticProps<LearnProps> =
       ]
     })
 
-    let { data: events }: { data: Array<TrainingSimpleEvent> } = await findAll(
-      'events',
-      {
-        filters: {
-          $and: [
-            {
-              localDatetime: {
-                $gte: startOfToday().toISOString()
-              },
-              category: {
-                $in: ['Live Training', 'Free Training', 'Paid Training']
-              }
+    const events = await eventsService.findAll({
+      filters: {
+        $and: [
+          {
+            localDatetime: {
+              $gte: startOfToday().toISOString()
             },
-            {
-              $or: getStagingOnlyFilters()
-            },
-            {
-              $or: getUnlistedFilters()
+            category: {
+              $in: ['Live Training', 'Free Training', 'Paid Training']
             }
-          ]
-        },
-        sort: ['localDatetime:ASC'],
-        populate: ['location']
-      }
-    )
+          },
+          {
+            $or: getUnlistedFilters()
+          }
+        ]
+      },
+      sort: ['localDatetime:ASC']
+    })
 
-    events = events.map((event) => {
+    const modifiedEvents: Array<TrainingSimpleEvent> = events.map((event) => {
+      let extractedTime: null | string = null
       if (event.richDescription) {
-        event.extractedTime = extractEventTime(event.richDescription)
+        extractedTime = extractEventTime(event.richDescription)
       }
 
-      if (!event?.extractedTime) {
-        event.extractedTime = convertTimeToString(event.localDatetime)
+      if (!extractedTime) {
+        extractedTime = convertTimeToString(event.localDatetime)
       }
 
-      return event
+      return {
+        ...event,
+        extractedTime
+      }
     })
 
     return {
@@ -107,7 +109,7 @@ export const getStaticProps: GetStaticProps<LearnProps> =
           path: '/learn',
           imageUrl: 'https://clickhouse.com/images/clickhouse-learning-og.png'
         },
-        events,
+        events: modifiedEvents,
         ...data,
         ...commonProps
       }
@@ -120,7 +122,7 @@ export default function LearnPage({
   customerStories,
   events,
   seo
-}: LearnProps) {
+}: PageProps) {
   useGalaxyOnPage('learnPage')
 
   const [eventsSearch, setEventsSearch] = useState('')

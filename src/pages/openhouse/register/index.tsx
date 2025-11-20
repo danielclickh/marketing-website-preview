@@ -1,19 +1,12 @@
 import imageOpenhouseLogo from '../assets/logo.svg'
 import styles from '../styles.module.scss'
 import { CUICard } from '@/components/ClickUI'
-import CopyUrlButton from '@/components/CopyUrlButton'
-import EventPost from '@/components/EventPostList/EventPost'
 import FontSohne from '@/components/FontSohne'
 import Footer from '@/components/Footer'
-import MarketoForm from '@/components/MarketoForm'
 import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
 import SeoContainer from '@/components/SeoContainer'
-import SocialButton from '@/components/SocialButton'
-import { SuiButton } from '@/components/sui'
-import { findAll } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventType } from '@/types/events'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -21,38 +14,9 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import 'swiper/css'
 
-interface RegisterPageProps extends CommonProps {
-  recentEvents: Array<EventType>
-}
-
-export const getStaticProps: GetStaticProps<RegisterPageProps> =
+export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
-    const commonPromise = getCommonProps()
-
-    const eventsPromise = findAll('events', {
-      filters: {
-        localDatetime: {
-          $gte: new Date().toISOString()
-        }
-      },
-      sort: ['localDatetime:ASC'],
-      populate: [
-        'thumbnailPng',
-        'hostedBy',
-        'hostedBy.hosts',
-        'hostedBy.hosts.avatarPng',
-        'agenda',
-        'agenda.items',
-        'location',
-        'form'
-      ],
-      pagination: { limit: 3 }
-    })
-
-    const [commonProps, { data: recentEvents }] = await Promise.all([
-      commonPromise,
-      eventsPromise
-    ])
+    const commonProps = await getCommonProps()
 
     return {
       props: {
@@ -62,20 +26,12 @@ export const getStaticProps: GetStaticProps<RegisterPageProps> =
           path: '/openhouse/register',
           image: [{ url: '/images/social-open-house.png' }]
         },
-        recentEvents,
         ...commonProps
       }
     }
   }
 
-export default function Page({
-  seo,
-  footerData,
-  recentEvents
-}: RegisterPageProps) {
-  const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(false)
-  const [formLoaded, setFormLoaded] = useState(false)
+export default function Page({ seo, footerData }: CommonProps) {
   return (
     <>
       {seo && <SeoContainer {...seo} />}

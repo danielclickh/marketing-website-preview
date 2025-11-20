@@ -43,7 +43,11 @@ export const getStaticProps = (async ({ params }) => {
     }
   }
 
-  const category = await resourceCategoriesService.findBySlug(categorySlug)
+  const category = await resourceCategoriesService.findOne({
+    filters: {
+      slug: categorySlug
+    }
+  })
 
   if (!category) {
     return {

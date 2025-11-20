@@ -1,26 +1,20 @@
 import PillFilters from '@/components-cleaned/PillFilters'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import { CUILink } from '@/components/ClickUI'
 import EventPost from '@/components/EventPostList/EventPost'
 import Layout from '@/components/Layout'
-import RecentEvents from '@/components/RecentEvents'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiTitle } from '@/components/sui'
-import {
-  findAll,
-  findOne,
-  getStagingOnlyFilters,
-  getUnlistedFilters
-} from '@/lib/api/strapi'
+import { eventsService, getUnlistedFilters } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateEventsArchiveSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { EventType } from '@/types/events'
-import { NewsAndEventsData, EventsPageProps } from '@/types/newsEvents'
+import { CommonProps } from '@/types/homepage'
+import { EntryEvent } from '@/types/strapi'
 import { CalendarIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 const CATEGORIES: Array<{
   label: string
@@ -59,13 +53,15 @@ const CATEGORIES: Array<{
   }
 ]
 
-export const getStaticProps: GetStaticProps<EventsPageProps> =
-  async function getStaticProps() {
-    const newsEvents: Promise<NewsAndEventsData> = findOne('news-and-event', {
-      populate: ['seo', 'seo.image']
-    })
+interface PageProps extends CommonProps {
+  featuredEvent: EntryEvent | null
+  events: Array<EntryEvent>
+  recentEvents: Array<EntryEvent>
+}
 
-    const events: Promise<{ data: EventType[] }> = findAll('events', {
+export const getStaticProps: GetStaticProps<PageProps> =
+  async function getStaticProps() {
+    const eventsRequest = eventsService.findAll({
       filters: {
         $and: [
           {
@@ -74,97 +70,68 @@ export const getStaticProps: GetStaticProps<EventsPageProps> =
             }
           },
           {
-            $or: getStagingOnlyFilters()
+            $or: getUnlistedFilters()
+          }
+        ]
+      },
+      sort: ['localDatetime:ASC']
+    })
+
+    const [commonProps, events] = await Promise.all([
+      getCommonProps(),
+      eventsRequest
+    ])
+
+    let featuredEvent: EntryEvent | undefined
+    let featuredEventIndex = events.findIndex((e) => e.featured)
+    if (featuredEventIndex !== -1) {
+      featuredEvent = events.splice(featuredEventIndex, 1)?.[0]
+    } else {
+      featuredEvent = events.shift()
+    }
+
+    const recentEvents = await eventsService.findMany({
+      filters: {
+        $and: [
+          {
+            localDatetime: {
+              $lt: new Date().toISOString()
+            }
           },
           {
             $or: getUnlistedFilters()
           }
         ]
       },
-      sort: ['localDatetime:ASC'],
-      populate: [
-        'thumbnailPng',
-        'hostedBy',
-        'hostedBy.hosts',
-        'hostedBy.hosts.avatarPng',
-        'agenda',
-        'agenda.items',
-        'location',
-        'form'
-      ]
+      sort: ['localDatetime:DESC'],
+      pagination: { limit: 4 }
     })
 
-    const [{ seo }, { data: allEvents }] = await Promise.all([
-      newsEvents,
-      events
-    ])
-
-    seo.title = 'Events - ClickHouse'
-    seo.path = '/company/events'
-    seo.schema = generateEventsArchiveSchema({ path: '/company/events' })
-
-    let featuredEvent: EventType | undefined
-    let featuredEventIndex = allEvents.findIndex((e) => e.featured)
-    if (featuredEventIndex !== undefined) {
-      featuredEvent = allEvents.splice(featuredEventIndex, 1)?.[0]
-    } else {
-      featuredEvent = allEvents.shift()
-    }
-
-    const filters: Record<string, any> = {
-      $and: [
-        {
-          localDatetime: {
-            $lt: new Date().toISOString()
-          }
-        },
-        {
-          $or: getStagingOnlyFilters()
-        },
-        {
-          $or: getUnlistedFilters()
-        }
-      ]
-    }
-    const { data: recentEvents }: { data: EventType[] } = await findAll(
-      'events',
-      {
-        filters: filters,
-        sort: ['localDatetime:DESC'],
-        populate: [
-          'thumbnailPng',
-          'hostedBy',
-          'hostedBy.hosts',
-          'hostedBy.hosts.avatarPng',
-          'agenda',
-          'agenda.items',
-          'location',
-          'form'
-        ],
-        pagination: { limit: 3 }
-      }
-    )
-
-    const commonProps = await getCommonProps()
     return {
       props: {
+        ...commonProps,
         featuredEvent: featuredEvent || null,
-        allEvents,
+        events,
         recentEvents,
-        seo,
-        ...commonProps
+        seo: {
+          title: 'Events - ClickHouse',
+          description:
+            'Get all of the latest ClickHouse events, trainings, and webinars.',
+          path: '/company/events',
+          schema: generateEventsArchiveSchema({ path: '/company/events' })
+        }
       }
     }
   }
 
 export default function News({
   featuredEvent,
-  allEvents,
+  events,
   footerData,
   headerData,
   recentEvents,
   seo
-}: EventsPageProps) {
+}: PageProps) {
   useGalaxyOnPage('eventsPage')
 
   const router = useRouter()
@@ -206,14 +173,14 @@ export default function News({
 
   const filteredEvents = useMemo(() => {
     return selectedCategoryObject?.value
-      ? allEvents.filter((event) => {
+      ? events.filter((event) => {
           return [
             selectedCategoryObject.value,
             ...selectedCategoryObject.aliases
           ].includes(event.category)
         })
-      : allEvents
-  }, [allEvents, selectedCategoryObject])
+      : events
+  }, [events, selectedCategoryObject])
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -225,11 +192,12 @@ export default function News({
           <div className='section-container'>
             <CUILink
               href={`/company/events/${featuredEvent.slug}`}
-              className='group/featuredEvent mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
+              className='group/featuredEvent mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
               {featuredEvent.thumbnailPng && (
                 <div className='lg:w-1/2'>
-                  <StrapiImageUrl
-                    {...featuredEvent.thumbnailPng}
+                  <StrapiImage
+                    entry={featuredEvent.thumbnailPng}
+                    alt={featuredEvent.title}
                     loading='eager'
                     width={640}
                     height={640}
@@ -302,7 +270,7 @@ export default function News({
       </div>
 
       <div
-        className='mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0'
+        className='mx-auto my-20 max-w-7xl px-4 sm:px-8 2xl:px-0'
         id='upcoming-events'>
         <div className='flex flex-col justify-between md:flex-row'>
           <h2 className='mb-10 font-basier text-4xl font-semibold text-neutral-100'>
@@ -326,23 +294,42 @@ export default function News({
           />
         </div>
 
-        <div>
-          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {filteredEvents.map((event: EventType) => (
-              <EventPost key={event.id} {...event} />
-            ))}
-            {!filteredEvents.length && (
-              <p className='col-span-full mt-12 w-full text-center'>
-                No results
-              </p>
-            )}
-          </div>
+        <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+          {filteredEvents.map((event) => (
+            <EventPost key={event.id} {...event} />
+          ))}
+          {!filteredEvents.length && (
+            <p className='col-span-full mt-12 w-full text-center'>No results</p>
+          )}
         </div>
       </div>
 
-      <div className='bg-shadow-element pb-8'>
-        <RecentEvents events={recentEvents} />
-      </div>
+      {/* Recent posts */}
+      {recentEvents.length > 0 && (
+        <section className='section-container my-20 flex flex-col'>
+          <div className='flex justify-between pb-8'>
+            <SuiTitle
+              type='h2'
+              className='!text-3xl text-neutral-100'
+              weight='semibold'>
+              Recent events
+            </SuiTitle>
+          </div>
+          <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
+            {recentEvents.map((recentEvent, recentEventIndex) => {
+              return (
+                <div
+                  key={recentEventIndex}
+                  className={
+                    recentEventIndex > 2 ? 'hidden md:block lg:hidden' : ''
+                  }>
+                  <EventPost {...recentEvent} />
+                </div>
+              )
+            })}
+          </div>
+        </section>
+      )}
     </Layout>
   )
 }
