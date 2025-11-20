@@ -57,27 +57,8 @@ export const getStaticProps: GetStaticProps<RichContentPageProps> =
     }
   }
 
-// This function gets called at build time on server-side.
-// It may be called again, on a serverless function, if
-// the path has not been generated.
 export async function getStaticPaths() {
-  // Get the paths we want to pre-render based on posts
-  const paths = await getPathsValues(
-    'rich-content-pages',
-    {
-      fields: ['url']
-    },
-    'url',
-    true
-  )
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: 'blocking' } will server-render pages
-  // on-demand if the path doesn't exist.
-  return {
-    paths: paths.filter((item) => item.params.slug.join('/') !== 'ai'),
-    fallback: 'blocking'
-  }
+  return { paths: [], fallback: 'blocking' }
 }
 
 export default function RichContentPage({
