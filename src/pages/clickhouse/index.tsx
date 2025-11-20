@@ -6,6 +6,7 @@ import diagram1part3 from './assets/diagram-1-part-3.svg'
 import diagram1part4 from './assets/diagram-1-part-4.svg'
 import diagram3base from './assets/diagram-3-base.svg'
 import diagram3node from './assets/diagram-3-node.svg'
+import diagram5inserts from './assets/diagram-5-inserts.svg'
 import heroTerminal from './assets/hero-terminal.svg'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
@@ -671,13 +672,37 @@ export default function ClickHouseServerPage({
               },
               {
                 handle: 'Blazing fast queries and inserts',
-                content: `![](${imagePrimaryIndex.src})
-
-ClickHouse uses a sparse primary index - just a few megabytes per terabyte - scaling effortlessly while pruning data quickly. Query caches, advanced skip indices accelerating performance further. Inserts are equally fast, streamed row by row or in batches, with writes optimized through part sorting and separation of reads and writes, delivering throughput without slowing queries.
-
-![](${imageVectorizedEngine.src})
-
-A parallelized, vectorized engine filters and aggregates data at speed across a single server or hundreds of nodes thanks to partial states, support for sharding and shared processing across replicas.`
+                content: (
+                  <div className='w-full space-y-4'>
+                    <Image
+                      src={imagePrimaryIndex}
+                      width={1376 / 2}
+                      height={532 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse uses a sparse primary index - just a few
+                      megabytes per terabyte - scaling effortlessly while
+                      pruning data quickly. Query caches, advanced skip indices
+                      accelerating performance further. Inserts are equally
+                      fast, streamed row by row or in batches, with writes
+                      optimized through part sorting and separation of reads and
+                      writes, delivering throughput without slowing queries.
+                    </p>
+                    <Image
+                      src={imageVectorizedEngine}
+                      width={1376 / 2}
+                      height={798 / 2}
+                      alt=''
+                    />
+                    <p>
+                      A parallelized, vectorized engine filters and aggregates
+                      data at speed across a single server or hundreds of nodes
+                      thanks to partial states, support for sharding and shared
+                      processing across replicas.
+                    </p>
+                  </div>
+                )
               },
               {
                 handle: 'Infinitely scalable for Petabyte workloads',
@@ -747,31 +772,84 @@ A parallelized, vectorized engine filters and aggregates data at speed across a 
               },
               {
                 handle: 'Powerful data operations',
-                content: `![](${imageDataTransformations.src})
-
-ClickHouse offers advanced features to manipulate, filter, and transform data efficiently. Materialized views can be refreshable or incremental, with incremental views shifting compute from query time to insert time and dramatically accelerating repeated queries. 
-
-Projections allow data to be sorted in multiple ways, optimizing for frequent access patterns.
-
-![](${imageJsonSupport.src})
-
-ClickHouse supports schema on write with JSON support, semi-structured data can be ingested safely without schema explosion, combining flexibility with the full power of a columnar database.
-
-![](${imageLightweightUpdates.src})
-
-ClickHouse breaks past traditional OLAP limitations with full support for lightweight updates and deletes through patched parts providing both flexibility and support for complex compliance requirements. `
+                content: (
+                  <div className='w-full space-y-4'>
+                    <DiagramFive />
+                    <p>
+                      ClickHouse offers advanced features to manipulate, filter,
+                      and transform data efficiently. Materialized views can be
+                      refreshable or incremental, with incremental views
+                      shifting compute from query time to insert time and
+                      dramatically accelerating repeated queries.
+                    </p>
+                    <p>
+                      Projections allow data to be sorted in multiple ways,
+                      optimizing for frequent access patterns.
+                    </p>
+                    <Image
+                      src={imageJsonSupport}
+                      width={1376 / 2}
+                      height={408 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse supports schema on write with JSON support,
+                      semi-structured data can be ingested safely without schema
+                      explosion, combining flexibility with the full power of a
+                      columnar database.
+                    </p>
+                    <Image
+                      src={imageLightweightUpdates}
+                      width={1376 / 2}
+                      height={833 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse breaks past traditional OLAP limitations with
+                      full support for lightweight updates and deletes through
+                      patched parts providing both flexibility and support for
+                      complex compliance requirements.
+                    </p>
+                  </div>
+                )
               },
               {
                 handle: 'Ease of use and interoperability',
-                content: `![](${imageSqlSupport.src})
-
-ClickHouse is a full database engine with complete SQL support, including joins, and an optimizer that can reorder joins globally and leverage column statistics automatically. It extends standard SQL with 100s of analytical functions, making complex aggregations and filters simpler and more expressive.
-
-![](${imageInteroperability.src})
-
-With support for 70+ file formats for ingestion and output, ClickHouse delivers unmatched interoperability. 
-
-The ability to read and write open table and lake formats such as Parquet, Iceberg, and Delta, with catalog integrations like AWS Glue and Unity making them seamless to query - bringing the performance of ClickHouse’s query engine to your data lake.`
+                content: (
+                  <div className='w-full space-y-4'>
+                    <Image
+                      src={imageSqlSupport}
+                      width={1376 / 2}
+                      height={480 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse is a full database engine with complete SQL
+                      support, including joins, and an optimizer that can
+                      reorder joins globally and leverage column statistics
+                      automatically. It extends standard SQL with 100s of
+                      analytical functions, making complex aggregations and
+                      filters simpler and more expressive.
+                    </p>
+                    <Image
+                      src={imageInteroperability}
+                      width={1376 / 2}
+                      height={666 / 2}
+                      alt=''
+                    />
+                    <p>
+                      With support for 70+ file formats for ingestion and
+                      output, ClickHouse delivers unmatched interoperability.
+                    </p>
+                    <p>
+                      The ability to read and write open table and lake formats
+                      such as Parquet, Iceberg, and Delta, with catalog
+                      integrations like AWS Glue and Unity making them seamless
+                      to query - bringing the performance of ClickHouse’s query
+                      engine to your data lake.
+                    </p>
+                  </div>
+                )
               }
             ]}
           />
@@ -1255,6 +1333,16 @@ function DiagramThree() {
           alt=''
           className='mt-auto h-auto w-full max-w-none'
         />
+      </div>
+    </ScaleToContainer>
+  )
+}
+
+function DiagramFive() {
+  return (
+    <ScaleToContainer>
+      <div className='relative flex h-[541px] w-[688px] flex-col rounded-lg border border-neutral-700/80 bg-gradient-to-tr from-black/30 to-black/0 p-6'>
+        <Image src={diagram5inserts} width={213} height={90} alt='' />
       </div>
     </ScaleToContainer>
   )
