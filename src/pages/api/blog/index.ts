@@ -121,7 +121,7 @@ export async function fetchBlogs({
               $containsi: search
             }
           }
-        },
+        }
       ]
     })
   }
@@ -142,7 +142,12 @@ export async function fetchBlogs({
       search,
       category
     },
-    pagination
+    pagination: pagination || {
+      page: 1,
+      pageSize: 1,
+      pageCount: 1,
+      total: 1
+    }
   }
 }
 

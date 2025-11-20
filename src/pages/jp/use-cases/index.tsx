@@ -43,7 +43,10 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
       sort: ['id:DESC'],
       populate: ['quotes', 'quotes.*', 'quotes.logo.*', 'id']
     }
-    const { data: quotes } = await findAll('use-case-quotes', quotesParams)
+    const { data: quotes }: { data: Array<any> } = await findAll(
+      'use-case-quotes',
+      quotesParams
+    )
 
     const firstThreeIds = [3, 14, 9] // Specify the IDs you want to keep at the beginning
     quotes.sort((a, b) => {
