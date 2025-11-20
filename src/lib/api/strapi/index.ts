@@ -164,7 +164,7 @@ export async function getPathsValues(
       }
     }
   })
-  if (pagination.pageCount > pageNumber) {
+  if (pagination && pagination.pageCount > pageNumber) {
     const newPages = await getPathsValues(
       pathName,
       obj,
@@ -195,7 +195,7 @@ export async function fetchAll(
     }
   }
   const { data, pagination } = await findAll(pathName, newParam)
-  if (pageNumber < pagination.pageCount) {
+  if (pagination && pageNumber < pagination.pageCount) {
     const newData = await fetchAll(pathName, params, data, pageNumber + 1)
     list = list.concat(newData)
   } else {
