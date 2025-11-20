@@ -9,7 +9,7 @@ export interface ApiResponse {
       page: number
       pageSize: number
       pageCount: number
-      tota: number
+      total: number
     }
   }
 }
