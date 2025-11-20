@@ -5,6 +5,7 @@ import diagram1part2 from './assets/diagram-1-part-2.svg'
 import diagram1part3 from './assets/diagram-1-part-3.svg'
 import diagram1part4 from './assets/diagram-1-part-4.svg'
 import diagram3base from './assets/diagram-3-base.svg'
+import diagram3node from './assets/diagram-3-node.svg'
 import heroTerminal from './assets/hero-terminal.svg'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
@@ -55,6 +56,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
 import { CommonProps } from '@/types/homepage'
 import { EntryMarketingVideo } from '@/types/strapi'
+import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
@@ -1103,45 +1105,148 @@ function DiagramOne() {
 }
 
 function DiagramThree() {
+  const [stepIndex, setStepIndex] = useState<number>(0)
+  const steps = [
+    {
+      nodes: 1,
+      delay: 1000,
+      scale: true
+    },
+    {
+      nodes: 2,
+      delay: 900,
+      scale: true
+    },
+    {
+      nodes: 3,
+      delay: 800,
+      scale: true
+    },
+    {
+      nodes: 4,
+      delay: 700,
+      scale: true
+    },
+    {
+      nodes: 5,
+      delay: 600,
+      scale: true
+    },
+    {
+      nodes: 6,
+      delay: 500,
+      scale: true
+    },
+    {
+      nodes: 7,
+      delay: 400,
+      scale: true
+    },
+    {
+      nodes: 8,
+      delay: 350,
+      scale: true
+    },
+    {
+      nodes: 9,
+      delay: 300,
+      scale: true
+    },
+    {
+      nodes: 10,
+      delay: 250,
+      scale: true
+    },
+    {
+      nodes: 11,
+      delay: 3000,
+      scale: true
+    },
+    {
+      nodes: 0,
+      delay: 500,
+      scale: false
+    }
+  ]
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setStepIndex((old) => {
+        const newIndex = old + 1
+        return newIndex >= steps.length ? 0 : newIndex
+      })
+    }, steps[stepIndex].delay)
+
+    return () => window.clearTimeout(timer)
+  }, [stepIndex])
+
   return (
     <ScaleToContainer>
       <div className='relative flex h-[402px] w-[688px] flex-col rounded-lg border border-neutral-700/80 bg-gradient-to-tr from-black/30 to-black/0 p-6'>
-        <div className='flex flex-1 gap-2'>
-          <div className='flex basis-full flex-col items-center'>
-            <div className='w-full flex-1 rounded bg-primary-300' />
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='1'
-              height='48'
-              viewBox='0 0 1 48'>
-              <line
-                x1='0.5'
-                x2='0.5'
-                y1='0'
-                y2='48'
-                strokeWidth='1'
-                strokeDasharray='4 4'
-                stroke='#fff'>
-                <animate
-                  attributeName='stroke-dashoffset'
-                  from='0'
-                  to='-8'
-                  dur='1s'
-                  repeatCount='indefinite'
-                />
-              </line>
-            </svg>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='6'
-              viewBox='0 0 3.96 2.27'>
-              <path
-                fill='#fff'
-                d='M1.76 2.2c.1.1.28.1.38 0L3.84.5a.27.27 0 1 0-.37-.38L1.95 1.64.45.12a.27.27 0 0 0-.4.38z'
-              />
-            </svg>
-          </div>
+        <div className='-mx-1 flex flex-1 justify-center'>
+          {Array(Math.max(...steps.map((step) => step.nodes)))
+            .fill(null)
+            .map((_, i) => {
+              const active = steps[stepIndex].nodes > i
+              const width = 100 / steps[stepIndex].nodes
+              const lineSpeed = Math.max(0.1, 1 - 0.1 * stepIndex)
+              const scale = steps[stepIndex].scale
+              return (
+                <motion.div
+                  key={i}
+                  layout={true}
+                  initial={false}
+                  animate={active ? 'open' : 'closed'}
+                  variants={{
+                    closed: scale
+                      ? { opacity: 0, x: -16, width: 0 }
+                      : { opacity: 0, x: 0, width: `${width}%` },
+                    open: { opacity: 1, x: 0, width: `${width}%` }
+                  }}
+                  transition={{ type: 'just', duration: 0.3 }}
+                  className='flex flex-col items-center overflow-hidden'>
+                  <div className='relative w-full flex-1 before:absolute before:inset-x-1 before:inset-y-0 before:block before:rounded before:bg-primary-300'>
+                    <Image
+                      src={diagram3node}
+                      width={32}
+                      height={40}
+                      alt='Node'
+                      className='absolute left-1/2 top-1/2 max-w-none -translate-x-1/2 -translate-y-1/2'
+                    />
+                  </div>
+
+                  {/* Line */}
+                  <svg width='1' height='48' viewBox='0 0 1 48'>
+                    <line
+                      x1='0.5'
+                      x2='0.5'
+                      y1='0'
+                      y2='48'
+                      strokeWidth='1'
+                      strokeDasharray='4 4'
+                      stroke='#fff'>
+                      <animate
+                        attributeName='stroke-dashoffset'
+                        from='0'
+                        to='-8'
+                        dur={`${lineSpeed}s`}
+                        repeatCount='indefinite'
+                      />
+                    </line>
+                  </svg>
+
+                  {/* Arrow */}
+                  <svg width='6' viewBox='0 0 3.96 2.27'>
+                    <path
+                      fill='#fff'
+                      d='M1.76 2.2c.1.1.28.1.38 0L3.84.5a.27.27 0 1 0-.37-.38L1.95 1.64.45.12a.27.27 0 0 0-.4.38z'
+                    />
+                  </svg>
+                </motion.div>
+              )
+            })}
         </div>
+
         <Image
           src={diagram3base}
           width={640}
