@@ -114,8 +114,29 @@ export const getStaticProps: GetStaticProps<PageProps> =
     }
   }
 
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
 export async function getStaticPaths() {
-  return { paths: [], fallback: 'blocking' }
+  const data: Array<Pick<EntryEvent, 'slug'>> = await eventsService.findAll({
+    fields: ['slug'],
+    populate: false,
+    filters: {
+      eventVideoUrl: {
+        $null: true
+      }
+    }
+  })
+
+  // Get the paths we want to pre-render based on posts
+  const paths = data.map((post) => ({
+    params: { slug: post.slug }
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: 'blocking' } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: 'blocking' }
 }
 
 export default function Page({
