@@ -90,7 +90,6 @@
     "@typescript-eslint/typescript-estree": "^8.21.0",
     "autoprefixer": "^10.4.19",
     "cheerio": "^1.1.1",
-    "cross-fetch": "^3.1.5",
     "dotenv": "^16.5.0",
     "eslint": "^9.24.0",
     "eslint-config-next": "^14.2.25",

@@ -1,5 +1,4 @@
 import { LogLevel, WebClient } from '@slack/web-api'
-import fetch from 'cross-fetch'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const SLACK_BOT_TOKEN = process.env.SLACK_TOKEN

@@ -9,33 +9,23 @@ import {
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
-import _fetch from 'cross-fetch'
 import type { NextApiRequest } from 'next'
 import { stringify } from 'qs'
 
-export function fetch(uri: string, init: any = {}) {
-  if (process?.env?.STRAPI_API_KEY) {
-    init.headers = {
-      Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-      ...(init.headers || {})
-    }
-  }
-  return _fetch(uri, init)
-}
+const memoryCache = new Map()
 
 const strapiApiUrl =
   process.env.STRAPI_API_URL ?? 'https://cms.clickhouse-dev.com:1337'
-//process.env.STRAPI_API_URL ?? 'http://localhost:1337'
 const url = `${strapiApiUrl}/api/`
 
-const stagingOnlyFilter =
-  process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
 export function getStagingOnlyFilters(
   fieldName: string = 'StagingOnly'
 ): Array<Record<string, any>> {
+  const filter =
+    process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
   return [
     { [fieldName]: { $null: true } },
-    { [fieldName]: stagingOnlyFilter },
+    { [fieldName]: filter },
     { [fieldName]: { $eq: false } }
   ]
 }
@@ -214,60 +204,9 @@ export async function fetchAll(
   return list
 }
 
-async function convertStrapiObject(element: any) {
-  const newElement =
-    'attributes' in element && 'id' in element
-      ? { id: element.id, ...element.attributes }
-      : element
-  const result: any = {}
-  for (const entry of Object.entries(newElement)) {
-    const field: string = entry[0]
-    const fieldValue: any = entry[1]
-
-    if (Array.isArray(fieldValue)) {
-      result[field] = await Promise.all(fieldValue.map(convertStrapiObject))
-      continue
-    }
-
-    if (typeof fieldValue === 'object' && fieldValue) {
-      if ('data' in fieldValue && Array.isArray(fieldValue.data)) {
-        result[field] = await Promise.all(
-          fieldValue.data.map(convertStrapiObject)
-        )
-        continue
-      }
-      let convertedObj: any = await convertStrapiObject(fieldValue)
-      if ('data' in convertedObj && Object.keys(convertedObj).length === 1) {
-        convertedObj = convertedObj.data
-      }
-
-      result[field] = convertedObj
-      continue
-    }
-
-    result[field] = fieldValue
-  }
-  return result
-}
-
 export async function findAll(pathName: string, params: Record<string, any>) {
-  const newParamString = stringify(params, {
-    encodeValuesOnly: true // prettify URL
-  })
-
-  const response = await fetch(
-    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
-  )
-
-  const { data, meta } = await response.json()
-  const dataList = await Promise.all(
-    data.map(
-      async (item: Record<string, any>): Promise<Record<string, any>> => {
-        const converted = await convertStrapiObject(item)
-        return converted
-      }
-    )
-  )
+  const { data, meta } = await request(pathName, params)
+  const dataList = data.map(cleanStrapiObject)
   return {
     data: dataList,
     pagination: meta.pagination
@@ -275,15 +214,8 @@ export async function findAll(pathName: string, params: Record<string, any>) {
 }
 
 export async function findOne(pathName: string, params: Record<string, any>) {
-  const newParamString = stringify(params, {
-    encodeValuesOnly: true // prettify URL
-  })
-  const response = await fetch(
-    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
-  )
-
-  const { data } = await response.json()
-  return await convertStrapiObject(data)
+  const { data } = await request(pathName, params)
+  return await cleanStrapiObject(data)
 }
 
 export async function findHeader(requestString: string) {
@@ -314,21 +246,14 @@ export async function getPricingV2() {
 }
 
 export async function findImageDetails(imageUrl: string) {
-  const pathName = 'upload/files'
-  const newParamString = stringify(
-    {
-      'filters[url][$eq]': imageUrl
-    },
-    {
-      encodeValuesOnly: true
+  const { data } = await request('upload/files', {
+    filters: {
+      url: {
+        $eq: imageUrl
+      }
     }
-  )
-  const response = await fetch(
-    `${url}${pathName}${newParamString.length > 0 ? `?${newParamString}` : ''}`
-  )
-  const data = await response.json()
-  const imageDetails = data.length > 0 ? data[0] : null
-  return imageDetails
+  })
+  return data.length > 0 ? data[0] : null
 }
 
 class StrapiEntryService<EntryType> {
