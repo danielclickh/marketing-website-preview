@@ -105,7 +105,11 @@ export async function request(
     .update(JSON.stringify({ uri, requestInit }))
     .digest('hex')
 
-  if (memoryCache.has(hash)) {
+  // Only return cached responses in build process
+  if (
+    process.env.NEXT_PHASE === 'phase-production-build' &&
+    memoryCache.has(hash)
+  ) {
     return memoryCache.get(hash)
   }
 
