@@ -47,6 +47,7 @@
     "motion": "^12.12.1",
     "next": "^14.2.26",
     "numeral": "^2.0.6",
+    "p-limit": "^7.2.0",
     "prettier-plugin-organize-imports": "^4.1.0",
     "primereact": "^10.6.4",
     "qs": "^6.11.0",

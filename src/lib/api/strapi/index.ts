@@ -9,8 +9,12 @@ import {
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
+import crypto from 'crypto'
 import type { NextApiRequest } from 'next'
+import pLimit from 'p-limit'
 import { stringify } from 'qs'
+
+const limit = pLimit(5)
 
 const memoryCache = new Map()
 
@@ -83,7 +87,7 @@ export async function request(
   let uri = `${url.replace(/\/$/, '')}/${path.replace(/^\//, '')}`
   if (queryString.length) uri += `?${queryString}`
 
-  const response = await fetch(uri, {
+  const requestInit: RequestInit = {
     // Default options
     next: {
       revalidate: 5
@@ -94,7 +98,18 @@ export async function request(
 
     // Merge options
     ...(options || {})
-  })
+  }
+
+  const hash = crypto
+    .createHash('sha1')
+    .update(JSON.stringify({ uri, requestInit }))
+    .digest('hex')
+
+  if (memoryCache.has(hash)) {
+    return memoryCache.get(hash)
+  }
+
+  const response = await limit(() => fetch(uri, requestInit))
 
   if (!response.ok) {
     throw new Error(
@@ -102,7 +117,11 @@ export async function request(
     )
   }
 
-  return await response.json()
+  const data = await response.json()
+
+  memoryCache.set(hash, data)
+
+  return data
 }
 
 export function cleanStrapiObject(element: any): any {
