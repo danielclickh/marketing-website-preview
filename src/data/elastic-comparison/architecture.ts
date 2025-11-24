@@ -2,7 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Architecture',
-  description: `Elastic is a **distributed search engine** built around **inverted indices and a shard-based architecture**. While effective for full-text search, this design introduces **high storage overhead**, **limited query parallelization,** and **heavy contention** between ingest and query workloads.
+  description: `### How do the Elastic Observability and ClickStack architectures differ?
+  
+Elasticsearch is a **distributed search engine** built around **inverted indices and a shard-based architecture**. While effective for full-text search, this design introduces **high storage overhead**, **limited query parallelization,** and **heavy contention** between ingest and query workloads.
 
 ClickStack is powered by ClickHouse, a database built on a **columnar, shared-nothing architecture** optimized for analytics. It minimizes storage with **advanced compression, parallelizes queries across all available cores,** and **separates storage from compute** in the cloud to deliver fast, efficient observability at scale. Full SQL support unlocks deep data analysis.`,
   rows: [
