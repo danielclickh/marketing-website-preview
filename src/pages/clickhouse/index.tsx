@@ -1342,10 +1342,24 @@ function DiagramFour() {
   const [stepIndex, setStepIndex] = useState<number>(0)
   const [loopCount, setLoopCount] = useState<number>(0)
 
+  const steps = [
+    {
+      delay: 600
+    },
+    {
+      delay: 400
+    },
+    {
+      delay: 600
+    },
+    {
+      delay: 1000
+    }
+  ]
   const highlightRows = [1, 3, 5, 6]
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    const timer = window.setTimeout(() => {
       setStepIndex((old) => {
         const newIndex = old + 1
         if (newIndex >= 4) {
@@ -1358,10 +1372,10 @@ function DiagramFour() {
         }
         return newIndex
       })
-    }, 1000)
+    }, steps[stepIndex].delay)
 
-    return () => window.clearInterval(timer)
-  }, [highlightRows])
+    return () => window.clearTimeout(timer)
+  }, [stepIndex])
 
   const activeRow = highlightRows[loopCount]
 
