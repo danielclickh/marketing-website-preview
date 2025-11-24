@@ -657,6 +657,7 @@ export default function ClickHouseServerPage({
             className='mx-auto w-full max-w-3xl lg:mr-0'
             items={[
               {
+                defaultOpen: true,
                 handle: 'Flexible architecture & columnar storage',
                 content: (
                   <div className='w-full space-y-4'>
