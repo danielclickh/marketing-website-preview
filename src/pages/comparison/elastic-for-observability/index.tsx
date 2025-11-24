@@ -63,7 +63,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'Elastic vs ClickHouse',
+          title: 'Elastic Observability vs ClickStack',
+          description:
+            'Learn why ClickStack outperforms Elastic Observability with 10x faster queries, 4x lower costs, and unified analytics across logs, metrics, and traces at scale.',
           path: '/comparison/elastic-for-observability',
           image: [{ url: '/images/clickhouse-vs-elastic-og.png' }]
         }
@@ -89,6 +91,7 @@ export default function ElasticPage({
           </Breadcrumbs>
           <SuiTitle type='h1' weight='bold'>
             ClickHouse <span className='text-primary-300'>vs</span> Elastic
+            Observability
           </SuiTitle>
           <Image
             src={heroLogos}
