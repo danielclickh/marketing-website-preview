@@ -126,10 +126,7 @@ export default function NavigationSubNavResources() {
               href='/comparison/elastic-for-observability'
               onClick={useGalaxyOnClick('topNav.comparisonsMenu.elasticSelect')}
               className='block w-full'>
-              Elastic{' '}
-              <small className='ml-2 inline-block rounded-sm bg-white/10 px-2 text-white'>
-                For observability
-              </small>
+              Elastic Observability
             </NavigationLink>
           </li>
           <li>
@@ -137,10 +134,7 @@ export default function NavigationSubNavResources() {
               href='/comparison/splunk-for-observability'
               onClick={useGalaxyOnClick('topNav.comparisonsMenu.splunkSelect')}
               className='block w-full'>
-              Splunk{' '}
-              <small className='ml-2 inline-block rounded-sm bg-white/10 px-2 text-white'>
-                For observability
-              </small>
+              Splunk
             </NavigationLink>
           </li>
         </NavigationSubNav>
