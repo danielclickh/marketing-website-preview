@@ -6,7 +6,12 @@ import diagram1part3 from './assets/diagram-1-part-3.svg'
 import diagram1part4 from './assets/diagram-1-part-4.svg'
 import diagram3base from './assets/diagram-3-base.svg'
 import diagram3node from './assets/diagram-3-node.svg'
+import diagram5arrowLeft from './assets/diagram-5-arrow-left.svg'
+import diagram5arrowRight from './assets/diagram-5-arrow-right.svg'
+import diagram5insertsMain from './assets/diagram-5-inserts-main.svg'
+import diagram5insertsMv from './assets/diagram-5-inserts-mv.svg'
 import diagram5inserts from './assets/diagram-5-inserts.svg'
+import diagram5queryIcon from './assets/diagram-5-query-icon.svg'
 import heroTerminal from './assets/hero-terminal.svg'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
@@ -1020,7 +1025,7 @@ function YoutubeCoverFlow({
       <button
         type='button'
         ref={prevRef}
-        className='absolute left-0 top-1/2 z-10 hidden size-12 -translate-y-1/2 items-center justify-center rounded-lg backdrop-blur-lg transition-colors hover:bg-black/10 lg:left-12 lg:flex 2xl:left-0'>
+        className='absolute left-0 top-1/2 z-10 hidden size-12 -translate-y-1/2 items-center justify-center rounded-full backdrop-blur-lg transition-colors hover:bg-black/10 lg:left-12 lg:flex 2xl:left-0'>
         <span className='sr-only'>Prev</span>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -1037,7 +1042,7 @@ function YoutubeCoverFlow({
       <button
         type='button'
         ref={nextRef}
-        className='absolute right-0 top-1/2 z-10 hidden size-12 -translate-y-1/2 items-center justify-center rounded-lg backdrop-blur-lg transition-colors hover:bg-black/10 lg:right-12 lg:flex 2xl:right-0'>
+        className='absolute right-0 top-1/2 z-10 hidden size-12 -translate-y-1/2 items-center justify-center rounded-full backdrop-blur-lg transition-colors hover:bg-black/10 lg:right-12 lg:flex 2xl:right-0'>
         <span className='sr-only'>Next</span>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -1339,10 +1344,218 @@ function DiagramThree() {
 }
 
 function DiagramFive() {
+  const [stepIndex, setStepIndex] = useState<number>(0)
+
+  const steps = [
+    // Main sequence
+    {
+      delay: 1000,
+      arrowLeft: 'opacity-0',
+      arrowRight: 'opacity-0',
+      queryIcon: 'opacity-0',
+      insertsMain: '-translate-y-2 opacity-0',
+      insertsMv: '-translate-y-12 opacity-0',
+      rowsMain: false,
+      rowsMv: false
+    },
+    {
+      delay: 1000,
+      arrowLeft: '',
+      arrowRight: 'opacity-0',
+      queryIcon: 'opacity-0',
+      insertsMain: '-translate-y-2 opacity-0',
+      insertsMv: '-translate-y-12 opacity-0',
+      rowsMain: false,
+      rowsMv: false
+    },
+    {
+      delay: 1000,
+      arrowLeft: '',
+      arrowRight: 'opacity-0',
+      queryIcon: 'opacity-0',
+      insertsMain: '',
+      insertsMv: '-translate-y-12 opacity-0',
+      rowsMain: false,
+      rowsMv: false
+    },
+    {
+      delay: 1000,
+      arrowLeft: '',
+      arrowRight: 'opacity-0',
+      queryIcon: 'opacity-0',
+      insertsMain: 'translate-y-12 opacity-0',
+      insertsMv: '-translate-y-12 opacity-0',
+      rowsMain: true,
+      rowsMv: false
+    },
+
+    // Pause
+    {
+      delay: 1000,
+      arrowLeft: 'opacity-0',
+      arrowRight: 'opacity-0',
+      queryIcon: 'opacity-0',
+      insertsMain: 'translate-y-12 opacity-0',
+      insertsMv: '-translate-y-12 opacity-0',
+      rowsMain: true,
+      rowsMv: false
+    },
+
+    // Material view sequence
+    {
+      delay: 1000,
+      arrowLeft: 'opacity-0',
+      arrowRight: '',
+      queryIcon: '',
+      insertsMain: 'translate-y-12 opacity-0',
+      insertsMv: '-translate-y-12 opacity-0',
+      rowsMain: true,
+      rowsMv: false
+    },
+    {
+      delay: 1000,
+      arrowLeft: 'opacity-0',
+      arrowRight: '',
+      queryIcon: '',
+      insertsMain: 'translate-y-12 opacity-0',
+      insertsMv: '',
+      rowsMain: true,
+      rowsMv: false
+    },
+    {
+      delay: 2000,
+      arrowLeft: 'opacity-0',
+      arrowRight: '',
+      queryIcon: '',
+      insertsMain: 'translate-y-12 opacity-0',
+      insertsMv: 'translate-y-12 opacity-0',
+      rowsMain: true,
+      rowsMv: true
+    }
+  ]
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setStepIndex((old) => {
+        const newIndex = old + 1
+        return newIndex >= steps.length ? 0 : newIndex
+      })
+    }, steps[stepIndex].delay)
+
+    return () => window.clearTimeout(timer)
+  }, [stepIndex])
+
+  const activeStep = steps[stepIndex]
+
   return (
     <ScaleToContainer>
-      <div className='relative flex h-[541px] w-[688px] flex-col rounded-lg border border-neutral-700/80 bg-gradient-to-tr from-black/30 to-black/0 p-6'>
-        <Image src={diagram5inserts} width={213} height={90} alt='' />
+      <div className='relative flex h-[608px] w-[688px] flex-col rounded-lg border border-neutral-700/80 bg-gradient-to-tr from-black/30 to-black/0'>
+        <div className='grid w-full grid-cols-1 grid-rows-1 pt-6'>
+          <Image
+            src={diagram5inserts}
+            width={688}
+            height={195}
+            alt=''
+            className='col-start-1 row-start-1'
+          />
+          <Image
+            src={diagram5arrowLeft}
+            width={688}
+            height={195}
+            alt=''
+            className={`col-start-1 row-start-1 transition duration-500 ${activeStep?.arrowLeft || ''}`}
+          />
+          <Image
+            src={diagram5arrowRight}
+            width={688}
+            height={195}
+            alt=''
+            className={`col-start-1 row-start-1 transition duration-500 ${activeStep?.arrowRight || ''}`}
+          />
+          <Image
+            src={diagram5queryIcon}
+            width={688}
+            height={195}
+            alt=''
+            className={`col-start-1 row-start-1 transition duration-500 ${activeStep?.queryIcon || ''}`}
+          />
+          <Image
+            src={diagram5insertsMain}
+            width={688}
+            height={195}
+            alt=''
+            className={`col-start-1 row-start-1 transition duration-500 ${activeStep?.insertsMain || ''}`}
+          />
+          <Image
+            src={diagram5insertsMv}
+            width={688}
+            height={195}
+            alt=''
+            className={`col-start-1 row-start-1 transition duration-500 ${activeStep?.insertsMv || ''}`}
+          />
+        </div>
+        <div className='relative z-10 flex items-start gap-12 p-6 pt-0'>
+          <div className='flex w-full flex-1 flex-col space-y-0.5 rounded border border-neutral-700 bg-neutral-750 p-4 text-center shadow'>
+            <strong>Main table</strong>
+            <p>...</p>
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <p>...</p>
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <p>...</p>
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <AnimatePresence>
+              {activeStep.rowsMain &&
+                Array(5)
+                  .fill(null)
+                  .map((_, i) => {
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: 12, marginTop: 2 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className='rounded-sm bg-primary-300'
+                      />
+                    )
+                  })}
+            </AnimatePresence>
+            <p>...</p>
+            <p className='text-right uppercase text-primary-400'>PB</p>
+          </div>
+          <div className='flex w-full flex-1 flex-col space-y-0.5 rounded border border-neutral-700 bg-neutral-750 p-4 text-center shadow'>
+            <strong>Materialized View</strong>
+            <p>...</p>
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <p>...</p>
+            <div className='h-3 rounded-sm bg-primary-300' />
+            <AnimatePresence>
+              {activeStep.rowsMv &&
+                Array(2)
+                  .fill(null)
+                  .map((_, i) => {
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: 12, marginTop: 2 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className='rounded-sm bg-primary-300'
+                      />
+                    )
+                  })}
+            </AnimatePresence>
+            <p>...</p>
+            <p className='text-right uppercase text-primary-400'>GB</p>
+          </div>
+        </div>
       </div>
     </ScaleToContainer>
   )
