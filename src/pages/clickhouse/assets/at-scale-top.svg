@@ -1,1 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="317" height="240" fill="none" viewBox="0 0 317 240"><path fill="#faff69" stroke="#1f1f1c" stroke-width="1.5" d="M113.5.75h90a11.75 11.75 0 0 1 11.75 11.75v66.25h8.25a1.75 1.75 0 0 1 1.75 1.75v7a11.75 11.75 0 0 1-11.75 11.75h-110A11.75 11.75 0 0 1 91.75 87.5v-7a1.75 1.75 0 0 1 1.75-1.75h8.25V12.5A11.75 11.75 0 0 1 113.5.75ZM95.25 87.5a8.25 8.25 0 0 0 8.25 8.25h110a8.25 8.25 0 0 0 8.25-8.25v-5.25H95.25zM113.5 4.25a8.25 8.25 0 0 0-8.25 8.25v66.25h106.5V12.5a8.25 8.25 0 0 0-8.25-8.25zm35 6.5h20a1.75 1.75 0 0 1 0 3.5h-20a1.75 1.75 0 0 1 0-3.5Z"/><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M170 36.82c0 2.21-5.37 4-12 4s-12-1.79-12-4m24 0c0-2.2-5.37-4-12-4s-12 1.8-12 4m24 0v4m-24-4V55.5q0 .97 1.33 1.84a12 12 0 0 0 3.72 1.44c1.57.37 3.38.6 5.29.7 1.9.08 3.85.02 5.66-.2m8-13.12-4 6.67h5.33l-4 6.67M146 46.15q.01.95 1.28 1.8c.84.56 2.06 1.04 3.56 1.41s3.25.62 5.09.73 3.73.07 5.52-.1"/><g clip-path="url(#a)" opacity=".7"><mask id="c" width="26" height="57" x="146" y="89" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="url(#b)" d="M146 89.15h26v56h-26z"/></mask><g stroke="#fff" stroke-dasharray="4 4" mask="url(#c)"><path d="M147 88.76v87m8-87v82m8-82v82m8-82.34v87"/></g></g><path stroke="#fff" stroke-width="2" d="m124 152.99 34.5 19.85M124 153l31.68-18.24c1.75-1 3.9-1 5.64 0L193 153m-69 0v22.1c0 1.27.68 2.44 1.78 3.08L158.5 197m0-24.16L193 153m-34.5 19.85V197m34.5-44.01v22.1c0 1.27-.68 2.44-1.78 3.08L158.5 197m27.46-32.99v8.43m-5.63-4.22v8.43"/><g opacity=".7"><mask id="e" width="317" height="54" x="0" y="186" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="url(#d)" d="M0 186.16h317v53H0z"/></mask><g stroke="#fff" stroke-dasharray="4 4" mask="url(#e)"><path d="m157.53 180.86-305.59 149.05m302.08-156.24-305.59 149.05m312.04-141.98 305.59 149.05M163.98 173.55 469.57 322.6"/></g></g><defs><linearGradient id="b" x1="159" x2="159" y1="89.15" y2="145.16" gradientUnits="userSpaceOnUse"><stop offset=".2" stop-opacity="0"/><stop offset=".45"/><stop offset=".55"/><stop offset=".8" stop-opacity="0"/></linearGradient><linearGradient id="d" x1="158.5" x2="158.5" y1="186.16" y2="239.16" gradientUnits="userSpaceOnUse"><stop offset=".1" stop-opacity="0"/><stop offset=".35"/><stop offset=".75"/><stop offset="1" stop-opacity="0"/></linearGradient><clipPath id="a"><path fill="#fff" d="M145.5 89h26v56h-26z"/></clipPath></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="317" height="240" fill="none" viewBox="0 0 317 240">
+    <path fill="#faff69" stroke="#1f1f1c" stroke-width="1.5" d="M113.5.75h90a11.75 11.75 0 0 1 11.75 11.75v66.25h8.25a1.75 1.75 0 0 1 1.75 1.75v7a11.75 11.75 0 0 1-11.75 11.75h-110A11.75 11.75 0 0 1 91.75 87.5v-7a1.75 1.75 0 0 1 1.75-1.75h8.25V12.5A11.75 11.75 0 0 1 113.5.75ZM95.25 87.5a8.25 8.25 0 0 0 8.25 8.25h110a8.25 8.25 0 0 0 8.25-8.25v-5.25H95.25zM113.5 4.25a8.25 8.25 0 0 0-8.25 8.25v66.25h106.5V12.5a8.25 8.25 0 0 0-8.25-8.25zm35 6.5h20a1.75 1.75 0 0 1 0 3.5h-20a1.75 1.75 0 0 1 0-3.5Z"/>
+    <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M170 36.82c0 2.21-5.37 4-12 4s-12-1.79-12-4m24 0c0-2.2-5.37-4-12-4s-12 1.8-12 4m24 0v4m-24-4V55.5q0 .97 1.33 1.84a12 12 0 0 0 3.72 1.44c1.57.37 3.38.6 5.29.7 1.9.08 3.85.02 5.66-.2m8-13.12-4 6.67h5.33l-4 6.67M146 46.15q.01.95 1.28 1.8c.84.56 2.06 1.04 3.56 1.41s3.25.62 5.09.73 3.73.07 5.52-.1"/>
+    <g clip-path="url(#a)" opacity=".7">
+        <mask id="c" width="26" height="57" x="146" y="89" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+            <path fill="url(#b)" d="M146 89.15h26v56h-26z"/>
+        </mask>
+        <g stroke="#fff" stroke-dasharray="4 4" mask="url(#c)">
+            <path d="M147 88.76v87m8-87v82m8-82v82m8-82.34v87"/>
+            <animate attributeName='stroke-dashoffset' from='0' to='-8' dur='1s' repeatCount='indefinite' />
+        </g>
+    </g>
+    <path stroke="#fff" stroke-width="2" d="m124 152.99 34.5 19.85M124 153l31.68-18.24c1.75-1 3.9-1 5.64 0L193 153m-69 0v22.1c0 1.27.68 2.44 1.78 3.08L158.5 197m0-24.16L193 153m-34.5 19.85V197m34.5-44.01v22.1c0 1.27-.68 2.44-1.78 3.08L158.5 197m27.46-32.99v8.43m-5.63-4.22v8.43"/>
+    <g opacity=".7">
+        <mask id="e" width="317" height="54" x="0" y="186" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+            <path fill="url(#d)" d="M0 186.16h317v53H0z"/>
+        </mask>
+        <g stroke="#fff" stroke-dasharray="4 4" mask="url(#e)">
+            <path d="m157.53 180.86-305.59 149.05m302.08-156.24-305.59 149.05m312.04-141.98 305.59 149.05M163.98 173.55 469.57 322.6"/>
+            <animate attributeName='stroke-dashoffset' from='0' to='-8' dur='1s' repeatCount='indefinite' />
+        </g>
+    </g>
+    <defs>
+        <linearGradient id="b" x1="159" x2="159" y1="89.15" y2="145.16" gradientUnits="userSpaceOnUse">
+            <stop offset=".2" stop-opacity="0"/>
+            <stop offset=".45"/>
+            <stop offset=".55"/>
+            <stop offset=".8" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="d" x1="158.5" x2="158.5" y1="186.16" y2="239.16" gradientUnits="userSpaceOnUse">
+            <stop offset=".1" stop-opacity="0"/>
+            <stop offset=".35"/>
+            <stop offset=".75"/>
+            <stop offset="1" stop-opacity="0"/>
+        </linearGradient>
+        <clipPath id="a">
+            <path fill="#fff" d="M145.5 89h26v56h-26z"/>
+        </clipPath>
+    </defs>
+</svg>

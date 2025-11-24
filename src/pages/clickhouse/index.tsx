@@ -525,35 +525,41 @@ export default function ClickHouseServerPage({
       )}
 
       {/* At scale */}
-      <section className='section-container mt-16 lg:mt-24'>
-        <Image
-          src={atScaleTop}
-          width={317}
-          height={240}
-          alt=''
-          className='mx-auto'
-        />
-        <div className='mx-auto max-w-4xl space-y-6 text-center'>
-          <SuiTitle type='h2'>
-            From your laptop to quadrillion scale and beyond
-          </SuiTitle>
-          <p className='text-neutral-200'>
-            Start in-process with Python on your laptop (CHDB), exploring
-            millions of rows.
-          </p>
-          <p className='text-neutral-200'>
-            Scale the same single-binary engine on your laptop to billions,
-            expand to trillions on a server, and then out to hundreds of nodes
-            for quadrillions.
-          </p>
+      <section className='mt-16 overflow-hidden lg:mt-24'>
+        <div className='relative mx-auto h-[120px] w-full max-w-[158px] overflow-hidden md:h-[240px] md:max-w-[317px]'>
+          <Image
+            src={atScaleTop}
+            width={317}
+            height={240}
+            alt=''
+            className='absolute inset-y-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2'
+          />
         </div>
-        <Image
-          src={atScaleBottom}
-          width={974}
-          height={487}
-          alt=''
-          className='mx-auto'
-        />
+        <div className='section-container'>
+          <div className='mx-auto max-w-4xl space-y-6 text-center'>
+            <SuiTitle type='h2'>
+              From your laptop to quadrillion scale and beyond
+            </SuiTitle>
+            <p className='text-neutral-200'>
+              Start in-process with Python on your laptop (CHDB), exploring
+              millions of rows.
+            </p>
+            <p className='text-neutral-200'>
+              Scale the same single-binary engine on your laptop to billions,
+              expand to trillions on a server, and then out to hundreds of nodes
+              for quadrillions.
+            </p>
+          </div>
+        </div>
+        <div className='relative mx-auto h-[243px] w-full max-w-[487px] overflow-hidden md:h-[487px] md:max-w-[974px]'>
+          <Image
+            src={atScaleBottom}
+            width={974}
+            height={487}
+            alt=''
+            className='absolute inset-y-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2'
+          />
+        </div>
       </section>
 
       {/* Videos */}
