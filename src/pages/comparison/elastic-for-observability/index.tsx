@@ -89,11 +89,11 @@ export default function ElasticPage({
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
-          <Breadcrumbs>
+          <Breadcrumbs className='justify-center lg:justify-start'>
             <Breadcrumbs.Item>Comparisons</Breadcrumbs.Item>
             <Breadcrumbs.Item>Observability</Breadcrumbs.Item>
           </Breadcrumbs>
-          <SuiTitle type='h1' weight='bold'>
+          <SuiTitle type='h1' weight='bold' className='md:!text-5xl'>
             ClickHouse <span className='text-primary-300'>vs</span> Elastic
             Observability
           </SuiTitle>
