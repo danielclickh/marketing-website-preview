@@ -679,12 +679,7 @@ export default function ClickHouseServerPage({
                 handle: 'Blazing fast queries and inserts',
                 content: (
                   <div className='w-full space-y-4'>
-                    <Image
-                      src={imagePrimaryIndex}
-                      width={1376 / 2}
-                      height={532 / 2}
-                      alt=''
-                    />
+                    <DiagramFour />
                     <p>
                       ClickHouse uses a sparse primary index - just a few
                       megabytes per terabyte - scaling effortlessly while
@@ -1343,6 +1338,107 @@ function DiagramThree() {
   )
 }
 
+function DiagramFour() {
+  const [stepIndex, setStepIndex] = useState<number>(0)
+  const [loopCount, setLoopCount] = useState<number>(0)
+
+  const highlightRows = [1, 3, 5, 6]
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setStepIndex((old) => {
+        const newIndex = old + 1
+        if (newIndex >= 4) {
+          setLoopCount((oldLoop) => {
+            const newLoop = oldLoop + 1
+            if (newLoop >= highlightRows.length) return 0
+            return newLoop
+          })
+          return 0
+        }
+        return newIndex
+      })
+    }, 1000)
+
+    return () => window.clearInterval(timer)
+  }, [highlightRows])
+
+  const activeRow = highlightRows[loopCount]
+
+  return (
+    <ScaleToContainer>
+      <div className='relative flex h-[266px] w-[688px] items-center gap-2 rounded-lg border border-neutral-700/80 bg-gradient-to-tr from-black/30 to-black/0 px-6'>
+        <div className='flex-1 basis-0 rounded border border-neutral-600 bg-neutral-725 py-5 text-center'>
+          <strong className='text-xs'>Query</strong>
+        </div>
+        <div className='relative overflow-hidden'>
+          <div
+            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary-300 duration-1000 ${stepIndex === 0 ? 'left-full translate-x-2 transition-all' : 'left-0 -translate-x-2 transition-none'}`}
+          />
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='41'
+            height='8'
+            fill='none'
+            viewBox='0 0 41 8'>
+            <path
+              fill='#fff'
+              d='M40.38 4.29c.2-.21.2-.55 0-.75L36.99.16a.53.53 0 1 0-.75.75l3 3-3 3a.53.53 0 1 0 .75.76zM40 3.9v-.53h-1.11v1.06H40zm-3.33 0v-.53h-2.23v1.06h2.23zm-4.45 0v-.53H30v1.06h2.22zm-4.44 0v-.53h-2.22v1.06h2.22zm-4.45 0v-.53h-2.22v1.06h2.22zm-4.44 0v-.53h-2.22v1.06h2.22zm-4.45 0v-.53h-2.22v1.06h2.22zM10 3.9v-.53H7.78v1.06H10zm-4.44 0v-.53H3.33v1.06h2.23zm-4.45 0v-.53H0v1.06h1.11z'
+            />
+          </svg>
+        </div>
+        <div className='flex flex-1 basis-0 flex-col gap-1 rounded border border-dashed border-neutral-600 p-2.5 text-center'>
+          {Array(12)
+            .fill(null)
+            .map((_, i) => {
+              const solid = highlightRows.includes(i)
+              const isActive = stepIndex === 1 && i === activeRow
+              return (
+                <div
+                  key={i}
+                  className={`relative h-3 rounded-sm ${solid ? `bg-primary-300 transition-opacity before:absolute before:inset-0 before:block before:bg-primary-300/50 before:blur before:transition-opacity ${isActive ? '' : 'opacity-30 before:opacity-0'}` : 'border border-neutral-600 bg-neutral-750'}`}
+                />
+              )
+            })}
+          <p className='mt-1.5 text-[0.625rem]'>
+            Sparse primary index in memory
+          </p>
+        </div>
+        <div className='relative overflow-hidden'>
+          <div
+            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary-300 duration-1000 ${stepIndex === 2 ? 'left-full translate-x-2 transition-all' : 'left-0 -translate-x-2 transition-none'}`}
+          />
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='41'
+            height='8'
+            fill='none'
+            viewBox='0 0 41 8'>
+            <path
+              fill='#fff'
+              d='M40.38 4.29c.2-.21.2-.55 0-.75L36.99.16a.53.53 0 1 0-.75.75l3 3-3 3a.53.53 0 1 0 .75.76zM40 3.9v-.53h-1.11v1.06H40zm-3.33 0v-.53h-2.23v1.06h2.23zm-4.45 0v-.53H30v1.06h2.22zm-4.44 0v-.53h-2.22v1.06h2.22zm-4.45 0v-.53h-2.22v1.06h2.22zm-4.44 0v-.53h-2.22v1.06h2.22zm-4.45 0v-.53h-2.22v1.06h2.22zM10 3.9v-.53H7.78v1.06H10zm-4.44 0v-.53H3.33v1.06h2.23zm-4.45 0v-.53H0v1.06h1.11z'
+            />
+          </svg>
+        </div>
+        <div className='flex flex-1 basis-0 flex-col gap-1.5'>
+          {Array(7)
+            .fill(null)
+            .map((_, i) => {
+              const solid = highlightRows.includes(i)
+              const isActive = stepIndex === 3 && i === activeRow
+              return (
+                <div
+                  key={i}
+                  className={`relative h-7 overflow-hidden rounded-sm ${solid ? `bg-primary-300/30 before:absolute before:inset-y-0 before:left-0 before:block before:w-20 before:-translate-x-24 before:-skew-x-12 before:bg-primary-300 before:duration-700 ${isActive ? 'before:left-full before:!translate-x-20 before:transition-all' : 'before:transition-none'}` : 'border border-neutral-600 bg-neutral-750'}`}
+                />
+              )
+            })}
+        </div>
+      </div>
+    </ScaleToContainer>
+  )
+}
+
 function DiagramFive() {
   const [stepIndex, setStepIndex] = useState<number>(0)
 
@@ -1520,7 +1616,7 @@ function DiagramFive() {
                         initial={{ opacity: 0, height: 0, marginTop: 0 }}
                         animate={{ opacity: 1, height: 12, marginTop: 2 }}
                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.5 }}
                         className='rounded-sm bg-primary-300'
                       />
                     )
@@ -1546,7 +1642,7 @@ function DiagramFive() {
                         initial={{ opacity: 0, height: 0, marginTop: 0 }}
                         animate={{ opacity: 1, height: 12, marginTop: 2 }}
                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.5 }}
                         className='rounded-sm bg-primary-300'
                       />
                     )
