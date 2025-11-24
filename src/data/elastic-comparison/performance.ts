@@ -2,7 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Performance',
-  description: `ClickStack, built on ClickHouse, is engineered for speed. Its **vectorized engine**, **columnar compression**, and efficient memory use deliver **sub-second aggregations on high-cardinality data at petabyte scale** - critical for observability workloads. Elastic, **designed for search**, struggles with analytics: aggregations are slow at scale, term aggregations approximate, and indexing competes with queries for resources in open-source.
+  description: `### How do Elastic Observability and ClickStack performance compare?
+
+ClickStack, built on ClickHouse, is engineered for speed. Its **vectorized engine**, **columnar compression**, and efficient memory use deliver **sub-second aggregations on high-cardinality data at petabyte scale** - critical for observability workloads. Elasticsearch, **designed for search**, struggles with analytics: aggregations are slow at scale, term aggregations approximate, and indexing competes with queries for resources in open-source.
 
 [Benchmarks](/blog/json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql) and [user reports](/videos/netflix-july-1) show ClickHouse outperforming Elasticsearch by 1**0–100x on analytics** with at least **2x better compression**. Without tuning or schema changes, it handles complex aggregations and joins across billions of rows at a fraction of the time and cost.`,
   rows: [

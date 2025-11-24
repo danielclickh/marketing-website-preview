@@ -2,7 +2,9 @@ import { Table } from './index'
 
 export default {
   name: 'Scalability',
-  description: `Elastic’s scalability is constrained by shards and the JVM, built for terabyte workloads. Shards are **size-limited**, queries parallelize only within shard boundaries, and **JVM heap caps (~64GB) force horizontal sprawl**. This drives **network overhead**, **costly rebalances** on outages, and resource contention between ingest and queries, often pushing users to sample data.
+  description: `### How do Elastic Observability and ClickStack scale?
+
+Elasticsearch’s scalability is constrained by shards and the JVM, built for terabyte workloads. Shards are **size-limited**, queries parallelize only within shard boundaries, and **JVM heap caps (~64GB) force horizontal sprawl**. This drives **network overhead**, **costly rebalances** on outages, and resource contention between ingest and queries, often pushing users to sample data.
 
 ClickStack, powered by ClickHouse, scales to petabytes. Queries parallelize across all cores without JVM limits, and vertical scaling reduces reliance on shards. In ClickHouse Cloud, compute and storage scale independently, all nodes share a single S3 copy for cost-efficient retention, and reads/writes can be isolated with elastic warehouses.`,
   rows: [

@@ -78,7 +78,9 @@ export default function ComparisonTable({
                   ? 'rounded-lg border-2 border-primary-300 p-6 shadow-noOffset-sm shadow-primary-300/40'
                   : ''
               }>
-              <h3 className='mb-6 text-xl font-semibold'>{column.heading}</h3>
+              <span className='mb-6 block text-xl font-semibold'>
+                {column.heading}
+              </span>
               <ul>
                 {rows.map(({ heading, values, hidden }, rowIndex) => {
                   return (
