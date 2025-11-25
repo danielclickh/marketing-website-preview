@@ -626,10 +626,10 @@ export default function ClickHouseServerPage({
             '--top-side': '224px'
           } as React.CSSProperties
         }>
-        <div className='section-container lg:flex lg:justify-between lg:gap-x-12'>
+        <div className='section-container xl:flex xl:justify-between xl:gap-x-12'>
           {/* Content */}
-          <div className='pb-10 text-center lg:text-left'>
-            <div className='w-full space-y-6 lg:sticky lg:top-32 lg:max-w-md'>
+          <div className='pb-10 text-center xl:text-left'>
+            <div className='w-full space-y-6 xl:sticky xl:top-32 xl:max-w-md'>
               <Image
                 src='/faq-icon.svg'
                 alt='FAQ Icon'
@@ -654,7 +654,7 @@ export default function ClickHouseServerPage({
 
           {/* Accordions */}
           <Accordion
-            className='mx-auto w-full max-w-3xl lg:mr-0'
+            className='mx-auto w-full max-w-3xl xl:mr-0'
             items={[
               {
                 defaultOpen: true,
