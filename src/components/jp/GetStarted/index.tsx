@@ -28,7 +28,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
         </SuiCodeblock>
         <div className='mt-4 text-sm font-medium text-neutral-500'>
           <CUILink
-            href='https://clickhouse.com/docs/en/integrations/sql-clients/clickhouse-client-local'
+            href='/docs/install/windows'
             target='_self'
             className='underline hover:text-neutral-0'
             onClick={useGalaxyOnClick(

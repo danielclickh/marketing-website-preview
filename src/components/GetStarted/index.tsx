@@ -17,7 +17,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             <span className='tilted tilted-yellow'>
               <span className='tilted-content'>ClickHouse</span>
             </span>{' '}
-            in minutes
+            in seconds
           </SuiTitle>
           <div className='mb-8 mt-6 text-center text-neutral-300'>
             Install ClickHouse for MacOS, Linux, and FreeBSD.
@@ -32,7 +32,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
         <div className='mt-4 text-sm font-medium text-neutral-500'>
           Or install for{' '}
           <CUILink
-            href='https://clickhouse.com/docs/en/integrations/sql-clients/clickhouse-client-local'
+            href='/docs/install/windows'
             target='_self'
             prefetch={false}
             className='underline hover:text-neutral-0'
