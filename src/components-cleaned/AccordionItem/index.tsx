@@ -100,7 +100,7 @@ export default function AccordionItem({
           open: { opacity: 1, y: 0, height: 'auto' }
         }}
         transition={{ type: 'spring', bounce: 0, duration: 0.5 }}
-        className='relative z-20 col-start-2'>
+        className='relative z-20 col-start-2 min-w-0'>
         {hasPrefix && (
           <span className='absolute -bottom-0 -left-px -top-4 border-l border-neutral-700/80' />
         )}
