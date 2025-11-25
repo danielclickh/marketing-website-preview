@@ -1,5 +1,6 @@
 import CodeInterpreter from './CodeInterpreter'
 import { DefaultView } from './CodeResults'
+import './highlightjs.scss'
 import { ChartConfig, ChartType } from './types'
 import { base64Decode } from './utils'
 import { CodeBlock } from '@clickhouse/click-ui'

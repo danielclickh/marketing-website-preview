@@ -92,7 +92,6 @@
 }
 
 @tailwind utilities;
-@import 'colors';
 
 html,
 body {
@@ -140,25 +139,6 @@ body {
 
 .feature-container {
   @apply grid grid-cols-1 gap-x-12 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0 lg:grid-cols-3;
-}
-
-.large-feature-container {
-  @apply grid grid-cols-1 gap-x-12 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0;
-}
-
-.feature-icon {
-  @apply flex h-9 w-9 items-center;
-}
-
-.gradient_title {
-  @apply bg-gradient-to-b from-gradientTop to-gradientBottom bg-clip-text text-transparent;
-}
-
-.line-clamp-container p {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
 }
 
 .rich_content {
@@ -304,30 +284,6 @@ body {
   }
 }
 
-.has-tooltip {
-  @apply relative w-fit;
-
-  .tooltip {
-    @apply invisible absolute bottom-0 left-full w-full;
-  }
-
-  &:hover .tooltip {
-    @apply visible z-50;
-  }
-}
-
-#ot-sdk-btn-floating {
-  @apply hidden #{!important};
-}
-
-.video-frame {
-  @apply aspect-video h-auto max-w-full;
-}
-
-.social-count {
-  background: transparent;
-}
-
 .tilted {
   @apply relative whitespace-nowrap;
 
@@ -362,93 +318,6 @@ body {
   &:before {
     @apply bg-slate-900;
   }
-}
-
-@keyframes fade-in-keyframes {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fade-in-animation {
-  @apply opacity-0 transition duration-300;
-  &.active {
-    @apply opacity-100;
-  }
-}
-
-@keyframes typewrite-size {
-  from {
-    background-size: 0 200%;
-  }
-}
-
-@keyframes typewrite-position {
-  50% {
-    background-position:
-      0 -100%,
-      0 0;
-  }
-}
-
-.terminal-type {
-  display: inline;
-  white-space: pre-wrap;
-  color: #0000;
-  background:
-    linear-gradient(-90deg, #ffffff 1ch, #0000 0) 8px 0,
-    linear-gradient(#ffffff 0 0) 0 0;
-  background-size: calc(var(--totalCount) * 1ch) 200%;
-  -webkit-background-clip: padding-box, text;
-  background-clip: padding-box, text;
-  background-repeat: no-repeat;
-  animation:
-    typewrite-position 0.4s infinite steps(1),
-    typewrite-size 2s steps(var(--totalCount)) forwards;
-  &.active {
-    @apply text-neutral-0 transition-colors;
-    .keyword {
-      color: #7a8fa7;
-    }
-    .constant {
-      color: #a48eaf;
-    }
-    .number {
-      color: #c18a61;
-    }
-    .string {
-      color: #b6bd73;
-    }
-    .bracket-level-1 {
-      @apply text-warning-300;
-    }
-    .bracket-level-2 {
-      color: #c875cd;
-    }
-  }
-}
-
-.bg-datawarehouse-run {
-  background: #fbff46;
-  background-image: url('/datawarehouse-run.png');
-}
-
-.bg-grid-lines {
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(
-      to right,
-      rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px,
-      transparent 1px
-    );
 }
 
 // Other triangle classes produce issues on smaller screen widths.
@@ -497,15 +366,6 @@ body {
   }
 }
 
-.clip-inverted-triangle-top {
-  @apply relative;
-  &::before {
-    @apply absolute inset-0 bg-primary-300;
-    clip-path: polygon(50% 14%, 100% 0%, 100% 100%, 0 100%, 0 0%);
-    content: '';
-  }
-}
-
 .clip-inverted-triangle-use-cases {
   @apply relative;
   &::before {
@@ -516,9 +376,6 @@ body {
       clip-path: polygon(50% 6%, 100% 0%, 100% 100%, 0 100%, 0 0%);
     }
   }
-}
-
-.show-copy-paste {
 }
 
 a.arrow-link {
