@@ -10,6 +10,13 @@ export interface TiltedTextProps extends React.HTMLProps<HTMLSpanElement> {
   ref?: React.Ref<HTMLSpanElement>
 }
 
+const mainClasses: Record<Types, string> = {
+  'black-on-yellow': 'flip-selection',
+  'white-on-yellow': 'flip-selection',
+  'white-on-black': '',
+  'yellow-on-black': ''
+}
+
 const textClasses: Record<Types, string> = {
   'black-on-yellow': 'text-neutral-900',
   'white-on-yellow': 'text-white',
@@ -31,7 +38,10 @@ export default function TiltedText({
   ...props
 }: TiltedTextProps) {
   return (
-    <span ref={ref} className={`relative isolate ${className}`} {...props}>
+    <span
+      ref={ref}
+      className={`relative isolate ${mainClasses[type]} ${className}`}
+      {...props}>
       <span
         className={`absolute inset-0 -z-10 -skew-y-3 ${tiltClasses[type]}`}
       />
