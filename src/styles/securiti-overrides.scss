@@ -1,84 +1,126 @@
-//securiti ai cookie
-.cc-message-container * {
-  font-size: 14px !important;
-}
-.cmp-modal {
-  font-weight: normal !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.cmp-modal h1 {
-  @apply font-basier antialiased;
-}
-.atabs__panel {
-  @apply pt-0;
-}
-.cmp-modal__sub-title {
-  @apply font-inter text-sm;
+// Banner
+//
+//
+.cc-theme-edgeless.cc-window.cc-banner {
+  @apply p-4 gap-4 overflow-hidden md:items-center md:py-0.5;
+
+  .cc-message-container {
+    @apply flex-1;
+
+    .cc-message {
+      @apply p-0 m-0 leading-tight text-sm;
+
+      .cc-link {
+        @apply p-0 leading-tight;
+      }
+    }
+  }
+
+  .cc-compliance {
+    @apply gap-x-0.5 gap-y-4 flex flex-wrap md:flex-nowrap;
+
+    .cc-btn + .cc-btn {
+      @apply m-0 #{!important};
+    }
+  }
+
+  .cc-btn, .cc-link {
+    @apply text-sm font-normal;
+  }
+
+  .cc-btn {
+    @apply flex-1 py-3 px-4;
+    @apply hover:bg-white/10 #{!important};
+  }
+
+  .cc-btn.cc-allow,
+  .cc-type-opt-out .cc-btn.cc-dismiss {
+    @apply bg-green-800 hover:bg-green-900 #{!important};
+  }
+
+  .cc-link.cmp-pref-link {
+    @apply m-0 order-first md:order-last md:p-4 #{!important};
+    @apply w-full h-auto;
+  }
 }
 
-.cmp-accordion p {
-  @apply text-sm;
-}
-.cmp-tabs__title {
-  @apply text-2xl font-semibold;
-}
-.cmp-tabs__sub-title {
-  @apply mb-2 text-base capitalize;
-}
-.cmp-accordion__title {
-  @apply text-base text-primary-300;
-}
-.cmp-accordion__sub-title {
-  @apply text-sm;
-}
-.cmp-save-btn {
-  @apply rounded-sm;
-}
-.cmp-modal__footer .cmp-save-btn,
-.cmp-modal__footer .cmp-decline-btn {
-  height: auto !important;
-}
-.cc-message {
-  padding: 15px !important;
-}
-.cc-compliance {
-  color: #fff !important;
-  font-weight: normal !important;
-}
-.cc-btn {
-  font-size: 14px !important;
-  color: #fff !important;
-  font-weight: normal !important;
-  padding: 15px !important;
+// Backdrop
+//
+//
+.cmp-body {
+  @apply bg-neutral-800/60;
 }
 
-.cc-btn.cc-allow,
-.cc-type-opt-out .cc-btn.cc-dismiss {
-  background-color: rgb(23, 103, 54) !important;
-  color: #fff !important;
-  font-weight: normal !important;
-  font-size: 14px !important;
-  border: none !important;
-}
+// Modal
+//
+//
+.cmp-body .cmp-modal {
+  @apply font-normal;
 
-#securitiCmpCookiePrefBtn {
-  font-weight: normal !important;
-  font-size: 14px !important;
-}
+  p {
+    @apply text-neutral-200;
+  }
 
-.cc-btn.cc-allow:hover,
-.cc-type-opt-out .cc-btn.cc-dismiss:hover {
-  background-color: rgb(15, 67, 35) !important;
-}
+  .cmp-modal__sub-title {
+    @apply text-sm;
+  }
 
-.cmp-revoke-consent {
-  position: initial !important;
-  padding: 0 !important;
-}
+  .cmp-tabs__opt-out.active, .cmp-tabs__gpc-message.active {
+    @apply border-none bg-white/5 rounded text-sm;
+  }
 
-@media only screen and (max-width: 750px) {
-  .cc-message {
-    padding: 15px 15px 0 15px !important;
+  // Tabs
+  .cmp-tabs {
+    @apply mt-0;
+    .cmp-tabs__nav {
+      @apply mb-4;
+    }
+  }
+
+  // Header
+  .cmp-modal__header {
+    @apply mb-0;
+
+    .cmp-modal__logo,
+    .cmp-modal__logo img {
+      @apply size-16 min-w-0;
+    }
+
+    .cmp-modal__title {
+      @apply text-2xl;
+    }
+  }
+
+  // Accordion
+  .cmp-accordion > .cmp-accordion__item {
+    @apply border-b border-b-white/10;
+
+    > .cmp-accordion__header {
+      @apply before:transition-colors before:absolute before:pointer-events-none before:inset-y-0 before:-inset-x-4 before:rounded hover:before:bg-white/5;
+
+      a {
+        @apply p-0 hover:underline;
+      }
+      > div {
+        @apply p-0;
+
+        > .cmp-accordion__sub-title {
+          @apply mt-0 p-0;
+        }
+      }
+    }
+
+    > .cmp-accordion__content {
+      @apply px-0;
+    }
+  }
+
+
+  // Footer
+  .cmp-modal__footer {
+    .cmp-btn-wrapper button.cmp-save-btn {
+      @apply rounded text-sm border-none;
+      @apply bg-primary-300 text-primary-900 hover:bg-primary-400 #{!important};
+    }
   }
 }

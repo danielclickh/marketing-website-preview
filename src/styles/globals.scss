@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 @layer utilities {
   .branded-scrollbar {
@@ -387,8 +388,6 @@
     }
   }
 }
-
-@tailwind utilities;
 
 html,
 body {
