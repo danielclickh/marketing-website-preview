@@ -154,7 +154,7 @@ export default function PlayOnClickVideo({
       {/* Player container */}
       <div
         ref={containerRef}
-        className='absolute inset-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
+        className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
       />
     </div>
   )

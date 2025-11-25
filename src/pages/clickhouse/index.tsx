@@ -58,6 +58,7 @@ import { SuiCodeblock, SuiText, SuiTitle } from '@/components/sui'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { marketingVideosService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
 import { CommonProps } from '@/types/homepage'
@@ -512,7 +513,22 @@ export default function ClickHouseServerPage({
                       provider='youtube'
                       id={releaseVideo.VideoID}
                       thumbnail={
-                        <YouTubeThumbnail videoId={releaseVideo.VideoID} />
+                        <div className='relative'>
+                          <small className='pointer-events-none absolute right-3 top-3 font-inconsolata text-sm leading-none text-black'>
+                            {new Date(releaseVideo.VideoDate).toLocaleString(
+                              'en-US',
+                              {
+                                year: 'numeric',
+                                month: 'short',
+                                timeZone: 'UTC'
+                              }
+                            )}
+                          </small>
+                          <YouTubeThumbnail
+                            videoId={releaseVideo.VideoID}
+                            loading='eager'
+                          />
+                        </div>
                       }
                     />
                   )
