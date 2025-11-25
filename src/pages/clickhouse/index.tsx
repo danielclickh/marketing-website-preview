@@ -986,10 +986,21 @@ export default function ClickHouseServerPage({
           />
           <div className='mx-auto max-w-3xl space-y-6 text-center'>
             <p className='text-neutral-700'>
-              We back up our claims with public, reproducible benchmarks like
-              ClickBench and JSONBench. You can explore our results directly and
-              compare ClickHouse against other technologies before deciding how
-              to power your analytics.
+              We back up our claims with public, reproducible benchmarks like{' '}
+              <Link
+                href='https://benchmark.clickhouse.com/'
+                className='underline hover:decoration-2'>
+                ClickBench
+              </Link>{' '}
+              and{' '}
+              <Link
+                href='https://jsonbench.com/'
+                className='underline hover:decoration-2'>
+                JSONBench
+              </Link>
+              . You can explore our results directly and compare ClickHouse
+              against other technologies before deciding how to power your
+              analytics.
             </p>
             <CUIButton
               href='https://benchmark.clickhouse.com/'
