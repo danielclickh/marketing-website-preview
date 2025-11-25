@@ -1362,13 +1362,13 @@ function DiagramFour() {
 
   const steps = [
     {
-      delay: 600
-    },
-    {
       delay: 400
     },
     {
-      delay: 600
+      delay: 300
+    },
+    {
+      delay: 400
     },
     {
       delay: 1000
@@ -1405,7 +1405,7 @@ function DiagramFour() {
         </div>
         <div className='relative overflow-hidden'>
           <div
-            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary-300 duration-1000 ${stepIndex === 0 ? 'left-full translate-x-2 transition-all' : 'left-0 -translate-x-2 transition-none'}`}
+            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary-300 duration-700 ${stepIndex === 0 ? 'left-full translate-x-2 transition-all' : 'left-0 -translate-x-2 transition-none'}`}
           />
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -1438,7 +1438,7 @@ function DiagramFour() {
         </div>
         <div className='relative overflow-hidden'>
           <div
-            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary-300 duration-1000 ${stepIndex === 2 ? 'left-full translate-x-2 transition-all' : 'left-0 -translate-x-2 transition-none'}`}
+            className={`absolute top-1/2 size-2 -translate-y-1/2 rounded-full bg-primary-300 duration-700 ${stepIndex === 2 ? 'left-full translate-x-2 transition-all' : 'left-0 -translate-x-2 transition-none'}`}
           />
           <svg
             xmlns='http://www.w3.org/2000/svg'
