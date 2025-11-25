@@ -151,7 +151,7 @@ export default function Page({
                     <Link
                       target='_blank'
                       className='text-primary-300'
-                      href='https://clickhouse.com/docs/en/migrations/rockset?loc=comparions'
+                      href='/docs/migrations/rockset?loc=comparions'
                       prefetch={false}>
                       how to migrate from Rockset to ClickHouse
                     </Link>

@@ -352,7 +352,7 @@ export default function CloudPage({
                 の最も一般的な使い方を厳選しました。データ取り込み、データ視覚化、言語クライアントのエコシステム統合のライブラリは増え続けています。MySQL
                 インターフェイスのサポートにより、お気に入りの MySQL 互換の
                 <a
-                  href='https://clickhouse.com/docs/en/integrations/data-visualization'
+                  href='/docs/integrations/data-visualization'
                   className='px-1 text-primary-300'>
                   データツール
                 </a>

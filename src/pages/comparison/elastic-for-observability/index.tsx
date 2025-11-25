@@ -173,7 +173,7 @@ export default function ElasticPage({
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
             <Link
-              href={`https://clickhouse.com/docs/use-cases/observability/clickstack/migration/elastic?loc=elastic-comparison-page-hero`}
+              href={`/docs/use-cases/observability/clickstack/migration/elastic?loc=elastic-comparison-page-hero`}
               target='_blank'
               prefetch={false}
               className='text-primary-300 hover:underline'>

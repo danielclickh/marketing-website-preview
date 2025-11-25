@@ -59,7 +59,7 @@ export default function HomepageHeroAlt({
                 type='secondary-dark'
                 weight='semibold'
                 size='lg'
-                href='https://clickhouse.com/docs/en/getting-started/quick-start'
+                href='/docs/getting-started/quick-start'
                 target='_blank'
                 prefetch={false}
                 linkClass='w-full'
@@ -67,7 +67,6 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>{' '}
-
           </div>
         </div>
 

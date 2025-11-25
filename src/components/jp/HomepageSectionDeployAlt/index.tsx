@@ -123,7 +123,7 @@ export default function HomepageSectionDeployAlt({
 
           {/* Local */}
           <Link
-            href='https://clickhouse.com/docs/en/operations/utilities/clickhouse-local'
+            href='/docs/operations/utilities/clickhouse-local'
             target='_blank'
             className='group flex flex-col items-center justify-center gap-6 rounded-lg bg-neutral-750 p-8 text-center text-white'>
             <svg

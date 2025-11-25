@@ -346,7 +346,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/knowledgebase'
+                    href='/docs/knowledgebase'
                     className='font text-primary-300 hover:underline'>
                     Knowledge base
                   </Link>
@@ -401,15 +401,13 @@ function Sitemap({
 
               <ul className='space-y-2'>
                 <li>
-                  <Link
-                    href='https://clickhouse.com/docs'
-                    className='font-semibold hover:underline'>
+                  <Link href='/docs' className='font-semibold hover:underline'>
                     Docs
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/en/install'
+                    href='/docs/install'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Install ClickHouse
@@ -417,7 +415,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/en/cloud-quick-start'
+                    href='/docs/cloud-quick-start'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Cloud quick start
@@ -425,7 +423,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/en/integrations'
+                    href='/docs/integrations'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Integrations
@@ -433,7 +431,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/category/changelog'
+                    href='/docs/category/changelog'
                     className='font text-primary-300 hover:underline'>
                     Changelog
                   </Link>

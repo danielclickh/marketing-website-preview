@@ -366,7 +366,7 @@ export default function CloudPage({
                 the MySQL interface so you can connect to any of your favorite
                 MySQL-compatible{' '}
                 <Link
-                  href='https://clickhouse.com/docs/en/integrations/data-visualization'
+                  href='/docs/integrations/data-visualization'
                   className='text-primary-300'
                   prefetch={false}
                   target='_blank'>

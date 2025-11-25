@@ -195,7 +195,7 @@ export default function BigQueryPage({
           <SuiText className='text-sm'>
             BigQueryからClickHouseへの移行{' '}
             <Link
-              href={`https://clickhouse.com/docs/en/migrations/bigquery?loc=${locTracking}-hero`}
+              href={`/docs/migrations/bigquery?loc=${locTracking}-hero`}
               target='_blank'
               prefetch={false}
               className='text-primary-300 hover:underline'

@@ -214,7 +214,7 @@ export default function PricingPage({
                       <SuiText size='sm'>
                         Or download the forever-free{' '}
                         <LinkWithArrow
-                          href='https://clickhouse.com/docs/en/quick-start'
+                          href='/docs/quick-start'
                           className='text-primary-300 hover:underline'>
                           open source distribution of ClickHouse
                         </LinkWithArrow>
@@ -223,7 +223,7 @@ export default function PricingPage({
                         For more information about our billing and pricing
                         please refer to our{' '}
                         <Link
-                          href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                          href='/docs/manage/billing/#faqs'
                           className='text-primary-300 hover:underline'>
                           Billing & Pricing FAQ
                         </Link>
@@ -266,7 +266,7 @@ export default function PricingPage({
                           For more information about our billing and pricing
                           please refer to our{' '}
                           <Link
-                            href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                            href='/docs/manage/billing/#faqs'
                             className='text-primary-300 hover:underline'>
                             Billing & Pricing FAQ
                           </Link>
@@ -277,7 +277,7 @@ export default function PricingPage({
                       <SuiText size='sm' className='text-center text-slate-300'>
                         Or download the forever-free{' '}
                         <LinkWithArrow
-                          href='https://clickhouse.com/docs/en/quick-start'
+                          href='/docs/quick-start'
                           className='text-primary-300 hover:underline'>
                           open source distribution of ClickHouse
                         </LinkWithArrow>

@@ -70,7 +70,7 @@ export default function GamingDiagramAndAccordion() {
             <p>
               Our extensive library of{' '}
               <Link
-                href='https://clickhouse.com/docs/en/engines/table-engines/mergetree-family'
+                href='/docs/engines/table-engines/mergetree-family'
                 className='text-primary-300 hover:underline'>
                 table engines
               </Link>{' '}
@@ -84,7 +84,7 @@ export default function GamingDiagramAndAccordion() {
               require batching inserts for efficiency, ClickHouse optimizes for
               both high-velocity streaming data and smaller real-time payloads.{' '}
               <Link
-                href='https://clickhouse.com/docs/en/optimize/asynchronous-inserts'
+                href='/docs/optimize/asynchronous-inserts'
                 className='text-primary-300 hover:underline'>
                 Asynchronous inserts
               </Link>{' '}
@@ -113,7 +113,7 @@ export default function GamingDiagramAndAccordion() {
               Data transformations are common pillars in many gaming analytics
               workflows. With ClickHouse,{' '}
               <Link
-                href='https://clickhouse.com/docs/en/guides/developer/cascading-materialized-views'
+                href='/docs/guides/developer/cascading-materialized-views'
                 className='text-primary-300 hover:underline'>
                 Materialized Views
               </Link>{' '}
@@ -225,7 +225,7 @@ export default function GamingDiagramAndAccordion() {
               include popular utilities for data ingestion and visualization, as
               well as language clients, SQL clients,{' '}
               <Link
-                href='https://clickhouse.com/docs/en/integrations'
+                href='/docs/integrations'
                 className='text-primary-300 hover:underline'>
                 and more
               </Link>

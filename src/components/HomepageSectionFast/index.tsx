@@ -58,7 +58,7 @@ export default function HomepageSectionFast({
         <CUIButton
           type='secondary'
           className='group w-auto'
-          href='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
+          href='/docs/concepts/why-clickhouse-is-so-fast'
           prefetch={false}
           iconRight={
             <ChevronRightIcon

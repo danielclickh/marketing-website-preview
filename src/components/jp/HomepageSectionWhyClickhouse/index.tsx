@@ -225,7 +225,7 @@ export default function HomepageSectionWhyClickhouse({
               }
               title={<>リソース最適化</>}
               target='_blank'
-              link='https://clickhouse.com/docs/en/concepts/why-clickhouse-is-so-fast'
+              link='/docs/concepts/why-clickhouse-is-so-fast'
             />
             <FeatureCard
               icon={
@@ -267,7 +267,7 @@ export default function HomepageSectionWhyClickhouse({
                 </svg>
               }
               title={<>100を超えるインテグレーション</>}
-              link='https://clickhouse.com/docs/en/integrations'
+              link='/docs/integrations'
               target='_blank'
             />
           </div>
