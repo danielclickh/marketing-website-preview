@@ -31,7 +31,7 @@ export default function NotFoundPage({
 }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      <div className='section-container flex items-center justify-center gap-16 py-16 lg:min-h-screen lg:py-24'>
+      <div className='section-container flex items-center justify-center gap-16 py-16 lg:py-24 xl:py-36'>
         <CUICard>
           <CUICard.Body className='space-y-4 p-4 lg:space-y-6 lg:p-6'>
             <div className='space-y-4'>
@@ -54,7 +54,7 @@ export default function NotFoundPage({
               </div>
             </div>
             <HRSeparator />
-            <ul className='flex gap-6'>
+            <ul className='flex flex-wrap gap-x-6 gap-y-2'>
               <li>
                 <Link
                   href='https://clickhouse.com/docs'
