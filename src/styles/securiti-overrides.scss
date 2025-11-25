@@ -2,7 +2,7 @@
 //
 //
 .cc-theme-edgeless.cc-window.cc-banner {
-  @apply p-4 gap-4 overflow-hidden md:items-center md:py-0.5;
+  @apply p-4 gap-4 overflow-hidden md:items-center md:py-0.5 bg-neutral-950/90 backdrop-blur-2xl;
 
   .cc-message-container {
     @apply flex-1;
@@ -40,7 +40,11 @@
 
   .cc-link.cmp-pref-link {
     @apply m-0 order-first md:order-last md:p-4 #{!important};
-    @apply w-full h-auto;
+    @apply w-full h-auto leading-none;
+
+    svg {
+      @apply w-auto h-3.5;
+    }
   }
 }
 
@@ -67,6 +71,11 @@
 
   .cmp-tabs__opt-out.active, .cmp-tabs__gpc-message.active {
     @apply border-none bg-white/5 rounded text-sm;
+  }
+
+  // Fixes switch alignment
+  .cmp-switch input:checked + .cmp-switch__slider::after {
+    transform: translateX(31px);
   }
 
   // Tabs
