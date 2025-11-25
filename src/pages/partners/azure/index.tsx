@@ -560,7 +560,7 @@ export default function Page({
                 <p>
                   All supported Azure regions can be found{' '}
                   <Link
-                    href='/docs/cloud/reference/supported-regions#azure-regions'
+                    href='https://clickhouse.com/docs/cloud/reference/supported-regions#azure-regions'
                     className='text-primary-300 hover:underline'>
                     here
                   </Link>

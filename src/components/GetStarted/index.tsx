@@ -30,7 +30,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
         <div className='mt-4 text-sm font-medium text-neutral-500'>
           Or install for{' '}
           <CUILink
-            href='/docs/integrations/sql-clients/clickhouse-client-local'
+            href='https://clickhouse.com/docs/integrations/sql-clients/clickhouse-client-local'
             target='_self'
             prefetch={false}
             className='underline hover:text-neutral-0'
@@ -51,7 +51,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           </CUILink>{' '}
           or see other{' '}
           <CUILink
-            href='/docs/install'
+            href='https://clickhouse.com/docs/install'
             target='_self'
             prefetch={false}
             className='underline hover:text-neutral-0'

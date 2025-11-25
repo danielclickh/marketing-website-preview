@@ -346,7 +346,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='/docs/knowledgebase'
+                    href='https://clickhouse.com/docs/knowledgebase'
                     className='font text-primary-300 hover:underline'>
                     Knowledge base
                   </Link>
@@ -401,13 +401,15 @@ function Sitemap({
 
               <ul className='space-y-2'>
                 <li>
-                  <Link href='/docs' className='font-semibold hover:underline'>
+                  <Link
+                    href='https://clickhouse.com/docs'
+                    className='font-semibold hover:underline'>
                     Docs
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href='/docs/install'
+                    href='https://clickhouse.com/docs/install'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Install ClickHouse
@@ -415,7 +417,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='/docs/cloud-quick-start'
+                    href='https://clickhouse.com/docs/cloud-quick-start'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Cloud quick start
@@ -423,7 +425,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='/docs/integrations'
+                    href='https://clickhouse.com/docs/integrations'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Integrations
@@ -431,7 +433,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='/docs/category/changelog'
+                    href='https://clickhouse.com/docs/category/changelog'
                     className='font text-primary-300 hover:underline'>
                     Changelog
                   </Link>

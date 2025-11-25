@@ -59,7 +59,7 @@ export default function HomepageHeroAlt({
                 type='secondary-dark'
                 weight='semibold'
                 size='lg'
-                href='/docs/getting-started/quick-start'
+                href='https://clickhouse.com/docs/getting-started/quick-start'
                 target='_blank'
                 prefetch={false}
                 linkClass='w-full'

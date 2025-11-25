@@ -249,7 +249,7 @@ export default function HomepageSectionWhyClickhouse({
                   optimized
                 </>
               }
-              link='/docs/concepts/why-clickhouse-is-so-fast'
+              link='https://clickhouse.com/docs/concepts/why-clickhouse-is-so-fast'
               target='_blank'
               prefetch={false}
             />
@@ -304,7 +304,7 @@ export default function HomepageSectionWhyClickhouse({
                   integrations
                 </>
               }
-              link='/docs/integrations'
+              link='https://clickhouse.com/docs/integrations'
               target='_blank'
               prefetch={false}
             />

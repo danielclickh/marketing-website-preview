@@ -89,7 +89,7 @@ export default function FAQ() {
                 ClickHouse supports connectors to many clients and drivers,
                 including common BI and data analysis tools. Please see{' '}
                 <Link
-                  href='/docs/en/integrations'
+                  href='https://clickhouse.com/docs/en/integrations'
                   className='text-primary-300 hover:underline'>
                   this page
                 </Link>{' '}

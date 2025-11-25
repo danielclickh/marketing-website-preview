@@ -80,7 +80,7 @@ const NAV_ITEMS: Array<NavItem> = [
     heading: 'Resources',
     newColumn: true,
     label: 'Documentation',
-    href: '/docs',
+    href: 'https://clickhouse.com/docs',
     galaxyEvent: 'footerNav.resourcesMenu.docsSelect'
   },
   {

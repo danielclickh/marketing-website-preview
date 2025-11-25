@@ -76,7 +76,7 @@ export default function ClickHouseServerPage({
                       type='secondary'
                       weight='semibold'
                       size='lg'
-                      href='/docs/integrations/clickpipes'
+                      href='https://clickhouse.com/docs/integrations/clickpipes'
                       target='_blank'
                       prefetch={false}
                       linkClass='w-full max-w-[14rem]'

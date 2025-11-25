@@ -56,7 +56,7 @@ export default function Navigation({
               {...topLevelEvents}
               label='Docs'
               link={{
-                href: '/docs',
+                href: 'https://clickhouse.com/docs',
                 onClick: useGalaxyOnClick('topNav.navItems.docsSelect'),
                 target: '_blank'
               }}

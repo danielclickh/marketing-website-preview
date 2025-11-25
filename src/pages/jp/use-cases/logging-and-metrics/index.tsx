@@ -280,7 +280,7 @@ export default function ClickHouseServerPage({
                     </li>
                     <li>
                       <Link
-                        href='/docs/knowledgebase/use-clickhouse-for-log-analytics'
+                        href='https://clickhouse.com/docs/knowledgebase/use-clickhouse-for-log-analytics'
                         target='_blank'
                         className='text-primary-300'>
                         Docs: Using ClickHouse for log analytics

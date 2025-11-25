@@ -217,7 +217,7 @@ export default function PricingPage({
                       <SuiText size='sm'>
                         またはいつまでも無料の
                         <Link
-                          href='/docs/quick-start'
+                          href='https://clickhouse.com/docs/quick-start'
                           className='text-primary-300 hover:underline'>
                           ClickHouseオープンソースディストリビューション
                         </Link>
@@ -226,7 +226,7 @@ export default function PricingPage({
                       <SuiText size='sm'>
                         請求と料金の詳細については、{' '}
                         <Link
-                          href='/docs/manage/billing/#faqs'
+                          href='https://clickhouse.com/docs/manage/billing/#faqs'
                           className='text-primary-300 hover:underline'>
                           請求と料金に関するFAQ
                         </Link>
@@ -265,7 +265,7 @@ export default function PricingPage({
                         <SuiText size='sm'>
                           請求と料金の詳細については、{' '}
                           <Link
-                            href='/docs/manage/billing/#faqs'
+                            href='https://clickhouse.com/docs/manage/billing/#faqs'
                             className='text-primary-300 hover:underline'>
                             請求と料金に関するFAQ
                           </Link>
@@ -276,7 +276,7 @@ export default function PricingPage({
                       <SuiText size='sm' className='text-center text-slate-300'>
                         またはいつまでも無料の{' '}
                         <Link
-                          href='/docs/quick-start'
+                          href='https://clickhouse.com/docs/quick-start'
                           className='text-primary-300 hover:underline'>
                           ClickHouseオープンソースディストリビューション
                         </Link>

@@ -172,7 +172,7 @@ export default function SupportProgram(props: any) {
                     </p>
                     <p>
                       <Link
-                        href='/docs'
+                        href='https://clickhouse.com/docs'
                         className='text-primary-300 hover:underline'>
                         Docs
                       </Link>
@@ -188,7 +188,7 @@ export default function SupportProgram(props: any) {
                     </p>
                     <p>
                       <Link
-                        href='/docs'
+                        href='https://clickhouse.com/docs'
                         className='text-primary-300 hover:underline'>
                         Docs
                       </Link>
