@@ -3,6 +3,7 @@ import { SuiCodeblock, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import Link from 'next/link'
+import React from 'react'
 
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
@@ -24,8 +25,9 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
         </div>
         <SuiCodeblock
           copyValue={platforms[0].instructions}
-          className='overflow-hidden'>
-          $ {platforms[0].instructions}
+          className='mx-auto flex w-full items-center gap-3 text-center md:pr-24'>
+          <span className='hidden text-primary sm:inline'>$</span>
+          <span>{platforms[0].instructions}</span>
         </SuiCodeblock>
         <div className='mt-4 text-sm font-medium text-neutral-500'>
           Or install for{' '}
