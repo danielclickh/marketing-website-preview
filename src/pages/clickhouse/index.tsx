@@ -187,7 +187,7 @@ export default function ClickHouseServerPage({
               <div className='relative z-10 space-y-8 rounded-lg border border-neutral-700 bg-neutral-800 p-8 shadow-lg lg:p-16'>
                 <div className='space-y-4'>
                   <SuiTitle type='h2' className='lg:!text-2.75xl'>
-                    Start using ClickHouse in minutes
+                    Start using ClickHouse in seconds
                   </SuiTitle>
                   <p className='text-neutral-200'>
                     Install ClickHouse for macOS, Linux, and FreeBSD
@@ -204,7 +204,7 @@ export default function ClickHouseServerPage({
                   <p>
                     Or install for{' '}
                     <Link
-                      href='/docs/en/integrations/sql-clients/clickhouse-client-local'
+                      href='/docs/install/windows'
                       className='underline transition-colors hover:text-neutral-100'>
                       Windows
                     </Link>
@@ -271,9 +271,7 @@ export default function ClickHouseServerPage({
           <p className='mb-4 font-bold uppercase text-primary-300'>
             Choosing ClickHouse
           </p>
-          <SuiTitle type='h2'>
-            The leading ClickHouse OSS analytics database
-          </SuiTitle>
+          <SuiTitle type='h2'>The leading OSS analytics database</SuiTitle>
           <p className='mt-6 text-neutral-200'>
             ClickHouse is an open-source, column-oriented SQL database built for
             speed and scale - running anywhere from a laptop to hundreds of
@@ -303,6 +301,7 @@ export default function ClickHouseServerPage({
                     releaseOnEdges: true,
                     sensitivity: 0.5
                   }}
+                  loop={true}
                   simulateTouch={false}
                   slidesPerView={1}
                   spaceBetween={16}
@@ -468,13 +467,13 @@ export default function ClickHouseServerPage({
                 ClickHouse feature development moves as fast as it queries. We
                 ship monthly releases packed with new features, performance
                 improvements, and bug fixes - shared openly in our community
-                calls.
+                release webinars.
               </p>
               <p>
                 <LinkWithArrow
                   href='/videos?category=releases'
                   className='font-bold text-primary-300'>
-                  View all release calls
+                  View all release webinars
                 </LinkWithArrow>
               </p>
             </div>
@@ -649,8 +648,8 @@ export default function ClickHouseServerPage({
               />
               <SuiTitle type='h2'>What's different about ClickHouse?</SuiTitle>
               <p className='text-neutral-200'>
-                Open-source. Column-orientated. Built for blazingly fast
-                analytics with SQL.
+                Open-source. Column-oriented. Built for blazingly fast analytics
+                with SQL.
               </p>
               <p>
                 <LinkWithArrow
