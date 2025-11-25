@@ -431,7 +431,7 @@ export default function ElasticPage({
       <div className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
-            Migrate your workload from Elastic today
+            Migrate your workload from Elastic Observability today
           </SuiTitle>
           <SuiText size='base' color='text-default' weight='normal'>
             Cut costs, boost performance, and unlock observability at scale with
@@ -572,7 +572,7 @@ function TabbedTable() {
         <Image
           src={elasticTableLogo}
           alt='Elastic Observability'
-          width={108}
+          width={236}
           height={32}
           className='mx-auto -mb-2 -mt-1'
         />
