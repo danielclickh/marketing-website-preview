@@ -16,16 +16,12 @@ import heroTerminal from './assets/hero-terminal.svg'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
 import imageClickbench from './assets/image-clickbench.png'
-import imageColumnOriented from './assets/image-column-oriented.png'
-import imageDataTransformations from './assets/image-data-transformations.png'
 import imageInteroperability from './assets/image-interoperability.png'
 import imageJsonSupport from './assets/image-json-support.png'
 import imageLightweightUpdates from './assets/image-lightweight-updates.png'
-import imagePrimaryIndex from './assets/image-primary-index.png'
 import imageReplication from './assets/image-replication.png'
 import imagesharding from './assets/image-sharding.png'
 import imageSqlSupport from './assets/image-sql-support.png'
-import imageStorageAndCompute from './assets/image-storage-and-compute.png'
 import imageVectorizedEngine from './assets/image-vectorized-engine.png'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import logoBraze from './assets/logo-braze.svg'
@@ -41,7 +37,6 @@ import thumb05 from './assets/thumb-05.png'
 import thumb06 from './assets/thumb-06.png'
 import thumb07 from './assets/thumb-07.png'
 import Accordion from '@/components-cleaned/Accordion'
-import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
@@ -58,7 +53,6 @@ import { SuiCodeblock, SuiText, SuiTitle } from '@/components/sui'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { marketingVideosService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import formatStat from '@/lib/utils/numbers'
 import { CommonProps } from '@/types/homepage'
@@ -67,7 +61,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
 import {
@@ -1044,10 +1038,11 @@ function YoutubeCoverFlow({
     thumbnail: ImageProps['src']
   }>
 }) {
+  const [navReady, setNavReady] = useState<boolean>(false)
   const prevRef = useRef<null | HTMLButtonElement>(null)
   const nextRef = useRef<null | HTMLButtonElement>(null)
-  const navigationMounted = useMemo(() => {
-    return !!prevRef.current && !!nextRef.current
+  useEffect(() => {
+    setNavReady(!!prevRef.current && !!nextRef.current)
   }, [prevRef.current, nextRef.current])
   return (
     <div className='relative'>
@@ -1086,7 +1081,7 @@ function YoutubeCoverFlow({
         </svg>
       </button>
       <Swiper
-        key={navigationMounted ? 'has-nav' : 'no-nav'}
+        key={navReady ? 'with-nav' : 'no-nav'}
         modules={[Mousewheel, EffectCoverflow, Navigation]}
         navigation={{
           enabled: true,
