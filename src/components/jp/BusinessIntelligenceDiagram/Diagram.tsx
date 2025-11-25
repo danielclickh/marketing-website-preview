@@ -1,4 +1,5 @@
 import RealTimeDiagram from './SvgSection1'
+import styles from '@/components/BusinessIntelligenceDiagram/styles.module.scss'
 
 interface DiagramProps {
   className?: string
@@ -10,9 +11,7 @@ const Diagram: React.FC<DiagramProps> = ({ className, sectionId }) => {
 
   return (
     <div className={className}>
-      <div
-        id='diagramContainer'
-        className='businessIntelligenceDiagramContainer'>
+      <div id='diagramContainer' className={styles.diagramContainer}>
         {sections.map(({ id, component: SvgSection }) => (
           <div
             key={id}

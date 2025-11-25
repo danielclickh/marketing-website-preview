@@ -1,0 +1,45 @@
+.diagramContainer {
+  :global {
+    .active-diagram-10 {
+      .data-ingestion {
+        @apply opacity-100;
+      }
+      .integrations,
+      .querying,
+      .data-transformations,
+      .dbt {
+        @apply opacity-40;
+      }
+    }
+    .active-diagram-20 {
+      .data-transformations {
+        @apply opacity-100;
+      }
+      .data-ingestion,
+      .integrations {
+        @apply opacity-40;
+      }
+    }
+    .active-diagram-30 {
+      .querying {
+        @apply opacity-100;
+      }
+      .data-ingestion,
+      .integrations,
+      .dbt {
+        @apply opacity-40;
+      }
+    }
+    .active-diagram-40 {
+      .integrations {
+        @apply opacity-100;
+      }
+      .data-transformations,
+      .data-ingestion,
+      .querying,
+      .dbt {
+        @apply opacity-40;
+      }
+    }
+  }
+}

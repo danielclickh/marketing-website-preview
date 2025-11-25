@@ -482,7 +482,7 @@ export default function SnowflakePage({
                     <>
                       {content.RelatedBlogs.flatMap((custom: any) =>
                         custom.blog_posts.map((blog: any) => (
-                          <div id='snowflake-relatedcontent' key={blog.id}>
+                          <div key={blog.id}>
                             <BlogPost {...blog} />
                           </div>
                         ))

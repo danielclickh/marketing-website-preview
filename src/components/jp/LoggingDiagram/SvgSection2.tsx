@@ -6,7 +6,7 @@ interface DiagramProps {
 const SvgSection2: React.FC<DiagramProps> = ({ className, sectionId }) => {
   return (
     <div
-      className='relative flex justify-center lg:-mt-2 2xl:-mt-4'
+      className='relative -mt-2 flex justify-center lg:-mt-2 2xl:-mt-4'
       id='logging-diagram-section2'>
       <svg
         className={`max-h-[100px] w-auto 2xl:max-h-max ${className}`}
