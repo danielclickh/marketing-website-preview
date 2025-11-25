@@ -353,17 +353,11 @@
       a {
         @apply text-primary-300;
       }
-      &.anchor-c6 a {
-        @apply text-primary-300;
-      }
     }
 
     &.ignore-anchor {
       a {
-        @apply text-inherit underline hover:text-c6-link;
-      }
-      &.anchor-c6 a {
-        @apply hover:text-primary-300;
+        @apply text-inherit underline hover:text-primary-300;
       }
     }
 

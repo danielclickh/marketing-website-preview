@@ -5,7 +5,7 @@ import HRSeparator from '@/components/HRSeparator'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import GetStarted from '@/components/jp/GetStarted'
 import Layout from '@/components/jp/Layout'
-import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
+import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -102,10 +102,10 @@ export default function ClickHouseServerPage({
                       </CUIButton>
                     )}
                     {!secondaryButton && gitButton?.text && (
-                      <SuiButton
+                      <CUIButton
                         type='secondary'
                         className='w-48'
-                        path={gitButton.href}
+                        href={gitButton.href}
                         target={gitButton.target}>
                         <StrapiImageUrl
                           {...(gitButton.darkIconPng || gitButton.lightIconPng)}
@@ -113,7 +113,7 @@ export default function ClickHouseServerPage({
                           height={20}
                         />
                         {gitButton.text}
-                      </SuiButton>
+                      </CUIButton>
                     )}
                   </div>
                 </div>

@@ -109,7 +109,7 @@ const Select = memo(function Select({
             {!selectedOption && placeholder}
           </span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
-            <ChevronDownIcon className='h-5 w-5 text-c4' aria-hidden='true' />
+            <ChevronDownIcon className='h-5 w-5' aria-hidden='true' />
           </span>
         </Listbox.Button>
         <Listbox.Options

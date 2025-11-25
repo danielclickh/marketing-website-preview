@@ -1,23 +1,23 @@
-import { ButtonProps } from '../sui/SuiButton'
-import { SuiButton } from '../sui/client'
 import { DuplicateIcon } from '@heroicons/react/outline'
 
 interface CopyUrlButtonProps {
-  className?: ButtonProps['className']
+  className?: string
   url?: string
 }
 
 function CopyUrlButton({ url, className = '' }: CopyUrlButtonProps) {
-  const onClick = () => {
+  const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
     navigator.clipboard.writeText(url || window.location.href)
   }
   return (
-    <SuiButton
-      type='custom'
+    <button
+      type='button'
       onClick={onClick}
-      className={`border border-neutral-700 bg-neutral-800 shadow hover:bg-primary-300 hover:text-neutral-800 ${className}`}>
+      className={`inline-block rounded-lg border border-neutral-700 bg-neutral-800 px-6 py-2.5 shadow transition-colors hover:bg-primary-300 hover:text-neutral-800 ${className}`}>
       <DuplicateIcon width='16' />
-    </SuiButton>
+      <span className='sr-only'>Copy URL</span>
+    </button>
   )
 }
 

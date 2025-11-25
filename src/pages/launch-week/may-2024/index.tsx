@@ -1,3 +1,4 @@
+import calendar from './assets/calendar.svg'
 import releases from './releases.json'
 import { CUIButton } from '@/components/ClickUI'
 import EventPost from '@/components/EventPostList/EventPost'
@@ -88,7 +89,15 @@ export default function LaunchWeekPage({
     <>
       <Layout footerData={footerData} seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
-          <div className='relative z-20 overflow-hidden bg-calendar bg-cover bg-top bg-no-repeat pt-14'>
+          <div className='relative z-20 overflow-hidden pt-14'>
+            <Image
+              src={calendar}
+              width={1440}
+              height={503}
+              alt='Calendar background'
+              loading='eager'
+              className='absolute inset-0 h-full w-full max-w-none object-cover object-top'
+            />
             <div className='container mx-auto flex-col px-4 pb-16 pt-10 lg:w-1/2'>
               <div className='mb-6 flex justify-center'>
                 <h4 className='w-full max-w-[8rem] rounded-full border border-base-color py-1 text-center text-base font-medium'>
