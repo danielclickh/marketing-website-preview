@@ -310,23 +310,16 @@
 
     pre {
       code {
-        // @apply mb-9;
-        // @apply box-border mb-9 w-full;
         padding: 4px;
         margin-right: 30px;
         position: inherit;
         @apply block whitespace-pre-wrap rounded-lg leading-6 text-neutral-0;
-
-        // @apply border border-solid border-c3 break-words;
 
         &.ignore-default-color {
           @apply border-transparent bg-transparent text-inherit;
         }
         font-family: monospace, ui-sans-serif;
       }
-      // div {
-      //   @apply overflow-auto whitespace-pre-wrap;
-      // }
     }
     .pre-whitespace {
       @apply whitespace-pre;
