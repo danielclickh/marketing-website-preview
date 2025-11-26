@@ -770,7 +770,7 @@ export default function ClickHouseServerPage({
                       alt=''
                     />
                     <p>
-                      lickHouse ensures reliability through its replication
+                      ClickHouse ensures reliability through its replication
                       model, which uses Raft-based coordination via{' '}
                       <Link
                         href='/clickhouse/keeper'
