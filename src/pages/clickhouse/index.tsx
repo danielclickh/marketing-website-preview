@@ -862,6 +862,13 @@ export default function ClickHouseServerPage({
                       With support for 70+ file formats for ingestion and
                       output, ClickHouse delivers unmatched interoperability.
                     </p>
+                    <p>
+                      The ability to read and write open table and lake formats
+                      such as Parquet, Iceberg, and Delta, with catalog
+                      integrations like AWS Glue and Unity making them seamless
+                      to query - bringing the performance of ClickHouse’s query
+                      engine to your data lake.
+                    </p>
                     <Image
                       src={imageInteroperability}
                       width={1376 / 2}
@@ -875,13 +882,6 @@ export default function ClickHouseServerPage({
                       automatically. It extends standard SQL with 100s of
                       analytical functions, making complex aggregations and
                       filters simpler and more expressive.
-                    </p>
-                    <p>
-                      The ability to read and write open table and lake formats
-                      such as Parquet, Iceberg, and Delta, with catalog
-                      integrations like AWS Glue and Unity making them seamless
-                      to query - bringing the performance of ClickHouse’s query
-                      engine to your data lake.
                     </p>
                   </div>
                 )
