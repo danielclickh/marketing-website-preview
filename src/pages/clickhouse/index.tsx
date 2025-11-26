@@ -1012,7 +1012,7 @@ export default function ClickHouseServerPage({
               type='secondary'
               size='lg'
               linkClass='block md:inline-block'
-              className='group w-full !border-neutral-800 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:mx-auto md:w-auto md:!px-10'>
+              className='group w-full !border-neutral-800 !bg-neutral-800 !text-white hover:!bg-neutral-725 md:mx-auto md:w-auto md:!px-10'>
               View our benchmarks
             </CUIButton>
           </div>
