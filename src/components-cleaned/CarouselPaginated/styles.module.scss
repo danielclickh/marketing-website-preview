@@ -5,7 +5,7 @@
     }
 
     .swiper-controls {
-      @apply flex items-center justify-center gap-x-2 mt-5;
+      @apply flex items-center justify-center gap-x-2 mt-3;
       &:has(.swiper-pagination-lock):has(.swiper-button-prev.swiper-button-disabled):has(.swiper-button-next.swiper-button-disabled) {
         @apply hidden;
       }
@@ -16,7 +16,7 @@
     //
     .swiper-button-prev,
     .swiper-button-next {
-      @apply transition-colors duration-300 size-5 flex items-center justify-center rounded;
+      @apply transition-colors duration-300 size-8 flex items-center justify-center rounded;
     }
 
     // Pagination
@@ -33,14 +33,11 @@
     }
 
     .swiper-pagination-bullet {
-      @apply transition-all duration-300 rounded-full shrink-0 grow-0 mr-2;
-      width: 5px;
-      height: 5px;
+      @apply transition-all duration-300 rounded-full shrink-0 grow-0 mr-3 size-1.5;
     }
 
     .swiper-pagination-bullet-active {
-      @apply cursor-default;
-      width: 20px;
+      @apply cursor-default w-6;
     }
 
     // Dynamic pagination
@@ -48,7 +45,7 @@
     //
     .swiper-pagination-bullets-dynamic {
       width: auto !important;
-      @apply -mr-2;
+      @apply -mr-3.5;
 
       // Has prev and next
       &:has(.swiper-pagination-bullet-active-prev):has(.swiper-pagination-bullet-active-next) {
@@ -91,7 +88,7 @@
     }
 
     .swiper-pagination-bullet {
-      @apply bg-white bg-opacity-50;
+      @apply bg-white bg-opacity-50 hover:bg-opacity-75;
     }
 
     .swiper-pagination-bullet-active {
@@ -116,7 +113,7 @@
     }
 
     .swiper-pagination-bullet {
-      @apply bg-neutral-900 bg-opacity-50;
+      @apply bg-neutral-900 bg-opacity-50 hover:bg-opacity-75;
     }
 
     .swiper-pagination-bullet-active {
