@@ -443,7 +443,9 @@ export default function ClickHouseServerPage({
                           <QuoteCard
                             className='border-0 bg-white/5'
                             content={
-                              <em className='text-sm'>{migration.quote}</em>
+                              <em className='text-base text-white'>
+                                {migration.quote}
+                              </em>
                             }
                             logo={{
                               ...migration.logo,
