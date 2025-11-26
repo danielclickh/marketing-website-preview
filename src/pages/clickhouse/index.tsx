@@ -55,7 +55,6 @@ import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { marketingVideosService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import formatStat from '@/lib/utils/numbers'
 import { CommonProps } from '@/types/homepage'
 import { EntryMarketingVideo } from '@/types/strapi'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -322,7 +321,7 @@ export default function ClickHouseServerPage({
                     }
                   }}
                   carouselClass='!-mx-6 !px-6 lg:!-mx-10 lg:!px-10'
-                  className='col-span-full row-span-full lg:!-mb-5'>
+                  className='col-span-full row-span-full lg:!-mb-7'>
                   {(
                     [
                       {
@@ -650,8 +649,8 @@ export default function ClickHouseServerPage({
           <div className='pb-10 text-center xl:text-left'>
             <div className='w-full space-y-6 xl:sticky xl:top-32 xl:max-w-md'>
               <Image
-                src='/faq-icon.svg'
-                alt='FAQ Icon'
+                src='/images/icon-shield.svg'
+                alt='Shield Icon'
                 width={72}
                 height={72}
                 className='inline-block'
