@@ -768,8 +768,13 @@ export default function ClickHouseServerPage({
                     />
                     <p>
                       lickHouse ensures reliability through its replication
-                      model, which uses Raft-based coordination via Keeper and
-                      provides eventual consistency. This lightweight design
+                      model, which uses Raft-based coordination via{' '}
+                      <Link
+                        href='/clickhouse/keeper'
+                        className='text-primary-300 hover:underline'>
+                        Keeper
+                      </Link>{' '}
+                      and provides eventual consistency. This lightweight design
                       enables replication across availability zones or even
                       regions with high latencies, delivering high durability
                       without heavy overhead.
