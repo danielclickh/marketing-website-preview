@@ -1268,7 +1268,7 @@ function DiagramOne() {
           <div className='h-10 w-full flex-shrink-0 flex-grow-0 bg-neutral-725' />
           <div className='grid flex-1 grid-cols-2 grid-rows-1'>
             {charts.map((chart, i) => {
-              const isActive = firstChartIndex === i
+              const isActive = steps[stepIndex] && firstChartIndex === i
               return (
                 <div key={i} className='col-start-1 row-start-1 flex'>
                   <Image
@@ -1280,7 +1280,7 @@ function DiagramOne() {
               )
             })}
             {charts.map((chart, i) => {
-              const isActive = secondChartIndex === i
+              const isActive = steps[stepIndex] && secondChartIndex === i
               return (
                 <div key={i} className='col-start-2 row-start-1 flex'>
                   <Image
