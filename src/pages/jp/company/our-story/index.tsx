@@ -262,7 +262,7 @@ export default function OurStoryPage({
               投資家の皆さま
             </SuiTitle>
 
-            <div className='investor min-[340px]:grid-cols-2 grid grid-cols-1 flex-wrap justify-evenly gap-2 md:grid-cols-3 lg:grid-cols-6'>
+            <div className='investor grid grid-cols-1 flex-wrap justify-evenly gap-2 md:grid-cols-3 lg:grid-cols-6'>
               {investors.map((investor) => (
                 <Person
                   small
