@@ -33,7 +33,6 @@ function JoinCommunity({ github }: Props) {
             <SocialIcon
               name='Slack'
               href='/slack'
-              prefetch={false}
               imgSrc='/socials/slack.svg'
             />
           </li>
@@ -55,7 +54,7 @@ function JoinCommunity({ github }: Props) {
             <SocialIcon
               name='LinkedIn'
               href='https://www.linkedin.com/company/clickhouseinc'
-              imgSrc='/socials/linkedin-in.svg'
+              imgSrc='/socials/linkedin.svg'
             />
           </li>
         </ul>

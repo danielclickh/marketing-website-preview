@@ -930,7 +930,6 @@ export default function ClickHouseServerPage({
                 <SocialIcon
                   name='Slack'
                   href='/slack'
-                  prefetch={false}
                   imgSrc='/socials/slack.svg'
                 />
               </li>
@@ -952,7 +951,7 @@ export default function ClickHouseServerPage({
                 <SocialIcon
                   name='LinkedIn'
                   href='https://www.linkedin.com/company/clickhouseinc'
-                  imgSrc='/socials/linkedin-in.svg'
+                  imgSrc='/socials/linkedin.svg'
                 />
               </li>
             </ul>
