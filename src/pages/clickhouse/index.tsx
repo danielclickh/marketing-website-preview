@@ -38,6 +38,7 @@ import thumb06 from './assets/thumb-06.png'
 import thumb07 from './assets/thumb-07.png'
 import Accordion from '@/components-cleaned/Accordion'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
+import GithubStats from '@/components-cleaned/GithubStats'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { CUIButton, CUICard } from '@/components/ClickUI'
@@ -918,7 +919,7 @@ export default function ClickHouseServerPage({
               vibrant open-source community that pushes the project forward at
               speed.
             </p>
-            <ul className='mx-auto grid max-w-40 grid-cols-2 gap-6 sm:max-w-max sm:grid-cols-4 lg:mx-0'>
+            <ul className='mx-auto flex flex-wrap justify-center gap-6 sm:max-w-max lg:mx-0'>
               <li className='flex items-center justify-center'>
                 <SocialIcon
                   name='X'
@@ -948,39 +949,16 @@ export default function ClickHouseServerPage({
                   imgSrc='/socials/meetup.svg'
                 />
               </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='LinkedIn'
+                  href='https://www.linkedin.com/company/clickhouseinc'
+                  imgSrc='/socials/linkedin-in.svg'
+                />
+              </li>
             </ul>
           </div>
-          <div className='w-full max-w-max'>
-            <ScaleToContainer scaleUp={false}>
-              <div className='grid h-[290px] w-[564px] -translate-y-5 grid-cols-4 grid-rows-4 gap-x-16 gap-y-20'>
-                {Object.entries({
-                  Contributors: headerData.github.contributors,
-                  PRs: headerData.github.prs,
-                  Releases: headerData.github.releases,
-                  Stars: headerData.github.stars
-                }).map(([label, value], statIndex) => {
-                  const className = [
-                    'translate-y-10 -translate-x-5',
-                    '',
-                    'translate-y-10 translate-x-2',
-                    '-translate-x-2'
-                  ][statIndex % 4]
-                  return (
-                    <div
-                      key={statIndex}
-                      className={`relative col-span-2 row-span-2 flex items-center justify-center text-7xl font-bold ${className}`}>
-                      <span className='flex flex-col'>
-                        {formatStat(value)}+
-                        <span className='text-2xl leading-snug text-primary-300'>
-                          {label}
-                        </span>
-                      </span>
-                    </div>
-                  )
-                })}
-              </div>
-            </ScaleToContainer>
-          </div>
+          <GithubStats {...headerData.github} />
         </div>
       </section>
 
