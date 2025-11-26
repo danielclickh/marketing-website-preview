@@ -1163,7 +1163,7 @@ function YoutubeCoverFlow({
           return (
             <SwiperSlide
               key={videoIndex}
-              className='cursor-pointer'
+              className='[&:not(.swiper-slide-active)]:cursor-pointer'
               onClick={() => {
                 const swiper = swiperRef.current
                 if (!swiper) return
