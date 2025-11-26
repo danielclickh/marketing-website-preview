@@ -13,6 +13,8 @@ import diagram5insertsMv from './assets/diagram-5-inserts-mv.svg'
 import diagram5inserts from './assets/diagram-5-inserts.svg'
 import diagram5queryIcon from './assets/diagram-5-query-icon.svg'
 import heroTerminal from './assets/hero-terminal.svg'
+import iconShootingStar from './assets/icon-shooting-star.svg'
+import imageAcademicPaper from './assets/image-academic-paper.png'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
 import imageClickbench from './assets/image-clickbench.png'
@@ -650,8 +652,8 @@ export default function ClickHouseServerPage({
           <div className='pb-10 text-center xl:text-left'>
             <div className='w-full space-y-6 xl:sticky xl:top-32 xl:max-w-md'>
               <Image
-                src='/images/icon-shield.svg'
-                alt='Shield Icon'
+                src={iconShootingStar}
+                alt='Icon'
                 width={72}
                 height={72}
                 className='inline-block'
@@ -1013,6 +1015,53 @@ export default function ClickHouseServerPage({
             </CUIButton>
           </div>
         </div>
+      </section>
+
+      <section className='section-container my-16 flex flex-col items-center justify-around gap-y-16 lg:my-24 lg:flex-row'>
+        <div className='w-full space-y-6 md:max-w-lg'>
+          <p className='font-bold uppercase text-primary-300'>
+            Built for innovation, open by design
+          </p>
+          <SuiTitle type='h2'>
+            Inviting experimentation and contribution
+          </SuiTitle>
+          <p className='text-neutral-200'>
+            Our academic paper shows how ClickHouse serves not only as a high
+            performance database, but also as a platform for advancing the state
+            of the art and is the best way to learn how its internals work.
+          </p>
+          <div className='flex flex-col gap-4 md:flex-row'>
+            <CUIButton type='primary' size='lg' className='lg:!px-8'>
+              Read our academic paper
+            </CUIButton>
+            <CUIButton
+              type='secondary'
+              size='lg'
+              className='lg:!px-8'
+              iconLeft={
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='20'
+                  height='15'
+                  fill='none'
+                  viewBox='0 0 20 15'>
+                  <path
+                    fill='#fff'
+                    d='M7.1 0H1.5A1.5 1.5 0 0 0 0 1.5v6A1.5 1.5 0 0 0 1.5 9h5.6v.8a3 3 0 0 1-3 3 .7.7 0 1 0 0 1.4 4.5 4.5 0 0 0 4.5-4.4V1.4A1.5 1.5 0 0 0 7.1 0m0 7.5H1.5v-6h5.6zM18 0h-5.6a1.5 1.5 0 0 0-1.5 1.5v6A1.5 1.5 0 0 0 12.4 9H18v.8a3 3 0 0 1-3 3 .7.7 0 1 0 0 1.4 4.5 4.5 0 0 0 4.5-4.4V1.4A1.5 1.5 0 0 0 18 0m0 7.5h-5.6v-6H18z'
+                  />
+                </svg>
+              }>
+              Copy citation
+            </CUIButton>
+          </div>
+        </div>
+        <Image
+          src={imageAcademicPaper}
+          width={1005 / 2}
+          height={908 / 2}
+          alt='Screenshot of academic paper'
+          className='order-first lg:order-last'
+        />
       </section>
 
       <GetStarted platforms={platforms} />
