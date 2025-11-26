@@ -1,4 +1,3 @@
-import { CUILink } from '../ClickUI'
 import { SuiCodeblock, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
@@ -29,39 +28,49 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           <span className='hidden text-primary sm:inline'>$</span>
           <span>{platforms[0].instructions}</span>
         </SuiCodeblock>
-        <div className='mt-4 text-sm font-medium text-neutral-500'>
+        <div className='mt-4 text-sm font-medium text-neutral-400'>
           Or install for{' '}
-          <CUILink
+          <Link
             href='/docs/install/windows'
             target='_self'
             prefetch={false}
-            className='underline hover:text-neutral-0'
+            className='underline transition-colors hover:text-neutral-100'
             onClick={useGalaxyOnClick(
               'homePage.installSection.windowsInstallSelect'
             )}>
             Windows
-          </CUILink>
+          </Link>
           ,{' '}
-          <CUILink
+          <Link
             href='https://hub.docker.com/r/clickhouse/clickhouse-server/'
             target='_self'
-            className='underline hover:text-neutral-0'
+            className='underline transition-colors hover:text-neutral-100'
             onClick={useGalaxyOnClick(
               'homePage.installSection.dockerInstallSelect'
             )}>
             Docker
-          </CUILink>{' '}
+          </Link>{' '}
           or see other{' '}
-          <CUILink
+          <Link
             href='https://clickhouse.com/docs/en/install'
             target='_self'
             prefetch={false}
-            className='underline hover:text-neutral-0'
+            className='underline transition-colors hover:text-neutral-100'
             onClick={useGalaxyOnClick(
               'homePage.installSection.otherOptionsSelect'
             )}>
-            install options.
-          </CUILink>
+            install options
+          </Link>
+          . Or try without installing in our{' '}
+          <Link
+            href='https://sql.clickhouse.com'
+            className='underline transition-colors hover:text-neutral-100'
+            onClick={useGalaxyOnClick(
+              'homePage.installSection.playgroundSelect'
+            )}>
+            playground
+          </Link>
+          .
           <p className='mt-5'>
             Watch this{' '}
             <Link

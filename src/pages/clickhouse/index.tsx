@@ -200,7 +200,7 @@ export default function ClickHouseServerPage({
                   <span className='hidden text-primary sm:inline'>$</span>
                   <span>curl https://clickhouse.com/ | sh</span>
                 </SuiCodeblock>
-                <div className='space-y-4 text-sm text-neutral-500'>
+                <div className='space-y-4 text-sm leading-normal text-neutral-400'>
                   <p>
                     Or install for{' '}
                     <Link
@@ -219,6 +219,12 @@ export default function ClickHouseServerPage({
                       href='/docs/en/install'
                       className='underline transition-colors hover:text-neutral-100'>
                       install options
+                    </Link>
+                    . Or try without installing in our{' '}
+                    <Link
+                      href='https://sql.clickhouse.com'
+                      className='underline transition-colors hover:text-neutral-100'>
+                      playground
                     </Link>
                     .
                   </p>
@@ -319,31 +325,17 @@ export default function ClickHouseServerPage({
                   {(
                     [
                       {
-                        link: '/comparison/bigquery',
-                        title: 'Migrating from BigQuery',
+                        link: '/comparison/elastic-for-observability',
+                        title: 'Migrating from Elastic',
                         description:
-                          'Run highly-concurrency queries without second-long latency, CSP lock-in or run away costs due to per query pricing.',
+                          'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically',
                         quote:
-                          'We needed a solution that could scale, but also provide end-user facing analytics capabilities with low latency and high throughput.',
+                          'Extensive testing and comparison showed that ClickHouse outperformed other solutions like Elasticsearch in three key areas: performance, compatibility, and cost-efficiency for large-scale operations.',
                         logo: {
-                          src: logoAdevinta,
-                          width: 126,
-                          height: 29,
-                          alt: 'Adevinta'
-                        }
-                      },
-                      {
-                        link: '/comparison/snowflake',
-                        title: 'Migrating from Snowflake',
-                        description:
-                          'Cut costs and improve latency with true high concurrency - no tier gated features or pricing models that penalize interactivity.',
-                        quote:
-                          "It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that.",
-                        logo: {
-                          src: logoBraze,
-                          width: 89,
-                          height: 41,
-                          alt: 'Braze'
+                          src: logoNetflix,
+                          width: 111,
+                          height: 30,
+                          alt: 'Netflix'
                         }
                       },
                       {
@@ -361,17 +353,31 @@ export default function ClickHouseServerPage({
                         }
                       },
                       {
-                        link: '/comparison/elastic-for-observability',
-                        title: 'Migrating from Elastic',
+                        link: '/comparison/snowflake',
+                        title: 'Migrating from Snowflake',
                         description:
-                          'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically',
+                          'Cut costs and improve latency with true high concurrency - no tier gated features or pricing models that penalize interactivity.',
                         quote:
-                          'Extensive testing and comparison showed that ClickHouse outperformed other solutions like Elasticsearch in three key areas: performance, compatibility, and cost-efficiency for large-scale operations.',
+                          "It's a lot faster. The data is consistent. We have to do less work. It's just way, way better for us. Anything we're doing in Snowflake now that we can do cheaper or faster in ClickHouse, we want to do that.",
                         logo: {
-                          src: logoNetflix,
-                          width: 111,
-                          height: 30,
-                          alt: 'Netflix'
+                          src: logoBraze,
+                          width: 89,
+                          height: 41,
+                          alt: 'Braze'
+                        }
+                      },
+                      {
+                        link: '/comparison/bigquery',
+                        title: 'Migrating from BigQuery',
+                        description:
+                          'Run highly-concurrency queries without second-long latency, CSP lock-in or run away costs due to per query pricing.',
+                        quote:
+                          'We needed a solution that could scale, but also provide end-user facing analytics capabilities with low latency and high throughput.',
+                        logo: {
+                          src: logoAdevinta,
+                          width: 126,
+                          height: 29,
+                          alt: 'Adevinta'
                         }
                       },
                       {
@@ -550,13 +556,13 @@ export default function ClickHouseServerPage({
               From your laptop to quadrillion scale and beyond
             </SuiTitle>
             <p className='text-neutral-200'>
-              Start in-process with Python on your laptop (CHDB), exploring
+              Start in-process with Python on your laptop (chDB), exploring
               millions of rows.
             </p>
             <p className='text-neutral-200'>
-              Scale the same single-binary engine on your laptop to billions,
-              expand to trillions on a server, and then out to hundreds of nodes
-              for quadrillions.
+              Scale the same engine on your laptop to billions, expand to
+              trillions on a server, and then out to hundreds of nodes for
+              quadrillions.
             </p>
           </div>
         </div>
@@ -574,9 +580,9 @@ export default function ClickHouseServerPage({
       {/* Videos */}
       <section className='bg-primary-300 py-16 text-neutral-900 lg:py-24'>
         <div className='section-container mb-8 max-w-3xl space-y-6 text-center lg:mb-16'>
-          <SuiTitle type='h2'>So what makes ClickHouse soo fast?</SuiTitle>
+          <SuiTitle type='h2'>So what makes ClickHouse fast?</SuiTitle>
           <p className='text-neutral-700'>
-            Learn what makes ClickHouse soo fast from isolated inserts and
+            Learn what makes ClickHouse so fast from isolated inserts and
             queries, efficient data pruning, and high compression to a
             state-of-the-art query engine and, above all, meticulous attention
             to detail.
@@ -726,8 +732,7 @@ export default function ClickHouseServerPage({
                   <div className='w-full space-y-4'>
                     <p>
                       ClickHouse scales vertically, fully using machine
-                      resources and parallelizing reads at a low level without
-                      requiring manual sharding to achieve speed.
+                      resources and parallelizing reads at a low level.
                     </p>
                     <p>
                       A decentralized architecture with sharding and replication
@@ -762,11 +767,12 @@ export default function ClickHouseServerPage({
                       alt=''
                     />
                     <p>
-                      ClickHouse ensures reliability with eventual consistency
-                      based replication. This lightweight design enables
-                      replication across availability zones or even regions with
-                      high latencies, delivering high durability without heavy
-                      overhead.
+                      lickHouse ensures reliability through its replication
+                      model, which uses Raft-based coordination via Keeper and
+                      provides eventual consistency. This lightweight design
+                      enables replication across availability zones or even
+                      regions with high latencies, delivering high durability
+                      without heavy overhead.
                     </p>
                     <Image
                       src={imageBackups}
@@ -900,8 +906,9 @@ export default function ClickHouseServerPage({
                   .toLowerCase()}
                 + contributors
               </strong>{' '}
-              and thousands of commits, ClickHouse thrives on a vibrant
-              open-source community that pushes the project forward at speed.
+              and thousands of commits per month, ClickHouse thrives on a
+              vibrant open-source community that pushes the project forward at
+              speed.
             </p>
             <ul className='mx-auto grid max-w-40 grid-cols-2 gap-6 sm:max-w-max sm:grid-cols-4 lg:mx-0'>
               <li className='flex items-center justify-center'>
