@@ -63,7 +63,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
 import {
@@ -1281,27 +1281,25 @@ function DiagramOne() {
           <div className='h-10 w-full flex-shrink-0 flex-grow-0 bg-neutral-725' />
           <div className='grid flex-1 grid-cols-2 grid-rows-1'>
             {charts.map((chart, i) => {
-              const isActive = steps[stepIndex] && firstChartIndex === i
+              const isFirstActive = steps[stepIndex] && firstChartIndex === i
+              const isSecondActive = steps[stepIndex] && secondChartIndex === i
               return (
-                <div key={i} className='col-start-1 row-start-1 flex'>
-                  <Image
-                    {...chart}
-                    alt=''
-                    className={`m-auto transition duration-300 ${isActive ? '' : 'translate-y-4 opacity-0'}`}
-                  />
-                </div>
-              )
-            })}
-            {charts.map((chart, i) => {
-              const isActive = steps[stepIndex] && secondChartIndex === i
-              return (
-                <div key={i} className='col-start-2 row-start-1 flex'>
-                  <Image
-                    {...chart}
-                    alt=''
-                    className={`m-auto transition duration-300 ${isActive ? '' : 'translate-y-4 opacity-0'}`}
-                  />
-                </div>
+                <Fragment key={i}>
+                  <div className='col-start-1 row-start-1 flex'>
+                    <Image
+                      {...chart}
+                      alt=''
+                      className={`m-auto transition duration-300 ${isFirstActive ? '' : 'translate-y-4 opacity-0'}`}
+                    />
+                  </div>
+                  <div className='col-start-2 row-start-1 flex'>
+                    <Image
+                      {...chart}
+                      alt=''
+                      className={`m-auto transition duration-300 ${isSecondActive ? '' : 'translate-y-4 opacity-0'}`}
+                    />
+                  </div>
+                </Fragment>
               )
             })}
           </div>
