@@ -71,6 +71,7 @@ import {
   Navigation
 } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperClass } from 'swiper/types'
 
 interface PageProps extends CommonProps {
   releaseVideos: Array<
@@ -1028,6 +1029,7 @@ function YoutubeCoverFlow({
     thumbnail: ImageProps['src']
   }>
 }) {
+  const swiperRef = useRef<null | SwiperClass>(null)
   const [navReady, setNavReady] = useState<boolean>(false)
   const prevRef = useRef<null | HTMLButtonElement>(null)
   const nextRef = useRef<null | HTMLButtonElement>(null)
@@ -1093,6 +1095,9 @@ function YoutubeCoverFlow({
           modifier: 1,
           slideShadows: false
         }}
+        onAfterInit={(swiper) => {
+          swiperRef.current = swiper
+        }}
         slidesPerView={1.25}
         simulateTouch={false}
         slideToClickedSlide={true}
@@ -1105,7 +1110,26 @@ function YoutubeCoverFlow({
         }}>
         {videos.map(({ title, youtubeId, thumbnail }, videoIndex) => {
           return (
-            <SwiperSlide key={videoIndex}>
+            <SwiperSlide
+              key={videoIndex}
+              className='cursor-pointer'
+              onClick={() => {
+                const swiper = swiperRef.current
+                if (!swiper) return
+                const isGt = videoIndex > swiper.realIndex
+                const isLt = videoIndex < swiper.realIndex
+                const isLoopStart =
+                  swiper.realIndex === 0 &&
+                  videoIndex === swiper.slides.length - 1
+                const isLoopEnd =
+                  swiper.realIndex === swiper.slides.length - 1 &&
+                  videoIndex === 0
+                if ((isGt && !isLoopStart) || isLoopEnd) {
+                  swiper.slideNext()
+                } else if ((isLt && !isLoopEnd) || isLoopStart) {
+                  swiper.slidePrev()
+                }
+              }}>
               {({ isActive, isVisible }) => (
                 <PlayOnClickVideo
                   provider='youtube'
