@@ -859,12 +859,8 @@ export default function ClickHouseServerPage({
                       alt=''
                     />
                     <p>
-                      ClickHouse is a full database engine with complete SQL
-                      support, including joins, and an optimizer that can
-                      reorder joins globally and leverage column statistics
-                      automatically. It extends standard SQL with 100s of
-                      analytical functions, making complex aggregations and
-                      filters simpler and more expressive.
+                      With support for 70+ file formats for ingestion and
+                      output, ClickHouse delivers unmatched interoperability.
                     </p>
                     <Image
                       src={imageInteroperability}
@@ -873,8 +869,12 @@ export default function ClickHouseServerPage({
                       alt=''
                     />
                     <p>
-                      With support for 70+ file formats for ingestion and
-                      output, ClickHouse delivers unmatched interoperability.
+                      ClickHouse is a full database engine with complete SQL
+                      support, including joins, and an optimizer that can
+                      reorder joins globally and leverage column statistics
+                      automatically. It extends standard SQL with 100s of
+                      analytical functions, making complex aggregations and
+                      filters simpler and more expressive.
                     </p>
                     <p>
                       The ability to read and write open table and lake formats
