@@ -55,7 +55,7 @@ import TiltedText from '@/components/TiltedText'
 import { SuiCodeblock, SuiText, SuiTitle } from '@/components/sui'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { marketingVideosService } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { EntryMarketingVideo } from '@/types/strapi'
@@ -1033,10 +1033,23 @@ export default function ClickHouseServerPage({
             of the art and is the best way to learn how its internals work.
           </p>
           <div className='flex flex-col gap-4 md:flex-row'>
-            <CUIButton type='primary' size='lg' className='lg:!px-8'>
+            <CUIButton
+              href='https://www.vldb.org/pvldb/vol17/p3731-schulze.pdf'
+              target='_blank'
+              onClick={useGalaxyOnClick(
+                'productOpenSourcePage.academicPaper.readSelect'
+              )}
+              type='primary'
+              size='lg'
+              className='lg:!px-8'>
               Read our academic paper
             </CUIButton>
             <CUIButton
+              href='https://www.researchgate.net/publication/385666611_ClickHouse_-_Lightning_Fast_Analytics_for_Everyone/citation/download'
+              target='_blank'
+              onClick={useGalaxyOnClick(
+                'productOpenSourcePage.academicPaper.citationSelect'
+              )}
               type='secondary'
               size='lg'
               className='lg:!px-8'
