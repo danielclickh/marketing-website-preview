@@ -16,7 +16,7 @@ export default function VideoPlayButton({
 }: VideoPlayButtonProps) {
   return (
     <button
-      className={`group/playButton w-max cursor-pointer rounded-full p-0.5 shadow-lg backdrop-blur-lg backdrop-brightness-150 transition-shadow duration-300 hover:shadow-xl ${className}`}
+      className={`group/playButton w-max cursor-pointer rounded-full p-0.5 shadow-lg backdrop-blur-lg backdrop-brightness-150 transition duration-300 hover:scale-105 hover:shadow-2xl ${className}`}
       {...props}>
       <span className='flex items-center rounded-full bg-neutral-750/95 transition-colors duration-300 group-hover/playButton:bg-neutral-750'>
         <span className='flex aspect-square w-20 flex-shrink-0 flex-grow-0 items-center justify-center text-primary-300'>
