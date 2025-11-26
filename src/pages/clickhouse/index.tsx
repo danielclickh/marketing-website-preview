@@ -63,7 +63,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/effect-creative'
 import {
@@ -1216,6 +1216,13 @@ function DiagramOne() {
     [0, 1, 2, 16, 17, 18, 20, 21, 22]
   ]
 
+  const charts: Array<Pick<ImageProps, 'src' | 'width' | 'height'>> = [
+    { src: diagram1part1, width: 171, height: 133 },
+    { src: diagram1part2, width: 176, height: 100 },
+    { src: diagram1part3, width: 142, height: 102 },
+    { src: diagram1part4, width: 176, height: 100 }
+  ]
+
   useEffect(() => {
     const timer = window.setInterval(() => {
       setStepIndex((old) => {
@@ -1227,6 +1234,19 @@ function DiagramOne() {
 
     return () => window.clearInterval(timer)
   }, [steps])
+
+  const [firstChartIndex, secondChartIndex] = useMemo(() => {
+    const randChartIndex = () => Math.floor(Math.random() * charts.length)
+    const first = randChartIndex()
+    let second = randChartIndex()
+
+    // Ensure two unique charts are displaying at one time
+    while (second === first) {
+      second = randChartIndex()
+    }
+
+    return [first, second]
+  }, [steps, stepIndex])
 
   return (
     <ScaleToContainer>
@@ -1246,20 +1266,25 @@ function DiagramOne() {
         </div>
         <div className='absolute bottom-6 right-6 flex h-56 w-[420px] flex-col overflow-hidden rounded-lg border border-neutral-700 bg-neutral-750 shadow'>
           <div className='h-10 w-full flex-shrink-0 flex-grow-0 bg-neutral-725' />
-          <div className='grid flex-1 grid-cols-1 grid-rows-1'>
-            {(
-              [
-                { src: diagram1part1, width: 171, height: 133 },
-                { src: diagram1part2, width: 176, height: 100 },
-                { src: diagram1part3, width: 142, height: 102 },
-                { src: diagram1part4, width: 176, height: 100 }
-              ] satisfies Array<Pick<ImageProps, 'src' | 'width' | 'height'>>
-            ).map((imageProps, i) => {
-              const isActive = stepIndex === i
+          <div className='grid flex-1 grid-cols-2 grid-rows-1'>
+            {charts.map((chart, i) => {
+              const isActive = firstChartIndex === i
               return (
                 <div key={i} className='col-start-1 row-start-1 flex'>
                   <Image
-                    {...imageProps}
+                    {...chart}
+                    alt=''
+                    className={`m-auto transition duration-300 ${isActive ? '' : 'translate-y-4 opacity-0'}`}
+                  />
+                </div>
+              )
+            })}
+            {charts.map((chart, i) => {
+              const isActive = secondChartIndex === i
+              return (
+                <div key={i} className='col-start-2 row-start-1 flex'>
+                  <Image
+                    {...chart}
                     alt=''
                     className={`m-auto transition duration-300 ${isActive ? '' : 'translate-y-4 opacity-0'}`}
                   />
