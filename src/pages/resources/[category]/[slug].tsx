@@ -13,7 +13,7 @@ import NewsLetter from '@/components/NewsLetter'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
 import TableOfContents from '@/components/TableOfContents'
-import { SuiButton, SuiText, SuiTitle } from '@/components/sui'
+import { SuiText, SuiTitle } from '@/components/sui'
 import {
   resourcesService,
   seoFieldToNextComponentProps

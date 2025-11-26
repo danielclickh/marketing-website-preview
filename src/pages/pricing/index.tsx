@@ -214,7 +214,7 @@ export default function PricingPage({
                       <SuiText size='sm'>
                         Or download the forever-free{' '}
                         <LinkWithArrow
-                          href='https://clickhouse.com/docs/en/quick-start'
+                          href='https://clickhouse.com/docs/quick-start'
                           className='text-primary-300 hover:underline'>
                           open source distribution of ClickHouse
                         </LinkWithArrow>
@@ -223,7 +223,7 @@ export default function PricingPage({
                         For more information about our billing and pricing
                         please refer to our{' '}
                         <Link
-                          href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                          href='https://clickhouse.com/docs/manage/billing/#faqs'
                           className='text-primary-300 hover:underline'>
                           Billing & Pricing FAQ
                         </Link>
@@ -257,7 +257,7 @@ export default function PricingPage({
                           </Link>{' '}
                           - for Postgres CDC pricing, visit{' '}
                           <Link
-                            href='/docs/cloud/reference/billing/clickpipes/postgres-cdc'
+                            href='https://clickhouse.com/docs/cloud/reference/billing/clickpipes/postgres-cdc'
                             className='text-primary-300 hover:underline'>
                             here
                           </Link>
@@ -266,7 +266,7 @@ export default function PricingPage({
                           For more information about our billing and pricing
                           please refer to our{' '}
                           <Link
-                            href='https://clickhouse.com/docs/en/manage/billing/#faqs'
+                            href='https://clickhouse.com/docs/manage/billing/#faqs'
                             className='text-primary-300 hover:underline'>
                             Billing & Pricing FAQ
                           </Link>
@@ -277,7 +277,7 @@ export default function PricingPage({
                       <SuiText size='sm' className='text-center text-slate-300'>
                         Or download the forever-free{' '}
                         <LinkWithArrow
-                          href='https://clickhouse.com/docs/en/quick-start'
+                          href='https://clickhouse.com/docs/quick-start'
                           className='text-primary-300 hover:underline'>
                           open source distribution of ClickHouse
                         </LinkWithArrow>

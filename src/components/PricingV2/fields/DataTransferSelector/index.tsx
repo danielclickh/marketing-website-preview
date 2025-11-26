@@ -240,7 +240,7 @@ export default function DataTransferSelector() {
       <p className='text-sm'>
         For details on data transfer and billing, visit our{' '}
         <Link
-          href='/docs/cloud/manage/network-data-transfer'
+          href='https://clickhouse.com/docs/cloud/manage/network-data-transfer'
           target='_blank'
           title='Opens in a new tab'
           className='text-primary-300 hover:underline'>

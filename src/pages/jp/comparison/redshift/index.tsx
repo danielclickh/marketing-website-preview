@@ -457,7 +457,7 @@ export default function ComparisonPage({
             <div className='mt-10 gap-3 md:columns-2 lg:mt-20 lg:columns-3'>
               {comparison.Testimonials.map((testimonial, index) => (
                 <div
-                  className='animate-fade-in mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-6 shadow-card hover:bg-neutral-750'
+                  className='mb-3 w-full break-inside-avoid rounded-lg border border-neutral-700/80 bg-neutral-900/50 object-cover p-6 shadow-card hover:bg-neutral-750'
                   key={index}>
                   <Link href={testimonial.href} target='_blank'>
                     <div className='flex h-full w-full flex-col justify-between space-y-12'>
@@ -468,7 +468,7 @@ export default function ComparisonPage({
                             className='color-swap-no-hover mb-4 h-16 fill-none'
                           />
                         )}
-                        <div className='rich-content-comparisons text-neutral-0'>
+                        <div className='space-y-4 text-neutral-0'>
                           <ReactMarkdown>
                             {testimonial.Description}
                           </ReactMarkdown>

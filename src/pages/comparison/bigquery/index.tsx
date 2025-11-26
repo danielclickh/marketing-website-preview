@@ -146,7 +146,7 @@ export default function BigQueryPage({
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
             <Link
-              href={`https://clickhouse.com/docs/en/migrations/bigquery?loc=bigquery-comparison-page-hero`}
+              href={`/docs/migrations/bigquery?loc=bigquery-comparison-page-hero`}
               target='_blank'
               prefetch={false}
               className='text-primary-300 hover:underline'>

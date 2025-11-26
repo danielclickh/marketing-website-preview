@@ -1,0 +1,23 @@
+.multiselectItem {
+  :global {
+    input[type='checkbox'] {
+      @apply absolute left-0 top-0 z-10 m-0 cursor-pointer appearance-none p-0 outline-none;
+    }
+    [data-pc-section='root'] {
+      @apply relative inline-flex h-4 w-4 cursor-pointer select-none;
+    }
+    [data-pc-section='box'] {
+      @apply flex h-4 w-4 items-center justify-center rounded-[3px] border border-neutral-700 bg-neutral-750 text-gray-600 hover:border-primary-300 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] focus:outline-none focus:outline-offset-0;
+    }
+    [data-pc-section='trigger'] {
+      padding-top: 1px;
+      padding-bottom: 1px;
+    }
+    [data-p-highlight='true'] {
+      @apply overflow-hidden rounded-[3px] border-none bg-primary-300;
+      .p-icon {
+        @apply stroke-current stroke-1 text-black;
+      }
+    }
+  }
+}

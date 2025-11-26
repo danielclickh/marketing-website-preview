@@ -185,7 +185,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               external ETL tools that are expensive, slow and not purpose built
               for Postgres.{' '}
               <Link
-                href='/docs/en/integrations/clickpipes/postgres'
+                href='https://clickhouse.com/docs/en/integrations/clickpipes/postgres'
                 className='text-primary-300 hover:underline'>
                 Learn more
               </Link>

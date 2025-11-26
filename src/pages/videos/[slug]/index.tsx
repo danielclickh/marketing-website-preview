@@ -1,12 +1,12 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import { CUICard } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import VideoCard from '@/components/VideoCard'
-import { SuiButton, SuiTitle } from '@/components/sui'
+import { SuiTitle } from '@/components/sui'
 import { fetchAll, findAll, getProxiedMediaUrl } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { absoluteUrl } from '@/lib/next'
@@ -232,68 +232,60 @@ export default function VideoPage({
         <div className='mb-10 grid w-full grid-cols-1 gap-8 md:grid-cols-2'>
           {prevVideo && (
             <div>
-              <Link href={`/videos/${prevVideo.Slug}`} className='block w-full'>
-                <SuiButton
-                  type='empty'
-                  color='primary'
-                  className='font-base block w-full border border-primary-300/50 hover:translate-y-0 hover:border-primary-400 hover:no-underline'>
-                  <div className='flex w-full flex-row-reverse items-center gap-6'>
-                    <div className='flex-shrink flex-grow basis-0 truncate text-left'>
-                      <strong className='block font-bold'>
-                        Previous video
-                      </strong>
-                      <span className='block truncate font-normal'>
-                        {prevVideo.Title}
-                      </span>
-                    </div>
-                    <div className='flex-shrink-0 flex-grow-0'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='16'
-                        height='16'
-                        fill='currentColor'
-                        viewBox='0 0 16 16'>
-                        <path
-                          fillRule='evenodd'
-                          d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
-                        />
-                      </svg>
-                    </div>
+              <Link
+                href={`/videos/${prevVideo.Slug}`}
+                className='font-base block w-full rounded-lg border border-primary-300/50 px-4 py-3 text-sm hover:translate-y-0 hover:border-primary-400'>
+                <div className='flex w-full flex-row-reverse items-center gap-6'>
+                  <div className='flex-shrink flex-grow basis-0 truncate text-left'>
+                    <strong className='block font-bold'>Previous video</strong>
+                    <span className='block truncate font-normal'>
+                      {prevVideo.Title}
+                    </span>
                   </div>
-                </SuiButton>
+                  <div className='flex-shrink-0 flex-grow-0'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='16'
+                      height='16'
+                      fill='currentColor'
+                      viewBox='0 0 16 16'>
+                      <path
+                        fillRule='evenodd'
+                        d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
+                      />
+                    </svg>
+                  </div>
+                </div>
               </Link>
             </div>
           )}
           {!prevVideo && <div></div>}
           {nextVideo && (
             <div>
-              <Link href={`/videos/${nextVideo.Slug}`} className='block w-full'>
-                <SuiButton
-                  type='empty'
-                  color='primary'
-                  className='font-base block w-full border border-primary-300/50 hover:translate-y-0 hover:border-primary-400 hover:no-underline'>
-                  <div className='flex w-full flex-row items-center gap-6'>
-                    <div className='flex-shrink flex-grow basis-0 truncate text-left'>
-                      <strong className='block font-bold'>Next video</strong>
-                      <span className='block truncate font-normal'>
-                        {nextVideo.Title}
-                      </span>
-                    </div>
-                    <div className='flex-shrink-0 flex-grow-0'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='16'
-                        height='16'
-                        fill='currentColor'
-                        viewBox='0 0 16 16'>
-                        <path
-                          fillRule='evenodd'
-                          d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
-                        />
-                      </svg>
-                    </div>
+              <Link
+                href={`/videos/${nextVideo.Slug}`}
+                className='font-base block w-full rounded-lg border border-primary-300/50 px-4 py-3 text-sm hover:translate-y-0 hover:border-primary-400'>
+                <div className='flex w-full flex-row items-center gap-6'>
+                  <div className='flex-shrink flex-grow basis-0 truncate text-left'>
+                    <strong className='block font-bold'>Next video</strong>
+                    <span className='block truncate font-normal'>
+                      {nextVideo.Title}
+                    </span>
                   </div>
-                </SuiButton>
+                  <div className='flex-shrink-0 flex-grow-0'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='16'
+                      height='16'
+                      fill='currentColor'
+                      viewBox='0 0 16 16'>
+                      <path
+                        fillRule='evenodd'
+                        d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
+                      />
+                    </svg>
+                  </div>
+                </div>
               </Link>
             </div>
           )}
@@ -335,13 +327,9 @@ export default function VideoPage({
                 Recent videos
               </SuiTitle>
 
-              <SuiButton
-                path='/videos'
-                type='empty'
-                color='primary'
-                className='font-base border border-primary-300/50'>
+              <CUIButton href='/videos' type='secondary'>
                 View all Videos
-              </SuiButton>
+              </CUIButton>
             </div>
             <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
               {relatedVideos.map((item) => {

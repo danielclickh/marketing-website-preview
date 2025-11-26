@@ -376,7 +376,7 @@ function StaticResult({ hit }: { hit: Hit<BaseHit> }) {
 }
 
 function DocsResult({ hit }: { hit: Hit<BaseHit> }) {
-  let link: string = joinPaths('/docs', hit.slug)
+  let link: string = joinPaths('https://clickhouse.com/docs', hit.slug)
   return (
     <SearchResultLink
       badge='Docs'

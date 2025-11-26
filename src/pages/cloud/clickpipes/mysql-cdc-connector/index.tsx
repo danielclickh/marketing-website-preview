@@ -77,7 +77,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               a few clicks. Get real-time analytics without the complexity or
               cost of external ETL tools.{' '}
               <Link
-                href='/docs/integrations/clickpipes/mysql'
+                href='https://clickhouse.com/docs/integrations/clickpipes/mysql'
                 className='text-primary-300 hover:underline'>
                 Learn more
               </Link>

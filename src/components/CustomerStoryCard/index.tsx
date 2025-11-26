@@ -152,7 +152,7 @@ export default function CustomerStoryCard({
           </div>
 
           {highlight && (
-            <div className='absolute -bottom-2 left-1/2 z-50 -translate-x-1/2 transform overflow-visible bg-half-highlight px-1 text-xs font-bold uppercase'>
+            <div className='absolute -bottom-2 left-1/2 z-50 -translate-x-1/2 transform overflow-visible bg-gradient-to-b from-neutral-700 from-[56%] to-transparent to-[56%] px-1 text-xs font-bold uppercase'>
               Highlight
             </div>
           )}

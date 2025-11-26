@@ -33,7 +33,7 @@ export function SuiSearchField({
             htmlFor={htmlFor}
             className='block pb-1 text-xs font-medium text-neutral-300'>
             {label}
-            {!required && <span className='text-c4'></span>}
+            {!required && <span></span>}
           </label>
         )}
         <div className='relative mt-1 flex'>

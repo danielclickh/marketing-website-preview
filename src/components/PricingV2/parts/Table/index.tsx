@@ -207,7 +207,7 @@ export default function Table({
         {minPublicInternetEgress && minInterRegionEgress && (
           <SuiText size='sm'>
             <Link
-              href='/docs/cloud/manage/network-data-transfer'
+              href='https://clickhouse.com/docs/cloud/manage/network-data-transfer'
               className='text-primary-300 hover:underline'>
               Data transfer
             </Link>{' '}

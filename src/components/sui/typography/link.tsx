@@ -38,7 +38,7 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
       <a
         href={href}
         onClick={onClick}
-        className={` ${sizeCalculator(size, weight)} ${colorCalculator(color ?? '', 'text-inherit')} hover:${colorCalculator(color ?? '', 'text-c6-link')} cursor-pointer hover:underline ${className ?? ''} `}
+        className={` ${sizeCalculator(size, weight)} ${colorCalculator(color ?? '', 'text-inherit')} hover:${colorCalculator(color ?? '', 'text-primary-300')} cursor-pointer hover:underline ${className ?? ''} `}
         {...props}>
         {children}
       </a>
@@ -49,7 +49,7 @@ export const SuiLink = ({ ...LinkProps }: LinkProps) => {
     <Link
       href={href}
       onClick={onClick}
-      className={` ${sizeCalculator(size, weight)} ${colorCalculator(color ?? '', 'text-inherit')} hover:${colorCalculator(color ?? '', 'text-c6-link')} cursor-pointer hover:underline ${className ?? ''} `}
+      className={` ${sizeCalculator(size, weight)} ${colorCalculator(color ?? '', 'text-inherit')} hover:${colorCalculator(color ?? '', 'text-primary-300')} cursor-pointer hover:underline ${className ?? ''} `}
       {...props}>
       {children}
     </Link>

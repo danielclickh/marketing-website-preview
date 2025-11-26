@@ -4,10 +4,8 @@ import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
 import { Galaxy } from '@/lib/galaxy/web/browser'
 import '@/styles/globals.scss'
-import '@/styles/highlightjs.scss'
-import '@/styles/securiti-cookie-banner.scss'
 import '@/styles/securiti-overrides.scss'
-import { ClickUIProvider, ThemeName } from '@clickhouse/click-ui'
+import { ClickUIProvider } from '@clickhouse/click-ui'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { AppProps } from 'next/app'
@@ -17,7 +15,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { useReportWebVitals } from 'next/web-vitals'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const GTM_ID = process?.env?.NEXT_PUBLIC_GTM
 
@@ -77,8 +75,6 @@ function updateGrowthBookURL() {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [theme, setTheme] = useState<ThemeName>('dark')
-
   const router = useRouter()
   useInitGalaxy()
 
@@ -110,7 +106,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <ClickUIProvider theme={theme}>
+      <ClickUIProvider theme='dark'>
         <Head>
           <base href='/' />
           <meta content='width=device-width, initial-scale=1' name='viewport' />

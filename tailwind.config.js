@@ -197,35 +197,6 @@ module.exports = {
           800: '#610000',
           900: '#300000'
         },
-
-        c1: {
-          light: '#FFFFFF',
-          DEFAULT: 'rgba(var(--clickhouse-color-1), <alpha-value>)',
-          dark: '#2F2C3A'
-        },
-        c2: {
-          light: '#F6F7FA',
-          DEFAULT: 'rgba(var(--clickhouse-color-2), <alpha-value>)',
-          dark: '#373343'
-        },
-        c3: '#443F51',
-        c4: {
-          light: '#6D7386',
-          DEFAULT: 'rgba(var(--clickhouse-color-4), <alpha-value>)',
-          dark: '#B0B4BC'
-        },
-        c6: {
-          DEFAULT: '#FAFF69',
-          text: '#FAFF69',
-          link: '#C78F0F'
-        },
-        c7: {
-          light: '#A6770D',
-          DEFAULT: 'rgba(var(--clickhouse-color-7), <alpha-value>)',
-          dark: '#FFC133'
-        },
-        gradientTop: '#FAFF69',
-        gradientBottom: '#EEF400',
         alerts: {
           danger: {
             text: '#C70F0F',
@@ -251,38 +222,16 @@ module.exports = {
         input: '0px 1px 2px rgba(0, 0, 0, 0.05)',
         'click-card':
           '0px 4px 44px rgba(22, 22, 0, 0.4), inset 0px 1px 3px rgba(25, 26, 6, 0.9)',
-        'footer-line': '0px -1px 1px #000000',
-        codeblock:
-          '0px 4px 4px rgba(0, 0, 0, 0.06), inset 0px 4px 25px rgba(0, 0, 0, 0.14)',
         noOffset: '0 0 100px -12px rgb(0 0 0 / 0.25)',
         'noOffset-sm': '0 0 48px rgb(0 0 0 / 0.25)',
         stackIntegrationGraphic: '0 4px 60px rgb(251, 255, 70)',
         stackIntegrationGraphicSmall: '0 2px 30px rgb(251, 255, 70)'
       },
-      backgroundSize: {
-        default_size: '0%, 100%',
-        focus_size: '100%, 100%'
-      },
       backgroundImage: {
-        'half-highlight':
-          'linear-gradient(to bottom, rgba(65,65,65,1) 56%, transparent 56%)',
-        snowflakeGradient:
-          'linear-gradient(0deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
-        homepageFadeLeftLogos:
-          'linear-gradient(90deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
-        homepageFadeRightLogos:
-          'linear-gradient(270deg, #FAFF69 30%, rgba(252, 255, 116, 0) 99.99%)',
-        cloudFadeLeftLogos:
-          'linear-gradient(90deg, #1D1D1D 30%, rgba(29, 29, 29, 0.1) 99.99%)',
-        cloudFadeRightLogos:
-          'linear-gradient(270deg, #1D1D1D 30%, rgba(29, 29, 29, 0.09) 99.99%)',
-        field_focus:
-          'linear-gradient(0deg, #fbff46, #fbff46 2px, transparent 0, transparent)',
         grid: 'url("/dot_grid.svg")',
         'click-grid': 'url("/bg-grid.svg")',
         'speed-lines': 'url("/speed-lines.svg")',
         'speed-lines-ml': 'url("/speed-lines-ml.svg")',
-        calendar: 'url("/calendar.svg")',
         'body-image': 'linear-gradient(272.48deg, #292924 1.95%, #0F0F0F 100%)'
       },
       spacing: {
