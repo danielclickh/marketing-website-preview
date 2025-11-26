@@ -1102,10 +1102,7 @@ function YoutubeCoverFlow({
         loop={true}
         breakpoints={{
           1024: {
-            slidesPerView: 3
-          },
-          1280: {
-            slidesPerView: 3
+            slidesPerView: 2.75
           }
         }}>
         {videos.map(({ title, youtubeId, thumbnail }, videoIndex) => {
