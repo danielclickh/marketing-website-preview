@@ -556,8 +556,11 @@ export default function ClickHouseServerPage({
               From your laptop to quadrillion scale and beyond
             </SuiTitle>
             <p className='text-neutral-200'>
-              Start in-process with Python on your laptop (chDB), exploring
-              millions of rows.
+              Start in-process with Python on your laptop (
+              <Link href='/chdb' className='text-primary-300 hover:underline'>
+                chDB
+              </Link>
+              ), exploring millions of rows.
             </p>
             <p className='text-neutral-200'>
               Scale the same engine on your laptop to billions, expand to
