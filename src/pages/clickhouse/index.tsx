@@ -122,6 +122,38 @@ export default function ClickHouseServerPage({
   releaseVideos
 }: PageProps) {
   useGalaxyOnPage('productOpenSourcePage')
+  const [citationCopied, setCitationCopied] = useState(false)
+
+  const handleCitationCopy = () => {
+    window.navigator.clipboard
+      .writeText(
+        `TY  - JOUR
+AU  - Schulze, Robert
+AU  - Schreiber, Tom
+AU  - Yatsishin, Ilya
+AU  - Dahimene, Ryadh
+AU  - Milovidov, Alexey
+PY  - 2024/11/08
+SP  - 3731
+EP  - 3744
+T1  - ClickHouse - Lightning Fast Analytics for Everyone
+VL  - 17
+DO  - 10.14778/3685800.3685802
+JO  - Proceedings of the VLDB Endowment
+ER  -  `
+      )
+      .finally(() => {
+        setCitationCopied(true)
+      })
+  }
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setCitationCopied(false)
+    }, 1000)
+
+    return () => window.clearTimeout(timer)
+  }, [citationCopied])
 
   // Apply Equal heights to quote card headers
   const quoteCarouselRef = useRef<null | HTMLDivElement>(null)
@@ -680,32 +712,6 @@ export default function ClickHouseServerPage({
             className='mx-auto w-full max-w-3xl xl:mr-0'
             items={[
               {
-                defaultOpen: true,
-                handle: 'Flexible architecture & columnar storage',
-                content: (
-                  <div className='w-full space-y-4'>
-                    <p>
-                      A column-oriented design delivers high compression, while
-                      the LSM-inspired engine and background merges keep parts
-                      compact and queries fast, no matter how large the dataset.
-                    </p>
-                    <DiagramOne />
-                    <p>
-                      ClickHouse is built on a unique architecture with a
-                      pluggable storage layer: data can live on SSDs, spinning
-                      disks, or object storage, and can naturally flow across
-                      tiers from hot to cold.
-                    </p>
-                    <Image
-                      src={imageArchitecture}
-                      width={1376 / 2}
-                      height={1002 / 2}
-                      alt=''
-                    />
-                  </div>
-                )
-              },
-              {
                 handle: 'Blazing fast queries and inserts',
                 content: (
                   <div className='w-full space-y-4'>
@@ -765,6 +771,63 @@ export default function ClickHouseServerPage({
                 )
               },
               {
+                handle: 'Powerful data operations',
+                content: (
+                  <div className='w-full space-y-4'>
+                    <p>
+                      ClickHouse offers advanced features to manipulate, filter,
+                      and transform data efficiently. Materialized views can be
+                      refreshable or incremental, with incremental views
+                      shifting compute from query time to insert time and
+                      dramatically accelerating repeated queries.
+                    </p>
+                    <DiagramFive />
+                    <p>
+                      Projections allow data to be sorted in multiple ways,
+                      optimizing for frequent access patterns.
+                    </p>
+                    <Image
+                      src={imageLightweightUpdates}
+                      width={1376 / 2}
+                      height={833 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse breaks past traditional OLAP limitations with
+                      full support for lightweight updates and deletes through
+                      patched parts providing both flexibility and support for
+                      complex compliance requirements.
+                    </p>
+                  </div>
+                )
+              },
+              {
+                defaultOpen: true,
+                handle: 'Flexible architecture & columnar storage',
+                content: (
+                  <div className='w-full space-y-4'>
+                    <p>
+                      A column-oriented design delivers high compression, while
+                      the LSM-inspired engine and background merges keep parts
+                      compact and queries fast, no matter how large the dataset.
+                    </p>
+                    <DiagramOne />
+                    <p>
+                      ClickHouse is built on a unique architecture with a
+                      pluggable storage layer: data can live on SSDs, spinning
+                      disks, or object storage, and can naturally flow across
+                      tiers from hot to cold.
+                    </p>
+                    <Image
+                      src={imageArchitecture}
+                      width={1376 / 2}
+                      height={1002 / 2}
+                      alt=''
+                    />
+                  </div>
+                )
+              },
+              {
                 handle: 'Highly reliable',
                 content: (
                   <div className='w-full space-y-4'>
@@ -806,62 +869,19 @@ export default function ClickHouseServerPage({
                 )
               },
               {
-                handle: 'Powerful data operations',
-                content: (
-                  <div className='w-full space-y-4'>
-                    <DiagramFive />
-                    <p>
-                      ClickHouse offers advanced features to manipulate, filter,
-                      and transform data efficiently. Materialized views can be
-                      refreshable or incremental, with incremental views
-                      shifting compute from query time to insert time and
-                      dramatically accelerating repeated queries.
-                    </p>
-                    <p>
-                      Projections allow data to be sorted in multiple ways,
-                      optimizing for frequent access patterns.
-                    </p>
-                    <Image
-                      src={imageJsonSupport}
-                      width={1376 / 2}
-                      height={408 / 2}
-                      alt=''
-                    />
-                    <p>
-                      ClickHouse supports schema on write with JSON support,
-                      semi-structured data can be ingested safely without schema
-                      explosion, combining flexibility with the full power of a
-                      columnar database.
-                    </p>
-                    <Image
-                      src={imageLightweightUpdates}
-                      width={1376 / 2}
-                      height={833 / 2}
-                      alt=''
-                    />
-                    <p>
-                      ClickHouse breaks past traditional OLAP limitations with
-                      full support for lightweight updates and deletes through
-                      patched parts providing both flexibility and support for
-                      complex compliance requirements.
-                    </p>
-                  </div>
-                )
-              },
-              {
                 handle: 'Ease of use and interoperability',
                 content: (
                   <div className='w-full space-y-4'>
+                    <p>
+                      With support for 70+ file formats for ingestion and
+                      output, ClickHouse delivers unmatched interoperability.
+                    </p>
                     <Image
                       src={imageSqlSupport}
                       width={1376 / 2}
                       height={480 / 2}
                       alt=''
                     />
-                    <p>
-                      With support for 70+ file formats for ingestion and
-                      output, ClickHouse delivers unmatched interoperability.
-                    </p>
                     <p>
                       The ability to read and write open table and lake formats
                       such as Parquet, Iceberg, and Delta, with catalog
@@ -882,6 +902,18 @@ export default function ClickHouseServerPage({
                       automatically. It extends standard SQL with 100s of
                       analytical functions, making complex aggregations and
                       filters simpler and more expressive.
+                    </p>
+                    <Image
+                      src={imageJsonSupport}
+                      width={1376 / 2}
+                      height={408 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse supports schema on write with JSON support,
+                      semi-structured data can be ingested safely without schema
+                      explosion, combining flexibility with the full power of a
+                      columnar database.
                     </p>
                   </div>
                 )
@@ -1045,11 +1077,12 @@ export default function ClickHouseServerPage({
               Read our academic paper
             </CUIButton>
             <CUIButton
-              href='https://www.researchgate.net/publication/385666611_ClickHouse_-_Lightning_Fast_Analytics_for_Everyone/citation/download'
-              target='_blank'
-              onClick={useGalaxyOnClick(
-                'productOpenSourcePage.academicPaper.citationSelect'
-              )}
+              onClick={() => {
+                useGalaxyOnClick(
+                  'productOpenSourcePage.academicPaper.citationSelect'
+                )()
+                handleCitationCopy()
+              }}
               type='secondary'
               size='lg'
               className='lg:!px-8'
@@ -1066,7 +1099,7 @@ export default function ClickHouseServerPage({
                   />
                 </svg>
               }>
-              Copy citation
+              {citationCopied ? 'Copied!' : 'Copy citation'}
             </CUIButton>
           </div>
         </div>
