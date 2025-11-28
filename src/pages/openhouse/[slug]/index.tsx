@@ -1,9 +1,12 @@
 import linesPattern from './assets/lines-pattern.svg'
 import speakersPlaceholderDesktop from './assets/speakers-placeholder-desktop.jpg'
 import speakersPlaceholderMobile from './assets/speakers-placeholder-mobile.jpg'
-import { OpenhouseEntry } from './types'
+import { OpenhouseEntry, OpenhouseVideo } from './types'
+import PillFilters from '@/components-cleaned/PillFilters'
+import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import OpenhouseAgendaHandle from '@/components-cleaned/openhouse/AgendaHandle'
 import OpenhouseButton from '@/components-cleaned/openhouse/Button'
+import ContentCarousel from '@/components-cleaned/openhouse/ContentCarousel'
 import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
 import OpenhouseFormModal from '@/components-cleaned/openhouse/FormModal'
 import OpenhouseHeader from '@/components-cleaned/openhouse/Header'
@@ -16,16 +19,22 @@ import FitText from '@/components/FitText'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
+import Modal from '@/components/Modal'
+import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import { fetchAll, findAll } from '@/lib/api/strapi'
 import { IS_PRODUCTION } from '@/lib/next'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getOrdinal } from '@/lib/utils/numbers'
+import { slugify } from '@/lib/utils/strings'
+import playButton from '@/pages/openhouse/assets/play-button.svg'
+import styles from '@/pages/openhouse/styles.module.scss'
 import { CommonProps, ParamsType } from '@/types/homepage'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -46,6 +55,7 @@ export const getStaticProps: GetStaticProps<RoadshowProps> =
         'gallery',
         'cards',
         'cards.icon',
+        'videos',
         'days',
         'days.agenda',
         'days.agenda.speakers',
@@ -129,6 +139,7 @@ export default function Page({
   applyToSpeakLink,
   gallery,
   cards,
+  videos,
   days,
   featuredSpeakers,
   speakers,
@@ -155,8 +166,10 @@ export default function Page({
   }, [])
 
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
+  const videosRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
+  const [activeVideo, setActiveVideo] = useState<null | OpenhouseVideo>(null)
 
   const hasFeaturedSpeakers = featuredSpeakers.length > 0
   const hasSpeakers = speakers.length > 0
@@ -199,6 +212,16 @@ export default function Page({
       router.events.off('hashChangeStart', onHashChangeStart)
     }
   }, [router.events])
+
+  const setFeaturedVideoAndUrl = useCallback(
+    (video: OpenhouseVideo | null) => {
+      setActiveVideo(video)
+      const newUrl = new URL(window.location.toString())
+      newUrl.hash = video ? slugify(`video ${video.title}`) : ''
+      window.history.replaceState(null, '', newUrl.toString())
+    },
+    [setActiveVideo]
+  )
 
   return (
     <>
@@ -282,6 +305,85 @@ export default function Page({
                   </div>
                 )
               })}
+            </div>
+          </section>
+        )}
+
+        {videos && videos.length > 0 && (
+          <section
+            id='videos'
+            className='relative py-10 text-white md:py-20 xl:py-24'>
+            <Modal
+              isOpen={!!activeVideo}
+              onClose={() => setFeaturedVideoAndUrl(null)}>
+              <div className='w-full flex-shrink-0'>
+                {activeVideo && (
+                  <>
+                    <h3 className='mb-6 mt-1 text-2xl md:-mt-1'>
+                      {activeVideo.title}
+                    </h3>
+                    <ResponsiveEmbed>
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${activeVideo.youtubeId}?rel=0&autoplay=1`}
+                        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                        allowFullScreen
+                      />
+                    </ResponsiveEmbed>
+                  </>
+                )}
+              </div>
+            </Modal>
+            <div className='overflow-hidden' ref={videosRef}>
+              <div className='section-container w-full'>
+                <div className='mb-10'>
+                  <p className='text-sm font-medium uppercase text-ch-yellow'>
+                    Sessions
+                  </p>
+                  <FontSohneBreit as='h2' className='text-3xl font-black'>
+                    In case you missed it
+                  </FontSohneBreit>
+                </div>
+                <ContentCarousel mode='dark'>
+                  {videos.map((video, videoIndex) => {
+                    return (
+                      <div
+                        key={videoIndex}
+                        className='group/videoItem relative flex h-full flex-col bg-white text-black'>
+                        <div className='relative'>
+                          <YouTubeThumbnail
+                            videoId={video.youtubeId}
+                            className='z-0 aspect-video h-auto w-full max-w-none origin-top-left object-cover'
+                          />
+                          <Image
+                            src={playButton}
+                            width={89}
+                            height={89}
+                            alt='Play'
+                            className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white transition-transform group-hover/videoItem:scale-105'
+                          />
+                        </div>
+                        <div className='flex flex-1 flex-col p-4 lg:p-6'>
+                          <h3 className='mb-3 text-xl'>
+                            <Link
+                              target='_blank'
+                              href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+                              onClick={(event) => {
+                                event.preventDefault()
+                                setFeaturedVideoAndUrl(video)
+                              }}>
+                              <span className='absolute inset-0 z-10' />
+                              {video.title}
+                            </Link>
+                          </h3>
+                          <strong className='mt-auto group-hover/videoItem:underline'>
+                            Watch now
+                          </strong>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </ContentCarousel>
+              </div>
             </div>
           </section>
         )}
