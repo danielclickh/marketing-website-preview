@@ -712,6 +712,7 @@ ER  -  `
             className='mx-auto w-full max-w-3xl xl:mr-0'
             items={[
               {
+                defaultOpen: true,
                 handle: 'Blazing fast queries and inserts',
                 content: (
                   <div className='w-full space-y-4'>
@@ -787,6 +788,18 @@ ER  -  `
                       optimizing for frequent access patterns.
                     </p>
                     <Image
+                      src={imageJsonSupport}
+                      width={1376 / 2}
+                      height={408 / 2}
+                      alt=''
+                    />
+                    <p>
+                      ClickHouse supports schema on write with JSON support,
+                      semi-structured data can be ingested safely without schema
+                      explosion, combining flexibility with the full power of a
+                      columnar database.
+                    </p>
+                    <Image
                       src={imageLightweightUpdates}
                       width={1376 / 2}
                       height={833 / 2}
@@ -802,7 +815,6 @@ ER  -  `
                 )
               },
               {
-                defaultOpen: true,
                 handle: 'Flexible architecture & columnar storage',
                 content: (
                   <div className='w-full space-y-4'>
@@ -902,18 +914,6 @@ ER  -  `
                       automatically. It extends standard SQL with 100s of
                       analytical functions, making complex aggregations and
                       filters simpler and more expressive.
-                    </p>
-                    <Image
-                      src={imageJsonSupport}
-                      width={1376 / 2}
-                      height={408 / 2}
-                      alt=''
-                    />
-                    <p>
-                      ClickHouse supports schema on write with JSON support,
-                      semi-structured data can be ingested safely without schema
-                      explosion, combining flexibility with the full power of a
-                      columnar database.
                     </p>
                   </div>
                 )
