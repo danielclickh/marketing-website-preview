@@ -12,16 +12,18 @@ export interface AnimatedDataArcProps {
   height?: number
   strokeWidth?: number
   radius?: number
+  reverse?: boolean
 }
 
 export default function AnimatedDataArc({
   direction,
   className,
   duration = 5.75,
-  width = 100,
+  width = 89,
   height = 100,
   strokeWidth = 3,
-  radius = 25
+  radius = 25,
+  reverse = false
 }: AnimatedDataArcProps) {
   // Keep the stroke inside the bounds
   const inset = strokeWidth / 2
@@ -35,28 +37,28 @@ export default function AnimatedDataArc({
    */
   const paths: Record<Directions, string> = {
     'to-bottom-right': `
-      M ${inset} ${inset}
+      M ${inset} 0
       V ${height - r - inset}
       A ${r} ${r} 0 0 0 ${r + inset} ${height - inset}
-      H ${width - inset}
+      H ${width}
     `,
     'to-bottom-left': `
-      M ${width - inset} ${inset}
+      M ${width - inset} 0
       V ${height - r - inset}
       A ${r} ${r} 0 0 1 ${width - r - inset} ${height - inset}
-      H ${inset}
+      H 0
     `,
     'to-top-right': `
-      M ${inset} ${height - inset}
+      M ${inset} ${height}
       V ${r + inset}
       A ${r} ${r} 0 0 1 ${r + inset} ${inset}
-      H ${width - inset}
+      H ${width}
     `,
     'to-top-left': `
-      M ${width - inset} ${height - inset}
+      M ${width - inset} ${height}
       V ${r + inset}
       A ${r} ${r} 0 0 0 ${width - r - inset} ${inset}
-      H ${inset}
+      H 0
     `
   }
 
@@ -79,7 +81,7 @@ export default function AnimatedDataArc({
       <path
         fill='none'
         stroke='#faff69'
-        strokeLinecap='round'
+        strokeLinecap='butt'
         strokeWidth={strokeWidth}
         d={d}
         pathLength='1000'>
@@ -96,7 +98,7 @@ export default function AnimatedDataArc({
           dur={`${duration}s`}
           keyTimes='0;0.5;1'
           repeatCount='indefinite'
-          values='0;-1000;-2000'
+          values={reverse ? '0;1000;2000' : '0;-1000;-2000'}
         />
       </path>
     </svg>

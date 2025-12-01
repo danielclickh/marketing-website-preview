@@ -14,6 +14,7 @@ export interface AnimatedDataLineProps {
     React.SVGProps<SVGLineElement>,
     'x1' | 'x2' | 'y1' | 'y2' | 'strokeWidth' | 'stroke'
   >
+  className?: string
 }
 
 export default function AnimatedDataLine({
@@ -25,7 +26,8 @@ export default function AnimatedDataLine({
   trackColor = '#414141',
   lineColor = '#FAFF69',
   lineProps = {},
-  trackProps = {}
+  trackProps = {},
+  className
 }: AnimatedDataLineProps) {
   // Defaults
   keyframes = keyframes || [
@@ -141,7 +143,8 @@ export default function AnimatedDataLine({
       xmlns='http://www.w3.org/2000/svg'
       width={width}
       height={height}
-      viewBox={`0 0 ${width} ${height}`}>
+      viewBox={`0 0 ${width} ${height}`}
+      className={className}>
       <line
         x1={x1}
         x2={x2}

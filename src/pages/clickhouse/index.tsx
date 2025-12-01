@@ -20,11 +20,18 @@ import imageBackups from './assets/image-backups.png'
 import imageClickbench from './assets/image-clickbench.png'
 import imageInteroperability from './assets/image-interoperability.png'
 import imageJsonSupport from './assets/image-json-support.png'
+import imageLightweightUpdatesAlt from './assets/image-lightweight-updates-alt.png'
 import imageLightweightUpdates from './assets/image-lightweight-updates.png'
 import imageReplication from './assets/image-replication.png'
 import imagesharding from './assets/image-sharding.png'
 import imageSqlSupport from './assets/image-sql-support.png'
 import imageVectorizedEngine from './assets/image-vectorized-engine.png'
+import joinsDiagram1 from './assets/joins-diagram-1.svg'
+import joinsDiagram2 from './assets/joins-diagram-2.svg'
+import joinsDiagram3 from './assets/joins-diagram-3.svg'
+import joinsDiagram4 from './assets/joins-diagram-4.svg'
+import joinsDiagram5 from './assets/joins-diagram-5.svg'
+import joinsDiagramBase from './assets/joins-diagram-base.svg'
 import logoAdevinta from './assets/logo-adevinta.svg'
 import logoBraze from './assets/logo-braze.svg'
 import logoConstantContact from './assets/logo-constant-contact.svg'
@@ -39,6 +46,8 @@ import thumb05 from './assets/thumb-05.png'
 import thumb06 from './assets/thumb-06.png'
 import thumb07 from './assets/thumb-07.png'
 import Accordion from '@/components-cleaned/Accordion'
+import AnimatedDataArc from '@/components-cleaned/AnimatedDataArc'
+import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import GithubStats from '@/components-cleaned/GithubStats'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
@@ -833,7 +842,7 @@ ER  -  `
                     <Image
                       src={imageArchitecture}
                       width={1376 / 2}
-                      height={1002 / 2}
+                      height={760 / 2}
                       alt=''
                     />
                   </div>
@@ -997,6 +1006,57 @@ ER  -  `
         </div>
       </section>
 
+      <FeatureSection image={<JoinsDiagram />}>
+        <SuiTitle type='h2' className='text-white'>
+          Full JOIN support
+        </SuiTitle>
+        <p>
+          ClickHouse fully supports all standard join types and adds powerful
+          non-equality capabilities such as ASOF join.
+        </p>
+        <p>
+          Continuous improvements to join algorithms deliver market leading
+          performance, allowing users to query across normalized datasets
+          without extra preprocessing - keeping analytics flexible and removing
+          the need for forced denormalization.
+        </p>
+      </FeatureSection>
+
+      <FeatureSection direction='rtl' image={<ClickhouseAtScale />}>
+        <SuiTitle type='h2' className='text-white'>
+          Built for high concurrency
+        </SuiTitle>
+        <p>
+          Cloud-native architecture enables effective data tiering and scaling,
+          resulting in the leading price / performance ratio on the market.
+        </p>
+      </FeatureSection>
+
+      <FeatureSection
+        image={
+          <Image
+            src={imageLightweightUpdatesAlt}
+            width={1126 / 2}
+            height={634}
+            alt=''
+          />
+        }>
+        <SuiTitle type='h2' className='text-white'>
+          Lightweight data changes
+        </SuiTitle>
+        <p>
+          ClickHouse delivers fast, reliable handling of updates and deletes
+          through lightweight mutations that modify only the affected rows
+          rather than rewriting entire datasets.
+        </p>
+        <p>
+          Patched parts allow efficient, fine-grained changes while preserving
+          performance, making it practical to support evolving data, late
+          arriving events, and workloads that require correction of historical
+          records.
+        </p>
+      </FeatureSection>
+
       {/* ClickBench */}
       <section className='section-container my-16 lg:my-24'>
         <div className='rounded-lg bg-primary-300 p-4 text-neutral-900 md:p-8 lg:p-16'>
@@ -1051,6 +1111,7 @@ ER  -  `
         </div>
       </section>
 
+      {/* Academic paper */}
       <section className='section-container my-16 flex flex-col items-center justify-around gap-y-16 lg:my-24 lg:flex-row'>
         <div className='w-full space-y-6 md:max-w-lg'>
           <p className='font-bold uppercase text-primary-300'>
@@ -1114,6 +1175,34 @@ ER  -  `
 
       <GetStarted platforms={platforms} />
     </Layout>
+  )
+}
+
+function FeatureSection({
+  image,
+  children,
+  direction = 'ltr'
+}: {
+  image: React.ReactNode
+  children: React.ReactNode
+  direction?: 'ltr' | 'rtl'
+}) {
+  return (
+    <section className='section-container my-16 lg:my-24'>
+      <div
+        className={`flex flex-col items-center justify-center gap-x-16 ${
+          direction === 'rtl' ? 'md:flex-row-reverse' : 'md:flex-row'
+        }`}>
+        <div className='mb-12 flex flex-col md:mb-0 md:w-1/2 md:text-left'>
+          <div className='space-y-4 border-primary-300 text-neutral-200 md:border-l-4 md:pl-8'>
+            {children}
+          </div>
+        </div>
+        <div className='flex w-full items-center justify-center md:w-1/2'>
+          {image}
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -1826,6 +1915,754 @@ function DiagramFive() {
             <p className='text-right uppercase text-primary-400'>GB</p>
           </div>
         </div>
+      </div>
+    </ScaleToContainer>
+  )
+}
+
+function ClickhouseAtScale() {
+  function Tile() {
+    return (
+      <div className='flex size-16 items-center justify-center rounded-md border border-neutral-700/80 bg-neutral-900 p-4'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='44'
+          height='44'
+          fill='none'
+          viewBox='0 0 44 44'>
+          <path
+            stroke='#dfdfdf'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
+            d='M33 9.17a3.67 3.67 0 0 1 3.67 3.66v15.63q0 .88.39 1.65L39 34a1.83 1.83 0 0 1-1.65 2.66H6.64A1.83 1.83 0 0 1 4.99 34l1.95-3.9q.4-.77.4-1.65V12.83A3.67 3.67 0 0 1 11 9.17zm3.77 20.14H7.23'
+          />
+        </svg>
+      </div>
+    )
+  }
+
+  return (
+    <ScaleToContainer scaleUp={false}>
+      <div className='grid size-[537px] grid-cols-3 grid-rows-3'>
+        {/* Top left */}
+        <div className='relative flex items-center justify-center'>
+          <Tile />
+          <AnimatedDataArc
+            direction='to-bottom-right'
+            duration={3}
+            className='absolute left-1/2 top-1/2 translate-y-8'
+          />
+        </div>
+
+        {/* Top center */}
+        <div className='flex items-start justify-center'>
+          <div className='relative z-10 mt-6 size-max'>
+            <Tile />
+            <AnimatedDataLine
+              size={115}
+              direction='down'
+              className='absolute left-1/2 top-full -translate-x-1/2'
+            />
+          </div>
+          <div className='relative -ml-4 -mt-4 size-max opacity-20'>
+            <Tile />
+            <AnimatedDataLine
+              size={144}
+              delay={0.2}
+              direction='down'
+              className='absolute left-1/2 top-full -translate-x-1/2'
+            />
+          </div>
+        </div>
+
+        {/* Top right */}
+        <div className='relative flex items-center justify-center'>
+          <Tile />
+          <AnimatedDataArc
+            direction='to-bottom-left'
+            duration={4}
+            className='absolute right-1/2 top-1/2 translate-y-8'
+          />
+        </div>
+
+        {/* Middle left */}
+        <div className='flex items-center'>
+          <div className='relative size-max'>
+            <Tile />
+            <AnimatedDataLine
+              size={124}
+              direction='right'
+              className='absolute left-full top-1/2 -translate-y-1/2'
+            />
+          </div>
+        </div>
+
+        {/* Middle center */}
+        <div className='relative'>
+          <div className='absolute inset-0 z-0 animate-fadeInOut bg-primary-300/60 blur-xl' />
+          <div className='absolute inset-0 z-10 flex rounded-lg border-2 border-primary-300 bg-neutral-750 bg-gradient-to-br from-primary-300/20 to-primary-300/40'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='104'
+              height='113'
+              fill='none'
+              viewBox='0 0 104 113'
+              className='m-auto'>
+              <path
+                fill='#fff'
+                d='M17 .8c0-.43.37-.8.81-.8h6.16c.44 0 .8.37.8.8v68.4a.8.8 0 0 1-.8.8H17.8a.8.8 0 0 1-.8-.8zm15.54 0c0-.43.37-.8.81-.8h6.16c.44 0 .8.37.8.8v68.4a.8.8 0 0 1-.8.8h-6.16a.8.8 0 0 1-.8-.8zm15.54 0c0-.43.37-.8.81-.8h6.16c.44 0 .8.37.8.8v68.4a.8.8 0 0 1-.8.8h-6.16a.8.8 0 0 1-.8-.8zM63.7.8c0-.43.36-.8.8-.8h6.16c.44 0 .8.37.8.8v68.4a.8.8 0 0 1-.8.8H64.5a.8.8 0 0 1-.8-.8zm15.54 27.27c0-.44.36-.8.8-.8h6.16c.44 0 .8.36.8.8V42a.8.8 0 0 1-.8.8h-6.16a.8.8 0 0 1-.8-.8zM6.8 99.38q-1.06 0-1.9.38a4 4 0 0 0-1.44 1.08 5 5 0 0 0-.9 1.74q-.3 1.02-.3 2.3 0 1.68.5 2.92a4 4 0 0 0 1.5 1.88q1 .66 2.52.66.92 0 1.76-.16a18 18 0 0 0 1.74-.46v1.86q-.84.32-1.72.46-.88.16-2.04.16-2.18 0-3.64-.9a5.5 5.5 0 0 1-2.16-2.56 10 10 0 0 1-.72-3.88q0-1.62.44-2.96.46-1.36 1.32-2.34a6 6 0 0 1 2.12-1.5 8 8 0 0 1 2.94-.54 9.4 9.4 0 0 1 4 .88l-.8 1.8q-.7-.32-1.52-.56a6 6 0 0 0-1.7-.26M15.24 112h-2.12V96.8h2.12zm5.45-10.78V112h-2.12v-10.78zm-1.04-4.1q.48 0 .84.28t.36.94q0 .64-.36.94-.36.28-.84.28-.52 0-.88-.28-.34-.3-.34-.94-.01-.66.34-.94t.88-.28m8.7 15.08q-1.47 0-2.6-.58a4 4 0 0 1-1.74-1.8 7 7 0 0 1-.62-3.14q0-2 .66-3.24a4.3 4.3 0 0 1 1.82-1.82q1.17-.6 2.64-.6.9 0 1.68.2.81.18 1.32.42l-.64 1.72a10 10 0 0 0-1.2-.38 5 5 0 0 0-1.18-.16q-1 0-1.66.44-.63.41-.96 1.28-.3.84-.3 2.12 0 1.22.32 2.06.33.84.94 1.28.65.42 1.58.42a5.6 5.6 0 0 0 2.86-.72v1.84q-.57.35-1.26.5-.67.16-1.66.16m7.57-7.8q0 .42-.04.96-.02.54-.06 1h.06l.38-.48.48-.6.44-.52 3.3-3.54h2.46l-4.34 4.62 4.62 6.16h-2.5l-3.56-4.82-1.24 1.04V112h-2.1V96.8h2.1zm20.45 7.6h-2.16v-6.52H47.4V112h-2.16V97.72h2.16v5.92h6.82v-5.92h2.16zm13.08-5.4q0 1.35-.36 2.38-.36 1.05-1.02 1.76-.66.72-1.6 1.1a6 6 0 0 1-4.12 0 4.6 4.6 0 0 1-2.64-2.86q-.38-1.05-.38-2.4 0-1.79.6-3.02a4.3 4.3 0 0 1 1.76-1.88 5.4 5.4 0 0 1 2.72-.66q1.49 0 2.6.66a4.4 4.4 0 0 1 1.78 1.88q.66 1.24.66 3.04m-7.94 0q0 1.2.3 2.08.3.86.94 1.32.65.45 1.64.46 1 0 1.64-.46t.94-1.32q.3-.88.3-2.08 0-1.24-.32-2.08-.3-.84-.94-1.28-.62-.45-1.64-.46-1.5 0-2.18 1t-.68 2.82m19.91-5.38V112h-1.7l-.3-1.42h-.1a3 3 0 0 1-.88.92q-.54.36-1.18.52-.65.18-1.32.18-1.26 0-2.14-.4a3 3 0 0 1-1.32-1.28 5 5 0 0 1-.44-2.24v-7.06h2.14v6.74q0 1.26.52 1.88.54.62 1.66.62t1.76-.44q.65-.45.9-1.28.28-.86.28-2.06v-5.46zm10.48 7.74q0 1.06-.52 1.78t-1.5 1.1q-.98.36-2.36.36-1.15 0-1.96-.18a7 7 0 0 1-1.48-.48v-1.86q.72.34 1.66.62a7 7 0 0 0 1.84.26q1.2 0 1.72-.38.54-.38.54-1.02 0-.36-.2-.64-.2-.3-.76-.6-.55-.32-1.6-.72a17 17 0 0 1-1.74-.82q-.72-.41-1.1-.98a2.7 2.7 0 0 1-.38-1.48q0-1.4 1.12-2.14 1.14-.75 3-.76.97 0 1.84.2.87.17 1.7.56l-.7 1.62q-.46-.22-.96-.36-.48-.16-.98-.26-.48-.1-1-.1-.96 0-1.46.3t-.5.84q0 .38.22.66.24.28.82.56.57.28 1.58.68 1 .38 1.7.78.72.4 1.08.98.38.58.38 1.48m6.76-7.94q1.43 0 2.45.6 1.01.59 1.56 1.68.55 1.1.55 2.6v1.16h-7.24q.05 1.65.86 2.54.84.88 2.34.88 1.05 0 1.84-.18.82-.2 1.69-.58v1.76a8 8 0 0 1-3.6.72q-1.57 0-2.77-.62a4.5 4.5 0 0 1-1.88-1.84 6.4 6.4 0 0 1-.66-3.04q0-1.82.6-3.08a4.5 4.5 0 0 1 4.26-2.6m0 1.64q-1.14 0-1.84.74-.68.75-.8 2.1h5.09q0-.84-.27-1.48a2 2 0 0 0-.8-1 2.4 2.4 0 0 0-1.38-.36'
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Middle right */}
+        <div className='flex items-end justify-end'>
+          <div className='relative size-max opacity-20'>
+            <Tile />
+            <AnimatedDataArc
+              direction='to-top-left'
+              height={40}
+              width={144}
+              className='absolute bottom-full right-1/2 -translate-x-0.5'
+            />
+          </div>
+        </div>
+
+        {/* Bottom Left */}
+        <div className='flex flex-col items-end'>
+          <div className='relative mr-4 mt-1 size-max'>
+            <AnimatedDataArc
+              direction='to-top-right'
+              duration={3}
+              height={40}
+              width={52}
+              className='absolute bottom-full left-1/2 -translate-x-0.5'
+            />
+            <Tile />
+          </div>
+          <div className='relative mr-8 mt-4 size-max opacity-20'>
+            <AnimatedDataArc
+              reverse={true}
+              direction='to-bottom-left'
+              duration={3.5}
+              height={150}
+              width={64}
+              className='absolute bottom-1/2 left-full translate-y-0.5'
+            />
+            <Tile />
+          </div>
+        </div>
+
+        {/* Bottom center */}
+        <div className='flex items-end justify-center'>
+          <div className='relative size-max'>
+            <Tile />
+            <AnimatedDataLine
+              size={115}
+              direction='up'
+              className='absolute bottom-full left-1/2 -translate-x-1/2'
+            />
+          </div>
+        </div>
+
+        {/* Bottom right */}
+        <div className='flex flex-col'>
+          <div className='relative ml-4 mt-1 size-max'>
+            <AnimatedDataArc
+              direction='to-top-left'
+              duration={3.5}
+              height={80}
+              width={52}
+              className='absolute bottom-full right-1/2 translate-x-0.5'
+            />
+            <Tile />
+          </div>
+          <div className='relative mt-9 size-max opacity-20'>
+            <AnimatedDataArc
+              reverse={true}
+              direction='to-bottom-right'
+              duration={3.5}
+              height={150}
+              width={30}
+              className='absolute bottom-1/2 right-full translate-y-0.5'
+            />
+            <Tile />
+          </div>
+        </div>
+      </div>
+    </ScaleToContainer>
+  )
+}
+
+function JoinsDiagram() {
+  const steps = 5
+  const [stepIndex, setStepIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setStepIndex((old) => {
+        const newIndex = old + 0.5
+        if (newIndex >= steps) return 0
+        return newIndex
+      })
+    }, 1000)
+
+    return () => window.clearInterval(timer)
+  }, [steps])
+
+  return (
+    <ScaleToContainer scaleUp={false}>
+      <div
+        className='grid grid-cols-1 grid-rows-1'
+        style={{ width: 246 * 1.5, height: 134 * 1.5 }}>
+        {/* Base */}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={246}
+          height={134}
+          fill='none'
+          viewBox='0 0 246 134'
+          className='col-start-1 row-start-1 h-auto w-full overflow-visible'>
+          <g filter='url(#joins-base-b)'>
+            <rect width={168.38} height={92} fill='#282828' rx={2.58} />
+            <rect
+              width={167.73}
+              height={91.36}
+              x={0.32}
+              y={0.32}
+              stroke='#fff'
+              strokeOpacity={0.1}
+              strokeWidth={0.64}
+              rx={2.26}
+            />
+          </g>
+          <rect
+            width={166.89}
+            height={24.49}
+            x={0.64}
+            y={0.64}
+            fill='#1d1d1d'
+            rx={1.93}
+          />
+          <g filter='url(#joins-base-c)'>
+            <rect
+              width={168.38}
+              height={92}
+              x={77}
+              y={42}
+              fill='#282828'
+              rx={2.58}
+            />
+            <rect
+              width={167.73}
+              height={91.36}
+              x={77.32}
+              y={42.32}
+              stroke='#fff'
+              strokeOpacity={0.1}
+              strokeWidth={0.64}
+              rx={2.26}
+            />
+          </g>
+          <rect
+            width={166.89}
+            height={24.49}
+            x={77.64}
+            y={42.64}
+            fill='#1d1d1d'
+            rx={1.93}
+          />
+          <defs>
+            <filter
+              id='joins-base-b'
+              width={171.85}
+              height={95.47}
+              x={-1.74}
+              y={0}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset dy={1.74} />
+              <feGaussianBlur stdDeviation={0.87} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_293'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_293'
+                result='shape'
+              />
+            </filter>
+            <filter
+              id='joins-base-c'
+              width={171.85}
+              height={95.47}
+              x={75.26}
+              y={42}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset dy={1.74} />
+              <feGaussianBlur stdDeviation={0.87} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_293'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_293'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+
+        {/* 1 */}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={246}
+          height={134}
+          fill='none'
+          viewBox='0 0 246 134'
+          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 0 ? '' : 'opacity-0'}`}>
+          <g filter='url(#joins-1-a)' shapeRendering='crispEdges'>
+            <path
+              fill='#fcff74'
+              fillOpacity={0.4}
+              d='M77 44.5a2.5 2.5 0 0 1 2.5-2.5H168v47.5a2.5 2.5 0 0 1-2.5 2.5H77z'
+            />
+            <path
+              stroke='#faff69'
+              d='M79.5 42.5h88v47a2 2 0 0 1-2 2h-88v-47c0-1.1.9-2 2-2Z'
+            />
+          </g>
+          <path
+            fill='#faff69'
+            d='M84.41 92H83l50-50h1.41zm8 0H91l50-50h1.41zm8 0H99l50-50h1.41zm8 0H107l50-50h1.41zm8 0H115l50-50h1.41zM168 48.41 124.41 92H123l45-45zm0 8L132.41 92H131l37-37zm0 8L140.41 92H139l29-29zm0 8L148.41 92H147l21-21zm0 8L156.41 92H155l13-13zm0 8L164.41 92H163l5-5zm-91 3V90l48-48h1.41zm0-8V82l40-40h1.41zm0-8V74l32-32h1.41zm0-8V66l24-24h1.41zm0-8V58l16-16h1.41zm0-8V50l8-8h1.41z'
+            opacity={0.4}
+          />
+          <defs>
+            <filter
+              id='joins-1-a'
+              width={131}
+              height={90}
+              x={57}
+              y={22}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset />
+              <feGaussianBlur stdDeviation={10} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_293'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_293'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+
+        {/* 2 */}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={246}
+          height={134}
+          fill='none'
+          viewBox='0 0 246 134'
+          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 1 ? '' : 'opacity-0'}`}>
+          <mask
+            id='joins-2-b'
+            width={168}
+            height={92}
+            x={0}
+            y={0}
+            maskUnits='userSpaceOnUse'
+            style={{
+              maskType: 'alpha'
+            }}>
+            <mask id='joins-2-a' fill='#fff'>
+              <path d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
+            </mask>
+            <path
+              fill='#fcff74'
+              fillOpacity={0.4}
+              d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
+            />
+            <path
+              fill='#faff69'
+              d='M164 0v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zM77 44.5h-1zM77 92v1h1v-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v-1H79.5v2H168zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.83.67-1.5 1.5-1.5zM77 44.5h-1V92h2V44.5zM77 92v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
+              mask='url(#joins-2-a)'
+            />
+          </mask>
+          <g mask='url(#joins-2-b)'>
+            <path
+              fill='#faff69'
+              d='m10 1-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0L-2 93l-.7-.7 92-92zm8 0L6 93l-.7-.7 92-92zm8 0L14 93l-.7-.7 92-92zm8 0L22 93l-.7-.7 92-92zm8 0L30 93l-.7-.7 92-92zm8 0L38 93l-.7-.7 92-92zm8 0L46 93l-.7-.7 92-92zm8 0L54 93l-.7-.7 92-92zm8 0L62 93l-.7-.7 92-92zm8 0L70 93l-.7-.7 92-92zm8 0L78 93l-.7-.7 92-92zm8 0L86 93l-.7-.7 92-92zm8 0L94 93l-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92z'
+            />
+          </g>
+          <g filter='url(#joins-2-c)'>
+            <mask id='joins-2-d' fill='#fff'>
+              <path d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
+            </mask>
+            <path
+              fill='#fcff74'
+              fillOpacity={0.4}
+              d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
+              shapeRendering='crispEdges'
+            />
+            <path
+              fill='#faff69'
+              d='M164 0v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zM77 44.5h-1zM77 92v1h1v-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v-1H79.5v2H168zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.83.67-1.5 1.5-1.5zM77 44.5h-1V92h2V44.5zM77 92v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
+              mask='url(#joins-2-d)'
+            />
+          </g>
+          <defs>
+            <filter
+              id='joins-2-c'
+              width={188}
+              height={112}
+              x={-10}
+              y={-10}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset />
+              <feGaussianBlur stdDeviation={5} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.4 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_332'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_332'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+
+        {/* 3 */}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={246}
+          height={134}
+          fill='none'
+          viewBox='0 0 246 134'
+          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 2 ? '' : 'opacity-0'}`}>
+          <g filter='url(#joins-3-a)' shapeRendering='crispEdges'>
+            <rect
+              width={168}
+              height={92}
+              x={77}
+              y={42}
+              fill='#fcff74'
+              fillOpacity={0.4}
+              rx={4}
+            />
+            <rect
+              width={167}
+              height={91}
+              x={77.5}
+              y={42.5}
+              stroke='#faff69'
+              rx={3.5}
+            />
+          </g>
+          <path
+            fill='#faff69'
+            d='M173.7 42.7 82.42 134H81l92-92zm8 0L90.42 134H89l92-92zm8 0L98.42 134H97l92-92zm8 0L106.42 134H105l92-92zm8 0L114.42 134H113l92-92zm8 0L122.42 134H121l92-92zm8 0L130.42 134H129l92-92zm8 0L138.42 134H137l92-92zm8 0L146.42 134H145l92-92zm6.13.47a4 4 0 0 1 .61.8L154.42 134H153zm1.17 8.24L162.41 134H161l84-84zm0 8L170.41 134H169l76-76zm0 8L178.41 134H177l68-68zm0 8L186.41 134H185l60-60zm0 8.3L194.7 134h-1.4L245 82.3zm0 8.29-42 42h-1.41L245 90.59zm0 8.3L211.3 134h-1.42L245 98.88zm0 8.29L219.59 134h-1.42L245 107.17zm0 8.29L227.88 134h-1.41L245 115.47zm0 8.3-8.83 8.82h-1.41L245 123.76zM165.7 42.7l-88.5 88.52a4 4 0 0 1-.19-1.01V130l88-88zm-8 0L77 123.4V122l80-80zm-8 0L77 115.4V114l72-72zm-8 0L77 107.4V106l64-64zm-8 0L77 99.4V98l56-56zm-8 0L77 91.4V90l48-48zm-8 0L77 83.4V82l40-40zm-8 0L77 75.4V74l32-32zm-8 0L77 67.4V66l24-24zm-8 0L77 59.4V58l16-16zm-8 0L77 51.4V50l8-8z'
+            opacity={0.4}
+          />
+          <defs>
+            <filter
+              id='joins-3-a'
+              width={208}
+              height={132}
+              x={57}
+              y={22}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset />
+              <feGaussianBlur stdDeviation={10} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_446'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_446'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+
+        {/* 4 */}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={246}
+          height={134}
+          fill='none'
+          viewBox='0 0 246 134'
+          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 3 ? '' : 'opacity-0'}`}>
+          <g filter='url(#joins-4-a)'>
+            <mask id='joins-4-b' fill='#fff'>
+              <path d='M164 0a4 4 0 0 1 4 4v38h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4H81a4 4 0 0 1-4-4V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
+            </mask>
+            <path
+              fill='#fcff74'
+              fillOpacity={0.4}
+              d='M164 0a4 4 0 0 1 4 4v38h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4H81a4 4 0 0 1-4-4V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
+              shapeRendering='crispEdges'
+            />
+            <path
+              fill='#faff69'
+              d='M164 0v-1zm4 4h1zm0 38h-1v1h1zm73 0v-1zm4 4h1zm-4 88v1zm-160 0v1zm-4-4h-1zm0-38h1v-1h-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v1h73v-2h-73zm73 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v84h2V46zm0 84h-1a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5zm-4 4v-1H81v2h160zm-160 0v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V92h-2v38zm0-38v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
+              mask='url(#joins-4-b)'
+            />
+          </g>
+          <path
+            fill='#faff69'
+            d='m178.3 42-92 92h-1.42l92-92zm8.29 0-92 92h-1.42l92-92zm8.29 0-92 92h-1.41l92-92zm8.3 0-92 92h-1.42l92-92zm7.53 0-92 92h-1.42l92-92zm7.53 0-92 92h-1.41l92-92zm7.54 0-92 92h-1.42l92-92zm7.53 0-92 92h-1.41l92-92zm7.54 0-92 92h-1.42l92-92zm3.79 2.33q.23.5.32 1.1L156.38 134h-1.41zm.36 8.59L163.92 134h-1.42L245 51.5zm0 7.53L171.45 134h-1.41L245 59.04zm0 7.54L178.99 134h-1.42L245 66.57zm0 7.53L186.52 134h-1.41L245 74.1zm0 7.54L194.06 134h-1.41L245 81.64zm0 7.53L201.6 134h-1.42L245 89.18zm0 7.54L209.13 134h-1.41L245 96.71zm0 7.53L216.66 134h-1.41L245 104.25zm0 7.54L224.2 134h-1.41L245 111.78zm0 7.53L231.73 134h-1.41L245 119.32zM170 42l-91.28 91.28a4 4 0 0 1-.75-.67L168.6 42zm-2-6.3-91 91v-1.4l91-91zm0-8.29-91 91V117l91-91zm0-8-91 91V109l91-91zm0-8-91 91V101l91-91zm-.35-9.06q.23.53.31 1.1L77 94.41V93zM7.7 91.71 7 91 98 0h1.41zm8 0L15 91l91-91h1.41zm8 0L23 91l91-91h1.41zm8 0L31 91l91-91h1.41zm8 0L39 91l91-91h1.41zm8 0L47 91l91-91h1.41zm8 0L55 91l91-91h1.41zm8 0L63 91l91-91h1.41zm8 0L71 91l91-91h1.41zM.89 90.5a4 4 0 0 1-.54-.86L90 0h1.41zM0 83.42V82L82 0h1.41zm0-8V74L74 0h1.41zm0-8V66L66 0h1.41zm0-8V58L58 0h1.41zm0-8V50L50 0h1.41zm0-8V42L42 0h1.41zm0-8V34L34 0h1.41zm0-8V26L26 0h1.41zm0-8V18L18 0h1.41zm0-8V10L10 0h1.41z'
+            opacity={0.4}
+          />
+          <defs>
+            <filter
+              id='joins-4-a'
+              width={285}
+              height={174}
+              x={-20}
+              y={-20}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset />
+              <feGaussianBlur stdDeviation={10} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_488'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_488'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+
+        {/* 5 */}
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={246}
+          height={134}
+          fill='none'
+          viewBox='0 0 246 134'
+          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 4 ? '' : 'opacity-0'}`}>
+          <g filter='url(#joins-5-a)'>
+            <mask id='joins-5-b' fill='#fff'>
+              <path d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
+            </mask>
+            <path
+              fill='#fcff74'
+              fillOpacity={0.4}
+              d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
+            />
+            <path
+              fill='#faff69'
+              d='M164 0v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zM77 44.5h-1zM77 92v1h1v-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v-1H79.5v2H168zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.83.67-1.5 1.5-1.5zM77 44.5h-1V92h2V44.5zM77 92v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
+              mask='url(#joins-5-b)'
+            />
+            <mask
+              id='joins-5-c'
+              width={285}
+              height={93}
+              x={-83}
+              y={0}
+              maskUnits='userSpaceOnUse'
+              style={{
+                maskType: 'alpha'
+              }}>
+              <path
+                fill='#faff69'
+                d='m9.7.7-92 92-.7-.7L9 0zm8 0-92 92-.7-.7L17 0zm8 0-92 92-.7-.7L25 0zm8 0-92 92-.7-.7L33 0zm8 0-92 92-.7-.7L41 0zm8 0-92 92-.7-.7L49 0zm8 0-92 92-.7-.7L57 0zm8 0-92 92-.7-.7L65 0zm8 0-92 92-.7-.7L73 0zm8 0-92 92-.7-.7L81 0zm8 0-92 92-.7-.7L89 0zm8 0-92 92L5 92 97 0zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92z'
+              />
+            </mask>
+            <g mask='url(#joins-5-c)'>
+              <mask id='joins-5-d' fill='#fff'>
+                <path d='M163.7-.3a4 4 0 0 1 4 4v38H79.2a2.5 2.5 0 0 0-2.5 2.5v47.5h-73a4 4 0 0 1-4-4v-84a4 4 0 0 1 4-4z' />
+              </mask>
+              <path
+                fill='#fcff74'
+                fillOpacity={0.4}
+                d='M163.7-.3a4 4 0 0 1 4 4v38H79.2a2.5 2.5 0 0 0-2.5 2.5v47.5h-73a4 4 0 0 1-4-4v-84a4 4 0 0 1 4-4z'
+              />
+              <path
+                fill='#faff69'
+                d='M163.7-.3v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zm-2.5 2.5h-1zm0 47.5v1h1v-1zm-73 0v1zm-4-4h-1zm4-88v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2v-38zm0 38v-1H79.2v2h88.5zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.82.68-1.5 1.5-1.5zm-2.5 2.5h-1v47.5h2V44.2zm0 47.5v-1h-73v2h73zm-73 0v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1v-84h-2v84zm0-84h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H3.7z'
+                mask='url(#joins-5-d)'
+              />
+            </g>
+          </g>
+          <g filter='url(#joins-5-e)'>
+            <mask id='joins-5-f' fill='#fff'>
+              <path d='M245 131.5a2.5 2.5 0 0 1-2.5 2.5H77V93h88.5a2.5 2.5 0 0 0 2.5-2.5V42h77z' />
+            </mask>
+            <path
+              fill='#fcff74'
+              fillOpacity={0.4}
+              d='M245 131.5a2.5 2.5 0 0 1-2.5 2.5H77V93h88.5a2.5 2.5 0 0 0 2.5-2.5V42h77z'
+            />
+            <path
+              fill='#faff69'
+              d='M245 131.5h1zm-2.5 2.5v1zM77 134h-1v1h1zm0-41v-1h-1v1zm88.5 0v1zm2.5-2.5h1zm0-48.5v-1h-1v1zm77 0h1v-1h-1zm0 89.5h-1c0 .83-.67 1.5-1.5 1.5v2a3.5 3.5 0 0 0 3.5-3.5zm-2.5 2.5v-1H77v2h165.5zM77 134h1V93h-2v41zm0-41v1h88.5v-2H77zm88.5 0v1a3.5 3.5 0 0 0 3.5-3.5h-2c0 .83-.67 1.5-1.5 1.5zm2.5-2.5h1V42h-2v48.5zm0-48.5v1h77v-2h-77zm77 0h-1v89.5h2V42z'
+              mask='url(#joins-5-f)'
+            />
+            <g clipPath='url(#joins-5-g)'>
+              <mask
+                id='joins-5-h'
+                width={285}
+                height={93}
+                x={43}
+                y={42}
+                maskUnits='userSpaceOnUse'
+                style={{
+                  maskType: 'alpha'
+                }}>
+                <path
+                  fill='#faff69'
+                  d='m235 134 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92z'
+                />
+              </mask>
+              <g mask='url(#joins-5-h)'>
+                <mask id='joins-5-i' fill='#fff'>
+                  <path d='M81 135a4 4 0 0 1-4-4V93h88.5a2.5 2.5 0 0 0 2.5-2.5V43h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4z' />
+                </mask>
+                <path
+                  fill='#fcff74'
+                  fillOpacity={0.4}
+                  d='M81 135a4 4 0 0 1-4-4V93h88.5a2.5 2.5 0 0 0 2.5-2.5V43h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4z'
+                />
+                <path
+                  fill='#faff69'
+                  d='M81 135v1zm-4-4h-1zm0-38v-1h-1v1zm88.5 0v1zm2.5-2.5h1zm0-47.5v-1h-1v1zm73 0v-1zm4 4h1zm-4 88v1zm-160 0v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V93h-2v38zm0-38v1h88.5v-2H77zm88.5 0v1a3.5 3.5 0 0 0 3.5-3.5h-2c0 .83-.67 1.5-1.5 1.5zm2.5-2.5h1V43h-2v47.5zm0-47.5v1h73v-2h-73zm73 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v84h2V47zm0 84h-1a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5zm-4 4v-1H81v2h160z'
+                  mask='url(#joins-5-i)'
+                />
+              </g>
+            </g>
+          </g>
+          <defs>
+            <filter
+              id='joins-5-a'
+              width={208.67}
+              height={132}
+              x={-20.29}
+              y={-20}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset />
+              <feGaussianBlur stdDeviation={10} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_372'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_372'
+                result='shape'
+              />
+            </filter>
+            <filter
+              id='joins-5-e'
+              width={325}
+              height={132}
+              x={23}
+              y={22}
+              colorInterpolationFilters='sRGB'
+              filterUnits='userSpaceOnUse'>
+              <feFlood floodOpacity={0} result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                result='hardAlpha'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+              />
+              <feOffset />
+              <feGaussianBlur stdDeviation={10} />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
+              <feBlend
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_207_372'
+              />
+              <feBlend
+                in='SourceGraphic'
+                in2='effect1_dropShadow_207_372'
+                result='shape'
+              />
+            </filter>
+            <clipPath id='joins-5-g'>
+              <path fill='#fff' d='M43 42h285v92H43z' />
+            </clipPath>
+          </defs>
+        </svg>
       </div>
     </ScaleToContainer>
   )
