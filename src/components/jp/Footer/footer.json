@@ -145,23 +145,23 @@
       {
         "id": 22,
         "name": "LinkedIn",
-        "href": "https://www.linkedin.com/company/clickhouseinc",
+        "href": "https://www.linkedin.com/company/clickhouse-jp/",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.linkedInSelect"
       },
       {
         "id": 22,
         "name": "X",
-        "href": "https://x.com/ClickhouseDB",
+        "href": "https://x.com/ClickHouseJP",
         "target": "_blank",
         "galaxyEvent": "footerNav.communityMenu.twitterSelect"
       },
       {
         "id": 23,
-        "name": "Telegram",
-        "href": "https://telegram.me/clickhouse_en",
+        "name": "Facebook",
+        "href": "https://www.facebook.com/ClickHouseJP",
         "target": "_blank",
-        "galaxyEvent": "footerNav.communityMenu.telegramSelect"
+        "galaxyEvent": "footerNav.communityMenu.facebookSelect"
       },
       {
         "id": 24,
