@@ -278,6 +278,7 @@ export interface EntryResourceCategory extends Entry {
   slug: string
   heading: null | string
   seo: ComponentSeo
+  requiresThumbnail: boolean
 }
 
 export interface EntryResource extends Entry {
@@ -293,6 +294,7 @@ export interface EntryResource extends Entry {
   sections: Array<BlogModules>
   seo: ComponentSeo
   category: EntryResourceCategory
+  thumbnail: null | EntryImage
 }
 
 export interface EntryEvent extends Entry {
