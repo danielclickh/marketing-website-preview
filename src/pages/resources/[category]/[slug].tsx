@@ -2,6 +2,7 @@ import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ScrollToTop from '@/components-cleaned/ScrollToTop'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
 import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import Avatars from '@/components/Avatars'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
@@ -210,6 +211,12 @@ export default function ResourcePage({
             {/* Blog content */}
             <article className='order-3 lg:order-none lg:col-span-11 xl:col-span-9'>
               <div className='w-full space-y-6' ref={contentRef}>
+                {resource.thumbnail && (
+                  <StrapiImage
+                    entry={resource.thumbnail}
+                    className='h-auto w-full'
+                  />
+                )}
                 {resource.sections &&
                   resource.sections.length > 0 &&
                   resource.sections.map((section, sectionIndex) => {

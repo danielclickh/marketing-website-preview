@@ -1,4 +1,5 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
+import StrapiResourceCard from '@/components-cleaned/StrapiResourceCard'
 import Layout from '@/components/Layout'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import {
@@ -122,30 +123,43 @@ export default function ResourcesCategoryPage({
           <hr className='my-6 h-px border-0 bg-white/20' />
 
           {filteredResources.length > 0 ? (
-            <ul className='space-y-10'>
+            <ul
+              className={
+                category.requiresThumbnail
+                  ? 'grid grid-cols-1 gap-8 lg:grid-cols-3'
+                  : 'space-y-10'
+              }>
               {filteredResources.map((resource, resourceIndex) => {
                 return (
-                  <li className='relative space-y-4' key={resourceIndex}>
-                    <SuiTitle type='h2' className='!text-xl'>
-                      <Link
-                        href={`/resources/${resource.category.slug}/${resource.slug}`}
-                        className='text-primary-300 hover:underline'>
-                        <span className='absolute inset-0' />
-                        {resource.title}
-                      </Link>
-                    </SuiTitle>
-                    <p className='mt-2 text-neutral-200'>{resource.excerpt}</p>
-                    {(resource.author || resource.date) && (
-                      <p className='text-sm text-neutral-200'>
-                        {[
-                          resource.author?.name,
-                          resource?.date
-                            ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`
-                            : null
-                        ]
-                          .filter(Boolean)
-                          .join(' • ')}
-                      </p>
+                  <li key={resourceIndex}>
+                    {category.requiresThumbnail ? (
+                      <StrapiResourceCard entry={resource} />
+                    ) : (
+                      <div className='relative space-y-4'>
+                        <SuiTitle type='h2' className='!text-xl'>
+                          <Link
+                            href={`/resources/${resource.category.slug}/${resource.slug}`}
+                            className='text-primary-300 hover:underline'>
+                            <span className='absolute inset-0' />
+                            {resource.title}
+                          </Link>
+                        </SuiTitle>
+                        <p className='mt-2 text-neutral-200'>
+                          {resource.excerpt}
+                        </p>
+                        {(resource.author || resource.date) && (
+                          <p className='text-sm text-neutral-200'>
+                            {[
+                              resource.author?.name,
+                              resource?.date
+                                ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`
+                                : null
+                            ]
+                              .filter(Boolean)
+                              .join(' • ')}
+                          </p>
+                        )}
+                      </div>
                     )}
                   </li>
                 )
