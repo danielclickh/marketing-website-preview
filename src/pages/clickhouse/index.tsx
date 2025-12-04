@@ -26,10 +26,15 @@ import imageReplication from './assets/image-replication.png'
 import imagesharding from './assets/image-sharding.png'
 import imageSqlSupport from './assets/image-sql-support.png'
 import imageVectorizedEngine from './assets/image-vectorized-engine.png'
+import joinsDiagram1Mask from './assets/joins-diagram-1-mask.svg'
 import joinsDiagram1 from './assets/joins-diagram-1.svg'
+import joinsDiagram2Mask from './assets/joins-diagram-2-mask.svg'
 import joinsDiagram2 from './assets/joins-diagram-2.svg'
+import joinsDiagram3Mask from './assets/joins-diagram-3-mask.svg'
 import joinsDiagram3 from './assets/joins-diagram-3.svg'
+import joinsDiagram4Mask from './assets/joins-diagram-4-mask.svg'
 import joinsDiagram4 from './assets/joins-diagram-4.svg'
+import joinsDiagram5Mask from './assets/joins-diagram-5-mask.svg'
 import joinsDiagram5 from './assets/joins-diagram-5.svg'
 import joinsDiagramBase from './assets/joins-diagram-base.svg'
 import logoAdevinta from './assets/logo-adevinta.svg'
@@ -70,6 +75,7 @@ import { CommonProps } from '@/types/homepage'
 import { EntryMarketingVideo } from '@/types/strapi'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
+import { StaticImageData } from 'next/dist/shared/lib/get-img-props'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
 import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
@@ -2113,572 +2119,84 @@ function ClickhouseAtScale() {
 }
 
 function JoinsDiagram() {
-  const steps = 5
   const [stepIndex, setStepIndex] = useState(0)
+
+  const steps: Array<{
+    image: StaticImageData
+    mask: StaticImageData
+  }> = [
+    {
+      image: joinsDiagram1,
+      mask: joinsDiagram1Mask
+    },
+    {
+      image: joinsDiagram2,
+      mask: joinsDiagram2Mask
+    },
+    {
+      image: joinsDiagram3,
+      mask: joinsDiagram3Mask
+    },
+    {
+      image: joinsDiagram4,
+      mask: joinsDiagram4Mask
+    },
+    {
+      image: joinsDiagram5,
+      mask: joinsDiagram5Mask
+    }
+  ]
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setStepIndex((old) => {
         const newIndex = old + 0.5
-        if (newIndex >= steps) return 0
+        if (newIndex >= steps.length) return 0
         return newIndex
       })
     }, 1000)
 
     return () => window.clearInterval(timer)
-  }, [steps])
+  }, [steps.length])
+
+  const activeStepMask: undefined | string = steps[stepIndex]?.mask?.src
 
   return (
     <ScaleToContainer scaleUp={false}>
       <div
         className='grid grid-cols-1 grid-rows-1'
-        style={{ width: 246 * 1.5, height: 134 * 1.5 }}>
-        {/* Base */}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width={246}
-          height={134}
-          fill='none'
-          viewBox='0 0 246 134'
-          className='col-start-1 row-start-1 h-auto w-full overflow-visible'>
-          <g filter='url(#joins-base-b)'>
-            <rect width={168.38} height={92} fill='#282828' rx={2.58} />
-            <rect
-              width={167.73}
-              height={91.36}
-              x={0.32}
-              y={0.32}
-              stroke='#fff'
-              strokeOpacity={0.1}
-              strokeWidth={0.64}
-              rx={2.26}
+        style={{
+          width: 266 * 1.5,
+          height: 154 * 1.5
+        }}>
+        <Image
+          src={joinsDiagramBase}
+          width={266}
+          height={154}
+          alt=''
+          className='col-start-1 row-start-1 h-auto w-full max-w-none'
+        />
+        {steps.map((step, index) => {
+          return (
+            <Image
+              src={step.image}
+              width={266}
+              height={154}
+              alt=''
+              className={`col-start-1 row-start-1 h-auto w-full max-w-none transition-opacity ${stepIndex === index ? '' : 'opacity-0'}`}
             />
-          </g>
-          <rect
-            width={166.89}
-            height={24.49}
-            x={0.64}
-            y={0.64}
-            fill='#1d1d1d'
-            rx={1.93}
+          )
+        })}
+        <div
+          className='relative col-start-1 row-start-1 overflow-hidden'
+          style={{
+            maskSize: '100% 100%',
+            maskImage: activeStepMask ? `url(${activeStepMask})` : 'none'
+          }}>
+          <div
+            className={`absolute inset-y-0 left-0 w-20 -translate-x-24 -skew-x-12 bg-primary-300 duration-700 ${activeStepMask ? 'left-full !translate-x-20 transition-all' : 'opacity-0 transition-none'}`}
           />
-          <g filter='url(#joins-base-c)'>
-            <rect
-              width={168.38}
-              height={92}
-              x={77}
-              y={42}
-              fill='#282828'
-              rx={2.58}
-            />
-            <rect
-              width={167.73}
-              height={91.36}
-              x={77.32}
-              y={42.32}
-              stroke='#fff'
-              strokeOpacity={0.1}
-              strokeWidth={0.64}
-              rx={2.26}
-            />
-          </g>
-          <rect
-            width={166.89}
-            height={24.49}
-            x={77.64}
-            y={42.64}
-            fill='#1d1d1d'
-            rx={1.93}
-          />
-          <defs>
-            <filter
-              id='joins-base-b'
-              width={171.85}
-              height={95.47}
-              x={-1.74}
-              y={0}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset dy={1.74} />
-              <feGaussianBlur stdDeviation={0.87} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_293'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_293'
-                result='shape'
-              />
-            </filter>
-            <filter
-              id='joins-base-c'
-              width={171.85}
-              height={95.47}
-              x={75.26}
-              y={42}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset dy={1.74} />
-              <feGaussianBlur stdDeviation={0.87} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_293'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_293'
-                result='shape'
-              />
-            </filter>
-          </defs>
-        </svg>
-
-        {/* 1 */}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width={246}
-          height={134}
-          fill='none'
-          viewBox='0 0 246 134'
-          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 0 ? '' : 'opacity-0'}`}>
-          <g filter='url(#joins-1-a)' shapeRendering='crispEdges'>
-            <path
-              fill='#fcff74'
-              fillOpacity={0.4}
-              d='M77 44.5a2.5 2.5 0 0 1 2.5-2.5H168v47.5a2.5 2.5 0 0 1-2.5 2.5H77z'
-            />
-            <path
-              stroke='#faff69'
-              d='M79.5 42.5h88v47a2 2 0 0 1-2 2h-88v-47c0-1.1.9-2 2-2Z'
-            />
-          </g>
-          <path
-            fill='#faff69'
-            d='M84.41 92H83l50-50h1.41zm8 0H91l50-50h1.41zm8 0H99l50-50h1.41zm8 0H107l50-50h1.41zm8 0H115l50-50h1.41zM168 48.41 124.41 92H123l45-45zm0 8L132.41 92H131l37-37zm0 8L140.41 92H139l29-29zm0 8L148.41 92H147l21-21zm0 8L156.41 92H155l13-13zm0 8L164.41 92H163l5-5zm-91 3V90l48-48h1.41zm0-8V82l40-40h1.41zm0-8V74l32-32h1.41zm0-8V66l24-24h1.41zm0-8V58l16-16h1.41zm0-8V50l8-8h1.41z'
-            opacity={0.4}
-          />
-          <defs>
-            <filter
-              id='joins-1-a'
-              width={131}
-              height={90}
-              x={57}
-              y={22}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset />
-              <feGaussianBlur stdDeviation={10} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_293'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_293'
-                result='shape'
-              />
-            </filter>
-          </defs>
-        </svg>
-
-        {/* 2 */}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width={246}
-          height={134}
-          fill='none'
-          viewBox='0 0 246 134'
-          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 1 ? '' : 'opacity-0'}`}>
-          <mask
-            id='joins-2-b'
-            width={168}
-            height={92}
-            x={0}
-            y={0}
-            maskUnits='userSpaceOnUse'
-            style={{
-              maskType: 'alpha'
-            }}>
-            <mask id='joins-2-a' fill='#fff'>
-              <path d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
-            </mask>
-            <path
-              fill='#fcff74'
-              fillOpacity={0.4}
-              d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
-            />
-            <path
-              fill='#faff69'
-              d='M164 0v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zM77 44.5h-1zM77 92v1h1v-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v-1H79.5v2H168zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.83.67-1.5 1.5-1.5zM77 44.5h-1V92h2V44.5zM77 92v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
-              mask='url(#joins-2-a)'
-            />
-          </mask>
-          <g mask='url(#joins-2-b)'>
-            <path
-              fill='#faff69'
-              d='m10 1-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0L-2 93l-.7-.7 92-92zm8 0L6 93l-.7-.7 92-92zm8 0L14 93l-.7-.7 92-92zm8 0L22 93l-.7-.7 92-92zm8 0L30 93l-.7-.7 92-92zm8 0L38 93l-.7-.7 92-92zm8 0L46 93l-.7-.7 92-92zm8 0L54 93l-.7-.7 92-92zm8 0L62 93l-.7-.7 92-92zm8 0L70 93l-.7-.7 92-92zm8 0L78 93l-.7-.7 92-92zm8 0L86 93l-.7-.7 92-92zm8 0L94 93l-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92z'
-            />
-          </g>
-          <g filter='url(#joins-2-c)'>
-            <mask id='joins-2-d' fill='#fff'>
-              <path d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
-            </mask>
-            <path
-              fill='#fcff74'
-              fillOpacity={0.4}
-              d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
-              shapeRendering='crispEdges'
-            />
-            <path
-              fill='#faff69'
-              d='M164 0v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zM77 44.5h-1zM77 92v1h1v-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v-1H79.5v2H168zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.83.67-1.5 1.5-1.5zM77 44.5h-1V92h2V44.5zM77 92v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
-              mask='url(#joins-2-d)'
-            />
-          </g>
-          <defs>
-            <filter
-              id='joins-2-c'
-              width={188}
-              height={112}
-              x={-10}
-              y={-10}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset />
-              <feGaussianBlur stdDeviation={5} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.4 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_332'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_332'
-                result='shape'
-              />
-            </filter>
-          </defs>
-        </svg>
-
-        {/* 3 */}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width={246}
-          height={134}
-          fill='none'
-          viewBox='0 0 246 134'
-          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 2 ? '' : 'opacity-0'}`}>
-          <g filter='url(#joins-3-a)' shapeRendering='crispEdges'>
-            <rect
-              width={168}
-              height={92}
-              x={77}
-              y={42}
-              fill='#fcff74'
-              fillOpacity={0.4}
-              rx={4}
-            />
-            <rect
-              width={167}
-              height={91}
-              x={77.5}
-              y={42.5}
-              stroke='#faff69'
-              rx={3.5}
-            />
-          </g>
-          <path
-            fill='#faff69'
-            d='M173.7 42.7 82.42 134H81l92-92zm8 0L90.42 134H89l92-92zm8 0L98.42 134H97l92-92zm8 0L106.42 134H105l92-92zm8 0L114.42 134H113l92-92zm8 0L122.42 134H121l92-92zm8 0L130.42 134H129l92-92zm8 0L138.42 134H137l92-92zm8 0L146.42 134H145l92-92zm6.13.47a4 4 0 0 1 .61.8L154.42 134H153zm1.17 8.24L162.41 134H161l84-84zm0 8L170.41 134H169l76-76zm0 8L178.41 134H177l68-68zm0 8L186.41 134H185l60-60zm0 8.3L194.7 134h-1.4L245 82.3zm0 8.29-42 42h-1.41L245 90.59zm0 8.3L211.3 134h-1.42L245 98.88zm0 8.29L219.59 134h-1.42L245 107.17zm0 8.29L227.88 134h-1.41L245 115.47zm0 8.3-8.83 8.82h-1.41L245 123.76zM165.7 42.7l-88.5 88.52a4 4 0 0 1-.19-1.01V130l88-88zm-8 0L77 123.4V122l80-80zm-8 0L77 115.4V114l72-72zm-8 0L77 107.4V106l64-64zm-8 0L77 99.4V98l56-56zm-8 0L77 91.4V90l48-48zm-8 0L77 83.4V82l40-40zm-8 0L77 75.4V74l32-32zm-8 0L77 67.4V66l24-24zm-8 0L77 59.4V58l16-16zm-8 0L77 51.4V50l8-8z'
-            opacity={0.4}
-          />
-          <defs>
-            <filter
-              id='joins-3-a'
-              width={208}
-              height={132}
-              x={57}
-              y={22}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset />
-              <feGaussianBlur stdDeviation={10} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_446'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_446'
-                result='shape'
-              />
-            </filter>
-          </defs>
-        </svg>
-
-        {/* 4 */}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width={246}
-          height={134}
-          fill='none'
-          viewBox='0 0 246 134'
-          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 3 ? '' : 'opacity-0'}`}>
-          <g filter='url(#joins-4-a)'>
-            <mask id='joins-4-b' fill='#fff'>
-              <path d='M164 0a4 4 0 0 1 4 4v38h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4H81a4 4 0 0 1-4-4V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
-            </mask>
-            <path
-              fill='#fcff74'
-              fillOpacity={0.4}
-              d='M164 0a4 4 0 0 1 4 4v38h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4H81a4 4 0 0 1-4-4V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
-              shapeRendering='crispEdges'
-            />
-            <path
-              fill='#faff69'
-              d='M164 0v-1zm4 4h1zm0 38h-1v1h1zm73 0v-1zm4 4h1zm-4 88v1zm-160 0v1zm-4-4h-1zm0-38h1v-1h-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v1h73v-2h-73zm73 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v84h2V46zm0 84h-1a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5zm-4 4v-1H81v2h160zm-160 0v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V92h-2v38zm0-38v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
-              mask='url(#joins-4-b)'
-            />
-          </g>
-          <path
-            fill='#faff69'
-            d='m178.3 42-92 92h-1.42l92-92zm8.29 0-92 92h-1.42l92-92zm8.29 0-92 92h-1.41l92-92zm8.3 0-92 92h-1.42l92-92zm7.53 0-92 92h-1.42l92-92zm7.53 0-92 92h-1.41l92-92zm7.54 0-92 92h-1.42l92-92zm7.53 0-92 92h-1.41l92-92zm7.54 0-92 92h-1.42l92-92zm3.79 2.33q.23.5.32 1.1L156.38 134h-1.41zm.36 8.59L163.92 134h-1.42L245 51.5zm0 7.53L171.45 134h-1.41L245 59.04zm0 7.54L178.99 134h-1.42L245 66.57zm0 7.53L186.52 134h-1.41L245 74.1zm0 7.54L194.06 134h-1.41L245 81.64zm0 7.53L201.6 134h-1.42L245 89.18zm0 7.54L209.13 134h-1.41L245 96.71zm0 7.53L216.66 134h-1.41L245 104.25zm0 7.54L224.2 134h-1.41L245 111.78zm0 7.53L231.73 134h-1.41L245 119.32zM170 42l-91.28 91.28a4 4 0 0 1-.75-.67L168.6 42zm-2-6.3-91 91v-1.4l91-91zm0-8.29-91 91V117l91-91zm0-8-91 91V109l91-91zm0-8-91 91V101l91-91zm-.35-9.06q.23.53.31 1.1L77 94.41V93zM7.7 91.71 7 91 98 0h1.41zm8 0L15 91l91-91h1.41zm8 0L23 91l91-91h1.41zm8 0L31 91l91-91h1.41zm8 0L39 91l91-91h1.41zm8 0L47 91l91-91h1.41zm8 0L55 91l91-91h1.41zm8 0L63 91l91-91h1.41zm8 0L71 91l91-91h1.41zM.89 90.5a4 4 0 0 1-.54-.86L90 0h1.41zM0 83.42V82L82 0h1.41zm0-8V74L74 0h1.41zm0-8V66L66 0h1.41zm0-8V58L58 0h1.41zm0-8V50L50 0h1.41zm0-8V42L42 0h1.41zm0-8V34L34 0h1.41zm0-8V26L26 0h1.41zm0-8V18L18 0h1.41zm0-8V10L10 0h1.41z'
-            opacity={0.4}
-          />
-          <defs>
-            <filter
-              id='joins-4-a'
-              width={285}
-              height={174}
-              x={-20}
-              y={-20}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset />
-              <feGaussianBlur stdDeviation={10} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_488'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_488'
-                result='shape'
-              />
-            </filter>
-          </defs>
-        </svg>
-
-        {/* 5 */}
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width={246}
-          height={134}
-          fill='none'
-          viewBox='0 0 246 134'
-          className={`col-start-1 row-start-1 h-auto w-full overflow-visible transition-opacity ${stepIndex === 4 ? '' : 'opacity-0'}`}>
-          <g filter='url(#joins-5-a)'>
-            <mask id='joins-5-b' fill='#fff'>
-              <path d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z' />
-            </mask>
-            <path
-              fill='#fcff74'
-              fillOpacity={0.4}
-              d='M164 0a4 4 0 0 1 4 4v38H79.5a2.5 2.5 0 0 0-2.5 2.5V92H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'
-            />
-            <path
-              fill='#faff69'
-              d='M164 0v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zM77 44.5h-1zM77 92v1h1v-1zM4 92v1zm-4-4h-1zM4 0v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2V4zm0 38v-1H79.5v2H168zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.83.67-1.5 1.5-1.5zM77 44.5h-1V92h2V44.5zM77 92v-1H4v2h73zM4 92v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V4h-2v84zM0 4h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H4z'
-              mask='url(#joins-5-b)'
-            />
-            <mask
-              id='joins-5-c'
-              width={285}
-              height={93}
-              x={-83}
-              y={0}
-              maskUnits='userSpaceOnUse'
-              style={{
-                maskType: 'alpha'
-              }}>
-              <path
-                fill='#faff69'
-                d='m9.7.7-92 92-.7-.7L9 0zm8 0-92 92-.7-.7L17 0zm8 0-92 92-.7-.7L25 0zm8 0-92 92-.7-.7L33 0zm8 0-92 92-.7-.7L41 0zm8 0-92 92-.7-.7L49 0zm8 0-92 92-.7-.7L57 0zm8 0-92 92-.7-.7L65 0zm8 0-92 92-.7-.7L73 0zm8 0-92 92-.7-.7L81 0zm8 0-92 92-.7-.7L89 0zm8 0-92 92L5 92 97 0zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92zm8 0-92 92-.7-.7 92-92z'
-              />
-            </mask>
-            <g mask='url(#joins-5-c)'>
-              <mask id='joins-5-d' fill='#fff'>
-                <path d='M163.7-.3a4 4 0 0 1 4 4v38H79.2a2.5 2.5 0 0 0-2.5 2.5v47.5h-73a4 4 0 0 1-4-4v-84a4 4 0 0 1 4-4z' />
-              </mask>
-              <path
-                fill='#fcff74'
-                fillOpacity={0.4}
-                d='M163.7-.3a4 4 0 0 1 4 4v38H79.2a2.5 2.5 0 0 0-2.5 2.5v47.5h-73a4 4 0 0 1-4-4v-84a4 4 0 0 1 4-4z'
-              />
-              <path
-                fill='#faff69'
-                d='M163.7-.3v-1zm4 4h1zm0 38v1h1v-1zm-88.5 0v-1zm-2.5 2.5h-1zm0 47.5v1h1v-1zm-73 0v1zm-4-4h-1zm4-88v-1zm160 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v38h2v-38zm0 38v-1H79.2v2h88.5zm-88.5 0v-1a3.5 3.5 0 0 0-3.5 3.5h2c0-.82.68-1.5 1.5-1.5zm-2.5 2.5h-1v47.5h2V44.2zm0 47.5v-1h-73v2h73zm-73 0v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1v-84h-2v84zm0-84h1a3 3 0 0 1 3-3v-2a5 5 0 0 0-5 5zm4-4v1h160v-2H3.7z'
-                mask='url(#joins-5-d)'
-              />
-            </g>
-          </g>
-          <g filter='url(#joins-5-e)'>
-            <mask id='joins-5-f' fill='#fff'>
-              <path d='M245 131.5a2.5 2.5 0 0 1-2.5 2.5H77V93h88.5a2.5 2.5 0 0 0 2.5-2.5V42h77z' />
-            </mask>
-            <path
-              fill='#fcff74'
-              fillOpacity={0.4}
-              d='M245 131.5a2.5 2.5 0 0 1-2.5 2.5H77V93h88.5a2.5 2.5 0 0 0 2.5-2.5V42h77z'
-            />
-            <path
-              fill='#faff69'
-              d='M245 131.5h1zm-2.5 2.5v1zM77 134h-1v1h1zm0-41v-1h-1v1zm88.5 0v1zm2.5-2.5h1zm0-48.5v-1h-1v1zm77 0h1v-1h-1zm0 89.5h-1c0 .83-.67 1.5-1.5 1.5v2a3.5 3.5 0 0 0 3.5-3.5zm-2.5 2.5v-1H77v2h165.5zM77 134h1V93h-2v41zm0-41v1h88.5v-2H77zm88.5 0v1a3.5 3.5 0 0 0 3.5-3.5h-2c0 .83-.67 1.5-1.5 1.5zm2.5-2.5h1V42h-2v48.5zm0-48.5v1h77v-2h-77zm77 0h-1v89.5h2V42z'
-              mask='url(#joins-5-f)'
-            />
-            <g clipPath='url(#joins-5-g)'>
-              <mask
-                id='joins-5-h'
-                width={285}
-                height={93}
-                x={43}
-                y={42}
-                maskUnits='userSpaceOnUse'
-                style={{
-                  maskType: 'alpha'
-                }}>
-                <path
-                  fill='#faff69'
-                  d='m235 134 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92zm-8 0 92-92 .7.7-92 92z'
-                />
-              </mask>
-              <g mask='url(#joins-5-h)'>
-                <mask id='joins-5-i' fill='#fff'>
-                  <path d='M81 135a4 4 0 0 1-4-4V93h88.5a2.5 2.5 0 0 0 2.5-2.5V43h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4z' />
-                </mask>
-                <path
-                  fill='#fcff74'
-                  fillOpacity={0.4}
-                  d='M81 135a4 4 0 0 1-4-4V93h88.5a2.5 2.5 0 0 0 2.5-2.5V43h73a4 4 0 0 1 4 4v84a4 4 0 0 1-4 4z'
-                />
-                <path
-                  fill='#faff69'
-                  d='M81 135v1zm-4-4h-1zm0-38v-1h-1v1zm88.5 0v1zm2.5-2.5h1zm0-47.5v-1h-1v1zm73 0v-1zm4 4h1zm-4 88v1zm-160 0v-1a3 3 0 0 1-3-3h-2a5 5 0 0 0 5 5zm-4-4h1V93h-2v38zm0-38v1h88.5v-2H77zm88.5 0v1a3.5 3.5 0 0 0 3.5-3.5h-2c0 .83-.67 1.5-1.5 1.5zm2.5-2.5h1V43h-2v47.5zm0-47.5v1h73v-2h-73zm73 0v1a3 3 0 0 1 3 3h2a5 5 0 0 0-5-5zm4 4h-1v84h2V47zm0 84h-1a3 3 0 0 1-3 3v2a5 5 0 0 0 5-5zm-4 4v-1H81v2h160z'
-                  mask='url(#joins-5-i)'
-                />
-              </g>
-            </g>
-          </g>
-          <defs>
-            <filter
-              id='joins-5-a'
-              width={208.67}
-              height={132}
-              x={-20.29}
-              y={-20}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset />
-              <feGaussianBlur stdDeviation={10} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_372'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_372'
-                result='shape'
-              />
-            </filter>
-            <filter
-              id='joins-5-e'
-              width={325}
-              height={132}
-              x={23}
-              y={22}
-              colorInterpolationFilters='sRGB'
-              filterUnits='userSpaceOnUse'>
-              <feFlood floodOpacity={0} result='BackgroundImageFix' />
-              <feColorMatrix
-                in='SourceAlpha'
-                result='hardAlpha'
-                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-              />
-              <feOffset />
-              <feGaussianBlur stdDeviation={10} />
-              <feComposite in2='hardAlpha' operator='out' />
-              <feColorMatrix values='0 0 0 0 0.980392 0 0 0 0 1 0 0 0 0 0.411765 0 0 0 0.3 0' />
-              <feBlend
-                in2='BackgroundImageFix'
-                result='effect1_dropShadow_207_372'
-              />
-              <feBlend
-                in='SourceGraphic'
-                in2='effect1_dropShadow_207_372'
-                result='shape'
-              />
-            </filter>
-            <clipPath id='joins-5-g'>
-              <path fill='#fff' d='M43 42h285v92H43z' />
-            </clipPath>
-          </defs>
-        </svg>
+        </div>
       </div>
     </ScaleToContainer>
   )
