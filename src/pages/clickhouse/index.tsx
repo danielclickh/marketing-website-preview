@@ -682,6 +682,152 @@ ER  -  `
         </div>
       </section>
 
+      <FeatureSection image={<JoinsDiagram />}>
+        <SuiTitle type='h2' className='text-white'>
+          Full JOIN support
+        </SuiTitle>
+        <p>
+          ClickHouse fully supports all standard join types and adds powerful
+          non-equality capabilities such as ASOF join.
+        </p>
+        <p>
+          Continuous improvements to join algorithms deliver market leading
+          performance, allowing users to query across normalized datasets
+          without extra preprocessing - keeping analytics flexible and removing
+          the need for forced denormalization.
+        </p>
+      </FeatureSection>
+
+      <FeatureSection direction='rtl' image={<ClickhouseAtScale />}>
+        <SuiTitle type='h2' className='text-white'>
+          Built for high concurrency
+        </SuiTitle>
+        <p>
+          Cloud-native architecture enables effective data tiering and scaling,
+          resulting in the leading price / performance ratio on the market.
+        </p>
+      </FeatureSection>
+
+      <FeatureSection
+        image={
+          <Image
+            src={imageLightweightUpdatesAlt}
+            width={1126 / 2}
+            height={634 / 2}
+            alt=''
+          />
+        }>
+        <SuiTitle type='h2' className='text-white'>
+          Lightweight data changes
+        </SuiTitle>
+        <p>
+          ClickHouse delivers fast, reliable handling of updates and deletes
+          through lightweight mutations that modify only the affected rows
+          rather than rewriting entire datasets.
+        </p>
+        <p>
+          Patched parts allow efficient, fine-grained changes while preserving
+          performance, making it practical to support evolving data, late
+          arriving events, and workloads that require correction of historical
+          records.
+        </p>
+      </FeatureSection>
+
+      <FeatureSection
+        direction='rtl'
+        image={
+          <Image
+            src={imageJsonSupport}
+            width={1376 / 2}
+            height={408 / 2}
+            alt=''
+          />
+        }>
+        <SuiTitle type='h2' className='text-white'>
+          Flexible schema-on-write <br className='hidden xl:block' />
+          with JSON
+        </SuiTitle>
+        <p>
+          ClickHouse lets you ingest semi-structured data without schema
+          explosion, combining JSON flexibility with the full performance of a
+          columnar database.
+        </p>
+      </FeatureSection>
+
+      {/* Community */}
+      <section className='bg-white/5 py-16 lg:py-24'>
+        <div
+          className='section-container bg-shadow-element yellow-shadow flex w-full flex-col-reverse items-center justify-between gap-x-8 gap-y-16 lg:flex-row'
+          style={
+            {
+              '--top-side': '25%',
+              '--left-side': 'auto',
+              '--right-side': '25%',
+              '--scale': 0.7,
+              '--opacity': 0.025
+            } as React.CSSProperties
+          }>
+          <div className='w-full max-w-xl space-y-6 text-center lg:text-left'>
+            <SuiTitle type='h2'>
+              Join the <TiltedText type='black-on-yellow'>100k+</TiltedText>{' '}
+              developers using ClickHouse today
+            </SuiTitle>
+            <p className='text-neutral-200'>
+              Backed by{' '}
+              <strong>
+                {Intl.NumberFormat('en', {
+                  notation: 'standard'
+                })
+                  .format(headerData.github.contributors)
+                  .toLowerCase()}
+                + contributors
+              </strong>{' '}
+              and thousands of commits per month, ClickHouse thrives on a
+              vibrant open-source community that pushes the project forward at
+              speed.
+            </p>
+            <ul className='mx-auto flex flex-wrap justify-center gap-6 sm:max-w-max lg:mx-0'>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='X'
+                  href='https://x.com/ClickhouseDB'
+                  imgSrc='/socials/x.svg'
+                />
+              </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='Slack'
+                  href='/slack'
+                  imgSrc='/socials/slack.svg'
+                />
+              </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='Telegram'
+                  href='https://telegram.me/clickhouse_en'
+                  imgSrc='/socials/telegram.svg'
+                />
+              </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='Meetup'
+                  href='https://www.meetup.com/pro/clickhouse'
+                  imgSrc='/socials/meetup.svg'
+                />
+              </li>
+              <li className='flex items-center justify-center'>
+                <SocialIcon
+                  name='LinkedIn'
+                  href='https://www.linkedin.com/company/clickhouseinc'
+                  imgSrc='/socials/linkedin.svg'
+                />
+              </li>
+            </ul>
+          </div>
+          <GithubStats {...headerData.github} />
+        </div>
+      </section>
+
       {/* What makes CH different? */}
       <section
         className='bg-shadow-element relative my-16 lg:my-24'
@@ -721,7 +867,6 @@ ER  -  `
             className='mx-auto w-full max-w-3xl xl:mr-0'
             items={[
               {
-                defaultOpen: true,
                 handle: 'Blazing fast queries and inserts',
                 content: (
                   <div className='w-full space-y-4'>
@@ -796,17 +941,12 @@ ER  -  `
                       Projections allow data to be sorted in multiple ways,
                       optimizing for frequent access patterns.
                     </p>
-                    <Image
-                      src={imageJsonSupport}
-                      width={1376 / 2}
-                      height={408 / 2}
-                      alt=''
-                    />
+                    <div className='h-40 rounded-lg bg-pink-500' />
                     <p>
-                      ClickHouse supports schema on write with JSON support,
-                      semi-structured data can be ingested safely without schema
-                      explosion, combining flexibility with the full power of a
-                      columnar database.
+                      ClickHouse breaks past traditional OLAP limitations with
+                      full support for lightweight updates and deletes through
+                      patched parts providing both flexibility and support for
+                      complex compliance requirements.
                     </p>
                     <Image
                       src={imageLightweightUpdates}
@@ -814,12 +954,6 @@ ER  -  `
                       height={833 / 2}
                       alt=''
                     />
-                    <p>
-                      ClickHouse breaks past traditional OLAP limitations with
-                      full support for lightweight updates and deletes through
-                      patched parts providing both flexibility and support for
-                      complex compliance requirements.
-                    </p>
                   </div>
                 )
               },
@@ -932,131 +1066,6 @@ ER  -  `
         </div>
       </section>
 
-      {/* Community */}
-      <section className='bg-white/5 py-16 lg:py-24'>
-        <div
-          className='section-container bg-shadow-element yellow-shadow flex w-full flex-col-reverse items-center justify-between gap-x-8 gap-y-16 lg:flex-row'
-          style={
-            {
-              '--top-side': '25%',
-              '--left-side': 'auto',
-              '--right-side': '25%',
-              '--scale': 0.7,
-              '--opacity': 0.025
-            } as React.CSSProperties
-          }>
-          <div className='w-full max-w-xl space-y-6 text-center lg:text-left'>
-            <SuiTitle type='h2'>
-              Join the <TiltedText type='black-on-yellow'>100k+</TiltedText>{' '}
-              developers using ClickHouse today
-            </SuiTitle>
-            <p className='text-neutral-200'>
-              Backed by{' '}
-              <strong>
-                {Intl.NumberFormat('en', {
-                  notation: 'standard'
-                })
-                  .format(headerData.github.contributors)
-                  .toLowerCase()}
-                + contributors
-              </strong>{' '}
-              and thousands of commits per month, ClickHouse thrives on a
-              vibrant open-source community that pushes the project forward at
-              speed.
-            </p>
-            <ul className='mx-auto flex flex-wrap justify-center gap-6 sm:max-w-max lg:mx-0'>
-              <li className='flex items-center justify-center'>
-                <SocialIcon
-                  name='X'
-                  href='https://x.com/ClickhouseDB'
-                  imgSrc='/socials/x.svg'
-                />
-              </li>
-              <li className='flex items-center justify-center'>
-                <SocialIcon
-                  name='Slack'
-                  href='/slack'
-                  imgSrc='/socials/slack.svg'
-                />
-              </li>
-              <li className='flex items-center justify-center'>
-                <SocialIcon
-                  name='Telegram'
-                  href='https://telegram.me/clickhouse_en'
-                  imgSrc='/socials/telegram.svg'
-                />
-              </li>
-              <li className='flex items-center justify-center'>
-                <SocialIcon
-                  name='Meetup'
-                  href='https://www.meetup.com/pro/clickhouse'
-                  imgSrc='/socials/meetup.svg'
-                />
-              </li>
-              <li className='flex items-center justify-center'>
-                <SocialIcon
-                  name='LinkedIn'
-                  href='https://www.linkedin.com/company/clickhouseinc'
-                  imgSrc='/socials/linkedin.svg'
-                />
-              </li>
-            </ul>
-          </div>
-          <GithubStats {...headerData.github} />
-        </div>
-      </section>
-
-      <FeatureSection image={<JoinsDiagram />}>
-        <SuiTitle type='h2' className='text-white'>
-          Full JOIN support
-        </SuiTitle>
-        <p>
-          ClickHouse fully supports all standard join types and adds powerful
-          non-equality capabilities such as ASOF join.
-        </p>
-        <p>
-          Continuous improvements to join algorithms deliver market leading
-          performance, allowing users to query across normalized datasets
-          without extra preprocessing - keeping analytics flexible and removing
-          the need for forced denormalization.
-        </p>
-      </FeatureSection>
-
-      <FeatureSection direction='rtl' image={<ClickhouseAtScale />}>
-        <SuiTitle type='h2' className='text-white'>
-          Built for high concurrency
-        </SuiTitle>
-        <p>
-          Cloud-native architecture enables effective data tiering and scaling,
-          resulting in the leading price / performance ratio on the market.
-        </p>
-      </FeatureSection>
-
-      <FeatureSection
-        image={
-          <Image
-            src={imageLightweightUpdatesAlt}
-            width={1126 / 2}
-            height={634}
-            alt=''
-          />
-        }>
-        <SuiTitle type='h2' className='text-white'>
-          Lightweight data changes
-        </SuiTitle>
-        <p>
-          ClickHouse delivers fast, reliable handling of updates and deletes
-          through lightweight mutations that modify only the affected rows
-          rather than rewriting entire datasets.
-        </p>
-        <p>
-          Patched parts allow efficient, fine-grained changes while preserving
-          performance, making it practical to support evolving data, late
-          arriving events, and workloads that require correction of historical
-          records.
-        </p>
-      </FeatureSection>
-
       {/* ClickBench */}
       <section className='section-container my-16 lg:my-24'>
         <div className='rounded-lg bg-primary-300 p-4 text-neutral-900 md:p-8 lg:p-16'>
@@ -1123,7 +1132,14 @@ ER  -  `
           <p className='text-neutral-200'>
             Our academic paper shows how ClickHouse serves not only as a high
             performance database, but also as a platform for advancing the state
-            of the art and is the best way to learn how its internals work.
+            of the art and is the best way to learn how its internals work. For
+            deeper insights, explore our in-depth{' '}
+            <Link
+              href='/blog?category=engineering'
+              className='text-primary-300 hover:underline'>
+              articles and blogs
+            </Link>
+            .
           </p>
           <div className='flex flex-col gap-4 md:flex-row'>
             <CUIButton
@@ -1276,7 +1292,7 @@ function YoutubeCoverFlow({
         coverflowEffect={{
           rotate: 0, // no tilt
           depth: 0, // no 3D depth
-          stretch: 100, // negative to pull sides under center
+          stretch: 60, // negative to pull sides under center
           scale: 0.8, // scale side slides down
           modifier: 1,
           slideShadows: false
@@ -1291,7 +1307,7 @@ function YoutubeCoverFlow({
         loop={true}
         breakpoints={{
           1024: {
-            slidesPerView: 2.75
+            slidesPerView: 2.85
           }
         }}>
         {videos.map(({ title, youtubeId, thumbnail }, videoIndex) => {
