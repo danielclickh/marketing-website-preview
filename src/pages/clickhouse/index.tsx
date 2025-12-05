@@ -1007,10 +1007,11 @@ ER  -  `
                         className='text-primary-300 hover:underline'>
                         Keeper
                       </Link>{' '}
-                      and provides eventual consistency. This lightweight design
-                      enables replication across availability zones or even
-                      regions with high latencies, delivering high durability
-                      without heavy overhead.
+                      and provides either immediate or eventual consistency
+                      depending on requirements. This lightweight design enables
+                      replication across availability zones or even regions with
+                      high latencies, delivering high durability without heavy
+                      overhead.
                     </p>
                     <Image
                       src={imageBackups}
