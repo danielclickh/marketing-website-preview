@@ -22,6 +22,7 @@ import imageInteroperability from './assets/image-interoperability.png'
 import imageJsonSupport from './assets/image-json-support.png'
 import imageLightweightUpdatesAlt from './assets/image-lightweight-updates-alt.png'
 import imageLightweightUpdates from './assets/image-lightweight-updates.png'
+import imageProjections from './assets/image-projections.png'
 import imageReplication from './assets/image-replication.png'
 import imagesharding from './assets/image-sharding.png'
 import imageSqlSupport from './assets/image-sql-support.png'
@@ -944,20 +945,15 @@ ER  -  `
                     </p>
                     <DiagramFive />
                     <p>
-                      Projections allow data to be sorted in multiple ways,
-                      optimizing for frequent access patterns.
-                    </p>
-                    <div className='h-40 rounded-lg bg-pink-500' />
-                    <p>
-                      ClickHouse breaks past traditional OLAP limitations with
-                      full support for lightweight updates and deletes through
-                      patched parts providing both flexibility and support for
-                      complex compliance requirements.
+                      Projections let you maintain the same data sorted in
+                      different ways, enabling ClickHouse to optimize for
+                      multiple access patterns and deliver consistently fast
+                      queries.
                     </p>
                     <Image
-                      src={imageLightweightUpdates}
+                      src={imageProjections}
                       width={1376 / 2}
-                      height={833 / 2}
+                      height={848 / 2}
                       alt=''
                     />
                   </div>
