@@ -698,10 +698,14 @@ ER  -  `
           non-equality capabilities such as ASOF join.
         </p>
         <p>
-          Continuous improvements to join algorithms deliver market leading
-          performance, allowing users to query across normalized datasets
-          without extra preprocessing - keeping analytics flexible and removing
-          the need for forced denormalization.
+          <Link
+            href='/videos/clickhouse-and-joins'
+            className='text-primary-300 hover:underline'>
+            Continuous improvements to join algorithms
+          </Link>{' '}
+          deliver market leading performance, allowing users to query across
+          normalized datasets without extra preprocessing - keeping analytics
+          flexible and removing the need for forced denormalization.
         </p>
       </FeatureSection>
 
@@ -874,6 +878,7 @@ ER  -  `
             className='mx-auto w-full max-w-3xl xl:mr-0'
             items={[
               {
+                defaultOpen: true,
                 handle: 'Blazing fast queries and inserts',
                 content: (
                   <div className='w-full space-y-4'>
