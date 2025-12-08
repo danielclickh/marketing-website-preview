@@ -1,7 +1,6 @@
 import imageAddBigquerySource from './assets/add-bigquery-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
-import logoBigQuery from './assets/logo-bigquery.svg'
 import imageMonitorPipe from './assets/monitor-pipe.png'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
@@ -67,13 +66,11 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                   <div className='absolute inset-x-20 top-1/2 z-0 -translate-y-1/2'>
                     <AnimatedDataLine size={300} direction='right' />
                   </div>
-
                   <div className='relative z-10 flex items-center gap-12'>
-                    {/* Logo */}
                     <div className='flex w-20 flex-shrink-0 flex-grow-0 items-center justify-center'>
                       <div className='flex aspect-square w-20 items-center justify-center rounded border border-jet bg-neutral-900/80'>
                         <Image
-                          src={logoBigQuery}
+                          src='/images/cloud/integrations/google-bigquery.svg'
                           width={50}
                           height={50}
                           alt='BigQuery'
@@ -81,8 +78,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                         />
                       </div>
                     </div>
-
-                    {/* Spinner */}
                     <div className='flex-grow-1 relative flex w-44 flex-shrink-0 flex-col items-center justify-center gap-y-4'>
                       <p className='absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-1/2 font-inconsolata text-xs'>
                         Data loading
@@ -100,8 +95,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                         />
                       </svg>
                     </div>
-
-                    {/* CH logo */}
                     <div className='relative w-20 flex-shrink-0 flex-grow-0'>
                       <div className='absolute inset-0 animate-fadeInOut bg-primary-300/60 blur-lg' />
                       <svg
