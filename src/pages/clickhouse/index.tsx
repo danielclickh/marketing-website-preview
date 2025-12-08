@@ -379,7 +379,7 @@ ER  -  `
                         link: '/comparison/elastic-for-observability',
                         title: 'Migrating from Elastic',
                         description:
-                          'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically',
+                          'Accelerate your aggregations, shrink your storage footprint, and simplify your architecture by scaling vertically.',
                         quote:
                           'Extensive testing and comparison showed that ClickHouse outperformed other solutions like Elasticsearch in three key areas: performance, compatibility, and cost-efficiency for large-scale operations.',
                         logo: {
@@ -393,7 +393,7 @@ ER  -  `
                         link: '/videos/lyft-user-story',
                         title: 'Migrating from Apache Druid',
                         description:
-                          'How Lyft optimized performance and cut infrastructure costs with ClickHouse',
+                          'How Lyft optimized performance and cut infrastructure costs with ClickHouse.',
                         quote:
                           'We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.',
                         logo: {
@@ -435,7 +435,7 @@ ER  -  `
                         link: '/comparison/redshift',
                         title: 'Migrating from Redshift',
                         description:
-                          'Run faster cold queries, tap into broader integrations, and avoid CSP lock-in',
+                          'Run faster cold queries, tap into broader integrations, and avoid CSP lock-in.',
                         quote:
                           'As data size grew, we faced performance and cost challenges with AWS Redshift. Switching to ClickHouse improved our query performance by 20 times and greatly cut costs.',
                         logo: {
@@ -908,7 +908,7 @@ ER  -  `
                 )
               },
               {
-                handle: 'Infinitely scalable for Petabyte workloads',
+                handle: 'Infinitely scalable for petabyte workloads',
                 content: (
                   <div className='w-full space-y-4'>
                     <p>
@@ -1158,7 +1158,7 @@ ER  -  `
               )}
               type='primary'
               size='lg'
-              className='lg:!px-8'>
+              className='w-full lg:!px-8'>
               Read our academic paper
             </CUIButton>
             <CUIButton
