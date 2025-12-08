@@ -34,7 +34,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             href='/docs/install/windows'
             target='_self'
             prefetch={false}
-            className='underline transition-colors hover:text-neutral-100'
+            className='text-primary-300 hover:underline'
             onClick={useGalaxyOnClick(
               'homePage.installSection.windowsInstallSelect'
             )}>
@@ -44,7 +44,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           <Link
             href='https://hub.docker.com/r/clickhouse/clickhouse-server/'
             target='_self'
-            className='underline transition-colors hover:text-neutral-100'
+            className='text-primary-300 hover:underline'
             onClick={useGalaxyOnClick(
               'homePage.installSection.dockerInstallSelect'
             )}>
@@ -55,7 +55,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             href='https://clickhouse.com/docs/en/install'
             target='_self'
             prefetch={false}
-            className='underline transition-colors hover:text-neutral-100'
+            className='text-primary-300 hover:underline'
             onClick={useGalaxyOnClick(
               'homePage.installSection.otherOptionsSelect'
             )}>
@@ -64,7 +64,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           . Or try without installing in our{' '}
           <Link
             href='https://sql.clickhouse.com'
-            className='underline transition-colors hover:text-neutral-100'
+            className='text-primary-300 hover:underline'
             onClick={useGalaxyOnClick(
               'homePage.installSection.playgroundSelect'
             )}>
