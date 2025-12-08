@@ -1322,7 +1322,7 @@ function YoutubeCoverFlow({
           return (
             <SwiperSlide
               key={videoIndex}
-              className='[&:not(.swiper-slide-active)]:cursor-pointer'
+              className='bg-neutral-900 [&:not(.swiper-slide-active)]:cursor-pointer'
               onClick={() => {
                 const swiper = swiperRef.current
                 if (!swiper) return
@@ -1344,8 +1344,7 @@ function YoutubeCoverFlow({
                 <PlayOnClickVideo
                   provider='youtube'
                   id={youtubeId}
-                  className={`transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none'}`}
-                  thumbnailClassName={`transition-opacity ${isActive ? '' : 'opacity-50'}`}
+                  className={`transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none opacity-50'}`}
                   playButtonClassName={`!transition-all ${isActive ? '' : 'opacity-0'}`}
                   thumbnail={
                     <Image
@@ -1354,6 +1353,10 @@ function YoutubeCoverFlow({
                       height={720 / 2}
                       loading='eager'
                       alt={`Why is clickhouse so fast. ${title}`}
+                      style={{
+                        transform:
+                          'translateZ(0px)' /* Fixes flashing bug on iOS Safari */
+                      }}
                     />
                   }
                 />
