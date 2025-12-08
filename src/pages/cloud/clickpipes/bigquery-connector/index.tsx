@@ -1,4 +1,4 @@
-import imageAddMongoSource from './assets/add-mongodb-source.png'
+import imageAddBigquerySource from './assets/add-bigquery-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
 import logoBigQuery from './assets/logo-bigquery.svg'
@@ -129,7 +129,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
             <div className='w-full lg:max-w-lg'>
               <CUICard>
                 <CUICard.Body className='p-4 lg:p-6'>
-                  <CdcWaitlistForm formId='1441' />
+                  <CdcWaitlistForm formId='1515' />
                 </CUICard.Body>
               </CUICard>
             </div>
@@ -220,7 +220,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         <div className='section-container relative z-10 space-y-16 lg:space-y-28 lg:pt-6'>
           <FeatureSection
             image={{
-              src: imageAddMongoSource,
+              src: imageAddBigquerySource,
               width: 1036 / 2,
               height: 964 / 2,
               alt: 'Add BigQuery Source'
@@ -293,7 +293,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               </SuiText>
             </div>
             <CUICard.Body className='p-4 lg:p-6'>
-              <CdcWaitlistForm formId='1441' />
+              <CdcWaitlistForm formId='1515' />
             </CUICard.Body>
           </CUICard>
         </div>
