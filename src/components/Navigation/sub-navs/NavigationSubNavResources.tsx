@@ -137,6 +137,16 @@ export default function NavigationSubNavResources() {
               Splunk
             </NavigationLink>
           </li>
+          <li>
+            <NavigationLink
+              href='/comparison/opensearch-for-observability'
+              onClick={useGalaxyOnClick(
+                'topNav.comparisonsMenu.opensearchSelect'
+              )}
+              className='block w-full'>
+              OpenSearch
+            </NavigationLink>
+          </li>
         </NavigationSubNav>
       </li>
       <li>

@@ -1,42 +1,44 @@
-import animationClickhouse from './assets/animation-clickhouse.svg'
-import animationSplunk from './assets/animation-splunk.svg'
+import chartQueries from './assets/chart-queries.svg'
+import chartStorage from './assets/chart-storage.svg'
 import clickstackLogo from './assets/clickstack-logo.svg'
 import heroLogos from './assets/hero-logos.png'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
 import iconLightning from './assets/icon-lightning.svg'
 import iconUnlock from './assets/icon-unlock.svg'
+import layerDataPrepper from './assets/layer-data-pepper.svg'
+import layerOpensearchDashboards from './assets/layer-opensearch-dashboards.svg'
+import layerOpensearch from './assets/layer-opensearch.svg'
 import logoAnthropic from './assets/logo-anthropic.svg'
 import logoElastic from './assets/logo-elastic.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
-import splunkTableLogo from './assets/splunk-table-logo.svg'
-import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
-import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
+import opensearchAnimationLogo from './assets/opensearch-animation-logo.svg'
+import opensearchTableLogo from './assets/opensearch-table-logo.svg'
+import Accordion from '@/components-cleaned/Accordion'
+import AnimatedClickHouseScaleVsCompetitor from '@/components-cleaned/AnimatedClickHouseScaleVsCompetitor'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
-import CounterAnimation from '@/components-cleaned/CounterAnimation'
-import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import Sticky from '@/components-cleaned/Sticky'
-import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
+import ClickStackVsCompetitorStack from '@/components/ClickStackVsCompetitorStack'
 import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
 } from '@/components/ComparisonTable'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
-import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
-import tables from '@/data/splunk-comparison'
+import { tables, faqs } from '@/data/opensearch-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateFaqPageSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import React, { Fragment, useCallback, useRef, useState, useMemo } from 'react'
+import React, { Fragment, useCallback, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -45,19 +47,20 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'Splunk vs ClickHouse',
-          path: '/comparison/splunk-for-observability'
+          title: 'OpenSearch vs ClickStack',
+          path: '/comparison/opensearch-for-observability',
+          schema: generateFaqPageSchema({ faqs })
         }
       }
     }
   }
 
-export default function SplunkPage({
+export default function OpensearchPage({
   footerData,
   headerData,
   seo
 }: CommonProps) {
-  useGalaxyOnPage('splunkComparisonPage')
+  useGalaxyOnPage('opensearchComparisonPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
@@ -69,11 +72,11 @@ export default function SplunkPage({
             <Breadcrumbs.Item>Observability</Breadcrumbs.Item>
           </Breadcrumbs>
           <SuiTitle type='h1' weight='bold'>
-            ClickStack <span className='text-primary-300'>vs</span> Splunk
+            ClickStack <span className='text-primary-300'>vs</span> OpenSearch
           </SuiTitle>
           <Image
             src={heroLogos}
-            alt='ClickHouse vs Splunk'
+            alt='ClickHouse vs OpenSearch'
             width={698 / 2}
             height={646 / 2}
             loading='eager'
@@ -83,21 +86,23 @@ export default function SplunkPage({
           <SuiText className='space-y-6 text-neutral-200'>
             <p>
               ClickStack is a high-performance, open-source observability stack
-              built on ClickHouse for OpenTelemetry at scale. It delivers high
-              compression and lightning-fast queries across high cardinality
-              OTel data at petabyte scale.
+              built on ClickHouse. It delivers high compression, lightning-fast
+              queries and powerful aggregations across high cardinality logs,
+              metrics, traces, session replays at petabyte scale.
             </p>
             <p>
-              Splunk, in contrast, is a legacy log analytics and monitoring
-              platform built on an index-based search architecture and a
-              proprietary query language. Designed for IT operations and
-              security analytics, it faces limitations in cost efficiency and
-              performance for modern observability workloads at large scale.
+              OpenSearch, derived from Elasticsearch, remains anchored in a
+              search-first architecture built on inverted indices. While suited
+              for text search, this design struggles with modern observability
+              workloads with high disk usage, poor compression and slow queries
+              at Petabyte scale. Logs, metrics, and traces are stored in
+              separate indices that cannot be joined or analyzed together
+              natively.
             </p>
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=splunk-comparison-page'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page'
               type='primary'
               size='lg'
               weight='semibold'
@@ -105,7 +110,7 @@ export default function SplunkPage({
               Get started with open-source
             </CUIButton>
             <CUIButton
-              href='/company/contact?loc=splunk-comparison-page-hero'
+              href='/company/contact?loc=opensearch-comparison-page-hero'
               type='secondary'
               size='lg'
               weight='semibold'
@@ -114,10 +119,38 @@ export default function SplunkPage({
               Contact sales
             </CUIButton>
           </div>
+          <SuiText>
+            <p className='font-bold text-white'>
+              Why ClickStack is better than Lucene-based observability:
+            </p>
+          </SuiText>
+          <div className='flex flex-col items-stretch gap-y-5 rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-lg lg:flex-row lg:divide-x lg:divide-neutral-700/80'>
+            {[
+              {
+                stat: '4x',
+                label: 'Reduction in costs'
+              },
+              {
+                stat: '10x',
+                label: 'Faster analytical queries'
+              },
+              {
+                stat: '2x',
+                label: 'Better compression'
+              }
+            ].map((item, itemIndex) => {
+              return (
+                <div key={itemIndex} className='flex-1 px-3 py-4 text-center'>
+                  <p className='mb-2 text-5xl font-bold'>{item.stat}</p>
+                  <p className='font-medium text-primary-300'>{item.label}</p>
+                </div>
+              )
+            })}
+          </div>
         </div>
         <Image
           src={heroLogos}
-          alt='ClickHouse vs Splunk'
+          alt='ClickHouse vs OpenSearch'
           width={698 / 2}
           height={646 / 2}
           loading='eager'
@@ -160,20 +193,25 @@ export default function SplunkPage({
             <SuiTitle
               type='h2'
               className='mx-auto mb-16 max-w-5xl text-neutral-200'>
-              Tired of ingest limits, limited retention, slow searches, and
-              complex licensing?{' '}
+              Frustrated by slow queries, rising storage costs and an endless
+              need to scale horizontally?{' '}
               <strong className='text-white'>You’re not alone.</strong>
             </SuiTitle>
-            <ClickHouseVersusSplunk />
+            <AnimatedClickHouseScaleVsCompetitor
+              name='OpenSearch'
+              logo={opensearchAnimationLogo}
+              tileColor='#F4F8FB'
+              lineColor='#1486BA'
+            />
           </div>
 
           {/* Testimonials */}
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
+          {/*<div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
             <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
-              Join Anthropic in migrating from Splunk
+              Join others migrating to ClickStack from OpenSearch
             </h2>
-            <div className='grid grid-cols-1 gap-6 lg:grid-cols-2 lg:space-y-0'>
+            <div className='grid grid-cols-1 gap-6 lg:grid-cols-4 lg:space-y-0'>
               <QuoteCard
                 content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
                 link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
@@ -184,114 +222,122 @@ export default function SplunkPage({
                   alt: 'Anthropic'
                 }}
               />
-              <div className='order-first lg:order-last'>
-                <PlayOnClickVideo
-                  provider='youtube'
-                  id='SrLKbzdFEWA'
-                  thumbnail={<YouTubeThumbnail videoId='SrLKbzdFEWA' />}
-                  playButtonEyebrow='Customer story'
-                  playButtonLabel='Hear from Anthropic'
-                />
-              </div>
+              <QuoteCard
+                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
+                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
+                logo={{
+                  src: logoAnthropic,
+                  width: 200 * 0.9,
+                  height: 41 * 0.9,
+                  alt: 'Anthropic'
+                }}
+              />
+              <QuoteCard
+                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
+                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
+                logo={{
+                  src: logoAnthropic,
+                  width: 200 * 0.9,
+                  height: 41 * 0.9,
+                  alt: 'Anthropic'
+                }}
+              />
+              <QuoteCard
+                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
+                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
+                logo={{
+                  src: logoAnthropic,
+                  width: 200 * 0.9,
+                  height: 41 * 0.9,
+                  alt: 'Anthropic'
+                }}
+              />
             </div>
-          </div>
+          </div>*/}
 
-          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='relative grid grid-cols-1 gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:grid-cols-2'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <h2 className='col-span-full text-center font-basier text-2xl font-semibold'>
+              Why ClickStack outperforms OpenSearch Observability
+            </h2>
+
             {/* Pillar 1 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
-              <div className='flex items-center gap-4 lg:gap-6'>
-                <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
-                <SuiTitle type='h3' className='text-white'>
-                  Predictable, resource-based pricing
-                </SuiTitle>
-              </div>
-              <SuiText>
-                Splunk’s complex mix of ingest, workload, and host-based pricing
-                makes cost forecasting difficult. ClickStack uses simple
-                resource-based pricing -pay only for compute and storage. With
-                separation of storage and compute and high compression, users
-                can enjoy long term cost-efficient retention.
-              </SuiText>
-            </div>
-
-            {/* Pillar 2 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconGuage} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
-                  Real-time performance, not long-running searches
+                  Performance at scale
                 </SuiTitle>
               </div>
               <SuiText>
-                Splunk queries often slow under scale or require
-                pre-aggregations like tstats. ClickStack delivers sub-second
-                queries on full-fidelity data, even across trillions of rows. No
-                sampling. No penalty for high cardinality.
+                OpenSearch slows under heavy ingest and high-cardinality
+                queries, while ClickHouse powers sub-second analytics even at
+                petabyte scale.
               </SuiText>
+              <Image
+                src={chartQueries}
+                alt='Full data set aggregation for 1 billion JSON documents'
+                width={336}
+                height={273}
+                className='mx-auto mt-auto'
+              />
+            </div>
+
+            {/* Pillar 2 */}
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
+              <div className='flex items-center gap-4 lg:gap-6'>
+                <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
+                <SuiTitle type='h3' className='text-white'>
+                  Lower cost, higher efficiency
+                </SuiTitle>
+              </div>
+              <SuiText>
+                ClickHouse’s columnar storage and advanced compression cut
+                storage needs by &gt; 50%, reducing infrastructure costs
+                dramatically and allowing for long term retention.
+              </SuiText>
+              <Image
+                src={chartStorage}
+                alt='Storage required for 1 billion JSON documents'
+                width={336}
+                height={273}
+                className='mx-auto mt-auto'
+              />
             </div>
 
             {/* Pillar 3 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconLightning} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
-                  Unified observability without product sprawl
+                  Unified observability
                 </SuiTitle>
               </div>
               <SuiText>
-                Unlike Splunk’s separate Enterprise, Cloud, and Observability
-                platforms, ClickStack unifies logs, metrics andtraces, in one
-                system - no multiple SKUs or disconnected data stores and
-                disjointed user experiences.
+                ClickStack runs logs, metrics, and traces in one engine
+                alongside business and application data for unrivalled
+                correlation. OpenSearch was never designed for analytical
+                workloads leaving data fragmented.
               </SuiText>
             </div>
 
             {/* Pillar 4 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconUnlock} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
-                  Open source and open standards
+                  Operational simplicity
                 </SuiTitle>
               </div>
               <SuiText>
-                Splunk’s proprietary SPL and closed data formats limit
-                portability. ClickStack is fully open-source and embraces open
-                standards like SQL and OpenTelemetry, ensuring flexibility and
-                avoiding lock-in.
+                ClickStack eliminates the overhead of managing tens, hundreds,
+                or even thousands of shards and the constant JVM tuning that
+                comes with them. Its optimized engine scales vertically,
+                handling massive datasets within a single shard - only requiring
+                sharding at extreme volumes - reducing network overhead and
+                costly rebalances.
               </SuiText>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className='bg-neutral-750 py-16'>
-        <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='lg:max-w-xl'>
-            <SuiTitle type='h2' className='mb-6'>
-              Designed for OTel at scale
-            </SuiTitle>
-            <SuiText className='space-y-6 text-neutral-200'>
-              <p>
-                <strong>
-                  OTel-first by design. Real-time querying.
-                  <br />
-                  Long term retention. No sampling.
-                </strong>
-              </p>
-              <p>
-                ClickStack, built on ClickHouse, is OpenTelemetry-native by
-                design, supporting unified logs, traces, metrics, and replays at
-                petabyte scale.
-              </p>
-              <p>
-                Splunk’s architecture is not optimized for OTel’s
-                high-cardinality, high-throughput demands.
-              </p>
-            </SuiText>
-          </div>
-          <div className='order-first mx-auto w-full max-w-max lg:order-last'>
-            <AnimatedClickstackOtel />
           </div>
         </div>
       </section>
@@ -299,14 +345,23 @@ export default function SplunkPage({
       {/* Tabbed table */}
       <section className='my-16 lg:my-24'>
         <div className='section-container mb-8'>
-          <div className='mx-auto max-w-5xl space-y-6 text-center'>
-            <SuiTitle type='h2'>ClickStack compared to Splunk</SuiTitle>
+          <div className='mx-auto mb-16 max-w-5xl space-y-6 text-center'>
+            <SuiTitle type='h2'>
+              ClickStack compared to OpenSearch for Observability
+            </SuiTitle>
             <SuiText className='mx-auto max-w-3xl text-neutral-200'>
-              Break free from thousands of products and SKUs.
-              <br />
-              One high-performance engine, one unified experience.
+              At a high level, OpenSearch and ClickStack share a familiar shape:
+              both have a data collection layer (FluentBit and Data Prepper vs.
+              OpenTelemetry), a storage engine (OpenSearch vs. ClickHouse), and
+              a UI (OpenSearch dashboards vs. HyperDX). But beneath these
+              parallels, the architectures diverge.
             </SuiText>
           </div>
+          <ClickStackVsCompetitorStack
+            layer1={{ logo: { src: layerOpensearchDashboards } }}
+            layer2={{ logo: { src: layerOpensearch } }}
+            layer3={{ logo: { src: layerDataPrepper } }}
+          />
         </div>
         <TabbedTable />
       </section>
@@ -317,33 +372,33 @@ export default function SplunkPage({
           <div className='-mx-4 flex flex-col lg:mx-auto lg:max-w-4xl lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/2'>
               <LinedIconCard
-                icon='database'
-                title='Long-term retention without compromise'
-                text='Separation of storage and compute and 10–30x compression, enables cost-efficient, near-infinite data retention. Keep full-fidelity data for months or years without sampling or pre-aggregation'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='gear'
-                title='Schema on read and write'
-                text='Splunk pioneered schema-on-read, and ClickStack matches it with powerful parsing and string extraction functions. It also adds dynamic schema-on-write, allowing users to index data efficiently for compression and performance'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
-                icon='guage'
-                title='Consistently low latency at high concurrency'
-                text='ClickHouse was designed for real-time analytics, sustaining thousands of concurrent queries while maintaining sub-second latency'
-                className='bg-neutral-900/80'
-              />
-            </div>
-            <div className='p-4 lg:w-1/2'>
-              <LinedIconCard
                 icon='hand-coins'
-                title='Unified architecture with simple pricing'
-                text='ClickStack streamlines observability in a unified engine. Eliminate the operational complexity of multiple products, components and SKUs.'
+                title='Lower costs'
+                text='10x cost savings thanks to high compression and resource efficiency'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='squares-four'
+                title='Simpler at scale'
+                text='Homogenous architecture and vertical scaling simplifies and reduces nodes'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='chart-line'
+                title='Built for high cardinality analytics'
+                text='Column orientation designed for high cardinality queries'
+                className='bg-neutral-900/80'
+              />
+            </div>
+            <div className='p-4 lg:w-1/2'>
+              <LinedIconCard
+                icon='list-search'
+                title='Cloud-agnostic and open'
+                text='Deploy on any cloud or on-premises. ClickStack’s open architecture avoids vendor lock-in and integrates seamlessly across ecosystems.'
                 className='bg-neutral-900/80'
               />
             </div>
@@ -355,7 +410,7 @@ export default function SplunkPage({
       <div className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
-            Migrate your workload from Splunk today
+            Migrate your workload from OpenSearch today
           </SuiTitle>
           <SuiText size='base' color='text-default' weight='normal'>
             Cut costs, boost performance, and unlock observability at scale with
@@ -366,36 +421,82 @@ export default function SplunkPage({
               type='primary-dark'
               size='lg'
               className='mx-auto w-full sm:!px-10 md:w-auto'
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=splunk-comparison-page-get-started'>
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page-get-started'>
               Get started with open-source
             </CUIButton>
             <CUIButton
               type='secondary'
               size='lg'
               className='mx-auto w-full !border-neutral-800 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white sm:!px-10 md:w-auto'
-              href='/company/contact?loc=splunk-comparison-page-get-started'>
+              href='/company/contact?loc=opensearch-comparison-page-get-started'>
               Contact sales
             </CUIButton>
           </p>
         </div>
       </div>
 
+      {/* FAQs */}
+      <section
+        id='faqs'
+        className='bg-shadow-element relative mx-auto my-24 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+        style={
+          {
+            '--top-side': '224px'
+          } as React.CSSProperties
+        }>
+        <div className='pb-10 text-center lg:text-left'>
+          <div className='lg:sticky lg:top-32'>
+            <Image
+              src='/faq-icon.svg'
+              alt='FAQ Icon'
+              width={72}
+              height={72}
+              className='mx-auto lg:mx-0'
+            />
+            <SuiTitle type='h2' className='my-6 lg:text-left'>
+              FAQs
+            </SuiTitle>
+            <div className='mx-auto max-w-md space-y-4 text-neutral-200 lg:text-left'>
+              <p>
+                We're here to make observability simple, fast, and open. Explore
+                our FAQs to learn more about ClickStack, and if you don’t see
+                what you need, we’re always happy to chat.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/company/contact'
+                  className='font-bold text-primary-300'>
+                  Ask us anything
+                </LinkWithArrow>
+              </p>
+            </div>
+          </div>
+        </div>
+        <Accordion
+          className='mx-auto w-full max-w-2xl lg:mr-0'
+          items={faqs.map(({ question, answer }) => ({
+            handle: question,
+            content: answer
+          }))}
+        />
+      </section>
+
       {/* More comparisons */}
       <MoreComparisons
         comparisons={[
           {
             name: 'PostgreSQL',
-            link: `/comparison/postgresql?loc=splunk-comparison-page`,
+            link: `/comparison/postgresql?loc=opensearch-comparison-page`,
             logo: logoPostgress
           },
           {
             name: 'Elastic Observability',
-            link: `/comparison/elastic-for-observability?loc=splunk-comparison-page`,
+            link: `/comparison/elastic-for-observability?loc=opensearch-comparison-page`,
             logo: logoElastic
           },
           {
             name: 'Snowflake',
-            link: `/comparison/snowflake?loc=splunk-comparison-page`,
+            link: `/comparison/snowflake?loc=opensearch-comparison-page`,
             logo: logoSnowflake
           }
         ]}
@@ -448,9 +549,9 @@ function TabbedTable() {
     {
       heading: (
         <Image
-          src={splunkTableLogo}
-          alt='Splunk'
-          width={103}
+          src={opensearchTableLogo}
+          alt='OpenSearch'
+          width={156}
           height={30}
           className='mx-auto -mb-2 -mt-1'
         />
@@ -548,7 +649,7 @@ function TabbedTable() {
                       )}
                     </>
                   ),
-                  values: [row.clickhouse, row.splunk]
+                  values: [row.clickhouse, row.opensearch]
                 }
               })
             })
@@ -556,134 +657,5 @@ function TabbedTable() {
         />
       </div>
     </div>
-  )
-}
-
-function ClickHouseVersusSplunk() {
-  const clickhouseLines = useMemo(() => {
-    return [
-      [
-        { startSize: 0.5, endSize: 1.5, duration: 1.3 },
-        { startSize: 1, endSize: 2, duration: 1.25 },
-        { startSize: 1.1, endSize: 1, duration: 0.9 },
-        { startSize: 2, endSize: 1.5, duration: 0.8 }
-      ],
-      [
-        { startSize: 0.8, endSize: 1.2, duration: 1.3 },
-        { startSize: 0.5, endSize: 1.5, duration: 1.5 },
-        { startSize: 0.25, endSize: 1, duration: 1 },
-        { startSize: 1, endSize: 0.8, duration: 0.7 }
-      ],
-      [
-        { startSize: 1.1, endSize: 1, duration: 1.5 },
-        { startSize: 1, endSize: 2, duration: 1.25 },
-        { startSize: 0.5, endSize: 1.5, duration: 1.5 }
-      ]
-    ].map((row) => {
-      return row.map((col) => {
-        return {
-          ...col,
-          duration: col.duration * 0.5
-        }
-      })
-    })
-  }, [])
-
-  const splunkLines = useMemo(() => {
-    return [
-      [
-        { startSize: 0.5, endSize: 1.5, duration: 4.8 },
-        { startSize: 1, endSize: 2, duration: 4.75 },
-        { startSize: 1.1, endSize: 1, duration: 4.4 },
-        { startSize: 2, endSize: 1.5, duration: 5.3 }
-      ]
-    ]
-  }, [])
-
-  return (
-    <ScaleToContainer scaleUp={false} className='mx-auto'>
-      <div className='relative flex w-max flex-row flex-nowrap gap-x-12 lg:gap-x-16'>
-        {/* ClickHouse */}
-        <div className='w-max'>
-          <Image
-            src={animationClickhouse}
-            alt='ClickHouse'
-            width={283}
-            height={360}
-          />
-          <span className='relative'>
-            <span className='absolute inset-0 block animate-fadeInOut bg-primary-400 blur-lg' />
-            <span className='relative z-10 inline-block rounded-full border border-primary-300 bg-primary-300 px-4 py-2 font-mono text-xs font-bold leading-none text-neutral-900'>
-              Query results
-            </span>
-          </span>
-          <div className='mx-auto flex w-max gap-3.5'>
-            {clickhouseLines.map((keyframes, lineIndex) => {
-              return (
-                <AnimatedDataLine
-                  key={lineIndex}
-                  size={50}
-                  direction='down'
-                  trackColor='rgba(255,255,255,0.2)'
-                  keyframes={keyframes}
-                />
-              )
-            })}
-          </div>
-          <div className='mx-auto inline-flex flex-col rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
-            <CounterAnimation
-              fixedWidth={false}
-              increment={4}
-              max={99999}
-              interval={5}
-            />{' '}
-            <small className='uppercase text-neutral-300'>
-              Queries executed
-            </small>
-          </div>
-        </div>
-
-        {/* VS icon */}
-        <Image
-          src={iconVs}
-          width={60}
-          height={60}
-          alt='VS'
-          className='self-center rounded-full shadow-xl'
-        />
-
-        {/* Splunk */}
-        <div className='w-max'>
-          <Image src={animationSplunk} alt='Splunk' width={283} height={360} />
-          <span className='relative z-10 inline-block rounded-full border border-neutral-600 bg-neutral-700 px-4 py-2 font-mono text-xs font-bold leading-none text-neutral-200'>
-            Search heads
-          </span>
-          <div className='mx-auto flex w-max gap-3.5'>
-            {splunkLines.map((keyframes, lineIndex) => {
-              return (
-                <AnimatedDataLine
-                  key={lineIndex}
-                  size={50}
-                  direction='down'
-                  strokeWidth={8}
-                  trackColor='rgba(255,255,255,0.2)'
-                  lineColor='#76B43A'
-                  lineProps={{
-                    strokeDasharray: '6 8'
-                  }}
-                  keyframes={keyframes}
-                />
-              )
-            })}
-          </div>
-          <div className='mx-auto inline-flex flex-col rounded border border-neutral-700 bg-neutral-750 px-4 py-2 text-center font-mono text-sm shadow-lg'>
-            <CounterAnimation fixedWidth={false} max={99999} interval={300} />{' '}
-            <small className='uppercase text-neutral-300'>
-              Queries executed
-            </small>
-          </div>
-        </div>
-      </div>
-    </ScaleToContainer>
   )
 }
