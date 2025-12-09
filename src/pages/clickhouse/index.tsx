@@ -389,7 +389,7 @@ ER  -  `
                         link: '/videos/lyft-user-story',
                         title: 'Migrating from Apache Druid',
                         description:
-                          'How Lyft optimized performance and cut infrastructure costs with ClickHouse.',
+                          'Optimize your performance and cut infrastructure costs with ClickHouse.',
                         quote:
                           'We needed something to slice and dice real-time data, like rides and driver hours across cities and regions where Lyft runs. Using ClickHouse resulted into a lot of performance benefits for us with huge cost savings for the org.',
                         logo: {
@@ -604,13 +604,6 @@ ER  -  `
             <SuiTitle type='h2'>
               From your laptop to quadrillion scale and beyond
             </SuiTitle>
-            <p className='text-neutral-200'>
-              Start in-process with Python on your laptop (
-              <Link href='/chdb' className='text-primary-300 hover:underline'>
-                chDB
-              </Link>
-              ), exploring millions of rows.
-            </p>
             <p className='text-neutral-200'>
               Scale the same engine on your laptop to billions, expand to
               trillions on a server, and then out to hundreds of nodes for
