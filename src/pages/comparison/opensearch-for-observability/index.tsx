@@ -48,8 +48,10 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         ...commonProps,
         seo: {
           title: 'OpenSearch vs ClickStack',
-          path: '/comparison/opensearch-for-observability',
-          schema: generateFaqPageSchema({ faqs })
+          description:
+            'Learn why ClickStack outperforms OpenSearch for observability with 10x faster queries, 4x lower costs, and unified analytics across logs, metrics, and traces at scale.',
+          schema: generateFaqPageSchema({ faqs }),
+          path: '/comparison/opensearch-for-observability'
         }
       }
     }

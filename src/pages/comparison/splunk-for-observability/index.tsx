@@ -11,6 +11,7 @@ import logoElastic from './assets/logo-elastic.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import splunkTableLogo from './assets/splunk-table-logo.svg'
+import Accordion from '@/components-cleaned/Accordion'
 import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
@@ -25,12 +26,13 @@ import ComparisonTable, {
 } from '@/components/ComparisonTable'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
-import tables from '@/data/splunk-comparison'
+import { tables, faqs } from '@/data/splunk-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
@@ -46,6 +48,8 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         ...commonProps,
         seo: {
           title: 'Splunk vs ClickHouse',
+          description:
+            'ClickStack offers fast, cost-efficient OpenTelemetry observability at scale. Compare it with Splunk’s complex pricing and slower searches to modernize your stack.',
           path: '/comparison/splunk-for-observability'
         }
       }
@@ -196,9 +200,13 @@ export default function SplunkPage({
             </div>
           </div>
 
-          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='grid grid-cols-1 gap-6 rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:grid-cols-2'>
+            <h2 className='col-span-full text-center font-basier text-2xl font-semibold'>
+              Why ClickStack outperforms Splunk
+            </h2>
+
             {/* Pillar 1 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -215,7 +223,7 @@ export default function SplunkPage({
             </div>
 
             {/* Pillar 2 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconGuage} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -231,7 +239,7 @@ export default function SplunkPage({
             </div>
 
             {/* Pillar 3 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconLightning} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -247,7 +255,7 @@ export default function SplunkPage({
             </div>
 
             {/* Pillar 4 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconUnlock} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -379,6 +387,52 @@ export default function SplunkPage({
           </p>
         </div>
       </div>
+
+      {/* FAQs */}
+      <section
+        id='faqs'
+        className='bg-shadow-element relative mx-auto my-24 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+        style={
+          {
+            '--top-side': '224px'
+          } as React.CSSProperties
+        }>
+        <div className='pb-10 text-center lg:text-left'>
+          <div className='lg:sticky lg:top-32'>
+            <Image
+              src='/faq-icon.svg'
+              alt='FAQ Icon'
+              width={72}
+              height={72}
+              className='mx-auto lg:mx-0'
+            />
+            <SuiTitle type='h2' className='my-6 lg:text-left'>
+              FAQs
+            </SuiTitle>
+            <div className='mx-auto max-w-md space-y-4 text-neutral-200 lg:text-left'>
+              <p>
+                We're here to make observability simple, fast, and open. Explore
+                our FAQs to learn more about ClickStack, and if you don’t see
+                what you need, we’re always happy to chat.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/company/contact'
+                  className='font-bold text-primary-300'>
+                  Ask us anything
+                </LinkWithArrow>
+              </p>
+            </div>
+          </div>
+        </div>
+        <Accordion
+          className='mx-auto w-full max-w-2xl lg:mr-0'
+          items={faqs.map(({ question, answer }) => ({
+            handle: question,
+            content: answer
+          }))}
+        />
+      </section>
 
       {/* More comparisons */}
       <MoreComparisons
