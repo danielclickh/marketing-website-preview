@@ -2,7 +2,7 @@ import { Table } from './index'
 
 export default {
   name: 'Performance',
-  description: `### ### What is the performance of OpenSearch vs ClickStack for Observability?
+  description: `### What is the performance of OpenSearch vs ClickStack for Observability?
 
 ClickStack, built on ClickHouse, is engineered for speed. Its **vectorized engine**, **columnar compression**, and efficient memory use deliver **sub-second aggregations on high-cardinality data at petabyte scale** \\- critical for observability workloads. Elastic, **designed for search**, struggles with analytics: aggregations are slow at scale, term aggregations approximate, and indexing competes with queries for resources in open-source.
 
