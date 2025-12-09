@@ -137,7 +137,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::marketing-video.marketing-video': async function (body, response) {
-    const paths = [`/sitemap`, `/videos`, `/jp/videos`]
+    const paths = [`/sitemap`, `/videos`, `/jp/videos`, `/clickhouse`]
 
     if (body?.entry?.Slug) {
       paths.push(`/videos/${body.entry.Slug}`)

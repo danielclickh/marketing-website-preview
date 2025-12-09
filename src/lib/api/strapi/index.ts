@@ -6,6 +6,7 @@ import {
   ApiResponse,
   ComponentSeo,
   EntryEvent,
+  EntryMarketingVideo,
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
@@ -428,3 +429,6 @@ export const eventsService = new StrapiEntryService<EntryEvent>(
   true,
   true
 )
+
+export const marketingVideosService =
+  new StrapiEntryService<EntryMarketingVideo>('marketing-videos', false, true)

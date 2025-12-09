@@ -537,7 +537,7 @@ export default function LearnPage({
           <SuiCodeblock
             showCopy={true}
             copyValue='curl https://clickhouse.com/ | sh'
-            className='mx-auto flex w-full items-center gap-3 text-center sm:w-max sm:text-left md:pr-24'>
+            className='mx-auto flex w-full items-center gap-3 text-center sm:w-max sm:text-left md:!pr-24'>
             <span className='hidden text-primary sm:inline'>$</span>
             <span>curl https://clickhouse.com/ | sh</span>
           </SuiCodeblock>

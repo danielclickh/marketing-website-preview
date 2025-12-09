@@ -77,6 +77,7 @@ type PopulateLeaf<T> =
 export type PopulateParam<T> =
   | '*'
   | 'deep'
+  | false
   | ApiKey<T>[]
   | {
       [K in ApiKey<T>]?: PopulateLeaf<any>
@@ -234,6 +235,12 @@ export interface ComponentAuthor {
   profileLink: null | string
 }
 
+export interface ComponentPromotion {
+  title: string
+  description: string
+  image: EntryImage
+}
+
 export interface ComponentEventHostedByItem {
   name: string
   role: string
@@ -272,6 +279,11 @@ export interface ComponentEventForm {
 // -----
 // Content types
 // -----
+
+export interface EntryTag extends Entry {
+  name: string
+  slug: string
+}
 
 export interface EntryResourceCategory extends Entry {
   name: string
@@ -314,4 +326,26 @@ export interface EntryEvent extends Entry {
   form: null | ComponentEventForm
   eventVideoUrl: null | string
   recordedVimeoUrl: null | string
+}
+
+export interface EntryMarketingVideoCategory extends Entry {
+  CategoryName: string
+}
+
+export interface EntryMarketingVideo extends Entry {
+  Title: string
+  Slug: string
+  VideoDate: string
+  VideoID: string
+  Description: string | null
+  RelatedVideos: Array<EntryMarketingVideo>
+  categories: Array<EntryMarketingVideoCategory>
+  IntroText: null | string
+  seo: null | {
+    title: null | string
+    description: null | string
+    image: null | EntryImage
+  }
+  tags: Array<EntryTag>
+  promotion: null | ComponentPromotion
 }
