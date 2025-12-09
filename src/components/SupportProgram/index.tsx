@@ -2,6 +2,7 @@ import { CUICard, CUILink } from '../ClickUI'
 import HRSeparator from '../HRSeparator'
 import { SuiText, SuiTitle } from '../sui'
 import ArrowsUp from './arrowsUp'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -109,13 +110,9 @@ export default function SupportProgram(props: any) {
                 answer your question, we’d encourage you to go instead to our
                 community resources:
               </p>
-              <CUILink
-                href='/slack'
-                target='_blank'
-                className='arrow-link mx-auto mb-4 items-center justify-center gap-1 font-bold text-neutral-800 hover:text-neutral-900 md:flex'>
-                ClickHouse community Slack channel{' '}
-                <ChevronRightIcon height='18' className='arrow pt-0.5' />
-              </CUILink>
+              <LinkWithArrow href='/slack' className='font-bold'>
+                ClickHouse community Slack channel
+              </LinkWithArrow>
             </div>
           </div>
         </div>
@@ -167,22 +164,34 @@ export default function SupportProgram(props: any) {
                   </td>
                   <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     <p>
-                      <a href='https://console.clickhouse.cloud/learn'>
+                      <Link
+                        href='https://console.clickhouse.cloud/learn'
+                        className='text-primary-300 hover:underline'>
                         On-demand training included
-                      </a>
+                      </Link>
                     </p>
                     <p>
-                      <a href='https://clickhouse.com/docs/'>Docs</a>
+                      <Link
+                        href='https://clickhouse.com/docs'
+                        className='text-primary-300 hover:underline'>
+                        Docs
+                      </Link>
                     </p>
                   </td>
                   <td className='border-r border-r-neutral-700 bg-neutral-750 p-4'>
                     <p>
-                      <a href='https://console.clickhouse.cloud/learn'>
+                      <Link
+                        href='https://console.clickhouse.cloud/learn'
+                        className='text-primary-300 hover:underline'>
                         On-demand training included
-                      </a>
+                      </Link>
                     </p>
                     <p>
-                      <a href='https://clickhouse.com/docs/'>Docs</a>
+                      <Link
+                        href='https://clickhouse.com/docs'
+                        className='text-primary-300 hover:underline'>
+                        Docs
+                      </Link>
                     </p>
                   </td>
                 </tr>

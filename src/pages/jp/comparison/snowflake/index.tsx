@@ -344,7 +344,7 @@ export default function SnowflakePage({
                       storage. Finally, this expense analysis is projected and
                       compared for a production environment and workload.
                     </p>
-                    <div className='absolute bottom-0 left-0 z-20 h-[220px] w-full bg-snowflakeGradient lg:h-[100px]'></div>
+                    <div className='absolute bottom-0 left-0 z-20 h-[220px] w-full bg-gradient-to-b from-primary-300/0 to-primary-300 to-70% lg:h-[100px]'></div>
                   </div>
                   <div className='relative z-40 -mt-30 lg:-mt-20'>
                     <div className='mx-auto max-w-xl rounded-lg bg-neutral-900 p-5 text-white lg:p-10'>
@@ -482,7 +482,7 @@ export default function SnowflakePage({
                     <>
                       {content.RelatedBlogs.flatMap((custom: any) =>
                         custom.blog_posts.map((blog: any) => (
-                          <div id='snowflake-relatedcontent' key={blog.id}>
+                          <div key={blog.id}>
                             <BlogPost {...blog} />
                           </div>
                         ))

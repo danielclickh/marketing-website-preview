@@ -409,7 +409,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/en/install'
+                    href='https://clickhouse.com/docs/install'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Install ClickHouse
@@ -417,7 +417,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/en/cloud-quick-start'
+                    href='https://clickhouse.com/docs/cloud-quick-start'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Cloud quick start
@@ -425,7 +425,7 @@ function Sitemap({
                 </li>
                 <li>
                   <Link
-                    href='https://clickhouse.com/docs/en/integrations'
+                    href='https://clickhouse.com/docs/integrations'
                     prefetch={false}
                     className='font text-primary-300 hover:underline'>
                     Integrations

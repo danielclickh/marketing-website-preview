@@ -187,7 +187,7 @@ export default function SnowflakePage({
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
             <Link
-              href={`https://clickhouse.com/docs/en/migrations/snowflake?loc=snowflake-comparison-page-hero`}
+              href={`/docs/migrations/snowflake?loc=snowflake-comparison-page-hero`}
               target='_blank'
               prefetch={false}
               className='text-primary-300 hover:underline'>

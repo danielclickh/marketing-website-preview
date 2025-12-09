@@ -1,5 +1,6 @@
 'use client'
 
+import styles from './styles.module.scss'
 import CustomerStoryCard from '@/components/CustomerStoryCard'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
@@ -427,10 +428,10 @@ export default function CustomerStoriesPage({
                     Latest
                   </button>
                   {useCaseOptions.length > 0 && (
-                    <div className='multiselect-target'>
+                    <div>
                       <MultiSelect
                         value={filterByUseCases}
-                        itemClassName='multiselect-item'
+                        itemClassName={styles.multiselectItem}
                         onChange={(event) => {
                           setFilterByUseCases(event.value)
                         }}
@@ -444,10 +445,10 @@ export default function CustomerStoriesPage({
                     </div>
                   )}
                   {migrationOptions.length > 0 && (
-                    <div className='multiselect-target'>
+                    <div>
                       <MultiSelect
                         value={filterByMigrations}
-                        itemClassName='multiselect-item'
+                        itemClassName={styles.multiselectItem}
                         onChange={(event) => {
                           setFilterByMigrations(event.value)
                         }}
@@ -461,10 +462,10 @@ export default function CustomerStoriesPage({
                     </div>
                   )}
                   {verticalOptions.length > 0 && (
-                    <div className='multiselect-target'>
+                    <div>
                       <MultiSelect
                         value={filterByVerticals}
-                        itemClassName='multiselect-item'
+                        itemClassName={styles.multiselectItem}
                         onChange={(event) => {
                           setFilterByVerticals(event.value)
                         }}
@@ -478,10 +479,10 @@ export default function CustomerStoriesPage({
                     </div>
                   )}
                   {cloudProvidersOptions.length > 0 && (
-                    <div className='multiselect-target'>
+                    <div>
                       <MultiSelect
                         value={filterByCloudProviders}
-                        itemClassName='multiselect-item'
+                        itemClassName={styles.multiselectItem}
                         onChange={(event) => {
                           setFilterByCloudProviders(event.value)
                         }}

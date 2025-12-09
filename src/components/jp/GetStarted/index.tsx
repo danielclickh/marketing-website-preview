@@ -28,7 +28,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
         </SuiCodeblock>
         <div className='mt-4 text-sm font-medium text-neutral-500'>
           <CUILink
-            href='/docs/install/windows'
+            href='https://clickhouse.com/docs/integrations/sql-clients/clickhouse-client-local'
             target='_self'
             className='underline hover:text-neutral-0'
             onClick={useGalaxyOnClick(
@@ -48,7 +48,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
           </CUILink>{' '}
           用もあります。
           <CUILink
-            href='https://clickhouse.com/docs/en/install'
+            href='https://clickhouse.com/docs/install'
             target='_self'
             className='underline hover:text-neutral-0'
             onClick={useGalaxyOnClick(

@@ -19,6 +19,11 @@ export interface OpenhouseCard {
   icon: any
 }
 
+export interface OpenhouseVideo {
+  title: string
+  youtubeId: string
+}
+
 export interface OpenhouseDayAgenda {
   time: null | string
   title: string
@@ -52,6 +57,7 @@ export interface OpenhouseEntry {
   applyToSpeakLink: string | null
   gallery: Array<StrapiImageType | StrapiVideoType>
   cards: Array<OpenhouseCard>
+  videos: Array<OpenhouseVideo>
   days: Array<OpenhouseDay>
   featuredSpeakers: Array<OpenhouseSpeakerEntry>
   speakers: Array<OpenhouseSpeakerEntry>

@@ -366,7 +366,7 @@ export default function CloudPage({
                 the MySQL interface so you can connect to any of your favorite
                 MySQL-compatible{' '}
                 <Link
-                  href='https://clickhouse.com/docs/en/integrations/data-visualization'
+                  href='https://clickhouse.com/docs/integrations/data-visualization'
                   className='text-primary-300'
                   prefetch={false}
                   target='_blank'>
@@ -528,7 +528,7 @@ export default function CloudPage({
                   <CUICard.Footer className='flex w-full items-center'>
                     <CUIButton
                       type='secondary'
-                      href='https://aws.amazon.com/marketplace/pp/prodview-jettukeanwrfc'
+                      href='https://aws.amazon.com/marketplace/pp/prodview-p4gwofrqpkltu?trk=176b570f-20dd-4b84-aa7e-cae53990fe91&sc_channel=el&source=clickhouse'
                       linkClass='w-full inline-grid group'
                       iconRight={
                         <ChevronRightIcon

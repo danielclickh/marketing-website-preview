@@ -1,5 +1,6 @@
 import CodeInterpreter from './CodeInterpreter'
 import { DefaultView } from './CodeResults'
+import './highlightjs.scss'
 import { ChartConfig, ChartType } from './types'
 import { base64Decode } from './utils'
 import { CodeBlock } from '@clickhouse/click-ui'
@@ -89,7 +90,7 @@ function CodeViewer({
   }
   return (
     <code
-      className={`${className} mb-9 border border-solid border-c3`}
+      className={`${className} mb-9 border border-solid border-neutral-750`}
       style={{ wordBreak: 'break-word' }}
       {...props}>
       {children}

@@ -30,8 +30,8 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
         </SuiCodeblock>
         <div className='mt-4 text-sm font-medium text-neutral-400'>
           Or install for{' '}
-          <Link
-            href='/docs/install/windows'
+          <CUILink
+            href='https://clickhouse.com/docs/integrations/sql-clients/clickhouse-client-local'
             target='_self'
             prefetch={false}
             className='text-primary-300 hover:underline'
@@ -51,8 +51,8 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             Docker
           </Link>{' '}
           or see other{' '}
-          <Link
-            href='https://clickhouse.com/docs/en/install'
+          <CUILink
+            href='https://clickhouse.com/docs/install'
             target='_self'
             prefetch={false}
             className='text-primary-300 hover:underline'

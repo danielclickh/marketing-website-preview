@@ -20,6 +20,7 @@ import logoShopee from './assets/logo-shopee.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import logoZomato from './assets/logo-zomato.svg'
 import styles from './styles.module.scss'
+import Accordion from '@/components-cleaned/Accordion'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
@@ -33,14 +34,16 @@ import ComparisonTable, {
 } from '@/components/ComparisonTable'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
 import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
-import tables from '@/data/elastic-comparison'
+import { tables, faqs } from '@/data/elastic-comparison'
 import { useDebounce } from '@/hooks'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateFaqPageSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { motion } from 'framer-motion'
@@ -63,9 +66,12 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'Elastic vs ClickHouse',
+          title: 'Elastic Observability vs ClickStack',
+          description:
+            'Learn why ClickStack outperforms Elastic Observability with 10x faster queries, 4x lower costs, and unified analytics across logs, metrics, and traces at scale.',
           path: '/comparison/elastic-for-observability',
-          image: [{ url: '/images/clickhouse-vs-elastic-og.png' }]
+          image: [{ url: '/images/clickhouse-vs-elastic-og.png' }],
+          schema: generateFaqPageSchema({ faqs })
         }
       }
     }
@@ -83,12 +89,13 @@ export default function ElasticPage({
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
-          <Breadcrumbs>
+          <Breadcrumbs className='justify-center lg:justify-start'>
             <Breadcrumbs.Item>Comparisons</Breadcrumbs.Item>
             <Breadcrumbs.Item>Observability</Breadcrumbs.Item>
           </Breadcrumbs>
-          <SuiTitle type='h1' weight='bold'>
+          <SuiTitle type='h1' weight='bold' className='md:!text-5xl'>
             ClickHouse <span className='text-primary-300'>vs</span> Elastic
+            Observability
           </SuiTitle>
           <Image
             src={heroLogos}
@@ -107,17 +114,17 @@ export default function ElasticPage({
               metrics, traces, session replays at petabyte scale.
             </p>
             <p>
-              Elastic, by contrast, is rooted in a full-text search engine,
-              built on the belief that observability was just a search problem
-              at a time when inverted indices were sufficient at smaller scales.
-              Never designed for metrics, it cannot unify logs, metrics, and
-              traces in a single system, leaving observability fragmented,
-              costly, and slow.
+              Elastic Observability, by contrast, is rooted in a full-text
+              search engine, built on the belief that observability was just a
+              search problem at a time when inverted indices were sufficient at
+              smaller scales. Never designed for metrics, it cannot unify logs,
+              metrics, and traces in a single system, leaving observability
+              fragmented, costly, and slow.
             </p>
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
-              href='/docs/use-cases/observability/clickstack/getting-started?loc=elastic-comparison-page'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=elastic-comparison-page'
               type='primary'
               size='lg'
               weight='semibold'
@@ -166,11 +173,11 @@ export default function ElasticPage({
           <SuiText className='text-sm'>
             Read our comprehensive guide about{' '}
             <Link
-              href={`https://clickhouse.com/docs/use-cases/observability/clickstack/migration/elastic?loc=elastic-comparison-page-hero`}
+              href={`/docs/use-cases/observability/clickstack/migration/elastic?loc=elastic-comparison-page-hero`}
               target='_blank'
               prefetch={false}
               className='text-primary-300 hover:underline'>
-              migrating from Elastic to ClickStack
+              migrating from Elastic Observability to ClickStack
             </Link>
             .
           </SuiText>
@@ -187,7 +194,7 @@ export default function ElasticPage({
       </section>
 
       {/* Testimonials */}
-      <section className='relative overflow-hidden bg-[#363636] py-16 lg:py-24'>
+      <section className='relative overflow-hidden bg-[#363636] pb-6 pt-16 lg:py-24'>
         {/* Red orb */}
         <div
           className='bg-shadow-element yellow-shadow absolute inset-0'
@@ -277,9 +284,13 @@ export default function ElasticPage({
             </div>
           </div>
 
-          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='grid grid-cols-1 gap-6 rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:grid-cols-2'>
+            <h2 className='col-span-full text-center font-basier text-2xl font-semibold'>
+              Why ClickStack outperforms Elastic Observability
+            </h2>
+
             {/* Pillar 1 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconGuage} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -301,7 +312,7 @@ export default function ElasticPage({
             </div>
 
             {/* Pillar 2 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -323,7 +334,7 @@ export default function ElasticPage({
             </div>
 
             {/* Pillar 3 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconLightning} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -339,7 +350,7 @@ export default function ElasticPage({
             </div>
 
             {/* Pillar 4 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconUnlock} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -364,11 +375,11 @@ export default function ElasticPage({
               ClickStack compared to Elastic Observability
             </SuiTitle>
             <SuiText className='mx-auto max-w-3xl text-neutral-200'>
-              At a high level, Elastic and ClickStack share a familiar shape:
-              both have a data collection layer (Beats and Logstash vs.
-              OpenTelemetry), a storage engine (Elasticsearch vs. ClickHouse),
-              and a UI (Kibana vs. HyperDX). But beneath these parallels, the
-              architectures diverge.
+              At a high level, Elastic Observability (formally the ELK stack)
+              and ClickStack share a familiar shape: both have a data collection
+              layer (Beats and Logstash vs. OpenTelemetry), a storage engine
+              (Elasticsearch vs. ClickHouse), and a UI (Kibana vs. HyperDX). But
+              beneath these parallels, the architectures diverge.
             </SuiText>
           </div>
           <ClickStackVersusElkStack />
@@ -420,7 +431,7 @@ export default function ElasticPage({
       <div className='section-container my-20 md:px-8 lg:my-24 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
           <SuiTitle type='h2' color='text-default'>
-            Migrate your workload from Elastic today
+            Migrate your workload from Elastic Observability today
           </SuiTitle>
           <SuiText size='base' color='text-default' weight='normal'>
             Cut costs, boost performance, and unlock observability at scale with
@@ -431,7 +442,7 @@ export default function ElasticPage({
               type='primary-dark'
               size='lg'
               className='mx-auto w-full sm:!px-10 md:w-auto'
-              href='/docs/use-cases/observability/clickstack/getting-started?loc=elastic-comparison-page-get-started'>
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=elastic-comparison-page-get-started'>
               Get started with open-source
             </CUIButton>
             <CUIButton
@@ -444,6 +455,52 @@ export default function ElasticPage({
           </p>
         </div>
       </div>
+
+      {/* FAQs */}
+      <section
+        id='faqs'
+        className='bg-shadow-element relative mx-auto my-24 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+        style={
+          {
+            '--top-side': '224px'
+          } as React.CSSProperties
+        }>
+        <div className='pb-10 text-center lg:text-left'>
+          <div className='lg:sticky lg:top-32'>
+            <Image
+              src='/faq-icon.svg'
+              alt='FAQ Icon'
+              width={72}
+              height={72}
+              className='mx-auto lg:mx-0'
+            />
+            <SuiTitle type='h2' className='my-6 lg:text-left'>
+              FAQs
+            </SuiTitle>
+            <div className='mx-auto max-w-md space-y-4 text-neutral-200 lg:text-left'>
+              <p>
+                We're here to make observability simple, fast, and open. Explore
+                our FAQs to learn more about ClickStack, and if you don’t see
+                what you need, we’re always happy to chat.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/company/contact'
+                  className='font-bold text-primary-300'>
+                  Ask us anything
+                </LinkWithArrow>
+              </p>
+            </div>
+          </div>
+        </div>
+        <Accordion
+          className='mx-auto w-full max-w-2xl lg:mr-0'
+          items={faqs.map(({ question, answer }) => ({
+            handle: question,
+            content: answer
+          }))}
+        />
+      </section>
 
       {/* More comparisons */}
       <MoreComparisons
@@ -514,8 +571,8 @@ function TabbedTable() {
       heading: (
         <Image
           src={elasticTableLogo}
-          alt='Elastic'
-          width={108}
+          alt='Elastic Observability'
+          width={236}
           height={32}
           className='mx-auto -mb-2 -mt-1'
         />

@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 @layer utilities {
   .branded-scrollbar {
@@ -17,6 +18,140 @@
   }
   .branded-scrollbar::-webkit-scrollbar-track {
     @apply bg-transparent;
+  }
+
+  .tilted {
+    @apply relative whitespace-nowrap;
+
+    &:before {
+      content: '';
+      @apply absolute inset-0 -skew-y-3;
+    }
+
+    &.tilted-sm:before {
+      @apply -skew-y-1;
+    }
+
+    .tilted-content {
+      @apply relative p-2;
+    }
+
+    &.non-tilted-md::before {
+      @screen md {
+        @apply skew-y-0;
+      }
+    }
+  }
+  .tilted-yellow {
+    @apply text-primary-900;
+    &:before {
+      @apply bg-primary-300;
+    }
+  }
+  .tilted-black {
+    @apply text-primary-300;
+    &:before {
+      @apply bg-slate-900;
+    }
+  }
+
+  // Other triangle classes produce issues on smaller screen widths.
+  // This class fixes that by using a fixed triangle depth.
+  //
+  // Use in combination with background classes
+  // @example <div class="bg-primary-300 clip-inverted-triangle-simplified">...</div>
+  //
+  // The default depth can be overriden by using the css variable `--triangle-depth`
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 150px">...</div>
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 25%">...</div>
+  //
+  // The triangle can be offset from the top by using the css variable `--triangle-offset`
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 200px">...</div>
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 10%">...</div>
+  .clip-inverted-triangle-simplified {
+    // Triangle offset from the top will default to 0% if variable is not defined
+    $triangle-offset: var(--triangle-offset, 0%);
+
+    // Triangle depth will default to 75 pixels if variable is not defined
+    $triangle-depth: var(--triangle-depth, 75px);
+
+    clip-path: polygon(
+      // Top left corner
+      0% #{$triangle-offset},
+      // Triangle tip
+      50% calc(#{$triangle-offset} + #{$triangle-depth}),
+      // Top right corner
+      100% #{$triangle-offset},
+      // Bottom right corner
+      100% 100%,
+      // Bottom left corner
+      0% 100%
+    );
+  }
+
+  .clip-inverted-triangle {
+    @apply relative;
+    &::before {
+      @apply absolute inset-0 bg-primary-300;
+      clip-path: polygon(50% 75%, 100% 50%, 100% 100%, 0 100%, 0 50%);
+      content: '';
+    }
+  }
+
+  .clip-inverted-triangle-use-cases {
+    @apply relative;
+    &::before {
+      @apply absolute inset-0 bg-primary-300;
+      clip-path: polygon(50% 30%, 100% 10%, 100% 100%, 0 100%, 0 10%);
+      content: '';
+      @media screen and (max-width: 768px) {
+        clip-path: polygon(50% 6%, 100% 0%, 100% 100%, 0 100%, 0 0%);
+      }
+    }
+  }
+
+  .color-swap {
+    filter: brightness(0) invert(0.8);
+    -webkit-filter: brightness(0) invert(0.8);
+    &:hover {
+      filter: brightness(1) invert(0);
+      -webkit-filter: brightness(1) invert(0);
+    }
+  }
+
+  .logos-color-swap:hover {
+    .color-swap {
+      filter: brightness(1) invert(0);
+      -webkit-filter: brightness(1) invert(0);
+    }
+  }
+
+  .color-swap-no-hover {
+    filter: brightness(0) invert(0.8);
+    -webkit-filter: brightness(0) invert(0.8);
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none !important; /* IE and Edge */
+    scrollbar-width: none !important; /* Firefox */
+  }
+
+  .pause-hover {
+    &:hover {
+      * {
+        animation-play-state: paused;
+      }
+    }
+  }
+
+  .bg-gradient-checkered {
+    background-image: repeating-conic-gradient(
+      var(--tw-gradient-from) 0% 25%,
+      var(--tw-gradient-to) 0% 50%
+    );
   }
 }
 
@@ -89,10 +224,157 @@
       top: 100%;
     }
   }
-}
 
-@tailwind utilities;
-@import 'colors';
+  // Mask size can be overriden with inline styles
+  // <el style="--mask-size: 10px; --mask-size-lg: 20px">...</el>
+  .mask-logos-carousel {
+    $mask-size: var(--mask-size, 2.5rem);
+    mask-image: linear-gradient(
+      90deg,
+      rgba(#000, 0) 0.1%,
+      rgba(#000, 1) #{$mask-size},
+      rgba(#000, 1) calc(99.9% - #{$mask-size}),
+      rgba(#000, 0) 99.9%
+    );
+    @media (min-width: 1024px) {
+      --mask-size: var(--mask-size-lg, 5rem);
+    }
+  }
+
+  .feature-container {
+    @apply grid grid-cols-1 gap-x-12 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0 lg:grid-cols-3;
+  }
+
+  .rich_content {
+    @apply text-neutral-200 space-y-6;
+
+    h2 {
+      @apply text-2xl font-semibold;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-neutral-100;
+    }
+
+    .code-with-play {
+      @apply relative flex whitespace-pre-wrap rounded-lg text-neutral-0 p-6 bg-primary-800;
+
+      .code {
+        @apply -mt-6 overflow-auto whitespace-pre-wrap;
+      }
+
+      .play-ui {
+        @apply absolute top-5 right-6 rounded-lg text-neutral-0 w-8 h-8 flex items-center justify-center text-center leading-5 text-2xl bg-black/80 transition-colors hover:bg-white/10;
+      }
+    }
+
+    table {
+      @apply mb-8 w-full max-w-screen-md rounded-lg text-left text-sm leading-5;
+      @apply rounded-tl-lg rounded-tr-lg;
+
+      thead {
+        @apply first:rounded-tl-lg last:rounded-tr-lg;
+      }
+      th {
+        @apply border-solid border-neutral-700 bg-neutral-725 font-semibold;
+        @apply px-2 py-2 text-left first:rounded-tl-lg last:rounded-tr-lg;
+      }
+      tr {
+        @apply border-b border-solid border-neutral-725 transition-all hover:bg-neutral-700;
+      }
+
+      tr.highlight {
+        @apply border-primary-500 bg-primary-300 bg-opacity-70 text-neutral-900 hover:bg-opacity-100;
+      }
+
+      tr.highlight-blue {
+        @apply border-blue-800 bg-blue-600 bg-opacity-70 text-neutral-0 hover:bg-opacity-100;
+      }
+
+      td {
+        @apply p-2 text-left;
+      }
+    }
+
+    :not(pre) code {
+      // @apply bg-neutral-725 text-neutral-0 font-inconsolata border border-solid inline-block px-1;
+      // border: 1px solid #414141;
+      margin-bottom: 2px;
+      border-radius: 4px;
+    }
+
+    pre {
+      code {
+        padding: 4px;
+        margin-right: 30px;
+        position: inherit;
+        @apply block whitespace-pre-wrap rounded-lg leading-6 text-neutral-0;
+
+        &.ignore-default-color {
+          @apply border-transparent bg-transparent text-inherit;
+        }
+        font-family: monospace, ui-sans-serif;
+      }
+    }
+    .pre-whitespace {
+      @apply whitespace-pre;
+    }
+
+    ul,
+    ol {
+      margin-left: 26px;
+      @apply mb-9;
+
+      li {
+        &:not(:last-child) {
+          @apply mb-2.5;
+        }
+      }
+    }
+
+    blockquote {
+      @apply mb-9 box-border rounded border-l-4 border-l-primary-300 bg-neutral-0/10 pb-3 pl-4 pr-4 pt-3 text-lg italic text-neutral-0;
+    }
+
+    img {
+      @apply max-w-full;
+    }
+
+    p {
+      @apply break-words;
+    }
+
+    &:not(.ignore-anchor) {
+      a {
+        @apply text-primary-300;
+      }
+    }
+
+    &.ignore-anchor {
+      a {
+        @apply text-inherit underline hover:text-primary-300;
+      }
+    }
+
+    &.rich-text-content {
+      ul {
+        @apply list-disc;
+      }
+      ol {
+        @apply list-decimal;
+      }
+    }
+
+    iframe {
+      @apply aspect-video h-auto max-w-full;
+    }
+  }
+}
 
 html,
 body {
@@ -118,790 +400,10 @@ body {
   }
 }
 
-* {
+*, *:before, *:after {
   @apply box-border;
-}
-
-// Mask size can be overriden with inline styles
-// <el style="--mask-size: 10px; --mask-size-lg: 20px">...</el>
-.mask-logos-carousel {
-  $mask-size: var(--mask-size, 2.5rem);
-  mask-image: linear-gradient(
-    90deg,
-    rgba(#000, 0) 0.1%,
-    rgba(#000, 1) #{$mask-size},
-    rgba(#000, 1) calc(99.9% - #{$mask-size}),
-    rgba(#000, 0) 99.9%
-  );
-  @media (min-width: 1024px) {
-    --mask-size: var(--mask-size-lg, 5rem);
-  }
-}
-
-.feature-container {
-  @apply grid grid-cols-1 gap-x-12 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0 lg:grid-cols-3;
-}
-
-.large-feature-container {
-  @apply grid grid-cols-1 gap-x-12 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0;
-}
-
-.feature-icon {
-  @apply flex h-9 w-9 items-center;
-}
-
-.gradient_title {
-  @apply bg-gradient-to-b from-gradientTop to-gradientBottom bg-clip-text text-transparent;
-}
-
-.line-clamp-container p {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-}
-
-.rich_content {
-  @apply text-neutral-200 space-y-6;
-
-  h2 {
-    @apply text-2xl font-semibold;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply text-neutral-100;
-  }
-
-  .code-with-play {
-    @apply relative flex whitespace-pre-wrap rounded-lg text-neutral-0 p-6 bg-primary-800;
-
-    .code {
-      @apply -mt-6 overflow-auto whitespace-pre-wrap;
-    }
-
-    .play-ui {
-      @apply absolute top-5 right-6 rounded-lg text-neutral-0 w-8 h-8 flex items-center justify-center text-center leading-5 text-2xl bg-black/80 transition-colors hover:bg-white/10;
-    }
-  }
-
-  table {
-    @apply mb-8 w-full max-w-screen-md rounded-lg text-left text-sm leading-5;
-    @apply rounded-tl-lg rounded-tr-lg;
-
-    thead {
-      @apply first:rounded-tl-lg last:rounded-tr-lg;
-    }
-    th {
-      @apply border-solid border-neutral-700 bg-neutral-725 font-semibold;
-      @apply px-2 py-2 text-left first:rounded-tl-lg last:rounded-tr-lg;
-    }
-    tr {
-      @apply border-b border-solid border-neutral-725 transition-all hover:bg-neutral-700;
-    }
-
-    tr.highlight {
-      @apply border-primary-500 bg-primary-300 bg-opacity-70 text-neutral-900 hover:bg-opacity-100;
-    }
-
-    tr.highlight-blue {
-      @apply border-blue-800 bg-blue-600 bg-opacity-70 text-neutral-0 hover:bg-opacity-100;
-    }
-
-    td {
-      @apply p-2 text-left;
-    }
-  }
-
-  :not(pre) code {
-    // @apply bg-neutral-725 text-neutral-0 font-inconsolata border border-solid inline-block px-1;
-    // border: 1px solid #414141;
-    margin-bottom: 2px;
-    border-radius: 4px;
-  }
-
-  pre {
-    code {
-      // @apply mb-9;
-      // @apply box-border mb-9 w-full;
-      padding: 4px;
-      margin-right: 30px;
-      position: inherit;
-      @apply block whitespace-pre-wrap rounded-lg leading-6 text-neutral-0;
-
-      // @apply border border-solid border-c3 break-words;
-
-      &.ignore-default-color {
-        @apply border-transparent bg-transparent text-inherit;
-      }
-      font-family: monospace, ui-sans-serif;
-    }
-    // div {
-    //   @apply overflow-auto whitespace-pre-wrap;
-    // }
-  }
-  .pre-whitespace {
-    @apply whitespace-pre;
-  }
-
-  ul,
-  ol {
-    margin-left: 26px;
-    @apply mb-9;
-
-    li {
-      &:not(:last-child) {
-        @apply mb-2.5;
-      }
-    }
-  }
-
-  blockquote {
-    @apply mb-9 box-border rounded border-l-4 border-l-primary-300 bg-neutral-0/10 pb-3 pl-4 pr-4 pt-3 text-lg italic text-neutral-0;
-  }
-
-  img {
-    @apply max-w-full;
-  }
-
-  p {
-    @apply break-words;
-  }
-
-  &:not(.ignore-anchor) {
-    a {
-      @apply text-primary-300;
-    }
-    &.anchor-c6 a {
-      @apply text-primary-300;
-    }
-  }
-
-  &.ignore-anchor {
-    a {
-      @apply text-inherit underline hover:text-c6-link;
-    }
-    &.anchor-c6 a {
-      @apply hover:text-primary-300;
-    }
-  }
-
-  &.rich-text-content {
-    ul {
-      @apply list-disc;
-    }
-    ol {
-      @apply list-decimal;
-    }
-  }
-
-  iframe {
-    @apply aspect-video h-auto max-w-full;
-  }
-}
-
-.has-tooltip {
-  @apply relative w-fit;
-
-  .tooltip {
-    @apply invisible absolute bottom-0 left-full w-full;
-  }
-
-  &:hover .tooltip {
-    @apply visible z-50;
-  }
-}
-
-#ot-sdk-btn-floating {
-  @apply hidden #{!important};
-}
-
-.video-frame {
-  @apply aspect-video h-auto max-w-full;
-}
-
-.social-count {
-  background: transparent;
-}
-
-.tilted {
-  @apply relative whitespace-nowrap;
-
-  &:before {
-    content: '';
-    @apply absolute inset-0 -skew-y-3;
-  }
-
-  &.tilted-sm:before {
-    @apply -skew-y-1;
-  }
-
-  .tilted-content {
-    @apply relative p-2;
-  }
-
-  &.non-tilted-md::before {
-    @screen md {
-      @apply skew-y-0;
-    }
-  }
-}
-.tilted-yellow {
-  @apply text-primary-900;
-  &:before {
-    @apply bg-primary-300;
-  }
-}
-
-.tilted-black {
-  @apply text-primary-300;
-  &:before {
-    @apply bg-slate-900;
-  }
-}
-
-@keyframes fade-in-keyframes {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fade-in-animation {
-  @apply opacity-0 transition duration-300;
-  &.active {
-    @apply opacity-100;
-  }
-}
-
-@keyframes typewrite-size {
-  from {
-    background-size: 0 200%;
-  }
-}
-
-@keyframes typewrite-position {
-  50% {
-    background-position:
-      0 -100%,
-      0 0;
-  }
-}
-
-.terminal-type {
-  display: inline;
-  white-space: pre-wrap;
-  color: #0000;
-  background:
-    linear-gradient(-90deg, #ffffff 1ch, #0000 0) 8px 0,
-    linear-gradient(#ffffff 0 0) 0 0;
-  background-size: calc(var(--totalCount) * 1ch) 200%;
-  -webkit-background-clip: padding-box, text;
-  background-clip: padding-box, text;
-  background-repeat: no-repeat;
-  animation:
-    typewrite-position 0.4s infinite steps(1),
-    typewrite-size 2s steps(var(--totalCount)) forwards;
-  &.active {
-    @apply text-neutral-0 transition-colors;
-    .keyword {
-      color: #7a8fa7;
-    }
-    .constant {
-      color: #a48eaf;
-    }
-    .number {
-      color: #c18a61;
-    }
-    .string {
-      color: #b6bd73;
-    }
-    .bracket-level-1 {
-      @apply text-warning-300;
-    }
-    .bracket-level-2 {
-      color: #c875cd;
-    }
-  }
-}
-
-.bg-datawarehouse-run {
-  background: #fbff46;
-  background-image: url('/datawarehouse-run.png');
-}
-
-.bg-grid-lines {
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(
-      to right,
-      rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(#fff, var(--grid-lines-opacity, 0.05)) 1px,
-      transparent 1px
-    );
-}
-
-// Other triangle classes produce issues on smaller screen widths.
-// This class fixes that by using a fixed triangle depth.
-//
-// Use in combination with background classes
-// @example <div class="bg-primary-300 clip-inverted-triangle-simplified">...</div>
-//
-// The default depth can be overriden by using the css variable `--triangle-depth`
-// @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 150px">...</div>
-// @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 25%">...</div>
-//
-// The triangle can be offset from the top by using the css variable `--triangle-offset`
-// @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 200px">...</div>
-// @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 10%">...</div>
-.clip-inverted-triangle-simplified {
-  // Triangle offset from the top will default to 0% if variable is not defined
-  $triangle-offset: var(--triangle-offset, 0%);
-
-  // Triangle depth will default to 75 pixels if variable is not defined
-  $triangle-depth: var(--triangle-depth, 75px);
-
-  clip-path: polygon(
-    // Top left corner
-    0% #{$triangle-offset},
-
-    // Triangle tip
-    50% calc(#{$triangle-offset} + #{$triangle-depth}),
-    // Top right corner
-    100% #{$triangle-offset},
-
-    // Bottom right corner
-    100% 100%,
-
-    // Bottom left corner
-    0% 100%
-  );
-}
-
-.clip-inverted-triangle {
-  @apply relative;
-  &::before {
-    @apply absolute inset-0 bg-primary-300;
-    clip-path: polygon(50% 75%, 100% 50%, 100% 100%, 0 100%, 0 50%);
-    content: '';
-  }
-}
-
-.clip-inverted-triangle-top {
-  @apply relative;
-  &::before {
-    @apply absolute inset-0 bg-primary-300;
-    clip-path: polygon(50% 14%, 100% 0%, 100% 100%, 0 100%, 0 0%);
-    content: '';
-  }
-}
-
-.clip-inverted-triangle-use-cases {
-  @apply relative;
-  &::before {
-    @apply absolute inset-0 bg-primary-300;
-    clip-path: polygon(50% 30%, 100% 10%, 100% 100%, 0 100%, 0 10%);
-    content: '';
-    @media screen and (max-width: 768px) {
-      clip-path: polygon(50% 6%, 100% 0%, 100% 100%, 0 100%, 0 0%);
-    }
-  }
-}
-
-.show-copy-paste {
-}
-
-a.arrow-link {
-  .arrow {
-    display: inline-block;
-    transition: 0.1s ease-in;
-  }
-  &:hover {
-    .arrow {
-      transform: translateX(50%);
-    }
-  }
-}
-
-.support-program-rich-content {
-  a {
-    @apply mb-2 text-primary-300;
-  }
-  td {
-    @apply py-4;
-  }
-  p {
-    @apply mb-2;
-  }
-}
-
-.severity-table {
-  @apply max-w-5xl rounded-lg border border-neutral-700 bg-neutral-800 text-left;
-  td,
-  th {
-    @apply border-b border-b-neutral-700 p-6 align-top text-base leading-relaxed text-neutral-200;
-  }
-}
-
-.animate-fade-in {
-  animation-name: fade-in;
-  animation-duration: 0.7s;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.plyr {
-  @apply rounded-lg;
-  --plyr-color-main: #faff69;
-  --plyr-video-control-color: #000000;
-  --plyr-video-control-color-hover: #000000;
-
-  @apply aspect-video h-auto w-full;
-  &.plyr--paused {
-    .plyr__video-wrapper {
-      @apply grayscale;
-    }
-
-    .plyr__controls {
-      @apply hidden;
-    }
-  }
-  .plyr__control.plyr__control--overlaid {
-    @apply flex items-center gap-3 rounded-[4rem] p-4 opacity-100 #{!important};
-    &::after {
-      @apply whitespace-nowrap text-base font-semibold;
-    }
-  }
-  .plyr__control--overlaid {
-    transform: initial;
-    top: 40%;
-    left: 45%;
-  }
-
-  .plyr__control:hover {
-    transform: scale(1.5);
-  }
-}
-
-@keyframes pulseEffect {
-  from {
-    filter: drop-shadow(0px 0px 50px #fbff46);
-  }
-
-  to {
-    filter: drop-shadow(0px 0px 25px #fbff46);
-  }
-}
-
-.clickhouse-logo-container {
-  animation: pulseEffect 2s ease-in-out 0s alternate infinite;
-}
-
-.speed-animation-mobile {
-  @apply flex w-full justify-center md:hidden md:px-12;
-  * {
-    @apply md:hidden;
-  }
-}
-
-.color-swap {
-  filter: brightness(0) invert(0.8);
-  -webkit-filter: brightness(0) invert(0.8);
-  &:hover {
-    filter: brightness(1) invert(0);
-    -webkit-filter: brightness(1) invert(0);
-  }
-}
-
-.logos-color-swap:hover {
-  .color-swap {
-    filter: brightness(1) invert(0);
-    -webkit-filter: brightness(1) invert(0);
-  }
-}
-
-.color-swap-no-hover {
-  filter: brightness(0) invert(0.8);
-  -webkit-filter: brightness(0) invert(0.8);
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none !important;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none !important; /* IE and Edge */
-  scrollbar-width: none !important; /* Firefox */
-}
-
-.pause-hover {
-  &:hover {
-    * {
-      animation-play-state: paused;
-    }
-  }
-}
-
-.rich-content-comparisons {
-  p {
-    @apply mb-4;
-  }
-}
-
-@layer components {
-  .slanted-top {
-    @apply bg-primary-300;
-    clip-path: polygon(0 0, 100% 90%, 100% 100%, 0 100%);
-  }
-}
-
-@layer utilities {
-  @supports (-webkit-touch-callout: none) {
-    #logging-diagram-section2 {
-      @apply -mt-2;
-    }
-    #logging-diagram-section3 {
-      @apply -mt-4;
-    }
-  }
 }
 
 #mktoForm_1014 {
   @apply hidden;
-}
-
-.mlDiagram {
-  * {
-    @apply transition-all ease-in-out;
-  }
-}
-
-.mlDiagramContainer {
-  .active-diagram-0 {
-    .all {
-      @apply opacity-100;
-    }
-  }
-  .active-diagram-10 {
-    .data-ingestion,
-    .models,
-    .clickhouse {
-      @apply opacity-100;
-    }
-    .tooling,
-    .apps,
-    .data-transformation,
-    .data-prep,
-    .connecting-lines {
-      @apply opacity-30;
-    }
-  }
-  .active-diagram-20 {
-    .sources,
-    .tooling,
-    .lines {
-      @apply opacity-30;
-    }
-  }
-  .active-diagram-30 {
-    .clickhouse,
-    .tooling {
-      @apply opacity-100;
-    }
-    .sources,
-    .lines,
-    .models,
-    .data-transformation,
-    .apps,
-    .connecting-lines,
-    .data-prep {
-      @apply opacity-30;
-    }
-  }
-}
-
-.rtDiagramContainer {
-  .active-diagram-0 {
-    .all {
-      @apply opacity-100;
-    }
-    .many-others {
-      @apply opacity-40;
-    }
-  }
-  .active-diagram-10 {
-    .data-ingestion {
-      @apply opacity-100;
-    }
-    .many-others {
-      @apply opacity-40;
-    }
-
-    .data-transformations,
-    .apps {
-      @apply opacity-30;
-    }
-  }
-  .active-diagram-20 {
-    .data-transformations {
-      @apply opacity-100;
-    }
-    .data-ingestion,
-    .apps {
-      @apply opacity-30;
-    }
-  }
-  .active-diagram-30 {
-    .apps {
-      @apply opacity-100;
-    }
-    .data-ingestion,
-    .data-transformations {
-      @apply opacity-30;
-    }
-  }
-}
-
-
-#snowflake-relatedcontent img {
-  @apply h-auto object-contain;
-}
-
-.disable-scroll {
-  overflow: hidden;
-}
-
-.businessIntelligenceDiagramContainer {
-  .active-diagram-10 {
-    .data-ingestion {
-      @apply opacity-100;
-    }
-    .integrations,
-    .querying,
-    .data-transformations,
-    .dbt {
-      @apply opacity-40;
-    }
-  }
-  .active-diagram-20 {
-    .data-transformations {
-      @apply opacity-100;
-    }
-    .data-ingestion,
-    .integrations {
-      @apply opacity-40;
-    }
-  }
-  .active-diagram-30 {
-    .querying {
-      @apply opacity-100;
-    }
-    .data-ingestion,
-    .integrations,
-    .dbt {
-      @apply opacity-40;
-    }
-  }
-  .active-diagram-40 {
-    .integrations {
-      @apply opacity-100;
-    }
-    .data-transformations,
-    .data-ingestion,
-    .querying,
-    .dbt {
-      @apply opacity-40;
-    }
-  }
-}
-
-@layer base {
-  #storageSize {
-    input[type='number']::-webkit-inner-spin-button,
-    input[type='number']::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-}
-
-.stroke-text {
-  text-shadow:
-    #2b2b21 5px 0px 0px,
-    #2b2b21 4.90033px 0.993347px 0px,
-    #2b2b21 4.60531px 1.94709px 0px,
-    #2b2b21 4.12668px 2.82321px 0px,
-    #2b2b21 3.48353px 3.58678px 0px,
-    #2b2b21 2.70151px 4.20736px 0px,
-    #2b2b21 1.81179px 4.6602px 0px,
-    #2b2b21 0.849836px 4.92725px 0px,
-    #2b2b21 -0.145998px 4.99787px 0px,
-    #2b2b21 -1.13601px 4.86924px 0px,
-    #2b2b21 -2.08073px 4.54649px 0px,
-    #2b2b21 -2.94251px 4.04248px 0px,
-    #2b2b21 -3.68697px 3.37732px 0px,
-    #2b2b21 -4.28444px 2.57751px 0px,
-    #2b2b21 -4.71111px 1.67494px 0px,
-    #2b2b21 -4.94996px 0.7056px 0px,
-    #2b2b21 -4.99147px -0.291871px 0px,
-    #2b2b21 -4.83399px -1.27771px 0px,
-    #2b2b21 -4.48379px -2.2126px 0px,
-    #2b2b21 -3.95484px -3.05929px 0px,
-    #2b2b21 -3.26822px -3.78401px 0px,
-    #2b2b21 -2.4513px -4.35788px 0px,
-    #2b2b21 -1.53666px -4.75801px 0px,
-    #2b2b21 -0.560763px -4.96846px 0px,
-    #2b2b21 0.437495px -4.98082px 0px,
-    #2b2b21 1.41831px -4.79462px 0px,
-    #2b2b21 2.34258px -4.41727px 0px,
-    #2b2b21 3.17346px -3.86382px 0px,
-    #2b2b21 3.87783px -3.15633px 0px,
-    #2b2b21 4.4276px -2.32301px 0px,
-    #2b2b21 4.80085px -1.39708px 0px,
-    #2b2b21 4.98271px -0.415447px 0px;
-}
-
-.bg-gradient-checkered {
-  background-image: repeating-conic-gradient(
-    var(--tw-gradient-from) 0% 25%,
-    var(--tw-gradient-to) 0% 50%
-  );
-}
-
-.multiselect-item {
-  input[type='checkbox'] {
-    @apply absolute left-0 top-0 z-10 m-0 cursor-pointer appearance-none p-0 outline-none;
-  }
-  [data-pc-section='root'] {
-    @apply relative inline-flex h-4 w-4 cursor-pointer select-none;
-  }
-  [data-pc-section='box'] {
-    @apply flex h-4 w-4 items-center justify-center rounded-[3px] border border-neutral-700 bg-neutral-750 text-gray-600 hover:border-primary-300 focus:shadow-[0_0_0_0.2rem_rgba(191,219,254,1)] focus:outline-none focus:outline-offset-0;
-  }
-  [data-pc-section='trigger'] {
-    padding-top: 1px;
-    padding-bottom: 1px;
-  }
-  [data-p-highlight='true'] {
-    @apply overflow-hidden rounded-[3px] border-none bg-primary-300;
-    .p-icon {
-      @apply stroke-current stroke-1 text-black;
-    }
-  }
 }

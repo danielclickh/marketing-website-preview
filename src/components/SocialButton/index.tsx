@@ -1,23 +1,22 @@
-import { ButtonProps } from '../sui/SuiButton'
-import { SuiButton } from '../sui/client'
-
 type Socials = 'bluesky' | 'linkedin' | 'twitter' | 'facebook' | 'y_combinator'
 
 interface SocialButtonProps {
   type: Socials
   title?: string
   url?: string
-  className?: ButtonProps['className']
+  className?: string
 }
 
 const socialConfig: Record<
   Socials,
   {
+    label: string
     url(url: string, title?: string): string
     icon: React.ReactNode
   }
 > = {
   bluesky: {
+    label: 'Share on BlueSky',
     url: (url, title = '') => {
       return `https://bsky.app/intent/compose?text=${title ? `${title} ` : ''}${url}`
     },
@@ -36,6 +35,7 @@ const socialConfig: Record<
     )
   },
   linkedin: {
+    label: 'Share on LinkedIn',
     url: (url, title) => {
       return `https://www.linkedin.com/sharing/share-offsite/?url=${url}${title ? `&text=${title}` : ''}`
     },
@@ -54,6 +54,7 @@ const socialConfig: Record<
     )
   },
   twitter: {
+    label: 'Share on Twitter',
     url: (url, title) => {
       return `https://twitter.com/intent/tweet?text=${title ? `${title} ` : ''}${url}`
     },
@@ -71,6 +72,7 @@ const socialConfig: Record<
     )
   },
   facebook: {
+    label: 'Share on Facebook',
     url: (url) => `https://www.facebook.com/sharer/sharer.php?u=${url}`,
     icon: (
       <svg
@@ -87,6 +89,7 @@ const socialConfig: Record<
     )
   },
   y_combinator: {
+    label: 'Share on Y Combinator',
     url: (url, title) =>
       `https://news.ycombinator.com/submitlink?u=${url}&t=${title}`,
     icon: (
@@ -115,19 +118,21 @@ const socialConfig: Record<
 function SocialButton({ type, title, url, className = '' }: SocialButtonProps) {
   const config = socialConfig[type]
 
-  const onClick = () => {
+  const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
     const escapedUrl = encodeURIComponent(url || window.location.href)
     const escapedTitle = title ? encodeURIComponent(title) : undefined
     window.open(config.url(escapedUrl, escapedTitle), '_blank')
   }
 
   return (
-    <SuiButton
-      type='custom'
-      className={`border border-neutral-700 bg-neutral-800 shadow hover:bg-primary-300 hover:text-neutral-800 ${className}`}
+    <button
+      type='button'
+      className={`inline-block rounded-lg border border-neutral-700 bg-neutral-800 px-6 py-2.5 shadow transition-colors hover:bg-primary-300 hover:text-neutral-800 ${className}`}
       onClick={onClick}>
       {config.icon}
-    </SuiButton>
+      <span className='sr-only'>{config.label}</span>
+    </button>
   )
 }
 

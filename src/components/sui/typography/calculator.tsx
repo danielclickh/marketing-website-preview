@@ -15,26 +15,10 @@ export const sizeCalculator = (size?: string, weight?: string) => {
 
 export const colorCalculator = (color: string, defaultColor?: string) => {
   switch (color) {
-    case 'c1':
-      return 'text-neutral-0'
-    case 'c2':
-      return 'text-c2'
-    case 'c3':
-      return 'text-c3'
-    case 'c4':
     case 'secondary':
       return 'text-neutral-200'
-    case 'c4-10':
-      return 'text-c4/10'
-    case 'c4-20':
-      return 'text-c4/20'
-    case 'c5':
     case 'primary':
       return 'text-neutral-0'
-    case 'c6':
-      return 'text-primary'
-    case 'c7':
-      return 'text-c7'
     case 'white':
       return 'text-neutral-0'
     case 'text-default':
@@ -43,14 +27,6 @@ export const colorCalculator = (color: string, defaultColor?: string) => {
       return 'text-neutral-200'
     case 'text-accent':
       return 'text-primary'
-    case 'c5-light':
-      return 'text-neutral-0'
-    case 'offWhite':
-      return 'text-c2-light'
-    case 'c4-light':
-      return 'text-c4-light'
-    case 'c4-dark':
-      return 'text-c4-dark'
     case 'success':
       return 'text-alerts-success-text'
     case 'warning':

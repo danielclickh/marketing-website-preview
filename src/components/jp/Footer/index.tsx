@@ -65,7 +65,7 @@ export default function Footer({
           <NewsLetterForm />
         </div>
       </div>
-      <div className='section-container w-full border-t border-neutral-400 opacity-10 shadow-footer-line' />
+      <div className='section-container w-full border-t border-neutral-400 opacity-10' />
       <div className='flex flex-col items-start pt-2 lg:pt-8'>
         <div className='section-container flex w-full flex-col items-center gap-3 pt-4 text-center text-sm text-neutral-400 sm:gap-1 md:flex-row md:justify-between md:pt-0 md:text-left'>
           <div>

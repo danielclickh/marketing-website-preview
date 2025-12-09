@@ -215,7 +215,7 @@ export default function ClickHouseServerPage({
                 type='primary'
                 size='lg'
                 weight='semibold'
-                href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+                href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
                 linkClass='w-full md:w-auto'
                 className='w-full !px-10 md:w-auto'>
                 Get started with open-source
@@ -656,7 +656,7 @@ export default function ClickHouseServerPage({
               type='primary'
               size='lg'
               weight='semibold'
-              href='/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
               target='_blank'
               linkClass='w-full md:w-auto'
               className='mt-6 w-full !px-10 md:w-auto'>
