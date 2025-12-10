@@ -47,7 +47,7 @@ export default function ClickStackVsCompetitorStack({
   const layer2Active = noActiveLayer || activeLayer === 2
   const layer3Active = noActiveLayer || activeLayer === 3
   return (
-    <ScaleToContainer className='mx-auto'>
+    <ScaleToContainer scaleUp={false} className='mx-auto'>
       <div className='flex w-max flex-row items-center justify-center gap-x-16 gap-y-8'>
         <ClickStack
           gap={layerGap}
