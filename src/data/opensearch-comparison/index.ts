@@ -14,7 +14,7 @@ export type Table = {
       icon: CellIcons
       label: string
     }
-    splunk: {
+    opensearch: {
       icon: CellIcons
       label: string
     }
@@ -31,8 +31,15 @@ export const tables = [
 
 export const faqs: Array<{ question: string; answer: string }> = [
   {
-    question: 'What is ClickStack and how is it different from Splunk?',
-    answer: `ClickStack is an open-source observability stack powered by ClickHouse, built to handle high-cardinality OpenTelemetry data with real-time performance and cost-efficient long-term retention. Splunk relies on a legacy index-based architecture and proprietary tooling that limits speed, scalability, and affordability for modern observability workloads. ClickStack delivers a unified, SQL-based experience with far higher compression, sub-second queries, and predictable resource-based pricing.`
+    question:
+      'What is ClickStack and how is it different from OpenSearch Observability or the OpenSearch Stack?',
+    answer: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces, and session replays, delivering lightning-fast queries and efficient storage at any scale.
+
+At a high level, OpenSearch Observability and ClickStack share a familiar shape: both include a data collection layer (Data Prepper and Fluent Bit vs. OpenTelemetry), a storage engine (OpenSearch vs. ClickHouse), and a UI (OpenSearch Dashboards vs. HyperDX). But beneath these similarities, the architectures diverge.
+
+OpenSearch is based on the distributed search engine originally derived from Elasticsearch, built around inverted indices and a shard-based architecture. While effective for full-text search, this design introduces high storage overhead, limited query parallelization, and contention between ingest and query workloads.
+
+ClickStack, powered by ClickHouse, takes a different approach. Its columnar, shared-nothing architecture is optimized for analytics, minimizing storage with advanced compression, parallelizing queries across all available cores, and separating storage from compute in the cloud for consistent, efficient performance. With full SQL support, ClickStack enables deep, real-time analysis across all your observability data while still supporting Lucene-style queries for fast searching.`
   },
   {
     question: 'What are the core components of ClickStack?',
@@ -45,11 +52,13 @@ export const faqs: Array<{ question: string; answer: string }> = [
 Together, they form a single, integrated observability stack optimized for speed, scalability, and simplicity.`
   },
   {
-    question: 'Why is ClickStack faster than Splunk?',
-    answer: `ClickStack runs on ClickHouse’s vectorized, columnar engine, which scans and aggregates data in parallel across all CPU cores and nodes. This architecture delivers sub-second queries even across trillions of rows. Splunk’s event-indexed model depends on bucket scans and MapReduce pipelines that slow under load and require pre-aggregations to achieve similar performance. With data skipping, real-time materialized views, and full storage–compute separation, ClickStack maintains consistently low latency at scale.`
+    question:
+      'Why is ClickStack faster than OpenSearch Observability workloads?',
+    answer: `OpenSearch’s inverted-index architecture was designed for search, not analytics. As data volumes grow, aggregations become slow and memory-intensive, especially for high-cardinality fields. ClickStack uses ClickHouse’s columnar, vectorized engine to parallelize queries across all CPU cores, achieving sub-second analytics at petabyte scale. This typically results in 10× faster queries and more precise aggregations for high-cardinality data, while also supporting inverted indices for fast text search on specific columns when needed.`
   },
   {
-    question: 'How much more cost-effective is ClickStack compared to Splunk?',
+    question:
+      'How much more cost-effective is ClickStack compared to OpenSearch Observability?',
     answer: `ClickStack reduces infrastructure costs by up to 4x through advanced compression and efficient resource utilization. Its columnar design requires less hardware and storage, while decoupled compute and storage in ClickHouse Cloud lower operational overhead. Users such as Netflix, Shopee, and Didi have reported 50%+ storage reduction and major savings compared to traditional Lucene-based observability stacks.`
   },
   {
@@ -69,8 +78,12 @@ Although ClickStack is OpenTelemetry-native, it also supports any wide-event for
 The HyperDX UI requires only a timestamp field to render and visualize events, so you can use your own data formats or custom pipelines. By following a wide-events pattern and including a timestamp, your data becomes immediately usable within ClickStack.`
   },
   {
-    question: 'How does ClickStack scale compared to Splunk?',
-    answer: `ClickStack scales efficiently through a decoupled architecture that separates storage and compute, allowing ingest and query workloads to grow independently. Its columnar engine uses full parallelism across cores and shards, supporting real-time analytics at petabyte scale. Splunk’s indexer-based model ties ingest and search to the same nodes, making scaling manual, expensive, and sensitive to indexer load. ClickStack provides elastic scaling, high throughput, and predictable performance without the operational overhead.`
+    question: 'How does ClickStack scale compared to OpenSearch Observability?',
+    answer: `OpenSearch’s scalability is limited by its shard-based architecture and JVM heap constraints, which cap shard sizes and force horizontal sprawl as data grows. Queries only parallelize within shard boundaries, and node failures often trigger costly rebalances and performance degradation.
+
+ClickStack, powered by ClickHouse, scales vertically and horizontally without these limits. It supports unlimited shard sizes, executes queries in parallel across all cores and replicas, and separates compute from storage for elastic scaling in the cloud. In ClickHouse Cloud, multiple compute warehouses can share the same data in S3, enabling read/write isolation, independent scaling, and cost-efficient long-term retention.
+
+In short, ClickStack scales to petabytes with consistent performance, while OpenSearch’s architecture struggles beyond terabyte-scale workloads.`
   },
   {
     question: 'Is ClickStack open source?',
@@ -89,14 +102,20 @@ A fully managed ClickStack offering is also planned for the future.`
     answer: `ClickStack is built on ClickHouse but extends it into a full observability platform. While ClickHouse is the high-performance analytical database at its core, ClickStack adds the surrounding ecosystem:
 
 - **Data collection:** OpenTelemetry-native ingestion.
+
 - **Visualization:** The HyperDX UI for log exploration, traces, and dashboards.
+
 - **Prebuilt schema and integrations:** Optimized ClickHouse table engines, views, and storage models for observability data.
+
 - **Deployment options:** Available as both open source (Helm charts) and in ClickHouse Cloud with managed scaling and storage separation.
 
 In short, ClickHouse is the engine while ClickStack is the complete, ready-to-deploy stack built on top of it.`
   },
   {
-    question: 'Can I deploy ClickStack anywhere?',
-    answer: `Yes. ClickStack is fully cloud-agnostic and can run in ClickHouse Cloud, on-premises, or in any cloud provider environment. Its open architecture and use of open standards, such as OpenTelemetry and open table formats, ensure full portability without vendor lock-in.`
+    question:
+      'Can I deploy ClickStack anywhere? How does it compare to OpenSearch in cloud flexibility?',
+    answer: `Yes. ClickStack is fully cloud-agnostic and can run in ClickHouse Cloud, on-premises, or in any cloud provider environment. Its open architecture and use of open standards, such as OpenTelemetry and open table formats, ensure full portability without vendor lock-in.
+
+OpenSearch is also open source and can be deployed anywhere, but its managed service, Amazon OpenSearch Service, is tightly integrated with AWS infrastructure and APIs. While convenient for AWS users, this coupling can make cross-cloud or hybrid deployments more complex. ClickStack provides the same managed experience while remaining independent of any specific cloud provider.`
   }
 ]
