@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'Splunk vs ClickHouse',
+          title: 'Splunk vs ClickStack',
           description:
             'ClickStack offers fast, cost-efficient OpenTelemetry observability at scale. Compare it with Splunk’s complex pricing and slower searches to modernize your stack.',
           path: '/comparison/splunk-for-observability'
