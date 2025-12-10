@@ -9,7 +9,6 @@ import iconUnlock from './assets/icon-unlock.svg'
 import layerDataPrepper from './assets/layer-data-pepper.svg'
 import layerOpensearchDashboards from './assets/layer-opensearch-dashboards.svg'
 import layerOpensearch from './assets/layer-opensearch.svg'
-import logoAnthropic from './assets/logo-anthropic.svg'
 import logoElastic from './assets/logo-elastic.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
@@ -29,7 +28,6 @@ import LinedIconCard from '@/components/LinedIconCard'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
-import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { tables, faqs } from '@/data/opensearch-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -206,56 +204,6 @@ export default function OpensearchPage({
               lineColor='#1486BA'
             />
           </div>
-
-          {/* Testimonials */}
-          {/*<div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
-            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-            <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
-              Join others migrating to ClickStack from OpenSearch
-            </h2>
-            <div className='grid grid-cols-1 gap-6 lg:grid-cols-4 lg:space-y-0'>
-              <QuoteCard
-                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
-                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Anthropic'
-                }}
-              />
-              <QuoteCard
-                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
-                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Anthropic'
-                }}
-              />
-              <QuoteCard
-                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
-                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Anthropic'
-                }}
-              />
-              <QuoteCard
-                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
-                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Anthropic'
-                }}
-              />
-            </div>
-          </div>*/}
 
           <div className='relative grid grid-cols-1 gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:grid-cols-2'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
