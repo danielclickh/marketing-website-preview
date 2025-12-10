@@ -94,12 +94,12 @@ export default function OpensearchPage({
             </p>
             <p>
               OpenSearch, derived from Elasticsearch, remains anchored in a
-              search-first architecture built on inverted indices. While suited
-              for text search, this design struggles with modern observability
-              workloads with high disk usage, poor compression and slow queries
-              at Petabyte scale. Logs, metrics, and traces are stored in
-              separate indices that cannot be joined or analyzed together
-              natively.
+              search-first architecture built on inverted indices. While
+              effective for text search, this design falls short for modern
+              observability workloads: it drives high disk usage, yields poor
+              compression, and slows down queries at petabyte scale. Logs,
+              metrics, and traces necessarily sit in separate indices, with no
+              native way to join or analyze them together.
             </p>
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
@@ -195,7 +195,7 @@ export default function OpensearchPage({
             <SuiTitle
               type='h2'
               className='mx-auto mb-16 max-w-5xl text-neutral-200'>
-              Frustrated by slow queries, rising storage costs and an endless
+              Frustrated by slow queries, rising storage costs, and an endless
               need to scale horizontally?{' '}
               <strong className='text-white'>You’re not alone.</strong>
             </SuiTitle>
