@@ -11,7 +11,7 @@ export default function TableOfContents({
   contentRef,
   headersSelector
 }: TableOfContentsProps) {
-  const [activeId, setActiveId] = useState<string>('')
+  const [activeId, setActiveId] = useState<null | string>(null)
   const navRef = useRef<null | HTMLElement>(null)
   const [headingElements, setHeadingElements] = useState<Array<HTMLElement>>([])
 
@@ -69,8 +69,10 @@ export default function TableOfContents({
 
     const mostVisible = visibilityMap.sort((a, b) => b.ratio - a.ratio)[0]
 
-    if (mostVisible) {
+    if (mostVisible && mostVisible.ratio > 0) {
       setActiveId(mostVisible.id)
+    } else {
+      setActiveId(null)
     }
   }, [setActiveId, headingElements])
 
