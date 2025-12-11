@@ -214,12 +214,13 @@ export default function OpensearchPage({
               Join Canva in migrating from OpenSearch
             </h2>
             <QuoteCard
+              direction='horizontal'
               content={`Moving to ClickHouse meant 70 percent lower costs and a 10x improvement in search performance. With amazing out of the box performance and really amazing compression, we got the ingest performance we needed and the headroom to make queries fast. We're doing more and storing more with less.`}
               link='/blog/canva-faster-search-lower-costs'
               logo={{
                 src: logoCanva,
-                width: 199.6 * 0.5,
-                height: 64 * 0.5,
+                width: 199.6 * 0.6,
+                height: 64 * 0.6,
                 alt: 'Canva'
               }}
             />
