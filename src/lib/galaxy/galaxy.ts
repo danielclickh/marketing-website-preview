@@ -2,9 +2,11 @@
 
 import { FullyQualifiedEvent, GalaxyClient } from './client'
 import { Galaxy } from './web/browser'
+import { getBrowserCookie, setBrowserCookie } from '@/lib/utils/cookies'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { v4 as uuid } from 'uuid'
 
 type FetchOptions = Record<string, unknown>
 
@@ -33,9 +35,39 @@ declare global {
   }
 }
 
+function findOrCreateGalaxyId(key: string) {
+  const read = () => {
+    try {
+      return (
+        getBrowserCookie(key) ??
+        window.localStorage.getItem(key) ??
+        window.sessionStorage.getItem(key)
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const persist = (value: string) => {
+    try {
+      setBrowserCookie(key, value)
+      window.localStorage.setItem(key, value)
+      window.sessionStorage.setItem(key, value)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const id = read() ?? uuid()
+  persist(id)
+  return id
+}
+
 export const useInitGalaxy = (): void => {
   useEffect(() => {
     const galaxyOptions: GalaxyOptions = {
+      getUserId: () => findOrCreateGalaxyId('glx_anonymous_id'),
+      getSessionId: () => findOrCreateGalaxyId('glx_id'),
       httpClient: {
         post: async (
           url: string,
@@ -105,8 +137,7 @@ export const useInitGalaxy = (): void => {
       replaceConsoleLog: false,
       application: 'MARKETING_WEBSITE',
       apiHost:
-        process.env.NEXT_PUBLIC_GALAXY_API_ENDPOINT ?? 'http://localhost:3000',
-      getUserId: () => null
+        process.env.NEXT_PUBLIC_GALAXY_API_ENDPOINT ?? 'http://localhost:3000'
     }
 
     const [galaxy, stopGalaxy] = Galaxy.init(galaxyOptions)
