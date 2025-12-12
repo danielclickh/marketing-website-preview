@@ -61,8 +61,8 @@ ClickHouse outperforms Elasticsearch by **10–100x on analytics** with at least
         label: '**1,000+ concurrent queries per node**'
       },
       opensearch: {
-        icon: 'yes',
-        label: 'Supported'
+        icon: 'intermediate',
+        label: 'Supported provided queries are searches'
       }
     }
   ]

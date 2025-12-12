@@ -14,7 +14,7 @@ ClickStack, powered by ClickHouse, **scales to petabytes**. Queries parallelize 
         icon: 'yes',
         label: '**Unlimited shard sizes** (disk-based)'
       },
-      opensearch: { icon: 'no', label: 'Recommended ≤ 50–100 GB per shard' }
+      opensearch: { icon: 'no', label: 'Recommended ≤ 50 GB per shard' }
     },
     {
       heading: 'Distributed query execution across replicas',
@@ -36,7 +36,8 @@ ClickStack, powered by ClickHouse, **scales to petabytes**. Queries parallelize 
       },
       opensearch: {
         icon: 'intermediate',
-        label: 'Limited to 64GB JVM; forces horizontal scaling'
+        label:
+          'Limited to <32GB GB JVM; forces horizontal scaling with associated network overhead'
       }
     },
     {
@@ -45,14 +46,18 @@ ClickStack, powered by ClickHouse, **scales to petabytes**. Queries parallelize 
         icon: 'yes',
         label: '**Up to 1,000 concurrent queries per node**'
       },
-      opensearch: { icon: 'intermediate', label: 'Requires horizontal scaling' }
+      opensearch: {
+        icon: 'intermediate',
+        label:
+          'Requires horizontal scaling. Search threads tied to the number of CPUs.'
+      }
     },
     {
       heading: 'Granular cache control',
       clickhouse: { icon: 'yes', label: '**Granular cache control**' },
       opensearch: {
-        icon: 'intermediate',
-        label: 'Indexing and search share JVM heap and I/O'
+        icon: 'yes',
+        label: 'Cache controls supported'
       }
     },
     {

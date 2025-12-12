@@ -59,7 +59,11 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
         icon: 'yes',
         label: '**Full parallelization** within & across shards'
       },
-      elastic: { icon: 'intermediate', label: 'Limited; relies only on shards' }
+      elastic: {
+        icon: 'intermediate',
+        label:
+          'Limited with accuracy implications for terms aggregations; concurrent segment'
+      }
     },
     {
       heading: 'Full join support for correlations',
@@ -86,9 +90,9 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
       heading: 'Natural language search',
       clickhouse: {
         icon: 'yes',
-        label: '**Natural language search via HyperDX**'
+        label: '**Lucene style search via HyperDX**'
       },
-      elastic: { icon: 'yes', label: 'Natural language search supported' }
+      elastic: { icon: 'yes', label: 'Lucene search supported' }
     },
     {
       heading: 'Flexible deployment (self-managed & cloud)',

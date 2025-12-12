@@ -35,7 +35,8 @@ ClickStack, powered by ClickHouse, scales to petabytes. Queries parallelize acro
       },
       elastic: {
         icon: 'intermediate',
-        label: 'Limited to 64GB JVM; forces horizontal scaling'
+        label:
+          'Limited to <32GB GB JVM; forces horizontal scaling with associated network overhead'
       }
     },
     {
