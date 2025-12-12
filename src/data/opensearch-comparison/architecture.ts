@@ -9,14 +9,21 @@ As a fork of Elasticsearch, OpenSearch is a **distributed search engine** built 
 ClickStack is powered by ClickHouse, a database built on a **columnar, shared-nothing architecture** optimized for analytics. It minimizes storage with **advanced compression, parallelizes queries across all available cores,** and **separates storage from compute** in the cloud to deliver fast, efficient observability at scale. Full SQL support unlocks deep data analysis.`,
   rows: [
     {
-      heading: 'Object storage for reads and writes in OSS',
-      clickhouse: { icon: 'yes', label: '**Native object storage support**' },
-      opensearch: { icon: 'no', label: 'Paid, Elastic Cloud Serverless only' }
-    },
-    {
       heading: 'Accurate aggregations for high cardinality',
       clickhouse: { icon: 'yes', label: '**Aggregate states for accuracy**' },
-      opensearch: { icon: 'no', label: 'Terms aggregations are estimates' }
+      opensearch: {
+        icon: 'no',
+        label: 'Terms aggregations are estimates and have slower performance'
+      }
+    },
+    {
+      heading: 'Object storage for reads and writes in OSS',
+      clickhouse: { icon: 'yes', label: '**Native object storage support**' },
+      opensearch: {
+        icon: 'intermediate',
+        label:
+          'Remote backed storage supported for replicas only. S3-backed warm storage at lower performance.'
+      }
     },
     {
       heading: 'Full columnar storage with high compression',
@@ -34,7 +41,8 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
       clickhouse: { icon: 'yes', label: '**ClickPipes** for streaming ingest' },
       opensearch: {
         icon: 'intermediate',
-        label: 'Requires Data Prepper/third parties, no hosted ingestion'
+        label:
+          'Requires Data Prepper/third parties or OpenSearch Ingestion Service for AWS managed instances'
       }
     },
     {
@@ -42,7 +50,7 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
       clickhouse: { icon: 'yes', label: '**JSON with type fidelity**' },
       opensearch: {
         icon: 'intermediate',
-        label: 'First event field determines type'
+        label: 'First event field determines type, no type preservation'
       }
     },
     {
@@ -61,7 +69,8 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
       },
       opensearch: {
         icon: 'intermediate',
-        label: 'Limited with accuracy implications; concurrent segment '
+        label:
+          'Limited with accuracy implications for terms aggregations; concurrent segment'
       }
     },
     {
@@ -95,21 +104,8 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
       opensearch: {
         icon: 'intermediate',
         label:
-          'AWS Serverless achieves partial decoupling via OCUs; not available in OSS'
+          'AWS Serverless achieves partial decoupling via OCUs. Decoupling read/write paths comes at a high read/write latency (10s)'
       }
-    },
-    {
-      heading: 'Natural language search',
-      clickhouse: {
-        icon: 'yes',
-        label: '**Natural language search via HyperDX**'
-      },
-      opensearch: { icon: 'yes', label: 'Natural language search supported' }
-    },
-    {
-      heading: 'Flexible deployment (self-managed & cloud)',
-      clickhouse: { icon: 'yes', label: '**Self-managed & cloud**' },
-      opensearch: { icon: 'yes', label: 'Self-managed & AWS OpenSearch' }
     },
     {
       heading: 'Stateless compute nodes with fast warm-up time',
@@ -117,7 +113,27 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
         icon: 'yes',
         label: '**Stateless compute nodes** (ClickHouse Cloud)'
       },
-      opensearch: { icon: 'yes', label: 'AWS OpenSearch Serverless only' }
+      opensearch: {
+        icon: 'intermediate',
+        label:
+          'AWS OpenSearch Serverless only but compute does not idle. OCUs added in fixed increments depending on data volume.'
+      }
+    },
+    {
+      heading: 'Natural language search',
+      clickhouse: {
+        icon: 'yes',
+        label: '**Lucene style search via HyperDX**'
+      },
+      opensearch: { icon: 'yes', label: 'Lucene search supported' }
+    },
+    {
+      heading: 'Flexible deployment (self-managed & cloud)',
+      clickhouse: { icon: 'yes', label: '**Self-managed & cloud**' },
+      opensearch: {
+        icon: 'yes',
+        label: 'Self-managed & AWS OpenSearch + third party providers'
+      }
     },
     {
       heading: 'Real-time ingest',
@@ -142,7 +158,11 @@ ClickStack is powered by ClickHouse, a database built on a **columnar, shared-no
     {
       heading: 'Data transformation at ingest time',
       clickhouse: { icon: 'yes', label: '**Incremental materialized views**' },
-      opensearch: { icon: 'yes', label: 'Ingest pipelines' }
+      opensearch: {
+        icon: 'yes',
+        label:
+          'Ingest pipelines and AWS OpenSearch Ingestion Service for AWS instances'
+      }
     }
   ]
 } satisfies Table

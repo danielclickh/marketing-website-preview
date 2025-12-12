@@ -17,7 +17,7 @@ ClickStack is **OpenTelemetry-native** but not exclusive, supporting OTel out of
       opensearch: {
         icon: 'intermediate',
         label:
-          'Limited to Parquet via AWS Glue & S3 direct query; no native support'
+          'Limited to Parquet, CSV, JSON via AWS Glue & S3 direct query. Does not work with existing tables; no native support'
       }
     },
     {
@@ -50,7 +50,8 @@ ClickStack is **OpenTelemetry-native** but not exclusive, supporting OTel out of
       clickhouse: { icon: 'yes', label: '**Open format support**' },
       opensearch: {
         icon: 'intermediate',
-        label: 'Parquet supported; no native Iceberg or ORC integration'
+        label:
+          'Parquet supported; no native Iceberg, Hudi, Delta or ORC integration'
       }
     },
     {
@@ -88,8 +89,9 @@ ClickStack is **OpenTelemetry-native** but not exclusive, supporting OTel out of
         label: 'Supported'
       },
       opensearch: {
-        icon: 'yes',
-        label: 'Supported via Observability plugin and Data Prepper pipelines'
+        icon: 'intermediate',
+        label:
+          'Supported via Observability plugin and Data Prepper pipelines. No correlation between logs, traces and metrics.'
       }
     }
   ]
