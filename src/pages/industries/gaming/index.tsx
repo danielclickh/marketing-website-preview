@@ -82,7 +82,7 @@ export default function GamingIndustryPage({
               '--left-side': 'auto'
             } as React.CSSProperties
           }>
-          <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-y-16 lg:flex-nowrap'>
+          <div className='section-container relative z-10 flex flex-wrap justify-between gap-y-16 lg:flex-nowrap'>
             {/* Content column */}
             <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:ml-0 lg:max-w-lg lg:text-left xl:max-w-2xl'>
               <Breadcrumbs>
