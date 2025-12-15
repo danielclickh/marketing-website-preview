@@ -35,6 +35,7 @@ declare global {
   }
 }
 
+// Find or create a UUID from cookies, local and session storage for backwards compatability
 function findOrCreateGalaxyId(key: string) {
   const read = () => {
     try {
@@ -64,13 +65,14 @@ function findOrCreateGalaxyId(key: string) {
 }
 
 export function getUserId() {
+  // Use the cookie/storage name `glx_anonymous_id` for backwards compatability
   return findOrCreateGalaxyId('glx_anonymous_id')
 }
 
 export const useInitGalaxy = (): void => {
   useEffect(() => {
     const galaxyOptions: GalaxyOptions = {
-      getUserId,
+      getUserId, // Override the default user id generator method for better persistence
       httpClient: {
         post: async (
           url: string,
