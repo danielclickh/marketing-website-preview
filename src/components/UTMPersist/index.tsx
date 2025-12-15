@@ -1,4 +1,3 @@
-import { GalaxyClient } from '@/lib/galaxy/client'
 import { getUserId } from '@/lib/galaxy/galaxy'
 import { getBrowserCookie } from '@/lib/utils/cookies'
 import { Experiment, Result } from '@growthbook/growthbook'
@@ -7,12 +6,6 @@ import React, { useEffect } from 'react'
 
 type UTMs = {
   [key: string]: string
-}
-
-declare global {
-  interface Window {
-    galaxy: GalaxyClient
-  }
 }
 
 export const updateLinks = (
