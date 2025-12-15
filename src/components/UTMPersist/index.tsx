@@ -1,4 +1,5 @@
 import { GalaxyClient } from '@/lib/galaxy/client'
+import { getUserId } from '@/lib/galaxy/galaxy'
 import { getBrowserCookie } from '@/lib/utils/cookies'
 import { Experiment, Result } from '@growthbook/growthbook'
 import { useRouter } from 'next/router'
@@ -182,7 +183,7 @@ export function appendUTMsToLink(url: string): string {
 }
 
 export function appendGalaxySessionIDToLink(url: string): string {
-  const galaxy_id = window.galaxy?.getUserId()
+  const galaxy_id = getUserId()
   const urlObject = new URL(url)
 
   // Append galaxy session id to links that contain ".cloud"

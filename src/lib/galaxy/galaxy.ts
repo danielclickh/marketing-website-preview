@@ -63,10 +63,14 @@ function findOrCreateGalaxyId(key: string) {
   return id
 }
 
+export function getUserId() {
+  return findOrCreateGalaxyId('glx_anonymous_id')
+}
+
 export const useInitGalaxy = (): void => {
   useEffect(() => {
     const galaxyOptions: GalaxyOptions = {
-      getUserId: () => findOrCreateGalaxyId('glx_anonymous_id'),
+      getUserId,
       httpClient: {
         post: async (
           url: string,
