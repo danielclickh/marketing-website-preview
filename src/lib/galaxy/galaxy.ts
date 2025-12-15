@@ -51,7 +51,9 @@ function findOrCreateGalaxyId(key: string) {
 
   const persist = (value: string) => {
     try {
-      setBrowserCookie(key, value)
+      setBrowserCookie(key, value, {
+        maxAge: 2147483647 // (68 years) the largest value supported
+      })
       window.localStorage.setItem(key, value)
       window.sessionStorage.setItem(key, value)
     } catch (error) {
