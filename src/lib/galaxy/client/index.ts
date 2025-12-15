@@ -82,9 +82,9 @@ export class GalaxyClient {
   private errorHandler?: ErrorHandler
   private application: string
   private apiHost: string
-  private getContext: () => Record<string, unknown>
-  private getUserId: () => string
-  private getSessionId: () => string
+  getContext: () => Record<string, unknown>
+  getUserId: () => string
+  getSessionId: () => string
 
   constructor({
     httpClient,

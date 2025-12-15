@@ -1,4 +1,4 @@
-import { Galaxy } from '@/lib/galaxy/web/browser'
+import { GalaxyClient } from '@/lib/galaxy/client'
 import { getBrowserCookie } from '@/lib/utils/cookies'
 import { Experiment, Result } from '@growthbook/growthbook'
 import { useRouter } from 'next/router'
@@ -6,6 +6,12 @@ import React, { useEffect } from 'react'
 
 type UTMs = {
   [key: string]: string
+}
+
+declare global {
+  interface Window {
+    galaxy: GalaxyClient
+  }
 }
 
 export const updateLinks = (
@@ -176,7 +182,7 @@ export function appendUTMsToLink(url: string): string {
 }
 
 export function appendGalaxySessionIDToLink(url: string): string {
-  const galaxy_id = Galaxy.getGalaxySessionId()
+  const galaxy_id = window.galaxy?.getUserId()
   const urlObject = new URL(url)
 
   // Append galaxy session id to links that contain ".cloud"

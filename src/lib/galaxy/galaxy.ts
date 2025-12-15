@@ -67,7 +67,6 @@ export const useInitGalaxy = (): void => {
   useEffect(() => {
     const galaxyOptions: GalaxyOptions = {
       getUserId: () => findOrCreateGalaxyId('glx_anonymous_id'),
-      getSessionId: () => findOrCreateGalaxyId('glx_id'),
       httpClient: {
         post: async (
           url: string,
