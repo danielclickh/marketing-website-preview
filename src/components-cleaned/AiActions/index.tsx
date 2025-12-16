@@ -12,13 +12,17 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 export interface AiActionsProps {
   galaxyNamespace?: string
+  shareUrl?: string
+  markdownUrl?: string
 }
 
 /** In-memory cache to dedupe fetches and allow "queue after fetch" */
 const mdCache = new Map<string, Promise<string>>()
 
 export default function AiActions({
-  galaxyNamespace = 'page'
+  galaxyNamespace = 'page',
+  shareUrl,
+  markdownUrl
 }: AiActionsProps) {
   const menuRef = useRef<null | HTMLUListElement>(null)
   const openRef = useRef<null | HTMLButtonElement>(null)
@@ -28,32 +32,45 @@ export default function AiActions({
   const abortRef = useRef<AbortController | null>(null)
 
   const {
-    cleanedUrl,
-    markdownUrl
-  }: { cleanedUrl: string | null; markdownUrl: string | null } = useMemo(() => {
-    if (typeof window === 'undefined') {
-      return {
-        cleanedUrl: null,
-        markdownUrl: null
+    cleanedShareUrl,
+    cleanedMarkdownUrl
+  }: { cleanedShareUrl: string | null; cleanedMarkdownUrl: string | null } =
+    useMemo(() => {
+      if (typeof window === 'undefined') {
+        return {
+          cleanedShareUrl: null,
+          cleanedMarkdownUrl: null
+        }
       }
-    }
 
-    const urlObj = new URL(window.location.toString())
-    urlObj.search = ''
-    urlObj.hash = ''
-    const clean = urlObj.toString()
-    urlObj.pathname = `${urlObj.pathname}.md`
-    const md = urlObj.toString()
-    return { cleanedUrl: clean, markdownUrl: md }
-  }, [])
+      const shareUrlObj = new URL(
+        shareUrl || window.location.toString(),
+        window.location.toString()
+      )
+      shareUrlObj.search = ''
+      shareUrlObj.hash = ''
+
+      const markdownUrlObj = new URL(
+        markdownUrl || window.location.toString(),
+        window.location.toString()
+      )
+      markdownUrlObj.search = ''
+      markdownUrlObj.hash = ''
+      markdownUrlObj.pathname = `${markdownUrlObj.pathname}.md`
+
+      return {
+        cleanedShareUrl: shareUrlObj.toString(),
+        cleanedMarkdownUrl: markdownUrlObj.toString()
+      }
+    }, [shareUrl, markdownUrl])
 
   // Silent fetch with dedupe + cancellation
   const fetchMarkdown = useCallback(async () => {
-    if (!markdownUrl) return null
+    if (!cleanedMarkdownUrl) return null
     if (markdownContent) return markdownContent
 
     // If there’s a fetch in the cache, reuse it.
-    const existing = mdCache.get(markdownUrl)
+    const existing = mdCache.get(cleanedMarkdownUrl)
     if (existing) {
       const txt = await existing
       setMarkdownContent((prev) => prev ?? txt)
@@ -66,24 +83,24 @@ export default function AiActions({
     abortRef.current = ctrl
 
     const p = (async () => {
-      const res = await fetch(markdownUrl, {
+      const res = await fetch(cleanedMarkdownUrl, {
         signal: ctrl.signal
       })
       if (!res.ok) throw new Error(`Failed to load markdown (${res.status})`)
       return await res.text()
     })()
 
-    mdCache.set(markdownUrl, p)
+    mdCache.set(cleanedMarkdownUrl, p)
     try {
       const txt = await p
       setMarkdownContent((prev) => prev ?? txt)
       return txt
     } catch (e) {
       // On failure, clear cache so a later attempt can retry
-      mdCache.delete(markdownUrl)
+      mdCache.delete(cleanedMarkdownUrl)
       throw e
     }
-  }, [markdownUrl, markdownContent])
+  }, [cleanedMarkdownUrl, markdownContent])
 
   // Prefetch on hover/focus
   const handlePrefetch = useCallback(() => {
@@ -130,20 +147,21 @@ export default function AiActions({
 
   const openWith = useCallback(
     (base: string, q: string) => {
-      if (!cleanedUrl) return
+      if (!cleanedShareUrl) return
       const url = `${base}${encodeURIComponent(q)}`
       window.open(url, '_blank', 'noopener,noreferrer')
     },
-    [cleanedUrl]
+    [cleanedShareUrl]
   )
 
   const handleOpenMarkdown = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
       useGalaxyOnClick(`${galaxyNamespace}.aiAction.openMarkdown`)()
-      if (markdownUrl) window.open(markdownUrl, '_blank', 'noopener,noreferrer')
+      if (cleanedMarkdownUrl)
+        window.open(cleanedMarkdownUrl, '_blank', 'noopener,noreferrer')
     },
-    [galaxyNamespace, markdownUrl]
+    [galaxyNamespace, cleanedMarkdownUrl]
   )
 
   const handleOpenChatGpt = useCallback(
@@ -152,10 +170,10 @@ export default function AiActions({
       useGalaxyOnClick(`${galaxyNamespace}.aiAction.openChatgpt`)()
       openWith(
         'https://chatgpt.com/?q=',
-        `Read from ${cleanedUrl} so I can ask questions about it.`
+        `Read from ${cleanedShareUrl} so I can ask questions about it.`
       )
     },
-    [galaxyNamespace, openWith, cleanedUrl]
+    [galaxyNamespace, openWith, cleanedShareUrl]
   )
 
   const handleOpenClaude = useCallback(
@@ -164,10 +182,10 @@ export default function AiActions({
       useGalaxyOnClick(`${galaxyNamespace}.aiAction.openClaude`)()
       openWith(
         'https://claude.ai/new?q=',
-        `Read from ${cleanedUrl} so I can ask questions about it.`
+        `Read from ${cleanedShareUrl} so I can ask questions about it.`
       )
     },
-    [galaxyNamespace, openWith, cleanedUrl]
+    [galaxyNamespace, openWith, cleanedShareUrl]
   )
 
   const handleOpenV0 = useCallback(
@@ -176,10 +194,10 @@ export default function AiActions({
       useGalaxyOnClick(`${galaxyNamespace}.aiAction.openV0`)()
       openWith(
         'https://v0.app/chat?q=',
-        `Read from ${cleanedUrl} so I can ask questions about it.`
+        `Read from ${cleanedShareUrl} so I can ask questions about it.`
       )
     },
-    [galaxyNamespace, openWith, cleanedUrl]
+    [galaxyNamespace, openWith, cleanedShareUrl]
   )
 
   useEffect(() => {
