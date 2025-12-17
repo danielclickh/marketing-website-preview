@@ -107,7 +107,7 @@ export default function NavigationSubNavProducts() {
               </li>
               <li className='flex items-center'>
                 <NavigationLink
-                  href='#'
+                  href='/ai'
                   onClick={useGalaxyOnClick(
                     'topNav.productMenu.agenticDataStackSelect'
                   )}
