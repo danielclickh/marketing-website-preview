@@ -462,7 +462,7 @@
       }
 
       // Industry: Cybersecurity
-      &.referer-industries-cybersecurity {
+      &[class*="referer-industries-"]{
         textarea#programmessagefull {
           height: 110px !important;
         }
