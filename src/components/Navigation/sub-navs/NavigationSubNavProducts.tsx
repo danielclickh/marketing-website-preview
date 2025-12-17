@@ -20,13 +20,13 @@ export default function NavigationSubNavProducts() {
                   href='/cloud'
                   onClick={useGalaxyOnClick('topNav.productMenu.cloudSelect')}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-clickhouse-cloud.svg'
                     alt='ClickHouse Cloud'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     ClickHouse Cloud
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -42,13 +42,13 @@ export default function NavigationSubNavProducts() {
                   href='/cloud/bring-your-own-cloud'
                   onClick={useGalaxyOnClick('topNav.productMenu.byocSelect')}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-byoc.svg'
                     alt='ClickHouse BYOC'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     Bring Your Own Cloud
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -65,13 +65,13 @@ export default function NavigationSubNavProducts() {
                     'topNav.productMenu.clickpipesSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-clickpipes.svg'
                     alt='ClickHouse Cloud ClickPipes'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     ClickPipes
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -89,13 +89,13 @@ export default function NavigationSubNavProducts() {
                     'topNav.productMenu.clickstackCloudSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-clickstack-cloud.svg'
                     alt='ClickStack Cloud'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     ClickStack Cloud
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -112,13 +112,13 @@ export default function NavigationSubNavProducts() {
                     'topNav.productMenu.agenticDataStackSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-agentic-data-stack.svg'
                     alt='Agentic Data Stack'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     Agentic Data Stack
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -148,13 +148,13 @@ export default function NavigationSubNavProducts() {
                     'topNav.productMenu.openSourceSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-clickhouse.svg'
                     alt='ClickHouse'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     ClickHouse
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -169,13 +169,13 @@ export default function NavigationSubNavProducts() {
                   href='/chdb'
                   onClick={useGalaxyOnClick('topNav.productMenu.chdbSelect')}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-chdb.svg'
                     alt='chDB'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     chDB
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -191,13 +191,13 @@ export default function NavigationSubNavProducts() {
                   target='_blank'
                   onClick={useGalaxyOnClick('topNav.productMenu.peerdbSelect')}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-peerdb.svg'
                     alt='PeerDB'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     <span className='flex items-center gap-0.5'>
                       <span>PeerDB</span>
@@ -216,13 +216,13 @@ export default function NavigationSubNavProducts() {
                     'topNav.productMenu.clickstackSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-clickstack.svg'
                     alt='ClickStack'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     ClickStack
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
@@ -242,13 +242,13 @@ export default function NavigationSubNavProducts() {
                     'topNav.productMenu.librechatSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
+                  {/*<Image
                     src='/images/nav/icon-librechat.svg'
                     alt='LibreChat'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
+                  />*/}
                   <span>
                     <span className='flex items-center gap-0.5'>
                       <span>LibreChat</span>
