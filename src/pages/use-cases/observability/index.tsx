@@ -35,6 +35,7 @@ import shareImage from './assets/share-image.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
 import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
+import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
@@ -54,6 +55,7 @@ import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import React, { CSSProperties, useRef, useState } from 'react'
+import { EffectCreative, Mousewheel } from 'swiper/modules'
 
 const FAQs: Array<{ question: string; answer: string }> = [
   {
@@ -675,16 +677,38 @@ export default function ClickHouseServerPage({
           <SuiTitle type='h2' className='mb-10'>
             Watch the ClickStack introduction
           </SuiTitle>
-          <PlayOnClickVideo
-            provider='youtube'
-            id='3waDYancX_c'
-            thumbnail={
-              <YouTubeThumbnail
-                videoId='3waDYancX_c'
-                alt='ClickStack introduction video'
-              />
-            }
-          />
+          <CarouselPaginated
+            modules={[Mousewheel, EffectCreative]}
+            mousewheel={{
+              enabled: true,
+              forceToAxis: true,
+              releaseOnEdges: true,
+              sensitivity: 0.5
+            }}
+            effect='creative'
+            creativeEffect={{
+              prev: {
+                shadow: true,
+                translate: ['-20%', 0, -1]
+              },
+              next: {
+                shadow: true,
+                translate: ['100%', 0, 0]
+              }
+            }}
+            simulateTouch={false}
+            carouselClass='rounded'>
+            {['WBe7ZwTRWuQ', '3waDYancX_c'].map((videoId, videoIdIndex) => {
+              return (
+                <PlayOnClickVideo
+                  key={videoIdIndex}
+                  provider='youtube'
+                  id={videoId}
+                  thumbnail={<YouTubeThumbnail videoId={videoId} />}
+                />
+              )
+            })}
+          </CarouselPaginated>
         </div>
       </section>
 
