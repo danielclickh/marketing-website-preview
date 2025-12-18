@@ -675,7 +675,7 @@ export default function ClickHouseServerPage({
       <section className='section-container my-20 lg:my-24'>
         <div className='mx-auto max-w-4xl text-center'>
           <SuiTitle type='h2' className='mb-10'>
-            Watch the ClickStack introduction
+            Watch the 60 second overview & introduction
           </SuiTitle>
           <CarouselPaginated
             modules={[Mousewheel, EffectCreative]}
