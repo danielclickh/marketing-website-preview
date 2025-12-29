@@ -58,7 +58,7 @@ export default function NavigationSubNavProducts() {
                   </span>
                 </NavigationLink>
               </li>
-              {/*<li className='flex items-center'>
+              <li className='flex items-center'>
                 <NavigationLink
                   href='/cloud/clickpipes'
                   onClick={useGalaxyOnClick(
@@ -75,13 +75,12 @@ export default function NavigationSubNavProducts() {
                   <span>
                     ClickPipes
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                      Effortless data movement and integration <br /> pipelines
-                      to ClickHouse Cloud from Kafka,
-                      <br /> Postgres, S3 and more.
+                      Data movement and integration pipelines
+                      <br /> from Kafka, Postgres, S3 and more.
                     </div>
                   </span>
                 </NavigationLink>
-              </li>*/}
+              </li>
               {/*<li className='flex items-center'>
                 <NavigationLink
                   href='#'

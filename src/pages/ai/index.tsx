@@ -85,7 +85,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 Get started today
               </CUIButton>
               <CUIButton
-                href='#'
+                href='https://clickhouse.com/docs/use-cases/AI/ask-ai'
                 onClick={useGalaxyOnClick('aiPage.heroCta.viewDocumentation')}
                 type='secondary'
                 size='lg'
@@ -162,10 +162,19 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               LibreChat gives you a familiar chat UI
             </TickItem>
             <TickItem className='max-w-md'>
-              MCP lets you connect to all of your favorite tools
+              <Link
+                href='https://clickhouse.com/docs/use-cases/AI/MCP'
+                className='text-primary-300 underline hover:decoration-2'>
+                MCP lets you connect to all of your favorite tools
+              </Link>
             </TickItem>
             <TickItem className='max-w-md'>
-              All the top AI models. One place.
+              <Link
+                href='https://www.librechat.ai/docs/features#-ai-model-selection'
+                className='text-primary-300 underline hover:decoration-2'>
+                All the top AI models. One place.
+                <ExternalLink height={16} width={16} className='ml-2 inline' />
+              </Link>
             </TickItem>
           </FeatureSection>
           <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
@@ -382,17 +391,45 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
         </div>
         <div className='mx-auto grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-2'>
           {[
-            { href: '#', label: 'Docs', icon: iconDocs },
-            { href: '#', label: 'AgentHouse', icon: iconAgenthouse },
-            { href: '#', label: 'Remote MCP server', icon: iconRemoteMcp },
-            { href: '#', label: 'ClickHouse for AI and ML', icon: iconYoutube },
-            { href: '#', label: 'MCP ClickHouse', icon: iconGithub },
-            { href: '#', label: 'LibreChat GitHub', icon: iconGithub }
+            {
+              href: 'https://clickhouse.com/docs/use-cases/AI/ask-ai',
+              label: 'Docs',
+              icon: iconDocs
+            },
+            {
+              href: 'https://llm.clickhouse.com',
+              label: 'AgentHouse',
+              icon: iconAgenthouse
+            },
+            {
+              href: 'https://clickhouse.com/docs/use-cases/AI/MCP/remote_mcp',
+              label: 'Remote MCP server',
+              icon: iconRemoteMcp
+            },
+            {
+              href: 'https://www.youtube.com/watch?v=GfvZHSdJ4CU&t=1527s',
+              label: 'ClickHouse for AI and ML',
+              icon: iconYoutube,
+              target: '_blank'
+            },
+            {
+              href: 'https://github.com/ClickHouse/mcp-clickhouse',
+              label: 'MCP ClickHouse',
+              icon: iconGithub,
+              target: '_blank'
+            },
+            {
+              href: 'https://github.com/danny-avila/LibreChat',
+              label: 'LibreChat GitHub',
+              icon: iconGithub,
+              target: '_blank'
+            }
           ].map((linkItem, linkIndex) => {
             return (
               <Link
                 key={linkIndex}
                 href={linkItem.href}
+                target={linkItem?.target}
                 className='flex items-center gap-4 rounded border border-neutral-700/80 bg-neutral-900/50 p-4 transition-colors hover:border-neutral-600/60 hover:bg-neutral-900/20'>
                 <Image
                   src={linkItem.icon}
@@ -426,15 +463,15 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
           </div>
           <div className='mt-8 flex flex-col gap-6 sm:flex-row sm:justify-center'>
             <CUIButton
-              href='#'
-              // onClick={useGalaxyOnClick('aiPage.heroCta.getStartedToday')}
+              href='https://llm.clickhouse.com/'
+              onClick={useGalaxyOnClick('aiPage.agenthouse.tryItNow')}
               type='primary'
               className='w-full border-none !px-8 sm:w-auto'>
               Try it now
             </CUIButton>
             <CUIButton
-              href='#'
-              // onClick={useGalaxyOnClick('aiPage.heroCta.viewDocumentation')}
+              href='/blog/agenthouse-demo-clickhouse-llm-mcp'
+              onClick={useGalaxyOnClick('aiPage.agenthouse.readTheBlog')}
               type='primary-dark'
               className='w-full border-none !px-8 sm:w-auto'>
               Read the blog
