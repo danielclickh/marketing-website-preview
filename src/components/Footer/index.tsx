@@ -115,6 +115,11 @@ const NAV_ITEMS: Array<NavItem> = [
     galaxyEvent: 'footerNav.resourcesMenu.demosSelect'
   },
   {
+    label: 'Presentations',
+    href: 'https://presentations.clickhouse.com/',
+    galaxyEvent: 'footerNav.resourcesMenu.presentationsSelect'
+  },
+  {
     label: 'Real-time data warehouse',
     href: '/real-time-data-warehouse',
     galaxyEvent: 'footerNav.productMenu.realtimeDWSelect'
