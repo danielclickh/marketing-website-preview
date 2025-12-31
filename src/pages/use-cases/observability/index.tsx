@@ -410,8 +410,8 @@ export default function ClickHouseServerPage({
               }
               logo={{
                 src: '/images/sony.svg',
-                width: 136.36,
-                height: 24,
+                width: 136.36 * 0.63,
+                height: 24 * 0.63,
                 alt: 'Sony'
               }}
             />
@@ -423,8 +423,8 @@ export default function ClickHouseServerPage({
               link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
               logo={{
                 src: logoAnthropic,
-                width: 143 * 1.1,
-                height: 16 * 1.1,
+                width: 143 * 1,
+                height: 16 * 1,
                 alt: 'Antrhopic',
                 className: 'mb-1'
               }}
@@ -437,8 +437,8 @@ export default function ClickHouseServerPage({
               link='/blog/scaling-observabilty-for-thousands-of-gpus-at-character-ai'
               logo={{
                 src: logoCharacterai,
-                width: 102 * 1.5,
-                height: 14 * 1.5,
+                width: 102 * 1.38,
+                height: 14 * 1.38,
                 alt: 'Character.ai',
                 className: 'mb-1'
               }}
