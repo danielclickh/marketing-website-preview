@@ -410,8 +410,8 @@ export default function ClickHouseServerPage({
               }
               logo={{
                 src: '/images/sony.svg',
-                width: 136.36 * 0.65,
-                height: 24 * 0.65,
+                width: 136.36 * 0.63,
+                height: 24 * 0.63,
                 alt: 'Sony'
               }}
             />
@@ -440,7 +440,7 @@ export default function ClickHouseServerPage({
                 width: 102 * 1.38,
                 height: 14 * 1.38,
                 alt: 'Character.ai',
-                className: 'mb-1 !object-contain'
+                className: 'mb-1'
               }}
             />
           </div>
