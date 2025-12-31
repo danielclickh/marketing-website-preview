@@ -66,7 +66,7 @@ function Quote({
         <footer className={classes.footer[direction]}>
           <Image
             {...logo}
-            className={`inline-block h-auto object-scale-down object-left pl-0.5 ${classes.logo[direction]} ${logoClassName}`}
+            className={`inline-block h-auto object-contain object-left pl-0.5 ${classes.logo[direction]} ${logoClassName}`}
             alt='Quote'
           />
         </footer>
