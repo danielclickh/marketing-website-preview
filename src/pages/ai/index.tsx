@@ -89,12 +89,12 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 onClick={useGalaxyOnClick('aiPage.heroCta.viewDocumentation')}
                 type='secondary'
                 size='lg'
-                className='w-full !px-10 sm:w-auto'>
+                className='w-full !bg-neutral !px-10 sm:w-auto md:!bg-transparent'>
                 View documentation
               </CUIButton>
             </div>
           </div>
-          <div className='relative'>
+          <div className='relative hidden md:block'>
             {/* Center border */}
             <div className='absolute -inset-1 rounded-[1.75%/3.5%] bg-primary-300 mix-blend-overlay' />
             <ResponsiveHtml5Video
@@ -103,7 +103,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               loop={true}
               autoPlay={true}
               preload='metadata'
-              className='relative z-10 block h-auto w-full rounded-[1.5%/3%]'
+              className='relative z-10 block h-auto w-full rounded-[1.5%/3%] bg-neutral'
               sources={{
                 defaultSrc: '/ai/hero-1280.mp4',
                 candidates: [
@@ -140,7 +140,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 '--top-side': '50%',
                 '--right-side': '20%',
                 '--left-side': 'auto',
-                '--scale': '1',
+                '--scale': '0.7',
                 '--opacity': '0.02'
               } as CSSProperties
             }
@@ -177,7 +177,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               </Link>
             </TickItem>
           </FeatureSection>
-          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
+          {/*<hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />*/}
           <FeatureSection
             className='bg-shadow-element yellow-shadow'
             style={
@@ -185,7 +185,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 '--top-side': '50%',
                 '--right-side': 'auto',
                 '--left-side': '20%',
-                '--scale': '1',
+                '--scale': '0.7',
                 '--opacity': '0.02'
               } as CSSProperties
             }
@@ -211,7 +211,6 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               Save and share chat and artifacts with your team
             </TickItem>
           </FeatureSection>
-          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
             className='bg-shadow-element yellow-shadow'
             style={
@@ -219,7 +218,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 '--top-side': '50%',
                 '--right-side': '20%',
                 '--left-side': 'auto',
-                '--scale': '1',
+                '--scale': '0.7',
                 '--opacity': '0.02'
               } as CSSProperties
             }
@@ -239,7 +238,6 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
             <TickItem>Interact with anything that supports MCP</TickItem>
             <TickItem>A unified AI interface for your organization</TickItem>
           </FeatureSection>
-          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
           <FeatureSection
             className='bg-shadow-element yellow-shadow'
             style={
@@ -247,7 +245,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 '--top-side': '50%',
                 '--right-side': 'auto',
                 '--left-side': '20%',
-                '--scale': '1',
+                '--scale': '0.7',
                 '--opacity': '0.02'
               } as CSSProperties
             }
@@ -397,12 +395,12 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               icon: iconDocs
             },
             {
-              href: 'https://llm.clickhouse.com',
+              href: 'https://clickhouse.com/docs/use-cases/AI_ML/AIChat/semantic-layer',
               label: 'AgentHouse',
               icon: iconAgenthouse
             },
             {
-              href: 'https://clickhouse.com/docs/use-cases/AI/MCP/remote_mcp',
+              href: 'https://clickhouse.com/docs/use-cases/AI/MCP',
               label: 'Remote MCP server',
               icon: iconRemoteMcp
             },
@@ -430,7 +428,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 key={linkIndex}
                 href={linkItem.href}
                 target={linkItem?.target}
-                className='flex items-center gap-4 rounded border border-neutral-700/80 bg-neutral-900/50 p-4 transition-colors hover:border-neutral-600/60 hover:bg-neutral-900/20'>
+                className='flex items-center gap-4 rounded border border-neutral-700/80 bg-neutral-900/50 p-4 transition-colors hover:border-primary-500 hover:bg-neutral-725/80'>
                 <Image
                   src={linkItem.icon}
                   width={32}
