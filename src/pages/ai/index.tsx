@@ -329,7 +329,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 insights, and take action in real time.
               </p>
               <LinkWithArrow
-                href='#'
+                href='/blog/agent-facing-analytics'
                 className='inline-block font-bold text-primary-300 hover:underline'>
                 <span className='absolute inset-0' />
                 Learn more
@@ -348,7 +348,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 and fast analytical databases.
               </p>
               <LinkWithArrow
-                href='#'
+                href='/blog/librechat-open-source-agentic-data-stack'
                 className='inline-block font-bold text-primary-300 hover:underline'>
                 <span className='absolute inset-0' />
                 Learn more
@@ -367,7 +367,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
                 modern data warehouses.
               </p>
               <LinkWithArrow
-                href='#'
+                href='/blog/ai-first-data-warehouse'
                 className='inline-block font-bold text-primary-300 hover:underline'>
                 <span className='absolute inset-0' />
                 Learn more
@@ -395,12 +395,12 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               icon: iconDocs
             },
             {
-              href: 'https://clickhouse.com/docs/use-cases/AI_ML/AIChat/semantic-layer',
+              href: '/blog/agenthouse-demo-clickhouse-llm-mcp',
               label: 'AgentHouse',
               icon: iconAgenthouse
             },
             {
-              href: 'https://clickhouse.com/docs/use-cases/AI/MCP',
+              href: 'https://clickhouse.com/docs/use-cases/AI/MCP/remote_mcp',
               label: 'Remote MCP server',
               icon: iconRemoteMcp
             },
