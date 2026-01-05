@@ -80,7 +80,7 @@ export default function HomepageHeroAlt({
               Build intelligent, AI-powered applications with ClickHouse. Enable
               real-time analytics and data-driven decision making for your AI
               agents.{' '}
-              <span className='font-medium group-hover:underline'>
+              <span className='text-nowrap font-medium group-hover:underline'>
                 Learn more&nbsp;-&gt;
               </span>
             </LogoAnnouncementLink>
