@@ -1042,7 +1042,7 @@ export default function ClickHouseServerPage({
               </p>
               <p>
                 <LinkWithArrow
-                  href='/company/contact'
+                  href='/jp/company/contact'
                   className='font-bold text-primary-300'>
                   お気軽にお問い合わせください
                 </LinkWithArrow>
