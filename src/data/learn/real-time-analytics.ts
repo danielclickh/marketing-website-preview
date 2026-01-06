@@ -1,3 +1,4 @@
+import badgeCertifiedDeveloper from './assets/badge-certified-developer.png'
 import badgeDatabaseAssociate from './assets/badge-database-associate.jpg'
 import badgeDatabaseProfessional from './assets/badge-database-professional.jpg'
 import iconBook from './assets/icon-book.svg'
@@ -88,10 +89,17 @@ export default {
         {
           icon: { src: iconTrophy },
           title: 'ClickHouse Certification',
-          description: `Validate your skills with our official ClickHouse Certification. Get certified with the ClickHouse Certified Developer Exam.
+          link: '/learn/certification',
+          panel: {
+            description: `Validate your skills with our official ClickHouse Certification. Get certified with the ClickHouse Certified Developer Exam.
 
 <span class="text-primary-300 group-hover:underline">Find out more -></span>`,
-          link: '/learn/certification'
+            image: {
+              src: badgeCertifiedDeveloper,
+              alt: 'ClickHouse Certified Developer',
+              className: 'self-stretch object-contain bg-white md:!w-40'
+            }
+          }
         }
       ]
     }
