@@ -62,6 +62,20 @@ export default function NavigationSubNavUseCases() {
           </li>
           <li
             onMouseEnter={() => {
+              //setQuote(quotes.cloudflare)
+            }}
+            className='col-span-2'>
+            <NavigationLink
+              href='/jp/use-cases/observability'
+              onClick={useGalaxyOnClick(
+                'topNav.useCasesMenu.observabilitySelect'
+              )}
+              className='block w-full'>
+              観測性
+            </NavigationLink>
+          </li>
+          <li
+            onMouseEnter={() => {
               //setQuote(quotes.langchain)
             }}
             className='col-span-2'>
@@ -74,7 +88,6 @@ export default function NavigationSubNavUseCases() {
               機械学習 & 生成AI
             </NavigationLink>
           </li>
-
           <li
             onMouseEnter={() => {
               //setQuote(quotes.adgreetz)
@@ -85,20 +98,6 @@ export default function NavigationSubNavUseCases() {
               onClick={useGalaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
               className='block w-full'>
               ビジネスインテリジェンス
-            </NavigationLink>
-          </li>
-          <li
-            onMouseEnter={() => {
-              //setQuote(quotes.cloudflare)
-            }}
-            className='col-span-2'>
-            <NavigationLink
-              href='/jp/use-cases/logging-and-metrics'
-              onClick={useGalaxyOnClick(
-                'topNav.useCasesMenu.loggingAndMetricsSelect'
-              )}
-              className='block w-full'>
-              ログ、イベント、トレース
             </NavigationLink>
           </li>
           <li
