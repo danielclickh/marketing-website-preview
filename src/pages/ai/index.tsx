@@ -198,14 +198,14 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               />
             }>
             <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
-              Chat, visualise, share
+              Chat, visualize, share
             </SuiTitle>
             <TickItem>Talk to your data</TickItem>
             <TickItem>
               Create and share no-code, specialized agents across your team
             </TickItem>
             <TickItem>
-              Create charts, visualisations, and dashboards from chats
+              Create charts, visualizations, and dashboards from chats
             </TickItem>
             <TickItem>
               Save and share chat and artifacts with your team
