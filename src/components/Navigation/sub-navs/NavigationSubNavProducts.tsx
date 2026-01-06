@@ -58,29 +58,7 @@ export default function NavigationSubNavProducts() {
                   </span>
                 </NavigationLink>
               </li>
-              <li className='flex items-center'>
-                <NavigationLink
-                  href='/cloud/clickpipes'
-                  onClick={useGalaxyOnClick(
-                    'topNav.productMenu.clickpipesSelect'
-                  )}
-                  className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
-                  <Image
-                    src='/images/nav/icon-clickpipes.svg'
-                    alt='ClickHouse Cloud ClickPipes'
-                    width={24}
-                    height={24}
-                    className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
-                  />
-                  <span>
-                    ClickPipes
-                    <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                      Data movement and integration pipelines
-                      <br /> from Kafka, Postgres, S3 and more.
-                    </div>
-                  </span>
-                </NavigationLink>
-              </li>
+              
               {/*<li className='flex items-center'>
                 <NavigationLink
                   href='#'
