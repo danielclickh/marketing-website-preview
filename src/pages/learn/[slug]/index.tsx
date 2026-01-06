@@ -398,7 +398,9 @@ function LearnSection({ section }: { section: Section }) {
                             )}
                             {item.panel.description && (
                               <SuiText size='sm'>
-                                {item.panel.description}
+                                <Markdown className='rich-text-content text-neutral-200'>
+                                  {item.panel.description}
+                                </Markdown>
                               </SuiText>
                             )}
                           </div>
