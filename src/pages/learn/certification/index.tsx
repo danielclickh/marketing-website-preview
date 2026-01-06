@@ -599,9 +599,23 @@ export default function CertificationPage({
               content: (
                 <p>
                   The ClickHouse Certified Developer exam is $200 USD per
-                  attempt. An exam attempt is valid for 365 days after purchase,
-                  at which time it will expire. Note that exam attempt purchases
-                  are not refundable.
+                  attempt.{' '}
+                  <strong>
+                    Note that exam attempt purchases are not refundable.
+                  </strong>
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examPurchaseExpiry'
+              ),
+              handle: 'After I purchase the exam, when do I need to take it?',
+              content: (
+                <p>
+                  An exam attempt is valid for 365 days after purchase, at which
+                  time it will expire.
                 </p>
               )
             },
