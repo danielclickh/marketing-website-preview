@@ -23,7 +23,7 @@ export default {
         {
           icon: { src: iconBook },
           link: 'https://learn.clickhouse.com/visitor_catalog_class/show/1883620',
-          title: 'Level 1: Observability at scale with ClickStack',
+          title: 'Level 1: Observability with ClickStack',
           description: `In level 1 of this three-part learning path, you’ll learn how to deploy a complete observability stack using ClickHouse, OpenTelemetry, and HyperDX.
           
 **Skill level:** Beginner
@@ -46,14 +46,14 @@ export default {
         {
           icon: { src: iconBook },
           badge: 'Coming soon',
-          title: 'Level 2: Using ClickHouse for Observability',
+          title: 'Level 2: Observability with ClickStack',
           description: `In level 2 of this three-part learning path, you’ll gain the skills needed to customize ClickHouse to your own Observability needs.
           
 **Skill level:** Intermediate
 
 **What you’ll learn:** Level 2 consists of the following four modules, including video lectures, hands-on labs, and quizzes:
-- Module 4: ClickHouse architecture and data types
-- Module 5: Data enrichment
+- Module 4: ClickHouse Architecture
+- Module 5: Schema Design
 - Module 6: Query acceleration techniques
 - Module 7: Alerting`,
           panel: {
@@ -70,7 +70,7 @@ export default {
         {
           icon: { src: iconBook },
           badge: 'Coming soon',
-          title: 'Level 3: Scaling ClickStack',
+          title: 'Level 3: Observability with ClickStack',
           description: `In level 3 of this three-part learning path, you’ll gain the skills and expertise to deploy ClickStack at Scale.
           
 **Skill level:** Advanced
