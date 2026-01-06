@@ -181,15 +181,26 @@ export const generateVideoObjectSchema = ({
   thumbnailUrl,
   uploadDate,
   contentUrl,
-  embedUrl
+  embedUrl,
+  ...rest
 }: {
-  title: string
-  description: string
-  thumbnailUrl: string
-  uploadDate: string
-  contentUrl: string
-  embedUrl: string
-}): WithContext<VideoObject> => ({
+  title: VideoObject['name']
+  description: VideoObject['description']
+  thumbnailUrl: VideoObject['thumbnailUrl']
+  uploadDate: VideoObject['uploadDate']
+  contentUrl: VideoObject['contentUrl']
+  embedUrl: VideoObject['embedUrl']
+} & Partial<
+  Omit<
+    VideoObject,
+    | 'name'
+    | 'description'
+    | 'thumbnailUrl'
+    | 'uploadDate'
+    | 'contentUrl'
+    | 'embedUrl'
+  >
+>): WithContext<VideoObject> => ({
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
   name: title,
@@ -197,7 +208,9 @@ export const generateVideoObjectSchema = ({
   thumbnailUrl,
   uploadDate,
   contentUrl,
-  embedUrl
+  embedUrl,
+  publisher: defaultOrganization,
+  ...rest
 })
 
 // @todo

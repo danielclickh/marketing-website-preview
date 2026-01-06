@@ -49,7 +49,7 @@ import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { generateFaqPageSchema } from '@/lib/schema'
+import { generateFaqPageSchema, generateVideoObjectSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -698,16 +698,37 @@ export default function ClickHouseServerPage({
             }}
             simulateTouch={false}
             carouselClass='rounded'>
-            {['WBe7ZwTRWuQ', '3waDYancX_c'].map((videoId, videoIdIndex) => {
-              return (
-                <PlayOnClickVideo
-                  key={videoIdIndex}
-                  provider='youtube'
-                  id={videoId}
-                  thumbnail={<YouTubeThumbnail videoId={videoId} />}
-                />
-              )
-            })}
+            <PlayOnClickVideo
+              provider='youtube'
+              id='WBe7ZwTRWuQ'
+              thumbnail={<YouTubeThumbnail videoId='WBe7ZwTRWuQ' />}
+              schema={generateVideoObjectSchema({
+                title: 'ClickStack in 60 seconds',
+                description:
+                  'A 60-second overview of ClickStack, an open-source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
+                thumbnailUrl:
+                  'https://img.youtube.com/vi/WBe7ZwTRWuQ/maxresdefault.jpg',
+                uploadDate: '2025-12-18T08:06:01-08:00',
+                contentUrl: 'https://www.youtube.com/watch?v=WBe7ZwTRWuQ',
+                embedUrl: 'https://www.youtube.com/embed/WBe7ZwTRWuQ'
+              })}
+            />
+            <PlayOnClickVideo
+              provider='youtube'
+              id='3waDYancX_c'
+              thumbnail={<YouTubeThumbnail videoId='3waDYancX_c' />}
+              schema={generateVideoObjectSchema({
+                title:
+                  'ClickStack: Unified Observability with ClickHouse for High-Cardinality Logs, Metrics & Traces ',
+                description:
+                  'A hands-on tutorial introducing ClickStack, an OpenTelemetry-native observability platform that unifies logs, metrics, and traces in ClickHouse with powerful correlation and querying via HyperDX.',
+                thumbnailUrl:
+                  'https://img.youtube.com/vi/3waDYancX_c/maxresdefault.jpg',
+                uploadDate: '2025-06-25T09:14:17-07:00',
+                contentUrl: 'https://www.youtube.com/watch?v=3waDYancX_c',
+                embedUrl: 'https://www.youtube.com/embed/3waDYancX_c'
+              })}
+            />
           </CarouselPaginated>
         </div>
       </section>
