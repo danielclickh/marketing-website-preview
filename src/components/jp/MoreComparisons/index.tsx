@@ -22,11 +22,9 @@ export default function MoreComparisons({
   return (
     <div className='bg-neutral-725 py-16'>
       <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
-        <div className='mb-8 text-center'>
-          <span className='font-semibold uppercase tracking-wider text-primary-300'>
-            {heading}
-          </span>
-        </div>
+        <h2 className='mb-8 text-center font-semibold uppercase tracking-wider text-primary-300'>
+          {heading}
+        </h2>
         <div className='flex flex-wrap justify-center'>
           {comparisons.map(({ name, logo, link }, index) => {
             return (
