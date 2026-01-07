@@ -222,6 +222,7 @@ export type PageModules =
   | PageModuleMarkdown
   | PageModuleWaitlistForm
   | PageModuleCtaBlock
+  | PageModuleFaqs
 
 export interface PageModuleMarkdown extends DynamicComponent {
   __component: 'page-modules.markdown'
@@ -244,6 +245,12 @@ export interface PageModuleCtaBlock extends DynamicComponent {
   content: string
   primary: ComponentLink
   secondary: null | ComponentLink
+}
+
+export interface PageModuleFaqs extends DynamicComponent {
+  __component: 'page-modules.faqs'
+  content: string
+  items: Array<{ question: string; answer: string }>
 }
 
 // -----
