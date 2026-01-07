@@ -96,7 +96,7 @@ export default function ClickHouseServerPage({
                       className: 'mx-3'
                     }}>
                     Blazing-fast MongoDB to ClickHouse CDC with our new
-                    ClickPipe connector — now in Private Preview.{' '}
+                    ClickPipe connector — now in Public Beta.{' '}
                     <span className='underline group-hover:decoration-2'>
                       Learn more
                     </span>
@@ -265,8 +265,7 @@ export default function ClickHouseServerPage({
         </div>
         <div className='bg-primary-300 py-12'></div>
 
-        {/* Azure Blob Storage form */}
-        <div className='section-container my-20'>
+        {/*<div className='section-container my-20'>
           <div className='mx-auto w-full lg:max-w-xl'>
             <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
               <div className='mb-10 flex justify-center'>
@@ -305,7 +304,7 @@ export default function ClickHouseServerPage({
               </CUICard.Body>
             </CUICard>
           </div>
-        </div>
+        </div>*/}
 
         <div className='section-container my-28 md:px-8 2xl:px-0'>
           <GetStartedFree
