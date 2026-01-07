@@ -34,10 +34,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title:
-            'ClickHouse.ai — Natural language & MCP interface for your data',
+          title: 'ClickHouse.ai — Agentic Data Stack',
           description:
-            'Unlock Agent-Facing Analytics within the ClickHouse Cloud console or via the native remote MCP server',
+            'The open-source stack for agentic analytics powered by ClickHouse, MCP, and LibreChat.',
           path: '/ai'
         },
         ...commonProps
