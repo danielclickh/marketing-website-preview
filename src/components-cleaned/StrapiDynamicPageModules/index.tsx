@@ -1,3 +1,4 @@
+import PageModulesCtaBlock from '@/components-cleaned/PageModulesCtaBlock'
 import PageModulesMarkdown from '@/components-cleaned/PageModulesMarkdown'
 import PageModulesWaitlistForm from '@/components-cleaned/PageModulesWaitlistForm'
 import { pascal } from '@/lib/utils/strings'
@@ -9,7 +10,8 @@ import { Attributes } from 'react'
 // Instead, we define a registry of components so they get rendered at build.
 const REGISTRY: Record<string, React.ComponentType<any>> = {
   PageModulesMarkdown,
-  PageModulesWaitlistForm
+  PageModulesWaitlistForm,
+  PageModulesCtaBlock
 }
 
 export type StrapiDynamicBlogModulesProps = DynamicComponent & {

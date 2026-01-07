@@ -248,6 +248,19 @@
   .rich_content {
     @apply text-neutral-200 space-y-6;
 
+    &.theme-dark {
+      @apply text-neutral;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        @apply text-neutral-900;
+      }
+
+    }
+
     h2 {
       @apply text-2xl font-semibold;
     }

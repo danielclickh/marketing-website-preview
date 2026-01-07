@@ -218,7 +218,10 @@ export interface BlogModuleImageGallery extends DynamicComponent {
 // Page modules
 // -----
 
-export type PageModules = PageModuleMarkdown | PageModuleWaitlistForm
+export type PageModules =
+  | PageModuleMarkdown
+  | PageModuleWaitlistForm
+  | PageModuleCtaBlock
 
 export interface PageModuleMarkdown extends DynamicComponent {
   __component: 'page-modules.markdown'
@@ -236,9 +239,22 @@ export interface PageModuleWaitlistForm extends DynamicComponent {
   showPrivacyPolicy: boolean
 }
 
+export interface PageModuleCtaBlock extends DynamicComponent {
+  __component: 'page-modules.cta-block'
+  content: string
+  primary: ComponentLink
+  secondary: null | ComponentLink
+}
+
 // -----
 // Components
 // -----
+
+export interface ComponentLink {
+  text: string
+  href: string
+  target: '_blank' | '_self'
+}
 
 export interface ComponentSeo {
   title: null | string
