@@ -7,6 +7,7 @@ import {
   ComponentSeo,
   EntryEvent,
   EntryMarketingVideo,
+  EntryPage,
   EntryResource,
   EntryResourceCategory
 } from '@/types/strapi'
@@ -427,6 +428,12 @@ export const resourcesService = new StrapiEntryService<EntryResource>(
 export const eventsService = new StrapiEntryService<EntryEvent>(
   'events',
   true,
+  true
+)
+
+export const pagesService = new StrapiEntryService<EntryPage>(
+  'pages',
+  'stagingOnly',
   true
 )
 

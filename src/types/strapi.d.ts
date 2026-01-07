@@ -148,6 +148,7 @@ export type BlogModules =
   | BlogModuleSummary
   | BlogModuleCodeBlock
   | BlogModuleYoutubeVideo
+  | BlogModuleImageGallery
 
 export interface BlogModuleMarketoForm extends DynamicComponent {
   __component: 'blog-modules.marketo-form'
@@ -211,6 +212,28 @@ export interface BlogModuleYoutubeVideo extends DynamicComponent {
 export interface BlogModuleImageGallery extends DynamicComponent {
   __component: 'blog-modules.image-gallery'
   images: Array<EntryImage>
+}
+
+// -----
+// Page modules
+// -----
+
+export type PageModules = PageModuleMarkdown | PageModuleWaitlistForm
+
+export interface PageModuleMarkdown extends DynamicComponent {
+  __component: 'page-modules.markdown'
+  body: string
+}
+
+export interface PageModuleWaitlistForm extends DynamicComponent {
+  __component: 'page-modules.waitlist-form'
+  introduction: string | null
+  formIntroduction: string | null
+  marketoFormId: string
+  formButtonLabel: string | null
+  formSuccessMessage: string
+  formSuccessRedirect: string | null
+  showPrivacyPolicy: boolean
 }
 
 // -----
@@ -348,4 +371,11 @@ export interface EntryMarketingVideo extends Entry {
   }
   tags: Array<EntryTag>
   promotion: null | ComponentPromotion
+}
+
+export interface EntryPage {
+  title: string
+  path: string
+  sections: Array<PageModules>
+  seo: ComponentSeo
 }
