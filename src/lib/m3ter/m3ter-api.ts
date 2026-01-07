@@ -1,7 +1,3 @@
-if (!process.env.NEXT_IS_PROD) {
-  require('dotenv').config({ path: './.env.local' })
-}
-
 // These are subsets of the fields from the API to cover what we use.
 
 export interface PricingBand {
