@@ -73,7 +73,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               <br />
               Your chat, your models, your data.
               <br />
-              Powered by ClickHouse, MCP and LibreChat.
+              Powered by ClickHouse, MCP, and LibreChat.
             </SuiText>
             <div className='!my-8 flex flex-col gap-6 sm:flex-row sm:justify-center'>
               <CUIButton
@@ -205,7 +205,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
               Create and share no-code, specialized agents across your team
             </TickItem>
             <TickItem>
-              Create charts, visualizations, and dashboards from chats
+              Generate charts, visualizations, and dashboards from chats
             </TickItem>
             <TickItem>
               Save and share chat and artifacts with your team
