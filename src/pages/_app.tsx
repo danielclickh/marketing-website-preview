@@ -3,6 +3,7 @@ import SmartBackProvider from '@/components-cleaned/SmartBackProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
 import { Galaxy } from '@/lib/galaxy/web/browser'
+import { IS_PRODUCTION } from '@/lib/next'
 import '@/styles/globals.scss'
 import '@/styles/securiti-overrides.scss'
 import { ClickUIProvider } from '@clickhouse/click-ui'
@@ -16,8 +17,6 @@ import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { useReportWebVitals } from 'next/web-vitals'
 import { useEffect } from 'react'
-
-const GTM_ID = process?.env?.NEXT_PUBLIC_GTM
 
 const inter = Inter({
   subsets: [],
@@ -155,7 +154,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         {!isMarketoIframe && (
           <>
             {/* GTM */}
-            {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
+            {IS_PRODUCTION && (
+              <GoogleTagManager
+                gtmId='GTM-WKSRXS8S'
+                gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
+              />
+            )}
 
             {/* Cleans marketo email tracking tokens */}
             <Script
