@@ -2,17 +2,16 @@ import imageAddMongoSource from './assets/add-mongodb-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
 import imageMonitorPipe from './assets/monitor-pipe.png'
-import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import TickItem from '@/components-cleaned/TickItem'
 import CdcAnimation from '@/components/CdcAnimation'
-import CdcWaitlistForm from '@/components/CdcWaitlistForm'
-import { CUIButton, CUICard } from '@/components/ClickUI'
-import DotsContainer from '@/components/DotsContainer'
+import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
+import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import logoBrainRocket from '@/pages/cloud/clickpipes/mysql-cdc-connector/assets/logo-brainrocket.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
@@ -82,10 +81,15 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               connector is now in Public Beta
             </SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
-              Replicate your MongoDB data to ClickHouse Cloud in just a few
-              clicks for blazing fast analytics. Eliminates the need for
-              external ETL tools that are expensive, slow and not purpose built
-              for MongoDB.
+              Seamlessly replicate your MongoDB data to ClickHouse Cloud with
+              just a few clicks. Get real-time analytics without the complexity
+              or cost of external ETL tools.{' '}
+              <Link
+                href='https://clickhouse.com/docs/integrations/clickpipes/mongodb'
+                className='text-primary-300 hover:underline'>
+                Learn more
+              </Link>
+              .
             </SuiText>
             <CUIButton
               type='primary'
@@ -102,7 +106,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
       {/* Cards */}
-      <div className='relative z-10 bg-neutral-700 py-20'>
+      <div className='relative z-10 pb-20'>
         <div className='section-container'>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/3'>
@@ -145,6 +149,44 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 className='bg-neutral-900/80'
               />
             </div>
+          </div>
+        </div>
+      </div>
+      {/* Quotes */}
+      <div className='relative z-10 bg-neutral-700 py-20'>
+        <div className='section-container'>
+          <SuiTitle type='h2' className='mb-16 text-center'>
+            What our customers are saying
+          </SuiTitle>
+          <div className='grid grid-cols-1 gap-8 lg:gap-10'>
+            <QuoteCard
+              className='bg-neutral-900/80'
+              direction='horizontal'
+              content={
+                ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ornare sit amet erat eu ultrices. Ut eleifend egestas augue, vel lacinia urna facilisis et. Vestibulum a risus vel augue placerat tempus ut quis orci. Morbi euismod, urna vitae mattis dictum, tortor dui condimentum lectus, sit amet interdum orci nulla sed risus. Donec suscipit posuere lacus, ut iaculis metus fermentum ac. Donec egestas congue gravida. Pellentesque vehicula, nisl ut pulvinar pellentesque, risus dui malesuada mi, id gravida lectus quam vel augue. Aliquam vitae enim erat. '
+              }
+              logo={{
+                src: logoBrainRocket,
+                width: 110,
+                height: 36,
+                alt: 'Brain Rocket',
+                className: 'saturate-0 brightness-0 invert bg-white'
+              }}
+            />
+            <QuoteCard
+              className='bg-neutral-900/80'
+              direction='horizontal'
+              content={
+                ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ornare sit amet erat eu ultrices. Ut eleifend egestas augue, vel lacinia urna facilisis et. Vestibulum a risus vel augue placerat tempus ut quis orci. Morbi euismod, urna vitae mattis dictum, tortor dui condimentum lectus, sit amet interdum orci nulla sed risus. Donec suscipit posuere lacus, ut iaculis metus fermentum ac. Donec egestas congue gravida. Pellentesque vehicula, nisl ut pulvinar pellentesque, risus dui malesuada mi, id gravida lectus quam vel augue. Aliquam vitae enim erat. '
+              }
+              logo={{
+                src: logoBrainRocket,
+                width: 110,
+                height: 36,
+                alt: 'Brain Rocket',
+                className: 'saturate-0 brightness-0 invert bg-white'
+              }}
+            />
           </div>
         </div>
       </div>
