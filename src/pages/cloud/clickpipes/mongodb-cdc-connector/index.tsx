@@ -37,33 +37,22 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function Page({ headerData, footerData, seo }: CommonProps) {
-  useGalaxyOnPage('mysqlCdcPage')
+  useGalaxyOnPage('mongodbCdcPage')
 
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
-      {/* Hero */}
-      <div className='relative my-10 lg:mb-20'>
-        <div className='section-container relative z-10 lg:py-20'>
-          <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
-            <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
-              <Breadcrumbs>
-                <Breadcrumbs.Link href='/cloud'>Cloud</Breadcrumbs.Link>
-                <Breadcrumbs.Link href='/cloud/clickpipes'>
-                  Data ingestion
-                </Breadcrumbs.Link>
-              </Breadcrumbs>
-              <SuiTitle type='h1' className='lg:!text-4xl'>
-                MongoDB CDC connector in ClickPipes is now in Private Preview
-              </SuiTitle>
-              <SuiText size='lg' className='text-neutral-200'>
-                Replicate your MongoDB data to ClickHouse Cloud in just a few
-                clicks for blazing fast analytics. Eliminates the need for
-                external ETL tools that are expensive, slow and not purpose
-                built for MongoDB.
-              </SuiText>
-              <SuiText size='lg' className='text-neutral-200'>
-                Join the waitlist today!
-              </SuiText>
+      {/* Hero */}{' '}
+      <div
+        className='bg-shadow-element yellow-shadow shadow-circle relative my-20 lg:my-24'
+        style={
+          {
+            '--top-side': '130%',
+            '--left-side': '80%'
+          } as CSSProperties
+        }>
+        <div className='section-container relative z-10'>
+          <div className='mx-auto w-full space-y-6 text-center lg:max-w-4xl'>
+            <div className='mb-10 flex justify-center'>
               <CdcAnimation
                 logo={
                   <div className='-mr-4 flex aspect-square w-20 items-center justify-center rounded-lg border border-[#113C55] bg-[#081E2B]'>
@@ -86,18 +75,33 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 ]}
               />
             </div>
-            <div className='w-full lg:max-w-lg'>
-              <CUICard>
-                <CUICard.Body className='p-4 lg:p-6'>
-                  <CdcWaitlistForm formId='1441' />
-                </CUICard.Body>
-              </CUICard>
-            </div>
+            <SuiTitle type='h1'>
+              <span className='tilted tilted-yellow'>
+                <span className='tilted-content'>MongoDB CDC</span>
+              </span>{' '}
+              connector is now in Public Beta
+            </SuiTitle>
+            <SuiText size='lg' className='text-neutral-200'>
+              Replicate your MongoDB data to ClickHouse Cloud in just a few
+              clicks for blazing fast analytics. Eliminates the need for
+              external ETL tools that are expensive, slow and not purpose built
+              for MongoDB.
+            </SuiText>
+            <CUIButton
+              type='primary'
+              size='lg'
+              className='group mx-auto mt-8 px-10'
+              target='_blank'
+              href='https://console.clickhouse.cloud/signUp?loc=mongodbCdcPageHeroCta'
+              onClick={useGalaxyOnClick(
+                'mongodbCdcPage.heroCta.startFreeCloudTrialSelect'
+              )}>
+              Start a free cloud trial
+            </CUIButton>
           </div>
         </div>
       </div>
-
-      {/* Cards  */}
+      {/* Cards */}
       <div className='relative z-10 bg-neutral-700 py-20'>
         <div className='section-container'>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
@@ -144,7 +148,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
           </div>
         </div>
       </div>
-
       {/* Features */}
       <div
         className='bg-shadow-element yellow-shadow shadow-circle my-24'
@@ -226,24 +229,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
           </FeatureSection>
         </div>
       </div>
-
-      {/* Footer form */}
-      <DotsContainer className='my-20'>
-        <div className='mx-auto w-full lg:max-w-xl'>
-          <CUICard className='bg-neutral-900/80'>
-            <div className='my-4 space-y-4 text-center lg:mb-4 lg:mt-6'>
-              <SuiTitle type='h2'>Get early access</SuiTitle>
-              <SuiText className='opacity-70'>
-                Join the waitlist to get access to the MongoDB CDC connector
-              </SuiText>
-            </div>
-            <CUICard.Body className='p-4 lg:p-6'>
-              <CdcWaitlistForm formId='1441' />
-            </CUICard.Body>
-          </CUICard>
-        </div>
-      </DotsContainer>
-
       {/* Get started */}
       <div className='section-container my-20 md:px-8 2xl:px-0'>
         <div className='space-y-6 rounded-lg bg-primary-300 px-4 py-16 text-center'>
