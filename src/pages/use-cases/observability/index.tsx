@@ -219,7 +219,10 @@ export default function ClickHouseServerPage({
                 weight='semibold'
                 href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
                 linkClass='w-full md:w-auto'
-                className='w-full !px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'
+                onClick={useGalaxyOnClick(
+                  'observabilityUseCasePage.hero.getStartedWithOpenSource'
+                )}>
                 Get started with open-source
               </CUIButton>
               <CUIButton
@@ -229,7 +232,10 @@ export default function ClickHouseServerPage({
                 href='/company/contact?loc=use-case-observability'
                 target='_self'
                 linkClass='w-full md:w-auto'
-                className='w-full !px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'
+                onClick={useGalaxyOnClick(
+                  'observabilityUseCasePage.hero.contactSales'
+                )}>
                 Contact sales
               </CUIButton>
             </div>
@@ -661,7 +667,10 @@ export default function ClickHouseServerPage({
               href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
               target='_blank'
               linkClass='w-full md:w-auto'
-              className='mt-6 w-full !px-10 md:w-auto'>
+              className='mt-6 w-full !px-10 md:w-auto'
+              onClick={useGalaxyOnClick(
+                'observabilityUseCasePage.builtForOtelAtScale.getStarted'
+              )}>
               Get started
             </CUIButton>
           </div>
