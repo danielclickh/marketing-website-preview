@@ -82,33 +82,35 @@ function getUseCaseCompute(
   const maxCompute = sortedComputes[sortedComputes.length - 1]
 
   let replicas = useCase.replicas
-  const calcIdeaCompute = () => {
+  const calcIdealCompute = () => {
     return Math.round(storageInGb / (useCase.ratio * replicas))
   }
   const calcMinCompute = () => {
     return config.findClosestCompute(
-      Math.round(calcIdeaCompute() - calcIdeaCompute() * 0.2)
+      Math.round(calcIdealCompute() - calcIdealCompute() * 0.2)
     )
   }
   const calcMaxCompute = () => {
     return config.findClosestCompute(
-      Math.round(calcIdeaCompute() + calcIdeaCompute() * 0.2)
+      Math.round(calcIdealCompute() + calcIdealCompute() * 0.2)
     )
   }
 
+  let idealCompute = calcIdealCompute()
   let computeMinSize = calcMinCompute()
   let computeMaxSize = calcMaxCompute()
 
   while (
     replicas > 1 &&
     replicas < 25 &&
-    (computeMinSize < minCompute || computeMaxSize > maxCompute)
+    (computeMinSize < minCompute || idealCompute > maxCompute)
   ) {
     if (computeMinSize < minCompute && replicas > 1) {
       replicas -= 1
-    } else if (computeMaxSize > maxCompute && replicas < 25) {
+    } else if (idealCompute > maxCompute && replicas < 25) {
       replicas += 1
     }
+    idealCompute = calcIdealCompute()
     computeMinSize = calcMinCompute()
     computeMaxSize = calcMaxCompute()
   }
