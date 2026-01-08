@@ -227,6 +227,7 @@ export type PageModules =
 export interface PageModuleMarkdown extends DynamicComponent {
   __component: 'page-modules.markdown'
   body: string
+  headingAnchorLinks: boolean
 }
 
 export interface PageModuleWaitlistForm extends DynamicComponent {
@@ -253,6 +254,13 @@ export interface PageModuleFaqs extends DynamicComponent {
   items: Array<{ question: string; answer: string }>
 }
 
+export interface PageModuleStandardCards extends DynamicComponent {
+  __component: 'page-modules.standard-cards'
+  introduction: string | null
+  columns: 'Two' | 'Three' | 'Four'
+  items: Array<ComponentStandardCard>
+}
+
 // -----
 // Components
 // -----
@@ -261,6 +269,14 @@ export interface ComponentLink {
   text: string
   href: string
   target: '_blank' | '_self'
+}
+
+export interface ComponentStandardCard {
+  image: null | EntryImage
+  icon: null | EntryImage
+  title: null | string
+  description: null | string
+  link: null | ComponentLink
 }
 
 export interface ComponentSeo {
