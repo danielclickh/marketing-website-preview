@@ -412,7 +412,7 @@ export interface EntryMarketingVideo extends Entry {
   promotion: null | ComponentPromotion
 }
 
-export interface EntryPage {
+export interface EntryPage extends Entry {
   title: string
   path: string
   sections: Array<PageModules>
