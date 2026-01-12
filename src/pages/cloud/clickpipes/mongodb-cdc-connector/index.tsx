@@ -1,6 +1,7 @@
 import imageAddMongoSource from './assets/add-mongodb-source.png'
 import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
 import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
+import logoRapidata from './assets/logo-rapidata.svg'
 import imageMonitorPipe from './assets/monitor-pipe.png'
 import TickItem from '@/components-cleaned/TickItem'
 import CdcAnimation from '@/components/CdcAnimation'
@@ -11,7 +12,6 @@ import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import logoBrainRocket from '@/pages/cloud/clickpipes/mysql-cdc-connector/assets/logo-brainrocket.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
@@ -163,28 +163,16 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
               className='bg-neutral-900/80'
               direction='horizontal'
               content={
-                ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ornare sit amet erat eu ultrices. Ut eleifend egestas augue, vel lacinia urna facilisis et. Vestibulum a risus vel augue placerat tempus ut quis orci. Morbi euismod, urna vitae mattis dictum, tortor dui condimentum lectus, sit amet interdum orci nulla sed risus. Donec suscipit posuere lacus, ut iaculis metus fermentum ac. Donec egestas congue gravida. Pellentesque vehicula, nisl ut pulvinar pellentesque, risus dui malesuada mi, id gravida lectus quam vel augue. Aliquam vitae enim erat. '
+                'Before using ClickPipes, we relied on multiple tools to replicate MongoDB data into ClickHouse, many of which required constant maintenance or manual intervention. After switching to the MongoDB connector in ClickPipes, those issues disappeared: the initial setup was simple, and once configured, it has required no ongoing attention. Using materialized views makes data modeling flexible and easy to evolve.\n\n' +
+                'Overall, ClickPipes has significantly reduced operational overhead and has worked great to replicate several terabytes of business data a day for analytical workloads.'
               }
               logo={{
-                src: logoBrainRocket,
-                width: 110,
-                height: 36,
-                alt: 'Brain Rocket',
-                className: 'saturate-0 brightness-0 invert bg-white'
-              }}
-            />
-            <QuoteCard
-              className='bg-neutral-900/80'
-              direction='horizontal'
-              content={
-                ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ornare sit amet erat eu ultrices. Ut eleifend egestas augue, vel lacinia urna facilisis et. Vestibulum a risus vel augue placerat tempus ut quis orci. Morbi euismod, urna vitae mattis dictum, tortor dui condimentum lectus, sit amet interdum orci nulla sed risus. Donec suscipit posuere lacus, ut iaculis metus fermentum ac. Donec egestas congue gravida. Pellentesque vehicula, nisl ut pulvinar pellentesque, risus dui malesuada mi, id gravida lectus quam vel augue. Aliquam vitae enim erat. '
-              }
-              logo={{
-                src: logoBrainRocket,
-                width: 110,
-                height: 36,
-                alt: 'Brain Rocket',
-                className: 'saturate-0 brightness-0 invert bg-white'
+                src: logoRapidata,
+                width: 128,
+                height: 33,
+                alt: 'Rapidata',
+                className:
+                  'saturate-0 brightness-0 invert lg:saturate-100 lg:brightness-100 lg:invert-0'
               }}
             />
           </div>
