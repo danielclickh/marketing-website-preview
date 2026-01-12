@@ -1,7 +1,9 @@
 import StrapiDynamicPageModules from '@/components-cleaned/StrapiDynamicPageModules'
 import Layout from '@/components/Layout'
 import { pagesService, seoFieldToNextComponentProps } from '@/lib/api/strapi'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { camel } from '@/lib/utils/strings'
 import { CommonProps } from '@/types/homepage'
 import { EntryPage } from '@/types/strapi'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
@@ -64,6 +66,8 @@ export default function Page({
   page,
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  useGalaxyOnPage(camel(page.path), [page.path])
+
   return (
     <Layout {...commonProps}>
       {page.sections &&
