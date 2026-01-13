@@ -100,23 +100,35 @@ interface DefaultComponentProps {
 function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
   return {
     img: BlogImage,
-    h1: (props: any) => (
-      <Header type='h1' allowHeaderLink={allowHeaderLink} {...props} />
+    h1: ({ node, children, ...props }: any) => (
+      <Header type='h1' allowHeaderLink={allowHeaderLink} {...props}>
+        {children}
+      </Header>
     ),
-    h2: (props: any) => (
-      <Header type='h2' allowHeaderLink={allowHeaderLink} {...props} />
+    h2: ({ node, children, ...props }: any) => (
+      <Header type='h2' allowHeaderLink={allowHeaderLink} {...props}>
+        {children}
+      </Header>
     ),
-    h3: (props: any) => (
-      <Header type='h3' allowHeaderLink={allowHeaderLink} {...props} />
+    h3: ({ node, children, ...props }: any) => (
+      <Header type='h3' allowHeaderLink={allowHeaderLink} {...props}>
+        {children}
+      </Header>
     ),
-    h4: (props: any) => (
-      <Header type='h4' allowHeaderLink={allowHeaderLink} {...props} />
+    h4: ({ node, children, ...props }: any) => (
+      <Header type='h4' allowHeaderLink={allowHeaderLink} {...props}>
+        {children}
+      </Header>
     ),
-    h5: (props: any) => (
-      <Header type='h5' allowHeaderLink={allowHeaderLink} {...props} />
+    h5: ({ node, children, ...props }: any) => (
+      <Header type='h5' allowHeaderLink={allowHeaderLink} {...props}>
+        {children}
+      </Header>
     ),
-    h6: (props: any) => (
-      <Header type='h6' allowHeaderLink={allowHeaderLink} {...props} />
+    h6: ({ node, children, ...props }: any) => (
+      <Header type='h6' allowHeaderLink={allowHeaderLink} {...props}>
+        {children}
+      </Header>
     ),
     code: CodeViewer,
     table({ node, children, ...props }: any) {
@@ -126,12 +138,12 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
         </div>
       )
     },
-    p({ children }: any) {
+    p({ node, children, ...props }: any) {
       const child = children?.[0]
       if (typeof child === 'object' && child?.type === BlogImage) {
         return <>{children}</> // render image directly without <p>
       }
-      return <p>{children}</p>
+      return <p {...props}>{children}</p>
     }
   }
 }
