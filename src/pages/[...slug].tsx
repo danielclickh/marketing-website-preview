@@ -66,7 +66,7 @@ export default function Page({
   page,
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  useGalaxyOnPage(camel(page.path), [page.path])
+  useGalaxyOnPage(camel(`${page.path} page`), [page.path])
 
   return (
     <Layout {...commonProps}>
