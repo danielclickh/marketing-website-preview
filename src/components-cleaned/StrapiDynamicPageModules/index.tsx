@@ -1,6 +1,7 @@
 import PageModulesCtaBlock from '@/components-cleaned/PageModulesCtaBlock'
 import PageModulesFaqs from '@/components-cleaned/PageModulesFaqs'
 import PageModulesMarkdown from '@/components-cleaned/PageModulesMarkdown'
+import PageModulesLegal from '@/components-cleaned/PageModulesMarkdown'
 import PageModulesStandardCards from '@/components-cleaned/PageModulesStandardCards'
 import PageModulesWaitlistForm from '@/components-cleaned/PageModulesWaitlistForm'
 import { pascal } from '@/lib/utils/strings'
@@ -15,7 +16,8 @@ const REGISTRY: Record<string, React.ComponentType<any>> = {
   PageModulesWaitlistForm,
   PageModulesCtaBlock,
   PageModulesFaqs,
-  PageModulesStandardCards
+  PageModulesStandardCards,
+  PageModulesLegal
 }
 
 export type StrapiDynamicBlogModulesProps = DynamicComponent & {

@@ -261,6 +261,11 @@ export interface PageModuleStandardCards extends DynamicComponent {
   items: Array<ComponentStandardCard>
 }
 
+export interface PageModuleLegal extends DynamicComponent {
+  __component: 'page-modules.legal'
+  body: string
+}
+
 // -----
 // Components
 // -----
