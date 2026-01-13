@@ -66,7 +66,24 @@ export default function HomepageHeroAlt({
                 className='w-full !border-black !text-black !transition-all hover:!text-white'>
                 Download open-source
               </CUIButton>
-            </div>{' '}
+            </div>
+            <LogoAnnouncementLink
+              href='/ai?loc=hero'
+              className='mt-8 text-sm'
+              logo={{
+                src: '/images/nav/icon-agentic-data-stack.svg',
+                alt: 'Agentic Data Stack',
+                width: 32,
+                height: 32,
+                className: 'brightness-0 mx-1'
+              }}>
+              Build intelligent, AI-powered applications with ClickHouse. Enable
+              real-time analytics and data-driven decision making for your AI
+              agents.{' '}
+              <span className='text-nowrap font-medium group-hover:underline'>
+                Learn more&nbsp;-&gt;
+              </span>
+            </LogoAnnouncementLink>
           </div>
         </div>
 

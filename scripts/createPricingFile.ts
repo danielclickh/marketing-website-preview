@@ -16,12 +16,12 @@ dotenv.config({
 
 // These are subsets of the fields from the API to cover what we use.
 
-interface PricingBand {
+export interface PricingBand {
   lowerLimit: number
   unitPrice: number
 }
 
-interface Pricing {
+export interface Pricing {
   id: string
   aggregationId?: string
   pricingBands?: Array<PricingBand>

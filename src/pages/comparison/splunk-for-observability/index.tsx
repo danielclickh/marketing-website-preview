@@ -6,7 +6,6 @@ import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
 import iconLightning from './assets/icon-lightning.svg'
 import iconUnlock from './assets/icon-unlock.svg'
-import logoAnthropic from './assets/logo-anthropic.svg'
 import logoElastic from './assets/logo-elastic.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
@@ -17,9 +16,7 @@ import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
 import CounterAnimation from '@/components-cleaned/CounterAnimation'
-import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import Sticky from '@/components-cleaned/Sticky'
-import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
@@ -29,7 +26,6 @@ import LinedIconCard from '@/components/LinedIconCard'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
-import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { tables, faqs } from '@/data/splunk-comparison'
@@ -167,36 +163,9 @@ export default function SplunkPage({ headerData, seo }: CommonProps) {
             <ClickHouseVersusSplunk />
           </div>
 
-          {/* Testimonials */}
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
+          <div className='relative grid grid-cols-1 gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:grid-cols-2'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-            <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
-              Join Anthropic in migrating from Splunk
-            </h2>
-            <div className='grid grid-cols-1 gap-6 lg:grid-cols-2 lg:space-y-0'>
-              <QuoteCard
-                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
-                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Anthropic'
-                }}
-              />
-              <div className='order-first lg:order-last'>
-                <PlayOnClickVideo
-                  provider='youtube'
-                  id='SrLKbzdFEWA'
-                  thumbnail={<YouTubeThumbnail videoId='SrLKbzdFEWA' />}
-                  playButtonEyebrow='Customer story'
-                  playButtonLabel='Hear from Anthropic'
-                />
-              </div>
-            </div>
-          </div>
 
-          <div className='grid grid-cols-1 gap-6 rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:grid-cols-2'>
             <h2 className='col-span-full text-center font-basier text-2xl font-semibold'>
               Why ClickStack outperforms Splunk
             </h2>
