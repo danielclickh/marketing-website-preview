@@ -110,6 +110,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
             }
           }
         },
+        sort: ['VideoDate:DESC'],
         pagination: {
           limit: 3
         }
