@@ -35,11 +35,11 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ headerData, footerData, seo }: CommonProps) {
+export default function Page({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('mongodbCdcPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}{' '}
       <div
         className='bg-shadow-element yellow-shadow shadow-circle relative my-20 lg:my-24'
