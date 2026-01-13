@@ -1,7 +1,7 @@
 import PageModulesCtaBlock from '@/components-cleaned/PageModulesCtaBlock'
 import PageModulesFaqs from '@/components-cleaned/PageModulesFaqs'
+import PageModulesLegal from '@/components-cleaned/PageModulesLegal'
 import PageModulesMarkdown from '@/components-cleaned/PageModulesMarkdown'
-import PageModulesLegal from '@/components-cleaned/PageModulesMarkdown'
 import PageModulesStandardCards from '@/components-cleaned/PageModulesStandardCards'
 import PageModulesWaitlistForm from '@/components-cleaned/PageModulesWaitlistForm'
 import { pascal } from '@/lib/utils/strings'
