@@ -787,12 +787,7 @@ const AGENDA: Array<{
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
-export default function Page({
-  seo,
-  footerData,
-  blogs,
-  roadshows
-}: OpenHousePageProps) {
+export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
@@ -1562,7 +1557,7 @@ export default function Page({
           </section>
         </div>
       </FontSohne>
-      <Footer {...footerData} />
+      <Footer />
     </>
   )
 }

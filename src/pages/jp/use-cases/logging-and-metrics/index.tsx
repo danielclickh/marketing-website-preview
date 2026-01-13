@@ -57,8 +57,7 @@ export const getStaticProps: GetStaticProps<LoggingProps> =
 export default function ClickHouseServerPage({
   customerStories,
   seo,
-  headerData,
-  footerData
+  headerData
 }: LoggingProps) {
   useGalaxyOnPage('logsMetricsUseCasePage')
   useEffect(() => {
@@ -71,7 +70,7 @@ export default function ClickHouseServerPage({
   }, [])
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-grid pt-10'>
             <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-40 lg:h-[524px] lg:bg-speed-lines'></div>

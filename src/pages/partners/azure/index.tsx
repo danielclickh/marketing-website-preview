@@ -71,7 +71,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
 export default function Page({
   seo,
   headerData,
-  footerData,
   customerStories,
   blogs
 }: PageProps) {
@@ -84,7 +83,7 @@ export default function Page({
   const customerLogos = customerStories.logos
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='section-container my-20 lg:my-24'>
         <div className='text-center'>

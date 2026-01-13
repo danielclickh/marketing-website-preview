@@ -25,15 +25,11 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function ContactPage({
-  footerData,
-  headerData,
-  seo
-}: CommonProps) {
+export default function ContactPage({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('requestDemoPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
           <div className='mx-auto flex flex-col pt-6 text-center'>

@@ -48,7 +48,6 @@ export const getStaticProps: GetStaticProps<MonitoramaProps> =
   }
 
 export default function MonitoramaPage({
-  footerData,
   headerData,
   customerStories,
   seo
@@ -70,7 +69,7 @@ export default function MonitoramaPage({
   }
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
         <div className='relative pt-16 lg:pb-24'>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>

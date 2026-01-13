@@ -28,14 +28,14 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
   }
 }
 
-export default function Page({ footerData, headerData, seo }: HomePageProps) {
+export default function Page({ headerData, seo }: HomePageProps) {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         {/* Hero */}
         <div className='bg-primary-300 py-16 lg:py-24'>
           <div className='section-container mx-auto 2xl:max-w-[92rem]'>

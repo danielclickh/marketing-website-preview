@@ -111,7 +111,6 @@ function CheckListItem(props: CheckListItemProps) {
 }
 
 export default function CertificationPage({
-  footerData,
   headerData,
   customerStories,
   seo
@@ -121,7 +120,7 @@ export default function CertificationPage({
   const [watchWebinar, setWatchWebinar] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='bg-grid'>
         <div className='section-container flex flex-row flex-wrap items-start justify-between gap-x-6 gap-y-16 py-16 md:py-20 lg:flex-nowrap'>

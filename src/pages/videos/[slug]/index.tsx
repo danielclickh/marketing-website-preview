@@ -194,11 +194,10 @@ export default function VideoPage({
   prevVideo,
   relatedVideos,
   seo,
-  headerData,
-  footerData
+  headerData
 }: InferGetServerSidePropsType<typeof getStaticProps>) {
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='container mx-auto my-20 flex max-w-3xl flex-col px-6 2xl:px-0'>
         <div className='mx-auto flex flex-col text-center'>
           <Breadcrumbs className='justify-center'>

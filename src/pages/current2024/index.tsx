@@ -34,14 +34,12 @@ interface ContactPageProps {
   contactForm: {
     disclaimer: string
   }
-  footerData: ContactProps['footerData']
   headerData: ContactProps['headerData']
   seo: ContactProps['seo']
 }
 
 export default function ContactPage({
   contactForm,
-  footerData,
   headerData,
   seo
 }: ContactPageProps) {
@@ -51,7 +49,7 @@ export default function ContactPage({
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='pt-10'>
           <div className='container mx-auto flex max-w-2xl flex-col px-8 2xl:px-0'>
             <div

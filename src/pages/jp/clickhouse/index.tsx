@@ -50,15 +50,14 @@ export default function ClickHouseServerPage({
   features5,
   seo,
   platforms,
-  headerData,
-  footerData
+  headerData
 }: ClickhouseData) {
   useGalaxyOnPage('productOpenSourcePage')
 
   const { mainButton, secondaryButton, gitButton } = hero
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat lg:bg-speed-lines'>
           <div className='relative overflow-x-hidden bg-grid pt-10'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 lg:min-h-[630px] 2xl:px-0'>

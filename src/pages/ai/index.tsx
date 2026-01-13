@@ -146,7 +146,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ seo, headerData, footerData }: CommonProps) {
+export default function Page({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('aiPage')
 
   const [activeTab, setActiveTab] = useState<Tabs>('assistant')
@@ -165,7 +165,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
   }, [router])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section
         className='bg-shadow-element yellow-shadow relative overflow-hidden bg-grid pb-6 md:pb-20'

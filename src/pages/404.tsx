@@ -24,13 +24,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function NotFoundPage({
-  footerData,
-  headerData,
-  seo
-}: CommonProps) {
+export default function NotFoundPage({ headerData, seo }: CommonProps) {
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='section-container flex items-center justify-center gap-16 py-16 lg:py-24 xl:py-36'>
         <CUICard>
           <CUICard.Body className='space-y-4 p-4 lg:space-y-6 lg:p-6'>

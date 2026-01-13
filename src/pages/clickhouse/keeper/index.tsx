@@ -21,11 +21,7 @@ export const getStaticProps: GetStaticProps<KeeperData> =
     }
   }
 
-export default function KeeperPage({
-  headerData,
-  footerData,
-  platforms
-}: KeeperData) {
+export default function KeeperPage({ headerData, platforms }: KeeperData) {
   useGalaxyOnPage('keeperPage')
 
   const seoData = {
@@ -37,7 +33,7 @@ export default function KeeperPage({
   }
   return (
     <>
-      <Layout footerData={footerData} seo={seoData} headerData={headerData}>
+      <Layout seo={seoData} headerData={headerData}>
         <div className='bg-neutral-800 bg-contain bg-center bg-no-repeat pt-10'>
           <div className='relative overflow-x-hidden'>
             <div className='container mx-auto flex max-w-7xl flex-col bg-opacity-10 px-4 pb-16 md:bg-no-repeat md:px-8 md:pb-24 2xl:px-0'>

@@ -8,11 +8,10 @@ import { CommonProps } from '@/types/homepage'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Page({ footerData, headerData }: CommonProps) {
+export default function Page({ headerData }: CommonProps) {
   useGalaxyOnPage('supportProgramPage')
   return (
     <Layout
-      footerData={footerData}
       seo={{
         title: 'ClickHouse Support Program',
         description: 'Trusted support services for your organization',

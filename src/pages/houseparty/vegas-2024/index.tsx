@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ footerData, headerData, seo }: CommonProps) {
+export default function Page({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('reinvent2024AncillaryPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
@@ -75,7 +75,6 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
   return (
     <>
       <Layout
-        footerData={footerData}
         seo={seo}
         headerData={{ eyebrow: { className: '!bg-[#EBFF00]' }, ...headerData }}>
         <div className='relative bg-[#EFEFEF]'>

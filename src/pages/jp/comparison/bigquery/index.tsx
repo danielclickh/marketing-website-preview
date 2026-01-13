@@ -98,7 +98,6 @@ export async function getStaticProps() {
 }
 
 export default function BigQueryPage({
-  footerData,
   headerData,
   seo,
   comparison,
@@ -144,7 +143,7 @@ export default function BigQueryPage({
   )
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='container mx-auto my-16 flex max-w-7xl flex-col items-center gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>

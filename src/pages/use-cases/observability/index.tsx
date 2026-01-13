@@ -172,11 +172,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function ClickHouseServerPage({
-  seo,
-  headerData,
-  footerData
-}: CommonProps) {
+export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('observabilityUseCasePage')
   const [hyperdxActive, setHyperdxActive] = useState(true)
   const [clickhouseActive, setClickhouseActive] = useState(false)
@@ -188,7 +184,7 @@ export default function ClickHouseServerPage({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='overflow-hidden py-20 lg:py-24'>
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>

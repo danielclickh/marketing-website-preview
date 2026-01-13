@@ -40,7 +40,6 @@ function ServiceUnavailableCountryPage({
   contactForm,
   ctaButton,
   platforms,
-  footerData,
   headerData,
   seo
 }: ServiceProps) {
@@ -48,7 +47,7 @@ function ServiceUnavailableCountryPage({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='section-container my-16 text-center lg:my-24'>
         <SuiTitle type='h1' className='mb-3'>
           {title}

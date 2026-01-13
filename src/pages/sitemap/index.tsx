@@ -129,7 +129,6 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
 function Sitemap({
   seo,
   headerData,
-  footerData,
   blogCategories,
   blogPosts,
   allEvents,
@@ -144,7 +143,7 @@ function Sitemap({
   useGalaxyOnPage('siteMapPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div>
         <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
           Site map

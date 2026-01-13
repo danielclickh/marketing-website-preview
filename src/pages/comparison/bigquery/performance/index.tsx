@@ -145,7 +145,6 @@ function LeadForm({ hiddenFields }: { hiddenFields: Record<any, any> }) {
 }
 
 export default function BigQueryPerformancePage({
-  footerData,
   seo,
   comparison,
   customerStories
@@ -654,7 +653,7 @@ export default function BigQueryPerformancePage({
           </div>
         </div>
       </div>
-      <Footer {...footerData} />
+      <Footer />
     </>
   )
 }

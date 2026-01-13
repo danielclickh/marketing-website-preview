@@ -41,8 +41,7 @@ export default function VideosPage({
   title,
   initialData,
   seo,
-  headerData,
-  footerData
+  headerData
 }: VideosPageProps) {
   useGalaxyOnPage('videosPage')
 
@@ -153,7 +152,7 @@ export default function VideosPage({
     }
   }, [page, search, category])
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:pt-20'>
         <SuiTitle type='h1'>ビデオ</SuiTitle>
       </div>
