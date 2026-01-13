@@ -8,8 +8,8 @@ import React from 'react'
 
 const columnClasses: Record<PageModuleStandardCards['columns'], string> = {
   Two: 'lg:grid-cols-2',
-  Three: 'lg:grid-cols-3',
-  Four: 'lg:grid-cols-4'
+  Three: 'md:grid-cols-2 lg:grid-cols-3',
+  Four: 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
 }
 
 export default function PageModulesStandardCards({
@@ -27,7 +27,7 @@ export default function PageModulesStandardCards({
           {introduction}
         </Markdown>
       )}
-      <div className={`grid grid-cols-1 ${columnClasses[columns]}`}>
+      <div className={`grid grid-cols-1 gap-6 ${columnClasses[columns]}`}>
         {items.map((item, itemIndex) => {
           return (
             <CUICard key={itemIndex} className='relative overflow-hidden'>
