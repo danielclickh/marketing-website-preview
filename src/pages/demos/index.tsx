@@ -58,12 +58,11 @@ export default function DemosPage({
   description,
   demos,
   seo,
-  headerData,
-  footerData
+  headerData
 }: DemosPageProps) {
   useGalaxyOnPage('demosPage')
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-20 lg:pt-20'>
         <SuiTitle type='h1'>{title || 'Demos'}</SuiTitle>
         {!!description && (

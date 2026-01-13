@@ -148,6 +148,7 @@ export type BlogModules =
   | BlogModuleSummary
   | BlogModuleCodeBlock
   | BlogModuleYoutubeVideo
+  | BlogModuleImageGallery
 
 export interface BlogModuleMarketoForm extends DynamicComponent {
   __component: 'blog-modules.marketo-form'
@@ -214,8 +215,74 @@ export interface BlogModuleImageGallery extends DynamicComponent {
 }
 
 // -----
+// Page modules
+// -----
+
+export type PageModules =
+  | PageModuleMarkdown
+  | PageModuleWaitlistForm
+  | PageModuleCtaBlock
+  | PageModuleFaqs
+
+export interface PageModuleMarkdown extends DynamicComponent {
+  __component: 'page-modules.markdown'
+  body: string
+  headingAnchorLinks: boolean
+}
+
+export interface PageModuleWaitlistForm extends DynamicComponent {
+  __component: 'page-modules.waitlist-form'
+  introduction: string | null
+  formIntroduction: string | null
+  marketoFormId: string
+  formButtonLabel: string | null
+  formSuccessMessage: string
+  formSuccessRedirect: string | null
+  showPrivacyPolicy: boolean
+}
+
+export interface PageModuleCtaBlock extends DynamicComponent {
+  __component: 'page-modules.cta-block'
+  content: string
+  primary: ComponentLink
+  secondary: null | ComponentLink
+}
+
+export interface PageModuleFaqs extends DynamicComponent {
+  __component: 'page-modules.faqs'
+  content: string
+  items: Array<{ question: string; answer: string }>
+}
+
+export interface PageModuleStandardCards extends DynamicComponent {
+  __component: 'page-modules.standard-cards'
+  introduction: string | null
+  columns: 'Two' | 'Three' | 'Four'
+  items: Array<ComponentStandardCard>
+}
+
+export interface PageModuleLegal extends DynamicComponent {
+  __component: 'page-modules.legal'
+  body: string
+}
+
+// -----
 // Components
 // -----
+
+export interface ComponentLink {
+  text: string
+  href: string
+  target: '_blank' | '_self'
+}
+
+export interface ComponentStandardCard {
+  image: null | EntryImage
+  icon: null | EntryImage
+  title: null | string
+  description: null | string
+  link: null | ComponentLink
+}
 
 export interface ComponentSeo {
   title: null | string
@@ -348,4 +415,11 @@ export interface EntryMarketingVideo extends Entry {
   }
   tags: Array<EntryTag>
   promotion: null | ComponentPromotion
+}
+
+export interface EntryPage extends Entry {
+  title: string
+  path: string
+  sections: Array<PageModules>
+  seo: ComponentSeo
 }

@@ -30,13 +30,9 @@ export const getStaticProps: GetStaticProps<ContactProps> =
     }
   }
 
-export default function ContactPage({
-  footerData,
-  headerData,
-  seo
-}: ContactProps) {
+export default function ContactPage({ headerData, seo }: ContactProps) {
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
           <div className='mx-auto flex flex-col pt-6 text-center'>

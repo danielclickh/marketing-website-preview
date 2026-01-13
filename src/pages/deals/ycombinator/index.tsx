@@ -43,13 +43,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ footerData, headerData, seo }: CommonProps) {
+export default function Page({ headerData, seo }: CommonProps) {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <section className='bg-grid py-16 lg:py-24'>
         <div className='section-container'>
           <div className='mx-auto max-w-5xl space-y-6 text-center'>

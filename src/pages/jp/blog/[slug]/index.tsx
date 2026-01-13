@@ -194,7 +194,6 @@ export default function BlogPage({
   otherBlogs,
   date,
   publishedAt,
-  footerData,
   headerData,
   newsLetterData,
   ShowCloudCTAHeader,
@@ -276,7 +275,7 @@ export default function BlogPage({
   }, [contentRef.current])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <ScrollToTop showFrom={600} hideAt={hideScrollTopAt} />
       <div className='relative'>
         <ReadingProgress target={contentRef} />

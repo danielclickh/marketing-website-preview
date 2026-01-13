@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ footerData, headerData, seo }: CommonProps) {
+export default function Page({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('cloudAwsSovereignCloudEuPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
@@ -34,7 +34,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <DotsContainer>
         <div className='mx-auto w-full lg:max-w-4xl'>
           <div className='mb-16 text-center'>

@@ -117,7 +117,6 @@ export async function getStaticPaths() {
 
 export default function Page({
   event,
-  footerData,
   headerData,
   moreEvents,
   seo
@@ -146,7 +145,7 @@ export default function Page({
   const hasVimeo = !!vimeoId
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <section className='section-container my-16 space-y-6 text-center lg:my-24'>
         {!vimeoId && (
           <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />

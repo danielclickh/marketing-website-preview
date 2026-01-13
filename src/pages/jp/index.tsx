@@ -48,7 +48,6 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
 export default function HomePage({
   hero,
   seo,
-  footerData,
   headerData,
   customerStories,
   platforms
@@ -56,7 +55,7 @@ export default function HomePage({
   useGalaxyOnPage('homePage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <HomepageHero />
       <HomepageSectionTrustedBy customerStories={customerStories} />
       <HRSeparator />

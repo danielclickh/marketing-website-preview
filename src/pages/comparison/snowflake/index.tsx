@@ -51,11 +51,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function SnowflakePage({
-  footerData,
-  headerData,
-  seo
-}: CommonProps) {
+export default function SnowflakePage({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('snowflakeComparisonPage')
 
   const [formModalOpen, setFormModalOpen] = useState(false)
@@ -63,7 +59,7 @@ export default function SnowflakePage({
   const [formSuccess, setFormSuccess] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Popup form */}
       <Modal
         className='!bg-black/60 backdrop-blur'

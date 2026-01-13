@@ -114,14 +114,13 @@ export default function DemoPage({
   Content,
   seo,
   headerData,
-  footerData,
   newsLetterData,
   otherDemos = []
 }: DemoProps) {
   useGalaxyOnPage('demo_page')
   const contentRef = useRef<null | HTMLDivElement>(null)
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='relative'>
         <ReadingProgress target={contentRef} />
 

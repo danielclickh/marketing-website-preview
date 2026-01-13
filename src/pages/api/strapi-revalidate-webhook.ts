@@ -167,11 +167,11 @@ const CONTENT_TYPE_HANDLERS: Record<
     // const paths = [`/pricing`, `/jp/pricing`]
     // await revalidate(response, paths)
   },
-  'api::rich-content-page.rich-content-page': async function (body, response) {
+  'api::page.page': async function (body, response) {
     const paths = [`/sitemap`]
 
-    if (body?.entry?.url) {
-      paths.push(`${body.entry.url}`)
+    if (body?.entry?.path) {
+      paths.push(`/${body.entry.path}`)
     }
 
     await revalidate(response, paths)

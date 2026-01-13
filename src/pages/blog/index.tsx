@@ -50,8 +50,7 @@ export default function BlogsPage({
   title,
   initialData,
   seo,
-  headerData,
-  footerData
+  headerData
 }: BlogProps) {
   useGalaxyOnPage('blogListPage')
 
@@ -164,7 +163,7 @@ export default function BlogsPage({
   }, [page, search, category])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='mx-auto mb-10 pt-10 text-center text-neutral-100 lg:mb-16 lg:pt-20'>
         <SuiTitle type='h1'>{title}</SuiTitle>
       </div>

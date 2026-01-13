@@ -5,6 +5,7 @@ import {
   fetchAll,
   getStagingOnlyFilters,
   getUnlistedFilters,
+  pagesService,
   resourcesService
 } from '@/lib/api/strapi'
 import { getVideos } from '@/lib/videos'
@@ -150,17 +151,17 @@ export async function cmsComparisons(): Promise<Array<IndexedItem>> {
 }
 
 export async function cmsPages(): Promise<Array<IndexedItem>> {
-  const richTextPages = await fetchAll('rich-content-pages', {
+  const pages = await pagesService.findAll({
+    fields: ['title', 'path', 'updatedAt'],
     sort: ['publishedAt:DESC'],
-    fields: ['title', 'url', 'updatedAt']
+    populate: []
   })
-  return richTextPages.map((post) => {
-    const uri = post.url.replace(/^\/+/, '').replace(/\/+$/, '')
+  return pages.map((page) => {
     return {
-      title: post.title,
-      path: `/${uri}`,
-      lastModified: post.updatedAt,
-      publishedAt: post.publishedAt
+      title: page.title,
+      path: `/${page.path}`,
+      lastModified: page.updatedAt,
+      publishedAt: page.publishedAt
     }
   })
 }

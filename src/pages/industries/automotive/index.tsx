@@ -42,11 +42,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function GamingIndustryPage({
-  seo,
-  headerData,
-  footerData
-}: CommonProps) {
+export default function GamingIndustryPage({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('automotiveIndustryPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
@@ -54,7 +50,7 @@ export default function GamingIndustryPage({
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section
         className='bg-shadow-element yellow-shadow my-16 lg:my-24'

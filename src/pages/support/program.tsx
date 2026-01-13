@@ -1,19 +1,27 @@
-import { CUICard, CUILink } from '../ClickUI'
-import HRSeparator from '../HRSeparator'
-import { SuiText, SuiTitle } from '../sui'
-import ArrowsUp from './arrowsUp'
+import { CUICard } from '@/components/ClickUI'
+import HRSeparator from '@/components/HRSeparator'
+import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { SuiText, SuiTitle } from '@/components/sui'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { CommonProps } from '@/types/homepage'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function SupportProgram(props: any) {
+export default function Page({ headerData }: CommonProps) {
+  useGalaxyOnPage('supportProgramPage')
   return (
-    <>
+    <Layout
+      seo={{
+        title: 'ClickHouse Support Program',
+        description: 'Trusted support services for your organization',
+        path: '/support/program'
+      }}
+      headerData={headerData}>
       <div className='bg-grid'>
         <div className='relative mx-auto max-w-4xl px-4 pb-24 pt-28 text-center sm:px-8 md:px-16 2xl:px-0'>
           <SuiTitle type='h1' className='mb-6 md:!text-6xl'>
-            {props.title}
+            Support Program
           </SuiTitle>
           <h2 className='mb-6 text-base font-bold'>
             Trusted support services for your organization
@@ -452,7 +460,13 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsUp />
+            <Image
+              src='/images/support-program/arrow-up.svg'
+              alt='Arrow'
+              height={32}
+              width={32}
+              className='mx-auto'
+            />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
@@ -467,7 +481,13 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsUp />
+            <Image
+              src='/images/support-program/arrow-up.svg'
+              alt='Arrow'
+              height={32}
+              width={32}
+              className='mx-auto'
+            />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
@@ -482,7 +502,13 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsUp />
+            <Image
+              src='/images/support-program/arrow-up.svg'
+              alt='Arrow'
+              height={32}
+              width={32}
+              className='mx-auto'
+            />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
@@ -497,7 +523,13 @@ export default function SupportProgram(props: any) {
             </div>
           </div>
           <div className='mx-auto text-center'>
-            <ArrowsUp />
+            <Image
+              src='/images/support-program/arrow-up.svg'
+              alt='Arrow'
+              height={32}
+              width={32}
+              className='mx-auto'
+            />
           </div>
           <div>
             <div className='w-full rounded-lg border border-neutral-700 bg-neutral-900/50 p-6'>
@@ -523,6 +555,6 @@ export default function SupportProgram(props: any) {
           please open a case to get started.
         </p>
       </div>
-    </>
+    </Layout>
   )
 }

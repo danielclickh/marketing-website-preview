@@ -62,7 +62,6 @@ export default function OurStoryPage({
   ourHistory,
   hiring,
   team,
-  footerData,
   headerData,
   seo
 }: OurStoryData) {
@@ -70,7 +69,7 @@ export default function OurStoryPage({
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='relative pt-10'>
           <div className='pt-10'>
             <div className='container mx-auto flex flex-col px-8 2xl:px-0'>

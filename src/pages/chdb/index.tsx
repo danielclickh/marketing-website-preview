@@ -49,11 +49,11 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function ChdbPage({ headerData, footerData, seo }: CommonProps) {
+export default function ChdbPage({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('chdbPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='relative my-10 lg:mb-20'>
         <div className='absolute bottom-0 left-0 z-0 aspect-[1512/524] w-full bg-contain bg-center bg-no-repeat lg:bg-speed-lines' />
