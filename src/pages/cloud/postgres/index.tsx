@@ -12,6 +12,7 @@ import ClickhousePostgresNvmeDiagram, {
 } from '@/components-cleaned/ClickhousePostgresNvmeDiagram'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUICard } from '@/components/ClickUI'
+import DotsContainer from '@/components/DotsContainer'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
@@ -24,7 +25,6 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -68,8 +68,8 @@ export default function Page({ headerData, seo }: CommonProps) {
               <span className='sr-only'>Postgres by ClickHouse</span>
               <Image
                 src={postgresByClickhouse}
-                width={478}
-                height={123}
+                width={573}
+                height={232}
                 alt=''
                 priority
               />
@@ -80,6 +80,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 with ClickHouse. Enterprise-grade OLTP meets real-time
                 analytics.
               </p>
+              <p>Powers a unified data stack for real-time AI applications.</p>
               <p>Join the waitlist today!</p>
             </SuiText>
           </div>
@@ -489,6 +490,31 @@ We’ve invested significant effort integrating these technologies, so a tighter
           </div>
         </div>
       </section>
+
+      {/* Footer form */}
+      <DotsContainer>
+        <div className='mx-auto w-full lg:max-w-xl'>
+          <CUICard className='bg-neutral-900/80'>
+            <div className='mb-4 mt-6 space-y-4 px-4 text-center lg:mb-4 lg:mt-8'>
+              <SuiTitle type='h2'>
+                Ready to try the
+                <br />{' '}
+                <TiltedText type='black-on-yellow' className='px-2'>
+                  fastest
+                </TiltedText>{' '}
+                Postgres?
+              </SuiTitle>
+              <SuiText className='mx-auto max-w-xl opacity-70 sm:px-10'>
+                Join our private preview. Get early access to Postgres by
+                ClickHouse and help shape the future of unified data.
+              </SuiText>
+            </div>
+            <CUICard.Body className='p-4 lg:p-6'>
+              <Form />
+            </CUICard.Body>
+          </CUICard>
+        </div>
+      </DotsContainer>
     </Layout>
   )
 }
