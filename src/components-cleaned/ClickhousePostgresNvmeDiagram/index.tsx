@@ -32,7 +32,7 @@ export default function ClickhousePostgresNvmeDiagram({
   const clickpipeCdc = !activeParts || activeParts.includes('clickpipes-cdc')
   const nvmes = !activeParts || activeParts.includes('nvmes')
 
-  const arrowQueries = yourApplication && postgresDatabase
+  const arrowQueries = yourApplication && postgresDatabase && !pgClickhouse
   const arrowPgClickhouseToPostgresDatabase = pgClickhouse && postgresDatabase
   const arrowPgClickhouseToClickhouseDatabase =
     pgClickhouse && clickhouseDatabase
