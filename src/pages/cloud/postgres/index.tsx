@@ -1,3 +1,4 @@
+import heroPostgresLogo from './assets/hero-postgres-logo.svg'
 import iconNvme from './assets/icon-nvme.svg'
 import iconOpenSource from './assets/icon-open-source.svg'
 import iconPlug from './assets/icon-plug.svg'
@@ -18,6 +19,7 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard, { QuoteCardProps } from '@/components/QuoteCard'
+import ScaleToContainer from '@/components/ScaleToContainer'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -65,16 +67,34 @@ export default function Page({ headerData, seo }: CommonProps) {
         }>
         <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
           <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
-            <h1>
-              <span className='sr-only'>Postgres by ClickHouse</span>
-              <Image
-                src={postgresByClickhouse}
-                width={573}
-                height={232}
-                alt=''
-                priority
-              />
-            </h1>
+            <ScaleToContainer scaleUp={false}>
+              <div className='flex w-max items-center gap-4'>
+                <div className='relative flex aspect-square size-48 flex-shrink-0 flex-grow-0'>
+                  <span className='absolute inset-0 block animate-pulse rounded-full bg-primary-300/15 blur-xl' />
+                  <span className='absolute inset-0 block animate-pulse rounded-full border border-primary-600/80 delay-100' />
+                  <span className='absolute inset-2.5 block animate-pulse rounded-full border border-primary-500/80 delay-150' />
+                  <span className='absolute inset-5 block animate-pulse rounded-full border border-primary-400/80 delay-300' />
+                  <Image
+                    src={heroPostgresLogo}
+                    width={102}
+                    height={106}
+                    alt=''
+                    priority
+                    className='relative z-10 m-auto'
+                  />
+                </div>
+                <h1 className='flex-shrink-0 flex-grow-0'>
+                  <span className='sr-only'>Postgres by ClickHouse</span>
+                  <Image
+                    src={postgresByClickhouse}
+                    width={347}
+                    height={162}
+                    alt=''
+                    priority
+                  />
+                </h1>
+              </div>
+            </ScaleToContainer>
             <SuiText size='lg' className='mt-8 space-y-6 text-neutral-200'>
               <p>
                 World's fastest and most scalable Postgres, deeply integrated
