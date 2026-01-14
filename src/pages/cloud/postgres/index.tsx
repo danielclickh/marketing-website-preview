@@ -309,14 +309,16 @@ We’ve invested significant effort integrating these technologies, so a tighter
               handle={<SuiTitle type='h3'>NVMe Postgres</SuiTitle>}
               onToggle={(isOpen) => {
                 setAccordionNvmesOpen(isOpen)
-                setActiveDiagramParts([
-                  'your-application',
-                  'postgres-database',
-                  'nvmes'
-                ])
                 if (isOpen) {
+                  setActiveDiagramParts([
+                    'your-application',
+                    'postgres-database',
+                    'nvmes'
+                  ])
                   setAccordionStackOpen(false)
                   setAccordionQueriesOpen(false)
+                } else {
+                  setActiveDiagramParts(undefined)
                 }
               }}
               open={accordionNvmesOpen}
@@ -342,15 +344,17 @@ We’ve invested significant effort integrating these technologies, so a tighter
               handle={<SuiTitle type='h3'>Unified data stack</SuiTitle>}
               onToggle={(isOpen) => {
                 setAccordionStackOpen(isOpen)
-                setActiveDiagramParts([
-                  'your-application',
-                  'postgres-database',
-                  'pg_clickhouse',
-                  'clickhouse-database'
-                ])
                 if (isOpen) {
+                  setActiveDiagramParts([
+                    'your-application',
+                    'postgres-database',
+                    'pg_clickhouse',
+                    'clickhouse-database'
+                  ])
                   setAccordionNvmesOpen(false)
                   setAccordionQueriesOpen(false)
+                } else {
+                  setActiveDiagramParts(undefined)
                 }
               }}
               open={accordionStackOpen}
@@ -374,14 +378,16 @@ We’ve invested significant effort integrating these technologies, so a tighter
               handle={<SuiTitle type='h3'>Sub-second queries</SuiTitle>}
               onToggle={(isOpen) => {
                 setAccordionQueriesOpen(isOpen)
-                setActiveDiagramParts([
-                  'postgres-database',
-                  'clickpipes-cdc',
-                  'clickhouse-database'
-                ])
                 if (isOpen) {
+                  setActiveDiagramParts([
+                    'postgres-database',
+                    'clickpipes-cdc',
+                    'clickhouse-database'
+                  ])
                   setAccordionNvmesOpen(false)
                   setAccordionStackOpen(false)
+                } else {
+                  setActiveDiagramParts(undefined)
                 }
               }}
               open={accordionQueriesOpen}
