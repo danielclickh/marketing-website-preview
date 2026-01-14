@@ -1,4 +1,5 @@
 import heroPostgresLogo from './assets/hero-postgres-logo.svg'
+import iconFeatures from './assets/icon-features.svg'
 import iconNvme from './assets/icon-nvme.svg'
 import iconOpenSource from './assets/icon-open-source.svg'
 import iconPlug from './assets/icon-plug.svg'
@@ -80,7 +81,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                     height={106}
                     alt=''
                     priority
-                    className='relative z-10 m-auto'
+                    className='relative z-10 m-auto translate-y-1'
                   />
                 </div>
                 <h1 className='flex-shrink-0 flex-grow-0'>
@@ -95,14 +96,13 @@ export default function Page({ headerData, seo }: CommonProps) {
                 </h1>
               </div>
             </ScaleToContainer>
-            <SuiText size='lg' className='mt-8 space-y-6 text-neutral-200'>
+            <SuiText className='!mt-12 space-y-6 text-xl text-neutral-200 lg:pr-20'>
               <p>
-                World's fastest and most scalable Postgres, deeply integrated
-                with ClickHouse. Enterprise-grade OLTP meets real-time
-                analytics.
+                Fast, scalable, enterprise-grade Postgres, fully integrated with
+                ClickHouse.
               </p>
               <p>Powers a unified data stack for real-time AI applications.</p>
-              <p>Join the waitlist today!</p>
+              <p>Join the waitlist now!</p>
             </SuiText>
           </div>
           <div className='w-full lg:max-w-lg'>
@@ -131,7 +131,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 bullets: [
                   'Ultra-low latency: μs vs ms',
                   'No EBS throttling or limits',
-                  'Validated by [Datadog](https://postgresql.us/events/pgconfus2025/sessions/session/2064/slides/204/), [Instacart](https://www.instacart.com/company/tech-innovation/how-instacart-built-a-modern-search-infrastructure-on-postgres)',
+                  'Architecture validated by [Datadog](https://postgresql.us/events/pgconfus2025/sessions/session/2064/slides/204/), [Instacart](https://www.instacart.com/company/tech-innovation/how-instacart-built-a-modern-search-infrastructure-on-postgres)',
                   'Full PITR & backups included'
                 ]
               },
@@ -436,7 +436,14 @@ We’ve invested significant effort integrating these technologies, so a tighter
 
       {/* Everything you need */}
       <section className='section-container my-16 lg:my-24'>
-        <SuiTitle type='h2' className='mb-16 text-center'>
+        <Image
+          src={iconFeatures}
+          width={80}
+          height={80}
+          alt=''
+          className='mx-auto'
+        />
+        <SuiTitle type='h2' className='my-16 text-center'>
           Everything you need, from day one
         </SuiTitle>
         <div className='mx-auto grid max-w-max grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:max-w-2xl lg:max-w-5xl lg:grid-cols-3'>
@@ -557,6 +564,7 @@ function Form() {
         <MarketoForm
           formId={'1517'}
           clearbitTracking={true}
+          submitButtonLabel='Get early access'
           onLoad={() => {
             setFormLoaded(true)
           }}
