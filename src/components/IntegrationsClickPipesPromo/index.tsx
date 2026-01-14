@@ -83,7 +83,7 @@ export default function IntegrationsClickPipesPromo() {
             className: 'mx-3'
           }}>
           Blazing-fast MongoDB to ClickHouse CDC with our new ClickPipe
-          connector — now in Private Preview.{' '}
+          connector — now in Public Beta.{' '}
           <span className='underline group-hover:decoration-2'>Learn more</span>
           !
         </LogoAnnouncementLink>
