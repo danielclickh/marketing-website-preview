@@ -6,6 +6,10 @@ import logoBeehiiv from './assets/logo-beehiiv.svg'
 import logoBlacksmith from './assets/logo-blacksmith.svg'
 import logoTrm from './assets/logo-trm.svg'
 import postgresByClickhouse from './assets/postgres-by-clickhouse.svg'
+import AccordionItem from '@/components-cleaned/AccordionItem'
+import ClickhousePostgresNvmeDiagram, {
+  ClickhousePostgresNvmeDiagramProps
+} from '@/components-cleaned/ClickhousePostgresNvmeDiagram'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
@@ -13,6 +17,7 @@ import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard, { QuoteCardProps } from '@/components/QuoteCard'
+import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -40,6 +45,12 @@ export const getStaticProps: GetStaticProps<CommonProps> =
 
 export default function Page({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('postgresByClickhousePage')
+
+  const [accordionNvmesOpen, setAccordionNvmesOpen] = useState(true)
+  const [accordionStackOpen, setAccordionStackOpen] = useState(false)
+  const [accordionQueriesOpen, setAccordionQueriesOpen] = useState(false)
+  const [activeDiagramParts, setActiveDiagramParts] =
+    useState<ClickhousePostgresNvmeDiagramProps['activeParts']>(undefined)
   return (
     <Layout headerData={headerData} seo={seo}>
       {/* Hero */}
@@ -197,7 +208,7 @@ export default function Page({ headerData, seo }: CommonProps) {
             } as React.CSSProperties
           }
         />
-        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-0 bg-primary-300 lg:top-[10rem]' />
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-1/4 bg-primary-300 lg:top-1/3' />
         <div className='section-container'>
           <div className='relative gap-6 overflow-hidden rounded-lg bg-neutral-725 p-6 text-neutral-0 shadow-lg'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
@@ -254,7 +265,230 @@ We’ve invested significant effort integrating these technologies, so a tighter
           </div>
         </div>
       </section>
+
+      {/* Architecture */}
+      <section className='section-container relative my-16 lg:my-24'>
+        {/* Yellow orb */}
+        <div
+          className='bg-shadow-element yellow-shadow absolute inset-0'
+          style={
+            {
+              '--top-side': '50%',
+              '--right-side': '50%',
+              '--left-side': '50%',
+              '--scale': '0.8',
+              '--opacity': '0.04'
+            } as React.CSSProperties
+          }
+        />
+        <SuiTitle type='h2' className='text-center'>
+          <TiltedText type='black-on-yellow' className='px-2'>
+            Unified
+          </TiltedText>{' '}
+          transactional and analytics stack
+        </SuiTitle>
+        <SuiText size='lg' className='mb-16 mt-6 text-center opacity-70'>
+          <p>
+            Keep your Postgres workflow. Add ClickHouse performance.
+            <br />
+            One unified interface for both transactional and analytical queries.
+          </p>
+        </SuiText>
+
+        {/* Diagram */}
+        <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row-reverse lg:items-start lg:gap-20'>
+          <div className='px-4'>
+            <ClickhousePostgresNvmeDiagram
+              activeParts={activeDiagramParts}
+              className='h-auto w-full max-w-full'
+            />
+          </div>
+          <div className='flex w-full flex-1 flex-col items-center gap-6 lg:max-w-md lg:items-start'>
+            <AccordionItem
+              handle={<SuiTitle type='h3'>NVMe Postgres</SuiTitle>}
+              onToggle={(isOpen) => {
+                setAccordionNvmesOpen(isOpen)
+                setActiveDiagramParts([
+                  'your-application',
+                  'postgres-database',
+                  'nvmes'
+                ])
+                if (isOpen) {
+                  setAccordionStackOpen(false)
+                  setAccordionQueriesOpen(false)
+                }
+              }}
+              open={accordionNvmesOpen}
+              className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
+              <SuiText className='space-y-4'>
+                <p>
+                  NVMe-powered Postgres delivers 2-10x faster performance,
+                  eliminating storage bottlenecks with microsecond latency and
+                  unlimited IOPS for your transactional workloads.
+                </p>
+                <p>
+                  Traditional SSDs bottleneck at 100K IOPS. NVMe delivers
+                  millions. Your Postgres queries that took seconds now complete
+                  in milliseconds.
+                </p>
+                <p>
+                  Connection pooling, vacuum operations, and high-concurrency
+                  workloads all benefit from direct PCIe-attached storage.
+                </p>
+              </SuiText>
+            </AccordionItem>
+            <AccordionItem
+              handle={<SuiTitle type='h3'>Unified data stack</SuiTitle>}
+              onToggle={(isOpen) => {
+                setAccordionStackOpen(isOpen)
+                setActiveDiagramParts([
+                  'your-application',
+                  'postgres-database',
+                  'pg_clickhouse',
+                  'clickhouse-database'
+                ])
+                if (isOpen) {
+                  setAccordionNvmesOpen(false)
+                  setAccordionQueriesOpen(false)
+                }
+              }}
+              open={accordionStackOpen}
+              className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
+              <SuiText className='space-y-4'>
+                <p>
+                  pg_clickhouse FDW creates a unified query interface — enabling
+                  transparent query routing between Postgres and ClickHouse
+                  through a single connection.
+                </p>
+                <p>
+                  TYour application connects to Postgres as usual. The FDW
+                  automatically routes analytical queries to ClickHouse, handles
+                  JOINs across both systems, and pushes down aggregations for
+                  optimal performance.
+                </p>
+                <p>One interface, two specialized engines.</p>
+              </SuiText>
+            </AccordionItem>
+            <AccordionItem
+              handle={<SuiTitle type='h3'>Sub-second queries</SuiTitle>}
+              onToggle={(isOpen) => {
+                setAccordionQueriesOpen(isOpen)
+                setActiveDiagramParts([
+                  'postgres-database',
+                  'clickpipes-cdc',
+                  'clickhouse-database'
+                ])
+                if (isOpen) {
+                  setAccordionNvmesOpen(false)
+                  setAccordionStackOpen(false)
+                }
+              }}
+              open={accordionQueriesOpen}
+              className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
+              <SuiText className='space-y-4'>
+                <p>
+                  ClickPipes CDC enables sub-second replication — streaming
+                  changes from Postgres to ClickHouse with zero impact on your
+                  primary database.
+                </p>
+                <p>
+                  Built on Postgres Logical Replication v2, ClickPipes captures
+                  every INSERT, UPDATE, and DELETE in real-time. Your analytics
+                  in ClickHouse stay fresh without polling, batch jobs, or ETL
+                  pipelines.
+                </p>
+                <p>Sub-second latency.</p>
+              </SuiText>
+            </AccordionItem>
+          </div>
+        </div>
+      </section>
+
       <HRSeparator />
+
+      {/* Everything you need */}
+      <section className='section-container my-16 lg:my-24'>
+        <SuiTitle type='h2' className='mb-16 text-center'>
+          Everything you need, from day one
+        </SuiTitle>
+        <div className='mx-auto grid max-w-max grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 md:max-w-2xl lg:max-w-5xl lg:grid-cols-3'>
+          <div>
+            <SuiTitle type='h3'>Enterprise Postgres</SuiTitle>
+            <ul className='mt-4 space-y-4 text-neutral-200 lg:mt-8'>
+              <li>
+                <TickItem>Point in time recovery (PITR)</TickItem>
+              </li>
+              <li>
+                <TickItem>Automated backups</TickItem>
+              </li>
+              <li>
+                <TickItem>Read replicas with faster failover</TickItem>
+              </li>
+              <li>
+                <TickItem>Connection pooling</TickItem>
+              </li>
+              <li>
+                <TickItem>Major version upgrades</TickItem>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <SuiTitle type='h3'>ClickHouse Integration</SuiTitle>
+            <ul className='mt-4 space-y-4 text-neutral-200 lg:mt-8'>
+              <li>
+                <TickItem>pg_clickhouse extension</TickItem>
+              </li>
+              <li>
+                <TickItem>CDC via ClickPipes</TickItem>
+              </li>
+              <li>
+                <TickItem>Query pushdown (JOINs, AGGs)</TickItem>
+              </li>
+              <li>
+                <TickItem className='text-neutral-600'>
+                  Logical Replication v2
+                  <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
+                    Soon
+                  </span>
+                </TickItem>
+              </li>
+              <li>
+                <TickItem className='text-neutral-600'>
+                  Custom output plugin
+                  <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
+                    Soon
+                  </span>
+                </TickItem>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <SuiTitle type='h3'>Developer experience</SuiTitle>
+            <ul className='mt-4 space-y-4 text-neutral-200 lg:mt-8'>
+              <li>
+                <TickItem>One click-provisioning</TickItem>
+              </li>
+              <li>
+                <TickItem>ClickHouse Cloud console</TickItem>
+              </li>
+              <li>
+                <TickItem>Metrics and monitoring</TickItem>
+              </li>
+              <li>
+                <TickItem className='text-neutral-600'>
+                  API & Terraform support
+                  <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
+                    Soon
+                  </span>
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>SOC 2 Type II certified</TickItem>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </Layout>
   )
 }
