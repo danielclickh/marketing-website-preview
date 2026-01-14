@@ -37,9 +37,10 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'Postgres by ClickHouse',
+          title:
+            'Postgres by ClickHouse | Unified transactional & analytical data',
           description:
-            "World's fastest and most scalable Postgres, deeply integrated with ClickHouse. Enterprise-grade OLTP meets real-time analytics.",
+            "World's fastest and most scalable Postgres, deeply integrated with ClickHouse. Enterprise-grade OLTP meets real-time analytics for a unified AI-ready data stack.",
           path: '/cloud/postgres'
         }
       }
@@ -387,7 +388,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
                   through a single connection.
                 </p>
                 <p>
-                  TYour application connects to Postgres as usual. The FDW
+                  Your application connects to Postgres as usual. The FDW
                   automatically routes analytical queries to ClickHouse, handles
                   JOINs across both systems, and pushes down aggregations for
                   optimal performance.
