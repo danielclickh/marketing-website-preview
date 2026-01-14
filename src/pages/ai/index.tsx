@@ -84,7 +84,7 @@ export default function Page({ seo, headerData }: CommonProps) {
                 Get started today
               </CUIButton>
               <CUIButton
-                href='https://clickhouse.com/docs/use-cases/AI/ask-ai'
+                href='https://clickhouse.com/docs/use-cases/AI/MCP/librechat'
                 onClick={useGalaxyOnClick('aiPage.heroCta.viewDocumentation')}
                 type='secondary'
                 size='lg'
