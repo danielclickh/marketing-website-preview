@@ -336,6 +336,10 @@ We’ve invested significant effort integrating these technologies, so a tighter
                     'postgres-database',
                     'nvmes'
                   ])
+                  setAccordionStackOpen(false)
+                  setAccordionQueriesOpen(false)
+                } else {
+                  setActiveDiagramParts(undefined)
                 }
               }}
               open={accordionNvmesOpen}
