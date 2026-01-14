@@ -7,9 +7,9 @@ import logoBlacksmith from './assets/logo-blacksmith.svg'
 import logoTrm from './assets/logo-trm.svg'
 import postgresByClickhouse from './assets/postgres-by-clickhouse.svg'
 import AccordionItem from '@/components-cleaned/AccordionItem'
-import ClickhousePostgresNvmeDiagram, {
-  ClickhousePostgresNvmeDiagramProps
-} from '@/components-cleaned/ClickhousePostgresNvmeDiagram'
+import PostgresByClickhouseDiagram, {
+  PostgresByClickhouseDiagramProps
+} from '@/components-cleaned/PostgresByClickhouseDiagram'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUICard } from '@/components/ClickUI'
 import DotsContainer from '@/components/DotsContainer'
@@ -49,8 +49,9 @@ export default function Page({ headerData, seo }: CommonProps) {
   const [accordionNvmesOpen, setAccordionNvmesOpen] = useState(true)
   const [accordionStackOpen, setAccordionStackOpen] = useState(false)
   const [accordionQueriesOpen, setAccordionQueriesOpen] = useState(false)
-  const [activeDiagramParts, setActiveDiagramParts] =
-    useState<ClickhousePostgresNvmeDiagramProps['activeParts']>(undefined)
+  const [activeDiagramParts, setActiveDiagramParts] = useState<
+    PostgresByClickhouseDiagramProps['activeParts']
+  >(['your-application', 'postgres-database', 'nvmes'])
   return (
     <Layout headerData={headerData} seo={seo}>
       {/* Hero */}
@@ -299,7 +300,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
         {/* Diagram */}
         <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row-reverse lg:items-start lg:gap-20'>
           <div className='px-4'>
-            <ClickhousePostgresNvmeDiagram
+            <PostgresByClickhouseDiagram
               activeParts={activeDiagramParts}
               className='h-auto w-full max-w-full'
             />
@@ -315,10 +316,6 @@ We’ve invested significant effort integrating these technologies, so a tighter
                     'postgres-database',
                     'nvmes'
                   ])
-                  setAccordionStackOpen(false)
-                  setAccordionQueriesOpen(false)
-                } else {
-                  setActiveDiagramParts(undefined)
                 }
               }}
               open={accordionNvmesOpen}
