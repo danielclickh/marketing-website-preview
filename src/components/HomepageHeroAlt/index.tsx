@@ -71,15 +71,15 @@ export default function HomepageHeroAlt({
               href='/ai?loc=hero'
               className='mt-8 text-sm'
               logo={{
-                src: '/images/nav/icon-agentic-data-stack.svg',
-                alt: 'Agentic Data Stack',
-                width: 32,
-                height: 32,
-                className: 'brightness-0 mx-1'
+                src: '/images/cloud/integrations/postgres.svg',
+                alt: 'Postgres by ClickHouse',
+                width: 52,
+                height: 52
               }}>
-              Build intelligent, AI-powered applications with ClickHouse. Enable
-              real-time analytics and data-driven decision making for your AI
-              agents.{' '}
+              Postgres by ClickHouse, a native Postgres service fully integrated
+              with ClickHouse, is now in private preview. Build apps on a
+              Unified Data Stack combining Postgres for transactions and
+              ClickHouse for analytics, with no operational overhead.{' '}
               <span className='text-nowrap font-medium group-hover:underline'>
                 Learn more&nbsp;-&gt;
               </span>
