@@ -68,7 +68,7 @@ export default function HomepageHeroAlt({
               </CUIButton>
             </div>
             <LogoAnnouncementLink
-              href='/ai?loc=hero'
+              href='/cloud/postgres?loc=hero'
               className='mt-8 text-sm'
               logo={{
                 src: '/images/cloud/integrations/postgres.svg',
