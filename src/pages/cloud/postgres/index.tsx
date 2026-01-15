@@ -39,9 +39,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         ...commonProps,
         seo: {
           title:
-            'Postgres by ClickHouse | Unified transactional & analytical data',
+            'Postgres by ClickHouse | One stack for transactions and analytics',
           description:
-            'Postgres by ClickHouse, a native Postgres service fully integrated with ClickHouse, is now in private preview. Build apps on a Unified Data Stack combining Postgres for transactions and ClickHouse for analytics, with no operational overhead.',
+            'Postgres by ClickHouse is now in private preview, a native Postgres service integrated with ClickHouse. Build on a Unified Data Stack with Postgres for transactions and ClickHouse for analytics, with no operational overhead.',
           path: '/cloud/postgres'
         }
       }
