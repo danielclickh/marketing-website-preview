@@ -8,6 +8,7 @@ import logoBeehiiv from './assets/logo-beehiiv.svg'
 import logoBlacksmith from './assets/logo-blacksmith.svg'
 import logoTrm from './assets/logo-trm.svg'
 import postgresByClickhouse from './assets/postgres-by-clickhouse.svg'
+import styles from './styles.module.scss'
 import AccordionItem from '@/components-cleaned/AccordionItem'
 import PostgresByClickhouseDiagram, {
   PostgresByClickhouseDiagramProps
@@ -72,10 +73,16 @@ export default function Page({ headerData, seo }: CommonProps) {
             <ScaleToContainer scaleUp={false}>
               <div className='flex w-max items-center gap-4'>
                 <div className='relative flex aspect-square size-48 flex-shrink-0 flex-grow-0'>
-                  <span className='absolute inset-0 block animate-pulse rounded-full bg-primary-300/15 blur-xl' />
-                  <span className='absolute inset-0 block animate-pulse rounded-full border border-primary-600/80 delay-100' />
-                  <span className='absolute inset-2.5 block animate-pulse rounded-full border border-primary-500/80 delay-150' />
-                  <span className='absolute inset-5 block animate-pulse rounded-full border border-primary-400/80 delay-300' />
+                  <span className='absolute inset-0 block rounded-full bg-primary-300/15 blur-xl' />
+                  <span
+                    className={`absolute inset-0 block rounded-full border border-primary-600/80 [animation-delay:400ms] ${styles.pulseRing}`}
+                  />
+                  <span
+                    className={`absolute inset-2.5 block rounded-full border border-primary-500/80 [animation-delay:200ms] ${styles.pulseRing}`}
+                  />
+                  <span
+                    className={`absolute inset-5 block rounded-full border border-primary-400/80 ${styles.pulseRing}`}
+                  />
                   <Image
                     src={heroPostgresLogo}
                     width={102}
@@ -97,12 +104,20 @@ export default function Page({ headerData, seo }: CommonProps) {
                 </h1>
               </div>
             </ScaleToContainer>
-            <SuiText className='!mt-12 space-y-6 text-xl text-neutral-200 lg:pr-20'>
+            <SuiText className='!mt-12 space-y-6 text-xl text-neutral-200'>
               <p>
-                Fast, scalable, enterprise-grade Postgres, fully integrated with
-                ClickHouse.
+                Fast, scalable, enterprise-grade Postgres that is natively
+                integrated with ClickHouse. Built for real-time and AI-driven
+                applications.
               </p>
-              <p>Powers a unified data stack for real-time AI applications.</p>
+              <p>
+                Powers Unified Data Stack combining Postgres for transactions
+                and ClickHouse for analytics.
+              </p>
+              <p>
+                Eliminates the traditional complexity of bringing transactional
+                and analytical workloads together.
+              </p>
               <p>Join the waitlist now!</p>
             </SuiText>
           </div>
@@ -128,12 +143,11 @@ export default function Page({ headerData, seo }: CommonProps) {
                 icon: iconNvme,
                 title: 'NVMe performance',
                 description:
-                  'Enterprise-grade Postgres on [local NVMe storage](https://www.ubicloud.com/blog/postgresql-performance-local-vs-network-attached-storage). Microsecond latency, practically unlimited IOPS, consistent performance without network jitter.',
+                  'Enterprise-grade Postgres on [local NVMe storage](https://www.ubicloud.com/blog/postgresql-performance-local-vs-network-attached-storage). Microsecond disk latency, practically unlimited IOPS, consistent performance without network jitter.',
                 bullets: [
                   'Ultra-low latency: μs vs ms',
                   'No EBS throttling or limits',
-                  'Architecture validated by [Datadog](https://postgresql.us/events/pgconfus2025/sessions/session/2064/slides/204/), [Instacart](https://www.instacart.com/company/tech-innovation/how-instacart-built-a-modern-search-infrastructure-on-postgres)',
-                  'Full PITR & backups included'
+                  'Architecture validated by [Datadog](https://postgresql.us/events/pgconfus2025/sessions/session/2064/slides/204/), [Instacart](https://www.instacart.com/company/tech-innovation/how-instacart-built-a-modern-search-infrastructure-on-postgres)'
                 ]
               },
               {
