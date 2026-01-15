@@ -104,21 +104,17 @@ export default function Page({ headerData, seo }: CommonProps) {
                 </h1>
               </div>
             </ScaleToContainer>
-            <SuiText className='!mt-12 space-y-6 text-xl text-neutral-200'>
+            <SuiText className='!mt-12 space-y-6 text-xl text-neutral-200 lg:pr-10'>
               <p>
-                Fast, scalable, enterprise-grade Postgres that is natively
-                integrated with ClickHouse. Built for real-time and AI-driven
-                applications.
+                Fast, scalable, enterprise-grade Postgres, natively integrated
+                with ClickHouse.
               </p>
+              <p>Built for real-time and AI-driven applications.</p>
               <p>
-                Powers Unified Data Stack combining Postgres for transactions
-                and ClickHouse for analytics.
+                A Unified Data Stack that combines Postgres for transactions and
+                ClickHouse for analytics, without the complexity of stitching
+                systems together.
               </p>
-              <p>
-                Eliminates the traditional complexity of bringing transactional
-                and analytical workloads together.
-              </p>
-              <p>Join the waitlist now!</p>
             </SuiText>
           </div>
           <div className='w-full lg:max-w-lg'>
@@ -143,8 +139,9 @@ export default function Page({ headerData, seo }: CommonProps) {
                 icon: iconNvme,
                 title: 'NVMe performance',
                 description:
-                  'Enterprise-grade Postgres on [local NVMe storage](https://www.ubicloud.com/blog/postgresql-performance-local-vs-network-attached-storage). Microsecond disk latency, practically unlimited IOPS, consistent performance without network jitter.',
+                  'Enterprise-grade Postgres on [local NVMe storage](https://www.ubicloud.com/blog/postgresql-performance-local-vs-network-attached-storage). Microsecond latency, practically unlimited IOPS, consistent performance without network jitter.',
                 bullets: [
+                  'Up to 10× faster performance for I/O-heavy workloads',
                   'Ultra-low latency: μs vs ms',
                   'No EBS throttling or limits',
                   'Architecture validated by [Datadog](https://postgresql.us/events/pgconfus2025/sessions/session/2064/slides/204/), [Instacart](https://www.instacart.com/company/tech-innovation/how-instacart-built-a-modern-search-infrastructure-on-postgres)'
@@ -154,12 +151,12 @@ export default function Page({ headerData, seo }: CommonProps) {
                 icon: iconPlug,
                 title: 'ClickHouse integration',
                 description:
-                  'Postgres meets ClickHouse, real-time analytics at 100× speed. Unify transactional and analytical workloads.',
+                  'Postgres meets ClickHouse, 100x faster real-time analytics. Unify transactional and analytical workloads.',
                 bullets: [
                   '[Native CDC](https://clickhouse.com/docs/integrations/clickpipes/postgres): sync Postgres data to ClickHouse, in a few clicks.',
                   'Blazing fast replication with seconds latency',
-                  '[pg_clickhouse](https://github.com/ClickHouse/pg_clickhouse): unified query layer to build apps.',
-                  'Comprehensive query pushdown'
+                  '[pg_clickhouse](https://github.com/ClickHouse/pg_clickhouse): unified query layer to build apps powering transactions and analytics.',
+                  'Comprehensive query pushdown with pg_clickhuse - JOINs, aggregations and more.'
                 ]
               },
               {
@@ -170,6 +167,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 bullets: [
                   'High availability with up to 2 standbys',
                   'Automatic backups with WAL archival to S3',
+                  'Forks & Point-In-Time-Recovery (PITR)',
                   'End-to-end encryption and private networking',
                   'Backed by ClickHouse Cloud Trust'
                 ]
@@ -279,7 +277,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
                       }
                     },
                     {
-                      content: `We’re excited by the vision of a unified database stack that brings together transactional and analytical workloads without the traditional complexity. Using Postgres for transactions and ClickHouse for analytics delivers best-in-class performance while significantly reducing operational overhead. That combination enables teams to focus less on infrastructure and more on shipping innovative, AI-driven product features for their customers. Early signs are very encouraging, and we look forward to continuing our collaboration as the integration continues to evolve.`,
+                      content: `Using Postgres for transactions and ClickHouse for analytics delivers best-in-class performance while significantly reducing operational overhead. That combination enables teams to focus less on infrastructure and more on shipping innovative, AI-driven product features for their customers. Early signs are very encouraging, and we look forward to continuing our collaboration as the integration continues to evolve.`,
                       logo: {
                         src: logoTrm,
                         alt: 'TRM Labs',
@@ -322,13 +320,19 @@ We’ve invested significant effort integrating these technologies, so a tighter
           <TiltedText type='black-on-yellow' className='px-2'>
             Unified
           </TiltedText>{' '}
-          transactional and analytics stack
+          data stack
         </SuiTitle>
-        <SuiText size='lg' className='mb-16 mt-6 text-center opacity-70'>
+        <SuiText
+          size='lg'
+          className='mx-auto mb-16 mt-6 max-w-3xl space-y-4 text-center opacity-70'>
           <p>
-            Keep your Postgres workflow. Add ClickHouse performance.
-            <br />
-            One unified interface for both transactional and analytical queries.
+            Combine Postgres for transactions with ClickHouse for analytics to
+            deliver best-in-class performance and scalability with minimal
+            operational overhead.
+          </p>
+          <p>
+            Architectural pattern followed by thousands of companies like
+            GitLab, Cloudflare, Instacart, and LangChain.
           </p>
         </SuiText>
 
@@ -342,7 +346,9 @@ We’ve invested significant effort integrating these technologies, so a tighter
           </div>
           <div className='flex w-full flex-1 flex-col items-center gap-6 lg:max-w-md lg:items-start'>
             <AccordionItem
-              handle={<SuiTitle type='h3'>NVMe Postgres</SuiTitle>}
+              handle={
+                <SuiTitle type='h3'>NVMe-backed Postgres for OLTP</SuiTitle>
+              }
               onToggle={(isOpen) => {
                 setAccordionNvmesOpen(isOpen)
                 if (isOpen) {
@@ -361,23 +367,28 @@ We’ve invested significant effort integrating these technologies, so a tighter
               className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
               <SuiText className='space-y-4'>
                 <p>
-                  NVMe-powered Postgres delivers 2-10x faster performance,
-                  eliminating storage bottlenecks with microsecond latency and
-                  unlimited IOPS for your transactional workloads.
+                  Unlock up to 10× faster Postgres performance with NVMe storage
+                  built for I/O-intensive workloads. Microsecond-level latency
+                  and millions of IOPS eliminate disk bottlenecks for
+                  high-throughput transactional applications.
                 </p>
                 <p>
-                  Traditional SSDs bottleneck at 100K IOPS. NVMe delivers
-                  millions. Your Postgres queries that took seconds now complete
-                  in milliseconds.
+                  Unlike traditional SSDs that cap out at a few hundred thousand
+                  IOPS, NVMe scales effortlessly, delivering lower tail
+                  latencies and faster system operations like VACUUM,
+                  checkpoints, and logical replication.
                 </p>
                 <p>
-                  Connection pooling, vacuum operations, and high-concurrency
-                  workloads all benefit from direct PCIe-attached storage.
+                  High availability is built in by design, with up to two
+                  dedicated standby instances reserved exclusively for HA. Read
+                  replicas are offered separately to preserve reliability.
+                  Automatic backups and point-in-time recovery (PITR) with WAL
+                  archiving ensure robust disaster recovery.
                 </p>
               </SuiText>
             </AccordionItem>
             <AccordionItem
-              handle={<SuiTitle type='h3'>Unified data stack</SuiTitle>}
+              handle={<SuiTitle type='h3'>Unified query layer</SuiTitle>}
               onToggle={(isOpen) => {
                 setAccordionStackOpen(isOpen)
                 if (isOpen) {
@@ -397,21 +408,30 @@ We’ve invested significant effort integrating these technologies, so a tighter
               className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
               <SuiText className='space-y-4'>
                 <p>
-                  pg_clickhouse FDW creates a unified query interface — enabling
-                  transparent query routing between Postgres and ClickHouse
-                  through a single connection.
+                  Query ClickHouse directly from Postgres using the
+                  pg_clickhouse extension. No proxies, no new query layer to
+                  manage. Postgres becomes a single interface for both
+                  transactions and analytics.
                 </p>
                 <p>
-                  Your application connects to Postgres as usual. The FDW
-                  automatically routes analytical queries to ClickHouse, handles
-                  JOINs across both systems, and pushes down aggregations for
-                  optimal performance.
+                  Queries are transparently pushed down to ClickHouse for
+                  maximum performance, supporting joins, filters, aggregations,
+                  and functions. Today, 14 of 22 TPC-H queries are fully pushed
+                  down, delivering 60×+ speedups.
                 </p>
-                <p>One interface, two specialized engines.</p>
+                <p>
+                  Pushdown support continues to expand to CTEs, window
+                  functions, and more, enabling fast analytics from the Postgres
+                  layer while ClickHouse handles execution behind the scenes.
+                </p>
               </SuiText>
             </AccordionItem>
             <AccordionItem
-              handle={<SuiTitle type='h3'>Sub-second queries</SuiTitle>}
+              handle={
+                <SuiTitle type='h3'>
+                  Blazing-fast replication using native CDC
+                </SuiTitle>
+              }
               onToggle={(isOpen) => {
                 setAccordionQueriesOpen(isOpen)
                 if (isOpen) {
@@ -430,17 +450,24 @@ We’ve invested significant effort integrating these technologies, so a tighter
               className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
               <SuiText className='space-y-4'>
                 <p>
-                  ClickPipes CDC enables sub-second replication — streaming
-                  changes from Postgres to ClickHouse with zero impact on your
-                  primary database.
+                  Replicate Postgres data to ClickHouse in real time to unlock
+                  up to 100× faster analytics. With replication latency as low
+                  as a few seconds, your data is analytics-ready almost
+                  immediately.
                 </p>
                 <p>
-                  Built on Postgres Logical Replication v2, ClickPipes captures
-                  every INSERT, UPDATE, and DELETE in real-time. Your analytics
-                  in ClickHouse stay fresh without polling, batch jobs, or ETL
-                  pipelines.
+                  The pipeline supports both initial snapshots for existing
+                  datasets and CDC-based incremental updates. It’s powered by
+                  the ClickPipes Postgres CDC connector, proven in production by
+                  hundreds of enterprises moving hundreds of terabytes per
+                  month.
                 </p>
-                <p>Sub-second latency.</p>
+                <p>
+                  Coming next: more native CDC capabilities, including
+                  sub-second replication latency, reliable slot flushing through
+                  ongoing transaction replication, and other enhancements,
+                  exclusive to Postgres by ClickHouse.
+                </p>
               </SuiText>
             </AccordionItem>
           </div>
@@ -546,16 +573,16 @@ We’ve invested significant effort integrating these technologies, so a tighter
           <CUICard className='bg-neutral-900/80'>
             <div className='mb-4 mt-6 space-y-4 px-4 text-center lg:mb-4 lg:mt-8'>
               <SuiTitle type='h2'>
-                Ready to try the
+                Ready to try
                 <br />{' '}
                 <TiltedText type='black-on-yellow' className='px-2'>
-                  fastest
+                  Postrgres
                 </TiltedText>{' '}
-                Postgres?
+                by ClickHouse?
               </SuiTitle>
               <SuiText className='mx-auto max-w-xl opacity-70 sm:px-10'>
-                Join our private preview. Get early access to Postgres by
-                ClickHouse and help shape the future of unified data.
+                Join our private preview. Get early access and help shape the
+                future of unified data.
               </SuiText>
             </div>
             <CUICard.Body className='p-4 lg:p-6'>
