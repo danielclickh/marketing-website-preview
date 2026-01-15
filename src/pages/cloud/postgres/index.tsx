@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           title:
             'Postgres by ClickHouse | Unified transactional & analytical data',
           description:
-            "World's fastest and most scalable Postgres, deeply integrated with ClickHouse. Enterprise-grade OLTP meets real-time analytics for a unified AI-ready data stack.",
+            'Postgres by ClickHouse, a native Postgres service fully integrated with ClickHouse, is now in private preview. Build apps on a Unified Data Stack combining Postgres for transactions and ClickHouse for analytics, with no operational overhead.',
           path: '/cloud/postgres'
         }
       }
