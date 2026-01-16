@@ -39,9 +39,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         ...commonProps,
         seo: {
           title:
-            'Postgres by ClickHouse | One stack for transactions and analytics',
+            'Postgres managed by ClickHouse | One stack for transactions and analytics',
           description:
-            'Postgres by ClickHouse is now in private preview, a native Postgres service integrated with ClickHouse. Build on a Unified Data Stack with Postgres for transactions and ClickHouse for analytics, with no operational overhead.',
+            'Postgres managed by ClickHouse is now in private preview, a native Postgres service integrated with ClickHouse. Build on a Unified Data Stack with Postgres for transactions and ClickHouse for analytics, with no operational overhead.',
           path: '/cloud/postgres'
         }
       }
@@ -93,10 +93,12 @@ export default function Page({ headerData, seo }: CommonProps) {
                   />
                 </div>
                 <h1 className='flex-shrink-0 flex-grow-0'>
-                  <span className='sr-only'>Postgres by ClickHouse</span>
+                  <span className='sr-only'>
+                    Postgres managed by ClickHouse
+                  </span>
                   <Image
                     src={postgresByClickhouse}
-                    width={347}
+                    width={438}
                     height={162}
                     alt=''
                     priority
@@ -115,6 +117,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 ClickHouse for analytics, without the complexity of stitching
                 systems together.
               </p>
+              <p>Currently in private preview. Joint waitlist!</p>
             </SuiText>
           </div>
           <div className='w-full lg:max-w-lg'>
@@ -127,11 +130,11 @@ export default function Page({ headerData, seo }: CommonProps) {
         </div>
       </section>
 
-      {/* Why Postgres by Clickhouse */}
+      {/* Why Postgres managed by ClickHouse */}
       <section className='bg-black/20 py-16 lg:py-24'>
         <div className='section-container'>
           <SuiTitle type='h2' className='mb-16 text-center'>
-            Why Postgres by ClickHouse?
+            Why Postgres managed by ClickHouse?
           </SuiTitle>
           <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
             {[
@@ -142,7 +145,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                   'Enterprise-grade Postgres on [local NVMe storage](https://www.ubicloud.com/blog/postgresql-performance-local-vs-network-attached-storage). Microsecond latency, practically unlimited IOPS, consistent performance without network jitter.',
                 bullets: [
                   'Up to 10× faster performance for I/O-heavy workloads',
-                  'Ultra-low latency: μs vs ms',
+                  'Ultra-low disk latency: μs vs ms',
                   'No EBS throttling or limits',
                   'Architecture validated by [Datadog](https://postgresql.us/events/pgconfus2025/sessions/session/2064/slides/204/), [Instacart](https://www.instacart.com/company/tech-innovation/how-instacart-built-a-modern-search-infrastructure-on-postgres)'
                 ]
@@ -163,7 +166,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 icon: iconPostgres,
                 title: 'Enterprise grade Postgres',
                 description:
-                  'Postgres built for mission-critical workloads. No compromises on availability, reliability, or security.',
+                  'Postgres built for mission-critical workloads. No compromises on availability, reliability, security or standard managed service features.',
                 bullets: [
                   'High availability with up to 2 standbys',
                   'Automatic backups with WAL archival to S3',
@@ -182,7 +185,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                   '[ClickHouse](https://github.com/ClickHouse/ClickHouse) for analytics',
                   '[PeerDB](https://github.com/PeerDB-io/peerdb) for CDC',
                   '[pg_clickhouse](https://github.com/ClickHouse/pg_clickhouse) for unified query layer',
-                  'Postgres powered by [Ubicloud](https://github.com/ubicloud/ubicloud)'
+                  'Postgres managed service powered by Ubicloud [Ubicloud](https://github.com/ubicloud/ubicloud)'
                 ]
               }
             ].map((item, itemIndex) => {
@@ -248,11 +251,7 @@ export default function Page({ headerData, seo }: CommonProps) {
           <div className='relative gap-6 overflow-hidden rounded-lg bg-neutral-725 p-6 text-neutral-0 shadow-lg'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
 
-            <h2 className='text-center font-basier text-2xl font-semibold'>
-              Trusted by
-            </h2>
-
-            <div className='hide-scrollbar -mx-6 mt-6 overflow-x-auto lg:mx-0 lg:overflow-x-visible'>
+            <div className='hide-scrollbar -mx-6 mb-1 mt-2 overflow-x-auto lg:mx-0 lg:overflow-x-visible'>
               <div className='flex flex-row before:block before:w-3 before:flex-shrink-0 after:block after:w-3 after:flex-shrink-0 lg:flex-wrap lg:justify-center lg:before:hidden lg:after:hidden'>
                 {(
                   [
@@ -277,7 +276,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
                       }
                     },
                     {
-                      content: `Using Postgres for transactions and ClickHouse for analytics delivers best-in-class performance while significantly reducing operational overhead. That combination enables teams to focus less on infrastructure and more on shipping innovative, AI-driven product features for their customers. Early signs are very encouraging, and we look forward to continuing our collaboration as the integration continues to evolve.`,
+                      content: `Using Postgres for transactions and ClickHouse for analytics delivers best-in-class performance while significantly reducing operational overhead. That combination enables teams to focus less on infrastructure and more on shipping innovative, AI-driven product features.`,
                       logo: {
                         src: logoTrm,
                         alt: 'TRM Labs',
@@ -466,7 +465,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
                   Coming next: more native CDC capabilities, including
                   sub-second replication latency, reliable slot flushing through
                   ongoing transaction replication, and other enhancements,
-                  exclusive to Postgres by ClickHouse.
+                  exclusive to Postgres managed by ClickHouse.
                 </p>
               </SuiText>
             </AccordionItem>
@@ -560,7 +559,12 @@ We’ve invested significant effort integrating these technologies, so a tighter
                 </TickItem>
               </li>
               <li>
-                <TickItem>SOC 2 Type II certified</TickItem>
+                <TickItem className='text-neutral-600'>
+                  Query Performance Insights
+                  <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
+                    Soon
+                  </span>
+                </TickItem>
               </li>
             </ul>
           </div>
@@ -573,12 +577,11 @@ We’ve invested significant effort integrating these technologies, so a tighter
           <CUICard className='bg-neutral-900/80'>
             <div className='mb-4 mt-6 space-y-4 px-4 text-center lg:mb-4 lg:mt-8'>
               <SuiTitle type='h2'>
-                Ready to try
-                <br />{' '}
+                Ready to try{' '}
                 <TiltedText type='black-on-yellow' className='px-2'>
                   Postrgres
-                </TiltedText>{' '}
-                by ClickHouse?
+                </TiltedText>
+                <br /> managed by ClickHouse?
               </SuiTitle>
               <SuiText className='mx-auto max-w-xl opacity-70 sm:px-10'>
                 Join our private preview. Get early access and help shape the
@@ -654,7 +657,7 @@ function Form() {
             You’ve been added to the waitlist!
           </h3>
           <p className='mt-2 text-center text-neutral-200'>
-            Thank you for your interest in Postgres by ClickHouse
+            Thank you for your interest in Postgres managed by ClickHouse
             <br />
             <br />
             We’ll be in touch soon.

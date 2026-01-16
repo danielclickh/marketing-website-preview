@@ -28,7 +28,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
   >(
-    'Postgres by ClickHouse is in private preview. One stack for transactions and analytics'
+    'Postgres managed by ClickHouse is in private preview. One stack for transactions and analytics'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState('/cloud/postgres')
   const [headerBannerExpires, setHeaderBannerExpires] = useState<

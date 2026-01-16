@@ -72,14 +72,13 @@ export default function HomepageHeroAlt({
               className='mt-8 text-sm'
               logo={{
                 src: '/images/cloud/integrations/postgres.svg',
-                alt: 'Postgres by ClickHouse',
+                alt: 'Postgres managed by ClickHouse',
                 width: 52,
                 height: 52
               }}>
-              Postgres by ClickHouse is now in private preview, a native
-              Postgres service integrated with ClickHouse. Build on a Unified
-              Data Stack with Postgres for transactions and ClickHouse for
-              analytics, with no operational overhead.{' '}
+              Postgres managed by ClickHouse is now in private preview. Build
+              apps on a Unified Data Stack with Postgres for transactions and
+              ClickHouse for analytics.{' '}
               <span className='text-nowrap font-medium group-hover:underline'>
                 Learn more&nbsp;-&gt;
               </span>
