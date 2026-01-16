@@ -387,45 +387,6 @@ We’ve invested significant effort integrating these technologies, so a tighter
               </SuiText>
             </AccordionItem>
             <AccordionItem
-              handle={<SuiTitle type='h3'>Unified query layer</SuiTitle>}
-              onToggle={(isOpen) => {
-                setAccordionStackOpen(isOpen)
-                if (isOpen) {
-                  setActiveDiagramParts([
-                    'your-application',
-                    'postgres-database',
-                    'pg_clickhouse',
-                    'clickhouse-database'
-                  ])
-                  setAccordionNvmesOpen(false)
-                  setAccordionQueriesOpen(false)
-                } else {
-                  setActiveDiagramParts(undefined)
-                }
-              }}
-              open={accordionStackOpen}
-              className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
-              <SuiText className='space-y-4'>
-                <p>
-                  Query ClickHouse directly from Postgres using the
-                  pg_clickhouse extension. No proxies, no new query layer to
-                  manage. Postgres becomes a single interface for both
-                  transactions and analytics.
-                </p>
-                <p>
-                  Queries are transparently pushed down to ClickHouse for
-                  maximum performance, supporting joins, filters, aggregations,
-                  and functions. Today, 14 of 22 TPC-H queries are fully pushed
-                  down, delivering 60×+ speedups.
-                </p>
-                <p>
-                  Pushdown support continues to expand to CTEs, window
-                  functions, and more, enabling fast analytics from the Postgres
-                  layer while ClickHouse handles execution behind the scenes.
-                </p>
-              </SuiText>
-            </AccordionItem>
-            <AccordionItem
               handle={
                 <SuiTitle type='h3'>
                   Blazing-fast replication using native CDC
@@ -466,6 +427,45 @@ We’ve invested significant effort integrating these technologies, so a tighter
                   sub-second replication latency, reliable slot flushing through
                   ongoing transaction replication, and other enhancements,
                   exclusive to Postgres managed by ClickHouse.
+                </p>
+              </SuiText>
+            </AccordionItem>
+            <AccordionItem
+              handle={<SuiTitle type='h3'>Unified query layer</SuiTitle>}
+              onToggle={(isOpen) => {
+                setAccordionStackOpen(isOpen)
+                if (isOpen) {
+                  setActiveDiagramParts([
+                    'your-application',
+                    'postgres-database',
+                    'pg_clickhouse',
+                    'clickhouse-database'
+                  ])
+                  setAccordionNvmesOpen(false)
+                  setAccordionQueriesOpen(false)
+                } else {
+                  setActiveDiagramParts(undefined)
+                }
+              }}
+              open={accordionStackOpen}
+              className='w-full !border-white/10 !bg-white/5 hover:!border-white/20'>
+              <SuiText className='space-y-4'>
+                <p>
+                  Query ClickHouse directly from Postgres using the
+                  pg_clickhouse extension. No proxies, no new query layer to
+                  manage. Postgres becomes a single interface for both
+                  transactions and analytics.
+                </p>
+                <p>
+                  Queries are transparently pushed down to ClickHouse for
+                  maximum performance, supporting joins, filters, aggregations,
+                  and functions. Today, 14 of 22 TPC-H queries are fully pushed
+                  down, delivering 60×+ speedups.
+                </p>
+                <p>
+                  Pushdown support continues to expand to CTEs, window
+                  functions, and more, enabling fast analytics from the Postgres
+                  layer while ClickHouse handles execution behind the scenes.
                 </p>
               </SuiText>
             </AccordionItem>
