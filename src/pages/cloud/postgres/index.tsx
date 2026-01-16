@@ -335,8 +335,8 @@ We’ve invested significant effort integrating these technologies, so a tighter
         </SuiText>
 
         {/* Diagram */}
-        <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row-reverse lg:items-start lg:gap-20'>
-          <div className='px-4'>
+        <div className='mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-8 lg:flex-row-reverse lg:items-start lg:gap-10 lg:px-9'>
+          <div>
             <PostgresByClickhouseDiagram
               activeParts={activeDiagramParts}
               className='h-auto w-full max-w-full'
