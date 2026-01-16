@@ -28,9 +28,11 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
   >(
-    'Postgres managed by ClickHouse is in private preview. One stack for transactions and analytics'
+    'ClickHouse raises Series D and Enters LLM Observability with Langfuse Acquisition. More here'
   )
-  const [headerBannerUrl, setHeaderBannerUrl] = useState('/cloud/postgres')
+  const [headerBannerUrl, setHeaderBannerUrl] = useState(
+    '/blog/clickhouse-raises-400-million-series-d-acquires-langfuse-launches-postgres'
+  )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
   >(undefined)
