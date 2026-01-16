@@ -114,8 +114,7 @@ export default function Page({ headerData, seo }: CommonProps) {
               <p>Built for real-time and AI-driven applications.</p>
               <p>
                 A Unified Data Stack that combines Postgres for transactions and
-                ClickHouse for analytics, without the complexity of stitching
-                systems together.
+                ClickHouse for analytics, with no added complexity!
               </p>
               <p>Currently in private preview. Joint waitlist!</p>
             </SuiText>
