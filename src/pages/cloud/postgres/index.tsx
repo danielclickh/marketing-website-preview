@@ -184,7 +184,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                   '[ClickHouse](https://github.com/ClickHouse/ClickHouse) for analytics',
                   '[PeerDB](https://github.com/PeerDB-io/peerdb) for CDC',
                   '[pg_clickhouse](https://github.com/ClickHouse/pg_clickhouse) for unified query layer',
-                  'Postgres managed service powered by Ubicloud [Ubicloud](https://github.com/ubicloud/ubicloud)'
+                  'Postgres managed service powered by [Ubicloud](https://github.com/ubicloud/ubicloud)'
                 ]
               }
             ].map((item, itemIndex) => {
