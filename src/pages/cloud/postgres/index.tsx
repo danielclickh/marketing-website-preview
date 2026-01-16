@@ -387,11 +387,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
               </SuiText>
             </AccordionItem>
             <AccordionItem
-              handle={
-                <SuiTitle type='h3'>
-                  Blazing-fast replication using native CDC
-                </SuiTitle>
-              }
+              handle={<SuiTitle type='h3'>Blazing-fast replication</SuiTitle>}
               onToggle={(isOpen) => {
                 setAccordionQueriesOpen(isOpen)
                 if (isOpen) {
