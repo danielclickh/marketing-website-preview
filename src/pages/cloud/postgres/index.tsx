@@ -116,7 +116,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 A Unified Data Stack that combines Postgres for transactions and
                 ClickHouse for analytics, with no added complexity!
               </p>
-              <p>Currently in private preview. Joint waitlist!</p>
+              <p>Currently in private preview. Join the waitlist!</p>
             </SuiText>
           </div>
           <div className='w-full lg:max-w-lg'>
