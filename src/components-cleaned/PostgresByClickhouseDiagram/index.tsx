@@ -40,8 +40,7 @@ export default function PostgresByClickhouseDiagram({
     clickpipeCdc &&
     nvmes
 
-  const arrowTransactions =
-    allActive || (yourApplication && postgresDatabase && !pgClickhouse)
+  const arrowTransactions = allActive || (yourApplication && postgresDatabase)
   const arrowPgClickhouseToClickhouseDatabase =
     allActive || (pgClickhouse && clickhouseDatabase)
   const arrowPostgresDatabaseToClickpipesCdc =
