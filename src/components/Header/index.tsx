@@ -31,7 +31,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     'ClickHouse raises Series D and Enters LLM Observability with Langfuse Acquisition. More here'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/clickhouse-raises-400-million-series-d-acquires-langfuse-launches-postgres'
+    '/blog/clickhouse-raises-400-million-series-d-acquires-langfuse-launches-postgres?loc=banner'
   )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
