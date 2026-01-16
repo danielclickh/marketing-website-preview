@@ -211,7 +211,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                     {item.bullets.map((bullet, bulletIndex) => {
                       return (
                         <li key={bulletIndex}>
-                          <TickItem>
+                          <TickItem size='sm'>
                             <Markdown
                               allowDirectives={false}
                               allowHeaderLink={false}
@@ -335,8 +335,8 @@ We’ve invested significant effort integrating these technologies, so a tighter
         </SuiText>
 
         {/* Diagram */}
-        <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row-reverse lg:items-start lg:gap-20'>
-          <div className='px-4'>
+        <div className='mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-8 lg:flex-row-reverse lg:items-start lg:gap-10 lg:px-9'>
+          <div>
             <PostgresByClickhouseDiagram
               activeParts={activeDiagramParts}
               className='h-auto w-full max-w-full'
@@ -487,19 +487,21 @@ We’ve invested significant effort integrating these technologies, so a tighter
             <SuiTitle type='h3'>Enterprise Postgres</SuiTitle>
             <ul className='mt-4 space-y-4 text-neutral-200 lg:mt-8'>
               <li>
-                <TickItem>Point in time recovery (PITR)</TickItem>
+                <TickItem size='sm'>Point in time recovery (PITR)</TickItem>
               </li>
               <li>
-                <TickItem>Automated backups</TickItem>
+                <TickItem size='sm'>Automated backups</TickItem>
               </li>
               <li>
-                <TickItem>Read replicas with faster failover</TickItem>
+                <TickItem size='sm'>
+                  Read replicas with faster failover
+                </TickItem>
               </li>
               <li>
-                <TickItem>Connection pooling</TickItem>
+                <TickItem size='sm'>Connection pooling</TickItem>
               </li>
               <li>
-                <TickItem>Major version upgrades</TickItem>
+                <TickItem size='sm'>Major version upgrades</TickItem>
               </li>
             </ul>
           </div>
@@ -507,16 +509,16 @@ We’ve invested significant effort integrating these technologies, so a tighter
             <SuiTitle type='h3'>ClickHouse Integration</SuiTitle>
             <ul className='mt-4 space-y-4 text-neutral-200 lg:mt-8'>
               <li>
-                <TickItem>pg_clickhouse extension</TickItem>
+                <TickItem size='sm'>pg_clickhouse extension</TickItem>
               </li>
               <li>
-                <TickItem>CDC via ClickPipes</TickItem>
+                <TickItem size='sm'>CDC via ClickPipes</TickItem>
               </li>
               <li>
-                <TickItem>Query pushdown (JOINs, AGGs)</TickItem>
+                <TickItem size='sm'>Query pushdown (JOINs, AGGs)</TickItem>
               </li>
               <li>
-                <TickItem className='text-neutral-600'>
+                <TickItem size='sm' className='text-neutral-600'>
                   Logical Replication v2
                   <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
                     Soon
@@ -524,7 +526,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
                 </TickItem>
               </li>
               <li>
-                <TickItem className='text-neutral-600'>
+                <TickItem size='sm' className='text-neutral-600'>
                   Custom output plugin
                   <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
                     Soon
@@ -537,16 +539,16 @@ We’ve invested significant effort integrating these technologies, so a tighter
             <SuiTitle type='h3'>Developer experience</SuiTitle>
             <ul className='mt-4 space-y-4 text-neutral-200 lg:mt-8'>
               <li>
-                <TickItem>One click-provisioning</TickItem>
+                <TickItem size='sm'>One click-provisioning</TickItem>
               </li>
               <li>
-                <TickItem>ClickHouse Cloud console</TickItem>
+                <TickItem size='sm'>ClickHouse Cloud console</TickItem>
               </li>
               <li>
-                <TickItem>Metrics and monitoring</TickItem>
+                <TickItem size='sm'>Metrics and monitoring</TickItem>
               </li>
               <li>
-                <TickItem className='text-neutral-600'>
+                <TickItem size='sm' className='text-neutral-600'>
                   API & Terraform support
                   <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
                     Soon
@@ -554,7 +556,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
                 </TickItem>
               </li>
               <li>
-                <TickItem className='text-neutral-600'>
+                <TickItem size='sm' className='text-neutral-600'>
                   Query Performance Insights
                   <span className='ml-2 inline-block rounded-full border border-green-800 bg-green-900 px-2 py-1 text-xs leading-none text-green-50'>
                     Soon
