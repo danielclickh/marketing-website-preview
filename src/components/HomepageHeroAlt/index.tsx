@@ -68,18 +68,17 @@ export default function HomepageHeroAlt({
               </CUIButton>
             </div>
             <LogoAnnouncementLink
-              href='/ai?loc=hero'
+              href='/cloud/postgres?loc=hero'
               className='mt-8 text-sm'
               logo={{
-                src: '/images/nav/icon-agentic-data-stack.svg',
-                alt: 'Agentic Data Stack',
-                width: 32,
-                height: 32,
-                className: 'brightness-0 mx-1'
+                src: '/images/cloud/integrations/postgres.svg',
+                alt: 'Postgres managed by ClickHouse',
+                width: 52,
+                height: 52
               }}>
-              Build intelligent, AI-powered applications with ClickHouse. Enable
-              real-time analytics and data-driven decision making for your AI
-              agents.{' '}
+              Postgres managed by ClickHouse is now in private preview. Build
+              apps on a Unified Data Stack with Postgres for transactions and
+              ClickHouse for analytics.{' '}
               <span className='text-nowrap font-medium group-hover:underline'>
                 Learn more&nbsp;-&gt;
               </span>

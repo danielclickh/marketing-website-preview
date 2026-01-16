@@ -55,6 +55,7 @@ export default function AccordionItem({
   return (
     <div
       ref={elRef}
+      data-state={areWeOpen ? 'open' : 'closed'}
       className={`relative overflow-hidden rounded border border-jet bg-neutral-900/50 p-4 transition-colors hover:bg-neutral-750 hover:bg-opacity-40 ${hasPrefix ? 'grid grid-cols-[auto_1fr]' : ''} ${className}`}>
       {hasPrefix && (
         <div className='border-r border-neutral-700/80 pr-4'>{prefix}</div>

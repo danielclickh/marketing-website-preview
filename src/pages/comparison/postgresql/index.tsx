@@ -1,5 +1,5 @@
 import BlogPost from '@/components/BlogPostList/BlogPost'
-import { CUICard } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LogoCarousel from '@/components/LogoCarousel'
@@ -7,21 +7,22 @@ import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import { StrapiImageUrl } from '@/components/StrapiElements'
+import { SuiTitle } from '@/components/sui'
 import { findAll, getPathsValues } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ComparisonProps } from '@/types/comparisons'
 import { ParamsType } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Tilt from 'react-parallax-tilt'
 
 export const getStaticProps: GetStaticProps<ComparisonProps> =
-  async function getStaticProps({ params }) {
-    const { slug } = params as ParamsType
+  async function getStaticProps() {
+    const slug = 'postgresql'
     const { data } = await findAll('comparisons', {
       filters: {
         slug: {
@@ -196,6 +197,28 @@ export default function ComparisonPage({
           </div>
         </div>
       </div>
+      <section className='mb-16 bg-primary-300 py-10 text-neutral-900 lg:mb-24'>
+        <div className='section-container flex flex-col gap-x-4 gap-y-6 md:flex-row md:items-center md:justify-between'>
+          <div className='space-y-4 md:max-w-xl'>
+            <SuiTitle type='h2'>Postgres managed by ClickHouse</SuiTitle>
+            <p>
+              A native Postgres service integrated with ClickHouse. Build on a
+              Unified Data Stack with Postgres for transactions and ClickHouse
+              for analytics.
+            </p>
+          </div>
+          <CUIButton
+            type='primary-dark'
+            size='lg'
+            className='group mx-auto w-full !px-10 md:w-auto'
+            href='/cloud/postgres'
+            onClick={useGalaxyOnClick(
+              `${comparison.slug}ComparisonPage.postgres.findOutMoreSelect`
+            )}>
+            Find out more
+          </CUIButton>
+        </div>
+      </section>
       {comparison.painpointsTitle && (
         <div className='mx-auto mt-6 max-w-7xl px-4 md:px-8 2xl:px-0'>
           <div className='section-container bg-shadow-element yellow-shadow align-shadow-right container mx-auto flex flex-col items-center'>
@@ -447,33 +470,4 @@ export default function ComparisonPage({
       </div>
     </Layout>
   )
-}
-
-export async function getStaticPaths() {
-  const params = {
-    fields: ['slug']
-  }
-
-  // Define an array of slugs to exclude
-  const excludedSlugs = [
-    'snowflake',
-    'redshift',
-    'rockset',
-    'bigquery',
-    'doublecloud',
-    'postgresql'
-  ]
-
-  const allPaths = await getPathsValues('comparisons', params)
-
-  // Filter out the paths with the excluded slugs
-  const paths = allPaths.filter((path) => {
-    const slug = path.params.slug
-    return !excludedSlugs.includes(slug)
-  })
-
-  return {
-    paths,
-    fallback: 'blocking'
-  }
 }
