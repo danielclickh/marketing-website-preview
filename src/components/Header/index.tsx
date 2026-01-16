@@ -28,7 +28,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
   >(
-    'ClickHouse raises Series D and Enters LLM Observability with Langfuse Acquisition. More here'
+    'ClickHouse raises Series D and enters LLM observability with Langfuse acquisition. More here'
   )
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
     '/blog/clickhouse-raises-400-million-series-d-acquires-langfuse-launches-postgres?loc=banner'
