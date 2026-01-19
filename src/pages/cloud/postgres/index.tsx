@@ -158,7 +158,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                   '[Native CDC](https://clickhouse.com/docs/integrations/clickpipes/postgres): sync Postgres data to ClickHouse, in a few clicks.',
                   'Blazing fast replication with seconds latency',
                   '[pg_clickhouse](https://github.com/ClickHouse/pg_clickhouse): unified query layer to build apps powering transactions and analytics.',
-                  'Comprehensive query pushdown with pg_clickhuse - JOINs, aggregations and more.'
+                  'Comprehensive query pushdown with pg_clickhouse - JOINs, aggregations and more.'
                 ]
               },
               {
