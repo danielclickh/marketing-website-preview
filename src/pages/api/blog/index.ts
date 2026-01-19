@@ -1,10 +1,16 @@
-import { findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { blogService, findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
 import { BlogApiResponse } from '@/types/blogs'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 const baseQuery: Record<string, any> = {
   sort: ['date:DESC', 'publishedAt:DESC'],
-  populate: ['author', 'author.avatarPng', 'thumbnailPng'],
+  populate: [
+    'author',
+    'author.avatarPng',
+    'thumbnailPng',
+    'author.profiles',
+    'author.profiles.avatar'
+  ],
   fields: [
     'category',
     'title',
@@ -14,8 +20,8 @@ const baseQuery: Record<string, any> = {
     'publishedAt',
     'slug',
     'date',
-    'StagingOnly',
-    'ListOnBlogs'
+    'reading_time',
+    'reading_time_override'
   ],
   filters: {
     $and: [
@@ -127,16 +133,28 @@ export async function fetchBlogs({
               $containsi: search
             }
           }
+        },
+        {
+          author: {
+            profiles: {
+              name: {
+                $containsi: search
+              }
+            }
+          }
         }
       ]
     })
   }
 
   // Get paginated blog posts
-  const { data, pagination } = await findAll('blog-posts', {
-    ...query,
-    pagination: { pageSize: 15, page: page }
-  })
+  const { data, pagination } = await blogService.findMany(
+    {
+      ...query,
+      pagination: { pageSize: 15, page: page }
+    },
+    true
+  )
 
   return {
     data: {

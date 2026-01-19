@@ -1,6 +1,9 @@
 import { useDebounce } from '../../hooks'
 import { fetchBlogs } from '../api/blog'
 import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
+import StrapiBlogMeta from '@/components-cleaned/StrapiBlogMeta'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import Avatars from '@/components/Avatars'
 import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUILink } from '@/components/ClickUI'
@@ -174,8 +177,8 @@ export default function BlogsPage({
             className='mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
             {featuredBlog.thumbnailPng && (
               <div className='lg:w-1/2'>
-                <StrapiImageUrl
-                  {...featuredBlog.thumbnailPng}
+                <StrapiImage
+                  entry={featuredBlog.thumbnailPng}
                   loading='eager'
                   priority
                   width={640}
@@ -195,27 +198,7 @@ export default function BlogsPage({
                 {featuredBlog.shortDescription}
               </div>
 
-              <div className='flex flex-row items-center space-x-4'>
-                {featuredBlog.author.avatarPng && (
-                  <Avatars
-                    avatars={
-                      Array.isArray(featuredBlog.author.avatarPng)
-                        ? featuredBlog.author.avatarPng
-                        : [featuredBlog.author.avatarPng]
-                    }
-                  />
-                )}
-                <div>
-                  <div className='text-base'>{featuredBlog.author.name}</div>
-                  {(featuredBlog.date || featuredBlog.publishedAt) && (
-                    <div className='text-sm text-neutral-300'>
-                      {convertDateToString(
-                        featuredBlog.date || featuredBlog.publishedAt
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <StrapiBlogMeta entry={featuredBlog} profileLinks={false} />
             </div>
           </CUILink>
         </div>
@@ -271,7 +254,7 @@ export default function BlogsPage({
             <div className='w-full'>
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 {blogs.map((blog) => (
-                  <BlogPost key={blog.id} {...blog} />
+                  <StrapiBlogPostCard key={blog.id} entry={blog} />
                 ))}
               </div>
             </div>

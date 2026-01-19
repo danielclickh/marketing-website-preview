@@ -1,5 +1,6 @@
 import { CommonProps } from './homepage'
 import { StrapiImageType } from '@/lib/api/strapi/types'
+import { EntryBlogPost } from '@/types/strapi'
 import { ReactNode } from 'react'
 
 export interface BlogPost {
@@ -29,8 +30,8 @@ export interface BlogProps extends CommonProps {
 
 export interface BlogApiResponse {
   data: {
-    featured: BlogPost
-    blogs: Array<BlogPost>
+    featured: EntryBlogPost
+    blogs: Array<EntryBlogPost>
     categories: Record<string, string>
   }
   params: {
