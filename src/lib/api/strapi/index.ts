@@ -5,6 +5,8 @@ import {
   ApiRequestParams,
   ApiResponse,
   ComponentSeo,
+  EntryAuthor,
+  EntryBlogPost,
   EntryEvent,
   EntryMarketingVideo,
   EntryPage,
@@ -439,3 +441,15 @@ export const pagesService = new StrapiEntryService<EntryPage>(
 
 export const marketingVideosService =
   new StrapiEntryService<EntryMarketingVideo>('marketing-videos', false, true)
+
+export const blogService = new StrapiEntryService<EntryBlogPost>(
+  'blog-posts',
+  true,
+  true
+)
+
+export const authorsService = new StrapiEntryService<EntryAuthor>(
+  'authors',
+  false,
+  true
+)

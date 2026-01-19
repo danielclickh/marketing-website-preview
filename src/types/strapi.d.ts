@@ -297,9 +297,10 @@ export interface ComponentSeo {
 }
 
 export interface ComponentAuthor {
-  name: string
-  avatarPng: Array<EntryImage>
+  name: null | string
+  avatarPng: null | Array<EntryImage>
   profileLink: null | string
+  profiles: Array<EntryAuthor>
 }
 
 export interface ComponentPromotion {
@@ -422,4 +423,66 @@ export interface EntryPage extends Entry {
   path: string
   sections: Array<PageModules>
   seo: ComponentSeo
+}
+
+export interface EntryBlogPost extends Entry {
+  category:
+    | 'Company and culture'
+    | 'Community'
+    | 'Engineering'
+    | 'Product'
+    | 'User stories'
+    | 'Japanese'
+  title: string
+  shortDescription: string
+  content: null | string
+  author: null | ComponentAuthor
+  thumbnailPng: EntryImage
+  slug: string
+  date: string
+  keywords: null | string
+  StagingOnly: boolean
+  ShowCloudCTAHeader: boolean | null
+  ShowCloudCTAFooter: boolean | null
+  reading_time: number
+  reading_time_override: number | null
+  theme:
+    | 'ClickHouse Journey'
+    | 'Cloud Announcement'
+    | 'Competitive Comparisons'
+    | 'Customer Story'
+    | 'Feature Deep-dive'
+    | 'Guest Post'
+    | 'Guide'
+    | 'Integrations'
+    | 'Meetup Report'
+    | 'Newsletter'
+    | 'Release Post'
+    | 'Thought Leadership'
+  use_case:
+    | 'Business Intelligence'
+    | 'Core'
+    | 'Logs, Metrics, & Traces'
+    | 'ML & GenAI'
+    | 'N/A'
+    | 'Real-time Analytics'
+  canonical_url: null | string
+  table_contents_headers: null | string
+  promotion: ComponentPromotion
+  enableSidebarGlobalCta: null | boolean
+  sections: Array<BlogModules>
+  ListOnBlogs: null | boolean
+}
+
+export interface EntryAuthor extends Entry {
+  name: string
+  slug: string
+  title: null | string
+  description: null | string
+  avatar: EntryImage
+  linkedinUrl: null | string
+  twitterUrl: null | string
+  githubUrl: null | string
+  instagramUrl: null | string
+  websiteUrl: null | string
 }

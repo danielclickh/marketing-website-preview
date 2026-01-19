@@ -1,5 +1,6 @@
 import { pages as learnPages } from '@/data/learn'
 import {
+  blogService,
   fetchAll,
   isAuthorisedRevalidationRequest,
   resourceCategoriesService,
@@ -45,6 +46,37 @@ const CONTENT_TYPE_HANDLERS: Record<
    * Collection types
    * -----
    */
+  'api::authors.authors': async function (body, response, request) {
+    const paths = [`/sitemap` /*`/blog`*/]
+
+    const id = body?.entry?.id
+    const slug = body?.entry?.slug
+
+    if (slug) {
+      paths.push(`/authors/${slug}`)
+    }
+
+    // Update blogs
+    if (id) {
+      const authorBlogs = await blogService.findAll({
+        fields: ['slug'],
+        populate: [],
+        filters: {
+          author: {
+            profiles: {
+              id
+            }
+          }
+        }
+      })
+
+      authorBlogs.forEach((blog) => {
+        paths.push(`/blog/${blog.slug}`)
+      })
+    }
+
+    await revalidate(response, paths)
+  },
   'api::blog-post.blog-post': async function (body, response, request) {
     const paths = [`/sitemap` /*`/blog`*/]
 
@@ -57,6 +89,20 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     // Revalidate open house page because it uses tagged content
     paths.push('/openhouse')
+
+    // Get all author relation slugs
+    const authorSlugs = body?.entry?.author?.profiles?.map(
+      // @ts-expect-error todo: better type handling
+      (profile) => profile.slug
+    )
+
+    // Revalidate author pages
+    if (authorSlugs) {
+      // @ts-expect-error todo: better type handling
+      authorSlugs.forEach((authorSlug) => {
+        paths.push(`/authors/${authorSlug}`)
+      })
+    }
 
     // Standard ISR revalidation
     await revalidate(response, paths)

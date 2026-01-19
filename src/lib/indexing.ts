@@ -1,6 +1,7 @@
 import { BuildRecord } from '../../scripts/buildIndex'
 import buildIndex from '@/../public/buildIndex.json'
 import {
+  authorsService,
   eventsService,
   fetchAll,
   getStagingOnlyFilters,
@@ -20,16 +21,25 @@ interface IndexedItem extends Partial<Omit<BuildRecord, 'title'>> {
 export async function all(): Promise<Array<IndexedItem>> {
   const staticItems = buildIndex.filter((item) => item.indexable)
 
-  const [blogs, events, comparisons, pages, videos, integrations, resources] =
-    await Promise.all([
-      cmsBlogs(),
-      cmsEvents(),
-      cmsComparisons(),
-      cmsPages(),
-      cmsVideos(),
-      cmsIntegrations(),
-      cmsResources()
-    ])
+  const [
+    blogs,
+    events,
+    comparisons,
+    pages,
+    videos,
+    integrations,
+    resources,
+    authors
+  ] = await Promise.all([
+    cmsBlogs(),
+    cmsEvents(),
+    cmsComparisons(),
+    cmsPages(),
+    cmsVideos(),
+    cmsIntegrations(),
+    cmsResources(),
+    cmsAuthors()
+  ])
 
   // Deduplicate by path (later entries override earlier ones)
   return [
@@ -42,7 +52,8 @@ export async function all(): Promise<Array<IndexedItem>> {
         ...pages,
         ...videos,
         ...integrations,
-        ...resources
+        ...resources,
+        ...authors
       ].map((item) => [item.path, item])
     ).values()
   ]
@@ -162,6 +173,22 @@ export async function cmsPages(): Promise<Array<IndexedItem>> {
       path: `/${page.path}`,
       lastModified: page.updatedAt,
       publishedAt: page.publishedAt
+    }
+  })
+}
+
+export async function cmsAuthors(): Promise<Array<IndexedItem>> {
+  const authors = await authorsService.findAll({
+    fields: ['name', 'slug', 'updatedAt'],
+    sort: ['name:ASC'],
+    populate: []
+  })
+  return authors.map((author) => {
+    return {
+      title: author.title,
+      path: `/authors/${author.slug}`,
+      lastModified: author.updatedAt,
+      publishedAt: author.publishedAt
     }
   })
 }
