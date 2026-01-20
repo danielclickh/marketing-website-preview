@@ -1,7 +1,7 @@
 import { useDebounce } from '../../hooks'
 import { fetchBlogs } from '../api/blog'
 import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
-import StrapiBlogMeta from '@/components-cleaned/StrapiBlogMeta'
+import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
 import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import StrapiImage from '@/components-cleaned/StrapiImage'
 import Avatars from '@/components/Avatars'
@@ -198,7 +198,21 @@ export default function BlogsPage({
                 {featuredBlog.shortDescription}
               </div>
 
-              <StrapiBlogMeta entry={featuredBlog} profileLinks={false} />
+              <StrapiAuthorMeta
+                authors={featuredBlog.author}
+                profileLinks={false}
+                extras={[
+                  featuredBlog.date || featuredBlog.publishedAt
+                    ? convertDateToString(
+                        featuredBlog.date || featuredBlog.publishedAt
+                      )
+                    : null,
+                  featuredBlog.reading_time_override ||
+                  featuredBlog.reading_time
+                    ? `${featuredBlog.reading_time_override || featuredBlog.reading_time} minutes read`
+                    : null
+                ]}
+              />
             </div>
           </CUILink>
         </div>

@@ -3,7 +3,7 @@ import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ScrollToTop from '@/components-cleaned/ScrollToTop'
 import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
-import StrapiBlogMeta from '@/components-cleaned/StrapiBlogMeta'
+import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
 import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import StrapiImage from '@/components-cleaned/StrapiImage'
@@ -30,6 +30,7 @@ import {
 } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateBlogArticleSchema } from '@/lib/schema'
+import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { camel, slugify } from '@/lib/utils/strings'
 import { CommonProps, ParamsType } from '@/types/homepage'
@@ -312,7 +313,17 @@ export default function BlogPage({
               </h1>
 
               {/* Authors */}
-              <StrapiBlogMeta entry={blog} />
+              <StrapiAuthorMeta
+                authors={blog.author}
+                extras={[
+                  blog.date || blog.publishedAt
+                    ? convertDateToString(blog.date || blog.publishedAt)
+                    : null,
+                  blog.reading_time_override || blog.reading_time
+                    ? `${blog.reading_time_override || blog.reading_time} minutes read`
+                    : null
+                ]}
+              />
             </div>
 
             {/* Blog content */}

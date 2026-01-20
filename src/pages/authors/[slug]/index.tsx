@@ -64,12 +64,12 @@ export const getStaticProps = (async ({ params }) => {
     filters: {
       author: {
         profiles: {
-          // @ts-expect-error todo: fix nested strapi types
           id: author.id
         }
       }
     },
-    pagination: { limit: 12 }
+    pagination: { limit: 12 },
+    sort: ['date:DESC', 'publishedAt:DESC']
   })
 
   return {
@@ -190,7 +190,7 @@ export default function Page({
           <div className='section-container'>
             <SuiTitle type='h2'>Blog posts by {author.name}</SuiTitle>
             <div className='mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-              {authorBlogs.map((blog, blogIndex) => {
+              {authorBlogs.map((blog) => {
                 return <StrapiBlogPostCard key={blog.id} entry={blog} />
               })}
             </div>

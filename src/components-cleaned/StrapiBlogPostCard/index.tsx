@@ -13,7 +13,7 @@ export interface StrapiBlogPostCardProps {
 export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
   const footer: Array<string> = []
 
-  if (entry.author?.profiles) {
+  if (entry.author?.profiles && entry.author.profiles.length > 0) {
     const authorNames = entry.author.profiles.map((profile) => profile.name)
     const combinedNames = interleaveWithLast(authorNames, ', ', ' and ').join(
       ''
