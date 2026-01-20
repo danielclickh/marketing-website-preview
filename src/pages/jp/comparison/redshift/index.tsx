@@ -1,4 +1,4 @@
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import { CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import LogoCarousel from '@/components/LogoCarousel'
@@ -543,7 +543,7 @@ export default function ComparisonPage({
                   <>
                     {content.RelatedBlogs.flatMap((custom) =>
                       custom.blog_posts.map((blog) => (
-                        <BlogPost key={blog.id} {...blog} />
+                        <StrapiBlogPostCard key={blog.id} entry={blog} />
                       ))
                     )}
                   </>

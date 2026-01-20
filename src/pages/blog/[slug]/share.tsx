@@ -1,9 +1,5 @@
 import SeoContainer from '@/components/SeoContainer'
-import {
-  findAll,
-  getProxiedMediaUrl,
-  getStagingOnlyFilters
-} from '@/lib/api/strapi'
+import { blogService, getProxiedMediaUrl } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { generateBlogArticleSchema } from '@/lib/schema'
 import { ParamsType } from '@/types/homepage'
@@ -17,24 +13,21 @@ export const getServerSideProps = (async ({ req, params }) => {
   const ua = req.headers['user-agent'] || ''
   const isBot = BOT_UA.test(ua)
   const { slug } = params as ParamsType
-  const { data } = await findAll('blog-posts', {
+
+  const blog = await blogService.findOne({
     filters: {
       slug: {
         $eq: slug
-      },
-      $or: getStagingOnlyFilters()
+      }
     },
-    populate: ['thumbnailPng'],
-    pagination: { limit: 1 }
+    populate: ['thumbnailPng']
   })
-
-  const blog = data?.[0]
 
   if (!blog) {
     return {
       notFound: true
     }
-  } else if (blog?.category === 'Japanese') {
+  } else if (blog.category === 'Japanese') {
     return {
       redirect: {
         destination: `/jp/blog/${slug}`,

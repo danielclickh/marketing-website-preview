@@ -2,6 +2,7 @@ import { BuildRecord } from '../../scripts/buildIndex'
 import buildIndex from '@/../public/buildIndex.json'
 import {
   authorsService,
+  blogService,
   eventsService,
   fetchAll,
   getStagingOnlyFilters,
@@ -60,7 +61,7 @@ export async function all(): Promise<Array<IndexedItem>> {
 }
 
 export async function cmsBlogs(): Promise<Array<IndexedItem>> {
-  const blogPosts = await fetchAll('blog-posts', {
+  const blogPosts = await blogService.findAll({
     sort: ['date:DESC', 'publishedAt:DESC'],
     fields: [
       'title',
@@ -69,8 +70,7 @@ export async function cmsBlogs(): Promise<Array<IndexedItem>> {
       'category',
       'publishedAt',
       'updatedAt'
-    ],
-    filters: { $or: getStagingOnlyFilters() }
+    ]
   })
 
   return blogPosts.map((post) => {

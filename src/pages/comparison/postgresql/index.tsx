@@ -1,4 +1,4 @@
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
@@ -8,11 +8,10 @@ import MarketoForm from '@/components/MarketoForm'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiTitle } from '@/components/sui'
-import { findAll, getPathsValues } from '@/lib/api/strapi'
+import { findAll } from '@/lib/api/strapi'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ComparisonProps } from '@/types/comparisons'
-import { ParamsType } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -406,7 +405,7 @@ export default function ComparisonPage({
                   <>
                     {content.RelatedBlogs.flatMap((custom) =>
                       custom.blog_posts.map((blog) => (
-                        <BlogPost key={blog.id} {...blog} />
+                        <StrapiBlogPostCard key={blog.id} entry={blog} />
                       ))
                     )}
                   </>

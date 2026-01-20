@@ -2,6 +2,7 @@ import { fetchCategories } from '../api/blog'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import {
+  blogService,
   eventsService,
   fetchAll,
   findOne,
@@ -15,13 +16,15 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getVideos } from '@/lib/videos'
 import { Video } from '@/lib/videos/types'
 import { CommonProps } from '@/types/homepage'
-import { EntryResource } from '@/types/strapi'
+import { EntryBlogPost, EntryResource } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 
 interface SitemapProps extends CommonProps {
   blogCategories: Record<string, string>
-  blogPosts: any[]
+  blogPosts: Array<
+    Pick<EntryBlogPost, 'category' | 'title' | 'slug' | 'date' | 'publishedAt'>
+  >
   allEvents: any[]
   allVideos: Video[]
   onDemandEvents: any[]
@@ -36,26 +39,11 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
 
-    const blogsParams: Record<string, any> = {
+    const blogPosts = await blogService.findAll({
       sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['author', 'author.avatarPng', 'thumbnailPng'],
-      fields: [
-        'category',
-        'title',
-        'shortDescription',
-        'createdAt',
-        'updatedAt',
-        'publishedAt',
-        'slug',
-        'date',
-        'StagingOnly'
-      ],
-      filters: {
-        $or: getStagingOnlyFilters()
-      }
-    }
-
-    const blogPosts = await fetchAll('blog-posts', blogsParams)
+      populate: [],
+      fields: ['category', 'title', 'slug', 'date', 'publishedAt']
+    })
     const events = await eventsService.findAll({
       filters: {
         $and: [

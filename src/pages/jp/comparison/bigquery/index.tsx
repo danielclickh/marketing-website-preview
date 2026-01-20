@@ -13,7 +13,7 @@ import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
 import logoAdevinta from './logoAdevinta.svg'
 import logos from './logos.png'
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import ComparisonTable from '@/components/ComparisonTable'
 import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
@@ -744,8 +744,7 @@ function combineRenderedContent(
 
   const relatedRendered = related.flatMap((custom) => {
     return custom.blog_posts.map((blog) => {
-      const urlWithLoc = `${blog.slug}?loc=${locTracking}`
-      return <BlogPost key={blog.id} {...blog} slug={urlWithLoc} />
+      return <StrapiBlogPostCard key={blog.id} entry={blog} />
     })
   })
 

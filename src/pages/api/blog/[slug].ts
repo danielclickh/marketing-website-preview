@@ -7,7 +7,6 @@ import {
 } from '@/lib/api/strapi'
 import { interleaveWithLast } from '@/lib/utils/arrays'
 import { escapeForRegex } from '@/lib/utils/strings'
-import { BlogProps } from '@/types/blog'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
@@ -97,7 +96,7 @@ ${frontMatter.join('\n')}
 
   // Add blog builder sections
   if (blog.sections) {
-    ;(blog.sections as BlogProps['sections']).forEach((section) => {
+    blog.sections.forEach((section) => {
       const md = strapiDynamicBlogModulesMarkdown(section)
       if (md) {
         lines.push(md)

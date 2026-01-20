@@ -302,7 +302,7 @@ const CONTENT_TYPE_HANDLERS: Record<
       /*`/blog`, `/jp/blog`*/
     ]
 
-    const data = await fetchAll('blog-posts', {
+    const blogs = await blogService.findAll({
       filters: {
         $or: [
           {
@@ -322,11 +322,12 @@ const CONTENT_TYPE_HANDLERS: Record<
           }
         ]
       },
-      fields: ['slug', 'category']
+      fields: ['slug', 'category'],
+      populate: []
     })
 
-    if (data) {
-      data.forEach((post) => {
+    if (blogs) {
+      blogs.forEach((post) => {
         if (post.category === 'Japanese') {
           paths.push(`/jp/blog/${post.slug}`)
         } else {
