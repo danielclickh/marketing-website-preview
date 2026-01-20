@@ -1,6 +1,5 @@
 import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import StrapiImage from '@/components-cleaned/StrapiImage'
-import BlogPost from '@/components/BlogPostList/BlogPost'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { SuiTitle } from '@/components/sui'
