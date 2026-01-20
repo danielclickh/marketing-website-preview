@@ -30,7 +30,7 @@ export interface BlogProps extends CommonProps {
 
 export interface BlogApiResponse {
   data: {
-    featured: EntryBlogPost
+    featured: null | EntryBlogPost
     blogs: Array<EntryBlogPost>
     categories: Record<string, string>
   }

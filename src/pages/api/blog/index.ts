@@ -1,4 +1,4 @@
-import { blogService, findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { blogService } from '@/lib/api/strapi'
 import { BlogApiResponse } from '@/types/blogs'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -98,18 +98,15 @@ export async function fetchBlogs({
     })
   }
 
-  const { data: featuredBlog } = await findAll('blog-posts', {
-    ...baseQuery,
-    pagination: { limit: 1 }
-  })
+  const featuredBlog = await blogService.findOne(baseQuery)
 
   const query = structuredClone(baseQuery)
 
   // Excluded featured blog from query
-  if (featuredBlog[0]) {
+  if (featuredBlog) {
     query.filters.$and.push({
       slug: {
-        $ne: featuredBlog[0].slug
+        $ne: featuredBlog.slug
       }
     })
   }
@@ -173,7 +170,7 @@ export async function fetchBlogs({
 
   return {
     data: {
-      featured: featuredBlog[0],
+      featured: featuredBlog || null,
       blogs: data,
       categories
     },

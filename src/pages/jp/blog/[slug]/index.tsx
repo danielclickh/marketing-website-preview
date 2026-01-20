@@ -428,10 +428,11 @@ export default function BlogPage({
           {otherBlogs.map((recentBlog, recentBlogIndex) => {
             return (
               <div
+                key={recentBlogIndex}
                 className={
                   recentBlogIndex > 2 ? 'hidden md:block lg:hidden' : ''
                 }>
-                <StrapiBlogPostCard key={recentBlogIndex} entry={recentBlog} />
+                <StrapiBlogPostCard entry={recentBlog} />
               </div>
             )
           })}
