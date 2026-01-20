@@ -92,9 +92,6 @@ export async function request(
   if (queryString.length) uri += `?${queryString}`
 
   const requestInit: RequestInit = {
-    next: {
-      revalidate: 5
-    },
     headers: {
       Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
     },

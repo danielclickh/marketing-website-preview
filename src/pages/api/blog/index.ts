@@ -2,36 +2,6 @@ import { blogService } from '@/lib/api/strapi'
 import { BlogApiResponse } from '@/types/blogs'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const baseQuery: Record<string, any> = {
-  sort: ['date:DESC', 'publishedAt:DESC'],
-  populate: [
-    'author',
-    'author.avatarPng',
-    'thumbnailPng',
-    'author.profiles',
-    'author.profiles.avatar'
-  ],
-  fields: [
-    'category',
-    'title',
-    'shortDescription',
-    'createdAt',
-    'updatedAt',
-    'publishedAt',
-    'slug',
-    'date',
-    'reading_time',
-    'reading_time_override'
-  ],
-  filters: {
-    $and: [
-      {
-        $or: [{ ListOnBlogs: { $null: true } }, { ListOnBlogs: { $eq: true } }]
-      }
-    ]
-  }
-}
-
 export async function fetchCategories(): Promise<Record<string, string>> {
   return {
     product: 'Product',
@@ -87,16 +57,43 @@ export async function fetchBlogs({
   locale = locale ? String(locale) : null
   locale = locale && locale.trim() ? locale : null
 
-  // Remove JP blogs from standard query
-  if (locale === 'jp') {
-    baseQuery.filters.$and.push({
-      category: { $eq: 'Japanese' }
-    })
-  } else if (!category) {
-    baseQuery.filters.$and.push({
-      category: { $ne: 'Japanese' }
-    })
+  const baseQuery: Record<string, any> = {
+    sort: ['date:DESC', 'publishedAt:DESC'],
+    populate: [
+      'author',
+      'author.avatarPng',
+      'thumbnailPng',
+      'author.profiles',
+      'author.profiles.avatar'
+    ],
+    fields: [
+      'category',
+      'title',
+      'shortDescription',
+      'createdAt',
+      'updatedAt',
+      'publishedAt',
+      'slug',
+      'date',
+      'reading_time',
+      'reading_time_override'
+    ],
+    filters: {
+      $and: [
+        {
+          $or: [
+            { ListOnBlogs: { $null: true } },
+            { ListOnBlogs: { $eq: true } }
+          ]
+        }
+      ]
+    }
   }
+
+  // Include/exclude japanese blogs
+  baseQuery.filters.$and.push({
+    category: { [locale === 'jp' ? '$eq' : '$ne']: 'Japanese' }
+  })
 
   const featuredBlog = await blogService.findOne(baseQuery)
 
