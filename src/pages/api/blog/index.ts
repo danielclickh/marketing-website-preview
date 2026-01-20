@@ -92,7 +92,7 @@ export async function fetchBlogs({
     baseQuery.filters.$and.push({
       category: { $eq: 'Japanese' }
     })
-  } else {
+  } else if (!category) {
     baseQuery.filters.$and.push({
       category: { $ne: 'Japanese' }
     })
