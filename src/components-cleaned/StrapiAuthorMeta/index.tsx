@@ -54,7 +54,11 @@ export default function StrapiAuthorMeta({
     <div className='flex flex-row flex-wrap items-center gap-x-4 gap-y-2'>
       {avatars.length > 0 && (
         <div className='flex-shrink-0'>
-          <Avatars avatars={avatars} />
+          <Avatars
+            avatars={Array.from(
+              new Map(avatars.map((item) => [item.id, item])).values()
+            )}
+          />
         </div>
       )}
       <div>
