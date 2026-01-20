@@ -25,8 +25,6 @@ const baseQuery: Record<string, any> = {
   ],
   filters: {
     $and: [
-      { category: { $ne: 'japanese' } },
-      { $or: getStagingOnlyFilters() },
       {
         $or: [{ ListOnBlogs: { $null: true } }, { ListOnBlogs: { $eq: true } }]
       }
@@ -47,7 +45,8 @@ export async function fetchCategories(): Promise<Record<string, string>> {
 export async function fetchBlogs({
   page = 1,
   category = null,
-  search = null
+  search = null,
+  locale
 }: {
   page?:
     | undefined
@@ -67,6 +66,7 @@ export async function fetchBlogs({
     | string
     | string[]
     | BlogApiResponse['params']['search']
+  locale?: undefined | null | string | string[]
 }): Promise<BlogApiResponse> {
   // Get and validate the paginated page number
   page = Number(page)
@@ -82,6 +82,21 @@ export async function fetchBlogs({
   // Validate the search param
   search = search ? String(search) : null
   search = search && search.trim() ? search : null
+
+  // Validate the locale param
+  locale = locale ? String(locale) : null
+  locale = locale && locale.trim() ? locale : null
+
+  // Remove JP blogs from standard query
+  if (locale === 'jp') {
+    baseQuery.filters.$and.push({
+      category: { $eq: 'Japanese' }
+    })
+  } else {
+    baseQuery.filters.$and.push({
+      category: { $ne: 'Japanese' }
+    })
+  }
 
   const { data: featuredBlog } = await findAll('blog-posts', {
     ...baseQuery,
@@ -179,12 +194,18 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  let { page = 1, category = null, search = null } = request.query
+  let {
+    page = 1,
+    category = null,
+    search = null,
+    locale = null
+  } = request.query
 
   const responseBody = await fetchBlogs({
     page,
     category,
-    search
+    search,
+    locale
   })
 
   response.status(200).json(responseBody)

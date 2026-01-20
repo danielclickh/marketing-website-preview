@@ -13,6 +13,8 @@ export interface StrapiBlogPostCardProps {
 export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
   const footer: Array<string> = []
 
+  const isJapanese = entry.category === 'Japanese'
+
   if (entry.author?.profiles && entry.author.profiles.length > 0) {
     const authorNames = entry.author.profiles.map((profile) => profile.name)
     const combinedNames = interleaveWithLast(authorNames, ', ', ' and ').join(
@@ -38,11 +40,15 @@ export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
         />
       </CUICard.Header>
       <CUICard.Body className='mb-auto p-6'>
-        <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
-          {entry.category}
-        </div>
+        {!isJapanese && (
+          <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
+            {entry.category}
+          </div>
+        )}
         <SuiTitle type='h3'>
-          <Link href={`/blog/${entry.slug}`} className='text-neutral-100'>
+          <Link
+            href={isJapanese ? `/jp/blog/${entry.slug}` : `/blog/${entry.slug}`}
+            className='text-neutral-100'>
             <span className='absolute inset-0' />
             {entry.title}
           </Link>

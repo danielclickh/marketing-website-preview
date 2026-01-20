@@ -1,20 +1,22 @@
-import { fetchBlogs } from '../../api/jp/blog'
-import Avatars from '@/components/Avatars'
+import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import { CUILink } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Pagination from '@/components/Pagination'
-import { StrapiImageUrl } from '@/components/StrapiElements'
-import BlogPost from '@/components/jp/BlogPostList/BlogPost'
 import Layout from '@/components/jp/Layout'
-import { SuiTitle } from '@/components/sui'
+import { SuiSearchField, SuiTitle } from '@/components/sui'
+import { useDebounce } from '@/hooks'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateBlogArchiveSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { fetchBlogs } from '@/pages/api/blog'
 import { BlogApiResponse, BlogProps } from '@/types/blogs'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<BlogProps> =
   async function getServerSideProps(context) {
@@ -25,12 +27,13 @@ export const getServerSideProps: GetServerSideProps<BlogProps> =
 
     const commonProps = await getCommonProps()
 
-    const { page = 1, category = null, search = null } = context.query || {}
-    const initialData = await fetchBlogs({ page, category, search })
+    const { page = 1, search = null } = context.query || {}
+    const initialData = await fetchBlogs({ page, search, locale: 'jp' })
 
     seo.locale = 'ja_JP'
     seo.path = '/jp/blog'
     seo.title = 'ClickHouse ブログ'
+    seo.schema = generateBlogArchiveSchema({ path: '/jp/blog' })
     seo.languages = ['en', 'ja']
 
     return {
@@ -67,37 +70,16 @@ export default function BlogsPage({
   const [search, setSearch] = useState<BlogApiResponse['params']['search']>(
     response?.params?.search || null
   )
-  const [category, setCategory] = useState<
-    BlogApiResponse['params']['category']
-  >(response?.params?.category || null)
 
   const currentPage = page > 1 ? page : 1
 
   const featuredBlog = response?.data?.featured || null
   const blogs = response?.data?.blogs || []
-  const categories = response?.data?.categories || {}
 
-  const categoryList = Object.entries(categories).map(([slug, label]) => ({
-    text: label,
-    onClick: () => {
-      setPage(1)
-      setCategory(slug)
-    },
-    selected: category === slug
-  }))
-
-  categoryList.unshift({
-    text: 'View All',
-    onClick: () => {
-      setPage(1)
-      setSearch(null)
-      setCategory(null)
-      if (inputRef.current) {
-        inputRef.current.value = ''
-      }
-    },
-    selected: !category
-  })
+  const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPage(1)
+    setSearch(e.target.value)
+  }
 
   const backToTop = () => {
     setTimeout(() => {
@@ -113,7 +95,7 @@ export default function BlogsPage({
     if (
       router.isReady &&
       (page !== response?.pagination?.page ||
-        category !== response?.params?.category)
+        search !== response?.params?.search)
     ) {
       ;(async function () {
         // Show loading screen
@@ -122,7 +104,6 @@ export default function BlogsPage({
         const params = new URLSearchParams()
         if (page && page > 1) params.set('page', page.toString())
         if (search) params.set('search', search)
-        if (category) params.set('category', category)
         const paramsString = Array.from(params).length ? `?${params}` : ''
 
         // Update URL
@@ -131,7 +112,8 @@ export default function BlogsPage({
         })
 
         // Make request
-        const response = await fetch(`/api/jp/blog${paramsString}`)
+        params.set('locale', 'jp')
+        const response = await fetch(`/api/blog?${params}`)
 
         // Handle response
         try {
@@ -144,7 +126,7 @@ export default function BlogsPage({
         setLoading(false)
       })()
     }
-  }, [page, category])
+  }, [page, search])
 
   return (
     <Layout seo={seo} headerData={headerData}>
@@ -158,8 +140,12 @@ export default function BlogsPage({
             className='mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
             {featuredBlog.thumbnailPng && (
               <div className='lg:w-1/2'>
-                <StrapiImageUrl
-                  {...featuredBlog.thumbnailPng}
+                <StrapiImage
+                  entry={featuredBlog.thumbnailPng}
+                  loading='eager'
+                  priority
+                  width={640}
+                  height={640}
                   className='overflow-hidden rounded-lg'
                 />
               </div>
@@ -172,27 +158,21 @@ export default function BlogsPage({
                 {featuredBlog.shortDescription}
               </div>
 
-              <div className='flex flex-row items-center space-x-4'>
-                {featuredBlog.author.avatarPng && (
-                  <Avatars
-                    avatars={
-                      Array.isArray(featuredBlog.author.avatarPng)
-                        ? featuredBlog.author.avatarPng
-                        : [featuredBlog.author.avatarPng]
-                    }
-                  />
-                )}
-                <div>
-                  <div className='text-base'>{featuredBlog.author.name}</div>
-                  {(featuredBlog.date || featuredBlog.publishedAt) && (
-                    <div className='text-sm text-neutral-300'>
-                      {convertDateToString(
+              <StrapiAuthorMeta
+                authors={featuredBlog.author}
+                profileLinks={false}
+                extras={[
+                  featuredBlog.date || featuredBlog.publishedAt
+                    ? convertDateToString(
                         featuredBlog.date || featuredBlog.publishedAt
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
+                      )
+                    : null,
+                  featuredBlog.reading_time_override ||
+                  featuredBlog.reading_time
+                    ? `${featuredBlog.reading_time_override || featuredBlog.reading_time} 分で読める`
+                    : null
+                ]}
+              />
             </div>
           </CUILink>
         </div>
@@ -204,7 +184,16 @@ export default function BlogsPage({
         <div
           className={`flex-col items-center pb-8 lg:flex lg:flex-row lg:justify-between lg:space-x-24 ${
             !response ? '!hidden' : ''
-          }`}></div>
+          }`}>
+          <SuiSearchField
+            defaultValue={search || ''}
+            placeholder='タイトルまたはキーワードで検索...'
+            htmlFor='search'
+            className='mb-6 lg:mb-0 lg:flex-1'
+            onChange={useDebounce(onSearchChange, 500)}
+            inputRef={inputRef}
+          />
+        </div>
 
         {loading && <p className='mt-12 w-full text-center'>読み込み中...</p>}
 
@@ -224,9 +213,6 @@ export default function BlogsPage({
               {currentPage === 1 && (
                 <>
                   {search ? `"${search}" の検索結果はありません` : '結果なし'}
-                  {category && category in categories
-                    ? ` in ${categories[category]}`
-                    : ''}
                 </>
               )}
             </p>
@@ -238,7 +224,7 @@ export default function BlogsPage({
             <div className='w-full'>
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 {blogs.map((blog) => (
-                  <BlogPost key={blog.id} {...blog} />
+                  <StrapiBlogPostCard key={blog.id} entry={blog} />
                 ))}
               </div>
             </div>

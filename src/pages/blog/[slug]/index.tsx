@@ -7,7 +7,6 @@ import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
 import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import StrapiImage from '@/components-cleaned/StrapiImage'
-import BlogPost from '@/components/BlogPostList/BlogPost'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
@@ -18,16 +17,9 @@ import NewsLetter from '@/components/NewsLetter'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import TableOfContents from '@/components/TableOfContents'
 import { SuiText, SuiTitle } from '@/components/sui'
-import {
-  blogService,
-  fetchAll,
-  findOne,
-  getProxiedMediaUrl,
-  getStagingOnlyFilters
-} from '@/lib/api/strapi'
+import { blogService, findOne, getProxiedMediaUrl } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateBlogArticleSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
@@ -57,14 +49,12 @@ interface BlogProps extends CommonProps {
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
-    const stagingOnlyFilters = getStagingOnlyFilters()
     const { slug } = params as ParamsType
     const blog = await blogService.findOne({
       filters: {
         slug: {
           $eq: slug
-        },
-        $or: stagingOnlyFilters
+        }
       }
     })
 
@@ -92,22 +82,13 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 
     const otherBlogsRequest = blogService.findMany({
       sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: [
-        'author',
-        'author.avatarPng',
-        'thumbnailPng',
-        'author.profiles',
-        'author.profiles.avatar'
-      ],
+      populate: ['author', 'thumbnailPng', 'author.profiles'],
       fields: [
         'category',
         'title',
-        'shortDescription',
-        'createdAt',
-        'updatedAt',
-        'publishedAt',
         'slug',
         'date',
+        'publishedAt',
         'reading_time',
         'reading_time_override'
       ],
@@ -116,8 +97,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         slug: {
           $ne: slug
         },
-        category: { $ne: 'Japanese' },
-        $or: stagingOnlyFilters
+        category: { $ne: 'Japanese' }
       }
     })
 
@@ -183,17 +163,19 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 // It may be called again, on a serverless function, if
 // the path has not been generated.
 export async function getStaticPaths() {
-  const data = await fetchAll('blog-posts', {
+  const blogs = await blogService.findAll({
     filters: {
-      category: { $ne: 'Japanese' },
-      $or: getStagingOnlyFilters()
+      category: {
+        $ne: 'Japanese'
+      }
     },
-    fields: ['slug']
+    fields: ['slug'],
+    populate: []
   })
 
   // Get the paths we want to pre-render based on posts
-  const paths = data.map((post) => ({
-    params: { slug: post.slug }
+  const paths = blogs.map((blog) => ({
+    params: { slug: blog.slug }
   }))
 
   // We'll pre-render only these paths at build time.
