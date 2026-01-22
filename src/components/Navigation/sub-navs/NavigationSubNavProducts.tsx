@@ -74,9 +74,9 @@ export default function NavigationSubNavProducts() {
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
                   />
                   <span>
-                    Managed Postgres
+                  Postgres managed by ClickHouse
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                    Fast, scalable, enterprise-grade Postgres, <br />natively integrated with ClickHouse.
+                    Unified data stack for transactions<br /> and analytics.
                     </div>
                   </span>
                 </NavigationLink>
