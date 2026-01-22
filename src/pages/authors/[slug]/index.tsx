@@ -86,19 +86,42 @@ export const getStaticProps = (async ({ params }) => {
     sort: ['date:DESC', 'publishedAt:DESC']
   })
 
+  const hasBlogs = authorBlogs.length
+  const hasResources = authorResources.length > 0
+
+  let title = author.name
+  let description = ''
+
+  if (hasBlogs && hasResources) {
+    title = `Articles & Resources by ${author.name}`
+    description = `Explore ClickHouse articles and resources by ${author.name}.`
+  } else if (hasBlogs) {
+    title = `Articles by ${author.name}`
+    description = `Read ClickHouse articles by ${author.name}.`
+  } else if (hasResources) {
+    title = `Resources by ${author.name}`
+    description = `Explore ClickHouse resources by ${author.name}.`
+  }
+
+  const seo: Props['seo'] = {
+    title: `${title} | ClickHouse`,
+    path: `/authors/${author.slug}`,
+    description: author.description
+      ? removeMarkdown(author.description)
+      : description
+  }
+
+  if (!hasBlogs && !hasResources) {
+    seo.robots = 'noindex,nofollow'
+  }
+
   return {
     props: {
       ...commonProps,
       author,
       authorBlogs,
       authorResources,
-      seo: {
-        title: `Articles by ${author.name} | ClickHouse`,
-        path: `/authors/${author.slug}`,
-        description: author.description
-          ? removeMarkdown(author.description)
-          : `Read all ClickHouse articles by ${author.name}.`
-      }
+      seo: seo
     }
   }
 }) satisfies GetStaticProps<Props>
@@ -145,23 +168,15 @@ export default function Page({
         <div className='section-container flex flex-col items-start gap-x-16 gap-y-8 lg:flex-row'>
           <StrapiImage
             entry={author.avatar}
-            className='hidden aspect-square h-auto w-64 max-w-none flex-shrink-0 flex-grow-0 rounded-full bg-neutral lg:block'
+            className='aspect-square h-auto w-16 max-w-none flex-shrink-0 flex-grow-0 rounded-full bg-neutral md:w-32 lg:w-64'
           />
           <div className='my-auto'>
-            <div className='flex flex-wrap items-center gap-4'>
-              <StrapiImage
-                entry={author.avatar}
-                className='aspect-square h-auto w-16 max-w-none flex-shrink-0 flex-grow-0 rounded-full bg-neutral md:w-32 lg:hidden'
-              />
-              <div>
-                <SuiTitle type='h1'>{author.name}</SuiTitle>
-                {author.title && (
-                  <p className='text-lg text-neutral-400 lg:text-xl'>
-                    {author.title}
-                  </p>
-                )}
-              </div>
-            </div>
+            <SuiTitle type='h1'>{author.name}</SuiTitle>
+            {author.title && (
+              <p className='text-lg text-neutral-400 lg:text-xl'>
+                {author.title}
+              </p>
+            )}
             {author.description && (
               <Markdown
                 allowDirectives={false}
