@@ -1,14 +1,16 @@
 import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import StrapiImage from '@/components-cleaned/StrapiImage'
+import StrapiResourceCard from '@/components-cleaned/StrapiResourceCard'
+import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { SuiTitle } from '@/components/sui'
-import { authorsService, blogService } from '@/lib/api/strapi'
+import { authorsService, blogService, resourcesService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { camel } from '@/lib/utils/strings'
 import { CommonProps } from '@/types/homepage'
-import { EntryAuthor, EntryBlogPost } from '@/types/strapi'
+import { EntryAuthor, EntryBlogPost, EntryResource } from '@/types/strapi'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,6 +20,7 @@ import removeMarkdown from 'remove-markdown'
 export interface Props extends CommonProps {
   author: EntryAuthor
   authorBlogs: Array<EntryBlogPost>
+  authorResources: Array<EntryResource>
 }
 
 export async function getStaticPaths() {
@@ -71,11 +74,24 @@ export const getStaticProps = (async ({ params }) => {
     sort: ['date:DESC', 'publishedAt:DESC']
   })
 
+  const authorResources = await resourcesService.findMany({
+    filters: {
+      author: {
+        profiles: {
+          id: author.id
+        }
+      }
+    },
+    pagination: { limit: 12 },
+    sort: ['date:DESC', 'publishedAt:DESC']
+  })
+
   return {
     props: {
       ...commonProps,
       author,
       authorBlogs,
+      authorResources,
       seo: {
         title: `Articles by ${author.name} | ClickHouse`,
         path: `/authors/${author.slug}`,
@@ -90,6 +106,7 @@ export const getStaticProps = (async ({ params }) => {
 export default function Page({
   author,
   authorBlogs,
+  authorResources,
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   useGalaxyOnPage(camel(`${author.slug} author page`), [author.slug])
@@ -124,17 +141,17 @@ export default function Page({
 
   return (
     <Layout {...commonProps}>
-      <section className='bg-grid py-16 lg:py-24'>
+      <section className='bg-grid py-16'>
         <div className='section-container flex flex-col items-start gap-x-16 gap-y-8 lg:flex-row'>
           <StrapiImage
             entry={author.avatar}
-            className='hidden aspect-square h-auto w-64 max-w-none flex-shrink-0 flex-grow-0 rounded-full lg:block'
+            className='hidden aspect-square h-auto w-64 max-w-none flex-shrink-0 flex-grow-0 rounded-full bg-neutral lg:block'
           />
-          <div>
+          <div className='my-auto'>
             <div className='flex flex-wrap items-center gap-4'>
               <StrapiImage
                 entry={author.avatar}
-                className='aspect-square h-auto w-16 max-w-none flex-shrink-0 flex-grow-0 rounded-full md:w-32 lg:hidden'
+                className='aspect-square h-auto w-16 max-w-none flex-shrink-0 flex-grow-0 rounded-full bg-neutral md:w-32 lg:hidden'
               />
               <div>
                 <SuiTitle type='h1'>{author.name}</SuiTitle>
@@ -184,13 +201,29 @@ export default function Page({
           </div>
         </div>
       </section>
+      {(authorBlogs.length > 0 || authorResources.length > 0) && (
+        <HRSeparator className='!max-w-none' />
+      )}
       {authorBlogs.length > 0 && (
-        <section className='border-t border-neutral-725 py-16 lg:py-24'>
+        <section className='my-16 lg:my-24'>
           <div className='section-container'>
             <SuiTitle type='h2'>Blog posts by {author.name}</SuiTitle>
             <div className='mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
               {authorBlogs.map((blog) => {
                 return <StrapiBlogPostCard key={blog.id} entry={blog} />
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+      {authorResources.length > 0 && (
+        <section className='my-16 lg:my-24'>
+          <div className='section-container'>
+            <SuiTitle type='h2'>Resources by {author.name}</SuiTitle>
+            <div className='mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+              {authorResources.map((resource) => {
+                resource.category.requiresThumbnail = false // force non-mixed display types
+                return <StrapiResourceCard key={resource.id} entry={resource} />
               })}
             </div>
           </div>
