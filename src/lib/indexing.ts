@@ -19,9 +19,9 @@ interface IndexedItem extends Partial<Omit<BuildRecord, 'title'>> {
   publishedAt?: string | null
 }
 
-export async function all(): Promise<Array<IndexedItem>> {
-  const staticItems = buildIndex.filter((item) => item.indexable)
-
+export async function all(
+  indexableOnly: boolean = true
+): Promise<Array<IndexedItem>> {
   const [
     blogs,
     events,
@@ -42,22 +42,31 @@ export async function all(): Promise<Array<IndexedItem>> {
     cmsAuthors()
   ])
 
-  // Deduplicate by path (later entries override earlier ones)
-  return [
-    ...new Map(
-      [
-        ...staticItems,
-        ...blogs,
-        ...events,
-        ...comparisons,
-        ...pages,
-        ...videos,
-        ...integrations,
-        ...resources,
-        ...authors
-      ].map((item) => [item.path, item])
-    ).values()
-  ]
+  const byPath = new Map<string, IndexedItem>()
+
+  const add = (arr: readonly IndexedItem[]) => {
+    for (const item of arr) {
+      // Skip non-indexable if requested
+      if (indexableOnly && 'indexable' in item && item.indexable === false) {
+        continue
+      }
+
+      // Later entries override earlier ones
+      byPath.set(item.path, item)
+    }
+  }
+
+  add(buildIndex)
+  add(blogs)
+  add(events)
+  add(comparisons)
+  add(pages)
+  add(videos)
+  add(integrations)
+  add(resources)
+  add(authors)
+
+  return Array.from(byPath.values())
 }
 
 export async function cmsBlogs(): Promise<Array<IndexedItem>> {
@@ -165,27 +174,28 @@ export async function cmsPages(): Promise<Array<IndexedItem>> {
   const pages = await pagesService.findAll({
     fields: ['title', 'path', 'updatedAt'],
     sort: ['publishedAt:DESC'],
-    populate: []
+    populate: ['seo']
   })
   return pages.map((page) => {
     return {
       title: page.title,
       path: `/${page.path}`,
       lastModified: page.updatedAt,
-      publishedAt: page.publishedAt
+      publishedAt: page.publishedAt,
+      indexable: !page?.seo?.noindex && !page?.seo?.robots?.includes('noindex')
     }
   })
 }
 
 export async function cmsAuthors(): Promise<Array<IndexedItem>> {
   const authors = await authorsService.findAll({
-    fields: ['name', 'slug', 'updatedAt'],
+    fields: ['name', 'slug', 'title', 'updatedAt'],
     sort: ['name:ASC'],
     populate: []
   })
   return authors.map((author) => {
     return {
-      title: author.title,
+      title: [author.name, author.title].filter(Boolean).join(' — '),
       path: `/authors/${author.slug}`,
       lastModified: author.updatedAt,
       publishedAt: author.publishedAt
