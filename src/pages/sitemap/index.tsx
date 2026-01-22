@@ -2,6 +2,7 @@ import { fetchCategories } from '../api/blog'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import {
+  authorsService,
   blogService,
   eventsService,
   fetchAll,
@@ -16,7 +17,12 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getVideos } from '@/lib/videos'
 import { Video } from '@/lib/videos/types'
 import { CommonProps } from '@/types/homepage'
-import { EntryBlogPost, EntryResource } from '@/types/strapi'
+import {
+  EntryAuthor,
+  EntryBlogPost,
+  EntryEvent,
+  EntryResource
+} from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 
@@ -25,14 +31,19 @@ interface SitemapProps extends CommonProps {
   blogPosts: Array<
     Pick<EntryBlogPost, 'category' | 'title' | 'slug' | 'date' | 'publishedAt'>
   >
-  allEvents: any[]
+  allEvents: Array<
+    Pick<EntryEvent, 'title' | 'slug' | 'localDatetime' | 'category'>
+  >
   allVideos: Video[]
   onDemandEvents: any[]
   newsEvents: any[]
   pressReleases: any[]
   comparisons: any[]
-  resources: EntryResource[]
+  resources: Array<
+    Pick<EntryResource, 'title' | 'slug' | 'category' | 'date' | 'dateLabel'>
+  >
   demos: any[]
+  authors: Array<Pick<EntryAuthor, 'name' | 'slug' | 'title'>>
 }
 
 export const getStaticProps: GetStaticProps<SitemapProps> =
@@ -45,6 +56,8 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
       fields: ['category', 'title', 'slug', 'date', 'publishedAt']
     })
     const events = await eventsService.findAll({
+      fields: ['title', 'slug', 'localDatetime', 'category'],
+      populate: [],
       filters: {
         $and: [
           {
@@ -89,7 +102,15 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
     const newsEvents = newsItems.newsItems
     const pressReleases = newsItems.pressReleases
 
-    const resources = await resourcesService.findAll()
+    const resources = await resourcesService.findAll({
+      fields: ['title', 'slug', 'date', 'dateLabel'],
+      populate: ['category']
+    })
+
+    const authors = await authorsService.findAll({
+      fields: ['name', 'title', 'slug'],
+      populate: []
+    })
 
     const allVideos = await getVideos()
 
@@ -105,6 +126,7 @@ export const getStaticProps: GetStaticProps<SitemapProps> =
         comparisons,
         resources,
         demos,
+        authors,
         seo: {
           title: 'Site map - ClickHouse',
           path: '/sitemap'
@@ -126,7 +148,8 @@ function Sitemap({
   pressReleases,
   comparisons,
   resources,
-  demos
+  demos,
+  authors
 }: SitemapProps) {
   useGalaxyOnPage('siteMapPage')
 
@@ -709,6 +732,33 @@ function Sitemap({
                         <span>{event.category}</span>
                       )}
                     </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <HRSeparator className='my-20' />
+          <div className='grid gap-10 xl:grid-cols-4'>
+            <div>
+              <h2
+                id='authors'
+                className='mb-6 font-basier text-2xl font-semibold text-neutral-100'>
+                Authors
+              </h2>
+              <ul>
+                {authors.map((author) => (
+                  <li key={author.slug} className='pb-3'>
+                    <p>
+                      <Link
+                        href={`/authors/${author.slug}`}
+                        className='text-primary-300 hover:underline'>
+                        {author.name}
+                      </Link>
+                    </p>
+                    {author.title && (
+                      <p className='text-sm text-neutral-200'>{author.title}</p>
+                    )}
                   </li>
                 ))}
               </ul>
