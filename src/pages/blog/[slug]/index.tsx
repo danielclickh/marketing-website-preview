@@ -145,9 +145,22 @@ export const getStaticProps: GetStaticProps<BlogProps> =
             title: blog.title,
             description: blog.shortDescription,
             imageUrl: getProxiedMediaUrl(blog.thumbnailPng.url),
-            authorName: blog?.author?.name
-              ? blog.author.name
-              : 'ClickHouse Team',
+            authors: blog?.author?.profiles?.length
+              ? blog.author.profiles.map((profile) => {
+                  return {
+                    name: profile.name,
+                    url: `/authors/${profile.slug}`,
+                    imageUrl: getProxiedMediaUrl(profile.avatar.url),
+                    jobTitle: profile.title
+                  }
+                })
+              : [
+                  {
+                    name: blog?.author?.name
+                      ? blog.author.name
+                      : 'ClickHouse Team'
+                  }
+                ],
             publishedDate: blog.publishedAt,
             modifiedDate: blog.updatedAt,
             faqs: combinedFaqs

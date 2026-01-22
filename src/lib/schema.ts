@@ -14,7 +14,8 @@ import {
   ContactPage,
   WebPage,
   Product,
-  FAQPage
+  FAQPage,
+  Person
 } from 'schema-dts'
 
 const defaultOrganization: Organization = {
@@ -75,35 +76,64 @@ export const generateBlogArticleSchema = ({
   title,
   description,
   imageUrl,
-  authorName,
   publishedDate,
   modifiedDate,
-  faqs
+  faqs,
+  authors
 }: {
   title: string
   description: string
   imageUrl: string
-  authorName: string
   publishedDate: string
   modifiedDate: string
   faqs?: Array<{
     question: string
     answer: string
   }>
+  authors: Array<{
+    name: string
+    url?: string | null
+    imageUrl?: string | null
+    jobTitle?: string | null
+    isEmployee?: boolean | null
+  }>
 }): Array<WithContext<BlogPosting | FAQPage>> => {
+  const authorNodes: Array<Person> = authors.map((author) => {
+    const person: Person = {
+      '@type': 'Person',
+      name: author.name
+    }
+
+    if (author.url) {
+      person.url = absoluteUrl(author.url)
+      person['@id'] = `${absoluteUrl(author.url)}#person`
+    }
+
+    if (author.imageUrl) {
+      person.image = author.imageUrl
+    }
+
+    if (author.jobTitle) {
+      person.jobTitle = author.jobTitle
+    }
+
+    if (author.isEmployee) {
+      person.worksFor = defaultOrganization
+    }
+
+    return person
+  })
+
   const blogSchema: WithContext<BlogPosting> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: title,
     description,
     image: imageUrl,
-    author: {
-      '@type': 'Person',
-      name: authorName
-    },
     publisher: defaultOrganization,
     datePublished: publishedDate,
-    dateModified: modifiedDate
+    dateModified: modifiedDate,
+    author: authorNodes.length === 1 ? authorNodes[0] : authorNodes
   }
 
   const schemas: Array<WithContext<BlogPosting | FAQPage>> = [blogSchema]
