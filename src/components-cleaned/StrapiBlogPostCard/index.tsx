@@ -36,7 +36,7 @@ export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
           entry={entry.thumbnailPng}
           width={400}
           height={600}
-          className='aspect-[375/211] w-full max-w-none object-cover object-center'
+          className='aspect-[31/16] w-full max-w-none object-cover object-center'
         />
       </CUICard.Header>
       <CUICard.Body className='mb-auto p-6'>
@@ -54,7 +54,7 @@ export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
           </Link>
         </SuiTitle>
       </CUICard.Body>
-      <CUICard.Footer className='mt-auto flex w-full items-center p-6 text-sm text-neutral-300'>
+      <CUICard.Footer className='mt-auto flex w-full items-center p-6 pt-0 text-sm text-neutral-300'>
         {footer.join(' · ')}
       </CUICard.Footer>
     </CUICard>
