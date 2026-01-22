@@ -46,8 +46,8 @@ const CONTENT_TYPE_HANDLERS: Record<
    * Collection types
    * -----
    */
-  'api::authors.authors': async function (body, response, request) {
-    const paths = [`/sitemap` /*`/blog`*/]
+  'api::author.author': async function (body, response, request) {
+    const paths = [`/sitemap`, `/resources` /*`/blog`*/]
 
     const id = body?.entry?.id
     const slug = body?.entry?.slug
@@ -56,7 +56,7 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/authors/${slug}`)
     }
 
-    // Update blogs
+    // Update blogs and resources
     if (id) {
       const authorBlogs = await blogService.findAll({
         fields: ['slug'],
@@ -72,6 +72,23 @@ const CONTENT_TYPE_HANDLERS: Record<
 
       authorBlogs.forEach((blog) => {
         paths.push(`/blog/${blog.slug}`)
+      })
+
+      const authorResources = await resourcesService.findAll({
+        fields: ['slug'],
+        populate: ['category'],
+        filters: {
+          author: {
+            profiles: {
+              id
+            }
+          }
+        }
+      })
+
+      authorResources.forEach((resource) => {
+        paths.push(`/resources/${resource.category.slug}`)
+        paths.push(`/resources/${resource.category.slug}/${resource.slug}`)
       })
     }
 
