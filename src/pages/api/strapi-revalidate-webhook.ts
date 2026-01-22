@@ -282,6 +282,20 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/resources/${body.entry.category.slug}/${body.entry.slug}`)
     }
 
+    // Get all author relation slugs
+    const authorSlugs = body?.entry?.author?.profiles?.map(
+      // @ts-expect-error todo: better type handling
+      (profile) => profile.slug
+    )
+
+    // Revalidate author pages
+    if (authorSlugs) {
+      // @ts-expect-error todo: better type handling
+      authorSlugs.forEach((authorSlug) => {
+        paths.push(`/authors/${authorSlug}`)
+      })
+    }
+
     await revalidate(response, paths)
   },
   'api::resource-category.resource-category': async function (body, response) {
