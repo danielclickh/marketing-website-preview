@@ -163,9 +163,9 @@ export default function Page({ headerData, seo }: CommonProps) {
               },
               {
                 icon: iconPostgres,
-                title: 'Enterprise grade Postgres',
+                title: 'Enterprise grade Postgres built with Ubicloud',
                 description:
-                  'Postgres built for mission-critical workloads. No compromises on availability, reliability, security or standard managed service features.',
+                  'Postgres built for mission-critical workloads. No compromises on availability, reliability, security or standard managed service features. Built along with seasoned Postgres experts at Ubicloud.',
                 bullets: [
                   'High availability with up to 2 standbys',
                   'Automatic backups with WAL archival to S3',
