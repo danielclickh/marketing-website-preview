@@ -196,7 +196,9 @@ export default function Page({
         <div className='section-container flex flex-col items-start gap-x-16 gap-y-8 lg:flex-row'>
           <StrapiImage
             entry={author.avatar}
-            className='aspect-square h-auto w-16 max-w-none flex-shrink-0 flex-grow-0 rounded-full bg-neutral md:w-32 lg:w-64'
+            width={256}
+            height={256}
+            className='aspect-square h-auto w-16 max-w-none flex-shrink-0 flex-grow-0 rounded-full bg-neutral object-cover md:w-32 lg:w-64'
           />
           <div className='my-auto'>
             <SuiTitle type='h1'>{author.name}</SuiTitle>

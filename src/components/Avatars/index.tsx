@@ -24,7 +24,7 @@ export default function Avatars({ avatars }: AvatarsProps) {
                 <Image
                   src={avatar.url}
                   alt={avatar.alternativeText || ''}
-                  className='aspect-square !h-auto !w-14 rounded-full border-4 border-neutral-900'
+                  className='aspect-square !h-auto !w-14 rounded-full border-4 border-neutral-900 bg-neutral object-cover'
                   width={44}
                   height={44}
                 />
