@@ -17,10 +17,14 @@ import Link from 'next/link'
 import React from 'react'
 import removeMarkdown from 'remove-markdown'
 
+const DISPLAY_LIMIT = 6
+
 export interface Props extends CommonProps {
   author: EntryAuthor
-  authorBlogs: Array<EntryBlogPost>
-  authorResources: Array<EntryResource>
+  blogs: Array<EntryBlogPost>
+  resources: Array<EntryResource>
+  totalBlogs: number
+  totalResources: number
 }
 
 export async function getStaticPaths() {
@@ -62,32 +66,40 @@ export const getStaticProps = (async ({ params }) => {
     }
   }
 
-  const authorBlogs = await blogService.findMany({
-    filters: {
-      author: {
-        profiles: {
-          id: author.id
-        }
-      }
-    },
-    pagination: { limit: 12 },
-    sort: ['date:DESC', 'publishedAt:DESC']
-  })
+  const { data: blogs, pagination: blogPagination } =
+    await blogService.findMany(
+      {
+        filters: {
+          author: {
+            profiles: {
+              id: author.id
+            }
+          }
+        },
+        pagination: { limit: DISPLAY_LIMIT, withCount: true },
+        sort: ['date:DESC', 'publishedAt:DESC']
+      },
+      true
+    )
 
-  const authorResources = await resourcesService.findMany({
-    filters: {
-      author: {
-        profiles: {
-          id: author.id
-        }
-      }
-    },
-    pagination: { limit: 12 },
-    sort: ['date:DESC', 'publishedAt:DESC']
-  })
+  const { data: resources, pagination: resourcePagination } =
+    await resourcesService.findMany(
+      {
+        filters: {
+          author: {
+            profiles: {
+              id: author.id
+            }
+          }
+        },
+        pagination: { limit: DISPLAY_LIMIT, withCount: true },
+        sort: ['date:DESC', 'publishedAt:DESC']
+      },
+      true
+    )
 
-  const hasBlogs = authorBlogs.length
-  const hasResources = authorResources.length > 0
+  const hasBlogs = blogs.length > 0
+  const hasResources = resources.length > 0
 
   let title = author.name
   let description = ''
@@ -119,8 +131,10 @@ export const getStaticProps = (async ({ params }) => {
     props: {
       ...commonProps,
       author,
-      authorBlogs,
-      authorResources,
+      blogs,
+      resources,
+      totalBlogs: blogPagination?.total || blogs.length,
+      totalResources: resourcePagination?.total || resources.length,
       seo: seo
     }
   }
@@ -128,8 +142,10 @@ export const getStaticProps = (async ({ params }) => {
 
 export default function Page({
   author,
-  authorBlogs,
-  authorResources,
+  blogs,
+  resources,
+  totalBlogs,
+  totalResources,
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   useGalaxyOnPage(camel(`${author.slug} author page`), [author.slug])
@@ -216,27 +232,40 @@ export default function Page({
           </div>
         </div>
       </section>
-      {(authorBlogs.length > 0 || authorResources.length > 0) && (
-        <HRSeparator className='!max-w-none' />
+      <HRSeparator className='!max-w-none' />
+      {!blogs.length && !resources.length && (
+        <section className='section-container my-16 text-center lg:my-24'>
+          <p>No articles or resources published yet.</p>
+        </section>
       )}
-      {authorBlogs.length > 0 && (
+      {blogs.length > 0 && (
         <section className='my-16 lg:my-24'>
           <div className='section-container'>
             <SuiTitle type='h2'>Blog posts by {author.name}</SuiTitle>
-            <div className='mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-              {authorBlogs.map((blog) => {
+            {totalBlogs > blogs.length && (
+              <p className='mt-4 text-neutral-400'>
+                Showing {blogs.length} of {totalBlogs} articles
+              </p>
+            )}
+            <div className='mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-16 lg:grid-cols-3'>
+              {blogs.map((blog) => {
                 return <StrapiBlogPostCard key={blog.id} entry={blog} />
               })}
             </div>
           </div>
         </section>
       )}
-      {authorResources.length > 0 && (
+      {resources.length > 0 && (
         <section className='my-16 lg:my-24'>
           <div className='section-container'>
             <SuiTitle type='h2'>Resources by {author.name}</SuiTitle>
-            <div className='mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-              {authorResources.map((resource) => {
+            {totalResources > resources.length && (
+              <p className='mt-4 text-neutral-400'>
+                Showing {resources.length} of {totalResources} resources
+              </p>
+            )}
+            <div className='mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-16 lg:grid-cols-3'>
+              {resources.map((resource) => {
                 resource.category.requiresThumbnail = false // force non-mixed display types
                 return <StrapiResourceCard key={resource.id} entry={resource} />
               })}
