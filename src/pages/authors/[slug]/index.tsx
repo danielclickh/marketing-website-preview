@@ -5,8 +5,14 @@ import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import { SuiTitle } from '@/components/sui'
-import { authorsService, blogService, resourcesService } from '@/lib/api/strapi'
+import {
+  authorsService,
+  blogService,
+  getProxiedMediaUrl,
+  resourcesService
+} from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateAuthorPageSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { camel } from '@/lib/utils/strings'
 import { CommonProps } from '@/types/homepage'
@@ -120,7 +126,13 @@ export const getStaticProps = (async ({ params }) => {
     path: `/authors/${author.slug}`,
     description: author.description
       ? removeMarkdown(author.description)
-      : description
+      : description,
+    schema: generateAuthorPageSchema({
+      name: author.name,
+      url: `/authors/${author.slug}`,
+      imageUrl: getProxiedMediaUrl(author.avatar.url),
+      jobTitle: author.title
+    })
   }
 
   if (!hasBlogs && !hasResources) {
