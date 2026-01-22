@@ -59,29 +59,28 @@ export default function NavigationSubNavProducts() {
                 </NavigationLink>
               </li>
               
-              {/*<li className='flex items-center'>
+              <li className='flex items-center'>
                 <NavigationLink
                   href='#'
                   onClick={useGalaxyOnClick(
-                    'topNav.productMenu.clickstackCloudSelect'
+                    'topNav.productMenu.postgresSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
                   <Image
-                    src='/images/nav/icon-clickstack-cloud.svg'
-                    alt='ClickStack Cloud'
+                    src='/images/nav/icon-postgres.svg'
+                    alt='Postgres ClickHouse Cloud'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
                   />
                   <span>
-                    ClickStack Cloud
+                  Postgres managed by ClickHouse
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                      Unified observability UI for logs,
-                      <br /> metrics, and traces
+                    Unified data stack for transactions<br /> and analytics.
                     </div>
                   </span>
                 </NavigationLink>
-              </li>*/}
+              </li>
             </ul>
           </div>
         </div>
