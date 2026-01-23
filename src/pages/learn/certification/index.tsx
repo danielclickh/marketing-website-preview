@@ -1,10 +1,12 @@
+import certificationThumbnail from '../assets/certification-thumbnail.jpg'
 import iconPlay from '../assets/icon-play.svg'
 import Accordion from '@/components-cleaned/Accordion'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import VimeoThumbnail from '@/components-cleaned/VimeoThumbnail'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LogoAnnouncementLink from '@/components/LogoAnnouncementLink'
 import Modal from '@/components/Modal'
-import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import Bullseye from '@/components/icons/Bullseye'
@@ -191,13 +193,11 @@ export default function CertificationPage({
                   Preparing for the ClickHouse Certified Developer exam
                 </h3>
                 {watchWebinar && (
-                  <ResponsiveEmbed>
-                    <iframe
-                      src='https://www.youtube-nocookie.com/embed/bLXCYhf5G8Q?rel=0&autoplay=1'
-                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                      allowFullScreen
-                    />
-                  </ResponsiveEmbed>
+                  <PlayOnClickVideo
+                    provider='vimeo'
+                    id={1152964032}
+                    thumbnail={certificationThumbnail}
+                  />
                 )}
               </div>
             </Modal>
