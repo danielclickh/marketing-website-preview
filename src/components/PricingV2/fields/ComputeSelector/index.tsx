@@ -7,6 +7,7 @@ import HRSeparator from '@/components/HRSeparator'
 import { usePricingV2Context } from '@/components/PricingV2ContextProvider'
 import { SuiText } from '@/components/sui'
 import { PricingV2ComponentPackage } from '@/lib/api/strapi/types'
+import { interleaveWithLast } from '@/lib/utils/arrays'
 import { useMemo } from 'react'
 
 // Array of replicate size options from 1-25
@@ -19,25 +20,6 @@ const COMPUTES: Options = config.computes.map((size) => ({
   value: size,
   label: `${size} GiB RAM, ${size / 4} vCPUs`
 }))
-
-function formatComponentsList(components: Array<React.ReactNode>) {
-  if (components.length === 0) return null
-  if (components.length === 1) return components[0]
-
-  const lastComponent = components[components.length - 1]
-  const allButLast = components.slice(0, -1)
-
-  return (
-    <>
-      {allButLast.reduce((acc: React.ReactNode[], curr, index) => {
-        if (index === allButLast.length - 1) {
-          return [...acc, curr, ' or ', lastComponent]
-        }
-        return [...acc, curr, ', ']
-      }, [])}
-    </>
-  )
-}
 
 export default function ComputeSelector() {
   const {
@@ -171,7 +153,7 @@ export default function ComputeSelector() {
                 To increase or customize the size of your service with
                 additional RAM and CPU, or to add more replicas for redundancy,
                 switch to{' '}
-                {formatComponentsList(
+                {interleaveWithLast(
                   customizablePlans.map((item, index) => {
                     return (
                       <button
@@ -183,7 +165,9 @@ export default function ComputeSelector() {
                         {item.name}
                       </button>
                     )
-                  })
+                  }),
+                  <>, </>,
+                  <> or </>
                 )}
               </div>
 

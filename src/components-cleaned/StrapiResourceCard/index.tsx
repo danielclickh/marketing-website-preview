@@ -1,6 +1,7 @@
 import StrapiImage from '@/components-cleaned/StrapiImage'
 import { CUICard } from '@/components/ClickUI'
 import { SuiTitle } from '@/components/sui'
+import { interleaveWithLast } from '@/lib/utils/arrays'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { EntryResource } from '@/types/strapi'
 import Image from 'next/image'
@@ -11,6 +12,24 @@ export interface StrapiResourceCardProps {
 }
 
 export default function StrapiResourceCard({ entry }: StrapiResourceCardProps) {
+  const footer: Array<string> = []
+
+  if (entry.author?.profiles && entry.author.profiles.length > 0) {
+    const authorNames = entry.author.profiles.map((profile) => profile.name)
+    const combinedNames = interleaveWithLast(authorNames, ', ', ' and ').join(
+      ''
+    )
+    footer.push(combinedNames)
+  } else if (entry.author?.name) {
+    footer.push(entry.author.name)
+  }
+
+  if (entry?.date) {
+    footer.push(
+      `${entry.dateLabel ? `${entry.dateLabel}: ` : ''}${convertDateToString(entry.date)}`
+    )
+  }
+
   return (
     <CUICard className='group/resource relative overflow-hidden p-6'>
       <CUICard.Header className='mb-4'>
@@ -44,14 +63,7 @@ export default function StrapiResourceCard({ entry }: StrapiResourceCardProps) {
         </SuiTitle>
         {(entry.author || entry.date) && (
           <p className='mt-2 text-sm text-neutral-200'>
-            {[
-              entry.author?.name,
-              entry?.date
-                ? `${entry.dateLabel ? `${entry.dateLabel}: ` : ''}${convertDateToString(entry.date)}`
-                : null
-            ]
-              .filter(Boolean)
-              .join(' • ')}
+            {footer.filter(Boolean).join(' • ')}
           </p>
         )}
       </CUICard.Header>

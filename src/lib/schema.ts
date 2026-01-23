@@ -14,7 +14,9 @@ import {
   ContactPage,
   WebPage,
   Product,
-  FAQPage
+  FAQPage,
+  Person,
+  ProfilePage
 } from 'schema-dts'
 
 const defaultOrganization: Organization = {
@@ -71,39 +73,79 @@ export const generateBlogArchiveSchema = ({
   }
 })
 
+type AuthorFields = {
+  name: string
+  url?: string | null
+  imageUrl?: string | null
+  jobTitle?: string | null
+  isEmployee?: boolean | null
+}
+
+export const generateAuthorSchema = ({
+  name,
+  url,
+  imageUrl,
+  jobTitle,
+  isEmployee
+}: AuthorFields): WithContext<Person> => {
+  const person: WithContext<Person> = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name
+  }
+
+  if (url) {
+    person.url = absoluteUrl(url)
+    person['@id'] = `${absoluteUrl(url)}#person`
+  }
+
+  if (imageUrl) {
+    person.image = imageUrl
+  }
+
+  if (jobTitle) {
+    person.jobTitle = jobTitle
+  }
+
+  if (isEmployee) {
+    person.worksFor = defaultOrganization
+  }
+
+  return person
+}
+
 export const generateBlogArticleSchema = ({
   title,
   description,
   imageUrl,
-  authorName,
   publishedDate,
   modifiedDate,
-  faqs
+  faqs,
+  authors
 }: {
   title: string
   description: string
   imageUrl: string
-  authorName: string
   publishedDate: string
   modifiedDate: string
   faqs?: Array<{
     question: string
     answer: string
   }>
+  authors: Array<AuthorFields>
 }): Array<WithContext<BlogPosting | FAQPage>> => {
+  const authorNodes = authors.map(generateAuthorSchema)
+
   const blogSchema: WithContext<BlogPosting> = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: title,
     description,
     image: imageUrl,
-    author: {
-      '@type': 'Person',
-      name: authorName
-    },
     publisher: defaultOrganization,
     datePublished: publishedDate,
-    dateModified: modifiedDate
+    dateModified: modifiedDate,
+    author: authorNodes.length === 1 ? authorNodes[0] : authorNodes
   }
 
   const schemas: Array<WithContext<BlogPosting | FAQPage>> = [blogSchema]
@@ -113,6 +155,24 @@ export const generateBlogArticleSchema = ({
   }
 
   return schemas
+}
+
+export const generateAuthorPageSchema = (
+  author: AuthorFields
+): Array<WithContext<Person | ProfilePage>> => {
+  const authorSchema = generateAuthorSchema(author)
+  const pageSchema: WithContext<ProfilePage> = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    name: `${author.name} Author Profile`,
+    mainEntity: authorSchema
+  }
+
+  if ('url' in authorSchema) {
+    pageSchema.url = authorSchema.url
+  }
+
+  return [authorSchema, pageSchema]
 }
 
 export const generateEventsArchiveSchema = ({

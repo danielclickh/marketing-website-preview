@@ -16,7 +16,7 @@ import logoPostgress from './logo-postgress.svg'
 import logoRedshift from './logo-redshift.svg'
 import logoSnowflake from './logo-snowflake.svg'
 import logoAdevinta from './logoAdevinta.svg'
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import FeatureCard from '@/components/Cards/FeatureCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
@@ -53,16 +53,7 @@ export async function getStaticProps() {
         $eq: 7
       }
     },
-    populate: [
-      'Content',
-      'Content.customContent',
-      'Content.customContent.Image',
-      'Content.RelatedBlogs',
-      'Content.RelatedBlogs.blog_posts',
-      'Content.RelatedBlogs.blog_posts.*',
-      'Content.RelatedBlogs.blog_posts.author',
-      'Content.RelatedBlogs.blog_posts.thumbnailPng'
-    ]
+    populate: 'deep'
   })
 
   if (!data?.[0]) {
@@ -714,8 +705,7 @@ function combineRenderedContent(
 
   const relatedRendered = related.flatMap((custom) => {
     return custom.blog_posts.map((blog) => {
-      const urlWithLoc = `${blog.slug}?loc=${locTracking}`
-      return <BlogPost key={blog.id} {...blog} slug={urlWithLoc} />
+      return <StrapiBlogPostCard key={blog.id} entry={blog} />
     })
   })
 

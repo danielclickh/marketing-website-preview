@@ -1,6 +1,7 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ScrollToTop from '@/components-cleaned/ScrollToTop'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
+import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
 import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import StrapiImage from '@/components-cleaned/StrapiImage'
 import Avatars from '@/components/Avatars'
@@ -176,36 +177,14 @@ export default function ResourcePage({
               </h1>
 
               {/* Authors */}
-              {(resource.author || resource.date) && (
-                <div className='flex flex-row items-center space-x-4 pt-2'>
-                  {resource.author && (
-                    <Avatars avatars={resource.author.avatarPng} />
-                  )}
-                  <div className='flex flex-col items-start'>
-                    {resource.author && (
-                      <SuiText size='base' weight='normal'>
-                        {resource.author.profileLink ? (
-                          <Link
-                            href={resource.author.profileLink}
-                            target='_blank'
-                            rel='noreferrer noopener'
-                            className='hover:underline'>
-                            {resource.author.name}
-                          </Link>
-                        ) : (
-                          resource.author.name
-                        )}
-                      </SuiText>
-                    )}
-                    {resource.date && (
-                      <SuiText size='sm' weight='normal' color='secondary'>
-                        {resource.dateLabel ? `${resource.dateLabel}: ` : ''}
-                        {convertDateToString(resource.date)}
-                      </SuiText>
-                    )}
-                  </div>
-                </div>
-              )}
+              <StrapiAuthorMeta
+                authors={resource.author}
+                extras={[
+                  resource.date
+                    ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`
+                    : null
+                ]}
+              />
             </div>
 
             {/* Blog content */}

@@ -1,10 +1,13 @@
 import { PricingV2 } from './types'
 import { SeoContainerProps } from '@/components/SeoContainer'
-import { absoluteUrl, relativeUrl } from '@/lib/next'
+import { absoluteUrl, IS_PRODUCTION, relativeUrl } from '@/lib/next'
 import {
+  ApiFieldFilter,
   ApiRequestParams,
   ApiResponse,
   ComponentSeo,
+  EntryAuthor,
+  EntryBlogPost,
   EntryEvent,
   EntryMarketingVideo,
   EntryPage,
@@ -27,8 +30,7 @@ const url = `${strapiApiUrl}/api/`
 export function getStagingOnlyFilters(
   fieldName: string = 'StagingOnly'
 ): Array<Record<string, any>> {
-  const filter =
-    process.env.NEXT_IS_PROD === 'true' ? { $eq: false } : { $eq: true }
+  const filter = IS_PRODUCTION ? { $eq: false } : { $eq: true }
   return [
     { [fieldName]: { $null: true } },
     { [fieldName]: filter },
@@ -90,10 +92,6 @@ export async function request(
   if (queryString.length) uri += `?${queryString}`
 
   const requestInit: RequestInit = {
-    // Default options
-    next: {
-      revalidate: 5
-    },
     headers: {
       Authorization: `Bearer ${process.env.STRAPI_API_KEY}`
     },
@@ -439,3 +437,15 @@ export const pagesService = new StrapiEntryService<EntryPage>(
 
 export const marketingVideosService =
   new StrapiEntryService<EntryMarketingVideo>('marketing-videos', false, true)
+
+export const blogService = new StrapiEntryService<EntryBlogPost>(
+  'blog-posts',
+  true,
+  true
+)
+
+export const authorsService = new StrapiEntryService<EntryAuthor>(
+  'authors',
+  false,
+  true
+)

@@ -1,6 +1,8 @@
 import { BuildRecord } from '../../scripts/buildIndex'
 import buildIndex from '@/../public/buildIndex.json'
 import {
+  authorsService,
+  blogService,
   eventsService,
   fetchAll,
   getStagingOnlyFilters,
@@ -17,39 +19,58 @@ interface IndexedItem extends Partial<Omit<BuildRecord, 'title'>> {
   publishedAt?: string | null
 }
 
-export async function all(): Promise<Array<IndexedItem>> {
-  const staticItems = buildIndex.filter((item) => item.indexable)
+export async function all(
+  indexableOnly: boolean = true
+): Promise<Array<IndexedItem>> {
+  const [
+    blogs,
+    events,
+    comparisons,
+    pages,
+    videos,
+    integrations,
+    resources,
+    authors
+  ] = await Promise.all([
+    cmsBlogs(),
+    cmsEvents(),
+    cmsComparisons(),
+    cmsPages(),
+    cmsVideos(),
+    cmsIntegrations(),
+    cmsResources(),
+    cmsAuthors()
+  ])
 
-  const [blogs, events, comparisons, pages, videos, integrations, resources] =
-    await Promise.all([
-      cmsBlogs(),
-      cmsEvents(),
-      cmsComparisons(),
-      cmsPages(),
-      cmsVideos(),
-      cmsIntegrations(),
-      cmsResources()
-    ])
+  const byPath = new Map<string, IndexedItem>()
 
-  // Deduplicate by path (later entries override earlier ones)
-  return [
-    ...new Map(
-      [
-        ...staticItems,
-        ...blogs,
-        ...events,
-        ...comparisons,
-        ...pages,
-        ...videos,
-        ...integrations,
-        ...resources
-      ].map((item) => [item.path, item])
-    ).values()
-  ]
+  const add = (arr: readonly IndexedItem[]) => {
+    for (const item of arr) {
+      // Skip non-indexable if requested
+      if (indexableOnly && 'indexable' in item && item.indexable === false) {
+        continue
+      }
+
+      // Later entries override earlier ones
+      byPath.set(item.path, item)
+    }
+  }
+
+  add(buildIndex)
+  add(blogs)
+  add(events)
+  add(comparisons)
+  add(pages)
+  add(videos)
+  add(integrations)
+  add(resources)
+  add(authors)
+
+  return Array.from(byPath.values())
 }
 
 export async function cmsBlogs(): Promise<Array<IndexedItem>> {
-  const blogPosts = await fetchAll('blog-posts', {
+  const blogPosts = await blogService.findAll({
     sort: ['date:DESC', 'publishedAt:DESC'],
     fields: [
       'title',
@@ -58,8 +79,7 @@ export async function cmsBlogs(): Promise<Array<IndexedItem>> {
       'category',
       'publishedAt',
       'updatedAt'
-    ],
-    filters: { $or: getStagingOnlyFilters() }
+    ]
   })
 
   return blogPosts.map((post) => {
@@ -154,14 +174,31 @@ export async function cmsPages(): Promise<Array<IndexedItem>> {
   const pages = await pagesService.findAll({
     fields: ['title', 'path', 'updatedAt'],
     sort: ['publishedAt:DESC'],
-    populate: []
+    populate: ['seo']
   })
   return pages.map((page) => {
     return {
       title: page.title,
       path: `/${page.path}`,
       lastModified: page.updatedAt,
-      publishedAt: page.publishedAt
+      publishedAt: page.publishedAt,
+      indexable: !page?.seo?.noindex && !page?.seo?.robots?.includes('noindex')
+    }
+  })
+}
+
+export async function cmsAuthors(): Promise<Array<IndexedItem>> {
+  const authors = await authorsService.findAll({
+    fields: ['name', 'slug', 'title', 'updatedAt'],
+    sort: ['name:ASC'],
+    populate: []
+  })
+  return authors.map((author) => {
+    return {
+      title: [author.name, author.title].filter(Boolean).join(' — '),
+      path: `/authors/${author.slug}`,
+      lastModified: author.updatedAt,
+      publishedAt: author.publishedAt
     }
   })
 }

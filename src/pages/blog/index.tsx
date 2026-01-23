@@ -1,19 +1,19 @@
-import { useDebounce } from '../../hooks'
-import { fetchBlogs } from '../api/blog'
 import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
-import Avatars from '@/components/Avatars'
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import { CUILink } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
 import Pagination from '@/components/Pagination'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
+import { useDebounce } from '@/hooks'
 import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateBlogArchiveSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { fetchBlogs } from '@/pages/api/blog'
 import { BlogApiResponse, BlogProps } from '@/types/blogs'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
@@ -174,8 +174,8 @@ export default function BlogsPage({
             className='mb-16 mt-2 flex w-full flex-col gap-y-8 rounded-xl hover:no-underline hover:shadow-card lg:flex-row-reverse lg:gap-x-12 xl:gap-x-24'>
             {featuredBlog.thumbnailPng && (
               <div className='lg:w-1/2'>
-                <StrapiImageUrl
-                  {...featuredBlog.thumbnailPng}
+                <StrapiImage
+                  entry={featuredBlog.thumbnailPng}
                   loading='eager'
                   priority
                   width={640}
@@ -195,27 +195,21 @@ export default function BlogsPage({
                 {featuredBlog.shortDescription}
               </div>
 
-              <div className='flex flex-row items-center space-x-4'>
-                {featuredBlog.author.avatarPng && (
-                  <Avatars
-                    avatars={
-                      Array.isArray(featuredBlog.author.avatarPng)
-                        ? featuredBlog.author.avatarPng
-                        : [featuredBlog.author.avatarPng]
-                    }
-                  />
-                )}
-                <div>
-                  <div className='text-base'>{featuredBlog.author.name}</div>
-                  {(featuredBlog.date || featuredBlog.publishedAt) && (
-                    <div className='text-sm text-neutral-300'>
-                      {convertDateToString(
+              <StrapiAuthorMeta
+                authors={featuredBlog.author}
+                profileLinks={false}
+                extras={[
+                  featuredBlog.date || featuredBlog.publishedAt
+                    ? convertDateToString(
                         featuredBlog.date || featuredBlog.publishedAt
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
+                      )
+                    : null,
+                  featuredBlog.reading_time_override ||
+                  featuredBlog.reading_time
+                    ? `${featuredBlog.reading_time_override || featuredBlog.reading_time} minutes read`
+                    : null
+                ]}
+              />
             </div>
           </CUILink>
         </div>
@@ -271,7 +265,7 @@ export default function BlogsPage({
             <div className='w-full'>
               <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
                 {blogs.map((blog) => (
-                  <BlogPost key={blog.id} {...blog} />
+                  <StrapiBlogPostCard key={blog.id} entry={blog} />
                 ))}
               </div>
             </div>

@@ -1,4 +1,4 @@
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import LogoCarousel from '@/components/LogoCarousel'
@@ -482,7 +482,7 @@ export default function SnowflakePage({
                       {content.RelatedBlogs.flatMap((custom: any) =>
                         custom.blog_posts.map((blog: any) => (
                           <div key={blog.id}>
-                            <BlogPost {...blog} />
+                            <StrapiBlogPostCard entry={blog} />
                           </div>
                         ))
                       )}
