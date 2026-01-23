@@ -592,7 +592,7 @@ We’ve invested significant effort integrating these technologies, so a tighter
               <SuiTitle type='h2'>
                 Ready to try{' '}
                 <TiltedText type='black-on-yellow' className='px-2'>
-                  Postrgres
+                  Postgres
                 </TiltedText>
                 <br /> managed by ClickHouse?
               </SuiTitle>
