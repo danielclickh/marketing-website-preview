@@ -29,7 +29,7 @@ import { CommonProps, ParamsType } from '@/types/homepage'
 import { BlogModules, EntryBlogPost } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import removeMarkdown from 'remove-markdown'
 
 interface BlogProps extends CommonProps {
@@ -208,9 +208,6 @@ export default function BlogPage({
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
   const contentRef = useRef<null | HTMLDivElement>(null)
-  const [hideScrollTopAt, setHideScrollTopAt] = useState<undefined | number>(
-    undefined
-  )
 
   const GlobalBlogCta = ({
     location,
@@ -256,26 +253,9 @@ export default function BlogPage({
     )
   })
 
-  useEffect(() => {
-    const contentEl = contentRef.current
-    if (!contentEl) {
-      setHideScrollTopAt(undefined)
-      return
-    }
-
-    const hideAtHanlder = () => {
-      setHideScrollTopAt(contentEl.offsetTop + contentEl.clientHeight)
-    }
-
-    const resizeObserver = new ResizeObserver(hideAtHanlder)
-    resizeObserver.observe(contentEl)
-
-    return () => resizeObserver.disconnect()
-  }, [contentRef.current])
-
   return (
     <Layout seo={seo} headerData={headerData}>
-      <ScrollToTop showFrom={600} hideAt={hideScrollTopAt} />
+      <ScrollToTop showFrom={600} hideAtBottomRef={contentRef} />
       <div className='relative'>
         <ReadingProgress target={contentRef} />
 
