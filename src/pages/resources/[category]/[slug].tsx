@@ -4,7 +4,6 @@ import SmartBackButton from '@/components-cleaned/SmartBackButton'
 import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
 import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import StrapiImage from '@/components-cleaned/StrapiImage'
-import Avatars from '@/components/Avatars'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
@@ -24,11 +23,10 @@ import { generateFaqPageSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { BlogModules, EntryResource } from '@/types/strapi'
+import { EntryResource } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import removeMarkdown from 'remove-markdown'
 
 export async function getStaticPaths() {
@@ -128,30 +126,9 @@ export default function ResourcePage({
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const contentRef = useRef<null | HTMLDivElement>(null)
-  const [hideScrollTopAt, setHideScrollTopAt] = useState<undefined | number>(
-    undefined
-  )
-
-  useEffect(() => {
-    const contentEl = contentRef.current
-    if (!contentEl) {
-      setHideScrollTopAt(undefined)
-      return
-    }
-
-    const hideAtHanlder = () => {
-      setHideScrollTopAt(contentEl.offsetTop + contentEl.clientHeight)
-    }
-
-    const resizeObserver = new ResizeObserver(hideAtHanlder)
-    resizeObserver.observe(contentEl)
-
-    return () => resizeObserver.disconnect()
-  }, [contentRef.current])
-
   return (
     <Layout {...commonProps}>
-      <ScrollToTop showFrom={600} hideAt={hideScrollTopAt} />
+      <ScrollToTop showFrom={600} hideAtBottomRef={contentRef} />
       <div className='relative'>
         <ReadingProgress target={contentRef} />
 
