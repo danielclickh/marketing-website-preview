@@ -61,7 +61,7 @@ export default function NavigationSubNavProducts() {
               
               <li className='flex items-center'>
                 <NavigationLink
-                  href='#'
+                  href='/cloud/postgres'
                   onClick={useGalaxyOnClick(
                     'topNav.productMenu.postgresSelect'
                   )}
