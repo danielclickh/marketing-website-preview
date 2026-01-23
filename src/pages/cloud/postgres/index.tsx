@@ -18,6 +18,7 @@ import { CUICard } from '@/components/ClickUI'
 import DotsContainer from '@/components/DotsContainer'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard, { QuoteCardProps } from '@/components/QuoteCard'
@@ -29,6 +30,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
@@ -102,19 +104,25 @@ export default function Page({ headerData, seo }: CommonProps) {
                     height={162}
                     alt=''
                     priority
+                    className='transform-none'
                   />
                 </h1>
               </div>
             </ScaleToContainer>
-            <SuiText className='!mt-12 space-y-6 text-xl text-neutral-200 lg:pr-10'>
+            <SuiText className='!mt-12 space-y-6 text-xl text-neutral-200'>
               <p>
                 Fast, scalable, enterprise-grade Postgres, natively integrated
-                with ClickHouse.
+                with&nbsp;ClickHouse.
               </p>
               <p>Built for real-time and AI-driven applications.</p>
               <p>
                 A Unified Data Stack that combines Postgres for transactions and
-                ClickHouse for analytics, with no added complexity!
+                ClickHouse for analytics, with no added complexity!{' '}
+                <Link
+                  href='/blog/postgres-managed-by-clickhouse?loc=hero'
+                  className='text-primary-300 hover:underline'>
+                  Learn more
+                </Link>
               </p>
               <p>Currently in private preview. Join the waitlist!</p>
             </SuiText>
@@ -227,6 +235,14 @@ export default function Page({ headerData, seo }: CommonProps) {
               )
             })}
           </div>
+          <p className='-mb-8 mt-8 text-center text-lg text-neutral-200 lg:mt-16'>
+            To learn more,{' '}
+            <LinkWithArrow
+              href='/blog/postgres-managed-by-clickhouse?loc=whyClickhouse'
+              className='text-primary-300 hover:underline'>
+              read our blog
+            </LinkWithArrow>
+          </p>
         </div>
       </section>
 
