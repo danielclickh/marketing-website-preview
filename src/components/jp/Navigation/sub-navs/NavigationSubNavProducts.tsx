@@ -1,5 +1,5 @@
-import LinkWithArrow from '../../../LinkWithArrow'
 import { NavigationLink } from '../parts'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import Image from 'next/image'
 

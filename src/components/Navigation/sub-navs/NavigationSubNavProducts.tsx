@@ -1,7 +1,5 @@
-import LinkWithArrow from '../../LinkWithArrow'
 import { NavigationLink } from '../parts'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import { ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 
 export default function NavigationSubNavProducts() {
@@ -58,7 +56,7 @@ export default function NavigationSubNavProducts() {
                   </span>
                 </NavigationLink>
               </li>
-              
+
               <li className='flex items-center'>
                 <NavigationLink
                   href='/cloud/postgres'
@@ -74,9 +72,10 @@ export default function NavigationSubNavProducts() {
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
                   />
                   <span>
-                  Postgres managed by ClickHouse
+                    Postgres managed by ClickHouse
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
-                    Unified data stack for transactions<br /> and analytics.
+                      Unified data stack for transactions
+                      <br /> and analytics.
                     </div>
                   </span>
                 </NavigationLink>
