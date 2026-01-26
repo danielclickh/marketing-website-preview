@@ -29,7 +29,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     string | React.ReactNode
   >('Postgres managed by ClickHouse | One stack for transactions and analytics')
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/postgres-managed-by-clickhouse?loc=banner'
+    '/cloud/postgres?loc=banner'
   )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
