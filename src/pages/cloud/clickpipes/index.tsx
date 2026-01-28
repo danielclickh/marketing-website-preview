@@ -1,19 +1,19 @@
 import features from './features.json'
+import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import CdcAnimation from '@/components/CdcAnimation'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import ClickPipesAnimationV2 from '@/components/ClickPipesAnimation/ClickPipesAnimationV2'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
 import LogoAnnouncementLink from '@/components/LogoAnnouncementLink'
+import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { ClickPipesData } from '@/types/clickpipes'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
@@ -86,16 +86,17 @@ export default function ClickHouseServerPage({
                   <LogoAnnouncementLink
                     mode='dark'
                     className='mt-8 !bg-neutral-700/60'
-                    href='/cloud/clickpipes/mongodb-cdc-connector?loc=clickpipes-hero'
+                    href='/cloud/clickpipes/bigquery-connector?loc=clickpipes-hero'
                     logo={{
-                      src: '/images/cloud/integrations/mongodb.svg',
-                      alt: 'MongoDB',
-                      width: 24,
+                      src: '/images/cloud/integrations/google-bigquery.svg',
+                      alt: 'BigQuery',
+                      width: 50,
                       height: 50,
-                      className: 'mx-3'
+                      className: 'mx-2'
                     }}>
-                    Blazing-fast MongoDB to ClickHouse CDC with our new
-                    ClickPipe connector — now in Public Beta.{' '}
+                    Blazing-fast BigQuery to ClickHouse with our new ClickPipe
+                    connector — now in Private Preview.
+                    <br />
                     <span className='underline group-hover:decoration-2'>
                       Learn more
                     </span>
@@ -190,13 +191,17 @@ export default function ClickHouseServerPage({
                       name: 'Google Cloud Storage'
                     },
                     {
+                      logo: '/images/cloud/integrations/google-bigquery.svg',
+                      name: 'BigQuery',
+                      badge: 'New'
+                    },
+                    {
                       logo: '/images/cloud/integrations/mysql.svg',
                       name: 'MySQL CDC'
                     },
                     {
                       logo: '/images/cloud/integrations/mongodb.svg',
-                      name: 'MongoDB CDC',
-                      badge: 'New'
+                      name: 'MongoDB CDC'
                     },
                     {
                       logo: '/images/cloud/integrations/azure-blob-storage.svg',
@@ -264,46 +269,87 @@ export default function ClickHouseServerPage({
         </div>
         <div className='bg-primary-300 py-12'></div>
 
-        {/*<div className='section-container my-20'>
+        {/* Azure Blob Storage form */}
+        <div className='section-container my-20'>
           <div className='mx-auto w-full lg:max-w-xl'>
             <div className='mb-4 space-y-4 text-center md:-mx-4 lg:mb-6'>
               <div className='mb-10 flex justify-center'>
-                <CdcAnimation
-                  logo={
-                    <div className='-mr-4 flex aspect-square w-20 items-center justify-center rounded-lg border border-[#113C55] bg-[#081E2B]'>
-                      <Image
-                        src='/images/cloud/integrations/mongodb.svg'
-                        width={24}
-                        height={50}
-                        alt='MongoDB'
-                        className='m-3'
-                      />
+                <ScaleToContainer scaleUp={false}>
+                  <div className='pointer-events-none relative w-max select-none'>
+                    <div className='absolute inset-x-20 top-1/2 z-0 -translate-y-1/2'>
+                      <AnimatedDataLine size={300} direction='right' />
                     </div>
-                  }
-                  badges={[
-                    { label: 'insert', theme: 'yellow' },
-                    { label: 'insert', theme: 'yellow' },
-                    { label: 'update', theme: 'blue' },
-                    { label: 'delete', theme: 'red' },
-                    { label: 'replace', theme: 'blue' },
-                    { label: 'add col', theme: 'yellow' }
-                  ]}
-                />
+                    <div className='relative z-10 flex items-center gap-12'>
+                      <div className='flex w-20 flex-shrink-0 flex-grow-0 items-center justify-center'>
+                        <div className='flex aspect-square w-20 items-center justify-center rounded border border-jet bg-neutral-900/80'>
+                          <Image
+                            src='/images/cloud/integrations/google-bigquery.svg'
+                            width={50}
+                            height={50}
+                            alt='BigQuery'
+                            className='m-3'
+                          />
+                        </div>
+                      </div>
+                      <div className='flex-grow-1 relative flex w-44 flex-shrink-0 flex-col items-center justify-center gap-y-4'>
+                        <p className='absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-1/2 font-inconsolata text-xs'>
+                          Data loading
+                        </p>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='232'
+                          height='239'
+                          fill='none'
+                          viewBox='0 0 232 239'
+                          className='size-12 animate-[spin_2s_linear_infinite_reverse]'>
+                          <path
+                            fill='#fff'
+                            d='m21.04 60.34-3.3-2.27-.15.23-.12.25zm43.08 162.25-2.18 3.36.06.04.07.04zm167.34-50.4-42.55 17.96 36.83 27.87zm-46.32-152.2 2.05-3.44c-7.23-4.32-17.01-8.57-28.42-11.68l-1.05 3.86-1.06 3.86c10.79 2.94 19.89 6.92 26.43 10.83zM124.43 4l.05-4C105.67-.25 85.13 3.5 65.3 14.13l1.9 3.52 1.89 3.52c18.45-9.9 37.6-13.4 55.28-13.16zM40.14 37.56l-2.78-2.87a153 153 0 0 0-19.61 23.38l3.3 2.27 3.29 2.26a145 145 0 0 1 18.58-22.17zm-19.1 22.78-3.57-1.8A181 181 0 0 0 6.02 86.87l3.83 1.16 3.82 1.17a174 174 0 0 1 10.95-27.06zM4.07 121.3l-4-.14c-.71 20.44 3.99 40.47 15.46 59.22l3.42-2.09 3.4-2.09c-10.6-17.33-14.94-35.8-14.29-54.76zm36.43 83-2.73 2.92q10.48 9.77 24.17 18.72l2.18-3.36 2.18-3.35a169 169 0 0 1-23.07-17.86zm23.62 18.28-2.05 3.44c7.29 4.35 17.78 8.14 30.08 10.5l.75-3.94.75-3.92c-11.66-2.23-21.2-5.76-27.48-9.51zm63.35 12.24.23 4c19.44-1.1 40.47-6.11 60.09-17.41l-2-3.47-2-3.46c-18.35 10.57-38.13 15.32-56.54 16.35z'
+                          />
+                        </svg>
+                      </div>
+                      <div className='relative w-20 flex-shrink-0 flex-grow-0'>
+                        <div className='absolute inset-0 animate-fadeInOut bg-primary-300/60 blur-lg' />
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='72'
+                          height='72'
+                          viewBox='0 0 72 72'
+                          className='relative z-10 h-auto w-full'>
+                          <g fill='none'>
+                            <rect
+                              width='72'
+                              height='72'
+                              fill='#FAFF69'
+                              rx='4'
+                            />
+                            <path
+                              fill='#161517'
+                              d='M21.41 15.75c.6 0 1.09.49 1.09 1.09v38.32c0 .6-.49 1.09-1.09 1.09h-2.32A1.1 1.1 0 0 1 18 55.16V16.84c0-.6.49-1.09 1.09-1.09h2.32Zm9 0c.6 0 1.09.49 1.09 1.09v38.32c0 .6-.49 1.09-1.09 1.09h-2.32A1.1 1.1 0 0 1 27 55.16V16.84c0-.6.49-1.09 1.09-1.09h2.32Zm9 0c.6 0 1.09.49 1.09 1.09v38.32c0 .6-.49 1.09-1.09 1.09h-2.32A1.1 1.1 0 0 1 36 55.16V16.84c0-.6.49-1.09 1.09-1.09h2.32Zm9 0c.6 0 1.09.49 1.09 1.09v38.32c0 .6-.49 1.09-1.09 1.09h-2.32A1.1 1.1 0 0 1 45 55.16V16.84c0-.6.49-1.09 1.09-1.09h2.32Zm9 15.75c.6 0 1.09.49 1.09 1.09v6.82c0 .6-.49 1.09-1.09 1.09h-2.32A1.1 1.1 0 0 1 54 39.41v-6.82c0-.6.49-1.09 1.09-1.09h2.32Z'
+                            />
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </ScaleToContainer>
               </div>
-              <SuiTitle type='h2'>MongoDB CDC is in Private Preview</SuiTitle>
+              <SuiTitle type='h2'>
+                BigQuery connector is in Private Preview
+              </SuiTitle>
               <SuiText className='opacity-70'>
-                Stream your MongoDB data into ClickHouse Cloud to bridge the gap
-                between transactional and analytical workloads — blazing fast
-                with our new ClickPipes MongoDB CDC connector!
+                Stream your BigQuery data into ClickHouse Cloud to bridge the
+                gap between transactional and analytical workloads — blazing
+                fast with our new ClickPipes BigQuery connector!
               </SuiText>
             </div>
             <CUICard className='bg-neutral-900/80'>
               <CUICard.Body className='p-4 lg:p-6'>
-                <CdcWaitlistForm formId='1441' />
+                <CdcWaitlistForm formId='1515' />
               </CUICard.Body>
             </CUICard>
           </div>
-        </div>*/}
+        </div>
 
         <div className='section-container my-28 md:px-8 2xl:px-0'>
           <GetStartedFree
