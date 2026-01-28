@@ -37,7 +37,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative my-10 lg:mb-20'>
+      <div className='relative my-10 bg-grid lg:mb-20'>
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
             <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
@@ -126,22 +126,24 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Cards  */}
-      <div className='relative z-10 bg-neutral-700 py-20'>
+      <div className='relative z-10 bg-black/20 py-20'>
         <div className='section-container'>
           <div className='-mx-4 flex flex-col lg:flex-row lg:flex-wrap lg:justify-center'>
             <div className='p-4 lg:w-1/3'>
               <LinedIconCard
                 icon='guage'
                 title='Blazing-fast analytics'
+                className='!bg-neutral-750 !p-6'
                 text={
                   <>
                     Integrates BigQuery with ClickHouse, enabling{' '}
                     <Link
-                      href='https://clickhouse.com/blog/cloud-data-warehouses-cost-performance-comparison'
+                      href='/blog/cloud-data-warehouses-cost-performance-comparison'
                       className='text-primary-300 hover:underline'>
                       up to 4x faster queries with significant cost savings
                     </Link>{' '}
                     for real-time analytics.
+                    <br />
                     <br />
                     See{' '}
                     <Link
@@ -152,7 +154,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                     .
                   </>
                 }
-                className='bg-neutral-900/80'
               />
             </div>
             <div className='p-4 lg:w-1/3'>
@@ -160,7 +161,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 icon='cloud-tick'
                 title='Efficient initial syncs'
                 text='Syncs terabytes of existing data within a few hours, with support for table- and column-level filtering.'
-                className='bg-neutral-900/80'
+                className='!bg-neutral-750'
               />
             </div>
             <div className='p-4 lg:w-1/3'>
@@ -176,7 +177,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                   </>
                 }
                 text='Leverages query-based Change Data Capture (CDC) to capture new data in BigQuery, enabling incremental loads at scheduled intervals to keep both databases in sync.'
-                className='bg-neutral-900/80'
+                className='!bg-neutral-750'
               />
             </div>
             <div className='p-4 lg:w-1/3'>
@@ -184,7 +185,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 icon='enterprise'
                 title='Fully managed experience'
                 text='Enables syncing BigQuery data in just a few clicks, with built-in monitoring and alerting. Supports automation and infrastructure-as-code configuration via OpenAPI and Terraform.'
-                className='bg-neutral-900/80'
+                className='!bg-neutral-750'
               />
             </div>
             <div className='p-4 lg:w-1/3'>
@@ -192,7 +193,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 icon='peerdb'
                 title='No vendor lock-in'
                 text='The BigQuery connector is powered by PeerDB, an open-source project. Except for the UI, all components extend directly from PeerDB, ensuring no vendor lock-in.'
-                className='bg-neutral-900/80'
+                className='!bg-neutral-750'
               />
             </div>
           </div>
@@ -200,9 +201,9 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
       </div>
 
       {/* Footer form */}
-      <DotsContainer className='my-20'>
+      <DotsContainer className='mb-20'>
         <div className='mx-auto w-full lg:max-w-xl'>
-          <CUICard className='bg-neutral-900/80'>
+          <CUICard className='!bg-neutral-750'>
             <div className='my-4 space-y-4 text-center lg:mb-4 lg:mt-6'>
               <SuiTitle type='h2'>Get early access</SuiTitle>
               <SuiText className='opacity-70'>
