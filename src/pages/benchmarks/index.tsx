@@ -38,7 +38,7 @@ type BlogItem = {
   slug: string
   entry: EntryBlogPost
   title?: string
-  image?: ImageProps['src']
+  benchmarkImage?: ImageProps['src']
   featured?: boolean
   competitors?: Array<BlogCompetitors>
 }
@@ -66,52 +66,52 @@ const POST_MAP: Array<Omit<BlogItem, 'entry'>> = [
   },
   {
     slug: 'clickhouse-fully-supports-joins-how-to-choose-the-right-algorithm-part5',
-    image: '/uploads/imdb_large_5b5d3f45ee.png'
+    benchmarkImage: '/uploads/imdb_large_5b5d3f45ee.png'
   },
   {
     slug: 'asynchronous-data-inserts-in-clickhouse',
-    image: '/uploads/async_inserts_12_8c2f0816e9.png'
+    benchmarkImage: '/uploads/async_inserts_12_8c2f0816e9.png'
   },
   {
     slug: 'clickhouse-cloud-boosts-performance-with-sharedmergetree-and-lightweight-updates',
-    image: '/uploads/smt_16_203c52f971.png'
+    benchmarkImage: '/uploads/smt_16_203c52f971.png'
   },
   {
     slug: 'clickhouse-keeper-a-zookeeper-alternative-written-in-cpp',
-    image: '/uploads/Keeper_05_ef049cc5e4.png'
+    benchmarkImage: '/uploads/Keeper_05_ef049cc5e4.png'
   },
   {
     slug: 'supercharge-your-clickhouse-data-loads-part2',
-    image: '/uploads/large_data_loads_p2_07_357c63e939.png'
+    benchmarkImage: '/uploads/large_data_loads_p2_07_357c63e939.png'
   },
   {
     slug: 'clickhouse-input-format-matchup-which-is-fastest-most-efficient',
-    image: '/uploads/Blog_Formats_003_93c66d9a7e.png'
+    benchmarkImage: '/uploads/Blog_Formats_003_93c66d9a7e.png'
   },
   {
     slug: 'accelerating-clickhouse-json-queries-for-fast-bluesky-dashboards',
-    image:
+    benchmarkImage:
       '/uploads/Accelerating_Click_House_queries_on_JSON_data_for_faster_Bluesky_insights_120d449e25.png'
   },
   {
     slug: 'clickhouse-gets-lazier-and-faster-introducing-lazy-materialization',
-    image: '/uploads/Blog_LAZY_MATERIALIZATION_001_d7b4526449.png'
+    benchmarkImage: '/uploads/Blog_LAZY_MATERIALIZATION_001_d7b4526449.png'
   },
   {
     slug: 'clickhouse-and-parquet-a-foundation-for-fast-lakehouse-analytics',
-    image: '/uploads/Blog_Formats_Reads_014_22d723e649.png'
+    benchmarkImage: '/uploads/Blog_Formats_Reads_014_22d723e649.png'
   },
   {
     slug: 'building-a-distributed-cache-for-s3',
-    image: '/uploads/Blog_caches_002_4142f575eb.png'
+    benchmarkImage: '/uploads/Blog_caches_002_4142f575eb.png'
   },
   {
     slug: 'updates-in-clickhouse-3-benchmarks',
-    image: '/uploads/Blog_updates_Part_3_004_b700981c01.png'
+    benchmarkImage: '/uploads/Blog_updates_Part_3_004_b700981c01.png'
   },
   {
     slug: 'clickhouse-parallel-replicas',
-    image: '/uploads/Parallel_Replicas_004_2e1de3a30e.png'
+    benchmarkImage: '/uploads/Parallel_Replicas_004_2e1de3a30e.png'
   },
 
   /// Filtered by competitor
@@ -289,10 +289,10 @@ export default function Page({ seo, headerData, blogs }: Props) {
                 {
                   title: 'Rows per benchmark (log scale)',
                   values: [
-                    { label: 'ClickBench', value: '3.4B', width: 100 },
-                    { label: 'MgBench', value: '600M', width: 51 },
-                    { label: 'Star Schema', value: '200M', width: 44 },
-                    { label: 'NYC Taxi Rides', value: '100M', width: 15 }
+                    { label: 'ClickBench', value: '100M', width: 100 },
+                    { label: 'MgBench', value: '200M', width: 51 },
+                    { label: 'Star Schema', value: '600M', width: 44 },
+                    { label: 'NYC Taxi Rides', value: '3.4B', width: 15 }
                   ]
                 }
               ].map((group, groupIndex) => {
@@ -409,17 +409,6 @@ function GlowingCostMap() {
         stroke='#faff69'
         rx='3.5'
       />
-      <rect
-        width='209.71'
-        height='189.62'
-        x='245.79'
-        y='.86'
-        fill='transparent'
-        stroke='#faff69'
-        strokeWidth={4}
-        rx='3.5'
-        className='animate-pulse blur'
-      />
       <path
         fill='#787878'
         d='M86.26 399.51q-.07-.6-.55-.94a2 2 0 0 0-1.23-.34q-.54 0-.92.17-.4.15-.59.43a1.1 1.1 0 0 0-.07 1.15q.13.2.37.37.24.15.52.25l.58.17.89.22q.53.13 1.03.34.49.21.89.53t.62.78q.24.45.23 1.07a2.6 2.6 0 0 1-1.65 2.45 5 5 0 0 1-1.93.35q-1.11 0-1.92-.34a3 3 0 0 1-1.26-1q-.45-.66-.5-1.6h1.7c0 .61.41 1.15 1 1.32q.42.16.96.16.56 0 .98-.17.43-.17.67-.47t.24-.71a1 1 0 0 0-.21-.61 2 2 0 0 0-.6-.4 6 6 0 0 0-.89-.3l-1.07-.28a4.4 4.4 0 0 1-1.85-.9 2.1 2.1 0 0 1-.67-1.64q0-.83.45-1.46a3 3 0 0 1 1.24-.98 4 4 0 0 1 1.78-.35q1 0 1.76.36.75.35 1.2.96.44.6.45 1.41zm4.9-2.6v9.46h-1.67v-9.46zm4.81 9.6q-1.03 0-1.8-.46-.76-.45-1.18-1.28a4 4 0 0 1-.42-1.92q0-1.1.42-1.93a3 3 0 0 1 1.18-1.28 3.5 3.5 0 0 1 1.8-.45q1.05 0 1.8.45.76.45 1.18 1.29.42.83.42 1.92 0 1.1-.42 1.92-.42.83-1.18 1.28-.75.46-1.8.46m.01-1.34q.57 0 .94-.31.37-.32.57-.84a4 4 0 0 0-.01-2.35 2 2 0 0 0-.56-.85 1.4 1.4 0 0 0-.94-.31q-.57 0-.96.31-.37.32-.57.85a4 4 0 0 0-.18 1.18q0 .64.18 1.17.2.53.57.84.39.3.96.3m6.08 1.2-2-7.1h1.7l1.25 5h.06l1.28-5h1.68l1.28 4.97h.07l1.22-4.96h1.71l-2 7.09h-1.75l-1.33-4.8h-.1l-1.32 4.8zm12.37.14q-1.07 0-1.84-.45a3 3 0 0 1-1.19-1.26 4 4 0 0 1-.42-1.94q0-1.1.42-1.92a3.1 3.1 0 0 1 2.94-1.75q.66 0 1.24.2.58.22 1.03.65.45.45.71 1.12.27.68.26 1.6v.52h-5.81v-1.13h4.21q0-.48-.2-.85a1.5 1.5 0 0 0-.58-.6 1.6 1.6 0 0 0-.84-.21q-.51 0-.9.25-.37.25-.6.64a2 2 0 0 0-.22.88v.98q0 .6.23 1.06.23.45.63.67.4.24.95.23.38 0 .66-.1.3-.1.52-.3.21-.2.32-.5l1.56.17a2.5 2.5 0 0 1-1.61 1.78q-.65.26-1.47.26m4.57-.14v-7.1h1.62v1.19h.07c.22-.78.94-1.3 1.75-1.28q.3 0 .6.04v1.54l-.34-.06q-.23-.04-.44-.04-.45 0-.82.2t-.56.54q-.21.35-.21.8v4.17zm-76.3-4.26c-.3.3-.3.77 0 1.06l4.77 4.78a.75.75 0 1 0 1.06-1.06l-4.25-4.25 4.25-4.24a.75.75 0 0 0-1.06-1.06zm.52.53v.75h24.91v-1.5h-24.9z'
@@ -444,11 +433,6 @@ function GlowingCostMap() {
         fill='#faff69'
         d='M299.38 167.86h7.44v1.9h-5.26v2.4h4.4v1.9h-4.4v2.66h5.26v1.9h-7.44zm12.66-.12v1.72l-.54-.01c-.66 0-1 .2-1 .97v.32h1.53v1.75h-1.53v6.14h-2.1v-6.14h-1.07v-1.75h1.07v-.44c0-1.66.9-2.6 2.83-2.6.3 0 .48 0 .81.04m5.06 0v1.72l-.54-.01c-.66 0-1 .2-1 .97v.32h1.52v1.75h-1.53v6.14h-2.1v-6.14h-1.06v-1.75h1.06v-.44c0-1.66.9-2.6 2.84-2.6.3 0 .48 0 .8.04m.92 2.07v-1.95h2.14v1.95zm2.13.93v7.89h-2.1v-7.9zm3.34 3.94c0 1.49.74 2.34 1.84 2.34.88 0 1.4-.6 1.6-1.4l1.81.8c-.36 1.3-1.59 2.37-3.42 2.37-2.3 0-3.92-1.66-3.92-4.1s1.63-4.1 3.92-4.1c1.81 0 3.01 1.05 3.39 2.32l-1.78.84c-.2-.8-.73-1.4-1.6-1.4-1.1 0-1.84.86-1.84 2.33m6.23-4.87v-1.95h2.15v1.95zm2.13.93v7.89h-2.1v-7.9zm5.18 8.05c-2.33 0-3.92-1.66-3.92-4.1 0-2.33 1.6-4.1 3.84-4.1 2.34 0 3.6 1.74 3.6 3.94v.62h-5.43c.15 1.2.89 1.92 1.92 1.92.81 0 1.46-.4 1.7-1.16l1.77.63a3.6 3.6 0 0 1-3.48 2.25m-.1-6.52c-.83 0-1.48.5-1.73 1.45h3.27c-.02-.78-.51-1.45-1.53-1.45m4.87 6.36v-7.9h2.1v.82a2.8 2.8 0 0 1 2.16-.96c1.64 0 2.65 1.12 2.65 2.83v5.2h-2.1v-4.6c0-.88-.36-1.51-1.26-1.51-.74 0-1.46.52-1.46 1.56v4.56zm10.21-3.95c0 1.49.74 2.34 1.85 2.34.87 0 1.4-.6 1.59-1.4l1.81.8c-.36 1.3-1.58 2.37-3.41 2.37-2.3 0-3.92-1.66-3.92-4.1s1.62-4.1 3.92-4.1c1.81 0 3.01 1.05 3.38 2.32l-1.78.84c-.2-.8-.72-1.4-1.59-1.4-1.11 0-1.85.86-1.85 2.33m10.05 4.4c-.51 1.4-1.23 2.3-2.97 2.3-.4 0-.56-.02-.83-.05v-1.7c.23.02.36.03.6.03.56 0 .86-.15 1.08-.72l.26-.63-2.84-7.57h2.18l1.78 5.19 1.74-5.2h2.12zm15.23-2.36v1.9h-8.52v-1.67l5.66-7.19h-5.61v-1.9h8.41v1.68l-5.62 7.18zm8.33-2.04c0 2.46-1.59 4.11-3.87 4.11s-3.87-1.65-3.87-4.1 1.6-4.1 3.87-4.1 3.87 1.65 3.87 4.1m-5.65 0c0 1.5.69 2.37 1.78 2.37 1.1 0 1.77-.87 1.77-2.37 0-1.48-.67-2.35-1.77-2.35s-1.78.87-1.78 2.35m6.93 3.95v-7.9h2.1v.82a2.8 2.8 0 0 1 2.16-.96c1.65 0 2.66 1.12 2.66 2.83v5.2h-2.1v-4.6c0-.88-.36-1.51-1.26-1.51-.74 0-1.46.52-1.46 1.56v4.56zm12.05.16c-2.32 0-3.91-1.66-3.91-4.1 0-2.33 1.6-4.1 3.84-4.1 2.34 0 3.6 1.74 3.6 3.94v.62h-5.43c.15 1.2.88 1.92 1.92 1.92.8 0 1.45-.4 1.7-1.16l1.76.63a3.6 3.6 0 0 1-3.48 2.25m-.09-6.52c-.84 0-1.48.5-1.74 1.45h3.27c-.01-.78-.5-1.45-1.53-1.45m-110.33-121c0 3.1 1.68 5.14 4.04 5.14 1.68 0 2.9-1.02 3.34-2.7l2.4.82a5.7 5.7 0 0 1-5.74 4.14c-3.82 0-6.6-3.04-6.6-7.4s2.78-7.4 6.6-7.4c2.9 0 4.9 1.6 5.74 4.14l-2.4.82c-.44-1.68-1.66-2.7-3.34-2.7-2.36 0-4.04 2.04-4.04 5.14m13.82-7.18v14.36h-2.4V44.1zm2.49 2.46V44.1h2.48v2.46zm2.44 1.4v10.5h-2.4v-10.5zm4.26 5.26c0 2.14 1.12 3.38 2.76 3.38 1.28 0 2.06-.84 2.36-2l2.06 1.04a4.45 4.45 0 0 1-4.42 3.04c-3 0-5.16-2.22-5.16-5.46s2.16-5.46 5.16-5.46c2.26 0 3.82 1.28 4.38 2.96l-2.02 1.1c-.3-1.14-1.08-2-2.36-2-1.64 0-2.76 1.26-2.76 3.4m11.03-9.12v8.28l4.04-4.42h2.94l-3.96 4.08 4.28 6.42h-2.78l-3.14-4.74-1.38 1.4v3.34h-2.4V44.1zm18.06 0h2.56v14.36h-2.56v-6.28h-6.88v6.28h-2.56V44.1h2.56v5.84h6.88zm14.65 9.12c0 3.26-2.1 5.46-5.06 5.46s-5.06-2.2-5.06-5.46 2.1-5.46 5.06-5.46 5.06 2.2 5.06 5.46m-7.7 0c0 2.14 1.02 3.44 2.64 3.44s2.64-1.3 2.64-3.44-1.02-3.44-2.64-3.44-2.64 1.3-2.64 3.44m18.3-5.26v10.5h-2.4v-1.12c-.6.7-1.5 1.34-2.85 1.34-2.2 0-3.56-1.5-3.56-3.76v-6.96h2.4v6.44c0 1.28.56 2.1 1.86 2.1 1.08 0 2.16-.8 2.16-2.3v-6.24zm1.44 8.5 1.8-1.44a3.6 3.6 0 0 0 3.04 1.7c1.02 0 1.96-.36 1.96-1.3 0-.9-.88-1-2.54-1.34s-3.56-.76-3.56-3c0-1.92 1.68-3.32 4.1-3.32 1.84 0 3.48.82 4.24 1.98l-1.62 1.46a3.2 3.2 0 0 0-2.76-1.48c-.98 0-1.62.44-1.62 1.14 0 .76.76.9 2.08 1.18 1.78.38 4.02.76 4.02 3.16 0 2.12-1.94 3.48-4.32 3.48-1.94 0-3.88-.78-4.82-2.22m15.42 2.22c-3 0-5.1-2.22-5.1-5.46 0-3.08 2.08-5.46 5-5.46 3.04 0 4.66 2.3 4.66 5.18v.8h-7.36c.18 1.8 1.26 2.9 2.8 2.9 1.18 0 2.12-.6 2.44-1.68l2.06.78a4.6 4.6 0 0 1-4.5 2.94m-.12-8.9c-1.24 0-2.2.74-2.56 2.16h4.82c-.02-1.16-.74-2.16-2.26-2.16'
       />
-      <path
-        fill='#faff69'
-        className='animate-pulse blur'
-        d='M299.38 167.86h7.44v1.9h-5.26v2.4h4.4v1.9h-4.4v2.66h5.26v1.9h-7.44zm12.66-.12v1.72l-.54-.01c-.66 0-1 .2-1 .97v.32h1.53v1.75h-1.53v6.14h-2.1v-6.14h-1.07v-1.75h1.07v-.44c0-1.66.9-2.6 2.83-2.6.3 0 .48 0 .81.04m5.06 0v1.72l-.54-.01c-.66 0-1 .2-1 .97v.32h1.52v1.75h-1.53v6.14h-2.1v-6.14h-1.06v-1.75h1.06v-.44c0-1.66.9-2.6 2.84-2.6.3 0 .48 0 .8.04m.92 2.07v-1.95h2.14v1.95zm2.13.93v7.89h-2.1v-7.9zm3.34 3.94c0 1.49.74 2.34 1.84 2.34.88 0 1.4-.6 1.6-1.4l1.81.8c-.36 1.3-1.59 2.37-3.42 2.37-2.3 0-3.92-1.66-3.92-4.1s1.63-4.1 3.92-4.1c1.81 0 3.01 1.05 3.39 2.32l-1.78.84c-.2-.8-.73-1.4-1.6-1.4-1.1 0-1.84.86-1.84 2.33m6.23-4.87v-1.95h2.15v1.95zm2.13.93v7.89h-2.1v-7.9zm5.18 8.05c-2.33 0-3.92-1.66-3.92-4.1 0-2.33 1.6-4.1 3.84-4.1 2.34 0 3.6 1.74 3.6 3.94v.62h-5.43c.15 1.2.89 1.92 1.92 1.92.81 0 1.46-.4 1.7-1.16l1.77.63a3.6 3.6 0 0 1-3.48 2.25m-.1-6.52c-.83 0-1.48.5-1.73 1.45h3.27c-.02-.78-.51-1.45-1.53-1.45m4.87 6.36v-7.9h2.1v.82a2.8 2.8 0 0 1 2.16-.96c1.64 0 2.65 1.12 2.65 2.83v5.2h-2.1v-4.6c0-.88-.36-1.51-1.26-1.51-.74 0-1.46.52-1.46 1.56v4.56zm10.21-3.95c0 1.49.74 2.34 1.85 2.34.87 0 1.4-.6 1.59-1.4l1.81.8c-.36 1.3-1.58 2.37-3.41 2.37-2.3 0-3.92-1.66-3.92-4.1s1.62-4.1 3.92-4.1c1.81 0 3.01 1.05 3.38 2.32l-1.78.84c-.2-.8-.72-1.4-1.59-1.4-1.11 0-1.85.86-1.85 2.33m10.05 4.4c-.51 1.4-1.23 2.3-2.97 2.3-.4 0-.56-.02-.83-.05v-1.7c.23.02.36.03.6.03.56 0 .86-.15 1.08-.72l.26-.63-2.84-7.57h2.18l1.78 5.19 1.74-5.2h2.12zm15.23-2.36v1.9h-8.52v-1.67l5.66-7.19h-5.61v-1.9h8.41v1.68l-5.62 7.18zm8.33-2.04c0 2.46-1.59 4.11-3.87 4.11s-3.87-1.65-3.87-4.1 1.6-4.1 3.87-4.1 3.87 1.65 3.87 4.1m-5.65 0c0 1.5.69 2.37 1.78 2.37 1.1 0 1.77-.87 1.77-2.37 0-1.48-.67-2.35-1.77-2.35s-1.78.87-1.78 2.35m6.93 3.95v-7.9h2.1v.82a2.8 2.8 0 0 1 2.16-.96c1.65 0 2.66 1.12 2.66 2.83v5.2h-2.1v-4.6c0-.88-.36-1.51-1.26-1.51-.74 0-1.46.52-1.46 1.56v4.56zm12.05.16c-2.32 0-3.91-1.66-3.91-4.1 0-2.33 1.6-4.1 3.84-4.1 2.34 0 3.6 1.74 3.6 3.94v.62h-5.43c.15 1.2.88 1.92 1.92 1.92.8 0 1.45-.4 1.7-1.16l1.76.63a3.6 3.6 0 0 1-3.48 2.25m-.09-6.52c-.84 0-1.48.5-1.74 1.45h3.27c-.01-.78-.5-1.45-1.53-1.45m-110.33-121c0 3.1 1.68 5.14 4.04 5.14 1.68 0 2.9-1.02 3.34-2.7l2.4.82a5.7 5.7 0 0 1-5.74 4.14c-3.82 0-6.6-3.04-6.6-7.4s2.78-7.4 6.6-7.4c2.9 0 4.9 1.6 5.74 4.14l-2.4.82c-.44-1.68-1.66-2.7-3.34-2.7-2.36 0-4.04 2.04-4.04 5.14m13.82-7.18v14.36h-2.4V44.1zm2.49 2.46V44.1h2.48v2.46zm2.44 1.4v10.5h-2.4v-10.5zm4.26 5.26c0 2.14 1.12 3.38 2.76 3.38 1.28 0 2.06-.84 2.36-2l2.06 1.04a4.45 4.45 0 0 1-4.42 3.04c-3 0-5.16-2.22-5.16-5.46s2.16-5.46 5.16-5.46c2.26 0 3.82 1.28 4.38 2.96l-2.02 1.1c-.3-1.14-1.08-2-2.36-2-1.64 0-2.76 1.26-2.76 3.4m11.03-9.12v8.28l4.04-4.42h2.94l-3.96 4.08 4.28 6.42h-2.78l-3.14-4.74-1.38 1.4v3.34h-2.4V44.1zm18.06 0h2.56v14.36h-2.56v-6.28h-6.88v6.28h-2.56V44.1h2.56v5.84h6.88zm14.65 9.12c0 3.26-2.1 5.46-5.06 5.46s-5.06-2.2-5.06-5.46 2.1-5.46 5.06-5.46 5.06 2.2 5.06 5.46m-7.7 0c0 2.14 1.02 3.44 2.64 3.44s2.64-1.3 2.64-3.44-1.02-3.44-2.64-3.44-2.64 1.3-2.64 3.44m18.3-5.26v10.5h-2.4v-1.12c-.6.7-1.5 1.34-2.85 1.34-2.2 0-3.56-1.5-3.56-3.76v-6.96h2.4v6.44c0 1.28.56 2.1 1.86 2.1 1.08 0 2.16-.8 2.16-2.3v-6.24zm1.44 8.5 1.8-1.44a3.6 3.6 0 0 0 3.04 1.7c1.02 0 1.96-.36 1.96-1.3 0-.9-.88-1-2.54-1.34s-3.56-.76-3.56-3c0-1.92 1.68-3.32 4.1-3.32 1.84 0 3.48.82 4.24 1.98l-1.62 1.46a3.2 3.2 0 0 0-2.76-1.48c-.98 0-1.62.44-1.62 1.14 0 .76.76.9 2.08 1.18 1.78.38 4.02.76 4.02 3.16 0 2.12-1.94 3.48-4.32 3.48-1.94 0-3.88-.78-4.82-2.22m15.42 2.22c-3 0-5.1-2.22-5.1-5.46 0-3.08 2.08-5.46 5-5.46 3.04 0 4.66 2.3 4.66 5.18v.8h-7.36c.18 1.8 1.26 2.9 2.8 2.9 1.18 0 2.12-.6 2.44-1.68l2.06.78a4.6 4.6 0 0 1-4.5 2.94m-.12-8.9c-1.24 0-2.2.74-2.56 2.16h4.82c-.02-1.16-.74-2.16-2.26-2.16'
-      />
       <g fill='#faff69' transform='translate(400.89 36.53)'>
         <ellipse cx='14.18' cy='14.17' rx='14.18' ry='14.17' />
       </g>
@@ -458,7 +442,7 @@ function GlowingCostMap() {
         cy='50.71'
         rx='14.18'
         ry='14.17'
-        className='origin-center animate-ping [transform-box:fill-box]'
+        className='origin-center animate-pulse blur [transform-box:fill-box]'
       />
       <path
         fill='#feaa0c'
@@ -495,21 +479,34 @@ function BlogItemImage({
   item: BlogItem
   className?: string
 }) {
-  return item.image ? (
-    <Image
-      src={item.image}
-      alt={item.entry.title}
-      width={400}
-      height={600}
-      className={`aspect-thumbnail w-full max-w-none object-cover object-center ${className}`}
-    />
-  ) : (
-    <StrapiImage
-      entry={item.entry.thumbnailPng}
-      width={400}
-      height={600}
-      className={`aspect-thumbnail w-full max-w-none object-cover object-center ${className}`}
-    />
+  return (
+    <div className={`relative aspect-thumbnail overflow-hidden ${className}`}>
+      {item.benchmarkImage && (
+        <div className='absolute inset-0 z-10 bg-neutral opacity-0 transition-opacity duration-500 group-hover:opacity-100'>
+          <Image
+            src={item.benchmarkImage}
+            alt={item.entry.title}
+            width={400}
+            height={600}
+            className='absolute inset-0 h-full w-full max-w-none scale-125 object-cover object-center opacity-15 blur-lg'
+          />
+          <Image
+            src={item.benchmarkImage}
+            alt={item.entry.title}
+            width={400}
+            height={600}
+            className='absolute inset-0 h-full w-full max-w-none object-contain object-center'
+          />
+        </div>
+      )}
+      <StrapiImage
+        entry={item.entry.thumbnailPng}
+        alt={item.entry.title}
+        width={400}
+        height={600}
+        className='absolute inset-0 w-full max-w-none object-cover object-center'
+      />
+    </div>
   )
 }
 
@@ -597,7 +594,7 @@ function BlogCoverFlow({ blogs }: { blogs: Array<BlogItem> }) {
           return (
             <SwiperSlide
               key={blogIndex}
-              className='[&:not(.swiper-slide-active)]:cursor-pointer'
+              className='select-none [&:not(.swiper-slide-active)]:cursor-pointer'
               onClick={() => {
                 const swiper = swiperRef.current
                 if (!swiper) return
@@ -623,7 +620,7 @@ function BlogCoverFlow({ blogs }: { blogs: Array<BlogItem> }) {
                   />
                   <Link
                     href={`/blog/${blogItem.entry.slug}`}
-                    className='relative z-10'>
+                    className='group relative z-10'>
                     <BlogItemImage item={blogItem} className='rounded-xl' />
                   </Link>
                 </div>
@@ -757,7 +754,7 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
               return (
                 <CUICard
                   key={blogIndex}
-                  className='relative overflow-hidden transition-transform hover:-translate-y-1'>
+                  className='group relative overflow-hidden transition-transform hover:-translate-y-1'>
                   <CUICard.Header>
                     <BlogItemImage item={blogItem} />
                   </CUICard.Header>
@@ -770,7 +767,7 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
                             : `/blog/${blogItem.entry.slug}`
                         }
                         className='text-neutral-100'>
-                        <span className='absolute inset-0' />
+                        <span className='absolute inset-0 z-10' />
                         {blogItem.title || blogItem.entry.title}
                       </Link>
                     </SuiTitle>
