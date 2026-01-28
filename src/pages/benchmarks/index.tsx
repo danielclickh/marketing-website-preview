@@ -1,13 +1,20 @@
 import chartPerformanceImprovements from './assets/chart-performance-improvements.svg'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import { CUIButton } from '@/components/ClickUI'
+import PaginateChildren from '@/components-cleaned/PaginateChildren'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
+import StrapiImage from '@/components-cleaned/StrapiImage'
+import ClearFiltersButton from '@/components/ClearFiltersButton/ClearFiltersButton'
+import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import TiltedText from '@/components/TiltedText'
 import { SuiTitle } from '@/components/sui'
+import { blogService } from '@/lib/api/strapi'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import imageClickbench from '@/pages/clickhouse/assets/image-clickbench.png'
 import { CommonProps } from '@/types/homepage'
+import { EntryBlogPost } from '@/types/strapi'
+import { ChevronDown } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import Link from 'next/link'
@@ -19,9 +26,145 @@ import { EffectCoverflow, Mousewheel, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 
-export const getStaticProps: GetStaticProps<CommonProps> =
+type BlogCompetitors =
+  | 'Postgres'
+  | 'Snowflake'
+  | 'MongoDB'
+  | 'Databricks'
+  | 'Elastic'
+  | 'Readshift'
+  | 'BigQuery'
+type BlogItem = {
+  slug: string
+  entry: EntryBlogPost
+  title?: string
+  image?: ImageProps['src']
+  featured?: boolean
+  competitors?: Array<BlogCompetitors>
+}
+
+const POST_MAP: Array<Omit<BlogItem, 'entry'>> = [
+  {
+    slug: 'cloud-data-warehouses-cost-performance-comparison',
+    featured: true
+  },
+  {
+    slug: 'join-me-if-you-can-clickhouse-vs-databricks-snowflake-part-2',
+    featured: true
+  },
+  {
+    slug: 'clickhouse-input-format-matchup-which-is-fastest-most-efficient',
+    featured: true
+  },
+  {
+    slug: 'clickhouse-parallel-replicas',
+    featured: true
+  },
+  {
+    slug: 'json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql',
+    featured: true
+  },
+  {
+    slug: 'clickhouse-fully-supports-joins-how-to-choose-the-right-algorithm-part5',
+    image: '/uploads/imdb_large_5b5d3f45ee.png'
+  },
+  {
+    slug: 'asynchronous-data-inserts-in-clickhouse',
+    image: '/uploads/async_inserts_12_8c2f0816e9.png'
+  },
+  {
+    slug: 'clickhouse-cloud-boosts-performance-with-sharedmergetree-and-lightweight-updates',
+    image: '/uploads/smt_16_203c52f971.png'
+  },
+  {
+    slug: 'clickhouse-keeper-a-zookeeper-alternative-written-in-cpp',
+    image: '/uploads/Keeper_05_ef049cc5e4.png'
+  },
+  {
+    slug: 'supercharge-your-clickhouse-data-loads-part2',
+    image: '/uploads/large_data_loads_p2_07_357c63e939.png'
+  },
+  {
+    slug: 'clickhouse-input-format-matchup-which-is-fastest-most-efficient',
+    image: '/uploads/Blog_Formats_003_93c66d9a7e.png'
+  },
+  {
+    slug: 'accelerating-clickhouse-json-queries-for-fast-bluesky-dashboards',
+    image:
+      '/uploads/Accelerating_Click_House_queries_on_JSON_data_for_faster_Bluesky_insights_120d449e25.png'
+  },
+  {
+    slug: 'clickhouse-gets-lazier-and-faster-introducing-lazy-materialization',
+    image: '/uploads/Blog_LAZY_MATERIALIZATION_001_d7b4526449.png'
+  },
+  {
+    slug: 'clickhouse-and-parquet-a-foundation-for-fast-lakehouse-analytics',
+    image: '/uploads/Blog_Formats_Reads_014_22d723e649.png'
+  },
+  {
+    slug: 'building-a-distributed-cache-for-s3',
+    image: '/uploads/Blog_caches_002_4142f575eb.png'
+  },
+  {
+    slug: 'updates-in-clickhouse-3-benchmarks',
+    image: '/uploads/Blog_updates_Part_3_004_b700981c01.png'
+  },
+  {
+    slug: 'clickhouse-parallel-replicas',
+    image: '/uploads/Parallel_Replicas_004_2e1de3a30e.png'
+  },
+
+  /// Filtered by competitor
+  {
+    slug: 'clickhouse_vs_elasticsearch_the_billion_row_matchup',
+    competitors: ['Elastic']
+  },
+  {
+    slug: 'json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql',
+    competitors: ['Elastic', 'MongoDB']
+  },
+  {
+    slug: 'join-me-if-you-can-clickhouse-vs-databricks-snowflake-join-performance',
+    competitors: ['Snowflake', 'Databricks']
+  },
+  {
+    slug: 'join-me-if-you-can-clickhouse-vs-databricks-snowflake-part-2',
+    competitors: ['Snowflake', 'Databricks']
+  },
+  {
+    slug: 'update-performance-clickhouse-vs-postgresql',
+    competitors: ['Postgres']
+  },
+  {
+    slug: 'cloud-data-warehouses-cost-performance-comparison',
+    competitors: ['Snowflake', 'Databricks', 'Readshift', 'BigQuery']
+  }
+]
+
+type Props = CommonProps & { blogs: Array<BlogItem> }
+
+export const getStaticProps: GetStaticProps<Props> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
+
+    const blogPosts = await blogService.findAll({
+      filters: {
+        slug: {
+          $in: POST_MAP.map((p) => p.slug)
+        }
+      },
+      populate: ['thumbnailPng']
+    })
+
+    const posts = POST_MAP.map((p) => {
+      const entry = blogPosts.find((e) => e.slug === p.slug)
+      if (!entry) return null
+      return {
+        ...p,
+        entry
+      }
+    }).filter(Boolean) as Array<BlogItem>
+
     return {
       props: {
         seo: {
@@ -31,12 +174,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
             'Explore verified ClickHouse benchmarks across performance, scalability, and cloud cost. See how ClickHouse compares to other data platforms at real-world scale.',
           path: '/benchmarks'
         },
+        blogs: posts,
         ...commonProps
       }
     }
   }
 
-export default function Page({ seo, headerData }: CommonProps) {
+export default function Page({ seo, headerData, blogs }: Props) {
   return (
     <Layout headerData={headerData} seo={seo}>
       {/* Hero */}
@@ -92,23 +236,14 @@ export default function Page({ seo, headerData }: CommonProps) {
           </p>
         </div>
         <div className='mx-auto mt-16 max-w-screen-2xl'>
-          <BlogCoverFlow
-            blogs={[
-              { url: '/', title: '', thumbnail: '' },
-              { url: '/', title: '', thumbnail: '' },
-              { url: '/', title: '', thumbnail: '' },
-              { url: '/', title: '', thumbnail: '' },
-              { url: '/', title: '', thumbnail: '' },
-              { url: '/', title: '', thumbnail: '' }
-            ]}
-          />
+          <BlogCoverFlow blogs={blogs.filter((blog) => blog.featured)} />
         </div>
       </section>
 
       {/* Benchmarks finder */}
       <section className='bg-black/20 py-16 lg:py-24'>
         <div className='section-container'>
-          <div className='mx-auto max-w-4xl space-y-6 text-center'>
+          <div className='mx-auto mb-16 max-w-4xl space-y-6 text-center'>
             <SuiTitle type='h2'>
               Cost and performance you can{' '}
               <TiltedText type='black-on-yellow' className='px-2'>
@@ -116,6 +251,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               </TiltedText>
             </SuiTitle>
           </div>
+          <BlogFinder blogs={blogs.filter((blog) => !blog.featured)} />
         </div>
       </section>
 
@@ -352,15 +488,32 @@ function GlowingCostMap() {
   )
 }
 
-function BlogCoverFlow({
-  blogs
+function BlogItemImage({
+  item,
+  className = ''
 }: {
-  blogs: Array<{
-    title: string
-    url: string
-    thumbnail: ImageProps['src']
-  }>
+  item: BlogItem
+  className?: string
 }) {
+  return item.image ? (
+    <Image
+      src={item.image}
+      alt={item.entry.title}
+      width={400}
+      height={600}
+      className={`aspect-thumbnail w-full max-w-none object-cover object-center ${className}`}
+    />
+  ) : (
+    <StrapiImage
+      entry={item.entry.thumbnailPng}
+      width={400}
+      height={600}
+      className={`aspect-thumbnail w-full max-w-none object-cover object-center ${className}`}
+    />
+  )
+}
+
+function BlogCoverFlow({ blogs }: { blogs: Array<BlogItem> }) {
   const swiperRef = useRef<null | SwiperClass>(null)
   const [navReady, setNavReady] = useState<boolean>(false)
   const prevRef = useRef<null | HTMLButtonElement>(null)
@@ -440,7 +593,7 @@ function BlogCoverFlow({
             slidesPerView: 2.85
           }
         }}>
-        {blogs.map(({ title, url, thumbnail }, blogIndex) => {
+        {blogs.map((blogItem, blogIndex) => {
           return (
             <SwiperSlide
               key={blogIndex}
@@ -464,12 +617,173 @@ function BlogCoverFlow({
               }}>
               {({ isActive, isVisible }) => (
                 <div
-                  className={`aspect-video rounded-xl bg-primary-300 transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none opacity-50'}`}></div>
+                  className={`relative my-6 transition-opacity ${isVisible || isActive ? '' : 'opacity-0'} ${isActive ? '' : 'pointer-events-none opacity-50'}`}>
+                  <div
+                    className={`absolute inset-0 z-0 bg-primary-300 blur transition-opacity ${isActive ? '' : 'opacity-0'}`}
+                  />
+                  <Link
+                    href={`/blog/${blogItem.entry.slug}`}
+                    className='relative z-10'>
+                    <BlogItemImage item={blogItem} className='rounded-xl' />
+                  </Link>
+                </div>
               )}
             </SwiperSlide>
           )
         })}
       </Swiper>
     </div>
+  )
+}
+
+function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
+  const [sortLatest, setSortLatest] = useState<boolean>(false)
+  const [competitorsOpen, setCompetitorsOpen] = useState<boolean>(false)
+  const [page, setPage] = useState<number>(1)
+  const [filterCompetitor, setFilterCompetitor] =
+    useState<null | BlogCompetitors>(null)
+
+  const filtered = blogs.filter((item) => {
+    return (
+      !filterCompetitor ||
+      (item.competitors && item.competitors.includes(filterCompetitor))
+    )
+  })
+
+  if (sortLatest) {
+    filtered.sort((a, b) => {
+      return new Date(b.entry.date).getTime() - new Date(a.entry.date).getTime()
+    })
+  }
+
+  const handleLatestToggle = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault()
+    setSortLatest((old) => !old)
+  }
+
+  const handleCopetitorsToggle = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault()
+    setCompetitorsOpen((old) => !old)
+  }
+
+  const handleCopetitorFilter = (competitor: BlogCompetitors) => {
+    return (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault()
+      setFilterCompetitor((old) => {
+        if (old === competitor) return null
+        return competitor
+      })
+    }
+  }
+
+  const handleClearFilters = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault()
+    setPage(1)
+    setCompetitorsOpen(false)
+    setFilterCompetitor(null)
+    setSortLatest(false)
+  }
+
+  return (
+    <>
+      <div className='flex flex-col flex-wrap justify-center gap-4 lg:flex-row'>
+        <CUIButton
+          type={sortLatest ? 'primary' : 'secondary'}
+          className='!rounded-full'
+          onClick={handleLatestToggle}>
+          Latest
+        </CUIButton>
+        <CUIButton
+          type={competitorsOpen ? 'primary-dark' : 'secondary'}
+          className='!rounded-full'
+          iconRight={
+            <ChevronDown
+              className={`size-4 transition-transform ${competitorsOpen ? '-rotate-180' : ''}`}
+            />
+          }
+          onClick={handleCopetitorsToggle}>
+          ClickHouse vs Competition
+        </CUIButton>
+        {competitorsOpen && (
+          <div className='flex flex-col flex-wrap justify-center gap-4 px-6 lg:order-last lg:flex-row lg:px-0'>
+            {(
+              [
+                'Postgres',
+                'Snowflake',
+                'MongoDB',
+                'Databricks',
+                'Elastic',
+                'Readshift',
+                'BigQuery'
+              ] satisfies Array<BlogCompetitors>
+            ).map((competitor, competitorIndex) => {
+              return (
+                <CUIButton
+                  key={competitorIndex}
+                  type={
+                    filterCompetitor === competitor ? 'primary' : 'secondary'
+                  }
+                  className='!rounded-full'
+                  onClick={handleCopetitorFilter(competitor)}>
+                  {competitor}
+                </CUIButton>
+              )
+            })}
+          </div>
+        )}
+        <CUIButton type='secondary' className='!rounded-full'>
+          Why is ClickHouse so fast
+        </CUIButton>
+        <ClearFiltersButton
+          onClick={handleClearFilters}
+          className='mx-auto lg:mx-0'
+          disabled={!filterCompetitor && !sortLatest}
+        />
+      </div>
+      <PaginateChildren
+        perPage={9}
+        mode='loadMore'
+        page={page}
+        onPageChange={setPage}>
+        <div className='mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+          <PaginateChildren.Items>
+            {filtered.map((blogItem, blogIndex) => {
+              return (
+                <CUICard
+                  key={blogIndex}
+                  className='relative overflow-hidden transition-transform hover:-translate-y-1'>
+                  <CUICard.Header>
+                    <BlogItemImage item={blogItem} />
+                  </CUICard.Header>
+                  <CUICard.Body className='mb-auto p-6'>
+                    <SuiTitle type='h3'>
+                      <Link
+                        href={
+                          blogItem.entry.category === 'Japanese'
+                            ? `/jp/blog/${blogItem.entry.slug}`
+                            : `/blog/${blogItem.entry.slug}`
+                        }
+                        className='text-neutral-100'>
+                        <span className='absolute inset-0' />
+                        {blogItem.title || blogItem.entry.title}
+                      </Link>
+                    </SuiTitle>
+                  </CUICard.Body>
+                </CUICard>
+              )
+            })}
+          </PaginateChildren.Items>
+        </div>
+        <PaginateChildren.NextButton className='mx-auto mt-6 flex items-center justify-center gap-1 rounded border border-primary-600 bg-transparent px-6 py-2 text-sm text-neutral-0 hover:border-primary-500 hover:bg-neutral-725 hover:bg-opacity-80 hover:shadow-xl active:border-primary-500 active:bg-neutral-725 active:bg-opacity-80 active:shadow-xl disabled:hidden'>
+          Load more
+        </PaginateChildren.NextButton>
+      </PaginateChildren>
+    </>
   )
 }
