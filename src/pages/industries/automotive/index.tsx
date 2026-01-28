@@ -2,6 +2,7 @@ import hero from './assets/hero.png'
 import logoJerry from './assets/logo-jerry.svg'
 import logoTekion from './assets/logo-tekion.svg'
 import logoTesla from './assets/logo-tesla.svg'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
@@ -12,6 +13,7 @@ import enterprise from '@/components/LinedIconCard/assets/enterprise.svg'
 import guage from '@/components/LinedIconCard/assets/guage.svg'
 import sparkles from '@/components/LinedIconCard/assets/sparkles.svg'
 import tada from '@/components/LinedIconCard/assets/tada.svg'
+import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -19,6 +21,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import React, { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -39,23 +42,32 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function GamingIndustryPage({
-  seo,
-  headerData,
-  footerData
-}: CommonProps) {
+export default function GamingIndustryPage({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('automotiveIndustryPage')
 
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
-      <section className='bg-grid py-16 lg:py-24'>
-        <div className='section-container relative z-10 flex flex-wrap items-center justify-between lg:flex-nowrap'>
+      <section
+        className='bg-shadow-element yellow-shadow my-16 lg:my-24'
+        style={
+          {
+            '--top-side': '60%',
+            '--right-side': '20%',
+            '--left-side': 'auto'
+          } as React.CSSProperties
+        }>
+        <div className='section-container relative z-10 flex flex-wrap justify-between gap-y-16 lg:flex-nowrap'>
           {/* Content column */}
-          <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:max-w-lg lg:text-left xl:max-w-2xl'>
-            <p className='font-bold text-primary-300'>
-              Industries / Automotive
-            </p>
+          <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:ml-0 lg:max-w-lg lg:text-left xl:max-w-2xl'>
+            <Breadcrumbs>
+              <Breadcrumbs.Link href='/industries'>Industries</Breadcrumbs.Link>
+              <Breadcrumbs.Item>Automotive</Breadcrumbs.Item>
+            </Breadcrumbs>
             <SuiTitle type='h1' className='text-white md:!text-5.5xl'>
               ClickHouse for Automotive
             </SuiTitle>
@@ -64,7 +76,7 @@ export default function GamingIndustryPage({
               Ingest millions of rows per second. Handle the most heavily
               concurrent workloads. All without compromising query speed.
             </SuiText>
-            <div className='!mt-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
+            <div className='!my-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
               <CUIButton
                 type='primary'
                 size='lg'
@@ -76,7 +88,7 @@ export default function GamingIndustryPage({
                 )}>
                 Get started today
               </CUIButton>
-              <CUIButton
+              {/*<CUIButton
                 type='primary-dark'
                 size='lg'
                 className='w-full !px-10 sm:w-auto'
@@ -86,45 +98,82 @@ export default function GamingIndustryPage({
                   'automotiveIndustryPage.heroCta.contactSalesSelect'
                 )}>
                 Talk to an expert
-              </CUIButton>
+              </CUIButton>*/}
             </div>
+            <ul className='space-y-4 text-left text-neutral-200'>
+              <li>
+                <TickItem>
+                  <strong>Automotive Performance Monitoring (APM)</strong> -
+                  track vehicle performance, logs, and telemetry in real time
+                  with crash analytics and performance tracking.
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>
+                    Effortlessly handle high-concurrency workloads
+                  </strong>{' '}
+                  needed to power real-time dashboards, live vehicle state
+                  tracking, EV charging analytics, and telemetry.
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Factory monitoring</strong> - ingest metrics, machine
+                  monitoring, assembly line analytics, and predictive
+                  maintenance & asset health.
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  <strong>Connected Car</strong> - predictive maintenance,
+                  remote diagnostics, EV charging station analytics,
+                  battery-health optimization, and track update roll-outs.
+                </TickItem>
+              </li>
+            </ul>
           </div>
 
-          {/* Image column */}
-          <div className='mx-auto hidden w-full pl-8 lg:block'>
-            <Image
-              src={hero}
-              alt='Automtive'
-              width={1170 / 1.5}
-              height={732 / 1.5}
-              className='h-auto w-full'
-              loading='eager'
-              priority
-            />
-          </div>
-        </div>
-        <div className='section-container mt-12'>
-          <div className='-m-3 flex flex-wrap items-start text-neutral-200'>
-            <TickItem className='p-2 text-left md:w-1/2'>
-              <strong>Automotive Performance Monitoring (APM)</strong> - track
-              vehicle performance, logs, and telemetry in real time with crash
-              analytics and performance tracking.
-            </TickItem>
-            <TickItem className='p-2 text-left md:w-1/2'>
-              <strong>Effortlessly handle high-concurrency workloads</strong>{' '}
-              needed to power real-time dashboards, live vehicle state tracking,
-              EV charging analytics, and telemetry.
-            </TickItem>
-            <TickItem className='p-2 text-left md:w-1/2'>
-              <strong>Factory monitoring</strong> - ingest metrics, machine
-              monitoring, assembly line analytics, and predictive maintenance &
-              asset health.
-            </TickItem>
-            <TickItem className='p-2 text-left md:w-1/2'>
-              <strong>Connected Car</strong> - predictive maintenance, remote
-              diagnostics, EV charging station analytics, battery-health
-              optimization, and track update roll-outs.
-            </TickItem>
+          {/* Form column */}
+          <div className='w-full lg:max-w-lg' id='get-in-touch'>
+            <div className='relative overflow-hidden rounded-lg bg-neutral-900/80 p-6 text-center shadow-lg lg:p-8'>
+              <SuiTitle type='h3' className='mb-2'>
+                Get in touch with a ClickHouse expert
+              </SuiTitle>
+              <SuiText className='mb-6 text-neutral-200'>
+                Tell us about your use case
+              </SuiText>
+              <MarketoForm
+                formId='1124'
+                clearbitTracking={true}
+                onLoad={() => {
+                  setFormLoaded(true)
+                }}
+                onSuccess={() => {
+                  setFormSuccess(true)
+
+                  // Delay needed to allow the ref to update before scrolling
+                  setTimeout(() => {
+                    formSuccessRef.current?.scrollIntoView()
+                  }, 10)
+
+                  return false // Stops page from reloading
+                }}
+              />
+              {!formLoaded && (
+                <div className='my-auto text-center'>Loading form...</div>
+              )}
+              {formSuccess && (
+                <div
+                  ref={formSuccessRef}
+                  className='absolute inset-0 z-10 my-auto flex flex-col items-center justify-center bg-neutral-900/90 text-center backdrop-blur'>
+                  <h3 className='text-2xl font-bold'>Thank you!</h3>
+                  <p className='mt-2 text-neutral-200'>
+                    We'll be in touch shortly.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

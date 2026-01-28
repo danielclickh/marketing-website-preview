@@ -1,6 +1,4 @@
-export const IS_PRODUCTION =
-  process?.env?.NEXT_IS_PROD === 'true' ||
-  (process?.env?.VERCEL_ENV || process?.env?.NODE_ENV) === 'production'
+export const IS_PRODUCTION = process.env.NEXT_PUBLIC_IS_PROD === 'true'
 
 export const BASE_PROTOCOL = process?.env?.NEXT_PUBLIC_PROTOCOL || 'https://'
 

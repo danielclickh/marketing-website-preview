@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ seo, headerData, footerData }: CommonProps) {
+export default function Page({ seo, headerData }: CommonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalInnerRef = useRef<HTMLDivElement | null>(null)
 
@@ -50,7 +50,7 @@ export default function Page({ seo, headerData, footerData }: CommonProps) {
   })
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section
         className='bg-shadow-element yellow-shadow overflow-hidden bg-grid py-16 lg:py-24'

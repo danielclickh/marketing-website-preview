@@ -7,6 +7,7 @@ export interface AccordionItemProps {
   prefix?: string | number | React.ReactNode
   handle: React.ReactNode | string
   children: React.ReactNode
+  defaultOpen?: boolean
   open?: boolean
   className?: React.HTMLProps<HTMLDivElement>['className']
   onOpen?: () => void
@@ -18,6 +19,7 @@ export default function AccordionItem({
   prefix,
   handle,
   children,
+  defaultOpen = false,
   open,
   className = '',
   onOpen,
@@ -25,7 +27,7 @@ export default function AccordionItem({
   onToggle
 }: AccordionItemProps) {
   const elRef = useRef<HTMLDivElement | null>(null)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen)
   const hasPrefix = !!prefix
 
   // Use parent state if provided, else local
@@ -53,6 +55,7 @@ export default function AccordionItem({
   return (
     <div
       ref={elRef}
+      data-state={areWeOpen ? 'open' : 'closed'}
       className={`relative overflow-hidden rounded border border-jet bg-neutral-900/50 p-4 transition-colors hover:bg-neutral-750 hover:bg-opacity-40 ${hasPrefix ? 'grid grid-cols-[auto_1fr]' : ''} ${className}`}>
       {hasPrefix && (
         <div className='border-r border-neutral-700/80 pr-4'>{prefix}</div>
@@ -98,7 +101,7 @@ export default function AccordionItem({
           open: { opacity: 1, y: 0, height: 'auto' }
         }}
         transition={{ type: 'spring', bounce: 0, duration: 0.5 }}
-        className='relative z-20 col-start-2'>
+        className='relative z-20 col-start-2 min-w-0'>
         {hasPrefix && (
           <span className='absolute -bottom-0 -left-px -top-4 border-l border-neutral-700/80' />
         )}

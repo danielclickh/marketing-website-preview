@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ seo, footerData }: CommonProps) {
+export default function Page({ seo }: CommonProps) {
   return (
     <>
       {seo && <SeoContainer {...seo} />}
@@ -73,7 +73,7 @@ export default function Page({ seo, footerData }: CommonProps) {
           </section>
         </div>
       </FontSohne>
-      <Footer {...footerData} />
+      <Footer />
     </>
   )
 }

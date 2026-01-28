@@ -30,11 +30,7 @@ export const getStaticProps: GetStaticProps<ContactProps> =
     }
   }
 
-export default function TrialExtensionPage({
-  footerData,
-  headerData,
-  seo
-}: ContactProps) {
+export default function TrialExtensionPage({ headerData, seo }: ContactProps) {
   const router = useRouter()
   useGalaxyOnPage('trialExtensionPage')
 
@@ -45,7 +41,7 @@ export default function TrialExtensionPage({
   const [formLoaded, setFormLoaded] = useState(false)
   const [marketoForm, setMarketoForm] = useState<SpoofedMarketoObject>()
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <Head>
         <meta name='robots' content='noindex,nofollow' />
       </Head>

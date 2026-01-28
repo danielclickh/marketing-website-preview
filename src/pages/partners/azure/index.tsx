@@ -5,9 +5,9 @@ import logoAstronomer from './assets/logo-astronomer.svg'
 import logoBaxenergy from './assets/logo-baxenergy.svg'
 import logoMicrosoft from './assets/logo-microsoft.svg'
 import Accordion from '@/components-cleaned/Accordion'
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import ClickHousePartnerLogo from '@/components/ClickHousePartnerLogo'
-import { CUIButton, CUILink } from '@/components/ClickUI'
+import { CUIButton } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
@@ -71,7 +71,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
 export default function Page({
   seo,
   headerData,
-  footerData,
   customerStories,
   blogs
 }: PageProps) {
@@ -84,7 +83,7 @@ export default function Page({
   const customerLogos = customerStories.logos
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='section-container my-20 lg:my-24'>
         <div className='text-center'>
@@ -671,7 +670,7 @@ export default function Page({
         </div>
         <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {blogs.slice(0, 3).map((blog) => (
-            <BlogPost key={blog.id} {...blog} />
+            <StrapiBlogPostCard key={blog.id} entry={blog} />
           ))}
         </div>
       </div>

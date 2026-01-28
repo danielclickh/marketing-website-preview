@@ -1,5 +1,12 @@
-import Avatars from '@/components/Avatars'
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import AiActions from '@/components-cleaned/AiActions'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
+import ScrollToTop from '@/components-cleaned/ScrollToTop'
+import SimpleCtaCard from '@/components-cleaned/SimpleCtaCard'
+import SmartBackButton from '@/components-cleaned/SmartBackButton'
+import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
+import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
@@ -9,48 +16,47 @@ import NewsLetter from '@/components/NewsLetter'
 import { getNewsLetterData } from '@/components/NewsLetter/getNewsLetterData'
 import ReadingProgress from '@/components/ReadingProgress'
 import SocialButton from '@/components/SocialButton'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import TableOfContents from '@/components/TableOfContents'
 import Layout from '@/components/jp/Layout'
 import { SuiText, SuiTitle } from '@/components/sui'
-import {
-  fetchAll,
-  findAll,
-  findOne,
-  getStagingOnlyFilters
-} from '@/lib/api/strapi'
+import { blogService, findOne, getProxiedMediaUrl } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateBlogArticleSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import { BlogProps } from '@/types/blog'
-import { ParamsType } from '@/types/homepage'
+import { camel } from '@/lib/utils/strings'
+import { CommonProps, ParamsType } from '@/types/homepage'
+import { BlogModules, EntryBlogPost } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 import React, { useRef } from 'react'
+import removeMarkdown from 'remove-markdown'
+
+interface BlogProps extends CommonProps {
+  blog: EntryBlogPost
+  otherBlogs: Array<EntryBlogPost>
+  CloudCTAFooter: string
+  CloudCTAHeader: string
+  globalCta?: null | {
+    content: string
+    link: {
+      href: string
+      text: string
+      target: '_self' | '_blank'
+    }
+  }
+}
 
 export const getStaticProps: GetStaticProps<BlogProps> =
   async function getStaticProps({ params }) {
-    const stagingOnlyFilters = getStagingOnlyFilters()
     const { slug } = params as ParamsType
-    const { data } = await findAll('blog-posts', {
+    const blog = await blogService.findOne({
       filters: {
         slug: {
           $eq: slug
-        },
-        $or: stagingOnlyFilters
-      },
-      populate: [
-        'author',
-        'author.avatarPng',
-        'thumbnailPng',
-        'promotion',
-        'promotion.image'
-      ],
-      pagination: { limit: 1 }
+        }
+      }
     })
-
-    const blog = data?.[0]
 
     if (!blog) {
       return {
@@ -65,51 +71,65 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       }
     }
 
-    const cloudCtaContent = await findOne('blog', {
-      populate: ['CloudCTAHeader', 'CloudCTAFooter']
+    const cloudCtaContentRequest = findOne('blog', {
+      populate: [
+        'CloudCTAHeader',
+        'CloudCTAFooter',
+        'globalCta',
+        'globalCta.link'
+      ]
     })
 
-    const blogsParams = {
+    const otherBlogsRequest = blogService.findMany({
       sort: ['date:DESC', 'publishedAt:DESC'],
-      populate: ['author', 'author.avatarPng', 'thumbnailPng'],
+      populate: ['author', 'thumbnailPng', 'author.profiles'],
       fields: [
         'category',
         'title',
-        'shortDescription',
-        'createdAt',
-        'updatedAt',
-        'publishedAt',
         'slug',
         'date',
-        'StagingOnly'
+        'publishedAt',
+        'reading_time',
+        'reading_time_override'
       ],
       pagination: { limit: 4 },
       filters: {
         slug: {
           $ne: slug
         },
-        category: { $eq: 'Japanese' },
-        $or: stagingOnlyFilters
+        category: { $eq: 'Japanese' }
       }
-    }
-    const { data: otherBlogs } = await findAll('blog-posts', blogsParams)
-    const commonData = await getCommonProps()
-    const newsLetterData = await getNewsLetterData()
+    })
 
-    const canonical = blog.canonical_url
+    const commonDataRequest = getCommonProps()
+    const newsLetterDataRequest = getNewsLetterData()
+
+    const [cloudCtaContent, otherBlogs, commonData, newsLetterData] =
+      await Promise.all([
+        cloudCtaContentRequest,
+        otherBlogsRequest,
+        commonDataRequest,
+        newsLetterDataRequest
+      ])
+
+    const canonical = blog.canonical_url?.trim()?.length
       ? blog.canonical_url
       : `/jp/blog/${slug}`
 
-    //super hacky thing that we will change for CMS override
-    if (
-      slug === 'clickhouse-cloud-is-now-generally-available-on-microsoft-azure'
-    ) {
-      blog.thumbnailPng.url = '/images/clickhouse-msft-dark.png'
-    }
+    const combinedFaqs = ((blog.sections as Array<BlogModules>) || [])
+      .filter((module) => module.__component === 'blog-modules.faqs')
+      .flatMap((module) => {
+        return module.items.map((item) => {
+          return {
+            question: item.question,
+            answer: removeMarkdown(item.answer)
+          }
+        })
+      })
 
     return {
       props: {
-        ...blog,
+        blog,
         ...cloudCtaContent,
         otherBlogs,
         seo: {
@@ -119,7 +139,32 @@ export const getStaticProps: GetStaticProps<BlogProps> =
           siteName: 'ClickHouse',
           image: [blog.thumbnailPng],
           path: canonical,
-          lastModified: blog.updatedAt
+          keywords: blog?.keywords || '',
+          lastModified: blog.updatedAt,
+          schema: generateBlogArticleSchema({
+            title: blog.title,
+            description: blog.shortDescription,
+            imageUrl: getProxiedMediaUrl(blog.thumbnailPng.url),
+            authors: blog?.author?.profiles?.length
+              ? blog.author.profiles.map((profile) => {
+                  return {
+                    name: profile.name,
+                    url: `/authors/${profile.slug}`,
+                    imageUrl: getProxiedMediaUrl(profile.avatar.url),
+                    jobTitle: profile.title
+                  }
+                })
+              : [
+                  {
+                    name: blog?.author?.name
+                      ? blog.author.name
+                      : 'ClickHouse Team'
+                  }
+                ],
+            publishedDate: blog.publishedAt,
+            modifiedDate: blog.updatedAt,
+            faqs: combinedFaqs
+          })
         },
         newsLetterData,
         ...commonData
@@ -131,17 +176,19 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 // It may be called again, on a serverless function, if
 // the path has not been generated.
 export async function getStaticPaths() {
-  const data = await fetchAll('blog-posts', {
+  const blogs = await blogService.findAll({
     filters: {
-      category: { $eq: 'Japanese' },
-      $or: getStagingOnlyFilters()
+      category: {
+        $eq: 'Japanese'
+      }
     },
-    fields: ['slug']
+    fields: ['slug'],
+    populate: []
   })
 
   // Get the paths we want to pre-render based on posts
-  const paths = data.map((post) => ({
-    params: { slug: post.slug }
+  const paths = blogs.map((blog) => ({
+    params: { slug: blog.slug }
   }))
 
   // We'll pre-render only these paths at build time.
@@ -151,73 +198,112 @@ export async function getStaticPaths() {
 }
 
 export default function BlogPage({
-  title,
-  author,
-  content,
-  category,
-  reading_time,
+  seo,
+  blog,
   otherBlogs,
-  date,
-  publishedAt,
-  footerData,
   headerData,
-  newsLetterData,
-  ShowCloudCTAHeader,
-  ShowCloudCTAFooter,
   CloudCTAFooter,
   CloudCTAHeader,
-  seo,
-  table_contents_headers,
-  promotion
+  globalCta
 }: BlogProps) {
   useGalaxyOnPage('blogPage')
   const contentRef = useRef<null | HTMLDivElement>(null)
+
+  const GlobalBlogCta = ({
+    location,
+    children
+  }: {
+    location: string
+    children?: React.ReactNode
+  }) => {
+    return (
+      <>
+        {globalCta && (
+          <SimpleCtaCard
+            link={globalCta.link}
+            galaxyEventName={`blogPage.${location}GlobalCta.${camel(globalCta.link.text)}`}>
+            {!children && (
+              <Markdown allowHeaderLink={false}>{globalCta.content}</Markdown>
+            )}
+            {children}
+          </SimpleCtaCard>
+        )}
+      </>
+    )
+  }
+
+  const markdownDirectives: Record<
+    string,
+    (props: Record<string, any>) => React.ReactNode
+  > = {
+    'global-blog-cta': ({ node, children }) => {
+      return (
+        <div className='my-6'>
+          <GlobalBlogCta location='content'>{children}</GlobalBlogCta>
+        </div>
+      )
+    }
+  }
+
+  // Ensure correct directive syntax is used
+  Object.keys(markdownDirectives).forEach((directiveKey) => {
+    blog.content = (blog.content || '').replaceAll(
+      `:::${directiveKey}:::`,
+      `:::${directiveKey}\n:::`
+    )
+  })
+
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
+      <ScrollToTop showFrom={600} hideAtBottomRef={contentRef} />
       <div className='relative'>
         <ReadingProgress target={contentRef} />
 
         <div className='section-container flex flex-col items-start gap-8 py-12 lg:flex-row lg:py-20'>
-          <Link
-            href='/jp/blog'
+          <SmartBackButton
+            fallbackPath='/blog'
             className='group/backButton -mx-3 -my-1.5 mr-8 inline-flex items-center whitespace-nowrap rounded px-3 py-1.5 text-base font-semibold transition-colors hover:bg-white/5'>
             <ArrowLeftIcon className='mr-2 w-4 transition-transform group-hover/backButton:-translate-x-1' />
             戻る
-          </Link>
-          <div className='flex flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
+          </SmartBackButton>
+          <div className='flex w-full flex-col gap-y-8 lg:grid lg:grid-cols-12 lg:gap-x-6'>
             {/* Blog meta */}
             <div className='order-1 lg:order-none lg:col-span-11 lg:mb-12 xl:col-span-9'>
-              <h4 className='text-base font-semibold text-primary-300'>
-                <Link href='/jp/blog' className='hover:underline'>
-                  ブログ
-                </Link>
-              </h4>
-              <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
-                <span className='leading-snug'>{title}</span>
-              </h1>
-              <div className='flex flex-row items-center space-x-4 pt-2'>
-                <Avatars
-                  avatars={
-                    Array.isArray(author.avatarPng)
-                      ? author.avatarPng
-                      : [author.avatarPng]
-                  }
-                />
-                <div className='flex flex-col items-start'>
-                  <SuiText size='base' weight='normal'>
-                    {author.name}
-                  </SuiText>
-                  <SuiText size='sm' weight='normal' color='secondary'>
-                    {convertDateToString(date || publishedAt)} - {reading_time}{' '}
-                    分で読める
-                  </SuiText>
+              <div className='flex flex-col gap-6 sm:-mt-0.5 sm:flex-row sm:items-center'>
+                <Breadcrumbs>
+                  <Breadcrumbs.Link href='/jp/blog'>ブログ</Breadcrumbs.Link>
+                </Breadcrumbs>
+                {/* AI Actions */}
+                <div>
+                  <AiActions
+                    galaxyNamespace='blogPage'
+                    shareUrl={`/jp/blog/${blog.slug}`}
+                    markdownUrl={`/blog/${blog.slug}`}
+                  />
                 </div>
               </div>
+
+              <h1 className='mb-8 mt-6 font-basier text-4xl font-bold text-neutral-100'>
+                <span className='leading-snug'>{blog.title}</span>
+              </h1>
+
+              {/* Authors */}
+              <StrapiAuthorMeta
+                authors={blog.author}
+                extras={[
+                  blog.date || blog.publishedAt
+                    ? convertDateToString(blog.date || blog.publishedAt)
+                    : null,
+                  blog.reading_time_override || blog.reading_time
+                    ? `${blog.reading_time_override || blog.reading_time} 分で読める`
+                    : null
+                ]}
+              />
             </div>
 
             {/* Blog content */}
             <article className='order-3 lg:order-none lg:col-span-11 xl:col-span-9'>
-              {ShowCloudCTAHeader && (
+              {blog.ShowCloudCTAHeader && (
                 <Markdown
                   className='rich-text-content mb-8 leading-6'
                   allowHeaderLink>
@@ -225,27 +311,40 @@ export default function BlogPage({
                 </Markdown>
               )}
 
-              {content && (
-                <div className='flex flex-col lg:flex-row' ref={contentRef}>
-                  <Markdown
-                    className='rich-text-content leading-6'
-                    allowHeaderLink>
-                    {content}
-                  </Markdown>
-                </div>
-              )}
+              <div className='w-full space-y-6' ref={contentRef}>
+                {blog.sections &&
+                  blog.sections.length > 0 &&
+                  blog.sections.map((section, sectionIndex) => {
+                    return (
+                      <StrapiDynamicBlogModules
+                        key={sectionIndex}
+                        {...section}
+                      />
+                    )
+                  })}
 
-              {promotion && (
+                {blog.content && (
+                  <Markdown
+                    allowDirectives={true}
+                    className='rich-text-content leading-6'
+                    allowHeaderLink={true}
+                    components={markdownDirectives}>
+                    {blog.content}
+                  </Markdown>
+                )}
+              </div>
+
+              {blog.promotion && (
                 <div className='mt-8'>
                   <CUICard className='border-primary-300'>
                     <CUICard.Body className='p-6 text-sm'>
                       <p className='mb-3'>
-                        <strong>{promotion.title}</strong>
+                        <strong>{blog.promotion.title}</strong>
                       </p>
                       <div className='flex flex-col gap-6 md:flex-row md:items-start'>
-                        <p>{promotion.description}</p>
-                        <StrapiImageUrl
-                          {...promotion.image}
+                        <p>{blog.promotion.description}</p>
+                        <StrapiImage
+                          entry={blog.promotion.image}
                           className='mx-auto !h-auto !w-36 flex-shrink-0 flex-grow-0 md:mr-0'
                         />
                       </div>
@@ -254,7 +353,7 @@ export default function BlogPage({
                 </div>
               )}
 
-              {ShowCloudCTAFooter && (
+              {blog.ShowCloudCTAFooter && (
                 <Markdown
                   className='rich-text-content mt-8 leading-6'
                   allowHeaderLink>
@@ -265,10 +364,17 @@ export default function BlogPage({
 
             {/* Blog sidebar */}
             <aside className='order-2 hidden lg:order-none xl:col-span-3 xl:block'>
-              <TableOfContents
-                contentRef={contentRef}
-                headersSelector={table_contents_headers}
-              />
+              <div className='sticky top-30 flex max-h-[calc(100vh_-_9rem)] flex-col gap-6'>
+                <TableOfContents
+                  contentRef={contentRef}
+                  headersSelector={blog.table_contents_headers || ''}
+                />
+                {blog.enableSidebarGlobalCta && (
+                  <div className='flex-shrink-0'>
+                    <GlobalBlogCta location='sidebar' />
+                  </div>
+                )}
+              </div>
             </aside>
 
             {/* Blog footer */}
@@ -282,16 +388,16 @@ export default function BlogPage({
                 </SuiText>
                 <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
                   <CopyUrlButton />
-                  <SocialButton type='y_combinator' title={title} />
-                  <SocialButton type='twitter' title={title} />
-                  <SocialButton type='bluesky' title={title} />
-                  <SocialButton type='facebook' title={title} />
-                  <SocialButton type='linkedin' title={title} />
+                  <SocialButton type='y_combinator' title={blog.title} />
+                  <SocialButton type='twitter' title={blog.title} />
+                  <SocialButton type='bluesky' title={blog.title} />
+                  <SocialButton type='facebook' title={blog.title} />
+                  <SocialButton type='linkedin' title={blog.title} />
                 </div>
               </div>
 
               {/* Form */}
-              <NewsLetter {...newsLetterData} />
+              <NewsLetter />
             </div>
           </div>
         </div>
@@ -307,7 +413,7 @@ export default function BlogPage({
             Recent posts
           </SuiTitle>
 
-          <CUIButton href='/jp/blog' type='secondary-dark'>
+          <CUIButton href='/jp/blog' type='secondary'>
             View all Blogs
           </CUIButton>
         </div>
@@ -315,10 +421,11 @@ export default function BlogPage({
           {otherBlogs.map((recentBlog, recentBlogIndex) => {
             return (
               <div
+                key={recentBlogIndex}
                 className={
                   recentBlogIndex > 2 ? 'hidden md:block lg:hidden' : ''
                 }>
-                <BlogPost key={recentBlogIndex} {...recentBlog} />
+                <StrapiBlogPostCard entry={recentBlog} />
               </div>
             )
           })}

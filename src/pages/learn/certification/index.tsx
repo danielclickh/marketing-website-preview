@@ -1,10 +1,11 @@
+import certificationThumbnail from '../assets/certification-thumbnail.jpg'
 import iconPlay from '../assets/icon-play.svg'
 import Accordion from '@/components-cleaned/Accordion'
+import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LogoAnnouncementLink from '@/components/LogoAnnouncementLink'
 import Modal from '@/components/Modal'
-import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import TiltedText from '@/components/TiltedText'
 import Bullseye from '@/components/icons/Bullseye'
@@ -111,7 +112,6 @@ function CheckListItem(props: CheckListItemProps) {
 }
 
 export default function CertificationPage({
-  footerData,
   headerData,
   customerStories,
   seo
@@ -121,7 +121,7 @@ export default function CertificationPage({
   const [watchWebinar, setWatchWebinar] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='bg-grid'>
         <div className='section-container flex flex-row flex-wrap items-start justify-between gap-x-6 gap-y-16 py-16 md:py-20 lg:flex-nowrap'>
@@ -192,13 +192,11 @@ export default function CertificationPage({
                   Preparing for the ClickHouse Certified Developer exam
                 </h3>
                 {watchWebinar && (
-                  <ResponsiveEmbed>
-                    <iframe
-                      src='https://www.youtube-nocookie.com/embed/bLXCYhf5G8Q?rel=0&autoplay=1'
-                      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                      allowFullScreen
-                    />
-                  </ResponsiveEmbed>
+                  <PlayOnClickVideo
+                    provider='vimeo'
+                    id={1152964032}
+                    thumbnail={certificationThumbnail}
+                  />
                 )}
               </div>
             </Modal>
@@ -599,9 +597,23 @@ export default function CertificationPage({
               content: (
                 <p>
                   The ClickHouse Certified Developer exam is $200 USD per
-                  attempt. An exam attempt is valid for 365 days after purchase,
-                  at which time it will expire. Note that exam attempt purchases
-                  are not refundable.
+                  attempt.{' '}
+                  <strong>
+                    Note that exam attempt purchases are not refundable.
+                  </strong>
+                </p>
+              )
+            },
+
+            {
+              onOpen: useGalaxyOnClick(
+                'certificationPage.faqSection.examPurchaseExpiry'
+              ),
+              handle: 'After I purchase the exam, when do I need to take it?',
+              content: (
+                <p>
+                  An exam attempt is valid for 365 days after purchase, at which
+                  time it will expire.
                 </p>
               )
             },

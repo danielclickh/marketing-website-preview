@@ -1,4 +1,3 @@
-import { FooterData } from '@/components/Footer/types'
 import { GettingStartedPlatform } from '@/components/GetStarted/types'
 import { HeaderProps } from '@/components/Header/types'
 import {
@@ -106,7 +105,6 @@ export interface NewsLetterData {
 }
 
 export interface CommonProps {
-  footerData: FooterData
   headerData: HeaderProps
   seo?: SeoMetadata
   platforms: Array<GettingStartedPlatform>

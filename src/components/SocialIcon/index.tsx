@@ -1,24 +1,33 @@
-import { CUILink } from '../ClickUI'
-import { LinkProps } from '../ClickUI/Link/types'
 import Image from 'next/image'
+import Link from 'next/link'
 
-interface Props extends Omit<LinkProps, 'children'> {
+interface SocialIconProps {
   name: string
   href: string
   imgSrc: string
 }
 
-function SocialIcon({ name, href, imgSrc, ...props }: Props) {
+export default function SocialIcon({
+  name,
+  href,
+  imgSrc,
+  ...props
+}: SocialIconProps) {
   return (
-    <CUILink
-      key={name}
+    <Link
       href={href}
       target='_blank'
-      className='grid h-16 w-16 place-items-center rounded border border-neutral-700/80 bg-neutral-900 hover:bg-neutral-800'
+      title={name}
+      className='grid size-16 place-items-center rounded border border-neutral-700/80 bg-neutral-900 transition-colors hover:bg-neutral-800'
       {...props}>
-      <Image src={imgSrc} width={32} height={32} alt={`${name} image`} />
-    </CUILink>
+      <Image
+        src={imgSrc}
+        width={32}
+        height={32}
+        alt={name}
+        className='size-8 max-w-none object-scale-down object-center'
+      />
+      <span className='sr-only'>{name}</span>
+    </Link>
   )
 }
-
-export default SocialIcon

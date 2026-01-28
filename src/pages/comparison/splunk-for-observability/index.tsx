@@ -6,31 +6,29 @@ import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
 import iconLightning from './assets/icon-lightning.svg'
 import iconUnlock from './assets/icon-unlock.svg'
-import logoAnthropic from './assets/logo-anthropic.svg'
 import logoElastic from './assets/logo-elastic.svg'
 import logoPostgress from './assets/logo-postgress.svg'
 import logoSnowflake from './assets/logo-snowflake.svg'
 import splunkTableLogo from './assets/splunk-table-logo.svg'
+import Accordion from '@/components-cleaned/Accordion'
 import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import iconVs from '@/components-cleaned/ClickHouseVersusAnimation/assets/icon-vs.png'
 import CounterAnimation from '@/components-cleaned/CounterAnimation'
-import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import Sticky from '@/components-cleaned/Sticky'
-import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import { CUIButton } from '@/components/ClickUI'
 import ComparisonTable, {
   ComparisonTableProps
 } from '@/components/ComparisonTable'
 import Layout from '@/components/Layout'
 import LinedIconCard from '@/components/LinedIconCard'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MoreComparisons from '@/components/MoreComparisons'
-import QuoteCard from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import { SuiText, SuiTitle } from '@/components/sui'
-import tables from '@/data/splunk-comparison'
+import { tables, faqs } from '@/data/splunk-comparison'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
@@ -45,23 +43,20 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         ...commonProps,
         seo: {
-          title: 'Splunk vs ClickHouse',
-          path: '/comparison/splunk-for-observability',
-          image: [{ url: '/images/clickhouse-vs-splunk-og.png' }]
+          title: 'Splunk vs ClickStack',
+          description:
+            'ClickStack offers fast, cost-efficient OpenTelemetry observability at scale. Compare it with Splunk’s complex pricing and slower searches to modernize your stack.',
+          path: '/comparison/splunk-for-observability'
         }
       }
     }
   }
 
-export default function SplunkPage({
-  footerData,
-  headerData,
-  seo
-}: CommonProps) {
+export default function SplunkPage({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('splunkComparisonPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='container mx-auto my-16 flex max-w-7xl flex-col items-start gap-x-6 px-8 md:flex-row 2xl:px-0'>
         <div className='mx-auto grid max-w-[800px] grid-cols-1 gap-6 text-center lg:mx-0 lg:text-left'>
@@ -70,7 +65,7 @@ export default function SplunkPage({
             <Breadcrumbs.Item>Observability</Breadcrumbs.Item>
           </Breadcrumbs>
           <SuiTitle type='h1' weight='bold'>
-            ClickHouse <span className='text-primary-300'>vs</span> Splunk
+            ClickStack <span className='text-primary-300'>vs</span> Splunk
           </SuiTitle>
           <Image
             src={heroLogos}
@@ -168,38 +163,15 @@ export default function SplunkPage({
             <ClickHouseVersusSplunk />
           </div>
 
-          {/* Testimonials */}
-          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
+          <div className='relative grid grid-cols-1 gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:grid-cols-2'>
             <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
-            <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
-              Join Anthropic in migrating from Splunk
-            </h2>
-            <div className='grid grid-cols-1 gap-6 lg:grid-cols-2 lg:space-y-0'>
-              <QuoteCard
-                content='I’d recommend ClickHouse - it supports real-time at scale, fast analytics, deployment flexibility, and cost-effective scaling. Queries are lightning-fast, and money is not on fire as much.'
-                link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
-                logo={{
-                  src: logoAnthropic,
-                  width: 200 * 0.9,
-                  height: 41 * 0.9,
-                  alt: 'Anthropic'
-                }}
-              />
-              <div className='order-first lg:order-last'>
-                <PlayOnClickVideo
-                  provider='youtube'
-                  id='SrLKbzdFEWA'
-                  thumbnail={<YouTubeThumbnail videoId='SrLKbzdFEWA' />}
-                  playButtonEyebrow='Customer story'
-                  playButtonLabel='Hear from Anthropic'
-                />
-              </div>
-            </div>
-          </div>
 
-          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+            <h2 className='col-span-full text-center font-basier text-2xl font-semibold'>
+              Why ClickStack outperforms Splunk
+            </h2>
+
             {/* Pillar 1 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconHandCoins} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -216,7 +188,7 @@ export default function SplunkPage({
             </div>
 
             {/* Pillar 2 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconGuage} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -232,7 +204,7 @@ export default function SplunkPage({
             </div>
 
             {/* Pillar 3 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconLightning} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -248,7 +220,7 @@ export default function SplunkPage({
             </div>
 
             {/* Pillar 4 */}
-            <div className='relative flex flex-col gap-6 overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-200 shadow-lg lg:p-10'>
+            <div className='relative flex flex-col gap-6 overflow-hidden rounded bg-neutral-725 p-6 text-neutral-200'>
               <div className='flex items-center gap-4 lg:gap-6'>
                 <Image src={iconUnlock} alt='Icon' width={36} height={36} />
                 <SuiTitle type='h3' className='text-white'>
@@ -381,6 +353,52 @@ export default function SplunkPage({
         </div>
       </div>
 
+      {/* FAQs */}
+      <section
+        id='faqs'
+        className='bg-shadow-element relative mx-auto my-24 max-w-7xl px-4 md:px-8 lg:flex lg:justify-between lg:gap-x-12 2xl:px-0'
+        style={
+          {
+            '--top-side': '224px'
+          } as React.CSSProperties
+        }>
+        <div className='pb-10 text-center lg:text-left'>
+          <div className='lg:sticky lg:top-32'>
+            <Image
+              src='/faq-icon.svg'
+              alt='FAQ Icon'
+              width={72}
+              height={72}
+              className='mx-auto lg:mx-0'
+            />
+            <SuiTitle type='h2' className='my-6 lg:text-left'>
+              FAQs
+            </SuiTitle>
+            <div className='mx-auto max-w-md space-y-4 text-neutral-200 lg:text-left'>
+              <p>
+                We're here to make observability simple, fast, and open. Explore
+                our FAQs to learn more about ClickStack, and if you don’t see
+                what you need, we’re always happy to chat.
+              </p>
+              <p>
+                <LinkWithArrow
+                  href='/company/contact'
+                  className='font-bold text-primary-300'>
+                  Ask us anything
+                </LinkWithArrow>
+              </p>
+            </div>
+          </div>
+        </div>
+        <Accordion
+          className='mx-auto w-full max-w-2xl lg:mr-0'
+          items={faqs.map(({ question, answer }) => ({
+            handle: question,
+            content: answer
+          }))}
+        />
+      </section>
+
       {/* More comparisons */}
       <MoreComparisons
         comparisons={[
@@ -390,7 +408,7 @@ export default function SplunkPage({
             logo: logoPostgress
           },
           {
-            name: 'Elastic',
+            name: 'Elastic Observability',
             link: `/comparison/elastic-for-observability?loc=splunk-comparison-page`,
             logo: logoElastic
           },

@@ -35,6 +35,7 @@ import shareImage from './assets/share-image.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
 import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
+import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
@@ -48,12 +49,13 @@ import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { generateFaqPageSchema } from '@/lib/schema'
+import { generateFaqPageSchema, generateVideoObjectSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
 import React, { CSSProperties, useRef, useState } from 'react'
+import { EffectCreative, Mousewheel } from 'swiper/modules'
 
 const FAQs: Array<{ question: string; answer: string }> = [
   {
@@ -170,11 +172,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function ClickHouseServerPage({
-  seo,
-  headerData,
-  footerData
-}: CommonProps) {
+export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('observabilityUseCasePage')
   const [hyperdxActive, setHyperdxActive] = useState(true)
   const [clickhouseActive, setClickhouseActive] = useState(false)
@@ -186,7 +184,7 @@ export default function ClickHouseServerPage({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='overflow-hidden py-20 lg:py-24'>
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
@@ -217,7 +215,10 @@ export default function ClickHouseServerPage({
                 weight='semibold'
                 href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
                 linkClass='w-full md:w-auto'
-                className='w-full !px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'
+                onClick={useGalaxyOnClick(
+                  'observabilityUseCasePage.hero.getStartedWithOpenSource'
+                )}>
                 Get started with open-source
               </CUIButton>
               <CUIButton
@@ -227,7 +228,10 @@ export default function ClickHouseServerPage({
                 href='/company/contact?loc=use-case-observability'
                 target='_self'
                 linkClass='w-full md:w-auto'
-                className='w-full !px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'
+                onClick={useGalaxyOnClick(
+                  'observabilityUseCasePage.hero.contactSales'
+                )}>
                 Contact sales
               </CUIButton>
             </div>
@@ -408,8 +412,8 @@ export default function ClickHouseServerPage({
               }
               logo={{
                 src: '/images/sony.svg',
-                width: 136.36,
-                height: 24,
+                width: 136.36 * 0.63,
+                height: 24 * 0.63,
                 alt: 'Sony'
               }}
             />
@@ -421,8 +425,8 @@ export default function ClickHouseServerPage({
               link='/blog/how-anthropic-is-using-clickhouse-to-scale-observability-for-ai-era'
               logo={{
                 src: logoAnthropic,
-                width: 143 * 1.1,
-                height: 16 * 1.1,
+                width: 143 * 1,
+                height: 16 * 1,
                 alt: 'Antrhopic',
                 className: 'mb-1'
               }}
@@ -435,8 +439,8 @@ export default function ClickHouseServerPage({
               link='/blog/scaling-observabilty-for-thousands-of-gpus-at-character-ai'
               logo={{
                 src: logoCharacterai,
-                width: 102 * 1.5,
-                height: 14 * 1.5,
+                width: 102 * 1.38,
+                height: 14 * 1.38,
                 alt: 'Character.ai',
                 className: 'mb-1'
               }}
@@ -659,7 +663,10 @@ export default function ClickHouseServerPage({
               href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
               target='_blank'
               linkClass='w-full md:w-auto'
-              className='mt-6 w-full !px-10 md:w-auto'>
+              className='mt-6 w-full !px-10 md:w-auto'
+              onClick={useGalaxyOnClick(
+                'observabilityUseCasePage.builtForOtelAtScale.getStarted'
+              )}>
               Get started
             </CUIButton>
           </div>
@@ -673,18 +680,61 @@ export default function ClickHouseServerPage({
       <section className='section-container my-20 lg:my-24'>
         <div className='mx-auto max-w-4xl text-center'>
           <SuiTitle type='h2' className='mb-10'>
-            Watch the ClickStack introduction
+            Watch the 60 second overview & introduction
           </SuiTitle>
-          <PlayOnClickVideo
-            provider='youtube'
-            id='3waDYancX_c'
-            thumbnail={
-              <YouTubeThumbnail
-                videoId='3waDYancX_c'
-                alt='ClickStack introduction video'
-              />
-            }
-          />
+          <CarouselPaginated
+            modules={[Mousewheel, EffectCreative]}
+            mousewheel={{
+              enabled: true,
+              forceToAxis: true,
+              releaseOnEdges: true,
+              sensitivity: 0.5
+            }}
+            effect='creative'
+            creativeEffect={{
+              prev: {
+                shadow: true,
+                translate: ['-20%', 0, -1]
+              },
+              next: {
+                shadow: true,
+                translate: ['100%', 0, 0]
+              }
+            }}
+            simulateTouch={false}
+            carouselClass='rounded'>
+            <PlayOnClickVideo
+              provider='youtube'
+              id='WBe7ZwTRWuQ'
+              thumbnail={<YouTubeThumbnail videoId='WBe7ZwTRWuQ' />}
+              schema={generateVideoObjectSchema({
+                title: 'ClickStack in 60 seconds',
+                description:
+                  'A 60-second overview of ClickStack, an open-source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
+                thumbnailUrl:
+                  'https://img.youtube.com/vi/WBe7ZwTRWuQ/maxresdefault.jpg',
+                uploadDate: '2025-12-18T08:06:01-08:00',
+                contentUrl: 'https://www.youtube.com/watch?v=WBe7ZwTRWuQ',
+                embedUrl: 'https://www.youtube.com/embed/WBe7ZwTRWuQ'
+              })}
+            />
+            <PlayOnClickVideo
+              provider='youtube'
+              id='3waDYancX_c'
+              thumbnail={<YouTubeThumbnail videoId='3waDYancX_c' />}
+              schema={generateVideoObjectSchema({
+                title:
+                  'ClickStack: Unified Observability with ClickHouse for High-Cardinality Logs, Metrics & Traces ',
+                description:
+                  'A hands-on tutorial introducing ClickStack, an OpenTelemetry-native observability platform that unifies logs, metrics, and traces in ClickHouse with powerful correlation and querying via HyperDX.',
+                thumbnailUrl:
+                  'https://img.youtube.com/vi/3waDYancX_c/maxresdefault.jpg',
+                uploadDate: '2025-06-25T09:14:17-07:00',
+                contentUrl: 'https://www.youtube.com/watch?v=3waDYancX_c',
+                embedUrl: 'https://www.youtube.com/embed/3waDYancX_c'
+              })}
+            />
+          </CarouselPaginated>
         </div>
       </section>
 

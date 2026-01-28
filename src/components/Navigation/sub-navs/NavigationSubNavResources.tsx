@@ -63,6 +63,7 @@ export default function NavigationSubNavResources() {
           setActiveSubNav(null)
         }}>
         <NavigationLink
+          href='#'
           onClick={() => {
             setActiveSubNav(
               isSubNavActive('comparisons') ? null : 'comparisons'
@@ -135,6 +136,19 @@ export default function NavigationSubNavResources() {
               onClick={useGalaxyOnClick('topNav.comparisonsMenu.splunkSelect')}
               className='block w-full'>
               Splunk
+            </NavigationLink>
+          </li>
+          <li>
+            <NavigationLink
+              href='/comparison/opensearch-for-observability'
+              onClick={useGalaxyOnClick(
+                'topNav.comparisonsMenu.opensearchSelect'
+              )}
+              className='block w-full md-mid:min-w-max md-mid:whitespace-nowrap'>
+              OpenSearch{' '}
+              <small className='ml-2 inline-block rounded-sm bg-white/10 px-2 text-neutral-200'>
+                For observability
+              </small>
             </NavigationLink>
           </li>
         </NavigationSubNav>

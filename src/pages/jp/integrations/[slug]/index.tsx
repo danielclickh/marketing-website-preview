@@ -141,14 +141,13 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> =
 export default function IntegrationPage({
   seo,
   headerData,
-  footerData,
   integration,
   similar
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const integrationLogo = integration.logo_dark || integration.logo
   useGalaxyOnPage('integrationPage')
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='bg-grid py-12 md:py-20'>
         <div className='section-container max-w-[800px]'>
           <Link

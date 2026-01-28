@@ -53,14 +53,14 @@ import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
-import { fetchAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { blogService, fetchAll } from '@/lib/api/strapi'
 import { IS_PRODUCTION } from '@/lib/next'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { limitStringByWord, slugify, stripHtmlTags } from '@/lib/utils/strings'
 import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
-import { BlogPost } from '@/types/blogs'
 import { CommonProps } from '@/types/homepage'
+import { EntryBlogPost } from '@/types/strapi'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { GetStaticProps } from 'next'
@@ -69,20 +69,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 interface OpenHousePageProps extends CommonProps {
-  blogs: Array<
-    Pick<
-      BlogPost,
-      | 'id'
-      | 'category'
-      | 'title'
-      | 'slug'
-      | 'date'
-      | 'shortDescription'
-      | 'content'
-      | 'thumbnailPng'
-      | 'publishedAt'
-    >
-  >
+  blogs: Array<EntryBlogPost>
   roadshows: Array<
     Pick<
       OpenhouseEntry,
@@ -110,14 +97,13 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
       }
     )
 
-    const blogs: OpenHousePageProps['blogs'] = await fetchAll('blog-posts', {
+    const blogs: OpenHousePageProps['blogs'] = await blogService.findAll({
       filters: {
         tags: {
           slug: {
             $eq: 'open-house'
           }
-        },
-        $or: getStagingOnlyFilters()
+        }
       },
       populate: ['thumbnailPng'],
       sort: ['date:DESC', 'publishedAt:DESC']
@@ -787,12 +773,7 @@ const AGENDA: Array<{
   { time: '5:15 p.m.', title: 'Networking and rooftop reception' }
 ]
 
-export default function Page({
-  seo,
-  footerData,
-  blogs,
-  roadshows
-}: OpenHousePageProps) {
+export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
   const speakersToggleRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
 
@@ -1562,7 +1543,7 @@ export default function Page({
           </section>
         </div>
       </FontSohne>
-      <Footer {...footerData} />
+      <Footer />
     </>
   )
 }

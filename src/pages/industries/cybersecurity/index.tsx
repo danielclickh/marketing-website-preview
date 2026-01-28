@@ -25,7 +25,7 @@ import LinkWithArrow from '@/components/LinkWithArrow'
 import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -52,11 +52,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function GamingIndustryPage({
-  seo,
-  headerData,
-  footerData
-}: CommonProps) {
+export default function GamingIndustryPage({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('cybersecurityIndustryPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
@@ -64,7 +60,7 @@ export default function GamingIndustryPage({
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section
         className='bg-shadow-element yellow-shadow my-16 lg:my-24'
@@ -75,27 +71,61 @@ export default function GamingIndustryPage({
             '--left-side': 'auto'
           } as React.CSSProperties
         }>
-        <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-12 lg:flex-nowrap lg:gap-16'>
+        <div className='section-container relative z-10 flex flex-wrap items-center justify-between gap-y-16 lg:flex-nowrap'>
           {/* Content column */}
-          <div className='mx-auto w-full max-w-lg space-y-6 text-center lg:ml-0 lg:max-w-2xl lg:text-left xl:pr-9'>
+          <div className='mx-auto w-full space-y-6 text-center text-neutral-200 lg:ml-0 lg:max-w-lg lg:text-left xl:max-w-2xl'>
             <p className='font-bold text-primary-300'>
               Industries / Cybersecurity
             </p>
-            <SuiTitle type='h1'>ClickHouse for Cybersecurity</SuiTitle>
+            <SuiTitle type='h1' className='text-white md:!text-5.5xl'>
+              ClickHouse for Cybersecurity
+            </SuiTitle>
             <SuiText size='lg' className='text-neutral-200'>
               Ingest millions of rows per second. Handle the most heavily
               concurrent workloads. All without compromising query speed.
             </SuiText>
-            <TickItem className='text-left'>
-              Continuous, high throughput ingest to serve fresh data
-            </TickItem>
-            <TickItem className='text-left'>
-              Seamlessly integrate static or streaming data from a wide range of
-              sources
-            </TickItem>
-            <TickItem className='text-left'>
-              ISO 27001, PCI DSS, HIPAA, GDPR and SOC 2 Type 2
-            </TickItem>
+            <div className='!my-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
+              <CUIButton
+                type='primary'
+                size='lg'
+                className='w-full !px-10 sm:w-auto'
+                target='_blank'
+                href='https://console.clickhouse.cloud/signUp?loc=industry-cybersecurity'
+                onClick={useGalaxyOnClick(
+                  'cybersecurityIndustryPage.heroCta.getStartedTodaySelect'
+                )}>
+                Get started today
+              </CUIButton>
+              {/*<CUIButton
+                  type='secondary'
+                  size='lg'
+                  className='w-full !px-10 sm:w-auto'
+                  target='_blank'
+                  href='/company/contact?loc=industry-cybersecurity'
+                  onClick={useGalaxyOnClick(
+                    'cybersecurityIndustryPage.heroCta.contactSalesSelect'
+                  )}>
+                  Talk to an expert
+                </CUIButton>*/}
+            </div>
+            <ul className='space-y-4 text-left text-neutral-200'>
+              <li>
+                <TickItem>
+                  Continuous, high throughput ingest to serve fresh data
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  Seamlessly integrate static or streaming data from a wide
+                  range of sources
+                </TickItem>
+              </li>
+              <li>
+                <TickItem>
+                  ISO 27001, PCI DSS, HIPAA, GDPR and SOC 2 Type 2
+                </TickItem>
+              </li>
+            </ul>
             <SuiText>
               Trusted by developers that work with data at scale
             </SuiText>

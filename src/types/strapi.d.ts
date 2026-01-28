@@ -2,8 +2,8 @@
 // Core
 // -----
 
-export interface ApiResponse {
-  data: any
+export interface ApiResponse<TData = any> {
+  data: TData
   meta: {
     pagination?: {
       page: number
@@ -16,9 +16,79 @@ export interface ApiResponse {
 
 type ApiKey<T> = Extract<keyof T, string>
 
+// Helpers: primitives + arrays
+type Primitive =
+  | string
+  | number
+  | boolean
+  | bigint
+  | symbol
+  | null
+  | undefined
+  | Date
+type IsPrimitive<T> = T extends Primitive ? true : false
+type UnwrapArray<T> = T extends (infer R)[] ? R : T
+type NN<T> = NonNullable<T> // <— IMPORTANT for optional/nullable relations
+
+// Fixed-depth dot-path keys
+type PrevDepth = [never, 0, 1, 2, 3, 4, 5, 6]
+type Join<K, P> = K extends string
+  ? P extends string
+    ? `${K}.${P}`
+    : never
+  : never
+
+/**
+ * Dot paths for ALL keys (for fields/sort):
+ * - handles nullable/optional nested objects
+ */
+export type DotPath<T, D extends number = 4> = [D] extends [never]
+  ? never
+  : NN<T> extends object
+    ? {
+        [K in Extract<keyof NN<T>, string>]:
+          | K
+          | (NN<NN<T>[K]> extends any[]
+              ? IsPrimitive<UnwrapArray<NN<NN<T>[K]>>> extends true
+                ? never
+                : Join<K, DotPath<UnwrapArray<NN<NN<T>[K]>>, PrevDepth[D]>>
+              : IsPrimitive<NN<NN<T>[K]>> extends true
+                ? never
+                : NN<NN<T>[K]> extends object
+                  ? Join<K, DotPath<NN<NN<T>[K]>, PrevDepth[D]>>
+                  : never)
+      }[Extract<keyof NN<T>, string>]
+    : never
+
+/**
+ * Dot paths for POPULATE:
+ * - only allows keys that are actually "populatable" (objects/relations)
+ * - handles nullable/optional relations (e.g. null | EntryImage)
+ */
+type PopulatableObject<T> =
+  IsPrimitive<NN<T>> extends true
+    ? never
+    : NN<T> extends any[]
+      ? PopulatableObject<UnwrapArray<NN<T>>>
+      : NN<T> extends object
+        ? NN<T>
+        : never
+
+export type PopulatePath<T, D extends number = 4> = [D] extends [never]
+  ? never
+  : PopulatableObject<T> extends never
+    ? never
+    : {
+        [K in Extract<keyof NN<T>, string>]: PopulatableObject<
+          NN<T>[K]
+        > extends never
+          ? never
+          : K | Join<K, PopulatePath<UnwrapArray<NN<NN<T>[K]>>, PrevDepth[D]>>
+      }[Extract<keyof NN<T>, string>]
+
 type ApiFilterTopOperators = '$or' | '$and' | '$not'
 
-type ApiAttributeOperators =
+type ApiScalarOperators =
   | '$eq'
   | '$eqi'
   | '$ne'
@@ -27,69 +97,81 @@ type ApiAttributeOperators =
   | '$lte'
   | '$gt'
   | '$gte'
-  | '$in'
-  | '$notIn'
   | '$contains'
   | '$notContains'
   | '$containsi'
   | '$notContainsi'
-  | '$null'
-  | '$notNull'
-  | '$between'
   | '$startsWith'
   | '$startsWithi'
   | '$endsWith'
   | '$endsWithi'
 
-type ApiFilterOperators = ApiFilterTopOperators | ApiAttributeOperators
+type ApiArrayOperators = '$in' | '$notIn'
+type ApiNullOperators = '$null' | '$notNull'
+type ApiBetweenOperator = '$between'
 
-// Value-level operators for a single attribute
-type AttributeFilter<T> =
+type ScalarAttributeFilter<T> =
   | T
-  | {
-      [Op in ApiAttributeOperators]?: T
-    }
+  | ({
+      [K in ApiScalarOperators]?: T
+    } & {
+      [K in ApiArrayOperators]?: T[]
+    } & {
+      [K in ApiBetweenOperator]?: [T, T]
+    } & {
+      [K in ApiNullOperators]?: boolean
+    })
 
-// Core: field filters, recursive for object / relation types
+type FieldFilter<V> =
+  // arrays of relations
+  V extends any[]
+    ? ApiFilters<UnwrapArray<V>>
+    : // objects / relations
+      V extends object
+      ? IsPrimitive<V> extends true
+        ? ScalarAttributeFilter<V> // Date counts as scalar
+        : ApiFilters<V>
+      : // primitives
+        ScalarAttributeFilter<V>
+
 type ApiFieldFilter<T> = {
-  [K in ApiKey<T>]?: T[K] extends (infer R)[] // array relation
-    ? ApiFilters<R> | AttributeFilter<R>
-    : T[K] extends object // single relation / nested object
-      ? ApiFilters<T[K]> | AttributeFilter<T[K]>
-      : AttributeFilter<T[K]> // primitive field
+  [K in ApiKey<T>]?: FieldFilter<T[K]>
 }
 
-// Top-level + logical operators
 export type ApiFilters<T> = ApiFieldFilter<T> & {
   $and?: ApiFilters<T>[]
   $or?: ApiFilters<T>[]
   $not?: ApiFilters<T>[]
 }
 
-type PopulateLeaf<T> =
-  | true
-  | ApiKey<T>[]
-  | {
-      populate?: PopulateParam<any>
-      fields?: string[] | '*'
-    }
+// Populate param
+type PopulateObjectForm<T> = {
+  [K in Extract<keyof NN<T>, string>]?:
+    | true
+    | PopulateObjectForm<UnwrapArray<NN<NN<T>[K]>>>
+    | { fields?: string[] | '*'; populate?: any }
+}
 
 export type PopulateParam<T> =
   | '*'
   | 'deep'
-  | ApiKey<T>[]
-  | {
-      [K in ApiKey<T>]?: PopulateLeaf<any>
-    }
+  | false
+  | PopulatePath<T>[]
+  | PopulateObjectForm<T>
+
+// fields + sort with dot paths
+type SortDirection = 'ASC' | 'DESC'
+
+export type SortParam<T> =
+  | DotPath<T>
+  | `${DotPath<T>}:${SortDirection}`
+  | Array<DotPath<T> | `${DotPath<T>}:${SortDirection}`>
 
 export interface ApiRequestParams<T> {
   filters?: ApiFilters<T>
-  populate?: PopulateParam<T> // add | 'deep' if you rely on the plugin
-  fields?: Array<ApiKey<T>> | '*'
-  sort?:
-    | ApiKey<T>
-    | `${ApiKey<T>}:${'ASC' | 'DESC'}`
-    | Array<ApiKey<T> | `${ApiKey<T>}:${'ASC' | 'DESC'}`>
+  populate?: PopulateParam<T>
+  fields?: Array<DotPath<T>> | '*'
+  sort?: SortParam<T>
   pagination?:
     | {
         page?: number
@@ -147,6 +229,7 @@ export type BlogModules =
   | BlogModuleSummary
   | BlogModuleCodeBlock
   | BlogModuleYoutubeVideo
+  | BlogModuleImageGallery
 
 export interface BlogModuleMarketoForm extends DynamicComponent {
   __component: 'blog-modules.marketo-form'
@@ -213,8 +296,74 @@ export interface BlogModuleImageGallery extends DynamicComponent {
 }
 
 // -----
+// Page modules
+// -----
+
+export type PageModules =
+  | PageModuleMarkdown
+  | PageModuleWaitlistForm
+  | PageModuleCtaBlock
+  | PageModuleFaqs
+
+export interface PageModuleMarkdown extends DynamicComponent {
+  __component: 'page-modules.markdown'
+  body: string
+  headingAnchorLinks: boolean
+}
+
+export interface PageModuleWaitlistForm extends DynamicComponent {
+  __component: 'page-modules.waitlist-form'
+  introduction: string | null
+  formIntroduction: string | null
+  marketoFormId: string
+  formButtonLabel: string | null
+  formSuccessMessage: string
+  formSuccessRedirect: string | null
+  showPrivacyPolicy: boolean
+}
+
+export interface PageModuleCtaBlock extends DynamicComponent {
+  __component: 'page-modules.cta-block'
+  content: string
+  primary: ComponentLink
+  secondary: null | ComponentLink
+}
+
+export interface PageModuleFaqs extends DynamicComponent {
+  __component: 'page-modules.faqs'
+  content: string
+  items: Array<{ question: string; answer: string }>
+}
+
+export interface PageModuleStandardCards extends DynamicComponent {
+  __component: 'page-modules.standard-cards'
+  introduction: string | null
+  columns: 'Two' | 'Three' | 'Four'
+  items: Array<ComponentStandardCard>
+}
+
+export interface PageModuleLegal extends DynamicComponent {
+  __component: 'page-modules.legal'
+  body: string
+}
+
+// -----
 // Components
 // -----
+
+export interface ComponentLink {
+  text: string
+  href: string
+  target: '_blank' | '_self'
+}
+
+export interface ComponentStandardCard {
+  image: null | EntryImage
+  icon: null | EntryImage
+  title: null | string
+  description: null | string
+  link: null | ComponentLink
+}
 
 export interface ComponentSeo {
   title: null | string
@@ -229,9 +378,16 @@ export interface ComponentSeo {
 }
 
 export interface ComponentAuthor {
-  name: string
-  avatarPng: Array<EntryImage>
+  name: null | string
+  avatarPng: null | Array<EntryImage>
   profileLink: null | string
+  profiles: Array<EntryAuthor>
+}
+
+export interface ComponentPromotion {
+  title: string
+  description: string
+  image: EntryImage
 }
 
 export interface ComponentEventHostedByItem {
@@ -272,6 +428,11 @@ export interface ComponentEventForm {
 // -----
 // Content types
 // -----
+
+export interface EntryTag extends Entry {
+  name: string
+  slug: string
+}
 
 export interface EntryResourceCategory extends Entry {
   name: string
@@ -314,4 +475,95 @@ export interface EntryEvent extends Entry {
   form: null | ComponentEventForm
   eventVideoUrl: null | string
   recordedVimeoUrl: null | string
+}
+
+export interface EntryMarketingVideoCategory extends Entry {
+  CategoryName: string
+}
+
+export interface EntryMarketingVideo extends Entry {
+  Title: string
+  Slug: string
+  VideoDate: string
+  VideoID: string
+  Description: string | null
+  RelatedVideos: Array<EntryMarketingVideo>
+  categories: Array<EntryMarketingVideoCategory>
+  IntroText: null | string
+  seo: null | {
+    title: null | string
+    description: null | string
+    image: null | EntryImage
+  }
+  tags: Array<EntryTag>
+  promotion: null | ComponentPromotion
+}
+
+export interface EntryPage extends Entry {
+  title: string
+  path: string
+  sections: Array<PageModules>
+  seo: ComponentSeo
+}
+
+export interface EntryBlogPost extends Entry {
+  category:
+    | 'Company and culture'
+    | 'Community'
+    | 'Engineering'
+    | 'Product'
+    | 'User stories'
+    | 'Japanese'
+  title: string
+  shortDescription: string
+  content: null | string
+  author: null | ComponentAuthor
+  thumbnailPng: EntryImage
+  slug: string
+  date: string
+  keywords: null | string
+  StagingOnly: boolean
+  ShowCloudCTAHeader: boolean | null
+  ShowCloudCTAFooter: boolean | null
+  reading_time: number
+  reading_time_override: number | null
+  theme:
+    | 'ClickHouse Journey'
+    | 'Cloud Announcement'
+    | 'Competitive Comparisons'
+    | 'Customer Story'
+    | 'Feature Deep-dive'
+    | 'Guest Post'
+    | 'Guide'
+    | 'Integrations'
+    | 'Meetup Report'
+    | 'Newsletter'
+    | 'Release Post'
+    | 'Thought Leadership'
+  use_case:
+    | 'Business Intelligence'
+    | 'Core'
+    | 'Logs, Metrics, & Traces'
+    | 'ML & GenAI'
+    | 'N/A'
+    | 'Real-time Analytics'
+  canonical_url: null | string
+  table_contents_headers: null | string
+  promotion: ComponentPromotion
+  enableSidebarGlobalCta: null | boolean
+  sections: Array<BlogModules>
+  ListOnBlogs: null | boolean
+}
+
+export interface EntryAuthor extends Entry {
+  name: string
+  slug: string
+  title: null | string
+  description: null | string
+  avatar: EntryImage
+  linkedinUrl: null | string
+  twitterUrl: null | string
+  githubUrl: null | string
+  instagramUrl: null | string
+  websiteUrl: null | string
 }

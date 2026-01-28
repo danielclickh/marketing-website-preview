@@ -2,26 +2,27 @@ import hero from './assets/hero.png'
 import logoAzur from './assets/logo-azur.svg'
 import logoExitlag from './assets/logo-exitlag.svg'
 import logoRoblox from './assets/logo-roblox.svg'
+import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import GamingDiagramAndAccordion from '@/components/GamingDiagramAndAccordion'
 import GetStartedFree from '@/components/GetStartedFree'
 import callouts from '@/components/Industries/Gaming/callouts.json'
 import faqs from '@/components/Industries/Gaming/faqs.json'
-import heroCheckItems from '@/components/Industries/Gaming/hero-check-items.json'
 import Layout from '@/components/Layout'
 import LogoCarousel from '@/components/LogoCarousel'
 import Markdown from '@/components/Markdown'
+import MarketoForm from '@/components/MarketoForm'
 import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 
 interface GamingPageProps extends CommonProps {
   customerStories: any
@@ -59,94 +60,142 @@ export const getStaticProps: GetStaticProps<GamingPageProps> =
 export default function GamingIndustryPage({
   customerStories,
   seo,
-  headerData,
-  footerData
+  headerData
 }: GamingPageProps) {
   useGalaxyOnPage('gamingIndustryPage')
-  useEffect(() => {
-    const container = document.getElementById('regionsContainer')
-    if (container) {
-      const middlePosition =
-        container.scrollWidth / 2 - container.clientWidth / 2
-      container.scrollLeft = middlePosition
-    }
-  }, [])
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
+
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
-        <div className='bg-contain bg-center bg-no-repeat'>
-          <div className='relative z-20 overflow-hidden bg-grid pb-16 pt-10'>
-            <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 md:bg-no-repeat md:px-8 lg:min-h-[630px] 2xl:px-0'>
-              <div className='flex'>
-                <div className='flex-col xl:mt-16'>
-                  <div className='w-full lg:max-w-xl xl:max-w-full'>
-                    <h4 className='mb-6 w-full text-center text-base font-medium text-primary-300 lg:text-left'>
-                      Industries / Gaming
-                    </h4>
-                    <h1 className='mb-6 text-center font-basier text-4xl font-semibold leading-tight md:text-5.5xl lg:max-w-xl lg:text-left'>
-                      The database for gaming analytics and telemetry
-                    </h1>
-                    <SuiText
-                      size='base'
-                      color='secondary'
-                      className='mt-6 text-center md:pr-16 lg:text-left'>
-                      <p className='mb-6 max-w-2xl font-normal'>
-                        The real-time database built for high-throughput gaming
-                        analytics. Process millions of in-game events per second
-                        without compromising query speed.
-                      </p>
-                      <p className='mb-6 max-w-2xl font-bold'>
-                        The real-time database that never lags.
-                      </p>
-                    </SuiText>
+      <Layout seo={seo} headerData={headerData}>
+        {/* Hero */}
+        <section
+          className='bg-shadow-element yellow-shadow my-16 lg:my-24'
+          style={
+            {
+              '--top-side': '60%',
+              '--right-side': '20%',
+              '--left-side': 'auto'
+            } as React.CSSProperties
+          }>
+          <div className='section-container relative z-10 flex flex-wrap justify-between gap-y-16 lg:flex-nowrap'>
+            {/* Content column */}
+            <div className='mx-auto w-full space-y-4 text-center text-neutral-200 lg:ml-0 lg:max-w-lg lg:text-left xl:max-w-2xl'>
+              <Breadcrumbs>
+                <Breadcrumbs.Link href='/industries'>
+                  Industries
+                </Breadcrumbs.Link>
+                <Breadcrumbs.Item>Gaming</Breadcrumbs.Item>
+              </Breadcrumbs>
+              <SuiTitle type='h1' className='text-white md:!text-5.5xl'>
+                The database for gaming analytics and telemetry
+              </SuiTitle>
+              <SuiText>
+                The real-time database built for high-throughput gaming
+                analytics. Process millions of in-game events per second without
+                compromising query speed.
+              </SuiText>
+              <SuiText>
+                <strong>The real-time database that never lags.</strong>
+              </SuiText>
+              <div className='!my-8 flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start'>
+                <CUIButton
+                  type='primary'
+                  size='lg'
+                  className='w-full !px-10 sm:w-auto'
+                  target='_blank'
+                  href='https://console.clickhouse.cloud/signUp?loc=industry-gaming'
+                  onClick={useGalaxyOnClick(
+                    'gamingIndustryPage.heroCta.getStartedTodaySelect'
+                  )}>
+                  Get started today
+                </CUIButton>
+                {/*<CUIButton
+                  type='secondary'
+                  size='lg'
+                  className='w-full !px-10 sm:w-auto'
+                  target='_blank'
+                  href='/company/contact?loc=industry-gaming'
+                  onClick={useGalaxyOnClick(
+                    'energyIndustryPage.heroCta.contactSalesSelect'
+                  )}>
+                  Talk to an expert
+                </CUIButton>*/}
+              </div>
+              <ul className='space-y-4 text-left text-neutral-200'>
+                <li>
+                  <TickItem>
+                    <strong>Power in-game analytics and player insights</strong>{' '}
+                    with instant responsiveness, enabling real-time segmentation
+                    based on in-game behavior.
+                  </TickItem>
+                </li>
+                <li>
+                  <TickItem>
+                    <strong>
+                      Optimize monetization and drive ad decisions
+                    </strong>{' '}
+                    with real-time event data, personalizing offers and custom
+                    in-game experiences.
+                  </TickItem>
+                </li>
+                <li>
+                  <TickItem>
+                    <strong>Game Performance Monitoring (GPM)</strong> - track
+                    game performance, betting system reliability, logs, and
+                    telemetry in real time with crash analytics and performance
+                    tracking for both gaming and wagering platforms.
+                  </TickItem>
+                </li>
+              </ul>
+            </div>
+
+            {/* Form column */}
+            <div className='w-full lg:max-w-lg' id='get-in-touch'>
+              <div className='relative overflow-hidden rounded-lg bg-neutral-900/80 p-6 text-center shadow-lg lg:p-8'>
+                <SuiTitle type='h3' className='mb-2'>
+                  Get in touch with a ClickHouse expert
+                </SuiTitle>
+                <SuiText className='mb-6 text-neutral-200'>
+                  Tell us about your use case
+                </SuiText>
+                <MarketoForm
+                  formId='1124'
+                  clearbitTracking={true}
+                  onLoad={() => {
+                    setFormLoaded(true)
+                  }}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView()
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+                {!formLoaded && (
+                  <div className='my-auto text-center'>Loading form...</div>
+                )}
+                {formSuccess && (
+                  <div
+                    ref={formSuccessRef}
+                    className='absolute inset-0 z-10 my-auto flex flex-col items-center justify-center bg-neutral-900/90 text-center backdrop-blur'>
+                    <h3 className='text-2xl font-bold'>Thank you!</h3>
+                    <p className='mt-2 text-neutral-200'>
+                      We'll be in touch shortly.
+                    </p>
                   </div>
-                  <div className='space-y-2 lg:max-w-2xl'>
-                    {heroCheckItems.map((item) => {
-                      return (
-                        <TickItem key={item.id}>
-                          <Markdown>{item.content}</Markdown>
-                        </TickItem>
-                      )
-                    })}
-                    <div className='relative z-40 !mt-8 flex gap-6'>
-                      <CUIButton
-                        type='primary'
-                        size='lg'
-                        weight='semibold'
-                        href='https://console.clickhouse.cloud/signUp?loc=industry-gaming'
-                        target='_blank'
-                        linkClass='w-full mx-auto md:mx-0 max-w-[14rem]'
-                        className='w-full'>
-                        Get started today
-                      </CUIButton>
-                      <CUIButton
-                        type='secondary'
-                        size='lg'
-                        weight='semibold'
-                        href='/company/contact?loc=industry-gaming'
-                        target='_self'
-                        linkClass='w-full mx-auto md:mx-0 max-w-[12rem]'
-                        className='w-full'>
-                        Contact sales
-                      </CUIButton>
-                    </div>
-                  </div>
-                </div>
-                <div className='relative z-30 mx-auto hidden items-center justify-center align-middle lg:flex'>
-                  <Image
-                    src={hero}
-                    alt='ClickHouse Gaming'
-                    width={1478 / 2}
-                    height={1057 / 2}
-                    className='h-auto w-full'
-                    loading='eager'
-                    priority
-                  />
-                </div>
+                )}
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <div className='bg-neutral-725'>
           <div className='bg-shadow-element-left red-shadow section-container max-w-7xl'>

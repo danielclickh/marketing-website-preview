@@ -1,5 +1,6 @@
 'use client'
 
+import JsonSchema from '@/components-cleaned/JsonSchema'
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
 import type VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
@@ -11,6 +12,7 @@ import {
   useMemo,
   cloneElement
 } from 'react'
+import { VideoObject, WithContext } from 'schema-dts'
 import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/types'
 
 type EmbedProviders = 'youtube' | 'vimeo'
@@ -28,6 +30,10 @@ export interface PlayOnClickVideoProps {
   id: string | number
   playButtonEyebrow?: string
   playButtonLabel?: string
+  className?: string
+  thumbnailClassName?: string
+  playButtonClassName?: string
+  schema?: WithContext<VideoObject>
 }
 
 export default function PlayOnClickVideo({
@@ -35,7 +41,11 @@ export default function PlayOnClickVideo({
   thumbnail,
   id,
   playButtonLabel,
-  playButtonEyebrow
+  playButtonEyebrow,
+  className = '',
+  thumbnailClassName = '',
+  playButtonClassName = '',
+  schema
 }: PlayOnClickVideoProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const playerRef = useRef<
@@ -107,8 +117,7 @@ export default function PlayOnClickVideo({
   const renderedThumbnail = useMemo(() => {
     if (!thumbnail) return null
 
-    const thumbnailClasses =
-      'absolute inset-0 z-0 h-full w-full object-cover object-center'
+    const thumbnailClasses = `absolute inset-0 z-0 h-full w-full object-cover object-center ${thumbnailClassName}`
 
     // Add our thumbnail classes to the element
     if (isValidElement<ThumbElWithClassName>(thumbnail)) {
@@ -126,17 +135,18 @@ export default function PlayOnClickVideo({
         className={thumbnailClasses}
       />
     )
-  }, [thumbnail])
+  }, [thumbnail, thumbnailClassName])
 
   return (
-    <div className='relative aspect-video overflow-hidden rounded bg-neutral-900'>
+    <div
+      className={`relative aspect-video overflow-hidden rounded bg-neutral-900 ${className}`}>
       {/* Thumbnail overlay */}
       <div
         className={`absolute inset-0 z-10 transition-opacity ${thumbnail ? 'bg-neutral-900' : 'pointer-events-none'} ${
           playing ? 'pointer-events-none opacity-0' : ''
         }`}>
         <VideoPlayButton
-          className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${thumbnail ? '' : 'pointer-events-auto'}`}
+          className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${thumbnail ? '' : 'pointer-events-auto'} ${playButtonClassName}`}
           eyebrow={playButtonEyebrow}
           label={playButtonLabel}
           loading={loading && !playing}
@@ -148,8 +158,10 @@ export default function PlayOnClickVideo({
       {/* Player container */}
       <div
         ref={containerRef}
-        className='absolute inset-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
+        className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
       />
+
+      {schema && <JsonSchema schema={schema} />}
     </div>
   )
 }

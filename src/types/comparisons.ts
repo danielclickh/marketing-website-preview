@@ -1,7 +1,7 @@
-import { BlogPost as BlogPostType } from './blogs'
 import { HomepageCustomerStories } from './homepage'
 import { CommonProps } from './homepage'
 import { SeoMetadata, StrapiImageType } from '@/lib/api/strapi/types'
+import { EntryBlogPost } from '@/types/strapi'
 
 interface Painpoint {
   Title: string
@@ -30,7 +30,7 @@ export interface RepeatableContent {
   ]
   RelatedBlogs: [
     {
-      blog_posts: Array<BlogPostType>
+      blog_posts: Array<EntryBlogPost>
     }
   ]
 }

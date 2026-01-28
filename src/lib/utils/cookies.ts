@@ -18,7 +18,8 @@ export function setBrowserCookie(
   name: string,
   value: string,
   options?: {
-    days?: number
+    expires?: Date | string
+    maxAge?: number
     path?: string
     domain?: string
     secure?: boolean
@@ -32,13 +33,11 @@ export function setBrowserCookie(
 
   let cookieString = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
 
-  if (options?.days) {
-    const date = new Date()
-    date.setTime(date.getTime() + options.days * 24 * 60 * 60 * 1000)
-    cookieString += `; expires=${date.toUTCString()}`
-  }
-
   cookieString += `; path=${options?.path ?? '/'}`
+  if (options?.expires) {
+    cookieString += `; expires=${options.expires instanceof Date ? options.expires.toUTCString() : options.expires}`
+  }
+  if (options?.maxAge) cookieString += `; max-age=${options.maxAge}`
   if (options?.domain) cookieString += `; domain=${options.domain}`
   if (secure) cookieString += '; secure'
   if (options?.sameSite) cookieString += `; samesite=${options.sameSite}`

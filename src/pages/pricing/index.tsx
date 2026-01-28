@@ -158,14 +158,13 @@ export default function PricingPage({
   cloudProviders,
   pricingData,
   requestParams,
-  headerData,
-  footerData
+  headerData
 }: PricingPageProps) {
   useGalaxyOnPage('pricingPage')
   const pocFormRef = useRef<HTMLDivElement | null>(null)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
         <div className='pt-16'>
           <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>

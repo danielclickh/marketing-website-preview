@@ -94,14 +94,18 @@ export default function ScaleToContainer({
   useResizeObserverSsr(outerRef, calculateNewSizes)
   useResizeObserverSsr(childRef, calculateNewSizes)
 
+  const conditionalClasses = [
+    overflow ? '' : 'overflow-hidden',
+    scaleUp ? '' : 'max-w-max',
+    hideUntilReady && !ready ? 'opacity-0' : ''
+  ]
+    .filter((val) => val.trim().length > 0)
+    .join(' ')
+
   return (
     <div
       ref={outerRef}
-      className={`${
-        overflow ? '' : 'overflow-hidden'
-      } w-full max-w-max transition-opacity ${
-        hideUntilReady && !ready ? 'opacity-0' : ''
-      } ${className}`}>
+      className={`w-full transition-opacity ${conditionalClasses} ${className}`}>
       <div ref={innerRef} className='origin-top-left'>
         {children}
       </div>

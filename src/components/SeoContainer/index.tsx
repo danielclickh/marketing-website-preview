@@ -1,3 +1,4 @@
+import JsonSchema from '@/components-cleaned/JsonSchema'
 import { absoluteOptimizedImageUrl, absoluteUrl } from '@/lib/next'
 import {
   applyLangPath,
@@ -159,12 +160,7 @@ function SeoContainer({
       <meta name='twitter:domain' content='clickhouse.com' />
 
       {/* Schema.org Markup */}
-      {schema && (
-        <script
-          type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      )}
+      {schema && <JsonSchema schema={schema} />}
     </Head>
   )
 }

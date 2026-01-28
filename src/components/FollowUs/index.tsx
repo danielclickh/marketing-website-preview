@@ -11,17 +11,11 @@ function FollowUs() {
           imgSrc='/socials/x.svg'
         />
         <SocialIcon
-          key='Bluesky'
           name='Bluesky'
           href='https://bsky.app/profile/clickhouse.com'
           imgSrc='/socials/bluesky.svg'
         />
-        <SocialIcon
-          name='Slack'
-          href='/slack'
-          imgSrc='/socials/slack.svg'
-          prefetch={false}
-        />
+        <SocialIcon name='Slack' href='/slack' imgSrc='/socials/slack.svg' />
 
         <div className='flex justify-center gap-2 md:gap-6'>
           <SocialIcon
@@ -41,12 +35,7 @@ function FollowUs() {
           />
         </div>
         <div className='flex justify-center gap-2 md:gap-6'>
-          <SocialIcon
-            key='blog-categories-nav'
-            name='Rss'
-            href='/rss.xml'
-            imgSrc='/socials/rss.svg'
-          />
+          <SocialIcon name='Rss' href='/rss.xml' imgSrc='/socials/rss.svg' />
         </div>
       </div>
     </div>

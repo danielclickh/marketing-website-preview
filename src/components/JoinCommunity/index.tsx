@@ -1,70 +1,65 @@
 import SocialIcon from '../SocialIcon'
 import { SuiTitle } from '../sui'
+import GithubStats from '@/components-cleaned/GithubStats'
 import { HeaderProps } from '@/components/Header/types'
+import ScaleToContainer from '@/components/ScaleToContainer'
+import TiltedText from '@/components/TiltedText'
 import formatStat from '@/lib/utils/numbers'
+import React from 'react'
 
 interface Props {
   github: HeaderProps['github']
 }
-function JoinCommunity({ github: { stars, contributors, prs } }: Props) {
+function JoinCommunity({ github }: Props) {
   return (
-    <div className='section-container flex w-full flex-col items-center justify-between gap-8 pb-16 md:flex-row md:px-8 md:pb-16 2xl:px-0'>
-      <div className='flex max-w-xl flex-col items-start gap-10'>
-        <SuiTitle type='h2' className='w-full text-center md:text-left'>
+    <div className='section-container flex w-full flex-col-reverse items-center justify-between gap-x-8 gap-y-16 lg:flex-row'>
+      <div className='w-full max-w-xl space-y-8 text-center lg:text-left'>
+        <SuiTitle type='h2'>
           Join the{' '}
-          <span className='tilted tilted-yellow'>
-            <span className='tilted-content'>100k+</span>
-          </span>{' '}
+          <TiltedText type='black-on-yellow' className='px-2'>
+            100k+
+          </TiltedText>{' '}
           developers using ClickHouse today
         </SuiTitle>
-        <div className='mx-auto flex flex-wrap gap-6 md:mx-0'>
-          <div className='mx-auto flex gap-6'>
+        <ul className='mx-auto flex flex-wrap justify-center gap-6 sm:max-w-max lg:mx-0'>
+          <li className='flex items-center justify-center'>
             <SocialIcon
               name='X'
               href='https://x.com/ClickhouseDB'
               imgSrc='/socials/x.svg'
             />
+          </li>
+          <li className='flex items-center justify-center'>
             <SocialIcon
               name='Slack'
               href='/slack'
-              prefetch={false}
               imgSrc='/socials/slack.svg'
             />
-          </div>
-          <div className='mx-auto flex gap-6'>
+          </li>
+          <li className='flex items-center justify-center'>
             <SocialIcon
               name='Telegram'
               href='https://telegram.me/clickhouse_en'
               imgSrc='/socials/telegram.svg'
             />
+          </li>
+          <li className='flex items-center justify-center'>
             <SocialIcon
               name='Meetup'
               href='https://www.meetup.com/pro/clickhouse'
               imgSrc='/socials/meetup.svg'
             />
-          </div>
-        </div>
+          </li>
+          <li className='flex items-center justify-center'>
+            <SocialIcon
+              name='LinkedIn'
+              href='https://www.linkedin.com/company/clickhouseinc'
+              imgSrc='/socials/linkedin.svg'
+            />
+          </li>
+        </ul>
       </div>
-      <div className='mx-auto flex w-full max-w-lg flex-col gap-8 bg-click-grid bg-bottom pb-24 text-right font-medium md:items-end md:pb-0'>
-        <div className='md:text-7.5xl absolute right-14 pt-4 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0'>
-          {formatStat(contributors)}+
-          <span className='absolute left-0 top-full text-xl leading-snug text-primary-300 md:text-2.75xl'>
-            Contributors
-          </span>
-        </div>
-        <div className='md:text-7.5xl absolute left-14 mr-auto pt-14 text-left font-basier text-5xl leading-none md:relative md:left-auto md:pt-0'>
-          {formatStat(prs)}+
-          <span className='absolute left-0 top-full text-xl leading-snug text-primary-300 md:text-2.75xl'>
-            PRs
-          </span>
-        </div>
-        <div className='md:text-7.5xl absolute right-30 pt-32 font-basier text-5xl leading-none md:relative md:right-auto md:pt-0'>
-          {formatStat(stars)}+
-          <span className='absolute left-0 top-full text-xl leading-snug text-primary-300 md:text-2.75xl'>
-            Stars
-          </span>
-        </div>
-      </div>
+      <GithubStats {...github} />
     </div>
   )
 }

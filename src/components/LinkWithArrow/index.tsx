@@ -2,9 +2,8 @@ import Nbsp from '../Nbsp'
 import Link, { LinkProps } from 'next/link'
 import React from 'react'
 
-interface Props extends LinkProps {
-  children: React.ReactNode
-  className?: string
+export interface LinkWithArrowProps
+  extends Omit<LinkProps & React.HTMLProps<HTMLAnchorElement>, 'ref'> {
   arrowClassName?: string
 }
 
@@ -13,7 +12,7 @@ export default function LinkWithArrow({
   className = '',
   arrowClassName = '',
   ...props
-}: Props) {
+}: LinkWithArrowProps) {
   return (
     <Link {...props} className={`group/linkWithArrow ${className}`}>
       {children}

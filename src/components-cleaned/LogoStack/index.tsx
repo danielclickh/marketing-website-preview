@@ -6,7 +6,7 @@ const spacingFixPercentage = 13
 
 type Logo = { src: ImageProps['src'] } & Partial<Omit<ImageProps, 'src'>>
 
-type Layer = {
+export type Layer = {
   logo: Logo
   color?: React.CSSProperties['backgroundColor']
   active?: boolean

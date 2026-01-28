@@ -66,7 +66,7 @@ function Quote({
         <footer className={classes.footer[direction]}>
           <Image
             {...logo}
-            className={`inline-block h-auto object-scale-down ${classes.logo[direction]} ${logoClassName}`}
+            className={`inline-block h-auto object-contain object-left pl-0.5 ${classes.logo[direction]} ${logoClassName}`}
             alt='Quote'
           />
         </footer>
@@ -93,13 +93,6 @@ export default function QuoteCard({
 }: QuoteCardProps) {
   if (typeof link === 'string') link = { href: link }
 
-  const QuoteComponent = (
-    <Quote
-      className={`transition hover:border-neutral-700 hover:bg-neutral-725/90 hover:shadow-lg ${className}`}
-      {...quote}
-    />
-  )
-
   return link ? (
     <Tilt
       tiltEnable={false}
@@ -108,9 +101,14 @@ export default function QuoteCard({
       glareColor='rgba(251, 255, 70, 0.08)'
       glarePosition='all'
       className='flex-1'>
-      <Link {...link}>{QuoteComponent}</Link>
+      <Link {...link}>
+        <Quote
+          className={`transition hover:border-neutral-700 hover:bg-neutral-725/90 hover:shadow-lg ${className}`}
+          {...quote}
+        />
+      </Link>
     </Tilt>
   ) : (
-    QuoteComponent
+    <Quote className={className} {...quote} />
   )
 }

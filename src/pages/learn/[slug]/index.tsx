@@ -93,7 +93,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
 
 export default function Page({
   headerData,
-  footerData,
   seo,
   platforms,
   customerStories,
@@ -102,7 +101,7 @@ export default function Page({
   useGalaxyOnPage(`learn${camel(props.slug)}`)
 
   return (
-    <Layout headerData={headerData} footerData={footerData} seo={seo}>
+    <Layout headerData={headerData} seo={seo}>
       {/* Hero */}
       <section>
         <div className='section-container my-4 lg:my-16'>
@@ -398,7 +397,9 @@ function LearnSection({ section }: { section: Section }) {
                             )}
                             {item.panel.description && (
                               <SuiText size='sm'>
-                                {item.panel.description}
+                                <Markdown className='rich-text-content text-neutral-200'>
+                                  {item.panel.description}
+                                </Markdown>
                               </SuiText>
                             )}
                           </div>

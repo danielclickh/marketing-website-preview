@@ -26,11 +26,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function ContactPage({
-  footerData,
-  headerData,
-  seo
-}: CommonProps) {
+export default function ContactPage({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('cloudInvertedIndexWaitlistPage')
 
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
@@ -38,7 +34,7 @@ export default function ContactPage({
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <DotsContainer>
         <div className='mx-auto w-full lg:max-w-xl'>
           <div className='mb-16 text-center'>

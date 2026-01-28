@@ -1,8 +1,8 @@
-import { CUILink } from '../ClickUI'
 import { SuiCodeblock, SuiTitle } from '../sui'
 import { GettingStartedData } from './types'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import Link from 'next/link'
+import React from 'react'
 
 export default function FetchGetStarted({ platforms }: GettingStartedData) {
   return (
@@ -16,7 +16,7 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
             <span className='tilted tilted-yellow'>
               <span className='tilted-content'>ClickHouse</span>
             </span>{' '}
-            in minutes
+            in seconds
           </SuiTitle>
           <div className='mb-8 mt-6 text-center text-neutral-300'>
             Install ClickHouse for MacOS, Linux, and FreeBSD.
@@ -24,42 +24,53 @@ export default function FetchGetStarted({ platforms }: GettingStartedData) {
         </div>
         <SuiCodeblock
           copyValue={platforms[0].instructions}
-          className='overflow-hidden'>
-          $ {platforms[0].instructions}
+          className='mx-auto flex w-full items-center gap-3 text-center md:pr-24'>
+          <span className='hidden text-primary sm:inline'>$</span>
+          <span>{platforms[0].instructions}</span>
         </SuiCodeblock>
-        <div className='mt-4 text-sm font-medium text-neutral-500'>
+        <div className='mt-4 text-sm font-medium text-neutral-400'>
           Or install for{' '}
-          <CUILink
+          <Link
             href='https://clickhouse.com/docs/integrations/sql-clients/clickhouse-client-local'
             target='_self'
             prefetch={false}
-            className='underline hover:text-neutral-0'
+            className='text-primary-300 hover:underline'
             onClick={useGalaxyOnClick(
               'homePage.installSection.windowsInstallSelect'
             )}>
             Windows
-          </CUILink>
+          </Link>
           ,{' '}
-          <CUILink
+          <Link
             href='https://hub.docker.com/r/clickhouse/clickhouse-server/'
             target='_self'
-            className='underline hover:text-neutral-0'
+            className='text-primary-300 hover:underline'
             onClick={useGalaxyOnClick(
               'homePage.installSection.dockerInstallSelect'
             )}>
             Docker
-          </CUILink>{' '}
+          </Link>{' '}
           or see other{' '}
-          <CUILink
+          <Link
             href='https://clickhouse.com/docs/install'
             target='_self'
             prefetch={false}
-            className='underline hover:text-neutral-0'
+            className='text-primary-300 hover:underline'
             onClick={useGalaxyOnClick(
               'homePage.installSection.otherOptionsSelect'
             )}>
-            install options.
-          </CUILink>
+            install options
+          </Link>
+          . Or try without installing in our{' '}
+          <Link
+            href='https://sql.clickhouse.com'
+            className='text-primary-300 hover:underline'
+            onClick={useGalaxyOnClick(
+              'homePage.installSection.playgroundSelect'
+            )}>
+            playground
+          </Link>
+          .
           <p className='mt-5'>
             Watch this{' '}
             <Link

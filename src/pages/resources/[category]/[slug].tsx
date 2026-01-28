@@ -1,9 +1,9 @@
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import ScrollToTop from '@/components-cleaned/ScrollToTop'
 import SmartBackButton from '@/components-cleaned/SmartBackButton'
+import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
 import StrapiDynamicBlogModules from '@/components-cleaned/StrapiDynamicBlogModules'
 import StrapiImage from '@/components-cleaned/StrapiImage'
-import Avatars from '@/components/Avatars'
 import CopyUrlButton from '@/components/CopyUrlButton'
 import FollowUs from '@/components/FollowUs'
 import HRSeparator from '@/components/HRSeparator'
@@ -23,11 +23,10 @@ import { generateFaqPageSchema } from '@/lib/schema'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { BlogModules, EntryResource } from '@/types/strapi'
+import { EntryResource } from '@/types/strapi'
 import { ArrowLeftIcon } from '@heroicons/react/solid'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import removeMarkdown from 'remove-markdown'
 
 export async function getStaticPaths() {
@@ -127,30 +126,9 @@ export default function ResourcePage({
   ...commonProps
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const contentRef = useRef<null | HTMLDivElement>(null)
-  const [hideScrollTopAt, setHideScrollTopAt] = useState<undefined | number>(
-    undefined
-  )
-
-  useEffect(() => {
-    const contentEl = contentRef.current
-    if (!contentEl) {
-      setHideScrollTopAt(undefined)
-      return
-    }
-
-    const hideAtHanlder = () => {
-      setHideScrollTopAt(contentEl.offsetTop + contentEl.clientHeight)
-    }
-
-    const resizeObserver = new ResizeObserver(hideAtHanlder)
-    resizeObserver.observe(contentEl)
-
-    return () => resizeObserver.disconnect()
-  }, [contentRef.current])
-
   return (
     <Layout {...commonProps}>
-      <ScrollToTop showFrom={600} hideAt={hideScrollTopAt} />
+      <ScrollToTop showFrom={600} hideAtBottomRef={contentRef} />
       <div className='relative'>
         <ReadingProgress target={contentRef} />
 
@@ -176,36 +154,14 @@ export default function ResourcePage({
               </h1>
 
               {/* Authors */}
-              {(resource.author || resource.date) && (
-                <div className='flex flex-row items-center space-x-4 pt-2'>
-                  {resource.author && (
-                    <Avatars avatars={resource.author.avatarPng} />
-                  )}
-                  <div className='flex flex-col items-start'>
-                    {resource.author && (
-                      <SuiText size='base' weight='normal'>
-                        {resource.author.profileLink ? (
-                          <Link
-                            href={resource.author.profileLink}
-                            target='_blank'
-                            rel='noreferrer noopener'
-                            className='hover:underline'>
-                            {resource.author.name}
-                          </Link>
-                        ) : (
-                          resource.author.name
-                        )}
-                      </SuiText>
-                    )}
-                    {resource.date && (
-                      <SuiText size='sm' weight='normal' color='secondary'>
-                        {resource.dateLabel ? `${resource.dateLabel}: ` : ''}
-                        {convertDateToString(resource.date)}
-                      </SuiText>
-                    )}
-                  </div>
-                </div>
-              )}
+              <StrapiAuthorMeta
+                authors={resource.author}
+                extras={[
+                  resource.date
+                    ? `${resource.dateLabel ? `${resource.dateLabel}: ` : ''}${convertDateToString(resource.date)}`
+                    : null
+                ]}
+              />
             </div>
 
             {/* Blog content */}

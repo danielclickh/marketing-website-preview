@@ -117,7 +117,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
   }
 
 export default function LearnPage({
-  footerData,
   headerData,
   customerStories,
   events,
@@ -160,7 +159,7 @@ export default function LearnPage({
   }, [events, eventsSearch])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='bg-grid py-16 lg:py-24'>
         <div className='section-container flex flex-col items-center gap-16 lg:flex-row'>
@@ -537,7 +536,7 @@ export default function LearnPage({
           <SuiCodeblock
             showCopy={true}
             copyValue='curl https://clickhouse.com/ | sh'
-            className='mx-auto flex w-full items-center gap-3 text-center sm:w-max sm:text-left md:pr-24'>
+            className='mx-auto flex w-full items-center gap-3 text-center sm:w-max sm:text-left md:!pr-24'>
             <span className='hidden text-primary sm:inline'>$</span>
             <span>curl https://clickhouse.com/ | sh</span>
           </SuiCodeblock>

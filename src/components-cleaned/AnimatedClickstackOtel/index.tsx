@@ -1,92 +1,9 @@
+import AnimatedDataArc from '@/components-cleaned/AnimatedDataArc'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import React from 'react'
 
 export default function AnimatedClickstackOtel() {
-  function Tile({ children }: { children?: React.ReactNode }) {
-    return (
-      <div className='flex size-16 items-center justify-center rounded-md border border-neutral-700/80 bg-neutral-900 p-4'>
-        {children}
-      </div>
-    )
-  }
-
-  function CornerLine({
-    angle,
-    className,
-    duration = 5.75
-  }: {
-    angle: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
-    className?: string
-    duration?: number
-  }) {
-    const path = {
-      'top-left': 'M1 0V75A25 25 0 0 0 25 99H100',
-      'top-right': 'M99 0V75A25 25 0 0 1 75 99H0',
-      'bottom-left': 'M1 100V25A25 25 0 0 1 25 1H100',
-      'bottom-right': 'M99 100V25A25 25 0 0 0 75 1H0'
-    }[angle]
-    return (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='100'
-        height='100'
-        viewBox='0 0 100 100'
-        className={className}>
-        <path
-          fill='none'
-          stroke='#414141'
-          stroke-width='3'
-          d={path}
-          pathLength='1000'
-        />
-        <path
-          fill='none'
-          stroke='#faff69'
-          stroke-linecap='round'
-          stroke-width='3'
-          d={path}
-          pathLength='1000'>
-          <animate
-            attributeName='stroke-dasharray'
-            dur={`${duration}s`}
-            keyTimes='0;0.5;1'
-            repeatCount='indefinite'
-            values='100 900;500 500;100 900'
-          />
-          <animate
-            attributeName='stroke-dashoffset'
-            calcMode='linear'
-            dur={`${duration}s`}
-            keyTimes='0;0.5;1'
-            repeatCount='indefinite'
-            values='0;-1000;-2000'
-          />
-        </path>
-      </svg>
-    )
-  }
-
-  function Otel() {
-    return (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='40'
-        height='40'
-        fill='none'
-        viewBox='0 0 40 40'>
-        <path
-          fill='#f5a800'
-          d='M21.05 21.77a4.35 4.35 0 1 0 6.03 6.27 4.35 4.35 0 0 0-6.03-6.27m4.6 4.6a2.16 2.16 0 0 1-3.67-1.52 2.16 2.16 0 0 1 4.3 0c0 .57-.23 1.12-.63 1.52M27.12.4l-2.65 2.67a1.34 1.34 0 0 0 0 1.9l10.4 10.4c.52.52 1.36.52 1.89 0l2.66-2.67c.52-.52.52-1.37 0-1.9L29.02.4a1.34 1.34 0 0 0-1.9 0M8.47 34.42a1.2 1.2 0 0 0 0-1.72l-1.35-1.36a1.2 1.2 0 0 0-1.72 0l-2.8 2.79-.75-.77a1.1 1.1 0 0 0-1.54 0 1.1 1.1 0 0 0 0 1.54l4.61 4.6a1.1 1.1 0 0 0 1.54 0 1.1 1.1 0 0 0 0-1.53l-.77-.76 2.8-2.8z'
-        />
-        <path
-          fill='#425cc7'
-          d='m22.56 8.03-5.92 5.92a1.37 1.37 0 0 0 0 1.91l3.65 3.65a6.6 6.6 0 0 1 8.53.7l2.95-2.95a1.37 1.37 0 0 0 0-1.92l-7.3-7.3a1.36 1.36 0 0 0-1.91 0m-3.8 13.03L16.6 18.9a1.3 1.3 0 0 0-1.84 0l-7.6 7.6a1.3 1.3 0 0 0 0 1.85l4.3 4.31a1.3 1.3 0 0 0 1.84 0l4.89-4.9a6.7 6.7 0 0 1 .57-6.7'
-        />
-      </svg>
-    )
-  }
-
   return (
     <ScaleToContainer>
       <div className='grid size-[537px] grid-cols-3 grid-rows-3'>
@@ -94,8 +11,8 @@ export default function AnimatedClickstackOtel() {
           <Tile>
             <Otel />
           </Tile>
-          <CornerLine
-            angle='top-left'
+          <AnimatedDataArc
+            direction='to-bottom-right'
             duration={3}
             className='absolute left-1/2 top-1/2 translate-y-8'
           />
@@ -130,8 +47,8 @@ export default function AnimatedClickstackOtel() {
           <Tile>
             <Otel />
           </Tile>
-          <CornerLine
-            angle='top-right'
+          <AnimatedDataArc
+            direction='to-bottom-left'
             duration={4}
             className='absolute right-1/2 top-1/2 translate-y-8'
           />
@@ -172,8 +89,8 @@ export default function AnimatedClickstackOtel() {
               />
             </svg>
           </Tile>
-          <CornerLine
-            angle='bottom-left'
+          <AnimatedDataArc
+            direction='to-top-right'
             duration={2.5}
             className='absolute bottom-1/2 left-1/2 -translate-y-8'
           />
@@ -201,13 +118,41 @@ export default function AnimatedClickstackOtel() {
               />
             </svg>
           </Tile>
-          <CornerLine
-            angle='bottom-right'
+          <AnimatedDataArc
+            direction='to-top-left'
             duration={3.5}
             className='absolute bottom-1/2 right-1/2 -translate-y-8'
           />
         </div>
       </div>
     </ScaleToContainer>
+  )
+}
+
+function Tile({ children }: { children?: React.ReactNode }) {
+  return (
+    <div className='flex size-16 items-center justify-center rounded-md border border-neutral-700/80 bg-neutral-900 p-4'>
+      {children}
+    </div>
+  )
+}
+
+function Otel() {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='40'
+      height='40'
+      fill='none'
+      viewBox='0 0 40 40'>
+      <path
+        fill='#f5a800'
+        d='M21.05 21.77a4.35 4.35 0 1 0 6.03 6.27 4.35 4.35 0 0 0-6.03-6.27m4.6 4.6a2.16 2.16 0 0 1-3.67-1.52 2.16 2.16 0 0 1 4.3 0c0 .57-.23 1.12-.63 1.52M27.12.4l-2.65 2.67a1.34 1.34 0 0 0 0 1.9l10.4 10.4c.52.52 1.36.52 1.89 0l2.66-2.67c.52-.52.52-1.37 0-1.9L29.02.4a1.34 1.34 0 0 0-1.9 0M8.47 34.42a1.2 1.2 0 0 0 0-1.72l-1.35-1.36a1.2 1.2 0 0 0-1.72 0l-2.8 2.79-.75-.77a1.1 1.1 0 0 0-1.54 0 1.1 1.1 0 0 0 0 1.54l4.61 4.6a1.1 1.1 0 0 0 1.54 0 1.1 1.1 0 0 0 0-1.53l-.77-.76 2.8-2.8z'
+      />
+      <path
+        fill='#425cc7'
+        d='m22.56 8.03-5.92 5.92a1.37 1.37 0 0 0 0 1.91l3.65 3.65a6.6 6.6 0 0 1 8.53.7l2.95-2.95a1.37 1.37 0 0 0 0-1.92l-7.3-7.3a1.36 1.36 0 0 0-1.91 0m-3.8 13.03L16.6 18.9a1.3 1.3 0 0 0-1.84 0l-7.6 7.6a1.3 1.3 0 0 0 0 1.85l4.3 4.31a1.3 1.3 0 0 0 1.84 0l4.89-4.9a6.7 6.7 0 0 1 .57-6.7'
+      />
+    </svg>
   )
 }

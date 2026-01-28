@@ -50,7 +50,6 @@ export default function OurStoryPage({
   ourHistory,
   hiring,
   team,
-  footerData,
   headerData,
   seo
 }: OurStoryData) {
@@ -58,7 +57,7 @@ export default function OurStoryPage({
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='relative pt-10'>
           <div className='pt-10'>
             <div className='container mx-auto flex flex-col px-8 2xl:px-0'>
@@ -262,7 +261,7 @@ export default function OurStoryPage({
               投資家の皆さま
             </SuiTitle>
 
-            <div className='investor min-[340px]:grid-cols-2 grid grid-cols-1 flex-wrap justify-evenly gap-2 md:grid-cols-3 lg:grid-cols-6'>
+            <div className='investor grid grid-cols-1 flex-wrap justify-evenly gap-2 md:grid-cols-3 lg:grid-cols-6'>
               {investors.map((investor) => (
                 <Person
                   small

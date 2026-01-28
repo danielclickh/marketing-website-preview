@@ -1,5 +1,6 @@
 import { pages as learnPages } from '@/data/learn'
 import {
+  blogService,
   fetchAll,
   isAuthorisedRevalidationRequest,
   resourceCategoriesService,
@@ -45,6 +46,54 @@ const CONTENT_TYPE_HANDLERS: Record<
    * Collection types
    * -----
    */
+  'api::author.author': async function (body, response, request) {
+    const paths = [`/sitemap`, `/resources` /*`/blog`*/]
+
+    const id = body?.entry?.id
+    const slug = body?.entry?.slug
+
+    if (slug) {
+      paths.push(`/authors/${slug}`)
+    }
+
+    // Update blogs and resources
+    if (id) {
+      const authorBlogs = await blogService.findAll({
+        fields: ['slug'],
+        populate: [],
+        filters: {
+          author: {
+            profiles: {
+              id
+            }
+          }
+        }
+      })
+
+      authorBlogs.forEach((blog) => {
+        paths.push(`/blog/${blog.slug}`)
+      })
+
+      const authorResources = await resourcesService.findAll({
+        fields: ['slug'],
+        populate: ['category'],
+        filters: {
+          author: {
+            profiles: {
+              id
+            }
+          }
+        }
+      })
+
+      authorResources.forEach((resource) => {
+        paths.push(`/resources/${resource.category.slug}`)
+        paths.push(`/resources/${resource.category.slug}/${resource.slug}`)
+      })
+    }
+
+    await revalidate(response, paths)
+  },
   'api::blog-post.blog-post': async function (body, response, request) {
     const paths = [`/sitemap` /*`/blog`*/]
 
@@ -57,6 +106,20 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     // Revalidate open house page because it uses tagged content
     paths.push('/openhouse')
+
+    // Get all author relation slugs
+    const authorSlugs = body?.entry?.author?.profiles?.map(
+      // @ts-expect-error todo: better type handling
+      (profile) => profile.slug
+    )
+
+    // Revalidate author pages
+    if (authorSlugs) {
+      // @ts-expect-error todo: better type handling
+      authorSlugs.forEach((authorSlug) => {
+        paths.push(`/authors/${authorSlug}`)
+      })
+    }
 
     // Standard ISR revalidation
     await revalidate(response, paths)
@@ -137,7 +200,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::marketing-video.marketing-video': async function (body, response) {
-    const paths = [`/sitemap`, `/videos`, `/jp/videos`]
+    const paths = [`/sitemap`, `/videos`, `/jp/videos`, `/clickhouse`]
 
     if (body?.entry?.Slug) {
       paths.push(`/videos/${body.entry.Slug}`)
@@ -167,11 +230,11 @@ const CONTENT_TYPE_HANDLERS: Record<
     // const paths = [`/pricing`, `/jp/pricing`]
     // await revalidate(response, paths)
   },
-  'api::rich-content-page.rich-content-page': async function (body, response) {
+  'api::page.page': async function (body, response) {
     const paths = [`/sitemap`]
 
-    if (body?.entry?.url) {
-      paths.push(`${body.entry.url}`)
+    if (body?.entry?.path) {
+      paths.push(`/${body.entry.path}`)
     }
 
     await revalidate(response, paths)
@@ -219,6 +282,20 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/resources/${body.entry.category.slug}/${body.entry.slug}`)
     }
 
+    // Get all author relation slugs
+    const authorSlugs = body?.entry?.author?.profiles?.map(
+      // @ts-expect-error todo: better type handling
+      (profile) => profile.slug
+    )
+
+    // Revalidate author pages
+    if (authorSlugs) {
+      // @ts-expect-error todo: better type handling
+      authorSlugs.forEach((authorSlug) => {
+        paths.push(`/authors/${authorSlug}`)
+      })
+    }
+
     await revalidate(response, paths)
   },
   'api::resource-category.resource-category': async function (body, response) {
@@ -256,7 +333,7 @@ const CONTENT_TYPE_HANDLERS: Record<
       /*`/blog`, `/jp/blog`*/
     ]
 
-    const data = await fetchAll('blog-posts', {
+    const blogs = await blogService.findAll({
       filters: {
         $or: [
           {
@@ -276,11 +353,12 @@ const CONTENT_TYPE_HANDLERS: Record<
           }
         ]
       },
-      fields: ['slug', 'category']
+      fields: ['slug', 'category'],
+      populate: []
     })
 
-    if (data) {
-      data.forEach((post) => {
+    if (blogs) {
+      blogs.forEach((post) => {
         if (post.category === 'Japanese') {
           paths.push(`/jp/blog/${post.slug}`)
         } else {

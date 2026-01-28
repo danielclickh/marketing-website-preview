@@ -84,13 +84,12 @@ export const getStaticProps: GetStaticProps<CareersData> =
 export default function CareersPage({
   positionsTitle,
   seo,
-  footerData,
   headerData
 }: CareersData) {
   useGalaxyOnPage('careersPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='pt-10'>
         <div className='relative pt-10'>
           <div className='absolute inset-0 mx-auto max-w-7xl -skew-y-2 transform rounded-md bg-primary-300 lg:max-h-96'></div>
