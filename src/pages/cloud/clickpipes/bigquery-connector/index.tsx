@@ -37,7 +37,7 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
   return (
     <Layout footerData={footerData} seo={seo} headerData={headerData}>
       {/* Hero */}
-      <div className='relative my-10 bg-grid lg:mb-20'>
+      <div className='relative bg-grid py-10 lg:pb-20'>
         <div className='section-container relative z-10 lg:py-20'>
           <div className='flex flex-col items-center justify-between gap-10 lg:flex-row'>
             <div className='w-full flex-1 space-y-6 lg:max-w-2xl lg:pr-8'>
