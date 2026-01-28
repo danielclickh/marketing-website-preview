@@ -1038,7 +1038,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                             width={310}
                             height={160}
                             loading='lazy'
-                            className='aspect-[31/16] h-auto w-full flex-shrink-0 flex-grow-0 object-cover'
+                            className='aspect-thumbnail h-auto w-full flex-shrink-0 flex-grow-0 object-cover'
                           />
                           <div className='flex flex-1 flex-col p-4 lg:p-6'>
                             <p className='mb-3 flex justify-start gap-2 text-sm opacity-60'>
