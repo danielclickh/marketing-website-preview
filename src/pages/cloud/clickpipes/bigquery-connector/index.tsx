@@ -31,11 +31,11 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ headerData, footerData, seo }: CommonProps) {
+export default function Page({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('mysqlCdcPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <div className='relative bg-grid py-10 lg:pb-20'>
         <div className='section-container relative z-10 lg:py-20'>
