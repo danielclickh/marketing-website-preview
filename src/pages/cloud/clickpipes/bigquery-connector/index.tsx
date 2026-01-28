@@ -1,10 +1,5 @@
-import imageAddBigquerySource from './assets/add-bigquery-source.png'
-import imageCustomizeIncomingData from './assets/customize-incoming-data.png'
-import imageEditPipeInPlace from './assets/edit-pipe-in-place.png'
-import imageMonitorPipe from './assets/monitor-pipe.png'
 import AnimatedDataLine from '@/components-cleaned/AnimatedDataLine'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
-import TickItem from '@/components-cleaned/TickItem'
 import CdcWaitlistForm from '@/components/CdcWaitlistForm'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import DotsContainer from '@/components/DotsContainer'
@@ -16,9 +11,9 @@ import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
-import Image, { ImageProps } from 'next/image'
+import Image from 'next/image'
 import Link from 'next/link'
-import React, { CSSProperties } from 'react'
+import React from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -200,81 +195,6 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
 
-      {/* Features */}
-      <div
-        className='bg-shadow-element yellow-shadow shadow-circle my-24'
-        style={
-          {
-            '--top-side': '0',
-            '--right-side': '50%',
-            '--left-side': 'auto'
-          } as CSSProperties
-        }>
-        <div className='section-container relative z-10 space-y-16 lg:space-y-28 lg:pt-6'>
-          <FeatureSection
-            image={{
-              src: imageAddBigquerySource,
-              width: 1036 / 2,
-              height: 964 / 2,
-              alt: 'Add BigQuery Source'
-            }}>
-            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
-              Easily add your BigQuery source
-            </SuiTitle>
-            {/*<TickItem>BigQuery can be running anywhere - cloud or on-prem</TickItem>*/}
-            {/*<TickItem>Multiple replication modes: one-time load, CDC, or both</TickItem>*/}
-          </FeatureSection>
-          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
-          <FeatureSection
-            flip={true}
-            image={{
-              src: imageCustomizeIncomingData,
-              width: 1019 / 2,
-              height: 679 / 2,
-              alt: 'Customize Incoming Data'
-            }}>
-            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
-              Customize incoming data
-            </SuiTitle>
-            <TickItem>Table-level filtering</TickItem>
-            <TickItem>Column-level filtering</TickItem>
-          </FeatureSection>
-          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
-          <FeatureSection
-            image={{
-              src: imageMonitorPipe,
-              width: 1168 / 2,
-              height: 667 / 2,
-              alt: 'Monitor Pipe'
-            }}>
-            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
-              Monitor your pipe
-            </SuiTitle>
-            {/*<TickItem>Track throughput (rows or GB ingested) and latency over time</TickItem>*/}
-            {/*<TickItem>Detailed table-level metrics</TickItem>*/}
-            {/*<TickItem>Built-in logging for full visibility</TickItem>*/}
-          </FeatureSection>
-          <hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />
-          <FeatureSection
-            flip={true}
-            image={{
-              src: imageEditPipeInPlace,
-              width: 1298 / 2,
-              height: 1029 / 2,
-              alt: 'Edit Pipe In-Place'
-            }}>
-            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
-              Edit pipe in-place
-            </SuiTitle>
-            <TickItem>Add more tables in just a few clicks</TickItem>
-            <TickItem>
-              Change replication settings, including data freshness
-            </TickItem>
-            <TickItem>Blazing-fast resyncs</TickItem>
-          </FeatureSection>
-        </div>
-      </div>
-
       {/* Footer form */}
       <DotsContainer className='my-20'>
         <div className='mx-auto w-full lg:max-w-xl'>
@@ -320,31 +240,5 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
         </div>
       </div>
     </Layout>
-  )
-}
-
-function FeatureSection({
-  image,
-  children,
-  flip = false
-}: {
-  image: ImageProps
-  children: React.ReactNode
-  flip?: boolean
-}) {
-  return (
-    <div
-      className={`flex flex-col items-center gap-x-16 ${
-        flip ? 'md:flex-row-reverse' : 'md:flex-row'
-      } justify-center`}>
-      <div className='mb-12 flex flex-col md:mb-0 md:w-1/2 md:text-left'>
-        <div className='space-y-4 border-yellow-200 md:border-l-4 md:pl-8'>
-          {children}
-        </div>
-      </div>
-      <div className='flex items-center justify-center md:w-1/2'>
-        <Image {...image} alt={image.alt || ''} />
-      </div>
-    </div>
   )
 }
