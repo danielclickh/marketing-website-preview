@@ -1,10 +1,10 @@
 'use client'
 
 import styles from './styles.module.scss'
+import ClearFiltersButton from '@/components/ClearFiltersButton/ClearFiltersButton'
 import CustomerStoryCard from '@/components/CustomerStoryCard'
 import FollowUs from '@/components/FollowUs'
 import Layout from '@/components/Layout'
-import ClearFilterButton from '@/components/UserStories/ClearFilterButton'
 import { SuiSearchField, SuiTitle } from '@/components/sui'
 import { fetchAll, findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
@@ -494,7 +494,7 @@ export default function CustomerStoriesPage({
                       />
                     </div>
                   )}
-                  <ClearFilterButton
+                  <ClearFiltersButton
                     onClick={handleClearFiltersClick}
                     disabled={!hasFilters}
                   />
@@ -535,7 +535,7 @@ export default function CustomerStoriesPage({
                 <div className='flex-grow font-basier text-2xl'>
                   Sorry, no user stories found
                 </div>
-                <ClearFilterButton
+                <ClearFiltersButton
                   className='mt-6 rounded-full border border-primary-600 px-4 py-2.5 text-sm font-semibold hover:border-primary-300'
                   onClick={handleClearFiltersClick}
                   disabled={!hasFilters}
