@@ -135,9 +135,13 @@ export default function Page({ headerData, footerData, seo }: CommonProps) {
                 title='Blazing-fast analytics'
                 text={
                   <>
-                    Integrates BigQuery with ClickHouse, enabling up to 4x
-                    faster queries with 21x cost savings for real-time
-                    analytics.
+                    Integrates BigQuery with ClickHouse, enabling{' '}
+                    <Link
+                      href='https://clickhouse.com/blog/cloud-data-warehouses-cost-performance-comparison'
+                      className='text-primary-300 hover:underline'>
+                      up to 4x faster queries with significant cost savings
+                    </Link>{' '}
+                    for real-time analytics.
                     <br />
                     See{' '}
                     <Link
