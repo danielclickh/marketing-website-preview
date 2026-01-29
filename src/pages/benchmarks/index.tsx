@@ -231,7 +231,7 @@ export default function Page({ seo, headerData, blogs }: Props) {
             <p>
               <LinkWithArrow
                 className='font-bold text-primary-300'
-                href='/blog/cloud-data-warehouses-cost-performance-comparison'>
+                href='/blog/cloud-data-warehouses-cost-performance-comparison?loc=benchmarks-hub'>
                 Don't believe us? Try it yourself
               </LinkWithArrow>
             </p>
@@ -345,8 +345,14 @@ export default function Page({ seo, headerData, blogs }: Props) {
               })}
             </div>
             <p className='mt-4 text-sm text-neutral-200'>
-              <sup>*</sup>VerisonBench benchmark is run when a new release is
-              published to check its performance and identify regressions.
+              <sup>*</sup>
+              <Link
+                href='https://benchmark.clickhouse.com/versions/'
+                className='italic underline hover:decoration-2'>
+                VerisonBench
+              </Link>{' '}
+              benchmark is run when a new release is published to check its
+              performance and identify regressions.
             </p>
           </div>
         </div>
@@ -463,7 +469,7 @@ function GlowingCostMap() {
         cy='50.71'
         rx='14.18'
         ry='14.17'
-        className='origin-center animate-pulse blur [transform-box:fill-box]'
+        className='origin-center scale-125 animate-fadeInOut blur-sm [transform-box:fill-box]'
       />
       <path
         fill='#feaa0c'
