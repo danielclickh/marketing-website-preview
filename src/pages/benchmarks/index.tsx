@@ -34,6 +34,14 @@ type BlogCompetitors =
   | 'Elastic'
   | 'Readshift'
   | 'BigQuery'
+
+type BlogFeatures =
+  | 'Joins'
+  | 'Inserts / Updates'
+  | 'Select'
+  | 'Cloud'
+  | 'JSON'
+  | 'Lakehouse'
 type BlogItem = {
   slug: string
   entry: EntryBlogPost
@@ -41,6 +49,7 @@ type BlogItem = {
   benchmarkImage?: ImageProps['src']
   featured?: boolean
   competitors?: Array<BlogCompetitors>
+  features?: Array<BlogFeatures>
 }
 
 const POST_MAP: Array<Omit<BlogItem, 'entry'>> = [
@@ -66,52 +75,64 @@ const POST_MAP: Array<Omit<BlogItem, 'entry'>> = [
   },
   {
     slug: 'clickhouse-fully-supports-joins-how-to-choose-the-right-algorithm-part5',
-    benchmarkImage: '/uploads/imdb_large_5b5d3f45ee.png'
+    benchmarkImage: '/uploads/imdb_large_5b5d3f45ee.png',
+    features: ['Joins', 'Select']
   },
   {
     slug: 'asynchronous-data-inserts-in-clickhouse',
-    benchmarkImage: '/uploads/async_inserts_12_8c2f0816e9.png'
+    benchmarkImage: '/uploads/async_inserts_12_8c2f0816e9.png',
+    features: ['Inserts / Updates']
   },
   {
     slug: 'clickhouse-cloud-boosts-performance-with-sharedmergetree-and-lightweight-updates',
-    benchmarkImage: '/uploads/smt_16_203c52f971.png'
+    benchmarkImage: '/uploads/smt_16_203c52f971.png',
+    features: ['Cloud']
   },
   {
     slug: 'clickhouse-keeper-a-zookeeper-alternative-written-in-cpp',
-    benchmarkImage: '/uploads/Keeper_05_ef049cc5e4.png'
+    benchmarkImage: '/uploads/Keeper_05_ef049cc5e4.png',
+    features: ['Cloud']
   },
   {
     slug: 'supercharge-your-clickhouse-data-loads-part2',
-    benchmarkImage: '/uploads/large_data_loads_p2_07_357c63e939.png'
+    benchmarkImage: '/uploads/large_data_loads_p2_07_357c63e939.png',
+    features: ['Inserts / Updates']
   },
   {
     slug: 'clickhouse-input-format-matchup-which-is-fastest-most-efficient',
-    benchmarkImage: '/uploads/Blog_Formats_003_93c66d9a7e.png'
+    benchmarkImage: '/uploads/Blog_Formats_003_93c66d9a7e.png',
+    features: ['Inserts / Updates']
   },
   {
     slug: 'accelerating-clickhouse-json-queries-for-fast-bluesky-dashboards',
     benchmarkImage:
-      '/uploads/Accelerating_Click_House_queries_on_JSON_data_for_faster_Bluesky_insights_120d449e25.png'
+      '/uploads/Accelerating_Click_House_queries_on_JSON_data_for_faster_Bluesky_insights_120d449e25.png',
+    features: ['Select', 'JSON']
   },
   {
     slug: 'clickhouse-gets-lazier-and-faster-introducing-lazy-materialization',
-    benchmarkImage: '/uploads/Blog_LAZY_MATERIALIZATION_001_d7b4526449.png'
+    benchmarkImage: '/uploads/Blog_LAZY_MATERIALIZATION_001_d7b4526449.png',
+    features: ['Select']
   },
   {
     slug: 'clickhouse-and-parquet-a-foundation-for-fast-lakehouse-analytics',
-    benchmarkImage: '/uploads/Blog_Formats_Reads_014_22d723e649.png'
+    benchmarkImage: '/uploads/Blog_Formats_Reads_014_22d723e649.png',
+    features: ['Select', 'Lakehouse']
   },
   {
     slug: 'building-a-distributed-cache-for-s3',
-    benchmarkImage: '/uploads/Blog_caches_002_4142f575eb.png'
+    benchmarkImage: '/uploads/Blog_caches_002_4142f575eb.png',
+    features: ['Select', 'Cloud']
   },
   {
     slug: 'updates-in-clickhouse-3-benchmarks',
-    benchmarkImage: '/uploads/Blog_updates_Part_3_004_b700981c01.png'
+    benchmarkImage: '/uploads/Blog_updates_Part_3_004_b700981c01.png',
+    features: ['Inserts / Updates']
   },
   {
     slug: 'clickhouse-parallel-replicas',
-    benchmarkImage: '/uploads/Parallel_Replicas_004_2e1de3a30e.png'
+    benchmarkImage: '/uploads/Parallel_Replicas_004_2e1de3a30e.png',
+    features: ['Select', 'Cloud']
   },
 
   /// Filtered by competitor
@@ -481,8 +502,8 @@ function BlogItemImage({
 }) {
   return (
     <div className={`relative aspect-thumbnail overflow-hidden ${className}`}>
-      {item.benchmarkImage && (
-        <div className='absolute inset-0 z-10 bg-neutral opacity-0 transition-opacity duration-500 group-hover:opacity-100'>
+      {item.benchmarkImage ? (
+        <div className='absolute inset-0 z-10 bg-neutral'>
           <Image
             src={item.benchmarkImage}
             alt={item.entry.title}
@@ -498,14 +519,15 @@ function BlogItemImage({
             className='absolute inset-0 h-full w-full max-w-none object-contain object-center'
           />
         </div>
+      ) : (
+        <StrapiImage
+          entry={item.entry.thumbnailPng}
+          alt={item.entry.title}
+          width={400}
+          height={600}
+          className='absolute inset-0 w-full max-w-none object-cover object-center'
+        />
       )}
-      <StrapiImage
-        entry={item.entry.thumbnailPng}
-        alt={item.entry.title}
-        width={400}
-        height={600}
-        className='absolute inset-0 w-full max-w-none object-cover object-center'
-      />
     </div>
   )
 }
@@ -636,15 +658,19 @@ function BlogCoverFlow({ blogs }: { blogs: Array<BlogItem> }) {
 function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
   const [sortLatest, setSortLatest] = useState<boolean>(false)
   const [competitorsOpen, setCompetitorsOpen] = useState<boolean>(false)
+  const [featuresOpen, setFeaturesOpen] = useState<boolean>(false)
   const [page, setPage] = useState<number>(1)
   const [filterCompetitor, setFilterCompetitor] =
     useState<null | BlogCompetitors>(null)
+  const [filterFeature, setFilterFeature] = useState<null | BlogFeatures>(null)
 
   const filtered = blogs.filter((item) => {
-    return (
+    const matchesCompetitor =
       !filterCompetitor ||
       (item.competitors && item.competitors.includes(filterCompetitor))
-    )
+    const matchesFeature =
+      !filterFeature || (item.features && item.features.includes(filterFeature))
+    return matchesCompetitor && matchesFeature
   })
 
   if (sortLatest) {
@@ -664,15 +690,36 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+    setFeaturesOpen(false)
     setCompetitorsOpen((old) => !old)
+  }
+
+  const handleFeaturesToggle = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault()
+    setCompetitorsOpen(false)
+    setFeaturesOpen((old) => !old)
   }
 
   const handleCopetitorFilter = (competitor: BlogCompetitors) => {
     return (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
+      setFilterFeature(null)
       setFilterCompetitor((old) => {
         if (old === competitor) return null
         return competitor
+      })
+    }
+  }
+
+  const handleFeatureFilter = (feature: BlogFeatures) => {
+    return (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault()
+      setFilterCompetitor(null)
+      setFilterFeature((old) => {
+        if (old === feature) return null
+        return feature
       })
     }
   }
@@ -681,10 +728,17 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+    // Reset pagination and sorting
     setPage(1)
-    setCompetitorsOpen(false)
-    setFilterCompetitor(null)
     setSortLatest(false)
+
+    // Remove filters
+    setFilterCompetitor(null)
+    setFilterFeature(null)
+
+    // Close UIs
+    setCompetitorsOpen(false)
+    setFeaturesOpen(false)
   }
 
   return (
@@ -734,13 +788,45 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
             })}
           </div>
         )}
-        <CUIButton type='secondary' className='!rounded-full'>
+        <CUIButton
+          type={featuresOpen ? 'primary-dark' : 'secondary'}
+          className='!rounded-full'
+          iconRight={
+            <ChevronDown
+              className={`size-4 transition-transform ${featuresOpen ? '-rotate-180' : ''}`}
+            />
+          }
+          onClick={handleFeaturesToggle}>
           Why is ClickHouse so fast
         </CUIButton>
+        {featuresOpen && (
+          <div className='flex flex-col flex-wrap justify-center gap-4 px-6 lg:order-last lg:flex-row lg:px-0'>
+            {(
+              [
+                'Joins',
+                'Inserts / Updates',
+                'Select',
+                'Cloud',
+                'JSON',
+                'Lakehouse'
+              ] satisfies Array<BlogFeatures>
+            ).map((feature, featureIndex) => {
+              return (
+                <CUIButton
+                  key={featureIndex}
+                  type={filterFeature === feature ? 'primary' : 'secondary'}
+                  className='!rounded-full'
+                  onClick={handleFeatureFilter(feature)}>
+                  {feature}
+                </CUIButton>
+              )
+            })}
+          </div>
+        )}
         <ClearFiltersButton
           onClick={handleClearFilters}
           className='mx-auto lg:mx-0'
-          disabled={!filterCompetitor && !sortLatest}
+          disabled={!filterCompetitor && !filterFeature && !sortLatest}
         />
       </div>
       <PaginateChildren
