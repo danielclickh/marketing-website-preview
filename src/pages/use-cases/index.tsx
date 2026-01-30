@@ -125,7 +125,7 @@ function UseCasesPage({
   const getUseCaseLink = (useCaseTitle: string | undefined | null) => {
     const map: Record<string, string> = {
       'Data warehousing': '/use-cases/data-warehousing',
-      Observability: '/use-cases/observability',
+      Observability: '/clickstack',
       'Machine learning and GenAI':
         '/use-cases/machine-learning-and-data-science',
       'Real-time analytics': '/use-cases/real-time-analytics'

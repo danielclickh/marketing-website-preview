@@ -19,7 +19,7 @@ import {
   ProfilePage
 } from 'schema-dts'
 
-export const defaultOrganization: Organization = {
+const defaultOrganization: Organization = {
   '@type': 'Organization',
   name: 'ClickHouse',
   url: absoluteUrl('/'),

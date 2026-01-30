@@ -47,7 +47,7 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'ClickStack',
-    href: '/use-cases/observability',
+    href: '/clickstack',
     galaxyEvent: 'footerNav.productMenu.clickstackSelect'
   },
   {

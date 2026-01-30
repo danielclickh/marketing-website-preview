@@ -353,17 +353,17 @@ const nextConfig = {
       },
       {
         source: '/use-cases/logging',
-        destination: '/use-cases/observability',
+        destination: '/clickstack',
         permanent: true
       },
       {
         source: '/use-cases/logging-and-metrics',
-        destination: '/cloud/clickstack',
+        destination: '/clickstack',
         permanent: true
       },
       {
         source: '/use-cases/observability',
-        destination: '/cloud/clickstack',
+        destination: '/clickstack',
         permanent: true
       },
       {

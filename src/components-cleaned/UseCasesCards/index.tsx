@@ -46,7 +46,7 @@ export default function UseCasesCards({
         icon={iconObservability}
         title='Observability'
         description='Store and query logs, metrics and traces at scale using ClickStack, the open source observability stack powered by ClickHouse.'
-        link='/use-cases/observability'
+        link='/clickstack'
         linkText='Explore observability'
         galaxyEventName={
           galaxyNamespace
