@@ -343,10 +343,12 @@
       margin-left: 26px;
       @apply mb-9;
 
+      ul, ol {
+        @apply mb-0;
+      }
+
       li {
-        &:not(:last-child) {
-          @apply mb-2.5;
-        }
+        @apply mt-2.5;
       }
     }
 
