@@ -358,7 +358,12 @@ const nextConfig = {
       },
       {
         source: '/use-cases/logging-and-metrics',
-        destination: '/use-cases/observability',
+        destination: '/cloud/clickstack',
+        permanent: true
+      },
+      {
+        source: '/use-cases/observability',
+        destination: '/cloud/clickstack',
         permanent: true
       },
       {

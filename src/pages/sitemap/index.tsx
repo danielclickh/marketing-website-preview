@@ -285,7 +285,7 @@ function Sitemap({
               </p>
               <p className='pb-2'>
                 <Link
-                  href='/use-cases/observability'
+                  href='/cloud/clickstack'
                   className='text-primary-300 hover:underline'>
                   Observability
                 </Link>

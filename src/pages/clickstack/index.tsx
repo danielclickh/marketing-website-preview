@@ -126,7 +126,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
             'ClickStack: High-Performance Open-Source Observability | Logs, Metrics, Traces with ClickHouse',
           description:
             'ClickStack is a high-performance observability stack powered by ClickHouse. Unify logs, metrics, and traces with 10-100x cost savings. Get started today!',
-          path: '/use-cases/observability',
+          path: '/cloud/clickstack',
           image: [{ url: shareImage.src }],
           languages: ['en', 'ja'],
           schema: [
@@ -136,7 +136,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
               name: 'ClickStack Observability',
               serviceType:
                 'Observability (logs, metrics, traces, session replays, errors)',
-              url: 'https://clickhouse.com/use-cases/observability',
+              url: 'https://clickhouse.com/clickstack',
               description:
                 'High-performance, open-source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
               provider: {
