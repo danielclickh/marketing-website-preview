@@ -67,16 +67,20 @@ import { EffectCreative, Mousewheel } from 'swiper/modules'
 
 const FAQs: Array<{ question: string; answer: string }> = [
   {
-    question: 'What is ClickStack?',
-    answer: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
+    question: 'What is Managed ClickStack?',
+    answer: `Managed ClickStack is the fully managed version of the open source ClickStack observability stack, running on ClickHouse Cloud. It delivers the same high-performance, open source foundation for logs, metrics, traces, and session replays, without the operational burden of running and maintaining the underlying ClickHouse infrastructure.
+
+ClickHouse Cloud handles cluster management, scaling, upgrades, and reliability for you, while adding enterprise-grade capabilities such as separation of storage and compute and low-cost object storage for long-term retention. This lets you retain high-cardinality OpenTelemetry data indefinitely, minimize costs, and focus entirely on observability and insights rather than platform operations.`
   },
   {
-    question: 'How does ClickStack compare to the ELK stack?',
-    answer: `At a high level, Elastic (ELK) and ClickStack share a familiar shape: both have a data collection layer (Beats and Logstash vs. OpenTelemetry), a storage engine (Elasticsearch vs. ClickHouse), and a UI (Kibana vs. HyperDX). But beneath these parallels, the architectures diverge.
+    question: 'How does Managed ClickStack compare to Elastic Cloud?',
+    answer: `At a glance, Managed ClickStack and Elastic Cloud look familiar. Both provide an end-to-end observability stack with data collection, storage, and a UI for search, dashboards, and analysis. OpenTelemetry and Beats serve similar roles, HyperDX and Kibana feel conceptually alike, and both platforms aim to make large-scale observability data accessible.
 
-Elastic is a distributed search engine built around inverted indices and a shard-based architecture. While effective for full-text search, this design introduces high storage overhead, limited query parallelization, and contention between ingest and query workloads.
+The key difference lies in the underlying architecture. Elastic Cloud is built on Elasticsearch, a distributed search engine optimized around inverted indices and shard-based storage. This works well for text search, but comes with higher storage overhead, limited compression, and increasing contention between ingest and query workloads as data volumes and cardinality grow. Elastic Cloud’s serverless offerings improve operational simplicity and long-term retention through object storage, but the core search-centric architecture remains.
 
-ClickStack, powered by ClickHouse, takes a different approach. Its columnar, shared-nothing architecture is optimized for analytics, minimizing storage with advanced compression, parallelizing queries across all available cores, and separating storage from compute in the cloud for consistent, efficient performance. With full SQL support, ClickStack enables deep, real-time analysis across all your observability data while still providing support for Lucene-style queries for fast searching. 
+Managed ClickStack is built on ClickHouse Cloud, a column-oriented analytics engine designed for high-cardinality data and fast aggregation at scale. Columnar storage enables dramatically higher compression, while massively parallel query execution delivers faster aggregations and analytics across large datasets. In ClickHouse Cloud, separation of storage and compute allows low-cost object storage for long-term retention, independent scaling of ingest and query workloads, and predictable performance as data grows.
+
+The result is a platform that feels familiar to users of Elastic, but delivers lower storage costs, faster analytical queries, and greater efficiency for real-time observability and long-term analysis at petabyte scale.
 
 For more details on how ClickStack compares with the ELK Stack [see our comparison guide](/comparison/elastic-for-observability).`
   },
@@ -85,42 +89,40 @@ For more details on how ClickStack compares with the ELK Stack [see our comparis
     answer: `The ClickStack consists of three core components:
 
 - **ClickHouse** - The columnar database powering fast, cost-efficient queries and compression.
-- **HyperDX** - The unified UI for search, dashboards, alerts, and session replays.
+- **ClickStack UI (HyperDX)** - The unified UI for search, dashboards, alerts, and session replays.
 - **OpenTelemetry** - Standardized data collection for logs, metrics, and traces.
 
 Together, they form a single, integrated observability stack optimized for speed, scalability, and simplicity.`
   },
   {
-    question: 'Is ClickStack compatible with OpenTelemetry?',
-    answer: `Yes. ClickStack is built for OpenTelemetry at any scale. It includes a bundled OpenTelemetry Collector and natively ingests OTel events - combining logs, metrics, and traces into a unified model. Powered by ClickHouse’s parallel processing and columnar storage, ClickStack scales seamlessly from small deployments to petabytes of telemetry data while maintaining real-time performance.
+    question: 'Is Managed ClickStack compatible with OpenTelemetry?',
+    answer: `Yes. Managed ClickStack is built for OpenTelemetry at any scale. Via an OpenTelemetry Collector users can ingest OTel events to ClickHouse - combining logs, metrics, and traces into a unified model.
 
-Although ClickStack is OpenTelemetry-native, it also supports any wide event format. While OpenTelemetry schemas are provided out of the box, users can bring their own - just include a timestamp, and the HyperDX UI with ClickHouse delivers the same powerful querying, correlation, and visualization capabilities.`
+Although Managed ClickStack is OpenTelemetry-native, it also supports any wide event format. While OpenTelemetry schemas are provided out of the box, users can bring their own - just include a timestamp, and the UI with ClickHouse delivers the same powerful querying, correlation, and visualization capabilities.`
   },
   {
-    question: 'Is ClickStack only compatible with OpenTelemetry?',
-    answer: `No. While ClickStack is optimized for the OpenTelemetry schema, making it the fastest way to get started and scale easily, it’s not limited to it. ClickHouse, the database powering ClickStack, can store and query any event schema.
+    question: 'Is Managed ClickStack only compatible with OpenTelemetry?',
+    answer: `No. While Managed ClickStack is optimized for the OpenTelemetry schema, making it the fastest way to get started and scale easily, it’s not limited to it. ClickHouse, the database powering ClickStack, can store and query any event schema.
 
-The HyperDX UI requires only a timestamp field to render and visualize events, so you can use your own data formats or custom pipelines. By following a wide events pattern and including a timestamp, your data becomes immediately usable within ClickStack.`
+Only a timestamp field is required to render and visualize events, so you can use your own data formats or custom pipelines. By following a wide events pattern and including a timestamp, your data becomes immediately usable.`
   },
   {
-    question: 'Can I store logs, traces, and metrics in ClickStack?',
-    answer: `Yes. ClickStack is a full observability platform designed to handle logs, traces and metrics in one place.  Built on ClickHouse, it efficiently ingests and stores high-cardinality OpenTelemetry data, automatically correlating events at the database layer for deep, real-time insights.`
+    question: 'Can I store logs, traces, and metrics in Managed ClickStack?',
+    answer: `Yes. Managed ClickStack is a full observability solution designed to handle logs, traces and metrics in one place.  Built on ClickHouse, it efficiently ingests and stores high-cardinality OpenTelemetry data, automatically correlating events at the database layer for deep, real-time insights.`
   },
   {
-    question: 'Does ClickStack support fast search using inverted indices?',
-    answer: `Yes. ClickStack uses ClickHouse, which is columnar by default, and supports optional inverted indices at the column level. You can enable inverted indices and bloom filters to accelerate log and text search, which is common for log data exploration. The HyperDX UI accepts Lucene-style syntax, transpiles it to SQL, and can leverage these indices for speed. If you want to minimize storage, you can disable indices and rely on ClickHouse’s fast, multi-parallel string search, which is sufficient for many use cases.`
+    question:
+      'Does Managed ClickStack support fast search using inverted indices?',
+    answer: `Yes. Managed ClickStack uses ClickHouse, which is columnar by default, and supports optional inverted indices at the column level. You can enable inverted indices and bloom filters to accelerate log and text search, which is common for log data exploration. The ClickStack UI (HyperDX) accepts Lucene-style syntax, transpiles it to SQL, and can leverage these indices for speed. If you want to minimize storage, you can disable indices and rely on ClickHouse’s fast, multi-parallel string search, which is sufficient for many use cases.`
   },
   {
-    question: 'Is ClickStack open source?',
-    answer: `Yes. ClickStack and its components are fully open source and built on open standards. ClickHouse and the  OpenTelemetry collector are licensed under Apache 2.0, with the HyperDX UI using the MIT license. You can deploy ClickStack anywhere - self-hosted, hybrid, or in the cloud, without restrictions.`
-  },
-  {
-    question: 'Is there a hosted version of ClickStack?',
-    answer: `Yes. ClickStack is available as a managed service in ClickHouse Cloud. It delivers the same open architecture with elastic scaling and full separation of storage and compute, allowing users to scale resources independently and isolate read and write workloads for consistent performance.
+    question:
+      'What is the difference between ClickStack Open Source and Managed ClickStack?',
+    answer: `**ClickStack Open Source** is the open source observability stack built on ClickHouse. It includes the ClicKStack UI (HyperDX) and optimized schemas for logs, metrics, traces, and session replays. You run and manage ClickHouse yourself, including cluster setup, scaling, upgrades, backups, and security. This option gives you full control and flexibility, but also full responsibility for operating the database.
 
-With advanced compression and cost-efficient object storage, data can be retained indefinitely at low cost. ClickHouse Cloud also includes automatic backups and zero operational overhead. The HyperDX UI is fully integrated - available at no additional cost, secured through ClickHouse Cloud authentication, and can be launched on any service. 
+**Managed ClickStack** is the fully managed version of ClickStack, running on ClickHouse Cloud. You get the same open source core and user experience, but without the operational overhead of managing ClickHouse. Cluster management, scaling, upgrades, backups, and reliability are handled for you, and authentication and user management are fully integrated with ClickHouse Cloud.
 
-A fully managed ClickStack offering is also planned for the future.`
+Managed ClickStack also includes additional platform capabilities that are not available when running ClickHouse open source alone. This includes cloud-native separation of storage and compute, independent scaling of read and write paths, and low-cost object storage that enables near-limitless retention.`
   }
 ]
 
@@ -180,7 +182,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
+export default function Page({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('managedClickstackPage')
   const [hyperdxActive, setHyperdxActive] = useState(true)
   const [clickhouseActive, setClickhouseActive] = useState(false)
@@ -219,7 +221,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
                 type='primary'
                 size='lg'
                 weight='semibold'
-                href='https://console.clickhouse.cloud/signUp?loc=managed-clickstack-hero'
+                href='https://console.clickhouse.cloud/signUp?intent=o11y&loc=managed-clickstack-hero'
                 linkClass='w-full md:w-auto'
                 className='w-full !px-10 md:w-auto'
                 onClick={useGalaxyOnClick(
@@ -688,7 +690,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://console.clickhouse.cloud/signUp?loc=managed-clickstack-accordions'
+              href='https://console.clickhouse.cloud/signUp?intent=o11y&loc=managed-clickstack-accordions'
               linkClass='w-full md:w-auto'
               className='w-full !px-10 md:w-auto'
               onClick={useGalaxyOnClick(
@@ -1136,7 +1138,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               size='lg'
               className='group mx-auto w-full !px-10 md:w-auto'
               target='_blank'
-              href='https://console.clickhouse.cloud/signUp?loc=managed-clickstack'
+              href='https://console.clickhouse.cloud/signUp?intent=o11y&loc=managed-clickstack'
               onClick={useGalaxyOnClick(
                 'managedClickstackPage.footerCta.getStartedSelect'
               )}>
@@ -1181,8 +1183,8 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
             <div className='mx-auto max-w-md space-y-4 text-neutral-200 lg:text-left'>
               <p>
                 We're here to make observability simple, fast, and open. Explore
-                our FAQs to learn more about ClickStack, and if you don’t see
-                what you need, we’re always happy to chat.
+                our FAQs to learn more about Managed ClickStack, and if you
+                don’t see what you need, we’re always happy to chat.
               </p>
               <p>
                 <LinkWithArrow
