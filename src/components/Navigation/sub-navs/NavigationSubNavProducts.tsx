@@ -185,7 +185,7 @@ export default function NavigationSubNavProducts() {
               </li>*/}
               <li>
                 <NavigationLink
-                  href='/cloud/clickstack'
+                  href='/use-cases/observability'
                   onClick={useGalaxyOnClick(
                     'topNav.productMenu.clickstackSelect'
                   )}

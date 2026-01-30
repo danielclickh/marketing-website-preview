@@ -206,7 +206,7 @@ export default function IndustriesPage({ seo, headerData, logos }: PageProps) {
                       Real-time analytics
                     </Link>
                     <Link
-                      href='/cloud/clickstack'
+                      href='/use-cases/observability'
                       className='flex items-center gap-4 rounded bg-neutral-750 px-3 py-3 text-sm transition-colors hover:bg-neutral-725 lg:px-4 lg:py-0'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
