@@ -23,6 +23,9 @@ import integrationNodejs from './assets/integration-nodejs.svg'
 import integrationOpentelemetry from './assets/integration-opentelemetry.svg'
 import integrationPython from './assets/integration-python.svg'
 import integrationRuby from './assets/integration-ruby.svg'
+import layerObservability from './assets/layer-observability.svg'
+import layerOtel from './assets/layer-otel.svg'
+import layerStorage from './assets/layer-storage.svg'
 import logoAnthropic from './assets/logo-anthropic.svg'
 import logoCharacterai from './assets/logo-characterai.svg'
 import logoCisco from './assets/logo-cisco.svg'
@@ -45,10 +48,10 @@ import AccordionItem from '@/components-cleaned/AccordionItem'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import ContentTicker from '@/components-cleaned/ContentTicker'
+import LogoStack from '@/components-cleaned/LogoStack'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import TickItem from '@/components-cleaned/TickItem'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
-import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
 import HRSeparator from '@/components/HRSeparator'
@@ -592,29 +595,40 @@ export default function Page({ seo, headerData }: CommonProps) {
         {/* Diagram */}
         <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row lg:items-start lg:gap-20'>
           <div className='w-full max-w-max px-4'>
-            <ClickStack
-              hyperdx={hyperdxActive || allAreInactive}
-              clickhouse={clickhouseActive || allAreInactive}
-              opentelemetry={opentelemetryActive || allAreInactive}
-              onClick={(stack) => {
-                switch (stack) {
-                  case 'hyperdx':
+            <LogoStack
+              gap={72}
+              layers={[
+                {
+                  logo: { src: layerObservability },
+                  active: hyperdxActive || allAreInactive,
+                  color: '#FAFF69',
+                  onClick() {
                     setHyperdxActive(true)
                     setClickhouseActive(false)
                     setOpentelemetryActive(false)
-                    break
-                  case 'clickhouse':
+                  }
+                },
+                {
+                  logo: { src: layerStorage },
+                  active: clickhouseActive || allAreInactive,
+                  color: '#FAFF69',
+                  onClick() {
                     setHyperdxActive(false)
                     setClickhouseActive(true)
                     setOpentelemetryActive(false)
-                    break
-                  case 'opentelemetry':
+                  }
+                },
+                {
+                  logo: { src: layerOtel },
+                  active: opentelemetryActive || allAreInactive,
+                  color: '#FAFF69',
+                  onClick() {
                     setHyperdxActive(false)
                     setClickhouseActive(false)
                     setOpentelemetryActive(true)
-                    break
+                  }
                 }
-              }}
+              ]}
             />
           </div>
           <div className='flex w-full flex-1 flex-col items-center gap-6 lg:items-start'>
