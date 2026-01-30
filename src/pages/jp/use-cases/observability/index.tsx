@@ -456,7 +456,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         </div>
         <div className='mt-12 text-center lg:mt-16'>
           <LinkWithArrow
-            href='/use-cases?log=use-case-observability'
+            href='/jp/use-cases?log=use-case-observability'
             className='text-slate-300 hover:underline'>
             導入事例をさらに見る
           </LinkWithArrow>
@@ -663,7 +663,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+              href='https://clickhouse.com/docs/jp/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
               target='_blank'
               linkClass='w-full md:w-auto'
               className='mt-6 w-full !px-10 md:w-auto'>
