@@ -103,8 +103,7 @@ export default function IntegrationsPage({
   title,
   integrationGroups,
   seo,
-  headerData,
-  footerData
+  headerData
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   useGalaxyOnPage('integrationsPage')
 
@@ -223,7 +222,7 @@ export default function IntegrationsPage({
   }, [category, search])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='bg-grid py-10 text-center text-neutral-100 md:py-16 lg:py-20'>
         <div className='container mx-auto max-w-7xl px-8 2xl:px-0'>
           <SuiTitle type='h1'>{title}</SuiTitle>

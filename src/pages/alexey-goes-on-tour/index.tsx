@@ -54,12 +54,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
     }
   }
 
-export default function HomePage({
-  seo,
-  footerData,
-  headerData,
-  recentEvents
-}: PageProps) {
+export default function HomePage({ seo, headerData, recentEvents }: PageProps) {
   const [timelineCoords, setTimelineCoords] = useState<null | {
     top: number
     right: number
@@ -127,7 +122,7 @@ export default function HomePage({
   ])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Page banner */}
       <div className='relative'>
         <Image

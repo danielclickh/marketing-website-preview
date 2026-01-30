@@ -60,8 +60,7 @@ export const getStaticProps: GetStaticProps<MLProps> =
 export default function MLUseCasePage({
   customerStories,
   seo,
-  headerData,
-  footerData
+  headerData
 }: MLProps) {
   useGalaxyOnPage('mlAIUseCasePage')
   useEffect(() => {
@@ -74,7 +73,7 @@ export default function MLUseCasePage({
   }, [])
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-grid pb-20 pt-10'>
             <div className='absolute z-10 w-full bg-center bg-no-repeat lg:top-64 lg:h-[524px] lg:bg-speed-lines'></div>

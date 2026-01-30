@@ -27,3 +27,15 @@ export function shuffleArraySeeded<T>(array: T[], seed: number): T[] {
 
   return shuffled
 }
+
+export function interleaveWithLast<T>(
+  items: readonly T[],
+  separator: T,
+  lastSeparator: T
+): T[] {
+  return items.flatMap((item, index) => {
+    if (index === items.length - 1) return [item]
+    if (index === items.length - 2) return [item, lastSeparator]
+    return [item, separator]
+  })
+}

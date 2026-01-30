@@ -68,7 +68,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
 export default function GamingIndustryPage({
   seo,
   headerData,
-  footerData,
   stories
 }: PageProps) {
   useGalaxyOnPage('retailIndustryPage')
@@ -78,7 +77,7 @@ export default function GamingIndustryPage({
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section
         className='bg-shadow-element yellow-shadow my-16 lg:my-24'

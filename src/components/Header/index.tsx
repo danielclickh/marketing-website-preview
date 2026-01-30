@@ -23,12 +23,14 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
   // Eyebrow default settings
-  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
+  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(true)
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
-  >('')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState('')
+  >('Postgres managed by ClickHouse | One stack for transactions and analytics')
+  const [headerBannerUrl, setHeaderBannerUrl] = useState(
+    '/cloud/postgres?loc=banner'
+  )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
   >(undefined)

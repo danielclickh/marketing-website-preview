@@ -140,7 +140,6 @@ export async function getStaticPaths() {
 }
 
 export default function Page({
-  footerData,
   headerData,
   event,
   moreEvents,
@@ -176,7 +175,7 @@ export default function Page({
   }
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <section className='section-container my-16 flex flex-col items-start gap-x-16 gap-y-8 lg:my-24 lg:flex-row'>
         {/* Content column */}
         <div className={`space-y-6 ${hasSidebar ? '' : 'mx-auto max-w-4xl'}`}>

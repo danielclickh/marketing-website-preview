@@ -1,5 +1,6 @@
 'use client'
 
+import JsonSchema from '@/components-cleaned/JsonSchema'
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
 import type VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
@@ -11,6 +12,7 @@ import {
   useMemo,
   cloneElement
 } from 'react'
+import { VideoObject, WithContext } from 'schema-dts'
 import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/types'
 
 type EmbedProviders = 'youtube' | 'vimeo'
@@ -31,6 +33,7 @@ export interface PlayOnClickVideoProps {
   className?: string
   thumbnailClassName?: string
   playButtonClassName?: string
+  schema?: WithContext<VideoObject>
 }
 
 export default function PlayOnClickVideo({
@@ -41,7 +44,8 @@ export default function PlayOnClickVideo({
   playButtonEyebrow,
   className = '',
   thumbnailClassName = '',
-  playButtonClassName = ''
+  playButtonClassName = '',
+  schema
 }: PlayOnClickVideoProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const playerRef = useRef<
@@ -156,6 +160,8 @@ export default function PlayOnClickVideo({
         ref={containerRef}
         className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
       />
+
+      {schema && <JsonSchema schema={schema} />}
     </div>
   )
 }

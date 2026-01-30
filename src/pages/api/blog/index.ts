@@ -1,32 +1,6 @@
-import { findAll, getStagingOnlyFilters } from '@/lib/api/strapi'
+import { blogService } from '@/lib/api/strapi'
 import { BlogApiResponse } from '@/types/blogs'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-const baseQuery: Record<string, any> = {
-  sort: ['date:DESC', 'publishedAt:DESC'],
-  populate: ['author', 'author.avatarPng', 'thumbnailPng'],
-  fields: [
-    'category',
-    'title',
-    'shortDescription',
-    'createdAt',
-    'updatedAt',
-    'publishedAt',
-    'slug',
-    'date',
-    'StagingOnly',
-    'ListOnBlogs'
-  ],
-  filters: {
-    $and: [
-      { category: { $ne: 'japanese' } },
-      { $or: getStagingOnlyFilters() },
-      {
-        $or: [{ ListOnBlogs: { $null: true } }, { ListOnBlogs: { $eq: true } }]
-      }
-    ]
-  }
-}
 
 export async function fetchCategories(): Promise<Record<string, string>> {
   return {
@@ -41,7 +15,8 @@ export async function fetchCategories(): Promise<Record<string, string>> {
 export async function fetchBlogs({
   page = 1,
   category = null,
-  search = null
+  search = null,
+  locale
 }: {
   page?:
     | undefined
@@ -61,6 +36,7 @@ export async function fetchBlogs({
     | string
     | string[]
     | BlogApiResponse['params']['search']
+  locale?: undefined | null | string | string[]
 }): Promise<BlogApiResponse> {
   // Get and validate the paginated page number
   page = Number(page)
@@ -77,18 +53,57 @@ export async function fetchBlogs({
   search = search ? String(search) : null
   search = search && search.trim() ? search : null
 
-  const { data: featuredBlog } = await findAll('blog-posts', {
-    ...baseQuery,
-    pagination: { limit: 1 }
+  // Validate the locale param
+  locale = locale ? String(locale) : null
+  locale = locale && locale.trim() ? locale : null
+
+  const baseQuery: Record<string, any> = {
+    sort: ['date:DESC', 'publishedAt:DESC'],
+    populate: [
+      'author',
+      'author.avatarPng',
+      'thumbnailPng',
+      'author.profiles',
+      'author.profiles.avatar'
+    ],
+    fields: [
+      'category',
+      'title',
+      'shortDescription',
+      'createdAt',
+      'updatedAt',
+      'publishedAt',
+      'slug',
+      'date',
+      'reading_time',
+      'reading_time_override'
+    ],
+    filters: {
+      $and: [
+        {
+          $or: [
+            { ListOnBlogs: { $null: true } },
+            { ListOnBlogs: { $eq: true } }
+          ]
+        }
+      ]
+    }
+  }
+
+  // Include/exclude japanese blogs
+  baseQuery.filters.$and.push({
+    category: { [locale === 'jp' ? '$eq' : '$ne']: 'Japanese' }
   })
+
+  const featuredBlog = await blogService.findOne(baseQuery)
 
   const query = structuredClone(baseQuery)
 
   // Excluded featured blog from query
-  if (featuredBlog[0]) {
+  if (featuredBlog) {
     query.filters.$and.push({
       slug: {
-        $ne: featuredBlog[0].slug
+        $ne: featuredBlog.slug
       }
     })
   }
@@ -127,20 +142,32 @@ export async function fetchBlogs({
               $containsi: search
             }
           }
+        },
+        {
+          author: {
+            profiles: {
+              name: {
+                $containsi: search
+              }
+            }
+          }
         }
       ]
     })
   }
 
   // Get paginated blog posts
-  const { data, pagination } = await findAll('blog-posts', {
-    ...query,
-    pagination: { pageSize: 15, page: page }
-  })
+  const { data, pagination } = await blogService.findMany(
+    {
+      ...query,
+      pagination: { pageSize: 15, page: page }
+    },
+    true
+  )
 
   return {
     data: {
-      featured: featuredBlog[0],
+      featured: featuredBlog || null,
       blogs: data,
       categories
     },
@@ -161,12 +188,18 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  let { page = 1, category = null, search = null } = request.query
+  let {
+    page = 1,
+    category = null,
+    search = null,
+    locale = null
+  } = request.query
 
   const responseBody = await fetchBlogs({
     page,
     category,
-    search
+    search,
+    locale
   })
 
   response.status(200).json(responseBody)

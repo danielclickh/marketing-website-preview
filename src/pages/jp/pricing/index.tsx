@@ -1,11 +1,11 @@
 import philosophy from './philosophy.json'
 import { CUIButton, CUICard } from '@/components/ClickUI'
-import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import Modal from '@/components/Modal'
 import PocContactForm from '@/components/PocContactForm'
 import ByocPricingCard from '@/components/jp/ByocPricingCard'
+import Layout from '@/components/jp/Layout'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useClickOutside } from '@/hooks'
 import { findAll, findOne, getPricingV2 } from '@/lib/api/strapi'
@@ -159,14 +159,13 @@ export default function PricingPage({
   cloudProviders,
   pricingData,
   requestParams,
-  headerData,
-  footerData
+  headerData
 }: PricingPageProps) {
   useGalaxyOnPage('jpPricingPage')
   const pocFormRef = useRef<HTMLDivElement | null>(null)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='pricing h-full text-neutral-0'>
         <div className='pt-16'>
           <div className='mx-auto max-w-7xl px-4 sm:px-8 xl:px-0'>

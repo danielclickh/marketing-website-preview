@@ -61,8 +61,7 @@ export const getStaticProps: GetStaticProps<MLProps> =
 export default function MLUseCasePage({
   customerStories,
   seo,
-  headerData,
-  footerData
+  headerData
 }: MLProps) {
   useGalaxyOnPage('mlAIUseCasePage')
   useEffect(() => {
@@ -75,7 +74,7 @@ export default function MLUseCasePage({
   }, [])
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         {/* Hero */}
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-grid pb-20 pt-10'>
@@ -162,7 +161,7 @@ export default function MLUseCasePage({
           <AnimatedFlare className='absolute left-0 top-1/3 z-0 aspect-video w-[300vh] -translate-y-1/2 opacity-70 lg:hidden' />
           <div className='section-container relative z-10 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:justify-between'>
             <div className='mx-auto -mt-1 max-w-lg space-y-4 text-center lg:mx-0 lg:pr-6 lg:text-left'>
-              <SuiTitle type='h2'>ClickHouse.ai</SuiTitle>
+              <SuiTitle type='h2'>Agentic Data Stack</SuiTitle>
               <SuiText size='lg' className='text-neutral-200'>
                 Unlock Agent-Facing Analytics within the ClickHouse Cloud
                 console or via the native remote MCP server

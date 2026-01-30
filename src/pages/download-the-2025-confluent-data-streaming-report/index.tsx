@@ -30,13 +30,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ footerData, headerData, seo }: CommonProps) {
+export default function Page({ headerData, seo }: CommonProps) {
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <section className='relative overflow-hidden'>
         <Image
           src={background}

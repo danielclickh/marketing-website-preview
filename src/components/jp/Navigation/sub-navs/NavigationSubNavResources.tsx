@@ -29,6 +29,7 @@ export default function NavigationSubNavResources() {
           setActiveSubNav(null)
         }}>
         <NavigationLink
+          href='#'
           onClick={() => {
             setActiveSubNav(
               isSubNavActive('comparisons') ? null : 'comparisons'

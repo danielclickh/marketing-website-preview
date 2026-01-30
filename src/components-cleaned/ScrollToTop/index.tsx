@@ -2,25 +2,83 @@
 
 import { useEffect, useState } from 'react'
 
-export interface ScrollToTopProps {
-  showFrom: number
-  hideAt?: number
+type ShowFromNone = {
+  showFrom?: never
+  showFromTopRef?: never
 }
 
-export default function ScrollToTop({ showFrom, hideAt }: ScrollToTopProps) {
+type ShowFromNumber = {
+  showFrom: number
+  showFromTopRef?: never
+}
+
+type ShowFromRef = {
+  showFrom?: never
+  showFromTopRef: React.RefObject<HTMLElement>
+}
+
+type HideAtNone = {
+  hideAt?: never
+  hideAtBottomRef?: never
+}
+
+type HideAtNumber = {
+  hideAt: number
+  hideAtBottomRef?: never
+}
+
+type HideAtRef = {
+  hideAt?: never
+  hideAtBottomRef: React.RefObject<HTMLElement>
+}
+
+export type ScrollToTopProps = (ShowFromNone | ShowFromNumber | ShowFromRef) &
+  (HideAtNone | HideAtNumber | HideAtRef)
+
+export default function ScrollToTop({
+  showFrom,
+  showFromTopRef,
+  hideAt,
+  hideAtBottomRef
+}: ScrollToTopProps) {
   const [show, setShow] = useState(false)
+  const [showFromValue, setShowFromValue] = useState<number>(0)
+  const [hideAtValue, setHideAtValue] = useState<null | number>(null)
+
+  useEffect(() => {
+    const showFromEl = showFromTopRef?.current
+    const hideAtEl = hideAtBottomRef?.current
+
+    if (!showFromEl) setShowFromValue(showFrom ?? 0)
+    if (!hideAtEl) setHideAtValue(hideAt ?? null)
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (showFromEl) {
+        setShowFromValue(showFromEl.offsetTop)
+      }
+      if (hideAtEl) {
+        setHideAtValue(hideAtEl.offsetTop + hideAtEl.clientHeight)
+      }
+    })
+
+    if (showFromEl) resizeObserver.observe(showFromEl)
+    if (hideAtEl) resizeObserver.observe(hideAtEl)
+
+    return () => resizeObserver.disconnect()
+  }, [showFrom, showFromTopRef?.current, hideAt, hideAtBottomRef?.current])
 
   useEffect(() => {
     const scrollHandler = (event: Event) => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop
       const scrollBottom = scrollTop + window.innerHeight
-      const isShowFrom = scrollTop >= showFrom
-      const isHideAt = hideAt && scrollBottom >= hideAt
+      const isShowFrom = scrollTop >= showFromValue
+      const isHideAt =
+        typeof hideAtValue === 'number' && scrollBottom >= hideAtValue
       setShow(isShowFrom && !isHideAt)
     }
     window.addEventListener('scroll', scrollHandler)
     return () => window.removeEventListener('scroll', scrollHandler)
-  }, [showFrom, hideAt])
+  }, [showFromValue, hideAtValue])
 
   const clickHandler = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>

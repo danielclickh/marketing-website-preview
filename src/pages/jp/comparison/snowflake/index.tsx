@@ -1,4 +1,4 @@
-import BlogPost from '@/components/BlogPostList/BlogPost'
+import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import LogoCarousel from '@/components/LogoCarousel'
@@ -94,7 +94,6 @@ export const getStaticProps: GetStaticProps<SnowflakePageProps> =
   }
 
 export default function SnowflakePage({
-  footerData,
   headerData,
   customerStories,
   seo,
@@ -111,7 +110,7 @@ export default function SnowflakePage({
   } = comparison.data[0]
   useGalaxyOnPage('snowflakeComparisonPage')
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='homepage'>
         <div className='relative pt-16 lg:pb-20'>
           <div className='mx-auto max-w-7xl px-4 md:px-8 2xl:px-0'>
@@ -483,7 +482,7 @@ export default function SnowflakePage({
                       {content.RelatedBlogs.flatMap((custom: any) =>
                         custom.blog_posts.map((blog: any) => (
                           <div key={blog.id}>
-                            <BlogPost {...blog} />
+                            <StrapiBlogPostCard entry={blog} />
                           </div>
                         ))
                       )}

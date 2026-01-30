@@ -91,7 +91,6 @@ export const getStaticProps: GetStaticProps<useCasesPageDataProps> =
 function UseCasesPage({
   seo,
   headerData,
-  footerData,
   useCasesPageData,
   individualUseCases,
   quotes
@@ -136,7 +135,7 @@ function UseCasesPage({
   }
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='homepage bg-grid'>
         <div className='relative gap-24 px-8 pb-16 pt-16 md:px-0'>
           <div className='mx-auto max-w-3xl'>

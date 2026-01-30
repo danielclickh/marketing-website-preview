@@ -66,7 +66,42 @@ export default function HomepageHeroAlt({
                 className='w-full !border-black !text-black !transition-all hover:!text-white'>
                 Download open-source
               </CUIButton>
-            </div>{' '}
+            </div>
+            {/*<LogoAnnouncementLink
+              href='/cloud/postgres?loc=hero'
+              className='mt-8 text-sm'
+              logo={{
+                src: '/images/cloud/integrations/postgres.svg',
+                alt: 'Postgres managed by ClickHouse',
+                width: 52,
+                height: 52
+              }}>
+              Postgres managed by ClickHouse is now in private preview. Build
+              apps on a Unified Data Stack with Postgres for transactions and
+              ClickHouse for analytics.{' '}
+              <span className='text-nowrap font-medium group-hover:underline'>
+                Learn more&nbsp;-&gt;
+              </span>
+            </LogoAnnouncementLink>*/}
+            <LogoAnnouncementLink
+              mode='light'
+              className='mt-8'
+              href='/cloud/clickpipes/bigquery-connector?loc=home-hero'
+              logo={{
+                src: '/images/cloud/integrations/google-bigquery.svg',
+                alt: 'BigQuery',
+                width: 50,
+                height: 50,
+                className: 'mx-2 brightness-800'
+              }}>
+              Blazing-fast BigQuery to ClickHouse with our new ClickPipe
+              connector — now in Private Preview.
+              <br />
+              <span className='underline group-hover:decoration-2'>
+                Learn more
+              </span>
+              !
+            </LogoAnnouncementLink>
           </div>
         </div>
 

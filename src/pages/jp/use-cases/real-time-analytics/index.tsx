@@ -58,8 +58,7 @@ export const getStaticProps: GetStaticProps<RealTimeAnalyticsPageProps> =
 export default function RealTimeAnalyticsPage({
   customerStories,
   seo,
-  headerData,
-  footerData
+  headerData
 }: RealTimeAnalyticsPageProps) {
   useGalaxyOnPage('realTimeUseCasePage')
   useEffect(() => {
@@ -72,7 +71,7 @@ export default function RealTimeAnalyticsPage({
   }, [])
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden bg-grid pb-16 pt-10'>
             <div className='container relative z-40 mx-auto flex max-w-7xl flex-col bg-opacity-10 px-8 md:bg-no-repeat md:px-8 lg:min-h-[630px] 2xl:px-0'>

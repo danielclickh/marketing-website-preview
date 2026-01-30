@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
     }
   }
 
-export default function Page({ footerData, headerData, seo }: PageProps) {
+export default function Page({ headerData, seo }: PageProps) {
   useGalaxyOnPage('reinvent2024AncillaryTicketPage')
 
   const router = useRouter()
@@ -97,7 +97,6 @@ export default function Page({ footerData, headerData, seo }: PageProps) {
   return (
     <>
       <Layout
-        footerData={footerData}
         seo={seo}
         headerData={{ eyebrow: { className: '!bg-[#EBFF00]' }, ...headerData }}>
         {loading && (

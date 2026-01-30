@@ -129,7 +129,6 @@ export async function getStaticPaths() {
 }
 
 export default function Page({
-  footerData,
   seo,
   slug,
   heading,
@@ -689,7 +688,7 @@ export default function Page({
           )}
         </div>
       </FontSohne>
-      <Footer {...footerData} />
+      <Footer />
     </>
   )
 }

@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function Page({ footerData, headerData, seo }: CommonProps) {
+export default function Page({ headerData, seo }: CommonProps) {
   useGalaxyOnPage('reinvent2025AncillaryPage')
 
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false)
@@ -48,7 +48,7 @@ export default function Page({ footerData, headerData, seo }: CommonProps) {
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <Modal
           isOpen={isMeetingModalOpen}
           onClose={() => setIsMeetingModalOpen(false)}>

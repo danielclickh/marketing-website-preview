@@ -1,13 +1,12 @@
 import { strapiDynamicBlogModulesMarkdown } from '@/components-cleaned/StrapiDynamicBlogModules'
 import {
-  findAll,
+  blogService,
   getAbsoluteMediaUrl,
   getProxiedMediaUrl,
-  getStagingOnlyFilters,
   isAuthorisedRevalidationRequest
 } from '@/lib/api/strapi'
+import { interleaveWithLast } from '@/lib/utils/arrays'
 import { escapeForRegex } from '@/lib/utils/strings'
-import { BlogProps } from '@/types/blog'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
@@ -22,18 +21,13 @@ export default async function handler(
   const forceRevalidate =
     force === 'true' && isAuthorisedRevalidationRequest(request)
 
-  const { data } = await findAll('blog-posts', {
+  const blog = await blogService.findOne({
     filters: {
       slug: {
         $eq: slug
-      },
-      $or: getStagingOnlyFilters()
-    },
-    populate: 'deep',
-    pagination: { limit: 1 }
+      }
+    }
   })
-
-  const blog = data?.[0]
 
   // Serve the right content type
   response.setHeader('Content-Type', 'text/markdown; charset=utf-8')
@@ -62,10 +56,20 @@ export default async function handler(
     return response.status(404).send('Blog not found')
   }
 
+  let authorName = blog.author?.name || null
+
+  if (blog.author?.profiles) {
+    authorName = interleaveWithLast(
+      blog.author.profiles.map((author) => author.name),
+      ', ',
+      ' and '
+    ).join('')
+  }
+
   const frontMatter = Object.entries({
     title: blog.title,
     date: blog.publishedAt,
-    author: blog.author.name,
+    author: authorName,
     category: blog.category,
     excerpt: blog.shortDescription
   })
@@ -92,7 +96,7 @@ ${frontMatter.join('\n')}
 
   // Add blog builder sections
   if (blog.sections) {
-    ;(blog.sections as BlogProps['sections']).forEach((section) => {
+    blog.sections.forEach((section) => {
       const md = strapiDynamicBlogModulesMarkdown(section)
       if (md) {
         lines.push(md)

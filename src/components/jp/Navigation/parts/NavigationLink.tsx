@@ -1,12 +1,12 @@
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Link, { LinkProps } from 'next/link'
 import React, { forwardRef } from 'react'
 
-export interface NavigationLinkProps extends Omit<LinkProps, 'href'> {
-  href?: string // Restrict href to be a string
-  className?: string
-  children: React.ReactNode
+export interface NavigationLinkProps
+  extends Omit<LinkProps & React.HTMLProps<HTMLAnchorElement>, 'ref'> {
   isHovered?: boolean
   target?: string
+  arrow?: boolean
 }
 
 const NavigationLink = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
@@ -18,14 +18,17 @@ const NavigationLink = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
       isHovered = false,
       prefetch = false,
       target = '_self',
+      arrow = false,
       ...props
     },
     ref
   ) {
+    const LinkComponent = arrow ? LinkWithArrow : Link
+
     return (
-      <Link
+      <LinkComponent
         ref={ref}
-        href={href} // Ensure href is a string
+        href={href}
         prefetch={prefetch}
         target={target}
         {...props}
@@ -33,7 +36,7 @@ const NavigationLink = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
           isHovered ? 'bg-neutral-700/25 text-primary-300' : ''
         }`}>
         {children}
-      </Link>
+      </LinkComponent>
     )
   }
 )

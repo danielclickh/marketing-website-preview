@@ -1,8 +1,7 @@
-import logoFull from '../../../public/logo-full.svg'
-import { CUIButton } from '../ClickUI'
-import NewsLetterForm from '../NewsLetter/NewsLetterForm'
-import GitHub from '../icons/GitHub'
-import { FooterData } from './types'
+import logoFull from '@/../public/logo-full.svg'
+import { CUIButton } from '@/components/ClickUI'
+import NewsLetterForm from '@/components/NewsLetter/NewsLetterForm'
+import GitHub from '@/components/icons/GitHub'
 import { FullyQualifiedEvent } from '@/lib/galaxy/client'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { camel } from '@/lib/utils/strings'
@@ -266,7 +265,36 @@ const NAV_ITEMS: Array<NavItem> = [
   }
 ]
 
-export default function Footer({ bottomLinks = [] }: FooterData) {
+const LEGAL_ITEMS: Array<{
+  label: string
+  href: string
+  target?: '_self' | '_blank'
+  galaxyEvent?: FullyQualifiedEvent
+}> = [
+  {
+    label: 'Trademark',
+    href: '/legal/trademark-policy'
+  },
+  {
+    label: 'Privacy',
+    href: '/legal/privacy-policy'
+  },
+  {
+    label: 'Security',
+    href: 'https://trust.clickhouse.com/',
+    target: '_blank'
+  },
+  {
+    label: 'Legal',
+    href: '/legal'
+  },
+  {
+    label: 'Cookie policy',
+    href: '/legal/cookie-policy'
+  }
+]
+
+export default function Footer() {
   const year = new Date()
 
   // Split nav items into columns
@@ -369,18 +397,19 @@ export default function Footer({ bottomLinks = [] }: FooterData) {
               CA and Amsterdam, NL.
             </div>
             <div className='bottom_links flex flex-wrap items-center justify-center gap-4'>
-              {bottomLinks.map((bottomLink, index) => (
+              {LEGAL_ITEMS.map((legalItem, legalIndex) => (
                 <Link
-                  key={bottomLink.text}
-                  href={bottomLink.href}
-                  target={bottomLink.target}
-                  className={`first:pl-0 bottom-link-${index} whitespace-nowrap hover:text-neutral-0`}
+                  key={legalIndex}
+                  href={legalItem.href}
+                  target={legalItem.target}
+                  className='whitespace-nowrap first:pl-0 hover:text-neutral-0'
                   onClick={() => {
                     useGalaxyOnClick(
-                      `footerNav.privacyItems.${camel(bottomLink.text)}Select`
+                      legalItem.galaxyEvent ||
+                        `footer.legal.${camel(legalItem.label)}`
                     )
                   }}>
-                  {bottomLink.text}
+                  {legalItem.label}
                 </Link>
               ))}
               <button

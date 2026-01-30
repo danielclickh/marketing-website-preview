@@ -2,6 +2,7 @@ import { CUIButton } from '../ClickUI'
 import { SuiLink, SuiSearchField, SuiText } from '../sui/client'
 import { JobType, PositionType } from './types'
 import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { ChangeEvent, useMemo, useState } from 'react'
 import useSWR from 'swr'
@@ -151,6 +152,18 @@ function CareersFilter() {
           }
         />
         <PillFilters options={departments} />
+      </div>
+      <div className='rounded-lg bg-neutral-725 p-4 text-center text-sm text-neutral-200'>
+        <p>
+          Langfuse is now part of the ClickHouse team, and they're hiring in
+          Berlin and San Francisco.{' '}
+          <LinkWithArrow
+            href='https://jobs.ashbyhq.com/langfuse'
+            target='_blank'
+            className='text-primary-300 hover:underline'>
+            Check out their openings here
+          </LinkWithArrow>
+        </p>
       </div>
       <div>
         <div className='mt-4'>

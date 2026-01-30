@@ -97,7 +97,6 @@ export default function CustomerStoriesPage({
   seo,
   stories,
   headerData,
-  footerData,
   categories,
   migrations,
   verticals,
@@ -387,7 +386,7 @@ export default function CustomerStoriesPage({
   ])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <PrimeReactProvider
         value={{
           unstyled: true,

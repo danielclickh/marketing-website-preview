@@ -26,14 +26,10 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function PartnersPage({
-  seo,
-  headerData,
-  footerData
-}: CommonProps) {
+export default function PartnersPage({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('awsPartnersPage')
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section
         className='section-container bg-shadow-element yellow-shadow my-16 lg:my-24'

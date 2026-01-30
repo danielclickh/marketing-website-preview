@@ -1,18 +1,14 @@
 import githubApiData from '@/../public/githubApiData.json'
-import { getFooterData } from '@/components/Footer/getFooterData'
-import { FooterData } from '@/components/Footer/types'
 import { getGetStartedData } from '@/components/GetStarted/getStartedData'
 import { GettingStartedPlatform } from '@/components/GetStarted/types'
 import { HeaderProps } from '@/components/Header/types'
 
 interface Props {
-  footerData: FooterData
   platforms: Array<GettingStartedPlatform>
   headerData: HeaderProps
 }
 
 export async function getCommonProps(): Promise<Props> {
-  const footerData = await getFooterData()
   const getStartedData = await getGetStartedData()
 
   // Set default fallback
@@ -35,7 +31,6 @@ export async function getCommonProps(): Promise<Props> {
   }
 
   return {
-    footerData,
     platforms: getStartedData.platforms,
     headerData: {
       github

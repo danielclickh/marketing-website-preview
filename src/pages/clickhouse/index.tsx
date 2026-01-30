@@ -110,6 +110,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
             }
           }
         },
+        sort: ['VideoDate:DESC'],
         pagination: {
           limit: 3
         }
@@ -133,7 +134,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
 export default function ClickHouseServerPage({
   seo,
   headerData,
-  footerData,
   platforms,
   releaseVideos
 }: PageProps) {
@@ -198,7 +198,7 @@ ER  -  `
   })
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='relative overflow-hidden bg-grid py-16 lg:py-24'>
         <div className='absolute -bottom-6 left-0 z-0 aspect-[1512/524] w-full bg-contain bg-center bg-no-repeat lg:bg-speed-lines' />

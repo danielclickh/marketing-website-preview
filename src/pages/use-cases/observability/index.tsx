@@ -49,7 +49,7 @@ import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { generateFaqPageSchema } from '@/lib/schema'
+import { generateFaqPageSchema, generateVideoObjectSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -172,11 +172,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     }
   }
 
-export default function ClickHouseServerPage({
-  seo,
-  headerData,
-  footerData
-}: CommonProps) {
+export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('observabilityUseCasePage')
   const [hyperdxActive, setHyperdxActive] = useState(true)
   const [clickhouseActive, setClickhouseActive] = useState(false)
@@ -188,7 +184,7 @@ export default function ClickHouseServerPage({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='overflow-hidden py-20 lg:py-24'>
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
@@ -219,7 +215,10 @@ export default function ClickHouseServerPage({
                 weight='semibold'
                 href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
                 linkClass='w-full md:w-auto'
-                className='w-full !px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'
+                onClick={useGalaxyOnClick(
+                  'observabilityUseCasePage.hero.getStartedWithOpenSource'
+                )}>
                 Get started with open-source
               </CUIButton>
               <CUIButton
@@ -229,7 +228,10 @@ export default function ClickHouseServerPage({
                 href='/company/contact?loc=use-case-observability'
                 target='_self'
                 linkClass='w-full md:w-auto'
-                className='w-full !px-10 md:w-auto'>
+                className='w-full !px-10 md:w-auto'
+                onClick={useGalaxyOnClick(
+                  'observabilityUseCasePage.hero.contactSales'
+                )}>
                 Contact sales
               </CUIButton>
             </div>
@@ -661,7 +663,10 @@ export default function ClickHouseServerPage({
               href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
               target='_blank'
               linkClass='w-full md:w-auto'
-              className='mt-6 w-full !px-10 md:w-auto'>
+              className='mt-6 w-full !px-10 md:w-auto'
+              onClick={useGalaxyOnClick(
+                'observabilityUseCasePage.builtForOtelAtScale.getStarted'
+              )}>
               Get started
             </CUIButton>
           </div>
@@ -698,16 +703,37 @@ export default function ClickHouseServerPage({
             }}
             simulateTouch={false}
             carouselClass='rounded'>
-            {['WBe7ZwTRWuQ', '3waDYancX_c'].map((videoId, videoIdIndex) => {
-              return (
-                <PlayOnClickVideo
-                  key={videoIdIndex}
-                  provider='youtube'
-                  id={videoId}
-                  thumbnail={<YouTubeThumbnail videoId={videoId} />}
-                />
-              )
-            })}
+            <PlayOnClickVideo
+              provider='youtube'
+              id='WBe7ZwTRWuQ'
+              thumbnail={<YouTubeThumbnail videoId='WBe7ZwTRWuQ' />}
+              schema={generateVideoObjectSchema({
+                title: 'ClickStack in 60 seconds',
+                description:
+                  'A 60-second overview of ClickStack, an open-source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
+                thumbnailUrl:
+                  'https://img.youtube.com/vi/WBe7ZwTRWuQ/maxresdefault.jpg',
+                uploadDate: '2025-12-18T08:06:01-08:00',
+                contentUrl: 'https://www.youtube.com/watch?v=WBe7ZwTRWuQ',
+                embedUrl: 'https://www.youtube.com/embed/WBe7ZwTRWuQ'
+              })}
+            />
+            <PlayOnClickVideo
+              provider='youtube'
+              id='3waDYancX_c'
+              thumbnail={<YouTubeThumbnail videoId='3waDYancX_c' />}
+              schema={generateVideoObjectSchema({
+                title:
+                  'ClickStack: Unified Observability with ClickHouse for High-Cardinality Logs, Metrics & Traces ',
+                description:
+                  'A hands-on tutorial introducing ClickStack, an OpenTelemetry-native observability platform that unifies logs, metrics, and traces in ClickHouse with powerful correlation and querying via HyperDX.',
+                thumbnailUrl:
+                  'https://img.youtube.com/vi/3waDYancX_c/maxresdefault.jpg',
+                uploadDate: '2025-06-25T09:14:17-07:00',
+                contentUrl: 'https://www.youtube.com/watch?v=3waDYancX_c',
+                embedUrl: 'https://www.youtube.com/embed/3waDYancX_c'
+              })}
+            />
           </CarouselPaginated>
         </div>
       </section>

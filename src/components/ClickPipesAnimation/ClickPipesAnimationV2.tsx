@@ -98,8 +98,9 @@ export default function ClickPipesAnimationV2({ ...props }: Props) {
           </li>
           <li>
             <LogoItem
-              src='/images/cloud/integrations/google-cloud-storage.svg'
-              alt='Google Cloud Storage'
+              src='/images/cloud/integrations/google-bigquery.svg'
+              alt='BigQuery'
+              badge='New'
               active={true}
             />
           </li>

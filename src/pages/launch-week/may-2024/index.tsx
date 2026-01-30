@@ -73,8 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function LaunchWeekPage({
   recentEvents,
   seo,
-  headerData,
-  footerData
+  headerData
 }: PageProps) {
   useGalaxyOnPage('launchWeekMayPage')
   useEffect(() => {
@@ -87,7 +86,7 @@ export default function LaunchWeekPage({
   }, [])
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='bg-contain bg-center bg-no-repeat'>
           <div className='relative z-20 overflow-hidden pt-14'>
             <Image

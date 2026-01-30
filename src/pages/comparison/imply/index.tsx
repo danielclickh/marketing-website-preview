@@ -22,7 +22,6 @@ interface PageProps {
   contactForm: {
     disclaimer: string
   }
-  footerData: ContactProps['footerData']
   headerData: ContactProps['headerData']
   seo: ContactProps['seo']
 }
@@ -65,7 +64,6 @@ export const getStaticProps: GetStaticProps<ContactProps> =
 export default function Page({
   customerStories,
   contactForm,
-  footerData,
   headerData,
   seo
 }: PageProps) {
@@ -80,7 +78,7 @@ export default function Page({
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         <div className='pb-24'>
           <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-8 sm:pt-8 md:pt-24 2xl:px-0'>
             <div className='mx-auto block w-full lg:flex lg:items-start lg:justify-between'>

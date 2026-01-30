@@ -39,7 +39,6 @@ export const getStaticProps: GetStaticProps = async function getStaticProps() {
 }
 
 export default function Page({
-  footerData,
   headerData,
   seo,
   customerStories
@@ -134,7 +133,7 @@ export default function Page({
 
   return (
     <>
-      <Layout footerData={footerData} seo={seo} headerData={headerData}>
+      <Layout seo={seo} headerData={headerData}>
         {/* Hero */}
         <div className='bg-primary-300 py-16 lg:py-24'>
           <div className='section-container mx-auto'>

@@ -55,15 +55,10 @@ export const getStaticProps: GetStaticProps<PageProps> =
     }
   }
 
-export default function IndustriesPage({
-  seo,
-  headerData,
-  footerData,
-  logos
-}: PageProps) {
+export default function IndustriesPage({ seo, headerData, logos }: PageProps) {
   useGalaxyOnPage('industriesPage')
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='bg-grid py-16 lg:py-24'>
         <div className='section-container flex flex-col items-center gap-16 lg:flex-row'>

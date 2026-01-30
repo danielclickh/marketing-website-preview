@@ -127,7 +127,6 @@ export const getStaticProps: GetStaticProps<PageProps> =
 export default function News({
   featuredEvent,
   events,
-  footerData,
   headerData,
   recentEvents,
   seo
@@ -183,7 +182,7 @@ export default function News({
   }, [events, selectedCategoryObject])
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div>
         <h1 className='mx-auto mb-10 pt-10 text-center font-basier text-4xl text-neutral-100 md:text-5.5xl lg:mb-16 lg:pt-20'>
           Events

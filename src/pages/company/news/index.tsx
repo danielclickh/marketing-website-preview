@@ -81,14 +81,13 @@ export const getStaticProps: GetStaticProps<PageProps> =
 export default function News({
   newsItems,
   pressItems,
-  footerData,
   headerData,
   seo
 }: PageProps) {
   useGalaxyOnPage('newsPage')
 
   return (
-    <Layout footerData={footerData} seo={seo} headerData={headerData}>
+    <Layout seo={seo} headerData={headerData}>
       <div className='section-container my-16 flex flex-col items-start gap-x-16 gap-y-16 lg:my-24 lg:flex-row'>
         {/* Main */}
         <div>
