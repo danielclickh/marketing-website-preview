@@ -60,7 +60,7 @@ import { EffectCreative, Mousewheel } from 'swiper/modules'
 const FAQs: Array<{ question: string; answer: string }> = [
   {
     question: 'ClickStack とは何ですか？',
-    answer: `ClickStack は ClickHouse を基盤とした高性能なオープンソースの観測性スタックです。ログ、メトリクス、トレース、セッションリプレイを統合し、あらゆるスケールにおいて高速なクエリ実行と効率的なストレージを提供します。`
+    answer: `ClickStack は ClickHouse を基盤とした高性能なオープンソースのオブザーバビリティスタックです。ログ、メトリクス、トレース、セッションリプレイを統合し、あらゆるスケールにおいて高速なクエリ実行と効率的なストレージを提供します。`
   },
   {
     question: 'ClickStack は ELK スタックとどのように異なりますか？',
@@ -68,7 +68,7 @@ const FAQs: Array<{ question: string; answer: string }> = [
 
 Elastic は転置インデックスとシャードベースのアーキテクチャを採用した分散検索エンジンです。全文検索には有効ですが、ストレージ使用量の増大、クエリの並列性の制限、取り込み処理とクエリ処理間の競合といった課題があります。
 
-一方、ClickHouse を基盤とする ClickStack は、分析処理に最適化されたカラム指向の共有なし（shared-nothing）アーキテクチャを採用しています。高度な圧縮によるストレージ効率の向上、全コアを活用したクエリの並列実行、そしてクラウド環境におけるストレージとコンピュートの分離により、一貫して高いパフォーマンスと効率性を実現します。フル SQL をサポートし、Lucene スタイルの高速検索にも対応しているため、すべての観測性データに対してリアルタイムかつ高度な分析が可能です。
+一方、ClickHouse を基盤とする ClickStack は、分析処理に最適化されたカラム指向の共有なし（shared-nothing）アーキテクチャを採用しています。高度な圧縮によるストレージ効率の向上、全コアを活用したクエリの並列実行、そしてクラウド環境におけるストレージとコンピュートの分離により、一貫して高いパフォーマンスと効率性を実現します。フル SQL をサポートし、Lucene スタイルの高速検索にも対応しているため、すべてのオブザーバビリティデータに対してリアルタイムかつ高度な分析が可能です。
 
 ClickStack と ELK スタックの詳細な比較については、[比較ガイドはこちら](/comparison/elastic-for-observability)をご覧ください。`
   },
@@ -80,7 +80,7 @@ ClickStack と ELK スタックの詳細な比較については、[比較ガイ
 - **HyperDX** - 検索、ダッシュボード、アラート、セッションリプレイを統合した UI  
 - **OpenTelemetry** - ログ、メトリクス、トレースのための標準化されたデータ収集基盤  
 
-これらが連携することで、速度、スケーラビリティ、そしてシンプルさを重視した統合型の観測性スタックを形成します。`
+これらが連携することで、速度、スケーラビリティ、そしてシンプルさを重視した統合型のオブザーバビリティスタックを形成します。`
   },
   {
     question: 'ClickStack は OpenTelemetry に対応していますか？',
@@ -98,7 +98,7 @@ HyperDX UI は、イベントを表示・可視化するためにタイムスタ
   },
   {
     question: 'ClickStack にはログ、トレース、メトリクスを保存できますか？',
-    answer: `はい。ClickStack は、ログ、トレース、メトリクスを単一のプラットフォームで扱うために設計されたフルスタックの観測性プラットフォームです。ClickHouse を基盤として、高いカーディナリティを持つ OpenTelemetry データを効率的に取り込み・保存し、データベースレイヤーで自動的にイベントを相関付けることで、リアルタイムかつ深い洞察を提供します。`
+    answer: `はい。ClickStack は、ログ、トレース、メトリクスを単一のプラットフォームで扱うために設計されたフルスタックのオブザーバビリティプラットフォームです。ClickHouse を基盤として、高いカーディナリティを持つ OpenTelemetry データを効率的に取り込み・保存し、データベースレイヤーで自動的にイベントを相関付けることで、リアルタイムかつ深い洞察を提供します。`
   },
   {
     question:
@@ -114,7 +114,7 @@ HyperDX UI は Lucene スタイルの構文を受け取り、それを SQL に�
 ClickStack は、セルフホスト、ハイブリッド、クラウドなど、制限なくあらゆる環境にデプロイできます。`
   },
   {
-    question: 'ClickStack のホステッド版はありますか？',
+    question: 'ClickStack のクラウド版はありますか？',
     answer: `はい。ClickStack は ClickHouse Cloud 上でマネージドサービスとして利用できます。オープンなアーキテクチャはそのままに、ストレージとコンピュートの完全な分離による柔軟なスケーリングを実現し、読み取りと書き込みのワークロードを分離することで、一貫したパフォーマンスを提供します。
 
 高度な圧縮とコスト効率の高いオブジェクトストレージにより、データを低コストで長期間保持できます。ClickHouse Cloud には自動バックアップが含まれ、運用負荷は不要です。HyperDX UI も追加費用なしで完全に統合されており、ClickHouse Cloud の認証を通じて安全に利用でき、どのサービスからでも起動できます。
@@ -130,9 +130,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         seo: {
           title:
-            'ClickStack：ClickHouse を基盤とした高性能オープンソース観測性 | ログ・メトリクス・トレース',
+            'ClickStack：ClickHouse を基盤とした高性能オープンソースオブザーバビリティ | ログ・メトリクス・トレース',
           description:
-            'ClickStack は ClickHouse を基盤とした高性能な観測性スタックです。ログ、メトリクス、トレースを統合し、10〜100 倍のコスト削減を実現します。今すぐ始めましょう。',
+            'ClickStack は ClickHouse を基盤とした高性能なオブザーバビリティスタックです。ログ、メトリクス、トレースを統合し、10〜100 倍のコスト削減を実現します。今すぐ始めましょう。',
           path: '/jp/use-cases/observability',
           image: [{ url: shareImage.src }],
           languages: ['en', 'ja'],
@@ -140,12 +140,12 @@ export const getStaticProps: GetStaticProps<CommonProps> =
             {
               '@context': 'https://schema.org',
               '@type': 'Service',
-              name: 'ClickStack 観測性',
+              name: 'ClickStack オブザーバビリティ',
               serviceType:
-                '観測性（ログ、メトリクス、トレース、セッションリプレイ、エラー）',
+                'オブザーバビリティ（ログ、メトリクス、トレース、セッションリプレイ、エラー）',
               url: 'https://clickhouse.com/jp/use-cases/observability',
               description:
-                'ClickHouse を基盤とした高性能なオープンソース観測性スタック。大規模環境において、ログ、メトリクス、トレース、セッションリプレイ、エラーに対するサブ秒クエリと効率的な集計を提供します。',
+                'ClickHouse を基盤とした高性能なオープンソースオブザーバビリティスタック。大規模環境において、ログ、メトリクス、トレース、セッションリプレイ、エラーに対するミリ秒クエリと効率的な集計を提供します。',
               provider: {
                 '@type': 'Organization',
                 name: 'ClickHouse, Inc.',
@@ -209,13 +209,14 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h1'
               className='font-basier font-semibold md:!text-6xl'>
-              大規模 OpenTelemetry に対応したオープンソース観測性スタック
+              大規模 OpenTelemetry
+              に対応したオープンソースオブザーバビリティスタック
             </SuiTitle>
             <SuiText size='lg' className='space-y-6 text-neutral-200'>
               <p>
                 大規模な OpenTelemetry データに対応するための
-                オープンソース観測性スタック 高いカーディナリティを持つ
-                OpenTelemetry
+                オープンソースオブザーバビリティスタック
+                高いカーディナリティを持つ OpenTelemetry
                 データであっても、ログ、メトリクス、トレース、セッションリプレイ、エラーに対する
                 高速クエリ実行と強力な集計機能
                 を実現し、リソース効率に優れた処理を提供します。
@@ -266,7 +267,7 @@ export default function ClickHouseServerPage({
       {/* Trusted by */}
       <section className='section-container mb-20 lg:mb-24 lg:mt-10'>
         <EyebrowText className='mb-10 text-center text-primary-300'>
-          多くの企業が観測性用途で信頼しています
+          多くの企業がオブザーバビリティ用途で信頼しています
         </EyebrowText>
         <ContentTicker
           gap='3rem'
@@ -411,7 +412,7 @@ export default function ClickHouseServerPage({
           <SuiTitle
             type='h2'
             className='mx-auto mb-12 max-w-4xl text-center lg:mb-24 lg:px-7'>
-            高性能な観測性ソリューションとして ClickStack
+            高性能なオブザーバビリティソリューションとして ClickStack
             を選択している企業の仲間に加わりましょう
           </SuiTitle>
           <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-9 lg:space-y-0'>
@@ -478,7 +479,9 @@ export default function ClickHouseServerPage({
         {/* Intro */}
         <div className='space-y-2 text-center'>
           <EyebrowText className='text-primary-300'>ClickStack</EyebrowText>
-          <SuiTitle type='h2'>ClickHouse を基盤とした観測性スタック</SuiTitle>
+          <SuiTitle type='h2'>
+            ClickHouse を基盤としたオブザーバビリティスタック
+          </SuiTitle>
         </div>
 
         {/* Features */}
@@ -488,11 +491,11 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h3'
               className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
-              サブ秒クエリ
+              ミリ秒クエリ
             </SuiTitle>
             <SuiText className='text-balance'>
               高いカーディナリティを持つ OpenTelemetry
-              データがペタバイト規模であっても、サブ秒でのクエリ実行が可能です
+              データがペタバイト規模であっても、ミリ秒でのクエリ実行が可能です
             </SuiText>
           </div>
           <div className='flex flex-1 flex-col items-center gap-4 text-center'>
@@ -512,11 +515,11 @@ export default function ClickHouseServerPage({
             <SuiTitle
               type='h3'
               className='font-basier text-[1.5rem] font-semibold leading-[1.3]'>
-              フルスタックの OpenTelemetry 観測性
+              フルスタックの OpenTelemetry オブザーバビリティ
             </SuiTitle>
             <SuiText className='text-balance'>
               セッションリプレイを OpenTelemetry
-              のログ、トレース、メトリクスと統合し、包括的な観測性を実現します
+              のログ、トレース、メトリクスと統合し、包括的なオブザーバビリティを実現します
             </SuiText>
           </div>
         </div>
@@ -620,7 +623,7 @@ export default function ClickHouseServerPage({
                 <SuiText>
                   ClickStack は OpenTelemetry
                   標準をネイティブにサポートし、ログ、メトリクス、トレースを「ワイドイベント」として取り込みます。ワイドイベントは、ClickHouse
-                  上で観測性データを統合するための、コンテキスト情報を豊富に含んだレコード形式です。ペタバイト規模の
+                  上でオブザーバビリティデータを統合するための、コンテキスト情報を豊富に含んだレコード形式です。ペタバイト規模の
                   OpenTelemetry データ処理を前提に設計されています。
                 </SuiText>
                 <SuiText>
@@ -730,7 +733,7 @@ export default function ClickHouseServerPage({
               以外のカスタムパイプラインやスキーマが必要な場合でも、HyperDX UI
               はスキーマ非依存で、あらゆるテレメトリパイプラインに対応します。任意の
               ClickHouse
-              インスタンスに接続でき、観測性データを完全にコントロールすることが可能です。
+              インスタンスに接続でき、オブザーバビリティデータを完全にコントロールすることが可能です。
             </SuiText>
             <SuiText>
               独自のスタック構築においても、ClickHouse
@@ -747,14 +750,15 @@ export default function ClickHouseServerPage({
       {/* Get started */}
       <section className='section-container my-20 grid grid-cols-1 gap-8 lg:my-24 lg:grid-cols-2 lg:gap-16'>
         <SuiTitle type='h2' className='col-span-full text-center'>
-          なぜ ClickStack で観測性を構築するのか？
+          なぜ ClickStack でオブザーバビリティを構築するのか？
         </SuiTitle>
         <div className='space-y-6'>
           <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
           <SuiTitle
             type='h3'
             className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
-            ClickStack はどのようにして観測性コストを削減するのでしょうか？
+            ClickStack
+            はどのようにしてオブザーバビリティコストを削減するのでしょうか？
           </SuiTitle>
           <SuiText className='text-neutral-200'>
             ClickHouse は JVM
@@ -783,7 +787,7 @@ export default function ClickHouseServerPage({
           </SuiText>
           <SuiText className='text-neutral-200'>
             運用負荷を最小限に抑えたい場合は、ClickHouse Cloud 上の ClickStack
-            を選択することで、スケーリング、バックアップ、メンテナンスが自動化されます。ストレージとコンピュートの分離により、インテリジェントなキャッシュを活用した無制限のスケーラビリティとサブ秒クエリ性能の両立を可能にします。
+            を選択することで、スケーリング、バックアップ、メンテナンスが自動化されます。ストレージとコンピュートの分離により、インテリジェントなキャッシュを活用した無制限のスケーラビリティとミリ秒クエリ性能の両立を可能にします。
           </SuiText>
         </div>
         <div className='space-y-6'>
@@ -792,16 +796,16 @@ export default function ClickHouseServerPage({
             type='h3'
             className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
             ClickStack
-            はどのようにしてリアルタイム観測性を実現するのでしょうか？
+            はどのようにしてリアルタイムオブザーバビリティを実現するのでしょうか？
           </SuiTitle>
           <SuiText className='text-neutral-200'>
             ClickHouse
-            は大量かつ継続的なデータストリームの取り込みを前提に設計されており、毎秒ギガバイト規模の取り込みレートをサポートしながら、新しいデータをサブ秒レベルの低遅延で検索可能にします。
+            は大量かつ継続的なデータストリームの取り込みを前提に設計されており、毎秒ギガバイト規模の取り込みレートをサポートしながら、新しいデータをミリ秒レベルの低遅延で検索可能にします。
           </SuiText>
           <SuiText className='text-neutral-200'>
             最も負荷の高いリアルタイムワークロード向けに構築された HyperDX
             は、ClickHouse
-            が備える強力な集計・分析関数群を高度に最適化して活用し、極めて高速な観測性クエリを提供します。
+            が備える強力な集計・分析関数群を高度に最適化して活用し、極めて高速なオブザーバビリティクエリを提供します。
           </SuiText>
         </div>
         <div className='space-y-6'>
@@ -814,16 +818,16 @@ export default function ClickHouseServerPage({
           <SuiTitle
             type='h3'
             className='font-basier text-[1.75rem] font-semibold leading-[1.3]'>
-            ClickStack は観測性データ専用なのでしょうか？
+            ClickStack はオブザーバビリティデータ専用なのでしょうか？
           </SuiTitle>
           <SuiText className='text-neutral-200'>
             ClickHouse
-            は観測性データのためだけのストアではなく、高速な分析処理を目的として設計された高性能
+            はオブザーバビリティデータのためだけのストアではなく、高速な分析処理を目的として設計された高性能
             SQL データベースです。
           </SuiText>
           <SuiText className='text-neutral-200'>
-            観測性は数あるデータ課題の一つに過ぎません。ClickHouse
-            を使用すれば、観測性データ、ビジネスデータ、セキュリティデータを単一のシステム上でシームレスに結合し、お好みの可視化ツールを用いて、システム全体にわたるより深い洞察を引き出すことができます。
+            オブザーバビリティは数あるデータ課題の一つに過ぎません。ClickHouse
+            を使用すれば、オブザーバビリティデータ、ビジネスデータ、セキュリティデータを単一のシステム上でシームレスに結合し、お好みの可視化ツールを用いて、システム全体にわたるより深い洞察を引き出すことができます。
           </SuiText>
         </div>
       </section>
@@ -833,7 +837,7 @@ export default function ClickHouseServerPage({
         <div className='flex flex-col justify-between gap-6 rounded bg-white/5 p-4 md:flex-row md:items-center md:p-6'>
           <div className='w-full md:w-1/2'>
             <SuiTitle type='h3' className='mb-2.5'>
-              観測性ニュースレターを購読する
+              オブザーバビリティニュースレターを購読する
             </SuiTitle>
             <SuiText size='sm' weight='medium' color='secondary'>
               ClickStack
@@ -1036,7 +1040,7 @@ export default function ClickHouseServerPage({
             </SuiTitle>
             <div className='mx-auto max-w-md space-y-4 text-neutral-200 lg:text-left'>
               <p>
-                私たちは、観測性をシンプルで高速、そしてオープンなものにすることを目指しています。ClickStack
+                私たちは、オブザーバビリティをシンプルで高速、そしてオープンなものにすることを目指しています。ClickStack
                 について詳しく知るには FAQ
                 をご覧ください。必要な情報が見つからない場合でも、いつでもお気軽にご相談いただけます。
               </p>
