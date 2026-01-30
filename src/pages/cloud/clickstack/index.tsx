@@ -3,7 +3,10 @@ import imageHero from './assets/hero.png'
 import iconBadge from './assets/icon-badge.svg'
 import iconCoins from './assets/icon-coins.svg'
 import iconFileSearch from './assets/icon-file-search.svg'
+import iconHandCoins from './assets/icon-hand-coins.svg'
 import iconLightBulb from './assets/icon-light-bulb.svg'
+import iconLock from './assets/icon-lock.svg'
+import iconShieldTick from './assets/icon-shield-tick.svg'
 import iconSparkles from './assets/icon-sparkles.svg'
 import iconStack from './assets/icon-stack.svg'
 import iconTimer from './assets/icon-timer.svg'
@@ -38,7 +41,6 @@ import shareImage from './assets/share-image.png'
 import imageWorkflows from './assets/workflows.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
-import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import ContentTicker from '@/components-cleaned/ContentTicker'
@@ -57,9 +59,6 @@ import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { generateFaqPageSchema, generateVideoObjectSchema } from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
-import logoBeehiiv from '@/pages/cloud/postgres/assets/logo-beehiiv.svg'
-import logoBlacksmith from '@/pages/cloud/postgres/assets/logo-blacksmith.svg'
-import logoTrm from '@/pages/cloud/postgres/assets/logo-trm.svg'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
 import Image, { ImageProps } from 'next/image'
@@ -307,7 +306,8 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
                 src: logoSony,
                 alt: 'Sony logo',
                 width: 100,
-                height: 19
+                height: 19,
+                className: 'opacity-80'
               },
               {
                 src: logoComcast,
@@ -409,28 +409,28 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
                     {
                       content: `At Sony LIV, we ingest tens of millions of video streaming events into ClickHouse Cloud and run queries to generate complex dashboards for analysis. This allows our operations team to monitor, alert & troubleshoot the QOS and QOE of our customers in real-time. ClickHouse Cloud has helped us to optimize costs and ensure the high availability and resilience of our services.`,
                       logo: {
-                        src: logoBeehiiv,
-                        alt: 'Sony',
-                        width: 159,
-                        height: 40
+                        src: logoSony,
+                        alt: 'Sony logo',
+                        width: 100,
+                        height: 19
                       }
                     },
                     {
                       content: `ClickHouse played an instrumental role in helping us develop and ship Claude 4. With ClickHouse, the database is green, queries are lightning-fast, and money is not on fire. ClickHouse has already delivered significant value in helping us create state-of-the-art language models.`,
                       logo: {
-                        src: logoBlacksmith,
-                        alt: 'Anthropic',
-                        width: 241,
-                        height: 24
+                        src: logoAnthropic,
+                        alt: 'Anthropic logo',
+                        width: 143,
+                        height: 16
                       }
                     },
                     {
                       content: `Previously, querying the last 10 minutes would take 1-2 minutes. With ClickStack, it was just a case of how fast I could blink. The performance is real. When you’re digging into logs during an incident, every second matters.`,
                       logo: {
-                        src: logoTrm,
-                        alt: 'Character.ai',
-                        width: 97,
-                        height: 31
+                        src: logoCharacterai,
+                        alt: 'Character.ai logo',
+                        width: 102 * 1.5,
+                        height: 14 * 1.5
                       }
                     }
                   ] satisfies Array<QuoteCardProps>
@@ -457,52 +457,69 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               The Observability solution powered by ClickHouse Cloud
             </SuiTitle>
           </div>
-          <div className='space-y-6'>
-            <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
-            <SuiTitle type='h3'>Sub-second Queries</SuiTitle>
-            <SuiText className='text-neutral-200'>
-              Even on hundreds of petabytes of high cardinality OTel data
-            </SuiText>
-          </div>
-          <div className='space-y-6'>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
             <Image
-              src={iconSparkles}
+              src={iconTimer}
               width={48}
               height={49}
-              alt='Sparkles icon'
+              alt='Timer icon'
+              className='flex-shrink-0'
             />
-            <SuiTitle type='h3'>Full Stack OTel Observability</SuiTitle>
-            <SuiText className='text-neutral-200'>
-              Unify Session Replays with OTel Logs, Traces and Metrics
-            </SuiText>
+            <div className='space-y-6 lg:pt-2'>
+              <SuiTitle type='h3'>Sub-second Queries</SuiTitle>
+              <SuiText className='text-neutral-200'>
+                Even on hundreds of petabytes of high cardinality OTel data
+              </SuiText>
+            </div>
           </div>
-          <div className='space-y-6'>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
             <Image
-              src={iconFileSearch}
+              src={iconStack}
               width={48}
               height={49}
-              alt='File icon'
+              alt='Stack icon'
+              className='flex-shrink-0'
             />
-            <SuiTitle type='h3'>Market leading cost efficiency</SuiTitle>
-            <SuiText className='text-neutral-200'>
-              With best-in-class compression for OpenTelemetry data, achieving
-              10x to 30x reduction, and object storage backing flexible,
-              warehouse-based compute, Managed ClickStack delivers unparalleled
-              cost efficiency.
-            </SuiText>
+            <div className='space-y-6 lg:pt-2'>
+              <SuiTitle type='h3'>Full Stack OTel Observability</SuiTitle>
+              <SuiText className='text-neutral-200'>
+                Unify Session Replays with OTel Logs, Traces and Metrics
+              </SuiText>
+            </div>
           </div>
-          <div className='space-y-6'>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
             <Image
-              src={iconLightBulb}
+              src={iconCoins}
               width={48}
               height={49}
-              alt='Light bulb icon'
+              alt='Coins icon'
+              className='flex-shrink-0'
             />
-            <SuiTitle type='h3'>Unlimited Retention</SuiTitle>
-            <SuiText className='text-neutral-200'>
-              Separation of storage and compute using object storage for data,
-              means long-term retention for less than a cent per GB per month.
-            </SuiText>
+            <div className='space-y-6 lg:pt-2'>
+              <SuiTitle type='h3'>Market leading cost efficiency</SuiTitle>
+              <SuiText className='text-neutral-200'>
+                With best-in-class compression for OpenTelemetry data, achieving
+                10x to 30x reduction, and object storage backing flexible,
+                warehouse-based compute, Managed ClickStack delivers
+                unparalleled cost efficiency.
+              </SuiText>
+            </div>
+          </div>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
+            <Image
+              src={iconHandCoins}
+              width={48}
+              height={49}
+              alt='Savings icon'
+              className='flex-shrink-0'
+            />
+            <div className='space-y-6 lg:pt-2'>
+              <SuiTitle type='h3'>Unlimited Retention</SuiTitle>
+              <SuiText className='text-neutral-200'>
+                Separation of storage and compute using object storage for data,
+                means long-term retention for less than a cent per GB per month.
+              </SuiText>
+            </div>
           </div>
         </div>
       </section>
@@ -531,7 +548,12 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         {/* Features */}
         <div className='mb-16 mt-10 grid grid-cols-1 gap-8 lg:mb-24 lg:mt-20 lg:grid-cols-2 lg:gap-16'>
           <div className='space-y-6'>
-            <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
+            <Image
+              src={iconShieldTick}
+              width={48}
+              height={49}
+              alt='Shield icon'
+            />
             <SuiTitle type='h3'>Uncompromising reliability</SuiTitle>
             <SuiText className='text-neutral-200'>
               Replicated across multiple availability zones by default,
@@ -540,12 +562,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
             </SuiText>
           </div>
           <div className='space-y-6'>
-            <Image
-              src={iconSparkles}
-              width={48}
-              height={49}
-              alt='Sparkles icon'
-            />
+            <Image src={iconLock} width={48} height={49} alt='Lock icon' />
             <SuiTitle type='h3'>World-class security</SuiTitle>
             <SuiText className='text-neutral-200'>
               Enterprise-grade security is built in from day one. ClickHouse
@@ -849,8 +866,17 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
           </SuiTitle>
         </div>
         <div className='space-y-6'>
-          <Image src={iconCoins} width={48} height={49} alt='Savings icon' />
-          <SuiTitle type='h3'>Reduce your observability costs</SuiTitle>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-center'>
+            <Image
+              src={iconCoins}
+              width={48}
+              height={49}
+              alt='Savings icon'
+              className='flex-shrink-0'
+            />
+            <SuiTitle type='h3'>Reduce your observability costs</SuiTitle>
+          </div>
+
           <SuiText className='text-neutral-200'>
             Managed ClickStack combines ClickHouse’s open source efficiency with
             cloud-native separation of storage and compute to keep observability
@@ -867,13 +893,16 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
           </SuiText>
         </div>
         <div className='space-y-6'>
-          <Image
-            src={iconSparkles}
-            width={48}
-            height={49}
-            alt='Sparkles icon'
-          />
-          <SuiTitle type='h3'>Simple deployment and maintenance</SuiTitle>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-center'>
+            <Image
+              src={iconSparkles}
+              width={48}
+              height={49}
+              alt='Sparkles icon'
+              className='flex-shrink-0'
+            />
+            <SuiTitle type='h3'>Simple deployment and maintenance</SuiTitle>
+          </div>
           <SuiText className='text-neutral-200'>
             Managed ClickStack can be deployed in a few clicks. Specify how much
             OpenTelemetry data you plan to ingest per month, and start sending
@@ -890,8 +919,16 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
           </SuiText>
         </div>
         <div className='space-y-6'>
-          <Image src={iconFileSearch} width={48} height={49} alt='File icon' />
-          <SuiTitle type='h3'>Real-time observability</SuiTitle>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-center'>
+            <Image
+              src={iconFileSearch}
+              width={48}
+              height={49}
+              alt='File icon'
+              className='flex-shrink-0'
+            />
+            <SuiTitle type='h3'>Real-time observability</SuiTitle>
+          </div>
           <SuiText className='text-neutral-200'>
             ClickHouse Cloud is built for continuous, high-volume ingestion,
             supporting gigabytes per second while making new data searchable
@@ -908,13 +945,16 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
           </SuiText>
         </div>
         <div className='space-y-6'>
-          <Image
-            src={iconLightBulb}
-            width={48}
-            height={49}
-            alt='Light bulb icon'
-          />
-          <SuiTitle type='h3'>Beyond observability</SuiTitle>
+          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-center'>
+            <Image
+              src={iconLightBulb}
+              width={48}
+              height={49}
+              alt='Light bulb icon'
+              className='flex-shrink-0'
+            />
+            <SuiTitle type='h3'>Beyond observability</SuiTitle>
+          </div>
           <SuiText className='text-neutral-200'>
             The engine behind Managed ClickStack, ClickHouse Cloud, is more than
             an observability store. It is a high-performance SQL database built
@@ -992,84 +1032,84 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
             width={49}
             height={55}
             alt='NodeJS'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationGo}
             width={49}
             height={19}
             alt='Go'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationJava}
             width={37}
             height={49}
             alt='Java'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationJavascript}
             width={49}
             height={49}
             alt='Javascript'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationNextjs}
             width={92}
             height={19}
             alt='NextJS'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationPython}
             width={49}
             height={49}
             alt='Python'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationRuby}
             width={46}
             height={45}
             alt='Ruby'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationCloudflare}
             width={49}
             height={23}
             alt='Cloudflare'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationKubernetes}
             width={49}
             height={47}
             alt='Kubernetes'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationOpentelemetry}
             width={49}
             height={49}
             alt='OpenTelemetry'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationAws}
             width={70}
             height={42}
             alt='AWS'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
           <Image
             src={integrationFluentd}
             width={49}
             height={49}
             alt='Fluentd'
-            className='w-8 md:w-auto'
+            className='w-8 md:w-[initial]'
           />
         </div>
       </section>
