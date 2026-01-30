@@ -19,21 +19,22 @@ export default function NavigationSubNavUseCases() {
           </li>
           <li className='col-span-2'>
             <NavigationLink
+              href='/jp/use-cases/observability'
+              onClick={useGalaxyOnClick(
+                'topNav.useCasesMenu.observabilitySelect'
+              )}
+              className='block w-full'>
+              オブザーバビリティ
+            </NavigationLink>
+          </li>
+          <li className='col-span-2'>
+            <NavigationLink
               href='/jp/use-cases/machine-learning-and-data-science'
               onClick={useGalaxyOnClick(
                 'topNav.useCasesMenu.machineLearningSelect'
               )}
               className='block w-full'>
               機械学習 & 生成AI
-            </NavigationLink>
-          </li>
-
-          <li className='col-span-2'>
-            <NavigationLink
-              href='/jp/use-cases/business-intelligence'
-              onClick={useGalaxyOnClick('topNav.useCasesMenu.bizIntelSelect')}
-              className='block w-full'>
-              ビジネスインテリジェンス
             </NavigationLink>
           </li>
           <li className='col-span-2'>

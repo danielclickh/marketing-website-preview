@@ -38,6 +38,44 @@
     ]
   },
   {
+    "title": "観測性",
+    "description": "ログ、イベント、トレース、その他の時系列データを、安心して監視できます。異常検知や不正検出、ネットワークやインフラの問題などを迅速に把握できます。<br /><br />信頼性の高い SQL ベースの観測性ストアとして、毎秒数百万レコード規模のデータ取り込みを大規模環境で実現しています。",
+    "icon": "/images/jp/use-cases/observability/icon.svg",
+    "link": "/jp/use-cases/observability",
+    "logos": [
+      {
+        "name": "SONY",
+        "logo": "/images/jp/use-cases/observability/sony-2.svg",
+        "link": "/jp/use-cases/observability"
+      },
+      {
+        "name": "eBay",
+        "logo": "/images/jp/use-cases/observability/logo-ebay.svg",
+        "link": "https://tech.ebayinc.com/engineering/ou-online-analytical-processing/"
+      },
+      {
+        "name": "Zomato",
+        "logo": "/images/jp/use-cases/observability/zomato.svg",
+        "link": "https://www.zomato.com/blog/building-a-cost-effective-logging-platform-using-clickhouse-for-petabyte-scale"
+      },
+      {
+        "name": "Didi",
+        "logo": "/images/jp/use-cases/observability/didi.svg",
+        "link": "/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system"
+      },
+      {
+        "name": "Trip.com",
+        "logo": "/images/jp/use-cases/observability/trip.svg",
+        "link": "/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse"
+      },
+      {
+        "name": "Tekion",
+        "logo": "/images/jp/use-cases/observability/tekion.svg",
+        "link": "/blog/tekion-adopts-clickhouse-cloud-to-power-application-performance-and-metrics-monitoring"
+      }
+    ]
+  },
+  {
     "title": "機械学習と生成AI",
     "description": "高速で効率的なベクトル検索を実行し、あらゆるプロバイダからの生成AIモデルを簡単に活用可能です。ペタバイト規模のデータを用いたモデルのトレーニングに対応する高速な集約を提供します。<br /><br />機械学習ワークロードのための中心的なデータストアです。",
     "icon": "/images/jp/use-cases/ml/ml.svg",
@@ -110,44 +148,6 @@
         "name": "QuickCheck",
         "logo": "/images/jp/use-cases/bi/quickcheck.svg",
         "link": "/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked"
-      }
-    ]
-  },
-  {
-    "title": "ログ、イベント、トレース",
-    "description": "ログ、イベント、トレース、その他の時系列データを確実に監視します。異常検知や不正、ネットワーク・インフラなどの問題を迅速に発見します。<br /><br />SQLベースの信頼できるオブザーバビリティストアとして、秒間あたり数百万レコードの取り込みを支えるスケーラビリティを実現しています。",
-    "icon": "/images/jp/use-cases/logs/logging.svg",
-    "link": "/jp/use-cases/logging-and-metrics",
-    "logos": [
-      {
-        "name": "SONY",
-        "logo": "/images/jp/use-cases/logs/sony-2.svg",
-        "link": "/jp/use-cases/logging-and-metrics"
-      },
-      {
-        "name": "eBay",
-        "logo": "/images/jp/use-cases/logs/logo-ebay.svg",
-        "link": "https://tech.ebayinc.com/engineering/ou-online-analytical-processing/"
-      },
-      {
-        "name": "Zomato",
-        "logo": "/images/jp/use-cases/logs/zomato.svg",
-        "link": "https://www.zomato.com/blog/building-a-cost-effective-logging-platform-using-clickhouse-for-petabyte-scale"
-      },
-      {
-        "name": "Didi",
-        "logo": "/images/jp/use-cases/logs/didi.svg",
-        "link": "/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system"
-      },
-      {
-        "name": "Trip.com",
-        "logo": "/images/jp/use-cases/logs/trip.svg",
-        "link": "/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse"
-      },
-      {
-        "name": "Tekion",
-        "logo": "/images/jp/use-cases/logs/tekion.svg",
-        "link": "/blog/tekion-adopts-clickhouse-cloud-to-power-application-performance-and-metrics-monitoring"
       }
     ]
   }

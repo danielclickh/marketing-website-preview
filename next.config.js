@@ -362,6 +362,11 @@ const nextConfig = {
         permanent: true
       },
       {
+        source: '/jp/use-cases/logging-and-metrics',
+        destination: '/jp/use-cases/observability',
+        permanent: true
+      },
+      {
         source: '/use-cases/business-intelligence',
         destination: '/use-cases/data-warehousing',
         permanent: true

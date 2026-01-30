@@ -99,7 +99,7 @@ const i18nRedirectionMap: Record<string, Record<string, string>> = {
     '/company/contact': '/jp/company/contact',
     '/use-cases': '/jp/use-cases',
     '/use-cases/data-warehousing': '/jp/use-cases/business-intelligence',
-    '/use-cases/observability': '/jp/use-cases/logging-and-metrics',
+    '/use-cases/observability': '/jp/use-cases/observability',
     '/use-cases/machine-learning-and-data-science':
       '/jp/use-cases/machine-learning-and-data-science',
     '/use-cases/real-time-analytics': '/jp/use-cases/real-time-analytics'
