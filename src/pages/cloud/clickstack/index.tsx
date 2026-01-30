@@ -40,8 +40,8 @@ import logoSierra from './assets/logo-sierra.svg'
 import logoSolarwinds from './assets/logo-solarwinds.svg'
 import logoSony from './assets/logo-sony.svg'
 import logoVimeo from './assets/logo-vimeo.svg'
+import imageReliabilityAndSecurity from './assets/reliability-and-security.svg'
 import shareImage from './assets/share-image.png'
-import imageSignupForm from './assets/signup-form.svg'
 import imageWorkflows from './assets/workflows.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
@@ -583,10 +583,10 @@ export default function Page({ seo, headerData }: CommonProps) {
             </div>
           </div>
           <Image
-            src={imageSignupForm}
-            width={540}
-            height={419}
-            alt='Signup form'
+            src={imageReliabilityAndSecurity}
+            width={542}
+            height={411}
+            alt='Reliability and security'
           />
         </div>
 
