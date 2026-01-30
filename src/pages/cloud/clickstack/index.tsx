@@ -38,6 +38,7 @@ import logoSolarwinds from './assets/logo-solarwinds.svg'
 import logoSony from './assets/logo-sony.svg'
 import logoVimeo from './assets/logo-vimeo.svg'
 import shareImage from './assets/share-image.png'
+import imageSignupForm from './assets/signup-form.svg'
 import imageWorkflows from './assets/workflows.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
@@ -50,6 +51,7 @@ import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
 import EyebrowText from '@/components/EyebrowText'
+import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import MarketoForm from '@/components/MarketoForm'
@@ -453,75 +455,66 @@ export default function Page({ seo, headerData }: CommonProps) {
 
       {/* Why */}
       <section className='bg-neutral-725 py-20 lg:py-24'>
-        <div className='section-container grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16'>
-          <div className='col-span-full text-center'>
+        <div className='section-container grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-10'>
+          <div className='col-span-full mb-6 text-center'>
             <SuiTitle type='h2' className='mx-auto max-w-xl'>
               The Observability solution powered by ClickHouse Cloud
             </SuiTitle>
           </div>
-          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
+          <div className='space-y-6 text-center'>
             <Image
               src={iconTimer}
               width={48}
               height={49}
               alt='Timer icon'
-              className='flex-shrink-0'
+              className='inline-block'
             />
-            <div className='space-y-6 lg:pt-2'>
-              <SuiTitle type='h3'>Sub-second Queries</SuiTitle>
-              <SuiText className='text-neutral-200'>
-                Even on hundreds of petabytes of high cardinality OTel data
-              </SuiText>
-            </div>
+            <SuiTitle type='h3'>Sub-second Queries</SuiTitle>
+            <p className='mx-auto max-w-md text-neutral-200'>
+              Even on hundreds of petabytes of high cardinality OTel data
+            </p>
           </div>
-          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
+          <div className='space-y-6 text-center'>
             <Image
               src={iconStack}
               width={48}
               height={49}
               alt='Stack icon'
-              className='flex-shrink-0'
+              className='inline-block'
             />
-            <div className='space-y-6 lg:pt-2'>
-              <SuiTitle type='h3'>Full Stack OTel Observability</SuiTitle>
-              <SuiText className='text-neutral-200'>
-                Unify Session Replays with OTel Logs, Traces and Metrics
-              </SuiText>
-            </div>
+            <SuiTitle type='h3'>Full Stack OTel Observability</SuiTitle>
+            <p className='mx-auto max-w-md text-neutral-200'>
+              Unify Session Replays with OTel Logs, Traces and Metrics
+            </p>
           </div>
-          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
+          <div className='space-y-6 text-center'>
             <Image
               src={iconCoins}
               width={48}
               height={49}
               alt='Coins icon'
-              className='flex-shrink-0'
+              className='inline-block'
             />
-            <div className='space-y-6 lg:pt-2'>
-              <SuiTitle type='h3'>Market leading cost efficiency</SuiTitle>
-              <SuiText className='text-neutral-200'>
-                With best-in-class compression for OpenTelemetry data, achieving
-                10x to 30x reduction, and object storage backing flexible,
-                warehouse-based compute, Managed ClickStack delivers
-                unparalleled cost efficiency.
-              </SuiText>
-            </div>
+            <SuiTitle type='h3'>Market leading cost efficiency</SuiTitle>
+            <p className='mx-auto max-w-md text-neutral-200'>
+              30x OpenTelemetry compression with object storage and flexible
+              compute for major cost savings.
+            </p>
           </div>
-          <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-start'>
+          <div className='space-y-6 text-center'>
             <Image
               src={iconHandCoins}
               width={48}
               height={49}
               alt='Savings icon'
-              className='flex-shrink-0'
+              className='inline-block'
             />
-            <div className='space-y-6 lg:pt-2'>
-              <SuiTitle type='h3'>Unlimited Retention</SuiTitle>
-              <SuiText className='text-neutral-200'>
-                Separation of storage and compute using object storage for data,
-                means long-term retention for less than a cent per GB per month.
-              </SuiText>
-            </div>
+
+            <SuiTitle type='h3'>Unlimited Retention</SuiTitle>
+            <p className='mx-auto max-w-md text-neutral-200'>
+              Separation of storage and compute, means long-term retention for
+              less than a cent per GB per month.
+            </p>
           </div>
         </div>
       </section>
@@ -548,32 +541,53 @@ export default function Page({ seo, headerData }: CommonProps) {
         </div>
 
         {/* Features */}
-        <div className='mb-16 mt-10 grid grid-cols-1 gap-8 lg:mb-24 lg:mt-20 lg:grid-cols-2 lg:gap-16'>
-          <div className='space-y-6'>
-            <Image
-              src={iconShieldTick}
-              width={48}
-              height={49}
-              alt='Shield icon'
-            />
-            <SuiTitle type='h3'>Uncompromising reliability</SuiTitle>
-            <SuiText className='text-neutral-200'>
-              Replicated across multiple availability zones by default,
-              ClickHouse Cloud provides high availability, seamless upgrades,
-              automated backups, and built-in disaster recovery
-            </SuiText>
+        <div className='mt-10 flex flex-col gap-16 lg:mt-20 lg:flex-row lg:items-center lg:justify-between'>
+          <div className='space-y-16 lg:max-w-xl'>
+            <div className='space-y-6'>
+              <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-center'>
+                <Image
+                  src={iconShieldTick}
+                  width={48}
+                  height={49}
+                  alt='Shield icon'
+                  className='size-8 flex-shrink-0'
+                />
+                <SuiTitle type='h3'>Uncompromising reliability</SuiTitle>
+              </div>
+              <p className='text-neutral-200'>
+                Replicated across multiple availability zones by default,
+                ClickHouse Cloud provides high availability, seamless upgrades,
+                automated backups, and built-in disaster recovery
+              </p>
+            </div>
+            <div className='space-y-6'>
+              <div className='flex flex-col gap-x-6 gap-y-4 lg:flex-row lg:items-center'>
+                <Image
+                  src={iconLock}
+                  width={48}
+                  height={49}
+                  alt='Lock icon'
+                  className='size-8 flex-shrink-0'
+                />
+                <SuiTitle type='h3'>World-class security</SuiTitle>
+              </div>
+              <p className='text-neutral-200'>
+                Enterprise-grade security is built in from day one. ClickHouse
+                Cloud offers strong user and network access controls, encryption
+                in transit and at rest, comprehensive activity logging, and SOC
+                2 Type II compliance.
+              </p>
+            </div>
           </div>
-          <div className='space-y-6'>
-            <Image src={iconLock} width={48} height={49} alt='Lock icon' />
-            <SuiTitle type='h3'>World-class security</SuiTitle>
-            <SuiText className='text-neutral-200'>
-              Enterprise-grade security is built in from day one. ClickHouse
-              Cloud offers strong user and network access controls, encryption
-              in transit and at rest, comprehensive activity logging, and SOC 2
-              Type II compliance.
-            </SuiText>
-          </div>
+          <Image
+            src={imageSignupForm}
+            width={540}
+            height={419}
+            alt='Signup form'
+          />
         </div>
+
+        <HRSeparator className='my-16 lg:my-24' />
 
         {/* Diagram */}
         <div className='mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-8 lg:flex-row lg:items-start lg:gap-20'>
@@ -618,22 +632,24 @@ export default function Page({ seo, headerData }: CommonProps) {
               open={hyperdxActive}
               className='w-full !bg-neutral-750'>
               <div className='space-y-4'>
-                <SuiText>
+                <p>
                   ClickStack unifies logs, metrics, traces, and session replays
-                  in one platform via the HyperDX UI. Optimized for ClickHouse,
-                  it supports fast Lucene-style search and full SQL access for
-                  advanced analysis and deeper analysis powered by over 100+
-                  built-in functions.
-                </SuiText>
-                <SuiText>
+                  in one platform via the ClickStack UI (HyperDX). Optimized for
+                  ClickHouse, it supports fast Lucene-style search and full SQL
+                  access for advanced analysis and deeper analysis powered by
+                  over 100+ built-in functions.
+                </p>
+                <p>
                   Create dashboards and alerts with minimal setup. Spot
                   anomalies with event deltas and speed up root cause analysis
                   using event patterns.
-                </SuiText>
+                </p>
               </div>
             </AccordionItem>
             <AccordionItem
-              handle={<SuiTitle type='h3'>ClickHouse powered storage</SuiTitle>}
+              handle={
+                <SuiTitle type='h3'>ClickHouse Cloud powered storage</SuiTitle>
+              }
               onToggle={(isOpen) => {
                 setClickhouseActive(isOpen)
                 if (isOpen) {
@@ -644,18 +660,18 @@ export default function Page({ seo, headerData }: CommonProps) {
               open={clickhouseActive}
               className='w-full !bg-neutral-750'>
               <div className='space-y-4'>
+                <p>
+                  Powered by ClickHouse Cloud, ClickStack searches terabytes of
+                  OTel data in seconds and ingests billions of high-cardinality
+                  events daily with optimized OTel schemas out-of-the-the-box.
+                </p>
                 <SuiText>
-                  Powered by ClickHouse, HyperDX searches terabytes of OTel data
-                  in seconds and ingests billions of high-cardinality events
-                  daily. ClickStack ships with optimized OTel schemas, removing
-                  the need for manual tuning and letting you focus on insights.
-                </SuiText>
-                <SuiText>
-                  On ClickHouse Cloud, ClickStack gains elastic scaling and cost
-                  efficiency through full separation of storage and compute.
-                  Ingestion and queries can run independently on dedicated
-                  resources, thanks to compute-compute separation, ensuring
-                  consistent performance at any scale.
+                  ClickHouse Cloud’s brings scaling and cost efficiency through
+                  full separation of storage and compute. Ingestion and queries
+                  can be completely isolated on dedicated resources, thanks to
+                  compute-compute separation. This ensures consistent
+                  performance at any scale while allowing further
+                  cost-efficiency optimizations to be made.
                 </SuiText>
               </div>
             </AccordionItem>
@@ -671,19 +687,19 @@ export default function Page({ seo, headerData }: CommonProps) {
               open={opentelemetryActive}
               className='w-full !bg-neutral-750'>
               <div className='space-y-4'>
-                <SuiText>
+                <p>
                   ClickStack natively supports the OpenTelemetry standard,
                   capturing logs, metrics, and traces as wide events -
                   context-rich records that unify observability data in
                   ClickHouse. Designed for OTel data at Petabyte scale.
-                </SuiText>
-                <SuiText>
+                </p>
+                <p>
                   With native JSON support, ClickHouse efficiently handles
                   evolving, semi-structured data. Fields are created
                   automatically on ingest, with compressed columnar storage
                   delivering fast queries and high compression with no upfront
                   schema required.
-                </SuiText>
+                </p>
               </div>
             </AccordionItem>
             <CUIButton
@@ -805,6 +821,33 @@ export default function Page({ seo, headerData }: CommonProps) {
 
       <section className='space-y-16 bg-neutral-800 py-16 lg:space-y-24 lg:py-24'>
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
+          <div className='space-y-4 border-primary-300 text-neutral-200 md:border-l-4 md:pl-8 lg:max-w-xl'>
+            <SuiTitle type='h2' className='text-white'>
+              Intuitive observability workflows
+            </SuiTitle>
+            <TickItem>
+              Intuitive observability UI for incident-driven workflows
+            </TickItem>
+            <TickItem>Lucene-style search and SQL, side by side</TickItem>
+            <TickItem>
+              Automatic correlation of logs, traces, and metrics
+            </TickItem>
+            <TickItem>
+              Service Maps, patterns, clustering, and dashboards built in
+            </TickItem>
+            <TickItem>
+              ClickHouse-native optimizations for fast queries at scale
+            </TickItem>
+          </div>
+          <Image
+            src={imageWorkflows}
+            width={540}
+            height={400}
+            alt=''
+            className='mx-auto lg:mr-0'
+          />
+        </div>
+        <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
           <div className='space-y-6 text-neutral-200 lg:max-w-xl'>
             <SuiTitle type='h2' className='text-white'>
               Only pay for the compute you need, when you need
@@ -823,35 +866,6 @@ export default function Page({ seo, headerData }: CommonProps) {
           </div>
           <Image
             src={imageEstimatedCost}
-            width={540}
-            height={400}
-            alt=''
-            className='mx-auto lg:mr-0'
-          />
-        </div>
-        <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='space-y-6 text-neutral-200 lg:max-w-xl'>
-            <SuiTitle type='h2' className='text-white'>
-              Intuitive observability workflows
-            </SuiTitle>
-            <p>
-              The ClickStack UI, HyperDX, delivers a modern, intuitive
-              observability experience built for how engineers actually
-              investigate incidents. Lucene-style log search and full SQL access
-              work side by side, with automatic correlation of logs, traces, and
-              metrics directly at the database layer.
-            </p>
-            <p>
-              Go beyond raw search with Service Maps, Event Patterns, and Log
-              Clustering and custom Dashboarding. Optimized for ClickHouse
-              Cloud, ClickStack automatically exploits ingest-time aggregates
-              via materialized views to accelerate common queries and
-              visualizations, keeping dashboards fast without extra services or
-              custom pipelines.
-            </p>
-          </div>
-          <Image
-            src={imageWorkflows}
             width={540}
             height={400}
             alt=''
