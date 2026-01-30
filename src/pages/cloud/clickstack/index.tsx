@@ -269,7 +269,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               width={814}
               height={509}
               alt='ClickStack Dashboard'
-              className='bottom-0 left-0 top-0 h-auto w-full origin-left from-40% gradient-mask-to-b md:from-25% lg:absolute lg:h-full lg:w-auto lg:max-w-none lg:gradient-mask-to-none'
+              className='bottom-0 left-0 top-0 h-auto w-full origin-left rounded-lg border border-slate-700 from-40% gradient-mask-to-b md:from-25% lg:absolute lg:h-full lg:w-auto lg:max-w-none lg:gradient-mask-to-none'
               quality={100}
               loading='eager'
               priority={true}
