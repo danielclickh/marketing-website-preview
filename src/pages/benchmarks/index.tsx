@@ -224,9 +224,8 @@ export default function Page({ seo, headerData, blogs }: Props) {
               publish the data to prove it.
             </p>
             <p className='max-w-xl text-lg text-neutral-200'>
-              Explore our benchmarks across engine internals, cloud cost
-              comparisons, and head-to-head performance comparison against other
-              cloud data platforms.
+              Explore our benchmarks across engine internals and head-to-head
+              performance & cost comparison against other cloud data platforms.
             </p>
             <p>
               <LinkWithArrow
@@ -248,12 +247,10 @@ export default function Page({ seo, headerData, blogs }: Props) {
       {/* Featured benchmarks */}
       <section className='bg-neutral-725 py-16 lg:py-24'>
         <div className='section-container mx-auto max-w-4xl space-y-6 text-center'>
-          <SuiTitle type='h2'>Our key benchmarks</SuiTitle>
+          <SuiTitle type='h2'>Our latest results</SuiTitle>
           <p className='text-lg text-neutral-200'>
-            See how ClickHouse performs on real workloads. Both head‑to‑head
-            against other platforms and across key ClickHouse features and
-            configurations. Every benchmark is repeatable and has clear setup
-            details, so you can trust what you see.
+            Every benchmark is repeatable and has clear setup details, so you
+            can trust what you see.
           </p>
         </div>
         <div className='mx-auto mt-16 max-w-screen-2xl'>
@@ -280,7 +277,7 @@ export default function Page({ seo, headerData, blogs }: Props) {
       <section className='section-container my-16 lg:my-24'>
         <div className='mb-16 space-y-6 text-center'>
           <SuiTitle type='h2'>
-            ClickHouse keeps getting faster, and we're not done yet!
+            ClickHouse keeps getting faster, and we're not done yet
           </SuiTitle>
         </div>
         <div className='mx-auto max-w-5xl space-y-4'>
@@ -662,7 +659,6 @@ function BlogCoverFlow({ blogs }: { blogs: Array<BlogItem> }) {
 }
 
 function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
-  const [sortLatest, setSortLatest] = useState<boolean>(false)
   const [competitorsOpen, setCompetitorsOpen] = useState<boolean>(false)
   const [featuresOpen, setFeaturesOpen] = useState<boolean>(false)
   const [page, setPage] = useState<number>(1)
@@ -679,17 +675,15 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
     return matchesCompetitor && matchesFeature
   })
 
-  if (sortLatest) {
-    filtered.sort((a, b) => {
-      return new Date(b.entry.date).getTime() - new Date(a.entry.date).getTime()
-    })
-  }
+  // Sort entries by date DESC
+  filtered.sort((a, b) => {
+    return new Date(b.entry.date).getTime() - new Date(a.entry.date).getTime()
+  })
 
   const handleLatestToggle = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
-    setSortLatest((old) => !old)
   }
 
   const handleCopetitorsToggle = (
@@ -734,9 +728,8 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
-    // Reset pagination and sorting
+    // Reset pagination
     setPage(1)
-    setSortLatest(false)
 
     // Remove filters
     setFilterCompetitor(null)
@@ -749,13 +742,7 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
 
   return (
     <>
-      <div className='flex flex-col flex-wrap justify-center gap-4 lg:flex-row'>
-        <CUIButton
-          type={sortLatest ? 'primary' : 'secondary'}
-          className='!rounded-full'
-          onClick={handleLatestToggle}>
-          Latest
-        </CUIButton>
+      <div className='mx-auto flex flex-col flex-wrap justify-center gap-4 lg:max-w-4xl lg:flex-row'>
         <CUIButton
           type={competitorsOpen ? 'primary-dark' : 'secondary'}
           className='!rounded-full'
@@ -832,7 +819,7 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
         <ClearFiltersButton
           onClick={handleClearFilters}
           className='mx-auto lg:mx-0'
-          disabled={!filterCompetitor && !filterFeature && !sortLatest}
+          disabled={!filterCompetitor && !filterFeature}
         />
       </div>
       <PaginateChildren
