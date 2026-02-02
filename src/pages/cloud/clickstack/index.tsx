@@ -59,7 +59,11 @@ import QuoteCard, { QuoteCardProps } from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { generateFaqPageSchema, generateVideoObjectSchema } from '@/lib/schema'
+import {
+  defaultOrganization,
+  generateFaqPageSchema,
+  generateVideoObjectSchema
+} from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -135,9 +139,9 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         seo: {
           title:
-            'ClickStack: High-Performance Open-Source Observability | Logs, Metrics, Traces with ClickHouse',
+            'ClickStack: High-Performance Managed Observability | Logs, Metrics, Traces powered by ClickHouse Cloud',
           description:
-            'ClickStack is a high-performance observability stack powered by ClickHouse. Unify logs, metrics, and traces with 10-100x cost savings. Get started today!',
+            'Lightning-fast queries and powerful aggregations across logs, metrics, traces and session replays, even on the highest-cardinality OpenTelemetry data powered by ClickHouse Cloud for unlimited retention at low-cost.',
           path: '/clickstack',
           image: [{ url: shareImage.src }],
           languages: ['en', 'ja'],
@@ -145,17 +149,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
             {
               '@context': 'https://schema.org',
               '@type': 'Service',
-              name: 'ClickStack Observability',
+              name: 'Managed ClickStack',
               serviceType:
                 'Observability (logs, metrics, traces, session replays, errors)',
               url: 'https://clickhouse.com/cloud/clickstack',
               description:
-                'High-performance, open-source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
-              provider: {
-                '@type': 'Organization',
-                name: 'ClickHouse, Inc.',
-                url: 'https://clickhouse.com'
-              },
+                'High-performance, observability stack powered by ClickHouse Cloud, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
+              provider: defaultOrganization,
               areaServed: 'Worldwide',
               audience: {
                 '@type': 'BusinessAudience',
@@ -163,13 +163,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
               },
               offers: {
                 '@type': 'Offer',
-                name: 'ClickStack on ClickHouse Cloud — Free trial',
+                name: 'Managed ClickStack on ClickHouse Cloud — Free trial',
                 description:
-                  'Experience HyperDX + ClickHouse with a 30-day trial and $300 in credits.',
+                  'Experience ClickStack with a 30-day trial and $300 in credits.',
                 price: '0.00',
                 priceCurrency: 'USD',
                 availability: 'https://schema.org/InStock',
-                url: 'https://console.clickhouse.cloud/'
+                url: 'https://console.clickhouse.cloud/signUp?intent=o11y'
               },
               brand: {
                 '@type': 'Brand',
