@@ -194,7 +194,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               type='black-on-yellow'
               className='px-2 py-1 text-3xl'
               angle={-2}>
-              <strong>ClickStack OSS</strong>
+              <strong>ClickStack</strong>
             </TiltedText>
             <SuiTitle
               type='h1'
