@@ -138,26 +138,34 @@ const POST_MAP: Array<Omit<BlogItem, 'entry'>> = [
   /// Filtered by competitor
   {
     slug: 'clickhouse_vs_elasticsearch_the_billion_row_matchup',
+    benchmarkImage:
+      '/uploads/Click_House_vs_Elasticsearch_The_Billion_Row_Matchup_6dcd5512b2.png',
     competitors: ['Elastic']
   },
   {
     slug: 'json-bench-clickhouse-vs-mongodb-elasticsearch-duckdb-postgresql',
+    benchmarkImage:
+      '/uploads/The_billion_docs_JSON_Challenge_Click_House_vs_Mongo_DB_Elasticsearch_and_more_41011801ad.png',
     competitors: ['Elastic', 'MongoDB']
   },
   {
     slug: 'join-me-if-you-can-clickhouse-vs-databricks-snowflake-join-performance',
+    benchmarkImage: '/uploads/total_perf_5b_149633e506.png',
     competitors: ['Snowflake', 'Databricks']
   },
   {
     slug: 'join-me-if-you-can-clickhouse-vs-databricks-snowflake-part-2',
+    benchmarkImage: '/uploads/image_388111140b.png',
     competitors: ['Snowflake', 'Databricks']
   },
   {
     slug: 'update-performance-clickhouse-vs-postgresql',
+    benchmarkImage: '/uploads/Blog_updates_Part_4_001_1ee0bc6501.png',
     competitors: ['Postgres']
   },
   {
     slug: 'cloud-data-warehouses-cost-performance-comparison',
+    benchmarkImage: '/uploads/Blog_Costs_009_18d232f919.png',
     competitors: ['Snowflake', 'Databricks', 'Readshift', 'BigQuery']
   }
 ]
