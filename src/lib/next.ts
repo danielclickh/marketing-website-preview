@@ -4,7 +4,7 @@ export const BASE_PROTOCOL = process?.env?.NEXT_PUBLIC_PROTOCOL || 'https://'
 
 // The app url WITHOUT protocol
 export const BASE_URL = (() => {
-  let base = process?.env?.NEXT_PUBLIC_WEBSITE_URL
+  let base = process?.env?.NEXT_PUBLIC_URL
   if (!base || !isValidUrl(base)) {
     base = 'clickhouse.com'
   }

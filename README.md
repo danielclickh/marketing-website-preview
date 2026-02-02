@@ -2,11 +2,11 @@
 
 ### Configure environment
 
-- install `node v18`.
+- install `node v22.x`.
 
 ```bash
 brew install nvm
-nvm install 18
+nvm install 22
 ```
 
 ### Install yarn dependencies
@@ -14,23 +14,40 @@ nvm install 18
 You need to install `yarn` packages for every project separately.
 Navigate to a project folder and run `yarn`.
 
-### Copy Environment variables (local)
+### Environment variables
 
-We have already added dummy values for the necessary operations but if you need to modify or test some functionalities use the following steps
-
-1. Rename the `.env.example` to `.env`
+1. Copy the `.env.example` to `.env`
 2. Ask for the credentials for the project in the [#website](https://clickhouse-inc.slack.com/archives/C02FCQ30GKA) Slack channel.
-    >`STRAPI_API_URL` can be replaced with the local running strapi if you prefer to work in offline mode
 
-### Copy Environment variables (vercel)
-1. Go to your vercel Project that hosts this repo
-2. Go to Settings
-3. Click on Environment Variables
-4. Click on create new tab
-5. Add the env variables and select the list of env you want the environment to be applied
-6. click Save
+#### Public environment variables
+> Exposed to the client (prefixed with `NEXT_PUBLIC_`)
 
-## Getting Started
+| Variable                                  | Description                                                                                                     |
+|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| NEXT_PUBLIC_IS_PROD                       | When `true`, staging filters are applied to Strapi requests and tracking scripts are loaded.                    |
+| NEXT_PUBLIC_URL                           | (optional) By default, generated absolute URLs will default to `clickhouse.com`. Use this variable to override. |
+| NEXT_PUBLIC_PROTOCOL                      | (optional) By default, generated absolute URLs will default to `https://`. Use this variable to override.       |
+| NEXT_PUBLIC_GROWTHBOOK_API_HOST           | GrowthBook API host used for A/B testing.                                                                       |
+| NEXT_PUBLIC_GROWTHBOOK_CLIENT_KEY         | Public client key for GrowthBook A/B testing.                                                                   |
+| NEXT_PUBLIC_GROWTHBOOK_DECRYPTION_KEY     | Decryption key used by GrowthBook to decrypt feature payloads on the client.                                    |
+| NEXT_PUBLIC_STRIPE_BUTTON_PUBLISHABLE_KEY | Publishable Stripe key used by payment-enabled events and flows.                                                |
+| NEXT_PUBLIC_ALGOLIA_APP_ID                | Application ID of the Algolia project the website reads from and writes to.                                     |
+| NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY        | Public API key used to authenticate Algolia search requests on the frontend.                                    |
+
+#### Private environment variables
+> Must never be exposed to the client
+
+| Variable             | Description                                                                                  |
+|----------------------|----------------------------------------------------------------------------------------------|
+| SLACK_TOKEN          | Used by the check-install script to post Slack updates about the status of the curl install. |
+| M3TER_API_ENDPOINT   | API endpoint used to fetch pricing data from m3ter.                                          |
+| M3TER_ORG_ID         | The m3ter organization ID.                                                                   |
+| M3TER_API_KEY        | API key used to authenticate requests to m3ter.                                              |
+| M3TER_API_SECRET     | API secret used alongside the m3ter API key.                                                 |
+| STRAPI_WEBHOOK_TOKEN | Token used to authenticate incoming webhooks from Strapi.                                    |
+| ALGOLIA_ADMIN_KEY    | Admin API key used for write operations in Algolia.                                          |
+
+## Getting started
 
 First, run the development server:
 
@@ -38,28 +55,51 @@ First, run the development server:
 yarn dev
 ```
 
-Open [http://localhost:3005](http://localhost:3005) with your browser to see the result.
+---
 
-You can start editing the page by modifying the values inside `pages` directory. The page auto-updates as you edit the file.
+## Google Analytics
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Google Tag Gateway
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To make our analytics more resiliant to ad blockers and privacy tools, we serve our Google Analytics from our first-party domain. This is defined by the `gtmScriptUrl` property.
 
-## Learn More
+- [Google documentation](https://developers.google.com/tag-platform/tag-manager/gateway/setup-guide?setup=manual) 
+- [Next.js documentation](https://nextjs.org/docs/app/guides/third-party-libraries#server-side-tagging)
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+<GoogleTagManager
+  gtmId='GTM-WKSRXS8S'
+  gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/' // Trailing slash required!
+/>
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Bot scoring
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+When viewing page source of the clickhouse.com website you'll find a script tag like the below. This tag is injected at the edge via our Cloudflare worker, Google Tag Manager uses this to score all Google Analytics events.
 
-## Deploy on Vercel
+```html
+<script>
+ (function(){
+  try {
+    window.__cfbm = {
+     score: 99,
+     verified: false,
+     category: "",
+     bucket: "unlikely-automated"
+    }
+    window.sessionStorage.setItem('__cfbm', JSON.stringify(window.__cfbm))
+  } catch(e) {}
+ })()
+</script>
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Bot scores are injected into the HTML at the edge: [clickhouse-website-worker](https://github.com/ClickHouse/clickhouse-website-worker/).
+2. Google Tag Manager reads the values from the `window.__cfbm` object and passes them to Google Analytics
+3. Inside Google Analytics, each value is defined as custom definition:
+   - `cfbm_bucket`
+   - `cfbm_category`
+   - `cfbm_score`
+   - `cfbm_verified`
 
 ---
 
