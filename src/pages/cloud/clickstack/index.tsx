@@ -139,7 +139,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         seo: {
           title:
-            'ClickStack: High-Performance Managed Observability | Logs, Metrics, Traces powered by ClickHouse Cloud',
+            'Managed ClickStack: High-Performance Observability | Logs, Metrics, Traces powered by ClickHouse Cloud',
           description:
             'Lightning-fast queries and powerful aggregations across logs, metrics, traces and session replays, even on the highest-cardinality OpenTelemetry data powered by ClickHouse Cloud for unlimited retention at low-cost.',
           path: '/clickstack',
@@ -202,9 +202,9 @@ export default function Page({ seo, headerData }: CommonProps) {
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
           {/* Content */}
           <div className='relative z-10 w-full max-w-3xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
-            <Breadcrumbs className='justify-center lg:justify-start'>
-              <Breadcrumbs.Item>Managed ClickStack</Breadcrumbs.Item>
-            </Breadcrumbs>
+            <TiltedText type='black-on-yellow' className='px-2 py-1 text-3xl' angle={-2}>
+              <strong>Managed ClickStack</strong>
+            </TiltedText>
             <SuiTitle
               type='h1'
               className='font-basier font-semibold md:!text-6xl'>
@@ -720,31 +720,22 @@ export default function Page({ seo, headerData }: CommonProps) {
 
       <section className='bg-neutral-800 py-16 lg:py-24'>
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='space-y-6 text-neutral-200 lg:max-w-xl'>
+          <div className='space-y-4 border-primary-300 text-neutral-200 md:border-l-4 md:pl-8 lg:max-w-xl'>
             <SuiTitle type='h2' className='text-white'>
               Ingest everything.
               <br />
               Retain everything.
             </SuiTitle>
             <p>
-              Whether you’re handling gigabytes or petabytes of OpenTelemetry
-              data, Managed ClickStack delivers the full power of open source
-              ClickStack with a simpler way to operate at scale. Retain all of
-              your OpenTelemetry data indefinitely,{' '}
-              <strong className='text-white'>
-                without sampling, rollups, or retention tradeoffs.
-              </strong>
+              Handle petabytes of OpenTelemetry data with the full power of open source ClickStack, delivered as a simple, fully managed service.
             </p>
+            <ul className='space-y-4'>
+              <li><TickItem>No sampling</TickItem></li>
+              <li><TickItem>No rollups</TickItem></li>
+              <li><TickItem>No retention tradeoffs</TickItem></li>
+            </ul>
             <p>
-              Built on ClickHouse Cloud, fully managed storage and compute scale
-              effortlessly to petabytes, with industry-leading compression and
-              cost controls that reduce{' '}
-              <strong className='text-white'>
-                storage to less than a cent per GB
-              </strong>
-              . Separation of storage and compute lets you retain
-              high-cardinality data long term while keeping queries fast and
-              costs predictable.
+              Managed ClickStack scales storage and compute independently to petabytes, exploiting industry-leading compression and object storage to let you retain high-cardinality data long term at <strong className="text-white">less than a cent per GB</strong> while keeping queries fast and costs predictable.
             </p>
           </div>
           <Image
@@ -848,7 +839,7 @@ export default function Page({ seo, headerData }: CommonProps) {
           />
         </div>
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='space-y-6 text-neutral-200 lg:max-w-xl'>
+          <div className='space-y-4 border-primary-300 text-neutral-200 md:border-l-4 md:pl-8 lg:max-w-xl'>
             <SuiTitle type='h2' className='text-white'>
               Only pay for the compute you need, when you need
             </SuiTitle>

@@ -39,6 +39,7 @@ import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import TickItem from '@/components-cleaned/TickItem'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
@@ -189,11 +190,12 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
           {/* Content */}
           <div className='relative z-10 w-full max-w-3xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
-            <SuiText className='flip-selection !text-3xl lg:mb-16 lg:!text-[3.5rem]'>
-              <TiltedText type='black-on-yellow' className='px-2 py-1'>
-                <strong>ClickStack OSS</strong>
-              </TiltedText>
-            </SuiText>
+            <TiltedText
+              type='black-on-yellow'
+              className='px-2 py-1 text-3xl'
+              angle={-2}>
+              <strong>ClickStack OSS</strong>
+            </TiltedText>
             <SuiTitle
               type='h1'
               className='font-basier font-semibold md:!text-6xl'>
@@ -605,46 +607,62 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         </div>
       </section>
 
-      <section className='space-y-16 bg-neutral-750 py-16 lg:space-y-24 lg:py-24'>
-        <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='space-y-6 text-neutral-200 lg:max-w-xl'>
-            <SuiTitle type='h2' className='text-white'>
-              Looking for a managed solution?
-            </SuiTitle>
-            <p>
-              <strong>We’ve got you covered.</strong> If you don’t want to
-              manage ClickStack on your own infrastructure, Managed ClickStack
-              gives you a fully managed ClickStack experience on ClickHouse
-              Cloud. You get the same open source observability stack, and more,
-              without running or maintaining ClickHouse yourself.
-            </p>
-            <p>
-              Benefit from separation of storage and compute, low-cost object
-              storage for long-term retention, integrated authentication, and
-              enterprise-grade reliability. Ingest and retain high-cardinality
-              OpenTelemetry data at petabyte scale, with predictable costs and
-              no operational overhead.
-            </p>
-            <CUIButton
-              type='primary'
-              size='lg'
-              weight='semibold'
-              href='/cloud/clickstack?loc=clickstack-oss'
-              target='_self'
-              linkClass='w-full md:w-auto'
-              className='mt-6 w-full !px-10 md:w-auto'
-              onClick={useGalaxyOnClick('clickstackOssPage.hero.contactSales')}>
-              Explore Managed ClickStack
-            </CUIButton>
+      <section className='section-container my-20 lg:my-24'>
+        <div className='rounded-lg bg-gradient-to-br from-primary-600 via-primary-400 to-primary-600 p-px'>
+          <div className='relative flex flex-col gap-x-16 gap-y-6 rounded-lg bg-neutral-750 p-4 shadow lg:flex-row lg:items-center lg:justify-between lg:p-16'>
+            <div className='space-y-6 text-neutral-200 lg:max-w-xl'>
+              <SuiTitle type='h2' className='text-white'>
+                Looking for a managed solution?
+              </SuiTitle>
+              <p>
+                <strong>We’ve got you covered.</strong> Managed ClickStack gives
+                you a fully managed ClickStack experience on ClickHouse Cloud.
+                You get the same open source observability stack, and more.
+              </p>
+              <ul className='space-y-4'>
+                <li>
+                  <TickItem>
+                    Infinite low-cost retention on object storage
+                  </TickItem>
+                </li>
+                <li>
+                  <TickItem>Integrated authentication</TickItem>
+                </li>
+                <li>
+                  <TickItem>Enterprise grade reliability</TickItem>
+                </li>
+              </ul>
+              <p>
+                Ingest and retain high-cardinality OpenTelemetry data at less
+                than a cent per GB, with predictable costs and no operational
+                overhead.
+              </p>
+              <CUIButton
+                type='primary'
+                size='lg'
+                weight='semibold'
+                href='/cloud/clickstack?loc=clickstack-oss'
+                target='_self'
+                linkClass='block md:inline-block'
+                className='group w-full md:mx-auto md:w-auto md:!px-10'
+                onClick={useGalaxyOnClick(
+                  'clickstackOssPage.hero.contactSales'
+                )}>
+                Explore Managed ClickStack
+              </CUIButton>
+            </div>
+            <Image
+              src={imageEstimatedCost}
+              width={540}
+              height={400}
+              alt=''
+              className='order-first mx-auto lg:order-last lg:mr-0'
+            />
           </div>
-          <Image
-            src={imageEstimatedCost}
-            width={540}
-            height={400}
-            alt=''
-            className='order-first mx-auto lg:order-last lg:mr-0'
-          />
         </div>
+      </section>
+
+      <section className='space-y-16 bg-neutral-750 py-16 lg:space-y-24 lg:py-24'>
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
           <div className='space-y-6 lg:max-w-xl'>
             <SuiTitle type='h2'>
@@ -683,7 +701,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               Get started with open-source
             </CUIButton>
           </div>
-          <div className='order-first mx-auto w-full max-w-max'>
+          <div className='order-first mx-auto w-full max-w-max lg:order-last'>
             <AnimatedClickstackOtel />
           </div>
         </div>

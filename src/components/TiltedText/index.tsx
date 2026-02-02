@@ -8,6 +8,7 @@ export interface TiltedTextProps extends React.HTMLProps<HTMLSpanElement> {
   type: Types
   children: React.ReactNode
   ref?: React.Ref<HTMLSpanElement>
+  angle?: number
 }
 
 const mainClasses: Record<Types, string> = {
@@ -35,6 +36,7 @@ export default function TiltedText({
   children,
   className = '',
   ref,
+  angle,
   ...props
 }: TiltedTextProps) {
   return (
@@ -44,6 +46,9 @@ export default function TiltedText({
       {...props}>
       <span
         className={`absolute inset-0 -z-10 -skew-y-3 ${tiltClasses[type]}`}
+        style={{
+          '--tw-skew-y': angle ? `${angle}deg` : null,
+        } as React.CSSProperties}
       />
       <span className={textClasses[type]}>{children}</span>
     </span>
