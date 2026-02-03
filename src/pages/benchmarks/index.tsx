@@ -225,7 +225,7 @@ export default function Page({ seo, headerData, blogs }: Props) {
               Second to none in <span className='text-primary-300'>
                 cost
               </span>{' '}
-              and <span className='text-primary-300'>performance</span>
+              and <span className='text-primary-300'>performance</span>.
             </h1>
             <p className='max-w-xl text-lg text-neutral-200'>
               ClickHouse is built for real-world, at-scale workloads, and we
@@ -285,7 +285,7 @@ export default function Page({ seo, headerData, blogs }: Props) {
       <section className='section-container my-16 lg:my-24'>
         <div className='mb-16 space-y-6 text-center'>
           <SuiTitle type='h2'>
-            ClickHouse keeps getting faster, and we're not done yet
+            ClickHouse keeps getting faster, and we're not done yet.
           </SuiTitle>
         </div>
         <div className='mx-auto max-w-5xl space-y-4'>
