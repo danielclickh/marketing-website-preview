@@ -169,6 +169,14 @@ export default function NavigationSubNavResources() {
           Demos
         </NavigationLink>
       </li>
+      <li>
+        <NavigationLink
+          href='/benchmarks'
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.benchmarksSelect')}
+          className='block w-full'>
+          Benchmark hub
+        </NavigationLink>
+      </li>
     </ul>
   )
 }

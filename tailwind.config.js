@@ -260,6 +260,9 @@ module.exports = {
         marqueeLeft5: 'marqueeLeftTransform 190s linear infinite',
         marqueeLeft6: 'marqueeLeftTransform2 190s linear infinite ',
         fadeInOut: 'fadeInOut 2.5s linear infinite'
+      },
+      aspectRatio: {
+        thumbnail: '31 / 16'
       }
     }
   }

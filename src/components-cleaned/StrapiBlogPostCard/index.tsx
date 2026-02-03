@@ -36,7 +36,7 @@ export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
           entry={entry.thumbnailPng}
           width={400}
           height={600}
-          className='aspect-[31/16] w-full max-w-none object-cover object-center'
+          className='aspect-thumbnail w-full max-w-none object-cover object-center'
         />
       </CUICard.Header>
       <CUICard.Body className='mb-auto p-6'>
