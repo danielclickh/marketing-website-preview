@@ -214,8 +214,8 @@ export const getStaticProps: GetStaticProps<Props> =
 export default function Page({ seo, headerData, blogs }: Props) {
   useGalaxyOnPage(`benchmarksHubPage`)
   const formSuccessRef = useRef<HTMLDivElement | null>(null)
-  const [formSuccess, setFormSuccess] = useState(true)
-  const [formLoaded, setFormLoaded] = useState(true)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
   return (
     <Layout headerData={headerData} seo={seo}>
       {/* Hero */}
