@@ -119,7 +119,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                       good vibes and join the party.
                     </p>
                     <p className='font-semibold'>
-                      <strong className='text-pink-500'>[date time]</strong>
+                      Wednesday, April 22, 9:30 PM - 12:00 AM PT
                     </p>
                   </SuiText>
                   <Link
@@ -150,7 +150,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                       When and where
                     </h3>
                     <p>
-                      <strong className='text-pink-500'>[date time]</strong>
+                      Wednesday, April 22, 9:30 PM - 12:00 AM PT
                       <br />
                       <strong className='text-pink-500'>[location]</strong>
                     </p>
@@ -201,31 +201,24 @@ export default function Page({ headerData, seo }: CommonProps) {
               id='request-meeting'
               className='bg-neutral-800 py-16 lg:py-24'>
               <div className='section-container flex flex-col items-center gap-10 lg:flex-row'>
-                <div className='relative mx-auto w-full max-w-lg'>
-                  <Image
-                    src={map}
-                    width={723}
-                    height={642}
-                    alt='ClickHouse booth location on AWS expo map'
-                    className='w-full'
-                  />
-                  <strong className='absolute left-1/2 top-1/2 block -translate-x-1/2 -translate-y-1/2 bg-pink-500 p-4 text-2xl text-white'>
-                    [placeholder]
-                  </strong>
-                </div>
+                <Image
+                  src={map}
+                  width={1972}
+                  height={822}
+                  alt='ClickHouse booth location on Google Next map'
+                  className='mx-auto w-full'
+                />
                 <div className='relative z-10 mx-auto space-y-4 lg:max-w-lg'>
                   <SuiTitle type='h2'>
                     Coming to Google Next? Find us at booth{' '}
                     <TiltedText type='black-on-yellow' className='px-1'>
-                      <strong className='text-pink-500'>[booth number]</strong>
+                      #2917
                     </TiltedText>
                   </SuiTitle>
                   <p className='text-neutral-200'>
                     Stop by and chat with the team. We're on the expo floor at
-                    booth{' '}
-                    <strong className='text-pink-500'>[booth number]</strong>.
-                    Let's explore how we can help you tackle your toughest
-                    analytics challenges.
+                    booth #2917. Let's explore how we can help you tackle your
+                    toughest analytics challenges.
                   </p>
                   <p className='text-neutral-200'>
                     Ready to skip the line? Request a 1-on-1 slot now and we'll
