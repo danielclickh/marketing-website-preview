@@ -67,7 +67,7 @@ export default function HomepageHeroAlt({
                 Download open-source
               </CUIButton>
             </div>
-            {/*<LogoAnnouncementLink
+            <LogoAnnouncementLink
               href='/cloud/postgres?loc=hero'
               className='mt-8 text-sm'
               logo={{
@@ -82,25 +82,6 @@ export default function HomepageHeroAlt({
               <span className='text-nowrap font-medium group-hover:underline'>
                 Learn more&nbsp;-&gt;
               </span>
-            </LogoAnnouncementLink>*/}
-            <LogoAnnouncementLink
-              mode='light'
-              className='mt-8'
-              href='/cloud/clickpipes/bigquery-connector?loc=home-hero'
-              logo={{
-                src: '/images/cloud/integrations/google-bigquery.svg',
-                alt: 'BigQuery',
-                width: 50,
-                height: 50,
-                className: 'mx-2 brightness-800'
-              }}>
-              Blazing-fast BigQuery to ClickHouse with our new ClickPipe
-              connector — now in Private Preview.
-              <br />
-              <span className='underline group-hover:decoration-2'>
-                Learn more
-              </span>
-              !
             </LogoAnnouncementLink>
           </div>
         </div>
