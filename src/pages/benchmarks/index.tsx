@@ -25,6 +25,8 @@ import 'swiper/css/effect-creative'
 import { EffectCoverflow, Mousewheel, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
+import MarketoForm from '@/components/MarketoForm'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 
 type BlogCompetitors =
   | 'Postgres'
@@ -210,6 +212,10 @@ export const getStaticProps: GetStaticProps<Props> =
   }
 
 export default function Page({ seo, headerData, blogs }: Props) {
+  useGalaxyOnPage(`benchmarksHubPage`)
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(true)
+  const [formLoaded, setFormLoaded] = useState(true)
   return (
     <Layout headerData={headerData} seo={seo}>
       {/* Hero */}
@@ -238,7 +244,7 @@ export default function Page({ seo, headerData, blogs }: Props) {
             <p>
               <LinkWithArrow
                 className='font-bold text-primary-300'
-                href='/blog/cloud-data-warehouses-cost-performance-comparison?loc=benchmarks-hub'>
+                href='/blog/cloud-data-warehouses-cost-performance-comparison?loc=benchmarks-hub#interactive-benchmark-explorer'>
                 Don't believe us? Try it yourself
               </LinkWithArrow>
             </p>
@@ -413,6 +419,59 @@ export default function Page({ seo, headerData, blogs }: Props) {
               className='group w-full !border-neutral-800 !bg-neutral-800 !text-white hover:!bg-neutral-725 md:mx-auto md:w-auto md:!px-10'>
               View our benchmarks
             </CUIButton>
+          </div>
+        </div>
+      </section>
+      <section className='section-container my-16 lg:my-24'>
+        <div className='section-container bg-shadow-element red-shadow align-shadow-left container mx-auto flex flex-col items-center'>
+          <Image
+            src='/images/migration.svg'
+            height={72}
+            width={72}
+            alt='Migrations'
+            className='mb-4 fill-none'
+          />
+          <SuiTitle type='h2' className='mb-12 text-center lg:mb-16'>
+            Talk to us about your use case
+          </SuiTitle>
+          <div className='mx-auto max-w-lg'>
+            <>
+              {!formSuccess && (
+                <MarketoForm
+                  formId={'1124'}
+                  clearbitTracking={true}
+                  onLoad={() => {
+                    setFormLoaded(true)
+                  }}
+                  onSuccess={() => {
+                    setFormSuccess(true)
+                    // Delay needed to allow the ref to update before scrolling
+                    setTimeout(() => {
+                      formSuccessRef.current?.scrollIntoView()
+                    }, 10)
+
+                    return false // Stops page from reloading
+                  }}
+                />
+              )}
+
+              {!formLoaded && (
+                <div className='text-center'>Loading form...</div>
+              )}
+
+              {formSuccess && (
+                <div ref={formSuccessRef}>
+                <CUICard className='py-16 px-4 sm:px-16'>
+                  <h3 className='text-center text-2xl font-bold'>
+                    Thank you for your submission!
+                  </h3>
+                  <p className='mt-2 text-center text-neutral-200'>
+                    We will be in touch soon.
+                  </p>
+                </CUICard>
+                </div>
+              )}
+            </>
           </div>
         </div>
       </section>
