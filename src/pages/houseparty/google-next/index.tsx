@@ -204,7 +204,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 <Image
                   src={map}
                   width={1972}
-                  height={822}
+                  height={881}
                   alt='ClickHouse booth location on Google Next map'
                   className='mx-auto w-full'
                 />
