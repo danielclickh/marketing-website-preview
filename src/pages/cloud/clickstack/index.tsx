@@ -460,7 +460,7 @@ export default function Page({ seo, headerData }: CommonProps) {
         <div className='section-container grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-10'>
           <div className='col-span-full mb-6 text-center'>
             <SuiTitle type='h2' className='mx-auto max-w-xl'>
-              The Observability solution powered by ClickHouse Cloud
+              The observability solution powered by ClickHouse Cloud
             </SuiTitle>
           </div>
           <div className='space-y-6 text-center'>
@@ -484,7 +484,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               alt='Stack icon'
               className='inline-block'
             />
-            <SuiTitle type='h3'>Full stack OTel Observability</SuiTitle>
+            <SuiTitle type='h3'>Full stack OTel observability</SuiTitle>
             <p className='mx-auto max-w-md text-neutral-200'>
               Unify Session Replays with OTel Logs, Traces and Metrics.
             </p>

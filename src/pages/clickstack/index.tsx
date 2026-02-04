@@ -199,7 +199,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
             <SuiTitle
               type='h1'
               className='font-basier font-semibold md:!text-6xl'>
-              Open source Observability for OpenTelemetry at scale
+              Open source observability for OpenTelemetry at scale
             </SuiTitle>
             <SuiText size='lg' className='space-y-6 text-neutral-200'>
               <p>
