@@ -360,7 +360,7 @@ export default function Page({ seo, headerData, blogs }: Props) {
               <Link
                 href='https://benchmark.clickhouse.com/versions/'
                 className='italic underline hover:decoration-2'>
-                VerisonBench
+                VersionBench
               </Link>{' '}
               benchmark is run when a new release is published to check its
               performance and identify regressions.
