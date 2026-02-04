@@ -100,21 +100,21 @@ export default function OpensearchPage({ headerData, seo }: CommonProps) {
           </SuiText>
           <div className='flex flex-col gap-4 sm:mx-auto sm:max-w-[523px] sm:flex-row lg:mx-0'>
             <CUIButton
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page'
+              href='/cloud/clickstack?loc=opensearch-comparison-page-hero'
               type='primary'
               size='lg'
               weight='semibold'
               className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
-              Get started with open-source
+              Explore Managed ClickStack
             </CUIButton>
             <CUIButton
-              href='/company/contact?loc=opensearch-comparison-page-hero'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page-hero'
               type='secondary'
               size='lg'
               weight='semibold'
               target='_blank'
               className='w-full sm:w-auto sm:flex-1 sm:!px-8'>
-              Contact sales
+              Get started with open-source
             </CUIButton>
           </div>
           <SuiText>
@@ -386,16 +386,16 @@ export default function OpensearchPage({ headerData, seo }: CommonProps) {
             <CUIButton
               type='primary-dark'
               size='lg'
-              className='mx-auto w-full sm:!px-10 md:w-auto'
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page-get-started'>
-              Get started with open-source
+              className='group mx-auto w-full !px-10 md:w-auto'
+              href='https://console.clickhouse.cloud/signUp?intent=o11y&loc=opensearch-comparison-page-get-started'>
+              Start free trial
             </CUIButton>
             <CUIButton
               type='secondary'
               size='lg'
-              className='mx-auto w-full !border-neutral-800 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white sm:!px-10 md:w-auto'
-              href='/company/contact?loc=opensearch-comparison-page-get-started'>
-              Contact sales
+              className='group mx-auto w-full !border-neutral-800 !px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page-get-started'>
+              Get started with open-source
             </CUIButton>
           </p>
         </div>
