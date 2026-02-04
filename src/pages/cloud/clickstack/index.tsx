@@ -471,9 +471,9 @@ export default function Page({ seo, headerData }: CommonProps) {
               alt='Timer icon'
               className='inline-block'
             />
-            <SuiTitle type='h3'>Sub-second Queries</SuiTitle>
+            <SuiTitle type='h3'>Sub-second queries</SuiTitle>
             <p className='mx-auto max-w-md text-neutral-200'>
-              Even on hundreds of petabytes of high cardinality OTel data
+              Even on hundreds of petabytes of high cardinality OTel data.
             </p>
           </div>
           <div className='space-y-6 text-center'>
@@ -484,9 +484,9 @@ export default function Page({ seo, headerData }: CommonProps) {
               alt='Stack icon'
               className='inline-block'
             />
-            <SuiTitle type='h3'>Full Stack OTel Observability</SuiTitle>
+            <SuiTitle type='h3'>Full stack OTel Observability</SuiTitle>
             <p className='mx-auto max-w-md text-neutral-200'>
-              Unify Session Replays with OTel Logs, Traces and Metrics
+              Unify Session Replays with OTel Logs, Traces and Metrics.
             </p>
           </div>
           <div className='space-y-6 text-center'>
@@ -512,7 +512,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               className='inline-block'
             />
 
-            <SuiTitle type='h3'>Unlimited Retention</SuiTitle>
+            <SuiTitle type='h3'>Unlimited retention</SuiTitle>
             <p className='mx-auto max-w-md text-neutral-200'>
               Separation of storage and compute, means long-term retention for
               less than a cent per GB per month.
