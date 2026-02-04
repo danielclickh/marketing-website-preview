@@ -84,6 +84,16 @@ export default function NavigationSubNavResources() {
         <NavigationSubNav isOpen={isSubNavActive('comparisons')}>
           <li>
             <NavigationLink
+              href='/benchmarks'
+              onClick={useGalaxyOnClick(
+                'topNav.resourcesMenu.benchmarksSelect'
+              )}
+              className='block w-full'>
+              Benchmark hub
+            </NavigationLink>
+          </li>
+          <li>
+            <NavigationLink
               href='/comparison/bigquery'
               onClick={useGalaxyOnClick(
                 'topNav.comparisonsMenu.bigQuerySelect'
@@ -167,14 +177,6 @@ export default function NavigationSubNavResources() {
           onClick={useGalaxyOnClick('topNav.resourcesMenu.demosSelect')}
           className='block w-full'>
           Demos
-        </NavigationLink>
-      </li>
-      <li>
-        <NavigationLink
-          href='/benchmarks'
-          onClick={useGalaxyOnClick('topNav.resourcesMenu.benchmarksSelect')}
-          className='block w-full'>
-          Benchmark hub
         </NavigationLink>
       </li>
     </ul>

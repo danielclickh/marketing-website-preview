@@ -109,9 +109,8 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Benchmarks',
-    href: 'https://benchmark.clickhouse.com',
-    target: '_blank',
-    galaxyEvent: 'footerNav.resourcesMenu.benchmarkSelect'
+    href: '/benchmarks',
+    galaxyEvent: 'footerNav.resourcesMenu.benchmarkHubSelect'
   },
   {
     label: 'Use cases',
