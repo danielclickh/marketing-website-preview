@@ -586,6 +586,11 @@ const nextConfig = {
         source: '/engineering-resources/:path*',
         destination: '/resources/engineering/:path*',
         permanent: true
+      },
+      {
+        source: '/cloud/clickstack-private-preview',
+        destination: '/cloud/clickstack',
+        permanent: true
       }
     ]
   }
