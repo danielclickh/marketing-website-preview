@@ -32,8 +32,8 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Postgres managed by ClickHouse',
-    href: '/cloud/bring-your-own-cloud',
-    galaxyEvent: 'footerNav.productMenu.byocSelect'
+    href: '/cloud/postgres',
+    galaxyEvent: 'footerNav.productMenu.postgresSelect'
   },
   {
     label: 'Managed ClickStack',

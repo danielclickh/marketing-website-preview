@@ -42,7 +42,6 @@ import shareImage from './assets/share-image.png'
 import imageWorkflows from './assets/workflows.png'
 import Accordion from '@/components-cleaned/Accordion'
 import AccordionItem from '@/components-cleaned/AccordionItem'
-import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
@@ -314,7 +313,7 @@ export default function Page({ seo, headerData }: CommonProps) {
                 alt: 'Sony logo',
                 width: 100,
                 height: 19,
-                className: 'opacity-80'
+                className: 'opacity-70'
               },
               {
                 src: logoComcast,
