@@ -202,7 +202,10 @@ export default function Page({ seo, headerData }: CommonProps) {
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
           {/* Content */}
           <div className='relative z-10 w-full max-w-3xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
-            <TiltedText type='black-on-yellow' className='px-2 py-1 text-3xl' angle={-2}>
+            <TiltedText
+              type='black-on-yellow'
+              className='px-2 py-1 text-3xl'
+              angle={-2}>
               <strong>Managed ClickStack</strong>
             </TiltedText>
             <SuiTitle
@@ -214,7 +217,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               <p>
                 Lightning-fast queries and powerful aggregations across logs,
                 metrics, traces and session replays, even on the
-                highest-cardinality OpenTelemetry data powered by ClickHouse
+                highest-cardinality OpenTelemetry data. Powered by ClickHouse
                 Cloud for unlimited retention at low-cost.
               </p>
             </SuiText>
@@ -248,8 +251,8 @@ export default function Page({ seo, headerData }: CommonProps) {
             <ul className='space-y-4 text-neutral-200'>
               <li>
                 <TickItem>
-                  Open-source ClickStack with cloud-native storage and compute
-                  separation
+                  ClickStack with cloud-native storage and compute separation,
+                  always open source
                 </TickItem>
               </li>
               <li>
@@ -260,7 +263,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               </li>
               <li>
                 <TickItem>
-                  Unlimited queries, no ingest sampling and predictable costs
+                  Unlimited queries, no ingest sampling, and predictable costs
                 </TickItem>
               </li>
             </ul>
@@ -557,7 +560,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               <p className='text-neutral-200'>
                 Replicated across multiple availability zones by default,
                 ClickHouse Cloud provides high availability, seamless upgrades,
-                automated backups, and built-in disaster recovery
+                automated backups, and built-in disaster recovery.
               </p>
             </div>
             <div className='space-y-6'>
@@ -665,14 +668,14 @@ export default function Page({ seo, headerData }: CommonProps) {
                   OTel data in seconds and ingests billions of high-cardinality
                   events daily with optimized OTel schemas out-of-the-the-box.
                 </p>
-                <SuiText>
+                <p>
                   ClickHouse Cloud’s brings scaling and cost efficiency through
                   full separation of storage and compute. Ingestion and queries
                   can be completely isolated on dedicated resources, thanks to
                   compute-compute separation. This ensures consistent
                   performance at any scale while allowing further
                   cost-efficiency optimizations to be made.
-                </SuiText>
+                </p>
               </div>
             </AccordionItem>
             <AccordionItem
@@ -727,15 +730,26 @@ export default function Page({ seo, headerData }: CommonProps) {
               Retain everything.
             </SuiTitle>
             <p>
-              Handle petabytes of OpenTelemetry data with the full power of open source ClickStack, delivered as a simple, fully managed service.
+              Handle petabytes of OpenTelemetry data with the full power of open
+              source ClickStack. Delivered as a simple, fully managed service.
             </p>
             <ul className='space-y-4'>
-              <li><TickItem>No sampling</TickItem></li>
-              <li><TickItem>No rollups</TickItem></li>
-              <li><TickItem>No retention tradeoffs</TickItem></li>
+              <li>
+                <TickItem>No sampling</TickItem>
+              </li>
+              <li>
+                <TickItem>No rollups</TickItem>
+              </li>
+              <li>
+                <TickItem>No retention tradeoffs</TickItem>
+              </li>
             </ul>
             <p>
-              Managed ClickStack scales storage and compute independently to petabytes, exploiting industry-leading compression and object storage to let you retain high-cardinality data long term at <strong className="text-white">less than a cent per GB</strong> while keeping queries fast and costs predictable.
+              Managed ClickStack scales storage and compute independently to
+              petabytes, exploiting industry-leading compression and object
+              storage to let you retain high-cardinality data long term at{' '}
+              <strong className='text-white'>less than a cent per GB</strong>{' '}
+              while keeping queries fast and costs predictable.
             </p>
           </div>
           <Image
