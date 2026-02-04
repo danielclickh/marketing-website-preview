@@ -20,10 +20,25 @@ type NavItem = {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    heading: 'Products',
+    heading: 'Product',
     label: 'ClickHouse Cloud',
     href: '/cloud',
     galaxyEvent: 'footerNav.productMenu.clickHouseCloudSelect'
+  },
+  {
+    label: 'Bring Your Own Cloud',
+    href: '/cloud/bring-your-own-cloud',
+    galaxyEvent: 'footerNav.productMenu.byocSelect'
+  },
+  {
+    label: 'Postgres managed by ClickHouse',
+    href: '/cloud/bring-your-own-cloud',
+    galaxyEvent: 'footerNav.productMenu.byocSelect'
+  },
+  {
+    label: 'Managed ClickStack',
+    href: '/cloud/clickstack',
+    galaxyEvent: 'footerNav.productMenu.managedClickstackSelect'
   },
   {
     label: 'ClickHouse',
@@ -31,9 +46,14 @@ const NAV_ITEMS: Array<NavItem> = [
     galaxyEvent: 'footerNav.productMenu.clickHouseSelect'
   },
   {
-    label: 'Bring Your Own Cloud',
-    href: '/cloud/bring-your-own-cloud',
-    galaxyEvent: 'footerNav.productMenu.byocSelect'
+    label: 'ClickStack',
+    href: '/clickstack',
+    galaxyEvent: 'footerNav.productMenu.clickstackSelect'
+  },
+  {
+    label: 'Agentic Data Stack',
+    href: '/ai',
+    galaxyEvent: 'footerNav.productMenu.agenticDataStackSelect'
   },
   {
     label: 'ClickHouse Government',
@@ -44,11 +64,6 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'ClickHouse Keeper',
     href: '/clickhouse/keeper',
     galaxyEvent: 'footerNav.productMenu.keeperSelect'
-  },
-  {
-    label: 'ClickStack',
-    href: '/use-cases/observability',
-    galaxyEvent: 'footerNav.productMenu.clickstackSelect'
   },
   {
     label: 'ClickPipes',
@@ -66,11 +81,6 @@ const NAV_ITEMS: Array<NavItem> = [
     galaxyEvent: 'footerNav.productMenu.chdbSelect'
   },
   {
-    label: 'Trust center',
-    href: 'https://trust.clickhouse.com',
-    galaxyEvent: 'footerNav.productMenu.trustCenterSelect'
-  },
-  {
     label: 'Pricing',
     href: '/pricing',
     galaxyEvent: 'footerNav.productMenu.pricingSelect'
@@ -81,6 +91,11 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Documentation',
     href: 'https://clickhouse.com/docs',
     galaxyEvent: 'footerNav.resourcesMenu.docsSelect'
+  },
+  {
+    label: 'Trust center',
+    href: 'https://trust.clickhouse.com',
+    galaxyEvent: 'footerNav.productMenu.trustCenterSelect'
   },
   {
     label: 'Training',
@@ -122,11 +137,6 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Real-time data warehouse',
     href: '/real-time-data-warehouse',
     galaxyEvent: 'footerNav.productMenu.realtimeDWSelect'
-  },
-  {
-    label: 'Open House videos',
-    href: '/videos?category=open-house',
-    galaxyEvent: 'footerNav.resourcesMenu.openHouseVideosSelect'
   },
   {
     label: 'Engineering resources',
@@ -330,21 +340,21 @@ export default function Footer() {
                   <li
                     key={columnIndex}
                     className='flex w-1/2 flex-col px-3 lg:w-4/12'>
-                    <ul>
+                    <ul className='space-y-1.5'>
                       {columnItems.map((columnItem, itemIndex) => {
                         return (
                           <Fragment key={itemIndex}>
                             {columnItem.heading && (
                               <li
-                                className={`mb-4 font-inter text-sm font-bold text-neutral-100 ${itemIndex > 0 ? 'mt-8' : ''}`}>
+                                className={`!mb-4 font-inter text-sm font-bold text-neutral-100 ${itemIndex > 0 ? '!mt-8' : ''}`}>
                                 {columnItem.heading}
                               </li>
                             )}
-                            <li>
+                            <li className='leading-none'>
                               <Link
                                 href={columnItem.href}
                                 target={columnItem.target}
-                                className='text-sm text-neutral-400 hover:text-neutral-0'
+                                className='text-sm text-neutral-400 transition-colors hover:text-neutral-0'
                                 onClick={useGalaxyOnClick(
                                   columnItem.galaxyEvent ||
                                     `footer.nav.${camel(columnItem.label)}`

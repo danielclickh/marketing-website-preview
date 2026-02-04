@@ -353,12 +353,17 @@ const nextConfig = {
       },
       {
         source: '/use-cases/logging',
-        destination: '/use-cases/observability',
+        destination: '/clickstack',
         permanent: true
       },
       {
         source: '/use-cases/logging-and-metrics',
-        destination: '/use-cases/observability',
+        destination: '/clickstack',
+        permanent: true
+      },
+      {
+        source: '/use-cases/observability',
+        destination: '/clickstack',
         permanent: true
       },
       {
@@ -532,12 +537,12 @@ const nextConfig = {
       },
       {
         source: '/o11y',
-        destination: '/use-cases/observability?loc=o11y',
+        destination: '/cloud/clickstack?loc=o11y',
         permanent: true
       },
       {
         source: '/olly',
-        destination: '/use-cases/observability?loc=olly',
+        destination: '/cloud/clickstack?loc=olly',
         permanent: true
       },
       {

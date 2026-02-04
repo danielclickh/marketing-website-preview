@@ -25,7 +25,7 @@ export default function NavigationSubNavSolutions() {
               </li>
               <li className='col-span-2'>
                 <NavigationLink
-                  href='/use-cases/observability'
+                  href='/clickstack'
                   onClick={useGalaxyOnClick(
                     'topNav.useCasesMenu.observabilitySelect'
                   )}

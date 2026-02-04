@@ -1,3 +1,4 @@
+import imageEstimatedCost from './assets/estimated-cost.svg'
 import imageHero from './assets/hero.png'
 import iconCoins from './assets/icon-coins.svg'
 import iconFileSearch from './assets/icon-file-search.svg'
@@ -38,6 +39,7 @@ import AnimatedClickstackOtel from '@/components-cleaned/AnimatedClickstackOtel'
 import CarouselPaginated from '@/components-cleaned/CarouselPaginated'
 import ContentTicker from '@/components-cleaned/ContentTicker'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
+import TickItem from '@/components-cleaned/TickItem'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import ClickStack from '@/components/ClickStack'
 import { CUIButton } from '@/components/ClickUI'
@@ -49,7 +51,11 @@ import QuoteCard from '@/components/QuoteCard'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
-import { generateFaqPageSchema, generateVideoObjectSchema } from '@/lib/schema'
+import {
+  defaultOrganization,
+  generateFaqPageSchema,
+  generateVideoObjectSchema
+} from '@/lib/schema'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { GetStaticProps } from 'next'
@@ -60,7 +66,7 @@ import { EffectCreative, Mousewheel } from 'swiper/modules'
 const FAQs: Array<{ question: string; answer: string }> = [
   {
     question: 'What is ClickStack?',
-    answer: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
+    answer: `ClickStack is a high-performance, open source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
   },
   {
     question: 'How does ClickStack compare to the ELK stack?',
@@ -108,11 +114,9 @@ The HyperDX UI requires only a timestamp field to render and visualize events, s
   },
   {
     question: 'Is there a hosted version of ClickStack?',
-    answer: `Yes. ClickStack is available as a managed service in ClickHouse Cloud. It delivers the same open architecture with elastic scaling and full separation of storage and compute, allowing users to scale resources independently and isolate read and write workloads for consistent performance.
+    answer: `[Managed ClickStack](/cloud/clickstack) is the fully managed version of ClickStack, running on ClickHouse Cloud. You get the same open source core and user experience, but without the operational overhead of managing ClickHouse. Cluster management, scaling, upgrades, backups, and reliability are handled for you, and authentication and user management are fully integrated with ClickHouse Cloud.
 
-With advanced compression and cost-efficient object storage, data can be retained indefinitely at low cost. ClickHouse Cloud also includes automatic backups and zero operational overhead. The HyperDX UI is fully integrated - available at no additional cost, secured through ClickHouse Cloud authentication, and can be launched on any service. 
-
-A fully managed ClickStack offering is also planned for the future.`
+Managed ClickStack also includes additional platform capabilities that are not available when running ClickHouse open source alone. This includes cloud-native separation of storage and compute, independent scaling of read and write paths, and low-cost object storage that enables near-limitless retention. Planned enterprise features such as fine-grained RBAC are delivered as part of the managed platform, alongside the broader reliability, security, and cost-efficiency benefits of ClickHouse Cloud.`
   }
 ]
 
@@ -123,10 +127,10 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         seo: {
           title:
-            'ClickStack: High-Performance Open-Source Observability | Logs, Metrics, Traces with ClickHouse',
+            'ClickStack: High-Performance Open Source Observability | Logs, Metrics, Traces with ClickHouse',
           description:
             'ClickStack is a high-performance observability stack powered by ClickHouse. Unify logs, metrics, and traces with 10-100x cost savings. Get started today!',
-          path: '/use-cases/observability',
+          path: '/clickstack',
           image: [{ url: shareImage.src }],
           languages: ['en', 'ja'],
           schema: [
@@ -136,14 +140,10 @@ export const getStaticProps: GetStaticProps<CommonProps> =
               name: 'ClickStack Observability',
               serviceType:
                 'Observability (logs, metrics, traces, session replays, errors)',
-              url: 'https://clickhouse.com/use-cases/observability',
+              url: 'https://clickhouse.com/clickstack',
               description:
-                'High-performance, open-source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
-              provider: {
-                '@type': 'Organization',
-                name: 'ClickHouse, Inc.',
-                url: 'https://clickhouse.com'
-              },
+                'High-performance, open source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
+              provider: defaultOrganization,
               areaServed: 'Worldwide',
               audience: {
                 '@type': 'BusinessAudience',
@@ -151,13 +151,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
               },
               offers: {
                 '@type': 'Offer',
-                name: 'ClickStack on ClickHouse Cloud — Free trial',
+                name: 'Managed ClickStack on ClickHouse Cloud — Free trial',
                 description:
-                  'Experience HyperDX + ClickHouse with a 30-day trial and $300 in credits.',
+                  'Experience ClickStack with a 30-day trial and $300 in credits.',
                 price: '0.00',
                 priceCurrency: 'USD',
                 availability: 'https://schema.org/InStock',
-                url: 'https://console.clickhouse.cloud/'
+                url: 'https://console.clickhouse.cloud/signUp?intent=o11y'
               },
               brand: {
                 '@type': 'Brand',
@@ -173,7 +173,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
   }
 
 export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
-  useGalaxyOnPage('observabilityUseCasePage')
+  useGalaxyOnPage('clickstackOssPage')
   const [hyperdxActive, setHyperdxActive] = useState(true)
   const [clickhouseActive, setClickhouseActive] = useState(false)
   const [opentelemetryActive, setOpentelemetryActive] = useState(false)
@@ -190,15 +190,16 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         <div className='section-container flex flex-col items-center lg:flex-row lg:items-stretch'>
           {/* Content */}
           <div className='relative z-10 w-full max-w-3xl space-y-6 text-center lg:py-8 lg:pr-8 lg:text-left'>
-            <SuiText className='flip-selection !text-3xl lg:mb-16 lg:!text-[3.5rem]'>
-              <TiltedText type='black-on-yellow' className='px-2 py-1'>
-                <strong>ClickStack</strong>
-              </TiltedText>
-            </SuiText>
+            <TiltedText
+              type='black-on-yellow'
+              className='px-2 py-1 text-3xl'
+              angle={-2}>
+              <strong>ClickStack</strong>
+            </TiltedText>
             <SuiTitle
               type='h1'
               className='font-basier font-semibold md:!text-6xl'>
-              The open-source observability stack for OpenTelemetry at scale
+              Open source Observability for OpenTelemetry at scale
             </SuiTitle>
             <SuiText size='lg' className='space-y-6 text-neutral-200'>
               <p>
@@ -206,33 +207,36 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
                 metrics, traces, session replays and errors with unmatched
                 resource efficiency for even your highest-cardinality OTel data.
               </p>
-              <p>All in one stack - powered by ClickHouse.</p>
+              <p>
+                All in one stack and built for OTel at scale - powered by
+                ClickHouse.
+              </p>
             </SuiText>
             <div className='flex w-full flex-col justify-center gap-6 md:flex-row lg:justify-start'>
               <CUIButton
                 type='primary'
                 size='lg'
                 weight='semibold'
-                href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+                href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=clickstack-oss'
                 linkClass='w-full md:w-auto'
                 className='w-full !px-10 md:w-auto'
                 onClick={useGalaxyOnClick(
-                  'observabilityUseCasePage.hero.getStartedWithOpenSource'
+                  'clickstackOssPage.hero.getStartedWithOpenSource'
                 )}>
-                Get started with open-source
+                Get started with open source
               </CUIButton>
               <CUIButton
                 type='secondary'
                 size='lg'
                 weight='semibold'
-                href='/company/contact?loc=use-case-observability'
+                href='/cloud/clickstack?loc=clickstack-oss'
                 target='_self'
                 linkClass='w-full md:w-auto'
                 className='w-full !px-10 md:w-auto'
                 onClick={useGalaxyOnClick(
-                  'observabilityUseCasePage.hero.contactSales'
+                  'clickstackOssPage.hero.contactSales'
                 )}>
-                Contact sales
+                Explore Managed ClickStack
               </CUIButton>
             </div>
           </div>
@@ -369,32 +373,6 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         </ContentTicker>
       </section>
 
-      {/* Fast, simple, fair */}
-      {/*<section className='overflow-hidden bg-neutral-800 py-6 md:py-10 lg:py-16'>
-        <div className='section-container'>
-          <div
-            className='md:bg-shadow-element yellow-shadow shadow-circle relative overflow-hidden rounded-lg bg-neutral-900 px-6 py-8 md:py-10 lg:py-16'
-            style={
-              {
-                '--top-side': '0',
-                '--left-side': '50%'
-              } as CSSProperties
-            }>
-            <div className='absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent' />
-            <div className='mx-auto ml-auto max-w-3xl flex-1 space-y-6 text-center'>
-              <SuiTitle type='h3' className='text-primary-300'>
-                Fast, simple, and fair observability at any scale
-              </SuiTitle>
-              <SuiText className='text-neutral-200 md:text-lg'>
-                Store and query petabytes of OpenTelemetry data with
-                transparent, simple pricing, with fast queries so your engineers
-                can investigate instantly, not wait for results.
-              </SuiText>
-            </div>
-          </div>
-        </div>
-      </section>*/}
-
       {/* Customer quotes */}
       <section className='relative z-10 bg-neutral-950/60 pb-12 pt-20 lg:pb-16 lg:pt-24'>
         <div className='section-container'>
@@ -449,7 +427,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         </div>
         <div className='mt-12 text-center lg:mt-16'>
           <LinkWithArrow
-            href='/use-cases?log=use-case-observability'
+            href='/use-cases?log=clickstack'
             className='text-slate-300 hover:underline'>
             Read more case studies
           </LinkWithArrow>
@@ -629,45 +607,98 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         </div>
       </section>
 
-      <section className='bg-neutral-750 py-16'>
+      <section className='section-container my-20 lg:my-24'>
+        <div className='rounded-lg bg-gradient-to-br from-primary-600 via-primary-400 to-primary-600 p-px'>
+          <div className='relative flex flex-col gap-x-16 gap-y-6 rounded-lg bg-neutral-750 p-4 shadow lg:flex-row lg:items-center lg:justify-between lg:p-16'>
+            <div className='space-y-6 text-neutral-200 lg:max-w-xl'>
+              <SuiTitle type='h2' className='text-white'>
+                Looking for a managed solution?
+              </SuiTitle>
+              <p>
+                <strong>We’ve got you covered.</strong> Managed ClickStack gives
+                you a fully managed ClickStack experience on ClickHouse Cloud.
+                You get the same open source observability stack, and more.
+              </p>
+              <ul className='space-y-4'>
+                <li>
+                  <TickItem>
+                    Infinite low-cost retention on object storage
+                  </TickItem>
+                </li>
+                <li>
+                  <TickItem>Integrated authentication</TickItem>
+                </li>
+                <li>
+                  <TickItem>Enterprise grade reliability</TickItem>
+                </li>
+              </ul>
+              <p>
+                Ingest and retain high-cardinality OpenTelemetry data at less
+                than a cent per GB, with predictable costs and no operational
+                overhead.
+              </p>
+              <CUIButton
+                type='primary'
+                size='lg'
+                weight='semibold'
+                href='/cloud/clickstack?loc=clickstack-oss'
+                target='_self'
+                linkClass='block md:inline-block'
+                className='group w-full md:mx-auto md:w-auto md:!px-10'
+                onClick={useGalaxyOnClick(
+                  'clickstackOssPage.hero.contactSales'
+                )}>
+                Explore Managed ClickStack
+              </CUIButton>
+            </div>
+            <Image
+              src={imageEstimatedCost}
+              width={540}
+              height={400}
+              alt=''
+              className='order-first mx-auto lg:order-last lg:mr-0'
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className='space-y-16 bg-neutral-750 py-16 lg:space-y-24 lg:py-24'>
         <div className='section-container flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between'>
-          <div className='lg:max-w-xl'>
-            <SuiTitle type='h2' className='mb-6'>
+          <div className='space-y-6 lg:max-w-xl'>
+            <SuiTitle type='h2'>
               Built for OTel at scale.
               <br />
               Get started in minutes.
             </SuiTitle>
-            <SuiText className='space-y-6'>
-              <p>
-                Whether you’re handling gigabytes or petabytes of OpenTelemetry
-                data, ClickStack delivers unmatched efficiency with high
-                compression, parallel query execution, and native SQL support.
-              </p>
-              <p>
-                The HyperDX UI provides a seamless experience with Lucene-style
-                log search, full SQL access, and automatic correlation of logs,
-                traces, and metrics at the database layer - no extra services,
-                pipelines required, restricted workflows or correlation at the
-                application layer.
-              </p>
-              <p>
-                If you’re wondering where to send your OpenTelemetry data, the
-                answer is simple: ClickStack. Open source.{' '}
-                <strong>Built for OTel at scale.</strong>
-              </p>
-            </SuiText>
+            <p>
+              Whether you’re handling gigabytes or petabytes of OpenTelemetry
+              data, ClickStack delivers unmatched efficiency with high
+              compression, parallel query execution, and native SQL support.
+            </p>
+            <p>
+              The HyperDX UI provides a seamless experience with Lucene-style
+              log search, full SQL access, and automatic correlation of logs,
+              traces, and metrics at the database layer - no extra services,
+              pipelines required, restricted workflows or correlation at the
+              application layer.
+            </p>
+            <p>
+              If you’re wondering where to send your OpenTelemetry data, the
+              answer is simple: ClickStack. Open source.{' '}
+              <strong>Built for OTel at scale.</strong>
+            </p>
             <CUIButton
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=use-case-observability'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=clickstack-oss'
               target='_blank'
               linkClass='w-full md:w-auto'
               className='mt-6 w-full !px-10 md:w-auto'
               onClick={useGalaxyOnClick(
-                'observabilityUseCasePage.builtForOtelAtScale.getStarted'
+                'clickstackOssPage.builtForOtelAtScale.getStarted'
               )}>
-              Get started
+              Get started with open source
             </CUIButton>
           </div>
           <div className='order-first mx-auto w-full max-w-max lg:order-last'>
@@ -710,7 +741,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               schema={generateVideoObjectSchema({
                 title: 'ClickStack in 60 seconds',
                 description:
-                  'A 60-second overview of ClickStack, an open-source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
+                  'A 60-second overview of ClickStack, an open source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
                 thumbnailUrl:
                   'https://img.youtube.com/vi/WBe7ZwTRWuQ/maxresdefault.jpg',
                 uploadDate: '2025-12-18T08:06:01-08:00',
@@ -743,8 +774,10 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
         <div className='relative flex flex-col gap-8 overflow-clip rounded bg-neutral-750 p-8 lg:p-16'>
           <div className='absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-primary-300 to-transparent' />
 
-          <div className='mx-auto max-w-4xl space-y-8 text-center lg:px-2'>
-            <SuiTitle type='h2'>Want to compose your own stack?</SuiTitle>
+          <div className='mx-auto max-w-4xl space-y-8 text-center text-neutral-200 lg:px-2'>
+            <SuiTitle type='h2' className='text-white'>
+              Want to compose your own stack with(out) OTel?
+            </SuiTitle>
             <SuiText>
               Need a custom pipeline or schema that isn’t OpenTelemetry? The
               HyperDX UI is schema-agnostic and works with any telemetry
@@ -1017,9 +1050,9 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               size='lg'
               className='group mx-auto w-full !px-10 md:w-auto'
               target='_blank'
-              href='https://console.clickhouse.cloud/signUp?loc=use-case-observability'
+              href='https://console.clickhouse.cloud/signUp?intent=o11y&loc=clickstack-oss'
               onClick={useGalaxyOnClick(
-                'observabilityUseCasePage.footerCta.getStartedSelect'
+                'clickstackOssPage.footerCta.getStartedSelect'
               )}>
               Get started
             </CUIButton>
@@ -1028,9 +1061,9 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               size='lg'
               className='group mx-auto w-full !border-neutral-800 !px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
               target='_blank'
-              href='/company/contact?loc=use-case-observability'
+              href='/company/contact?loc=clickstack-oss'
               onClick={useGalaxyOnClick(
-                'observabilityUseCasePage.footerCta.requestDemoSelect'
+                'clickstackOssPage.footerCta.requestDemoSelect'
               )}>
               Get a demo
             </CUIButton>

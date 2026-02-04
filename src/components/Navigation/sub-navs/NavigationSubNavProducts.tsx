@@ -80,6 +80,30 @@ export default function NavigationSubNavProducts() {
                   </span>
                 </NavigationLink>
               </li>
+
+              <li className='flex items-center'>
+                <NavigationLink
+                  href='/cloud/clickstack'
+                  onClick={useGalaxyOnClick(
+                    'topNav.productMenu.managedClickstackSelect'
+                  )}
+                  className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
+                  <Image
+                    src='/images/nav/icon-managed-clickstack.svg'
+                    alt='Managed ClickStack'
+                    width={24}
+                    height={24}
+                    className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
+                  />
+                  <span>
+                    Managed ClickStack
+                    <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
+                      Managed observability with high-performance
+                      <br /> queries and long-term retention.
+                    </div>
+                  </span>
+                </NavigationLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -161,7 +185,7 @@ export default function NavigationSubNavProducts() {
               </li>*/}
               <li>
                 <NavigationLink
-                  href='/use-cases/observability'
+                  href='/clickstack'
                   onClick={useGalaxyOnClick(
                     'topNav.productMenu.clickstackSelect'
                   )}
@@ -171,7 +195,7 @@ export default function NavigationSubNavProducts() {
                     alt='ClickStack'
                     width={24}
                     height={24}
-                    className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
+                    className='flex-grow-1 size-5 flex-shrink-0 object-scale-down'
                   />
                   <span>
                     ClickStack
