@@ -796,7 +796,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               schema={generateVideoObjectSchema({
                 title: 'ClickStack in 60 seconds',
                 description:
-                  'A 60-second overview of ClickStack, an open-source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
+                  'A 60-second overview of ClickStack, an open source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
                 thumbnailUrl:
                   'https://img.youtube.com/vi/WBe7ZwTRWuQ/maxresdefault.jpg',
                 uploadDate: '2025-12-18T08:06:01-08:00',

@@ -66,7 +66,7 @@ import { EffectCreative, Mousewheel } from 'swiper/modules'
 const FAQs: Array<{ question: string; answer: string }> = [
   {
     question: 'What is ClickStack?',
-    answer: `ClickStack is a high-performance, open-source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
+    answer: `ClickStack is a high-performance, open source observability stack powered by ClickHouse. It unifies logs, metrics, traces and session replays, delivering lightning-fast queries and efficient storage at any scale.`
   },
   {
     question: 'How does ClickStack compare to the ELK stack?',
@@ -127,7 +127,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
       props: {
         seo: {
           title:
-            'ClickStack: High-Performance Open-Source Observability | Logs, Metrics, Traces with ClickHouse',
+            'ClickStack: High-Performance Open Source Observability | Logs, Metrics, Traces with ClickHouse',
           description:
             'ClickStack is a high-performance observability stack powered by ClickHouse. Unify logs, metrics, and traces with 10-100x cost savings. Get started today!',
           path: '/clickstack',
@@ -142,7 +142,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
                 'Observability (logs, metrics, traces, session replays, errors)',
               url: 'https://clickhouse.com/clickstack',
               description:
-                'High-performance, open-source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
+                'High-performance, open source observability stack powered by ClickHouse, delivering sub-second queries and efficient aggregations across logs, metrics, traces, session replays, and errors at massive scale.',
               provider: defaultOrganization,
               areaServed: 'Worldwide',
               audience: {
@@ -199,7 +199,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
             <SuiTitle
               type='h1'
               className='font-basier font-semibold md:!text-6xl'>
-              Open-source Observability for OpenTelemetry at scale
+              Open source Observability for OpenTelemetry at scale
             </SuiTitle>
             <SuiText size='lg' className='space-y-6 text-neutral-200'>
               <p>
@@ -223,7 +223,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
                 onClick={useGalaxyOnClick(
                   'clickstackOssPage.hero.getStartedWithOpenSource'
                 )}>
-                Get started with open-source
+                Get started with open source
               </CUIButton>
               <CUIButton
                 type='secondary'
@@ -698,7 +698,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               onClick={useGalaxyOnClick(
                 'clickstackOssPage.builtForOtelAtScale.getStarted'
               )}>
-              Get started with open-source
+              Get started with open source
             </CUIButton>
           </div>
           <div className='order-first mx-auto w-full max-w-max lg:order-last'>
@@ -741,7 +741,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               schema={generateVideoObjectSchema({
                 title: 'ClickStack in 60 seconds',
                 description:
-                  'A 60-second overview of ClickStack, an open-source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
+                  'A 60-second overview of ClickStack, an open source observability platform for logs, traces, metrics, session replay, and alerting — all unified to help teams quickly detect, investigate, and resolve issues at scale.',
                 thumbnailUrl:
                   'https://img.youtube.com/vi/WBe7ZwTRWuQ/maxresdefault.jpg',
                 uploadDate: '2025-12-18T08:06:01-08:00',
