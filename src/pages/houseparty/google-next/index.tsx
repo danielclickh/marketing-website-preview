@@ -6,21 +6,25 @@ import image3 from './assets/image-3.png'
 import map from './assets/map.svg'
 import socialImage from './assets/social.jpg'
 import Accordion from '@/components-cleaned/Accordion'
-import { CUIButton } from '@/components/ClickUI'
+import { CUIButton, CUICard } from '@/components/ClickUI'
+import CopyUrlButton from '@/components/CopyUrlButton'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import Modal from '@/components/Modal'
+import SocialButton from '@/components/SocialButton'
+import StripeBuyButton from '@/components/StripeBuyButton'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { CheckCircleIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import Script from 'next/script'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -28,7 +32,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
     return {
       props: {
         seo: {
-          title: 'House Party with The Chainsmokers 2026',
+          title: 'House Party with The Chainsmokers — Google Cloud Next 2026',
           description:
             'Ready to trade dashboards for dance floors? Join us in Vegas during Google Next for House Party with The Chainsmokers 2026. Step away from the tech talk, grab a drink, and get ready for a night of music, energy, and unforgettable vibes.',
           path: '/houseparty/google-next',
@@ -45,6 +49,10 @@ export default function Page({ headerData, seo }: CommonProps) {
   const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false)
   const [meetingModalLoaded, setMeetingModalLoaded] = useState(false)
   const [meetingModalSuccess, setMeetingModalSuccess] = useState(false)
+
+  const formSuccessRef = useRef<HTMLDivElement | null>(null)
+  const [formSuccess, setFormSuccess] = useState(false)
+  const [formLoaded, setFormLoaded] = useState(false)
 
   return (
     <>
@@ -86,7 +94,7 @@ export default function Page({ headerData, seo }: CommonProps) {
             </div>
           )}
         </Modal>
-        <div className='relative bg-[#010203]'>
+        <div className='relative bg-[#010203] py-10 lg:py-20'>
           {/* Background texture */}
           <Image
             src={imageTexture}
@@ -96,9 +104,9 @@ export default function Page({ headerData, seo }: CommonProps) {
             className='pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-25'
           />
 
-          <div className='relative z-10'>
+          <div className='relative z-10 space-y-10 lg:space-y-20'>
             {/* Form section */}
-            <section className='section-container py-10 lg:py-20'>
+            <section className='section-container'>
               <div className='flex flex-col gap-12 lg:flex-row lg:justify-between'>
                 <div className='mx-auto max-w-xl flex-1 space-y-12 lg:ml-0'>
                   <SuiTitle type='h1' weight='bold'>
@@ -107,44 +115,29 @@ export default function Page({ headerData, seo }: CommonProps) {
                     <Image
                       src={heroText}
                       width={375}
-                      height={173}
-                      alt='Featuring The Chainsmokers! Welcome back to house party!'
+                      height={132}
+                      alt='Featuring The Chainsmokers!'
                       className='mt-2'
                     />
                   </SuiTitle>
                   <SuiText className='space-y-6 lg:text-xl'>
-                    <p>
-                      You've survived another day of Google Next sessions and
-                      vendor demos. Time to trade your conference badge for some
-                      good vibes and join the party.
-                    </p>
-                    <p className='font-semibold'>
-                      Wednesday, April 22, 9:30 PM - 12:00 AM PT
-                    </p>
-                  </SuiText>
-                  <Link
-                    href='https://luma.com/event/evt-okMsbH8gdBGotLV'
-                    target='_blank'
-                    data-luma-action='checkout'
-                    data-luma-event-id='evt-okMsbH8gdBGotLV'
-                    className='block w-full rounded-full bg-primary-300 px-4 py-3 text-center text-lg font-bold text-primary-900 transition-colors hover:bg-primary-400'>
-                    Register for Event
-                  </Link>
-                  <Script
-                    id='luma-checkout'
-                    src='https://embed.lu.ma/checkout-button.js'
-                  />
-                  <SuiText className='space-y-6 lg:text-xl'>
                     <h3 className='!-mb-6 font-semibold text-primary-300'>
-                      What’s going down
+                      We're bringing House Party to Google Cloud Next
                     </h3>
                     <p>
                       You + ClickHouse + The Chainsmokers = House Party. Where
                       database engineers become dance floor legends.
                     </p>
+                    <p className='font-semibold'>
+                      Wednesday, April 22, 9:30 PM - 12:00 AM PT
+                    </p>
+                    <h3 className='!-mb-6 font-semibold text-primary-300'>
+                      What’s going down
+                    </h3>
                     <p>
-                      We’re bringing the Chainsmokers back to Intrigue for
-                      another epic night of music, food, and drink.
+                      The ClickHouse House Party is coming to Google Next for
+                      the first time. If you know, you know. We bring the music
+                      and pour the drinks; you bring the dance moves.
                     </p>
                     <h3 className='!-mb-6 font-semibold text-primary-300'>
                       When and where
@@ -152,19 +145,15 @@ export default function Page({ headerData, seo }: CommonProps) {
                     <p>
                       Wednesday, April 22, 9:30 PM - 12:00 AM PT
                       <br />
-                      <strong className='text-pink-500'>[location]</strong>
+                      Hakkasan Nightclub, MGM Grand, Las Vegas
                     </p>
                     <h3 className='!-mb-6 font-semibold text-primary-300'>
                       Ready to Party?
                     </h3>
                     <p>
-                      House Party awaits. The Chainsmokers are ready. The only
-                      question is: Are you?
-                    </p>
-                    <p>
-                      RSVP to get your free ticket. You'll need to show your
-                      Luma ticket QR code to get access to the event. Entry will
-                      be first-come-first-serve.
+                      Fill out the form to be notified as soon as registration
+                      opens. Registration will be first-come-first-serve and
+                      capacity is limited.
                     </p>
                     <p>
                       Trust us - your future self will thank you when you're
@@ -173,26 +162,107 @@ export default function Page({ headerData, seo }: CommonProps) {
                     </p>
                   </SuiText>
                 </div>
-                <div className='mx-auto max-w-lg flex-1 space-y-10 lg:mr-0'>
+                <div className='mx-auto w-full max-w-lg flex-1 space-y-10 lg:mr-0'>
                   <Image
-                    src={image2}
-                    width={1198 / 2}
-                    height={966 / 2}
-                    alt='House Party 2024'
+                    src={socialImage}
+                    width={1920 / 3}
+                    height={1080 / 3}
+                    alt='House Party'
+                    className='w-full max-w-none rounded'
                   />
-                  <Image
-                    src={image3}
-                    width={1122 / 2}
-                    height={836 / 2}
-                    alt='House Party 2024'
-                  />
-                  <Image
-                    src={image1}
-                    width={1166 / 2}
-                    height={1016 / 2}
-                    alt='House Party 2024'
-                  />
+                  <div>
+                    <CUICard>
+                      <CUICard.Body className='p-4 lg:p-6'>
+                        {!formSuccess && (
+                          <>
+                            <div className='mb-6 space-y-2 text-center'>
+                              <SuiTitle type='h3'>
+                                Get notified when registration opens
+                              </SuiTitle>
+                            </div>
+                            <MarketoForm
+                              formId='1127'
+                              onLoad={() => setFormLoaded(true)}
+                              submitButtonLabel='Save the date'
+                              clearbitTracking={true}
+                              onSuccess={() => {
+                                setFormSuccess(true)
+
+                                // Delay needed to allow the ref to update before scrolling
+                                window.setTimeout(() => {
+                                  formSuccessRef.current?.scrollIntoView()
+                                }, 10)
+                              }}
+                            />
+                          </>
+                        )}
+
+                        {!formLoaded && (
+                          <div className='text-center'>Loading form...</div>
+                        )}
+
+                        {formSuccess && (
+                          <div ref={formSuccessRef}>
+                            <div className='space-y-6 text-center'>
+                              <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
+                              <p>
+                                Thank you! We'll email you as soon as
+                                registration opens.
+                              </p>
+                              <div>
+                                <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
+                                  Share with others
+                                </p>
+                                <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
+                                  <CopyUrlButton />
+                                  <SocialButton
+                                    type='twitter'
+                                    title='House Party with The Chainsmokers — Google Cloud Next 2026'
+                                  />
+                                  <SocialButton
+                                    type='facebook'
+                                    title='House Party with The Chainsmokers — Google Cloud Next 2026'
+                                  />
+                                  <SocialButton
+                                    type='linkedin'
+                                    title='House Party with The Chainsmokers — Google Cloud Next 2026'
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </CUICard.Body>
+                    </CUICard>
+                  </div>
                 </div>
+              </div>
+            </section>
+
+            {/* Gallery */}
+            <section className='mx-auto max-w-screen-2xl px-4'>
+              <div className='grid grid-cols-1 gap-6 lg:grid-cols-3'>
+                <Image
+                  src={image2}
+                  width={1198 / 2}
+                  height={966 / 2}
+                  alt='House Party 2024'
+                  className='mx-auto'
+                />
+                <Image
+                  src={image1}
+                  width={1166 / 2}
+                  height={1016 / 2}
+                  alt='House Party 2024'
+                  className='mx-auto'
+                />
+                <Image
+                  src={image3}
+                  width={1122 / 2}
+                  height={836 / 2}
+                  alt='House Party 2024'
+                  className='mx-auto'
+                />
               </div>
             </section>
 
@@ -234,7 +304,7 @@ export default function Page({ headerData, seo }: CommonProps) {
             </section>
 
             {/* FAQs */}
-            <div className='relative py-10 lg:py-20' id='faqs'>
+            <section className='relative' id='faqs'>
               <div className='bg-shadow-element yellow-shadow align-shadow-right absolute right-0 h-full w-1/2 -translate-y-1/4' />
               <div className='section-container relative z-10'>
                 <SuiTitle type='h2' className='text-center'>
@@ -263,7 +333,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                       {
                         handle: 'Can I bring a friend (or two, or three)?',
                         content:
-                          'Yes, please invite your friends but note that [everyone must register](https://luma.com/) to receive a QR code. Each person will need to present their QR code to enter the event.'
+                          'Yes, please invite your friends but note that everyone must register to receive a QR code. Each person will need to present their QR code to enter the event.'
                       },
                       {
                         handle: 'What if I don’t know anyone?',
@@ -288,7 +358,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                   />
                 </div>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </Layout>
