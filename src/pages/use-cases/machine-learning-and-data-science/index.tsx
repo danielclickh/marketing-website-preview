@@ -163,9 +163,19 @@ export default function MLUseCasePage({
           <div className='section-container relative z-10 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:justify-between'>
             <div className='mx-auto -mt-1 max-w-lg space-y-4 text-center lg:mx-0 lg:pr-6 lg:text-left'>
               <SuiTitle type='h2'>Agentic Data Stack</SuiTitle>
-              <SuiText size='lg' className='text-neutral-200'>
-                Unlock Agent-Facing Analytics within the ClickHouse Cloud
-                console or via the native remote MCP server
+              <SuiText size='lg' className='space-y-4 text-neutral-200'>
+                <p>
+                  Unlock Agent-Facing Analytics within the ClickHouse Cloud
+                  console or via the native remote MCP server, and observe your
+                  agents with{' '}
+                  <Link
+                    href='https://langfuse.com/?utm_source=clickhouse_mlusecase'
+                    target='_blank'
+                    className='underline hover:decoration-2'>
+                    Langfuse
+                    <ExternalLinkIcon className='ml-1 inline-block size-4' />
+                  </Link>
+                </p>
               </SuiText>
             </div>
             <ul className='mx-auto flex max-w-md flex-wrap justify-center gap-x-11 gap-y-3.5 lg:mx-0 lg:grid lg:grid-cols-1 xl:grid-cols-2'>
@@ -187,20 +197,6 @@ export default function MLUseCasePage({
               <li>
                 <TickItem>
                   <strong>Docs AI</strong>
-                </TickItem>
-              </li>
-              <li className='col-span-full w-full'>
-                <TickItem>
-                  <strong>
-                    Agent observability with{' '}
-                    <Link
-                      href='https://langfuse.com/?utm_source=clickhouse_mlusecase'
-                      target='_blank'
-                      className='underline hover:decoration-2'>
-                      Langfuse
-                      <ExternalLinkIcon className='ml-1 inline-block size-4' />
-                    </Link>
-                  </strong>
                 </TickItem>
               </li>
             </ul>

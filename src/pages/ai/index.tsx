@@ -11,6 +11,7 @@ import iconDocs from './assets/icon-docs.svg'
 import iconGithub from './assets/icon-github.svg'
 import iconRemoteMcp from './assets/icon-remote-mcp.svg'
 import iconYoutube from './assets/icon-youtube.svg'
+import langfuseObservability from './assets/langfuse-observability.png'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import ResponsiveHtml5Video from '@/components-cleaned/ResponsiveHtml5Video'
 import TickItem from '@/components-cleaned/TickItem'
@@ -210,6 +211,72 @@ export default function Page({ seo, headerData }: CommonProps) {
               Save and share chat and artifacts with your team
             </TickItem>
           </FeatureSection>
+        </div>
+      </section>
+      <section className='my-24 bg-gradient-to-br from-[#042566] to-[#010C22]'>
+        <div className='section-container py-16 lg:py-24'>
+          <FeatureSection
+            image={
+              <Image
+                src={langfuseObservability}
+                width={1785 / 3}
+                height={1273 / 3}
+                alt='Languse'
+              />
+            }>
+            <Link
+              href='/blog/clickhouse-acquires-langfuse-open-source-llm-observability'
+              className='rounded bg-neutral-400/20 px-3 py-2 text-xs text-neutral-200/75'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='13'
+                height='13'
+                fill='none'
+                viewBox='0 0 13 13'
+                className='mr-3 inline-block'>
+                <path
+                  fill='silver'
+                  fillOpacity='.75'
+                  d='M6.5 6c.28 0 .5.22.5.5v3.33a.5.5 0 1 1-1 0V6.5c0-.28.22-.5.5-.5m.07-2.66a.67.67 0 1 1-.73.73V4c0-.37.3-.67.66-.67z'
+                />
+                <path
+                  fill='silver'
+                  fill-opacity='.75'
+                  fillRule='evenodd'
+                  d='M6.5 0a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13m0 1a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11'
+                  clipRule='evenodd'
+                />
+              </svg>
+              ClickHouse welcomes Langfuse: The future of open-source LLM
+              observability
+            </Link>
+            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
+              Observe your agents with Langfuse
+            </SuiTitle>
+            <TickItem>
+              Trace full agent workflows, from prompts to tool calls and
+              responses
+            </TickItem>
+            <TickItem>
+              Evaluate agent outputs with custom scoring and human feedback
+            </TickItem>
+            <TickItem>
+              Monitor quality, cost, and latency across every LLM call
+            </TickItem>
+            <TickItem>
+              <Link
+                href='https://langfuse.com/?utm_source=clickhouse_dotai'
+                target='_blank'
+                className='text-primary-300 underline hover:decoration-2'>
+                Get started on langfuse.com
+                <ExternalLink height={16} width={16} className='ml-2 inline' />
+              </Link>
+            </TickItem>
+          </FeatureSection>
+        </div>
+      </section>
+      <section className='my-24'>
+        <div className='section-container relative z-10 space-y-16 lg:space-y-28 lg:pt-6'>
           <FeatureSection
             className='bg-shadow-element yellow-shadow'
             style={
