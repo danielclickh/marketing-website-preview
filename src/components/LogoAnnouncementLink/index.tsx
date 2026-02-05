@@ -3,8 +3,9 @@ import Link, { LinkProps } from 'next/link'
 
 type Modes = 'light' | 'dark'
 
-export interface LogoAnnouncementLinkProps extends LinkProps {
-  children: React.ReactNode
+export interface LogoAnnouncementLinkProps
+  extends LinkProps,
+    Omit<React.HTMLProps<HTMLAnchorElement>, 'ref' | keyof LinkProps> {
   logo: ImageProps
   className?: string
   mode?: Modes
