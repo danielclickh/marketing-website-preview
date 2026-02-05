@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<CommonProps> =
         seo: {
           title: 'House Party with The Chainsmokers — Google Cloud Next 2026',
           description:
-            'Ready to trade dashboards for dance floors? Join us in Vegas during Google Next for House Party with The Chainsmokers 2026. Step away from the tech talk, grab a drink, and get ready for a night of music, energy, and unforgettable vibes.',
+            'Ready to trade dashboards for dance floors? Join us in Vegas during Google Cloud Next for House Party with The Chainsmokers 2026. Step away from the tech talk, grab a drink, and get ready for a night of music, energy, and unforgettable vibes.',
           path: '/houseparty/google-next',
           image: [{ url: socialImage.src }]
         },
@@ -135,9 +135,9 @@ export default function Page({ headerData, seo }: CommonProps) {
                       What’s going down
                     </h3>
                     <p>
-                      The ClickHouse House Party is coming to Google Next for
-                      the first time. If you know, you know. We bring the music
-                      and pour the drinks; you bring the dance moves.
+                      The ClickHouse House Party is coming to Google Cloud Next
+                      for the first time. If you know, you know. We bring the
+                      music and pour the drinks; you bring the dance moves.
                     </p>
                     <h3 className='!-mb-6 font-semibold text-primary-300'>
                       When and where
@@ -275,12 +275,12 @@ export default function Page({ headerData, seo }: CommonProps) {
                   src={map}
                   width={1972}
                   height={881}
-                  alt='ClickHouse booth location on Google Next map'
+                  alt='ClickHouse booth location on Google Cloud Next map'
                   className='mx-auto w-full'
                 />
                 <div className='relative z-10 mx-auto space-y-4 lg:max-w-lg'>
                   <SuiTitle type='h2'>
-                    Coming to Google Next? Find us at booth{' '}
+                    Coming to Google Cloud Next? Find us at booth{' '}
                     <TiltedText type='black-on-yellow' className='px-1'>
                       #2917
                     </TiltedText>
