@@ -193,7 +193,7 @@ export default function Page({ seo, headerData }: CommonProps) {
             </SuiTitle>
             <p className='!mt-2 mb-8 max-w-md text-lg text-neutral-200/75'>
               Monitored by the leading solution for LLM observability,
-              evaluations, and prompt management
+              evaluations, and prompt management.
             </p>
             <TickItem className='max-w-md'>
               LibreChat gives you a familiar chat UI
