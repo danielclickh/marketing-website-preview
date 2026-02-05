@@ -73,7 +73,7 @@ export default function Page({ seo, headerData }: CommonProps) {
               <br />
               Your chat, your models, your data.
               <br />
-              Powered by ClickHouse, MCP, and LibreChat.
+              Powered by ClickHouse, LibreChat and Langfuse.
             </SuiText>
             <div className='!my-8 flex flex-col gap-6 sm:flex-row sm:justify-center'>
               <CUIButton
@@ -138,6 +138,39 @@ export default function Page({ seo, headerData }: CommonProps) {
             style={
               {
                 '--top-side': '50%',
+                '--right-side': 'auto',
+                '--left-side': '20%',
+                '--scale': '0.7',
+                '--opacity': '0.02'
+              } as CSSProperties
+            }
+            image={
+              <Image
+                src={imageAgent}
+                width={1093 / 2}
+                height={498 / 2}
+                alt='Create your agent'
+              />
+            }>
+            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
+              Chat, visualize, share
+            </SuiTitle>
+            <TickItem>Talk to your data</TickItem>
+            <TickItem>
+              Create and share no-code, specialized agents across your team
+            </TickItem>
+            <TickItem>
+              Create charts, visualisations, and dashboards from chats
+            </TickItem>
+            <TickItem>
+              Save and share chat and artifacts with your team
+            </TickItem>
+          </FeatureSection>
+          <FeatureSection
+            className='bg-shadow-element yellow-shadow'
+            style={
+              {
+                '--top-side': '50%',
                 '--right-side': '20%',
                 '--left-side': 'auto',
                 '--scale': '0.7',
@@ -147,17 +180,21 @@ export default function Page({ seo, headerData }: CommonProps) {
             image={
               <Image
                 src={imageArchitecture}
-                width={1128 / 2}
-                height={684 / 2}
+                width={945 / 2}
+                height={784 / 2}
                 alt='Architecture'
               />
             }>
             <SuiTitle
               type='h3'
-              className='mb-8 max-w-md !text-4xl'
+              className='max-w-md !text-4xl'
               weight='semibold'>
               An open-source, composable stack
             </SuiTitle>
+            <p className='!mt-2 mb-8 max-w-md text-lg text-neutral-200/75'>
+              Monitored by the leading solution for LLM observability,
+              evaluations, and prompt management
+            </p>
             <TickItem className='max-w-md'>
               LibreChat gives you a familiar chat UI
             </TickItem>
@@ -177,102 +214,79 @@ export default function Page({ seo, headerData }: CommonProps) {
               </Link>
             </TickItem>
           </FeatureSection>
-          {/*<hr className='mx-auto w-2/3 opacity-10 lg:w-1/2' />*/}
-          <FeatureSection
-            className='bg-shadow-element yellow-shadow'
-            style={
-              {
-                '--top-side': '50%',
-                '--right-side': 'auto',
-                '--left-side': '20%',
-                '--scale': '0.7',
-                '--opacity': '0.02'
-              } as CSSProperties
-            }
-            image={
-              <Image
-                src={imageAgent}
-                width={559 / 2}
-                height={878 / 2}
-                alt='Create your agent'
-              />
-            }>
-            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
-              Chat, visualize, share
-            </SuiTitle>
-            <TickItem>Talk to your data</TickItem>
-            <TickItem>
-              Create and share no-code, specialized agents across your team
-            </TickItem>
-            <TickItem>
-              Generate charts, visualizations, and dashboards from chats
-            </TickItem>
-            <TickItem>
-              Save and share chat and artifacts with your team
-            </TickItem>
-          </FeatureSection>
         </div>
       </section>
       <section className='my-24 bg-gradient-to-br from-[#042566] to-[#010C22]'>
         <div className='section-container py-16 lg:py-24'>
-          <FeatureSection
-            image={
+          <div className='flex flex-col items-center justify-center gap-x-16 gap-y-12 md:flex-row'>
+            <div className='relative z-10 flex w-full flex-col md:w-1/2 md:text-left'>
+              <Link
+                href='/blog/clickhouse-acquires-langfuse-open-source-llm-observability'
+                className='inline-flex w-full max-w-max items-center gap-3 rounded bg-neutral-400/20 px-3 py-2 text-xs text-neutral-200/75 transition-colors hover:text-neutral-200'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='13'
+                  height='13'
+                  fill='none'
+                  viewBox='0 0 13 13'
+                  className='flex-shrink-0 flex-grow-0'>
+                  <path
+                    fill='silver'
+                    fillOpacity='.75'
+                    d='M6.5 6c.28 0 .5.22.5.5v3.33a.5.5 0 1 1-1 0V6.5c0-.28.22-.5.5-.5m.07-2.66a.67.67 0 1 1-.73.73V4c0-.37.3-.67.66-.67z'
+                  />
+                  <path
+                    fill='silver'
+                    fill-opacity='.75'
+                    fillRule='evenodd'
+                    d='M6.5 0a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13m0 1a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11'
+                    clipRule='evenodd'
+                  />
+                </svg>
+                ClickHouse welcomes Langfuse: The future of open-source LLM
+                observability
+              </Link>
+              <div className='mt-8 space-y-4 border-primary-300 md:border-l-4 md:pl-8'>
+                <SuiTitle
+                  type='h3'
+                  className='mb-8 !text-4xl'
+                  weight='semibold'>
+                  Observe your agents with&nbsp;Langfuse
+                </SuiTitle>
+                <TickItem>
+                  Trace full agent workflows, from prompts to tool calls and
+                  responses
+                </TickItem>
+                <TickItem>
+                  Evaluate agent outputs with custom scoring and human feedback
+                </TickItem>
+                <TickItem>
+                  Monitor quality, cost, and latency across every LLM call
+                </TickItem>
+                <TickItem>
+                  <Link
+                    href='https://langfuse.com/?utm_source=clickhouse_dotai'
+                    target='_blank'
+                    className='text-primary-300 underline hover:decoration-2'>
+                    Get started on langfuse.com
+                    <ExternalLink
+                      height={16}
+                      width={16}
+                      className='ml-2 inline'
+                    />
+                  </Link>
+                </TickItem>
+              </div>
+            </div>
+            <div className='relative z-10 flex w-full items-center justify-center md:w-1/2'>
               <Image
                 src={langfuseObservability}
                 width={1785 / 3}
                 height={1273 / 3}
                 alt='Languse'
               />
-            }>
-            <Link
-              href='/blog/clickhouse-acquires-langfuse-open-source-llm-observability'
-              className='rounded bg-neutral-400/20 px-3 py-2 text-xs text-neutral-200/75'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='13'
-                height='13'
-                fill='none'
-                viewBox='0 0 13 13'
-                className='mr-3 inline-block'>
-                <path
-                  fill='silver'
-                  fillOpacity='.75'
-                  d='M6.5 6c.28 0 .5.22.5.5v3.33a.5.5 0 1 1-1 0V6.5c0-.28.22-.5.5-.5m.07-2.66a.67.67 0 1 1-.73.73V4c0-.37.3-.67.66-.67z'
-                />
-                <path
-                  fill='silver'
-                  fill-opacity='.75'
-                  fillRule='evenodd'
-                  d='M6.5 0a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13m0 1a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11'
-                  clipRule='evenodd'
-                />
-              </svg>
-              ClickHouse welcomes Langfuse: The future of open-source LLM
-              observability
-            </Link>
-            <SuiTitle type='h3' className='mb-8 !text-4xl' weight='semibold'>
-              Observe your agents with Langfuse
-            </SuiTitle>
-            <TickItem>
-              Trace full agent workflows, from prompts to tool calls and
-              responses
-            </TickItem>
-            <TickItem>
-              Evaluate agent outputs with custom scoring and human feedback
-            </TickItem>
-            <TickItem>
-              Monitor quality, cost, and latency across every LLM call
-            </TickItem>
-            <TickItem>
-              <Link
-                href='https://langfuse.com/?utm_source=clickhouse_dotai'
-                target='_blank'
-                className='text-primary-300 underline hover:decoration-2'>
-                Get started on langfuse.com
-                <ExternalLink height={16} width={16} className='ml-2 inline' />
-              </Link>
-            </TickItem>
-          </FeatureSection>
+            </div>
+          </div>
         </div>
       </section>
       <section className='my-24'>
