@@ -217,7 +217,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
                 type='primary'
                 size='lg'
                 weight='semibold'
-                href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=clickstack-oss'
+                href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started/oss?loc=clickstack-oss'
                 linkClass='w-full md:w-auto'
                 className='w-full !px-10 md:w-auto'
                 onClick={useGalaxyOnClick(
@@ -691,7 +691,7 @@ export default function ClickHouseServerPage({ seo, headerData }: CommonProps) {
               type='primary'
               size='lg'
               weight='semibold'
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=clickstack-oss'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started/oss?loc=clickstack-oss'
               target='_blank'
               linkClass='w-full md:w-auto'
               className='mt-6 w-full !px-10 md:w-auto'

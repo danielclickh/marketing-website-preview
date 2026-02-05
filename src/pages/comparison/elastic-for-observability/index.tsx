@@ -113,7 +113,7 @@ export default function ElasticPage({ headerData, seo }: CommonProps) {
               Explore Managed ClickStack
             </CUIButton>
             <CUIButton
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=elastic-comparison-page'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started/oss?loc=elastic-comparison-page'
               type='secondary'
               size='lg'
               weight='semibold'
@@ -438,7 +438,7 @@ export default function ElasticPage({ headerData, seo }: CommonProps) {
               type='secondary'
               size='lg'
               className='group mx-auto w-full !border-neutral-800 !px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=elastic-comparison-page'>
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started/oss?loc=elastic-comparison-page'>
               Get started with open-source
             </CUIButton>
           </p>

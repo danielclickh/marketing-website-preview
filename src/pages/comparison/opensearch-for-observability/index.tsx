@@ -108,7 +108,7 @@ export default function OpensearchPage({ headerData, seo }: CommonProps) {
               Explore Managed ClickStack
             </CUIButton>
             <CUIButton
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page-hero'
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started/oss?loc=opensearch-comparison-page-hero'
               type='secondary'
               size='lg'
               weight='semibold'
@@ -394,7 +394,7 @@ export default function OpensearchPage({ headerData, seo }: CommonProps) {
               type='secondary'
               size='lg'
               className='group mx-auto w-full !border-neutral-800 !px-10 !text-neutral-800 hover:!bg-neutral-800 hover:!text-white md:w-auto'
-              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started?loc=opensearch-comparison-page-get-started'>
+              href='https://clickhouse.com/docs/use-cases/observability/clickstack/getting-started/oss?loc=opensearch-comparison-page-get-started'>
               Get started with open-source
             </CUIButton>
           </p>
