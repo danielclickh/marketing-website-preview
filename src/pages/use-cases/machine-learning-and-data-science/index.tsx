@@ -16,6 +16,7 @@ import { findOne } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -186,6 +187,20 @@ export default function MLUseCasePage({
               <li>
                 <TickItem>
                   <strong>Docs AI</strong>
+                </TickItem>
+              </li>
+              <li className='col-span-full w-full'>
+                <TickItem>
+                  <strong>
+                    Agent observability with{' '}
+                    <Link
+                      href='https://langfuse.com/?utm_source=clickhouse_mlusecase'
+                      target='_blank'
+                      className='underline hover:decoration-2'>
+                      Langfuse
+                      <ExternalLinkIcon className='ml-1 inline-block size-4' />
+                    </Link>
+                  </strong>
                 </TickItem>
               </li>
             </ul>
