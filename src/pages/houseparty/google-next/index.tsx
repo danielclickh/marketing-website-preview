@@ -246,21 +246,21 @@ export default function Page({ headerData, seo }: CommonProps) {
                   src={image2}
                   width={1198 / 2}
                   height={966 / 2}
-                  alt='House Party 2024'
+                  alt='House Party 2025'
                   className='mx-auto'
                 />
                 <Image
                   src={image1}
                   width={1166 / 2}
                   height={1016 / 2}
-                  alt='House Party 2024'
+                  alt='House Party 2025'
                   className='mx-auto'
                 />
                 <Image
                   src={image3}
                   width={1122 / 2}
                   height={836 / 2}
-                  alt='House Party 2024'
+                  alt='House Party 2025'
                   className='mx-auto'
                 />
               </div>
