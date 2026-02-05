@@ -68,17 +68,19 @@ export default function HomepageHeroAlt({
               </CUIButton>
             </div>
             <LogoAnnouncementLink
-              href='/cloud/postgres?loc=hero'
+              href='https://langfuse.com/?utm_source=clickhouse_hero'
+              target='_blank'
               className='mt-8 text-sm'
               logo={{
-                src: '/images/cloud/integrations/postgres.svg',
-                alt: 'Postgres managed by ClickHouse',
+                src: '/logos/langfuse.svg',
+                alt: 'Langfuse',
                 width: 52,
                 height: 52
               }}>
-              Postgres managed by ClickHouse is now in private preview. Build
-              apps on a Unified Data Stack with Postgres for transactions and
-              ClickHouse for analytics.{' '}
+              Langfuse is now part of ClickHouse. Discover the leading
+              open-source platform for LLM observability, evaluations, and
+              prompt management. Ideal for building, monitoring, and optimizing
+              AI applications at scale.{' '}
               <span className='text-nowrap font-medium group-hover:underline'>
                 Learn more&nbsp;-&gt;
               </span>
