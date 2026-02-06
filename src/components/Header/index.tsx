@@ -74,13 +74,13 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         countryCode?.toUpperCase() === 'JP' ||
         langCode?.toUpperCase() === 'JA'
       ) {
-        setHeaderBannerEnabled(true)
+        /*setHeaderBannerEnabled(true)
         setHeaderBannerText(
           'ClickHouse announces establishment of Japanese subsidiary in partnership with Japan Cloud'
         )
         setHeaderBannerUrl('/blog/japan-cloud?loc=eyebrow')
         setHeaderBannerExpires(undefined)
-        setHeaderBannerArrow(true)
+        setHeaderBannerArrow(true)*/
       }
     })()
 
