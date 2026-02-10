@@ -276,9 +276,9 @@ export default function Page({ headerData, seo }: CommonProps) {
                   width={1972}
                   height={881}
                   alt='ClickHouse booth location on Google Cloud Next map'
-                  className='mx-auto w-full'
+                  className='mx-auto w-full flex-1 lg:max-w-2xl'
                 />
-                <div className='relative z-10 mx-auto space-y-4 lg:max-w-lg'>
+                <div className='relative z-10 mx-auto space-y-4 w-full lg:max-w-lg'>
                   <SuiTitle type='h2'>
                     Coming to Google Cloud Next? Find us at booth{' '}
                     <TiltedText type='black-on-yellow' className='px-1'>
