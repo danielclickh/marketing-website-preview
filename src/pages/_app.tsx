@@ -135,29 +135,29 @@ function MyApp({ Component, pageProps }: AppProps) {
             href='/favicons/apple-touch-icon.png'
           />
         </Head>
-        <GrowthBookProvider growthbook={gb}>
-          <GlobalSearchProvider enabled={!isMarketoIframe}>
-            <SmartBackProvider>
-              <div
-                id='main-site-container'
-                className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-                <div className='flex min-h-screen flex-col'>
-                  <Component {...pageProps} />
+
+        <SecuritiCookieBanner production={IS_PRODUCTION}>
+          <GrowthBookProvider growthbook={gb}>
+            <GlobalSearchProvider enabled={!isMarketoIframe}>
+              <SmartBackProvider>
+                <div
+                  id='main-site-container'
+                  className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
+                  <div className='flex min-h-screen flex-col'>
+                    <Component {...pageProps} />
+                  </div>
                 </div>
-              </div>
-              <UTMPersist />
-            </SmartBackProvider>
-          </GlobalSearchProvider>
-        </GrowthBookProvider>
+                <UTMPersist />
+              </SmartBackProvider>
+            </GlobalSearchProvider>
+          </GrowthBookProvider>
+        </SecuritiCookieBanner>
 
         {!isMarketoIframe && IS_PRODUCTION && (
-          <>
-            <SecuritiCookieBanner />
-            <GoogleTagManager
-              gtmId='GTM-WKSRXS8S'
-              gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
-            />
-          </>
+          <GoogleTagManager
+            gtmId='GTM-WKSRXS8S'
+            gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
+          />
         )}
       </ClickUIProvider>
     </>
