@@ -14,7 +14,6 @@ import { Inconsolata, Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Script from 'next/script'
 import { useReportWebVitals } from 'next/web-vitals'
 import { useEffect } from 'react'
 
@@ -150,43 +149,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           </GlobalSearchProvider>
         </GrowthBookProvider>
 
-        {/* Exclude tracking from marketo iframe routes */}
-        {!isMarketoIframe && (
-          <>
-            {/* GTM */}
-            {IS_PRODUCTION && (
-              <GoogleTagManager
-                gtmId='GTM-WKSRXS8S'
-                gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
-              />
-            )}
-
-            {/* Cleans marketo email tracking tokens */}
-            <Script
-              id='stripmkttok-script'
-              src='https://discover.clickhouse.com/js/stripmkttok.js'
-              type='text/javascript'
-              async
-            />
-
-            {/* Securiti.ai Cookie Banner */}
-            <Script
-              defer
-              data-strict-csp
-              data-skip-css='false'
-              src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
-              data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-              data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-              data-backend-url='https://app.securiti.ai'
-              onReady={() => {
-                const cookieSettingsButton = document.querySelector(
-                  '#cookie-settings-button'
-                )
-                cookieSettingsButton?.classList.remove('hidden')
-                cookieSettingsButton?.classList.add('cmp-revoke-consent')
-              }}
-            />
-          </>
+        {!isMarketoIframe && IS_PRODUCTION && (
+          <GoogleTagManager
+            gtmId='GTM-WKSRXS8S'
+            gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
+          />
         )}
       </ClickUIProvider>
     </>
