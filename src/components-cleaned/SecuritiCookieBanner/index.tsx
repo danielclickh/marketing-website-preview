@@ -4,6 +4,7 @@ import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useState
@@ -72,16 +73,20 @@ function getConsentValuesFromLocalStorage() {
 
 type SecuritiContextType = {
   consentValues: Partial<SecuritiConsentStatuses>
-  open: () => void
-  close: () => void
+  open: () => boolean
+  close: () => boolean
   enabled: boolean
   staging: boolean
 }
 
 const SecuritiContext = createContext<SecuritiContextType>({
   consentValues: {},
-  open() {},
-  close() {},
+  open() {
+    return false
+  },
+  close() {
+    return false
+  },
   enabled: true,
   staging: false
 })
@@ -247,13 +252,17 @@ export default function SecuritiCookieBanner({
     }
   }, [enabled, staging])
 
-  const open = () => {
-    sdk?.showPreferenceCenter()
-  }
+  const open = useCallback(() => {
+    if (!sdk || !('showPreferenceCenter' in sdk)) return false
+    sdk.showPreferenceCenter()
+    return true
+  }, [sdk])
 
-  const close = () => {
-    sdk?.closePreferenceCenter()
-  }
+  const close = useCallback(() => {
+    if (!sdk || !('closePreferenceCenter' in sdk)) return false
+    sdk.closePreferenceCenter()
+    return true
+  }, [sdk])
 
   return (
     <SecuritiContext.Provider
