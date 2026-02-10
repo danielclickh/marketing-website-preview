@@ -1,4 +1,5 @@
 import GlobalSearchProvider from '@/components-cleaned/GlobalSearchProvider'
+import SecuritiCookieBanner from '@/components-cleaned/SecuritiCookieBanner'
 import SmartBackProvider from '@/components-cleaned/SmartBackProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
@@ -150,10 +151,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         </GrowthBookProvider>
 
         {!isMarketoIframe && IS_PRODUCTION && (
-          <GoogleTagManager
-            gtmId='GTM-WKSRXS8S'
-            gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
-          />
+          <>
+            <SecuritiCookieBanner />
+            <GoogleTagManager
+              gtmId='GTM-WKSRXS8S'
+              gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
+            />
+          </>
         )}
       </ClickUIProvider>
     </>
