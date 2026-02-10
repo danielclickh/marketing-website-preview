@@ -1,6 +1,7 @@
 'use client'
 
 import JsonSchema from '@/components-cleaned/JsonSchema'
+import VideoConsentWrapper from '@/components-cleaned/VideoConsentWrapper'
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
 import type VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
@@ -138,30 +139,33 @@ export default function PlayOnClickVideo({
   }, [thumbnail, thumbnailClassName])
 
   return (
-    <div
-      className={`relative aspect-video overflow-hidden rounded bg-neutral-900 ${className}`}>
-      {/* Thumbnail overlay */}
-      <div
-        className={`absolute inset-0 z-10 transition-opacity ${thumbnail ? 'bg-neutral-900' : 'pointer-events-none'} ${
-          playing ? 'pointer-events-none opacity-0' : ''
-        }`}>
-        <VideoPlayButton
-          className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${thumbnail ? '' : 'pointer-events-auto'} ${playButtonClassName}`}
-          eyebrow={playButtonEyebrow}
-          label={playButtonLabel}
-          loading={loading && !playing}
-          onClick={handlePlay}
-        />
-        {renderedThumbnail}
-      </div>
+    <>
+      <VideoConsentWrapper thumbnail={renderedThumbnail}>
+        <div
+          className={`relative aspect-video overflow-hidden rounded bg-neutral-900 ${className}`}>
+          {/* Thumbnail overlay */}
+          <div
+            className={`absolute inset-0 z-10 transition-opacity ${thumbnail ? 'bg-neutral-900' : 'pointer-events-none'} ${
+              playing ? 'pointer-events-none opacity-0' : ''
+            }`}>
+            <VideoPlayButton
+              className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${thumbnail ? '' : 'pointer-events-auto'} ${playButtonClassName}`}
+              eyebrow={playButtonEyebrow}
+              label={playButtonLabel}
+              loading={loading && !playing}
+              onClick={handlePlay}
+            />
+            {renderedThumbnail}
+          </div>
 
-      {/* Player container */}
-      <div
-        ref={containerRef}
-        className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
-      />
-
+          {/* Player container */}
+          <div
+            ref={containerRef}
+            className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
+          />
+        </div>
+      </VideoConsentWrapper>
       {schema && <JsonSchema schema={schema} />}
-    </div>
+    </>
   )
 }

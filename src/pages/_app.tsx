@@ -136,7 +136,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </Head>
 
-        <SecuritiCookieBanner production={IS_PRODUCTION}>
+        <SecuritiCookieBanner
+          enabled={!isMarketoIframe}
+          staging={!IS_PRODUCTION}>
           <GrowthBookProvider growthbook={gb}>
             <GlobalSearchProvider enabled={!isMarketoIframe}>
               <SmartBackProvider>

@@ -27,12 +27,6 @@ type SecuritiConsentStatuses = Record<
   SecuritiConsentStatus
 >
 
-type SecuritiConsentEvents = {
-  'cmp-consent-change': {
-    categories: SecuritiConsentStatuses
-  }
-}
-
 const DEFAULT_STATUSES: Record<
   SecuritiCookieCategories,
   SecuritiConsentStatus
@@ -52,28 +46,6 @@ function normalizeStatus(
   if (value === true) return 'granted'
   if (value === false) return 'denied'
   return fallback
-}
-
-type SecuritiContextType = {
-  consentValues: Partial<SecuritiConsentStatuses>
-  open: () => void
-  close: () => void
-}
-
-const SecuritiContext = createContext<SecuritiContextType>({
-  consentValues: {},
-  open() {},
-  close() {}
-})
-
-export function useSecuritiCookieBanner() {
-  const result = useContext(SecuritiContext)
-  if (!result) {
-    throw new Error(
-      'Context used outside of the <SecuritiCookieBanner> component!'
-    )
-  }
-  return result
 }
 
 function getConsentValuesFromLocalStorage() {
@@ -98,15 +70,44 @@ function getConsentValuesFromLocalStorage() {
   }
 }
 
+type SecuritiContextType = {
+  consentValues: Partial<SecuritiConsentStatuses>
+  open: () => void
+  close: () => void
+  enabled: boolean
+  staging: boolean
+}
+
+const SecuritiContext = createContext<SecuritiContextType>({
+  consentValues: {},
+  open() {},
+  close() {},
+  enabled: true,
+  staging: false
+})
+
+export function useSecuritiCookieBanner() {
+  const result = useContext(SecuritiContext)
+  if (!result) {
+    throw new Error(
+      'Context used outside of the <SecuritiCookieBanner> component!'
+    )
+  }
+  return result
+}
+
 export interface SecuritiCookieBannerProps {
   children: React.ReactNode
-  production: boolean
+  enabled?: boolean
+  staging?: boolean
 }
 
 export default function SecuritiCookieBanner({
   children,
-  production = false
+  enabled = true,
+  staging = false
 }: SecuritiCookieBannerProps) {
+  const [sdk, setSdk] = useState<any>(null)
   const [values, setValues] = useState<Partial<SecuritiConsentStatuses>>(
     getConsentValuesFromLocalStorage()
   )
@@ -182,11 +183,13 @@ export default function SecuritiCookieBanner({
     // Triggered on every page load
     const loadCallback = [
       'onLoad',
-      function (sdk: any) {
-        if (sdk.isConsentGiven()) {
-          submitConsent(sdk.getConsent())
+      function (sdkRef: any) {
+        setSdk(sdkRef)
+
+        if (sdkRef.isConsentGiven()) {
+          submitConsent(sdkRef.getConsent())
         } else {
-          submitConsent(sdk.getDefaultConsentState(), 'default_consent')
+          submitConsent(sdkRef.getDefaultConsentState(), 'default_consent')
         }
       }
     ]
@@ -194,8 +197,9 @@ export default function SecuritiCookieBanner({
     // Triggered when the user gives consent
     const consentGivenCallback = [
       'onConsentGiven',
-      function (sdk: any, consent: SecuritiConsentObject) {
-        submitConsent(consent || sdk.getConsent())
+      function (sdkRef: any, consent: SecuritiConsentObject) {
+        setSdk(sdkRef)
+        submitConsent(consent || sdkRef.getConsent())
       }
     ]
 
@@ -213,7 +217,7 @@ export default function SecuritiCookieBanner({
     el.setAttribute('data-backend-url', 'https://app.securiti.ai')
     el.setAttribute('data-skip-css', 'false')
     el.setAttribute('data-strict-csp', 'true')
-    if (!production) {
+    if (staging) {
       el.setAttribute('data-securiti-staging-mode', 'true')
     }
     el.defer = true
@@ -225,7 +229,10 @@ export default function SecuritiCookieBanner({
         cookieSettingsButton.style.display = 'block'
       }
     })
-    ;(document.head || document.body).appendChild(el)
+
+    if (enabled) {
+      ;(document.head || document.body).appendChild(el)
+    }
 
     // Clean up
     return () => {
@@ -238,13 +245,24 @@ export default function SecuritiCookieBanner({
         return item !== loadCallback && item !== consentGivenCallback
       })
     }
-  }, [production])
+  }, [enabled, staging])
+
+  const open = () => {
+    sdk?.showPreferenceCenter()
+  }
+
+  const close = () => {
+    sdk?.closePreferenceCenter()
+  }
+
   return (
     <SecuritiContext.Provider
       value={{
         consentValues: values,
-        open() {},
-        close() {}
+        open,
+        close,
+        enabled,
+        staging
       }}>
       {children}
     </SecuritiContext.Provider>

@@ -5,6 +5,7 @@ import { CUILink } from '../ClickUI'
 import CodeViewer from '../CodeViewer'
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
+import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { useRouter } from 'next/router'
 import { memo, MouseEventHandler, useState } from 'react'
@@ -97,6 +98,18 @@ interface DefaultComponentProps {
   allowHeaderLink: boolean
 }
 
+const isResponsiveEmbed = (src?: string) => {
+  if (!src) return false
+  try {
+    const { hostname } = new URL(src)
+    return ['youtube.com', 'youtu.be', 'vimeo.com'].some(
+      (domain) => hostname === domain || hostname.endsWith(`.${domain}`)
+    )
+  } catch {
+    return false
+  }
+}
+
 function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
   return {
     img: BlogImage,
@@ -144,6 +157,19 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
         return <>{children}</> // render image directly without <p>
       }
       return <p {...props}>{children}</p>
+    },
+    iframe({ node, src, children, ...props }: any) {
+      const iframeEl = (
+        <iframe src={src} {...props}>
+          {children}
+        </iframe>
+      )
+
+      if (isResponsiveEmbed(src)) {
+        return <ResponsiveEmbed>{iframeEl}</ResponsiveEmbed>
+      }
+
+      return iframeEl
     }
   }
 }
