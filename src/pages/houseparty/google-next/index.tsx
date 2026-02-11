@@ -128,8 +128,15 @@ export default function Page({ headerData, seo }: CommonProps) {
                     </p>
                   </SuiText>
                 </div>
-                <div className='mx-auto w-full max-w-lg flex-1 space-y-10 lg:mr-0'>
-                
+                <div className='mx-auto w-full max-w-lg flex-1 space-y-6 lg:sticky lg:top-24 lg:mr-0'>
+                  <video
+                    src='/houseparty/google-next/highlight-reel.mp4'
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
+                    className='aspect-video w-full rounded-lg object-cover'
+                  />
                   <div>
                     <CUICard>
                       <CUICard.Body className='p-4 lg:p-6'>
