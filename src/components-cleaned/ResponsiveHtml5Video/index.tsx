@@ -17,16 +17,42 @@ export interface ResponsiveHtml5VideoProps
     candidates: VideoCandidate[]
   }
   preserveTime?: boolean // When true, preserve currentTime when switching sources
+  defer?: boolean // When true, defer video load until browser is idle
+}
+
+// Schedule a callback when the browser is idle, with a fallback for Safari
+type WindowWithIdle = Window & {
+  requestIdleCallback: (cb: () => void, opts?: { timeout?: number }) => number
+  cancelIdleCallback: (id: number) => void
+}
+
+function onIdle(cb: () => void): () => void {
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    const win = window as WindowWithIdle
+    const id = win.requestIdleCallback(cb, { timeout: 2000 })
+    return () => win.cancelIdleCallback(id)
+  }
+  const id = setTimeout(cb, 100)
+  return () => clearTimeout(id)
 }
 
 export default function ResponsiveHtml5Video({
   sources,
   autoPlay,
   preserveTime = true,
+  defer = false,
   ...props
 }: ResponsiveHtml5VideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [currentSrc, setCurrentSrc] = useState<string>(sources.defaultSrc)
+  const [ready, setReady] = useState(!defer)
+
+  // When defer is true, wait until the browser is idle before allowing load
+  useEffect(() => {
+    if (!defer) return
+    const cancel = onIdle(() => setReady(true))
+    return cancel
+  }, [defer])
 
   // Build a unique list of media queries to subscribe to
   const mediaQueries = useMemo(() => {
@@ -68,6 +94,8 @@ export default function ResponsiveHtml5Video({
   }, [sources, mediaQueries])
 
   useEffect(() => {
+    if (!ready) return
+
     const video = videoRef.current
     if (!video) return
     if (!currentSrc) return
@@ -115,7 +143,7 @@ export default function ResponsiveHtml5Video({
     return () => {
       video.removeEventListener('loadedmetadata', restore)
     }
-  }, [currentSrc, autoPlay, preserveTime, props.muted])
+  }, [ready, currentSrc, autoPlay, preserveTime, props.muted])
 
-  return <video ref={videoRef} autoPlay={autoPlay} {...props} />
+  return <video ref={videoRef} autoPlay={!defer ? autoPlay : undefined} {...props} />
 }
