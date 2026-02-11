@@ -165,13 +165,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Script
               id='stripmkttok-script'
               src='https://discover.clickhouse.com/js/stripmkttok.js'
-              type='text/javascript'
-              async
+              strategy='lazyOnload'
             />
 
             {/* Securiti.ai Cookie Banner */}
             <Script
-              defer
+              strategy='afterInteractive'
               data-strict-csp
               data-skip-css='false'
               src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
