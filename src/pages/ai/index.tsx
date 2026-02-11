@@ -27,7 +27,7 @@ import { ExternalLink } from 'lucide-react'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, useEffect, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -47,6 +47,17 @@ export const getStaticProps: GetStaticProps<CommonProps> =
 
 export default function Page({ seo, headerData }: CommonProps) {
   useGalaxyOnPage('aiPage')
+
+  // Only mount the video on desktop to avoid downloading on mobile
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    setIsDesktop(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   return (
     <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
@@ -94,39 +105,36 @@ export default function Page({ seo, headerData }: CommonProps) {
               </CUIButton>
             </div>
           </div>
-          <div className='relative hidden md:block'>
-            {/* Center border */}
-            <div className='absolute -inset-1 rounded-[1.75%/3.5%] bg-primary-300 mix-blend-overlay' />
-            <ResponsiveHtml5Video
-              muted={true}
-              playsInline={true}
-              loop={true}
-              autoPlay={true}
-              preload='metadata'
-              className='relative z-10 block h-auto w-full rounded-[1.5%/3%] bg-neutral'
-              sources={{
-                defaultSrc: '/ai/hero-1280.mp4',
-                candidates: [
-                  {
-                    src: '/ai/hero-960.mp4',
-                    media: '(max-width: 768px) and (resolution: 1dppx)'
-                  },
-                  {
-                    src: '/ai/hero-1280.mp4',
-                    media: '(max-width: 768px) and (min-resolution: 2dppx)'
-                  },
-                  {
-                    src: '/ai/hero-1280.mp4',
-                    media: '(min-width: 769px) and (resolution: 1dppx)'
-                  },
-                  {
-                    src: '/ai/hero-1920.mp4',
-                    media: '(min-width: 769px) and (min-resolution: 2dppx)'
-                  }
-                ]
-              }}
-            />
-          </div>
+          {/* Only mount video on desktop — avoids downloading 6-13MB on mobile */}
+          {isDesktop && (
+            <div className='relative'>
+              {/* Center border */}
+              <div className='absolute -inset-1 rounded-[1.75%/3.5%] bg-primary-300 mix-blend-overlay' />
+              <ResponsiveHtml5Video
+                muted={true}
+                playsInline={true}
+                loop={true}
+                autoPlay={true}
+                defer={true}
+                preload='none'
+                poster='/ai/hero-poster.jpg'
+                className='relative z-10 block h-auto w-full rounded-[1.5%/3%] bg-neutral'
+                sources={{
+                  defaultSrc: '/ai/hero-1280.mp4',
+                  candidates: [
+                    {
+                      src: '/ai/hero-1280.mp4',
+                      media: '(min-width: 769px) and (resolution: 1dppx)'
+                    },
+                    {
+                      src: '/ai/hero-1920.mp4',
+                      media: '(min-width: 769px) and (min-resolution: 2dppx)'
+                    }
+                  ]
+                }}
+              />
+            </div>
+          )}
         </div>
       </section>
 
