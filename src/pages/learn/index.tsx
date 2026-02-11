@@ -54,17 +54,17 @@ interface PageProps extends CommonProps {
 
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
-    const commonProps = await getCommonProps()
-    const data = await findOne('homepage', {
-      populate: [
-        'customerStories',
-        'customerStories.*',
-        'customerStories.logos.*',
-        'customerStories.logos.darkLogoPng'
-      ]
-    })
-
-    const events = await eventsService.findAll({
+    const [commonProps, data, events] = await Promise.all([
+      getCommonProps(),
+      findOne('homepage', {
+        populate: [
+          'customerStories',
+          'customerStories.*',
+          'customerStories.logos.*',
+          'customerStories.logos.darkLogoPng'
+        ]
+      }),
+      eventsService.findAll({
       filters: {
         $and: [
           {
@@ -81,7 +81,7 @@ export const getStaticProps: GetStaticProps<PageProps> =
         ]
       },
       sort: ['localDatetime:ASC']
-    })
+    })])
 
     const modifiedEvents: Array<TrainingSimpleEvent> = events.map((event) => {
       let extractedTime: null | string = null

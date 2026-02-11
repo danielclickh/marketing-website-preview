@@ -251,7 +251,7 @@ export default function MarketoForm({
       setQueryString(params.toString())
 
       // Listen for messages from the iframe
-      window.addEventListener('message', recieveEventFromIframe)
+      window.addEventListener('message', recieveEventFromIframe, { passive: true })
       setMountIframe(true)
       return () => {
         window.removeEventListener('message', recieveEventFromIframe)

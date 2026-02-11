@@ -36,8 +36,8 @@ export default function DisplayPrice() {
 
   // Attach resize events on mount
   useEffect(() => {
-    window.addEventListener('resize', resize)
-    window.addEventListener('orientationchange', resize)
+    window.addEventListener('resize', resize, { passive: true })
+    window.addEventListener('orientationchange', resize, { passive: true })
 
     return () => {
       window.removeEventListener('resize', resize)

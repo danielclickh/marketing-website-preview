@@ -29,19 +29,17 @@ interface PageProps extends CommonProps {
 
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
-    const commonProps = await getCommonProps()
-
-    const stories: Pick<HomePageProps, 'customerStories'> = await findOne(
-      'homepage',
-      {
+    const [commonProps, stories] = await Promise.all([
+      getCommonProps(),
+      findOne('homepage', {
         populate: [
           'customerStories',
           'customerStories.*',
           'customerStories.logos.*',
           'customerStories.logos.darkLogoPng'
         ]
-      }
-    )
+      })
+    ]) as [Awaited<ReturnType<typeof getCommonProps>>, Pick<HomePageProps, 'customerStories'>]
 
     return {
       props: {

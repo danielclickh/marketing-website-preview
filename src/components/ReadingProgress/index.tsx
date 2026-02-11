@@ -43,9 +43,9 @@ export default function ReadingProgress({
 
   useEffect(() => {
     scrollListener() // Apply scroll percent on component mount
-    window.addEventListener('scroll', scrollListener)
+    window.addEventListener('scroll', scrollListener, { passive: true })
     return () => window.removeEventListener('scroll', scrollListener)
-  })
+  }, [scrollListener])
 
   return (
     <ProgressBar
