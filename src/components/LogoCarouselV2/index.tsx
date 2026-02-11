@@ -26,7 +26,7 @@ export interface LogoCarouselV2Props extends React.HTMLProps<HTMLDivElement> {
 
 export default function LogoCarouselV2({
   logos,
-  className = '',
+  className = 'my-16',
   invert = false,
   heading = '',
   initialSlide = 0, // Index of initial slide, can be an array of indexes for each row of logos
@@ -88,7 +88,7 @@ export default function LogoCarouselV2({
   }, [])
 
   return (
-    <div className={`my-16 text-primary-300 ${className}`} {...props}>
+    <div className={`text-primary-300 ${className}`} {...props}>
       <EyebrowText className='mb-10 text-center text-primary-300'>
         {heading}
       </EyebrowText>
