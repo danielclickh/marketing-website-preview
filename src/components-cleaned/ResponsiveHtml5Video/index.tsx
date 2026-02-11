@@ -21,10 +21,16 @@ export interface ResponsiveHtml5VideoProps
 }
 
 // Schedule a callback when the browser is idle, with a fallback for Safari
+type WindowWithIdle = Window & {
+  requestIdleCallback: (cb: () => void, opts?: { timeout?: number }) => number
+  cancelIdleCallback: (id: number) => void
+}
+
 function onIdle(cb: () => void): () => void {
   if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-    const id = window.requestIdleCallback(cb, { timeout: 2000 })
-    return () => window.cancelIdleCallback(id)
+    const win = window as WindowWithIdle
+    const id = win.requestIdleCallback(cb, { timeout: 2000 })
+    return () => win.cancelIdleCallback(id)
   }
   const id = setTimeout(cb, 100)
   return () => clearTimeout(id)
