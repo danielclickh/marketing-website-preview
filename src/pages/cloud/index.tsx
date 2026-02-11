@@ -1,8 +1,12 @@
 import featureBlocks from './feature_blocks.json'
 import features from './features.json'
 import TickItem from '@/components-cleaned/TickItem'
-import AnimatedIntegrationLogos from '@/components/AnimatedIntegrationLogos'
 import { BYOCSection } from '@/components/BYOCSection'
+import dynamic from 'next/dynamic'
+
+const AnimatedIntegrationLogos = dynamic(() => import('@/components/AnimatedIntegrationLogos'), {
+  ssr: false
+})
 import Lines from '@/components/ClickPipesAnimation/Lines'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import GetStartedFree from '@/components/GetStartedFree'
