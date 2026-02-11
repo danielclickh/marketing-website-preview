@@ -25,7 +25,7 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import Script from 'next/script'
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 
 export const getStaticProps: GetStaticProps<CommonProps> =
   async function getStaticProps() {
@@ -129,12 +129,8 @@ export default function Page({ headerData, seo }: CommonProps) {
                   </SuiText>
                 </div>
                 <div className='mx-auto w-full max-w-lg flex-1 space-y-6 lg:sticky lg:top-24 lg:mr-0'>
-                  <video
+                  <MuteableVideo
                     src='/houseparty/google-next/highlight-reel.mp4'
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
                     className='aspect-video w-full rounded-lg object-cover'
                   />
                   <div>
@@ -293,5 +289,69 @@ export default function Page({ headerData, seo }: CommonProps) {
         </div>
       </Layout>
     </>
+  )
+}
+
+function MuteableVideo({
+  src,
+  className = ''
+}: {
+  src: string
+  className?: string
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isMuted, setIsMuted] = useState(true)
+  const [isReady, setIsReady] = useState(false)
+
+  const toggleMute = useCallback(() => {
+    if (!videoRef.current) return
+    videoRef.current.muted = !videoRef.current.muted
+    setIsMuted(videoRef.current.muted)
+  }, [])
+
+  return (
+    <div className='group relative'>
+      {/* Placeholder overlaid while video loads */}
+      {!isReady && (
+        <div className={`absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-neutral-800`}>
+          <div className='flex flex-col items-center gap-2 text-neutral-400'>
+            <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' className='animate-pulse'>
+              <polygon points='5 3 19 12 5 21 5 3' />
+            </svg>
+            <span className='text-sm'>Loading video...</span>
+          </div>
+        </div>
+      )}
+      <video
+        ref={videoRef}
+        src={src}
+        autoPlay
+        muted
+        playsInline
+        loop
+        onPlaying={() => setIsReady(true)}
+        className={className}
+      />
+      {isReady && (
+        <button
+          onClick={toggleMute}
+          aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+          className='absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100'>
+          {isMuted ? (
+            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+              <polygon points='11 5 6 9 2 9 2 15 6 15 11 19 11 5' />
+              <line x1='23' y1='9' x2='17' y2='15' />
+              <line x1='17' y1='9' x2='23' y2='15' />
+            </svg>
+          ) : (
+            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+              <polygon points='11 5 6 9 2 9 2 15 6 15 11 19 11 5' />
+              <path d='M19.07 4.93a10 10 0 0 1 0 14.14' />
+              <path d='M15.54 8.46a5 5 0 0 1 0 7.07' />
+            </svg>
+          )}
+        </button>
+      )}
+    </div>
   )
 }
