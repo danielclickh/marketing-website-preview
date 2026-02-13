@@ -35,6 +35,9 @@ import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
+import 'swiper/css'
+import { Mousewheel } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 interface StaticProps extends CommonProps {
   postgresBlogs: Array<{
@@ -195,113 +198,126 @@ export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
             </SuiText>
           </div>
           <Spacer size='xxl' />
-          <div className='scrollbar-hide-inline flex items-stretch gap-6 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
-            {Array.from({ length: POSTGRES_WEEK_TOTAL_DAYS }).map(
-              (_, index) => {
-                // Calculate the date for this card
-                const cardDate = new Date(today)
+          <div className='overflow-hidden'>
+            <Swiper
+              direction='horizontal'
+              modules={[Mousewheel]}
+              mousewheel={{
+                forceToAxis: false,
+                sensitivity: 1,
+                releaseOnEdges: true
+              }}
+              slidesPerView='auto'
+              spaceBetween={24}>
+              {Array.from({ length: POSTGRES_WEEK_TOTAL_DAYS }).map(
+                (_, index) => {
+                  // Calculate the date for this card
+                  const cardDate = new Date(today)
 
-                if (index !== 0) {
-                  // DAY 2+: Start from next Tuesday and continue daily
-                  // Calculate days until next Tuesday (day 2 = Tuesday)
-                  const currentDay = today.getDay() // 0=Sunday, 1=Monday, 2=Tuesday, etc.
-                  const daysUntilTuesday =
-                    currentDay <= 2
-                      ? 2 - currentDay // If today is Sun/Mon/Tue, days until Tuesday
-                      : 9 - currentDay // If after Tuesday, days until next Tuesday
+                  if (index !== 0) {
+                    // DAY 2+: Start from next Tuesday and continue daily
+                    // Calculate days until next Tuesday (day 2 = Tuesday)
+                    const currentDay = today.getDay() // 0=Sunday, 1=Monday, 2=Tuesday, etc.
+                    const daysUntilTuesday =
+                      currentDay <= 2
+                        ? 2 - currentDay // If today is Sun/Mon/Tue, days until Tuesday
+                        : 9 - currentDay // If after Tuesday, days until next Tuesday
 
-                  // Set to next Tuesday, then add additional days for DAY 3, 4, 5
-                  cardDate.setDate(
-                    today.getDate() + daysUntilTuesday + (index - 1)
+                    // Set to next Tuesday, then add additional days for DAY 3, 4, 5
+                    cardDate.setDate(
+                      today.getDate() + daysUntilTuesday + (index - 1)
+                    )
+                  }
+
+                  cardDate.setHours(0, 0, 0, 0)
+
+                  // Get blog data and format date
+                  const blog = postgresBlogs?.[index]
+                  const dateString = cardDate.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    month: 'short',
+                    day: 'numeric'
+                  })
+
+                  // Content unlocks as soon as blog is available
+                  const isContentUnlocked = !!blog?.title
+
+                  // Get status text and blog URL
+                  const statusText = getRelativeDateStatus(cardDate)
+                  const blogUrl = blog?.slug
+                    ? `/blog/${blog.slug}?loc=postgresWeek${index + 1}`
+                    : '#'
+
+                  // Card styling
+                  const cardClassName = `flex h-full w-64 flex-col justify-start p-6 text-neutral-200 ${
+                    isContentUnlocked
+                      ? 'cursor-pointer hover:border-primary-300 hover:bg-[#323232] focus:border-primary-300'
+                      : 'cursor-not-allowed hover:shadow-card'
+                  }`
+
+                  return (
+                    <SwiperSlide
+                      key={`postgres-week-blog-${index}`}
+                      className='!h-auto !w-auto'>
+                      <CUICard
+                        onClick={
+                          isContentUnlocked
+                            ? () => window.open(blogUrl, '_blank')
+                            : undefined
+                        }
+                        className={cardClassName}>
+                        <CUICard.Header>
+                          <SuiText
+                            size='base'
+                            color='white'
+                            weight='bold'
+                            className='!font-bold'>
+                            DAY {index + 1}
+                          </SuiText>
+                          <SuiText
+                            size='base'
+                            color='text-accent'
+                            weight='medium'
+                            className='font-mono'>
+                            {dateString}
+                          </SuiText>
+                        </CUICard.Header>
+                        <Spacer size='md' />
+                        <CUICard.Body className='h-full'>
+                          <SuiTitle
+                            type='h3'
+                            color='white'
+                            className={isContentUnlocked ? '' : 'blur-[5px]'}>
+                            {isContentUnlocked
+                              ? blog.title
+                              : `New blog post will be revealed on ${dateString}!`}
+                          </SuiTitle>
+                        </CUICard.Body>
+                        <div className='flex w-full flex-col'>
+                          <Separator size='lg' />
+                          <CUICard.Footer>
+                            {isContentUnlocked ? (
+                              <LinkWithArrow
+                                href={blogUrl}
+                                target='_blank'
+                                onClick={(e) => e.stopPropagation()}
+                                className='text-base font-medium text-primary-300 hover:underline'>
+                                Read blog
+                              </LinkWithArrow>
+                            ) : (
+                              <SuiText className='flex items-center gap-2'>
+                                <Icon name='clock' />
+                                {statusText}
+                              </SuiText>
+                            )}
+                          </CUICard.Footer>
+                        </div>
+                      </CUICard>
+                    </SwiperSlide>
                   )
                 }
-
-                cardDate.setHours(0, 0, 0, 0)
-
-                // Get blog data and format date
-                const blog = postgresBlogs?.[index]
-                const dateString = cardDate.toLocaleDateString('en-US', {
-                  weekday: 'long',
-                  month: 'short',
-                  day: 'numeric'
-                })
-
-                // Content unlocks as soon as blog is available
-                const isContentUnlocked = !!blog?.title
-
-                // Get status text and blog URL
-                const statusText = getRelativeDateStatus(cardDate)
-                const blogUrl = blog?.slug
-                  ? `/blog/${blog.slug}?loc=postgresWeek${index + 1}`
-                  : '#'
-
-                // Card styling
-                const cardClassName = `flex h-auto w-64 flex-col justify-start p-6 text-neutral-200 ${
-                  isContentUnlocked
-                    ? 'cursor-pointer hover:border-primary-300 hover:bg-[#323232] focus:border-primary-300'
-                    : 'cursor-not-allowed hover:shadow-card'
-                }`
-
-                return (
-                  <CUICard
-                    hFull={false}
-                    key={`postgres-week-blog-${index}`}
-                    onClick={
-                      isContentUnlocked
-                        ? () => window.open(blogUrl, '_blank')
-                        : undefined
-                    }
-                    className={cardClassName}>
-                    <CUICard.Header>
-                      <SuiText
-                        size='base'
-                        color='white'
-                        weight='bold'
-                        className='!font-bold'>
-                        DAY {index + 1}
-                      </SuiText>
-                      <SuiText
-                        size='base'
-                        color='text-accent'
-                        weight='medium'
-                        className='font-mono'>
-                        {dateString}
-                      </SuiText>
-                    </CUICard.Header>
-                    <Spacer size='md' />
-                    <CUICard.Body className='h-full'>
-                      <SuiTitle
-                        type='h3'
-                        color='white'
-                        className={isContentUnlocked ? '' : 'blur-[5px]'}>
-                        {isContentUnlocked
-                          ? blog.title
-                          : `New blog post will be revealed on ${dateString}!`}
-                      </SuiTitle>
-                    </CUICard.Body>
-                    <div className='flex w-full flex-col'>
-                      <Separator size='lg' />
-                      <CUICard.Footer>
-                        {isContentUnlocked ? (
-                          <LinkWithArrow
-                            href={blogUrl}
-                            target='_blank'
-                            onClick={(e) => e.stopPropagation()}
-                            className='text-base font-medium text-primary-300 hover:underline'>
-                            Read blog
-                          </LinkWithArrow>
-                        ) : (
-                          <SuiText className='flex items-center gap-2'>
-                            <Icon name='clock' />
-                            {statusText}
-                          </SuiText>
-                        )}
-                      </CUICard.Footer>
-                    </div>
-                  </CUICard>
-                )
-              }
-            )}
+              )}
+            </Swiper>
           </div>
         </div>
         <Spacer size='lg' />
