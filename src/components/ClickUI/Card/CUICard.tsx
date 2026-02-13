@@ -1,7 +1,10 @@
 import React, { HTMLAttributes } from 'react'
 import Tilt from 'react-parallax-tilt'
 
-type CardComponent = React.FunctionComponent<HTMLAttributes<HTMLDivElement>> & {
+type CardElementType = HTMLAttributes<HTMLDivElement> & {
+  hFull?: boolean
+}
+type CardComponent = React.FunctionComponent<CardElementType> & {
   Header: React.FunctionComponent<HTMLAttributes<HTMLDivElement>>
   Body: React.FunctionComponent<HTMLAttributes<HTMLDivElement>>
   Footer: React.FunctionComponent<HTMLAttributes<HTMLDivElement>>
@@ -10,6 +13,7 @@ type CardComponent = React.FunctionComponent<HTMLAttributes<HTMLDivElement>> & {
 const CUICard: CardComponent = ({
   children,
   className,
+  hFull = true,
   ...props
 }): JSX.Element => (
   <Tilt
@@ -18,7 +22,7 @@ const CUICard: CardComponent = ({
     glareMaxOpacity={0.4}
     glareColor='rgba(251, 255, 70, 0.08)'
     glarePosition='all'
-    className='h-full'>
+    className={hFull ? 'h-full' : undefined}>
     <div
       className={`cui-card flex h-full flex-col items-center justify-between rounded-lg border border-neutral-700/80 bg-neutral-900/50 shadow-card hover:shadow-lg ${className}`}
       {...props}>
