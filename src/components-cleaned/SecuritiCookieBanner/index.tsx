@@ -156,12 +156,15 @@ export default function SecuritiCookieBanner({
 
   const setValuesIfChanged = useCallback(
     (newValues: SecuritiConsentStatuses) => {
-      const keys = Object.keys(newValues) as Array<
-        keyof SecuritiConsentStatuses
-      >
-      const valuesHaveChanged = keys.some(
-        (key) => newValues[key] !== values[key]
-      )
+      // Dedupe keys
+      const keys = new Set([...Object.keys(values), ...Object.keys(newValues)])
+
+      // Check if any values differ
+      const valuesHaveChanged = (
+        [...keys] as Array<keyof SecuritiConsentStatuses>
+      ).some((key) => values[key] !== newValues[key])
+
+      // Only update the state if values have changed
       if (valuesHaveChanged) {
         setValues(newValues)
       }
