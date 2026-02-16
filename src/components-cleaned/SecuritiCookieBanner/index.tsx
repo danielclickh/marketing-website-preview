@@ -154,12 +154,27 @@ export default function SecuritiCookieBanner({
     getConsentValuesFromLocalStorage()
   )
 
+  const setValuesIfChanged = useCallback(
+    (newValues: SecuritiConsentStatuses) => {
+      const keys = Object.keys(newValues) as Array<
+        keyof SecuritiConsentStatuses
+      >
+      const valuesHaveChanged = keys.some(
+        (key) => newValues[key] !== values[key]
+      )
+      if (valuesHaveChanged) {
+        setValues(newValues)
+      }
+    },
+    [values]
+  )
+
   useEffect(() => {
     const submitConsent = (securitiConsent: null | SecuritiConsentObject) => {
       const statuses = normalizeCategoryStatuses(securitiConsent)
       if (!statuses) return false
       window.sessionStorage.setItem('cmp-consent', JSON.stringify(statuses))
-      setValues(statuses)
+      setValuesIfChanged(statuses)
       return true
     }
 
