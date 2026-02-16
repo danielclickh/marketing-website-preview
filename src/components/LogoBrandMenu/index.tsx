@@ -60,10 +60,11 @@ export default function LogoBrandMenu({
   const copySvg = useCallback(async () => {
     try {
       const svg =
-        svgCache.current ||
+        svgCache.current ??
         (await fetch('/brand-assets/clickhouse-logo-white.svg').then((r) =>
           r.text()
         ))
+      if (!svg) return
 
       // Try modern clipboard API first, fall back to execCommand
       let ok = false
