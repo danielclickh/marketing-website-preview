@@ -116,17 +116,7 @@ type SecuritiContextType = {
   staging: boolean
 }
 
-const SecuritiContext = createContext<SecuritiContextType>({
-  consentValues: DEFAULT_STATUSES,
-  open() {
-    return false
-  },
-  close() {
-    return false
-  },
-  enabled: true,
-  staging: false
-})
+const SecuritiContext = createContext<SecuritiContextType | null>(null)
 
 export function useSecuritiCookieBanner() {
   const result = useContext(SecuritiContext)
