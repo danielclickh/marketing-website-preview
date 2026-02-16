@@ -71,6 +71,18 @@ function getConsentValuesFromLocalStorage() {
   }
 }
 
+function mapSecuritiValuesToTagManager(statuses: SecuritiConsentStatuses) {
+  return {
+    ad_storage: statuses.advertising,
+    ad_user_data: statuses.advertising,
+    ad_personalization: statuses.advertising,
+    analytics_storage: statuses.analytics,
+    functionality_storage: statuses.functional,
+    personalization_storage: statuses.analytics,
+    security_storage: 'granted' // always granted for security/fraud prevention
+  }
+}
+
 type SecuritiContextType = {
   consentValues: Partial<SecuritiConsentStatuses>
   open: () => boolean
@@ -118,6 +130,19 @@ export default function SecuritiCookieBanner({
   )
 
   useEffect(() => {
+    // This function is required to update consent states
+    // Google uses a strict check for the Arguments object type
+    function gtag(...args: Array<any>) {
+      if (!window.dataLayer) window.dataLayer = []
+      window.dataLayer.push(arguments)
+    }
+
+    // Set default consent state
+    gtag('consent', 'default', {
+      ...mapSecuritiValuesToTagManager(DEFAULT_STATUSES),
+      wait_for_update: 500 // Gives Securiti 500ms to load before tags fire
+    })
+
     function normalizeCategoryStatuses(
       content: null | SecuritiConsentObject
     ): null | SecuritiConsentStatuses {
@@ -157,10 +182,7 @@ export default function SecuritiCookieBanner({
       }
     }
 
-    function submitConsent(
-      securitiConsent: null | SecuritiConsentObject,
-      gtmEvent: 'default' | 'update'
-    ) {
+    function submitConsent(securitiConsent: null | SecuritiConsentObject) {
       const statuses = normalizeCategoryStatuses(securitiConsent)
       if (!statuses) return false
 
@@ -169,20 +191,15 @@ export default function SecuritiCookieBanner({
       setValues(statuses)
 
       // https://support.google.com/tagmanager/answer/13802165
+      gtag('consent', 'update', mapSecuritiValuesToTagManager(statuses))
+
+      // Push a custom event to the dataLayer
+      // Pushing to the dataLayer instead of `gtag` function for mechanical purposes
       if (!window.dataLayer) window.dataLayer = []
-      window.dataLayer.push([
-        'consent',
-        gtmEvent,
-        {
-          ad_storage: statuses.advertising,
-          ad_user_data: statuses.advertising,
-          ad_personalization: statuses.advertising,
-          analytics_storage: statuses.analytics,
-          functionality_storage: statuses.functional,
-          personalization_storage: statuses.analytics,
-          security_storage: 'granted' // always granted for security/fraud prevention
-        }
-      ])
+      window.dataLayer.push({
+        event: 'consent_updated'
+      })
+
       return true
     }
 
@@ -193,9 +210,9 @@ export default function SecuritiCookieBanner({
         setSdk(sdkRef)
 
         if (sdkRef.isConsentGiven()) {
-          submitConsent(sdkRef.getConsent(), 'update')
+          submitConsent(sdkRef.getConsent())
         } else {
-          submitConsent(sdkRef.getDefaultConsentState(), 'default')
+          submitConsent(sdkRef.getDefaultConsentState())
         }
       }
     ]
@@ -205,7 +222,7 @@ export default function SecuritiCookieBanner({
       'onConsentGiven',
       function (sdkRef: any, consent: SecuritiConsentObject) {
         setSdk(sdkRef)
-        submitConsent(consent || sdkRef.getConsent(), 'update')
+        submitConsent(consent || sdkRef.getConsent())
       }
     ]
 
