@@ -77,6 +77,7 @@ type SecuritiContextType = {
   close: () => boolean
   enabled: boolean
   staging: boolean
+  initiated: boolean
 }
 
 const SecuritiContext = createContext<SecuritiContextType>({
@@ -88,7 +89,8 @@ const SecuritiContext = createContext<SecuritiContextType>({
     return false
   },
   enabled: true,
-  staging: false
+  staging: false,
+  initiated: false
 })
 
 export function useSecuritiCookieBanner() {
@@ -112,6 +114,7 @@ export default function SecuritiCookieBanner({
   enabled = true,
   staging = false
 }: SecuritiCookieBannerProps) {
+  const [initiated, setInitiated] = useState<boolean>(false)
   const [sdk, setSdk] = useState<any>(null)
   const [values, setValues] = useState<Partial<SecuritiConsentStatuses>>(
     getConsentValuesFromLocalStorage()
@@ -183,6 +186,9 @@ export default function SecuritiCookieBanner({
           security_storage: 'granted' // always granted for security/fraud prevention
         }
       ])
+      window.dataLayer.push({
+        event: 'consent_updated'
+      })
       return true
     }
 
@@ -197,6 +203,8 @@ export default function SecuritiCookieBanner({
         } else {
           submitConsent(sdkRef.getDefaultConsentState(), 'default')
         }
+
+        setInitiated(true)
       }
     ]
 
@@ -272,7 +280,8 @@ export default function SecuritiCookieBanner({
         open,
         close,
         enabled,
-        staging
+        staging,
+        initiated
       }}>
       {children}
     </SecuritiContext.Provider>

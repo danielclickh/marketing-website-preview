@@ -1,4 +1,5 @@
 import GlobalSearchProvider from '@/components-cleaned/GlobalSearchProvider'
+import GoogleTagManager from '@/components-cleaned/GoogleTagManager'
 import SecuritiCookieBanner from '@/components-cleaned/SecuritiCookieBanner'
 import SmartBackProvider from '@/components-cleaned/SmartBackProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
@@ -9,7 +10,6 @@ import '@/styles/globals.scss'
 import '@/styles/securiti-overrides.scss'
 import { ClickUIProvider } from '@clickhouse/click-ui'
 import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
-import { GoogleTagManager } from '@next/third-parties/google'
 import { AppProps } from 'next/app'
 import { Inconsolata, Inter } from 'next/font/google'
 import localFont from 'next/font/local'
@@ -153,14 +153,8 @@ function MyApp({ Component, pageProps }: AppProps) {
               </SmartBackProvider>
             </GlobalSearchProvider>
           </GrowthBookProvider>
+          {!isMarketoIframe && <GoogleTagManager />}
         </SecuritiCookieBanner>
-
-        {!isMarketoIframe && IS_PRODUCTION && (
-          <GoogleTagManager
-            gtmId='GTM-WKSRXS8S'
-            gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
-          />
-        )}
       </ClickUIProvider>
     </>
   )
