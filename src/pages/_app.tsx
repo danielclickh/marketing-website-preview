@@ -1,4 +1,6 @@
 import GlobalSearchProvider from '@/components-cleaned/GlobalSearchProvider'
+import GoogleTagManagerConsent from '@/components-cleaned/GoogleTagManagerConsent'
+import SecuritiCookieBanner from '@/components-cleaned/SecuritiCookieBanner'
 import SmartBackProvider from '@/components-cleaned/SmartBackProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
@@ -135,27 +137,34 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </Head>
 
-        <GrowthBookProvider growthbook={gb}>
-          <GlobalSearchProvider enabled={!isMarketoIframe}>
-            <SmartBackProvider>
-              <div
-                id='main-site-container'
-                className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-                <div className='flex min-h-screen flex-col'>
-                  <Component {...pageProps} />
+        <SecuritiCookieBanner
+          enabled={!isMarketoIframe}
+          staging={!IS_PRODUCTION}>
+          <GrowthBookProvider growthbook={gb}>
+            <GlobalSearchProvider enabled={!isMarketoIframe}>
+              <SmartBackProvider>
+                <div
+                  id='main-site-container'
+                  className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
+                  <div className='flex min-h-screen flex-col'>
+                    <Component {...pageProps} />
+                  </div>
                 </div>
-              </div>
-              <UTMPersist />
-            </SmartBackProvider>
-          </GlobalSearchProvider>
-        </GrowthBookProvider>
-
-        {!isMarketoIframe && IS_PRODUCTION && (
-          <GoogleTagManager
-            gtmId='GTM-WKSRXS8S'
-            gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
-          />
-        )}
+                <UTMPersist />
+              </SmartBackProvider>
+            </GlobalSearchProvider>
+          </GrowthBookProvider>
+          {!isMarketoIframe && true && (
+            <>
+              {/* Consent must initialize first! */}
+              <GoogleTagManagerConsent />
+              <GoogleTagManager
+                gtmId='GTM-WKSRXS8S'
+                gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
+              />
+            </>
+          )}
+        </SecuritiCookieBanner>
       </ClickUIProvider>
     </>
   )
