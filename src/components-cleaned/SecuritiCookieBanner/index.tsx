@@ -159,7 +159,7 @@ export default function SecuritiCookieBanner({
 
     function submitConsent(
       securitiConsent: null | SecuritiConsentObject,
-      gtmEvent: 'default_consent' | 'consent_update' = 'consent_update'
+      gtmEvent: 'default' | 'update'
     ) {
       const statuses = normalizeCategoryStatuses(securitiConsent)
       if (!statuses) return false
@@ -170,9 +170,10 @@ export default function SecuritiCookieBanner({
 
       // https://support.google.com/tagmanager/answer/13802165
       if (!window.dataLayer) window.dataLayer = []
-      window.dataLayer.push({
-        event: gtmEvent,
-        consent_update: {
+      window.dataLayer.push([
+        'consent',
+        gtmEvent,
+        {
           ad_storage: statuses.advertising,
           ad_user_data: statuses.advertising,
           ad_personalization: statuses.advertising,
@@ -181,7 +182,7 @@ export default function SecuritiCookieBanner({
           personalization_storage: statuses.analytics,
           security_storage: 'granted' // always granted for security/fraud prevention
         }
-      })
+      ])
       return true
     }
 
@@ -192,9 +193,9 @@ export default function SecuritiCookieBanner({
         setSdk(sdkRef)
 
         if (sdkRef.isConsentGiven()) {
-          submitConsent(sdkRef.getConsent())
+          submitConsent(sdkRef.getConsent(), 'update')
         } else {
-          submitConsent(sdkRef.getDefaultConsentState(), 'default_consent')
+          submitConsent(sdkRef.getDefaultConsentState(), 'default')
         }
       }
     ]
@@ -204,7 +205,7 @@ export default function SecuritiCookieBanner({
       'onConsentGiven',
       function (sdkRef: any, consent: SecuritiConsentObject) {
         setSdk(sdkRef)
-        submitConsent(consent || sdkRef.getConsent())
+        submitConsent(consent || sdkRef.getConsent(), 'update')
       }
     ]
 
