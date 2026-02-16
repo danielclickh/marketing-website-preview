@@ -2,8 +2,6 @@
 
 import {
   createContext,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useContext,
   useEffect,
@@ -14,21 +12,21 @@ type SecuritiConsentObject = {
   category: Record<string, unknown>
 }
 
-type SecuritiCookieCategories =
+export type SecuritiCookieCategories =
   | 'advertising'
   | 'analytics'
   | 'functional'
   | 'essential'
   | 'unclassified'
 
-type SecuritiConsentStatus = 'denied' | 'granted'
+export type SecuritiConsentStatus = 'denied' | 'granted'
 
-type SecuritiConsentStatuses = Record<
+export type SecuritiConsentStatuses = Record<
   SecuritiCookieCategories,
   SecuritiConsentStatus
 >
 
-const DEFAULT_STATUSES: Record<
+export const DEFAULT_STATUSES: Record<
   SecuritiCookieCategories,
   SecuritiConsentStatus
 > = {
@@ -37,7 +35,7 @@ const DEFAULT_STATUSES: Record<
   functional: 'denied',
   essential: 'granted',
   unclassified: 'denied'
-}
+} as const
 
 function normalizeStatus(
   value: any,
@@ -47,6 +45,45 @@ function normalizeStatus(
   if (value === true) return 'granted'
   if (value === false) return 'denied'
   return fallback
+}
+
+function normalizeCategoryStatuses(
+  content: null | SecuritiConsentObject
+): null | SecuritiConsentStatuses {
+  const category = content?.category || null
+  if (!category) return null
+
+  // https://app.securiti.ai/privaci/v1/admin/cmp/published_cookie_categories
+  const advertising = normalizeStatus(
+    category.Advertising,
+    DEFAULT_STATUSES.advertising
+  )
+  const analytics = normalizeStatus(
+    category['Analytics and customization'] ||
+      category['Analytics & Customization'],
+    DEFAULT_STATUSES.analytics
+  )
+  const functional = normalizeStatus(
+    category['Performance and functionality'] ||
+      category['Performance & Functionality'],
+    DEFAULT_STATUSES.functional
+  )
+  const essential = normalizeStatus(
+    category.Essential,
+    DEFAULT_STATUSES.essential
+  )
+  const unclassified = normalizeStatus(
+    category.Unclassified,
+    DEFAULT_STATUSES.unclassified
+  )
+
+  return {
+    advertising,
+    analytics,
+    functional,
+    essential,
+    unclassified
+  }
 }
 
 function getConsentValuesFromLocalStorage() {
@@ -71,20 +108,8 @@ function getConsentValuesFromLocalStorage() {
   }
 }
 
-function mapSecuritiValuesToTagManager(statuses: SecuritiConsentStatuses) {
-  return {
-    ad_storage: statuses.advertising,
-    ad_user_data: statuses.advertising,
-    ad_personalization: statuses.advertising,
-    analytics_storage: statuses.analytics,
-    functionality_storage: statuses.functional,
-    personalization_storage: statuses.analytics,
-    security_storage: 'granted' // always granted for security/fraud prevention
-  }
-}
-
 type SecuritiContextType = {
-  consentValues: Partial<SecuritiConsentStatuses>
+  consentValues: SecuritiConsentStatuses
   open: () => boolean
   close: () => boolean
   enabled: boolean
@@ -92,7 +117,7 @@ type SecuritiContextType = {
 }
 
 const SecuritiContext = createContext<SecuritiContextType>({
-  consentValues: {},
+  consentValues: DEFAULT_STATUSES,
   open() {
     return false
   },
@@ -125,81 +150,16 @@ export default function SecuritiCookieBanner({
   staging = false
 }: SecuritiCookieBannerProps) {
   const [sdk, setSdk] = useState<any>(null)
-  const [values, setValues] = useState<Partial<SecuritiConsentStatuses>>(
+  const [values, setValues] = useState<SecuritiConsentStatuses>(
     getConsentValuesFromLocalStorage()
   )
 
   useEffect(() => {
-    // This function is required to update consent states
-    // Google uses a strict check for the Arguments object type
-    function gtag(...args: Array<any>) {
-      if (!window.dataLayer) window.dataLayer = []
-      window.dataLayer.push(arguments)
-    }
-
-    // Set default consent state
-    gtag('consent', 'default', {
-      ...mapSecuritiValuesToTagManager(getConsentValuesFromLocalStorage()),
-      wait_for_update: 500 // Gives Securiti 500ms to load before tags fire
-    })
-
-    function normalizeCategoryStatuses(
-      content: null | SecuritiConsentObject
-    ): null | SecuritiConsentStatuses {
-      const category = content?.category || null
-      if (!category) return null
-
-      // https://app.securiti.ai/privaci/v1/admin/cmp/published_cookie_categories
-      const advertising = normalizeStatus(
-        category.Advertising,
-        DEFAULT_STATUSES.advertising
-      )
-      const analytics = normalizeStatus(
-        category['Analytics and customization'] ||
-          category['Analytics & Customization'],
-        DEFAULT_STATUSES.analytics
-      )
-      const functional = normalizeStatus(
-        category['Performance and functionality'] ||
-          category['Performance & Functionality'],
-        DEFAULT_STATUSES.functional
-      )
-      const essential = normalizeStatus(
-        category.Essential,
-        DEFAULT_STATUSES.essential
-      )
-      const unclassified = normalizeStatus(
-        category.Unclassified,
-        DEFAULT_STATUSES.unclassified
-      )
-
-      return {
-        advertising,
-        analytics,
-        functional,
-        essential,
-        unclassified
-      }
-    }
-
-    function submitConsent(securitiConsent: null | SecuritiConsentObject) {
+    const submitConsent = (securitiConsent: null | SecuritiConsentObject) => {
       const statuses = normalizeCategoryStatuses(securitiConsent)
       if (!statuses) return false
-
-      // Store statuses and update state for use by other components
       window.sessionStorage.setItem('cmp-consent', JSON.stringify(statuses))
       setValues(statuses)
-
-      // https://support.google.com/tagmanager/answer/13802165
-      gtag('consent', 'update', mapSecuritiValuesToTagManager(statuses))
-
-      // Push a custom event to the dataLayer
-      // Pushing to the dataLayer instead of `gtag` function for mechanical purposes
-      if (!window.dataLayer) window.dataLayer = []
-      window.dataLayer.push({
-        event: 'consent_updated'
-      })
-
       return true
     }
 
