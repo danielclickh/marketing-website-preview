@@ -158,11 +158,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         {!isMarketoIframe && IS_PRODUCTION && (
           <>
+            {/* Consent must initialize first! */}
+            <GoogleTagManagerConsent />
             <GoogleTagManager
               gtmId='GTM-WKSRXS8S'
               gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
             />
-            <GoogleTagManagerConsent />
           </>
         )}
       </ClickUIProvider>
