@@ -37,7 +37,9 @@ export default function GoogleTagManagerConsent({
   // This function is required to update consent states
   // Google uses a strict check for the Arguments object type
   const gtag = useCallback(
-    (...args: Array<any>) => getDataLayer().push(arguments),
+    function (...args: Array<any>) {
+      getDataLayer().push(arguments)
+    },
     [getDataLayer]
   )
 
