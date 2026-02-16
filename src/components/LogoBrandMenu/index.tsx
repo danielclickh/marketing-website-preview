@@ -1,12 +1,30 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
+function copyToClipboard(text: string): boolean {
+  try {
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    textarea.style.position = 'fixed'
+    textarea.style.left = '-9999px'
+    textarea.style.opacity = '0'
+    document.body.appendChild(textarea)
+    textarea.select()
+    const ok = document.execCommand('copy')
+    document.body.removeChild(textarea)
+    return ok
+  } catch {
+    return false
+  }
+}
+
 export default function LogoBrandMenu({
   children
 }: {
   children: React.ReactNode
 }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState<string | false>(false)
+  const svgCache = useRef<string | null>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   const handleContextMenu = useCallback((e: React.MouseEvent) => {
@@ -27,17 +45,40 @@ export default function LogoBrandMenu({
 
   useEffect(() => {
     if (!isOpen) setCopied(false)
+
+    // Prefetch SVG when menu opens so copy is instant
+    if (isOpen && !svgCache.current) {
+      fetch('/brand-assets/clickhouse-logo-white.svg')
+        .then((r) => r.text())
+        .then((t) => {
+          svgCache.current = t
+        })
+        .catch(() => {})
+    }
   }, [isOpen])
 
   const copySvg = useCallback(async () => {
     try {
-      const res = await fetch('/brand-assets/clickhouse-logo-white.svg')
-      const text = await res.text()
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
+      const svg =
+        svgCache.current ||
+        (await fetch('/brand-assets/clickhouse-logo-white.svg').then((r) =>
+          r.text()
+        ))
+
+      // Try modern clipboard API first, fall back to execCommand
+      let ok = false
+      try {
+        await navigator.clipboard.writeText(svg)
+        ok = true
+      } catch {
+        ok = copyToClipboard(svg)
+      }
+
+      setCopied(ok ? 'Copied!' : 'Failed to copy')
       setTimeout(() => setIsOpen(false), 600)
     } catch {
-      setIsOpen(false)
+      setCopied('Failed to copy')
+      setTimeout(() => setIsOpen(false), 1000)
     }
   }, [])
 
@@ -62,7 +103,7 @@ export default function LogoBrandMenu({
         }`}>
         <div className='rounded-lg bg-neutral-750 p-1.5 shadow-lg border border-white/10'>
           <button onClick={copySvg} className={itemClass}>
-            {copied ? 'Copied!' : 'Copy logo as SVG'}
+            {copied || 'Copy logo as SVG'}
           </button>
           <a
             href='/brand-assets/clickhouse-logo.zip'
