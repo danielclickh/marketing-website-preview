@@ -139,7 +139,7 @@ export default function SecuritiCookieBanner({
 
     // Set default consent state
     gtag('consent', 'default', {
-      ...mapSecuritiValuesToTagManager(DEFAULT_STATUSES),
+      ...mapSecuritiValuesToTagManager(getConsentValuesFromLocalStorage()),
       wait_for_update: 500 // Gives Securiti 500ms to load before tags fire
     })
 
