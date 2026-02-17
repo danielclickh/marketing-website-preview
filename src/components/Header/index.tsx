@@ -1,5 +1,6 @@
 import logoFull from '../../../public/logo-full.svg'
 import AnnouncementBar from '../AnnouncementBar'
+import LogoBrandMenu from '../LogoBrandMenu'
 import { CUIButton, CUILink } from '../ClickUI'
 import HeaderRegionSelector from '../HeaderRegionSelector'
 import Navigation from '../Navigation'
@@ -121,19 +122,20 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
           {/* Logo */}
-          <Link
-            href='/'
-            prefetch={false}
-            onClick={useGalaxyOnClick('topNav.logo.select')}
-            className='mr-auto'>
-            <Image
-              src={logoFull}
-              priority
-              width='135'
-              height='40'
-              alt='ClickHouse logo'
-            />
-          </Link>
+          <LogoBrandMenu>
+            <Link
+              href='/'
+              prefetch={false}
+              onClick={useGalaxyOnClick('topNav.logo.select')}>
+              <Image
+                src={logoFull}
+                priority
+                width='135'
+                height='40'
+                alt='ClickHouse logo'
+              />
+            </Link>
+          </LogoBrandMenu>
 
           {/* Mobile search */}
           <button

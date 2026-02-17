@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 interface ResponsiveEmbedBaseProps {
   ratio?: string
   lazyLoad?: boolean
+  requiresConsent?: boolean
 }
 
 interface ResponsiveEmebedHtmlProps extends ResponsiveEmbedBaseProps {

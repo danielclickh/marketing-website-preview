@@ -5,6 +5,7 @@ import { CUILink } from '../ClickUI'
 import CodeViewer from '../CodeViewer'
 import { SuiTitle } from '../sui'
 import { AllowedElements, HighLightOptions, sanitizeMarkdown } from './utils'
+import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { useRouter } from 'next/router'
 import { memo, MouseEventHandler, useState } from 'react'
@@ -97,6 +98,42 @@ interface DefaultComponentProps {
   allowHeaderLink: boolean
 }
 
+const isResponsiveEmbed = (src?: string) => {
+  if (!src) return false
+  try {
+    const { hostname } = new URL(src)
+    return ['youtube.com', 'youtu.be', 'vimeo.com'].some(
+      (domain) => hostname === domain || hostname.endsWith(`.${domain}`)
+    )
+  } catch {
+    return false
+  }
+}
+
+const getNoCookieEmbedSrc = (src?: string) => {
+  if (!src) return src
+  try {
+    const url = new URL(src)
+
+    // Replace YouTube domains with youtube-nocookie.com
+    if (url.hostname === 'www.youtube.com' || url.hostname === 'youtube.com') {
+      url.hostname = 'www.youtube-nocookie.com'
+    }
+
+    // Add dnt=1 parameter for Vimeo
+    if (
+      url.hostname === 'player.vimeo.com' ||
+      url.hostname.endsWith('.vimeo.com')
+    ) {
+      url.searchParams.set('dnt', '1')
+    }
+
+    return url.toString()
+  } catch {
+    return src
+  }
+}
+
 function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
   return {
     img: BlogImage,
@@ -144,6 +181,20 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
         return <>{children}</> // render image directly without <p>
       }
       return <p {...props}>{children}</p>
+    },
+    iframe({ node, src, children, ...props }: any) {
+      const noCookieSrc = getNoCookieEmbedSrc(src)
+      const iframeEl = (
+        <iframe src={noCookieSrc} {...props}>
+          {children}
+        </iframe>
+      )
+
+      if (isResponsiveEmbed(src)) {
+        return <ResponsiveEmbed>{iframeEl}</ResponsiveEmbed>
+      }
+
+      return iframeEl
     }
   }
 }

@@ -1,4 +1,6 @@
 import GlobalSearchProvider from '@/components-cleaned/GlobalSearchProvider'
+import GoogleTagManagerConsent from '@/components-cleaned/GoogleTagManagerConsent'
+import SecuritiCookieBanner from '@/components-cleaned/SecuritiCookieBanner'
 import SmartBackProvider from '@/components-cleaned/SmartBackProvider'
 import UTMPersist, { onExperimentViewed } from '@/components/UTMPersist'
 import { useInitGalaxy } from '@/lib/galaxy/galaxy'
@@ -14,7 +16,6 @@ import { Inconsolata, Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Script from 'next/script'
 import { useReportWebVitals } from 'next/web-vitals'
 import { useEffect } from 'react'
 
@@ -135,58 +136,35 @@ function MyApp({ Component, pageProps }: AppProps) {
             href='/favicons/apple-touch-icon.png'
           />
         </Head>
-        <GrowthBookProvider growthbook={gb}>
-          <GlobalSearchProvider enabled={!isMarketoIframe}>
-            <SmartBackProvider>
-              <div
-                id='main-site-container'
-                className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
-                <div className='flex min-h-screen flex-col'>
-                  <Component {...pageProps} />
-                </div>
-              </div>
-              <UTMPersist />
-            </SmartBackProvider>
-          </GlobalSearchProvider>
-        </GrowthBookProvider>
 
-        {/* Exclude tracking from marketo iframe routes */}
-        {!isMarketoIframe && (
-          <>
-            {/* GTM */}
-            {IS_PRODUCTION && (
+        <SecuritiCookieBanner
+          enabled={!isMarketoIframe}
+          staging={!IS_PRODUCTION}>
+          <GrowthBookProvider growthbook={gb}>
+            <GlobalSearchProvider enabled={!isMarketoIframe}>
+              <SmartBackProvider>
+                <div
+                  id='main-site-container'
+                  className={`${inter.variable} font-inter ${inconsolata.variable} ${basier.variable}`}>
+                  <div className='flex min-h-screen flex-col'>
+                    <Component {...pageProps} />
+                  </div>
+                </div>
+                <UTMPersist />
+              </SmartBackProvider>
+            </GlobalSearchProvider>
+          </GrowthBookProvider>
+          {!isMarketoIframe && true && (
+            <>
+              {/* Consent must initialize first! */}
+              <GoogleTagManagerConsent />
               <GoogleTagManager
                 gtmId='GTM-WKSRXS8S'
                 gtmScriptUrl='https://clickhouse.com/gtmwksrxs8s/'
               />
-            )}
-
-            {/* Cleans marketo email tracking tokens */}
-            <Script
-              id='stripmkttok-script'
-              src='https://discover.clickhouse.com/js/stripmkttok.js'
-              strategy='lazyOnload'
-            />
-
-            {/* Securiti.ai Cookie Banner */}
-            <Script
-              strategy='afterInteractive'
-              data-strict-csp
-              data-skip-css='false'
-              src='https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
-              data-tenant-uuid='8555e54b-cd0b-45d7-9c1c-e9e088bf774a'
-              data-domain-uuid='e058d040-977c-4594-aa2c-84b844ce5cf0'
-              data-backend-url='https://app.securiti.ai'
-              onReady={() => {
-                const cookieSettingsButton = document.querySelector(
-                  '#cookie-settings-button'
-                )
-                cookieSettingsButton?.classList.remove('hidden')
-                cookieSettingsButton?.classList.add('cmp-revoke-consent')
-              }}
-            />
-          </>
-        )}
+            </>
+          )}
+        </SecuritiCookieBanner>
       </ClickUIProvider>
     </>
   )

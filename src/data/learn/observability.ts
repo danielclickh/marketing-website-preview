@@ -45,7 +45,7 @@ export default {
         },
         {
           icon: { src: iconBook },
-          badge: 'Coming soon',
+          link: 'https://learn.clickhouse.com/visitor_catalog_class/show/2259908',
           title: 'Level 2: Observability with ClickStack',
           description: `In level 2 of this three-part learning path, you’ll gain the skills needed to customize ClickHouse to your own Observability needs.
           
