@@ -104,6 +104,16 @@ const CONTENT_TYPE_HANDLERS: Record<
       paths.push(`/jp/blog/${slug}`)
     }
 
+    // Revalidate the postgres page as blogs are published
+    if (
+      body?.entry?.tags?.some(
+        // @ts-expect-error todo: better type handling
+        (tag) => tag.slug === 'postgres-weekly'
+      )
+    ) {
+      paths.push('/cloud/postgres')
+    }
+
     // Revalidate open house page because it uses tagged content
     paths.push('/openhouse')
 
