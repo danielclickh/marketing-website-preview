@@ -15,8 +15,12 @@ import langfuseObservability from './assets/langfuse-observability.png'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import ResponsiveHtml5Video from '@/components-cleaned/ResponsiveHtml5Video'
 import TickItem from '@/components-cleaned/TickItem'
-import AnimatedFlare from '@/components/AnimatedFlare'
 import { CUIButton } from '@/components/ClickUI'
+import dynamic from 'next/dynamic'
+
+const AnimatedFlare = dynamic(() => import('@/components/AnimatedFlare'), {
+  ssr: false
+})
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import { SuiText, SuiTitle } from '@/components/sui'

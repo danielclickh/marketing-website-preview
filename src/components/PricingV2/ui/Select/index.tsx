@@ -3,7 +3,7 @@ import { StrapiImageType } from '@/lib/api/strapi/types'
 import { slugify } from '@/lib/utils/strings'
 import { Listbox } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { isEqual } from 'lodash'
+import isEqual from 'lodash/isEqual'
 import { Fragment, memo, useMemo } from 'react'
 
 export type Option = {

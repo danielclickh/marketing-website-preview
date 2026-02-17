@@ -3,8 +3,12 @@ import checkpoints from './checkpoints.json'
 import features from './features.json'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import TickItem from '@/components-cleaned/TickItem'
-import AnimatedFlare from '@/components/AnimatedFlare'
 import { CUIButton } from '@/components/ClickUI'
+import dynamic from 'next/dynamic'
+
+const AnimatedFlare = dynamic(() => import('@/components/AnimatedFlare'), {
+  ssr: false
+})
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
 import LogoCarousel from '@/components/LogoCarousel'

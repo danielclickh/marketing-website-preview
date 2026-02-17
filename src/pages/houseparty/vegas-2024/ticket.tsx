@@ -66,7 +66,7 @@ export default function Page({ headerData, seo }: PageProps) {
     }
 
     scrollHanlder()
-    window.addEventListener('scroll', scrollHanlder)
+    window.addEventListener('scroll', scrollHanlder, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', scrollHanlder)

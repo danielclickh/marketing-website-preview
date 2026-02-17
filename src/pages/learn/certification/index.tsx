@@ -29,15 +29,17 @@ interface PageProps extends CommonProps {
 
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
-    const commonProps = await getCommonProps()
-    const data = await findOne('homepage', {
-      populate: [
-        'customerStories',
-        'customerStories.*',
-        'customerStories.logos.*',
-        'customerStories.logos.darkLogoPng'
-      ]
-    })
+    const [commonProps, data] = await Promise.all([
+      getCommonProps(),
+      findOne('homepage', {
+        populate: [
+          'customerStories',
+          'customerStories.*',
+          'customerStories.logos.*',
+          'customerStories.logos.darkLogoPng'
+        ]
+      })
+    ])
     return {
       props: {
         seo: {
