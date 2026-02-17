@@ -45,10 +45,10 @@ const POSTGRES_WEEK_DATES = [
   new Date('2026-02-19'),
   new Date('2026-02-20')
   // Need more days? Add them here...
-]
+] as const
 
 interface StaticProps extends CommonProps {
-  postgresBlogs: Array<Pick<EntryBlogPost, 'title' | 'slug' | 'publishedAt'>>
+  postgresBlogs: Array<Pick<EntryBlogPost, 'title' | 'slug' | 'date'>>
 }
 
 export const getStaticProps: GetStaticProps<StaticProps> =
@@ -63,14 +63,14 @@ export const getStaticProps: GetStaticProps<StaticProps> =
         },
         $or: POSTGRES_WEEK_DATES.map((date) => {
           return {
-            publishedAt: {
+            date: {
               $gte: date.toISOString()
             }
           }
         })
       },
-      sortBy: 'publishedAt:desc',
-      fields: ['title', 'slug', 'publishedAt'],
+      sortBy: 'date:desc',
+      fields: ['title', 'slug', 'date'],
       populate: []
     })
 
@@ -194,8 +194,7 @@ export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
               // Get blog entry
               const blog = postgresBlogs.find(
                 (post) =>
-                  new Date(post.publishedAt).toDateString() ===
-                  cardDate.toDateString()
+                  new Date(post.date).toDateString() === cardDate.toDateString()
               )
 
               const dateString = cardDate.toLocaleDateString('en-US', {
@@ -229,7 +228,7 @@ export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
                         {dateString}
                       </span>
                     </CUICard.Header>
-                    <CUICard.Body className='mt-4'>
+                    <CUICard.Body className='mb-auto mt-4'>
                       <SuiTitle
                         type='h3'
                         color='white'
