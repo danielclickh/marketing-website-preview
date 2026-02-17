@@ -94,7 +94,7 @@ export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
   >(['your-application', 'postgres-database', 'nvmes'])
 
   // Get today's date normalized to midnight for date comparisons
-  const today = new Date()
+  const today = new Date('2026-02-13')
   today.setHours(0, 0, 0, 0)
 
   return (
