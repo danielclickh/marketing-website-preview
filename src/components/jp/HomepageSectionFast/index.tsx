@@ -1,17 +1,11 @@
 import { CUIButton } from '../../ClickUI'
 import { SuiText, SuiTitle } from '../../sui'
+import ColumnOrientedIllustration from '../../ColumnOrientedIllustration'
+import RowOrientedIllustration from '../../RowOrientedIllustration'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import React from 'react'
-
-const ColumnOrientedIllustration = dynamic(() => import('../ColumnOrientedIllustration'), {
-  ssr: false
-})
-const RowOrientedIllustration = dynamic(() => import('../RowOrientedIllustration'), {
-  ssr: false
-})
 
 export default function HomepageSectionFast({
   className = '',
