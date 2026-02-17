@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState
 } from 'react'
 
@@ -112,6 +113,7 @@ type SecuritiContextType = {
   consentValues: SecuritiConsentStatuses
   open: () => boolean
   close: () => boolean
+  acceptAll: () => boolean
   enabled: boolean
   staging: boolean
 }
@@ -162,20 +164,23 @@ export default function SecuritiCookieBanner({
     [values]
   )
 
-  useEffect(() => {
-    const submitConsent = (securitiConsent: null | SecuritiConsentObject) => {
+  const submitConsent = useCallback(
+    (securitiConsent: null | SecuritiConsentObject) => {
       const statuses = normalizeCategoryStatuses(securitiConsent)
       if (!statuses) return false
       window.sessionStorage.setItem('cmp-consent', JSON.stringify(statuses))
       setValuesIfChanged(statuses)
       return true
-    }
+    },
+    [setValuesIfChanged]
+  )
 
-    // Triggered on every page load
-    const loadCallback = [
+  // Triggered on every page load
+  const loadCallback = useMemo(() => {
+    return [
       'onLoad',
       function (sdkRef: any) {
-        setSdk(sdkRef)
+        if (!sdk) setSdk(sdkRef)
 
         if (sdkRef.isConsentGiven()) {
           submitConsent(sdkRef.getConsent())
@@ -184,16 +189,20 @@ export default function SecuritiCookieBanner({
         }
       }
     ]
+  }, [sdk, submitConsent])
 
-    // Triggered when the user gives consent
-    const consentGivenCallback = [
+  // Triggered when the user gives consent
+  const consentGivenCallback = useMemo(() => {
+    return [
       'onConsentGiven',
       function (sdkRef: any, consent: SecuritiConsentObject) {
-        setSdk(sdkRef)
+        if (!sdk) setSdk(sdkRef)
         submitConsent(consent || sdkRef.getConsent())
       }
     ]
+  }, [sdk, submitConsent])
 
+  useEffect(() => {
     // Add the callbacks to the datalayer
     // https://helpcenter.securiti.ai/docs/using-the-advanced-event-driven-methods#sdk-object-methods
     window.SecuritiDataLayer = window.SecuritiDataLayer || []
@@ -250,12 +259,19 @@ export default function SecuritiCookieBanner({
     return true
   }, [sdk])
 
+  const acceptAll = useCallback(() => {
+    if (!sdk || !('acceptAll' in sdk)) return false
+    sdk.acceptAll()
+    return true
+  }, [sdk])
+
   return (
     <SecuritiContext.Provider
       value={{
         consentValues: values,
         open,
         close,
+        acceptAll,
         enabled,
         staging
       }}>

@@ -87,6 +87,7 @@ export default function PlayOnClickVideo({
       const { default: YouTubePlayer } = await import('youtube-player')
       const yt = YouTubePlayer(el, {
         videoId: String(id),
+        host: 'https://www.youtube-nocookie.com',
         playerVars: { rel: 0, controls: 1, modestbranding: 1 }
       })
       yt.on('stateChange', (event: any) => {
@@ -98,7 +99,8 @@ export default function PlayOnClickVideo({
       const vimeo = new VimeoCtor(el, {
         id: Number(id),
         controls: true,
-        title: false
+        title: false,
+        dnt: true
       })
       vimeo.on('play', () => setPlaying(true))
       playerRef.current = vimeo
@@ -168,33 +170,29 @@ export default function PlayOnClickVideo({
   }, [thumbnail, thumbnailClassName])
 
   return (
-    <>
-      <VideoConsentWrapper thumbnail={renderedThumbnail}>
-        <div
-          className={`relative aspect-video overflow-hidden rounded bg-neutral-900 ${className}`}>
-          {/* Thumbnail overlay */}
-          <div
-            className={`absolute inset-0 z-10 transition-opacity ${thumbnail ? 'bg-neutral-900' : 'pointer-events-none'} ${
-              playing ? 'pointer-events-none opacity-0' : ''
-            }`}>
-            <VideoPlayButton
-              className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${thumbnail ? '' : 'pointer-events-auto'} ${playButtonClassName}`}
-              eyebrow={playButtonEyebrow}
-              label={playButtonLabel}
-              loading={loading && !playing}
-              onClick={handlePlay}
-            />
-            {renderedThumbnail}
-          </div>
+    <div
+      className={`relative aspect-video overflow-hidden rounded bg-neutral-900 ${className}`}>
+      {/* Thumbnail overlay */}
+      <div
+        className={`absolute inset-0 z-10 transition-opacity ${thumbnail ? 'bg-neutral-900' : 'pointer-events-none'} ${
+          playing ? 'pointer-events-none opacity-0' : ''
+        }`}>
+        <VideoPlayButton
+          className={`absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 ${thumbnail ? '' : 'pointer-events-auto'} ${playButtonClassName}`}
+          eyebrow={playButtonEyebrow}
+          label={playButtonLabel}
+          loading={loading && !playing}
+          onClick={handlePlay}
+        />
+        {renderedThumbnail}
+      </div>
 
-          {/* Player container */}
-          <div
-            ref={setContainerRef}
-            className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
-          />
-        </div>
-      </VideoConsentWrapper>
+      {/* Player container */}
+      <div
+        ref={setContainerRef}
+        className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
+      />
       {schema && <JsonSchema schema={schema} />}
-    </>
+    </div>
   )
 }

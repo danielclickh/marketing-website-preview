@@ -8,7 +8,8 @@ export default function ResponsiveEmbed({
   ratio,
   html,
   children,
-  lazyLoad = true
+  lazyLoad = true,
+  requiresConsent = false
 }: ResponsiveEmbedProps) {
   const style = {
     '--ratio': ratio
@@ -27,21 +28,25 @@ export default function ResponsiveEmbed({
     )
   }, [html, children])
 
-  return (
-    <VideoConsentWrapper>
-      <div className={`relative ${styles.responsiveEmbed}`} style={style}>
-        {lazyLoad && (
-          <div className='absolute inset-0 flex bg-black'>
-            <div className='m-auto aspect-square w-10 animate-spin rounded-full border-4 border-primary-300/20 border-t-primary-300' />
-          </div>
-        )}
-        {!lazyLoad && <Content />}
-        {lazyLoad && (
-          <LazyLoad>
-            <Content />
-          </LazyLoad>
-        )}
-      </div>
-    </VideoConsentWrapper>
+  const content = (
+    <div className={`relative ${styles.responsiveEmbed}`} style={style}>
+      {lazyLoad && (
+        <div className='absolute inset-0 flex bg-black'>
+          <div className='m-auto aspect-square w-10 animate-spin rounded-full border-4 border-primary-300/20 border-t-primary-300' />
+        </div>
+      )}
+      {!lazyLoad && <Content />}
+      {lazyLoad && (
+        <LazyLoad>
+          <Content />
+        </LazyLoad>
+      )}
+    </div>
+  )
+
+  return requiresConsent ? (
+    <VideoConsentWrapper>{content}</VideoConsentWrapper>
+  ) : (
+    content
   )
 }

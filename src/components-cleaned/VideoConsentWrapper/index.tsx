@@ -1,6 +1,7 @@
 'use client'
 
 import { useSecuritiCookieBanner } from '@/components-cleaned/SecuritiCookieBanner'
+import { CUIButton } from '@/components/ClickUI'
 import { cloneElement, useEffect, useState } from 'react'
 
 export interface VideoConsentWrapperProps {
@@ -31,6 +32,15 @@ export default function VideoConsentWrapper({
     const opened = banner.open()
     if (!opened) setAttemptedToOpen(true)
   }
+
+  const clickHandler = (callback: () => boolean) => {
+    return (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault()
+      if (!callback()) {
+        setAttemptedToOpen(true)
+      }
+    }
+  }
   return (
     <>
       {!consentGiven && (
@@ -41,15 +51,23 @@ export default function VideoConsentWrapper({
             })}
           <p className='relative z-10'>
             This video requires functional cookies to play.
-            <br />{' '}
-            {banner.enabled && (
-              <button
-                className='text-primary-300 hover:underline'
-                onClick={openHandler}>
-                Change cookie preferences
-              </button>
-            )}
           </p>
+          {banner.enabled && (
+            <div className='flex flex-wrap items-start justify-center gap-4'>
+              <CUIButton
+                type='primary'
+                size='sm'
+                onClick={clickHandler(() => banner.acceptAll())}>
+                Allow cookies
+              </CUIButton>
+              <CUIButton
+                type='secondary'
+                size='sm'
+                onClick={clickHandler(() => banner.open())}>
+                Cookie preferences
+              </CUIButton>
+            </div>
+          )}
           {attemptedToOpen && (
             <p className='rounded border border-primary-500/50 bg-primary-500/10 p-2 leading-tight backdrop-blur-xl'>
               <small>

@@ -110,6 +110,30 @@ const isResponsiveEmbed = (src?: string) => {
   }
 }
 
+const getNoCookieEmbedSrc = (src?: string) => {
+  if (!src) return src
+  try {
+    const url = new URL(src)
+
+    // Replace YouTube domains with youtube-nocookie.com
+    if (url.hostname === 'www.youtube.com' || url.hostname === 'youtube.com') {
+      url.hostname = 'www.youtube-nocookie.com'
+    }
+
+    // Add dnt=1 parameter for Vimeo
+    if (
+      url.hostname === 'player.vimeo.com' ||
+      url.hostname.endsWith('.vimeo.com')
+    ) {
+      url.searchParams.set('dnt', '1')
+    }
+
+    return url.toString()
+  } catch {
+    return src
+  }
+}
+
 function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
   return {
     img: BlogImage,
@@ -159,8 +183,9 @@ function getDefaultComponents({ allowHeaderLink }: DefaultComponentProps) {
       return <p {...props}>{children}</p>
     },
     iframe({ node, src, children, ...props }: any) {
+      const noCookieSrc = getNoCookieEmbedSrc(src)
       const iframeEl = (
-        <iframe src={src} {...props}>
+        <iframe src={noCookieSrc} {...props}>
           {children}
         </iframe>
       )
