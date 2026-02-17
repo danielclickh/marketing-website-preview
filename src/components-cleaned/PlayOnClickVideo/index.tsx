@@ -1,6 +1,7 @@
 'use client'
 
 import JsonSchema from '@/components-cleaned/JsonSchema'
+import VideoConsentWrapper from '@/components-cleaned/VideoConsentWrapper'
 import VideoPlayButton from '@/components-cleaned/VideoPlayButton'
 import type VimeoPlayer from '@vimeo/player'
 import Image, { type ImageProps } from 'next/image'
@@ -10,16 +11,14 @@ import {
   useEffect,
   isValidElement,
   useMemo,
-  cloneElement
+  cloneElement,
+  useCallback
 } from 'react'
 import { VideoObject, WithContext } from 'schema-dts'
 import type { YouTubePlayer as YouTubePlayerClass } from 'youtube-player/dist/types'
 
 type EmbedProviders = 'youtube' | 'vimeo'
-
 type ThumbElWithClassName = { className?: string }
-
-// Accept EITHER a src for <Image> OR an already-instantiated element
 type ThumbnailProp =
   | ImageProps['src']
   | React.ReactElement<ThumbElWithClassName>
@@ -48,9 +47,13 @@ export default function PlayOnClickVideo({
   schema
 }: PlayOnClickVideoProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
+
   const playerRef = useRef<
     YouTubePlayerClass | InstanceType<typeof VimeoPlayer> | null
   >(null)
+
+  // Track which DOM node the current player was created against
+  const playerHostElRef = useRef<HTMLDivElement | null>(null)
 
   const [loading, setLoading] = useState(false)
   const [playing, setPlaying] = useState(false)
@@ -59,22 +62,32 @@ export default function PlayOnClickVideo({
   const isVimeo = (p: any): p is InstanceType<typeof VimeoPlayer> =>
     !!p && 'play' in p
 
-  const destroy = () => {
-    if (playerRef.current && 'destroy' in playerRef.current) {
-      playerRef.current.destroy()
-      playerRef.current = null
+  const destroy = useCallback(() => {
+    const p = playerRef.current as any
+    if (p && typeof p.destroy === 'function') {
+      p.destroy()
     }
-  }
+    playerRef.current = null
+    playerHostElRef.current = null
+  }, [])
 
-  const ensurePlayer = async () => {
-    if (playerRef.current) return playerRef.current
+  const ensurePlayer = useCallback(async () => {
     const el = containerRef.current
     if (!el) return null
+
+    // If we already have a player but it was created for a different host element, rebuild it.
+    if (playerRef.current && playerHostElRef.current === el) {
+      return playerRef.current
+    }
+
+    // If host changed (or we have a stale instance), clean up and recreate
+    if (playerRef.current) destroy()
 
     if (provider === 'youtube') {
       const { default: YouTubePlayer } = await import('youtube-player')
       const yt = YouTubePlayer(el, {
         videoId: String(id),
+        host: 'https://www.youtube-nocookie.com',
         playerVars: { rel: 0, controls: 1, modestbranding: 1 }
       })
       yt.on('stateChange', (event: any) => {
@@ -86,33 +99,52 @@ export default function PlayOnClickVideo({
       const vimeo = new VimeoCtor(el, {
         id: Number(id),
         controls: true,
-        title: false
+        title: false,
+        dnt: true
       })
       vimeo.on('play', () => setPlaying(true))
       playerRef.current = vimeo
     }
+
+    playerHostElRef.current = el
     return playerRef.current
-  }
+  }, [destroy, provider, id])
+
+  // Callback ref fires when the wrapper mounts/unmounts the container
+  const setContainerRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      containerRef.current = node
+
+      if (!node) {
+        // Wrapper just unmounted children → destroy stale player instance
+        destroy()
+        setPlaying(false)
+        return
+      }
+
+      // Container just mounted (consent granted) → create player now
+      void ensurePlayer()
+    },
+    [destroy, ensurePlayer]
+  )
 
   const handlePlay = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setLoading(true)
     try {
-      const player = playerRef.current // already loaded
+      const player = await ensurePlayer()
       if (!player) return
-      setPlaying(true)
+
+      // Don’t set playing=true optimistically; wait for real play events
       if (isYT(player)) player.playVideo()
-      else if (isVimeo(player)) player.play()
+      else if (isVimeo(player)) await player.play()
     } finally {
       setLoading(false)
     }
   }
 
-  // Cleanup on unmount
-  useEffect(() => {
-    ensurePlayer() // Load library asynchronously
-    return () => destroy()
-  }, [])
+  // Cleanup if the whole component unmounts
+  useEffect(() => destroy, [destroy])
 
   const renderedThumbnail = useMemo(() => {
     if (!thumbnail) return null
@@ -157,10 +189,9 @@ export default function PlayOnClickVideo({
 
       {/* Player container */}
       <div
-        ref={containerRef}
+        ref={setContainerRef}
         className='absolute inset-0 z-0 h-full w-full [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:h-full [&>iframe]:w-full'
       />
-
       {schema && <JsonSchema schema={schema} />}
     </div>
   )
