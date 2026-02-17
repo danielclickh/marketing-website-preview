@@ -83,7 +83,7 @@ export default function TableOfContents({
 
     scrollHanlder()
     window.addEventListener('scroll', scrollHanlder, { passive: true })
-    window.addEventListener('resize', scrollHanlder, { passive: true })
+    window.addEventListener('resize', scrollHanlder)
 
     const resizeObserver = new ResizeObserver(scrollHanlder)
     resizeObserver.observe(contentRef.current)
