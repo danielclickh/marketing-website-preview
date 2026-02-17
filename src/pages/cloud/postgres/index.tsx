@@ -30,39 +30,48 @@ import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getRelativeDateStatus } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
-import { Icon, Separator, Spacer } from '@clickhouse/click-ui'
+import { EntryBlogPost } from '@/types/strapi'
+import { Icon, Separator } from '@clickhouse/click-ui'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
-import 'swiper/css'
-import { Mousewheel } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+
+// Constants
+const POSTGRES_WEEK_DATES = [
+  new Date('2026-02-13'),
+  new Date('2026-02-17'),
+  new Date('2026-02-18'),
+  new Date('2026-02-19'),
+  new Date('2026-02-20')
+  // Need more days? Add them here...
+] as const
 
 interface StaticProps extends CommonProps {
-  postgresBlogs: Array<{
-    title: string
-    slug: string
-  }>
+  postgresBlogs: Array<Pick<EntryBlogPost, 'title' | 'slug' | 'date'>>
 }
 
 export const getStaticProps: GetStaticProps<StaticProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
-    const postgresBlogs = await blogService.findMany({
+    const postgresBlogs = await blogService.findAll({
       filters: {
         tags: {
           slug: {
             $eq: 'postgres-weekly'
           }
-        }
+        },
+        $or: POSTGRES_WEEK_DATES.map((date) => {
+          return {
+            date: {
+              $gte: date.toISOString()
+            }
+          }
+        })
       },
-      sortBy: 'publishedAt:desc',
-      pagination: { limit: 5 },
-      fields: ['title', 'slug'],
-      populate: {
-        tags: { fields: ['slug'] }
-      }
+      sortBy: 'date:desc',
+      fields: ['title', 'slug', 'date'],
+      populate: []
     })
 
     return {
@@ -80,9 +89,6 @@ export const getStaticProps: GetStaticProps<StaticProps> =
     }
   }
 
-// Constants
-const POSTGRES_WEEK_TOTAL_DAYS = 5
-
 export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
   useGalaxyOnPage('postgresByClickhousePage')
 
@@ -92,10 +98,6 @@ export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
   const [activeDiagramParts, setActiveDiagramParts] = useState<
     PostgresByClickhouseDiagramProps['activeParts']
   >(['your-application', 'postgres-database', 'nvmes'])
-
-  // Get today's date normalized to midnight for date comparisons
-  const today = new Date('2026-02-13')
-  today.setHours(0, 0, 0, 0)
 
   return (
     <Layout headerData={headerData} seo={seo}>
@@ -176,151 +178,90 @@ export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
       </section>
 
       {/* Postgres Week */}
-      <section className='relative bg-neutral-750 py-16'>
-        <div className='section-container'>
-          <div className='mx-auto flex max-w-3xl flex-col gap-6'>
-            <div className='mx-auto flex w-fit items-center justify-center gap-2 rounded-[2.5rem] border border-primary-600 bg-[linear-gradient(180deg,rgba(250,255,105,0.16)_3.75%,rgba(150,153,63,0.16)_100%)] px-4 py-2'>
-              <SuiText
-                size='base'
-                weight='semibold'
-                color='white'
-                className='text-center font-inter leading-[150%]'>
-                Feb 13-20, 2026
-              </SuiText>
-            </div>
-            <SuiTitle type='h2' className='text-center'>
-              Postgres Week
-            </SuiTitle>
-            <SuiText
-              size='lg'
-              className='mx-auto space-y-4 text-center opacity-70'>
-              Five days, five deep dives
-            </SuiText>
-          </div>
-          <Spacer size='xxl' />
-          <div className='overflow-hidden'>
-            <Swiper
-              direction='horizontal'
-              modules={[Mousewheel]}
-              mousewheel={{
-                forceToAxis: false,
-                sensitivity: 1,
-                releaseOnEdges: true
-              }}
-              slidesPerView='auto'
-              spaceBetween={24}>
-              {Array.from({ length: POSTGRES_WEEK_TOTAL_DAYS }).map(
-                (_, index) => {
-                  // Calculate the date for this card
-                  const cardDate = new Date(today)
+      <section className='relative bg-neutral-750 py-16 lg:py-24'>
+        <div className='section-container mb-12 max-w-3xl space-y-6 text-center lg:mb-16'>
+          <span className='rounded-full border border-primary-600/80 bg-gradient-to-b from-primary-300/10 to-primary-400/5 px-6 py-2.5 align-middle font-medium leading-none'>
+            Feb 13-20, 2026
+          </span>
+          <SuiTitle type='h2'>Postgres Week</SuiTitle>
+          <SuiText size='lg' className='opacity-70'>
+            Five days, five deep dives
+          </SuiText>
+        </div>
+        <div className='hide-scrollbar overflow-x-auto'>
+          <div className='mx-auto flex w-max flex-row before:block before:w-3 before:flex-shrink-0 after:block after:w-3 after:flex-shrink-0'>
+            {POSTGRES_WEEK_DATES.map((cardDate, index) => {
+              // Get blog entry
+              const blog = postgresBlogs.find(
+                (post) =>
+                  new Date(post.date).toDateString() === cardDate.toDateString()
+              )
 
-                  if (index !== 0) {
-                    // DAY 2+: Start from next Tuesday and continue daily
-                    // Calculate days until next Tuesday (day 2 = Tuesday)
-                    const currentDay = today.getDay() // 0=Sunday, 1=Monday, 2=Tuesday, etc.
-                    const daysUntilTuesday =
-                      currentDay <= 2
-                        ? 2 - currentDay // If today is Sun/Mon/Tue, days until Tuesday
-                        : 9 - currentDay // If after Tuesday, days until next Tuesday
+              const dateString = cardDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric'
+              })
 
-                    // Set to next Tuesday, then add additional days for DAY 3, 4, 5
-                    cardDate.setDate(
-                      today.getDate() + daysUntilTuesday + (index - 1)
-                    )
-                  }
+              // Content unlocks as soon as blog is available
+              const isContentUnlocked = !!blog
 
-                  cardDate.setHours(0, 0, 0, 0)
+              // Get status text and blog URL
+              const statusText = getRelativeDateStatus(cardDate)
 
-                  // Get blog data and format date
-                  const blog = postgresBlogs?.[index]
-                  const dateString = cardDate.toLocaleDateString('en-US', {
-                    weekday: 'long',
-                    month: 'short',
-                    day: 'numeric'
-                  })
+              // Card styling
+              const cardClassName = `flex h-full relative overflow-hidden flex-col transition-colors justify-start p-6 text-neutral-200 ${
+                isContentUnlocked
+                  ? 'hover:border-primary-500 hover:bg-neutral-725 focus-within:border-primary-500'
+                  : 'cursor-not-allowed'
+              }`
 
-                  // Content unlocks as soon as blog is available
-                  const isContentUnlocked = !!blog?.title
-
-                  // Get status text and blog URL
-                  const statusText = getRelativeDateStatus(cardDate)
-                  const blogUrl = blog?.slug
-                    ? `/blog/${blog.slug}?loc=postgresWeek${index + 1}`
-                    : '#'
-
-                  // Card styling
-                  const cardClassName = `flex h-full w-64 flex-col justify-start p-6 text-neutral-200 ${
-                    isContentUnlocked
-                      ? 'cursor-pointer hover:border-primary-300 hover:bg-[#323232] focus:border-primary-300'
-                      : 'cursor-not-allowed hover:shadow-card'
-                  }`
-
-                  return (
-                    <SwiperSlide
-                      key={`postgres-week-blog-${index}`}
-                      className='!h-auto !w-auto'>
-                      <CUICard
-                        onClick={
-                          isContentUnlocked
-                            ? () => window.open(blogUrl, '_blank')
-                            : undefined
-                        }
-                        className={cardClassName}>
-                        <CUICard.Header>
-                          <SuiText
-                            size='base'
-                            color='white'
-                            weight='bold'
-                            className='!font-bold'>
-                            DAY {index + 1}
-                          </SuiText>
-                          <SuiText
-                            size='base'
-                            color='text-accent'
-                            weight='medium'
-                            className='font-mono'>
-                            {dateString}
-                          </SuiText>
-                        </CUICard.Header>
-                        <Spacer size='md' />
-                        <CUICard.Body className='h-full'>
-                          <SuiTitle
-                            type='h3'
-                            color='white'
-                            className={isContentUnlocked ? '' : 'blur-[5px]'}>
-                            {isContentUnlocked
-                              ? blog.title
-                              : `New blog post will be revealed on ${dateString}!`}
-                          </SuiTitle>
-                        </CUICard.Body>
-                        <div className='flex w-full flex-col'>
-                          <Separator size='lg' />
-                          <CUICard.Footer>
-                            {isContentUnlocked ? (
-                              <LinkWithArrow
-                                href={blogUrl}
-                                target='_blank'
-                                onClick={(e) => e.stopPropagation()}
-                                className='text-base font-medium text-primary-300 hover:underline'>
-                                Read blog
-                              </LinkWithArrow>
-                            ) : (
-                              <SuiText className='flex items-center gap-2'>
-                                <Icon name='clock' />
-                                {statusText}
-                              </SuiText>
-                            )}
-                          </CUICard.Footer>
-                        </div>
-                      </CUICard>
-                    </SwiperSlide>
-                  )
-                }
-              )}
-            </Swiper>
+              return (
+                <div
+                  key={index}
+                  className='w-72 flex-shrink-0 flex-grow-0 px-3 lg:max-w-none'>
+                  <CUICard className={cardClassName}>
+                    <CUICard.Header>
+                      <strong>DAY {index + 1}</strong>
+                      <br />
+                      <span className='font-mono text-primary-300'>
+                        {dateString}
+                      </span>
+                    </CUICard.Header>
+                    <CUICard.Body className='mb-auto mt-4'>
+                      <SuiTitle
+                        type='h3'
+                        color='white'
+                        className={isContentUnlocked ? '' : 'blur-sm'}>
+                        {isContentUnlocked
+                          ? blog.title
+                          : `New blog post will be revealed on ${dateString}!`}
+                      </SuiTitle>
+                    </CUICard.Body>
+                    <CUICard.Footer>
+                      <Separator size='lg' />
+                      {isContentUnlocked ? (
+                        <LinkWithArrow
+                          href={`/blog/${blog.slug}?loc=postgresWeek${index + 1}`}
+                          target='_blank'
+                          onClick={(e) => e.stopPropagation()}
+                          className='text-base font-medium text-primary-300 hover:underline'>
+                          <span className='absolute inset-0' />
+                          Read blog
+                        </LinkWithArrow>
+                      ) : (
+                        <SuiText className='flex items-center gap-2'>
+                          <Icon name='clock' />
+                          {statusText}
+                        </SuiText>
+                      )}
+                    </CUICard.Footer>
+                  </CUICard>
+                </div>
+              )
+            })}
           </div>
         </div>
-        <Spacer size='lg' />
       </section>
 
       {/* Why Postgres managed by ClickHouse */}
