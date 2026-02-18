@@ -4,7 +4,7 @@ import { HeaderProps } from '../../Header/types'
 import HeaderRegionSelector from '../../HeaderRegionSelector'
 import GitHub from '../../icons/GitHub'
 import Navigation from '../Navigation'
-import AnnouncementBar from '@/components/AnnouncementBar'
+import StrapiGlobalAnnouncement from '@/components/StrapiGlobalAnnouncement'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
@@ -16,19 +16,6 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
-
-  // Eyebrow default settings
-  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(true)
-  const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
-  const [headerBannerText, setHeaderBannerText] = useState<
-    string | React.ReactNode
-  >('ClickHouse、Japan Cloudと提携し日本法人設立を発表')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/jp/blog/japan-cloud-jp?loc=eyebrow'
-  )
-  const [headerBannerExpires, setHeaderBannerExpires] = useState<
-    undefined | Date
-  >(undefined)
 
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
@@ -66,16 +53,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         } ${
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
-        {/* Announcement banner */}
-        <AnnouncementBar
-          enabled={headerBannerEnabled}
-          link={headerBannerUrl}
-          text={headerBannerText}
-          expires={headerBannerExpires}
-          dismissible={true}
-          className={eyebrow?.className || ''}
-          arrow={headerBannerArrow}
-        />
+        <StrapiGlobalAnnouncement className={eyebrow?.className} />
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
