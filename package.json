@@ -15,7 +15,11 @@
     "format:check": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --check",
     "format": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --write",
     "export": "next export",
-    "check:unused": "knip"
+    "check:unused": "knip",
+    "cms:toggle": "bash scripts/toggle-cms.sh",
+    "dev:local-cms": "bash scripts/dev-local-cms.sh",
+    "cms:local": "sed -i '' 's|STRAPI_API_URL=.*|STRAPI_API_URL=http://localhost:1337|' .env.local && echo 'CMS → local (http://localhost:1337). Restart dev server.'",
+    "cms:remote": "sed -i '' 's|STRAPI_API_URL=.*|STRAPI_API_URL=https://cms.clickhouse-dev.com:1337|' .env.local && echo 'CMS → remote (https://cms.clickhouse-dev.com:1337). Restart dev server.'"
   },
   "dependencies": {
     "@clickhouse/click-ui": "^0.0.188",

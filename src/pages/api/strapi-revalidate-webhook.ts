@@ -487,6 +487,9 @@ const CONTENT_TYPE_HANDLERS: Record<
   'api::use-case-feature.use-case-feature': async function (body, response) {
     const paths = [`/use-cases`, `/jp/use-cases`]
     await revalidate(response, paths)
+  },
+  'api::global-announcement.global-announcement': async function () {
+    // No ISR revalidation needed — fetched client-side via /api/announcement
   }
 }
 

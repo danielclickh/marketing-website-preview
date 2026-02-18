@@ -23,18 +23,10 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
 
-  // Eyebrow default settings
-  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(true)
-  const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
-  const [headerBannerText, setHeaderBannerText] = useState<
-    string | React.ReactNode
-  >('Postgres Week | All things Postgres from ClickHouse')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/cloud/postgres?loc=banner'
-  )
-  const [headerBannerExpires, setHeaderBannerExpires] = useState<
-    undefined | Date
-  >(undefined)
+  // Announcement banner state (populated from CMS)
+  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
+  const [headerBannerText, setHeaderBannerText] = useState('')
+  const [headerBannerUrl, setHeaderBannerUrl] = useState('')
 
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
@@ -51,19 +43,16 @@ export default function Header({ github, eyebrow }: HeaderProps) {
     window.addEventListener('scroll', scrollHandler, { passive: true })
     scrollHandler()
 
-    //=== Country specific eyebrow ===//
+    // Fetch announcement from CMS, with optional country targeting
     ;(async () => {
       let countryCode = getBrowserCookie('ch-user-country')
-      const langCode = window.navigator.language.split('-')[0]
 
       if (!countryCode) {
         try {
-          const request = await fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-          const response = await request.json()
-          if (request.ok && !response.error) {
-            countryCode = response.country // (ISO 3166-1 alpha-2 format)
-
-            // Remember users country
+          const geoReq = await fetch('https://ipinfo.io?token=33cfa2cb7f422c')
+          const geoRes = await geoReq.json()
+          if (geoReq.ok && !geoRes.error) {
+            countryCode = geoRes.country
             if (countryCode) {
               setBrowserCookie('ch-user-country', countryCode)
             }
@@ -71,18 +60,16 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         } catch {}
       }
 
-      if (
-        countryCode?.toUpperCase() === 'JP' ||
-        langCode?.toUpperCase() === 'JA'
-      ) {
-        /*setHeaderBannerEnabled(true)
-        setHeaderBannerText(
-          'ClickHouse announces establishment of Japanese subsidiary in partnership with Japan Cloud'
-        )
-        setHeaderBannerUrl('/blog/japan-cloud?loc=eyebrow')
-        setHeaderBannerExpires(undefined)
-        setHeaderBannerArrow(true)*/
-      }
+      try {
+        const qs = countryCode ? `?country=${countryCode}` : ''
+        const res = await fetch(`/api/announcement${qs}`)
+        const data = await res.json()
+        if (data.text && data.url) {
+          setHeaderBannerText(data.text)
+          setHeaderBannerUrl(data.url)
+          setHeaderBannerEnabled(true)
+        }
+      } catch {}
     })()
 
     return () => {
@@ -113,10 +100,8 @@ export default function Header({ github, eyebrow }: HeaderProps) {
           enabled={headerBannerEnabled}
           link={headerBannerUrl}
           text={headerBannerText}
-          expires={headerBannerExpires}
           dismissible={true}
           className={eyebrow?.className || ''}
-          arrow={headerBannerArrow}
         />
 
         {/* Logo, navigtation, CTAs... */}
