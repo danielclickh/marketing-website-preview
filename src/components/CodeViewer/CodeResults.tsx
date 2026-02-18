@@ -1,4 +1,3 @@
-import Chart from './charts'
 import copyGridElements from './copy/copyGridElements'
 import { ChartConfig, ChartType, QueryResults } from './types'
 import {
@@ -10,8 +9,18 @@ import {
   SelectionFocus,
   Tooltip
 } from '@clickhouse/click-ui'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useCallback, useRef, useMemo, useState } from 'react'
+
+const Chart = dynamic(() => import('./charts'), {
+  loading: () => (
+    <div className="flex h-64 items-center justify-center">
+      <Image src='/loading.svg' width={36} height={36} alt='loading-chart' />
+    </div>
+  ),
+  ssr: false
+})
 
 export enum DefaultView {
   Chart = 'chart',

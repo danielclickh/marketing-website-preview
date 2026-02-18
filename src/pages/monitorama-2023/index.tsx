@@ -31,8 +31,10 @@ export const getStaticProps: GetStaticProps<MonitoramaProps> =
       ]
     }
 
-    const commonProps = await getCommonProps()
-    const data = await findOne('homepage', params)
+    const [commonProps, data] = await Promise.all([
+      getCommonProps(),
+      findOne('homepage', params)
+    ])
 
     return {
       props: {

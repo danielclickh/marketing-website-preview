@@ -43,11 +43,8 @@ export async function fetchBlogs({
   page = isNaN(page) ? 1 : page
   page = page < 1 ? 1 : page
 
-  const categories = await fetchCategories()
-
   // Validate the category param
   category = category ? String(category) : null
-  category = category && category in categories ? category : null
 
   // Validate the search param
   search = search ? String(search) : null
@@ -95,7 +92,13 @@ export async function fetchBlogs({
     category: { [locale === 'jp' ? '$eq' : '$ne']: 'Japanese' }
   })
 
-  const featuredBlog = await blogService.findOne(baseQuery)
+  const [categories, featuredBlog] = await Promise.all([
+    fetchCategories(),
+    blogService.findOne(baseQuery)
+  ])
+
+  // Validate category against fetched categories
+  category = category && category in categories ? category : null
 
   const query = structuredClone(baseQuery)
 

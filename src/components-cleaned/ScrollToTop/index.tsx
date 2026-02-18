@@ -76,7 +76,7 @@ export default function ScrollToTop({
         typeof hideAtValue === 'number' && scrollBottom >= hideAtValue
       setShow(isShowFrom && !isHideAt)
     }
-    window.addEventListener('scroll', scrollHandler)
+    window.addEventListener('scroll', scrollHandler, { passive: true })
     return () => window.removeEventListener('scroll', scrollHandler)
   }, [showFromValue, hideAtValue])
 

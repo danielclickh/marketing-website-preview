@@ -85,18 +85,11 @@ export default function Page({ headerData, seo }: CommonProps) {
                       className='!mt-6'
                     />
                     <SuiText className='!mt-10 font-semibold lg:text-xl text-primary-300'>
-                    Wednesday, April 22, 9:30 PM - 12:00 AM PT
+                    We're bringing House Party to Google Cloud Next!
                     </SuiText>
                   <HRSeparator className='' />
                   <SuiText className='space-y-6 lg:text-xl'>
-                    <h3 className='!-mb-6 font-semibold text-primary-300'>
-                      We're bringing House Party to Google Cloud Next
-                    </h3>
-                    <p>
-                      You + ClickHouse + The Chainsmokers = House Party. Where
-                      database engineers become dance floor legends.
-                    </p>
-    
+                   
                     <h3 className='!-mb-6 font-semibold text-primary-300'>
                       What’s going down
                     </h3>

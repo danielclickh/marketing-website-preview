@@ -4,7 +4,6 @@ import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
-import MarketoForm from '@/components/MarketoForm'
 import Modal from '@/components/Modal'
 import PocContactForm from '@/components/PocContactForm'
 import { SuiText, SuiTitle } from '@/components/sui'
@@ -36,6 +35,11 @@ const PricingV1 = dynamic(() => import('@/components/PricingCalculator'), {
 const PricingV2 = dynamic(() => import('@/components/PricingV2'), {
   loading: () => <p className='my-10 text-center'>Loading pricing...</p>,
   ssr: true
+})
+
+const MarketoForm = dynamic(() => import('@/components/MarketoForm'), {
+  loading: () => <div className="h-96 animate-pulse bg-gray-800 rounded" />,
+  ssr: false
 })
 
 export const getServerSideProps: GetServerSideProps<PricingPageProps> =

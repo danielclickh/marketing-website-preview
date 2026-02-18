@@ -25,17 +25,55 @@ import QuoteCard, { QuoteCardProps } from '@/components/QuoteCard'
 import ScaleToContainer from '@/components/ScaleToContainer'
 import TiltedText from '@/components/TiltedText'
 import { SuiText, SuiTitle } from '@/components/sui'
+import { blogService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { getRelativeDateStatus } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { EntryBlogPost } from '@/types/strapi'
+import { Icon, Separator } from '@clickhouse/click-ui'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 
-export const getStaticProps: GetStaticProps<CommonProps> =
+// Constants
+const POSTGRES_WEEK_DATES = [
+  new Date('2026-02-13'),
+  new Date('2026-02-17'),
+  new Date('2026-02-18'),
+  new Date('2026-02-19'),
+  new Date('2026-02-20')
+  // Need more days? Add them here...
+] as const
+
+interface StaticProps extends CommonProps {
+  postgresBlogs: Array<Pick<EntryBlogPost, 'title' | 'slug' | 'date'>>
+}
+
+export const getStaticProps: GetStaticProps<StaticProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
+    const postgresBlogs = await blogService.findAll({
+      filters: {
+        tags: {
+          slug: {
+            $eq: 'postgres-weekly'
+          }
+        },
+        $or: POSTGRES_WEEK_DATES.map((date) => {
+          return {
+            date: {
+              $gte: date.toISOString()
+            }
+          }
+        })
+      },
+      sortBy: 'date:desc',
+      fields: ['title', 'slug', 'date'],
+      populate: []
+    })
+
     return {
       props: {
         ...commonProps,
@@ -45,12 +83,13 @@ export const getStaticProps: GetStaticProps<CommonProps> =
           description:
             'Postgres managed by ClickHouse is now in private preview, a native Postgres service integrated with ClickHouse. Build on a Unified Data Stack with Postgres for transactions and ClickHouse for analytics, with no operational overhead.',
           path: '/cloud/postgres'
-        }
+        },
+        postgresBlogs
       }
     }
   }
 
-export default function Page({ headerData, seo }: CommonProps) {
+export default function Page({ headerData, seo, postgresBlogs }: StaticProps) {
   useGalaxyOnPage('postgresByClickhousePage')
 
   const [accordionNvmesOpen, setAccordionNvmesOpen] = useState(true)
@@ -59,6 +98,7 @@ export default function Page({ headerData, seo }: CommonProps) {
   const [activeDiagramParts, setActiveDiagramParts] = useState<
     PostgresByClickhouseDiagramProps['activeParts']
   >(['your-application', 'postgres-database', 'nvmes'])
+
   return (
     <Layout headerData={headerData} seo={seo}>
       {/* Hero */}
@@ -133,6 +173,93 @@ export default function Page({ headerData, seo }: CommonProps) {
                 <Form />
               </CUICard.Body>
             </CUICard>
+          </div>
+        </div>
+      </section>
+
+      {/* Postgres Week */}
+      <section className='relative bg-neutral-750 py-16 lg:py-24'>
+        <div className='section-container mb-12 max-w-3xl space-y-6 text-center lg:mb-16'>
+          <span className='rounded-full border border-primary-600/80 bg-gradient-to-b from-primary-300/10 to-primary-400/5 px-6 py-2.5 align-middle font-medium leading-none'>
+            Feb 13-20, 2026
+          </span>
+          <SuiTitle type='h2'>Postgres Week</SuiTitle>
+          <SuiText size='lg' className='opacity-70'>
+            Five days, five deep dives
+          </SuiText>
+        </div>
+        <div className='hide-scrollbar overflow-x-auto'>
+          <div className='mx-auto flex w-max flex-row before:block before:w-3 before:flex-shrink-0 after:block after:w-3 after:flex-shrink-0'>
+            {POSTGRES_WEEK_DATES.map((cardDate, index) => {
+              // Get blog entry
+              const blog = postgresBlogs.find(
+                (post) =>
+                  new Date(post.date).toDateString() === cardDate.toDateString()
+              )
+
+              const dateString = cardDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric'
+              })
+
+              // Content unlocks as soon as blog is available
+              const isContentUnlocked = !!blog
+
+              // Get status text and blog URL
+              const statusText = getRelativeDateStatus(cardDate)
+
+              // Card styling
+              const cardClassName = `flex h-full relative overflow-hidden flex-col transition-colors justify-start p-6 text-neutral-200 ${
+                isContentUnlocked
+                  ? 'hover:border-primary-500 hover:bg-neutral-725 focus-within:border-primary-500'
+                  : 'cursor-not-allowed'
+              }`
+
+              return (
+                <div
+                  key={index}
+                  className='w-72 flex-shrink-0 flex-grow-0 px-3 lg:max-w-none'>
+                  <CUICard className={cardClassName}>
+                    <CUICard.Header>
+                      <strong>DAY {index + 1}</strong>
+                      <br />
+                      <span className='font-mono text-primary-300'>
+                        {dateString}
+                      </span>
+                    </CUICard.Header>
+                    <CUICard.Body className='mb-auto mt-4'>
+                      <SuiTitle
+                        type='h3'
+                        color='white'
+                        className={isContentUnlocked ? '' : 'blur-sm'}>
+                        {isContentUnlocked
+                          ? blog.title
+                          : `New blog post will be revealed on ${dateString}!`}
+                      </SuiTitle>
+                    </CUICard.Body>
+                    <CUICard.Footer>
+                      <Separator size='lg' />
+                      {isContentUnlocked ? (
+                        <LinkWithArrow
+                          href={`/blog/${blog.slug}?loc=postgresWeek${index + 1}`}
+                          target='_blank'
+                          onClick={(e) => e.stopPropagation()}
+                          className='text-base font-medium text-primary-300 hover:underline'>
+                          <span className='absolute inset-0' />
+                          Read blog
+                        </LinkWithArrow>
+                      ) : (
+                        <SuiText className='flex items-center gap-2'>
+                          <Icon name='clock' />
+                          {statusText}
+                        </SuiText>
+                      )}
+                    </CUICard.Footer>
+                  </CUICard>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -271,7 +398,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 {(
                   [
                     {
-                      content: `We’re excited to see ClickHouse entering the Postgres ecosystem. At Beehiiv, we rely heavily on both Postgres and ClickHouse to power our mission-critical, real-time, customer-facing applications. 
+                      content: `We’re excited to see ClickHouse entering the Postgres ecosystem. At Beehiiv, we rely heavily on both Postgres and ClickHouse to power our mission-critical, real-time, customer-facing applications.
 
 We’ve invested significant effort integrating these technologies, so a tighter, more native integration between them would materially simplify our architecture.`,
                       logo: {

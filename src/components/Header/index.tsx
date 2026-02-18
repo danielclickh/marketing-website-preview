@@ -1,5 +1,6 @@
 import logoFull from '../../../public/logo-full.svg'
 import AnnouncementBar from '../AnnouncementBar'
+import LogoBrandMenu from '../LogoBrandMenu'
 import { CUIButton, CUILink } from '../ClickUI'
 import HeaderRegionSelector from '../HeaderRegionSelector'
 import Navigation from '../Navigation'
@@ -27,9 +28,9 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
-  >('Introducing Managed ClickStack: Observability for OpenTelemetry at scale')
+  >('Postgres Week | All things Postgres from ClickHouse')
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/introducing-managed-clickstack-beta?loc=banner'
+    '/cloud/postgres?loc=banner'
   )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
@@ -47,7 +48,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   })
 
   useEffect(() => {
-    window.addEventListener('scroll', scrollHandler)
+    window.addEventListener('scroll', scrollHandler, { passive: true })
     scrollHandler()
 
     //=== Country specific eyebrow ===//
@@ -121,19 +122,20 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>
           {/* Logo */}
-          <Link
-            href='/'
-            prefetch={false}
-            onClick={useGalaxyOnClick('topNav.logo.select')}
-            className='mr-auto'>
-            <Image
-              src={logoFull}
-              priority
-              width='135'
-              height='40'
-              alt='ClickHouse logo'
-            />
-          </Link>
+          <LogoBrandMenu>
+            <Link
+              href='/'
+              prefetch={false}
+              onClick={useGalaxyOnClick('topNav.logo.select')}>
+              <Image
+                src={logoFull}
+                priority
+                width='135'
+                height='40'
+                alt='ClickHouse logo'
+              />
+            </Link>
+          </LogoBrandMenu>
 
           {/* Mobile search */}
           <button

@@ -553,6 +553,7 @@ export interface EntryBlogPost extends Entry {
   enableSidebarGlobalCta: null | boolean
   sections: Array<BlogModules>
   ListOnBlogs: null | boolean
+  tags?: Array<EntryTag>
 }
 
 export interface EntryAuthor extends Entry {

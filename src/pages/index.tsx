@@ -34,8 +34,10 @@ export const getStaticProps: GetStaticProps<HomePageProps> =
       ]
     }
 
-    const commonProps = await getCommonProps()
-    const data = await findOne('homepage', params)
+    const [commonProps, data] = await Promise.all([
+      getCommonProps(),
+      findOne('homepage', params)
+    ])
 
     // Remove unwanted svg data from being serialized
     data.customerStories.logos = data.customerStories.logos.map(
