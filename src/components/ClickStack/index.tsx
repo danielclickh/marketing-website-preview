@@ -1,3 +1,4 @@
+import logoClickhouseCloud from './assets/clickhouse-cloud.svg'
 import logoClickhouse from './assets/clickhouse.svg'
 import logoHyperdx from './assets/hyperdx.svg'
 import logoOpentelemetry from './assets/opentelemetry.svg'
@@ -6,6 +7,7 @@ import LogoStack from '@/components-cleaned/LogoStack'
 type CallbackStack = 'hyperdx' | 'clickhouse' | 'opentelemetry'
 
 export interface ClickStackProps {
+  type?: 'oss' | 'cloud'
   hyperdx?: boolean
   clickhouse?: boolean
   opentelemetry?: boolean
@@ -16,6 +18,7 @@ export interface ClickStackProps {
 }
 
 export default function ClickStack({
+  type = 'oss',
   hyperdx = true,
   clickhouse = true,
   opentelemetry = true,
@@ -39,7 +42,9 @@ export default function ClickStack({
           onMouseLeave: onMouseLeave ? () => onMouseLeave('hyperdx') : undefined
         },
         {
-          logo: { src: logoClickhouse },
+          logo: {
+            src: type === 'cloud' ? logoClickhouseCloud : logoClickhouse
+          },
           active: clickhouse,
           color: '#FAFF69',
           onClick: onClick ? () => onClick('clickhouse') : undefined,
