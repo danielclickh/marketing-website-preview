@@ -94,7 +94,7 @@ export default function HomepageHeroAlt2({
       {/* Hero content */}
       <div className='section-container relative z-10 pt-16 text-center lg:pt-24'>
         <h1
-          className={`!text-[2.5rem] leading-none md:!text-[4.5rem] xl:!text-[6.5rem] font-black ${mounted ? 'hero-animate' : 'opacity-0'}`}
+          className={`!text-[2.5rem] leading-none md:!text-[4.5rem] xl:!text-[6rem] font-black ${mounted ? 'hero-animate' : 'opacity-0'}`}
           style={{ animationDelay: '0ms' }}>
           The leading<br />database for AI
         </h1>
