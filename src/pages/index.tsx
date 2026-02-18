@@ -2,12 +2,13 @@ import UseCasesCards from '@/components-cleaned/UseCasesCards'
 import FAQ from '@/components/FAQ'
 import GetStarted from '@/components/GetStarted'
 import HRSeparator from '@/components/HRSeparator'
-import HomepageHeroAlt from '@/components/HomepageHeroAlt'
+// import HomepageHeroAlt from '@/components/HomepageHeroAlt'
+import HomepageHeroAlt2 from '@/components/HomepageHeroAlt2'
 import HomepageSectionContentFeed from '@/components/HomepageSectionContentFeed'
 import HomepageSectionDeployAlt from '@/components/HomepageSectionDeployAlt'
 import HomepageSectionFast from '@/components/HomepageSectionFast'
 import HomepageSectionStackIntegration from '@/components/HomepageSectionStackIntegration'
-import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
+// import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
 import HomepageSectionWhyClickhouse from '@/components/HomepageSectionWhyClickhouse'
 import JoinCommunity from '@/components/JoinCommunity'
 import Layout from '@/components/Layout'
@@ -74,8 +75,8 @@ export default function HomePage({
 
   return (
     <Layout seo={seo} headerData={headerData}>
-      <HomepageHeroAlt />
-      <HomepageSectionTrustedByAlt customerStories={customerStories} />
+      {/* To switch back: use <HomepageHeroAlt /> and restore <HomepageSectionTrustedByAlt customerStories={customerStories} /> below */}
+      <HomepageHeroAlt2 customerStories={customerStories} />
       <section className='mb-16 bg-gradient-to-br from-white/5 to-transparent to-50% pt-10 lg:mb-28 lg:pt-16'>
         <div className='section-container'>
           <div className='space-y-4 text-center'>

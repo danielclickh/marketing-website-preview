@@ -16,7 +16,7 @@ export default function HomepageSectionTrustedByAlt({
   customerStories,
   className = '',
   invertLogos = true,
-  heading = 'ClickHouse is Trusted by',
+  heading = 'ClickHouse is trusted by',
   initialSlide = 0, // Index of initial slide, can be an array of indexes for each row of logos
   numberOfRows = 2,
   ...props
@@ -51,6 +51,7 @@ export default function HomepageSectionTrustedByAlt({
       heading={heading}
       initialSlide={initialSlide}
       numberOfRows={numberOfRows}
+      className={className}
       {...props}
     />
   )
