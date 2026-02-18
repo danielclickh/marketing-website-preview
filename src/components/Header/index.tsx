@@ -1,40 +1,24 @@
 import logoFull from '../../../public/logo-full.svg'
-import AnnouncementBar from '../AnnouncementBar'
-import LogoBrandMenu from '../LogoBrandMenu'
 import { CUIButton, CUILink } from '../ClickUI'
 import HeaderRegionSelector from '../HeaderRegionSelector'
+import LogoBrandMenu from '../LogoBrandMenu'
 import Navigation from '../Navigation'
 import GitHub from '../icons/GitHub'
 import { HeaderProps } from './types'
 import { useGlobalSearch } from '@/components-cleaned/GlobalSearchProvider'
+import StrapiGlobalAnnouncement from '@/components/StrapiGlobalAnnouncement'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import { getBrowserCookie, setBrowserCookie } from '@/lib/utils/cookies'
 import { SearchIcon } from '@heroicons/react/outline'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Header({ github, eyebrow }: HeaderProps) {
-  const pathname = usePathname()
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
-
-  // Eyebrow default settings
-  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(true)
-  const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
-  const [headerBannerText, setHeaderBannerText] = useState<
-    string | React.ReactNode
-  >('Postgres Week | All things Postgres from ClickHouse')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/cloud/postgres?loc=banner'
-  )
-  const [headerBannerExpires, setHeaderBannerExpires] = useState<
-    undefined | Date
-  >(undefined)
 
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
@@ -50,40 +34,6 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler, { passive: true })
     scrollHandler()
-
-    //=== Country specific eyebrow ===//
-    ;(async () => {
-      let countryCode = getBrowserCookie('ch-user-country')
-      const langCode = window.navigator.language.split('-')[0]
-
-      if (!countryCode) {
-        try {
-          const request = await fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-          const response = await request.json()
-          if (request.ok && !response.error) {
-            countryCode = response.country // (ISO 3166-1 alpha-2 format)
-
-            // Remember users country
-            if (countryCode) {
-              setBrowserCookie('ch-user-country', countryCode)
-            }
-          }
-        } catch {}
-      }
-
-      if (
-        countryCode?.toUpperCase() === 'JP' ||
-        langCode?.toUpperCase() === 'JA'
-      ) {
-        /*setHeaderBannerEnabled(true)
-        setHeaderBannerText(
-          'ClickHouse announces establishment of Japanese subsidiary in partnership with Japan Cloud'
-        )
-        setHeaderBannerUrl('/blog/japan-cloud?loc=eyebrow')
-        setHeaderBannerExpires(undefined)
-        setHeaderBannerArrow(true)*/
-      }
-    })()
 
     return () => {
       window.removeEventListener('scroll', scrollHandler)
@@ -108,16 +58,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         } ${
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
-        {/* Announcement banner */}
-        <AnnouncementBar
-          enabled={headerBannerEnabled}
-          link={headerBannerUrl}
-          text={headerBannerText}
-          expires={headerBannerExpires}
-          dismissible={true}
-          className={eyebrow?.className || ''}
-          arrow={headerBannerArrow}
-        />
+        <StrapiGlobalAnnouncement className={eyebrow?.className} />
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>

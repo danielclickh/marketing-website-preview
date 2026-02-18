@@ -9,6 +9,7 @@ import {
   EntryAuthor,
   EntryBlogPost,
   EntryEvent,
+  EntryGlobalAnnouncement,
   EntryMarketingVideo,
   EntryPage,
   EntryResource,
@@ -449,3 +450,10 @@ export const authorsService = new StrapiEntryService<EntryAuthor>(
   false,
   true
 )
+
+export const globalAnnouncementsService =
+  new StrapiEntryService<EntryGlobalAnnouncement>(
+    'global-announcements',
+    false,
+    false
+  )

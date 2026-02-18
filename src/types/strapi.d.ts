@@ -568,3 +568,9 @@ export interface EntryAuthor extends Entry {
   instagramUrl: null | string
   websiteUrl: null | string
 }
+
+export interface EntryGlobalAnnouncement extends Entry {
+  text: string
+  url: string
+  country: string | null
+}
