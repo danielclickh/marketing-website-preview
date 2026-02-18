@@ -1,32 +1,24 @@
 import logoFull from '../../../public/logo-full.svg'
-import AnnouncementBar from '../AnnouncementBar'
-import LogoBrandMenu from '../LogoBrandMenu'
 import { CUIButton, CUILink } from '../ClickUI'
 import HeaderRegionSelector from '../HeaderRegionSelector'
+import LogoBrandMenu from '../LogoBrandMenu'
 import Navigation from '../Navigation'
 import GitHub from '../icons/GitHub'
 import { HeaderProps } from './types'
 import { useGlobalSearch } from '@/components-cleaned/GlobalSearchProvider'
+import StrapiGlobalAnnouncement from '@/components/StrapiGlobalAnnouncement'
 import useResizeObserverSsr from '@/hooks/useResizeObserverSsr'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
-import { getBrowserCookie, setBrowserCookie } from '@/lib/utils/cookies'
 import { SearchIcon } from '@heroicons/react/outline'
 import { MenuIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Header({ github, eyebrow }: HeaderProps) {
-  const pathname = usePathname()
   const headerRef = useRef<HTMLElement>(null)
   const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState<boolean>(false)
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
-
-  // Announcement banner state (populated from CMS)
-  const [headerBannerEnabled, setHeaderBannerEnabled] = useState(false)
-  const [headerBannerText, setHeaderBannerText] = useState('')
-  const [headerBannerUrl, setHeaderBannerUrl] = useState('')
 
   const scrollHandler = () => {
     setIsScrolled(window.scrollY > 0)
@@ -42,35 +34,6 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler, { passive: true })
     scrollHandler()
-
-    // Fetch announcement from CMS, with optional country targeting
-    ;(async () => {
-      let countryCode = getBrowserCookie('ch-user-country')
-
-      if (!countryCode) {
-        try {
-          const geoReq = await fetch('https://ipinfo.io?token=33cfa2cb7f422c')
-          const geoRes = await geoReq.json()
-          if (geoReq.ok && !geoRes.error) {
-            countryCode = geoRes.country
-            if (countryCode) {
-              setBrowserCookie('ch-user-country', countryCode)
-            }
-          }
-        } catch {}
-      }
-
-      try {
-        const qs = countryCode ? `?country=${countryCode}` : ''
-        const res = await fetch(`/api/announcement${qs}`)
-        const data = await res.json()
-        if (data.text && data.url) {
-          setHeaderBannerText(data.text)
-          setHeaderBannerUrl(data.url)
-          setHeaderBannerEnabled(true)
-        }
-      } catch {}
-    })()
 
     return () => {
       window.removeEventListener('scroll', scrollHandler)
@@ -95,14 +58,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
         } ${
           isScrolled ? 'md-mid:bg-neutral-900/80' : 'md-mid:bg-neutral-900/10'
         } fixed top-0 z-50 w-full border-b border-white/5 backdrop-blur transition-colors`}>
-        {/* Announcement banner */}
-        <AnnouncementBar
-          enabled={headerBannerEnabled}
-          link={headerBannerUrl}
-          text={headerBannerText}
-          dismissible={true}
-          className={eyebrow?.className || ''}
-        />
+        <StrapiGlobalAnnouncement className={eyebrow?.className} />
 
         {/* Logo, navigtation, CTAs... */}
         <div className='no-wrap section-container relative flex items-center py-4'>

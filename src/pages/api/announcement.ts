@@ -1,12 +1,7 @@
-import { request } from '@/lib/api/strapi'
+import { globalAnnouncementsService, request } from '@/lib/api/strapi'
+import { absoluteUrl } from '@/lib/next'
+import { EntryGlobalAnnouncement } from '@/types/strapi'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-interface AnnouncementEntry {
-  text: string
-  url: string
-  global: boolean
-  country: string | null
-}
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,9 +11,7 @@ export default async function handler(
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const visitorCountry = (
-    (req.query.country as string) || ''
-  )
+  const visitorCountry = ((req.query.country as string) || '')
     .trim()
     .toUpperCase()
 
@@ -28,46 +21,39 @@ export default async function handler(
   )
 
   try {
-    const { data } = await request('global-announcements', {
-      filters: { enabled: { $eq: true } },
-      fields: ['text', 'url', 'global', 'country'],
-      publicationState: 'live'
+    const entries = await globalAnnouncementsService.findAll({
+      sort: ['publishedAt:desc']
     })
 
-    if (!data || !data.length) {
+    if (!entries || !entries.length) {
       return res.json({})
     }
 
-    const entries: AnnouncementEntry[] = data.map((entry: any) => ({
-      text: entry.attributes?.text ?? entry.text,
-      url: entry.attributes?.url ?? entry.url,
-      global: entry.attributes?.global ?? entry.global ?? true,
-      country: entry.attributes?.country ?? entry.country ?? null
-    }))
-
     // Country-specific match takes priority over global
-    let match: AnnouncementEntry | undefined
+    let match: EntryGlobalAnnouncement | undefined
 
     if (visitorCountry) {
       match = entries.find((e) => {
-        if (e.global || !e.country) return false
-        const codes = e.country
-          .split(',')
-          .map((c) => c.trim().toUpperCase())
+        if (!e.country) return false
+        const codes = e.country.split(',').map((c) => c.trim().toUpperCase())
         return codes.includes(visitorCountry)
       })
     }
 
     if (!match) {
-      match = entries.find((e) => e.global)
+      match = entries.find((e) => !e.country)
     }
 
     if (!match) {
       return res.json({})
     }
 
-    const url = new URL(match.url, 'https://clickhouse.com')
-    url.searchParams.set('loc', 'banner')
+    const url = new URL(absoluteUrl(match.url))
+
+    // Add default loc param if not already defined
+    if (!url.searchParams.has('loc')) {
+      url.searchParams.set('loc', 'banner')
+    }
 
     return res.json({ text: match.text, url: url.toString() })
   } catch (err) {
