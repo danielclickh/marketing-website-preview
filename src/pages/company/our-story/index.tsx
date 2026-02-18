@@ -13,6 +13,8 @@ import leadedge from './assets/investor-leadedge.png'
 import lightspeed from './assets/investor-lightspeed.png'
 import nebius from './assets/investor-nebius.png'
 import redpoint from './assets/investor-redpoint.png'
+import troweprice from './assets/investor-t-rowe-price.svg'
+import wcm from './assets/investor-wcm.svg'
 import founders from './founders.json'
 import styles from './styles.module.scss'
 import { CUIButton } from '@/components/ClickUI'
@@ -25,7 +27,7 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { OurStoryData } from '@/types/ourStory'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
-import Image from 'next/image'
+import Image, { ImageProps } from 'next/image'
 
 export const getStaticProps: GetStaticProps<OurStoryData> =
   async function getStaticProps() {
@@ -209,119 +211,92 @@ While we’re in different places, we all have the same goals, and we trust each
             </SuiTitle>
 
             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:flex xl:flex-row xl:flex-wrap xl:items-center xl:justify-around'>
-              <Image
-                src={indexventures}
-                width={672 / 3}
-                height={177 / 3}
-                alt='Index Ventures'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={benchmark}
-                width={651 / 3}
-                height={177 / 3}
-                alt='Benchmark'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={coatue}
-                width={141}
-                height={59}
-                alt='Coatue'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={altimeter}
-                width={609 / 3}
-                height={177 / 3}
-                alt='Altimeter'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={khosla}
-                width={213}
-                height={59}
-                alt='Khosla'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <div
-                className='hidden h-0 w-full basis-full xl:block'
-                aria-hidden='true'
-              />
-              <Image
-                src={lightspeed}
-                width={492 / 3}
-                height={177 / 3}
-                alt='Lightspeed'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={bond}
-                width={144}
-                height={59}
-                alt='Bond'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={bessemer}
-                width={119}
-                height={59}
-                alt='Bessemer'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={battery}
-                width={186}
-                height={59}
-                alt='Battery'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={ivp}
-                width={75}
-                height={59}
-                alt='IVP'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={nebius}
-                width={504 / 3}
-                height={177 / 3}
-                alt='Nebius'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <div
-                className='hidden h-0 w-full basis-full xl:block'
-                aria-hidden='true'
-              />
-              <Image
-                src={redpoint}
-                width={483 / 3}
-                height={177 / 3}
-                alt='Redpoint'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={almazcapital}
-                width={489 / 3}
-                height={177 / 3}
-                alt='AlmazCapital'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={firstmark}
-                width={528 / 3}
-                height={177 / 3}
-                alt='Firstmark'
-                className='mx-auto flex-1 flex-grow-0'
-              />
-              <Image
-                src={leadedge}
-                width={576 / 3}
-                height={177 / 3}
-                alt='Lead Edge'
-                className='mx-auto flex-1 flex-grow-0'
-              />
+              {(
+                [
+                  {
+                    src: indexventures,
+                    width: 672 / 3,
+                    height: 177 / 3,
+                    alt: 'Index Ventures'
+                  },
+                  {
+                    src: benchmark,
+                    width: 651 / 3,
+                    height: 177 / 3,
+                    alt: 'Benchmark'
+                  },
+                  { src: coatue, width: 141, height: 59, alt: 'Coatue' },
+                  {
+                    src: altimeter,
+                    width: 609 / 3,
+                    height: 177 / 3,
+                    alt: 'Altimeter'
+                  },
+                  { src: khosla, width: 213, height: 59, alt: 'Khosla' },
+                  {
+                    src: lightspeed,
+                    width: 492 / 3,
+                    height: 177 / 3,
+                    alt: 'Lightspeed'
+                  },
+                  { src: bond, width: 144, height: 59, alt: 'Bond' },
+                  { src: bessemer, width: 119, height: 59, alt: 'Bessemer' },
+                  { src: battery, width: 186, height: 59, alt: 'Battery' },
+                  { src: ivp, width: 75, height: 59, alt: 'IVP' },
+                  {
+                    src: troweprice,
+                    width: 222,
+                    height: 64,
+                    alt: 'T.Rowe Price'
+                  },
+                  { src: wcm, width: 126, height: 42, alt: 'WCM' },
+                  {
+                    src: nebius,
+                    width: 504 / 3,
+                    height: 177 / 3,
+                    alt: 'Nebius'
+                  },
+                  {
+                    src: redpoint,
+                    width: 483 / 3,
+                    height: 177 / 3,
+                    alt: 'Redpoint'
+                  },
+                  {
+                    src: almazcapital,
+                    width: 489 / 3,
+                    height: 177 / 3,
+                    alt: 'AlmazCapital'
+                  },
+                  {
+                    src: firstmark,
+                    width: 528 / 3,
+                    height: 177 / 3,
+                    alt: 'Firstmark'
+                  },
+                  {
+                    src: leadedge,
+                    width: 576 / 3,
+                    height: 177 / 3,
+                    alt: 'Lead Edge'
+                  }
+                ] satisfies Array<
+                  Pick<ImageProps, 'src' | 'width' | 'height' | 'alt'>
+                >
+              )
+                .toSorted((a, b) => a.alt.localeCompare(b.alt))
+                .map((item, index) => {
+                  return (
+                    <Image
+                      key={index}
+                      src={item.src}
+                      width={item.width}
+                      height={item.height}
+                      alt={item.alt}
+                      className='mx-auto flex-1 flex-grow-0'
+                    />
+                  )
+                })}
             </div>
           </div>
         </div>
