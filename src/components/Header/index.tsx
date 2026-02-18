@@ -28,7 +28,7 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
-  >('Postgres Week | All Things Postgres from ClickHouse')
+  >('Postgres Week | All things Postgres from ClickHouse')
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
     '/cloud/postgres?loc=banner'
   )
