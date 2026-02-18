@@ -154,7 +154,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               </SmartBackProvider>
             </GlobalSearchProvider>
           </GrowthBookProvider>
-          {!isMarketoIframe && true && (
+          {!isMarketoIframe && IS_PRODUCTION && (
             <>
               {/* Consent must initialize first! */}
               <GoogleTagManagerConsent />
