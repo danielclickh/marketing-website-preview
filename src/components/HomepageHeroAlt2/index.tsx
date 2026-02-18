@@ -3,24 +3,8 @@ import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import HomepageSectionTrustedByAlt from '../HomepageSectionTrustedByAlt'
 import { SuiText, SuiTitle } from '../sui'
 import { HomepageCustomerStories } from '@/types/homepage'
+import styles from './hero-entrance.module.css'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-
-const heroEntrance = `
-@keyframes heroSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.hero-animate {
-  opacity: 0;
-  animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-`
 
 interface HomepageHeroAlt2Props extends React.HTMLProps<HTMLDivElement> {
   customerStories: HomepageCustomerStories
@@ -88,25 +72,22 @@ export default function HomepageHeroAlt2({
         }}
       />
 
-      {/* Injected keyframes */}
-      <style dangerouslySetInnerHTML={{ __html: heroEntrance }} />
-
       {/* Hero content */}
       <div className='section-container relative z-10 pt-16 text-center lg:pt-24'>
         <h1
-          className={`!text-[2.5rem] leading-none md:!text-[4.5rem] xl:!text-[6rem] font-black ${mounted ? 'hero-animate' : 'opacity-0'}`}
+          className={`!text-[2.5rem] leading-none md:!text-[4.5rem] xl:!text-[6rem] font-black ${mounted ? styles.heroAnimate : 'opacity-0'}`}
           style={{ animationDelay: '0ms' }}>
           The leading<br />database for AI
         </h1>
 
-        <SuiText
-          className={`mx-auto mt-4 md:max-w-2xl xl:max-w-4xl xl:leading-8 text-white lg:text-lg xl:!text-[1.5rem] ${mounted ? 'hero-animate' : 'opacity-0'}`}
+        <p
+          className={`mx-auto mt-4 md:max-w-2xl xl:max-w-4xl xl:leading-8 text-white md:text-lg xl:!text-[1.5rem] ${mounted ? styles.heroAnimate : 'opacity-0'}`}
           style={{ animationDelay: '120ms' }}>
            Powering agentic systems with millisecond queries at petabyte scale.
-        </SuiText>
+        </p>
 
         <div
-          className={`mx-auto mt-12 flex max-w-md flex-wrap justify-center gap-6 ${mounted ? 'hero-animate' : 'opacity-0'}`}
+          className={`mx-auto mt-12 flex max-w-md flex-wrap justify-center gap-6 ${mounted ? styles.heroAnimate : 'opacity-0'}`}
           style={{ animationDelay: '240ms' }}>
           <CUIButton
             type='primary'
@@ -131,7 +112,7 @@ export default function HomepageHeroAlt2({
 
         {/* Langfuse announcement */}
         <div
-          className={`relative z-10 mx-auto mt-24 max-w-2xl -mb-12 ${mounted ? 'hero-animate' : 'opacity-0'}`}
+          className={`relative z-10 mx-auto mt-24 max-w-2xl -mb-12 ${mounted ? styles.heroAnimate : 'opacity-0'}`}
           style={{ animationDelay: '360ms' }}>
           <LogoAnnouncementLink
             href='https://langfuse.com/?utm_source=clickhouse_hero'
