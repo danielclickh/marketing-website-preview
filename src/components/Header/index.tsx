@@ -28,9 +28,9 @@ export default function Header({ github, eyebrow }: HeaderProps) {
   const [headerBannerArrow, setHeaderBannerArrow] = useState(true)
   const [headerBannerText, setHeaderBannerText] = useState<
     string | React.ReactNode
-  >('Introducing Managed ClickStack: Observability for OpenTelemetry at scale')
+  >('Postgres Week | All Things Postgres from ClickHouse')
   const [headerBannerUrl, setHeaderBannerUrl] = useState(
-    '/blog/introducing-managed-clickstack-beta?loc=banner'
+    '/cloud/postgres?loc=banner'
   )
   const [headerBannerExpires, setHeaderBannerExpires] = useState<
     undefined | Date
