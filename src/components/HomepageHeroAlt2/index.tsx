@@ -100,11 +100,9 @@ export default function HomepageHeroAlt2({
         </h1>
 
         <SuiText
-          className={`mx-auto mt-6 max-w-2xl !text-base text-white/70 lg:!text-lg ${mounted ? 'hero-animate' : 'opacity-0'}`}
+          className={`mx-auto mt-4 md:max-w-2xl xl:max-w-4xl xl:leading-8 text-white lg:text-lg xl:!text-[1.5rem] ${mounted ? 'hero-animate' : 'opacity-0'}`}
           style={{ animationDelay: '120ms' }}>
-          Real-time insight without the wait. ClickHouse is the analytical
-          database built for engineers who move fast and expect the same from
-          their data.
+           Powering agentic systems with millisecond queries at petabyte scale.
         </SuiText>
 
         <div
