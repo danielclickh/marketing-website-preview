@@ -11,7 +11,7 @@
 
   /* WebKit (Chrome, Edge, Safari) */
   .branded-scrollbar::-webkit-scrollbar {
-    @apply w-2 h-2;
+    @apply h-2 w-2;
   }
   .branded-scrollbar::-webkit-scrollbar-thumb {
     @apply rounded bg-primary-300;
@@ -183,7 +183,7 @@
       right: var(--right-side);
       top: var(--top-side);
       box-shadow: 0 0 800px 470px var(--color-shadow);
-      transform:  scale(var(--scale));
+      transform: scale(var(--scale));
     }
     &.align-shadow-left {
       --left-side: 0;
@@ -246,7 +246,7 @@
   }
 
   .rich_content {
-    @apply text-neutral-200 space-y-6;
+    @apply space-y-6 text-neutral-200;
 
     &.theme-dark {
       @apply text-neutral;
@@ -258,7 +258,6 @@
       h6 {
         @apply text-neutral-900;
       }
-
     }
 
     h2 {
@@ -275,14 +274,14 @@
     }
 
     .code-with-play {
-      @apply relative flex whitespace-pre-wrap rounded-lg text-neutral-0 p-6 bg-primary-800;
+      @apply relative flex whitespace-pre-wrap rounded-lg bg-primary-800 p-6 text-neutral-0;
 
       .code {
         @apply -mt-6 overflow-auto whitespace-pre-wrap;
       }
 
       .play-ui {
-        @apply absolute top-5 right-6 rounded-lg text-neutral-0 w-8 h-8 flex items-center justify-center text-center leading-5 text-2xl bg-black/80 transition-colors hover:bg-white/10;
+        @apply absolute right-6 top-5 flex h-8 w-8 items-center justify-center rounded-lg bg-black/80 text-center text-2xl leading-5 text-neutral-0 transition-colors hover:bg-white/10;
       }
     }
 
@@ -343,7 +342,8 @@
       margin-left: 26px;
       @apply mb-9;
 
-      ul, ol {
+      ul,
+      ol {
         @apply mb-0;
       }
 
@@ -415,7 +415,9 @@ body {
   }
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   @apply box-border;
 }
 

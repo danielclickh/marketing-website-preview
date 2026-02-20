@@ -145,5 +145,7 @@ export default function ResponsiveHtml5Video({
     }
   }, [ready, currentSrc, autoPlay, preserveTime, props.muted])
 
-  return <video ref={videoRef} autoPlay={!defer ? autoPlay : undefined} {...props} />
+  return (
+    <video ref={videoRef} autoPlay={!defer ? autoPlay : undefined} {...props} />
+  )
 }

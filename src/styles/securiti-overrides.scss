@@ -2,13 +2,13 @@
 //
 //
 .cc-theme-edgeless.cc-window.cc-banner {
-  @apply p-4 gap-4 overflow-hidden md:items-center md:py-0.5 bg-neutral-950/90 backdrop-blur-2xl;
+  @apply gap-4 overflow-hidden bg-neutral-950/90 p-4 backdrop-blur-2xl md:items-center md:py-0.5;
 
   .cc-message-container {
     @apply flex-1;
 
     .cc-message {
-      @apply p-0 m-0 leading-tight text-sm;
+      @apply m-0 p-0 text-sm leading-tight;
 
       .cc-link {
         @apply p-0 leading-tight;
@@ -17,19 +17,20 @@
   }
 
   .cc-compliance {
-    @apply gap-x-0.5 gap-y-4 flex flex-wrap md:flex-nowrap;
+    @apply flex flex-wrap gap-x-0.5 gap-y-4 md:flex-nowrap;
 
     .cc-btn + .cc-btn {
       @apply m-0 #{!important};
     }
   }
 
-  .cc-btn, .cc-link {
+  .cc-btn,
+  .cc-link {
     @apply text-sm font-normal;
   }
 
   .cc-btn {
-    @apply flex-1 py-3 px-4;
+    @apply flex-1 px-4 py-3;
     @apply hover:bg-white/10 #{!important};
   }
 
@@ -39,11 +40,11 @@
   }
 
   .cc-link.cmp-pref-link {
-    @apply m-0 order-first md:order-last md:p-4 #{!important};
-    @apply w-full h-auto leading-none;
+    @apply order-first m-0 md:order-last md:p-4 #{!important};
+    @apply h-auto w-full leading-none;
 
     svg {
-      @apply w-auto h-3.5;
+      @apply h-3.5 w-auto;
     }
   }
 }
@@ -69,8 +70,9 @@
     @apply text-sm;
   }
 
-  .cmp-tabs__opt-out.active, .cmp-tabs__gpc-message.active {
-    @apply border-none bg-white/5 rounded text-sm;
+  .cmp-tabs__opt-out.active,
+  .cmp-tabs__gpc-message.active {
+    @apply rounded border-none bg-white/5 text-sm;
   }
 
   // Fixes switch alignment
@@ -105,7 +107,7 @@
     @apply border-b border-b-white/10;
 
     > .cmp-accordion__header {
-      @apply before:transition-colors before:absolute before:pointer-events-none before:inset-y-0 before:-inset-x-4 before:rounded hover:before:bg-white/5;
+      @apply before:pointer-events-none before:absolute before:-inset-x-4 before:inset-y-0 before:rounded before:transition-colors hover:before:bg-white/5;
 
       a {
         @apply p-0 hover:underline;
@@ -124,11 +126,10 @@
     }
   }
 
-
   // Footer
   .cmp-modal__footer {
     .cmp-btn-wrapper button.cmp-save-btn {
-      @apply rounded text-sm border-none;
+      @apply rounded border-none text-sm;
       @apply bg-primary-300 text-primary-900 hover:bg-primary-400 #{!important};
     }
   }

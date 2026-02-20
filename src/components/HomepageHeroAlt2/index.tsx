@@ -1,9 +1,9 @@
 import { CUIButton } from '../ClickUI'
-import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import HomepageSectionTrustedByAlt from '../HomepageSectionTrustedByAlt'
+import LogoAnnouncementLink from '../LogoAnnouncementLink'
 import { SuiText, SuiTitle } from '../sui'
-import { HomepageCustomerStories } from '@/types/homepage'
 import styles from './hero-entrance.module.css'
+import { HomepageCustomerStories } from '@/types/homepage'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 interface HomepageHeroAlt2Props extends React.HTMLProps<HTMLDivElement> {
@@ -24,17 +24,14 @@ export default function HomepageHeroAlt2({
     setMounted(true)
   }, [])
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!heroRef.current) return
-      const rect = heroRef.current.getBoundingClientRect()
-      setFlarePos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      })
-    },
-    []
-  )
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!heroRef.current) return
+    const rect = heroRef.current.getBoundingClientRect()
+    setFlarePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    })
+  }, [])
 
   return (
     <div
@@ -75,15 +72,17 @@ export default function HomepageHeroAlt2({
       {/* Hero content */}
       <div className='section-container relative z-10 pt-16 text-center lg:pt-24'>
         <h1
-          className={`!text-[2.5rem] leading-none md:!text-[4.5rem] xl:!text-[6rem] font-black ${mounted ? styles.heroAnimate : 'opacity-0'}`}
+          className={`!text-[2.5rem] font-black leading-none md:!text-[4.5rem] xl:!text-[6rem] ${mounted ? styles.heroAnimate : 'opacity-0'}`}
           style={{ animationDelay: '0ms' }}>
-          The leading<br />database for AI
+          The leading
+          <br />
+          database for AI
         </h1>
 
         <p
-          className={`mx-auto mt-4 md:max-w-2xl xl:max-w-4xl xl:leading-8 text-white md:text-lg xl:!text-[1.5rem] ${mounted ? styles.heroAnimate : 'opacity-0'}`}
+          className={`mx-auto mt-4 text-white md:max-w-2xl md:text-lg xl:max-w-4xl xl:!text-[1.5rem] xl:leading-8 ${mounted ? styles.heroAnimate : 'opacity-0'}`}
           style={{ animationDelay: '120ms' }}>
-           Powering agentic systems with millisecond queries at petabyte scale.
+          Powering agentic systems with millisecond queries at petabyte scale.
         </p>
 
         <div
@@ -112,12 +111,12 @@ export default function HomepageHeroAlt2({
 
         {/* Langfuse announcement */}
         <div
-          className={`relative z-10 mx-auto mt-24 max-w-2xl -mb-12 ${mounted ? styles.heroAnimate : 'opacity-0'}`}
+          className={`relative z-10 mx-auto -mb-12 mt-24 max-w-2xl ${mounted ? styles.heroAnimate : 'opacity-0'}`}
           style={{ animationDelay: '360ms' }}>
           <LogoAnnouncementLink
             href='https://langfuse.com/?utm_source=clickhouse_hero'
             target='_blank'
-            className='text-sm border-white/5'
+            className='border-white/5 text-sm'
             mode='dark'
             logo={{
               src: '/logos/langfuse.svg',
@@ -136,7 +135,7 @@ export default function HomepageHeroAlt2({
       {/* Trusted By section */}
       <HomepageSectionTrustedByAlt
         customerStories={customerStories}
-        className='relative z-0 pb-8 pt-24 bg-neutral-600/20 border-t border-white/5'
+        className='relative z-0 border-t border-white/5 bg-neutral-600/20 pb-8 pt-24'
       />
     </div>
   )
