@@ -2,9 +2,9 @@ import heroLogos from './assets/hero-logos.png'
 import iconDatabase from './assets/icon-database.svg'
 import iconGuage from './assets/icon-guage.svg'
 import iconHandCoins from './assets/icon-hand-coins.svg'
+import logoAdgreetz from './assets/logo-adgreetz.svg'
 import logoBigquery from './assets/logo-bigquery.svg'
 import logoBraze from './assets/logo-braze.svg'
-import logoAdgreetz from './assets/logo-adgreetz.svg'
 import logoChartmetric from './assets/logo-chartmetric.svg'
 import logoM3ter from './assets/logo-m3ter.svg'
 import logoPostgress from './assets/logo-postgress.svg'
@@ -262,7 +262,7 @@ export default function SnowflakePage({ headerData, seo }: CommonProps) {
             </h2>
             <div className='space-y-6 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0'>
               <QuoteCard
-                content="With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us."
+                content='With Snowflake, we were using the standard plan, small compute, which cost nearly six times more than ClickHouse Cloud. We got several seconds query time and no materialized views. With ClickHouse Cloud’s production instance, we are getting sub-second query time along with materialized views. The decision to switch was a no-brainer for us.'
                 link='/blog/adgreetz-processes-millions-of-daily-ad-impressions'
                 logo={{
                   src: logoAdgreetz,

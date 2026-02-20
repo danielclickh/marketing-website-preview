@@ -9,10 +9,10 @@
 .thumbs {
   :global {
     .swiper-slide:not(.swiper-slide-thumb-active) {
-      @apply opacity-60
+      @apply opacity-60;
     }
     .swiper-slide-thumb-active {
-      @apply border-primary-300
+      @apply border-primary-300;
     }
   }
 }

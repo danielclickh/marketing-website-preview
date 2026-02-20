@@ -97,12 +97,12 @@ export default function LogoBrandMenu({
       {children}
 
       <div
-        className={`absolute left-0 top-full z-50 pt-2 w-56 origin-top-left transition-all ${
+        className={`absolute left-0 top-full z-50 w-56 origin-top-left pt-2 transition-all ${
           isOpen
             ? 'pointer-events-auto scale-100 opacity-100'
             : 'pointer-events-none scale-95 opacity-0'
         }`}>
-        <div className='rounded-lg bg-neutral-750 p-1.5 shadow-lg border border-white/10'>
+        <div className='rounded-lg border border-white/10 bg-neutral-750 p-1.5 shadow-lg'>
           <button onClick={copySvg} className={itemClass}>
             {copied || 'Copy logo as SVG'}
           </button>

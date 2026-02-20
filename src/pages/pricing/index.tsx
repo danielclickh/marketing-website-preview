@@ -38,7 +38,7 @@ const PricingV2 = dynamic(() => import('@/components/PricingV2'), {
 })
 
 const MarketoForm = dynamic(() => import('@/components/MarketoForm'), {
-  loading: () => <div className="h-96 animate-pulse bg-gray-800 rounded" />,
+  loading: () => <div className='h-96 animate-pulse rounded bg-gray-800' />,
   ssr: false
 })
 

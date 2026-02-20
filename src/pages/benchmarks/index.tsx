@@ -7,9 +7,11 @@ import ClearFiltersButton from '@/components/ClearFiltersButton/ClearFiltersButt
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
+import MarketoForm from '@/components/MarketoForm'
 import TiltedText from '@/components/TiltedText'
 import { SuiTitle } from '@/components/sui'
 import { blogService } from '@/lib/api/strapi'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import imageClickbench from '@/pages/clickhouse/assets/image-clickbench.png'
 import { CommonProps } from '@/types/homepage'
@@ -25,8 +27,6 @@ import 'swiper/css/effect-creative'
 import { EffectCoverflow, Mousewheel, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
-import MarketoForm from '@/components/MarketoForm'
-import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 
 type BlogCompetitors =
   | 'Postgres'
@@ -461,14 +461,14 @@ export default function Page({ seo, headerData, blogs }: Props) {
 
               {formSuccess && (
                 <div ref={formSuccessRef}>
-                <CUICard className='py-16 px-4 sm:px-16'>
-                  <h3 className='text-center text-2xl font-bold'>
-                    Thank you for your submission!
-                  </h3>
-                  <p className='mt-2 text-center text-neutral-200'>
-                    We will be in touch soon.
-                  </p>
-                </CUICard>
+                  <CUICard className='px-4 py-16 sm:px-16'>
+                    <h3 className='text-center text-2xl font-bold'>
+                      Thank you for your submission!
+                    </h3>
+                    <p className='mt-2 text-center text-neutral-200'>
+                      We will be in touch soon.
+                    </p>
+                  </CUICard>
                 </div>
               )}
             </>

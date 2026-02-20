@@ -5,8 +5,10 @@
     }
 
     .swiper-controls {
-      @apply flex items-center justify-center gap-x-2 mt-3;
-      &:has(.swiper-pagination-lock):has(.swiper-button-prev.swiper-button-disabled):has(.swiper-button-next.swiper-button-disabled) {
+      @apply mt-3 flex items-center justify-center gap-x-2;
+      &:has(.swiper-pagination-lock):has(
+          .swiper-button-prev.swiper-button-disabled
+        ):has(.swiper-button-next.swiper-button-disabled) {
         @apply hidden;
       }
     }
@@ -16,7 +18,7 @@
     //
     .swiper-button-prev,
     .swiper-button-next {
-      @apply transition-colors duration-300 size-8 flex items-center justify-center rounded;
+      @apply flex size-8 items-center justify-center rounded transition-colors duration-300;
     }
 
     // Pagination
@@ -33,11 +35,11 @@
     }
 
     .swiper-pagination-bullet {
-      @apply transition-all duration-300 rounded-full shrink-0 grow-0 mr-3 size-1.5;
+      @apply mr-3 size-1.5 shrink-0 grow-0 rounded-full transition-all duration-300;
     }
 
     .swiper-pagination-bullet-active {
-      @apply cursor-default w-6;
+      @apply w-6 cursor-default;
     }
 
     // Dynamic pagination
@@ -48,27 +50,44 @@
       @apply -mr-3.5;
 
       // Has prev and next
-      &:has(.swiper-pagination-bullet-active-prev):has(.swiper-pagination-bullet-active-next) {
-        .swiper-pagination-bullet:not(.swiper-pagination-bullet-active-prev):not(.swiper-pagination-bullet-active-next):not(.swiper-pagination-bullet-active-main) {
-          @apply w-0 h-0 mr-0;
+      &:has(.swiper-pagination-bullet-active-prev):has(
+          .swiper-pagination-bullet-active-next
+        ) {
+        .swiper-pagination-bullet:not(
+            .swiper-pagination-bullet-active-prev
+          ):not(.swiper-pagination-bullet-active-next):not(
+            .swiper-pagination-bullet-active-main
+          ) {
+          @apply mr-0 h-0 w-0;
         }
       }
 
       // Has prev only
-      &:has(.swiper-pagination-bullet-active-prev):not(:has(.swiper-pagination-bullet-active-next)) {
-        .swiper-pagination-bullet:not(.swiper-pagination-bullet-active-prev):not(.swiper-pagination-bullet-active-prev-prev):not(.swiper-pagination-bullet-active-main) {
-          @apply w-0 h-0 mr-0;
+      &:has(.swiper-pagination-bullet-active-prev):not(
+          :has(.swiper-pagination-bullet-active-next)
+        ) {
+        .swiper-pagination-bullet:not(
+            .swiper-pagination-bullet-active-prev
+          ):not(.swiper-pagination-bullet-active-prev-prev):not(
+            .swiper-pagination-bullet-active-main
+          ) {
+          @apply mr-0 h-0 w-0;
         }
       }
 
       // Has next only
-      &:has(.swiper-pagination-bullet-active-next):not(:has(.swiper-pagination-bullet-active-prev)) {
-        .swiper-pagination-bullet:not(.swiper-pagination-bullet-active-next):not(.swiper-pagination-bullet-active-next-next):not(.swiper-pagination-bullet-active-main) {
-          @apply w-0 h-0 mr-0;
+      &:has(.swiper-pagination-bullet-active-next):not(
+          :has(.swiper-pagination-bullet-active-prev)
+        ) {
+        .swiper-pagination-bullet:not(
+            .swiper-pagination-bullet-active-next
+          ):not(.swiper-pagination-bullet-active-next-next):not(
+            .swiper-pagination-bullet-active-main
+          ) {
+          @apply mr-0 h-0 w-0;
         }
       }
     }
-
   }
 }
 

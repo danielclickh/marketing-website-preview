@@ -1,10 +1,10 @@
 .mask {
   mask-image: linear-gradient(
-                  to right,
-                  rgba(#000, 0) 0%,
-                  rgba(#000, 1) clamp(1rem, 25vw, 100px),
-                  rgba(#000, 1) calc(100% - clamp(1rem, 25vw, 100px)),
-                  rgba(#000, 0) 100%
+    to right,
+    rgba(#000, 0) 0%,
+    rgba(#000, 1) clamp(1rem, 25vw, 100px),
+    rgba(#000, 1) calc(100% - clamp(1rem, 25vw, 100px)),
+    rgba(#000, 0) 100%
   );
 }
 

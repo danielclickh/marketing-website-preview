@@ -6,11 +6,6 @@ import { CUIButton, CUICard } from '@/components/ClickUI'
 import HRSeparator from '@/components/HRSeparator'
 import LogoCarousel from '@/components/LogoCarousel'
 import GetStartedFree from '@/components/jp/GetStartedFree'
-import dynamic from 'next/dynamic'
-
-const AnimatedIntegrationLogos = dynamic(() => import('@/components/jp/AnimatedIntegrationLogos'), {
-  ssr: false
-})
 import Layout from '@/components/jp/Layout'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { findOne } from '@/lib/api/strapi'
@@ -20,9 +15,17 @@ import { CloudData } from '@/types/cloud'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { useInView } from 'framer-motion'
 import { GetStaticProps } from 'next'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+
+const AnimatedIntegrationLogos = dynamic(
+  () => import('@/components/jp/AnimatedIntegrationLogos'),
+  {
+    ssr: false
+  }
+)
 
 export const getStaticProps: GetStaticProps<CloudData> =
   async function getStaticProps() {

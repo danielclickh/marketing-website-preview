@@ -65,23 +65,24 @@ export const getStaticProps: GetStaticProps<PageProps> =
         ]
       }),
       eventsService.findAll({
-      filters: {
-        $and: [
-          {
-            localDatetime: {
-              $gte: startOfToday().toISOString()
+        filters: {
+          $and: [
+            {
+              localDatetime: {
+                $gte: startOfToday().toISOString()
+              },
+              category: {
+                $in: ['Live Training', 'Free Training', 'Paid Training']
+              }
             },
-            category: {
-              $in: ['Live Training', 'Free Training', 'Paid Training']
+            {
+              $or: getUnlistedFilters()
             }
-          },
-          {
-            $or: getUnlistedFilters()
-          }
-        ]
-      },
-      sort: ['localDatetime:ASC']
-    })])
+          ]
+        },
+        sort: ['localDatetime:ASC']
+      })
+    ])
 
     const modifiedEvents: Array<TrainingSimpleEvent> = events.map((event) => {
       let extractedTime: null | string = null

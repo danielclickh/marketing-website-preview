@@ -46,9 +46,11 @@ export default function TiltedText({
       {...props}>
       <span
         className={`absolute inset-0 -z-10 -skew-y-3 ${tiltClasses[type]}`}
-        style={{
-          '--tw-skew-y': angle ? `${angle}deg` : null,
-        } as React.CSSProperties}
+        style={
+          {
+            '--tw-skew-y': angle ? `${angle}deg` : null
+          } as React.CSSProperties
+        }
       />
       <span className={textClasses[type]}>{children}</span>
     </span>

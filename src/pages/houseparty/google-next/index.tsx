@@ -1,4 +1,3 @@
-import HRSeparator from '@/components/HRSeparator'
 import imageTexture from './assets/background.png'
 import heroText from './assets/hero-text.svg'
 import image1 from './assets/image-1.png'
@@ -9,6 +8,7 @@ import socialImage from './assets/social.jpg'
 import Accordion from '@/components-cleaned/Accordion'
 import { CUIButton, CUICard } from '@/components/ClickUI'
 import CopyUrlButton from '@/components/CopyUrlButton'
+import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
@@ -58,7 +58,6 @@ export default function Page({ headerData, seo }: CommonProps) {
   return (
     <>
       <Layout seo={seo} headerData={headerData}>
-        
         <div className='relative bg-[#010203] py-10 lg:py-20'>
           {/* Background texture */}
           <Image
@@ -74,22 +73,21 @@ export default function Page({ headerData, seo }: CommonProps) {
             <section className='section-container'>
               <div className='flex flex-col gap-12 lg:flex-row lg:justify-between'>
                 <div className='mx-auto max-w-xl flex-1 space-y-12 lg:ml-0'>
-                  <h1 className='text-6xl font-[900] leading-none lg:text-[5rem] tracking-tighter'>
+                  <h1 className='text-6xl font-[900] leading-none tracking-tighter lg:text-[5rem]'>
                     House Party
-                    </h1>
-                    <Image
-                      src={heroText}
-                      width={575}
-                      height={208}
-                      alt='Featuring The Chainsmokers!'
-                      className='!mt-6'
-                    />
-                    <SuiText className='!mt-10 font-semibold lg:text-xl text-primary-300'>
+                  </h1>
+                  <Image
+                    src={heroText}
+                    width={575}
+                    height={208}
+                    alt='Featuring The Chainsmokers!'
+                    className='!mt-6'
+                  />
+                  <SuiText className='!mt-10 font-semibold text-primary-300 lg:text-xl'>
                     We're bringing House Party to Google Cloud Next!
-                    </SuiText>
+                  </SuiText>
                   <HRSeparator className='' />
                   <SuiText className='space-y-6 lg:text-xl'>
-                   
                     <h3 className='!-mb-6 font-semibold text-primary-300'>
                       What’s going down
                     </h3>
@@ -306,9 +304,20 @@ function MuteableVideo({
     <div className='group relative'>
       {/* Placeholder overlaid while video loads */}
       {!isReady && (
-        <div className={`absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-neutral-800`}>
+        <div
+          className={`absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-neutral-800`}>
           <div className='flex flex-col items-center gap-2 text-neutral-400'>
-            <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' className='animate-pulse'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='1.5'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              className='animate-pulse'>
               <polygon points='5 3 19 12 5 21 5 3' />
             </svg>
             <span className='text-sm'>Loading video...</span>
@@ -331,13 +340,31 @@ function MuteableVideo({
           aria-label={isMuted ? 'Unmute video' : 'Mute video'}
           className='absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100'>
           {isMuted ? (
-            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='16'
+              height='16'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'>
               <polygon points='11 5 6 9 2 9 2 15 6 15 11 19 11 5' />
               <line x1='23' y1='9' x2='17' y2='15' />
               <line x1='17' y1='9' x2='23' y2='15' />
             </svg>
           ) : (
-            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='16'
+              height='16'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'>
               <polygon points='11 5 6 9 2 9 2 15 6 15 11 19 11 5' />
               <path d='M19.07 4.93a10 10 0 0 1 0 14.14' />
               <path d='M15.54 8.46a5 5 0 0 1 0 7.07' />

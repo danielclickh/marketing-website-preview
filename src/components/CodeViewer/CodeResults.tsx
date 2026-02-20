@@ -15,7 +15,7 @@ import { useCallback, useRef, useMemo, useState } from 'react'
 
 const Chart = dynamic(() => import('./charts'), {
   loading: () => (
-    <div className="flex h-64 items-center justify-center">
+    <div className='flex h-64 items-center justify-center'>
       <Image src='/loading.svg' width={36} height={36} alt='loading-chart' />
     </div>
   ),

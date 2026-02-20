@@ -4,11 +4,6 @@ import features from './features.json'
 import Breadcrumbs from '@/components-cleaned/Breadcrumbs'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
-import dynamic from 'next/dynamic'
-
-const AnimatedFlare = dynamic(() => import('@/components/AnimatedFlare'), {
-  ssr: false
-})
 import GetStartedFree from '@/components/GetStartedFree'
 import Layout from '@/components/Layout'
 import LogoCarousel from '@/components/LogoCarousel'
@@ -22,10 +17,15 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
 import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { Fragment, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
+
+const AnimatedFlare = dynamic(() => import('@/components/AnimatedFlare'), {
+  ssr: false
+})
 
 interface MLProps extends CommonProps {
   customerStories: any
