@@ -156,7 +156,7 @@ function CareersFilter() {
       <div className='rounded-lg bg-neutral-725 p-4 text-center text-sm text-neutral-200'>
         <p>
           Langfuse is now part of the ClickHouse team, and they're hiring in
-          Berlin and San Francisco.{' '}
+          Europe and San Francisco.{' '}
           <LinkWithArrow
             href='https://jobs.ashbyhq.com/langfuse'
             target='_blank'
