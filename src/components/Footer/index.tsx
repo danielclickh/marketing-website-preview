@@ -426,7 +426,14 @@ export default function Footer() {
                 className={
                   'cmp-revoke-consent relative bottom-auto left-auto hidden whitespace-nowrap bg-transparent p-0 hover:text-neutral-0'
                 }>
-                Cookie settings
+                <Image
+                  src='/images/opt-out-logo.svg'
+                  width={30}
+                  height={14}
+                  className='mr-2 inline w-8 align-middle'
+                  alt='Opt-out logo'
+                />
+                Your privacy choices
               </button>
             </div>
           </div>
