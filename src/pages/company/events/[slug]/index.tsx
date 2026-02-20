@@ -6,6 +6,7 @@ import CopyUrlButton from '@/components/CopyUrlButton'
 import EventPost from '@/components/EventPostList/EventPost'
 import HRSeparator from '@/components/HRSeparator'
 import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
 import Markdown from '@/components/Markdown'
 import MarketoForm from '@/components/MarketoForm'
 import SocialButton from '@/components/SocialButton'
@@ -26,7 +27,7 @@ import { EntryEvent } from '@/types/strapi'
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import React, { useRef, useState } from 'react'
+import { useRef, useState, useMemo } from 'react'
 
 export interface PageProps extends CommonProps {
   event: EntryEvent
@@ -152,6 +153,14 @@ export default function Page({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
+  const eventHasPast = (() => {
+    const eventDate = new Date(event.localDatetime)
+    const nowDate = new Date()
+    eventDate.setUTCHours(23, 59, 59)
+    nowDate.setUTCHours(23, 59, 59)
+    return eventDate < nowDate
+  })()
+
   const redirectOnSuccess =
     event.form?.type === 'recordedGatedContent' && !!event.recordedVimeoUrl
   const hasSidebar = !!event.thumbnailPng || !event.form?.disabled
@@ -253,66 +262,78 @@ export default function Page({
                 className='hidden h-auto w-full rounded-lg border border-neutral-700/80 object-cover shadow-lg lg:block'
               />
             )}
-            <CUICard>
-              <CUICard.Body className='p-4 lg:p-6'>
-                {!event.form?.disabled && (
-                  <>
-                    {!formSuccess && (
-                      <MarketoForm
-                        formId={formId}
-                        onLoad={() => setFormLoaded(true)}
-                        submitButtonLabel={event.form?.submitButtonLabel}
-                        clearbitTracking={true}
-                        onSuccess={handleFormSuccess}
-                      />
-                    )}
+            {!event.form?.disabled && (
+              <CUICard>
+                <CUICard.Body className='p-4 lg:p-6'>
+                  {eventHasPast ? (
+                    <div className='py-16 text-center text-neutral-200'>
+                      Registration for this event is now closed.
+                      <br />{' '}
+                      <LinkWithArrow
+                        href='/company/events'
+                        className='text-primary-300 hover:underline'>
+                        Explore our upcoming events here
+                      </LinkWithArrow>
+                    </div>
+                  ) : (
+                    <>
+                      {!formSuccess && (
+                        <MarketoForm
+                          formId={formId}
+                          onLoad={() => setFormLoaded(true)}
+                          submitButtonLabel={event.form?.submitButtonLabel}
+                          clearbitTracking={true}
+                          onSuccess={handleFormSuccess}
+                        />
+                      )}
 
-                    {!formLoaded && (
-                      <div className='text-center'>Loading form...</div>
-                    )}
+                      {!formLoaded && (
+                        <div className='text-center'>Loading form...</div>
+                      )}
 
-                    {formSuccess && (
-                      <div ref={formSuccessRef}>
-                        <div className='space-y-6 text-center'>
-                          <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
-                          <Markdown className='rich-text-content text-center'>
-                            {event.form?.SuccessMessage ||
-                              "You've been successfully registered. See you there!"}
-                          </Markdown>
-                          {event.form?.stripeBuyButtonId && (
-                            <div className='mx-auto w-max overflow-hidden rounded-xl border-2 border-primary-300'>
-                              <StripeBuyButton
-                                id={event.form.stripeBuyButtonId}
-                              />
-                            </div>
-                          )}
-                          <div>
-                            <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
-                              Share with others
-                            </p>
-                            <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
-                              <CopyUrlButton />
-                              <SocialButton
-                                type='twitter'
-                                title={event.title}
-                              />
-                              <SocialButton
-                                type='facebook'
-                                title={event.title}
-                              />
-                              <SocialButton
-                                type='linkedin'
-                                title={event.title}
-                              />
+                      {formSuccess && (
+                        <div ref={formSuccessRef}>
+                          <div className='space-y-6 text-center'>
+                            <CheckCircleIcon className='mx-auto !mt-4 h-16 w-16 stroke-1 text-primary-300' />
+                            <Markdown className='rich-text-content text-center'>
+                              {event.form?.SuccessMessage ||
+                                "You've been successfully registered. See you there!"}
+                            </Markdown>
+                            {event.form?.stripeBuyButtonId && (
+                              <div className='mx-auto w-max overflow-hidden rounded-xl border-2 border-primary-300'>
+                                <StripeBuyButton
+                                  id={event.form.stripeBuyButtonId}
+                                />
+                              </div>
+                            )}
+                            <div>
+                              <p className='mb-2 px-10 text-base font-semibold text-neutral-300'>
+                                Share with others
+                              </p>
+                              <div className='flex flex-wrap justify-center gap-4 text-neutral-0'>
+                                <CopyUrlButton />
+                                <SocialButton
+                                  type='twitter'
+                                  title={event.title}
+                                />
+                                <SocialButton
+                                  type='facebook'
+                                  title={event.title}
+                                />
+                                <SocialButton
+                                  type='linkedin'
+                                  title={event.title}
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </>
-                )}
-              </CUICard.Body>
-            </CUICard>
+                      )}
+                    </>
+                  )}
+                </CUICard.Body>
+              </CUICard>
+            )}
           </div>
         )}
       </section>
