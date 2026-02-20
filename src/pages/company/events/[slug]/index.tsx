@@ -153,13 +153,13 @@ export default function Page({
   const [formSuccess, setFormSuccess] = useState(false)
   const [formLoaded, setFormLoaded] = useState(false)
 
-  const eventHasPast = (() => {
+  const eventHasPast = useMemo(() => {
     const eventDate = new Date(event.localDatetime)
     const nowDate = new Date()
     eventDate.setUTCHours(23, 59, 59)
     nowDate.setUTCHours(23, 59, 59)
     return eventDate < nowDate
-  })()
+  }, [event.localDatetime])
 
   const redirectOnSuccess =
     event.form?.type === 'recordedGatedContent' && !!event.recordedVimeoUrl
