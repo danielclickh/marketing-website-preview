@@ -1,8 +1,14 @@
 {
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@4.9.2",
+  "engines": {
+    "node": "22.x",
+    "yarn": ">=4"
+  },
   "scripts": {
-    "dev": "yarn create-githubstars-file && yarn create-pricing-file && next dev -p 3005",
+    "pre-build": "yarn create-githubstars-file && yarn create-pricing-file",
+    "dev": "next dev -p 3005",
     "build": "next build",
     "start": "next start",
     "build:analyze": "ANALYZE=true yarn build",
@@ -10,7 +16,7 @@
     "create-githubstars-file": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/getGitHubStars",
     "build-index": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/buildIndex",
     "sync-algolia": "ts-node --project tsconfig.scripts.json -r tsconfig-paths/register ./scripts/syncAlgolia",
-    "deploy": "yarn create-githubstars-file && yarn create-pricing-file && next build && yarn build-index && yarn sync-algolia",
+    "deploy": "yarn pre-build && next build && yarn build-index && yarn sync-algolia",
     "lint": "next lint && yarn format:check",
     "format:check": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --check",
     "format": "yarn prettier \"./src/**/*.{ts,tsx,css,scss,json,md,mdx}\" --write",
