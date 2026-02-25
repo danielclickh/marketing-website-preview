@@ -1,5 +1,6 @@
 import { NavigationLink } from '../parts'
 import { useGalaxyOnClick } from '@/lib/galaxy/galaxy'
+import { ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 
 export default function NavigationSubNavProducts() {
@@ -100,6 +101,33 @@ export default function NavigationSubNavProducts() {
                     <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
                       Managed observability with high-performance
                       <br /> queries and long-term retention.
+                    </div>
+                  </span>
+                </NavigationLink>
+              </li>
+
+              <li className='flex items-center'>
+                <NavigationLink
+                  href='https://langfuse.com/?utm_source=clickhouse_topnav'
+                  target='_blank'
+                  onClick={useGalaxyOnClick(
+                    'topNav.productMenu.langfuseCloudSelect'
+                  )}
+                  className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
+                  <Image
+                    src='/images/nav/icon-langfuse.svg'
+                    alt='Langfuse Cloud'
+                    width={24}
+                    height={24}
+                    className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
+                  />
+                  <span>
+                    <span className='inline-flex items-center gap-1'>
+                      Langfuse Cloud <ExternalLink className='inline size-4' />
+                    </span>
+                    <div className='text-xs text-slate-300 transition-colors group-hover/nav-with-icon:text-white'>
+                      LLM observability and evaluations
+                      <br /> for reliable AI applications and agents.
                     </div>
                   </span>
                 </NavigationLink>
