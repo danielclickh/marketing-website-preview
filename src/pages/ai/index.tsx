@@ -12,12 +12,17 @@ import iconGithub from './assets/icon-github.svg'
 import iconRemoteMcp from './assets/icon-remote-mcp.svg'
 import iconYoutube from './assets/icon-youtube.svg'
 import langfuseObservability from './assets/langfuse-observability.png'
+import logoCbioportal from './assets/logo-cbioportal.svg'
+import logoDaimlerTruck from './assets/logo-daimler-truck.svg'
+import logoFetch from './assets/logo-fetch.svg'
+import logoShopify from './assets/logo-shopify.svg'
 import PlayOnClickVideo from '@/components-cleaned/PlayOnClickVideo'
 import ResponsiveHtml5Video from '@/components-cleaned/ResponsiveHtml5Video'
 import TickItem from '@/components-cleaned/TickItem'
 import { CUIButton } from '@/components/ClickUI'
 import Layout from '@/components/Layout'
 import LinkWithArrow from '@/components/LinkWithArrow'
+import QuoteCard from '@/components/QuoteCard'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { useGalaxyOnClick, useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -66,7 +71,7 @@ export default function Page({ seo, headerData }: CommonProps) {
     <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section
-        className='bg-shadow-element yellow-shadow relative overflow-hidden bg-grid pb-6 md:pb-20'
+        className='bg-shadow-element yellow-shadow relative overflow-hidden bg-grid pb-16 md:pb-28'
         style={
           {
             '--top-side': '60%',
@@ -139,6 +144,62 @@ export default function Page({ seo, headerData }: CommonProps) {
               />
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className='relative -mt-10 overflow-hidden pb-6 lg:mt-0 lg:bg-grid lg:pb-16'>
+        {/* Yellow triangle */}
+        <div className='clip-inverted-triangle-simplified absolute bottom-0 left-0 right-0 top-80 bg-primary-300' />
+        <div className='section-container relative z-10 space-y-6'>
+          <div className='relative flex flex-col overflow-hidden rounded-lg bg-neutral-800 p-6 text-neutral-0 shadow-lg lg:p-10'>
+            <div className='absolute left-0 right-0 top-0 h-1 bg-primary' />
+            <h2 className='mb-6 text-center font-basier text-2xl font-semibold lg:-mt-3'>
+              Join others already building agentic analytics
+            </h2>
+            <div className='space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0'>
+              <QuoteCard
+                content='LibreChat powers reflexive AI use across Shopify. With near universal adoption and thousands of custom agents, teams use it to solve real problems, increase productivity, and keep the quality bar high. By connecting more than 30 internal MCP servers, it democratizes access to critical information across the company'
+                link='/blog/librechat-open-source-agentic-data-stack#shopify'
+                logo={{
+                  src: logoShopify,
+                  width: 140,
+                  height: 40,
+                  alt: 'Shopify'
+                }}
+              />
+              <QuoteCard
+                content={`By leveraging the ClickHouse, MCP, and LibreChat stack, we rapidly delivered a prototype to cBioPortal users that empowered them to ask entirely new questions about cancer genomics and treatment trajectories, get quick answers, and explore data in ways not possible through the existing UI. It puts discovery at cancer researchers' fingertips.`}
+                link='/blog/librechat-open-source-agentic-data-stack#cbioportal'
+                logo={{
+                  src: logoCbioportal,
+                  width: 172,
+                  height: 40,
+                  alt: 'cBioPortal'
+                }}
+              />
+              <QuoteCard
+                content='We built our new product, FAST by Fetch, on ClickHouse to help users instantly discover insights and drive efficient activation. We see agentic analytics as the future of data interaction, enabling more intuitive, dynamic, and impactful use of information. With its unmatched speed and scalability, ClickHouse is well-positioned to power this new generation of agentic experiences, and we’re thrilled to grow our partnership together.'
+                link='/blog/librechat-open-source-agentic-data-stack#fetch'
+                logo={{
+                  src: logoFetch,
+                  width: 158 * 0.8,
+                  height: 40 * 0.8,
+                  alt: 'Fetch'
+                }}
+              />
+              <QuoteCard
+                content='With LibreChat, Daimler Truck is making the power of modern AI available to all employees. This enables the company to bring innovation and progress into everyday work – simply, transparently, securely, and full of new opportunities.'
+                link='/blog/librechat-open-source-agentic-data-stack#daimler-truck'
+                logo={{
+                  src: logoDaimlerTruck,
+                  width: 318,
+                  height: 24,
+                  alt: 'Daimler Truck'
+                }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
