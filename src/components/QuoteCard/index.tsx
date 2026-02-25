@@ -67,7 +67,6 @@ function Quote({
           <Image
             {...logo}
             className={`inline-block h-auto object-contain object-left pl-0.5 ${classes.logo[direction]} ${logoClassName}`}
-            alt='Quote'
           />
         </footer>
       </blockquote>
