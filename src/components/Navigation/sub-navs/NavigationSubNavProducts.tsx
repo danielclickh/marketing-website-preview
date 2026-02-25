@@ -109,13 +109,14 @@ export default function NavigationSubNavProducts() {
               <li className='flex items-center'>
                 <NavigationLink
                   href='https://langfuse.com/?utm_source=clickhouse_topnav'
+                  target='_blank'
                   onClick={useGalaxyOnClick(
                     'topNav.productMenu.langfuseCloudSelect'
                   )}
                   className='group/nav-with-icon !flex w-full !flex-nowrap items-center gap-3'>
                   <Image
                     src='/images/nav/icon-langfuse.svg'
-                    alt='LangFuse Cloud'
+                    alt='Langfuse Cloud'
                     width={24}
                     height={24}
                     className='flex-grow-1 size-6 flex-shrink-0 object-scale-down'
