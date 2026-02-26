@@ -154,11 +154,17 @@ export default function Page({
   const [formLoaded, setFormLoaded] = useState(false)
 
   const eventHasPast = useMemo(() => {
-    const eventDate = new Date(event.localDatetime)
+    const expiryDate = new Date(event.localDatetime)
     const nowDate = new Date()
-    eventDate.setUTCHours(23, 59, 59)
-    nowDate.setUTCHours(23, 59, 59)
-    return eventDate < nowDate
+
+    // Set expiry datetime at 23:59 +1 day after the event closes
+    expiryDate.setDate(expiryDate.getDate() + 1)
+    expiryDate.setUTCHours(23, 59, 59, 0)
+
+    // Set now time to 00:00
+    nowDate.setUTCHours(0, 0, 0, 0)
+
+    return nowDate > expiryDate
   }, [event.localDatetime])
 
   const redirectOnSuccess =
