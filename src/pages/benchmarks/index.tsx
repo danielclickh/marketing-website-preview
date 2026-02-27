@@ -34,7 +34,7 @@ type BlogCompetitors =
   | 'MongoDB'
   | 'Databricks'
   | 'Elastic'
-  | 'Readshift'
+  | 'Redshift'
   | 'BigQuery'
 
 type BlogFeatures =
@@ -168,7 +168,7 @@ const POST_MAP: Array<Omit<BlogItem, 'entry'>> = [
   {
     slug: 'cloud-data-warehouses-cost-performance-comparison',
     benchmarkImage: '/uploads/Blog_Costs_009_18d232f919.png',
-    competitors: ['Snowflake', 'Databricks', 'Readshift', 'BigQuery']
+    competitors: ['Snowflake', 'Databricks', 'Redshift', 'BigQuery']
   }
 ]
 
@@ -830,7 +830,7 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
                 'MongoDB',
                 'Databricks',
                 'Elastic',
-                'Readshift',
+                'Redshift',
                 'BigQuery'
               ] satisfies Array<BlogCompetitors>
             ).map((competitor, competitorIndex) => {
