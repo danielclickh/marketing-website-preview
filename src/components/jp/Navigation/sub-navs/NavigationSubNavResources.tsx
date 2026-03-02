@@ -21,6 +21,14 @@ export default function NavigationSubNavResources() {
           ブログ
         </NavigationLink>
       </li>
+      <li>
+        <NavigationLink
+          href='/jp/company/news'
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.newsSelect')}
+          className='block w-full'>
+          プレスリリース
+        </NavigationLink>
+      </li>
       <li
         onMouseEnter={() => {
           setActiveSubNav('comparisons')
