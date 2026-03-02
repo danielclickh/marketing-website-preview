@@ -216,6 +216,10 @@ export interface EntryImage extends EntryMedia {
   formats: null | Record<string, EntryImage>
 }
 
+export interface EntryVideo extends EntryMedia {
+  mime: `video/${string}`
+}
+
 // -----
 // Blog modules
 // -----
@@ -425,6 +429,41 @@ export interface ComponentEventForm {
   disabled: null | boolean
 }
 
+export interface ComponentOpenhouseCard {
+  title: string
+  content: string
+  icon: any
+}
+
+export interface ComponentOpenhouseVideo {
+  title: string
+  youtubeId: string
+}
+
+export interface ComponentOpenhouseDayAgenda {
+  time: null | string
+  title: string
+  description: null | string
+  speakers: Array<EntryOpenhouseSpeaker>
+}
+
+export interface ComponentOpenhouseDay {
+  date: string
+  description: string
+  agenda: Array<ComponentOpenhouseDayAgenda>
+  useAmericanDateFormat: boolean
+}
+
+export interface ComponentOpenhouseFaq {
+  question: string
+  answer: string
+}
+
+export interface ComponentOpenhouseLogo {
+  logo: EntryImage
+  width: 'Small (1/4)' | 'Medium (1/3)' | 'Large (1/2)' | 'Full (1/1)'
+}
+
 // -----
 // Content types
 // -----
@@ -573,4 +612,37 @@ export interface EntryGlobalAnnouncement extends Entry {
   text: string
   url: string
   country: string | null
+}
+
+export interface EntryOpenhouseSpeaker extends Entry {
+  name: string
+  title: string
+  headshot: EntryImage
+  logo: null | EntryImage
+}
+
+export interface EntryOpenhouse extends Entry {
+  slug: string
+  heading: string
+  strapline: string
+  startDate: string
+  endDate: string
+  applyToSpeakLink: string | null
+  gallery: Array<EntryImage | EntryVideo>
+  cards: Array<ComponentOpenhouseCard>
+  videos: Array<ComponentOpenhouseVideo>
+  days: Array<ComponentOpenhouseDay>
+  featuredSpeakers: Array<EntryOpenhouseSpeaker>
+  speakers: Array<EntryOpenhouseSpeaker>
+  locationAddress: string
+  locationImage: EntryImage
+  faqs: Array<ComponentOpenhouseFaq>
+  logos: Array<ComponentOpenhouseLogo>
+  marketoFormId: string
+  speakersIntro: string
+  faqsIntro: string
+  seo: null | ComponentSeo
+  registerLabel: string
+  listOnMainPage: boolean
+  template: 'Y2025' | 'Y2026'
 }

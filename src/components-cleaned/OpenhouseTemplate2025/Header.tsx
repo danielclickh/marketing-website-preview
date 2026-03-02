@@ -1,6 +1,6 @@
+import OpenhouseButton from './Button'
 import logo from './assets/logo.svg'
 import navGradientTop from './assets/nav-gradient-top.png'
-import OpenhouseButton from '@/components-cleaned/openhouse/Button'
 import Image from 'next/image'
 import Link from 'next/link'
 

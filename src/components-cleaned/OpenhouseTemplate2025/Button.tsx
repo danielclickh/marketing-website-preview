@@ -1,4 +1,4 @@
-import styles from '@/components-cleaned/openhouse/styles.module.scss'
+import styles from './styles.module.scss'
 import { ArrowRight } from 'lucide-react'
 import Link, { LinkProps } from 'next/link'
 

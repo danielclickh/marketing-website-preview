@@ -11,6 +11,7 @@ import {
   EntryEvent,
   EntryGlobalAnnouncement,
   EntryMarketingVideo,
+  EntryOpenhouse,
   EntryPage,
   EntryResource,
   EntryResourceCategory
@@ -386,7 +387,7 @@ class StrapiEntryService<EntryType> {
 }
 
 export function seoFieldToNextComponentProps(
-  seo: undefined | null | ComponentSeo,
+  seo: undefined | null | Partial<ComponentSeo>,
   defaults: SeoContainerProps
 ): SeoContainerProps {
   const merged = { ...defaults }
@@ -457,3 +458,9 @@ export const globalAnnouncementsService =
     false,
     false
   )
+
+export const openhouseService = new StrapiEntryService<EntryOpenhouse>(
+  'openhouses',
+  false,
+  true
+)

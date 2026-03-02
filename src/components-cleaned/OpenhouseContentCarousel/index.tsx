@@ -6,15 +6,15 @@ import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperClass } from 'swiper/types'
 
-export interface ContentCarouselProps {
+export interface OpenhouseCarouselProps {
   children: React.ReactNode
   mode?: 'dark' | 'light'
 }
 
-export default function ContentCarousel({
+export default function OpenhouseCarousel({
   children,
   mode = 'light'
-}: ContentCarouselProps) {
+}: OpenhouseCarouselProps) {
   const prevRef = useRef<null | HTMLButtonElement>(null)
   const nextRef = useRef<null | HTMLButtonElement>(null)
   const swiperRef = useRef<null | SwiperClass>(null)

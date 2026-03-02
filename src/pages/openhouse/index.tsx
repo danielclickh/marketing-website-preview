@@ -40,10 +40,10 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import DateRange from '@/components-cleaned/DateRange'
+import OpenhouseCarousel from '@/components-cleaned/OpenhouseContentCarousel'
 import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
-import ContentCarousel from '@/components-cleaned/openhouse/ContentCarousel'
-import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
@@ -53,14 +53,13 @@ import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
-import { blogService, fetchAll } from '@/lib/api/strapi'
+import { blogService, openhouseService } from '@/lib/api/strapi'
 import { IS_PRODUCTION } from '@/lib/next'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { limitStringByWord, slugify, stripHtmlTags } from '@/lib/utils/strings'
-import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import { CommonProps } from '@/types/homepage'
-import { EntryBlogPost } from '@/types/strapi'
+import { EntryBlogPost, EntryOpenhouse } from '@/types/strapi'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { GetStaticProps } from 'next'
@@ -72,13 +71,8 @@ interface OpenHousePageProps extends CommonProps {
   blogs: Array<EntryBlogPost>
   roadshows: Array<
     Pick<
-      OpenhouseEntry,
-      | 'slug'
-      | 'heading'
-      | 'locationImage'
-      | 'startDate'
-      | 'endDate'
-      | 'comingSoon'
+      EntryOpenhouse,
+      'slug' | 'heading' | 'locationImage' | 'startDate' | 'endDate'
     >
   >
 }
@@ -87,15 +81,17 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
 
-    const roadshows: OpenHousePageProps['roadshows'] = await fetchAll(
-      'openhouses',
-      {
-        fields: ['slug', 'heading', 'startDate', 'endDate', 'comingSoon'],
-        populate: ['locationImage'],
-        publicationState: IS_PRODUCTION ? 'live' : 'preview',
-        sort: ['comingSoon', 'startDate:ASC']
-      }
-    )
+    const roadshows = await openhouseService.findAll({
+      filters: {
+        listOnMainPage: {
+          $eq: true
+        }
+      },
+      fields: ['slug', 'heading', 'startDate', 'endDate'],
+      populate: ['locationImage'],
+      publicationState: IS_PRODUCTION ? 'live' : 'preview',
+      sort: ['startDate:ASC']
+    })
 
     const blogs: OpenHousePageProps['blogs'] = await blogService.findAll({
       filters: {
@@ -964,36 +960,26 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                       {roadshows.map((roadshow, roadshowIndex) => {
                         return (
                           <Link
-                            href={
-                              roadshow.comingSoon
-                                ? '#'
-                                : `/openhouse/${roadshow.slug}`
-                            }
+                            href={`/openhouse/${roadshow.slug}`}
                             key={roadshowIndex}
-                            className={`group/roadshow flex items-center gap-2 px-4 py-2 text-left ${roadshow.comingSoon ? 'pointer-events-none' : ''}`}>
+                            className='group/roadshow flex items-center gap-2 px-4 py-2 text-left'>
                             <span className='flex-1'>
                               <FontSohne className='block font-bold tracking-wide transition-colors group-hover/roadshow:text-ch-yellow'>
                                 {roadshow.heading.replaceAll(/\n+/g, ', ')}
                               </FontSohne>
                               <small className='text-sm opacity-70'>
-                                {roadshow.comingSoon ? (
-                                  <>Coming soon</>
-                                ) : (
-                                  <OpenhouseDateRange
-                                    monthFormat='long'
-                                    dayFormat='numeric-ordinal'
-                                    start={new Date(roadshow.startDate)}
-                                    end={new Date(roadshow.endDate)}
-                                  />
-                                )}
+                                <DateRange
+                                  monthFormat='long'
+                                  dayFormat='numeric-ordinal'
+                                  start={new Date(roadshow.startDate)}
+                                  end={new Date(roadshow.endDate)}
+                                />
                               </small>
                             </span>
-                            {!roadshow.comingSoon && (
-                              <ArrowRight
-                                strokeWidth={2.5}
-                                className='flex-shrink-0 flex-grow-0 transition group-hover/roadshow:translate-x-1 group-hover/roadshow:text-ch-yellow lg:inline'
-                              />
-                            )}
+                            <ArrowRight
+                              strokeWidth={2.5}
+                              className='flex-shrink-0 flex-grow-0 transition group-hover/roadshow:translate-x-1 group-hover/roadshow:text-ch-yellow lg:inline'
+                            />
                           </Link>
                         )
                       })}
@@ -1026,7 +1012,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                   <h2 className='mb-10 text-center text-4xl md:mb-14 lg:mb-20'>
                     Whats been announced
                   </h2>
-                  <ContentCarousel>
+                  <OpenhouseCarousel>
                     {blogs.map((blog, blogIndex) => {
                       return (
                         <div
@@ -1069,7 +1055,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                         </div>
                       )
                     })}
-                  </ContentCarousel>
+                  </OpenhouseCarousel>
                 </div>
               </section>
 
@@ -1114,7 +1100,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                       activePillClassName='bg-ch-yellow text-neutral-800 border-ch-yellow'
                       inactivePillClassName='text-neutral-0 border-ch-yellow/30 hover:border-ch-yellow'
                     />
-                    <ContentCarousel mode='dark'>
+                    <OpenhouseCarousel mode='dark'>
                       {filteredVideos.map((video, videoIndex) => {
                         return (
                           <div
@@ -1156,7 +1142,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                           </div>
                         )
                       })}
-                    </ContentCarousel>
+                    </OpenhouseCarousel>
                   </div>
                 </div>
               </section>

@@ -1,0 +1,20 @@
+.modalBackground {
+  &:before {
+    content: '';
+    display: block;
+    position: fixed;
+    inset: 0;
+    --dot: 1.5px;
+    --bg: black;
+    background-image: radial-gradient(
+      circle at center,
+      var(--bg) var(--dot),
+      transparent var(--dot)
+    );
+    background-size: calc(var(--dot) * 2) calc(var(--dot) * 2);
+    backdrop-filter: blur(8vmin) contrast(10);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: -1;
+  }
+}

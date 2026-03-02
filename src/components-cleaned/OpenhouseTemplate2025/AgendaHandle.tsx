@@ -1,11 +1,11 @@
-import OpenhouseTime from '@/components-cleaned/openhouse/Time'
-import { StrapiImageUrl } from '@/components/StrapiElements'
-import { StrapiImageType } from '@/lib/api/strapi/types'
+import OpenhouseTime from './Time'
+import StrapiImage from '@/components-cleaned/StrapiImage'
+import { EntryImage } from '@/types/strapi'
 
 export interface OpenhouseAgendaHandleProps {
   title: string
   time?: string | null
-  speakers?: Array<StrapiImageType>
+  speakers?: Array<EntryImage>
 }
 
 export default function OpenhouseAgendaHandle({
@@ -33,9 +33,9 @@ export default function OpenhouseAgendaHandle({
               style={{
                 zIndex: speakers.length - speakerIndex
               }}>
-              <StrapiImageUrl
+              <StrapiImage
                 key={speakerIndex}
-                {...speaker}
+                entry={speaker}
                 width={44}
                 height={44}
                 unoptimized={false}
