@@ -1,13 +1,12 @@
 import { pages as learnPages } from '@/data/learn'
 import {
   blogService,
-  fetchAll,
   isAuthorisedRevalidationRequest,
+  openhouseService,
   resourceCategoriesService,
   resourcesService
 } from '@/lib/api/strapi'
 import { absoluteUrl } from '@/lib/next'
-import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import { waitUntil } from '@vercel/functions'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
@@ -269,12 +268,10 @@ const CONTENT_TYPE_HANDLERS: Record<
   'api::openhouse-speaker.openhouse-speaker': async function (body, response) {
     const paths: Array<string> = []
 
-    const data: Array<Pick<OpenhouseEntry, 'slug'>> = await fetchAll(
-      'openhouses',
-      {
-        fields: ['slug']
-      }
-    )
+    const data = await openhouseService.findAll({
+      fields: ['slug'],
+      populate: []
+    })
 
     if (data) {
       data.forEach((page) => {
