@@ -27,16 +27,16 @@ export default function OpenhouseHeader({
       />
       <Image
         src={logo}
-        width={230}
-        height={49}
+        width={222}
+        height={48}
         alt='Open House by ClickHouse'
         className='absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 lg:block'
       />
       <div className='section-container relative z-10 flex items-center justify-between lg:block'>
         <Image
           src={logo}
-          width={230}
-          height={49}
+          width={222}
+          height={48}
           alt='Open House by ClickHouse'
           className='w-full max-w-44 flex-shrink flex-grow-0 lg:hidden'
         />
