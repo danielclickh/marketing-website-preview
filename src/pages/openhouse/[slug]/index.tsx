@@ -84,7 +84,7 @@ const TEMPLATE_MAP: Record<
 } as const
 
 export default function Page({ seo, entry }: RoadshowProps) {
-  const Template = TEMPLATE_MAP[entry.template]
+  const Template = TEMPLATE_MAP[entry.template] ?? OpenhouseTemplate2025
   return (
     <>
       {seo && <SeoContainer {...seo} />}
