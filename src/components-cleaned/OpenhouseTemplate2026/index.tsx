@@ -212,9 +212,7 @@ export default function OpenhouseTemplate2026({
             <div className='overflow-hidden' ref={videosRef}>
               <div className='section-container w-full'>
                 <div className='mb-10'>
-                  <p className='text-sm font-medium uppercase text-ch-yellow'>
-                    Sessions
-                  </p>
+                  <p className='font-bold uppercase text-ch-yellow'>Sessions</p>
                   <FontSohneBreit as='h2' className='text-3xl font-black'>
                     In case you missed it
                   </FontSohneBreit>
