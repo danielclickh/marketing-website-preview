@@ -53,7 +53,16 @@ export async function getStaticProps() {
         $eq: 7
       }
     },
-    populate: 'deep'
+    populate: [
+      'Content',
+      'Content.customContent',
+      'Content.customContent.Image',
+      'Content.RelatedBlogs',
+      'Content.RelatedBlogs.blog_posts',
+      'Content.RelatedBlogs.blog_posts.thumbnailPng',
+      'Content.RelatedBlogs.blog_posts.author',
+      'Content.RelatedBlogs.blog_posts.author.profiles',
+    ]
   })
 
   if (!data?.[0]) {

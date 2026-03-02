@@ -14,7 +14,8 @@ import {
   EntryOpenhouse,
   EntryPage,
   EntryResource,
-  EntryResourceCategory
+  EntryResourceCategory,
+  PopulateParam
 } from '@/types/strapi'
 import crypto from 'crypto'
 import type { NextApiRequest } from 'next'
@@ -285,7 +286,7 @@ class StrapiEntryService<EntryType> {
   constructor(
     private apiUri: string,
     private stagingFilters: boolean | string = false,
-    private deepPopulate: boolean = false
+    private defaultPopulate: PopulateParam<EntryType> = false
   ) {}
 
   private mergeStagingFilters(params: ApiRequestParams<EntryType>) {
@@ -301,15 +302,11 @@ class StrapiEntryService<EntryType> {
     }
   }
 
-  private applyDeepPopulate(params: ApiRequestParams<EntryType>) {
-    if (!params.populate && this.deepPopulate) {
-      params.populate = 'deep'
-    }
-    return params
-  }
-
   private modifyParams(params: ApiRequestParams<EntryType>) {
-    return this.mergeStagingFilters(this.applyDeepPopulate(params))
+    if (!params.populate && this.defaultPopulate) {
+      params = { ...params, populate: this.defaultPopulate }
+    }
+    return this.mergeStagingFilters(params)
   }
 
   async findOne(params: Omit<ApiRequestParams<EntryType>, 'pagination'> = {}) {
@@ -416,40 +413,86 @@ export const resourceCategoriesService =
   new StrapiEntryService<EntryResourceCategory>(
     'resource-categories',
     false,
-    true
+    '*'
   )
 
 export const resourcesService = new StrapiEntryService<EntryResource>(
   'resources',
   'stagingOnly',
-  true
+  [
+    'author',
+    'author.profiles',
+    'author.profiles.avatar',
+    'author.avatarPng',
+    'thumbnail',
+    'sections',
+    'sections.items',
+    'sections.sources',
+    'sections.placeholder',
+    'sections.images',
+    'seo',
+    'seo.image',
+    'category',
+  ]
 )
 
 export const eventsService = new StrapiEntryService<EntryEvent>(
   'events',
   true,
-  true
+  [
+    'thumbnailPng',
+    'location',
+    'hostedBy',
+    'hostedBy.hosts',
+    'hostedBy.hosts.avatarPng',
+    'agenda',
+    'agenda.items',
+    'form',
+  ]
 )
 
 export const pagesService = new StrapiEntryService<EntryPage>(
   'pages',
   'stagingOnly',
-  true
+  [
+    'seo',
+    'seo.image',
+    'sections',
+    'sections.items',
+    'sections.items.image',
+    'sections.items.icon',
+    'sections.items.link',
+    'sections.primary',
+    'sections.secondary',
+  ]
 )
 
 export const marketingVideosService =
-  new StrapiEntryService<EntryMarketingVideo>('marketing-videos', false, true)
+  new StrapiEntryService<EntryMarketingVideo>('marketing-videos', false, false)
 
 export const blogService = new StrapiEntryService<EntryBlogPost>(
   'blog-posts',
   true,
-  true
+  [
+    'author',
+    'author.profiles',
+    'author.profiles.avatar',
+    'author.avatarPng',
+    'thumbnailPng',
+    'promotion',
+    'promotion.image',
+    'sections',
+    'sections.items',
+    'sections.sources',
+    'sections.placeholder',
+    'sections.images',
+  ]
 )
 
 export const authorsService = new StrapiEntryService<EntryAuthor>(
   'authors',
   false,
-  true
+  '*'
 )
 
 export const globalAnnouncementsService =

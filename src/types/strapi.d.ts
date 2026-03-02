@@ -154,8 +154,8 @@ type PopulateObjectForm<T> = {
 
 export type PopulateParam<T> =
   | '*'
-  | 'deep'
   | false
+  | string[]
   | PopulatePath<T>[]
   | PopulateObjectForm<T>
 
