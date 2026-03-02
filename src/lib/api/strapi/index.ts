@@ -432,7 +432,7 @@ export const resourcesService = new StrapiEntryService<EntryResource>(
     'sections.images',
     'seo',
     'seo.image',
-    'category',
+    'category'
   ]
 )
 
@@ -447,7 +447,7 @@ export const eventsService = new StrapiEntryService<EntryEvent>(
     'hostedBy.hosts.avatarPng',
     'agenda',
     'agenda.items',
-    'form',
+    'form'
   ]
 )
 
@@ -463,7 +463,7 @@ export const pagesService = new StrapiEntryService<EntryPage>(
     'sections.items.icon',
     'sections.items.link',
     'sections.primary',
-    'sections.secondary',
+    'sections.secondary'
   ]
 )
 
@@ -485,7 +485,7 @@ export const blogService = new StrapiEntryService<EntryBlogPost>(
     'sections.items',
     'sections.sources',
     'sections.placeholder',
-    'sections.images',
+    'sections.images'
   ]
 )
 
@@ -505,5 +505,35 @@ export const globalAnnouncementsService =
 export const openhouseService = new StrapiEntryService<EntryOpenhouse>(
   'openhouses',
   false,
-  true
+  [
+    'cards',
+    'cards.icon',
+    'days',
+    'days.agenda',
+    'days.agenda.speakers',
+    'days.agenda.speakers.headshot',
+    'days.agenda.speakers.headshot.formats',
+    'days.agenda.speakers.logo',
+    'days.agenda.speakers.logo.formats',
+    'featuredSpeakers',
+    'featuredSpeakers.headshot',
+    'featuredSpeakers.headshot.formats',
+    'featuredSpeakers.logo',
+    'featuredSpeakers.logo.formats',
+    'speakers',
+    'speakers.headshot',
+    'speakers.headshot.formats',
+    'speakers.logo',
+    'speakers.logo.formats',
+    'faqs',
+    'logos',
+    'logos.logo',
+    'logos.logo.formats',
+    'locationImage',
+    'locationImage.formats',
+    'gallery',
+    'seo',
+    'seo.image',
+    'videos'
+  ] as string[]
 )
