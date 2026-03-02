@@ -1,17 +1,22 @@
-export function convertDateToString(value: string | Date): string {
-  return new Date(value).toLocaleString('en-US', {
+export function convertDateToString(
+  value: string | Date,
+  locale: Intl.LocalesArgument = 'en-US',
+  timeZone: Intl.DateTimeFormatOptions['timeZone'] = 'UTC'
+): string {
+  return new Date(value).toLocaleString(locale, {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-    timeZone: 'UTC'
+    timeZone
   })
 }
 
 export function convertTimeToString(
   value: string,
-  timeZone: string = 'UTC'
+  locale: Intl.LocalesArgument = 'en-US',
+  timeZone: Intl.DateTimeFormatOptions['timeZone'] = 'UTC'
 ): string {
-  return new Date(value).toLocaleString('en-US', {
+  return new Date(value).toLocaleString(locale, {
     hour: 'numeric',
     minute: '2-digit',
     hour12: true,
