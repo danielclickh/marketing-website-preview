@@ -53,14 +53,13 @@ import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
-import { blogService, fetchAll } from '@/lib/api/strapi'
+import { blogService, fetchAll, openhouseService } from '@/lib/api/strapi'
 import { IS_PRODUCTION } from '@/lib/next'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { limitStringByWord, slugify, stripHtmlTags } from '@/lib/utils/strings'
-import { OpenhouseEntry } from '@/pages/openhouse/[slug]/types'
 import { CommonProps } from '@/types/homepage'
-import { EntryBlogPost } from '@/types/strapi'
+import { EntryBlogPost, EntryOpenhouse } from '@/types/strapi'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { GetStaticProps } from 'next'
@@ -72,13 +71,8 @@ interface OpenHousePageProps extends CommonProps {
   blogs: Array<EntryBlogPost>
   roadshows: Array<
     Pick<
-      OpenhouseEntry,
-      | 'slug'
-      | 'heading'
-      | 'locationImage'
-      | 'startDate'
-      | 'endDate'
-      | 'comingSoon'
+      EntryOpenhouse,
+      'slug' | 'heading' | 'locationImage' | 'startDate' | 'endDate'
     >
   >
 }
@@ -87,15 +81,17 @@ export const getStaticProps: GetStaticProps<OpenHousePageProps> =
   async function getStaticProps() {
     const commonProps = await getCommonProps()
 
-    const roadshows: OpenHousePageProps['roadshows'] = await fetchAll(
-      'openhouses',
-      {
-        fields: ['slug', 'heading', 'startDate', 'endDate', 'comingSoon'],
-        populate: ['locationImage'],
-        publicationState: IS_PRODUCTION ? 'live' : 'preview',
-        sort: ['comingSoon', 'startDate:ASC']
-      }
-    )
+    const roadshows = await openhouseService.findAll({
+      filters: {
+        listOnMainPage: {
+          $eq: true
+        }
+      },
+      fields: ['slug', 'heading', 'startDate', 'endDate'],
+      populate: ['locationImage'],
+      publicationState: IS_PRODUCTION ? 'live' : 'preview',
+      sort: ['startDate:ASC']
+    })
 
     const blogs: OpenHousePageProps['blogs'] = await blogService.findAll({
       filters: {
@@ -964,36 +960,26 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                       {roadshows.map((roadshow, roadshowIndex) => {
                         return (
                           <Link
-                            href={
-                              roadshow.comingSoon
-                                ? '#'
-                                : `/openhouse/${roadshow.slug}`
-                            }
+                            href={`/openhouse/${roadshow.slug}`}
                             key={roadshowIndex}
-                            className={`group/roadshow flex items-center gap-2 px-4 py-2 text-left ${roadshow.comingSoon ? 'pointer-events-none' : ''}`}>
+                            className='group/roadshow flex items-center gap-2 px-4 py-2 text-left'>
                             <span className='flex-1'>
                               <FontSohne className='block font-bold tracking-wide transition-colors group-hover/roadshow:text-ch-yellow'>
                                 {roadshow.heading.replaceAll(/\n+/g, ', ')}
                               </FontSohne>
                               <small className='text-sm opacity-70'>
-                                {roadshow.comingSoon ? (
-                                  <>Coming soon</>
-                                ) : (
-                                  <OpenhouseDateRange
-                                    monthFormat='long'
-                                    dayFormat='numeric-ordinal'
-                                    start={new Date(roadshow.startDate)}
-                                    end={new Date(roadshow.endDate)}
-                                  />
-                                )}
+                                <OpenhouseDateRange
+                                  monthFormat='long'
+                                  dayFormat='numeric-ordinal'
+                                  start={new Date(roadshow.startDate)}
+                                  end={new Date(roadshow.endDate)}
+                                />
                               </small>
                             </span>
-                            {!roadshow.comingSoon && (
-                              <ArrowRight
-                                strokeWidth={2.5}
-                                className='flex-shrink-0 flex-grow-0 transition group-hover/roadshow:translate-x-1 group-hover/roadshow:text-ch-yellow lg:inline'
-                              />
-                            )}
+                            <ArrowRight
+                              strokeWidth={2.5}
+                              className='flex-shrink-0 flex-grow-0 transition group-hover/roadshow:translate-x-1 group-hover/roadshow:text-ch-yellow lg:inline'
+                            />
                           </Link>
                         )
                       })}

@@ -3,11 +3,11 @@ import ContentTicker from '@/components-cleaned/ContentTicker'
 import Parallax from '@/components/Parallax'
 import { StrapiImageUrl } from '@/components/StrapiElements'
 import { getProxiedMediaUrl } from '@/lib/api/strapi'
-import { StrapiImageType, StrapiVideoType } from '@/lib/api/strapi/types'
 import { shuffleArraySeeded } from '@/lib/utils/arrays'
+import { EntryImage, EntryVideo } from '@/types/strapi'
 
 export interface OpenhouseHeroProps {
-  gallery: Array<StrapiImageType | StrapiVideoType>
+  gallery: Array<EntryImage | EntryVideo>
   children: React.ReactNode
   pause?: boolean
 }

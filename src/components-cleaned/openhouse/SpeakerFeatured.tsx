@@ -1,13 +1,13 @@
 import photoTexture from './assets/photo-texture.svg'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import FontSohneBreit from '@/components/FontSohneBreit'
-import { StrapiImageUrl } from '@/components/StrapiElements'
-import { StrapiImageType } from '@/lib/api/strapi/types'
+import { EntryImage } from '@/types/strapi'
 
 export interface OpenhouseSpeakerFeaturedProps {
   name: string
   title: string
-  headshot: StrapiImageType
-  logo: null | StrapiImageType
+  headshot: EntryImage
+  logo: null | EntryImage
 }
 
 export default function OpenhouseSpeakerFeatured({
@@ -25,8 +25,8 @@ export default function OpenhouseSpeakerFeatured({
             backgroundImage: `url('${photoTexture.src}')`
           }}
         />
-        <StrapiImageUrl
-          {...headshot}
+        <StrapiImage
+          entry={headshot}
           width={400}
           height={400}
           unoptimized={false}
@@ -39,8 +39,8 @@ export default function OpenhouseSpeakerFeatured({
         </FontSohneBreit>
         <p className='text-sm opacity-70 lg:text-base'>{title}</p>
         {logo && (
-          <StrapiImageUrl
-            {...logo}
+          <StrapiImage
+            entry={logo}
             className='mt-auto hidden lg:inline-block'
           />
         )}

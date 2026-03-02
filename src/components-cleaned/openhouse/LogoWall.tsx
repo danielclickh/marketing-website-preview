@@ -1,11 +1,11 @@
-import { StrapiImageUrl } from '@/components/StrapiElements'
-import { StrapiImageType } from '@/lib/api/strapi/types'
+import StrapiImage from '@/components-cleaned/StrapiImage'
+import { EntryImage } from '@/types/strapi'
 
 type Widths = 'Small (1/4)' | 'Medium (1/3)' | 'Large (1/2)' | 'Full (1/1)'
 
 export interface OpenhouseLogoWallProps {
   logos: Array<{
-    logo: StrapiImageType
+    logo: EntryImage
     width: Widths
   }>
 }
@@ -44,8 +44,8 @@ export default function OpenhouseLogoWall({ logos }: OpenhouseLogoWallProps) {
           <div
             key={logoIndex}
             className={`flex items-center justify-center bg-white px-2 py-6 ring-1 ring-gray-200 ${logoColSpanToTailwind[logoWidthToColSpan[logo.width]]}`}>
-            <StrapiImageUrl
-              {...logo.logo}
+            <StrapiImage
+              entry={logo.logo}
               className='h-12 w-full max-w-48 object-scale-down object-center'
             />
           </div>

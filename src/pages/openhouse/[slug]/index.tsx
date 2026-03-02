@@ -1,8 +1,7 @@
 import linesPattern from './assets/lines-pattern.svg'
 import speakersPlaceholderDesktop from './assets/speakers-placeholder-desktop.jpg'
 import speakersPlaceholderMobile from './assets/speakers-placeholder-mobile.jpg'
-import { OpenhouseEntry, OpenhouseVideo } from './types'
-import PillFilters from '@/components-cleaned/PillFilters'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
 import OpenhouseAgendaHandle from '@/components-cleaned/openhouse/AgendaHandle'
 import OpenhouseButton from '@/components-cleaned/openhouse/Button'
@@ -23,14 +22,17 @@ import Modal from '@/components/Modal'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
 import { StrapiImageUrl } from '@/components/StrapiElements'
-import { fetchAll, findAll } from '@/lib/api/strapi'
+import {
+  openhouseService,
+  seoFieldToNextComponentProps
+} from '@/lib/api/strapi'
 import { IS_PRODUCTION } from '@/lib/next'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { getOrdinal } from '@/lib/utils/numbers'
 import { slugify } from '@/lib/utils/strings'
 import playButton from '@/pages/openhouse/assets/play-button.svg'
-import styles from '@/pages/openhouse/styles.module.scss'
 import { CommonProps, ParamsType } from '@/types/homepage'
+import { EntryOpenhouse } from '@/types/strapi'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
@@ -38,68 +40,43 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-export type RoadshowProps = CommonProps & OpenhouseEntry
+export interface RoadshowProps extends CommonProps {
+  entry: EntryOpenhouse
+}
 
 export const getStaticProps: GetStaticProps<RoadshowProps> =
   async function getStaticProps({ params }) {
     const { slug } = params as ParamsType
-    const commonProps = await getCommonProps()
 
-    const { data } = await findAll('openhouses', {
-      filters: {
-        slug: {
-          $eq: slug
-        }
-      },
-      populate: [
-        'gallery',
-        'cards',
-        'cards.icon',
-        'videos',
-        'days',
-        'days.agenda',
-        'days.agenda.speakers',
-        'days.agenda.speakers.headshot',
-        'days.agenda.speakers.logo',
-        'featuredSpeakers',
-        'featuredSpeakers.headshot',
-        'featuredSpeakers.logo',
-        'speakers',
-        'speakers.headshot',
-        'speakers.logo',
-        'locationImage',
-        'faqs',
-        'logos',
-        'logos.logo',
-        'seo',
-        'seo.image'
-      ],
-      pagination: { limit: 1 },
-      publicationState: IS_PRODUCTION ? 'live' : 'preview'
-    })
+    const [commonProps, entry] = await Promise.all([
+      getCommonProps(),
+      openhouseService.findOne({
+        filters: {
+          slug: {
+            $eq: slug
+          }
+        },
+        publicationState: IS_PRODUCTION ? 'live' : 'preview'
+      })
+    ])
 
-    const page = data?.[0] as null | OpenhouseEntry
-
-    if (!page || (page.comingSoon && IS_PRODUCTION)) {
+    if (!entry) {
       return {
         notFound: true
       }
     }
 
-    const startDateObject = new Date(page.startDate)
+    const startDateObject = new Date(entry.startDate)
+
+    const seo = seoFieldToNextComponentProps(entry.seo, {
+      title: `Open House ${startDateObject.getFullYear()}, The ClickHouse User Conference - ${entry.heading.replaceAll(`\n`, ', ')}.`,
+      path: `/openhouse/${entry.slug}`
+    })
 
     return {
       props: {
-        ...page,
-        seo: {
-          title: page.seo?.title?.trim().length
-            ? page.seo.title
-            : `Open House ${startDateObject.getFullYear()}, The ClickHouse User Conference - ${page.heading.replaceAll(`\n`, ', ')}.`,
-          description: page.seo?.description || '',
-          keywords: page.seo?.keywords || '',
-          path: `/openhouse/${page.slug}`,
-          image: page.seo?.image ? page.seo?.image : []
-        },
+        entry,
+        seo,
         ...commonProps
       }
     }
@@ -109,13 +86,11 @@ export const getStaticProps: GetStaticProps<RoadshowProps> =
 // It may be called again, on a serverless function, if
 // the path has not been generated.
 export async function getStaticPaths() {
-  const data: Array<Pick<OpenhouseEntry, 'slug'>> = await fetchAll(
-    'openhouses',
-    {
-      fields: ['slug'],
-      publicationState: IS_PRODUCTION ? 'live' : 'preview'
-    }
-  )
+  const data = await openhouseService.findAll({
+    fields: ['slug'],
+    populate: [],
+    publicationState: IS_PRODUCTION ? 'live' : 'preview'
+  })
 
   // Get the paths we want to pre-render based on posts
   const paths = data.map((post) => ({
@@ -128,36 +103,11 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' }
 }
 
-export default function Page({
-  seo,
-  slug,
-  heading,
-  strapline,
-  startDate,
-  endDate,
-  applyToSpeakLink,
-  gallery,
-  cards,
-  videos,
-  days,
-  featuredSpeakers,
-  speakers,
-  locationAddress,
-  locationImage,
-  faqs,
-  logos,
-  marketoFormId,
-  faqsIntro,
-  speakersIntro,
-  navRegisterLabel,
-  agendaRegisterLabel,
-  speakersRegisterLabel,
-  locationRegisterLabel
-}: RoadshowProps) {
+export default function Page({ seo, entry }: RoadshowProps) {
   const router = useRouter()
   const nowDateObject = new Date()
-  const startDateObject = new Date(`${startDate}T00:00:00Z`)
-  const endDateObject = new Date(`${endDate}T00:00:00Z`)
+  const startDateObject = new Date(`${entry.startDate}T00:00:00Z`)
+  const endDateObject = new Date(`${entry.endDate}T00:00:00Z`)
 
   // Add's scroll offset to <html> tag
   useEffect(() => {
@@ -168,10 +118,12 @@ export default function Page({
   const videosRef = useRef<HTMLDivElement | null>(null)
   const [displayAllSpeakers, setDisplayAllSpeakers] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
-  const [activeVideo, setActiveVideo] = useState<null | OpenhouseVideo>(null)
+  const [activeVideo, setActiveVideo] = useState<
+    null | EntryOpenhouse['videos'][number]
+  >(null)
 
-  const hasFeaturedSpeakers = featuredSpeakers.length > 0
-  const hasSpeakers = speakers.length > 0
+  const hasFeaturedSpeakers = entry.featuredSpeakers.length > 0
+  const hasSpeakers = entry.speakers.length > 0
 
   const registrationIsOpen =
     startDateObject > nowDateObject && endDateObject > nowDateObject
@@ -213,7 +165,7 @@ export default function Page({
   }, [router.events])
 
   const setFeaturedVideoAndUrl = useCallback(
-    (video: OpenhouseVideo | null) => {
+    (video: EntryOpenhouse['videos'][number] | null) => {
       setActiveVideo(video)
       const newUrl = new URL(window.location.toString())
       newUrl.hash = video ? slugify(`video ${video.title}`) : ''
@@ -227,17 +179,17 @@ export default function Page({
       {seo && <SeoContainer {...seo} />}
       <FontSohne className='flex flex-col gap-4 bg-black tracking-wider text-white selection:bg-ch-yellow'>
         <OpenhouseHeader
-          agenda={days.length > 0}
+          agenda={entry.days.length > 0}
           speakers={true}
-          faqs={faqs.length > 0}
+          faqs={entry.faqs.length > 0}
           register={registrationIsOpen}
-          applyToSpeak={applyToSpeakLink}
-          registerLabel={navRegisterLabel}
+          applyToSpeak={entry.applyToSpeakLink}
+          registerLabel={entry.registerLabel}
         />
 
         {registrationIsOpen && (
           <OpenhouseFormModal
-            formId={marketoFormId}
+            formId={entry.marketoFormId}
             open={formOpen}
             onClose={() => {
               setFormOpen(false)
@@ -246,13 +198,13 @@ export default function Page({
         )}
 
         {/* Hero */}
-        <OpenhouseHero gallery={gallery} pause={formOpen}>
+        <OpenhouseHero gallery={entry.gallery} pause={formOpen}>
           <div className='section-container w-full items-end justify-between md:flex'>
             <h1 className='flex flex-col uppercase'>
               <span className='text-xl font-extrabold leading-none lg:text-[1.75rem]'>
                 Free database and AI conference{' '}
               </span>
-              {heading.split(/\n+/g).map((item, itemIndex) => {
+              {entry.heading.split(/\n+/g).map((item, itemIndex) => {
                 return (
                   <FontSohneBreit
                     as='span'
@@ -271,7 +223,7 @@ export default function Page({
                 />
                 <span className='hidden md:inline'>.</span>{' '}
               </span>
-              {strapline.split(`\n`).map((item, itemIndex) => {
+              {entry.strapline.split(`\n`).map((item, itemIndex) => {
                 return (
                   <span key={itemIndex} className='hidden md:inline'>
                     {item}{' '}
@@ -283,10 +235,10 @@ export default function Page({
         </OpenhouseHero>
 
         {/* Cards */}
-        {cards.length > 0 && (
+        {entry.cards.length > 0 && (
           <section className='section-container'>
             <div className='-m-2 flex flex-col md:flex-row md:flex-wrap'>
-              {cards.map((card, cardIndex) => {
+              {entry.cards.map((card, cardIndex) => {
                 return (
                   <div
                     key={cardIndex}
@@ -308,7 +260,7 @@ export default function Page({
           </section>
         )}
 
-        {videos && videos.length > 0 && (
+        {entry.videos && entry.videos.length > 0 && (
           <section
             id='videos'
             className='relative py-10 text-white md:py-20 xl:py-24'>
@@ -343,7 +295,7 @@ export default function Page({
                   </FontSohneBreit>
                 </div>
                 <ContentCarousel mode='dark'>
-                  {videos.map((video, videoIndex) => {
+                  {entry.videos.map((video, videoIndex) => {
                     return (
                       <div
                         key={videoIndex}
@@ -388,9 +340,9 @@ export default function Page({
         )}
 
         {/* Agenda */}
-        {days.length > 0 && (
+        {entry.days.length > 0 && (
           <section id='agenda' className='section-container w-full space-y-4'>
-            {days.map((day, dayIndex) => {
+            {entry.days.map((day, dayIndex) => {
               const dayDateObject = new Date(`${day.date}T00:00:00Z`)
               const dayNumber = dayDateObject.toLocaleString('en-US', {
                 day: 'numeric',
@@ -483,7 +435,7 @@ export default function Page({
                 size='lg'
                 arrow={true}
                 className='!-mt-px w-full border border-white'>
-                {agendaRegisterLabel}
+                {entry.registerLabel}
               </OpenhouseButton>
             )}
           </section>
@@ -495,12 +447,12 @@ export default function Page({
             <div className='p-px'>
               <div className='flex items-center bg-white p-4 pt-3 ring-1 ring-black lg:gap-6 lg:p-6 lg:pt-5'>
                 <OpenhouseMarkdown className='flex-1'>
-                  {speakersIntro}
+                  {entry.speakersIntro}
                 </OpenhouseMarkdown>
-                {applyToSpeakLink && (
+                {entry.applyToSpeakLink && (
                   <OpenhouseButton
                     variant='secondary'
-                    href={applyToSpeakLink}
+                    href={entry.applyToSpeakLink}
                     target='_blank'
                     className='mr-2 !hidden lg:!inline-flex'>
                     Apply to speak
@@ -509,7 +461,7 @@ export default function Page({
               </div>
 
               {/* Coming soon */}
-              {!featuredSpeakers.length && !speakers.length && (
+              {!entry.featuredSpeakers.length && !entry.speakers.length && (
                 <div className='relative my-px ring-1 ring-black'>
                   <div className='absolute left-8 right-8 top-1/2 z-10 -translate-y-1/2 border border-black bg-white p-8 text-center lg:left-1/2 lg:right-auto lg:max-w-96 lg:-translate-x-1/2 lg:px-10'>
                     <FontSohneBreit as='h4' className='text-xl font-black'>
@@ -538,9 +490,9 @@ export default function Page({
               )}
 
               {/* Featured speakers */}
-              {featuredSpeakers.length > 0 && (
+              {entry.featuredSpeakers.length > 0 && (
                 <div className='grid grid-cols-6 gap-px md-mid:grid-cols-12'>
-                  {featuredSpeakers.map((speaker, speakerIndex) => {
+                  {entry.featuredSpeakers.map((speaker, speakerIndex) => {
                     return (
                       <OpenhouseSpeakerFeatured
                         key={speakerIndex}
@@ -548,12 +500,12 @@ export default function Page({
                       />
                     )
                   })}
-                  {Array(2 - (featuredSpeakers.length % 2))
+                  {Array(2 - (entry.featuredSpeakers.length % 2))
                     .fill(null)
                     .map((value, fillerIndex) => {
                       return (
                         <div
-                          key={featuredSpeakers.length - 1 + fillerIndex}
+                          key={entry.featuredSpeakers.length - 1 + fillerIndex}
                           className='col-span-6 hidden bg-white ring-1 ring-black md-mid:block'
                         />
                       )
@@ -565,18 +517,18 @@ export default function Page({
               {hasSpeakers && (
                 <div className='relative grid grid-cols-2 gap-px sm:grid-cols-3 md-mid:grid-cols-4 lg:grid-cols-6'>
                   {(!hasFeaturedSpeakers || displayAllSpeakers) &&
-                    speakers.map((speaker, speakerIndex) => {
+                    entry.speakers.map((speaker, speakerIndex) => {
                       return (
                         <OpenhouseSpeaker key={speakerIndex} {...speaker} />
                       )
                     })}
                   {(!hasFeaturedSpeakers || displayAllSpeakers) &&
-                    Array(6 - (speakers.length % 6))
+                    Array(6 - (entry.speakers.length % 6))
                       .fill(null)
                       .map((value, fillerIndex) => {
                         return (
                           <div
-                            key={speakers.length - 1 + fillerIndex}
+                            key={entry.speakers.length - 1 + fillerIndex}
                             className='bg-white ring-1 ring-black'
                           />
                         )
@@ -618,7 +570,7 @@ export default function Page({
                   size='lg'
                   arrow={true}
                   className='w-full ring-1 ring-black'>
-                  {speakersRegisterLabel}
+                  {entry.registerLabel}
                 </OpenhouseButton>
               )}
             </div>
@@ -629,7 +581,7 @@ export default function Page({
             <div className='flex flex-col-reverse border border-black lg:grid lg:grid-cols-3'>
               <div className='flex flex-col justify-center border-inherit lg:border-r'>
                 <OpenhouseMarkdown className='my-auto space-y-6 p-6 lg:p-16'>
-                  {`## ${heading.replaceAll(`\n`, ', ')}\n${locationAddress.replaceAll(`\n`, '  \n')}`}
+                  {`## ${entry.heading.replaceAll(`\n`, ', ')}\n${entry.locationAddress.replaceAll(`\n`, '  \n')}`}
                 </OpenhouseMarkdown>
 
                 {registrationIsOpen && (
@@ -638,27 +590,27 @@ export default function Page({
                     size='lg'
                     arrow={true}
                     className='-mx-px mt-auto border border-black'>
-                    {locationRegisterLabel}
+                    {entry.registerLabel}
                   </OpenhouseButton>
                 )}
               </div>
-              <StrapiImageUrl
-                {...locationImage}
+              <StrapiImage
+                entry={entry.locationImage}
                 className='col-span-2 h-full w-full object-cover'
               />
             </div>
           </section>
 
           {/* FAQs */}
-          {faqs.length > 0 && (
+          {entry.faqs.length > 0 && (
             <section id='faqs' className='section-container !mt-0'>
               <div className='bg-black text-white'>
                 <OpenhouseMarkdown className='p-4 pt-3 lg:p-6 lg:pt-5'>
-                  {faqsIntro}
+                  {entry.faqsIntro}
                 </OpenhouseMarkdown>
                 <ul>
-                  {faqs.length > 0 &&
-                    faqs.map((faq, faqIndex) => {
+                  {entry.faqs.length > 0 &&
+                    entry.faqs.map((faq, faqIndex) => {
                       return (
                         <li key={faqIndex} className='border-t border-white'>
                           <RiggedAccordion
@@ -681,9 +633,9 @@ export default function Page({
           )}
 
           {/* Logo wall */}
-          {logos.length > 0 && (
+          {entry.logos.length > 0 && (
             <section id='logos' className='section-container'>
-              <OpenhouseLogoWall logos={logos} />
+              <OpenhouseLogoWall logos={entry.logos} />
             </section>
           )}
         </div>
