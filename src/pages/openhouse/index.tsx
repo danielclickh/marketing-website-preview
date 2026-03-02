@@ -40,10 +40,10 @@ import speakerYuryIzrailevsky from './assets/speaker-yury-izrailevsky.png'
 import speakerZachNaimon from './assets/speaker-zach-naimon.png'
 import speakerZoeSteinkamp from './assets/speaker-zoe-steinkamp.png'
 import styles from './styles.module.scss'
+import DateRange from '@/components-cleaned/DateRange'
+import OpenhouseCarousel from '@/components-cleaned/OpenhouseContentCarousel'
 import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import YouTubeThumbnail from '@/components-cleaned/YouTubeThumbnail'
-import ContentCarousel from '@/components-cleaned/openhouse/ContentCarousel'
-import OpenhouseDateRange from '@/components-cleaned/openhouse/DateRange'
 import FontSohne from '@/components/FontSohne'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import Footer from '@/components/Footer'
@@ -53,7 +53,7 @@ import OpenHouseButton from '@/components/OpenHouseButton'
 import OpenHouseHeader from '@/components/OpenHouseHeader'
 import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import SeoContainer from '@/components/SeoContainer'
-import { blogService, fetchAll, openhouseService } from '@/lib/api/strapi'
+import { blogService, openhouseService } from '@/lib/api/strapi'
 import { IS_PRODUCTION } from '@/lib/next'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
@@ -968,7 +968,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                                 {roadshow.heading.replaceAll(/\n+/g, ', ')}
                               </FontSohne>
                               <small className='text-sm opacity-70'>
-                                <OpenhouseDateRange
+                                <DateRange
                                   monthFormat='long'
                                   dayFormat='numeric-ordinal'
                                   start={new Date(roadshow.startDate)}
@@ -1012,7 +1012,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                   <h2 className='mb-10 text-center text-4xl md:mb-14 lg:mb-20'>
                     Whats been announced
                   </h2>
-                  <ContentCarousel>
+                  <OpenhouseCarousel>
                     {blogs.map((blog, blogIndex) => {
                       return (
                         <div
@@ -1055,7 +1055,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                         </div>
                       )
                     })}
-                  </ContentCarousel>
+                  </OpenhouseCarousel>
                 </div>
               </section>
 
@@ -1100,7 +1100,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                       activePillClassName='bg-ch-yellow text-neutral-800 border-ch-yellow'
                       inactivePillClassName='text-neutral-0 border-ch-yellow/30 hover:border-ch-yellow'
                     />
-                    <ContentCarousel mode='dark'>
+                    <OpenhouseCarousel mode='dark'>
                       {filteredVideos.map((video, videoIndex) => {
                         return (
                           <div
@@ -1142,7 +1142,7 @@ export default function Page({ seo, blogs, roadshows }: OpenHousePageProps) {
                           </div>
                         )
                       })}
-                    </ContentCarousel>
+                    </OpenhouseCarousel>
                   </div>
                 </div>
               </section>

@@ -1,6 +1,6 @@
 import { getOrdinal } from '@/lib/utils/numbers'
 
-export interface OpenhouseDateRangeProps {
+export interface DateRangeProps {
   start: Date
   end: Date
   dayFormat?:
@@ -11,13 +11,13 @@ export interface OpenhouseDateRangeProps {
   yearFormat?: Intl.DateTimeFormatOptions['year']
 }
 
-export default function OpenhouseDateRange({
+export default function DateRange({
   start,
   end,
   dayFormat = 'numeric',
   monthFormat = 'short',
   yearFormat = 'numeric'
-}: OpenhouseDateRangeProps) {
+}: DateRangeProps) {
   const ordinal =
     dayFormat === '2-digit-ordinal' || dayFormat === 'numeric-ordinal'
 

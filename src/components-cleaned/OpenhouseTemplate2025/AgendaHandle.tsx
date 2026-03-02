@@ -1,6 +1,5 @@
+import OpenhouseTime from './Time'
 import StrapiImage from '@/components-cleaned/StrapiImage'
-import OpenhouseTime from '@/components-cleaned/openhouse/Time'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import { EntryImage } from '@/types/strapi'
 
 export interface OpenhouseAgendaHandleProps {

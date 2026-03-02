@@ -1,4 +1,4 @@
-import OpenhouseButton from '@/components-cleaned/openhouse/Button'
+import OpenhouseButton from './Button'
 import FontSohneBreit from '@/components/FontSohneBreit'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
@@ -19,7 +19,7 @@ export default function OpenhouseMarkdown({
             return (
               <FontSohneBreit
                 as='h1'
-                className={`!-mb-6 text-4xl font-black ${className}`}
+                className={`text-4xl font-black ${className}`}
                 {...props}>
                 {children}
               </FontSohneBreit>
@@ -29,7 +29,7 @@ export default function OpenhouseMarkdown({
             return (
               <FontSohneBreit
                 as='h2'
-                className={`!-mb-6 text-2xl font-black ${className}`}
+                className={`text-2xl font-black ${className}`}
                 {...props}>
                 {children}
               </FontSohneBreit>
@@ -39,7 +39,7 @@ export default function OpenhouseMarkdown({
             return (
               <FontSohneBreit
                 as='h3'
-                className={`!-mb-6 text-xl font-black ${className}`}
+                className={`text-xl font-black ${className}`}
                 {...props}>
                 {children}
               </FontSohneBreit>
@@ -49,7 +49,7 @@ export default function OpenhouseMarkdown({
             return (
               <FontSohneBreit
                 as='h4'
-                className={`!-mb-6 text-lg font-black ${className}`}
+                className={`text-lg font-black ${className}`}
                 {...props}>
                 {children}
               </FontSohneBreit>
@@ -59,7 +59,7 @@ export default function OpenhouseMarkdown({
             return (
               <FontSohneBreit
                 as='h5'
-                className={`!-mb-6 text-base font-black ${className}`}
+                className={`text-base font-black ${className}`}
                 {...props}>
                 {children}
               </FontSohneBreit>
@@ -69,7 +69,7 @@ export default function OpenhouseMarkdown({
             return (
               <FontSohneBreit
                 as='h6'
-                className={`!-mb-6 text-sm font-black ${className}`}
+                className={`text-sm font-black ${className}`}
                 {...props}>
                 {children}
               </FontSohneBreit>

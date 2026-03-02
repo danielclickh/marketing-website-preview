@@ -644,4 +644,5 @@ export interface EntryOpenhouse extends Entry {
   seo: null | ComponentSeo
   registerLabel: string
   listOnMainPage: boolean
+  template: 'Y2025' | 'Y2026'
 }
