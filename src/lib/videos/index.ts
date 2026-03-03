@@ -20,6 +20,7 @@ type StrapiItem = {
   }
   publishedAt: string
   updatedAt: string
+  language: 'English' | 'Japanese'
 }
 
 export async function getVideos(): Promise<Video[]> {
@@ -62,7 +63,8 @@ export async function getVideos(): Promise<Video[]> {
       related: item.RelatedVideos?.map((cat) => cat.id) || [],
       seo: seo,
       updatedAt: item.updatedAt,
-      publishedAt: item.publishedAt
+      publishedAt: item.publishedAt,
+      language: item.language
     } satisfies Video
   })
 }
