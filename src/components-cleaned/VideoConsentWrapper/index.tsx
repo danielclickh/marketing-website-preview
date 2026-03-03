@@ -15,7 +15,7 @@ export default function VideoConsentWrapper({
 }: VideoConsentWrapperProps) {
   const [attemptedToOpen, setAttemptedToOpen] = useState(false)
   const banner = useSecuritiCookieBanner()
-  const consentGiven = banner.consentValues.functional === 'granted'
+  const consentGiven = banner.consentValues?.functional === 'granted'
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
