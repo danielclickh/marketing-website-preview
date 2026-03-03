@@ -1,59 +1,49 @@
 import PaginateChildren from '@/components-cleaned/PaginateChildren'
+import StrapiImage from '@/components-cleaned/StrapiImage'
 import { CUICard } from '@/components/ClickUI'
 import FollowUs from '@/components/FollowUs'
-import { StrapiImageUrl } from '@/components/StrapiElements'
 import Layout from '@/components/jp/Layout'
 import { SuiText, SuiTitle } from '@/components/sui'
-import { fetchAll } from '@/lib/api/strapi'
-import { StrapiImageType } from '@/lib/api/strapi/types'
+import { newsItemsService } from '@/lib/api/strapi'
 import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
 import { convertDateToString } from '@/lib/utils/dateUtils'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { CommonProps } from '@/types/homepage'
+import { EntryNewsItem } from '@/types/strapi'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
 
-interface StrapiNewsItem {
-  title: string
-  slug: string
-  redirectUrl: string
-  publisherName: string
-  publisherAvatar: StrapiImageType
-  type: 'News' | 'Press release'
-  publishedDate: string
-  excerpt: null | string
-}
-
 interface PageProps extends CommonProps {
-  newsItems: Array<StrapiNewsItem>
-  pressItems: Array<StrapiNewsItem>
+  newsItems: Array<EntryNewsItem>
+  pressItems: Array<EntryNewsItem>
 }
 
 export const getStaticProps: GetStaticProps<PageProps> =
   async function getStaticProps() {
-    const newsPromise: Promise<Array<StrapiNewsItem>> = fetchAll('news-items', {
+    const newsPromise = newsItemsService.findAll({
       filters: {
         type: {
           $eq: 'News'
+        },
+        language: {
+          $eq: 'Japanese'
         }
       },
-      populate: ['publisherAvatar'],
       sort: ['publishedDate:desc']
     })
 
-    const pressPromise: Promise<Array<StrapiNewsItem>> = fetchAll(
-      'news-items',
-      {
-        filters: {
-          type: {
-            $eq: 'Press release'
-          }
+    const pressPromise = newsItemsService.findAll({
+      filters: {
+        type: {
+          $eq: 'Press release'
         },
-        populate: ['publisherAvatar'],
-        sort: ['publishedDate:desc']
-      }
-    )
+        language: {
+          $eq: 'Japanese'
+        }
+      },
+      sort: ['publishedDate:desc']
+    })
 
     const commonPromise = getCommonProps()
 
@@ -90,12 +80,15 @@ export default function News({
     <Layout seo={seo} headerData={headerData}>
       <div className='section-container my-16 flex flex-col items-start gap-x-16 gap-y-16 lg:my-24 lg:flex-row'>
         {/* Main */}
-        <div>
+        <div className='flex-1'>
           <SuiTitle type='h1'>プレスリリース</SuiTitle>
           <PaginateChildren perPage={6} mode='loadMore'>
             <PaginateChildren.Items
               as='ol'
               className='space-y-6 divide-y divide-white/5'>
+              {!pressItems.length && (
+                <li className='pt-6'>No press releases</li>
+              )}
               {pressItems.map((item, itemIndex) => (
                 <li key={itemIndex} className='pt-6'>
                   <div className='group/newsItem relative space-y-2'>
@@ -134,6 +127,9 @@ export default function News({
                 <PaginateChildren.Items
                   as='ol'
                   className='space-y-6 divide-y divide-white/5'>
+                  {!newsItems.length && (
+                    <li className='pt-6'>No news articles</li>
+                  )}
                   {newsItems.map((item, itemIndex) => (
                     <li key={itemIndex} className='pt-6'>
                       <div className='group/newsItem relative'>
@@ -146,8 +142,8 @@ export default function News({
                           </Link>
                         </SuiTitle>
                         <div className='mt-4 flex items-center gap-4'>
-                          <StrapiImageUrl
-                            {...item.publisherAvatar}
+                          <StrapiImage
+                            entry={item.publisherAvatar}
                             width={100}
                             height={100}
                             unoptimized={false}
