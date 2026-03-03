@@ -27,16 +27,10 @@ export type SecuritiConsentStatuses = Record<
   SecuritiConsentStatus
 >
 
-export const DEFAULT_STATUSES: Record<
-  SecuritiCookieCategories,
-  SecuritiConsentStatus
-> = {
-  advertising: 'denied',
-  analytics: 'denied',
-  functional: 'denied',
-  essential: 'granted',
-  unclassified: 'denied'
-} as const
+const SECURITI_CDN_URL = 'https://cdn-prod.securiti.ai' as const
+const SECURITI_TENANT_ID = '8555e54b-cd0b-45d7-9c1c-e9e088bf774a' as const
+const SECURITI_DOMAIN_ID = 'e058d040-977c-4594-aa2c-84b844ce5cf0' as const
+const SECURITI_BACKEND_URL = 'https://app.securiti.ai' as const
 
 function normalizeStatus(
   value: any,
@@ -55,28 +49,19 @@ function normalizeCategoryStatuses(
   if (!category) return null
 
   // https://app.securiti.ai/privaci/v1/admin/cmp/published_cookie_categories
-  const advertising = normalizeStatus(
-    category.Advertising,
-    DEFAULT_STATUSES.advertising
-  )
+  const advertising = normalizeStatus(category.Advertising, 'denied')
   const analytics = normalizeStatus(
     category['Analytics and customization'] ||
       category['Analytics & Customization'],
-    DEFAULT_STATUSES.analytics
+    'denied'
   )
   const functional = normalizeStatus(
     category['Performance and functionality'] ||
       category['Performance & Functionality'],
-    DEFAULT_STATUSES.functional
+    'denied'
   )
-  const essential = normalizeStatus(
-    category.Essential,
-    DEFAULT_STATUSES.essential
-  )
-  const unclassified = normalizeStatus(
-    category.Unclassified,
-    DEFAULT_STATUSES.unclassified
-  )
+  const essential = normalizeStatus(category.Essential, 'granted')
+  const unclassified = normalizeStatus(category.Unclassified, 'denied')
 
   return {
     advertising,
@@ -87,30 +72,8 @@ function normalizeCategoryStatuses(
   }
 }
 
-function getConsentValuesFromLocalStorage() {
-  let advertising, analytics, functional, essential, unclassified
-  try {
-    const value = window.sessionStorage.getItem('cmp-consent')
-    const json = JSON.parse(value || '')
-
-    advertising = json.advertising
-    analytics = json.analytics
-    functional = json.functional
-    essential = json.essential
-    unclassified = json.unclassified
-  } catch {}
-
-  return {
-    advertising: normalizeStatus(advertising, DEFAULT_STATUSES.advertising),
-    analytics: normalizeStatus(analytics, DEFAULT_STATUSES.analytics),
-    functional: normalizeStatus(functional, DEFAULT_STATUSES.functional),
-    essential: normalizeStatus(essential, DEFAULT_STATUSES.essential),
-    unclassified: normalizeStatus(unclassified, DEFAULT_STATUSES.unclassified)
-  }
-}
-
 type SecuritiContextType = {
-  consentValues: SecuritiConsentStatuses
+  consentValues: null | SecuritiConsentStatuses
   open: () => boolean
   close: () => boolean
   acceptAll: () => boolean
@@ -142,19 +105,20 @@ export default function SecuritiCookieBanner({
   staging = false
 }: SecuritiCookieBannerProps) {
   const [sdk, setSdk] = useState<any>(null)
-  const [values, setValues] = useState<SecuritiConsentStatuses>(
-    getConsentValuesFromLocalStorage()
-  )
+  const [values, setValues] = useState<SecuritiConsentStatuses | null>(null)
 
   const setValuesIfChanged = useCallback(
     (newValues: SecuritiConsentStatuses) => {
       // Dedupe keys
-      const keys = new Set([...Object.keys(values), ...Object.keys(newValues)])
+      const keys = new Set([
+        ...Object.keys(values || {}),
+        ...Object.keys(newValues)
+      ])
 
       // Check if any values differ
       const valuesHaveChanged = (
         [...keys] as Array<keyof SecuritiConsentStatuses>
-      ).some((key) => values[key] !== newValues[key])
+      ).some((key) => values?.[key] !== newValues[key])
 
       // Only update the state if values have changed
       if (valuesHaveChanged) {
@@ -209,19 +173,18 @@ export default function SecuritiCookieBanner({
     window.SecuritiDataLayer.push(loadCallback)
     window.SecuritiDataLayer.push(consentGivenCallback)
 
-    const el = document.createElement('script')
-    el.src =
-      'https://cdn-prod.securiti.ai/consent/cookie-consent-sdk-loader-strict-csp.js'
-    el.setAttribute('data-tenant-uuid', '8555e54b-cd0b-45d7-9c1c-e9e088bf774a')
-    el.setAttribute('data-domain-uuid', 'e058d040-977c-4594-aa2c-84b844ce5cf0')
-    el.setAttribute('data-backend-url', 'https://app.securiti.ai')
-    el.setAttribute('data-skip-css', 'false')
-    el.setAttribute('data-strict-csp', 'true')
+    const bannerScript = document.createElement('script')
+    bannerScript.src = `${SECURITI_CDN_URL}/consent/cookie-consent-sdk-loader-strict-csp.js`
+    bannerScript.setAttribute('data-tenant-uuid', SECURITI_TENANT_ID)
+    bannerScript.setAttribute('data-domain-uuid', SECURITI_DOMAIN_ID)
+    bannerScript.setAttribute('data-backend-url', SECURITI_BACKEND_URL)
+    bannerScript.setAttribute('data-skip-css', 'false')
+    bannerScript.setAttribute('data-strict-csp', 'true')
     if (staging) {
-      el.setAttribute('data-securiti-staging-mode', 'true')
+      bannerScript.setAttribute('data-securiti-staging-mode', 'true')
     }
-    el.defer = true
-    el.addEventListener('load', function () {
+    bannerScript.defer = true
+    bannerScript.addEventListener('load', function () {
       const cookieSettingsButton = document.querySelector<HTMLElement>(
         '#cookie-settings-button'
       )
@@ -230,13 +193,22 @@ export default function SecuritiCookieBanner({
       }
     })
 
+    const gcpDefaults = document.createElement('script')
+    gcpDefaults.src = `${SECURITI_CDN_URL}/consent/cookie_banner/${SECURITI_TENANT_ID}/${SECURITI_DOMAIN_ID}/google_consent_defaults.js`
+    gcpDefaults.addEventListener('load', () => {
+      // Second: after defaults loaded, load the banner
+      ;(document.head || document.body).appendChild(bannerScript)
+    })
+
+    // First: load Google Consent Police defaults
     if (enabled) {
-      ;(document.head || document.body).appendChild(el)
+      ;(document.head || document.body).appendChild(gcpDefaults)
     }
 
     // Clean up
     return () => {
-      el.remove()
+      gcpDefaults.remove()
+      bannerScript.remove()
 
       // Remove callbacks
       window.SecuritiDataLayer = (
