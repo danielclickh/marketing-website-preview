@@ -3,15 +3,6 @@ import { slugify } from '@/lib/utils/strings'
 import { VideosApiResponse } from '@/types/videos'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const baseQuery: Record<string, any> = {
-  sort: ['VideoDate:DESC', 'publishedAt:DESC'],
-  populate: ['categories', 'seo', 'seo.image'],
-  filters: {
-    //$or: getStagingOnlyFilters() // Not used on videos
-    $or: []
-  }
-}
-
 export async function fetchVideoCategories() {
   const response = await findAll('marketing-videos-categories', {
     sort: ['CategoryName:ASC']
@@ -29,7 +20,8 @@ export async function fetchVideoCategories() {
 export async function fetchVideos({
   page = 1,
   category = null,
-  search = null
+  search = null,
+  locale
 }: {
   page?:
     | undefined
@@ -49,6 +41,7 @@ export async function fetchVideos({
     | string
     | string[]
     | VideosApiResponse['params']['search']
+  locale?: undefined | null | string | string[]
 }): Promise<VideosApiResponse> {
   const categories = await fetchVideoCategories()
 
@@ -65,38 +58,57 @@ export async function fetchVideos({
   search = search ? String(search) : null
   search = search && search.trim() ? search : null
 
+  // Validate the locale param
+  locale = locale ? String(locale) : null
+  locale = locale && locale.trim() ? locale : null
+
+  const baseQuery: Record<string, any> = {
+    sort: ['VideoDate:DESC', 'publishedAt:DESC'],
+    populate: ['categories', 'seo', 'seo.image'],
+    filters: {
+      //$or: getStagingOnlyFilters() // Not used on videos
+      $and: []
+    }
+  }
+
+  // Include/exclude japanese blogs
+  baseQuery.filters.$and.push({
+    language: { $eq: locale === 'jp' ? 'Japanese' : 'English' }
+  })
+
   const query = structuredClone(baseQuery)
 
   // Apply category filters
   if (category) {
-    query.filters.categories = {
-      CategoryName: {
-        $eq: categories[category]
+    query.filters.$and.push({
+      categories: {
+        CategoryName: {
+          $eq: categories[category]
+        }
       }
-    }
+    })
   }
 
   // Apply search filters
   if (search) {
-    // Search title
-    query.filters.$or.push({
-      Title: {
-        $containsi: search
-      }
-    })
-
-    // Search intro text
-    query.filters.$or.push({
-      IntroText: {
-        $containsi: search
-      }
-    })
-
-    // Search description
-    query.filters.$or.push({
-      Description: {
-        $containsi: search
-      }
+    query.filters.$and.push({
+      $or: [
+        {
+          Title: {
+            $containsi: search
+          }
+        },
+        {
+          IntroText: {
+            $containsi: search
+          }
+        },
+        {
+          Description: {
+            $containsi: search
+          }
+        }
+      ]
     })
   }
 
@@ -128,12 +140,18 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  let { page = 1, category = null, search = null } = request.query
+  let {
+    page = 1,
+    category = null,
+    search = null,
+    locale = null
+  } = request.query
 
   const responseBody = await fetchVideos({
     page,
     category,
-    search
+    search,
+    locale
   })
 
   response.status(200).json(responseBody)

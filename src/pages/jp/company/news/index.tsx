@@ -25,10 +25,10 @@ export const getStaticProps: GetStaticProps<PageProps> =
       filters: {
         type: {
           $eq: 'News'
-        },
-        language: {
-          $eq: 'Japanese'
         }
+        /*language: {
+          $eq: 'Japanese'
+        }*/
       },
       sort: ['publishedDate:desc']
     })
@@ -37,10 +37,10 @@ export const getStaticProps: GetStaticProps<PageProps> =
       filters: {
         type: {
           $eq: 'Press release'
-        },
-        language: {
-          $eq: 'Japanese'
         }
+        /*language: {
+          $eq: 'Japanese'
+        }*/
       },
       sort: ['publishedDate:desc']
     })

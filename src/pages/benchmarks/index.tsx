@@ -908,7 +908,7 @@ function BlogFinder({ blogs }: { blogs: Array<BlogItem> }) {
                     <SuiTitle type='h3'>
                       <Link
                         href={
-                          blogItem.entry.category === 'Japanese'
+                          blogItem.entry.language === 'Japanese'
                             ? `/jp/blog/${blogItem.entry.slug}`
                             : `/blog/${blogItem.entry.slug}`
                         }

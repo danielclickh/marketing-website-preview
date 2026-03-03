@@ -38,6 +38,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return {
       notFound: true
     }
+  } else if (data[0]?.language !== 'Japanese') {
+    return {
+      redirect: {
+        destination: `/videos/${slug}`,
+        permanent: true
+      }
+    }
   }
 
   const video = data[0] as Video
@@ -49,6 +56,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     filters: {
       Slug: {
         $ne: slug
+      },
+      language: {
+        $eq: 'Japanese'
       },
       ...(video.VideoDate
         ? {
@@ -75,6 +85,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     filters: {
       Slug: {
         $ne: slug
+      },
+      language: {
+        $eq: 'Japanese'
       },
       ...(video.VideoDate
         ? {
@@ -106,6 +119,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       filters: {
         id: {
           $ne: video.id
+        },
+        language: {
+          $eq: 'Japanese'
         },
         categories: {
           id: {

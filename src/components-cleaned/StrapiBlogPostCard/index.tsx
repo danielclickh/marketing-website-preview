@@ -13,7 +13,7 @@ export interface StrapiBlogPostCardProps {
 export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
   const footer: Array<string> = []
 
-  const isJapanese = entry.category === 'Japanese'
+  const isJapanese = entry.language === 'Japanese'
 
   if (entry.author?.profiles && entry.author.profiles.length > 0) {
     const authorNames = entry.author.profiles.map((profile) => profile.name)
@@ -26,7 +26,12 @@ export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
   }
 
   if (entry.date || entry.publishedAt) {
-    footer.push(convertDateToString(entry.date || entry.publishedAt))
+    footer.push(
+      convertDateToString(
+        entry.date || entry.publishedAt,
+        isJapanese ? 'ja-JP' : undefined
+      )
+    )
   }
 
   return (
@@ -40,7 +45,7 @@ export default function StrapiBlogPostCard({ entry }: StrapiBlogPostCardProps) {
         />
       </CUICard.Header>
       <CUICard.Body className='mb-auto p-6'>
-        {!isJapanese && (
+        {entry.category && (
           <div className='mb-2 font-inconsolata text-base font-medium text-primary-300'>
             {entry.category}
           </div>

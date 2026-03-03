@@ -27,7 +27,7 @@ export const getServerSideProps = (async ({ req, params }) => {
     return {
       notFound: true
     }
-  } else if (blog.category === 'Japanese') {
+  } else if (blog.language === 'Japanese') {
     return {
       redirect: {
         destination: `/jp/blog/${slug}`,

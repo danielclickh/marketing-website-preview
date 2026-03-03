@@ -1,3 +1,4 @@
+import PillFilters, { Filter } from '@/components-cleaned/PillFilters'
 import StrapiAuthorMeta from '@/components-cleaned/StrapiAuthorMeta'
 import StrapiBlogPostCard from '@/components-cleaned/StrapiBlogPostCard'
 import StrapiImage from '@/components-cleaned/StrapiImage'
@@ -70,11 +71,53 @@ export default function BlogsPage({
   const [search, setSearch] = useState<BlogApiResponse['params']['search']>(
     response?.params?.search || null
   )
+  const [category, setCategory] = useState<
+    BlogApiResponse['params']['category']
+  >(response?.params?.category || null)
 
   const currentPage = page > 1 ? page : 1
 
   const featuredBlog = response?.data?.featured || null
   const blogs = response?.data?.blogs || []
+  const categories = response?.data?.categories || {}
+
+  const labelMap: Record<string, string> = {
+    product: '製品',
+    community: 'コミュニティ',
+    engineering: 'エンジニアリング',
+    'user-stories': 'ユーザーストーリー',
+    'company-and-culture': '企業文化'
+  }
+
+  const categoryList = Object.entries(categories).map(([slug, label]) => {
+    return {
+      kind: 'link',
+      href: `/jp/blog?category=${slug}`,
+      label: labelMap[slug] || label,
+      onClick(event) {
+        event.preventDefault()
+        setPage(1)
+        setCategory(slug)
+      },
+      active: category === slug
+    } satisfies Filter
+  })
+
+  categoryList.unshift({
+    kind: 'link' as const,
+    href: `/jp/blog`,
+    label: 'すべて表示',
+    onClick: (event) => {
+      event.preventDefault()
+      setPage(1)
+      setSearch(null)
+      setCategory(null)
+      if (inputRef.current) {
+        inputRef.current.value = ''
+      }
+    },
+    active: !category
+  })
 
   const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPage(1)
@@ -95,7 +138,8 @@ export default function BlogsPage({
     if (
       router.isReady &&
       (page !== response?.pagination?.page ||
-        search !== response?.params?.search)
+        search !== response?.params?.search ||
+        category !== response?.params?.category)
     ) {
       ;(async function () {
         // Show loading screen
@@ -104,9 +148,10 @@ export default function BlogsPage({
         const params = new URLSearchParams()
         if (page && page > 1) params.set('page', page.toString())
         if (search) params.set('search', search)
-        const paramsString = Array.from(params).length ? `?${params}` : ''
+        if (category) params.set('category', category)
 
         // Update URL
+        const paramsString = Array.from(params).length ? `?${params}` : ''
         router.push(`/jp/blog${paramsString}`, undefined, {
           shallow: true
         })
@@ -126,7 +171,7 @@ export default function BlogsPage({
         setLoading(false)
       })()
     }
-  }, [page, search])
+  }, [page, search, category])
 
   return (
     <Layout seo={seo} headerData={headerData}>
@@ -151,6 +196,9 @@ export default function BlogsPage({
               </div>
             )}
             <div className='flex w-full flex-col justify-start border-l-8 border-primary-300 pl-6 lg:w-1/2 lg:flex-1'>
+              <div className='font-inconsolata font-medium text-primary-300'>
+                {featuredBlog.category}
+              </div>
               <SuiTitle type='h2' className='text-neutral-100'>
                 {featuredBlog.title}
               </SuiTitle>
@@ -164,7 +212,8 @@ export default function BlogsPage({
                 extras={[
                   featuredBlog.date || featuredBlog.publishedAt
                     ? convertDateToString(
-                        featuredBlog.date || featuredBlog.publishedAt
+                        featuredBlog.date || featuredBlog.publishedAt,
+                        'ja-JP'
                       )
                     : null,
                   featuredBlog.reading_time_override ||
@@ -193,6 +242,7 @@ export default function BlogsPage({
             onChange={useDebounce(onSearchChange, 500)}
             inputRef={inputRef}
           />
+          <PillFilters options={categoryList} />
         </div>
 
         {loading && <p className='mt-12 w-full text-center'>読み込み中...</p>}

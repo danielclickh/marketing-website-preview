@@ -73,7 +73,8 @@ export async function fetchBlogs({
       'slug',
       'date',
       'reading_time',
-      'reading_time_override'
+      'reading_time_override',
+      'language'
     ],
     filters: {
       $and: [
@@ -89,7 +90,7 @@ export async function fetchBlogs({
 
   // Include/exclude japanese blogs
   baseQuery.filters.$and.push({
-    category: { [locale === 'jp' ? '$eq' : '$ne']: 'Japanese' }
+    language: { $eq: locale === 'jp' ? 'Japanese' : 'English' }
   })
 
   const [categories, featuredBlog] = await Promise.all([

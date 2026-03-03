@@ -83,7 +83,7 @@ export async function cmsBlogs(): Promise<Array<IndexedItem>> {
   })
 
   return blogPosts.map((post) => {
-    const prefix = post.category === 'Japanese' ? '/jp' : ''
+    const prefix = post.language === 'Japanese' ? '/jp' : ''
     return {
       title: post.title,
       path: `${prefix}/blog/${post.slug}`,
@@ -112,6 +112,7 @@ export async function cmsEvents(): Promise<Array<IndexedItem>> {
   })
 
   return events.map((post) => {
+    //const prefix = post.language === 'Japanese' ? '/jp' : ''
     return {
       title: post.title,
       path: `/company/events/${post.slug}`,
@@ -126,16 +127,11 @@ export async function cmsVideos(): Promise<Array<IndexedItem>> {
 
   return videos
     .map((post) => {
+      const prefix = post.language === 'Japanese' ? '/jp' : ''
       return [
         {
           title: post.title,
-          path: `/videos/${post.slug}`,
-          lastModified: post.updatedAt,
-          publishedAt: post.publishedAt
-        },
-        {
-          title: post.title,
-          path: `/jp/videos/${post.slug}`,
+          path: `${prefix}/videos/${post.slug}`,
           lastModified: post.updatedAt,
           publishedAt: post.publishedAt
         }
