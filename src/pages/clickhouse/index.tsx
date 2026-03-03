@@ -702,7 +702,23 @@ ER  -  `
           </p>
         </FeatureSection>
 
-        <FeatureSection direction='rtl' image={<ClickhouseAtScale />}>
+        <FeatureSection direction='rtl' image={<JoinsDiagram />}>
+          <SuiTitle type='h3' className='text-white md:!text-4xl'>
+            Full Text Search
+          </SuiTitle>
+          <p>
+            ClickHouse delivers fast, scalable token based search through native
+            inverted indexes built directly into the storage engine.
+          </p>
+          <p>
+            Inverted indices enable analytics on large unstructured or
+            semi-structured data at petabyte scale. Filter text precisely, then
+            aggregate and join in the same SQL query with ClickHouse’s signature
+            speed and efficiency.
+          </p>
+        </FeatureSection>
+
+        <FeatureSection image={<ClickhouseAtScale />}>
           <SuiTitle type='h3' className='text-white md:!text-4xl'>
             Built for high concurrency
           </SuiTitle>
@@ -714,6 +730,7 @@ ER  -  `
         </FeatureSection>
 
         <FeatureSection
+          direction='rtl'
           image={
             <Image
               src={imageLightweightUpdatesAlt}
@@ -739,7 +756,6 @@ ER  -  `
         </FeatureSection>
 
         <FeatureSection
-          direction='rtl'
           image={
             <Image
               src={imageJsonSupport}
