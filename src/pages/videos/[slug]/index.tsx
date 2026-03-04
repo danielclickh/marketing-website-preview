@@ -190,7 +190,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 // the path has not been generated.
 export async function getStaticPaths() {
   const data = await fetchAll('marketing-videos', {
-    fields: ['Slug']
+    fields: ['Slug', 'language'],
+    filters: {
+      language: {
+        $ne: 'Japanese'
+      }
+    }
   })
 
   // Get the paths we want to pre-render based on posts
