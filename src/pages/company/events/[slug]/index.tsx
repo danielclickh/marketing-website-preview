@@ -54,7 +54,14 @@ export const getStaticProps: GetStaticProps<PageProps> =
           permanent: false
         }
       }
-    }
+    } /*else if (event.language === 'Japanese') {
+      return {
+        redirect: {
+          destination: `/jp/company/events/${slug}`,
+          permanent: true
+        }
+      }
+    }*/
 
     const moreEventsRequest = await eventsService.findMany({
       filters: {
@@ -125,6 +132,9 @@ export async function getStaticPaths() {
     filters: {
       eventVideoUrl: {
         $null: true
+      },
+      language: {
+        $eq: 'English'
       }
     }
   })

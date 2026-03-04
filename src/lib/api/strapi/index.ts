@@ -11,6 +11,7 @@ import {
   EntryEvent,
   EntryGlobalAnnouncement,
   EntryMarketingVideo,
+  EntryNewsItem,
   EntryOpenhouse,
   EntryPage,
   EntryResource,
@@ -536,4 +537,10 @@ export const openhouseService = new StrapiEntryService<EntryOpenhouse>(
     'seo.image',
     'videos'
   ] as string[]
+)
+
+export const newsItemsService = new StrapiEntryService<EntryNewsItem>(
+  'news-items',
+  false,
+  ['publisherAvatar']
 )

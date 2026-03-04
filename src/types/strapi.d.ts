@@ -514,6 +514,7 @@ export interface EntryEvent extends Entry {
   form: null | ComponentEventForm
   eventVideoUrl: null | string
   recordedVimeoUrl: null | string
+  language: 'English' | 'Japanese'
 }
 
 export interface EntryMarketingVideoCategory extends Entry {
@@ -536,6 +537,7 @@ export interface EntryMarketingVideo extends Entry {
   }
   tags: Array<EntryTag>
   promotion: null | ComponentPromotion
+  language: 'English' | 'Japanese'
 }
 
 export interface EntryPage extends Entry {
@@ -593,6 +595,7 @@ export interface EntryBlogPost extends Entry {
   sections: Array<BlogModules>
   ListOnBlogs: null | boolean
   tags?: Array<EntryTag>
+  language: 'English' | 'Japanese'
 }
 
 export interface EntryAuthor extends Entry {
@@ -645,4 +648,15 @@ export interface EntryOpenhouse extends Entry {
   registerLabel: string
   listOnMainPage: boolean
   template: 'Y2025' | 'Y2026'
+}
+
+export interface EntryNewsItem extends Entry {
+  title: string
+  slug: string
+  redirectUrl: string
+  publisherName: string
+  publisherAvatar: EntryImage
+  type: 'News' | 'Press release'
+  publishedDate: string
+  excerpt: null | string
 }

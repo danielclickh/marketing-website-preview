@@ -9,11 +9,13 @@ export default function VideoCard({
   Title,
   categories,
   IntroText,
+  language,
   seo
 }: Video) {
+  const isJapanese = language === 'Japanese'
   return (
     <Link
-      href={`/videos/${Slug}`}
+      href={isJapanese ? `/jp/videos/${Slug}` : `/videos/${Slug}`}
       className='hover:scale-102 group transition ease-in-out hover:-translate-y-1 hover:no-underline'>
       <CUICard>
         <CUICard.Body>

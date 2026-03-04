@@ -19,4 +19,5 @@ export interface Video {
   seo: Omit<SeoMetadata, 'path'>
   updatedAt: string
   publishedAt: string
+  language: 'English' | 'Japanese'
 }

@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       return {
         notFound: true
       }
-    } else if (blog?.category === 'Japanese') {
+    } else if (blog?.language === 'Japanese') {
       return {
         redirect: {
           destination: `/jp/blog/${slug}`,
@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         slug: {
           $ne: slug
         },
-        category: { $ne: 'Japanese' }
+        language: { $ne: 'Japanese' }
       }
     })
 
@@ -178,7 +178,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 export async function getStaticPaths() {
   const blogs = await blogService.findAll({
     filters: {
-      category: {
+      language: {
         $ne: 'Japanese'
       }
     },

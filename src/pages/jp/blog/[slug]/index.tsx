@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
       return {
         notFound: true
       }
-    } else if (blog?.category !== 'Japanese') {
+    } else if (blog?.language !== 'Japanese') {
       return {
         redirect: {
           destination: `/blog/${slug}`,
@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
         slug: {
           $ne: slug
         },
-        category: { $eq: 'Japanese' }
+        language: { $eq: 'Japanese' }
       }
     })
 
@@ -178,7 +178,7 @@ export const getStaticProps: GetStaticProps<BlogProps> =
 export async function getStaticPaths() {
   const blogs = await blogService.findAll({
     filters: {
-      category: {
+      language: {
         $eq: 'Japanese'
       }
     },
@@ -410,11 +410,11 @@ export default function BlogPage({
             type='h2'
             className='!text-3xl text-neutral-100'
             weight='semibold'>
-            Recent posts
+            最新記事
           </SuiTitle>
 
           <CUIButton href='/jp/blog' type='secondary'>
-            View all Blogs
+            ブログ一覧を見る
           </CUIButton>
         </div>
         <div className='grid grid-cols-1 justify-center gap-8 md:grid-cols-2 lg:grid-cols-3'>

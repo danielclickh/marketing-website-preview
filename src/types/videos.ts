@@ -24,6 +24,7 @@ export interface Video {
   seo?: CommonProps['seo']
   publishedAt: string
   updatedAt: string
+  language: 'English' | 'Japanese'
 }
 
 export interface VideosPageProps extends CommonProps {

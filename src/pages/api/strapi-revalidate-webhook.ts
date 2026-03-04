@@ -366,7 +366,7 @@ const CONTENT_TYPE_HANDLERS: Record<
 
     if (blogs) {
       blogs.forEach((post) => {
-        if (post.category === 'Japanese') {
+        if (post.language === 'Japanese') {
           paths.push(`/jp/blog/${post.slug}`)
         } else {
           paths.push(`/blog/${post.slug}`)
@@ -458,7 +458,7 @@ const CONTENT_TYPE_HANDLERS: Record<
     await revalidate(response, paths)
   },
   'api::news-item.news-item': async function (body, response) {
-    const paths: Array<string> = ['/company/news']
+    const paths: Array<string> = ['/company/news', '/jp/company/news']
     await revalidate(response, paths)
   },
   'api::newsletter-form.newsletter-form': async function (body, response) {

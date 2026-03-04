@@ -11,14 +11,19 @@ import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { VideosApiResponse, VideosPageProps } from '@/types/videos'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react'
 
 export const getServerSideProps: GetServerSideProps<VideosPageProps> =
   async function getServerSideProps(context) {
     const commonProps = await getCommonProps()
 
     const { page = 1, category = null, search = null } = context.query || {}
-    const initialData = await fetchVideos({ page, category, search })
+    const initialData = await fetchVideos({
+      page,
+      category,
+      search,
+      locale: 'jp'
+    })
 
     return {
       props: {
@@ -71,17 +76,23 @@ export default function VideosPage({
   const videos = response?.data?.videos || []
   const categories = response?.data?.categories || {}
 
-  const categoryList = Object.entries(categories).map(([slug, label]) => ({
-    kind: 'link',
-    label,
-    href: `/jp/videos?category=${slug}`,
-    onClick(event) {
-      event.preventDefault()
-      setPage(1)
-      setCategory(slug)
-    },
-    active: category === slug
-  })) satisfies Array<Filter>
+  const categoryList = Object.entries(categories)
+    .filter(([, label]) => {
+      return videos.some((v) =>
+        v.categories.some((c) => c.CategoryName === label)
+      )
+    })
+    .map(([slug, label]) => ({
+      kind: 'link',
+      label,
+      href: `/jp/videos?category=${slug}`,
+      onClick(event) {
+        event.preventDefault()
+        setPage(1)
+        setCategory(slug)
+      },
+      active: category === slug
+    })) satisfies Array<Filter>
 
   categoryList.unshift({
     kind: 'link',
@@ -129,15 +140,16 @@ export default function VideosPage({
         if (page && page > 1) params.set('page', page.toString())
         if (search) params.set('search', search)
         if (category) params.set('category', category)
-        const paramsString = Array.from(params).length ? `?${params}` : ''
 
         // Update URL
+        const paramsString = Array.from(params).length ? `?${params}` : ''
         router.push(`/jp/videos${paramsString}`, undefined, {
           shallow: true
         })
 
         // Make request
-        const response = await fetch(`/api/videos${paramsString}`)
+        params.set('locale', 'jp')
+        const response = await fetch(`/api/videos?${params}`)
 
         // Handle response
         try {
@@ -188,10 +200,7 @@ export default function VideosPage({
               )}
               {currentPage === 1 && (
                 <>
-                  {search ? `No search results for "${search}"` : 'No results'}
-                  {category && category in categories
-                    ? ` in ${categories[category]}`
-                    : ''}
+                  {search ? `"${search}" の検索結果はありません` : '結果なし'}
                 </>
               )}
             </p>

@@ -45,6 +45,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     return {
       notFound: true
     }
+  } else if (data[0]?.language === 'Japanese') {
+    return {
+      redirect: {
+        destination: `/jp/videos/${slug}`,
+        permanent: true
+      }
+    }
   }
 
   const video = data[0] as Video
@@ -56,6 +63,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     filters: {
       Slug: {
         $ne: slug
+      },
+      language: {
+        $eq: 'English'
       },
       ...(video.VideoDate
         ? {
@@ -82,6 +92,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     filters: {
       Slug: {
         $ne: slug
+      },
+      language: {
+        $eq: 'English'
       },
       ...(video.VideoDate
         ? {
@@ -113,6 +126,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       filters: {
         id: {
           $ne: video.id
+        },
+        language: {
+          $eq: 'English'
         },
         categories: {
           id: {
@@ -174,7 +190,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 // the path has not been generated.
 export async function getStaticPaths() {
   const data = await fetchAll('marketing-videos', {
-    fields: ['Slug']
+    fields: ['Slug', 'language'],
+    filters: {
+      language: {
+        $ne: 'Japanese'
+      }
+    }
   })
 
   // Get the paths we want to pre-render based on posts

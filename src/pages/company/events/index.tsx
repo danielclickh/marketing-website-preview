@@ -70,6 +70,11 @@ export const getStaticProps: GetStaticProps<PageProps> =
             }
           },
           {
+            language: {
+              $eq: 'English'
+            }
+          },
+          {
             $or: getUnlistedFilters()
           }
         ]
