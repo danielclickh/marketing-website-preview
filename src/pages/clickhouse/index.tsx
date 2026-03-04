@@ -708,9 +708,10 @@ ER  -  `
           image={
             <Image
               src={imageFullTextSearch}
-              width={1126 / 2}
-              height={634 / 2}
-              alt=''
+              width={3085 / 3}
+              height={1211 / 3}
+              alt='Full Text Search tokenization and pre-processing diagram'
+              className='rounded-lg border border-neutral-700'
             />
           }>
           <SuiTitle type='h3' className='text-white md:!text-4xl'>
