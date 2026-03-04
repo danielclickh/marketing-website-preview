@@ -5,16 +5,16 @@ import ResponsiveEmbed from '@/components/ResponsiveEmbed'
 import VideoCard from '@/components/VideoCard'
 import Layout from '@/components/jp/Layout'
 import { SuiTitle } from '@/components/sui'
-import { findAll } from '@/lib/api/strapi'
+import { fetchAll, findAll } from '@/lib/api/strapi'
 import { SeoMetadata } from '@/lib/api/strapi/types'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
 import { slugify } from '@/lib/utils/strings'
 import { ParamsType } from '@/types/homepage'
 import { Video } from '@/types/videos'
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getStaticProps(context: GetStaticPropsContext) {
   const { slug } = context.params as ParamsType
   const { data } = await findAll('marketing-videos', {
     sort: ['VideoDate:DESC', 'publishedAt:DESC'],
@@ -34,16 +34,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     pagination: { limit: 1 }
   })
 
-  if (!data?.[0]) {
+  if (!data?.[0] || data[0]?.language !== 'Japanese') {
     return {
       notFound: true
-    }
-  } else if (data[0]?.language !== 'Japanese') {
-    return {
-      redirect: {
-        destination: `/videos/${slug}`,
-        permanent: true
-      }
     }
   }
 
@@ -167,6 +160,30 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 }
 
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
+export async function getStaticPaths() {
+  const data = await fetchAll('marketing-videos', {
+    fields: ['Slug', 'language'],
+    filters: {
+      language: {
+        $eq: 'Japanese'
+      }
+    }
+  })
+
+  // Get the paths we want to pre-render based on posts
+  const paths = data.map((post) => ({
+    params: { slug: post.Slug }
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: 'blocking' } will server-render pages
+  // on-demand if the path doesn't exist.
+  return { paths, fallback: 'blocking' }
+}
+
 export default function VideoPage({
   video,
   nextVideo,
@@ -174,7 +191,7 @@ export default function VideoPage({
   relatedVideos,
   seo,
   headerData
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout seo={seo} headerData={headerData}>
       <div className='container mx-auto my-20 flex max-w-3xl flex-col px-6 2xl:px-0'>
