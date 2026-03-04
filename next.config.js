@@ -591,6 +591,11 @@ const nextConfig = {
         source: '/cloud/clickstack-private-preview',
         destination: '/cloud/clickstack',
         permanent: true
+      },
+      {
+        source: '/openhouse',
+        destination: '/openhouse/san-francisco',
+        permanent: false
       }
     ]
   }
