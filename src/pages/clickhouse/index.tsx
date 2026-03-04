@@ -18,6 +18,7 @@ import imageAcademicPaper from './assets/image-academic-paper.png'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
 import imageClickbench from './assets/image-clickbench.png'
+import imageFullTextSearch from './assets/image-full-text-search.png'
 import imageInteroperability from './assets/image-interoperability.png'
 import imageJsonSupport from './assets/image-json-support.png'
 import imageLightweightUpdatesAlt from './assets/image-lightweight-updates-alt.png'
@@ -702,7 +703,16 @@ ER  -  `
           </p>
         </FeatureSection>
 
-        <FeatureSection direction='rtl' image={<JoinsDiagram />}>
+        <FeatureSection
+          direction='rtl'
+          image={
+            <Image
+              src={imageFullTextSearch}
+              width={1126 / 2}
+              height={634 / 2}
+              alt=''
+            />
+          }>
           <SuiTitle type='h3' className='text-white md:!text-4xl'>
             Full Text Search
           </SuiTitle>
