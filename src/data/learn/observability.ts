@@ -76,9 +76,9 @@ export default {
 **Skill level:** Advanced
 
 **What you’ll learn:** Level 3 consists of the following three modules,  including video lectures, hands-on labs, and quizzes:
-- Module 8: Advanced data analysis
-- Module 9: Integrating with other tools
-- Module 10: Multi-region observability`,
+- Module 8: Improving Data Ingestion
+- Module 9: ClickHouse Cluster Architecture
+- Module 10: Analyzing Observability Data`,
           panel: {
             title: 'Become a recognized ClickHouse expert',
             description:
