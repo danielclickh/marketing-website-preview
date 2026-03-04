@@ -18,6 +18,7 @@ import imageAcademicPaper from './assets/image-academic-paper.png'
 import imageArchitecture from './assets/image-architecture.png'
 import imageBackups from './assets/image-backups.png'
 import imageClickbench from './assets/image-clickbench.png'
+import imageFullTextSearch from './assets/image-full-text-search.png'
 import imageInteroperability from './assets/image-interoperability.png'
 import imageJsonSupport from './assets/image-json-support.png'
 import imageLightweightUpdatesAlt from './assets/image-lightweight-updates-alt.png'
@@ -702,7 +703,33 @@ ER  -  `
           </p>
         </FeatureSection>
 
-        <FeatureSection direction='rtl' image={<ClickhouseAtScale />}>
+        <FeatureSection
+          direction='rtl'
+          image={
+            <Image
+              src={imageFullTextSearch}
+              width={3085 / 3}
+              height={1211 / 3}
+              alt='Full Text Search tokenization and pre-processing diagram'
+              className='rounded-lg border border-neutral-700'
+            />
+          }>
+          <SuiTitle type='h3' className='text-white md:!text-4xl'>
+            Full Text Search
+          </SuiTitle>
+          <p>
+            ClickHouse delivers fast, scalable token based search through native
+            inverted indexes built directly into the storage engine.
+          </p>
+          <p>
+            Inverted indices enable analytics on large unstructured or
+            semi-structured data at petabyte scale. Filter text precisely, then
+            aggregate and join in the same SQL query with ClickHouse’s signature
+            speed and efficiency.
+          </p>
+        </FeatureSection>
+
+        <FeatureSection image={<ClickhouseAtScale />}>
           <SuiTitle type='h3' className='text-white md:!text-4xl'>
             Built for high concurrency
           </SuiTitle>
@@ -714,6 +741,7 @@ ER  -  `
         </FeatureSection>
 
         <FeatureSection
+          direction='rtl'
           image={
             <Image
               src={imageLightweightUpdatesAlt}
@@ -739,7 +767,6 @@ ER  -  `
         </FeatureSection>
 
         <FeatureSection
-          direction='rtl'
           image={
             <Image
               src={imageJsonSupport}
