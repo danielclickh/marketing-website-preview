@@ -105,24 +105,24 @@ export default function OpenhouseFormModal({
               Share this event
             </p>
             <div className='flex flex-wrap justify-center gap-2 text-neutral-0'>
-              <CopyUrlButton className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow' />
+              <CopyUrlButton className='flex aspect-square w-11 items-center justify-center !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow' />
               <SocialButton
-                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                className='flex aspect-square w-11 items-center justify-center !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
                 type='y_combinator'
                 title='Open House by ClickHouse'
               />
               <SocialButton
-                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                className='flex aspect-square w-11 items-center justify-center !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
                 type='twitter'
                 title='Open House by ClickHouse'
               />
               <SocialButton
-                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                className='flex aspect-square w-11 items-center justify-center !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
                 type='facebook'
                 title='Open House by ClickHouse'
               />
               <SocialButton
-                className='aspect-square w-11 !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
+                className='flex aspect-square w-11 items-center justify-center !rounded-none !p-0 !shadow-none hover:!bg-ch-yellow'
                 type='linkedin'
                 title='Open House by ClickHouse'
               />
