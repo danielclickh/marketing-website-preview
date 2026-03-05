@@ -6,7 +6,8 @@
       "Bash(npm install:*)",
       "Bash(yarn add:*)",
       "Bash(npx tsc:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(grep:*)"
     ]
   }
 }
