@@ -266,7 +266,8 @@ function JoinsPanel({ year, month }: { year: number; month: number }) {
         }
   )
 
-  const option = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const option: any = {
     backgroundColor: 'transparent',
     title: {
       text: 'TPC-H Benchmark',
@@ -381,7 +382,8 @@ function DataTypesPanel({ activeYear, activeMonth }: { activeYear: number; activ
     }
   }))
 
-  const option = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const option: any = {
     backgroundColor: 'transparent',
     title: {
       text: 'Data Types & Formats Supported',
@@ -631,7 +633,8 @@ function IndexesPanel({ activeYear, activeMonth }: { activeYear: number; activeM
   const monthName = new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })
   const version = `${activeYear - 2000}.${activeMonth}`
 
-  const option = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const option: any = {
     backgroundColor: 'transparent',
     series: [
       {
