@@ -257,7 +257,7 @@ function JoinsPanel({ year, month }: { year: number; month: number }) {
             color: '#ef4444',
             position: 'top',
             fontSize: 11,
-            fontWeight: 'bold'
+            fontWeight: 'bold' as const
           }
         }
       : {
@@ -271,7 +271,7 @@ function JoinsPanel({ year, month }: { year: number; month: number }) {
     title: {
       text: 'TPC-H Benchmark',
       left: 'center',
-      textStyle: { color: '#ffffff', fontSize: 13, fontWeight: 'bold' }
+      textStyle: { color: '#ffffff', fontSize: 13, fontWeight: 'bold' as const }
     },
     grid: { top: 44, right: 16, bottom: 68, left: 68, containLabel: false },
     xAxis: {
@@ -280,8 +280,8 @@ function JoinsPanel({ year, month }: { year: number; month: number }) {
       name: 'Test run',
       nameLocation: 'middle',
       nameGap: 36,
-      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' },
-      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold', rotate: 45 },
+      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' as const },
+      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold' as const, rotate: 45 },
       axisLine: { lineStyle: { color: '#404040' } },
       axisTick: { show: false }
     },
@@ -291,8 +291,8 @@ function JoinsPanel({ year, month }: { year: number; month: number }) {
       nameLocation: 'middle',
       nameRotate: 90,
       nameGap: 52,
-      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' },
-      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold' },
+      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' as const },
+      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold' as const },
       min: 0,
       max: JOINS_Y_MAX,
       axisLine: { show: false },
@@ -386,7 +386,7 @@ function DataTypesPanel({ activeYear, activeMonth }: { activeYear: number; activ
     title: {
       text: 'Data Types & Formats Supported',
       left: 'center',
-      textStyle: { color: '#ffffff', fontSize: 13, fontWeight: 'bold' }
+      textStyle: { color: '#ffffff', fontSize: 13, fontWeight: 'bold' as const }
     },
     grid: { top: 44, right: 16, bottom: 68, left: 68, containLabel: false },
     xAxis: {
@@ -395,8 +395,8 @@ function DataTypesPanel({ activeYear, activeMonth }: { activeYear: number; activ
       name: 'Release',
       nameLocation: 'middle',
       nameGap: 36,
-      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' },
-      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold', rotate: 45, interval: 2 },
+      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' as const },
+      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold' as const, rotate: 45, interval: 2 },
       axisLine: { lineStyle: { color: '#404040' } },
       axisTick: { show: false }
     },
@@ -406,8 +406,8 @@ function DataTypesPanel({ activeYear, activeMonth }: { activeYear: number; activ
       nameLocation: 'middle',
       nameRotate: 90,
       nameGap: 52,
-      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' },
-      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold' },
+      nameTextStyle: { color: '#ffffff', fontSize: 12, fontWeight: 'bold' as const },
+      axisLabel: { color: '#ffffff', fontSize: 11, fontWeight: 'bold' as const },
       min: 0,
       max: DATA_TYPES_Y_MAX,
       axisLine: { show: false },
@@ -1102,7 +1102,7 @@ export default function FeatureJourneyPage({ seo, headerData }: CommonProps) {
             fastest analytical database. See how JOIN performance advanced, data
             types and formats expanded, data lake support matured, indexing became
             smarter, while data lifecycle operations grew more powerful and
-            flexible. Choose a snapshot and scroll to follow the evolution,
+            flexible. Choose a snapshot and scroll to travel back in time,
             release by release.
           </p>
         </div>
