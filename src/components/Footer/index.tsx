@@ -143,6 +143,11 @@ const NAV_ITEMS: Array<NavItem> = [
     galaxyEvent: 'footerNav.resourcesMenu.engineeringResources'
   },
   {
+    label: 'Feature journey',
+    href: '/feature-journey',
+    galaxyEvent: 'footerNav.resourcesMenu.featureJourneySelect'
+  },
+  {
     heading: 'Company',
     newColumn: true,
     label: 'Blog',

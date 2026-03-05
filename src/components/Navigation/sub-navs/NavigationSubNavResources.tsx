@@ -179,6 +179,14 @@ export default function NavigationSubNavResources() {
           Demos
         </NavigationLink>
       </li>
+      <li>
+        <NavigationLink
+          href='/feature-journey'
+          onClick={useGalaxyOnClick('topNav.resourcesMenu.featureJourneySelect')}
+          className='block w-full'>
+          Feature journey
+        </NavigationLink>
+      </li>
     </ul>
   )
 }

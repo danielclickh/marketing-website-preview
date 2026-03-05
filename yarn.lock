@@ -3948,6 +3948,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:^2.2.6":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
+  languageName: node
+  linkType: hard
+
 "classnames@npm:^2.3.2":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
@@ -8899,6 +8906,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-intersection-observer@npm:^9.5.3":
+  version: 9.16.0
+  resolution: "react-intersection-observer@npm:9.16.0"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: 10c0/2aee5103fb460c6e5a3ab5a4fdc8c69a5215e23699a12d7857f25ba765fed48eacbed94ca835d79edf00c0edcc9c4fbb5bb057a373402d0551718546810e0e48
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -9043,6 +9063,20 @@ __metadata:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: 10c0/2ba754ba748faefa15f87c96dfa700d5525054a0141de8c75763aae6734af0740e77e11261a1e8f4ffc08fd9ab78510122e05c21c2d79066c38bb6861a886c82
+  languageName: node
+  linkType: hard
+
+"react-vertical-timeline-component@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "react-vertical-timeline-component@npm:4.0.0"
+  dependencies:
+    classnames: "npm:^2.2.6"
+    prop-types: "npm:^15.8.1"
+    react-intersection-observer: "npm:^9.5.3"
+  peerDependencies:
+    react: ^16.8.6 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.6 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/47668b96e015bd71855dfbca1decc5b90d1eb1a29e209aa00b4e4ee8da3aa9b2c177faf32c9d0a86cae0e189736b108b33b963e940a894440c7ec393be1ca0e0
   languageName: node
   linkType: hard
 
@@ -9419,6 +9453,7 @@ __metadata:
     react-instantsearch: "npm:^7.16.1"
     react-markdown: "npm:^8.0.4"
     react-parallax-tilt: "npm:^1.7.120"
+    react-vertical-timeline-component: "npm:^4.0.0"
     rehype-highlight: "npm:^6.0.0"
     rehype-raw: "npm:^6.1.1"
     rehype-slug-custom-id: "npm:^1.1.0"
