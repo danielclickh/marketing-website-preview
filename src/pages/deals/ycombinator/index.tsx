@@ -76,7 +76,7 @@ export default function Page({ headerData, seo }: CommonProps) {
                 className='hover:underline'>
                 Y Combinator
               </Link>{' '}
-              Fall 2025 batch, you can claim $10,000 in ClickHouse Cloud credits
+              current batch, you can claim $10,000 in ClickHouse Cloud credits
               to supercharge your analytics and ship faster.
             </p>
             <div className='!mt-12 flex justify-center'>
