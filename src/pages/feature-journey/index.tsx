@@ -1,13 +1,13 @@
-import { FEATURE_EVENTS, EventCategory, FeatureEvent } from './data'
-import { DATA_LAKES_RELEASES } from './data-lakes'
-import { DATA_TYPES_MONTHLY } from './data-types'
-import { INDEXES_TREE, IndexTreeNode } from './indexes-tree'
+import { FEATURE_EVENTS, EventCategory, FeatureEvent } from '@/lib/feature-journey/data'
+import { DATA_LAKES_RELEASES } from '@/lib/feature-journey/data-lakes'
+import { DATA_TYPES_MONTHLY } from '@/lib/feature-journey/data-types'
+import { INDEXES_TREE, IndexTreeNode } from '@/lib/feature-journey/indexes-tree'
 import {
   JOINS_BENCHMARK_DATA,
   JOINS_TEST_LABELS,
   JOINS_Y_MAX,
   getJoinsBenchmark
-} from './joins'
+} from '@/lib/feature-journey/joins'
 import Layout from '@/components/Layout'
 import { SuiText, SuiTitle } from '@/components/sui'
 import { getCommonProps } from '@/lib/utils/getCommonProps'
