@@ -2,6 +2,7 @@ import { FEATURE_EVENTS, EventCategory, FeatureEvent } from '@/lib/feature-journ
 import { DATA_LAKES_RELEASES } from '@/lib/feature-journey/data-lakes'
 import { DATA_TYPES_MONTHLY } from '@/lib/feature-journey/data-types'
 import { INDEXES_TREE, IndexTreeNode } from '@/lib/feature-journey/indexes-tree'
+import { DATA_LIFECYCLE_STACK } from '@/lib/feature-journey/data-lifecycle'
 import {
   JOINS_BENCHMARK_DATA,
   JOINS_TEST_LABELS,
@@ -215,7 +216,7 @@ function CategoryFilter({
     'border-neutral-700 text-neutral-400 hover:border-neutral-500 hover:text-neutral-200'
 
   return (
-    <div className='mb-12 flex flex-wrap gap-2 pt-6'>
+    <div className='mb-4 flex flex-wrap gap-2 pt-3'>
       {CATEGORIES.map((cat) => (
         <button
           key={cat}
@@ -714,6 +715,124 @@ function IndexesPanel({ activeYear, activeMonth }: { activeYear: number; activeM
   )
 }
 
+// ─── Data Lifecycle panel ─────────────────────────────────────────────────────
+
+// Interpolates between a dark muted yellow (#3d3700) and CH_YELLOW (#FAFF69)
+// t = 0 → oldest/dullest, t = 1 → newest/brightest
+function lerpYellow(t: number): string {
+  const r = Math.round(0x3d + (0xfa - 0x3d) * t)
+  const g = Math.round(0x37 + (0xff - 0x37) * t)
+  const b = Math.round(0x00 + (0x69 - 0x00) * t)
+  return `rgb(${r},${g},${b})`
+}
+
+
+function DataLifecyclePanel({ activeYear, activeMonth }: { activeYear: number; activeMonth: number }) {
+  const activeLayers = DATA_LIFECYCLE_STACK
+    .filter((f) => f.year < activeYear || (f.year === activeYear && f.month <= activeMonth))
+
+  const features = FEATURE_EVENTS.filter(
+    (e) => e.year === activeYear && e.month === activeMonth && e.category === 'data-lifecycle'
+  )
+  const monthName = new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })
+  const version = `${activeYear - 2000}.${activeMonth}`
+
+  const n = activeLayers.length
+  const total = DATA_LIFECYCLE_STACK.length
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const option: any = {
+    backgroundColor: 'transparent',
+    grid: { top: 16, right: 16, bottom: 16, left: 16, containLabel: false },
+    xAxis: {
+      type: 'category',
+      data: [''],
+      axisTick: { show: false },
+      axisLine: { show: false },
+      axisLabel: { show: false },
+    },
+    yAxis: {
+      type: 'value',
+      show: false,
+      min: 0,
+      max: total, // fixed ceiling = all layers, so each segment is always the same height
+    },
+    series: activeLayers.map((layer) => {
+      // Use the feature's fixed position in the full stack so colors never shift
+      const globalIndex = DATA_LIFECYCLE_STACK.findIndex((f) => f.id === layer.id)
+      const t = total > 1 ? globalIndex / (total - 1) : 1
+      const color = lerpYellow(t)
+      return {
+        name: layer.name,
+        type: 'bar',
+        stack: 'total',
+        barWidth: '60%',
+        data: [layer.value],
+        itemStyle: { color },
+        label: {
+          show: true,
+          position: 'inside',
+          color: '#000000',
+          fontSize: 11,
+          overflow: 'truncate',
+          formatter: layer.name,
+        },
+      }
+    }),
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: '#1d1d1d',
+      borderColor: '#414141',
+      textStyle: { color: '#e5e5e5' },
+      formatter: (p: { seriesName: string }) => p.seriesName,
+    },
+  }
+
+  return (
+    <div className='flex h-full'>
+      {/* Stack chart — 70% */}
+      <div className='min-h-0 flex-[7] p-4'>
+        {n === 0 ? (
+          <div className='flex h-full items-center justify-center'>
+            <p className='text-sm italic text-neutral-500'>No lifecycle features before this release.</p>
+          </div>
+        ) : (
+          <ReactEcharts
+            option={option}
+            notMerge={true}
+            style={{ height: '100%', width: '100%' }}
+            opts={{ renderer: 'canvas' }}
+          />
+        )}
+      </div>
+
+      {/* Text — 30% */}
+      <div className='flex min-h-0 flex-[3] flex-col overflow-y-auto border-l border-neutral-800 p-6 pt-5'>
+        <h3 className='mb-3 text-base font-semibold leading-snug text-white'>
+          {monthName} {activeYear} ({version})
+          {features.length > 0 && (
+            <span className='ml-1 font-normal text-neutral-400'>
+              — {features.length} feature{features.length !== 1 ? 's' : ''} shipped
+            </span>
+          )}
+        </h3>
+        {features.length > 0 ? (
+          <ul className='flex flex-col gap-4'>
+            {features.map((event) => (
+              <li key={event.id}>
+                <p className='mb-1 text-sm font-medium text-neutral-200'>{event.title}</p>
+                <p className='text-sm leading-relaxed text-neutral-400'>{event.summary}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className='text-sm italic text-neutral-500'>No new lifecycle improvements this release.</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function CategoryPanel({
   category,
   activeYear,
@@ -735,6 +854,8 @@ function CategoryPanel({
         <DataLakesPanel activeYear={activeYear} activeMonth={activeMonth} />
       ) : category === 'indexes' ? (
         <IndexesPanel activeYear={activeYear} activeMonth={activeMonth} />
+      ) : category === 'data-lifecycle' ? (
+        <DataLifecyclePanel activeYear={activeYear} activeMonth={activeMonth} />
       ) : (
         <div className='flex h-full items-center justify-center'>
           <p className='text-sm italic text-neutral-500'>
@@ -980,6 +1101,22 @@ function FeatureJourneyTimeline() {
         style={{ top: 72, background: PAGE_BG }}
       >
         <CategoryFilter active={activeFilter} onChange={setActiveFilter} />
+
+        {/* Contextual date label */}
+        <div className='mb-2 text-lg font-semibold text-white'>
+          {activeMonthKey === latestMonthKey ? (
+            <>ClickHouse <span style={{ color: CH_YELLOW }}>today</span></>
+          ) : (
+            <>
+              ClickHouse in{' '}
+              <span style={{ color: CH_YELLOW }}>
+                {new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })}{' '}
+                {activeYear}
+              </span>
+            </>
+          )}
+        </div>
+
         <CategoryPanel
           category={activeFilter}
           activeYear={activeYear}
