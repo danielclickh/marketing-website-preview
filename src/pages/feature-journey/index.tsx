@@ -643,7 +643,7 @@ function IndexesPanel({ activeYear, activeMonth }: { activeYear: number; activeM
         data: [activeTree ? toEChartsNode(activeTree, activeYear, activeMonth) : { name: '' }],
         orient: 'LR',
         top: '5%',
-        left: '8%',
+        left: '20%',
         bottom: '5%',
         right: '22%',
         symbolSize: 7,
