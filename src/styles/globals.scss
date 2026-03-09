@@ -1,0 +1,426 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .branded-scrollbar {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.primary.300') transparent;
+  }
+
+  /* WebKit (Chrome, Edge, Safari) */
+  .branded-scrollbar::-webkit-scrollbar {
+    @apply h-2 w-2;
+  }
+  .branded-scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded bg-primary-300;
+  }
+  .branded-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .tilted {
+    @apply relative whitespace-nowrap;
+
+    &:before {
+      content: '';
+      @apply absolute inset-0 -skew-y-3;
+    }
+
+    &.tilted-sm:before {
+      @apply -skew-y-1;
+    }
+
+    .tilted-content {
+      @apply relative p-2;
+    }
+
+    &.non-tilted-md::before {
+      @screen md {
+        @apply skew-y-0;
+      }
+    }
+  }
+  .tilted-yellow {
+    @apply text-primary-900;
+    &:before {
+      @apply bg-primary-300;
+    }
+  }
+  .tilted-black {
+    @apply text-primary-300;
+    &:before {
+      @apply bg-slate-900;
+    }
+  }
+
+  // Other triangle classes produce issues on smaller screen widths.
+  // This class fixes that by using a fixed triangle depth.
+  //
+  // Use in combination with background classes
+  // @example <div class="bg-primary-300 clip-inverted-triangle-simplified">...</div>
+  //
+  // The default depth can be overriden by using the css variable `--triangle-depth`
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 150px">...</div>
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-depth: 25%">...</div>
+  //
+  // The triangle can be offset from the top by using the css variable `--triangle-offset`
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 200px">...</div>
+  // @example <div class="clip-inverted-triangle-simplified" style="--triangle-offset: 10%">...</div>
+  .clip-inverted-triangle-simplified {
+    // Triangle offset from the top will default to 0% if variable is not defined
+    $triangle-offset: var(--triangle-offset, 0%);
+
+    // Triangle depth will default to 75 pixels if variable is not defined
+    $triangle-depth: var(--triangle-depth, 75px);
+
+    clip-path: polygon(
+      // Top left corner
+      0% #{$triangle-offset},
+      // Triangle tip
+      50% calc(#{$triangle-offset} + #{$triangle-depth}),
+      // Top right corner
+      100% #{$triangle-offset},
+      // Bottom right corner
+      100% 100%,
+      // Bottom left corner
+      0% 100%
+    );
+  }
+
+  .clip-inverted-triangle {
+    @apply relative;
+    &::before {
+      @apply absolute inset-0 bg-primary-300;
+      clip-path: polygon(50% 75%, 100% 50%, 100% 100%, 0 100%, 0 50%);
+      content: '';
+    }
+  }
+
+  .clip-inverted-triangle-use-cases {
+    @apply relative;
+    &::before {
+      @apply absolute inset-0 bg-primary-300;
+      clip-path: polygon(50% 30%, 100% 10%, 100% 100%, 0 100%, 0 10%);
+      content: '';
+      @media screen and (max-width: 768px) {
+        clip-path: polygon(50% 6%, 100% 0%, 100% 100%, 0 100%, 0 0%);
+      }
+    }
+  }
+
+  .color-swap {
+    filter: brightness(0) invert(0.8);
+    -webkit-filter: brightness(0) invert(0.8);
+    &:hover {
+      filter: brightness(1) invert(0);
+      -webkit-filter: brightness(1) invert(0);
+    }
+  }
+
+  .logos-color-swap:hover {
+    .color-swap {
+      filter: brightness(1) invert(0);
+      -webkit-filter: brightness(1) invert(0);
+    }
+  }
+
+  .color-swap-no-hover {
+    filter: brightness(0) invert(0.8);
+    -webkit-filter: brightness(0) invert(0.8);
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none !important; /* IE and Edge */
+    scrollbar-width: none !important; /* Firefox */
+  }
+
+  .pause-hover {
+    &:hover {
+      * {
+        animation-play-state: paused;
+      }
+    }
+  }
+
+  .bg-gradient-checkered {
+    background-image: repeating-conic-gradient(
+      var(--tw-gradient-from) 0% 25%,
+      var(--tw-gradient-to) 0% 50%
+    );
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-8 2xl:px-0;
+  }
+  .bg-shadow-element {
+    --left-side: 33%;
+    --right-side: auto;
+    --top-side: 50%;
+    --scale: 1;
+    --opacity: 0.07;
+    --color-shadow: rgba(255, 117, 117, #{var(--opacity)});
+    &.yellow-shadow {
+      --color-shadow: rgba(251, 255, 70, #{var(--opacity)});
+    }
+    &.red-shadow {
+      --color-shadow: rgba(225, 117, 117, #{var(--opacity)});
+    }
+    @apply relative;
+    &::before {
+      content: '';
+      @apply absolute;
+      border-radius: 50%;
+      width: 1px;
+      height: 1px;
+      left: var(--left-side);
+      right: var(--right-side);
+      top: var(--top-side);
+      box-shadow: 0 0 800px 470px var(--color-shadow);
+      transform: scale(var(--scale));
+    }
+    &.align-shadow-left {
+      --left-side: 0;
+    }
+    &.align-shadow-right {
+      --right-side: 0;
+    }
+    &.shadow-z-low {
+      @apply z-10;
+    }
+  }
+
+  .bg-shadow-element-left {
+    @extend .bg-shadow-element;
+
+    &::before {
+      left: 5%;
+      top: 100%;
+    }
+  }
+
+  .bg-shadow-element-right {
+    @extend .bg-shadow-element;
+
+    &::before {
+      left: auto;
+      right: 5%;
+      top: 100%;
+    }
+  }
+
+  .bg-shadow-element-center {
+    @extend .bg-shadow-element;
+
+    &::before {
+      left: -50%;
+      right: -50%;
+      top: 100%;
+    }
+  }
+
+  // Mask size can be overriden with inline styles
+  // <el style="--mask-size: 10px; --mask-size-lg: 20px">...</el>
+  .mask-logos-carousel {
+    $mask-size: var(--mask-size, 2.5rem);
+    mask-image: linear-gradient(
+      90deg,
+      rgba(#000, 0) 0.1%,
+      rgba(#000, 1) #{$mask-size},
+      rgba(#000, 1) calc(99.9% - #{$mask-size}),
+      rgba(#000, 0) 99.9%
+    );
+    @media (min-width: 1024px) {
+      --mask-size: var(--mask-size-lg, 5rem);
+    }
+  }
+
+  .feature-container {
+    @apply grid grid-cols-1 gap-x-12 gap-y-10 space-y-4 md:grid-cols-2 md:space-y-0 lg:grid-cols-3;
+  }
+
+  .rich_content {
+    @apply space-y-6 text-neutral-200;
+
+    &.theme-dark {
+      @apply text-neutral;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        @apply text-neutral-900;
+      }
+    }
+
+    h2 {
+      @apply text-2xl font-semibold;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-neutral-100;
+    }
+
+    .code-with-play {
+      @apply relative flex whitespace-pre-wrap rounded-lg bg-primary-800 p-6 text-neutral-0;
+
+      .code {
+        @apply -mt-6 overflow-auto whitespace-pre-wrap;
+      }
+
+      .play-ui {
+        @apply absolute right-6 top-5 flex h-8 w-8 items-center justify-center rounded-lg bg-black/80 text-center text-2xl leading-5 text-neutral-0 transition-colors hover:bg-white/10;
+      }
+    }
+
+    table {
+      @apply mb-8 w-full max-w-screen-md rounded-lg text-left text-sm leading-5;
+      @apply rounded-tl-lg rounded-tr-lg;
+
+      thead {
+        @apply first:rounded-tl-lg last:rounded-tr-lg;
+      }
+      th {
+        @apply border-solid border-neutral-700 bg-neutral-725 font-semibold;
+        @apply px-2 py-2 text-left first:rounded-tl-lg last:rounded-tr-lg;
+      }
+      tr {
+        @apply border-b border-solid border-neutral-725 transition-all hover:bg-neutral-700;
+      }
+
+      tr.highlight {
+        @apply border-primary-500 bg-primary-300 bg-opacity-70 text-neutral-900 hover:bg-opacity-100;
+      }
+
+      tr.highlight-blue {
+        @apply border-blue-800 bg-blue-600 bg-opacity-70 text-neutral-0 hover:bg-opacity-100;
+      }
+
+      td {
+        @apply p-2 text-left;
+      }
+    }
+
+    :not(pre) code {
+      // @apply bg-neutral-725 text-neutral-0 font-inconsolata border border-solid inline-block px-1;
+      // border: 1px solid #414141;
+      margin-bottom: 2px;
+      border-radius: 4px;
+    }
+
+    pre {
+      code {
+        padding: 4px;
+        margin-right: 30px;
+        position: inherit;
+        @apply block whitespace-pre-wrap rounded-lg leading-6 text-neutral-0;
+
+        &.ignore-default-color {
+          @apply border-transparent bg-transparent text-inherit;
+        }
+        font-family: monospace, ui-sans-serif;
+      }
+    }
+    .pre-whitespace {
+      @apply whitespace-pre;
+    }
+
+    ul,
+    ol {
+      margin-left: 26px;
+      @apply mb-9;
+
+      ul,
+      ol {
+        @apply mb-0;
+      }
+
+      li {
+        @apply mt-2.5;
+      }
+    }
+
+    blockquote {
+      @apply mb-9 box-border rounded border-l-4 border-l-primary-300 bg-neutral-0/10 pb-3 pl-4 pr-4 pt-3 text-lg italic text-neutral-0;
+    }
+
+    img {
+      @apply max-w-full;
+    }
+
+    p {
+      @apply break-words;
+    }
+
+    &:not(.ignore-anchor) {
+      a {
+        @apply text-primary-300;
+      }
+    }
+
+    &.ignore-anchor {
+      a {
+        @apply text-inherit underline hover:text-primary-300;
+      }
+    }
+
+    &.rich-text-content {
+      ul {
+        @apply list-disc;
+      }
+      ol {
+        @apply list-decimal;
+      }
+    }
+
+    iframe {
+      @apply aspect-video h-auto max-w-full;
+    }
+  }
+}
+
+html,
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  @apply mx-auto leading-normal text-neutral-100;
+  scroll-padding-top: 100px;
+  background: #131312;
+}
+
+body {
+  @apply h-full w-full bg-body-image;
+}
+
+::selection {
+  @apply bg-primary-300 bg-opacity-[0.99] text-neutral-800;
+}
+
+.flip-selection {
+  ::selection {
+    @apply bg-neutral-800 text-primary-300;
+  }
+}
+
+*,
+*:before,
+*:after {
+  @apply box-border;
+}
+
+#mktoForm_1014 {
+  @apply hidden;
+}

@@ -1,0 +1,13 @@
+<svg width="72" height="73" viewBox="0 0 72 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1" y="1.5" width="70" height="70" rx="16" stroke="#FAFF69" stroke-width="2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M44.75 49.625H27.25C24.8335 49.625 22.875 47.6665 22.875 45.25V27.75C22.875 25.3335 24.8335 23.375 27.25 23.375H44.75C47.1665 23.375 49.125 25.3335 49.125 27.75V45.25C49.125 47.6665 47.1665 49.625 44.75 49.625Z" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M39.5 41.75H32.5C31.5334 41.75 30.75 40.9666 30.75 40V33C30.75 32.0334 31.5334 31.25 32.5 31.25H39.5C40.4666 31.25 41.25 32.0334 41.25 33V40C41.25 40.9666 40.4666 41.75 39.5 41.75Z" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="32.1" y1="22.475" x2="32.1" y2="20.3375" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="39.975" y1="22.475" x2="39.975" y2="20.3375" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="32.1" y1="52.6625" x2="32.1" y2="50.525" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="39.975" y1="52.6625" x2="39.975" y2="50.525" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="19.8375" y1="32.6" x2="21.975" y2="32.6" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="19.8375" y1="40.475" x2="21.975" y2="40.475" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="50.025" y1="32.6" x2="52.1625" y2="32.6" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="50.025" y1="40.475" x2="52.1625" y2="40.475" stroke="#FAFF69" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg timelineBegin="start" width="1512" height="524" viewBox="0 0 1512 524" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 442H815.573L1016.35 2H1511.78" stroke="#727272" stroke-opacity="0.18" strokeWidth="3" />
+  <path d="M0 522H875.505L1076.28 82H1512" stroke="#727272" stroke-opacity="0.18" strokeWidth="3" />
+  <path d="M0 442H815.573L1016.35 2H1511.78" stroke="#FAFF69" strokeWidth="3">
+    <animate
+      dur='3s'
+      attributeName='stroke-dasharray'
+      repeatCount='indefinite'
+      begin='3s;op.end+3s'
+      values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+    />
+  </path>
+  <path d="M0 522H875.505L1076.28 82H1512" stroke="#FAFF69" strokeWidth="3">
+    <animate
+      dur='2.5s'
+      attributeName='stroke-dasharray'
+      repeatCount='indefinite'
+      begin='2.5s;op.end+2.5s'
+      values='0,0,0,0,0,621; 0,0,0,310.5,310.5,0; 0,0,155.25,465.75,0,0; 0,310.5,0,310.5,0,0'
+    />
+  </path>
+</svg>

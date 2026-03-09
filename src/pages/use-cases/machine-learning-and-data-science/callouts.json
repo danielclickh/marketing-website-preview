@@ -1,0 +1,26 @@
+[
+  {
+    "id": 10,
+    "title": "Create valuable experiences and insights",
+    "content": "Whether you're building engaging personalization features, incorporating semantic search into your product, generating summarized insights from raw content automatically, or more, ClickHouse exposes the features you need to build AI-powered functionality with your data.",
+    "icon": "/images/use-cases/ml-and-ds/smile.svg"
+  },
+  {
+    "id": 20,
+    "title": "Unify your data stack",
+    "content": "Eliminate the need for specialized data stores used for specific machine learning tasks, such as vector search. With ClickHouse, you can rely on one, unified, data store to power your analytics, run your machine learning workloads, and manage your ad-hoc querying, all in one place.",
+    "icon": "/images/use-cases/logging/ingest.svg"
+  },
+  {
+    "id": 30,
+    "title": "Manage data efficiently",
+    "content": "ClickHouse's efficient management of resources helps maximize cost-effectiveness. Our column-oriented design delivers best-in-class compression ratios, reducing storage burden and ensuring blazing speed for even the most intensive ML workloads.",
+    "icon": "/images/use-cases/logging/manage.svg"
+  },
+  {
+    "id": 40,
+    "title": "Use the tools you love",
+    "content": "Leverage ClickHouse directly with your favorite ML tools. Our growing community of integrations includes popular machine learning frameworks, visualization tools, notebooks, and more.",
+    "icon": "/images/use-cases/ml-and-ds/tools.svg"
+  }
+]

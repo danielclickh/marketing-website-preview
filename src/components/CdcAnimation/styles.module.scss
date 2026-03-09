@@ -1,0 +1,60 @@
+.animatedBadgeGlow {
+  animation: fadeInOut var(--glow-interval) linear var(--glow-delay) infinite;
+}
+
+.animatedBadge {
+  animation: fadeSaturation var(--glow-interval) linear var(--glow-delay)
+    infinite;
+}
+
+.animatedLine {
+  stroke-dasharray: 355;
+  stroke-dashoffset: 355;
+  animation: dashAnimation 3.5s infinite;
+}
+
+@keyframes dashAnimation {
+  0% {
+    stroke-dashoffset: 355;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -355;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeSaturation {
+  0% {
+    filter: brightness(1) saturate(1);
+  }
+  10% {
+    filter: unquote(
+      'brightness(var(--glow-amount)) saturate(var(--glow-amount))'
+    ); // Using unquote to fix issue with compiler
+  }
+  20% {
+    filter: unquote(
+      'brightness(var(--glow-amount)) saturate(var(--glow-amount))'
+    ); // Using unquote to fix issue with compiler
+  }
+  30% {
+    filter: brightness(1) saturate(1);
+  }
+}

@@ -1,0 +1,295 @@
+<svg width="556" height="269" viewBox="0 0 556 269" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect id="line1" x="36.7914" y="67.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="67.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="67.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="183.581" y="67.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="67.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="67.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="330.37" y="67.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect id="line2" x="36.7914" y="87.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="85.7211" y="87.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="87.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="134.651" y="87.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="87.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="183.581" y="87.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="232.51" y="87.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="87.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="281.44" y="87.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="87.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="330.37" y="87.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect id="line3" x="36.7914" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="85.7211" y="107.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="107.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+400ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="134.651" y="107.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="107.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+400ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="183.581" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="232.51" y="107.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="107.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+400ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="281.44" y="107.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="107.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+400ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="330.37" y="107.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect id="line4" x="36.7914" y="127.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="127.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="127.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="183.581" y="127.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="127.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="127.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="330.37" y="127.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect id="line5" x="36.7914" y="147.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="147.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="147.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="183.581" y="147.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="147.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="147.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="330.37" y="147.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect id="line6" x="36.7914" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="85.7211" y="167.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="167.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1000ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="134.651" y="167.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="167.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1000ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="183.581" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="232.51" y="167.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="167.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1000ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="281.44" y="167.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="167.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1000ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="330.37" y="167.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect id="line7" x="36.7914" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="85.7211" y="187.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="187.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="134.651" y="187.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="187.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="183.581" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="232.51" y="187.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="187.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="281.44" y="187.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="187.932" width="42.9384" height="0" rx="2" fill="#FAFF69">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1200ms" to="17" />
+    <animate dur="0.6s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s"
+      values="17; 17; 0" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="330.37" y="187.932" width="42.9384" height="17" rx="2" fill="#282828">
+    <animate dur="0.6s" fill="freeze" attributeName="fill" begin="lineNav.end+0.5s"
+      values="#FAFF69; #FAFF69; #282828" keyTimes="0; 0.99; 1" />
+  </rect>
+  <rect x="36.7914" y="87.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+200ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="183.581" y="87.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+200ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="330.37" y="87.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+200ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="36.7914" y="107.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+400ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="183.581" y="107.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+400ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="330.37" y="107.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+400ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="36.7914" y="167.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1000ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="183.581" y="167.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1000ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="330.37" y="167.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1000ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="36.7914" y="187.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1200ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="183.581" y="187.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1200ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect x="330.37" y="187.932" width="42.9384" height="0" rx="2" fill="#FF7575">
+    <animate dur="200ms" fill="freeze" attributeName="height" begin="lineNav.begin+1200ms" to="17" />
+    <animate dur="0.5s" fill="freeze" attributeName="height" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="width" begin="lineNav.end+0.5s" to="0" />
+    <animate dur="0.5s" attributeName="x" begin="lineNav.end+0.5s" to="425" />
+    <animate dur="0.5s" attributeName="y" begin="lineNav.end+0.5s" to="127.932" />
+  </rect>
+  <rect id="line8" x="36.7914" y="207.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="85.7211" y="207.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="134.651" y="207.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="183.581" y="207.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="232.51" y="207.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="281.44" y="207.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <rect x="330.37" y="207.932" width="42.9384" height="17" rx="2" fill="#282828" />
+  <!-- Bar Chart -->
+  <g opacity="0">
+    <rect x="405.376" y="90" width="20.9699" height="98" rx="3" fill="#FAFF69" />
+    <rect x="435.333" y="107" width="20.9699" height="81" rx="3" fill="#FAFF69" />
+    <rect x="465.29" y="127.932" width="20.9699" height="58" rx="3" fill="#FAFF69" />
+    <rect x="495.247" y="159" width="20.9699" height="29" rx="3" fill="#FAFF69" />
+    <animate id="barChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0"
+      keyTimes="0; 0.99; 1" begin="2.417s;lineChart.end+2.417s" />
+  </g>
+  <!-- Pie Chart -->
+  <g opacity="0" transform="matrix(1, 0, 0, 1, 412.135132, 89.503609)">
+    <circle cx="49.2523" cy="48.932" r="38.5" fill="#FF7575" stroke="#FAFF69" stroke-width="21" />
+    <mask id="mask0_642_37639" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="-1"
+      width="99" height="99">
+      <circle cx="49.2523" cy="48.932" r="38.5" fill="#FF7575" stroke="#FAFF69" stroke-width="21" />
+    </mask>
+    <g mask="url(#mask0_642_37639)">
+      <path d="M63.6944 -10.658L108.406 32.0681L49.0482 49.4262L63.6944 -10.658Z" fill="#FF7575" />
+      <path d="M106.673 32.0775L91.3507 91.9928L47.1239 48.7653L106.673 32.0775Z" fill="#FF7575" />
+    </g>
+    <ellipse cx="48.907" cy="49" rx="28.0402" ry="28" fill="#211D1B" />
+    <animate id="pieChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0"
+      keyTimes="0; 0.99; 1" begin="barChart.end+2.417s" />
+  </g>
+  <!-- Line Chart -->
+  <g opacity="0" transform="matrix(1, 0, 0, 1, 413.511292, 87.500008)">
+    <path d="M0 36.3714L18.8 23L29.2 41L48 32.2571L70 41L98 26.6" stroke="#FAFF69" stroke-width="5" />
+    <path d="M0 70.3714L18.8 57L29.2 75L48 66.2571L70 75L98 60.6" stroke="#FF7575" stroke-width="5" />
+    <animate id="lineChart" attributeName="opacity" attributeType="XML" dur="1s" values="1; 1; 0"
+      keyTimes="0; 0.99; 1" begin="pieChart.end+2.417s" />
+  </g>
+  <rect x="36.7914" y="67.932" width="336.517" height="2" rx="2" fill="#FF7575">
+    <animate id="lineNav" attributeName="y" attributeType="XML" dur="1570ms" to="223.932"
+      begin="0s;barChart.end;lineChart.end;pieChart.end" />
+    <animate attributeName="opacity" attributeType="XML" dur="1s" values="0; 0; 1"
+      keyTimes="0; 0.99; 1" begin="lineNav.end" />
+  </rect>
+</svg>

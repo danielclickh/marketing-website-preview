@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "icon": "/images/clickhouse/lightening.svg",
+    "title": "驚きの速さ",
+    "content": "従来の行指向/カラム指向システムよりも高速に分析クエリを処理できます。"
+  },
+  {
+    "id": 2,
+    "icon": "/images/clickhouse/scalable.svg",
+    "title": "直線的にスケール可能",
+    "content": "ハードウェアリソースを水平と垂直の方向にスケールすることで、ペタバイト規模まで効率的に拡張できます。"
+  },
+  {
+    "id": 3,
+    "icon": "/images/clickhouse/fault-tolerance.svg",
+    "title": "高信頼性",
+    "content": "非同期レプリケーションをサポートし、複数のデータセンターにまたがってデプロイできます。"
+  },
+  {
+    "id": 4,
+    "icon": "/images/clickhouse/shield.svg",
+    "title": "Flexible architecture",
+    "content": "Supports shared-nothing clusters as well as separation of storage and compute."
+  },
+  {
+    "id": 5,
+    "icon": "/images/clickhouse/star.svg",
+    "title": "豊富な機能",
+    "content": "結合やフェデレーテッドクエリなどにも対応する完全な分析用データベースです。"
+  },
+  {
+    "id": 6,
+    "icon": "/images/clickhouse/magic.svg",
+    "title": "使いやすい",
+    "content": "一般的なデータ分析ユースケースに最適化された使いやすいSQLの方言でクエリを簡単に作成できます。"
+  }
+]

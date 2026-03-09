@@ -1,0 +1,62 @@
+[
+  {
+    "id": 10,
+    "content": "ユーザ向けダッシュボードやアプリ",
+    "section": 10
+  },
+  {
+    "id": 20,
+    "content": "Eコマース最適化",
+    "section": 10
+  },
+  {
+    "id": 30,
+    "content": "小売業のデータ分析",
+    "section": 10
+  },
+  {
+    "id": 40,
+    "content": "サプライチェーン最適化",
+    "section": 10
+  },
+  {
+    "id": 50,
+    "content": "不正検知",
+    "section": 20
+  },
+  {
+    "id": 60,
+    "content": "脅威防止",
+    "section": 20
+  },
+  {
+    "id": 70,
+    "content": "予防保守",
+    "section": 20
+  },
+  {
+    "id": 80,
+    "content": "インテリジェントオートメーション",
+    "section": 20
+  },
+  {
+    "id": 90,
+    "content": "ユーザー行動分析",
+    "section": 30
+  },
+  {
+    "id": 100,
+    "content": "トレンドの評価と監視",
+    "section": 30
+  },
+  {
+    "id": 110,
+    "content": "ゲームデータ分析",
+    "section": 30
+  },
+  {
+    "id": 120,
+    "content": "広告およびマーケティングデータ分析",
+    "section": 30
+  }
+]

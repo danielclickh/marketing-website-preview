@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10,
+    "title": "Data ingestion",
+    "content": "Access to live data is vital for real-time analytics. With [ClickPipes](/cloud/clickpipes), available exclusively in ClickHouse Cloud, we provide a turn-key integration engine that makes ingesting large volumes of data effortless. Select an incoming data source and format, tune your schema, and let your pipeline run.<br /><br />Our extensive library of [table engines](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family) supports ingesting data from a wide range of formats and sources. From Kafka topics to S3 buckets, OLTP databases, and more - we have you covered, no matter where your data lives. <br /><br /> With ClickHouse, there's no need to worry about managing complex ingest pipelines. Unlike other OLAP databases which require you to batch inserts for high throughput, ClickHouse is equally comfortable with smaller payloads. [Asynchronous inserts](https://clickhouse.com/docs/en/optimize/asynchronous-inserts) in ClickHouse automatically batch small inserts for you, ensuring writes are performed optimally."
+  },
+  {
+    "id": 20,
+    "title": "Data transformations and queries",
+    "content": "Data transformations are common pillars in many analytics workflows. With ClickHouse, [Materialized Views](https://clickhouse.com/docs/en/guides/developer/cascading-materialized-views) make transformations seamless. Automatically triggered when new data is inserted into source tables, these SQL-based views are used to easily extract, aggregate, and modify data as it arrives - eliminating the need to build bespoke data transformation pipelines yourself. Chaining Materialized Views together offers modularized flexibility, too.<br /><br />Queries on Materialized Views are exceptionally fast, as their results are automatically stored in new tables. This ensures that applications that rely on these queries are even more responsive, no matter how many petabytes of data are being analyzed. Unlike other database providers, at ClickHouse, we don't hide valuable accelerating features like these behind higher pricing tiers or additional charges.<br /><br />The ClickHouse Query Cache is available for further enhanced responsiveness and reduced resource consumption, best suited for frequently used and expensive queries. Additional tuning through indexes and [projections](https://clickhouse.com/blog/clickhouse-faster-queries-with-projections-and-primary-indexes) provides additional optimizations to ensure ultimate performance, every time."
+  },
+  {
+    "id": 30,
+    "title": "Applications, dashboards, and more",
+    "content": "ClickHouse is relied on by companies all over the world to unlock value from data as soon as it arrives, powering user-facing analytics and workflows across a wide range of industries, from financial services to gaming, e-commerce, and many more.<br /><br />Unlike traditional databases, ClickHouse supports a REST interface, allowing web developers to build lightweight applications on ClickHouse without the need to integrate with complex binary protocols.<br /><br />Leveraging the tools and frameworks you love with ClickHouse is easy through our extensive ecosystem of integrations. These include popular utilities for data ingestion and visualization, as well as language clients, SQL clients, [and more](https://clickhouse.com/docs/en/integrations)."
+  }
+]

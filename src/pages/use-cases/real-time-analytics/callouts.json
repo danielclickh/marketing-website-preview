@@ -1,0 +1,26 @@
+[
+  {
+    "id": 10,
+    "title": "Unlock real-time insights and user experiences",
+    "content": "Whether you’re performing live analysis to drive business outcomes or building interactive user-facing applications, ClickHouse delivers the unparalleled speed-to-insight you can depend on.",
+    "icon": "/images/use-cases/ml-and-ds/tools.svg"
+  },
+  {
+    "id": 20,
+    "title": "Simplify your SQL",
+    "content": "ClickHouse supports an extensive library of domain-specific functions that transform even the most complex queries into simple SQL statements. With ClickHouse, real-time data exploration is easy and powerful.",
+    "icon": "/images/use-cases/logging/ingest.svg"
+  },
+  {
+    "id": 30,
+    "title": "Manage data efficiently",
+    "content": "With highly optimized compression techniques and our fully parallelized query pipeline, ClickHouse maximizes CPU efficiency and provides the power to quickly process huge volumes of compressed data.",
+    "icon": "/images/use-cases/logging/manage.svg"
+  },
+  {
+    "id": 40,
+    "title": "Scale effortlessly",
+    "content": "ClickHouse scales both vertically and horizontally to meet the demands of any workload - read and write - to systems with hundreds of cores and petabytes of storage. ClickHouse provides the scalability you need to effortlessly handle increasing data volumes and workloads over time.",
+    "icon": "/images/use-cases/real-time-analytics/trend-up-light.svg"
+  }
+]

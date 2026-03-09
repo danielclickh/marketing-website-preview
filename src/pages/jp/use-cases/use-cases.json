@@ -1,0 +1,154 @@
+[
+  {
+    "title": "リアルタイム分析",
+    "description": "大規模なデータを即座に分析・集計するインタラクティブなアプリケーションやダッシュボードをサポートします。複雑な内部分析も数ミリ秒で実行可能です。<br /><br />世界中の企業が毎日数百億件の新しいイベントを処理するために利用しています。",
+    "icon": "/images/jp/use-cases/real-time-analytics/eventdriven.svg",
+    "link": "/jp/use-cases/real-time-analytics",
+    "logos": [
+      {
+        "name": "Vimeo",
+        "logo": "/images/jp/use-cases/real-time-analytics/vimeo.svg",
+        "link": "https://medium.com/vimeo-engineering-blog/clickhouse-is-in-the-house-413862c8ac28"
+      },
+      {
+        "name": "CloudFlare",
+        "logo": "/images/jp/use-cases/real-time-analytics/cloudflare.svg",
+        "link": "https://clickhouse.com"
+      },
+      {
+        "name": "ContentSquare",
+        "logo": "/images/jp/use-cases/real-time-analytics/contentsquare.svg",
+        "link": "/blog/contentsquare-migration-from-elasticsearch-to-clickhouse"
+      },
+      {
+        "name": "Highlight",
+        "logo": "/images/jp/use-cases/real-time-analytics/highlight.svg",
+        "link": "/blog/overview-of-highlightio"
+      },
+      {
+        "name": "Block",
+        "logo": "/images/jp/use-cases/real-time-analytics/block.svg",
+        "link": "/blog/hifis-migration-from-bigquery-to-clickhouse"
+      },
+      {
+        "name": "Resmo",
+        "logo": "/images/jp/use-cases/real-time-analytics/resmo.svg",
+        "link": "/blog/how-we-used-clickhouse-to-store-opentelemetry-traces"
+      }
+    ]
+  },
+  {
+    "title": "オブザーバビリティ",
+    "description": "ログ、イベント、トレース、その他の時系列データを、安心して監視できます。異常検知や不正検出、ネットワークやインフラの問題などを迅速に把握できます。<br /><br />信頼性の高い SQL ベースのオブザーバビリティストアとして、毎秒数百万レコード規模のデータ取り込みを大規模環境で実現しています。",
+    "icon": "/images/jp/use-cases/observability/icon.svg",
+    "link": "/jp/use-cases/observability",
+    "logos": [
+      {
+        "name": "SONY",
+        "logo": "/images/jp/use-cases/observability/sony-2.svg",
+        "link": "/jp/use-cases/observability"
+      },
+      {
+        "name": "eBay",
+        "logo": "/images/jp/use-cases/observability/logo-ebay.svg",
+        "link": "https://tech.ebayinc.com/engineering/ou-online-analytical-processing/"
+      },
+      {
+        "name": "Zomato",
+        "logo": "/images/jp/use-cases/observability/zomato.svg",
+        "link": "https://www.zomato.com/blog/building-a-cost-effective-logging-platform-using-clickhouse-for-petabyte-scale"
+      },
+      {
+        "name": "Didi",
+        "logo": "/images/jp/use-cases/observability/didi.svg",
+        "link": "/blog/didi-migrates-from-elasticsearch-to-clickHouse-for-a-new-generation-log-storage-system"
+      },
+      {
+        "name": "Trip.com",
+        "logo": "/images/jp/use-cases/observability/trip.svg",
+        "link": "/blog/how-trip.com-migrated-from-elasticsearch-and-built-a-50pb-logging-solution-with-clickhouse"
+      },
+      {
+        "name": "Tekion",
+        "logo": "/images/jp/use-cases/observability/tekion.svg",
+        "link": "/blog/tekion-adopts-clickhouse-cloud-to-power-application-performance-and-metrics-monitoring"
+      }
+    ]
+  },
+  {
+    "title": "機械学習と生成AI",
+    "description": "高速で効率的なベクトル検索を実行し、あらゆるプロバイダからの生成AIモデルを簡単に活用可能です。ペタバイト規模のデータを用いたモデルのトレーニングに対応する高速な集約を提供します。<br /><br />機械学習ワークロードのための中心的なデータストアです。",
+    "icon": "/images/jp/use-cases/ml/ml.svg",
+    "link": "/jp/use-cases/machine-learning-and-data-science",
+    "logos": [
+      {
+        "name": "Corsearch",
+        "logo": "/images/jp/use-cases/ml/corsearch.svg",
+        "link": "/blog/corsearch-replaces-mysql-with-clickhouse-for-content-and-brand-protection"
+      },
+      {
+        "name": "Admixer",
+        "logo": "/images/jp/use-cases/ml/logo-admixer.svg",
+        "link": "/blog/admixer-aggregates-over-1-billion-unique-users-a-day-using-clickhouse"
+      },
+      {
+        "name": "Cognitiv",
+        "logo": "/images/jp/use-cases/ml/cognitiv-logo.svg",
+        "link": "/blog/transforming-ad-tech-how-cognitiv-uses-clickhouse-to-build-better-machine-learning-models"
+      },
+      {
+        "name": "DeepL",
+        "logo": "/images/jp/use-cases/ml/deepl.svg",
+        "link": "/blog/overview-of-highlightio"
+      },
+      {
+        "name": "Ensemble",
+        "logo": "/images/jp/use-cases/ml/ensemble.svg",
+        "link": "/blog/hifis-migration-from-bigquery-to-clickhouse"
+      },
+      {
+        "name": "Denic",
+        "logo": "/images/jp/use-cases/ml/denic.svg",
+        "link": "/blog/how-we-used-clickhouse-to-store-opentelemetry-traces"
+      }
+    ]
+  },
+  {
+    "title": "ビジネスインテリジェンス",
+    "description": "データをインタラクティブに分析、レポート作成、内部アプリケーション構築に活用します。ビジネス利用状況やユーザー行動、広告パフォーマンス、市場動向の理解に活用されており、従来のデータウェアハウスやデータレイクからのワークロードを移行することで、スピードと効率性を実現します。",
+    "icon": "/images/jp/use-cases/bi/bi.svg",
+    "link": "/jp/use-cases/business-intelligence",
+    "logos": [
+      {
+        "name": "Lyft",
+        "logo": "/images/jp/use-cases/bi/lyft.svg",
+        "link": "https://eng.lyft.com/druid-deprecation-and-clickhouse-adoption-at-lyft-120af37651fd"
+      },
+      {
+        "name": "Microsoft Titan",
+        "logo": "/images/jp/use-cases/bi/microsoft.svg",
+        "link": "/blog/self-service-data-analytics-for-microsofts-biggest-web-properties"
+      },
+      {
+        "name": "Rokt",
+        "logo": "/images/jp/use-cases/bi/rokt.svg",
+        "link": "/blog/nyc-meetup-report-real-time-slicing-and-dicing-reporting-with-clickhouse"
+      },
+      {
+        "name": "Deutsche Bank",
+        "logo": "/images/jp/use-cases/bi/deutsche-bank.svg",
+        "link": "/uploads/D2_H3_3_Yakunin_Goihburg_4f3219d89e.pdf"
+      },
+      {
+        "name": "Trillabit",
+        "logo": "/images/jp/use-cases/bi/trillabit.svg",
+        "link": "/blog/trillabit-utilizes-the-power-of-clickhouse-for-fast-scalable-results-within-their-self-service-search-driven-analytics-offering"
+      },
+      {
+        "name": "QuickCheck",
+        "logo": "/images/jp/use-cases/bi/quickcheck.svg",
+        "link": "/blog/how-quickcheck-uses-clickhouse-to-bring-banking-to-the-unbanked"
+      }
+    ]
+  }
+]

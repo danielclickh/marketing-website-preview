@@ -1,0 +1,191 @@
+[
+  {
+    "id": 1,
+    "name": "Postgres",
+    "logo": "/images/cloud/integrations/postgres.svg",
+    "imgWidth": 48,
+    "imgHeight": 49,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 2,
+    "name": "Amazon S3",
+    "logo": "/images/cloud/integrations/amazon_s3.svg",
+    "imgWidth": 48,
+    "imgHeight": 49,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 3,
+    "name": "Kafka",
+    "logo": "/images/cloud/integrations/kafka.svg",
+    "imgWidth": 48,
+    "imgHeight": 49
+  },
+  {
+    "id": 4,
+    "name": "Airbyte",
+    "logo": "/images/cloud/integrations/airbyte.svg",
+    "imgWidth": 48,
+    "imgHeight": 49,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 10,
+    "name": "Superset",
+    "logo": "/images/cloud/integrations/superset.svg",
+    "imgWidth": 44,
+    "imgHeight": 45,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 6,
+    "name": "Vector",
+    "logo": "/images/cloud/integrations/vector.svg",
+    "imgWidth": 48,
+    "imgHeight": 49,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 7,
+    "name": "Grafana",
+    "logo": "/images/cloud/integrations/grafana.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 8,
+    "name": "Tableau",
+    "logo": "/images/cloud/integrations/tableau.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 80,
+    "name": "Google Cloud PubSub",
+    "logo": "/images/cloud/integrations/diagram/google-cloud-pubsub-logo-1.svg",
+    "soon": true,
+    "imgWidth": 40,
+    "imgHeight": 36
+  },
+  {
+    "id": 9,
+    "name": "Deep Note",
+    "logo": "/images/cloud/integrations/deepnote.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 40,
+    "name": "Azure Event Hub",
+    "logo": "/images/cloud/integrations/diagram/azure-event-hub.svg",
+    "imgWidth": 44,
+    "imgHeight": 44,
+    "soon": true
+  },
+  {
+    "id": 12,
+    "name": "MySQL",
+    "logo": "/images/cloud/integrations/mysql.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "soon": true
+  },
+  {
+    "id": 5,
+    "name": "dbt",
+    "logo": "/images/cloud/integrations/dbt.svg",
+    "imgWidth": 48,
+    "imgHeight": 49,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 120,
+    "name": "Union",
+    "logo": "/images/cloud/integrations/diagram/Union.svg",
+    "imgWidth": 48,
+    "imgHeight": 46
+  },
+  {
+    "id": 16,
+    "name": "Python",
+    "logo": "/images/cloud/integrations/python.svg",
+    "imgWidth": 41,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 500,
+    "name": "AWS Kinesis",
+    "logo": "/images/cloud/integrations/diagram/aws-kinesis.svg",
+    "imgWidth": 37,
+    "imgHeight": 44,
+    "soon": true
+  },
+  {
+    "id": 11,
+    "name": "Metabase",
+    "logo": "/images/cloud/integrations/metabase.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 13,
+    "name": "Java",
+    "logo": "/images/cloud/integrations/java.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 13,
+    "name": "Go Lang",
+    "logo": "/images/cloud/integrations/go.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 130,
+    "name": "DG",
+    "logo": "/images/cloud/integrations/diagram/Logos-6.svg",
+    "imgWidth": 40,
+    "imgHeight": 40,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 15,
+    "name": "C++",
+    "logo": "/images/cloud/integrations/c++.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 14,
+    "name": "Node JS",
+    "logo": "/images/cloud/integrations/nodejs.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  },
+  {
+    "id": 170,
+    "name": "Confluent",
+    "logo": "/images/cloud/integrations/diagram/confluent-logos-idXfleyO4U-1.svg",
+    "imgWidth": 40,
+    "imgHeight": 40
+  },
+  {
+    "id": 17,
+    "name": "Hex",
+    "logo": "/images/cloud/integrations/hex.svg",
+    "imgWidth": 40,
+    "imgHeight": 41,
+    "fadeOnLoad": true
+  }
+]

@@ -1,0 +1,126 @@
+[
+  {
+    "href": "/comparison/snowflake",
+    "title": "Snowflake",
+    "quote": "Over time, those queries had become painfully slow in Snowflake and Postgres. Some took over a minute. Others timed out entirely...The payoff [of migrating to ClickHouse] came right away. Queries that once failed now ran in six seconds, with no caching required.",
+    "stats": [
+      {
+        "icon": "/images/use-cases/logging/gauge-light.svg",
+        "bigStat": "2x",
+        "smallText": "Faster queries",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/file-zip-rar.svg",
+        "bigStat": "38%",
+        "smallText": "Better compression",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/hand-coins-light.svg",
+        "bigStat": "3-5x",
+        "smallText": "Reduction in cost",
+        "iconWidth": 32,
+        "iconHeight": 32
+      }
+    ],
+    "customerLogo": "/images/logo-chartmetric-white.svg",
+    "customerLogoWidth": 166.39,
+    "customerLogoHeight": 30
+  },
+  {
+    "href": "/comparison/postgresql",
+    "title": "PostgreSQL",
+    "stats": [
+      {
+        "icon": "/images/use-cases/logging/gauge-light.svg",
+        "bigStat": "1000x",
+        "smallText": "Faster queries",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/file-zip-rar.svg",
+        "bigStat": "-50%",
+        "smallText": "Disk space",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/hand-coins-light.svg",
+        "bigStat": "5x",
+        "smallText": "Cost savings",
+        "iconWidth": 32,
+        "iconHeight": 32
+      }
+    ],
+    "quote": "It is instant in ClickHouse vs forever in Postgres.",
+    "customerLogo": "/images/quickcheck-logo.svg",
+    "customerLogoWidth": 183,
+    "customerLogoHeight": 34
+  },
+  {
+    "href": "/comparison/bigquery",
+    "title": "BigQuery",
+    "stats": [
+      {
+        "icon": "/images/use-cases/logging/gauge-light.svg",
+        "bigStat": "10x",
+        "smallText": "Better performance",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/file-zip-rar.svg",
+        "bigStat": "30x",
+        "smallText": "Compression ratios",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/hand-coins-light.svg",
+        "bigStat": "10x",
+        "smallText": "OpEx reduction",
+        "iconWidth": 32,
+        "iconHeight": 32
+      }
+    ],
+    "quote": "We simply don’t want the hassle of trying to figure out in advance how many BQ slots to purchase - what a headache!",
+    "customerLogo": "/images/block-logo-white.svg",
+    "customerLogoWidth": 200,
+    "customerLogoHeight": 40
+  },
+  {
+    "href": "/comparison/redshift",
+    "title": "Redshift",
+    "stats": [
+      {
+        "icon": "/images/use-cases/logging/gauge-light.svg",
+        "bigStat": "5x",
+        "smallText": "Query performance",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/hand-coins-light.svg",
+        "bigStat": "75%",
+        "smallText": "Reduction in cost",
+        "iconWidth": 32,
+        "iconHeight": 32
+      },
+      {
+        "icon": "/images/use-cases/logging/ingest.svg",
+        "bigStat": "20x",
+        "smallText": "Concurrency",
+        "iconWidth": 32,
+        "iconHeight": 32
+      }
+    ],
+    "quote": "Moving over to ClickHouse we were basically able to cut that (Redshift) bill in half.",
+    "customerLogo": "/images/vantage-logo.svg",
+    "customerLogoWidth": 133,
+    "customerLogoHeight": 35
+  }
+]

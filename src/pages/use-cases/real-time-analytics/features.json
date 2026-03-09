@@ -1,0 +1,62 @@
+[
+  {
+    "id": 10,
+    "content": "User-facing dashboards and apps",
+    "section": 10
+  },
+  {
+    "id": 20,
+    "content": "E-commerce optimization",
+    "section": 10
+  },
+  {
+    "id": 30,
+    "content": "Retail analytics",
+    "section": 10
+  },
+  {
+    "id": 40,
+    "content": "Supply chain optimization",
+    "section": 10
+  },
+  {
+    "id": 50,
+    "content": "Fraud detection",
+    "section": 20
+  },
+  {
+    "id": 60,
+    "content": "Threat prevention",
+    "section": 20
+  },
+  {
+    "id": 70,
+    "content": "Proactive maintenance",
+    "section": 20
+  },
+  {
+    "id": 80,
+    "content": "Intelligent automation",
+    "section": 20
+  },
+  {
+    "id": 90,
+    "content": "User behavior analytics",
+    "section": 30
+  },
+  {
+    "id": 100,
+    "content": "Trend evaluation and monitoring",
+    "section": 30
+  },
+  {
+    "id": 110,
+    "content": "Gaming analytics",
+    "section": 30
+  },
+  {
+    "id": 120,
+    "content": "Advertising and marketing analysis",
+    "section": 30
+  }
+]

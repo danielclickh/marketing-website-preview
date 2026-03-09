@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1182" height="753" fill="none" viewBox="0 0 1182 753" timelineBegin="onStart">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500');
+
+      @keyframes pulseEffect {
+      from {
+      filter: drop-shadow(0px 0px 50px #fbff46);
+      }
+
+      to {
+      filter: drop-shadow(0px 0px 25px #fbff46);
+      }
+      }
+
+      .clickhouse-logo-container {
+      animation: pulseEffect 2s ease-in-out 0s alternate infinite;
+      }
+    </style>
+    <path id="postgresLine"
+      d="M55.727 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247"
+      stroke-width="3"></path>
+    <path id="bigQueryLine"
+      d="M150 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247"
+      stroke-width="3" />
+    <path id="redshiftLine"
+      d="M230 66.9697L351.715 66.9698C355.029 66.9698 357.714 69.6554 357.714 72.9687L357.714 313.248C357.714 316.561 360.4 319.247 363.714 319.247L572.583 319.247"
+      stroke-width="3" />
+    <path id="snowflakeLine"
+      d="M52.9436 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744"
+      stroke-width="3" />
+    <path id="mongoLine"
+      d="M150 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744"
+      stroke-width="3" />
+    <path id="mysqlLine"
+      d="M230 151.878L352.182 151.878C355.496 151.878 358.182 154.564 358.182 157.878L358.182 312.744C358.182 316.057 360.869 318.744 364.182 318.744L591.909 318.744"
+      stroke-width="3"></path>
+    <path id="kafkaLine"
+      d="M50.9138 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076"
+      stroke-width="3"></path>
+    <path id="vectorLine"
+      d="M150 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076"
+      stroke-width="3"></path>
+    <path id="dbtLine"
+      d="M230 325.421L319.006 325.421C321.424 325.421 323.362 327.346 323.362 329.748V329.748C323.362 332.151 325.301 334.076 327.719 334.076L584.659 334.076"
+      stroke-width="3"></path>
+    <path id="icebergLine"
+      d="M49.0072 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252"
+      stroke-width="3"></path>
+    <path id="hudiLine"
+      d="M150 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252"
+      stroke-width="3"></path>
+    <path id="deltaLakeLine"
+      d="M230 488.827L316.672 488.827C319.986 488.827 322.672 486.141 322.672 482.827L322.672 356.251C322.672 352.938 325.358 350.252 328.672 350.252L598.813 350.252"
+      stroke-width="3"></path>
+    <path id="localFilesLine"
+      d="M152.9105 671.89L352.718 671.89C356.032 671.89 358.718 669.204 358.718 665.89L358.718 371.329C358.718 368.015 361.404 365.329 364.718 365.329L563.803 365.329"
+      stroke-width="3"></path>
+    <path id="supersetLine"
+      d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.455,273.453L896.455,75.101C896.455,71.7575 899.215,69.0153 902.581,69.0153L1050,69.0153"
+      stroke-width="3"></path>
+    <path id="deepNoteLine"
+      d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.455,273.453L896.455,75.101C896.455,71.7575 899.215,69.0153 902.581,69.0153L1122.68,69.0153"
+      stroke-width="3"></path>
+    <path id="graphanaLine"
+      d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.453,273.453L896.453,163.949C896.453,160.605 899.213,157.863 902.579,157.863L1050,157.863"
+      stroke-width="3"></path>
+    <path id="metabaseLine"
+      d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.453,273.453L896.453,163.949C896.453,160.605 899.213,157.863 902.579,157.863L1120.39,157.863"
+      stroke-width="3"></path>
+    <path id="tableauLine"
+      d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.454,251.012C896.454,247.668 899.215,244.926 902.581,244.926L1050,244.926"
+      stroke-width="3"></path>
+    <path id="hexLine"
+      d="M639.849,333.516L890.327,333.516C893.693,333.516 896.454,330.773 896.454,327.43L896.454,251.012C896.454,247.668 899.215,244.926 902.581,244.926L1118.21,244.926"
+      stroke-width="3"></path>
+    <path id="pythonLine"
+      d="M1060,494.109L903.3,494.109C900.017,494.109 897.386,491.496 897.386,488.235L897.386,356.655C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
+      stroke-width="3"></path>
+    <path id="nodejsLine"
+      d="M1130.61,494.109L903.3,494.109C900.017,494.109 897.386,491.496 897.386,488.235L897.386,356.655C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
+      stroke-width="3"></path>
+    <path id="javaLine"
+      d="M1060,581.926L903.319,582.127C900.034,582.129 897.4,579.515 897.4,576.253L897.4,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
+      stroke-width="3"></path>
+    <path id="cHashLine"
+      d="M1131.79,581.926L903.319,582.127C900.034,582.129 897.4,579.515 897.4,576.253L897.4,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
+      stroke-width="3"></path>
+    <path id="goLine"
+      d="M1060,669.936L903.298,669.936C900.016,669.936 897.385,667.323 897.385,664.062L897.385,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
+      stroke-width="3"></path>
+    <path id="rustLine"
+      d="M1131.52,669.936L903.298,669.936C900.016,669.936 897.385,667.323 897.385,664.062L897.385,364.636C897.386,353.394 894.755,350.781 891.472,350.781L602.305,350.781"
+      stroke-width="3"></path>
+  </defs>
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#postgresLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#bigQueryLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#redshiftLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#snowflakeLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#mongoLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#mysqlLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#kafkaLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#vectorLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#dbtLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#icebergLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#hudiLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#deltaLakeLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#localFilesLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#supersetLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#deepNoteLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#graphanaLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#metabaseLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#tableauLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#hexLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#pythonLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#nodejsLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#javaLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#cHashLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#goLine" />
+  <use stroke="rgba(52, 52, 52, 0.9)" href="#rustLine" />
+  <use href="#postgresLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710">
+    <animate id="postgresLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="0s;mongoLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+  </use>
+  <use href="#bigQueryLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="bigQueryLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="mysqlLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="bigQueryLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#redshiftLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="redshiftLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="snowflakeLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="redshiftLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#snowflakeLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="snowflakeLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="bigQueryLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="snowflakeLine.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#mongoLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="mongoLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="redshiftLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="mongoLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#mysqlLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="mysqlLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="postgresLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="mysqlLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#kafkaLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="kafkaLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="0.75s;dbtLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="icebergLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#vectorLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="vectorLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="kafkaLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="vectorLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#dbtLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="dbtLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="vectorLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="dbtLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#icebergLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="icebergLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="0.5s;deltaLakeLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="icebergLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#hudiLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="hudiLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="icebergLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="hudiLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#deltaLakeLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="deltaLakeLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="hudiLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="deltaLakeLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#localFilesLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710">
+    <animate attributeName="stroke-dashoffset" from="200" begin="0s" to="-1710" dur="3s"
+      repeatCount="indefinite" />
+  </use>
+  <use href="#supersetLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="supersetLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="2s;hexLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="supersetLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#deepNoteLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="deepNoteLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="supersetLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="deepNoteLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#graphanaLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="graphanaLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="deepNoteLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="graphanaLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#metabaseLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="metabaseLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="graphanaLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="metabaseLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#tableauLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="tableauLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="metabaseLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="tableauLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#hexLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="hexLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="tableauLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="hexLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#pythonLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710">
+    <animate id="pythonLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="0s;rustLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+  </use>
+  <use href="#nodejsLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="nodejsLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="pythonLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="nodejsLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#javaLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="javaLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="nodejsLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="javaLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#cHashLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="cHashLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="javaLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="cHashLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#goLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="goLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="cHashLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="goLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <use href="#rustLine" stroke="#FAFF69" stroke-width="3" stroke-dasharray="200 1710"
+    stroke-opacity="0">
+    <animate id="rustLineAnimate" attributeName="stroke-dashoffset" from="200"
+      begin="goLineAnimate.end-1" to="-1710" dur="3s" fill="freeze" />
+    <animate attributeName="stroke-opacity" from="0" begin="rustLineAnimate.begin-0.01" to="1"
+      dur="0.01s" repeatCount='1' fill="freeze" />
+  </use>
+  <rect xmlns="http://www.w3.org/2000/svg" width="119.984" height="119.938" x="539.15" y="282.068"
+    fill="#FAFF69" class="clickhouse-logo-container" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="79" height="80" x="559.642" y="302.037"
+    href="/logos/black-logo.svg">
+  </image>
+  <text xmlns="http://www.w3.org/2000/svg" x="15.1426" y="12" fill="#C0C0C0" font-size="12"
+    style="font-family: 'Inter';"> Databases and data warehouses </text>
+  <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="31.0679" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="27.1426" y="43.0679"
+    href="/logos/postgres.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="103.143" y="31.0679" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="115.143" y="43.0679"
+    href="/logos/bigquery.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="191.143" y="31.0679" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="203.143" y="47"
+    href="/logos/redshift.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="119.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="27.1426" y="131.068"
+    href="/logos/snowflake.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="103.143" y="119.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="115.143" y="131.068"
+    href="/logos/mongodb.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="191.143" y="119.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="32" x="203.143" y="140.068"
+    href="/logos/mysql.png">
+  </image>
+  <text xmlns="http://www.w3.org/2000/svg" x="15.1426" y="267.068" fill="#C0C0C0" font-size="12"
+    style="font-family: 'Inter';"> Streams, logs, and analytics </text>
+  <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="286.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="27.1426" y="298.068"
+    href="/logos/kafka.png">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="103.143" y="286.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="115.143" y="298.068"
+    href="/logos/vector.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="191.143" y="286.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4" />
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="203.143" y="298.068"
+    href="/logos/dbt.svg">
+  </image>
+  <text xmlns="http://www.w3.org/2000/svg" x="15.1426" y="434.068" fill="#C0C0C0" font-size="12"
+    style="font-family: 'Inter';"> Data lake formats </text>
+  <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="453.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="40" height="40" x="31.1426" y="469.068"
+    href="/logos/iceberg.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="103.143" y="453.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="58.4795" height="40" x="109.902" y="469.068"
+    href="/logos/hudi.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="191.143" y="453.068" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="41.2371" height="40" x="206.523" y="469.068"
+    href="/logos/deltaLake.svg">
+  </image>
+  <text xmlns="http://www.w3.org/2000/svg" x="15.1426" y="601.068" fill="#C0C0C0" font-size="12"
+    style="font-family: 'Inter';"> Local files </text>
+  <rect xmlns="http://www.w3.org/2000/svg" x="15.1426" y="620.068" width="248" height="102"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="43" height="48" x="45.3262" y="645.068"
+    href="/logos/file-icon.svg">
+  </image>
+  <image xmlns="http://www.w3.org/2000/svg" width="124" height="54" x="110.643" y="644.068"
+    href="/logos/local-files-text.svg">
+  </image>
+  <text x="994.166" y="12.209" fill="#C0C0C0" font-size="12" style="font-family: 'Inter';"> Data
+    visualization tools </text>
+  <rect xmlns="http://www.w3.org/2000/svg" x="994.166" y="31.209" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1006.166" y="43.209"
+    href="/logos/superset.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1082.17" y="31.209" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1096.17" y="43.209"
+    href="/logos/deepnote.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="994.166" y="119.209" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1006.166" y="131.209"
+    href="/logos/graphana.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1082.02" y="119.209" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1096.02" y="131.209"
+    href="/logos/metabase.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="994.166" y="207.209" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1006.023" y="219.209"
+    href="/logos/tableau.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1082.17" y="207.209" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1094.17" y="219.209"
+    href="/logos/hex.svg">
+  </image>
+  <text x="1007.14" y="438.386" fill="#C0C0C0" font-size="12" style="font-family: 'Inter';">
+    Languages and drivers </text>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1007.14" y="457.386" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1019.14" y="469.386"
+    href="/logos/python.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1095.14" y="457.386" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1107.14" y="469.386"
+    href="/logos/nodejs.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1007.14" y="545.386" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="48" height="48" x="1019.14" y="557.386"
+    href="/logos/java.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1095.14" y="545.386" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="35.55" height="40" x="1113.39" y="559.386"
+    href="/logos/chash.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1007.14" y="633.387" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="40" height="40" x="1019.14" y="645.387"
+    href="/logos/go.svg">
+  </image>
+  <rect xmlns="http://www.w3.org/2000/svg" x="1095.14" y="633.387" width="72" height="72"
+    fill="#1A1918" stroke="rgba(52, 52, 52, 0.9)" rx="4">
+  </rect>
+  <image xmlns="http://www.w3.org/2000/svg" width="40" height="40" x="1109.14" y="647.387"
+    href="/logos/rust.svg">
+  </image>
+</svg>

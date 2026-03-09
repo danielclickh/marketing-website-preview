@@ -1,0 +1,28 @@
+export function classNames(
+  ...args: (string | number | Record<string, any> | any[])[]
+): string | undefined {
+  if (args) {
+    let classes: string[] = []
+    for (let i = 0; i < args.length; i++) {
+      const className = args[i]
+      if (!className) {
+        continue
+      }
+      const type = typeof className
+      if (type === 'string' || type === 'number') {
+        classes.push(className as string)
+      } else if (type === 'object') {
+        const _classes = Array.isArray(className)
+          ? className
+          : Object.entries(className).map(([key, value]) =>
+              value ? key : null
+            )
+        classes = _classes.length
+          ? classes.concat(_classes.filter((c) => !!c))
+          : classes
+      }
+    }
+    return classes.join(' ').trim()
+  }
+  return undefined
+}

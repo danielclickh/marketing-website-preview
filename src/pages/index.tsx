@@ -1,0 +1,105 @@
+import UseCasesCards from '@/components-cleaned/UseCasesCards'
+import FAQ from '@/components/FAQ'
+import GetStarted from '@/components/GetStarted'
+import HRSeparator from '@/components/HRSeparator'
+// import HomepageHeroAlt from '@/components/HomepageHeroAlt'
+import HomepageHeroAlt2 from '@/components/HomepageHeroAlt2'
+import HomepageSectionContentFeed from '@/components/HomepageSectionContentFeed'
+import HomepageSectionDeployAlt from '@/components/HomepageSectionDeployAlt'
+import HomepageSectionFast from '@/components/HomepageSectionFast'
+import HomepageSectionStackIntegration from '@/components/HomepageSectionStackIntegration'
+// import HomepageSectionTrustedByAlt from '@/components/HomepageSectionTrustedByAlt'
+import HomepageSectionWhyClickhouse from '@/components/HomepageSectionWhyClickhouse'
+import JoinCommunity from '@/components/JoinCommunity'
+import Layout from '@/components/Layout'
+import LinkWithArrow from '@/components/LinkWithArrow'
+import { SuiTitle } from '@/components/sui'
+import { findOne } from '@/lib/api/strapi'
+import { useGalaxyOnPage } from '@/lib/galaxy/galaxy'
+import { generateHomepageSchema } from '@/lib/schema'
+import { getCommonProps } from '@/lib/utils/getCommonProps'
+import { HomepageCustomerStoryLogo, HomePageProps } from '@/types/homepage'
+import { GetStaticProps } from 'next'
+
+export const getStaticProps: GetStaticProps<HomePageProps> =
+  async function getStaticProps() {
+    const params = {
+      populate: [
+        'seo',
+        'seo.image',
+        'customerStories',
+        'customerStories.*',
+        'customerStories.logos.*',
+        'customerStories.logos.darkLogoPng'
+      ]
+    }
+
+    const [commonProps, data] = await Promise.all([
+      getCommonProps(),
+      findOne('homepage', params)
+    ])
+
+    // Remove unwanted svg data from being serialized
+    data.customerStories.logos = data.customerStories.logos.map(
+      (story: HomepageCustomerStoryLogo) => {
+        if (story.darkLogoPng && story.darkLogoPng?.svgText) {
+          delete story.darkLogoPng.svgText
+        }
+
+        if (story.lightLogoPng && story.lightLogoPng?.svgText) {
+          delete story.lightLogoPng.svgText
+        }
+
+        return story
+      }
+    )
+
+    data.seo.path = ''
+    data.seo.schema = generateHomepageSchema()
+    data.seo.languages = ['en', 'ja']
+    return {
+      props: {
+        ...data,
+        ...commonProps
+      }
+    }
+  }
+
+export default function HomePage({
+  seo,
+  headerData,
+  customerStories,
+  platforms
+}: HomePageProps) {
+  useGalaxyOnPage('homePage')
+
+  return (
+    <Layout seo={seo} headerData={headerData}>
+      {/* To switch back: use <HomepageHeroAlt /> and restore <HomepageSectionTrustedByAlt customerStories={customerStories} /> below */}
+      <HomepageHeroAlt2 customerStories={customerStories} />
+      <section className='mb-16 bg-gradient-to-br from-white/5 to-transparent to-50% pt-10 lg:mb-28 lg:pt-16'>
+        <div className='section-container'>
+          <div className='space-y-4 text-center'>
+            <p className='text-sm font-semibold uppercase tracking-[0.0875rem] text-inherit text-primary-300'>
+              Use cases
+            </p>
+            <SuiTitle type='h2'>Built for every modern data challenge</SuiTitle>
+          </div>
+          <UseCasesCards
+            className='mt-10 lg:mt-16'
+            galaxyNamespace='homePage'
+          />
+        </div>
+      </section>
+      <HomepageSectionContentFeed />
+      <HomepageSectionWhyClickhouse />
+      <HomepageSectionStackIntegration />
+      <HomepageSectionFast />
+      <HomepageSectionDeployAlt />
+      <JoinCommunity github={headerData.github} />
+      <HRSeparator className='my-24' />
+      <FAQ />
+      <GetStarted platforms={platforms} />
+    </Layout>
+  )
+}

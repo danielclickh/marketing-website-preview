@@ -1,0 +1,14 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_to_staging:
+    name: Deploy to Production
+    environment: Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Vercel to redeploy
+        run: |
+          curl '${{ secrets.VERCEL_HOOK }}'

@@ -1,0 +1,26 @@
+[
+  {
+    "img": "/images/homepage/dev_cover_cloudflair.png",
+    "title": "Cloudflare’s HTTP analytics infrastructure",
+    "description": "Read about how Cloudflare uses ClickHouse to support 6M requests per second.",
+    "btnText": "Learn More",
+    "href": "https://blog.cloudflare.com/http-analytics-for-6m-requests-per-second-using-clickhouse/",
+    "event": "homePage.engBlogs.cloudflareLearnMoreSelect"
+  },
+  {
+    "img": "/images/homepage/dev_cover_gitlab.png",
+    "title": "GitLab’s APM datastore",
+    "description": "Watch this YouTube video showing why GitLab chose ClickHouse over Timescale to power their APM infrastructure.",
+    "btnText": "Learn More",
+    "href": "https://www.youtube.com/watch?v=cMdQsxolcqc",
+    "event": "homePage.engBlogs.gitlabLearnMoreSelect"
+  },
+  {
+    "img": "/images/homepage/dev_cover_lyft.svg",
+    "title": "Lyft's Real-time Analytics",
+    "description": "Read about how ClickHouse has been great for Lyft. It has solved all the use cases that they  have thrown at it.",
+    "btnText": "Learn More",
+    "href": "/videos/lyft-user-story",
+    "event": "homePage.engBlogs.lyftLearnMoreSelect"
+  }
+]

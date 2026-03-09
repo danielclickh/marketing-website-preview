@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Analyze all data, in any format",
+    "content": "ClickHouse provides support for 70+ [file formats](https://clickhouse.com/docs/en/sql-reference/formats) - from Parquet to JSON, CSV, TSV, and many more. For local files, [clickhouse-local](/blog/extracting-converting-querying-local-files-with-sql-clickhouse-local) provides a powerful and portable tool to query, convert and transform data on your local machine, too.",
+    "icon": "/images/analyze-icon.svg"
+  },
+  {
+    "title": "Integrate with your favorite tools",
+    "content": "Our vibrant and growing ecosystem of integrations makes it easy to leverage the tools and frameworks you already love - from MySQL-compatible tools, to popular visualization products like Tableau, as well as language clients, dbt, [and many more](https://clickhouse.com/docs/en/integrations).",
+    "icon": "/images/tools-icon.svg"
+  },
+  {
+    "title": "Reduce cost and maximize efficiency",
+    "content": "Many traditional data warehouses charge per query, limit concurrency, and gate critical features behind higher pricing tiers. With ClickHouse, speed comes out-of-the box. And, you only pay for the compute and compressed storage you actually use.",
+    "icon": "/images/reduce-costs-icon.svg"
+  },
+  {
+    "title": "Simplify your SQL",
+    "content": "ClickHouse supports an extensive library of domain-specific functions that scale seamlessly over billions of records, and transform even the most complex queries into simple SQL statements. With ClickHouse, data exploration is easy and powerful.",
+    "icon": "/images/sql-icon.svg"
+  }
+]

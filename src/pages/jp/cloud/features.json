@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "icon": "/images/cloud/stopwatch.svg",
+    "title": "すばやくデプロイ",
+    "content": "サイズもスケーリングも、サービスのアップグレードも気にせず、すばやく使用を開始できます。運用にかかる負担もすべてClickHouseにおまかせください。"
+  },
+  {
+    "id": 2,
+    "icon": "/images/cloud/terminal.svg",
+    "title": "対話型SQLコンソール",
+    "content": "ClickHouseデータベースに高速かつ簡単に接続し、探索してクエリを実行できます。ClickHouse Cloudのお客さまに限りご利用いただけます。"
+  },
+  {
+    "id": 3,
+    "icon": "/images/cloud/lock.svg",
+    "title": "セキュア。コンプライアンス認証済",
+    "content": "SOC 2 Type IIに準拠。ClickHouse Cloudのセキュリティ、可用性、処理の完全性、機密保持プロセスを第三者機関が監査しています。"
+  },
+  {
+    "id": 4,
+    "icon": "/images/cloud/automate-gears.svg",
+    "title": "手軽に自動化",
+    "content": "ClickHouseのTerraformプロバイダーとAPIを使用してインフラ管理を効率化し、設定および構成を簡単に自動化できます。"
+  },
+  {
+    "id": 5,
+    "icon": "/images/cloud/arrows-out.svg",
+    "title": "シームレスにスケール",
+    "content": "ピーク時に合わせて過度にプロピジョニングすることも、未使用の領域に対する支払いもありません。ClickHouseなら状況に合わせてシームレスにスケールアップやスケールダウンします。"
+  },
+  {
+    "id": 6,
+    "icon": "/images/cloud/line.svg",
+    "title": "広範なエコシステム",
+    "content": "ClickPipesインテグレーションエンジンでデータを簡単にインジェストできます。データコネクタ、可視化ツール、SQLや言語のクライアントをお選びいただけます。"
+  }
+]

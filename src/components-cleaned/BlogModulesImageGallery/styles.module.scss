@@ -1,0 +1,18 @@
+.main {
+  :global {
+    .swiper-wrapper {
+      align-items: stretch;
+    }
+  }
+}
+
+.thumbs {
+  :global {
+    .swiper-slide:not(.swiper-slide-thumb-active) {
+      @apply opacity-60;
+    }
+    .swiper-slide-thumb-active {
+      @apply border-primary-300;
+    }
+  }
+}

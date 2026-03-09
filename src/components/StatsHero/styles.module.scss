@@ -1,0 +1,5 @@
+.angledBackground {
+  --angle-width: min(22vw, 320px);
+  clip-path: polygon(var(--angle-width) 0, 100% 0, 100% 100%, 0 100%);
+  left: calc(0px - var(--angle-width));
+}

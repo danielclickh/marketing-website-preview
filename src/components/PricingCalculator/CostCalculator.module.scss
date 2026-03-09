@@ -1,0 +1,14 @@
+.options {
+  @apply w-full max-w-[520px];
+}
+
+.sizes {
+  @apply flex flex-col justify-between gap-6 lg:flex-row;
+  div {
+    @apply w-full;
+  }
+}
+
+.costs {
+  @apply w-full rounded-lg border border-primary-300 bg-[#151515] p-8 text-center md:flex-1;
+}

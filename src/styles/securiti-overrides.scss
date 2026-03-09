@@ -1,0 +1,136 @@
+// Banner
+//
+//
+.cc-theme-edgeless.cc-window.cc-banner {
+  @apply gap-4 overflow-hidden bg-neutral-950/90 p-4 backdrop-blur-2xl md:items-center md:py-0.5;
+
+  .cc-message-container {
+    @apply flex-1;
+
+    .cc-message {
+      @apply m-0 p-0 text-sm leading-tight;
+
+      .cc-link {
+        @apply p-0 leading-tight;
+      }
+    }
+  }
+
+  .cc-compliance {
+    @apply flex flex-wrap gap-x-0.5 gap-y-4 md:flex-nowrap;
+
+    .cc-btn + .cc-btn {
+      @apply m-0 #{!important};
+    }
+  }
+
+  .cc-btn,
+  .cc-link {
+    @apply text-sm font-normal;
+  }
+
+  .cc-btn {
+    @apply flex-1 px-4 py-3;
+    @apply hover:bg-white/10 #{!important};
+  }
+
+  .cc-btn.cc-allow,
+  .cc-type-opt-out .cc-btn.cc-dismiss {
+    @apply bg-green-800 hover:bg-green-900 #{!important};
+  }
+
+  .cc-link.cmp-pref-link {
+    @apply order-first m-0 md:order-last md:p-4 #{!important};
+    @apply h-auto w-full leading-none;
+
+    svg {
+      @apply h-3.5 w-auto;
+    }
+  }
+}
+
+// Backdrop
+//
+//
+.cmp-body {
+  @apply bg-neutral-800/60;
+}
+
+// Modal
+//
+//
+.cmp-body .cmp-modal {
+  @apply font-normal;
+
+  p {
+    @apply text-neutral-200;
+  }
+
+  .cmp-modal__sub-title {
+    @apply text-sm;
+  }
+
+  .cmp-tabs__opt-out.active,
+  .cmp-tabs__gpc-message.active {
+    @apply rounded border-none bg-white/5 text-sm;
+  }
+
+  // Fixes switch alignment
+  .cmp-switch input:checked + .cmp-switch__slider::after {
+    transform: translateX(31px);
+  }
+
+  // Tabs
+  .cmp-tabs {
+    @apply mt-0;
+    .cmp-tabs__nav {
+      @apply mb-4;
+    }
+  }
+
+  // Header
+  .cmp-modal__header {
+    @apply mb-0;
+
+    .cmp-modal__logo,
+    .cmp-modal__logo img {
+      @apply size-16 min-w-0;
+    }
+
+    .cmp-modal__title {
+      @apply text-2xl;
+    }
+  }
+
+  // Accordion
+  .cmp-accordion > .cmp-accordion__item {
+    @apply border-b border-b-white/10;
+
+    > .cmp-accordion__header {
+      @apply before:pointer-events-none before:absolute before:-inset-x-4 before:inset-y-0 before:rounded before:transition-colors hover:before:bg-white/5;
+
+      a {
+        @apply p-0 hover:underline;
+      }
+      > div {
+        @apply p-0;
+
+        > .cmp-accordion__sub-title {
+          @apply mt-0 p-0;
+        }
+      }
+    }
+
+    > .cmp-accordion__content {
+      @apply px-0;
+    }
+  }
+
+  // Footer
+  .cmp-modal__footer {
+    .cmp-btn-wrapper button.cmp-save-btn {
+      @apply rounded border-none text-sm;
+      @apply bg-primary-300 text-primary-900 hover:bg-primary-400 #{!important};
+    }
+  }
+}

@@ -1,0 +1,142 @@
+import { CUIButton } from '../ClickUI'
+import HomepageSectionTrustedByAlt from '../HomepageSectionTrustedByAlt'
+import LogoAnnouncementLink from '../LogoAnnouncementLink'
+import { SuiText, SuiTitle } from '../sui'
+import styles from './hero-entrance.module.css'
+import { HomepageCustomerStories } from '@/types/homepage'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+
+interface HomepageHeroAlt2Props extends React.HTMLProps<HTMLDivElement> {
+  customerStories: HomepageCustomerStories
+}
+
+export default function HomepageHeroAlt2({
+  customerStories,
+  className = '',
+  ...props
+}: HomepageHeroAlt2Props) {
+  const heroRef = useRef<HTMLDivElement>(null)
+  const [flarePos, setFlarePos] = useState({ x: 0, y: 0 })
+  const [flareVisible, setFlareVisible] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!heroRef.current) return
+    const rect = heroRef.current.getBoundingClientRect()
+    setFlarePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    })
+  }, [])
+
+  return (
+    <div
+      ref={heroRef}
+      className={`relative overflow-hidden ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setFlareVisible(true)}
+      onMouseLeave={() => setFlareVisible(false)}
+      {...props}>
+      {/* Grid revealed by lens flare — masked to only show around cursor */}
+      <div
+        className='pointer-events-none absolute inset-0 z-0 transition-opacity duration-500'
+        style={{
+          opacity: flareVisible ? 1 : 0,
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+          maskImage: `radial-gradient(circle 300px at ${flarePos.x}px ${flarePos.y}px, black 0%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle 300px at ${flarePos.x}px ${flarePos.y}px, black 0%, transparent 100%)`
+        }}
+      />
+
+      {/* Lens flare glow that follows the cursor */}
+      <div
+        className='pointer-events-none absolute z-0 transition-opacity duration-500'
+        style={{
+          left: flarePos.x,
+          top: flarePos.y,
+          width: 600,
+          height: 600,
+          transform: 'translate(-50%, -50%)',
+          opacity: flareVisible ? 1 : 0,
+          background:
+            'radial-gradient(circle, rgba(250,223,80,0.12) 0%, rgba(250,223,80,0.04) 35%, transparent 70%)'
+        }}
+      />
+
+      {/* Hero content */}
+      <div className='section-container relative z-10 pt-16 text-center lg:pt-24'>
+        <h1
+          className={`!text-[2.5rem] font-black leading-none md:!text-[4.5rem] xl:!text-[6rem] ${mounted ? styles.heroAnimate : 'opacity-0'}`}
+          style={{ animationDelay: '0ms' }}>
+          The leading
+          <br />
+          database for AI
+        </h1>
+
+        <p
+          className={`mx-auto mt-4 text-white md:max-w-2xl md:text-lg xl:max-w-4xl xl:!text-[1.5rem] xl:leading-8 ${mounted ? styles.heroAnimate : 'opacity-0'}`}
+          style={{ animationDelay: '120ms' }}>
+          Powering agentic systems with millisecond queries at petabyte scale.
+        </p>
+
+        <div
+          className={`mx-auto mt-12 flex max-w-md flex-wrap justify-center gap-6 ${mounted ? styles.heroAnimate : 'opacity-0'}`}
+          style={{ animationDelay: '240ms' }}>
+          <CUIButton
+            type='primary'
+            size='lg'
+            weight='semibold'
+            href='https://console.clickhouse.cloud/signUp?loc=hero'
+            target='_blank'
+            linkClass='w-full sm:w-auto'
+            className='w-full sm:w-auto sm:!px-8'>
+            Start free cloud trial
+          </CUIButton>
+          <CUIButton
+            type='secondary'
+            size='lg'
+            weight='semibold'
+            href='/company/contact?loc=homepage-hero'
+            linkClass='w-full sm:w-auto'
+            className='w-full sm:w-auto sm:!px-8'>
+            Contact sales
+          </CUIButton>
+        </div>
+
+        {/* Langfuse announcement */}
+        <div
+          className={`relative z-10 mx-auto -mb-12 mt-24 max-w-2xl ${mounted ? styles.heroAnimate : 'opacity-0'}`}
+          style={{ animationDelay: '360ms' }}>
+          <LogoAnnouncementLink
+            href='https://langfuse.com/?utm_source=clickhouse_hero'
+            target='_blank'
+            className='border-white/5 text-sm'
+            mode='dark'
+            logo={{
+              src: '/logos/langfuse.svg',
+              alt: 'Langfuse',
+              width: 52,
+              height: 52
+            }}>
+            Langfuse is now part of ClickHouse. Discover the leading open-source
+            platform for LLM observability, evaluations, and prompt management.
+            Ideal for building, monitoring, and optimizing AI applications at
+            scale.
+          </LogoAnnouncementLink>
+        </div>
+      </div>
+
+      {/* Trusted By section */}
+      <HomepageSectionTrustedByAlt
+        customerStories={customerStories}
+        className='relative z-0 border-t border-white/5 bg-neutral-600/20 pb-8 pt-24'
+      />
+    </div>
+  )
+}

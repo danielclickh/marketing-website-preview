@@ -1,0 +1,43 @@
+.diagramContainer {
+  :global {
+    .active-diagram-0 {
+      .all {
+        @apply opacity-100;
+      }
+      .many-others {
+        @apply opacity-40;
+      }
+    }
+    .active-diagram-10 {
+      .data-ingestion {
+        @apply opacity-100;
+      }
+      .many-others {
+        @apply opacity-40;
+      }
+
+      .data-transformations,
+      .apps {
+        @apply opacity-30;
+      }
+    }
+    .active-diagram-20 {
+      .data-transformations {
+        @apply opacity-100;
+      }
+      .data-ingestion,
+      .apps {
+        @apply opacity-30;
+      }
+    }
+    .active-diagram-30 {
+      .apps {
+        @apply opacity-100;
+      }
+      .data-ingestion,
+      .data-transformations {
+        @apply opacity-30;
+      }
+    }
+  }
+}

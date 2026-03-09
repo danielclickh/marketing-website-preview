@@ -1,0 +1,22 @@
+[
+  {
+    "id": 10,
+    "icon": "/images/use-cases/logging/ingest.svg",
+    "content": "**最高クラスのデータ取り込み速度**を実現しており、継続的なデータストリームを処理するように設計されています。これにより、最新の情報に基づいて正確な予測と結果を生み出すことができます。"
+  },
+  {
+    "id": 20,
+    "icon": "/images/use-cases/logging/gauge-light.svg",
+    "content": "**スケールにおける圧倒的なクエリ性能**。数十億行のデータをミリ秒単位でクエリできます。イテレーション時間を減らして最大限に効率を高めます。"
+  },
+  {
+    "id": 30,
+    "icon": "/images/use-cases/logging/trend-up-light.svg",
+    "content": "**強力な自動スケーリング**で予測不可能なワークロードに対応。インフラを気にせず、機械学習に集中できます。"
+  },
+  {
+    "id": 40,
+    "icon": "/images/use-cases/ml-and-ds/native-support.svg",
+    "content": "**Python向けのインプロセスOLAP SQLエンジン**として利用可能です。Pythonコード内でClickHouseのすべてのパワーを利用できるChDBでダイレクトに活用できます。"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 10,
+    "content": "Simplify your data stack by eliminating the need for ML-specific data stores"
+  },
+  {
+    "id": 20,
+    "content": "Use lightning-fast aggregations for data preparation, powering model training at petabyte scale"
+  },
+  {
+    "id": 30,
+    "content": "Execute fast and efficient vector search with linear and approximate techniques"
+  },
+  {
+    "id": 40,
+    "content": "Plug-and-play pre-built models directly, from any provider"
+  },
+  {
+    "id": 50,
+    "content": "Develop with the ML tools you already love through our extensive suite of integrations"
+  }
+]

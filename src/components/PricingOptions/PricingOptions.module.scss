@@ -1,0 +1,18 @@
+.cloudProvidersButton {
+  @apply relative h-12 w-[72px];
+  &:not(:disabled) {
+    @apply border-neutral-700 bg-neutral-750;
+    &:hover {
+      @apply bg-neutral-725;
+    }
+  }
+  &[data-selected='true'] {
+    @apply border-primary-300;
+    &:hover {
+      @apply border-primary-300;
+    }
+  }
+  &:disabled {
+    @apply cursor-not-allowed border-neutral-725 bg-neutral-725 #{!important};
+  }
+}

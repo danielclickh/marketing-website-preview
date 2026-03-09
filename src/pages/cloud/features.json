@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "icon": "/images/cloud/stopwatch.svg",
+    "title": "Deploy in seconds",
+    "content": "Get started in seconds without worrying about sizing, scaling, and upgrading your services. Eliminate the operational overhead and let us handle the rest."
+  },
+  {
+    "id": 2,
+    "icon": "/images/cloud/terminal.svg",
+    "title": "Interactive SQL console",
+    "content": "The fastest and easiest way to connect, explore and query your ClickHouse databases. Exclusively available to ClickHouse Cloud customers."
+  },
+  {
+    "id": 3,
+    "icon": "/images/cloud/lock.svg",
+    "title": "Secure. Verified compliant",
+    "content": "ClickHouse Cloud is SOC 2 Type II compliant! Security, availability, processing integrity, and confidentiality processes all independently audited."
+  },
+  {
+    "id": 4,
+    "icon": "/images/cloud/automate-gears.svg",
+    "title": "Effortless automation",
+    "content": "Streamline your infrastructure management with our Terraform provider and APIs that help you effortlessly automate your setup and configuration."
+  },
+  {
+    "id": 5,
+    "icon": "/images/cloud/arrows-out.svg",
+    "title": "Scale seamlessly",
+    "content": "Forget about over-provisioning for peak usage and paying for unused capacity. ClickHouse seamlessly scales up or down to meet any workload."
+  },
+  {
+    "id": 6,
+    "icon": "/images/cloud/line.svg",
+    "title": "Broad ecosystem",
+    "content": "Use our ClickPipes integrations engine to ingest your data with ease. Bring your favorite data connectors, visualization tools, SQL and language clients with you."
+  }
+]

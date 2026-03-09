@@ -1,0 +1,20 @@
+[
+  {
+    "id": 10,
+    "stat": "10x+",
+    "content": "Reduction in costs",
+    "readmore": "[Read more](/blog/juspay-analyzes-payment-transactions-in-real-time-with-clickhouse)"
+  },
+  {
+    "id": 30,
+    "stat": "5x",
+    "content": "Faster queries",
+    "readmore": "[Read more](/comparison/redshift)"
+  },
+  {
+    "id": 40,
+    "stat": "20x",
+    "content": "Higher concurrency",
+    "readmore": "[Read more](/comparison/redshift)"
+  }
+]

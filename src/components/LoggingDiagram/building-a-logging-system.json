@@ -1,0 +1,17 @@
+[
+  {
+    "id": 10,
+    "title": "Data collection",
+    "content": "For observability use cases, ClickHouse seamlessly integrates with OpenTelemetry, the growing industry standard. At ClickHouse, we internally use ClickHouse Cloud to power our own observability platform, where we've adopted OpenTelemetry components like the OTel ClickHouse collector and exporter."
+  },
+  {
+    "id": 20,
+    "title": "ClickHouse",
+    "content": "ClickHouse is relied on at scale to power real-time observability platforms that process billions of new events every day.<br /><br />In these systems, features like [Materialized Views](https://clickhouse.com/docs/en/guides/developer/cascading-materialized-views) are often leveraged to transform data at insert time, which supports common tasks like extracting structure from unstructured logs.<br /><br />ClickHouse is built from the ground up to leverage resources as efficiently as possible, combining best-in-class compression ratios with flexible tuning controls that help you balance query performance and storage utilization effectively. <br /><br />ClickHouse supports a wide range of aggregation and analytical functions that make real-time data exploration simple and powerful."
+  },
+  {
+    "id": 30,
+    "title": "UI, alerting, and reports",
+    "content": "ClickHouse benefits from a vibrant ecosystem of integrations that includes visualization tools like Grafana and Superset.<br /><br />The [ClickHouse-Grafana](https://clickhouse.com/docs/en/integrations/grafana) integration is a popular choice among observability practitioners who benefit from its powerful dashboarding capabilities that allow for ad-hoc exploration of the underlying data, as well as great utility features including alerting."
+  }
+]

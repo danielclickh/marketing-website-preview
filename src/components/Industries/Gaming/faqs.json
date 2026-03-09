@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "content": "<span class='font-bold text-white'>Real-time insights with zero lag.</span> <span class='text-[#8D8D8D]'>Get lightning-fast queries for in-game events, player analytics, and ad tech - where every millisecond matters.</span>"
+  },
+  {
+    "id": 2,
+    "content": "<span class='font-bold text-white'>Built for high-speed event ingestion</span> <span class='text-[#8D8D8D]'>process millions of in-game events per second with native support for streaming sources like Kafka, Kinesis and Pub/Sub.</span>"
+  },
+  {
+    "id": 3,
+    "content": "<span class='font-bold text-white'>High query concurrency, zero slowdown. </span> <span class='text-[#8D8D8D]'>ClickHouse powers real-time gaming leaderboards, player dashboards, in-game ads, betting interfaces, and live telemetry for both gameplay and wagering activities—handling massive user loads with instant responsiveness, unlike traditional data warehouses.</span>"
+  },
+  {
+    "id": 4,
+    "content": "<span class='font-bold text-white'>Native support for OpenTelemetry (OTel) - </span> <span class='text-[#8D8D8D]'>Capture logs, traces, and performance data in real time. Enable low-latency telemetry for monitoring player experience, game crashes and  detecting anomalies.</span>"
+  },
+  {
+    "id": 5,
+    "content": "<span class='font-bold text-white'>Secure by design, built for compliance - </span> <span class='text-[#8D8D8D]'>Safeguard player data with CMEK, BYOC support, fine-grained access controls, and built-in GDPR-compliant TTLs and deletes.</span>"
+  }
+]

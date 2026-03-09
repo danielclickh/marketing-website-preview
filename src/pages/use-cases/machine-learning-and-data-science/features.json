@@ -1,0 +1,22 @@
+[
+  {
+    "id": 10,
+    "icon": "/images/use-cases/logging/ingest.svg",
+    "content": "**Best-in-class ingestion rates** built to handle continuous streams of data so you can rely on the most up-to-date information to fuel accurate predictions and results."
+  },
+  {
+    "id": 20,
+    "icon": "/images/use-cases/logging/gauge-light.svg",
+    "content": "**Unparalleled query performance at scale**. Query billions of rows in milliseconds. Reduce iteration times and maximize efficiency with your data."
+  },
+  {
+    "id": 30,
+    "icon": "/images/use-cases/logging/trend-up-light.svg",
+    "content": "**Powerful automatic scaling** that's designed to handle unpredictable workloads. Focus on machine learning without worrying about your infrastructure."
+  },
+  {
+    "id": 40,
+    "icon": "/images/use-cases/ml-and-ds/native-support.svg",
+    "content": "Available as an **in-process OLAP SQL engine for Python**. Leverage the full power of ClickHouse, directly in your Python code with [chDB](/blog/welcome-chdb-to-clickhouse)."
+  }
+]
