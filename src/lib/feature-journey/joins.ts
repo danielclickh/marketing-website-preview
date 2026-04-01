@@ -45,6 +45,14 @@ export const JOINS_BENCHMARK_DATA: JoinsMonthlyBenchmark[] = [
   // t1   t2   t3   t4   t5   t6   t7   t8   t9  t10  t11  t12  t13  t14  t15  t16  t17  t18  t19  t20
   {
     year: 2026,
+    month: 3,
+    values: [
+      10, 29, 20, 29, 5, 27, 13, 5, 5, 30, 30, 18, 15, 19, 20, 25, 25, 15, 16,
+      27
+    ]
+  },
+  {
+    year: 2026,
     month: 2,
     values: [
       12, 34, 23, 34, 6, 31, 15, 6, 6, 35, 35, 21, 18, 22, 23, 29, 29, 18, 19,

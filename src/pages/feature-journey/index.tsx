@@ -39,18 +39,6 @@ export const getStaticProps: GetStaticProps<CommonProps> =
 // ─── Color tokens ─────────────────────────────────────────────────────────────
 
 const CH_YELLOW = '#FAFF69'
-const YEAR_COLOR = '#e2e8f0'
-const CARD_BG = '#1d1d1d'
-const CARD_BORDER = '#414141'
-
-// ─── Horizontal timeline layout constants ─────────────────────────────────────
-const ABOVE_H = 76   // height above the line (for labels)
-const YEAR_W  = 72   // width of a year marker item
-const EMPTY_W = 30   // width of an empty-month item
-const LARGE_DOT_W = 64  // width of a selectable month without events
-const EVENT_W = 220  // width of a month-with-events item
-const DOT_LARGE = 28 // diameter of event/endpoint dot
-const DOT_SMALL = 11 // diameter of empty-month dot
 
 // ─── Category config ─────────────────────────────────────────────────────────
 
@@ -108,63 +96,6 @@ const MONTH_NAMES = [
   'Dec'
 ]
 
-// ─── EventCard content ────────────────────────────────────────────────────────
-
-function EventCardContent({ event }: { event: FeatureEvent }) {
-  const [expanded, setExpanded] = useState(false)
-  const meta = CATEGORY_META[event.category]
-
-  return (
-    <div className='w-full text-left'>
-      <span
-        className={`mb-2 inline-flex items-center rounded border px-2 py-0.5 text-xs font-medium ${meta.badgeClass}`}>
-        {meta.label}
-      </span>
-
-      <h3 className='mb-1 text-sm font-semibold leading-snug text-white'>
-        {event.title}
-      </h3>
-
-      <p className='text-xs leading-relaxed text-neutral-400'>
-        {event.summary}
-      </p>
-
-      <AnimatePresence initial={false}>
-        {expanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ type: 'spring', bounce: 0, duration: 0.5 }}
-            className='overflow-hidden'>
-            <p className='mt-3 border-t border-neutral-700 pt-3 text-xs leading-relaxed text-neutral-300'>
-              {event.details}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className='mt-2 flex items-center justify-between'>
-        <button
-          onClick={() => setExpanded((v) => !v)}
-          className='cursor-pointer text-xs text-neutral-600 hover:text-neutral-400'>
-          {expanded ? '↑ Show less' : '↓ Read more'}
-        </button>
-
-        {event.url && (
-          <a
-            href={event.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='text-xs text-primary-300 hover:underline'>
-            Learn more →
-          </a>
-        )}
-      </div>
-    </div>
-  )
-}
-
 // ─── Category filter ──────────────────────────────────────────────────────────
 
 function CategoryFilter({
@@ -174,19 +105,17 @@ function CategoryFilter({
   active: EventCategory | 'all'
   onChange: (v: EventCategory | 'all') => void
 }) {
-  const base =
-    'rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors'
-  const on = 'border-primary-300 bg-primary-300/10 text-primary-300'
-  const off =
-    'border-neutral-700 text-neutral-400 hover:border-neutral-500 hover:text-neutral-200'
-
   return (
-    <div className='mb-2 flex flex-wrap gap-1.5 pt-2'>
+    <div className='mb-2 flex flex-wrap justify-center gap-1.5 pt-2'>
       {CATEGORIES.map((cat) => (
         <button
           key={cat}
           onClick={() => onChange(cat)}
-          className={`${base} ${active === cat ? on : off}`}>
+          className={`rounded-full border px-2.5 py-0.5 text-sm font-medium transition-colors ${
+            active === cat
+              ? 'border-[#FAFF69] bg-[#FAFF69] text-black'
+              : 'border-neutral-700 text-neutral-400 hover:border-neutral-500 hover:text-neutral-200'
+          }`}>
           {CATEGORY_META[cat].label}
         </button>
       ))}
@@ -194,19 +123,13 @@ function CategoryFilter({
   )
 }
 
-// ─── Category panel ───────────────────────────────────────────────────────────
+// ─── Joins panel ──────────────────────────────────────────────────────────────
 
 const FAIL_STUB = Math.ceil(JOINS_Y_MAX * 0.04)
 
 function JoinsPanel({ year, month }: { year: number; month: number }) {
   const benchmark = getJoinsBenchmark(year, month)
   const values = benchmark?.values ?? getJoinsBenchmark(2025, 12)?.values ?? []
-
-  const joinsFeatures = FEATURE_EVENTS.filter(
-    (e) => e.year === year && e.month === month && e.category === 'joins'
-  )
-  const monthName = new Date(year, month - 1, 1).toLocaleString('en-US', { month: 'long' })
-  const version = `${year - 2000}.${month}`
 
   const chartData = values.map((v) =>
     v === -1
@@ -288,44 +211,17 @@ function JoinsPanel({ year, month }: { year: number; month: number }) {
   }
 
   return (
-    <div className='flex h-full'>
-      {/* Chart — 70% */}
-      <div className='flex min-w-0 flex-[7] flex-col p-4'>
-        <div className='min-h-0 flex-1'>
-          <ReactEcharts
-            option={option}
-            style={{ height: '100%', width: '100%' }}
-            opts={{ renderer: 'canvas' }}
-          />
-        </div>
-      </div>
-
-      {/* Text — 30% */}
-      <div className='flex min-h-0 flex-[3] flex-col overflow-y-auto border-l border-neutral-800 p-6 pt-5'>
-        <h3 className='mb-3 text-base font-semibold leading-snug text-white'>
-          {monthName} {year} ({version})
-          {joinsFeatures.length > 0 && (
-            <span className='ml-1 font-normal text-neutral-400'>
-              — {joinsFeatures.length} feature{joinsFeatures.length !== 1 ? 's' : ''} shipped
-            </span>
-          )}
-        </h3>
-        {joinsFeatures.length > 0 ? (
-          <ul className='flex flex-col gap-4'>
-            {joinsFeatures.map((event) => (
-              <li key={event.id}>
-                <p className='mb-1 text-sm font-medium text-neutral-200'>{event.title}</p>
-                <p className='text-sm leading-relaxed text-neutral-400'>{event.summary}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className='text-sm italic text-neutral-500'>No new join improvements this release.</p>
-        )}
-      </div>
+    <div className='h-full p-4'>
+      <ReactEcharts
+        option={option}
+        style={{ height: '100%', width: '100%' }}
+        opts={{ renderer: 'canvas' }}
+      />
     </div>
   )
 }
+
+// ─── Data Types panel ─────────────────────────────────────────────────────────
 
 // Sorted oldest → newest for left-to-right chart display
 const DATA_TYPES_CHART_DATA = [...DATA_TYPES_MONTHLY]
@@ -343,7 +239,7 @@ function DataTypesPanel({ activeYear, activeMonth }: { activeYear: number; activ
   const chartData = DATA_TYPES_VALUES.map((v, i) => ({
     value: v,
     itemStyle: {
-      color: DATA_TYPES_LABELS[i] === activeLabel ? '#ef4444' : CH_YELLOW,
+      color: DATA_TYPES_LABELS[i] === activeLabel ? CH_YELLOW : '#3a3a3a',
       borderRadius: [2, 2, 0, 0]
     }
   }))
@@ -393,53 +289,17 @@ function DataTypesPanel({ activeYear, activeMonth }: { activeYear: number; activ
   }
 
   return (
-    <div className='flex h-full'>
-      {/* Chart — 70% */}
-      <div className='min-h-0 flex-[7] p-4'>
-        <ReactEcharts
-          option={option}
-          style={{ height: '100%', width: '100%' }}
-          opts={{ renderer: 'canvas' }}
-        />
-      </div>
-
-      {/* Text — 30% */}
-      <div className='flex min-h-0 flex-[3] flex-col overflow-y-auto border-l border-neutral-800 p-6 pt-5'>
-        {(() => {
-          const features = FEATURE_EVENTS.filter(
-            e => e.year === activeYear && e.month === activeMonth && e.category === 'data-types-formats'
-          )
-          const monthName = new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })
-          const version = `${activeYear - 2000}.${activeMonth}`
-          return (
-            <>
-              <h3 className='mb-3 text-base font-semibold leading-snug text-white'>
-                {monthName} {activeYear} ({version})
-                {features.length > 0 && (
-                  <span className='ml-1 font-normal text-neutral-400'>
-                    — {features.length} feature{features.length !== 1 ? 's' : ''} shipped
-                  </span>
-                )}
-              </h3>
-              {features.length > 0 ? (
-                <ul className='flex flex-col gap-4'>
-                  {features.map(event => (
-                    <li key={event.id}>
-                      <p className='mb-1 text-sm font-medium text-neutral-200'>{event.title}</p>
-                      <p className='text-sm leading-relaxed text-neutral-400'>{event.summary}</p>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className='text-sm italic text-neutral-500'>No new types or formats this release.</p>
-              )}
-            </>
-          )
-        })()}
-      </div>
+    <div className='h-full p-4'>
+      <ReactEcharts
+        option={option}
+        style={{ height: '100%', width: '100%' }}
+        opts={{ renderer: 'canvas' }}
+      />
     </div>
   )
 }
+
+// ─── Data Lakes panel ─────────────────────────────────────────────────────────
 
 // Size 1–10 mapped to Tailwind font-size + weight
 const WORD_SIZE_CLASSES: Record<number, string> = {
@@ -482,16 +342,9 @@ function DataLakesPanel({ activeYear, activeMonth }: { activeYear: number; activ
     .filter(r => r.year < activeYear || (r.year === activeYear && r.month <= activeMonth))
     .flatMap(r => r.terms)
 
-  const features = FEATURE_EVENTS.filter(
-    e => e.year === activeYear && e.month === activeMonth && e.category === 'data-lakes'
-  )
-  const monthName = new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })
-  const version = `${activeYear - 2000}.${activeMonth}`
-
   return (
-    <div className='flex h-full'>
-      {/* Word cloud — 70% */}
-      <div className='flex min-h-0 flex-[7] flex-wrap content-center justify-center gap-x-5 gap-y-1 overflow-hidden p-6'>
+    <div className='h-full'>
+      <div className='flex h-full flex-wrap content-center justify-center gap-x-5 gap-y-1 overflow-hidden p-6'>
         <AnimatePresence>
           {activeTerms.map((term, i) => {
             const ty  = (hashRand(term.word, 0) * 28 - 14)  // –14px … +14px
@@ -515,30 +368,6 @@ function DataLakesPanel({ activeYear, activeMonth }: { activeYear: number; activ
             )
           })}
         </AnimatePresence>
-      </div>
-
-      {/* Text — 30% */}
-      <div className='flex min-h-0 flex-[3] flex-col overflow-y-auto border-l border-neutral-800 p-6 pt-5'>
-        <h3 className='mb-3 text-base font-semibold leading-snug text-white'>
-          {monthName} {activeYear} ({version})
-          {features.length > 0 && (
-            <span className='ml-1 font-normal text-neutral-400'>
-              — {features.length} feature{features.length !== 1 ? 's' : ''} shipped
-            </span>
-          )}
-        </h3>
-        {features.length > 0 ? (
-          <ul className='flex flex-col gap-4'>
-            {features.map(event => (
-              <li key={event.id}>
-                <p className='mb-1 text-sm font-medium text-neutral-200'>{event.title}</p>
-                <p className='text-sm leading-relaxed text-neutral-400'>{event.summary}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className='text-sm italic text-neutral-500'>No new data lake improvements this release.</p>
-        )}
       </div>
     </div>
   )
@@ -593,12 +422,6 @@ function IndexesPanel({ activeYear, activeMonth }: { activeYear: number; activeM
 
   const activeTree = filterTree(INDEXES_TREE, filterYear, filterMonth)
 
-  const features = FEATURE_EVENTS.filter(
-    (e) => e.year === activeYear && e.month === activeMonth && e.category === 'indexes'
-  )
-  const monthName = new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })
-  const version = `${activeYear - 2000}.${activeMonth}`
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const option: any = {
     backgroundColor: 'transparent',
@@ -644,37 +467,12 @@ function IndexesPanel({ activeYear, activeMonth }: { activeYear: number; activeM
 
   return (
     <div className='flex h-full'>
-      {/* Tree — 70% */}
       <div className='min-h-0 flex-[7] p-4'>
         <ReactEcharts
           option={option}
           style={{ height: '100%', width: '100%' }}
           opts={{ renderer: 'canvas' }}
         />
-      </div>
-
-      {/* Text — 30% */}
-      <div className='flex min-h-0 flex-[3] flex-col overflow-y-auto border-l border-neutral-800 p-6 pt-5'>
-        <h3 className='mb-3 text-base font-semibold leading-snug text-white'>
-          {monthName} {activeYear} ({version})
-          {features.length > 0 && (
-            <span className='ml-1 font-normal text-neutral-400'>
-              — {features.length} feature{features.length !== 1 ? 's' : ''} shipped
-            </span>
-          )}
-        </h3>
-        {features.length > 0 ? (
-          <ul className='flex flex-col gap-4'>
-            {features.map((event) => (
-              <li key={event.id}>
-                <p className='mb-1 text-sm font-medium text-neutral-200'>{event.title}</p>
-                <p className='text-sm leading-relaxed text-neutral-400'>{event.summary}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className='text-sm italic text-neutral-500'>No new index improvements this release.</p>
-        )}
       </div>
     </div>
   )
@@ -691,16 +489,9 @@ function lerpYellow(t: number): string {
   return `rgb(${r},${g},${b})`
 }
 
-
 function DataLifecyclePanel({ activeYear, activeMonth }: { activeYear: number; activeMonth: number }) {
   const activeLayers = DATA_LIFECYCLE_STACK
     .filter((f) => f.year < activeYear || (f.year === activeYear && f.month <= activeMonth))
-
-  const features = FEATURE_EVENTS.filter(
-    (e) => e.year === activeYear && e.month === activeMonth && e.category === 'data-lifecycle'
-  )
-  const monthName = new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })
-  const version = `${activeYear - 2000}.${activeMonth}`
 
   const n = activeLayers.length
   const total = DATA_LIFECYCLE_STACK.length
@@ -720,10 +511,9 @@ function DataLifecyclePanel({ activeYear, activeMonth }: { activeYear: number; a
       type: 'value',
       show: false,
       min: 0,
-      max: total, // fixed ceiling = all layers, so each segment is always the same height
+      max: total,
     },
     series: activeLayers.map((layer) => {
-      // Use the feature's fixed position in the full stack so colors never shift
       const globalIndex = DATA_LIFECYCLE_STACK.findIndex((f) => f.id === layer.id)
       const t = total > 1 ? globalIndex / (total - 1) : 1
       const color = lerpYellow(t)
@@ -754,49 +544,24 @@ function DataLifecyclePanel({ activeYear, activeMonth }: { activeYear: number; a
   }
 
   return (
-    <div className='flex h-full'>
-      {/* Stack chart — 70% */}
-      <div className='min-h-0 flex-[7] p-4'>
-        {n === 0 ? (
-          <div className='flex h-full items-center justify-center'>
-            <p className='text-sm italic text-neutral-500'>No lifecycle features before this release.</p>
-          </div>
-        ) : (
-          <ReactEcharts
-            option={option}
-            notMerge={true}
-            style={{ height: '100%', width: '100%' }}
-            opts={{ renderer: 'canvas' }}
-          />
-        )}
-      </div>
-
-      {/* Text — 30% */}
-      <div className='flex min-h-0 flex-[3] flex-col overflow-y-auto border-l border-neutral-800 p-6 pt-5'>
-        <h3 className='mb-3 text-base font-semibold leading-snug text-white'>
-          {monthName} {activeYear} ({version})
-          {features.length > 0 && (
-            <span className='ml-1 font-normal text-neutral-400'>
-              — {features.length} feature{features.length !== 1 ? 's' : ''} shipped
-            </span>
-          )}
-        </h3>
-        {features.length > 0 ? (
-          <ul className='flex flex-col gap-4'>
-            {features.map((event) => (
-              <li key={event.id}>
-                <p className='mb-1 text-sm font-medium text-neutral-200'>{event.title}</p>
-                <p className='text-sm leading-relaxed text-neutral-400'>{event.summary}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className='text-sm italic text-neutral-500'>No new lifecycle improvements this release.</p>
-        )}
-      </div>
+    <div className='h-full p-4'>
+      {n === 0 ? (
+        <div className='flex h-full items-center justify-center'>
+          <p className='text-sm italic text-neutral-500'>No lifecycle features before this release.</p>
+        </div>
+      ) : (
+        <ReactEcharts
+          option={option}
+          notMerge={true}
+          style={{ height: '100%', width: '100%' }}
+          opts={{ renderer: 'canvas' }}
+        />
+      )}
     </div>
   )
 }
+
+// ─── Category panel ───────────────────────────────────────────────────────────
 
 function CategoryPanel({
   category,
@@ -808,8 +573,7 @@ function CategoryPanel({
   activeMonth: number
 }) {
   return (
-    <div
-      className='h-full overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900'>
+    <div className='h-full overflow-hidden'>
       {category === 'joins' ? (
         <JoinsPanel year={activeYear} month={activeMonth} />
       ) : category === 'data-types-formats' ? (
@@ -831,7 +595,7 @@ function CategoryPanel({
   )
 }
 
-// ─── Timeline ─────────────────────────────────────────────────────────────────
+// ─── Timeline items builder ───────────────────────────────────────────────────
 
 type TimelineItem =
   | { type: 'year'; year: number }
@@ -910,74 +674,22 @@ function buildItems(activeFilter: EventCategory | 'all'): TimelineItem[] {
   return items
 }
 
+// ─── Vertical Timeline ────────────────────────────────────────────────────────
 
-function FeatureJourneyTimeline() {
-  const [activeFilter, setActiveFilter] = useState<EventCategory | 'all'>(
-    'joins'
-  )
-  const MIN_W = 600, MAX_W = 1200, MIN_H = 420, MAX_H = 840
-
+function VerticalTimeline({
+  activeFilter,
+  onActiveMonthChange
+}: {
+  activeFilter: EventCategory | 'all'
+  onActiveMonthChange?: (year: number, month: number) => void
+}) {
   const [activeMonthKey, setActiveMonthKey] = useState<string | null>(null)
-  const [panelPos, setPanelPos] = useState({ x: 24, y: 96 })
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null)
+  const [halfHeight, setHalfHeight] = useState(240)
 
-  // Position panel at bottom-left on mount
-  useEffect(() => {
-    setPanelPos({ x: 24, y: window.innerHeight - MIN_H - 24 })
-  }, [])
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [panelSize, setPanelSize] = useState({ width: 600, height: 420 })
-  const [timelineOffset, setTimelineOffset] = useState(0)
-  const dragState = useRef<{ startMouse: { x: number; y: number }; startPos: { x: number; y: number } } | null>(null)
-
-  const handleResizeStart = (e: React.MouseEvent, dir: 'e' | 's' | 'se') => {
-    e.preventDefault()
-    e.stopPropagation()
-    const startMouse = { x: e.clientX, y: e.clientY }
-    const startSize = panelSize
-    const startPos = panelPos
-    const onMove = (ev: MouseEvent) => {
-      const dx = ev.clientX - startMouse.x
-      const dy = ev.clientY - startMouse.y
-      const maxW = Math.min(MAX_W, window.innerWidth - startPos.x)
-      const maxH = Math.min(MAX_H, window.innerHeight - startPos.y)
-      setPanelSize({
-        width: dir === 's' ? startSize.width : Math.min(maxW, Math.max(MIN_W, startSize.width + dx)),
-        height: dir === 'e' ? startSize.height : Math.min(maxH, Math.max(MIN_H, startSize.height + dy)),
-      })
-    }
-    const onUp = () => {
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('mouseup', onUp)
-    }
-    window.addEventListener('mousemove', onMove)
-    window.addEventListener('mouseup', onUp)
-  }
-
-  const handleDragStart = (e: React.MouseEvent) => {
-    e.preventDefault()
-    const capturedSize = panelSize
-    dragState.current = { startMouse: { x: e.clientX, y: e.clientY }, startPos: panelPos }
-    const onMove = (ev: MouseEvent) => {
-      if (!dragState.current) return
-      const newX = dragState.current.startPos.x + ev.clientX - dragState.current.startMouse.x
-      const newY = dragState.current.startPos.y + ev.clientY - dragState.current.startMouse.y
-      setPanelPos({
-        x: Math.min(Math.max(0, newX), window.innerWidth - capturedSize.width),
-        y: Math.min(Math.max(0, newY), window.innerHeight - capturedSize.height),
-      })
-    }
-    const onUp = () => {
-      dragState.current = null
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('mouseup', onUp)
-    }
-    window.addEventListener('mousemove', onMove)
-    window.addEventListener('mouseup', onUp)
-  }
   const items = useMemo(() => buildItems(activeFilter), [activeFilter])
 
-  // Compute selectable months: feature months + earliest + latest only.
-  // These are the only months with large dots and the only ones the scroll tracker watches.
   const { earliestMonthKey, latestMonthKey, selectableMonthKeys } =
     useMemo(() => {
       const monthItems = items.filter(
@@ -985,153 +697,293 @@ function FeatureJourneyTimeline() {
       )
       const first = monthItems[0]
       const last = monthItems[monthItems.length - 1]
-      const earliestKey = last ? `${last.year}-${last.month}` : null
       const latestKey = first ? `${first.year}-${first.month}` : null
+      const earliestKey = last ? `${last.year}-${last.month}` : null
       const selectable = new Set<string>()
       for (const item of monthItems) {
         const key = `${item.year}-${item.month}`
-        if (
-          item.events.length > 0 ||
-          key === earliestKey ||
-          key === latestKey
-        ) {
+        if (item.events.length > 0 || key === earliestKey || key === latestKey) {
           selectable.add(key)
         }
       }
       return {
         earliestMonthKey: earliestKey,
         latestMonthKey: latestKey,
-        selectableMonthKeys: selectable
+        selectableMonthKeys: selectable,
       }
     }, [items])
 
-
-  // Center the timeline: first dot appears at horizontal center on load
+  // Scroll tracking: find the selectable month closest to the vertical center
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-    setTimelineOffset(Math.max(0, container.clientWidth / 2 - YEAR_W / 2))
-  }, [])
+    const el = scrollRef.current
+    if (!el) return
 
-  // Track which selectable month is closest to the horizontal centre of the container
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-    const monthKeys = Array.from(selectableMonthKeys)
     let rafId: number | null = null
-
     const handleScroll = () => {
       if (rafId !== null) return
       rafId = requestAnimationFrame(() => {
         rafId = null
-
-        // Snapped all the way right → latest month
-        const atRight = container.scrollLeft + container.clientWidth >= container.scrollWidth - 8
-        if (atRight) {
-          setActiveMonthKey((prev) => (prev === latestMonthKey ? prev : latestMonthKey))
-          return
-        }
-        // Snapped all the way left → earliest month
-        if (container.scrollLeft <= 8) {
-          setActiveMonthKey((prev) => (prev === earliestMonthKey ? prev : earliestMonthKey))
-          return
-        }
-
-        const containerRect = container.getBoundingClientRect()
-        const centerX = containerRect.left + containerRect.width / 2
+        const rect = el.getBoundingClientRect()
+        const centerY = rect.top + rect.height / 2
         let closestKey: string | null = null
         let closestDist = Infinity
-
-        for (const key of monthKeys) {
-          const el = document.getElementById(`month-${key}`)
-          if (!el) continue
-          const rect = el.getBoundingClientRect()
-          const dist = Math.abs(rect.left + rect.width / 2 - centerX)
+        for (const key of Array.from(selectableMonthKeys)) {
+          const itemEl = document.getElementById(`vtl-${key}`)
+          if (!itemEl) continue
+          const itemRect = itemEl.getBoundingClientRect()
+          const dist = Math.abs(itemRect.top + itemRect.height / 2 - centerY)
           if (dist < closestDist) {
             closestDist = dist
             closestKey = key
           }
         }
-
         setActiveMonthKey((prev) => (prev === closestKey ? prev : closestKey))
       })
     }
 
-    container.addEventListener('scroll', handleScroll, { passive: true })
+    el.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
-
     return () => {
-      container.removeEventListener('scroll', handleScroll)
+      el.removeEventListener('scroll', handleScroll)
       if (rafId !== null) cancelAnimationFrame(rafId)
     }
-  }, [selectableMonthKeys, latestMonthKey, earliestMonthKey])
+  }, [selectableMonthKeys])
 
+  // Derive active year/month from key
   const [activeYear, activeMonth] = useMemo(() => {
     if (!activeMonthKey) return [2025, 12]
     const [y, m] = activeMonthKey.split('-').map(Number)
     return [y, m]
   }, [activeMonthKey])
 
-  // Reverse to oldest-first for left→right display
-  const displayItems = useMemo(() => [...items].reverse(), [items])
+  // Notify parent when active month changes
+  useEffect(() => {
+    onActiveMonthChange?.(activeYear, activeMonth)
+  }, [activeYear, activeMonth, onActiveMonthChange])
+
+  // Track scroll container height for top/bottom padding
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const update = () => setHalfHeight(el.clientHeight / 2)
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  const handleClick = (key: string) => {
+    setActiveMonthKey(key)
+  }
 
   return (
-    <>
-      {/* Floating draggable + resizable panel */}
-      <div
-        style={{
-          position: 'fixed',
-          left: panelPos.x,
-          top: panelPos.y,
-          zIndex: 50,
-          width: panelSize.width,
-          height: panelSize.height,
-          background: '#1a1a1a',
-          border: `1px solid ${CARD_BORDER}`,
-          borderRadius: 10,
-          boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
-          userSelect: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Drag handle */}
+    <div ref={scrollRef} style={{ overflowY: 'auto', height: '100%', scrollSnapType: 'y mandatory' }}>
+      <div style={{ position: 'relative', paddingTop: halfHeight, paddingBottom: halfHeight }}>
+        {/* Vertical line */}
         <div
-          onMouseDown={handleDragStart}
           style={{
-            cursor: 'grab',
-            padding: '5px 10px',
-            flexShrink: 0,
-            borderBottom: `1px solid ${CARD_BORDER}`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            position: 'absolute',
+            left: 23,
+            top: 0,
+            bottom: 0,
+            width: 2,
+            background: `linear-gradient(to bottom, ${CH_YELLOW}, transparent)`,
+            pointerEvents: 'none',
+            zIndex: 0,
           }}
-        >
-          <span style={{ color: '#666', fontSize: 11, letterSpacing: 2 }}>⠿⠿</span>
-          <span style={{ color: '#888', fontSize: 11 }}>
-            {activeMonthKey === latestMonthKey ? (
-              <>ClickHouse <span style={{ color: CH_YELLOW }}>today</span></>
-            ) : (
-              <>
-                ClickHouse in{' '}
-                <span style={{ color: CH_YELLOW }}>
-                  {new Date(activeYear, activeMonth - 1, 1).toLocaleString('en-US', { month: 'long' })}{' '}
-                  {activeYear}
+        />
+
+        {items.map((item) => {
+          if (item.type === 'year') {
+            return (
+              <div
+                key={`vy-${item.year}`}
+                style={{ display: 'flex', alignItems: 'center', padding: '8px 16px 8px 12px' }}
+              >
+                <div
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: '50%',
+                    flexShrink: 0,
+                    zIndex: 2,
+                    position: 'relative',
+                    background: '#2a2a2a',
+                    border: '1px solid #4b5563',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <span style={{ fontSize: 8, fontWeight: 700, color: '#9ca3af' }}>
+                    {String(item.year).slice(2)}
+                  </span>
+                </div>
+                <span style={{ marginLeft: 8, fontSize: 16, fontWeight: 700, color: '#6b7280' }}>
+                  {item.year}
                 </span>
-              </>
-            )}
-          </span>
-          <span style={{ color: '#555', fontSize: 11, letterSpacing: 2 }}>⠿⠿</span>
+              </div>
+            )
+          }
+
+          const monthKey = `${item.year}-${item.month}`
+          const isActive = activeMonthKey === monthKey
+          const hasEvents = item.events.length > 0
+          const isSelectable = hasEvents || monthKey === earliestMonthKey || monthKey === latestMonthKey
+          const isHovered = hasEvents && hoveredKey === monthKey
+
+          const dotSize = isActive ? 18 : isSelectable ? 14 : 7
+          const dotColor = isActive
+            ? CH_YELLOW
+            : isHovered
+            ? '#d1d5db'
+            : isSelectable
+            ? '#9ca3af'
+            : '#4b5563'
+
+          // Events shown inline when this month is active
+          const inlineEvents = isActive
+            ? FEATURE_EVENTS.filter(
+                (e) =>
+                  e.year === item.year &&
+                  e.month === item.month &&
+                  (activeFilter === 'all' || e.category === activeFilter)
+              )
+            : []
+
+          return (
+            <div
+              key={`vm-${monthKey}`}
+              id={`vtl-${monthKey}`}
+              onClick={hasEvents ? () => handleClick(monthKey) : undefined}
+              onMouseEnter={hasEvents ? () => setHoveredKey(monthKey) : undefined}
+              onMouseLeave={hasEvents ? () => setHoveredKey(null) : undefined}
+              style={{
+                padding: isSelectable ? '8px 24px 8px 12px' : '3px 24px 3px 12px',
+                cursor: hasEvents ? 'pointer' : 'default',
+                position: 'relative',
+                scrollSnapAlign: isSelectable ? 'center' : undefined,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div
+                  style={{
+                    width: dotSize,
+                    height: dotSize,
+                    borderRadius: '50%',
+                    flexShrink: 0,
+                    zIndex: 2,
+                    position: 'relative',
+                    marginLeft: (24 - dotSize) / 2,
+                    background: dotColor,
+                    border: isActive || isHovered
+                      ? `2px solid ${CH_YELLOW}`
+                      : `1px solid ${CH_YELLOW}44`,
+                    boxShadow: isActive
+                      ? `0 0 8px ${CH_YELLOW}88`
+                      : isHovered
+                      ? `0 0 5px ${CH_YELLOW}55`
+                      : 'none',
+                    transition: 'all 0.15s ease',
+                  }}
+                />
+                {isSelectable && (
+                  <span
+                    style={{
+                      fontSize: isActive ? 17 : 15,
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      color: isActive ? CH_YELLOW : isHovered ? '#e5e7eb' : '#6b7280',
+                      fontWeight: isActive ? 700 : 400,
+                      transition: 'color 0.15s, font-size 0.15s',
+                    }}
+                  >
+                    {item.dateLabel}
+                  </span>
+                )}
+              </div>
+
+              {/* Founded label on the earliest item */}
+              {monthKey === earliestMonthKey && (
+                <div style={{ marginTop: 8, paddingLeft: 40 }}>
+                  <span style={{
+                    fontSize: 12,
+                    color: '#6b7280',
+                    fontStyle: 'italic',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                  }}>
+                    <span style={{ color: CH_YELLOW }}>⬡</span>
+                    ClickHouse open-sourced — June 2016
+                  </span>
+                </div>
+              )}
+
+              {/* Inline events for the active month */}
+              {isActive && inlineEvents.length > 0 && (
+                <div style={{ marginTop: 10, paddingLeft: 40, display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  {inlineEvents.map((event) => (
+                    <div key={event.id}>
+                      <p style={{ fontSize: 16, fontWeight: 600, color: '#fff', margin: '0 0 5px', lineHeight: 1.35 }}>
+                        {event.title}
+                      </p>
+                      <p style={{ fontSize: 15, color: '#9ca3af', lineHeight: 1.6, margin: 0 }}>
+                        {event.summary}
+                      </p>
+                      {event.url && (
+                        <a
+                          href={event.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          style={{ fontSize: 14, color: CH_YELLOW, display: 'inline-block', marginTop: 5 }}
+                        >
+                          Learn more →
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// ─── Main interactive section ──────────────────────────────────────────────────
+
+function FeatureJourneyTimeline() {
+  const [activeFilter, setActiveFilter] = useState<EventCategory | 'all'>('joins')
+  const [activeYear, setActiveYear] = useState(2025)
+  const [activeMonth, setActiveMonth] = useState(12)
+
+  return (
+    <div className='section-container'>
+      <div className='overflow-hidden rounded-xl border border-neutral-700 bg-neutral-900'>
+        {/* Category filter bar */}
+        <div className='border-b border-neutral-700 px-4 py-3'>
+          <CategoryFilter active={activeFilter} onChange={setActiveFilter} />
         </div>
 
-        {/* Content */}
-        <div style={{ flex: 1, minHeight: 0, padding: '4px 10px 8px', display: 'flex', flexDirection: 'column' }}>
-          <div style={{ flexShrink: 0 }}>
-            <CategoryFilter active={activeFilter} onChange={setActiveFilter} />
+        {/* Two-column body */}
+        <div className='flex h-[280px] flex-col lg:h-[480px] lg:flex-row'>
+          {/* Left: vertical scrollable timeline */}
+          <div className='h-[300px] w-full shrink-0 border-b border-neutral-700 lg:h-full lg:w-[60%] lg:border-b-0 lg:border-r'>
+            <VerticalTimeline
+              activeFilter={activeFilter}
+              onActiveMonthChange={(y, m) => {
+                setActiveYear(y)
+                setActiveMonth(m)
+              }}
+            />
           </div>
-          <div style={{ flex: 1, minHeight: 0 }}>
+
+          {/* Right: chart panel */}
+          <div className='min-w-0 flex-1'>
             <CategoryPanel
               category={activeFilter}
               activeYear={activeYear}
@@ -1139,203 +991,8 @@ function FeatureJourneyTimeline() {
             />
           </div>
         </div>
-
-        {/* Resize handles */}
-        <div
-          onMouseDown={e => handleResizeStart(e, 'e')}
-          style={{ position: 'absolute', right: 0, top: 12, bottom: 12, width: 5, cursor: 'ew-resize' }}
-        />
-        <div
-          onMouseDown={e => handleResizeStart(e, 's')}
-          style={{ position: 'absolute', bottom: 0, left: 12, right: 12, height: 5, cursor: 'ns-resize' }}
-        />
-        <div
-          onMouseDown={e => handleResizeStart(e, 'se')}
-          style={{
-            position: 'absolute', right: 0, bottom: 0, width: 14, height: 14,
-            cursor: 'nwse-resize',
-            background: 'linear-gradient(135deg, transparent 50%, #555 50%)',
-            borderBottomRightRadius: 10,
-          }}
-        />
       </div>
-
-      {/* Horizontal Timeline */}
-      <div style={{ position: 'relative' }}>
-      <div
-        ref={containerRef}
-        style={{
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          position: 'relative',
-          height: 440,
-          cursor: 'default',
-          scrollSnapType: 'x mandatory',
-        }}
-      >
-        <div style={{
-          display: 'flex',
-          position: 'relative',
-          height: '100%',
-          minWidth: 'max-content',
-          paddingLeft: timelineOffset,
-          paddingRight: 80,
-        }}>
-          {/* Continuous horizontal line — starts at the first dot, fades out at the right */}
-          <div style={{
-            position: 'absolute',
-            left: timelineOffset + YEAR_W / 2,
-            right: 0,
-            top: ABOVE_H,
-            height: 2,
-            background: `linear-gradient(to right, ${CH_YELLOW} 0%, ${CH_YELLOW} calc(100% - 80px), transparent 100%)`,
-            zIndex: 0,
-            pointerEvents: 'none',
-          }} />
-
-          {displayItems.map((item) => {
-            if (item.type === 'year') {
-              return (
-                <div
-                  key={`year-${item.year}`}
-                  style={{ width: YEAR_W, flexShrink: 0, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-                >
-                  <div style={{ height: ABOVE_H, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: 18 }}>
-                    <span style={{ fontFamily: 'monospace', fontWeight: 700, fontSize: 15, color: '#9ca3af' }}>
-                      {item.year}
-                    </span>
-                  </div>
-                  <div style={{
-                    position: 'absolute',
-                    top: ABOVE_H - 10,
-                    width: 20, height: 20,
-                    borderRadius: '50%',
-                    background: '#6b7280',
-                    boxShadow: `0 0 0 3px #6b728033`,
-                    zIndex: 2,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    <span style={{ fontSize: 8, fontWeight: 700, color: '#e5e7eb' }}>
-                      {String(item.year).slice(2)}
-                    </span>
-                  </div>
-                </div>
-              )
-            }
-
-            const hasEvents = item.events.length > 0
-            const isActive = activeMonthKey === `${item.year}-${item.month}`
-            const monthKey = `${item.year}-${item.month}`
-            const isEarliest = monthKey === earliestMonthKey
-            const isLatest = monthKey === latestMonthKey
-            const showLargeDot = hasEvents || isEarliest || isLatest
-            const dotSize = showLargeDot ? DOT_LARGE : DOT_SMALL
-            const itemWidth = hasEvents ? EVENT_W : (showLargeDot ? LARGE_DOT_W : EMPTY_W)
-            const dotColor = isActive ? CH_YELLOW : (showLargeDot ? '#9ca3af' : '#4b5563')
-
-            return (
-              <div
-                key={`month-${item.year}-${item.month}`}
-                id={`month-${item.year}-${item.month}`}
-                style={{ width: itemWidth, flexShrink: 0, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', ...(showLargeDot ? { scrollSnapAlign: 'center' } : {}) }}
-              >
-                {/* Date label above the line */}
-                <div style={{ height: ABOVE_H, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: dotSize / 2 + 10 }}>
-                  {showLargeDot && (
-                    <span style={{
-                      fontSize: 10,
-                      color: isActive ? CH_YELLOW : '#6b7280',
-                      whiteSpace: 'nowrap',
-                      fontWeight: isActive ? 600 : 400,
-                      transition: 'color 0.2s',
-                    }}>
-                      {item.dateLabel}
-                    </span>
-                  )}
-                </div>
-
-                {/* Active indicator — bouncing arrow above the date label */}
-                {isActive && (
-                  <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-                    style={{
-                      position: 'absolute',
-                      top: 4,
-                      width: 0,
-                      height: 0,
-                      borderLeft: '6px solid transparent',
-                      borderRight: '6px solid transparent',
-                      borderTop: `8px solid ${CH_YELLOW}`,
-                      zIndex: 3,
-                    }}
-                  />
-                )}
-
-                {/* Dot on the line */}
-                <div style={{
-                  position: 'absolute',
-                  top: ABOVE_H - dotSize / 2,
-                  width: dotSize, height: dotSize,
-                  borderRadius: '50%',
-                  background: dotColor,
-                  border: isActive ? `2px solid ${CH_YELLOW}` : `1px solid ${CH_YELLOW}`,
-                  boxShadow: isActive ? `0 0 10px ${CH_YELLOW}88` : 'none',
-                  zIndex: 2,
-                  transition: 'all 0.2s ease',
-                }} />
-
-                {/* "ClickHouse was founded" label for earliest item */}
-                {isEarliest && !hasEvents && (
-                  <div style={{
-                    marginTop: DOT_LARGE / 2 + 12,
-                    fontSize: 10,
-                    color: '#6b7280',
-                    whiteSpace: 'nowrap',
-                    textAlign: 'center',
-                    fontStyle: 'italic',
-                  }}>
-                    ClickHouse founded
-                  </div>
-                )}
-
-                {/* Card below the line */}
-                {hasEvents && (
-                  <div style={{
-                    marginTop: DOT_LARGE / 2 + 12,
-                    width: EVENT_W - 20,
-                    maxHeight: 320,
-                    overflowY: 'auto',
-                    background: CARD_BG,
-                    border: isActive ? `2px solid ${CH_YELLOW}` : `1px solid ${CARD_BORDER}`,
-                    borderRadius: 8,
-                    padding: '10px 12px',
-                    opacity: isActive ? 1 : 0.4,
-                    transition: 'border-color 0.2s ease, opacity 0.2s ease',
-                  }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                      {item.events.map(event => {
-                        const meta = CATEGORY_META[event.category]
-                        return (
-                          <div key={event.id}>
-                            <span className={`mb-1 inline-flex items-center rounded border px-1.5 py-0.5 text-xs font-medium ${meta.badgeClass}`}>
-                              {meta.label}
-                            </span>
-                            <p style={{ fontSize: 12, fontWeight: 600, color: '#fff', margin: '3px 0 2px', lineHeight: 1.3 }}>{event.title}</p>
-                            <p style={{ fontSize: 11, color: '#888', lineHeight: 1.4, margin: 0 }}>{event.summary}</p>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      </div>
-      </div>
-    </>
+    </div>
   )
 }
 
@@ -1346,24 +1003,18 @@ export default function FeatureJourneyPage({ seo, headerData }: CommonProps) {
     <Layout seo={seo} headerData={headerData}>
       {/* Hero */}
       <section className='relative overflow-hidden bg-grid pb-8 pt-16 lg:pt-24'>
-        <div className='section-container relative z-10'>
-          <SuiTitle type='h1' className='mb-6'>
-            The ClickHouse Feature Journey
-          </SuiTitle>
-          <SuiText size='lg' className='text-neutral-200'>
-            <p>
-              Explore the milestones that transformed ClickHouse into the
-              world&apos;s fastest analytical database.
+        <div className='section-container relative z-10 flex flex-col items-center text-center'>
+          <div className='max-w-[900px]'>
+            <div className='mb-4 inline-flex items-center rounded-full border border-neutral-700 bg-neutral-800 px-3 py-1 text-xs font-medium text-neutral-400'>
+              The ClickHouse Feature Journey
+            </div>
+            <SuiTitle type='h2' className='mb-4'>
+              Explore the milestones that transformed ClickHouse into the world&apos;s fastest analytical database.
+            </SuiTitle>
+            <p className='text-sm leading-relaxed text-neutral-400'>
+              From blazing-fast JOINs to native data lake support — discover the features that shaped ClickHouse, release by release.
             </p>
-          </SuiText>
-          <p className='mt-4 text-sm leading-relaxed text-neutral-400'>
-            Trace the key features that shaped ClickHouse into the world&apos;s
-            fastest analytical database. See how JOIN performance advanced, data
-            types and formats expanded, data lake support matured, indexing became
-            smarter, while data lifecycle operations grew more powerful and
-            flexible. Choose a snapshot and scroll to travel back in time,
-            release by release.
-          </p>
+          </div>
         </div>
       </section>
 

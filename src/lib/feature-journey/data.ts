@@ -18,6 +18,54 @@ export interface FeatureEvent {
 
 export const FEATURE_EVENTS: FeatureEvent[] = [
 
+  // ─── 26.3 (March 2026) — dummy preview entries ────────────────────────────
+
+  {
+    id: 'join-adaptive-hash-26-3',
+    year: 2026, month: 3,
+    title: 'Adaptive Hash Join Selection',
+    summary: 'ClickHouse now automatically picks the optimal hash join strategy at runtime based on cardinality estimates, reducing query planning overhead.',
+    details: 'In 26.3, the query planner was extended with adaptive hash join selection. Rather than choosing a join algorithm statically, the engine samples row counts at the start of execution and switches between grace hash join, in-memory hash join, and partial merge join depending on the data characteristics encountered. Benchmarks show up to 2.4× improvement on skewed datasets.',
+    category: 'joins',
+    url: 'https://clickhouse.com/blog/clickhouse-release-26-3'
+  },
+  {
+    id: 'dtype-json-v2-26-3',
+    year: 2026, month: 3,
+    title: 'JSON Type V2 — Stable Release',
+    summary: 'The native JSON column type graduates from experimental to stable, with full support for dynamic paths, schema inference, and sub-column pruning.',
+    details: '26.3 marks the stable release of the native JSON type introduced in 25.1. This release adds full support for deeply nested dynamic paths, automatic schema inference from incoming data, and efficient sub-column pruning during reads. Storage overhead is reduced by up to 30% compared to String-stored JSON via improved path compression.',
+    category: 'data-types-formats',
+    url: 'https://clickhouse.com/blog/clickhouse-release-26-3'
+  },
+  {
+    id: 'lake-delta-write-26-3',
+    year: 2026, month: 3,
+    title: 'Delta Lake Write Support',
+    summary: 'ClickHouse can now write directly to Delta Lake tables on S3-compatible object storage, enabling bidirectional lakehouse workflows.',
+    details: 'Building on read support added in earlier releases, ClickHouse 26.3 introduces the ability to write INSERT queries directly into Delta Lake tables stored on S3, GCS, or Azure Blob. Transactions are ACID-compliant via Delta transaction log commits. This enables ClickHouse to act as a high-throughput writer in lakehouse architectures alongside Spark and Flink.',
+    category: 'data-lakes',
+    url: 'https://clickhouse.com/blog/clickhouse-release-26-3'
+  },
+  {
+    id: 'index-vector-hnsw-26-3',
+    year: 2026, month: 3,
+    title: 'HNSW Vector Index — General Availability',
+    summary: 'The HNSW approximate nearest-neighbour index is now generally available, supporting Float32, Float16, and BFloat16 embeddings.',
+    details: 'After several experimental releases, the HNSW (Hierarchical Navigable Small World) vector index is declared generally available in 26.3. It supports Float32, Float16, and BFloat16 embeddings and is integrated with the ClickHouse MergeTree storage engine. Build times and memory footprint have been reduced by 40% compared to the experimental version, making large-scale vector search practical.',
+    category: 'indexes',
+    url: 'https://clickhouse.com/blog/clickhouse-release-26-3'
+  },
+  {
+    id: 'lifecycle-tiered-storage-26-3',
+    year: 2026, month: 3,
+    title: 'Policy-Driven Tiered Storage Moves',
+    summary: 'Data lifecycle policies can now trigger automatic tier migrations based on query access frequency, not just age or size.',
+    details: 'ClickHouse 26.3 extends tiered storage policies with access-frequency tracking. Parts that have not been queried within a configurable window are automatically migrated to cheaper object storage tiers. This complements existing age- and size-based policies and reduces storage costs for time-series workloads where hot data is accessed frequently but cools off quickly.',
+    category: 'data-lifecycle',
+    url: 'https://clickhouse.com/blog/clickhouse-release-26-3'
+  },
+
   // ─── Joins ──────────────────────────────────────────────────────────────────
 
   {
