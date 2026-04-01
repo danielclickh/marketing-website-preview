@@ -20,9 +20,11 @@ export async function getStaticPaths() {
   })
 
   return {
-    paths: pages.map((post) => ({
-      params: { slug: post.path.split('/') }
-    })),
+    paths: pages
+      .filter((post) => post.path != null)
+      .map((post) => ({
+        params: { slug: post.path.split('/').filter(Boolean) }
+      })),
     fallback: 'blocking'
   }
 }

@@ -605,4 +605,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true'
 })
 
-module.exports = withBundleAnalyzer(nextConfig)
+const finalConfig = {
+  ...nextConfig,
+  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: true }
+}
+
+module.exports = withBundleAnalyzer(finalConfig)

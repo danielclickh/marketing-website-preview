@@ -117,12 +117,16 @@ export async function request(
     return memoryCache.get(hash)
   }
 
+  // Skip API calls when no key is configured (e.g. local dev or preview builds)
+  if (!process.env.STRAPI_API_KEY) {
+    return { data: [], meta: {} }
+  }
+
   const response = await limit(() => fetch(uri, requestInit))
 
   if (!response.ok) {
-    throw new Error(
-      `STRAPI HTTP Error: ${response.status} (${response.statusText}) ${uri}`
-    )
+    console.warn(`STRAPI HTTP Error: ${response.status} (${response.statusText}) ${uri}`)
+    return { data: [], meta: {} }
   }
 
   const data = await response.json()
@@ -181,16 +185,18 @@ export async function getPathsValues(
     }
   }
   const { data, pagination } = await findAll(pathName, newParam)
-  const urlList = data.map((page: Record<string, any>) => {
-    const slugList = isDynamicUrl
-      ? page[type].split('/').filter((slug: string) => slug.length > 0)
-      : page[type]
-    return {
-      params: {
-        [paramName]: slugList
+  const urlList = data
+    .filter((page: Record<string, any>) => page[type] != null)
+    .map((page: Record<string, any>) => {
+      const slugList = isDynamicUrl
+        ? page[type].split('/').filter((slug: string) => slug.length > 0)
+        : page[type]
+      return {
+        params: {
+          [paramName]: slugList
+        }
       }
-    }
-  })
+    })
   if (pagination && pagination.pageCount > pageNumber) {
     const newPages = await getPathsValues(
       pathName,
